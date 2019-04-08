@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+
+<head>
+    <title>登录成功</title>
+    <link rel="stylesheet" th:href="@{/static/css/common.css}"/>
+    <script type="text/javascript" th:src="@{/static/js/jquery.min.js}"></script>
+</head>
+<body>
+<h1>登录成功</h1><br/>
+<p th:text="${session.logingUser.uname}+'：'+${session.logingUser.account}"></p>
+<div shiro:hasAnyRoles="admin,manager">
+    <li>
+        <a th:href="@{/userList}" class="glyphicon glyphicon-th-large"> 用户列表</a>
+    </li>
+</div>
+<div style="width: 70%;height:30%;margin: 0 auto">
+    <table style="border-collapse: collapse">
+        <!--<thead>-->
+        <!--<th th:each="usesr : ${users}" th:text="${usesr.uname}"></th>-->
+        <!--</thead>-->
+        <tr>
+            <td>用户名</td>
+            <td>账号</td>
+            <td>手机号</td>
+            <td>邮箱</td>
+            <td>状态</td>
+            <td>操作</td>
+        </tr>
+        <tr th:each="user : ${users}">
+            <td th:text="${user.uname}"></td>
+            <td th:text="${user.account}"></td>
+            <td th:text="${user.mobile}"></td>
+            <td th:text="${user.email}"></td>
+            <td th:text="${user.status}"></td>
+            <td>
+                <div shiro:hasRole="admin">
+                    <a href="#">删除</a><a href="#">修改</a>
+                </div>
+                <div shiro:hasPermission="list"><a href="#">查看</a></div>
+            </td>
+        </tr>
+    </table>
+</div>
+</body>
+</html>

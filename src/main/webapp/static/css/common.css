@@ -1,0 +1,16 @@
+li {
+    float: left;
+    margin: 5px 5px;
+    list-style: none;
+}
+
+td {
+    width: 140px;
+    height: 40px;
+    border: 1px solid grey
+}
+
+a {
+    text-decoration: none;
+    margin-left: 5px;
+}

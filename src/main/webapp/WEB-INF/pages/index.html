@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Index首页</title>
+    <link rel="stylesheet" th:href="@{/static/css/common.css}"/>
+    <script type="text/javascript" th:src="@{/static/js/jquery.min.js}"></script>
+    <script th:inline="javascript">
+        $(function () {
+            var _ctx = [[${application.ctx}]];
+            console.log("Project ContextPath:" + _ctx);
+            console.log("路径:" + $("#ctx").val());
+        });
+    </script>
+    <title>Spring MVC + Thymeleaf Example</title>
+</head>
+<body>
+<!-- Project ContextPath -->
+<input type="hidden" id="ctx" th:value="${application.ctx}"/> Hello,<br/>
+<ul>
+    <li>
+        <a th:href="@{/home}">我的主页</a>
+    </li>
+    <li>
+        <a th:href="@{/show}">用户名单</a>
+    </li>
+    <li>
+        <a th:href="@{/picture}">查看图片</a>
+    </li>
+</ul>
+<br/>
+<form th:action="@{/login}" method="post">
+    <p>
+        用户名：<input name="uname"/>
+    </p>
+    <p>
+        密码：<input type="password" name="pwd"/>
+    </p>
+    <p><input type="submit" value="登录"/>&nbsp;&nbsp;&nbsp;<input type="button" value="取消"/></p>
+</form>
+</body>
+</html>
