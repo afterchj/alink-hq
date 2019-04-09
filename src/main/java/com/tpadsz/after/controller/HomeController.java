@@ -2,7 +2,6 @@ package com.tpadsz.after.controller;
 
 import com.github.pagehelper.PageHelper;
 import com.tpadsz.after.entity.User;
-import com.tpadsz.after.entity.dd.ResultDict;
 import com.tpadsz.after.realm.EasyTypeToken;
 import com.tpadsz.after.service.UserService;
 import org.apache.commons.lang.StringUtils;
@@ -17,7 +16,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpSession;
@@ -81,16 +79,16 @@ public class HomeController {
             subject.login(token);
         } catch (Exception e) {
             if (e instanceof UnknownAccountException) {
-                map.put("errMsg",  e.getMessage());
+                map.put("errMsg", e.getMessage());
                 return "/login";
             } else if (e instanceof LockedAccountException) {
                 map.put("errMsg", e.getMessage());
                 return "/login";
             } else if (e instanceof DisabledAccountException) {
-                map.put("errMsg",  e.getMessage());
+                map.put("errMsg", e.getMessage());
                 return "/login";
             } else if (e instanceof IncorrectCredentialsException) {
-                map.put("errMsg",  e.getMessage());
+                map.put("errMsg", e.getMessage());
                 return "/login";
             }
         }
@@ -100,12 +98,18 @@ public class HomeController {
     }
 
     @RequestMapping("/userList")
-    public String userList(User user, ModelMap map, @RequestParam(required = false, defaultValue = "1") Integer page, @RequestParam(required = false, defaultValue = "5") Integer rows) {
-        logger.info("username=" + user.getUname() + ",pwd=" + user.getPwd());
-        List<User> list = userService.selectAll();
+    public String userList(ModelMap map, Integer page,Integer rows) {
+        logger.info("userList..." + page);
+//        System.out.println("userList..." + page);
+        if (null == page || page < 1) {
+            page = 1;
+        }
         PageHelper.startPage(page, 8);
+        List<User> list = userService.selectAll();
+        logger.info("page=" + page + ",size=" + rows);
+        map.put("page", page);
         map.put("users", list);
-        return "/loginSuccess";
+        return "/userList";
     }
 
     /**
