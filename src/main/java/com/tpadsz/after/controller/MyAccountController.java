@@ -4,7 +4,6 @@ import com.tpadsz.after.entity.MyAccount;
 import com.tpadsz.after.exception.InvalidCodeException;
 import com.tpadsz.after.service.MyAccountService;
 import com.tpadsz.after.service.ValidationService;
-import org.apache.commons.collections.map.HashedMap;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -44,8 +44,6 @@ public class MyAccountController {
         return "myAccount";
     }
 
-    //8a937a9ef9daaf40c46a2280fbecabdf5203fc2d
-    //8e0a2885579d4f22
     /**
      * 修改密码
      * @param account 账号
@@ -56,7 +54,7 @@ public class MyAccountController {
     @ResponseBody
     public Map<String,String> confirmChange(String account, String newPwd) {
         boolean success = myAccountService.updatePwd(account, newPwd);
-        Map<String,String> map = new HashedMap();
+        Map<String,String> map = new HashMap<>();
         String info="密码修改成功";
         if (!success) {
             info="密码修改失败";
@@ -68,9 +66,9 @@ public class MyAccountController {
     @RequestMapping(value = "/changeUserName", method = RequestMethod.POST)
     @ResponseBody
     public Map<String,String> changeUserName(String account, String uname,String flag){
-        Map<String, String> map = new HashedMap();
+        Map<String, String> map = new HashMap<>();
         boolean success = myAccountService.updateUserName(account,uname);
-        String info=new String();
+        String info = new String();
         if ("0".equals(flag)){
             //填写用户名
             info="用户名填写成功";
@@ -95,7 +93,7 @@ public class MyAccountController {
     @ResponseBody
     public Map<String, String> sendCode(String mobile){
         int count = myAccountService.getMobile(mobile);
-        Map<String, String> map = new HashedMap();
+        Map<String, String> map = new HashMap<>();
 //        String sysCode;
         if (count>0){
             map.put("info","isBinding");
@@ -121,7 +119,7 @@ public class MyAccountController {
     @ResponseBody
     public Map<String,String> sendEmailCode(String email){
        int count = myAccountService.getEamil(email);
-        Map<String, String> map = new HashedMap();
+        Map<String, String> map = new HashMap<>();
         if (count>0){
             map.put("info","isBinding");
             return map;
@@ -138,7 +136,7 @@ public class MyAccountController {
     @RequestMapping(value = "/changeMobile", method = RequestMethod.POST)
     @ResponseBody
     public Map<String,String> changeMobile(String mobile,String code, String account){
-        Map<String, String> map = new HashedMap();
+        Map<String, String> map = new HashMap<>();
         boolean success;
         try {
             validationService.checkCode(code,mobile);
@@ -159,7 +157,7 @@ public class MyAccountController {
     @RequestMapping(value = "/changeEmail", method = RequestMethod.POST)
     @ResponseBody
     public Map<String,String> changeEmail(String email,String code, String account){
-        Map<String, String> map = new HashedMap();
+        Map<String, String> map = new HashMap<>();
         boolean success;
         try {
             validationService.checkCode(code,email);
