@@ -9,15 +9,15 @@
   </head>
   <body>
   <form id="unameForm" action="#" onsubmit="return false" method="post">
-    原用户名:<input type="text" th:value="${uname}" readonly="readonly" class="name">
-    <br>
+    原用户名:<input type="text" th:value="${uname}" readonly="readonly" class="name"/>
+    <br/>
     <span id="unameHint"></span>
-    <br>
+    <br/>
     用户名:<input type="text" id="uname" name="uname"/>
-    <input type="hidden" th:value="${account}" id="account" name="account">
-    <input type="hidden" th:value="${flag}" id="flag" name="flag">
+    <input type="hidden" th:value="${account}" id="account" name="account"/>
+    <input type="hidden" th:value="${flag}" id="flag" name="flag"/>
     <br>
-    <input type="submit" value="确认修改" id="submit">
+    <input type="submit" value="确认修改" id="submit"/>
   </form>
   </body>
 </html>

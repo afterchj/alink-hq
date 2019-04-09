@@ -26,7 +26,7 @@
 // */
 //
 //@Configuration
-//@PropertySource("classpath:jdbc.properties")
+//@PropertySource("classpath:setup.production.properties")
 //public class SpringConfig {
 //
 //    @Value("${memcache.server}")
