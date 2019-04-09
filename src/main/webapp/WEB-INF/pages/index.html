@@ -10,13 +10,16 @@
             var _ctx = [[${application.ctx}]];
             console.log("Project ContextPath:" + _ctx);
             console.log("路径:" + $("#ctx").val());
+//            $("#sendCode").click(function () {
+//                $.ajax(_ctx / +"")
+//            })
         });
     </script>
     <title>Spring MVC + Thymeleaf Example</title>
 </head>
 <body>
 <!-- Project ContextPath -->
-<input type="hidden" id="ctx" th:value="${application.ctx}"/> Hello,<br/>
+<input type="hidden" id="ctx" th:value="${application.ctx}"/> Hello<br/>
 <ul>
     <li>
         <a th:href="@{/home}">我的主页</a>
@@ -29,14 +32,39 @@
     </li>
 </ul>
 <br/>
-<form th:action="@{/login}" method="post">
-    <p>
-        用户名：<input name="uname"/>
-    </p>
-    <p>
-        密码：<input type="password" name="pwd"/>
-    </p>
-    <p><input type="submit" value="登录"/>&nbsp;&nbsp;&nbsp;<input type="button" value="取消"/></p>
-</form>
+<div style="width: 40%;margin: 0 auto;border: 1px solid grey">
+    <div class="title">
+        <ul>
+            <li>账密登录</li>
+            <li>手机验证码登录</li>
+        </ul>
+        <br/>
+    </div>
+    <hr style="width:90%"/>
+    <div style="width: 40%;margin: 10px auto">
+        <form th:action="@{/login}" method="post">
+            <div id="password">
+                <p>
+                    <input name="uname" placeholder="请输入账号/用户名/邮箱/手机号"/>
+                </p>
+                <p>
+                    <input type="password" name="pwd" placeholder="请输入密码"/>
+                </p>
+            </div>
+            <div id="code" class="myDisplay">
+                <p>
+                    <input style="width: 280px" name="mobile" placeholder="请输入手机号"/>
+                </p>
+                <p>
+                    <input style="width: 200px" type="code" name="pwd" placeholder="请输入验证码"/>
+                    <input id="sendCode" type="button" value="获取验证码"/>
+                </p>
+            </div>
+        </form>
+        <div style="margin: 10px auto;text-align: center">
+            <input style="width: 300px;height:30px;background:deepskyblue;color:white;border: 0" type="submit" value="登录"/></div>
+    </div>
+</div>
+
 </body>
 </html>

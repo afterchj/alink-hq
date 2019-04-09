@@ -4,6 +4,7 @@ package com.tpadsz.after.service;
 import com.tpadsz.after.entity.User;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author after
@@ -15,7 +16,7 @@ public interface UserService {
 	User selectById(String id);
 	
 	User selectByUsername(String username);
-	
+	int getCount(Map map);
 	void save(User user);
 	
 	boolean userIsExist(String username);

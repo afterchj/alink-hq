@@ -13,11 +13,12 @@ public class User {
 
     private String email;
     //状态码 0:禁用,1:正常
-    private boolean status;
+    private int status;
     private String rememberMe;
     private Date createDate;
     private Date updateDate;
-    private boolean isLocked;
+    //账号锁 0:正常,1:账号在别处登录
+    private int isLocked;
 
     @Override
     public String toString() {
@@ -33,11 +34,11 @@ public class User {
                 '}';
     }
 
-    public boolean getStatus() {
+    public int getStatus() {
         return status;
     }
 
-    public void setStatus(boolean status) {
+    public void setStatus(int status) {
         this.status = status;
     }
 
@@ -121,11 +122,11 @@ public class User {
         this.rememberMe = rememberMe;
     }
 
-    public boolean isLocked() {
+    public int isLocked() {
         return isLocked;
     }
 
-    public void setLocked(boolean locked) {
+    public void setLocked(int locked) {
         isLocked = locked;
     }
 }

@@ -1,6 +1,5 @@
 package com.tpadsz.after.realm;
 
-import com.tpadsz.after.utils.LoginType;
 import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;
 import org.apache.shiro.authc.credential.HashedCredentialsMatcher;

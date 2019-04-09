@@ -42,6 +42,18 @@
         or email = #{uname}
     </select>
 
+    <select id="getCount" parameterType="map" resultType="int">
+        SELECT COUNT(1) FROM f_user_account WHERE 1=1
+        <if test="uname != null">
+            AND uname=#{uname}
+        </if>
+        <if test="email != null">
+            AND email=#{email}
+        </if>
+        <if test="mobile != null">
+            AND mobile=#{mobile}
+        </if>
+    </select>
     <delete id="deleteById" parameterType="string">
         <!-- DELETE user,user_role FROM user LEFT JOIN user_role ON user.id = user_role.user_id WHERE user.id= #{id,jdbcType = INTEGER} -->
         DELETE from f_user_account where id = #{id}

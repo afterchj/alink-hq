@@ -1,4 +1,4 @@
-package com.tpadsz.after.utils;
+package com.tpadsz.after.realm;
 
 /**
  * Created by hongjian.chen on 2019/4/9.

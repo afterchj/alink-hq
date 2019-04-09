@@ -26,10 +26,13 @@ public class MainTest {
     @Test
     public void testSqlSessionTemplate() {
         Map map = new HashMap();
-        map.put("uname", "管理员");
+//        map.put("uname", "管理员");
         map.put("account", "admin");
+//        map.put("mobile", "18170756879");
+        map.put("email", "after@tpadsz.com");
         User user = getSqlSessionTemplate().selectOne("com.tpadsz.after.dao.UserExtendDao.selectByUsername", "超级管理员");
         System.out.println("user:" + getSqlSessionTemplate().selectList("com.tpadsz.after.dao.UserExtendDao.getPermissions", "超级管理员"));
+        System.out.println("count:" + getSqlSessionTemplate().selectOne("com.tpadsz.after.dao.UserDao.getCount", map));
     }
 
     @Test

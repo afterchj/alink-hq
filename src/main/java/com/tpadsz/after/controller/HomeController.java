@@ -2,8 +2,10 @@ package com.tpadsz.after.controller;
 
 import com.github.pagehelper.PageHelper;
 import com.tpadsz.after.entity.User;
+import com.tpadsz.after.exception.InvalidCodeException;
 import com.tpadsz.after.realm.EasyTypeToken;
 import com.tpadsz.after.service.UserService;
+import com.tpadsz.after.service.ValidationService;
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 import org.apache.shiro.SecurityUtils;
@@ -19,7 +21,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpSession;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by hongjian.chen on 2019/4/3.
@@ -31,6 +35,9 @@ public class HomeController {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private ValidationService validationService;
 
     @RequestMapping("/")
     public String index() {
@@ -66,14 +73,45 @@ public class HomeController {
         return "";
     }
 
+    @ResponseBody
+    @RequestMapping("/verify")
+    public String sendCode(String mobile) {
+        String str;
+        Map map = new HashMap();
+        map.put("mobile", mobile);
+        int count = userService.getCount(map);
+        if (count == 0) {
+            str = "手机号不存在";
+        } else {
+            try {
+                validationService.sendCode("13", mobile);
+                str = "success";
+            } catch (Exception e) {
+                str = "failure";
+            }
+        }
+        return str;
+    }
+
     @RequestMapping("/login")
-    public String login(User user, HttpSession session, ModelMap map) {
+    public String login(User user, HttpSession session, ModelMap map, String code) {
         String pwd = user.getPwd();
-        EasyTypeToken token = null;
+        String mobile = user.getMobile();
+        EasyTypeToken token;
         logger.info("username=" + user.getUname() + ",pwd=" + pwd);
         if (StringUtils.isEmpty(pwd)) {
             token = new EasyTypeToken(user.getUname());
-        } else token = new EasyTypeToken(user.getUname(), user.getPwd());
+        } else {
+            token = new EasyTypeToken(user.getUname(), user.getPwd());
+            if (StringUtils.isNotEmpty(code) && StringUtils.isNotEmpty(mobile)) {
+                try {
+                    validationService.checkCode(code, mobile);
+                } catch (InvalidCodeException e) {
+                    map.put("errMsg", e.getMessage());
+                    return "/login";
+                }
+            }
+        }
         Subject subject = SecurityUtils.getSubject();
         try {
             subject.login(token);
@@ -98,7 +136,7 @@ public class HomeController {
     }
 
     @RequestMapping("/userList")
-    public String userList(ModelMap map, Integer page,Integer rows) {
+    public String userList(ModelMap map, Integer page, Integer rows) {
         logger.info("userList..." + page);
 //        System.out.println("userList..." + page);
         if (null == page || page < 1) {
@@ -123,4 +161,6 @@ public class HomeController {
         session.removeAttribute("loginUser");
         return "redirect:/index";
     }
+
+
 }
