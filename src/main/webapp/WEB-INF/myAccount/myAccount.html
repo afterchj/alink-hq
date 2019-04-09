@@ -1,0 +1,57 @@
+﻿<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>我的账号</title>
+</head>
+<body>
+    <div class="account">
+        账号:<span>${myAccount.account}</span>
+        &nbsp;&nbsp;&nbsp;<a href="pwd?account=${myAccount.account}">修改密码</a>
+    </div>
+    <br/>
+    <br/>
+    <div class="uname">
+        用户名:
+        <c:if test="${empty myAccount.uname}">
+            <span>未填写</span>
+            &nbsp;&nbsp;&nbsp;<a href="fillUname?account=${myAccount.account}&flag=0">填写用户名</a>
+        </c:if>
+        <c:if test="${not empty myAccount.uname}">
+            <span>${myAccount.uname}</span>
+            &nbsp;&nbsp;&nbsp;<a href="modifiUname?account=${myAccount.account}&uname=${myAccount.uname}&flag=1">修改用户名
+            </a>
+        </c:if>
+
+    </div>
+    <br/>
+    <br/>
+    <div class="mobile">
+        手机号:
+        <c:if test="${empty myAccount.mobile}">
+            <span>未填写</span>
+            &nbsp;&nbsp;&nbsp;<a href="fillMobile?account=${myAccount.account}&flag=0">绑定手机号</a>
+        </c:if>
+        <c:if test="${not empty myAccount.mobile}">
+            <span>${myAccount.mobile}</span>
+            &nbsp;&nbsp;&nbsp;<a href="modifiMobile?account=${myAccount.account}&flag=1">
+            修改手机号</a>
+        </c:if>
+    </div>
+    <br/>
+    <br/>
+    <div class="email">
+        邮箱:
+        <c:if test="${empty myAccount.email}">
+            <span>未填写</span>
+            &nbsp;&nbsp;&nbsp;<a href="fillEmail?account=${myAccount.account}&flag=0">绑定邮箱</a>
+        </c:if>
+        <c:if test="${not empty myAccount.email}">
+            <span>${myAccount.email}</span>
+            &nbsp;&nbsp;&nbsp;<a href="modifiEmail?account=${myAccount.account}&flag=1">
+            修改邮箱</a>
+        </c:if>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.tpadsz.after.dao.MyAccountDao">
+
+    <select id="getAllByAccount" resultType="com.tpadsz.after.entity.MyAccount">
+        SELECT uname,mobile,account,email FROM alink.f_user_account WHERE account=#{account}
+    </select>
+    <!--返回id-->
+    <update id="updatePwd" parameterType="com.tpadsz.after.entity.MyAccount" useGeneratedKeys="true" keyProperty="id">
+        update alink.f_user_account set pwd=#{password}, salt=#{salt} WHERE account=#{account}
+    </update>
+
+    <update id="updateUserName">
+        UPDATE alink.f_user_account set uname=#{uname} WHERE account=#{account}
+    </update>
+
+    <select id="getMobile" resultType="int">
+        select count(*) FROM alink.f_user_account WHERE mobile=#{mobile}
+    </select>
+
+    <update id="updateMobile">
+        UPDATE alink.f_user_account set mobile=#{mobile} WHERE account=#{account}
+    </update>
+
+    <update id="updateEmail">
+        UPDATE alink.f_user_account set email=#{email} WHERE account=#{account}
+    </update>
+
+    <select id="getEmail" resultType="int">
+        select count(*) FROM alink.f_user_account WHERE email=#{email}
+    </select>
+
+</mapper>
