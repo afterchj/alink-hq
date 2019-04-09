@@ -75,7 +75,7 @@ public class MainController {
             System.out.println("plainText=" + user.getPwd());
             ShiroDbRealm.HashPassword hashPassword = new ShiroDbRealm().encrypt(user.getPwd());
             System.out.println(hashPassword.password + "\t" + hashPassword.salt);
-            user.setStatus("1");
+            user.setStatus(true);
             user.setPwd(hashPassword.password);
             user.setSalt(hashPassword.salt);
             user.setCreateDate(new Date());

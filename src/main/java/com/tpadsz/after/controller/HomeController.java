@@ -8,6 +8,10 @@ import com.tpadsz.after.service.UserService;
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authc.DisabledAccountException;
+import org.apache.shiro.authc.IncorrectCredentialsException;
+import org.apache.shiro.authc.LockedAccountException;
+import org.apache.shiro.authc.UnknownAccountException;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -76,8 +80,19 @@ public class HomeController {
         try {
             subject.login(token);
         } catch (Exception e) {
-            map.put("errorMsg", ResultDict.ACCOUNT_NOT_CORRECT.getValue());
-            return "/login";
+            if (e instanceof UnknownAccountException) {
+                map.put("errMsg",  e.getMessage());
+                return "/login";
+            } else if (e instanceof LockedAccountException) {
+                map.put("errMsg", e.getMessage());
+                return "/login";
+            } else if (e instanceof DisabledAccountException) {
+                map.put("errMsg",  e.getMessage());
+                return "/login";
+            } else if (e instanceof IncorrectCredentialsException) {
+                map.put("errMsg",  e.getMessage());
+                return "/login";
+            }
         }
         User loginUser = userService.selectByUsername(user.getUname());
         session.setAttribute("logingUser", loginUser);

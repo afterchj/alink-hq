@@ -1,15 +1,11 @@
 package com.tpadsz.after.realm;
 
-import com.alibaba.fastjson.JSON;
 import com.tpadsz.after.dao.UserExtendDao;
 import com.tpadsz.after.entity.User;
 import com.tpadsz.after.utils.Digests;
 import com.tpadsz.after.utils.Encodes;
 import org.apache.log4j.Logger;
-import org.apache.shiro.authc.AuthenticationInfo;
-import org.apache.shiro.authc.AuthenticationToken;
-import org.apache.shiro.authc.SimpleAuthenticationInfo;
-import org.apache.shiro.authc.UnknownAccountException;
+import org.apache.shiro.authc.*;
 import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
@@ -57,16 +53,24 @@ public class ShiroDbRealm extends AuthorizingRealm {
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) {
 //        logger.info("doGetAuthenticationInfo...");
-
         String username = (String) token.getPrincipal();
         User user = userExtendDao.selectByUsername(username);
         AuthenticationInfo info;
-        logger.info("user:" + JSON.toJSONString(user));
+//        logger.info("user:" + JSON.toJSONString(user));
         if (null != user) {
+            if (user.getStatus() == false) {
+                throw new DisabledAccountException("该账号已禁用！");
+            } else if (user.isLocked() == true) {
+                throw new LockedAccountException("该账号在别处登入！");
+            }
+        } else {
+            throw new UnknownAccountException("账号不存在！");
+        }
+        try {
             byte[] salt = Encodes.decodeHex(user.getSalt());
             info = new SimpleAuthenticationInfo(user.getUname(), user.getPwd(), ByteSource.Util.bytes(salt), getName());
-        } else {
-            throw new UnknownAccountException();
+        } catch (Exception e) {
+            throw new IncorrectCredentialsException("账号密码不正确！");
         }
         return info;
     }

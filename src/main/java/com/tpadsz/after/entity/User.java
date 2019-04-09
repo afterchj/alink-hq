@@ -13,7 +13,7 @@ public class User {
 
     private String email;
     //状态码 0:禁用,1:正常
-    private String status;
+    private boolean status;
     private String rememberMe;
     private Date createDate;
     private Date updateDate;
@@ -33,11 +33,11 @@ public class User {
                 '}';
     }
 
-    public String getStatus() {
+    public boolean getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(boolean status) {
         this.status = status;
     }
 
