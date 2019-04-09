@@ -2,6 +2,7 @@ package com.tpadsz.after.controller;
 
 import com.github.pagehelper.PageHelper;
 import com.tpadsz.after.entity.User;
+import com.tpadsz.after.entity.dd.ResultDict;
 import com.tpadsz.after.exception.InvalidCodeException;
 import com.tpadsz.after.realm.EasyTypeToken;
 import com.tpadsz.after.service.UserService;
@@ -101,8 +102,6 @@ public class HomeController {
         logger.info("username=" + user.getUname() + ",pwd=" + pwd);
         if (StringUtils.isEmpty(pwd)) {
             token = new EasyTypeToken(user.getUname());
-        } else {
-            token = new EasyTypeToken(user.getUname(), user.getPwd());
             if (StringUtils.isNotEmpty(code) && StringUtils.isNotEmpty(mobile)) {
                 try {
                     validationService.checkCode(code, mobile);
@@ -111,6 +110,8 @@ public class HomeController {
                     return "/login";
                 }
             }
+        } else {
+            token = new EasyTypeToken(user.getUname(), user.getPwd());
         }
         Subject subject = SecurityUtils.getSubject();
         try {
@@ -126,7 +127,7 @@ public class HomeController {
                 map.put("errMsg", e.getMessage());
                 return "/login";
             } else if (e instanceof IncorrectCredentialsException) {
-                map.put("errMsg", e.getMessage());
+                map.put("errMsg", ResultDict.PASSWORD_NOT_CORRECT.getValue());
                 return "/login";
             }
         }
