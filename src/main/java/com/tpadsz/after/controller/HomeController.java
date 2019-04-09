@@ -2,16 +2,17 @@ package com.tpadsz.after.controller;
 
 import com.github.pagehelper.PageHelper;
 import com.tpadsz.after.entity.User;
+import com.tpadsz.after.entity.dd.ResultDict;
+import com.tpadsz.after.realm.EasyTypeToken;
 import com.tpadsz.after.service.UserService;
+import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 import org.apache.shiro.SecurityUtils;
-import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -56,12 +57,28 @@ public class HomeController {
         return list;
     }
 
+    @ResponseBody
+    @RequestMapping("/test")
+    public String test(String account) {
+        List<User> list = userService.selectAll();
+        return "";
+    }
+
     @RequestMapping("/login")
-    public String login(User user, HttpSession session) {
-        logger.info("username=" + user.getUname() + ",pwd=" + user.getPwd());
-        UsernamePasswordToken token = new UsernamePasswordToken(user.getUname(), user.getPwd());
+    public String login(User user, HttpSession session, ModelMap map) {
+        String pwd = user.getPwd();
+        EasyTypeToken token = null;
+        logger.info("username=" + user.getUname() + ",pwd=" + pwd);
+        if (StringUtils.isEmpty(pwd)) {
+            token = new EasyTypeToken(user.getUname());
+        } else token = new EasyTypeToken(user.getUname(), user.getPwd());
         Subject subject = SecurityUtils.getSubject();
-        subject.login(token);
+        try {
+            subject.login(token);
+        } catch (Exception e) {
+            map.put("errorMsg", ResultDict.ACCOUNT_NOT_CORRECT.getValue());
+            return "/login";
+        }
         User loginUser = userService.selectByUsername(user.getUname());
         session.setAttribute("logingUser", loginUser);
         return "/loginSuccess";
@@ -75,6 +92,7 @@ public class HomeController {
         map.put("users", list);
         return "/loginSuccess";
     }
+
     /**
      * 登出，清除session
      *

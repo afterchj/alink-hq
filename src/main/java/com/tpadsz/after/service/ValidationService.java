@@ -5,6 +5,7 @@ import com.tpadsz.after.constants.MemcachedObjectType;
 import com.tpadsz.after.exception.InvalidCodeException;
 import com.tpadsz.after.utils.HttpUtils;
 import com.tpadsz.after.utils.email.SendMailUtil;
+import net.rubyeye.xmemcached.MemcachedClient;
 import net.rubyeye.xmemcached.XMemcachedClient;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +20,7 @@ import java.util.Random;
 public class ValidationService {
 
     @Autowired
-    XMemcachedClient client;
+    private MemcachedClient client;
 
     public String sendCode(String appid, String mobile) throws Exception {
         String key = String.format(MemcachedObjectType.CACHE_MESSAGE_VERIFICATION.getPrefix(), mobile);

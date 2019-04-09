@@ -6,10 +6,10 @@ import com.tpadsz.after.entity.User;
 import com.tpadsz.after.utils.Digests;
 import com.tpadsz.after.utils.Encodes;
 import org.apache.log4j.Logger;
-import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;
 import org.apache.shiro.authc.SimpleAuthenticationInfo;
+import org.apache.shiro.authc.UnknownAccountException;
 import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
@@ -21,7 +21,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import javax.annotation.PostConstruct;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 
 public class ShiroDbRealm extends AuthorizingRealm {
@@ -56,23 +55,25 @@ public class ShiroDbRealm extends AuthorizingRealm {
      * 用于验证身份
      */
     @Override
-    protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
+    protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) {
 //        logger.info("doGetAuthenticationInfo...");
+
         String username = (String) token.getPrincipal();
         User user = userExtendDao.selectByUsername(username);
-        AuthenticationInfo info = null;
+        AuthenticationInfo info;
         logger.info("user:" + JSON.toJSONString(user));
         if (null != user) {
             byte[] salt = Encodes.decodeHex(user.getSalt());
             info = new SimpleAuthenticationInfo(user.getUname(), user.getPwd(), ByteSource.Util.bytes(salt), getName());
-            return info;
+        } else {
+            throw new UnknownAccountException();
         }
         return info;
     }
 
     @PostConstruct
     public void initCredentialsMatcher() {
-        HashedCredentialsMatcher matcher = new HashedCredentialsMatcher(ALGORITHM);
+        HashedCredentialsMatcher matcher = new RetryLimitHashedCredentialsMatcher();
         matcher.setHashIterations(INTERATIONS);
         setCredentialsMatcher(matcher);
     }
