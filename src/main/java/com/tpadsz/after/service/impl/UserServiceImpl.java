@@ -8,58 +8,64 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class UserServiceImpl implements UserService {
 
-	@Autowired
-	private UserDao userDao;
+    @Autowired
+    private UserDao userDao;
 
-	@Override
-	public User selectById(String id) {
-		User user = userDao.selectById(id);
-		return user;
-	}
+    @Override
+    public User selectById(String id) {
+        User user = userDao.selectById(id);
+        return user;
+    }
 
-	@Override
-	public void save(User user) {
-		userDao.insert(user);
+    @Override
+    public void save(User user) {
+        userDao.insert(user);
 
-	}
+    }
 
-	@Override
-	public User selectByUsername(String username) {
-		return userDao.selectByUsername(username);
-	}
+    @Override
+    public User selectByUsername(String username) {
+        return userDao.selectByUsername(username);
+    }
 
-	@Override
-	public boolean userIsExist(String username) {
-		User user = userDao.selectByUsername(username);
-		if(user == null){
-			return false;
-		}else{
-			return true;
-		}
-	}
+    @Override
+    public int getCount(Map map) {
+        return userDao.getCount(map);
+    }
 
-	@Override
-	public List<User> selectAll() {
-		return userDao.selectAll();
-	}
+    @Override
+    public boolean userIsExist(String username) {
+        User user = userDao.selectByUsername(username);
+        if (user == null) {
+            return false;
+        } else {
+            return true;
+        }
+    }
 
-	@Override
-	public void deleteById(Integer id) {
-		userDao.deleteById(id);
-	}
+    @Override
+    public List<User> selectAll() {
+        return userDao.selectAll();
+    }
 
-	@Override
-	public void blockUserById(Integer id) {
-		userDao.blockUserById(id);
-	}
+    @Override
+    public void deleteById(Integer id) {
+        userDao.deleteById(id);
+    }
 
-	@Override
-	public void unblockUserById(Integer id) {
-		userDao.unblockUserById(id);
-	}
+    @Override
+    public void blockUserById(Integer id) {
+        userDao.blockUserById(id);
+    }
+
+    @Override
+    public void unblockUserById(Integer id) {
+        userDao.unblockUserById(id);
+    }
 
 }

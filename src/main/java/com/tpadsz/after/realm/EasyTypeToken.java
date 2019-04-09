@@ -1,6 +1,5 @@
 package com.tpadsz.after.realm;
 
-import com.tpadsz.after.utils.LoginType;
 import org.apache.shiro.authc.UsernamePasswordToken;
 
 /**

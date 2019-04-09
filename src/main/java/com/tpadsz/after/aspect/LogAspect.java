@@ -45,10 +45,9 @@ public class LogAspect {
     }
 
     //登录 后置通知
-    @After("loginPointcut()")
-    public void login(JoinPoint joinPoint) {
-        logger.info("切面方法：" + joinPoint.getSignature().getName());
-
+//    @After("loginPointcut()")
+//    public void login(JoinPoint joinPoint) {
+//        logger.info("切面方法：" + joinPoint.getSignature().getName());
 //        HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
 //        User loginUser = (User) request.getSession().getAttribute("loginUser");
 //        LogModal log = new LogModal();
@@ -68,7 +67,7 @@ public class LogAspect {
 //            log.setResult("执行失败");
 //            logService.insertLog(log);
 //        }
-    }
+//    }
 
     //登出,环绕通知
 //    @Around("logOutPointcut()")

@@ -58,9 +58,9 @@ public class ShiroDbRealm extends AuthorizingRealm {
         AuthenticationInfo info;
 //        logger.info("user:" + JSON.toJSONString(user));
         if (null != user) {
-            if (user.getStatus() == false) {
+            if (user.getStatus() == 0) {
                 throw new DisabledAccountException("该账号已禁用！");
-            } else if (user.isLocked() == true) {
+            } else if (user.isLocked() == 1) {
                 throw new LockedAccountException("该账号在别处登入！");
             }
         } else {
