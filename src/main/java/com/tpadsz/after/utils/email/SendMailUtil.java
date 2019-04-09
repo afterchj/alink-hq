@@ -1,5 +1,8 @@
 package com.tpadsz.after.utils.email;
 
+import net.rubyeye.xmemcached.XMemcachedClient;
+
+import javax.annotation.Resource;
 import javax.mail.Message;
 import javax.mail.MessagingException;
 import javax.mail.Session;
@@ -16,6 +19,9 @@ import java.util.Properties;
  */
 
 public class SendMailUtil {
+
+    @Resource
+    private XMemcachedClient memcachedClient;
 
     public static void sendCode(String code, String to, String flag) {
         String subject = "";
@@ -63,6 +69,7 @@ public class SendMailUtil {
         } catch (MessagingException e) {
             e.printStackTrace();
         } finally {
+
             try {
                 transport.close();
             } catch (MessagingException e) {
