@@ -41,7 +41,7 @@ public class MyAccountController {
     public String myAccount(String account, Model model) {
         MyAccount myAccount = myAccountService.getAllByAccount(account);
         model.addAttribute("myAccount", myAccount);
-        return "myAccount";
+        return "myAccount/myAccount";
     }
 
     /**
@@ -187,7 +187,7 @@ public class MyAccountController {
     public String fillUname(String account,String flag,Model model){
         model.addAttribute("account", account);
         model.addAttribute("flag", flag);
-        return "fillUname";
+        return "myAccount/fillUname";
     }
 
     /**
@@ -201,7 +201,7 @@ public class MyAccountController {
     public String fillMobile(String account,String flag,Model model){
         model.addAttribute("account", account);
         model.addAttribute("flag", flag);
-        return "fillMobile";
+        return "myAccount/fillMobile";
     }
 
     /**
@@ -215,7 +215,7 @@ public class MyAccountController {
     public String fillEmail(String account,String flag,Model model){
         model.addAttribute("account", account);
         model.addAttribute("flag", flag);
-        return "fillEmail";
+        return "myAccount/fillEmail";
     }
 
     /**
@@ -229,7 +229,7 @@ public class MyAccountController {
         model.addAttribute("account", account);
         model.addAttribute("uname", uname);
         model.addAttribute("flag", flag);
-        return "modifiUname";
+        return "myAccount/modifiUname";
     }
     /**
      * 跳转modifiEmail.jsp
@@ -241,7 +241,7 @@ public class MyAccountController {
     public String modifiEmail(String account, String flag,Model model){
         model.addAttribute("account", account);
         model.addAttribute("flag", flag);
-        return "modifiEmail";
+        return "myAccount/modifiEmail";
     }
 
     /**
@@ -254,7 +254,7 @@ public class MyAccountController {
     public String modifiMobile(String account, String flag,Model model){
         model.addAttribute("account", account);
         model.addAttribute("flag", flag);
-        return "modifiMobile";
+        return "myAccount/modifiMobile";
     }
     /**
      * 跳转changePassword.jsp
@@ -265,7 +265,7 @@ public class MyAccountController {
     @RequestMapping(value = "/pwd", method = RequestMethod.GET)
     public String pwd(String account, Model model) {
         model.addAttribute("account", account);
-        return "changePassword";
+        return "myAccount/changePassword";
     }
 
 }

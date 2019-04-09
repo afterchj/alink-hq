@@ -31,7 +31,7 @@ $(function () {
             }else {
                 $.ajax({
                     type:"POST",
-                    url:"/blt-hq/myAccount/changePwd",
+                    url:"/alink-hq/myAccount/changePwd",
                     data:$("#pwdForm").serialize(),
                     dataType:"json",
                     success:function (msg) {
@@ -40,7 +40,7 @@ $(function () {
                             alert("密码修改成功");
                             //2s后跳转
                             setTimeout(function () {
-                                window.location.href = "http://localhost:8080/blt-hq/myAccount/myAccount?account="+account;
+                                window.location.href = "http://localhost:8080/alink-hq/myAccount/myAccount?account="+account;
                             },2000);
                         }else {
                             alert(msg.success);

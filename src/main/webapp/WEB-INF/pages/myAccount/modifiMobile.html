@@ -3,10 +3,9 @@
       xmlns:th="http://www.thymeleaf.org">
   <head>
     <title>修改手机号</title>
-    <script src="/blt-hq/static/myAccount/js/jquery-3.3.1.min.js"></script>
-    <script src="/blt-hq/static/myAccount/js/common.js"></script>
-    <script src="/blt-hq/static/myAccount/js/mobile.js"></script>
-    <%--<script src="/blt-hq/static/myAccount/js/common.js"></script>--%>
+    <script src="/alink-hq/static/myAccount/js/jquery-3.3.1.min.js"></script>
+    <script src="/alink-hq/static/myAccount/js/common.js"></script>
+    <script src="/alink-hq/static/myAccount/js/mobile.js"></script>
     <script>
       $(function () {
         var alertText = "绑定成功";
@@ -18,18 +17,14 @@
   <body>
   <form id="mobileForm" action="#" onsubmit="return false" method="post">
     <br/>
-    <br/>
     <span id="mobileHint"></span>
     <br/>
     手机号：<input type="text" name="mobile" id="mobile"/>
     <br/>
     <span id="codeHint"></span>
     <br/>
-    <br/>
-    <br/>
     验证码：<input type="text" name="code" id="code"/> &nbsp;<input type="submit" id="codeSubmit" value="获取验证码"/>
-    <br>
-    <br>
+    <br/>
     <input type="hidden" th:value="${account}" id="account" name="account"/>
     <input type="hidden" th:value="${flag}" id="flag" name="flag"/>
     <input type="submit" id="fillSubmit" value="确认修改"/>

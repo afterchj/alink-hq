@@ -29,7 +29,7 @@ $(function () {
         }else {
             $.ajax({
                 type:"POST",
-                url:"/blt-hq/myAccount/changeUserName",
+                url:"/alink-hq/myAccount/changeUserName",
                 data:$("#unameForm").serialize(),
                 dataType:"json",
                 success:function (msg) {
@@ -39,7 +39,7 @@ $(function () {
                         alert(msg.success);
                         //2s后跳转
                         setTimeout(function () {
-                            window.location.href = "http://localhost:8080/blt-hq/myAccount/myAccount?account="+account;
+                            window.location.href = "http://localhost:8080/alink-hq/myAccount/myAccount?account="+account;
                         },2000);
                     }else {
                         alert(msg.success);

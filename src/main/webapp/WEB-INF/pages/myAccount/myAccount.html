@@ -15,7 +15,7 @@
     用户名:
     <span th:text="${myAccount.getUname()==null or #strings.isEmpty(myAccount.getUname())}?'未填写':${myAccount.getUname()}"></span>&nbsp;&nbsp;&nbsp;
     <a th:if="${myAccount.getUname()==null or #strings.isEmpty(myAccount.getUname())}" th:href="@{fillUname(account=${myAccount.getAccount()},flag=0)}">填写用户名</a>
-    <a th:if="${myAccount.getUname()!=null or !#strings.isEmpty(myAccount.getUname())}" th:href="@{modifiUname(account=${myAccount.getAccount()},uname=${myAccount.getUname()},flag=1)}">修改用户名</a>
+    <a th:if="${myAccount.getUname()!=null and !#strings.isEmpty(myAccount.getUname())}" th:href="@{modifiUname(account=${myAccount.getAccount()},uname=${myAccount.getUname()},flag=1)}">修改用户名</a>
     </div>
     <br/>
     <br/>
@@ -23,7 +23,7 @@
         手机号:
         <span th:text="${myAccount.getMobile()==null or #strings.isEmpty(myAccount.getMobile())}?'未填写':${myAccount.getMobile()}"></span>&nbsp;&nbsp;&nbsp;
         <a th:if="${myAccount.getMobile()==null or #strings.isEmpty(myAccount.getMobile())}" th:href="@{fillMobile(account=${myAccount.getAccount()},flag=0)}">绑定手机号</a>
-        <a th:if="${myAccount.getMobile()!=null or !#strings.isEmpty(myAccount.getMobile())}" th:href="@{modifiMobile(account=${myAccount.getAccount()},flag=1)}">修改手机号</a>
+        <a th:if="${myAccount.getMobile()!=null and !#strings.isEmpty(myAccount.getMobile())}" th:href="@{modifiMobile(account=${myAccount.getAccount()},flag=1)}">修改手机号</a>
 </div>
 <br/>
 <br/>
@@ -31,7 +31,7 @@
     邮箱:
     <span th:text="${myAccount.getEmail()==null or #strings.isEmpty(myAccount.getEmail())}?'未填写':${myAccount.getEmail()}"></span>&nbsp;&nbsp;&nbsp;
     <a th:if="${myAccount.getEmail()==null or #strings.isEmpty(myAccount.getEmail())}" th:href="@{fillEmail(account=${myAccount.getAccount()},flag=0)}">绑定邮箱</a>
-    <a th:href="@{modifiEmail(account=${myAccount.getAccount()},flag=1)}" th:if="${myAccount.getEmail()!=null or !#strings.isEmpty(myAccount.getEmail())}">修改邮箱</a>
+    <a th:href="@{modifiEmail(account=${myAccount.getAccount()},flag=1)}" th:if="${myAccount.getEmail()!=null and !#strings.isEmpty(myAccount.getEmail())}">修改邮箱</a>
 </div>
 </body>
 </html>
