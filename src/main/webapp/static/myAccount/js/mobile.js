@@ -26,7 +26,7 @@ $(function () {
             $("#mobileHint").empty();
             $.ajax({
                 type:"POST",
-                url:"/blt-hq/myAccount/sendCode",
+                url:"/alink-hq/myAccount/sendCode",
                 data:"mobile="+mobile,
                 dataType:"json",
                 success:function (msg) {
@@ -82,7 +82,7 @@ function clickFillSubmit(event) {
             $("#mobileHint").empty();
             $.ajax({
                 type:"POST",
-                url:"/blt-hq/myAccount/changeMobile",
+                url:"/alink-hq/myAccount/changeMobile",
                 data:$("#mobileForm").serialize(),
                 dataType:"json",
                 success:function (msg) {
@@ -99,7 +99,7 @@ function clickFillSubmit(event) {
                         alert(event.data.alertText);
                         //2s后跳转
                         setTimeout(function () {
-                            window.location.href = "http://localhost:8080/blt-hq/myAccount/myAccount?account="+account;
+                            window.location.href = "http://localhost:8080/alink-hq/myAccount/myAccount?account="+account;
                         },2000);
                     }
 

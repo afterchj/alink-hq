@@ -52,7 +52,7 @@ public class SendMailUtil {
         Transport transport = null;
         try {
             // 设置发件人邮箱地址
-            message.setFrom(new InternetAddress("info@tpadsz.com"));
+            message.setFrom(new InternetAddress("service@tpadsz.com"));
             // 设置收件人邮箱地址
 //        message.setRecipients(Message.RecipientType.TO, new InternetAddress[]{new InternetAddress("after@tpadsz.com"),new InternetAddress("766256898@qq.com")});
             message.setRecipient(Message.RecipientType.TO, new InternetAddress(to));//一个收件人
@@ -63,7 +63,7 @@ public class SendMailUtil {
             // 得到邮差对象
             transport = session.getTransport();
             // 连接自己的邮箱账户
-            transport.connect("info@tpadsz.com", "HH7eK9AjhcLGBXUT");// 密码为QQ邮箱开通的stmp服务后得到的客户端授权码
+            transport.connect("service@tpadsz.com", "Tp123456.");// 密码为QQ邮箱开通的stmp服务后得到的客户端授权码
             // 发送邮件
             transport.sendMessage(message, message.getAllRecipients());
         } catch (MessagingException e) {

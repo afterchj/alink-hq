@@ -3,23 +3,20 @@
       xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>邮箱绑定</title>
-    <script src="/blt-hq/static/myAccount/js/jquery-3.3.1.min.js"></script>
-    <script src="/blt-hq/static/myAccount/js/common.js"></script>
-    <script src="/blt-hq/static/myAccount/js/email.js"></script>
+    <script src="/alink-hq/static/myAccount/js/jquery-3.3.1.min.js"></script>
+    <script src="/alink-hq/static/myAccount/js/common.js"></script>
+    <script src="/alink-hq/static/myAccount/js/email.js"></script>
 </head>
 <body>
 <form id="emailForm" action="#" onsubmit="return false" method="post">
-    <br/>
-    <br/>
     <span id="emailHint"></span>
-    <br>
+    <br/>
     邮箱：<input type="text" name="email" id="email"/>
     <br/>
     <span id="codeHint"></span>
     <br/>
     激活码：<input type="text" name="code" id="code"/> &nbsp;<input type="submit" id="codeSubmit" value="获取激活码"/><span id="success"></span>
-    <br>
-    <br>
+    <br/>
     <input type="hidden" th:value="${account}" id="account" name="account"/>
     <input type="hidden" th:value="${flag}" id="flag" name="flag"/>
     <input type="submit" id="fillSubmit" value="立即绑定"/>

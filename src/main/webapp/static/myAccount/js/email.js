@@ -27,7 +27,7 @@ $(function () {
             $("#emailHint").empty();
             $.ajax({
                 type: "POST",
-                url: "/blt-hq/myAccount/sendEmailCode",
+                url: "/alink-hq/myAccount/sendEmailCode",
                 data: "email=" + email,
                 dataType: "json",
                 success: function (msg) {
@@ -83,7 +83,7 @@ $(function () {
                 $("#emailHint").empty();
                 $.ajax({
                     type: "POST",
-                    url: "/blt-hq/myAccount/changeEmail",
+                    url: "/alink-hq/myAccount/changeEmail",
                     data: $("#emailForm").serialize(),
                     dataType: "json",
                     success: function (msg) {
@@ -100,7 +100,7 @@ $(function () {
                             alert("绑定成功");
                             //2s后跳转
                             setTimeout(function () {
-                                window.location.href = "http://localhost:8080/blt-hq/myAccount/myAccount?account=" + account;
+                                window.location.href = "http://localhost:8080/alink-hq/myAccount/myAccount?account=" + account;
                             }, 2000);
                         }
 
