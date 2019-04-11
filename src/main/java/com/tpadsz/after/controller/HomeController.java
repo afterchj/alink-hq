@@ -58,7 +58,7 @@ public class HomeController {
 
     @RequestMapping("/home")
     public String home() {
-        return "index";
+        return "./projectManage/projectManage";
     }
 
     @RequestMapping("/picture")
