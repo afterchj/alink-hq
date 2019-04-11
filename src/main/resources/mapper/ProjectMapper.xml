@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.tpadsz.after.dao.ProjectDao">
+
+    <select id="findRoleIdByUid" resultType="string" parameterType="string">
+        SELECT role_id FROM alink.f_user_role WHERE user_id=#{uid}
+    </select>
+
+    <select id="findProList" resultType="com.tpadsz.after.entity.ProjectList">
+        SELECT t1.id,t1.name,count(t3.id) as meshNum,t2.account as account,DATE_FORMAT(t1.create_date,'%Y-%m-%d %H:%i:%s') AS create_date,DATE_FORMAT(t1.update_date,'%Y-%m-%d %H:%i:%s') AS update_date FROM alink.f_project AS t1 INNER JOIN alink.f_user_account AS t2 ON t1.uid = t2.id INNER JOIN alink.f_mesh AS t3 ON t1.id = t3.project_id GROUP BY t3.project_id ORDER BY t1.create_date DESC
+    </select>
+
+    <select id="findFirmUid" resultType="string" parameterType="string">
+        SELECT uid FROM alink.f_user_customer WHERE fid=(SELECT fid FROM f_user_customer WHERE uid=#{uid})
+    </select>
+
+    <select id="findProListByUids" resultType="com.tpadsz.after.entity.ProjectList">
+        SELECT t1.id,t1.name,count(t3.id) as meshNum,t2.account as account,DATE_FORMAT(t1.create_date,'%Y-%m-%d %H:%i:%s') AS create_date,DATE_FORMAT(t1.update_date,'%Y-%m-%d %H:%i:%s') AS update_date FROM
+        (SELECT * FROM alink.f_project WHERE uid IN
+            <foreach item="item" collection="list" open="(" separator="," close=")">#{item}
+            </foreach>) AS t1
+        INNER JOIN alink.f_user_account AS t2 ON t1.uid = t2.id INNER JOIN alink.f_mesh AS t3 ON t1.id = t3.project_id
+        GROUP BY t3.project_id ORDER BY t1.create_date DESC
+    </select>
+
+    <select id="findProListByUid" resultType="com.tpadsz.after.entity.ProjectList">
+        SELECT t1.id,t1.name,count(t3.id) as meshNum,t2.account as account,DATE_FORMAT(t1.create_date,'%Y-%m-%d %H:%i:%s') AS create_date,DATE_FORMAT(t1.update_date,'%Y-%m-%d %H:%i:%s') AS update_date FROM
+        (SELECT * FROM alink.f_project WHERE uid = #{uid}) AS t1
+        INNER JOIN alink.f_user_account AS t2 ON t1.uid = t2.id INNER JOIN alink.f_mesh AS t3 ON t1.id = t3.project_id
+        GROUP BY t3.project_id ORDER BY t1.create_date DESC
+    </select>
+
+
+</mapper>
