@@ -133,10 +133,14 @@ function pushCode(flag) {
         },
         async: true,
         success: function (res) {
-            console.log("result=" + res + ",mobile=" + mobile);
-            if (res == "false") {
+            console.log("result=" + res + ",mobile=" + mobile + ",email=" + email);
+            if (res == "mobile_failure") {
                 $("#errMsg").html("<span style='font-weight: bold;color: red'>该手机号未绑定！</span>");
                 $("#mobile").focus();
+            }
+            if (res == "email_failure") {
+                $("#errMsg").html("<span style='font-weight: bold;color: red'>该邮箱未绑定！</span>");
+                $("#email").focus();
             }
         }
     })

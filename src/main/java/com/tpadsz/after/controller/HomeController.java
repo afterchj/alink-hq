@@ -42,8 +42,13 @@ public class HomeController {
     private ValidationService validationService;
 
     @RequestMapping("/")
-    public String index() {
+    public String login() {
         return "login";
+    }
+
+    @RequestMapping("/index")
+    public String index() {
+        return "index";
     }
 
     @RequestMapping("/toLogin")
@@ -126,15 +131,15 @@ public class HomeController {
         Map map = new HashMap();
         if (StringUtils.isNotEmpty(mobile)) {
             map.put("mobile", mobile);
-            str = "mobile";
+            str = "mobile_";
         }
         if (StringUtils.isNotEmpty(email)) {
             map.put("email", email);
-            str = "email";
+            str = "email_";
         }
         int count = userService.getCount(map);
         if (count == 0) {
-            str = str + "false";
+            str = str + "failure";
         } else {
             try {
                 if (StringUtils.isNotEmpty(mobile)) {
@@ -142,7 +147,7 @@ public class HomeController {
                     str = "success";
                 }
                 if (StringUtils.isNotEmpty(email)) {
-                    validationService.sendEmailCode(email,"reset");
+                    validationService.sendEmailCode(email, "reset");
                     str = "success";
                 }
             } catch (Exception e) {
@@ -197,16 +202,16 @@ public class HomeController {
             logger.info("errMsg=" + e);
             if (e instanceof UnknownAccountException) {
                 map.put("errMsg", e.getMessage());
-                return "/index";
+                return "/login";
             } else if (e instanceof LockedAccountException) {
                 map.put("errMsg", e.getMessage());
-                return "/index";
+                return "/login";
             } else if (e instanceof DisabledAccountException) {
                 map.put("errMsg", e.getMessage());
-                return "/index";
+                return "/login";
             } else if (e instanceof IncorrectCredentialsException) {
                 map.put("errMsg", ResultDict.PASSWORD_NOT_CORRECT.getValue());
-                return "/index";
+                return "/login";
             }
         }
         User loginUser = userService.selectByUsername(userName);
@@ -240,6 +245,4 @@ public class HomeController {
         session.removeAttribute("loginUser");
         return "redirect:/index";
     }
-
-
 }

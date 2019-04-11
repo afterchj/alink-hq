@@ -46,6 +46,9 @@
                             </div>
 
                             <!-- <p class="false-alert">登录名密码不正确</p>-->
+                            <div id="errMsg" style="margin-bottom: 10px;text-align: center" th:if="${errMsg!=null}">
+                                <span style="font-weight: bold;color: red" th:text="${errMsg}"></span>
+                            </div>
                             <p class="page-hint"></p>
                             <button type="submit">登录</button>
                             <div class="clearfix hint">
@@ -90,12 +93,14 @@
                                <p class="code-input">请输入验证码</p>
                                <p class="code-overtime active">验证码已超时，请重新获取</p>-->
                             <div class="icon-input p-r">
-                                <input type="text" class="phone" name="code" placeholder="请输入验证码" style="text-indent: 15px;"/>
+                                <input type="text" class="phone" name="code" placeholder="请输入验证码"
+                                       style="text-indent: 15px;"/>
                                 <button class="security-code" type="button">获取验证码</button>
                             </div>
                             <!-- <p class="input-letter active">请输入6-16位数字、字母</p>
                              <p class="input-newpassword ">请输入新密码</p>-->
-                            <input type="password" name="pwd" placeholder="请输入新密码（6-16位数字、字母）" style="text-indent: 15px;"/>
+                            <input type="password" name="pwd" placeholder="请输入新密码（6-16位数字、字母）"
+                                   style="text-indent: 15px;"/>
                             <button type="submit">修改密码</button>
                             <div class="clearfix hint">
                                 <span class="f-r go-login">已有账号，请点击这里登录</span>
@@ -111,12 +116,14 @@
                             <!--      <p class="code-false ">验证码不正确</p>
                                   <p class="code-input">请输入验证码</p>-->
                             <div class="icon-input p-r">
-                                <input type="text" class="phone" name="code" placeholder="请输入验证码" style="text-indent: 15px;"/>
+                                <input type="text" class="phone" name="code" placeholder="请输入验证码"
+                                       style="text-indent: 15px;"/>
                                 <button class="security-code" type="button">获取验证码</button>
                             </div>
                             <!-- <p class="input-letter active">请输入6-16位数字、字母</p>
                              <p class="input-newpassword ">请输入新密码</p>-->
-                            <input type="password" name="pwd" placeholder="请输入新密码（6-16位数字、字母）" style="text-indent: 15px;"/>
+                            <input type="password" name="pwd" placeholder="请输入新密码（6-16位数字、字母）"
+                                   style="text-indent: 15px;"/>
                             <button type="submit">修改密码</button>
                             <div class="clearfix hint">
                                 <span class="f-r go-login">已有账号，请点击这里登录</span>
