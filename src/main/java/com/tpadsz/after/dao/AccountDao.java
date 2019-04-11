@@ -21,4 +21,8 @@ public interface AccountDao {
 
     List<Role> findRoleList();
 
+    List<UserList> searchByAdmin(@Param("account")String account,@Param("fid")Integer fid,@Param("roleId")Integer roleId,@Param("startDate")String startDate,@Param("endDate")String endDate);
+
+
+    List<UserList> searchByManager(@Param("account")String account,@Param("list")List<String> uids,@Param("roleId")Integer roleId,@Param("startDate")String startDate,@Param("endDate")String endDate);
 }

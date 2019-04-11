@@ -14,7 +14,7 @@ public interface ProjectDao {
 
     List<ProjectList> search(@Param("projectName") String projectName);
 
-    String findRoleIdByUid(@Param("uid") String uid);
+    Integer findRoleIdByUid(@Param("uid") String uid);
 
     List<String> findFirmUid(@Param("uid") String uid);
 

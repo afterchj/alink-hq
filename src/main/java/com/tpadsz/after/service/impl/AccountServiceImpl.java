@@ -40,5 +40,16 @@ public class AccountServiceImpl implements AccountService {
         return accountDao.findRoleList();
     }
 
+    @Override
+    public List<UserList> searchByAdmin(String account,Integer fid,Integer roleId,String startDate,String endDate) {
+        return accountDao.searchByAdmin(account,fid,roleId,startDate,endDate);
+    }
+
+    @Override
+    public List<UserList> searchByManager(String account, List<String> uids, Integer roleId, String startDate, String
+            endDate) {
+        return accountDao.searchByManager(account,uids,roleId,startDate,endDate);
+    }
+
 
 }

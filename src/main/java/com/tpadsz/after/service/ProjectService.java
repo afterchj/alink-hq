@@ -13,7 +13,7 @@ public interface ProjectService {
 
     List<ProjectList> search(String projectName, String account, String create_date, String update_date);
 
-    String findRoleIdByUid(String uid);
+    Integer findRoleIdByUid(String uid);
 
     List<String> findFirmUid(String uid);
 

@@ -20,4 +20,7 @@ public interface AccountService {
 
     List<Role> findRoleList();
 
+    List<UserList> searchByAdmin(String account,Integer fid,Integer roleId,String startDate,String endDate);
+
+    List<UserList> searchByManager(String account, List<String> uids, Integer roleId, String startDate, String endDate);
 }

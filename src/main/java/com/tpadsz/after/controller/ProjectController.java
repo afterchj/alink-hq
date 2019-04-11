@@ -27,14 +27,14 @@ public class ProjectController {
 
     @RequestMapping(value = "/list", method = RequestMethod.POST)
     public String list(String uid, Model model) {
-        String roleId = projectService.findRoleIdByUid(uid);
+        Integer role_id = projectService.findRoleIdByUid(uid);
         List<ProjectList> list = new ArrayList<>();
-        if("1".equals(roleId)){
+        if(role_id==1){
             list = projectService.findProList();
-        }else if("2".equals(roleId)){
+        }else if(role_id==2){
             List<String> uids = projectService.findFirmUid(uid);
             list = projectService.findProListByUids(uids);
-        }else if("3".equals(roleId)){
+        }else if(role_id==3){
             list = projectService.findProListByUid(uid);
         }
         try {

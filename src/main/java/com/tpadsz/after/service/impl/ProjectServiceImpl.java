@@ -29,7 +29,7 @@ public class ProjectServiceImpl implements ProjectService {
     }
 
     @Override
-    public String findRoleIdByUid(String uid) {
+    public Integer findRoleIdByUid(String uid) {
         return projectDao.findRoleIdByUid(uid);
     }
 
