@@ -175,13 +175,13 @@ p.false-alert{
 p.false-alert.active{
 display: block;
 }
-p.add-hint,p.password-hint{
+p.add-hint,p.password-hint,p.code-hint{
     font-size: 17px;
     color: #fb2a2a;
     text-align: left;
     display: none;
 }
-p.add-hint.active,p.password-hint.active,p.page-hint.active{
+p.add-hint.active,p.password-hint.active,p.page-hint.active,p.code-hint.active{
     display: block;
 }
 p.page-hint{

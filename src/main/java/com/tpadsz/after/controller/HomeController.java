@@ -53,7 +53,7 @@ public class HomeController {
 
     @RequestMapping("/toLogin")
     public String toLogin() {
-        return "login";
+        return "index";
     }
 
     @RequestMapping("/toRest")
@@ -63,7 +63,7 @@ public class HomeController {
 
     @RequestMapping("/home")
     public String home() {
-        return "./projectManage/projectManage";
+        return "projectManage/projectManage";
     }
 
     @RequestMapping("/picture")

@@ -1,0 +1,89 @@
+<!DOCTYPE html >
+<html lang="en" xmlns:th="http://www.thymeleaf.org" >
+<head>
+    <meta charset="UTF-8"/>
+    <link rel="stylesheet"  th:href="@{/static/css/base.css}"/>
+    <link rel="stylesheet" th:href="@{/static/css/leftNav.css}"/>
+    <link rel="stylesheet"  th:href="@{/static/css/projectManage.css}"/>
+    <title>项目管理</title>
+</head>
+<body>
+    <div class="nav-top clearfix">
+        <div class="f-l nav-title">
+            灯联网项目管理后台
+        </div>
+        <div class="f-r ad-nav">
+            <span class="nav-img">
+                <img src="/src/main/webapp/static/img/off-unclick .png" alt=""/>
+            </span>
+            <span>退出</span>
+        </div>
+        <div class="f-r ad-nav">
+            <span  class="nav-img">
+                <img src="/src/main/webapp/static/img/admin.png" alt=""/>
+            </span>
+            <span>admin</span>
+        </div>
+    </div>
+    <div class="main p-r">
+        <div class="p-a main-left">
+            <ul>
+                <li class="one-list">
+                    <div class="p-r">
+                        <a href="javascript:void(0);" tab="projectManage">项目管理</a><img src="/src/main/webapp/static/img/bottom-triangle.png" alt="" class="p-a">
+                    </div>
+                    <ul >
+                        <li tab="projectList">项目列表</li>
+                        <li tab="networkList">网络列表</li>
+                    </ul>
+                </li>
+                <li class="one-list">
+                    <div class="p-r">
+                        <a href="javascript:void(0);" tab="userManage">用户管理</a><img src="/src/main/webapp/static/img/top-triangle.png" alt="" class="p-a">
+                    </div>
+                    <ul class="">
+                        <li>用户列表</li>
+                        <li tab="createAccount">创建账号</li>
+                    </ul>
+                </li>
+                <li class="one-list">
+                    <a href="javascript:void(0);" tab="account">我的账户</a>
+                </li>
+            </ul>
+        </div>
+        <div class="main-right">
+            
+        </div>
+    </div>
+<script th:src="@{/static/js/jquery.min.js}"></script>
+<script>
+    
+    $(function(){
+        //项目详情
+        $('.one-list li,.one-list a').click(function(){
+            var tab=$(this).attr('tab');
+            var tagName=$(this).prop('tagName');
+            if(tagName=='A'){
+                var iframe=`<iframe name="${tab}" id="${tab}" src="../${tab}/${tab}.html" frameborder="0" align="left" width="100%"  height="1000px;"  scrolling="no">
+                </iframe>`;
+            }else if(tagName=='LI'){
+                var prevTag=$(this).parent().parent().find('a').attr('tab');
+                var iframe=`<iframe name="${tab}" id="${tab}" src="../${prevTag}/${tab}.html" frameborder="0" align="left" width="100%"  height="1000px;"  scrolling="no">
+                </iframe>`;
+            }
+            $('.main-right').children().remove();
+            $('.main-right').append(iframe);
+        })
+    })
+
+    function goIframe(fileName,url){
+       var iframe=`<iframe name="${url}" id="${url}" src="../${fileName}/${url}.html" frameborder="0" align="left" width="100%"  height="1000px;"  scrolling="no">
+               </iframe>`;
+          $('.main-right').children().remove();
+          $('.main-right').append(iframe);
+    }
+
+
+</script>
+</body>
+</html>

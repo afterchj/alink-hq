@@ -104,6 +104,7 @@ $(function () {
     });
 });
 
+
 function showForm(id) {
     for (var i = 1; i < 3; i++) {
         if (id == i) {
@@ -116,6 +117,7 @@ function showForm(id) {
     }
 }
 
+// 发送验证码
 function pushCode(flag) {
     var mobile = "";
     var email = "";
@@ -145,6 +147,7 @@ function pushCode(flag) {
         }
     })
 }
+
 function validate() {
     var username = $("#uname").val();
     var password = $("#pwd").val();
@@ -174,7 +177,7 @@ function validate() {
         $("#form1").submit();
     }
 }
-/* 检查用户名是否可用 */
+/* 校验验证码 */
 function validateCode(user, code) {
     var result = "";
     $.ajax({
