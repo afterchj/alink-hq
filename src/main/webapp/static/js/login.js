@@ -49,92 +49,92 @@ $('input.p-l-val').blur(function(){
     }
 })
 
-function validaccountPassword(){
-    $("#errMsg").html("");
-    var accountVal=$('input.p-l-val').val();
-    var passwordVal=$('input.p-l-password-val').val();
-
-    //检测账号格式是否正确
-    var account=/^[a-z A-Z]{5}[0-9]{3}/;
-    var accountResult=account.test(accountVal);
-    //检测用户名格式是否正确
-    var userName=/^[a-zA-Z0-9\u4e00-\u9fa5]{2,6}$/;
-    var userNameResult=userName.test(accountVal);
-    //验证邮箱格式是否正确
-    var email=/^([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+@([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+\.[a-zA-Z]{2,3}$/;
-    var emailResult=email.test(accountVal);
-    //验证手机号格式是否正确
-    var phone=/^[1][3,4,5,7,8,9][0-9]{9}$/;
-    var phoneResult=phone.test(accountVal);
-
-    //密码格式是否正确
-    var pwd=/^[a-z0-9]{6,16}$/;
-    var pwdResult=pwd.test(passwordVal);
-    //登录名未输入
-    if(accountVal==''){
-        if(passwordVal==''){
-            $('p.add-hint').addClass('active').text('请输入账号/用户名/邮箱/手机号');
-            $('p.password-hint').addClass('active').text('请输入密码');
-            return false;
-        }else if(passwordVal.length>=6 && passwordVal.length<=16){
-            $('p.add-hint').addClass('active').text('请输入账号/用户名/邮箱/手机号');
-            $('p.password-hint').removeClass('active').text('');
-            $('input.p-l-password-val').val('');
-            return false;
-        }else{
-            $('p.add-hint').addClass('active').text('请输入账号/用户名/邮箱/手机号');
-            $('p.password-hint').removeClass('active').text('');
-            $('input.p-l-password-val').val('');
-            return false;
-        }
-        //登录名为账号或用户名
-    }else if(accountResult || userNameResult){
-        if(passwordVal==''){
-            $('p.password-hint').addClass('active').text('请输入密码');
-            return false;
-        }else{
-            $.ajax({
-                type: "GET",
-                url: "/alink-hq/login",
-                data:{
-                    "uname":accountVal,
-                    "pwd":passwordVal
-                },
-                async: false,
-                success: function (res) {
-                    console.log(res);
-                },
-                error:function(res){
-
-                }
-            })
-
-        }
-    }else if(phoneResult) {
-        if (passwordVal == '') {
-            $('p.password-hint').addClass('active').text('请输入密码');
-            return false;
-        } else {
-            var result=true;
-            $.ajax({
-                type: "GET",
-                url: "/alink-hq/login",
-                data: {
-                    "uname": accountVal,
-                    "pwd": passwordVal
-                },
-                async: false,
-                success: function (res) {
-                    console.log(res);
-                },
-                error: function (res) {
-                    result=false;
-                }
-            })
-            return result;
-        }
-    }
-}
+// function validaccountPassword(){
+//     $("#errMsg").html("");
+//     var accountVal=$('input.p-l-val').val();
+//     var passwordVal=$('input.p-l-password-val').val();
+//
+//     //检测账号格式是否正确
+//     var account=/^[a-z A-Z]{5}[0-9]{3}/;
+//     var accountResult=account.test(accountVal);
+//     //检测用户名格式是否正确
+//     var userName=/^[a-zA-Z0-9\u4e00-\u9fa5]{2,6}$/;
+//     var userNameResult=userName.test(accountVal);
+//     //验证邮箱格式是否正确
+//     var email=/^([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+@([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+\.[a-zA-Z]{2,3}$/;
+//     var emailResult=email.test(accountVal);
+//     //验证手机号格式是否正确
+//     var phone=/^[1][3,4,5,7,8,9][0-9]{9}$/;
+//     var phoneResult=phone.test(accountVal);
+//
+//     //密码格式是否正确
+//     var pwd=/^[a-z0-9]{6,16}$/;
+//     var pwdResult=pwd.test(passwordVal);
+//     //登录名未输入
+//     if(accountVal==''){
+//         if(passwordVal==''){
+//             $('p.add-hint').addClass('active').text('请输入账号/用户名/邮箱/手机号');
+//             $('p.password-hint').addClass('active').text('请输入密码');
+//             return false;
+//         }else if(passwordVal.length>=6 && passwordVal.length<=16){
+//             $('p.add-hint').addClass('active').text('请输入账号/用户名/邮箱/手机号');
+//             $('p.password-hint').removeClass('active').text('');
+//             $('input.p-l-password-val').val('');
+//             return false;
+//         }else{
+//             $('p.add-hint').addClass('active').text('请输入账号/用户名/邮箱/手机号');
+//             $('p.password-hint').removeClass('active').text('');
+//             $('input.p-l-password-val').val('');
+//             return false;
+//         }
+//         //登录名为账号或用户名
+//     }else if(accountResult || userNameResult){
+//         if(passwordVal==''){
+//             $('p.password-hint').addClass('active').text('请输入密码');
+//             return false;
+//         }else{
+//             $.ajax({
+//                 type: "GET",
+//                 url: "/alink-hq/login",
+//                 data:{
+//                     "uname":accountVal,
+//                     "pwd":passwordVal
+//                 },
+//                 async: false,
+//                 success: function (res) {
+//                     console.log(res);
+//                 },
+//                 error:function(res){
+//
+//                 }
+//             })
+//
+//         }
+//     }else if(phoneResult) {
+//         if (passwordVal == '') {
+//             $('p.password-hint').addClass('active').text('请输入密码');
+//             return false;
+//         } else {
+//             var result=true;
+//             $.ajax({
+//                 type: "GET",
+//                 url: "/alink-hq/login",
+//                 data: {
+//                     "uname": accountVal,
+//                     "pwd": passwordVal
+//                 },
+//                 async: false,
+//                 success: function (res) {
+//                     console.log(res);
+//                 },
+//                 error: function (res) {
+//                     result=false;
+//                 }
+//             })
+//             return result;
+//         }
+//     }
+// }
 
 function validPhoneCode(){
    var phoneVal=  $('.phone-login input[type="phone"]').val();

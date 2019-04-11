@@ -25,18 +25,19 @@
                 <div class="login-in-box-tab-content">
                     <!--账号密码登录-->
                     <div class="password-login active" tabContent="password-login">
-                        <form th:action="@{/login}" onsubmit="return validaccountPassword()">
+                        <form >
+                            <!--<form th:action="@{/login}" onsubmit="return validaccountPassword()">-->
                             <p class="add-hint"></p>
                             <div class="icon-input p-r">
                                 <img src="./static/img/account.png" alt="" class="icon p-a"/>
-                                <input type="text" name="uname" placeholder="请输入账号/用户名/邮箱/手机号" class="p-l-val"/>
+                                <input type="text" name="uname" placeholder="请输入账号/用户名/邮箱/手机号" class="p-l-val" autocomplete="off" />
                             </div>
 
                             <p class="password-hint"></p>
                             <div class="icon-input p-r">
                                 <img src="./static/img/password.png" alt="" class="icon p-a"/>
                                 <input type="password" placeholder="请输入密码" name="pwd"  id="pwd" class="p-l-password-val"
-                                       maxlength="16"/>
+                                       maxlength="16" autocomplete="off"/>
                             </div>
 
 
@@ -53,17 +54,18 @@
                     </div>
                     <!--手机验证码登录-->
                     <div class="phone-login" tabContent="phone-login" >
-                        <form th:action="@{/login}" onsubmit="return validPhoneCode()">
+                        <!--<form th:action="@{/login}" onsubmit="return validPhoneCode()">-->
+                        <form >
 
                             <p class="add-hint"></p>
                             <div class="icon-input p-r">
                                 <img src="./static/img/phone.png" alt="" class="icon p-a"/>
-                                <input type="phone" name="mobile" id="phone" placeholder="请输入手机号"/>
+                                <input type="phone" name="mobile" id="phone" placeholder="请输入手机号" autocomplete="off"/>
                             </div>
                             <p class="password-hint"></p>
                             <div class="icon-input p-r">
                                 <img src="./static/img/code.png" alt="" class="icon p-a" style="top: 20px;"/>
-                                <input type="text" class="phone" name="code" id="code1" placeholder="请输入验证码"/>
+                                <input type="text" class="phone" name="code" id="code1" placeholder="请输入验证码" autocomplete="off"/>
                                 <button class="security-code" type="button"  onclick="pushCode('mobile')">获取验证码</button>
                             </div>
 
@@ -79,16 +81,16 @@
                     <div class="phone-find-password" tabContent="phone-find-password">
                         <form action="" >
                             <p class="add-hint"></p>
-                            <input type="phone" name="mobile" id="mobile" placeholder="请输入所绑定的手机号" style="text-indent: 15px;"/>
+                            <input type="phone" name="mobile" id="mobile" placeholder="请输入所绑定的手机号" style="text-indent: 15px;" autocomplete="off"/>
                             <p class="code-hint"></p>
                             <div class="icon-input p-r">
                                 <input type="text" class="phone" name="code" id="code2" placeholder="请输入验证码"
-                                       style="text-indent: 15px;"/>
+                                       style="text-indent: 15px;" autocomplete="off"/>
                                 <button class="security-code" type="button" onclick="pushCode('mobile')">获取验证码</button>
                             </div>
                             <p class="password-hint"></p>
                             <input type="password" name="pwd"  id="pwd1" placeholder="请输入新密码（6-16位数字、字母）"
-                                   style="text-indent: 15px;"/>
+                                   style="text-indent: 15px;" autocomplete="off"/>
                             <button onclick="modifyPwd()">修改密码</button>
                             <div class="clearfix hint">
                                 <span class="f-r go-login">已有账号，请点击这里登录</span>
