@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="//apps.bdimg.com/libs/jqueryui/1.10.4/css/jquery-ui.min.css">
+    <link rel="stylesheet" href="./css/base.css">
+    <link rel="stylesheet" href="./css/projectManage.css">
+
+    <title>项目列表</title>
+</head>
+<body>
+    <div id="projectList" class="">
+        <div class="search-condition ">
+            <form action="" class="clearfix">
+                <div class="f-l search" style="margin-right:125px;">
+                    <div>
+                        <label for="">项目名</label>
+                        <input type="text" placeholder="请输入项目名">
+                    </div>
+                    <div class="p-r">
+                        <label for="">创建时间</label>
+                        <input type="text" id="start-time" placeholder="请选择日期">
+                        <img src="./img/date.png" alt="" class="p-a">
+                    </div>
+                </div>
+                <div class="f-l search" >
+                    <div>
+                        <label for="">施工员工账号</label>
+                        <input type="text" placeholder="请输入账号">
+                    </div>
+                    <div class="p-r">
+                        <label for="">更新时间</label>
+                        <input type="text" id="end-time" placeholder="请选择日期">
+                        <img src="./img/date.png" alt="" class="p-a">
+                    </div>
+                </div>
+                <div class="f-r search-button ">
+                        <button type="submit" class="pointer">查询</button>
+                </div>
+            </form>
+        </div>
+        <div class="search-result">
+            <table>
+
+            </table>
+        </div>
+    </div>
+    <script src="./js/jquery.min.js"></script>
+    <script src="//apps.bdimg.com/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
+    <script>
+        $(function() {
+            $( "#start-time" ).datepicker();
+            $( "#end-time" ).datepicker();
+        });
+    </script>
+</body>
+</html>

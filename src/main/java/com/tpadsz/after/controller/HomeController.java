@@ -5,6 +5,7 @@ import com.tpadsz.after.entity.User;
 import com.tpadsz.after.entity.dd.ResultDict;
 import com.tpadsz.after.exception.InvalidCodeException;
 import com.tpadsz.after.realm.EasyTypeToken;
+import com.tpadsz.after.realm.ShiroDbRealm;
 import com.tpadsz.after.service.UserService;
 import com.tpadsz.after.service.ValidationService;
 import org.apache.commons.lang.StringUtils;
@@ -42,7 +43,7 @@ public class HomeController {
 
     @RequestMapping("/")
     public String index() {
-        return "index";
+        return "login";
     }
 
     @RequestMapping("/toLogin")
@@ -50,9 +51,14 @@ public class HomeController {
         return "login";
     }
 
+    @RequestMapping("/toRest")
+    public String toRest() {
+        return "forgetPwd";
+    }
+
     @RequestMapping("/home")
     public String home() {
-        return "home";
+        return "index";
     }
 
     @RequestMapping("/picture")
@@ -75,18 +81,70 @@ public class HomeController {
     }
 
     @ResponseBody
-    @RequestMapping("/verify")
-    public String sendCode(String mobile) {
+    @RequestMapping("/checkUser")
+    public String checkUser(User user) {
         String str;
         Map map = new HashMap();
-        map.put("mobile", mobile);
+        String uname = user.getUname();
+        String mobile = user.getMobile();
+        if (StringUtils.isNotEmpty(uname)) {
+            map.put("uname", uname);
+        }
+        if (StringUtils.isNotEmpty(mobile)) {
+            map.put("mobile", mobile);
+        }
+        int count = userService.getCount(map);
+        if (count > 0) {
+            str = "success";
+        } else {
+            str = "failure";
+        }
+        return str;
+    }
+
+    @ResponseBody
+    @RequestMapping("/checkCode")
+    public String checkCode(String mobile, String code) {
+        String str = "";
+        try {
+            validationService.checkCode(code, mobile);
+            str = "success";
+        } catch (InvalidCodeException e) {
+            logger.error("errMsg" + e.getMessage());
+            str = "failure";
+        } finally {
+            logger.info("str=" + str + ",mobile=" + mobile + ",code=" + code);
+            return str;
+        }
+    }
+
+    @ResponseBody
+    @RequestMapping("/verify")
+    public String sendCode(String mobile, String email) {
+        logger.info("mobile=" + mobile + ",email=" + email);
+        String str = "";
+        Map map = new HashMap();
+        if (StringUtils.isNotEmpty(mobile)) {
+            map.put("mobile", mobile);
+            str = "mobile";
+        }
+        if (StringUtils.isNotEmpty(email)) {
+            map.put("email", email);
+            str = "email";
+        }
         int count = userService.getCount(map);
         if (count == 0) {
-            str = "手机号不存在";
+            str = str + "false";
         } else {
             try {
-                validationService.sendCode("13", mobile);
-                str = "success";
+                if (StringUtils.isNotEmpty(mobile)) {
+                    validationService.sendCode("13", mobile);
+                    str = "success";
+                }
+                if (StringUtils.isNotEmpty(email)) {
+                    validationService.sendEmailCode(email);
+                    str = "success";
+                }
             } catch (Exception e) {
                 str = "failure";
             }
@@ -94,22 +152,41 @@ public class HomeController {
         return str;
     }
 
+    @ResponseBody
+    @RequestMapping("/restPwd")
+    public String restPwd(String mobile, String email, String pwd) {
+        String str;
+        Map map = new HashMap();
+        if (StringUtils.isNotEmpty(mobile)) {
+            map.put("mobile", mobile);
+        }
+        if (StringUtils.isNotEmpty(email)) {
+            map.put("email", email);
+        }
+        logger.info("mobile=" + mobile + ",email=" + email + "pwd=" + pwd);
+        ShiroDbRealm.HashPassword hashPassword = new ShiroDbRealm().encrypt(pwd);
+        System.out.println(hashPassword.password + "\t" + hashPassword.salt);
+        map.put("pwd", hashPassword.password);
+        map.put("salt", hashPassword.salt);
+        try {
+            userService.updatePwd(map);
+            str = "success";
+        } catch (Exception e) {
+            logger.error(e.getMessage());
+            str = "failure";
+        }
+        return str;
+    }
+
     @RequestMapping("/login")
-    public String login(User user, HttpSession session, ModelMap map, String code) {
+    public String login(User user, HttpSession session, ModelMap map) {
+        String userName = "";
         String pwd = user.getPwd();
-        String mobile = user.getMobile();
         EasyTypeToken token;
         logger.info("username=" + user.getUname() + ",pwd=" + pwd);
         if (StringUtils.isEmpty(pwd)) {
-            token = new EasyTypeToken(user.getUname());
-            if (StringUtils.isNotEmpty(code) && StringUtils.isNotEmpty(mobile)) {
-                try {
-                    validationService.checkCode(code, mobile);
-                } catch (InvalidCodeException e) {
-                    map.put("errMsg", e.getMessage());
-                    return "/login";
-                }
-            }
+            userName = user.getMobile();
+            token = new EasyTypeToken(userName);
         } else {
             token = new EasyTypeToken(user.getUname(), user.getPwd());
         }
@@ -117,21 +194,22 @@ public class HomeController {
         try {
             subject.login(token);
         } catch (Exception e) {
+            logger.info("errMsg=" + e);
             if (e instanceof UnknownAccountException) {
                 map.put("errMsg", e.getMessage());
-                return "/login";
+                return "/index";
             } else if (e instanceof LockedAccountException) {
                 map.put("errMsg", e.getMessage());
-                return "/login";
+                return "/index";
             } else if (e instanceof DisabledAccountException) {
                 map.put("errMsg", e.getMessage());
-                return "/login";
+                return "/index";
             } else if (e instanceof IncorrectCredentialsException) {
                 map.put("errMsg", ResultDict.PASSWORD_NOT_CORRECT.getValue());
-                return "/login";
+                return "/index";
             }
         }
-        User loginUser = userService.selectByUsername(user.getUname());
+        User loginUser = userService.selectByUsername(userName);
         session.setAttribute("logingUser", loginUser);
         return "/loginSuccess";
     }

@@ -29,6 +29,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public void updatePwd(Map map) {
+       userDao.updatePwd(map);
+    }
+
+    @Override
     public User selectByUsername(String username) {
         return userDao.selectByUsername(username);
     }

@@ -1,5 +1,6 @@
 package com.tpadsz.after.realm;
 
+import com.alibaba.fastjson.JSON;
 import com.tpadsz.after.dao.UserExtendDao;
 import com.tpadsz.after.entity.User;
 import com.tpadsz.after.utils.Digests;

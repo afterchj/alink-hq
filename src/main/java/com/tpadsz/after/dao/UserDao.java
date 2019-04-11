@@ -20,7 +20,7 @@ public interface UserDao {
 
     User selectByUsername(String username);
 
-    int updateByIdSelective(User record);
+    void updatePwd(Map map);
 
     int updateById(User record);
 

@@ -1,0 +1,117 @@
+.nav-top{
+    background-color: #3598db;
+    height: 100px;
+    line-height: 100px;
+    padding: 0 58px 0 45px;
+    color: #fff;
+}
+.nav-title{
+    font-size: 35px;
+    color: #fff;
+    font-weight:bold;
+}
+.ad-nav{
+    font-size: 24px;
+    margin-left: 40px;
+}
+.ad-nav img{
+    margin-right: 15px;
+    position: absolute;
+    top: 50%;
+    margin-top: -30px;
+}
+.ad-nav span{
+    display: inline-block;
+}
+.ad-nav span.nav-img{
+    position: relative;
+    width:50px;
+}
+.main-right{
+    width: 1539px;
+    /* margin-left: 323px; */
+    margin: 20px 58px 20px 323px;
+}
+.main-left{
+    padding: 45px 58px 45px 45px;
+}
+.main-left a{
+    font-size:26px;
+    color: #111;
+}
+.one-list{
+    margin-bottom: 10px;
+}
+.one-list li{
+    font-size: 24px;
+    color: #111;
+    height: 62px;
+    line-height: 62px;
+    width: 190px;
+    margin-left: 30px;
+}
+.one-list img{
+    top:35%;
+    right:0;
+    cursor: pointer;
+}
+.main-right-nav{
+    padding: 10px 0 10px 20px;
+    border-left: 5px solid #3598db;
+    border-bottom: 1px solid #3598db;
+}
+.main-right-title{
+    font-size: 26px;
+    color: #111;
+}
+.main-right-nav>div:last-child{
+    margin-right:15px;
+}
+/*.search{
+    width:40%;
+}
+.search-button{
+    width:20%;
+}*/
+.search-condition {
+    margin: 30px 0;
+    padding: 30px 65px 25px 65px;
+    border: 1px solid #bbb;
+}
+.search input{
+    width: 328px;
+    height: 44px;
+    border-radius: 5px;
+    border: 1px solid #bbb;
+    font-size: 19px;
+    color: #999;
+    text-indent: 10px;
+}
+.search>div{
+    margin-bottom: 26px;
+}
+.search-button button{
+    width: 114px;
+    height: 44px;
+    font-size: 20px;
+    letter-spacing: 8px;
+    background-color: #ffb500;
+    border: 1px solid #ffb500;
+    border-radius: 5px;
+    color: #fff;
+}
+.search label{
+    margin-right: 50px;
+    font-size: 19px;
+    display: inline-block;
+    color: #111;
+    width: 130px;
+    text-align: right;
+}
+.search-button {
+    margin-top:75px;
+}
+.search img{
+    top: 15px;
+    right: 10px;
+}

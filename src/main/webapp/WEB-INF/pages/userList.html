@@ -8,8 +8,10 @@
 </head>
 <body>
 <h1>用户列表</h1><br/>
-<p th:text="${session.logingUser.uname}+'：'+${session.logingUser.account}"></p>
-<div shiro:hasAnyRoles="admin,manager">
+<div th:if="${session.logingUser}!=null">
+    <p th:text="${session.logingUser.uname}+'：'+${session.logingUser.account}"></p>
+</div>
+<div shiro:hasAnyRoles="super,admin,manager">
     <li>
         <a th:href="@{/userList}" class="glyphicon glyphicon-th-large"> 用户列表</a>
     </li>
