@@ -119,10 +119,10 @@ function showForm(id) {
 
 // 发送验证码
 function pushCode(flag) {
-    var mobile = "";
+    var mobile = $("#mobile").val();
     var email = "";
     if (flag == "mobile") {
-        mobile = $("#mobile").val();
+        mobile == "" ? mobile = $("#phone").val() : mobile;
     } else {
         email = $("#email").val();
     }
@@ -133,15 +133,15 @@ function pushCode(flag) {
             "mobile": mobile,
             "email": email
         },
-        async: true,
+        async: false,
         success: function (res) {
-            console.log("result=" + res + ",mobile=" + mobile + ",email=" + email);
+            console.log("result=" + res + ",mobile=" + mobile);
             if (res == "mobile_failure") {
                 $("#errMsg").html("<span style='font-weight: bold;color: red'>该手机号未绑定！</span>");
                 $("#mobile").focus();
             }
             if (res == "email_failure") {
-                $("#errMsg").html("<span style='font-weight: bold;color: red'>该邮箱未绑定！</span>");
+                $("#errMsg").html("<span style='font-weight: bold;color: red'>该手机号未绑定！</span>");
                 $("#email").focus();
             }
         }
@@ -252,11 +252,11 @@ function modifyPwd() {
     }
 
     function go() {
-        // var flag = confirm("密码修改成功，是否直接跳转到用户列表？");
-        // if (flag == true) {
-        //     location.href = "/alink-hq/userList";
-        // }
-        alert("密码修改成功！")
-        location.href = "/alink-hq/userList";
+        var flag = confirm("密码修改成功，是否直接跳转到用户列表？");
+        if (flag == true) {
+            location.href = "/alink-hq/userList";
+        } else {
+            location.href = "/alink-hq/userList";
+        }
     }
 }

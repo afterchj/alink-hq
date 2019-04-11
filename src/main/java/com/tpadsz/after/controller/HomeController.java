@@ -216,7 +216,7 @@ public class HomeController {
         }
         User loginUser = userService.selectByUsername(userName);
         session.setAttribute("logingUser", loginUser);
-        return "/loginSuccess";
+        return "/success";
     }
 
     @RequestMapping("/userList")
