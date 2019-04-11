@@ -142,7 +142,7 @@ public class HomeController {
                     str = "success";
                 }
                 if (StringUtils.isNotEmpty(email)) {
-                    validationService.sendEmailCode(email);
+                    validationService.sendEmailCode(email,"reset");
                     str = "success";
                 }
             } catch (Exception e) {

@@ -131,7 +131,7 @@ function pushCode(flag) {
             "mobile": mobile,
             "email": email
         },
-        async: false,
+        async: true,
         success: function (res) {
             console.log("result=" + res + ",mobile=" + mobile);
             if (res == "false") {
@@ -245,11 +245,11 @@ function modifyPwd() {
     }
 
     function go() {
-        var flag = confirm("密码修改成功，是否直接跳转到用户列表？");
-        if (flag == true) {
-            location.href = "/alink-hq/userList";
-        }else {
-            location.href = "/alink-hq/userList";
-        }
+        // var flag = confirm("密码修改成功，是否直接跳转到用户列表？");
+        // if (flag == true) {
+        //     location.href = "/alink-hq/userList";
+        // }
+        alert("密码修改成功！")
+        location.href = "/alink-hq/userList";
     }
 }

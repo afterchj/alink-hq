@@ -70,13 +70,13 @@ function toVaild1(){
             $('p.password-hint').addClass('active').text('请输入密码');
             return false;
         }else if(passwordVal.length>=6 && passwordVal.length<=16){
-            $('p.page-hint').addClass('active').text('登录名密码不正确');
-            $('input.p-l-password-val').val('');
-            return false;
+            // $('p.page-hint').addClass('active').text('登录名密码不正确');
+            // $('input.p-l-password-val').val('');
+            return true;
         }else{
             $('p.page-hint').addClass('active').text('登录名密码不正确');
             $('input.p-l-password-val').val('');
-            return false;
+            return true;
         }
     }else if(!emailResult){
         $('input.p-l-val').blur(function(){
