@@ -17,8 +17,9 @@ audio, video {
 
 body {
     line-height:1;
+    zoom: 1;
 }
-/*a{
+a{
     text-decoration:none;
 }
 a{
@@ -27,14 +28,12 @@ a{
     border:0;
     font-size:100%;
     vertical-align:baseline;
-   !* background:transparent;*!
 
 }
 a:hover,a:focus{
     text-decoration:none;
-    bblr:expression(this.onFocus=this.blur());!*IE*!
-    outline-style:none;!*FF*!
-}*/
+    outline-style:none;/*FF*/
+}
 .container{
     width: 100%;
     margin: 0 auto;
@@ -73,21 +72,27 @@ ul li{
 .pointer{
     cursor: pointer;
 }
-.ui-widget-header {
-    border: 1px solid #aaa;
+.m-r-20{
+    margin-right: 20px;
+}
+.m-r-15{
+    margin-right: 15px;
+}
+.m-r-35{
+    margin-right: 35px;
+}
+.m-l-20{
+    margin-left: 20px;
+}
+.m-l-15{
+    margin-left:15px;
+}
+.m-l-35{
+    margin-left: 35px;
+}
+.ui-widget-header{
     background: #fff;
-    color: #222;
-    font-weight: 700;
 }
-/*
-.ui-datepicker{
-    background-color: rgb(255, 255, 255);
-    border: 1px solid rgb(187, 187, 187);
-    border-radius: 5px;
-}
-.ui-datepicker a{
-    color: #444;
-}
-.ui-datepicker td span, .ui-datepicker td a{
+.a-center{
     text-align: center;
-}*/
+}
