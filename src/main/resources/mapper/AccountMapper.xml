@@ -51,4 +51,32 @@
     </select>
 
 
+    <insert id="createAccount" parameterType="string">
+        insert into alink.f_user_account (account,pwd,salt,create_date) values (#{account},#{pwd},#{salt},NOW())
+        <selectKey keyProperty="id" order="AFTER" resultType="string">
+            select LAST_INSERT_ID()
+        </selectKey>
+    </insert>
+
+    <insert id="createFirmInfo" parameterType="integer">
+        insert into alink.f_user_customer (uid,fid,create_date) values (#{uid},#{fid},NOW())
+    </insert>
+
+    <insert id="createRoleInfo" parameterType="integer">
+        insert into alink.f_user_role (user_id,role_id) values (#{uid},#{roleId})
+    </insert>
+
+    <insert id="generateDefaultNetwork" parameterType="string" useGeneratedKeys="true" keyProperty="id">
+        <selectKey keyProperty="count" resultType="int" order="BEFORE">
+            select count(*) from alink.f_mesh where mesh_id = '11223344' and uid= #{uid}
+        </selectKey>
+        <if test="count==0">
+            INSERT INTO alink.f_mesh (mname,mesh_id,is_repeat,pwd,uid,project_id,create_date) VALUES('1122','11223344',#{uid},'3344',#{uid},0,NOW())
+        </if>
+    </insert>
+
+    <select id="findByAccount" resultType="com.tpadsz.after.entity.User">
+        SELECT * FROM alink.f_user_account WHERE account=#{account}
+    </select>
+
 </mapper>

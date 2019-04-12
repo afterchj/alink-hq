@@ -2,6 +2,7 @@ package com.tpadsz.after.controller;
 
 import com.tpadsz.after.entity.Firm;
 import com.tpadsz.after.entity.Role;
+import com.tpadsz.after.entity.User;
 import com.tpadsz.after.entity.UserList;
 import com.tpadsz.after.service.AccountService;
 import com.tpadsz.after.service.ProjectService;
@@ -38,21 +39,21 @@ public class AccountController {
             roleList = accountService.findRoleList();
             roleList.remove(0);
             firmList = accountService.findFirmList();
-        } else if(role_id == 2){
+        } else if (role_id == 2) {
             userList = accountService.findUserListByAdmin();
             roleList = accountService.findRoleList();
-            for(int i=0;i<role_id;i++) {
+            for (int i = 0; i < role_id; i++) {
                 roleList.remove(0);
             }
             firmList = accountService.findFirmList();
-        }else if (role_id == 3) {
+        } else if (role_id == 3) {
             List<String> uids = accountService.findFirmUidOfUser(uid);
             uids.remove(uid);
             if (uids.size() != 0) {
                 userList = accountService.findUserListByManager(uids);
             }
             roleList = accountService.findRoleList();
-            for(int i=0;i<role_id;i++) {
+            for (int i = 0; i < role_id; i++) {
                 roleList.remove(0);
             }
         }
@@ -68,7 +69,7 @@ public class AccountController {
         List<UserList> list = new ArrayList<>();
         if (role_id == 1) {
             list = accountService.searchBySuper(account, fid, roleId, startDate, endDate);
-        } else if(role_id == 2){
+        } else if (role_id == 2) {
             list = accountService.searchByAdmin(account, fid, roleId, startDate, endDate);
         } else if (role_id == 3) {
             List<String> uids = accountService.findFirmUidOfUser(uid);
@@ -81,16 +82,21 @@ public class AccountController {
 
     @RequestMapping(value = "/create", method = RequestMethod.POST)
     @ResponseBody
-    public void create(String uid, Integer fid, Integer roleId, String num,
+    public void create(Integer fid, Integer roleId, Integer num,
                        Model model) {
-        List<UserList> list = new ArrayList<>();
         String account;
-
-
-        do {
-            account = GenerateUtils.getCharAndNumr(8);
-        } while (!GenerateUtils.check(account));
-        System.out.println(account);
+        for (int i = 0; i < num; i++) {
+            User user = new User();
+            User user2 = new User();
+            do {
+                account = GenerateUtils.getCharAndNumr(8);
+                user2 = accountService.findByAccount(account);
+            } while (!GenerateUtils.check(account) || (user2 != null));
+            user.setAccount(account);
+            user.setPwd("dc10cc20d435f846425f1f7a31b5d293cb39e590");
+            user.setSalt("0e9cc6f31100af96");
+            accountService.createAccount(user, fid, roleId);
+        }
 
     }
 
