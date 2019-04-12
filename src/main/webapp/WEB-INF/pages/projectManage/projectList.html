@@ -376,39 +376,51 @@
             var hasCheckbox = true;
             var imgUrl = $(this).attr('src');
 
-            if (imgUrl == './img/checkbox.png') {
-                $(this).attr('src', './img/checkbox-gou.png');
+            if (imgUrl == '../img/checkbox.png') {
+                $(this).attr('src', '../img/checkbox-gou.png');
+  
             } else {
-                $(this).attr('src', './img/checkbox.png');
+                $(this).attr('src', '../img/checkbox.png');
+
+                    // $('th.all-checkbox>img').attr('src', '../img/checkbox.png');
+                
+                
             }
-            $('tbody tr').each(function () {
-                var imgUrl = $(this).children('td.checkbox').children('img').attr('src');
-                if (imgUrl != './img/checkbox-gou.png') {
-                    hasCheckbox = false;
+            $(this).parents('tbody').find('.checkbox img').each(function(){
+                var otherCheckbox=$(this).attr('src');
+                console.log('otherCheckbox',otherCheckbox);
+                if(otherCheckbox=='../img/checkbox.png'){
+                    hasCheckbox=false;
+                    // $('th.all-checkbox>img').attr('src', '../img/checkbox.png');
                 }
             })
-            if (hasCheckbox) {
-                $('th.all-checkbox>img').attr('src', './img/checkbox-gou.png');
-            } else {
-                $('th.all-checkbox>img').attr('src', './img/checkbox.png');
-            }
+
         })
 
         $('th.all-checkbox>img').click(function () {
-            var hasCheckbox = true;
-            $('tbody tr').each(function () {
-                var imgUrl = $(this).children('td.checkbox').children('img').attr('src');
-                if (imgUrl != './img/checkbox-gou.png') {
-                    hasCheckbox = false;
-                }
-            })
-            if (hasCheckbox) {
-                $(this).attr('src', './img/checkbox.png');
-                $('td.checkbox img').attr('src', './img/checkbox.png');
-            } else {
-                $(this).attr('src', './img/checkbox-gou.png');
-                $('td.checkbox img').attr('src', './img/checkbox-gou.png');
+            var  isCheckbox=$(this).attr('src');
+            // var hasCheckbox = true;
+            if(isCheckbox=='../img/checkbox-gou.png'){
+                $(this).attr('src', '../img/checkbox.png');
+                $('td.checkbox img').attr('src', '../img/checkbox.png');
+            }else{
+                $(this).attr('src', '../img/checkbox-gou.png');
+                $('td.checkbox img').attr('src', '../img/checkbox-gou.png');
             }
+           
+            // $('tbody tr').each(function () {
+            //     var imgUrl = $(this).children('td.checkbox').children('img').attr('src');
+            //     if (imgUrl != '../img/checkbox-gou.png') {
+            //         hasCheckbox = false;
+            //     }
+            // })
+            // if (hasCheckbox) {
+               
+            //     $('td.checkbox img').attr('src', '../img/checkbox.png');
+            // } else {
+            //     $(this).attr('src', '../img/checkbox-gou.png');
+            //     $('td.checkbox img').attr('src', '../img/checkbox-gou.png');
+            // }
         })
 
         //跳转项目详情
