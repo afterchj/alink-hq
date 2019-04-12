@@ -1,5 +1,6 @@
 package com.tpadsz.after.controller;
 
+import com.alibaba.fastjson.JSON;
 import com.github.pagehelper.PageHelper;
 import com.tpadsz.after.entity.User;
 import com.tpadsz.after.entity.dd.ResultDict;
@@ -185,15 +186,15 @@ public class HomeController {
 
     @RequestMapping("/login")
     public String login(User user, HttpSession session, ModelMap map) {
-        String userName = "";
+        String userName = user.getUname();
         String pwd = user.getPwd();
         EasyTypeToken token;
-        logger.info("username=" + user.getUname() + ",pwd=" + pwd);
+        logger.info("user:" + JSON.toJSONString(user));
         if (StringUtils.isEmpty(pwd)) {
             userName = user.getMobile();
             token = new EasyTypeToken(userName);
         } else {
-            token = new EasyTypeToken(user.getUname(), user.getPwd());
+            token = new EasyTypeToken(userName, pwd);
         }
         Subject subject = SecurityUtils.getSubject();
         try {
@@ -202,21 +203,21 @@ public class HomeController {
             logger.info("errMsg=" + e);
             if (e instanceof UnknownAccountException) {
                 map.put("errMsg", e.getMessage());
-                return "/login";
+                return "login";
             } else if (e instanceof LockedAccountException) {
                 map.put("errMsg", e.getMessage());
-                return "/login";
+                return "login";
             } else if (e instanceof DisabledAccountException) {
                 map.put("errMsg", e.getMessage());
-                return "/login";
+                return "login";
             } else if (e instanceof IncorrectCredentialsException) {
                 map.put("errMsg", ResultDict.PASSWORD_NOT_CORRECT.getValue());
-                return "/login";
+                return "login";
             }
         }
         User loginUser = userService.selectByUsername(userName);
-        session.setAttribute("logingUser", loginUser);
-        return "/success";
+        session.setAttribute("user", loginUser);
+        return "success";
     }
 
     @RequestMapping("/userList")
@@ -231,7 +232,7 @@ public class HomeController {
         logger.info("page=" + page + ",size=" + rows);
         map.put("page", page);
         map.put("users", list);
-        return "/userList";
+        return "userList";
     }
 
     /**

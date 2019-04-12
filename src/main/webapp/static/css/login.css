@@ -1,73 +1,85 @@
 
-.logo{
-    left:60px;
-    top:30px;
+.logo {
+    left: 60px;
+    top: 30px;
     z-index: 999;
 }
 
-.content{
+.content {
     right: 195px;
     top: 193px;
 
 }
-::-webkit-input-placeholder{/*Webkit browsers*/
-    color:#999;
-    font-size:19px;
+
+::-webkit-input-placeholder { /*Webkit browsers*/
+    color: #999;
+    font-size: 19px;
 }
-:-moz-placeholder{/*Mozilla Firefox 4 to 8*/
-    color:#999;
-    font-size:16px;
+
+:-moz-placeholder { /*Mozilla Firefox 4 to 8*/
+    color: #999;
+    font-size: 16px;
 }
-::moz-placeholder{/*Mozilla Firefox 19+*/
-    color:#999;
-    font-size:16px;
+
+::moz-placeholder { /*Mozilla Firefox 19+*/
+    color: #999;
+    font-size: 16px;
 }
-:-ms-input-placeholder{/*Internet Explorer 10+*/
-    color:#999;
-    font-size:16px;
+
+:-ms-input-placeholder { /*Internet Explorer 10+*/
+    color: #999;
+    font-size: 16px;
 }
-.login-in-box{
+
+.login-in-box {
     top: 21px;
     left: 22px;
     right: 20px;
     bottom: 38px;
 }
-.login-in-box-tab{
+
+.login-in-box-tab {
     font-size: 26px;
     color: #fff;
     padding-top: 45px;
     border-bottom: 1px solid #bbb;
 }
-.login-in-box-tab>div{
+
+.login-in-box-tab > div {
     width: 50%;
     padding-bottom: 20px;
     text-align: center;
 }
-.content  .login-in-box-l,.content .login-in-box-r{
+
+.content .login-in-box-l, .content .login-in-box-r {
     cursor: pointer;
     display: none;
 }
-.content  .login-in-box-l.visible,.content .login-in-box-r.visible{
+
+.content .login-in-box-l.visible, .content .login-in-box-r.visible {
     display: block;
 }
 
-.content  .login-in-box-l.active,.content  .login-in-box-r.active{
+.content .login-in-box-l.active, .content .login-in-box-r.active {
     border-bottom: 4px solid #0066b6;
     color: #005293;
 }
-.content  .login-in-box-tab-content{
+
+.content .login-in-box-tab-content {
 }
-.content  .login-in-box-tab-content input{
+
+.content .login-in-box-tab-content input {
     display: block;
     border: 1px solid #797979;
     width: 404px;
     height: 48px;
-    line-height:48px;
+    line-height: 48px;
     text-indent: 50px;
     border-radius: 5px;
     margin: 10px 0 20px 0;
 }
-.content  .login-in-box-tab-content button{
+
+.content .login-in-box-tab-content button {
     width: 404px;
     height: 52px;
     font-size: 20px;
@@ -77,22 +89,26 @@
     border-radius: 5px;
     cursor: pointer;
 }
-.icon{
+
+.icon {
     left: 15px;
     top: 10px;
 }
+
 .content .hint {
     font-size: 20px;
-    margin-top:15px;
+    margin-top: 15px;
     color: #fff;
     width: 404px;
     cursor: pointer;
 }
-.content .hint span:hover{
+
+.content .hint span:hover {
     color: #0066b6;
     border-bottom: 1px solid #0066b6;
 }
-.login-in-box-foot{
+
+.login-in-box-foot {
     top: 880px;
     left: 350px;
     right: 350px;
@@ -100,40 +116,49 @@
     color: #333;
     font-size: 14px;
 }
-.login-in-box-foot .twoCode .part{
-font-size: 14px;
-width:33.33%;
-}
-.login-in-box-foot .twoCode .part>.part-right{
-padding: 10px 0 10px 15px;
-}
-.login-in-box-foot .twoCode .part>.part-right>div{
-line-height: 1.5;
-}
-.login-in-box-foot .part-icon{
-height: 40px;
-line-height: 20px;
-}
-.login-in-box-foot .part-icon.two{
-padding-left: 15px;
-}
-.login-in-box-foot .part-icon img{
-width:35px;
-height:20px;
-}
-.login-in-box-foot .link{
-text-align: center;
-line-height: 2;
-}
-.login-in-box-foot .link span{
-margin:5px;
-}
-.login-in-box-foot .filing{
-text-align: center;
-line-height: 2;
+
+.login-in-box-foot .twoCode .part {
+    font-size: 14px;
+    width: 33.33%;
 }
 
-.content  .login-in-box-tab-content button.security-code{
+.login-in-box-foot .twoCode .part > .part-right {
+    padding: 10px 0 10px 15px;
+}
+
+.login-in-box-foot .twoCode .part > .part-right > div {
+    line-height: 1.5;
+}
+
+.login-in-box-foot .part-icon {
+    height: 40px;
+    line-height: 20px;
+}
+
+.login-in-box-foot .part-icon.two {
+    padding-left: 15px;
+}
+
+.login-in-box-foot .part-icon img {
+    width: 35px;
+    height: 20px;
+}
+
+.login-in-box-foot .link {
+    text-align: center;
+    line-height: 2;
+}
+
+.login-in-box-foot .link span {
+    margin: 5px;
+}
+
+.login-in-box-foot .filing {
+    text-align: center;
+    line-height: 2;
+}
+
+.content .login-in-box-tab-content button.security-code {
     display: inline-block;
     width: 130px;
     margin-left: 22px;
@@ -142,29 +167,33 @@ line-height: 2;
     font-size: 20px;
     top: 11px;
 }
-.content  .login-in-box-tab-content input.phone{
-display: inline-block;
-width: 252px;
-}
-.password-login,.phone-login,.phone-find-password,.email-find-password{
-    position: absolute;
-    left: 50%;
-    top: 24%;
-    margin-left: -40%;
-display: none;
-}
-.password-login.active,.phone-login.active,.phone-find-password.active,.email-find-password.active{
-    position: absolute;
-    left: 50%;
-    top: 24%;
-    margin-left: -40%;
-display: block;
+
+.content .login-in-box-tab-content input.phone {
+    display: inline-block;
+    width: 252px;
 }
 
-.forget-password{
-cursor: pointer;
+.password-login, .phone-login, .phone-find-password, .email-find-password {
+    position: absolute;
+    left: 50%;
+    top: 24%;
+    margin-left: -40%;
+    display: none;
 }
-p.false-alert{
+
+.password-login.active, .phone-login.active, .phone-find-password.active, .email-find-password.active {
+    position: absolute;
+    left: 50%;
+    top: 24%;
+    margin-left: -40%;
+    display: block;
+}
+
+.forget-password {
+    cursor: pointer;
+}
+
+p.false-alert {
     font-size: 17px;
     color: #fb2a2a;
     text-align: center;
@@ -172,23 +201,44 @@ p.false-alert{
     line-height: 74px;
     display: none;
 }
-p.false-alert.active{
-display: block;
+
+p.false-alert.active {
+    display: block;
 }
-p.add-hint,p.password-hint,p.code-hint{
+
+p.add-hint, p.password-hint, p.code-hint {
     font-size: 17px;
     color: #fb2a2a;
     text-align: left;
     display: none;
 }
-p.add-hint.active,p.password-hint.active,p.page-hint.active,p.code-hint.active{
+
+p.mobile-add-hint, p.mobile-password-hint, p.mobile-code-hint {
+    font-size: 17px;
+    color: #fb2a2a;
+    text-align: left;
+}
+
+p.email-add-hint, p.email-password-hint, p.email-code-hint {
+    font-size: 17px;
+    color: #fb2a2a;
+    text-align: left;
+}
+
+p.add-hint.active, p.password-hint.active, p.page-hint.active, p.code-hint.active {
     display: block;
 }
-p.page-hint{
+
+p.page-hint {
     font-size: 17px;
     color: #fb2a2a;
     text-align: center;
-    height:74px;
+    height: 74px;
     line-height: 74px;
     display: none;
+}
+
+.errMsg {
+    margin-bottom: 10px;
+    text-align: center;
 }

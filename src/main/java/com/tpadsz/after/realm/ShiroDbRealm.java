@@ -55,9 +55,9 @@ public class ShiroDbRealm extends AuthorizingRealm {
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) {
 //        logger.info("doGetAuthenticationInfo...");
         String username = (String) token.getPrincipal();
+        logger.info("username=" + username);
         User user = userExtendDao.selectByUsername(username);
         AuthenticationInfo info;
-//        logger.info("user:" + JSON.toJSONString(user));
         if (null != user) {
             if (user.getStatus() == 0) {
                 throw new DisabledAccountException("该账号已禁用！");

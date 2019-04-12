@@ -1,5 +1,8 @@
 $(function () {
     $(".login-in-box-tab>div:not('.icon-input')").click(function () {
+        $("#errMsg").html("");
+        $('p.add-hint').text('');
+        $('p.password-hint').text('');
         var tab = $(this).attr('tab').trim();
         $(this).addClass('active visible').siblings().removeClass('active');
         $('.login-in-box-tab-content>div').each(function () {
@@ -11,6 +14,7 @@ $(function () {
     });
     $('.forget-password').click(function () {
         $('.login-in-box-tab-content>div').each(function () {
+            $("#errMsg").html("");
             var tabContent = $(this).attr('tabContent').trim();
             if (tabContent == 'phone-find-password') {
                 $(this).addClass('active').siblings().removeClass('active');
@@ -48,7 +52,185 @@ $(function () {
         } else {
             $('p.add-hint').removeClass('active').text('');
         }
-    })
+    });
+
+    //为表单元素添加失去焦点事件
+    $(".login-in-box-tab-content :input").blur(function () {
+        //检测账号格式是否正确
+        if ($(this).is("#uname")) {
+            var accountVal = $.trim(this.value); //原生js去空格方式：this.replace(/(^\s*)|(\s*$)/g, "")
+            if (accountVal == "") {
+                //class='msg onError' 中间的空格是层叠样式的格式
+                $('p.add-hint').addClass('active').text('登录账号不能为空！');
+            } else {
+                $('p.add-hint').html('');
+            }
+        }
+        //验证手机
+        if ($(this).is("#phone")) {
+            var mobileVal = $.trim(this.value);
+            var regMobile = /^[1][3,4,5,7,8,9][0-9]{9}$/;
+            if (mobileVal == "") {
+                $('p.add-hint').addClass('active').text('手机号不能为空！');
+            } else if (!regMobile.test(mobileVal)) {
+                $('p.add-hint').addClass('active').text('请输入正确的手机号！');
+            } else {
+                $('p.add-hint').text('');
+            }
+        }
+        if ($(this).is("#code")) {
+            var codeVal = $.trim(this.value); //原生js去空格方式：this.replace(/(^\s*)|(\s*$)/g, "")
+            if (codeVal == "") {
+                //class='msg onError' 中间的空格是层叠样式的格式
+                $('p.password-hint').addClass('active').text('验证码不能为空！');
+            } else {
+                $('p.password--hint').text('');
+            }
+        }
+        if ($(this).is("#pwd")) {
+            var pwdVal = $.trim(this.value); //原生js去空格方式：this.replace(/(^\s*)|(\s*$)/g, "")
+            if (pwdVal == "") {
+                $('p.password-hint').addClass('active').text('密码不能为空！');
+            } else {
+                $('p.password-hint').text('');
+            }
+        }
+        //验证手机
+        if ($(this).is("#mobile")) {
+            var mobileVal = $.trim(this.value);
+            var regMobile = /^[1][3,4,5,7,8,9][0-9]{9}$/;
+            if (mobileVal == "") {
+                $('p.mobile-add-hint').addClass('active').text('手机号不能为空！');
+            } else if (!regMobile.test(mobileVal)) {
+                $('p.mobile-add-hint').addClass('active').text('请输入正确的手机号！');
+            } else {
+                $('p.mobile-add-hint').text('');
+            }
+        }
+        if ($(this).is("#code1")) {
+            var codeVal = $.trim(this.value); //原生js去空格方式：this.replace(/(^\s*)|(\s*$)/g, "")
+            if (codeVal == "") {
+                //class='msg onError' 中间的空格是层叠样式的格式
+                $('p.mobile-code-hint').addClass('active').text('验证码不能为空！');
+            } else {
+                $('p.mobile-code-hint').text('');
+            }
+        }
+        if ($(this).is("#pwd1")) {
+            var pwdVal = $.trim(this.value); //原生js去空格方式：this.replace(/(^\s*)|(\s*$)/g, "")
+            if (pwdVal == "") {
+                $('p.mobile-password-hint').addClass('active').text('密码不能为空！');
+            } else {
+                $('p.mobile-password-hint').text('');
+            }
+        }
+        //验证邮箱
+        if ($(this).is("#email")) {
+            var emailVal = $.trim(this.value);
+            var regEmail = /^([a-zA-Z]|[0-9])(\w|\-)+@[a-zA-Z0-9]+\.([a-zA-Z]{2,4})$/;
+            if (emailVal == "") {
+                $('p.email-add-hint').addClass('active').text('邮箱不能为空！');
+            } else if (regEmail.test(emailVal)) {
+                $('p.email--add-hint').addClass('active').text('请输入正确的邮箱！');
+            } else {
+                $('p.email--add-hint').text('');
+            }
+        }
+        if ($(this).is("#code2")) {
+            var codeVal = $.trim(this.value); //原生js去空格方式：this.replace(/(^\s*)|(\s*$)/g, "")
+            if (codeVal == "") {
+                //class='msg onError' 中间的空格是层叠样式的格式
+                $('p.email-code-hint').addClass('active').text('验证码不能为空！');
+            } else {
+                $('p.email-code-hint').text('');
+            }
+        }
+        if ($(this).is("#pwd2")) {
+            var pwdVal = $.trim(this.value); //原生js去空格方式：this.replace(/(^\s*)|(\s*$)/g, "")
+            if (pwdVal == "") {
+                $('p.email-password-hint').addClass('active').text('密码不能为空！');
+            } else {
+                $('p.email-password-hint').text('');
+            }
+        }
+    }).keyup(function () {
+        //triggerHandler 防止事件执行完后，浏览器自动为标签获得焦点
+        $(this).triggerHandler("blur");
+    }).focus(function () {
+        $(this).triggerHandler("blur");
+    });
+    // $(".phone-find-password :input").blur(function () {
+    //     //验证手机
+    //     if ($(this).is("#mobile")) {
+    //         var mobileVal = $.trim(this.value);
+    //         var regMobile = /^[1][3,4,5,7,8,9][0-9]{9}$/;
+    //         if (mobileVal == "") {
+    //             $('p.mobile-add-hint').addClass('active').text('手机号不能为空！');
+    //         } else if (!regMobile.test(mobileVal)) {
+    //             $('p.mobile-add-hint').addClass('active').text('请输入正确的手机号！');
+    //         }else {
+    //             $('p.mobile-add-hint').text('');
+    //         }
+    //     }
+    //     if ($(this).is("#code1")) {
+    //         var codeVal = $.trim(this.value); //原生js去空格方式：this.replace(/(^\s*)|(\s*$)/g, "")
+    //         if (codeVal == "") {
+    //             //class='msg onError' 中间的空格是层叠样式的格式
+    //             $('p.mobile-code-hint').addClass('active').text('验证码不能为空！');
+    //         }else {
+    //             $('p.mobile-code-hint').text('');
+    //         }
+    //     }
+    //     if ($(this).is("#pwd1")) {
+    //         var pwdVal = $.trim(this.value); //原生js去空格方式：this.replace(/(^\s*)|(\s*$)/g, "")
+    //         if (pwdVal == "") {
+    //             $('p.mobile-password-hint').addClass('active').text('密码不能为空！');
+    //         }else {
+    //             $('p.mobile-password-hint').text('');
+    //         }
+    //     }
+    // }).keyup(function () {
+    //     //triggerHandler 防止事件执行完后，浏览器自动为标签获得焦点
+    //     $(this).triggerHandler("blur");
+    // }).focus(function () {
+    //     $(this).triggerHandler("blur");
+    // });
+    // $(".email-find-password :input").blur(function () {
+    //     //验证邮箱
+    //     if ($(this).is("#email")) {
+    //         var emailVal = $.trim(this.value);
+    //         var regEmail = /^([a-zA-Z]|[0-9])(\w|\-)+@[a-zA-Z0-9]+\.([a-zA-Z]{2,4})$/;
+    //         if (emailVal == "") {
+    //             $('p.email-add-hint').addClass('active').text('邮箱不能为空！');
+    //         } else if (regEmail.test(emailVal)) {
+    //             $('p.email--add-hint').addClass('active').text('请输入正确的邮箱！');
+    //         }else {
+    //             $('p.email--add-hint').text('');
+    //         }
+    //     }
+    //     if ($(this).is("#code2")) {
+    //         var codeVal = $.trim(this.value); //原生js去空格方式：this.replace(/(^\s*)|(\s*$)/g, "")
+    //         if (codeVal == "") {
+    //             //class='msg onError' 中间的空格是层叠样式的格式
+    //             $('p.email-code-hint').addClass('active').text('验证码不能为空！');
+    //         }else {
+    //             $('p.email-code-hint').text('');
+    //         }
+    //     }
+    //     if ($(this).is("#pwd2")) {
+    //         var pwdVal = $.trim(this.value); //原生js去空格方式：this.replace(/(^\s*)|(\s*$)/g, "")
+    //         if (pwdVal == "") {
+    //             $('p.email-password-hint').addClass('active').text('密码不能为空！');
+    //         }else {
+    //             $('p.email-password-hint').text('');
+    //         }
+    //     }
+    // }).keyup(function () {
+    //     //triggerHandler 防止事件执行完后，浏览器自动为标签获得焦点
+    //     $(this).triggerHandler("blur");
+    // }).focus(function () {
+    //     $(this).triggerHandler("blur");
+    // });
 });
 
 function validaccountPassword() {
@@ -296,16 +478,18 @@ function validateCode(user, code) {
 }
 
 function modifyPwd() {
+    $("div.errMsg").html("");
     var email = $("#email").val();
     var mobile = $("#mobile").val();
-    var confirmPwd = "";
+    var temp = "";
+    var pwd = "";
     var code = "";
-    var pwd = $("#pwd1").val();
+    var pwd1 = $("#pwd1").val();
     var pwd2 = $("#pwd2").val();
-    if (pwd != "") {
-        confirmPwd = pwd;
+    if (pwd1 != "") {
+        pwd = pwd1;
     } else if (pwd2 != "") {
-        confirmPwd = pwd2;
+        pwd = pwd2;
     }
     var code1 = $("#code1").val();
     var code2 = $("#code2").val();
@@ -315,12 +499,19 @@ function modifyPwd() {
         code = code2;
     }
     if (mobile != "") {
+        temp = mobile;
         var result = validateCode(mobile, code);
     }
     if (email != "") {
+        temp = email;
         var result = validateCode(email, code);
     }
-    var flag = phoneFindPassword();
+    // var flag = phoneFindPassword();
+    var flag = false;
+    if (temp != "" && code != "" && pwd != "") {
+        flag = true;
+    }
+    console.log("temp=" + temp + ",code=" + code + ",pwd=" + pwd);
     alert("flag=" + flag + ",result=" + result);
     if (flag) {
         if (result == "success") {
@@ -330,7 +521,7 @@ function modifyPwd() {
                 data: {
                     "mobile": mobile,
                     "email": email,
-                    "pwd": confirmPwd
+                    "pwd": pwd
                 },
                 async: false,
                 success: function (res) {
@@ -340,15 +531,13 @@ function modifyPwd() {
                     }
                 }
             })
+        } else if (mobile != "") {
+            $("div.errMsg").html("<span style='font-weight: bold;color: red'>验证码不正确！</span>");
+            $("#code1").focus();
+        } else if (email != "") {
+            $("div.errMsg").html("<span style='font-weight: bold;color: red'>验证码不正确！</span>");
+            $("#code2").focus();
         }
-    } else if (mobile != "") {
-        $("#codeMsg1").html("");
-        $("#codeMsg1").html("<span style='font-weight: bold;color: red'>验证码不正确！</span>");
-        $("#code1").focus();
-    } else if (email != "") {
-        $("#codeMsg1").html("");
-        $("#codeMsg1").html("<span style='font-weight: bold;color: red'>验证码不正确！</span>");
-        $("#code2").focus();
     }
     console.log("mobile=" + mobile + ",email=" + email);
 }

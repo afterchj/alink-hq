@@ -18,7 +18,7 @@ public interface UserDao {
 
     User selectById(String id);
 
-    User selectByUsername(String username);
+    User selectByUsername(String uname);
 
     void updatePwd(Map map);
 

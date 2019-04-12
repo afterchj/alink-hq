@@ -15,7 +15,7 @@ public interface UserService {
 
     User selectById(String id);
 
-    User selectByUsername(String username);
+    User selectByUsername(String uname);
 
     int getCount(Map map);
 
@@ -23,7 +23,7 @@ public interface UserService {
 
     void updatePwd(Map map);
 
-    boolean userIsExist(String username);
+//    boolean userIsExist(String username);
 
     void deleteById(Integer id);
 

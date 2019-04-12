@@ -32,7 +32,7 @@
         from f_user_account
     </select>
 
-    <select id="selectByUsername" resultMap="BaseResultMap" parameterType="java.lang.String">
+    <select id="selectByUsername" resultMap="BaseResultMap" parameterType="string">
         select
         <include refid="Base_Column_List"/>
         from f_user_account

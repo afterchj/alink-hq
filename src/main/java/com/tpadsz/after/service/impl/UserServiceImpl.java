@@ -34,8 +34,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User selectByUsername(String username) {
-        return userDao.selectByUsername(username);
+    public User selectByUsername(String uname) {
+        return userDao.selectByUsername(uname);
     }
 
     @Override
@@ -43,15 +43,15 @@ public class UserServiceImpl implements UserService {
         return userDao.getCount(map);
     }
 
-    @Override
-    public boolean userIsExist(String username) {
-        User user = userDao.selectByUsername(username);
-        if (user == null) {
-            return false;
-        } else {
-            return true;
-        }
-    }
+//    @Override
+//    public boolean userIsExist(User user) {
+//        User user = userDao.selectByUsername(user);
+//        if (user == null) {
+//            return false;
+//        } else {
+//            return true;
+//        }
+//    }
 
     @Override
     public List<User> selectAll() {
