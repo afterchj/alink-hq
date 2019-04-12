@@ -9,6 +9,9 @@
     <title>灯联网后台管理</title>
 </head>
 <body>
+<div th:if="${session.user}!=null">
+    <input id="uid" type="hidden" th:text="${session.user.id}"/>
+</div>
 <div class="container ">
     <img src="./static/img/background.png" class="p-a" alt=""/>
     <div class="logo p-a">
@@ -31,7 +34,8 @@
                             <p class="add-hint"></p>
                             <div class="icon-input p-r">
                                 <img src="./static/img/account.png" alt="" class="icon p-a"/>
-                                <input type="text" name="uname" id="uname" placeholder="请输入账号/用户名/邮箱/手机号" class="p-l-val"/>
+                                <input type="text" name="uname" id="uname" placeholder="请输入账号/用户名/邮箱/手机号"
+                                       class="p-l-val"/>
                             </div>
 
                             <p class="password-hint"></p>
@@ -40,9 +44,9 @@
                                 <input type="password" placeholder="请输入密码" name="pwd" id="pwd" class="p-l-password-val"
                                        maxlength="16"/>
                             </div>
-                            <p class="page-hint" th:if="${errMsg!=null}">
-                                <span style="font-weight: bold;color: red" th:text="${errMsg}"></span>
-                            </p>
+                            <div class="errMsg" th:if="${errMsg!=null}">
+                                <p class="page-hint" style="display: block" th:text="${errMsg}"></p>
+                            </div>
                             <button type="button" onclick="validate()">登录</button>
                             <!--<input type="button" onclick="validate()" value="登录"/>-->
                             <div class="clearfix hint">
@@ -65,8 +69,7 @@
                                 <input type="text" class="phone" name="code" id="code" placeholder="请输入验证码"/>
                                 <button class="security-code" type="button" onclick="pushCode('mobile')">获取验证码</button>
                             </div>
-                            <p class="page-hint"></p>
-                            <!--<div class="errMsg"></div>-->
+                            <div class="page-hint"></div>
                             <button type="button" onclick="validate()">登录</button>
                             <!--<input type="button" onclick="validate()" value="登录"/>-->
                             <div class="clearfix hint">
@@ -91,7 +94,7 @@
                         <p class="mobile-password-hint"></p>
                         <input type="password" name="pwd" id="pwd1" placeholder="请输入新密码（6-16位数字、字母）"
                                style="text-indent: 15px;"/>
-                        <p class="page-hint"></p>
+                        <div class="page-hint"></div>
                         <button onclick="modifyPwd()">修改密码</button>
                         <div class="clearfix hint">
                             <span class="f-r go-login">已有账号，请点击这里登录</span>
@@ -107,14 +110,14 @@
 
                         <p class="email-code-hint"></p>
                         <div class="icon-input p-r">
-                            <input type="text" class="phone" name="code" id="code2" placeholder="请输入验证码" style="text-indent: 15px;"/>
+                            <input type="text" class="phone" name="code" id="code2" placeholder="请输入验证码"
+                                   style="text-indent: 15px;"/>
                             <button class="security-code" type="button">获取验证码</button>
                         </div>
-                        <div class="errMsg"></div>
                         <p class="email-password-hint"></p>
                         <input type="password" name="pwd" id="pwd2" placeholder="请输入新密码（6-16位数字、字母）"
                                style="text-indent: 15px;"/>
-                        <p class="page-hint"></p>
+                        <div class="page-hint"></div>
                         <button onclick="modifyPwd()">修改密码</button>
                         <div class="clearfix hint">
                             <span class="f-r go-login">已有账号，请点击这里登录</span>

@@ -212,12 +212,14 @@ p.add-hint, p.password-hint, p.code-hint {
     text-align: left;
     display: none;
 }
-p.mobile-add-hint, p.mobile-password-hint, p.mobile-code-hint{
+
+p.mobile-add-hint, p.mobile-password-hint, p.mobile-code-hint {
     font-size: 17px;
     color: #fb2a2a;
     text-align: left;
 }
-p.email-add-hint, p.email-password-hint, p.email-code-hint{
+
+p.email-add-hint, p.email-password-hint, p.email-code-hint {
     font-size: 17px;
     color: #fb2a2a;
     text-align: left;
@@ -231,9 +233,21 @@ p.page-hint {
     font-size: 17px;
     color: #fb2a2a;
     text-align: center;
-    height: 74px;
-    line-height: 74px;
+    /*height: 74px;*/
+    /*line-height: 74px;*/
+    margin: 20px auto;
     display: none;
+}
+
+div.page-hint {
+    font-size: 17px;
+    color: #fb2a2a;
+    text-align: center;
+    margin: 20px auto;
+}
+
+.dsp {
+    display: block;
 }
 
 .errMsg {

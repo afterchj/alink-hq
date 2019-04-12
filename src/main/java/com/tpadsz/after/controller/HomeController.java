@@ -240,9 +240,10 @@ public class HomeController {
      * @param session
      * @return
      */
-    @RequestMapping(value = "/user/logOut")
+    @RequestMapping(value = "logOut")
     public String logOut(HttpSession session) {
-        session.removeAttribute("loginUser");
+        logger.info("logOut...");
+        session.removeAttribute("user");
         return "redirect:/index";
     }
 }
