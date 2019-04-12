@@ -3,9 +3,9 @@
 
 <head>
     <meta charset="UTF-8" />
-    <link rel="stylesheet" href="../css/base.css" />
-    <link rel="stylesheet" href="../css/leftNav.css" />
-    <link rel="stylesheet" href="../css/projectManage.css" />
+    <link rel="stylesheet" href="/alink-hq/static/css/base.css" />
+    <link rel="stylesheet" href="/alink-hq/static/css/leftNav.css" />
+    <link rel="stylesheet" href="/alink-hq/static/css/projectManage.css" />
     <title>项目管理</title>
 </head>
 
@@ -16,13 +16,13 @@
         </div>
         <div class="f-r ad-nav">
             <span class="nav-img">
-                <img src="../img/off-unclick .png" alt="" />
+                <img src="/alink-hq/static/img/off-unclick .png" alt="" />
             </span>
             <span>退出</span>
         </div>
         <div class="f-r ad-nav">
             <span class="nav-img">
-                <img src="../img/admin.png" alt="" />
+                <img src="/alink-hq/static/img/admin.png" alt="" />
             </span>
             <span>admin</span>
         </div>
@@ -32,7 +32,7 @@
             <ul>
                 <li class="one-list">
                     <div class="p-r">
-                        <a href="javascript:void(0);" tab="projectManage">项目管理</a><img src="../img/bottom-triangle.png"
+                        <a href="javascript:void(0);" tab="projectManage">项目管理</a><img src="/alink-hq/static/img/bottom-triangle.png"
                             alt="" class="p-a">
                     </div>
                     <ul>
@@ -42,7 +42,7 @@
                 </li>
                 <li class="one-list">
                     <div class="p-r">
-                        <a href="javascript:void(0);" tab="userManage">用户管理</a><img src="../img/top-triangle.png" alt=""
+                        <a href="javascript:void(0);" tab="userManage">用户管理</a><img src="/alink-hq/static/img/top-triangle.png" alt=""
                             class="p-a">
                     </div>
                     <ul class="">
@@ -63,7 +63,7 @@
         <div class="confirm-create-iframe ">
             <div class="create-nav p-r">
                 导出账号
-                <img src="../img/close.png" alt="" class="p-a pointer close">
+                <img src="/alink-hq/static/img/close.png" alt="" class="p-a pointer close">
             </div>
             <div class="create-content">
                 <div class="c-main">
@@ -123,10 +123,10 @@
         </div>
     </div>
     <div class="hide-iframe "></div>
-    <script src="../js/jquery.min.js"></script>
+    <script src="/alink-hq/static/js/jquery.min.js"></script>
     <script>
         $(function () {
-            var iframe = `<iframe name="projectManage" id="projectManage" src="../projectManage/projectList.html" style="z-index:1000;" frameborder="0" align="left" width="100%"  height="1000px;"  scrolling="no">
+            var iframe = `<iframe name="projectManage" id="projectManage" src="/alink-hq/WEB-INF/projectManage/projectList.html" style="z-index:1000;" frameborder="0" align="left" width="100%"  height="1000px;"  scrolling="no">
                         </iframe>`;
                         $('.main-right').append(iframe);
             //项目详情
@@ -138,13 +138,13 @@
                         var iframe = `<iframe name="${tab}" id="${tab}" src="../${tab}/projectList.html" style="z-index:1000;" frameborder="0" align="left" width="100%"  height="1000px;"  scrolling="no">
                         </iframe>`;
                     }else{
-                        var iframe = `<iframe name="${tab}" id="${tab}" src="../${tab}/${tab}.html" style="z-index:1000;" frameborder="0" align="left" width="100%"  height="1000px;"  scrolling="no">
+                        var iframe = `<iframe name="${tab}" id="${tab}" src="http://localhost:8080/alink-hq/${tab}" style="z-index:1000;" frameborder="0" align="left" width="100%"  height="1000px;"  scrolling="no">
                 </iframe>`;
                     }
        
                 } else if (tagName == 'LI') {
                     var prevTag = $(this).parent().parent().find('a').attr('tab');
-                    var iframe = `<iframe name="${tab}" id="${tab}" src="../${prevTag}/${tab}.html" style="z-index:1000;" frameborder="0" align="left" width="100%"  height="1000px;"  scrolling="no">
+                    var iframe = `<iframe name="${tab}" id="${tab}" src="http://localhost:8080/alink-hq/${tab}" style="z-index:1000;" frameborder="0" align="left" width="100%"  height="1000px;"  scrolling="no">
                 </iframe>`;
                 }
                 $('.main-right').children().remove();

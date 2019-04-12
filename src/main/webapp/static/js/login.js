@@ -27,6 +27,33 @@ $(function () {
             }
         })
     });
+    $(function(){
+        $('.security-code').click(function(){
+
+            $(this).addClass('active');
+            settime(this);
+        })
+        var countdown = 60;
+        function settime(obj) {
+            if (countdown == 0) {
+                obj.removeAttribute("disabled");
+                obj.innerHTML = "获取验证码";
+                countdown = 60;
+                return;
+            } else {
+                obj.setAttribute("disabled", true);
+                obj.style.background="#A0A0A0";
+                obj.style.borderColor="#A0A0A0";
+                obj.innerHTML = "已发送(" + countdown+')' ;
+                countdown--;
+            }
+            setTimeout(function () {
+                settime(obj)
+            }, 1000)
+        }
+    })
+
+
     $('.go-login').click(function () {
         $("div.errMsg").html("");
         $('p.page-hint').text('');
@@ -313,13 +340,6 @@ function phoneFindPassword() {
             } else {
                 return true;
             }
-            // else {
-            //     // validateCode(phoneVal, codeVal);
-            //     // if( validateCode(phoneVal, codeVal)=='success'){
-            //     //     // modifyPwd();
-            //     //     return false;
-            //     // }
-            // }
         }
     }
 }

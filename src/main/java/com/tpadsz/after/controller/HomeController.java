@@ -51,6 +51,11 @@ public class HomeController {
         return "index";
     }
 
+    @RequestMapping("/account")
+    public String account() {
+        return "account/account";
+    }
+
     @RequestMapping("/toLogin")
     public String toLogin() {
         return "index";
