@@ -64,11 +64,11 @@
             var tab=$(this).attr('tab');
             var tagName=$(this).prop('tagName');
             if(tagName=='A'){
-                var iframe=`<iframe name="${tab}" id="${tab}" src="../${tab}/${tab}.html" frameborder="0" align="left" width="100%"  height="1000px;"  scrolling="no">
+                var iframe=`<iframe name="${tab}" id="${tab}" th:src="@{/static/${tab}/${tab}.html}" frameborder="0" align="left" width="100%"  height="1000px;"  scrolling="no">
                 </iframe>`;
             }else if(tagName=='LI'){
                 var prevTag=$(this).parent().parent().find('a').attr('tab');
-                var iframe=`<iframe name="${tab}" id="${tab}" src="../${prevTag}/${tab}.html" frameborder="0" align="left" width="100%"  height="1000px;"  scrolling="no">
+                var iframe=`<iframe name="${tab}" id="${tab}" th:src="@{/${prevTag}/${tab}.html}" frameborder="0" align="left" width="100%"  height="1000px;"  scrolling="no">
                 </iframe>`;
             }
             $('.main-right').children().remove();

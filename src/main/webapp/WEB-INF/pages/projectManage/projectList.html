@@ -1,12 +1,12 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="../laydate/theme/default/laydate.css">
-    <link rel="stylesheet" href="../css/base.css">
-    <link rel="stylesheet" href="../css/leftNav.css">
-    <link rel="stylesheet" href="../css/projectManage.css">
+    <link rel="stylesheet"  th:href="@{/static/css/laydate.css}"/>
+    <link rel="stylesheet"  th:href="@{/static/css/base.css}"/>
+    <link rel="stylesheet"  th:href="@{/static/css/leftNav.css}"/>
+    <link rel="stylesheet" th:href="@{/static/css/projectManage.css}"/>
 
     <title>项目列表</title>
 </head>
@@ -360,8 +360,8 @@
             </table>
         </div>
     </div>
-    <script src="../js/jquery.min.js"></script>
-    <script src="../laydate/laydate.js"></script>
+    <script th:src="@{/static/js/jquery.min.js}"></script>
+    <script  th:src="@{/laydate/laydate.js}"></script>
     <script>
         //日期选择
         laydate.render({
