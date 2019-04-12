@@ -29,16 +29,6 @@ public class ProjectServiceImpl implements ProjectService {
     }
 
     @Override
-    public Integer findRoleIdByUid(String uid) {
-        return projectDao.findRoleIdByUid(uid);
-    }
-
-    @Override
-    public List<String> findFirmUid(String uid) {
-        return projectDao.findFirmUid(uid);
-    }
-
-    @Override
     public List<ProjectList> findProListByUids(List<String> uids) {
         return projectDao.findProListByUids(uids);
     }

@@ -11,6 +11,9 @@ import java.util.List;
  */
 public interface AccountService {
 
+    Integer findRoleIdByUid(String uid);
+
+    List<UserList> findUserListBySuper();
 
     List<UserList> findUserListByAdmin();
 
@@ -20,7 +23,14 @@ public interface AccountService {
 
     List<Role> findRoleList();
 
-    List<UserList> searchByAdmin(String account,Integer fid,Integer roleId,String startDate,String endDate);
+    List<UserList> searchBySuper(String account,Integer fid,Integer roleId,String startDate,String endDate);
 
-    List<UserList> searchByManager(String account, List<String> uids, Integer roleId, String startDate, String endDate);
+    List<UserList> searchByAdmin(String account, Integer fid, Integer roleId, String startDate, String endDate);
+
+    List<UserList> searchByManager(String account, List<String> uids, String startDate, String endDate);
+
+    List<String> findFirmUidOfUser(String uid);
+
+    List<String> findFirmUid(String uid);
+
 }

@@ -13,7 +13,6 @@ public class UserList {
     private String role_id;
     private String create_date;
     private String status;
-    private String other;
 
     public Integer getId() {
         return id;
@@ -87,11 +86,4 @@ public class UserList {
         this.status = status;
     }
 
-    public String getOther() {
-        return other;
-    }
-
-    public void setOther(String other) {
-        this.other = other;
-    }
 }

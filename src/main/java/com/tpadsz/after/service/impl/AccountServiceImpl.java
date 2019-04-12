@@ -21,6 +21,16 @@ public class AccountServiceImpl implements AccountService {
 
 
     @Override
+    public Integer findRoleIdByUid(String uid) {
+        return accountDao.findRoleIdByUid(uid);
+    }
+
+    @Override
+    public List<UserList> findUserListBySuper() {
+        return accountDao.findUserListBySuper();
+    }
+
+    @Override
     public List<UserList> findUserListByAdmin() {
         return accountDao.findUserListByAdmin();
     }
@@ -41,14 +51,29 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
-    public List<UserList> searchByAdmin(String account,Integer fid,Integer roleId,String startDate,String endDate) {
+    public List<UserList> searchBySuper(String account,Integer fid,Integer roleId,String startDate,String endDate) {
+        return accountDao.searchBySuper(account,fid,roleId,startDate,endDate);
+    }
+
+    @Override
+    public List<UserList> searchByAdmin(String account, Integer fid, Integer roleId, String startDate, String endDate) {
         return accountDao.searchByAdmin(account,fid,roleId,startDate,endDate);
     }
 
     @Override
-    public List<UserList> searchByManager(String account, List<String> uids, Integer roleId, String startDate, String
+    public List<UserList> searchByManager(String account, List<String> uids,String startDate, String
             endDate) {
-        return accountDao.searchByManager(account,uids,roleId,startDate,endDate);
+        return accountDao.searchByManager(account,uids,startDate,endDate);
+    }
+
+    @Override
+    public List<String> findFirmUidOfUser(String uid) {
+        return accountDao.findFirmUidOfUser(uid);
+    }
+
+    @Override
+    public List<String> findFirmUid(String uid) {
+        return accountDao.findFirmUid(uid);
     }
 
 
