@@ -1,0 +1,193 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="../css/base.css" />
+    <link rel="stylesheet" href="../css/leftNav.css" />
+    <link rel="stylesheet" href="../css/projectManage.css" />
+    <title>项目管理</title>
+</head>
+
+<body>
+    <div class="nav-top clearfix">
+        <div class="f-l nav-title">
+            灯联网项目管理后台
+        </div>
+        <div class="f-r ad-nav">
+            <span class="nav-img">
+                <img src="../img/off-unclick .png" alt="" />
+            </span>
+            <span>退出</span>
+        </div>
+        <div class="f-r ad-nav">
+            <span class="nav-img">
+                <img src="../img/admin.png" alt="" />
+            </span>
+            <span>admin</span>
+        </div>
+    </div>
+    <div class="main p-r">
+        <div class="p-a main-left">
+            <ul>
+                <li class="one-list">
+                    <div class="p-r">
+                        <a href="javascript:void(0);" tab="projectManage">项目管理</a><img src="../img/bottom-triangle.png"
+                            alt="" class="p-a">
+                    </div>
+                    <ul>
+                        <li tab="projectList">项目列表</li>
+                        <li tab="networkList">网络列表</li>
+                    </ul>
+                </li>
+                <li class="one-list">
+                    <div class="p-r">
+                        <a href="javascript:void(0);" tab="userManage">用户管理</a><img src="../img/top-triangle.png" alt=""
+                            class="p-a">
+                    </div>
+                    <ul class="">
+                        <li>用户列表</li>
+                        <li tab="createAccount">创建账号</li>
+                    </ul>
+                </li>
+                <li class="one-list">
+                    <a href="javascript:void(0);" tab="account">我的账户</a>
+                </li>
+            </ul>
+        </div>
+        <div class="main-right">
+
+        </div>
+        <!-- 确定到处弹框 -->
+
+        <div class="confirm-create-iframe ">
+            <div class="create-nav p-r">
+                导出账号
+                <img src="../img/close.png" alt="" class="p-a pointer close">
+            </div>
+            <div class="create-content">
+                <div class="c-main">
+                    <div class="c-title ">
+                        <div class="clearfix">
+                                <div class="f-l c-width one">账号</div>
+                                <div class="f-l c-width two">密码</div>
+                        </div>
+
+                    </div>
+                    <div class="c-list clearfix">
+                        <div class="clearfix">              
+                                <div class="f-l c-width one">BN001</div>
+                                <div class="f-l c-width two">123456</div>
+                        </div>
+                        <div class="clearfix">              
+                                <div class="f-l c-width one">BN001</div>
+                                <div class="f-l c-width two">123456</div>
+                        </div>
+                        <div class="clearfix">              
+                                <div class="f-l c-width one">BN001</div>
+                                <div class="f-l c-width two">123456</div>
+                        </div>
+                    </div>
+                </div>
+                <a href="">Excel导出</a>
+                <p>注：请牢记/导出新账号密码，关闭后将无法展示。</p>
+            </div>
+        </div>
+    </div>
+
+    <!--重置密码 -->
+    <div class="gray-confirm-reset-passwords ">
+        <div class="reset-passwords">
+            <div class="reset-passwords-nav p-r">
+                重置密码
+
+            </div>
+            <div class="reset-passwords-content">
+                <form action="">
+                    <div class="title">账号：BM000</div>
+                    <div>
+                        <label for="">新密码</label>
+                        <input type="password">
+                    </div>
+                    <div>
+                        <label for="">确认密码</label>
+                        <input type="password">
+                    </div>
+                    <div>
+                        <button>取消</button>
+                        <button>确定</button>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+    <div class="hide-iframe "></div>
+    <script src="../js/jquery.min.js"></script>
+    <script>
+        $(function () {
+            var iframe = `<iframe name="projectManage" id="projectManage" src="../projectManage/projectList.html" style="z-index:1000;" frameborder="0" align="left" width="100%"  height="1000px;"  scrolling="no">
+                        </iframe>`;
+                        $('.main-right').append(iframe);
+            //项目详情
+            $('.one-list li,.one-list a').click(function () {
+                var tab = $(this).attr('tab');
+                var tagName = $(this).prop('tagName');
+                if (tagName == 'A') {
+                    if(tab=='projectManage'){
+                        var iframe = `<iframe name="${tab}" id="${tab}" src="../${tab}/projectList.html" style="z-index:1000;" frameborder="0" align="left" width="100%"  height="1000px;"  scrolling="no">
+                        </iframe>`;
+                    }else{
+                        var iframe = `<iframe name="${tab}" id="${tab}" src="../${tab}/${tab}.html" style="z-index:1000;" frameborder="0" align="left" width="100%"  height="1000px;"  scrolling="no">
+                </iframe>`;
+                    }
+       
+                } else if (tagName == 'LI') {
+                    var prevTag = $(this).parent().parent().find('a').attr('tab');
+                    var iframe = `<iframe name="${tab}" id="${tab}" src="../${prevTag}/${tab}.html" style="z-index:1000;" frameborder="0" align="left" width="100%"  height="1000px;"  scrolling="no">
+                </iframe>`;
+                }
+                $('.main-right').children().remove();
+                $('.main-right').append(iframe);
+            })
+        })
+
+        function goIframe(fileName, url) {
+            var iframe = `<iframe name="${url}" id="${url}" src="../${fileName}/${url}.html" frameborder="0" align="left" width="100%"  height="1000px;"  scrolling="no">
+               </iframe>`;
+            $('.main-right').children().remove();
+            $('.main-right').append(iframe);
+        }
+
+        function shade() {
+            var width = window.screen.width;
+            var height = window.screen.height;
+            console.log(width, height);
+            $('.hide-iframe').addClass('active');
+            $('.hide-iframe').css({
+                'width': width,
+                'height': height
+            });
+            $('.confirm-create-iframe').addClass('active');
+        }
+
+        function hide() {
+            $('.hide-iframe').removeClass('active');
+            $('.confirm-create-iframe').removeClass('active');
+        }
+
+        $('.close').click(function () {
+            hide();
+
+        })
+        function scroll(){
+            var height=$('.c-list').height();
+            console.log(height);
+            if(height>=100){
+                $('.c-list .c-width.two').css('width','147px');
+            }
+        }
+    </script>
+</body>
+
+</html>

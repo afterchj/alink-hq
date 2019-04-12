@@ -1,0 +1,196 @@
+
+
+.search-condition {
+    margin: 30px 0;
+    padding: 30px 65px 25px 65px;
+    border: 1px solid #bbb;
+}
+.search input{
+    width: 328px;
+    height: 44px;
+    border-radius: 5px;
+    border: 1px solid #bbb;
+    font-size: 19px;
+    color: #999;
+    text-indent: 10px;
+}
+.search>div{
+    margin-bottom: 26px;
+}
+.search-button button{
+    width: 114px;
+    height: 44px;
+    font-size: 20px;
+    letter-spacing: 8px;
+    background-color: #ffb500;
+    border: 1px solid #ffb500;
+    border-radius: 5px;
+    color: #fff;
+}
+.search label{
+    margin-right: 50px;
+    font-size: 19px;
+    display: inline-block;
+    color: #111;
+    width: 130px;
+    text-align: right;
+}
+.search-button {
+    margin-top:75px;
+}
+.search img{
+    top: 15px;
+    right: 10px;
+}
+.search-result table {
+    border-collapse: collapse;
+    width:100%;
+    margin-bottom: 35px;
+}
+
+.search-result table, td, th {
+    border: 1px solid #bbb;
+}
+.search-result table th{
+    height: 57px;
+    line-height: 57px;
+    font-size: 21px;
+    color: #111;
+    font-weight: normal;
+}
+.search-result table td{
+    height: 52px;
+    line-height: 52px;
+    text-align: center;
+    font-size: 19px;
+    color: #3c3c3c;
+    cursor: pointer;
+}
+.search-result table td a{
+    color: #3c3c3c;
+}
+.center-img{
+    margin:0 30px;
+}
+img.toTop{
+    top:17px;
+}
+img.toBottom{
+    bottom: 17px;
+}
+.toTime{
+    margin-right:8px;
+}
+.project-name a:hover{
+    border-bottom: 1px solid #3598db;
+    color:#3598db;
+}
+.popup{
+    display: block;
+    width: 75px;
+    height: 35px;
+    line-height: 35px;
+    font-size: 18px;
+    color: #3c3c3c;
+    background-color: #eef2f5;
+    border: 1px solid #bbb;
+    left: 30%;
+    top: 35px;
+    display: none;
+}
+.search-result table td.page{
+    height: 64px;
+    line-height: 64px;
+    font-size: 19px;
+    color: #111;
+}
+.search-result table .selected-order{
+    margin:0 35px 0 30px;
+}
+.search-result table .selected-order .amount{
+    color: red;
+}
+.page img{
+   vertical-align: middle;
+
+}
+.page-right>span{
+    display: inline-block;
+}
+.page-right>span input,.page-right>span select{
+    width: 68px;
+    height: 32px;
+    border: 1px solid #bbb;
+    font-size: 18px;
+    color: #3c3c3c;
+}
+th.all-checkbox{
+    cursor: pointer;
+}
+.hasData,.noData{
+    display: none;
+}
+.hasData.active,.noData.active{
+    display: table;
+}
+.search-result table.noData td{
+    height: 469px;
+    padding-top: 171px;
+}
+.search-result table.noData td p{
+    font-size: 24px;
+    color: #999;
+}
+#project-list{
+    display: none;
+}
+
+#projectDetail .p-detail{
+    height: 842px;
+    margin:30px 0;
+ 
+    border: 1px solid #bbb;
+}
+#projectDetail .p-nav,#projectDetail .c-nav{
+    height: 58px;
+    line-height: 58px;
+    padding-left: 25px;
+    font-size: 22px;
+    color: #111;
+    border-bottom: 1px solid #bbb;
+
+}
+#projectDetail .c-nav{
+    border-top: 1px solid #bbb;
+}
+#projectDetail .p-content{
+    padding: 50px 350px;
+}
+#projectDetail .c-content{
+    padding: 50px 455px;
+}
+#projectDetail .p-content span{
+    font-size: 21px;
+    color: #3c3c3c;
+}
+#projectDetail .p-content>div>div{
+    margin-bottom: 30px;
+    width: 50%;
+    text-align: center;
+}
+
+#projectDetail .p-content a{
+    font-size: 21px;
+    color: #3598db;
+}
+#projectDetail .p-content a:hover{
+    color: #003e68;
+    border-bottom: 1px solid #003e68;
+}
+#projectDetail .c-content>div{
+    text-align: left;
+  
+    font-size: 21px;
+    color: #3c3c3c;
+    margin-bottom: 30px;
+}

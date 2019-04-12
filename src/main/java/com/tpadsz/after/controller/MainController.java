@@ -124,31 +124,31 @@ public class MainController {
      * @param username
      * @return
      */
-    @ResponseBody
-    @RequestMapping(value = "/user/checkUser", method = RequestMethod.GET)
-    public String checkUser(String username, HttpServletRequest resqust,
-                            HttpServletResponse response) {
-        Boolean b = userService.userIsExist(username);
-        String result = b ? "true" : "false";
-        return result;
-    }
+//    @ResponseBody
+//    @RequestMapping(value = "/user/checkUser", method = RequestMethod.GET)
+//    public String checkUser(String username, HttpServletRequest resqust,
+//                            HttpServletResponse response) {
+//        Boolean b = userService.userIsExist(username);
+//        String result = b ? "true" : "false";
+//        return result;
+//    }
 
     /**
      * ajax验证用户名密码
      *
      * @return
      */
-    @ResponseBody
-    @RequestMapping(value = "/validatePassword")
-    public String validateUser(String username) {
-        User _user = userService.selectByUsername(username);
-        String _password = _user.getPwd();
-        if (_password == null) {
-            return "";
-        } else {
-            return _password;
-        }
-    }
+//    @ResponseBody
+//    @RequestMapping(value = "/validatePassword")
+//    public String validateUser(String username) {
+//        User _user = userService.selectByUsername(username);
+//        String _password = _user.getPwd();
+//        if (_password == null) {
+//            return "";
+//        } else {
+//            return _password;
+//        }
+//    }
 
     /**
      * 跳转到写博客页面

@@ -1,0 +1,98 @@
+html, body, div, span, object, iframe,h1, h2,
+h3, h4, h5, h6, p, blockquote, pre,abbr, address, cite, code,del, dfn,
+em, img, ins,kbd, q, samp,small, strong, sub, sup, var,b, i,dl, dt, dd,
+ol, ul, li,fieldset, form, label, legend,table, caption, tbody,
+tfoot,thead,tr, th, td,article, aside, canvas, details, figcaption,
+figure, footer, header, hgroup, menu, nav, section, summary,time, mark,
+audio, video {
+    margin:0;
+    padding:0;
+    border:0;
+    outline:0;
+    font-size:100%;
+    vertical-align:baseline;
+   /* background:transparent;*/
+    outline-style:none;/*FF*/
+}
+
+body {
+    line-height:1;
+    zoom: 1;
+}
+a{
+    text-decoration:none;
+}
+a{
+    margin:0;
+    padding:0;
+    border:0;
+    font-size:100%;
+    vertical-align:baseline;
+
+}
+a:hover,a:focus{
+    text-decoration:none;
+    outline-style:none;/*FF*/
+}
+.container{
+    width: 100%;
+    margin: 0 auto;
+}
+.p-r{
+    position: relative;
+}
+.p-a{
+    position: absolute;
+}
+.clearfix::after{
+    display: block;
+    content: '';
+    height: 0;
+    clear: both;
+    visibility: hidden;
+}
+ul li{
+    list-style-type:none;
+}
+.clearfix{
+    zoom: 1;
+}
+.f-l{
+    float: left;
+}
+.f-r{
+    float: right;
+}
+.right-triangle{
+    width:0;
+    height: 0;
+    display: block;
+    border:10px solid #eef2f5;
+}
+.pointer{
+    cursor: pointer;
+}
+.m-r-20{
+    margin-right: 20px;
+}
+.m-r-15{
+    margin-right: 15px;
+}
+.m-r-35{
+    margin-right: 35px;
+}
+.m-l-20{
+    margin-left: 20px;
+}
+.m-l-15{
+    margin-left:15px;
+}
+.m-l-35{
+    margin-left: 35px;
+}
+.ui-widget-header{
+    background: #fff;
+}
+.a-center{
+    text-align: center;
+}

@@ -32,7 +32,7 @@
         from f_user_account
     </select>
 
-    <select id="selectByUsername" resultMap="BaseResultMap" parameterType="java.lang.String">
+    <select id="selectByUsername" resultMap="BaseResultMap" parameterType="string">
         select
         <include refid="Base_Column_List"/>
         from f_user_account
@@ -144,26 +144,20 @@
         </trim>
     </insert>
 
-    <update id="updateByIdSelective" parameterType="User">
-        update user
+    <update id="updatePwd" parameterType="map">
+        UPDATE alink.f_user_account
         <set>
-            <if test="username != null">
-                #{username,jdbcType=VARCHAR},
-            </if>
-            <if test="password != null">
-                #{password,jdbcType=VARCHAR},
-            </if>
-            <if test="birth != null">
-                #{age,jdbcType=DATE},
-            </if>
-            <if test="gender != null">
-                #{age,jdbcType=VARCHAR},
-            </if>
-            <if test="age != null">
-                #{email,jdbcType=VARCHAR},
-            </if>
+            <if test="pwd != null">pwd=#{pwd},</if>
+            <if test="salt != null">salt=#{salt},</if>
+            update_date=now()
         </set>
-        where id = #{id,jdbcType=INTEGER}
+        WHERE 1=1
+        <if test="email != null">
+            AND email=#{email}
+        </if>
+        <if test="mobile != null">
+            AND mobile=#{mobile}
+        </if>
     </update>
 
     <update id="updateByPrimaryKey" parameterType="User">

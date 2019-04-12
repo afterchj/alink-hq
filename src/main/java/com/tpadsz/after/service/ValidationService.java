@@ -29,10 +29,10 @@ public class ValidationService {
         return code;
     }
 
-    public String sendEmailCode(String email) throws Exception{
+    public String sendEmailCode(String email,String flag) throws Exception{
         String key = String.format(MemcachedObjectType.CACHE_MESSAGE_VERIFICATION.getPrefix(), email);
         String code = prepare(key);
-        SendMailUtil.sendCode(code,email,"reset");
+        SendMailUtil.sendCode(code,email,flag);
         return code;
     }
 

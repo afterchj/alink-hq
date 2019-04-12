@@ -125,7 +125,7 @@ public class MyAccountController {
             return map;
         }
         try {
-            validationService.sendEmailCode(email);
+            validationService.sendEmailCode(email,"bind");
             map.put("info","success");
             return map;
         } catch (Exception e) {

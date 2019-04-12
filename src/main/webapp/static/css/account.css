@@ -1,0 +1,143 @@
+#account .a-nav{
+    height: 58px;
+    line-height: 58px;
+    padding-left: 25px;
+    font-size: 22px;
+    color: #111;
+    border-bottom: 1px solid #bbb;
+}
+#account .m-account{
+    height: 842px;
+    margin: 30px 0;
+    border: 1px solid #bbb;
+}
+#account .a-content{
+    padding: 10px 70px;
+    font-size: 21px;
+    color: #3c3c3c;
+}
+#account .a-content>div{
+    padding: 40px 0;
+    border-bottom: 1px solid #bbb;
+}
+#account .a-content>div:nth-child(3),#account .a-content>div:nth-child(4){
+    padding: 29px 0;
+}
+#account .icon{
+    padding: 0 50px;
+    display: inline-block;
+   width: 60px;
+}
+#account .title{
+    display: inline-block;
+    width: 65px;
+    margin-right: 205px;
+}
+#account .a-content>div>span:nth-child(3){
+    width: 350px;
+    display: inline-block;
+}
+#account .a-content>div>span:nth-child(4){
+    width: 200px;
+}
+#account .a-content>div>span {
+    display: inline-block;
+}
+#account .a-content>div>span ul {
+    display: inline-block;
+    list-style:disc;
+}
+#account .a-content>div>span a{
+    color: #3598db;
+}
+#account .a-content>div>span a:hover{
+    color: #003e68;
+    border-bottom: 1px solid #003e68;
+}
+#account .a-content>div>span ul li{
+    font-size: 18px;
+    color: #666;
+    list-style-type: disc;
+    line-height: 1.5;
+}
+i.dot{
+    display: inline-block;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background-color: red;
+    margin-right: 10px;
+    margin-bottom: 10px;
+}
+i.dot-no{
+    display: inline-block;
+    width: 5px;
+    height: 5px;
+    margin-right: 10px;
+}
+#changePassword .c-nav,#bindPhone .b-nav,#fillUsername .f-nav,#bindEmail .b-nav{
+    height: 58px;
+    line-height: 58px;
+    padding-left: 25px;
+    font-size: 22px;
+    color: #111;
+    border-bottom: 1px solid #bbb;
+}
+#changePassword .c-changePwd,#bindPhone .b-bindPhone,#fillUsername .f-fillUsername,#bindEmail .b-bindEmail{
+    height: 842px;
+    margin: 30px 0;
+    border: 1px solid #bbb;
+}
+#changePassword form,#bindPhone form,#fillUsername form,#bindEmail form{
+    margin: 100px auto;
+    font-size: 21px;
+    color: #3c3c3c;
+    width: 500px;
+}
+#changePassword form p,#bindPhone form p,#fillUsername form p,#bindEmail form p{
+    font-size: 15px;
+    color: red;
+    padding-left: 106px;
+    line-height: 2;
+}
+#changePassword form input,#bindPhone form input,#fillUsername form input,#bindEmail form input{
+    height: 42px;
+    width: 330px;
+    border-radius: 5px;
+    border: 1px solid #bbb;
+    font-size: 18px;
+    text-indent: 10px;
+}
+#changePassword form label,#bindPhone form label,#fillUsername form label,#bindEmail form label{
+    display: inline-block;
+    width: 100px;
+    
+}
+#changePassword form>div,#bindPhone form>div,#fillUsername form>div,#bindEmail form>div{
+    margin-bottom: 35px;
+}
+#changePassword form button,#bindPhone form button,#fillUsername form button,#bindEmail form button{
+    height: 44px;
+    font-size: 20px;
+    padding: 0 20px;
+    background-color: #3598db;
+    border-radius: 5px;
+    color: #fff;
+    border: 1px solid #3598db;
+    margin-top: 70px;
+    cursor: pointer;
+}
+#changePassword .submit-btn,#bindPhone .submit-btn,#fillUsername .submit-btn,#bindEmail .submit-btn{
+    text-align: center;
+}
+#bindPhone .verification-code input,#bindEmail .verification-code input{
+    width: 192px;
+}
+#bindPhone .verification-code button,#bindEmail .verification-code button{
+    width: 115px;
+    font-size: 18px;
+    padding: 0;
+    margin: 0;
+    margin: 0px 0 0 18px;
+    vertical-align: middle;
+}

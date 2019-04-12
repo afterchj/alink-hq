@@ -18,9 +18,9 @@ public interface UserDao {
 
     User selectById(String id);
 
-    User selectByUsername(String username);
+    User selectByUsername(String uname);
 
-    int updateByIdSelective(User record);
+    void updatePwd(Map map);
 
     int updateById(User record);
 

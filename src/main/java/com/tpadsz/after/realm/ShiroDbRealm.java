@@ -1,5 +1,6 @@
 package com.tpadsz.after.realm;
 
+import com.alibaba.fastjson.JSON;
 import com.tpadsz.after.dao.UserExtendDao;
 import com.tpadsz.after.entity.User;
 import com.tpadsz.after.utils.Digests;
@@ -54,9 +55,9 @@ public class ShiroDbRealm extends AuthorizingRealm {
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) {
 //        logger.info("doGetAuthenticationInfo...");
         String username = (String) token.getPrincipal();
+//        logger.info("username=" + username);
         User user = userExtendDao.selectByUsername(username);
         AuthenticationInfo info;
-//        logger.info("user:" + JSON.toJSONString(user));
         if (null != user) {
             if (user.getStatus() == 0) {
                 throw new DisabledAccountException("该账号已禁用！");
