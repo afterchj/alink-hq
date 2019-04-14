@@ -34,10 +34,6 @@ a:hover,a:focus{
     text-decoration:none;
     outline-style:none;/*FF*/
 }
-.container{
-    width: 100%;
-    margin: 0 auto;
-}
 .p-r{
     position: relative;
 }

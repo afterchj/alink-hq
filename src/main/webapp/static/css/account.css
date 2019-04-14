@@ -94,12 +94,18 @@ i.dot-no{
     color: #3c3c3c;
     width: 500px;
 }
-#changePassword form p,#bindPhone form p,#fillUsername form p,#bindEmail form p{
+
+p.phone-hint,p.email-hint,p.pwd-hint,p.use-hint,p.inconsistent-hint,p.code-hint{
     font-size: 15px;
     color: red;
     padding-left: 106px;
     line-height: 2;
+    display: none;
 }
+p.phone-hint.active,p.email-hint.active,p.pwd-hint.active,p.use-hint.active,p.inconsistent-hint.active,p.code-hint.active{
+    display: block;
+}
+
 #changePassword form input,#bindPhone form input,#fillUsername form input,#bindEmail form input{
     height: 42px;
     width: 330px;
