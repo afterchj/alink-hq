@@ -23,7 +23,6 @@
     width: 300px;  
     height: 300px;  
     position: absolute;  
-
     /*旋转动画*/  
     animation:circleRoate 5s infinite linear ;   
 
