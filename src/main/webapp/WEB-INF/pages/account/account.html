@@ -1,5 +1,6 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
-<html lang="en" >
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -28,27 +29,29 @@
                     <span class="title">
                         账号
                     </span>
-                    <span>天平数字科技</span>
+                    <span th:text="${myAccount.getAccount()}"></span>
                     <span>
-                        <a href="javascript:void(0);" tab="changePassword">修改密码</a>
+                        <a href="javascript:void(0);" tab="myAccount/pwd">修改密码</a>
                     </span>
                 </div>
                 <div>
-                    <span class="icon"><i class="dot"></i><img src="/alink-hq/static/img/account.png" alt=""/></span>
+                    <span class="icon"><i th:class="${myAccount.getUname()==null or #strings.isEmpty(myAccount.getUname())}?'dot':'dot-no'"></i><img src="/alink-hq/static/img/account.png" alt=""/></span>
                     <span class="title">
                         用户名
                     </span>
-                    <span>未填写</span>
+                    <span th:text="${myAccount.getUname()==null or #strings.isEmpty(myAccount.getUname())}?'未填写':${myAccount.getUname()}"></span>
                     <span>
-                        <a href="javascript:void(0);" tab="fillUsername">填写用户名</a>
+                        <a href="javascript:void(0);" tab="fillUsername" style="display:none;">填写用户名</a>
+                        <a href="javascript:void(0);" tab="changeUsername">修改用户名</a>
                     </span>
                 </div>
                 <div>
-                    <span class="icon"><i class="dot"></i><img src="/alink-hq/static/img/phone.png" alt=""/></span>
+                    <span class="icon"><i th:class="${myAccount.getMobile()==null or #strings.isEmpty(myAccount.getMobile())}?'dot':'dot-no'"></i><img src="/alink-hq/static/img/phone.png" alt=""/></span>
                     <span class="title">手机号</span>
-                    <span>未绑定</span>
+                    <span th:text="${myAccount.getMobile()==null or #strings.isEmpty(myAccount.getMobile())}?'未填写':${myAccount.getMobile()}"></span>
                     <span>
-                        <a href="javascript:void(0);" tab="bindPhone">绑定手机号</a>
+                        <a href="javascript:void(0);" tab="bindPhone" style="display:none;">绑定手机号</a>
+                        <a href="javascript:void(0);" tab="changePhone">修改手机号</a>
                     </span>
                     <span>
                         <ul>
@@ -58,11 +61,12 @@
                     </span>
                 </div>
                 <div>
-                    <span class="icon"><i class="dot"></i><img src="/alink-hq/static/img/email.png" alt=""/></span>
+                    <span class="icon"><i th:class="${myAccount.getEmail()==null or #strings.isEmpty(myAccount.getEmail())}?'dot':'dot-no'"></i><img src="/alink-hq/static/img/email.png" alt=""/></span>
                     <span class="title">邮箱</span>
-                    <span>未绑定</span>
+                    <span th:text="${myAccount.getEmail()==null or #strings.isEmpty(myAccount.getEmail())}?'未填写':${myAccount.getEmail()}"></span>
                     <span>
-                        <a href="javascript:void(0);" tab="bindEmail">绑定邮箱</a>
+                        <a href="javascript:void(0);" tab="bindEmail" style="display:none;">绑定邮箱</a>
+                        <a href="javascript:void(0);" tab="changeEmail">修改邮箱</a>
                     </span>
                     <span>
                         <ul>
@@ -80,8 +84,9 @@
         $('.a-content a').click(function(){
             var fileName='account';
             var url=$(this).attr('tab');
+            var account = 'tpad1d12';
             console.log(url);
-            parent.goIframe(fileName,url);
+            parent.goAccountIframe(fileName,url,account);
         })
     </script>
 </body>

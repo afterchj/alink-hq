@@ -401,3 +401,9 @@ th.all-checkbox {
     cursor: pointer;
     background-color: #3598DB;
 }
+#preload-anim{
+    display: none;
+}
+#preload-anim.active{
+    display: block;
+}

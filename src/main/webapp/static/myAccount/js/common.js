@@ -18,12 +18,12 @@ function isEmpty(value){
  * 匹配输入框
  */
 function matchInput(event) {
-    $(event.data.hint).empty();
+    $('p.'+event.data.hint).removeClass('active').text('');
     var context = $(event.data.context).val();
     if (!event.data.match.test(context)){
-        $(event.data.hint).text(event.data.text);
+        $('p.'+event.data.hint).addClass('active').text(event.data.text);
     }else {
-        $(event.data.hint).empty();
+        $('p.'+event.data.hint).removeClass('active').text('');
     }
 }
 
@@ -55,7 +55,7 @@ function countDown(obj, second, value) {
 //          obj.disabled = true;
         // 按钮里的内容呈现倒计时状态
 //          obj.value = buttonDefaultValue+'('+second+'S)';
-        obj.val(buttonDefaultValue + '(' + second + 'S)');
+        obj.text(buttonDefaultValue + '(' + second + 'S)');
         // 时间减一
         second--;
         // 一秒后重复执行
@@ -69,6 +69,6 @@ function countDown(obj, second, value) {
         obj.attr("disabled", false);
         // 按钮里的内容恢复初始状态
 //          obj.value = '获取验证码';
-        obj.val(value);
+        obj.text(value);
     }
 }

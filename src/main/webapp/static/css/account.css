@@ -95,15 +95,17 @@ i.dot-no{
     width: 500px;
 }
 
-p.phone-hint,p.email-hint,p.pwd-hint,p.use-hint,p.inconsistent-hint,p.code-hint{
+p.phone-hint,p.email-hint,p.pwd-hint,p.use-hint,p.inconsistent-hint,p.code-hint,p.use-hint2{
     font-size: 15px;
     color: red;
     padding-left: 106px;
     line-height: 2;
-    display: none;
+    /* display: none; */
+    visibility: hidden;
 }
-p.phone-hint.active,p.email-hint.active,p.pwd-hint.active,p.use-hint.active,p.inconsistent-hint.active,p.code-hint.active{
-    display: block;
+p.phone-hint.active,p.use-hint2.active,p.email-hint.active,p.pwd-hint.active,p.use-hint.active,p.inconsistent-hint.active,p.code-hint.active{
+    /* display: block; */
+    visibility:visible;
 }
 
 #changePassword form input,#bindPhone form input,#fillUsername form input,#bindEmail form input{
@@ -120,7 +122,7 @@ p.phone-hint.active,p.email-hint.active,p.pwd-hint.active,p.use-hint.active,p.in
     
 }
 #changePassword form>div,#bindPhone form>div,#fillUsername form>div,#bindEmail form>div{
-    margin-bottom: 35px;
+    /* margin-bottom: 35px; */
 }
 #changePassword form button,#bindPhone form button,#fillUsername form button,#bindEmail form button{
     height: 44px;
