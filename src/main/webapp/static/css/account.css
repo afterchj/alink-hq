@@ -100,10 +100,12 @@ p.phone-hint,p.email-hint,p.pwd-hint,p.use-hint,p.inconsistent-hint,p.code-hint,
     color: red;
     padding-left: 106px;
     line-height: 2;
-    display: none;
+    /* display: none; */
+    visibility: hidden;
 }
 p.phone-hint.active,p.use-hint2.active,p.email-hint.active,p.pwd-hint.active,p.use-hint.active,p.inconsistent-hint.active,p.code-hint.active{
-    display: block;
+    /* display: block; */
+    visibility:visible;
 }
 
 #changePassword form input,#bindPhone form input,#fillUsername form input,#bindEmail form input{
