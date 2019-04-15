@@ -120,7 +120,7 @@ p.phone-hint.active,p.use-hint2.active,p.email-hint.active,p.pwd-hint.active,p.u
     
 }
 #changePassword form>div,#bindPhone form>div,#fillUsername form>div,#bindEmail form>div{
-    margin-bottom: 35px;
+    /* margin-bottom: 35px; */
 }
 #changePassword form button,#bindPhone form button,#fillUsername form button,#bindEmail form button{
     height: 44px;
