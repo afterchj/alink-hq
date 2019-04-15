@@ -8,6 +8,7 @@ import com.tpadsz.after.realm.EasyTypeToken;
 import com.tpadsz.after.realm.ShiroDbRealm;
 import com.tpadsz.after.service.UserService;
 import com.tpadsz.after.service.ValidationService;
+import com.tpadsz.after.utils.Encryption;
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 import org.apache.shiro.SecurityUtils;
@@ -209,7 +210,7 @@ public class HomeController {
             map.put("email", email);
         }
         logger.info("mobile=" + mobile + ",email=" + email + "pwd=" + pwd);
-        ShiroDbRealm.HashPassword hashPassword = new ShiroDbRealm().encrypt(pwd);
+        ShiroDbRealm.HashPassword hashPassword = new ShiroDbRealm().encrypt(Encryption.getMD5Str(pwd));
         System.out.println(hashPassword.password + "\t" + hashPassword.salt);
         map.put("pwd", hashPassword.password);
         map.put("salt", hashPassword.salt);
@@ -232,7 +233,7 @@ public class HomeController {
             userName = user.getMobile();
             token = new EasyTypeToken(userName);
         } else {
-            token = new EasyTypeToken(userName, pwd);
+            token = new EasyTypeToken(userName, Encryption.getMD5Str(pwd));
         }
         logger.info("userName=" + userName + ",pwd=" + pwd);
         Subject subject = SecurityUtils.getSubject();

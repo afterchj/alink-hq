@@ -3,14 +3,13 @@
 
 <head>
     <title>用户列表</title>
-    <link rel="stylesheet" th:href="@{/static/css/common.css}"/>
-    <script type="text/javascript" th:src="@{/static/js/jquery.min.js}"></script>
+    <link rel="stylesheet" href="/alink-hq/static/css/base.css" />
+    <link rel="stylesheet" href="/alink-hq/static/css/leftNav.css" />
+    <link rel="stylesheet" href="/alink-hq/static/css/projectManage.css" />
 </head>
 <body>
 <h1>用户列表</h1><br/>
-<div th:if="${session.user}!=null">
-    <p th:text="${session.user.uname}+'：'+${session.user.account}"></p>
-</div>
+<div th:replace="common/head::head"></div>
 <div th:replace="common/left::left"></div>
 <div style="width: 80%;height:30%;margin: 0 auto">
     <table style="border-collapse: collapse">
