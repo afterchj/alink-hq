@@ -460,7 +460,7 @@ function modifyPwd() {
     if (flag) {
         if (result == "success") {
             $.ajax({
-                type: "GET",
+                type: "POST",
                 url: "/alink-hq/restPwd",
                 data: {
                     "mobile": mobile,

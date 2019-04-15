@@ -2,10 +2,10 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="./static/css/base.css"/>
-    <link rel="stylesheet" href="./static/css/login.css"/>
-    <script type="text/javascript" src="./static/js/jquery.min.js"></script>
-    <script type="text/javascript" src="./static/js/login.js"></script>
+    <link rel="stylesheet" href="/alink-hq/static/css/base.css"/>
+    <link rel="stylesheet" href="/alink-hq/static/css/login.css"/>
+    <script type="text/javascript" src="/alink-hq/static/js/jquery.min.js"></script>
+    <script type="text/javascript" src="/alink-hq/static/js/login.js"></script>
     <title>灯联网后台管理</title>
 </head>
 <body>
@@ -30,7 +30,7 @@
                 <div class="login-in-box-tab-content">
                     <!--账号密码登录-->
                     <div class="password-login active" tabContent="password-login">
-                        <form th:action="@{/login}">
+                        <form th:action="@{/login}" method="post">
                             <p class="add-hint"></p>
                             <div class="icon-input p-r">
                                 <img src="./static/img/account.png" alt="" class="icon p-a"/>
@@ -57,7 +57,7 @@
                     </div>
                     <!--手机验证码登录-->
                     <div class="phone-login" tabContent="phone-login">
-                        <form th:action="@{/login}">
+                        <form th:action="@{/login}" method="post">
                             <p class="add-hint"></p>
                             <div class="icon-input p-r">
                                 <img src="./static/img/phone.png" alt="" class="icon p-a"/>
@@ -111,7 +111,7 @@
                         <div class="icon-input p-r">
                             <input type="text" class="phone" name="code" id="code2" placeholder="请输入验证码"
                                    style="text-indent: 15px;"/>
-                            <button class="security-code" type="button">获取验证码</button>
+                            <button class="security-code" type="button" onclick="pushCode('email')">获取验证码</button>
                         </div>
                         <p class="email-password-hint"></p>
                         <input type="password" name="pwd" id="pwd2" placeholder="请输入新密码（6-16位数字、字母）"

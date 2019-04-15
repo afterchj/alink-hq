@@ -4,58 +4,18 @@
     <meta charset="UTF-8"/>
     <title>Index首页</title>
     <link rel="stylesheet" th:href="@{/static/css/common.css}"/>
+    <link rel="stylesheet" href="/alink-hq/static/css/base.css" />
+    <link rel="stylesheet" href="/alink-hq/static/css/leftNav.css" />
+    <link rel="stylesheet" href="/alink-hq/static/css/projectManage.css" />
     <script type="text/javascript" th:src="@{/static/js/jquery.min.js}"></script>
     <script type="text/javascript" th:src="@{/static/js/myLogin.js}"></script>
     <title>Spring MVC + Thymeleaf Example</title>
 </head>
 <body>
 <!-- Project ContextPath -->
-<input type="hidden" id="ctx" th:value="${application.ctx}"/> Hello<br/>
+<div th:replace="common/head::head"></div>
 <div th:replace="common/left::left"></div>
-<br/>
-<div style="width: 40%;margin: 0 auto;border: 1px solid grey;text-align: left">
-    <div id="title" class="title">
-        <ul>
-            <li class="bottom" onclick="showForm(1)">账密登录</li>
-            <li onclick="showForm(2)">手机验证码登录</li>
-        </ul>
-        <br/>
-    </div>
-    <div class="loginForm">
-        <form th:action="@{/login}" method="post" id="form1">
-            <div id="login1">
-                <p>
-                    <input id="uname" name="uname" class="required" placeholder="请输入账号/用户名/邮箱/手机号"/>
-                </p>
-                <p>
-                    <input type="password" id="pwd" name="pwd" class="required" placeholder="请输入密码"/>
-                </p>
-            </div>
-            <div id="login2" class="myDisplay">
-                <p>
-                    <input style="width: 300px" id="mobile" name="mobile" class="required" placeholder="请输入手机号"/>
-                </p>
-                <p>
-                    <input style="width: 200px" id="code" name="code" class="required" placeholder="请输入验证码"/>
-                    <input id="sendCode" class="codeBtn" type="button" onclick="pushCode('mobile')" value="获取验证码"/>
-                </p>
-            </div>
-            <div id="errMsg1" th:if="${errMsg!=null}">
-                <span style="font-weight: bold;color: red" th:text="${errMsg}"></span>
-            </div>
-            <div id="errMsg2" class="myDisplay"></div>
-            <div style="margin: 10px auto;text-align: center">
-                <input class="loginBtn" type="button" onclick="validate()" value="登录"/>
-            </div>
-        </form>
-        <div class="title">
-            <ul>
-                <li><a th:href="@{/toRest}">忘记密码</a></li>
-                <li><a th:href="@{/register}">注册账号</a></li>
-            </ul>
-            <br/>
-        </div>
-    </div>
+<h1>欢迎登陆：<span id="ctx" th:value="${application.ctx}"/> Hello</h1>
 </div>
 
 </body>
