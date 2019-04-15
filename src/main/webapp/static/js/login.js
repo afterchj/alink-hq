@@ -27,9 +27,37 @@ $(function () {
             }
         })
     });
+    $(function(){
+        $('.security-code').click(function(){
+
+            $(this).addClass('active');
+            settime(this);
+        })
+        var countdown = 60;
+        function settime(obj) {
+            if (countdown == 0) {
+                obj.removeAttribute("disabled");
+                obj.innerHTML = "获取验证码";
+                countdown = 60;
+                return;
+            } else {
+                obj.setAttribute("disabled", true);
+                obj.style.background="#A0A0A0";
+                obj.style.borderColor="#A0A0A0";
+                obj.innerHTML = "已发送(" + countdown+')' ;
+                countdown--;
+            }
+            setTimeout(function () {
+                settime(obj)
+            }, 1000)
+        }
+    })
+
+
     $('.go-login').click(function () {
         $("div.errMsg").html("");
         $('p.page-hint').text('');
+        $('p.mobile-add-hint').text('');
         $('.login-in-box-tab-content>div').each(function () {
             var tabContent = $(this).attr('tabContent').trim();
             console.log(tabContent);
@@ -43,24 +71,24 @@ $(function () {
         })
     });
 
-    $('input.p-l-val').blur(function () {
-        //验证手机号格式是否正确
-        var accountVal = $(this).val();
-        var phone = /^[1][3,4,5,7,8,9][0-9]{9}$/;
-        var phoneResult = phone.test(accountVal);
-        console.log(isNaN(parseInt(accountVal)));
-        if (!isNaN(parseInt(accountVal))) {
-            if (!phoneResult) {
-                $('p.add-hint').addClass('active').text('请输入正确的手机号');
-            }
-        } else {
-            $('p.add-hint').removeClass('active').text('');
-        }
-    });
+    // $('input.p-l-val').blur(function () {
+    //     //验证手机号格式是否正确
+    //     var accountVal = $(this).val();
+    //     var phone = /^[1][3,4,5,7,8,9][0-9]{9}$/;
+    //     var phoneResult = phone.test(accountVal);
+    //     console.log(isNaN(parseInt(accountVal)));
+    //     if (!isNaN(parseInt(accountVal))) {
+    //         if (!phoneResult) {
+    //             $('p.add-hint').addClass('active').text('请输入正确的手机号');
+    //         }
+    //     } else {
+    //         $('p.add-hint').removeClass('active').text('');
+    //     }
+    // });
 
     //为表单元素添加失去焦点事件
     $(".login-in-box-tab-content :input").blur(function () {
-        $("div.errMsg").html("");
+        // $("div.errMsg").html("");
         //检测账号格式是否正确
         if ($(this).is("#uname")) {
             var accountVal = $.trim(this.value); //原生js去空格方式：this.replace(/(^\s*)|(\s*$)/g, "")
@@ -80,7 +108,7 @@ $(function () {
             } else if (!regMobile.test(mobileVal)) {
                 $('p.add-hint').addClass('active').text('请输入正确的手机号！');
             } else {
-                $('p.add-hint').text('');
+                $('p.add-hint').removeClass('active').text('');
             }
         }
         if ($(this).is("#code")) {
@@ -89,7 +117,7 @@ $(function () {
                 //class='msg onError' 中间的空格是层叠样式的格式
                 $('p.password-hint').addClass('active').text('验证码不能为空！');
             } else {
-                $('p.password-hint').text('');
+                $('p.password-hint').removeClass('active').text('');
             }
         }
         if ($(this).is("#pwd")) {
@@ -97,7 +125,7 @@ $(function () {
             if (pwdVal == "") {
                 $('p.password-hint').addClass('active').text('密码不能为空！');
             } else {
-                $('p.password-hint').text('');
+                $('p.password-hint').removeClass('active').text('');
             }
         }
         //验证手机
@@ -109,7 +137,7 @@ $(function () {
             } else if (!regMobile.test(mobileVal)) {
                 $('p.mobile-add-hint').addClass('active').text('请输入正确的手机号！');
             } else {
-                $('p.mobile-add-hint').text('');
+                $('p.mobile-add-hint').removeClass('active').text('');
             }
         }
         if ($(this).is("#code1")) {
@@ -118,7 +146,7 @@ $(function () {
                 //class='msg onError' 中间的空格是层叠样式的格式
                 $('p.mobile-code-hint').addClass('active').text('验证码不能为空！');
             } else {
-                $('p.mobile-code-hint').text('');
+                $('p.mobile-code-hint').removeClass('active').text('');
             }
         }
         if ($(this).is("#pwd1")) {
@@ -126,7 +154,7 @@ $(function () {
             if (pwdVal == "") {
                 $('p.mobile-password-hint').addClass('active').text('密码不能为空！');
             } else {
-                $('p.mobile-password-hint').text('');
+                $('p.mobile-password-hint').removeClass('active').text('');
             }
         }
         //验证邮箱
@@ -135,10 +163,10 @@ $(function () {
             var regEmail = /^([a-zA-Z]|[0-9])(\w|\-)+@[a-zA-Z0-9]+\.([a-zA-Z]{2,4})$/;
             if (emailVal == "") {
                 $('p.email-add-hint').addClass('active').text('邮箱不能为空！');
-            } else if (regEmail.test(emailVal)) {
+            } else if (!regEmail.test(emailVal)) {
                 $('p.email--add-hint').addClass('active').text('请输入正确的邮箱！');
             } else {
-                $('p.email--add-hint').text('');
+                $('p.email--add-hint').removeClass('active').text('');
             }
         }
         if ($(this).is("#code2")) {
@@ -147,7 +175,7 @@ $(function () {
                 //class='msg onError' 中间的空格是层叠样式的格式
                 $('p.email-code-hint').addClass('active').text('验证码不能为空！');
             } else {
-                $('p.email-code-hint').text('');
+                $('p.email-code-hint').removeClass('active').text('');
             }
         }
         if ($(this).is("#pwd2")) {
@@ -155,7 +183,7 @@ $(function () {
             if (pwdVal == "") {
                 $('p.email-password-hint').addClass('active').text('密码不能为空！');
             } else {
-                $('p.email-password-hint').text('');
+                $('p.email-password-hint').removeClass('active').text('');
             }
         }
     }).keyup(function () {
@@ -313,13 +341,6 @@ function phoneFindPassword() {
             } else {
                 return true;
             }
-            // else {
-            //     // validateCode(phoneVal, codeVal);
-            //     // if( validateCode(phoneVal, codeVal)=='success'){
-            //     //     // modifyPwd();
-            //     //     return false;
-            //     // }
-            // }
         }
     }
 }

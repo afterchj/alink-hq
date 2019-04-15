@@ -18,12 +18,12 @@ function isEmpty(value){
  * 匹配输入框
  */
 function matchInput(event) {
-    $(event.data.hint).empty();
+    $('p.'+event.data.hint).removeClass('active').text('');
     var context = $(event.data.context).val();
     if (!event.data.match.test(context)){
-        $(event.data.hint).text(event.data.text);
+        $('p.'+event.data.hint).addClass('active').text(event.data.text);
     }else {
-        $(event.data.hint).empty();
+        $('p.'+event.data.hint).removeClass('active').text('');
     }
 }
 
