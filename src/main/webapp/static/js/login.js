@@ -164,9 +164,9 @@ $(function () {
             if (emailVal == "") {
                 $('p.email-add-hint').addClass('active').text('邮箱不能为空！');
             } else if (!regEmail.test(emailVal)) {
-                $('p.email--add-hint').addClass('active').text('请输入正确的邮箱！');
+                $('p.email-add-hint').addClass('active').text('请输入正确的邮箱！');
             } else {
-                $('p.email--add-hint').removeClass('active').text('');
+                $('p.email-add-hint').removeClass('active').text('');
             }
         }
         if ($(this).is("#code2")) {

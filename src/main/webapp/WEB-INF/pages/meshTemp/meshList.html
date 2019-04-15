@@ -2,12 +2,12 @@
 <html xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
 
 <head>
-    <title>登录成功</title>
+    <title>网络列表</title>
     <link rel="stylesheet" th:href="@{/static/css/common.css}"/>
     <script type="text/javascript" th:src="@{/static/js/jquery.min.js}"></script>
 </head>
 <body>
-<h1>登录成功</h1><br/>
+<h1>网络列表</h1><br/>
 <div th:if="${session.user}!=null">
     <p th:text="${session.user.uname}+'：'+${session.user.account}"></p>
 </div>
@@ -32,10 +32,34 @@
             <td th:text="${user.email}"></td>
             <td th:text="${user.status}"></td>
             <td>
-                <div shiro:hasRole="admin">
-                    <a href="#">删除</a><a href="#">修改</a>
+                <div>
+                    <ul>
+                        <li shiro:hasRole="admin">
+                            <a href="#">删除</a>
+                        </li>
+                        <li shiro:hasRole="admin">
+                            <a href="#">修改</a>
+                        </li>
+                        <li shiro:hasPermission="list">
+                            <a href="#">查看</a>
+                        </li>
+                    </ul>
                 </div>
-                <div shiro:hasPermission="list"><a href="#">查看</a></div>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="6">
+                <ul>
+                    <li>
+                        <a th:href="@{/userList(page=${page-1})}">上一页</a>
+                    </li>
+                    <li>
+                        <span th:text="${page}"></span>
+                    </li>
+                    <li>
+                        <a th:href="@{/userList(page=${page+1},rows=10)}">下一页</a>
+                    </li>
+                </ul>
             </td>
         </tr>
     </table>

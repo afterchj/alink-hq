@@ -11,17 +11,7 @@
 <body>
 <!-- Project ContextPath -->
 <input type="hidden" id="ctx" th:value="${application.ctx}"/> Hello<br/>
-<ul>
-    <li>
-        <a th:href="@{/home}">我的主页</a>
-    </li>
-    <li>
-        <a th:href="@{/show}">用户名单</a>
-    </li>
-    <li>
-        <a th:href="@{/picture}">查看图片</a>
-    </li>
-</ul>
+<div th:replace="common/left::left"></div>
 <br/>
 <div style="width: 40%;margin: 0 auto;border: 1px solid grey;text-align: left">
     <div id="title" class="title">

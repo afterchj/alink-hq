@@ -1,5 +1,5 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta charset="UTF-8" />
@@ -10,51 +10,53 @@
 </head>
 
 <body>
-    <div class="nav-top clearfix">
-        <div class="f-l nav-title">
-            灯联网项目管理后台
-        </div>
-        <div class="f-r ad-nav">
-            <span class="nav-img">
-                <img src="/alink-hq/static/img/off-unclick .png" alt="" />
-            </span>
-            <span>退出</span>
-        </div>
-        <div class="f-r ad-nav">
-            <span class="nav-img">
-                <img src="/alink-hq/static/img/admin.png" alt="" />
-            </span>
-            <span>admin</span>
-        </div>
-    </div>
-    <div class="main p-r">
-        <div class="p-a main-left">
-            <ul>
-                <li class="one-list">
-                    <div class="p-r">
-                        <a href="javascript:void(0);" tab="projectManage">项目管理</a><img
-                            src="/alink-hq/static/img/bottom-triangle.png" alt="" class="p-a">
-                    </div>
-                    <ul>
-                        <li tab="projectList">项目列表</li>
-                        <li tab="networkList">网络列表</li>
-                    </ul>
-                </li>
-                <li class="one-list">
-                    <div class="p-r">
-                        <a href="javascript:void(0);" tab="userManage">用户管理</a><img
-                            src="/alink-hq/static/img/top-triangle.png" alt="" class="p-a">
-                    </div>
-                    <ul class="">
-                        <li tab="useList">用户列表</li>
-                        <li tab="createAccount">创建账号</li>
-                    </ul>
-                </li>
-                <li class="one-list">
-                    <a href="javascript:void(0);" tab="account">我的账户</a>
-                </li>
-            </ul>
-        </div>
+<div th:replace="common/head::head"></div>
+<div th:replace="common/left::left"></div>
+    <!--<div class="nav-top clearfix">-->
+        <!--<div class="f-l nav-title">-->
+            <!--灯联网项目管理后台-->
+        <!--</div>-->
+        <!--<div class="f-r ad-nav">-->
+            <!--<span class="nav-img">-->
+                <!--<img src="/alink-hq/static/img/off-unclick .png" alt="" />-->
+            <!--</span>-->
+            <!--<span>退出</span>-->
+        <!--</div>-->
+        <!--<div class="f-r ad-nav">-->
+            <!--<span class="nav-img">-->
+                <!--<img src="/alink-hq/static/img/admin.png" alt="" />-->
+            <!--</span>-->
+            <!--<span>admin</span>-->
+        <!--</div>-->
+    <!--</div>-->
+    <!--<div class="main p-r">-->
+        <!--<div class="p-a main-left">-->
+            <!--<ul>-->
+                <!--<li class="one-list">-->
+                    <!--<div class="p-r">-->
+                        <!--<a href="javascript:void(0);" tab="projectManage">项目管理</a><img-->
+                            <!--src="/alink-hq/static/img/bottom-triangle.png" alt="" class="p-a">-->
+                    <!--</div>-->
+                    <!--<ul>-->
+                        <!--<li tab="projectList">项目列表</li>-->
+                        <!--<li tab="networkList">网络列表</li>-->
+                    <!--</ul>-->
+                <!--</li>-->
+                <!--<li class="one-list">-->
+                    <!--<div class="p-r">-->
+                        <!--<a href="javascript:void(0);" tab="userManage">用户管理</a><img-->
+                            <!--src="/alink-hq/static/img/top-triangle.png" alt="" class="p-a">-->
+                    <!--</div>-->
+                    <!--<ul class="">-->
+                        <!--<li tab="useList">用户列表</li>-->
+                        <!--<li tab="createAccount">创建账号</li>-->
+                    <!--</ul>-->
+                <!--</li>-->
+                <!--<li class="one-list">-->
+                    <!--<a href="javascript:void(0);" tab="account">我的账户</a>-->
+                <!--</li>-->
+            <!--</ul>-->
+        <!--</div>-->
         <div class="main-right">
 
         </div>
