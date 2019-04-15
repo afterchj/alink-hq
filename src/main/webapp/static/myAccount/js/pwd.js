@@ -54,6 +54,7 @@ $(function () {
                                 var content = "修改";
                                 parent.loding(title, content);
                                 window.location.href = "http://localhost:8080/alink-hq/myAccount/myAccount?account="+account;
+
                             },2000);
                         }else {
                             alert(msg.success);
