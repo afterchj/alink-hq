@@ -5,6 +5,7 @@ import com.tpadsz.after.dao.UserExtendDao;
 import com.tpadsz.after.entity.User;
 import com.tpadsz.after.utils.Digests;
 import com.tpadsz.after.utils.Encodes;
+import com.tpadsz.after.utils.Encryption;
 import org.apache.log4j.Logger;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
@@ -98,7 +99,7 @@ public class ShiroDbRealm extends AuthorizingRealm {
     }
 
     public static void main(String[] args) {
-        HashPassword hashPassword = new ShiroDbRealm().encrypt("123456");
+        HashPassword hashPassword = new ShiroDbRealm().encrypt(Encryption.getMD5Str("123456"));
         System.out.println(hashPassword.password + "\t" + hashPassword.salt);
     }
 }

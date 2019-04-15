@@ -1,61 +1,62 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta charset="UTF-8" />
     <link rel="stylesheet" href="/alink-hq/static/css/base.css" />
     <link rel="stylesheet" href="/alink-hq/static/css/leftNav.css" />
     <link rel="stylesheet" href="/alink-hq/static/css/projectManage.css" />
-    <link rel="stylesheet" href="/alink-hq/static/css/loding.css" />
     <title>项目管理</title>
 </head>
 
 <body>
-    <div class="nav-top clearfix">
-        <div class="f-l nav-title">
-            灯联网项目管理后台
-        </div>
-        <div class="f-r ad-nav">
-            <span class="nav-img">
-                <img src="/alink-hq/static/img/off-unclick .png" alt="" />
-            </span>
-            <span>退出</span>
-        </div>
-        <div class="f-r ad-nav">
-            <span class="nav-img">
-                <img src="/alink-hq/static/img/admin.png" alt="" />
-            </span>
-            <span>admin</span>
-        </div>
-    </div>
-    <div class="main p-r">
-        <div class="p-a main-left">
-            <ul>
-                <li class="one-list">
-                    <div class="p-r">
-                        <a href="javascript:void(0);" tab="projectManage">项目管理</a><img
-                            src="/alink-hq/static/img/bottom-triangle.png" alt="" class="p-a">
-                    </div>
-                    <ul>
-                        <li tab="projectList">项目列表</li>
-                        <li tab="networkList">网络列表</li>
-                    </ul>
-                </li>
-                <li class="one-list">
-                    <div class="p-r">
-                        <a href="javascript:void(0);" tab="userManage">用户管理</a><img
-                            src="/alink-hq/static/img/top-triangle.png" alt="" class="p-a">
-                    </div>
-                    <ul class="">
-                        <li tab="useList">用户列表</li>
-                        <li tab="createAccount">创建账号</li>
-                    </ul>
-                </li>
-                <li class="one-list">
-                    <a href="javascript:void(0);" tab="myAccount/myAccount">我的账户</a>
-                </li>
-            </ul>
-        </div>
+<div th:replace="common/head::head"></div>
+<div th:replace="common/left::left"></div>
+    <!--<div class="nav-top clearfix">-->
+        <!--<div class="f-l nav-title">-->
+            <!--灯联网项目管理后台-->
+        <!--</div>-->
+        <!--<div class="f-r ad-nav">-->
+            <!--<span class="nav-img">-->
+                <!--<img src="/alink-hq/static/img/off-unclick .png" alt="" />-->
+            <!--</span>-->
+            <!--<span>退出</span>-->
+        <!--</div>-->
+        <!--<div class="f-r ad-nav">-->
+            <!--<span class="nav-img">-->
+                <!--<img src="/alink-hq/static/img/admin.png" alt="" />-->
+            <!--</span>-->
+            <!--<span>admin</span>-->
+        <!--</div>-->
+    <!--</div>-->
+    <!--<div class="main p-r">-->
+        <!--<div class="p-a main-left">-->
+            <!--<ul>-->
+                <!--<li class="one-list">-->
+                    <!--<div class="p-r">-->
+                        <!--<a href="javascript:void(0);" tab="projectManage">项目管理</a><img-->
+                            <!--src="/alink-hq/static/img/bottom-triangle.png" alt="" class="p-a">-->
+                    <!--</div>-->
+                    <!--<ul>-->
+                        <!--<li tab="projectList">项目列表</li>-->
+                        <!--<li tab="networkList">网络列表</li>-->
+                    <!--</ul>-->
+                <!--</li>-->
+                <!--<li class="one-list">-->
+                    <!--<div class="p-r">-->
+                        <!--<a href="javascript:void(0);" tab="userManage">用户管理</a><img-->
+                            <!--src="/alink-hq/static/img/top-triangle.png" alt="" class="p-a">-->
+                    <!--</div>-->
+                    <!--<ul class="">-->
+                        <!--<li tab="useList">用户列表</li>-->
+                        <!--<li tab="createAccount">创建账号</li>-->
+                    <!--</ul>-->
+                <!--</li>-->
+                <!--<li class="one-list">-->
+                    <!--<a href="javascript:void(0);" tab="account">我的账户</a>-->
+                <!--</li>-->
+            <!--</ul>-->
+        <!--</div>-->
         <div class="main-right">
 
         </div>
@@ -167,27 +168,8 @@
         </div>
     </div>
     <div class="hide-iframe "></div>
-    <div id="preload-anim" >
-        <!-- <div style="margin: 20px auto; text-align: center; margin-bottom: 0px;">
-          <a href="http://www.100sucai.com/" target="_blank"><img src="100sucai.png" alt=""></a>
-        </div> -->
-        <div id="circularG">
-          <div id="circularG_1" class="circularG"></div>
-          <div id="circularG_2" class="circularG"></div>
-          <div id="circularG_3" class="circularG"></div>
-          <div id="circularG_4" class="circularG"></div>
-          <div id="circularG_5" class="circularG"></div>
-          <div id="circularG_6" class="circularG"></div>
-          <div id="circularG_7" class="circularG"></div>
-          <div id="circularG_8" class="circularG"></div>
-        </div>
-        <p  class="title"></p>
-      </div>
     <script src="/alink-hq/static/js/jquery.min.js"></script>
     <script>
-//        <li class="one-list">
-//                <a href="javascript:void(0);" tab="account">我的账户</a>
-//                </li>
         $(function () {
             var iframe = `<iframe name="projectManage" id="projectManage" src="/alink-hq/projectList" style="z-index:1000;" frameborder="0" align="left" width="100%"  height="1000px;"  scrolling="no">
                         </iframe>`;
@@ -195,10 +177,20 @@
             //项目详情
             $('.one-list li,.one-list a').click(function () {
                 var tab = $(this).attr('tab');
-                if (tab=="myAccount/myAccount"){
-                    var iframe = `<iframe name="${tab}" id="${tab}" src="/alink-hq/${tab}?account=tpad1d12" style="z-index:1000;" frameborder="0" align="left" width="100%"  height="1000px;"  scrolling="no"></iframe>`;
-                }else {
-                    var iframe = `<iframe name="${tab}" id="${tab}" src="/alink-hq/${tab}" style="z-index:1000;" frameborder="0" align="left" width="100%"  height="1000px;"  scrolling="no"></iframe>`;
+                var tagName = $(this).prop('tagName');
+                if (tagName == 'A') {
+                    if (tab == 'projectManage') {
+                        var iframe = `<iframe name="${tab}" id="${tab}" src="/alink-hq/projectList" style="z-index:1000;" frameborder="0" align="left" width="100%"  height="1000px;"  scrolling="no">
+                        </iframe>`;
+                    } else {
+                        var iframe = `<iframe name="${tab}" id="${tab}" src="/alink-hq/${tab}" style="z-index:1000;" frameborder="0" align="left" width="100%"  height="1000px;"  scrolling="no">
+                </iframe>`;
+                    }
+
+                } else if (tagName == 'LI') {
+                    var prevTag = $(this).parent().parent().find('a').attr('tab');
+                    var iframe = `<iframe name="${tab}" id="${tab}" src="/alink-hq/${tab}" style="z-index:1000;" frameborder="0" align="left" width="100%"  height="1000px;"  scrolling="no">
+                </iframe>`;
                 }
                 $('.main-right').children().remove();
                 $('.main-right').append(iframe);
@@ -208,13 +200,6 @@
         function goIframe(fileName, url) {
             var iframe = `<iframe name="${url}" id="${url}" src="http://localhost:8080/alink-hq/${url}" frameborder="0" align="left" width="100%"  height="1000px;"  scrolling="no">
                </iframe>`;
-            $('.main-right').children().remove();
-            $('.main-right').append(iframe);
-        }
-
-        function goAccountIframe(fileName, url,account) {
-            var iframe = `<iframe name="${url}" id="${url}" src="http://localhost:8080/alink-hq/${url}?account=${account}" frameborder="0" align="left" width="100%"  height="1000px;"  scrolling="no">
-                       </iframe>`;
             $('.main-right').children().remove();
             $('.main-right').append(iframe);
         }
@@ -274,16 +259,6 @@
             $(this).parents('.pop-iframe').removeClass('active');
             // 其他逻辑代码
         })
-
-        //显示loding
-        function loding(title,content){
-            $('#preload-anim').addClass('active');
-            $('#preload-anim .title').text(title+content+'成功！');
-            setTimeout(function(){
-                $('#preload-anim').removeClass('active');
-                $('#preload-anim .title').text('');
-            },2000)
-        }
     </script>
 </body>
 
