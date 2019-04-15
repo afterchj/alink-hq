@@ -167,46 +167,40 @@
         </div>
     </div>
     <div class="hide-iframe "></div>
-    <div id="preload-anim" >
+    <div id="preload-anim">
         <!-- <div style="margin: 20px auto; text-align: center; margin-bottom: 0px;">
           <a href="http://www.100sucai.com/" target="_blank"><img src="100sucai.png" alt=""></a>
         </div> -->
         <div id="circularG">
-          <div id="circularG_1" class="circularG"></div>
-          <div id="circularG_2" class="circularG"></div>
-          <div id="circularG_3" class="circularG"></div>
-          <div id="circularG_4" class="circularG"></div>
-          <div id="circularG_5" class="circularG"></div>
-          <div id="circularG_6" class="circularG"></div>
-          <div id="circularG_7" class="circularG"></div>
-          <div id="circularG_8" class="circularG"></div>
+            <div id="circularG_1" class="circularG"></div>
+            <div id="circularG_2" class="circularG"></div>
+            <div id="circularG_3" class="circularG"></div>
+            <div id="circularG_4" class="circularG"></div>
+            <div id="circularG_5" class="circularG"></div>
+            <div id="circularG_6" class="circularG"></div>
+            <div id="circularG_7" class="circularG"></div>
+            <div id="circularG_8" class="circularG"></div>
         </div>
-        <p  class="title"></p>
-      </div>
+        <p class="title"></p>
+    </div>
     <script src="/alink-hq/static/js/jquery.min.js"></script>
     <script>
+        // $(function () {
+        //     var iframe = `<iframe name="welcome" id="welcome" src="/alink-hq/welcome" style="z-index:1000;" frameborder="0" align="left" width="100%"  height="1500px;"  scrolling="no">
+        //                 </iframe>`;
+        //     $('.main-right').children().remove();
+        //     $('.main-right').append(iframe);
+        // })
+
         $(function () {
-            var iframe = `<iframe name="projectManage" id="projectManage" src="/alink-hq/projectList" style="z-index:1000;" frameborder="0" align="left" width="100%"  height="1000px;"  scrolling="no">
+            var iframe = `<iframe name="welcome" id="welcome" src="/alink-hq/welcome" style="z-index:1000;" frameborder="0" align="left" width="100%"  height="1500px;"  scrolling="no">
                         </iframe>`;
             $('.main-right').append(iframe);
             //项目详情
             $('.one-list li,.one-list a').click(function () {
                 var tab = $(this).attr('tab');
-                var tagName = $(this).prop('tagName');
-                if (tagName == 'A') {
-                    if (tab == 'projectManage') {
-                        var iframe = `<iframe name="${tab}" id="${tab}" src="/alink-hq/projectList" style="z-index:1000;" frameborder="0" align="left" width="100%"  height="1000px;"  scrolling="no">
-                        </iframe>`;
-                    } else {
-                        var iframe = `<iframe name="${tab}" id="${tab}" src="/alink-hq/${tab}" style="z-index:1000;" frameborder="0" align="left" width="100%"  height="1000px;"  scrolling="no">
-                </iframe>`;
-                    }
-
-                } else if (tagName == 'LI') {
-                    var prevTag = $(this).parent().parent().find('a').attr('tab');
-                    var iframe = `<iframe name="${tab}" id="${tab}" src="/alink-hq/${tab}" style="z-index:1000;" frameborder="0" align="left" width="100%"  height="1000px;"  scrolling="no">
-                </iframe>`;
-                }
+                var iframe = `<iframe name="${tab}" id="${tab}" src="/alink-hq/${tab}" style="z-index:1000;" frameborder="0" align="left" width="100%"  height="1500px;"  scrolling="no">
+                // </iframe>`;
                 $('.main-right').children().remove();
                 $('.main-right').append(iframe);
             })
@@ -259,7 +253,7 @@
             var height = $('.c-list').height();
             console.log(height);
             if (height >= 100) {
-                $('.c-list .c-width.two').css('width', '147px');
+                $('.c-list .c-width.two').css('width', '146px');
             }
         }
 
@@ -276,13 +270,13 @@
         })
 
         //显示loding
-        function loding(title,content){
+        function loding(title, content) {
             $('#preload-anim').addClass('active');
-            $('#preload-anim .title').text(title+content+'成功！');
-            setTimeout(function(){
+            $('#preload-anim .title').text(title + content + '成功！');
+            setTimeout(function () {
                 $('#preload-anim').removeClass('active');
                 $('#preload-anim .title').text('');
-            },3000)        
+            }, 3000)
         }
     </script>
 </body>

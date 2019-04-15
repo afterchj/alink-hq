@@ -43,11 +43,12 @@
                                     <input type="password" placeholder="请输入密码" name="pwd" id="pwd" class="p-l-password-val"
                                            maxlength="16"/>
                                 </div>
-                                <!--<p class="page-hint" style="height: 40px;"></p>-->
-                                <p class="page-hint" th:if="${errMsg!=null}"  style="height: 40px;">
+                                <p class="page-hint" style="height: 40px;"></p>
+                                <!-- <p class="page-hint" th:if="${errMsg!=null}"  style="height: 40px;">
                                     <span style="font-weight: bold;color: red" th:text="${errMsg}"></span>
-                                </p>
-                                <button type="button" onclick="validate()">登录</button>
+                                </p> -->
+                                <!-- <button type="button" onclick="validate()">登录</button> -->
+                                <button type="button" class="password-login-btn"  onclick="passwordLogin()">登录</button>
                                 <div class="clearfix hint">
                                     <span class="f-l forget-password">忘记密码？</span>
                                     <span class="f-r">注册请联系我们</span>
@@ -70,7 +71,7 @@
                                 </div>
                                 <p class="page-hint" style="height: 40px;"></p>
                                 <!--<div class="errMsg"></div>-->
-                                <button type="button" onclick="validate()">登录</button>
+                                <button  onclick="phoneLogin()">登录</button>
                                 <!--<input type="button" onclick="validate()" value="登录"/>-->
                                 <div class="clearfix hint">
                                     <span class="f-l forget-password">忘记密码？</span>
@@ -95,7 +96,7 @@
                             <input type="password" name="pwd" id="pwd1" placeholder="请输入新密码（6-16位数字、字母）"
                                    style="text-indent: 15px;"/>
                             <p class="page-hint" style="height: 17px;"></p>
-                            <button onclick="modifyPwd()">修改密码</button>
+                            <button onclick="">修改密码</button>
                             <div class="clearfix hint">
                                 <span class="f-r go-login">已有账号，请点击这里登录</span>
                             </div>
@@ -118,7 +119,7 @@
                             <input type="password" name="pwd" id="pwd2" placeholder="请输入新密码（6-16位数字、字母）"
                                    style="text-indent: 15px;"/>
                             <p class="page-hint" style="height: 17px;"></p>
-                            <button onclick="modifyPwd()">修改密码</button>
+                            <button onclick="">修改密码</button>
                             <div class="clearfix hint">
                                 <span class="f-r go-login">已有账号，请点击这里登录</span>
                             </div>

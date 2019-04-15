@@ -51,6 +51,11 @@ public class HomeController {
         return "index";
     }
 
+    @RequestMapping("/welcome")
+    public String welcome() {
+        return "welcome";
+    }
+
     @RequestMapping("/useList")
     public String useList() {
         return "userManage/useList";
