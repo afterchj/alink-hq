@@ -88,7 +88,7 @@ $(function () {
 
     //为表单元素添加失去焦点事件
     $(".login-in-box-tab-content :input").blur(function () {
-        $("div.errMsg").html("");
+        // $("div.errMsg").html("");
         //检测账号格式是否正确
         if ($(this).is("#uname")) {
             var accountVal = $.trim(this.value); //原生js去空格方式：this.replace(/(^\s*)|(\s*$)/g, "")

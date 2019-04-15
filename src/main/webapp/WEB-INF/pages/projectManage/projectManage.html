@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="/alink-hq/static/css/base.css" />
     <link rel="stylesheet" href="/alink-hq/static/css/leftNav.css" />
     <link rel="stylesheet" href="/alink-hq/static/css/projectManage.css" />
+    <link rel="stylesheet" href="/alink-hq/static/css/loding.css" />
     <title>项目管理</title>
 </head>
 
@@ -166,6 +167,22 @@
         </div>
     </div>
     <div class="hide-iframe "></div>
+    <div id="preload-anim" >
+        <!-- <div style="margin: 20px auto; text-align: center; margin-bottom: 0px;">
+          <a href="http://www.100sucai.com/" target="_blank"><img src="100sucai.png" alt=""></a>
+        </div> -->
+        <div id="circularG">
+          <div id="circularG_1" class="circularG"></div>
+          <div id="circularG_2" class="circularG"></div>
+          <div id="circularG_3" class="circularG"></div>
+          <div id="circularG_4" class="circularG"></div>
+          <div id="circularG_5" class="circularG"></div>
+          <div id="circularG_6" class="circularG"></div>
+          <div id="circularG_7" class="circularG"></div>
+          <div id="circularG_8" class="circularG"></div>
+        </div>
+        <p  class="title"></p>
+      </div>
     <script src="/alink-hq/static/js/jquery.min.js"></script>
     <script>
         $(function () {
@@ -257,6 +274,17 @@
             $(this).parents('.pop-iframe').removeClass('active');
             // 其他逻辑代码
         })
+
+
+        //显示loding
+        function loding(title,content){
+            $('#preload-anim').addClass('active');
+            $('#preload-anim .title').text(title+content+'成功！');
+            setTimeout(function(){
+                $('#preload-anim').removeClass('active');
+                $('#preload-anim .title').text('');
+            },3000)        
+        }
     </script>
 </body>
 
