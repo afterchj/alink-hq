@@ -31,20 +31,6 @@ public class MyAccountController {
     private ValidationService validationService;
 
     /**
-     * 展示我的账号信息
-     * @param account
-     * @param model
-     * @return
-     */
-    @RequestMapping(value = "/myAccount", method = RequestMethod.GET)
-//    @ResponseBody
-    public String myAccount(String account, Model model) {
-        MyAccount myAccount = myAccountService.getAllByAccount(account);
-        model.addAttribute("myAccount", myAccount);
-        return "myAccount/myAccount";
-    }
-
-    /**
      * 修改密码
      * @param account 账号
      * @param newPwd  新密码
@@ -175,10 +161,35 @@ public class MyAccountController {
         }
     }
 
-
+    /**
+     * 展示我的账号信息
+     * 跳转到account.html
+     * @param account
+     * @param model
+     * @return
+     */
+    @RequestMapping(value = "/myAccount", method = RequestMethod.GET)
+//    @ResponseBody
+    public String myAccount(String account, Model model) {
+        MyAccount myAccount = myAccountService.getAllByAccount(account);
+        model.addAttribute("myAccount", myAccount);
+        return "account/account";
+    }
 
     /**
-     * 跳转fillUname.jsp
+     * 跳转changePassword.html
+     * @param account
+     * @param model
+     * @return
+     */
+    @RequestMapping(value = "/pwd", method = RequestMethod.GET)
+    public String pwd(String account, Model model) {
+        model.addAttribute("account", account);
+        return "account/changePassword";
+    }
+
+    /**
+     * 跳转fillUsername.html
      * @param account
      * @param model
      * @return
@@ -187,39 +198,11 @@ public class MyAccountController {
     public String fillUname(String account,String flag,Model model){
         model.addAttribute("account", account);
         model.addAttribute("flag", flag);
-        return "myAccount/fillUname";
+        return "account/fillUsername";
     }
 
     /**
-     * 跳转fillMobile.jsp
-     * @param account
-     * @param flag
-     * @param model
-     * @return
-     */
-    @RequestMapping(value = "/fillMobile", method = RequestMethod.GET)
-    public String fillMobile(String account,String flag,Model model){
-        model.addAttribute("account", account);
-        model.addAttribute("flag", flag);
-        return "myAccount/fillMobile";
-    }
-
-    /**
-     * 跳转fillEmail.jsp
-     * @param account
-     * @param flag
-     * @param model
-     * @return
-     */
-    @RequestMapping(value = "/fillEmail", method = RequestMethod.GET)
-    public String fillEmail(String account,String flag,Model model){
-        model.addAttribute("account", account);
-        model.addAttribute("flag", flag);
-        return "myAccount/fillEmail";
-    }
-
-    /**
-     * 跳转modifiUname.jsp
+     * 跳转modifiUname.html
      * @param account
      * @param model
      * @return
@@ -229,23 +212,25 @@ public class MyAccountController {
         model.addAttribute("account", account);
         model.addAttribute("uname", uname);
         model.addAttribute("flag", flag);
-        return "myAccount/modifiUname";
-    }
-    /**
-     * 跳转modifiEmail.jsp
-     * @param account
-     * @param model
-     * @return
-     */
-    @RequestMapping(value = "/modifiEmail", method = RequestMethod.GET)
-    public String modifiEmail(String account, String flag,Model model){
-        model.addAttribute("account", account);
-        model.addAttribute("flag", flag);
-        return "myAccount/modifiEmail";
+        return "account/modifiUname";
     }
 
     /**
-     * 跳转modifiMobile.jsp
+     * 跳转bindPhone.html
+     * @param account
+     * @param flag
+     * @param model
+     * @return
+     */
+    @RequestMapping(value = "/fillMobile", method = RequestMethod.GET)
+    public String fillMobile(String account,String flag,Model model){
+        model.addAttribute("account", account);
+        model.addAttribute("flag", flag);
+        return "account/bindPhone";
+    }
+
+    /**
+     * 跳转modifiMobile.html
      * @param account
      * @param model
      * @return
@@ -254,18 +239,32 @@ public class MyAccountController {
     public String modifiMobile(String account, String flag,Model model){
         model.addAttribute("account", account);
         model.addAttribute("flag", flag);
-        return "myAccount/modifiMobile";
+        return "account/modifiMobile";
     }
     /**
-     * 跳转changePassword.jsp
+     * 跳转bindEmail.html
+     * @param account
+     * @param flag
+     * @param model
+     * @return
+     */
+    @RequestMapping(value = "/fillEmail", method = RequestMethod.GET)
+    public String fillEmail(String account,String flag,Model model){
+        model.addAttribute("account", account);
+        model.addAttribute("flag", flag);
+        return "account/bindEmail";
+    }
+
+    /**
+     * 跳转modifiEmail.html
      * @param account
      * @param model
      * @return
      */
-    @RequestMapping(value = "/pwd", method = RequestMethod.GET)
-    public String pwd(String account, Model model) {
+    @RequestMapping(value = "/modifiEmail", method = RequestMethod.GET)
+    public String modifiEmail(String account, String flag,Model model){
         model.addAttribute("account", account);
-        return "myAccount/changePassword";
+        model.addAttribute("flag", flag);
+        return "account/modifiEmail";
     }
-
 }

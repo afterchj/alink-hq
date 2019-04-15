@@ -11,23 +11,21 @@
 <input id="add" type="button" value="添加">
 <script>
 $("#add").bind("click", function() {
-    $.MsgBox.Alert("消息", "哈哈，添加成功！");
+    $.MsgBox.Alert( "添加成功");
 });
 
 (function() {
     $.MsgBox = {
-        Alert: function(title, msg) {
-            GenerateHtml("alert", title, msg);
-            btnOk(); //alert只是弹出消息，因此没必要用到回调函数callback
-            btnNo();
+        Alert: function( msg) {
+            GenerateHtml( msg);
         }
     }
     //生成Html
-    var GenerateHtml = function(type, title, msg) {
+    var GenerateHtml = function( msg) {
         var _html = "";
-        _html += '<div id="mb_box"></div><div id="mb_con"><span id="mb_tit">' + title + '</span>';
-        _html += '<a id="mb_ico">x</a><div id="mb_msg">' + msg + '</div><div id="mb_btnbox">';
-        _html += '</div></div>';
+        _html += '<div id="mb_box"></div><div id="mb_con">' + msg + '</div>';
+//        _html += '<div id="mb_msg">' + msg + '</div>';
+//        _html += '</div>';
         //必须先将_html添加到body，再设置Css样式
         $("body").append(_html);
         //生成Css
@@ -50,6 +48,7 @@ $("#add").bind("click", function() {
         $("#mb_con").css({
             zIndex: '999999',
             width: '400px',
+            height:'400px',
             position: 'fixed',
             backgroundColor: 'White',
             borderRadius: '15px'
@@ -109,21 +108,6 @@ $("#add").bind("click", function() {
         $("#mb_con").css({
             top: (_height - boxHeight) / 2 + "px",
             left: (_widht - boxWidth) / 2 + "px"
-        });
-    }
-    //确定按钮事件
-    var btnOk = function(callback) {
-        $("#mb_btn_ok").click(function() {
-            $("#mb_box,#mb_con").remove();
-            if (typeof(callback) == 'function') {
-                callback();
-            }
-        });
-    }
-    //取消按钮事件
-    var btnNo = function() {
-        $("#mb_btn_no,#mb_ico").click(function() {
-            $("#mb_box,#mb_con").remove();
         });
     }
 })();
