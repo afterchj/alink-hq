@@ -3,9 +3,10 @@
 
 <head>
     <meta charset="UTF-8" />
-    <link rel="stylesheet" href="../css/base.css" />
-    <link rel="stylesheet" href="../css/leftNav.css" />
-    <link rel="stylesheet" href="../css/projectManage.css" />
+    <link rel="stylesheet" href="/alink-hq/static/css/base.css" />
+    <link rel="stylesheet" href="/alink-hq/static/css/leftNav.css" />
+    <link rel="stylesheet" href="/alink-hq/static/css/projectManage.css" />
+    <link rel="stylesheet" href="/alink-hq/static/css/loding.css" />
     <title>项目管理</title>
 </head>
 
@@ -16,13 +17,13 @@
         </div>
         <div class="f-r ad-nav">
             <span class="nav-img">
-                <img src="../img/off-unclick .png" alt="" />
+                <img src="/alink-hq/static/img/off-unclick .png" alt="" />
             </span>
             <span>退出</span>
         </div>
         <div class="f-r ad-nav">
             <span class="nav-img">
-                <img src="../img/admin.png" alt="" />
+                <img src="/alink-hq/static/img/admin.png" alt="" />
             </span>
             <span>admin</span>
         </div>
@@ -32,8 +33,8 @@
             <ul>
                 <li class="one-list">
                     <div class="p-r">
-                        <a href="javascript:void(0);" tab="projectManage">项目管理</a><img src="../img/bottom-triangle.png"
-                            alt="" class="p-a">
+                        <a href="javascript:void(0);" tab="projectManage">项目管理</a><img
+                            src="/alink-hq/static/img/bottom-triangle.png" alt="" class="p-a">
                     </div>
                     <ul>
                         <li tab="projectList">项目列表</li>
@@ -42,11 +43,11 @@
                 </li>
                 <li class="one-list">
                     <div class="p-r">
-                        <a href="javascript:void(0);" tab="userManage">用户管理</a><img src="../img/top-triangle.png" alt=""
-                            class="p-a">
+                        <a href="javascript:void(0);" tab="userManage">用户管理</a><img
+                            src="/alink-hq/static/img/top-triangle.png" alt="" class="p-a">
                     </div>
                     <ul class="">
-                        <li>用户列表</li>
+                        <li tab="useList">用户列表</li>
                         <li tab="createAccount">创建账号</li>
                     </ul>
                 </li>
@@ -60,32 +61,32 @@
         </div>
         <!-- 确定到处弹框 -->
 
-        <div class="confirm-create-iframe ">
-            <div class="create-nav p-r">
+        <div class="confirm-create-iframe  pop-iframe" openContent="confirm-create">
+            <div class="create-nav p-r pop-nav">
                 导出账号
-                <img src="../img/close.png" alt="" class="p-a pointer close">
+                <img src="/alink-hq/static/img/close.png" alt="" class="p-a pointer close">
             </div>
-            <div class="create-content">
+            <div class="create-content pop-content">
                 <div class="c-main">
                     <div class="c-title ">
                         <div class="clearfix">
-                                <div class="f-l c-width one">账号</div>
-                                <div class="f-l c-width two">密码</div>
+                            <div class="f-l c-width one">账号</div>
+                            <div class="f-l c-width two">密码</div>
                         </div>
 
                     </div>
                     <div class="c-list clearfix">
-                        <div class="clearfix">              
-                                <div class="f-l c-width one">BN001</div>
-                                <div class="f-l c-width two">123456</div>
+                        <div class="clearfix">
+                            <div class="f-l c-width one">BN001</div>
+                            <div class="f-l c-width two">123456</div>
                         </div>
-                        <div class="clearfix">              
-                                <div class="f-l c-width one">BN001</div>
-                                <div class="f-l c-width two">123456</div>
+                        <div class="clearfix">
+                            <div class="f-l c-width one">BN001</div>
+                            <div class="f-l c-width two">123456</div>
                         </div>
-                        <div class="clearfix">              
-                                <div class="f-l c-width one">BN001</div>
-                                <div class="f-l c-width two">123456</div>
+                        <div class="clearfix">
+                            <div class="f-l c-width one">BN001</div>
+                            <div class="f-l c-width two">123456</div>
                         </div>
                     </div>
                 </div>
@@ -96,55 +97,114 @@
     </div>
 
     <!--重置密码 -->
-    <div class="gray-confirm-reset-passwords ">
-        <div class="reset-passwords">
-            <div class="reset-passwords-nav p-r">
-                重置密码
 
-            </div>
-            <div class="reset-passwords-content">
-                <form action="">
-                    <div class="title">账号：BM000</div>
-                    <div>
-                        <label for="">新密码</label>
-                        <input type="password">
-                    </div>
-                    <div>
-                        <label for="">确认密码</label>
-                        <input type="password">
-                    </div>
-                    <div>
-                        <button>取消</button>
-                        <button>确定</button>
-                    </div>
-                </form>
-            </div>
+    <div class="reset-passwords pop-iframe" openContent="">
+        <div class="reset-passwords-nav p-r pop-nav">
+            重置密码
 
+        </div>
+        <div class="reset-passwords-content pop-content">
+            <form action="">
+                <div class="title">账号：BM000</div>
+                <div>
+                    <label for="">新密码</label>
+                    <input type="password">
+                </div>
+                <div>
+                    <label for="">确认密码</label>
+                    <input type="password">
+                </div>
+                <div class="pop-btn">
+                    <button class="reduce">取消</button>
+                    <button class="yes">确定</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- 确定启用禁用弹出框 -->
+    <div class="confirm-on-off pop-iframe " openContent="start-use">
+        <div class="confirm-on-off-nav p-r pop-nav">
+            温馨提示
+        </div>
+        <div class="pop-content">
+            <div class="off-or-on"></div>
+            <!-- <div class="reset-pwd-hint">（重置后将无法重置，请慎重！）</div> -->
+            <div class="pop-btn">
+                <button class="reduce">取消</button>
+                <button class="yes">确定</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 确定重置密码 -->
+    <div class="confirm-on-off pop-iframe " openContent="reset-pwd">
+        <div class="confirm-on-off-nav p-r pop-nav">
+            温馨提示
+        </div>
+        <div class="pop-content">
+            <div class="reset-pwd">您确定要重置该账号密码吗？</div>
+            <div class="reset-pwd-hint">（重置后将无法重置，请慎重！）</div>
+            <div class="pop-btn">
+                <button class="reduce">取消</button>
+                <button class="yes">确定</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 删除账户 -->
+    <div class="pop-iframe" openContent="delete-account">
+        <div class=" p-r pop-nav">
+            温馨提示
+        </div>
+        <div class="pop-content">
+            <div class="reset-pwd">您确定要删除该账号信息吗？</div>
+            <div class="reset-pwd-hint">（删除后将无法恢复，请慎重！）</div>
+            <div class="pop-btn">
+                <button class="reduce">取消</button>
+                <button class="yes">确定</button>
+            </div>
         </div>
     </div>
     <div class="hide-iframe "></div>
-    <script src="../js/jquery.min.js"></script>
+    <div id="preload-anim" >
+        <!-- <div style="margin: 20px auto; text-align: center; margin-bottom: 0px;">
+          <a href="http://www.100sucai.com/" target="_blank"><img src="100sucai.png" alt=""></a>
+        </div> -->
+        <div id="circularG">
+          <div id="circularG_1" class="circularG"></div>
+          <div id="circularG_2" class="circularG"></div>
+          <div id="circularG_3" class="circularG"></div>
+          <div id="circularG_4" class="circularG"></div>
+          <div id="circularG_5" class="circularG"></div>
+          <div id="circularG_6" class="circularG"></div>
+          <div id="circularG_7" class="circularG"></div>
+          <div id="circularG_8" class="circularG"></div>
+        </div>
+        <p  class="title"></p>
+      </div>
+    <script src="/alink-hq/static/js/jquery.min.js"></script>
     <script>
         $(function () {
-            var iframe = `<iframe name="projectManage" id="projectManage" src="../projectManage/projectList.html" style="z-index:1000;" frameborder="0" align="left" width="100%"  height="1000px;"  scrolling="no">
+            var iframe = `<iframe name="projectManage" id="projectManage" src="/alink-hq/projectList" style="z-index:1000;" frameborder="0" align="left" width="100%"  height="1000px;"  scrolling="no">
                         </iframe>`;
-                        $('.main-right').append(iframe);
+            $('.main-right').append(iframe);
             //项目详情
             $('.one-list li,.one-list a').click(function () {
                 var tab = $(this).attr('tab');
                 var tagName = $(this).prop('tagName');
                 if (tagName == 'A') {
-                    if(tab=='projectManage'){
-                        var iframe = `<iframe name="${tab}" id="${tab}" src="../${tab}/projectList.html" style="z-index:1000;" frameborder="0" align="left" width="100%"  height="1000px;"  scrolling="no">
+                    if (tab == 'projectManage') {
+                        var iframe = `<iframe name="${tab}" id="${tab}" src="/alink-hq/projectList" style="z-index:1000;" frameborder="0" align="left" width="100%"  height="1000px;"  scrolling="no">
                         </iframe>`;
-                    }else{
-                        var iframe = `<iframe name="${tab}" id="${tab}" src="../${tab}/${tab}.html" style="z-index:1000;" frameborder="0" align="left" width="100%"  height="1000px;"  scrolling="no">
+                    } else {
+                        var iframe = `<iframe name="${tab}" id="${tab}" src="/alink-hq/${tab}" style="z-index:1000;" frameborder="0" align="left" width="100%"  height="1000px;"  scrolling="no">
                 </iframe>`;
                     }
-       
+
                 } else if (tagName == 'LI') {
                     var prevTag = $(this).parent().parent().find('a').attr('tab');
-                    var iframe = `<iframe name="${tab}" id="${tab}" src="../${prevTag}/${tab}.html" style="z-index:1000;" frameborder="0" align="left" width="100%"  height="1000px;"  scrolling="no">
+                    var iframe = `<iframe name="${tab}" id="${tab}" src="/alink-hq/${tab}" style="z-index:1000;" frameborder="0" align="left" width="100%"  height="1000px;"  scrolling="no">
                 </iframe>`;
                 }
                 $('.main-right').children().remove();
@@ -153,13 +213,13 @@
         })
 
         function goIframe(fileName, url) {
-            var iframe = `<iframe name="${url}" id="${url}" src="../${fileName}/${url}.html" frameborder="0" align="left" width="100%"  height="1000px;"  scrolling="no">
+            var iframe = `<iframe name="${url}" id="${url}" src="http://localhost:8080/alink-hq/${url}" frameborder="0" align="left" width="100%"  height="1000px;"  scrolling="no">
                </iframe>`;
             $('.main-right').children().remove();
             $('.main-right').append(iframe);
         }
 
-        function shade() {
+        function shade(open, text) {
             var width = window.screen.width;
             var height = window.screen.height;
             console.log(width, height);
@@ -168,7 +228,21 @@
                 'width': width,
                 'height': height
             });
-            $('.confirm-create-iframe').addClass('active');
+            $('.pop-iframe').each(function () {
+                var openContent = $(this).attr('openContent');
+                console.log(openContent, open);
+                if (openContent == open) {
+                    $(this).addClass('active');
+                    if (open == 'start-use') {
+                        console.log(text);
+                        if (text == '启用') {
+                            $('.off-or-on').text('您确定要禁用该账户吗？');
+                        } else {
+                            $('.off-or-on').text('您确定要启用该账户吗？');
+                        }
+                    }
+                }
+            })
         }
 
         function hide() {
@@ -180,12 +254,35 @@
             hide();
 
         })
-        function scroll(){
-            var height=$('.c-list').height();
+
+        function scroll() {
+            var height = $('.c-list').height();
             console.log(height);
-            if(height>=100){
-                $('.c-list .c-width.two').css('width','147px');
+            if (height >= 100) {
+                $('.c-list .c-width.two').css('width', '147px');
             }
+        }
+
+        // 点击取消时
+        $('.pop-content  .pop-btn .reduce').click(function () {
+            hide();
+            $(this).parents('.pop-iframe').removeClass('active');
+        })
+        // 点击确定时
+        $('.pop-content  .pop-btn .yes').click(function () {
+            hide();
+            $(this).parents('.pop-iframe').removeClass('active');
+            // 其他逻辑代码
+        })
+
+        //显示loding
+        function loding(title,content){
+            $('#preload-anim').addClass('active');
+            $('#preload-anim .title').text(title+content+'成功！');
+            setTimeout(function(){
+                $('#preload-anim').removeClass('active');
+                $('#preload-anim .title').text('');
+            },3000)        
         }
     </script>
 </body>

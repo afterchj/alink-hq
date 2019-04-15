@@ -51,6 +51,60 @@ public class HomeController {
         return "index";
     }
 
+    @RequestMapping("/useList")
+    public String useList() {
+        return "userManage/useList";
+    }
+
+    @RequestMapping("/projectList")
+    public String projectList() {
+        return "projectManage/projectList";
+    }
+
+    @RequestMapping("/createAccount")
+    public String createAccount() {
+        return "userManage/createAccount";
+    }
+
+    @RequestMapping("/changeEmail")
+    public String changeEmail() {
+        return "account/changeEmail";
+    }
+
+    @RequestMapping("/bindEmail")
+    public String bindEmail() {
+        return "account/bindEmail";
+    }
+
+    @RequestMapping("/bindPhone")
+    public String bindPhone() {
+        return "account/bindPhone";
+    }
+
+    @RequestMapping("/changePhone")
+    public String changePhone() {
+        return "account/changePhone";
+    }
+
+    @RequestMapping("/fillUsername")
+    public String fillUsername() {
+        return "account/fillUsername";
+    }
+
+    @RequestMapping("/changeUsername")
+    public String changeUsername() {
+        return "account/changeUsername";
+    }
+
+    @RequestMapping("/account")
+    public String account() {
+        return "account/account";
+    }
+    @RequestMapping("/changePassword")
+    public String changePassword() {
+        return "account/changePassword";
+    }
+
     @RequestMapping("/toLogin")
     public String toLogin() {
         return "index";
