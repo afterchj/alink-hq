@@ -6,11 +6,18 @@
 }
 
 .content {
-    right: 195px;
-    top: 193px;
+    right: 0;
+    top: 0;
 
 }
+.container{
+    width: 100%;
+    height: 850px;
+    background-color: #2984CC;
+    background-image: url(../img/background.png);
+    background-size: cover;
 
+}
 ::-webkit-input-placeholder { /*Webkit browsers*/
     color: #999;
     font-size: 19px;
@@ -30,7 +37,19 @@
     color: #999;
     font-size: 16px;
 }
-
+.login-max{
+    text-align: center;
+    padding: 100px 0 0 300px;
+    margin: auto;
+    height: 571px;
+    position: relative;
+}
+.login-in{
+    position: relative;
+    width: 1080px;
+    margin: auto;
+    position: relative;
+}
 .login-in-box {
     top: 21px;
     left: 22px;
@@ -65,7 +84,8 @@
     color: #005293;
 }
 
-.content .login-in-box-tab-content {
+.con-input{
+    text-align: left;
 }
 
 .content .login-in-box-tab-content input {
@@ -212,20 +232,20 @@ p.add-hint, p.password-hint, p.code-hint {
     text-align: left;
     display: none;
 }
-
-p.mobile-add-hint, p.mobile-password-hint, p.mobile-code-hint {
+p.mobile-add-hint, p.mobile-password-hint, p.mobile-code-hint{
     font-size: 17px;
     color: #fb2a2a;
     text-align: left;
+    display: none;
 }
-
-p.email-add-hint, p.email-password-hint, p.email-code-hint {
+p.email-add-hint, p.email-password-hint, p.email-code-hint{
     font-size: 17px;
     color: #fb2a2a;
     text-align: left;
+    display: none;
 }
 
-p.add-hint.active, p.password-hint.active, p.page-hint.active, p.code-hint.active {
+p.add-hint.active, p.password-hint.active, p.page-hint.active, p.code-hint.active,p.email-add-hint.active {
     display: block;
 }
 
@@ -233,24 +253,16 @@ p.page-hint {
     font-size: 17px;
     color: #fb2a2a;
     text-align: center;
-    /*height: 74px;*/
-    /*line-height: 74px;*/
-    margin: 20px auto;
+    height:30px;
+    line-height:30px;
     display: none;
-}
-
-div.page-hint {
-    font-size: 17px;
-    color: #fb2a2a;
-    text-align: center;
-    margin: 20px auto;
-}
-
-.dsp {
-    display: block;
 }
 
 .errMsg {
     margin-bottom: 10px;
     text-align: center;
+}
+.security-code.active{
+    background-color: #A0A0A0;
+    color: #fff;
 }
