@@ -97,7 +97,34 @@ public class AccountController {
             user.setSalt("0e9cc6f31100af96");
             accountService.createAccount(user, fid, roleId);
         }
+    }
 
+    @RequestMapping(value = "/resetPwd", method = RequestMethod.POST)
+    @ResponseBody
+    public void resetPwd(String account, Model model) {
+        String randomPwd = GenerateUtils.randomPwd();
+        accountService.updateAccount(account, randomPwd);
+    }
+
+
+    @RequestMapping(value = "/transfer", method = RequestMethod.POST)
+    @ResponseBody
+    public void transfer(String uid,Integer fid, Model model) {
+        String randomPwd = GenerateUtils.randomPwd();
+        accountService.transferAccount(uid,fid,randomPwd);
+    }
+
+
+    @RequestMapping(value = "/delete", method = RequestMethod.POST)
+    @ResponseBody
+    public void delete(String uid, Model model) {
+        accountService.delete(uid);
+    }
+
+    @RequestMapping(value = "/enable", method = RequestMethod.POST)
+    @ResponseBody
+    public void enable(String uid,Integer status, Model model) {
+        accountService.enable(uid,status);
     }
 
 
