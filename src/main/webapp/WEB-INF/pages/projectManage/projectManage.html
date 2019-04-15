@@ -52,7 +52,7 @@
                     </ul>
                 </li>
                 <li class="one-list">
-                    <a href="javascript:void(0);" tab="account">我的账户</a>
+                    <a href="javascript:void(0);" tab="myAccount/myAccount">我的账户</a>
                 </li>
             </ul>
         </div>
@@ -185,6 +185,9 @@
       </div>
     <script src="/alink-hq/static/js/jquery.min.js"></script>
     <script>
+//        <li class="one-list">
+//                <a href="javascript:void(0);" tab="account">我的账户</a>
+//                </li>
         $(function () {
             var iframe = `<iframe name="projectManage" id="projectManage" src="/alink-hq/projectList" style="z-index:1000;" frameborder="0" align="left" width="100%"  height="1000px;"  scrolling="no">
                         </iframe>`;
@@ -192,20 +195,10 @@
             //项目详情
             $('.one-list li,.one-list a').click(function () {
                 var tab = $(this).attr('tab');
-                var tagName = $(this).prop('tagName');
-                if (tagName == 'A') {
-                    if (tab == 'projectManage') {
-                        var iframe = `<iframe name="${tab}" id="${tab}" src="/alink-hq/projectList" style="z-index:1000;" frameborder="0" align="left" width="100%"  height="1000px;"  scrolling="no">
-                        </iframe>`;
-                    } else {
-                        var iframe = `<iframe name="${tab}" id="${tab}" src="/alink-hq/${tab}" style="z-index:1000;" frameborder="0" align="left" width="100%"  height="1000px;"  scrolling="no">
-                </iframe>`;
-                    }
-
-                } else if (tagName == 'LI') {
-                    var prevTag = $(this).parent().parent().find('a').attr('tab');
-                    var iframe = `<iframe name="${tab}" id="${tab}" src="/alink-hq/${tab}" style="z-index:1000;" frameborder="0" align="left" width="100%"  height="1000px;"  scrolling="no">
-                </iframe>`;
+                if (tab=="myAccount/myAccount"){
+                    var iframe = `<iframe name="${tab}" id="${tab}" src="/alink-hq/${tab}?account=tpad1d12" style="z-index:1000;" frameborder="0" align="left" width="100%"  height="1000px;"  scrolling="no"></iframe>`;
+                }else {
+                    var iframe = `<iframe name="${tab}" id="${tab}" src="/alink-hq/${tab}" style="z-index:1000;" frameborder="0" align="left" width="100%"  height="1000px;"  scrolling="no"></iframe>`;
                 }
                 $('.main-right').children().remove();
                 $('.main-right').append(iframe);
@@ -215,6 +208,13 @@
         function goIframe(fileName, url) {
             var iframe = `<iframe name="${url}" id="${url}" src="http://localhost:8080/alink-hq/${url}" frameborder="0" align="left" width="100%"  height="1000px;"  scrolling="no">
                </iframe>`;
+            $('.main-right').children().remove();
+            $('.main-right').append(iframe);
+        }
+
+        function goAccountIframe(fileName, url,account) {
+            var iframe = `<iframe name="${url}" id="${url}" src="http://localhost:8080/alink-hq/${url}?account=${account}" frameborder="0" align="left" width="100%"  height="1000px;"  scrolling="no">
+                       </iframe>`;
             $('.main-right').children().remove();
             $('.main-right').append(iframe);
         }
@@ -282,7 +282,7 @@
             setTimeout(function(){
                 $('#preload-anim').removeClass('active');
                 $('#preload-anim .title').text('');
-            },3000)        
+            },2000)
         }
     </script>
 </body>
