@@ -149,9 +149,6 @@ function passwordLogin() {
         if (pwdVal == '') {
             $('.password-login .add-hint').text('请输入账号/用户名/邮箱/手机号');
             $('.password-login .password-hint').text('请输入密码');
-        }else if(pwdResult){
-            $('.password-login .add-hint').text('请输入账号/用户名/邮箱/手机号');
-            $('.password-login .password-hint').text('');
         }else{
             $('.password-login .add-hint').text('请输入账号/用户名/邮箱/手机号');
             $('.password-login .password-hint').text('');
@@ -209,18 +206,15 @@ function passwordLogin() {
         }
     }else if(a.test(unameVal) || unameVal.length<=6){
         //想输入的是用户名
+        console.log('想输入的是用户名');
         if(!isBind){
-            $('.password-login .add-hint').text('登录名错误');
-            $('.password-login .password-hint').text('');
+            // $('.password-login .add-hint').text('登录名错误');
+            // $('.password-login .password-hint').text('');
             if (pwdVal == '') {
                 $('.password-login .add-hint').text('登录名错误');
                 $('.password-login .password-hint').text('请输入密码');
-            }else if(pwdResult){
-                $('.password-login .page-hint ').text('登录名密码不正确');
-                $('.password-login .add-hint').text('');
-                $('.password-login .password-hint').text('');
             }else{
-                $('.password-login .page-hint').text('登录名密码不正确');
+                $('.password-login .page-hint ').text('登录名密码不正确');
                 $('.password-login .add-hint').text('');
                 $('.password-login .password-hint').text('');
             }
