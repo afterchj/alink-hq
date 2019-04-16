@@ -27,8 +27,8 @@
         <if test="uid!=null">
             AND m.uid=#{uid}
         </if>
-        <if test="project_id!=null">
-            AND m.project_id=#{project_id}
+        <if test="pid!=null">
+            AND m.project_id=#{pid}
         </if>
     </select>
 
@@ -43,4 +43,7 @@
         WHERE 1=1
     </select>
 
+    <select id="getCountByTable" resultType="int" parameterType="string" statementType="STATEMENT">
+        select count(*) from ${_parameter}
+    </select>
 </mapper>

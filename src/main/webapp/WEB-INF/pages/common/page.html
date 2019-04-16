@@ -13,11 +13,11 @@
     <span>
         <img src="/alink-hq/static/img/left-arrow.png" alt="">
     </span>
-    <span>1</span>
+    <span>[[${page}]]</span>
     <span>
         <img src="/alink-hq/static/img/right-arrow-color.png" alt="">
     </span>
-    <span class="m-l-15 m-r-20">共<span>9</span>页</span>
+    <span class="m-l-15 m-r-20">共<span>[[${totalPage}]]</span>页</span>
     <span class="m-r-15">
         <input type="number">
     </span>
@@ -26,7 +26,7 @@
     </span>
     <span class="m-r-15r">每页显示：</span>
     <span class="m-r-20">
-        <select name="size" id="">
+        <select name="size" id="refresh">
             <option value="10">10</option>
             <option value="5">5</option>
         </select>
