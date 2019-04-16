@@ -3,17 +3,14 @@
 
 <head>
     <title>登录成功</title>
-    <link rel="stylesheet" th:href="@{/static/css/common.css}"/>
-    <script type="text/javascript" th:src="@{/static/js/jquery.min.js}"></script>
+    <link rel="stylesheet" href="/alink-hq/static/css/base.css" />
+    <link rel="stylesheet" href="/alink-hq/static/css/leftNav.css" />
+    <link rel="stylesheet" href="/alink-hq/static/css/projectManage.css" />
 </head>
 <body>
 <h1>登录成功</h1><br/>
-<p th:text="${session.user.uname}+'：'+${session.user.account}"></p>
-<div shiro:hasAnyRoles="super,admin,manager">
-    <li>
-        <a th:href="@{/userList}" class="glyphicon glyphicon-th-large"> 用户列表</a>
-    </li>
-</div>
+<div th:replace="common/head::head"></div>
+<div th:replace="common/left::left"></div>
 <div style="width: 80%;height:30%;margin: 0 auto">
     <table style="border-collapse: collapse">
         <!--<thead>-->

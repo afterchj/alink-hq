@@ -8,6 +8,7 @@ import com.tpadsz.after.realm.EasyTypeToken;
 import com.tpadsz.after.realm.ShiroDbRealm;
 import com.tpadsz.after.service.UserService;
 import com.tpadsz.after.service.ValidationService;
+import com.tpadsz.after.utils.Encryption;
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 import org.apache.shiro.SecurityUtils;
@@ -105,6 +106,7 @@ public class HomeController {
     public String account() {
         return "account/account";
     }
+
     @RequestMapping("/changePassword")
     public String changePassword() {
         return "account/changePassword";
@@ -146,16 +148,12 @@ public class HomeController {
 
     @ResponseBody
     @RequestMapping("/checkUser")
-    public String checkUser(User user) {
+    public String checkUser(String uname) {
+        logger.info("user:" + uname);
         String str;
         Map map = new HashMap();
-        String uname = user.getUname();
-        String mobile = user.getMobile();
         if (StringUtils.isNotEmpty(uname)) {
             map.put("uname", uname);
-        }
-        if (StringUtils.isNotEmpty(mobile)) {
-            map.put("mobile", mobile);
         }
         int count = userService.getCount(map);
         if (count > 0) {
@@ -228,7 +226,7 @@ public class HomeController {
             map.put("email", email);
         }
         logger.info("mobile=" + mobile + ",email=" + email + "pwd=" + pwd);
-        ShiroDbRealm.HashPassword hashPassword = new ShiroDbRealm().encrypt(pwd);
+        ShiroDbRealm.HashPassword hashPassword = new ShiroDbRealm().encrypt(Encryption.getMD5Str(pwd));
         System.out.println(hashPassword.password + "\t" + hashPassword.salt);
         map.put("pwd", hashPassword.password);
         map.put("salt", hashPassword.salt);
@@ -251,7 +249,7 @@ public class HomeController {
             userName = user.getMobile();
             token = new EasyTypeToken(userName);
         } else {
-            token = new EasyTypeToken(userName, pwd);
+            token = new EasyTypeToken(userName, Encryption.getMD5Str(pwd));
         }
         logger.info("userName=" + userName + ",pwd=" + pwd);
         Subject subject = SecurityUtils.getSubject();
@@ -275,7 +273,7 @@ public class HomeController {
         }
         User loginUser = userService.selectByUsername(userName);
         session.setAttribute("user", loginUser);
-        return "success";
+        return "projectManage/projectManage";
     }
 
     @RequestMapping("/userList")
@@ -299,9 +297,10 @@ public class HomeController {
      * @param session
      * @return
      */
-    @RequestMapping(value = "/user/logOut")
+    @RequestMapping(value = "logOut")
     public String logOut(HttpSession session) {
-        session.removeAttribute("loginUser");
+        logger.info("logOut...");
+        session.removeAttribute("user");
         return "redirect:/index";
     }
 }

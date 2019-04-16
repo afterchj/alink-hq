@@ -45,13 +45,7 @@
     <select id="getCount" parameterType="map" resultType="int">
         SELECT COUNT(1) FROM f_user_account WHERE 1=1
         <if test="uname != null">
-            AND uname=#{uname}
-        </if>
-        <if test="email != null">
-            AND email=#{email}
-        </if>
-        <if test="mobile != null">
-            AND mobile=#{mobile}
+            AND uname = #{uname}
         </if>
     </select>
     <delete id="deleteById" parameterType="string">

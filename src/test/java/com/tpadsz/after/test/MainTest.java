@@ -26,16 +26,17 @@ public class MainTest {
     @Test
     public void testSqlSessionTemplate() {
         Map map = new HashMap();
-//        map.put("uname", "管理员");
-        map.put("account", "admin");
+        map.put("uname", "test");
+//        map.put("account", "admin");
 //        map.put("mobile", "18170756879");
-        map.put("email", "after@tpadsz.com");
+//        map.put("email", "after@tpadsz.com");
         User user = new User();
         user.setMobile("18170756879");
 //        User user = getSqlSessionTemplate().selectOne("com.tpadsz.after.dao.UserExtendDao.selectByUsername", "超级管理员");
-        System.out.println("user:" + getSqlSessionTemplate().selectList("com.tpadsz.after.dao.UserExtendDao.getPermissions", "超级管理员"));
-        System.out.println("user=" + getSqlSessionTemplate().selectOne("com.tpadsz.after.dao.UserDao.selectByUsername", user).toString());
+//        System.out.println("user:" + getSqlSessionTemplate().selectList("com.tpadsz.after.dao.UserExtendDao.getPermissions", "超级管理员"));
+//        System.out.println("user=" + getSqlSessionTemplate().selectOne("com.tpadsz.after.dao.UserDao.selectByUsername", user).toString());
         System.out.println("count:" + getSqlSessionTemplate().selectOne("com.tpadsz.after.dao.UserDao.getCount", map));
+//        System.out.println("user:" + getSqlSessionTemplate().selectList("com.tpadsz.after.dao.MeshDao.getByMap", null).size());
     }
 
     @Test

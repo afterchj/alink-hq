@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.tpadsz.after.dao.AccountDao">
+
+    <select id="findRoleIdByUid" resultType="Integer" parameterType="string">
+        SELECT role_id FROM alink.f_user_role WHERE user_id=#{uid}
+    </select>
+
+    <select id="findFirmUid" resultType="string" parameterType="string">
+        SELECT uid FROM alink.f_user_customer WHERE fid=(SELECT fid FROM f_user_customer WHERE uid=#{uid})
+    </select>
+
+    <select id="findFirmUidOfUser" resultType="string" parameterType="string">
+        SELECT uid FROM alink.f_user_customer AS t1 INNER JOIN alink.f_user_role AS t4 ON t1.uid = t4.user_id WHERE t4.role_id = 4 and t1.fid=(SELECT fid FROM f_user_customer WHERE uid=#{uid})
+    </select>
+
+    <select id="findUserListBySuper" resultType="com.tpadsz.after.entity.UserList">
+        SELECT t1.id,t1.account,t1.uname,t1.mobile,t1.email,t3.coname,t4.role_id,DATE_FORMAT(t1.create_date,'%Y-%m-%d %H:%i:%s') AS create_date,t1.status FROM alink.f_user_account AS t1 INNER JOIN alink.f_user_customer AS t2 ON t1.id = t2.uid INNER JOIN alink.f_firm AS t3 ON t2.fid = t3.id INNER JOIN alink.f_user_role AS t4 ON t1.id = t4.user_id WHERE t4.role_id &lt;&gt;1 ORDER BY t1.create_date DESC
+    </select>
+
+    <select id="findUserListByAdmin" resultType="com.tpadsz.after.entity.UserList">
+        SELECT t1.id,t1.account,t1.uname,t1.mobile,t1.email,t3.coname,t4.role_id,DATE_FORMAT(t1.create_date,'%Y-%m-%d %H:%i:%s') AS create_date,t1.status FROM alink.f_user_account AS t1 INNER JOIN alink.f_user_customer AS t2 ON t1.id = t2.uid INNER JOIN alink.f_firm AS t3 ON t2.fid = t3.id INNER JOIN alink.f_user_role AS t4 ON t1.id = t4.user_id WHERE t4.role_id IN(3,4) ORDER BY t1.create_date DESC
+    </select>
+
+    <select id="findUserListByManager" resultType="com.tpadsz.after.entity.UserList">
+        SELECT t1.id,t1.account,t1.uname,t1.mobile,t1.email,t3.coname,t4.role_id,DATE_FORMAT(t1.create_date,'%Y-%m-%d %H:%i:%s') AS create_date,t1.status FROM (SELECT * FROM alink.f_user_account WHERE id IN
+        <foreach item="item" collection="list" open="(" separator="," close=")">#{item}
+        </foreach>) AS t1 INNER JOIN alink.f_user_customer AS t2 ON t1.id = t2.uid INNER JOIN alink.f_firm AS t3 ON t2.fid = t3.id ORDER BY t1.create_date DESC
+    </select>
+
+    <select id="findFirmList" resultType="com.tpadsz.after.entity.Firm">
+        SELECT id,coname FROM alink.f_firm ORDER BY id
+    </select>
+
+    <select id="findRoleList" resultType="com.tpadsz.after.entity.Role">
+        SELECT id,role_name AS roleName FROM alink.f_role ORDER BY id
+    </select>
+
+    <select id="searchBySuper" resultType="com.tpadsz.after.entity.UserList">
+        SELECT t1.id,t1.account,t1.uname,t1.mobile,t1.email,t3.coname,t4.role_id,DATE_FORMAT(t1.create_date,'%Y-%m-%d %H:%i:%s') AS create_date,t1.status FROM (SELECT * FROM alink.f_user_account WHERE account=IFNULL(NULLIF(#{account},''),account) and create_date BETWEEN IFNULL(NULLIF(#{startDate},''),create_date) and IFNULL(NULLIF(#{endDate},''),create_date)) AS t1 INNER JOIN alink.f_user_customer AS t2 ON t1.id = t2.uid INNER JOIN alink.f_firm AS t3 ON t2.fid = t3.id INNER JOIN alink.f_user_role AS t4 ON t1.id = t4.user_id WHERE t2.fid = IFNULL(NULLIF(#{fid},''),fid) and t4.role_id &lt;&gt;1 and t4.role_id = IFNULL(NULLIF(#{roleId},''),t4.role_id) ORDER BY t1.create_date DESC
+    </select>
+
+    <select id="searchByAdmin" resultType="com.tpadsz.after.entity.UserList">
+        SELECT t1.id,t1.account,t1.uname,t1.mobile,t1.email,t3.coname,t4.role_id,DATE_FORMAT(t1.create_date,'%Y-%m-%d %H:%i:%s') AS create_date,t1.status FROM (SELECT * FROM alink.f_user_account WHERE account=IFNULL(NULLIF(#{account},''),account) and create_date BETWEEN IFNULL(NULLIF(#{startDate},''),create_date) and IFNULL(NULLIF(#{endDate},''),create_date)) AS t1 INNER JOIN alink.f_user_customer AS t2 ON t1.id = t2.uid INNER JOIN alink.f_firm AS t3 ON t2.fid = t3.id INNER JOIN alink.f_user_role AS t4 ON t1.id = t4.user_id WHERE t2.fid = IFNULL(NULLIF(#{fid},''),fid) and t4.role_id IN(3,4) and t4.role_id = IFNULL(NULLIF(#{roleId},''),t4.role_id) ORDER BY t1.create_date DESC
+    </select>
+
+    <select id="searchByManager" resultType="com.tpadsz.after.entity.UserList">
+        SELECT t1.id,t1.account,t1.uname,t1.mobile,t1.email,t3.coname,t4.role_id,DATE_FORMAT(t1.create_date,'%Y-%m-%d %H:%i:%s') AS create_date,t1.status FROM (SELECT * FROM alink.f_user_account WHERE account=IFNULL(NULLIF(#{account},''),account) and create_date BETWEEN IFNULL(NULLIF(#{startDate},''),create_date) and IFNULL(NULLIF(#{endDate},''),create_date) and id IN
+        <foreach item="item" collection="list" open="(" separator="," close=")">#{item}
+        </foreach>) AS t1 INNER JOIN alink.f_user_customer AS t2 ON t1.id = t2.uid INNER JOIN alink.f_firm AS t3 ON t2.fid = t3.id ORDER BY t1.create_date DESC
+    </select>
+
+
+    <insert id="createAccount" parameterType="string">
+        insert into alink.f_user_account (account,pwd,salt,create_date) values (#{account},#{pwd},#{salt},NOW())
+        <selectKey keyProperty="id" order="AFTER" resultType="string">
+            select LAST_INSERT_ID()
+        </selectKey>
+    </insert>
+
+    <insert id="createFirmInfo" parameterType="integer">
+        insert into alink.f_user_customer (uid,fid,create_date) values (#{uid},#{fid},NOW())
+    </insert>
+
+    <insert id="createRoleInfo" parameterType="integer">
+        insert into alink.f_user_role (user_id,role_id) values (#{uid},#{roleId})
+    </insert>
+
+    <insert id="generateDefaultNetwork" parameterType="string" useGeneratedKeys="true" keyProperty="id">
+        <selectKey keyProperty="count" resultType="int" order="BEFORE">
+            select count(*) from alink.f_mesh where mesh_id = '11223344' and uid= #{uid}
+        </selectKey>
+        <if test="count==0">
+            INSERT INTO alink.f_mesh (mname,mesh_id,is_repeat,pwd,uid,project_id,create_date) VALUES('1122','11223344',#{uid},'3344',#{uid},0,NOW())
+        </if>
+    </insert>
+
+    <select id="findByAccount" resultType="com.tpadsz.after.entity.User">
+        SELECT * FROM alink.f_user_account WHERE account=#{account}
+    </select>
+
+</mapper>

@@ -3,20 +3,17 @@
 
 <head>
     <title>用户列表</title>
-    <link rel="stylesheet" th:href="@{/static/css/common.css}"/>
-    <script type="text/javascript" th:src="@{/static/js/jquery.min.js}"></script>
+    <link rel="stylesheet" href="/alink-hq/static/css/common.css"/>
+    <link rel="stylesheet" href="/alink-hq/static/css/base.css"/>
+    <link rel="stylesheet" href="/alink-hq/static/css/leftNav.css"/>
+    <link rel="stylesheet" href="/alink-hq/static/css/projectManage.css"/>
 </head>
 <body>
-<h1>用户列表</h1><br/>
-<div th:if="${session.user}!=null">
-    <p th:text="${session.user.uname}+'：'+${session.user.account}"></p>
-</div>
-<div shiro:hasAnyRoles="super,admin,manager">
-    <li>
-        <a th:href="@{/userList}" class="glyphicon glyphicon-th-large"> 用户列表</a>
-    </li>
-</div>
-<div style="width: 80%;height:30%;margin: 0 auto">
+<div th:replace="common/head::head"></div>
+<div th:replace="common/left::left"></div>
+<div class="main-right">
+    <h1>用户列表</h1>
+    <br>
     <table style="border-collapse: collapse">
         <!--<thead>-->
         <!--<th th:each="usesr : ${users}" th:text="${usesr.uname}"></th>-->
@@ -53,17 +50,20 @@
         </tr>
         <tr>
             <td colspan="6">
-                <ul>
-                    <li>
-                        <a th:href="@{/userList(page=${page-1})}">上一页</a>
-                    </li>
-                    <li>
-                        <span th:text="${page}"></span>
-                    </li>
-                    <li>
-                        <a th:href="@{/userList(page=${page+1},rows=10)}">下一页</a>
-                    </li>
-                </ul>
+                <div th:replace="common/page::page"></div>
+                <!--<div style="float: right;margin-top: 5px;">-->
+                    <!--<ul>-->
+                        <!--<li>-->
+                            <!--<a th:href="@{/userList(page=${page-1})}">上一页</a>-->
+                        <!--</li>-->
+                        <!--<li>-->
+                            <!--<span th:text="${page}"></span>-->
+                        <!--</li>-->
+                        <!--<li>-->
+                            <!--<a th:href="@{/userList(page=${page+1},rows=10)}">下一页</a>-->
+                        <!--</li>-->
+                    <!--</ul>-->
+                <!--</div>-->
             </td>
         </tr>
     </table>
