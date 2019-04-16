@@ -1,6 +1,6 @@
 $(function () {
     $(".login-in-box-tab>div:not('.icon-input')").click(function () {
-        // $("div.errMsg").html("");
+        $("div.errMsg").html("");
         $('p.add-hint').text('');
         $('p.page-hint').text('');
         $('p.password-hint').text('');
@@ -29,7 +29,6 @@ $(function () {
     });
     $(function(){
         $('.security-code').click(function(){
-
             $(this).addClass('active');
             settime(this);
         })
@@ -88,7 +87,7 @@ $(function () {
 
     //为表单元素添加失去焦点事件
     $(".login-in-box-tab-content :input").blur(function () {
-        $("div.errMsg").html("");
+        // $("div.errMsg").html("");
         //检测账号格式是否正确
         if ($(this).is("#uname")) {
             var accountVal = $.trim(this.value); //原生js去空格方式：this.replace(/(^\s*)|(\s*$)/g, "")
@@ -164,9 +163,9 @@ $(function () {
             if (emailVal == "") {
                 $('p.email-add-hint').addClass('active').text('邮箱不能为空！');
             } else if (!regEmail.test(emailVal)) {
-                $('p.email-add-hint').addClass('active').text('请输入正确的邮箱！');
+                $('p.email--add-hint').addClass('active').text('请输入正确的邮箱！');
             } else {
-                $('p.email-add-hint').removeClass('active').text('');
+                $('p.email--add-hint').removeClass('active').text('');
             }
         }
         if ($(this).is("#code2")) {
@@ -378,23 +377,23 @@ function pushCode(flag) {
 }
 
 function validate() {
-    $("p.page-hint").html("");
+    $("div.errMsg").html("");
     var uname = $("#uname").val();
     var pwd = $("#pwd").val();
     var phone = $("#phone").val();
     var code = $("#code").val();
+    var flag = validateCode(phone, code);
     if (uname != "" && pwd != "") {
         $("form:eq(0)").submit();
     } else {
-        var flag = validateCode(phone, code);
         console.log("uname=" + uname + ",pwd=" + pwd + ",phone=" + phone + ",code=" + code + ",flag=" + flag);
-        if (flag == "success" && phone != "") {
-            $("form:eq(1)").submit();
-        } else {
-            console.log("flag=" + flag);
-            $('div.page-hint').addClass('dsp').text('验证码不正确！');
-            // $("div.errMsg").html("<span style='font-weight: bold;color: red'>验证码不正确！</span>");
-        }
+    }
+    if (flag == "success" && phone != "") {
+        $("form:eq(1)").submit();
+    } else {
+        console.log("flag=" + flag);
+        $('p.page-hint').addClass('active').text('验证码不正确！');
+        // $("div.errMsg").html("<span style='font-weight: bold;color: red'>验证码不正确！</span>");
     }
 }
 /* 校验验证码 */
@@ -460,7 +459,7 @@ function modifyPwd() {
     if (flag) {
         if (result == "success") {
             $.ajax({
-                type: "POST",
+                type: "GET",
                 url: "/alink-hq/restPwd",
                 data: {
                     "mobile": mobile,
@@ -477,10 +476,10 @@ function modifyPwd() {
             })
         } else if (mobile != "") {
             // $("div.errMsg").html("<span style='font-weight: bold;color: red'>验证码不正确！</span>");
-            $('div.page-hint').addClass('dsp').text('验证码不正确！');
+            $('p.page-hint').addClass('active').text('验证码不正确！');
             $("#code1").focus();
         } else if (email != "") {
-            $('div.page-hint').addClass('dsp').text('验证码不正确！');
+            $('p.page-hint').addClass('active').text('验证码不正确！');
             $("#code2").focus();
         }
     }
@@ -495,26 +494,3 @@ function go() {
         location.href = "/alink-hq/userList";
     }
 }
-
-window.onbeforeunload = function () {
-    var uid = $("#uid").val();
-    var n = window.event.screenX - window.screenLeft;
-    var b = n > document.documentElement.scrollWidth - 20;
-    if (b && window.event.clientY < 0 || window.event.altKey) {
-        console.log("这是一个关闭操作而非刷新");
-        $.ajax({
-            type: "GET",
-            url: "/alink-hq/logOut",
-            data: {
-                "id": uid,
-            },
-            async: false,
-            success: function () {
-                console.log("uid=" + uid);
-            }
-        })
-    } else {
-        console.log("这是一个刷新操作而非关闭");
-        //此处放你想要操作的代
-    }
-};
