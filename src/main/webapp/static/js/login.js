@@ -39,9 +39,35 @@ $(function () {
     })
 })
 
-// $(function(){
-//     $("div[tab='password-login']").click();
-// })
+$(function(){
+    $('#pwd').click(function(){
+        var unameVal = $('#uname').val();
+        var p=/^[0-9]+$/;
+        var e = new RegExp("[@]");
+        //验证手机号是否正确
+        var regPhone = /^[1][3,4,5,7,8,9][0-9]{9}$/;
+        var phoneResult = regPhone.test(unameVal);
+        //验证邮箱
+        var regEmail = /^([a-zA-Z]|[0-9])(\w|\-)+@[a-zA-Z0-9]+\.([a-zA-Z]{2,4})$/;
+        var emailResult = regEmail.test(unameVal);
+        console.log(unameVal);
+        if(unameVal.length>6 && p.test(unameVal)){
+            if(!phoneResult){
+                $('.password-login .add-hint').text('请输入正确的手机号');
+                $('.password-login .password-hint').text('');
+            }else{
+                $('.password-login .add-hint').text('');
+            }
+        }else if(e.test(unameVal)){
+            if(!emailResult){
+                $('.password-login .add-hint').text('请输入正确的邮箱');
+                $('.password-login .password-hint').text('');
+            }else{
+                $('.password-login .add-hint').text('');
+            }
+        }
+    })
+})
 //倒计时
 $(function () {
     $('.security-code').click(function () {
@@ -215,6 +241,6 @@ function passwordLogin() {
     }
 }
 
-function phoneLogin() {
-    console.log('kk')
-}
+// function phoneLogin() {
+//     console.log('kk')
+// }
