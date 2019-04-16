@@ -40,23 +40,16 @@
                                 <input type="password" placeholder="请输入密码" name="pwd" id="pwd" class="p-l-password-val"
                                        maxlength="16"/>
                             </div>
-                            <!--<div class="errMsg" th:if="${errMsg!=null}">-->
-                                <!--<p class="page-hint" style="display: block" th:text="${errMsg}"></p>-->
-                            <!--</div>-->
-                            <!--<p class="page-hint"></p>-->
                             <div th:if="${errMsg!=null}">
                                 <p class="page-hint" style="height: 40px;"   th:text="${errMsg}"></p>
                             </div>
-                            <!--<p class="page-hint" style="height: 40px;"  th:if="${errMsg!=null}" th:text="登录名密码不正确" ></p>-->
-
                             <div class="btn-bottom">
                                 <button type="button" onclick="passwordLogin()">登录</button>
                                 <div class="clearfix hint">
                                     <span class="f-l forget-password">忘记密码？</span>
-                                    <span class="f-r">注册请联系我们</span>
+                                    <span class="f-r" onclick="contact()">注册请联系我们</span>
                                 </div>
                             </div>
-
                         </form>
                     </div>
                     <!--手机验证码登录-->
@@ -80,7 +73,7 @@
                             <button type="button" onclick="validate()">登录</button>
                             <div class="clearfix hint">
                                 <span class="f-l forget-password">忘记密码？</span>
-                                <span class="f-r">注册请联系我们</span>
+                                <span class="f-r" onclick="contact()">注册请联系我们</span>
                             </div>
                             </div>
                         </form>
@@ -188,6 +181,49 @@
         </div>
         <div class="filing">
             备案信息备案信息备案信息备案信息备案信息
+        </div>
+    </div>
+</div>
+<div id="shade-lay" ></div>
+<!-- 确定联系我们弹出框 -->
+<div class="contact pop-iframe " >
+    <div class="p-r pop-nav">
+        联系我们
+    </div>
+    <div class="pop-content clearfix">
+        <div class="f-l pop-l">
+            <div>
+                关注微信公众号
+            </div>
+            <div>（获取最新分享内容）</div>
+            <div><img src="./static/img/chat_qrcode.jpg" alt="" style="width: 120px;"></div>
+            <div>微信扫一扫关注或者</div>
+            <div>搜索关注：XXX</div>
+        </div>
+        <div class="f-r pop-r">
+            <div>
+                关注微信公众号
+            </div>
+            <div>（干活分享和技术交流）</div>
+            <div><img src="./static/img/chat_qrcode.jpg" alt="" style="width: 120px;"></div>
+            <div>微信扫一扫关注或者</div>
+            <div>搜索关注：XXX</div>
+        </div>
+    </div>
+</div>
+
+<!--登录超时，请重新尝试-->
+<div class="overtime pop-iframe " >
+    <div class="p-r pop-nav">
+        信息提示
+    </div>
+    <div class="pop-content clearfix">
+        <div class="p-r hint">
+            <img src="./static/img/over-time.png" alt="">
+            <span  class="p-a ">登录超时，请重新尝试</span>
+        </div>
+        <div class="p-r c-btn">
+            <button type="button" class="p-a" onclick="closeOverTime()">确定</button>
         </div>
     </div>
 </div>

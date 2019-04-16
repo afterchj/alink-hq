@@ -182,7 +182,6 @@ function passwordLogin() {
                 $('.password-login .password-hint').text('');
             }
         }
-
     }else if(e.test(unameVal)){
         //想输入的是邮箱
         if(!emailResult){
@@ -234,4 +233,36 @@ function passwordLogin() {
         $('.password-login .password-hint').text('');
     }
 }
-
+// $(function(){
+//     overTime();
+// })
+//联系我们的弹出框
+function contact(){
+    var width=window.screen.width;
+    var height=window.screen.height;
+    $('#shade-lay').addClass('active');
+    $('#shade-lay').css({'width':width,'height':height});
+    $('.contact').addClass('active');
+}
+function closeContact(){
+    var width=window.screen.width;
+    var height=window.screen.height;
+    $('#shade-lay').removeClass('active');
+    $('#shade-lay').css({'width':width,'height':height});
+    $('.contact').removeClass('active');
+}
+// 登录超时的弹出框
+function overTime(){
+    var width=window.screen.width;
+    var height=window.screen.height;
+    $('#shade-lay').addClass('active');
+    $('#shade-lay').css({'width':width,'height':height});
+    $('.overtime').addClass('active');
+}
+function closeOverTime(){
+    var width=window.screen.width;
+    var height=window.screen.height;
+    $('#shade-lay').removeClass('active');
+    $('#shade-lay').css({'width':width,'height':height});
+    $('.overtime').removeClass('active');
+}

@@ -72,6 +72,11 @@ public class HomeController {
         return "userManage/createAccount";
     }
 
+    @RequestMapping("/useTurnOver")
+    public String useTurnOver() {
+        return "userManage/useTurnOver";
+    }
+
     @RequestMapping("/changeEmail")
     public String changeEmail() {
         return "account/changeEmail";
