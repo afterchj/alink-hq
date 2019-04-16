@@ -3,15 +3,15 @@
 
 <head>
     <title>用户列表</title>
-    <link rel="stylesheet" href="/alink-hq/static/css/common.css" />
-    <link rel="stylesheet" href="/alink-hq/static/css/base.css" />
-    <link rel="stylesheet" href="/alink-hq/static/css/leftNav.css" />
-    <link rel="stylesheet" href="/alink-hq/static/css/projectManage.css" />
+    <link rel="stylesheet" href="/alink-hq/static/css/common.css"/>
+    <link rel="stylesheet" href="/alink-hq/static/css/base.css"/>
+    <link rel="stylesheet" href="/alink-hq/static/css/leftNav.css"/>
+    <link rel="stylesheet" href="/alink-hq/static/css/projectManage.css"/>
 </head>
 <body>
 <div th:replace="common/head::head"></div>
 <div th:replace="common/left::left"></div>
-<div class="table">
+<div class="main-right">
     <h1>用户列表</h1>
     <br>
     <table style="border-collapse: collapse">
@@ -50,19 +50,20 @@
         </tr>
         <tr>
             <td colspan="6">
-               <div style="float: right;margin-top: 5px;">
-                   <ul>
-                       <li>
-                           <a th:href="@{/userList(page=${page-1})}">上一页</a>
-                       </li>
-                       <li>
-                           <span th:text="${page}"></span>
-                       </li>
-                       <li>
-                           <a th:href="@{/userList(page=${page+1},rows=10)}">下一页</a>
-                       </li>
-                   </ul>
-               </div>
+                <div th:replace="common/page::page"></div>
+                <!--<div style="float: right;margin-top: 5px;">-->
+                    <!--<ul>-->
+                        <!--<li>-->
+                            <!--<a th:href="@{/userList(page=${page-1})}">上一页</a>-->
+                        <!--</li>-->
+                        <!--<li>-->
+                            <!--<span th:text="${page}"></span>-->
+                        <!--</li>-->
+                        <!--<li>-->
+                            <!--<a th:href="@{/userList(page=${page+1},rows=10)}">下一页</a>-->
+                        <!--</li>-->
+                    <!--</ul>-->
+                <!--</div>-->
             </td>
         </tr>
     </table>
