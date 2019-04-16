@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 
 <head>
     <meta charset="UTF-8">
@@ -31,8 +31,7 @@
                     <div class="p-r">
                         <label for="role">角色</label>
                         <select name="role" id="role">
-                            <option value="1">管理员</option>
-                            <option value="2">员工</option>
+                            <option th:each="role:${roleList}" th:value="${role.id}" th:text="${role.roleName }"></option>
                         </select>
                     </div>
                 </div>
@@ -40,8 +39,7 @@
                     <div>
                         <label for="company">隶属公司</label>
                         <select name="company" id="company">
-                            <option value="">天平数字科技</option>
-                            <option value="">天平数字科技2</option>
+                            <option th:each="firm:${firmList}" th:value="${firm.id}" th:text="${firm.coname }"></option>
                         </select>
                     </div>
                     <div class="p-r">
@@ -83,181 +81,19 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td class="project-name">TP001</td>
-                        <td>钱钱</td>
-                        <td>13912345678</td>
-                        <td>XXX@XX.com</td>
-                        <td>XXX公司</td>
-                        <td>管理员</td>
-                        <td>2019/03/22 &nbsp;&nbsp;19:25:23</td>
-                        <td><a href="javascript:void(0);" class="start-use" openTab="start-use">启用</a></td>
+                    <tr th:each="user:${pageInfo.list}">
+                        <td class="project-name" th:text="${user.account}"></td>
+                        <td th:text="${user.uname}"></td>
+                        <td th:text="${user.mobile}"></td>
+                        <td th:text="${user.email}"></td>
+                        <td th:text="${user.coname}"></td>
+                        <td th:text="${user.role_id}"></td>
+                        <td th:text="${user.create_date}"></td>
+                        <td th:text="${user.status}"><a href="javascript:void(0);" class="start-use" openTab="start-use"></a></td>
                         <td class="p-r">
                             <img src="/alink-hq/static/img/edit.png" alt="" openTab="reset-pwd" class="reset-pwd">
                             <img src="/alink-hq/static/img/exchange.png" alt="" class="center-img">
                             <img src="/alink-hq/static/img/delete.png" alt=""  class="delete-account" openTab="delete-account">
-                            <div class="popup p-a">
-                                重命名
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="project-name">TP001</td>
-                        <td>钱钱</td>
-                        <td>13912345678</td>
-                        <td>XXX@XX.com</td>
-                        <td>XXX公司</td>
-                        <td>管理员</td>
-                        <td>2019/03/22 &nbsp;&nbsp;19:25:23</td>
-                        <td><a href="javascript:void(0);" class="start-use" openTab="start-use">启用</a></td>
-                        <td class="p-r">
-                            <img src="/alink-hq/static/img/edit.png" alt="" openTab="reset-pwd" class="reset-pwd">
-                            <img src="/alink-hq/static/img/exchange.png" alt="" class="center-img">
-                            <img src="/alink-hq/static/img/delete.png" alt=""  class="delete-account" openTab="delete-account">
-                            <div class="popup p-a">
-                                重命名
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="project-name">TP001</td>
-                        <td>钱钱</td>
-                        <td>13912345678</td>
-                        <td>XXX@XX.com</td>
-                        <td>XXX公司</td>
-                        <td>管理员</td>
-                        <td>2019/03/22 &nbsp;&nbsp;19:25:23</td>
-                        <td><a href="javascript:void(0);" class="start-use" openTab="start-use">启用</a></td>
-                        <td class="p-r">
-                            <img src="/alink-hq/static/img/edit.png" alt="" openTab="reset-pwd" class="reset-pwd">
-                            <img src="/alink-hq/static/img/exchange.png" alt="" class="center-img">
-                            <img src="/alink-hq/static/img/delete.png" alt=""  class="delete-account" openTab="delete-account">
-                            <div class="popup p-a">
-                                重命名
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="project-name">TP001</td>
-                        <td>钱钱</td>
-                        <td>13912345678</td>
-                        <td>XXX@XX.com</td>
-                        <td>XXX公司</td>
-                        <td>管理员</td>
-                        <td>2019/03/22 &nbsp;&nbsp;19:25:23</td>
-                        <td><a href="javascript:void(0);" class="start-use" openTab="start-use">启用</a></td>
-                        <td class="p-r">
-                            <img src="/alink-hq/static/img/edit.png" alt="" openTab="reset-pwd" class="reset-pwd">
-                            <img src="/alink-hq/static/img/exchange.png" alt="" class="center-img">
-                            <img src="/alink-hq/static/img/delete.png" alt=""  class="delete-account" openTab="delete-account">
-                            <div class="popup p-a">
-                                重命名
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="project-name">TP001</td>
-                        <td>钱钱</td>
-                        <td>13912345678</td>
-                        <td>XXX@XX.com</td>
-                        <td>XXX公司</td>
-                        <td>管理员</td>
-                        <td>2019/03/22 &nbsp;&nbsp;19:25:23</td>
-                        <td><a href="javascript:void(0);" class="start-use" openTab="start-use">启用</a></td>
-                        <td class="p-r">
-                            <img src="/alink-hq/static/img/edit.png" alt="" openTab="reset-pwd" class="reset-pwd">
-                            <img src="/alink-hq/static/img/exchange.png" alt="" class="center-img">
-                            <img src="/alink-hq/static/img/delete.png" alt=""  class="delete-account" openTab="delete-account">
-                            <div class="popup p-a">
-                                重命名
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="project-name">TP001</td>
-                        <td>钱钱</td>
-                        <td>13912345678</td>
-                        <td>XXX@XX.com</td>
-                        <td>XXX公司</td>
-                        <td>管理员</td>
-                        <td>2019/03/22 &nbsp;&nbsp;19:25:23</td>
-                        <td><a href="javascript:void(0);" class="start-use" openTab="start-use">启用</a></td>
-                        <td class="p-r">
-                            <img src="/alink-hq/static/img/edit.png" alt="" openTab="reset-pwd" class="reset-pwd">
-                            <img src="/alink-hq/static/img/exchange.png" alt="" class="center-img">
-                            <img src="/alink-hq/static/img/delete.png" alt=""  class="delete-account" openTab="delete-account">
-                            <div class="popup p-a">
-                                重命名
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="project-name">TP001</td>
-                        <td>钱钱</td>
-                        <td>13912345678</td>
-                        <td>XXX@XX.com</td>
-                        <td>XXX公司</td>
-                        <td>管理员</td>
-                        <td>2019/03/22 &nbsp;&nbsp;19:25:23</td>
-                        <td><a href="javascript:void(0);" class="start-use" openTab="start-use">启用</a></td>
-                        <td class="p-r">
-                            <img src="/alink-hq/static/img/edit.png" alt="" openTab="reset-pwd" class="reset-pwd">
-                            <img src="/alink-hq/static/img/exchange.png" alt="" class="center-img">
-                            <img src="/alink-hq/static/img/delete.png" alt=""  class="delete-account" openTab="delete-account">
-                            <div class="popup p-a">
-                                重命名
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="project-name">TP001</td>
-                        <td>钱钱</td>
-                        <td>13912345678</td>
-                        <td>XXX@XX.com</td>
-                        <td>XXX公司</td>
-                        <td>管理员</td>
-                        <td>2019/03/22 &nbsp;&nbsp;19:25:23</td>
-                        <td><a href="javascript:void(0);" class="start-use" openTab="start-use">启用</a></td>
-                        <td class="p-r">
-                            <img src="/alink-hq/static/img/edit.png" alt="" openTab="reset-pwd" class="reset-pwd">
-                            <img src="/alink-hq/static/img/exchange.png" alt="" class="center-img">
-                            <img src="/alink-hq/static/img/delete.png" alt=""  class="delete-account" openTab="delete-account">
-                            <div class="popup p-a">
-                                重命名
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="project-name">TP001</td>
-                        <td>钱钱</td>
-                        <td>13912345678</td>
-                        <td>XXX@XX.com</td>
-                        <td>XXX公司</td>
-                        <td>管理员</td>
-                        <td>2019/03/22 &nbsp;&nbsp;19:25:23</td>
-                        <td><a href="javascript:void(0);" class="start-use" openTab="start-use">禁用</a></td>
-                        <td class="p-r">
-                            <img src="/alink-hq/static/img/edit.png" alt="" openTab="reset-pwd" class="reset-pwd">
-                            <img src="/alink-hq/static/img/exchange.png" alt="" class="center-img">
-                            <img src="/alink-hq/static/img/delete.png" alt=""  class="delete-account" openTab="delete-account">
-                            <div class="popup p-a">
-                                重命名
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="project-name">TP001</td>
-                        <td>钱钱</td>
-                        <td>13912345678</td>
-                        <td>XXX@XX.com</td>
-                        <td>XXX公司</td>
-                        <td>管理员</td>
-                        <td>2019/03/22 &nbsp;&nbsp;19:25:23</td>
-                        <td><a href="javascript:void(0);" class="start-use" openTab="start-use">禁用</a></td>
-                        <td class="p-r">
-                            <img src="/alink-hq/static/img/edit.png" alt="" openTab="reset-pwd" class="reset-pwd">
-                            <img src="/alink-hq/static/img/exchange.png" alt="" class="center-img">
-                            <img src="/alink-hq/static/img/delete.png" alt="" class="delete-account" openTab="delete-account">
                             <div class="popup p-a">
                                 重命名
                             </div>
@@ -269,16 +105,22 @@
                         <td colspan="11" class="clearfix page">
                             <div class="f-r page-right">
                                 <span>
-                                    <img src="/alink-hq/static/img/left-arrow.png" alt="">
+                                    <a th:href="@{/account/list(pageNum=${pageInfo.prePage},uid=15)}">
+                                    <img src="/alink-hq/static/img/left-arrow.png" alt=""></a>
                                 </span>
-                                <span>1</span>
-                                <span>
-                                    <img src="/alink-hq/static/img/right-arrow-color.png" alt="">
+                                <span th:text="${pageInfo.pageNum}"></span>
+                                <span th:if="${pageInfo.hasNextPage}">
+                                    <a th:href="@{/account/list(pageNum=${pageInfo.nextPage},uid=15)}">
+                                    <img src="/alink-hq/static/img/right-arrow-color.png" alt=""></a>
+                                </span>
+                                <span th:unless="${pageInfo.hasNextPage}">
+                                    <a th:href="@{/account/list(pageNum=${pageInfo.pageNum},uid=15)}">
+                                    <img src="/alink-hq/static/img/right-arrow-color.png" alt=""></a>
                                 </span>
                                 <span class="m-l-15 m-r-20">
                                     共
-                                    <span>9</span>
-                                    页
+                                    <span th:text="${pageInfo.pages}"></span>
+                                    页/<span th:text="${pageInfo.total}"></span>条数据
                                 </span>
                                 <span class="m-r-15">
                                     <input type="number">

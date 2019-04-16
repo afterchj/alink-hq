@@ -53,6 +53,11 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
+    public List<Firm> findFirmByUid(String uid) {
+        return accountDao.findFirmByUid(uid);
+    }
+
+    @Override
     public List<UserList> searchBySuper(String account,Integer fid,Integer roleId,String startDate,String endDate) {
         return accountDao.searchBySuper(account,fid,roleId,startDate,endDate);
     }

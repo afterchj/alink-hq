@@ -1,18 +1,18 @@
 package com.tpadsz.after.controller;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.tpadsz.after.entity.Firm;
 import com.tpadsz.after.entity.Role;
 import com.tpadsz.after.entity.User;
 import com.tpadsz.after.entity.UserList;
 import com.tpadsz.after.service.AccountService;
-import com.tpadsz.after.service.ProjectService;
 import com.tpadsz.after.utils.GenerateUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-
 import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.List;
@@ -27,37 +27,56 @@ public class AccountController {
     @Resource
     private AccountService accountService;
 
-    @RequestMapping(value = "/list", method = RequestMethod.POST)
-    @ResponseBody
-    public String list(String uid, Model model) {
-        Integer role_id = accountService.findRoleIdByUid(uid);
-        List<Role> roleList = new ArrayList<>();
-        List<Firm> firmList = new ArrayList<>();
-        List<UserList> userList = new ArrayList<>();
-        if (role_id == 1) {
-            userList = accountService.findUserListBySuper();
-            roleList = accountService.findRoleList();
-            roleList.remove(0);
-            firmList = accountService.findFirmList();
-        } else if (role_id == 2) {
-            userList = accountService.findUserListByAdmin();
-            roleList = accountService.findRoleList();
-            for (int i = 0; i < role_id; i++) {
-                roleList.remove(0);
+    @RequestMapping(value = "/list", method = RequestMethod.GET)
+    public String list(String uid,Integer pageNum,Integer pageSize,Model model) {
+            if (pageNum == null) {
+                pageNum = 1;   //设置默认当前页
             }
-            firmList = accountService.findFirmList();
-        } else if (role_id == 3) {
-            List<String> uids = accountService.findFirmUidOfUser(uid);
-            uids.remove(uid);
-            if (uids.size() != 0) {
-                userList = accountService.findUserListByManager(uids);
+            if (pageNum <= 0) {
+                pageNum = 1;
             }
-            roleList = accountService.findRoleList();
-            for (int i = 0; i < role_id; i++) {
-                roleList.remove(0);
-            }
+        if(pageSize == null){
+            pageSize = 10;    //设置默认每页显示的数据数
         }
-        return null;
+        try {
+            Integer role_id = accountService.findRoleIdByUid(uid);
+            List<Role> roleList = new ArrayList<>();
+            List<Firm> firmList = new ArrayList<>();
+            List<UserList> userList = new ArrayList<>();
+            if (role_id == 1) {
+                PageHelper.startPage(pageNum, pageSize);
+                userList = accountService.findUserListBySuper();
+                roleList = accountService.findRoleList();
+                roleList.remove(0);
+                firmList = accountService.findFirmList();
+            } else if (role_id == 2) {
+                PageHelper.startPage(pageNum, pageSize);
+                userList = accountService.findUserListByAdmin();
+                roleList = accountService.findRoleList();
+                for (int i = 0; i < role_id; i++) {
+                    roleList.remove(0);
+                }
+                firmList = accountService.findFirmList();
+            } else if (role_id == 3) {
+                List<String> uids = accountService.findFirmUidOfUser(uid);
+                uids.remove(uid);
+                if (uids.size() != 0) {
+                    PageHelper.startPage(pageNum, pageSize);
+                    userList = accountService.findUserListByManager(uids);
+                }
+                roleList = accountService.findRoleList();
+                for (int i = 0; i < role_id; i++) {
+                    roleList.remove(0);
+                }
+            }
+            PageInfo<UserList> pageInfo = new PageInfo<UserList>(userList, pageSize);
+            model.addAttribute("pageInfo", pageInfo);
+            model.addAttribute("firmList", firmList);
+            model.addAttribute("roleList", roleList);
+        }catch (Exception e){
+
+        }
+        return "userManage/useList";
     }
 
 
@@ -80,8 +99,25 @@ public class AccountController {
         }
     }
 
-    @RequestMapping(value = "/create", method = RequestMethod.POST)
-    @ResponseBody
+    @RequestMapping(value = "/createAccount", method = RequestMethod.GET)
+    public void createAccount(String uid,
+                              Model model) {
+        Integer role_id = accountService.findRoleIdByUid(uid);
+        List<Role> roleList = new ArrayList<>();
+        List<Firm> firmList = new ArrayList<>();
+        if (role_id == 1) {
+            firmList = accountService.findFirmList();
+        }else if(role_id==2){
+            firmList = accountService.findFirmList();
+        }else if(role_id==3){
+            firmList = accountService.findFirmByUid(uid);
+        }
+
+
+    }
+
+
+    @RequestMapping(value = "/create", method = RequestMethod.GET)
     public void create(Integer fid, Integer roleId, Integer num,
                        Model model) {
         String account;

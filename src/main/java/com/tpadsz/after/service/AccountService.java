@@ -24,6 +24,8 @@ public interface AccountService {
 
     List<Role> findRoleList();
 
+    List<Firm> findFirmByUid(String uid);
+
     List<UserList> searchBySuper(String account,Integer fid,Integer roleId,String startDate,String endDate);
 
     List<UserList> searchByAdmin(String account, Integer fid, Integer roleId, String startDate, String endDate);
@@ -45,4 +47,5 @@ public interface AccountService {
     void delete(String uid);
 
     void enable(String uid, Integer status);
+
 }

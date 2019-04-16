@@ -55,4 +55,6 @@ public interface AccountDao {
 
 
     void enable(@Param("uid")String uid,@Param("status")Integer status);
+
+    List<Firm> findFirmByUid(@Param("uid")String uid);
 }
