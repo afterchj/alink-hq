@@ -112,7 +112,7 @@
                             <span>
                                  <div th:switch="${page}">
                                      <a th:case="1" href="javascript:void(0)">
-                                        <img src="/alink-hq/static/img/left-arrow.png" alt="" id="next">
+                                        <img src="/alink-hq/static/img/left-arrow.png" alt="">
                                     </a>
                                      <a th:case="*" th:href="@{/mesh/list(page=${page-1},size=${size})}">
                                         <img src="/alink-hq/static/img/left-arrow.png" alt="" id="prev">
@@ -123,10 +123,10 @@
                             <span>
                                 <div th:switch="${page}">
                                      <a th:case="${totalPage}" href="javascript:void(0)">
-                                        <img src="/alink-hq/static/img/right-arrow-color.png" alt="" id="next">
+                                        <img src="/alink-hq/static/img/right-arrow-color.png" alt="">
                                     </a>
                                     <a th:case="*" th:href="@{/mesh/list(page=${page+1},size=${size})}">
-                                        <img src="/alink-hq/static/img/right-arrow-color.png" alt="" id="next">
+                                        <img src="/alink-hq/static/img/right-arrow-color.png" alt="">
                                     </a>
                                 </div>
                             </span>
