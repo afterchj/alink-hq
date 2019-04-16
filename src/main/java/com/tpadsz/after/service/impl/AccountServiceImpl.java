@@ -6,6 +6,7 @@ import com.tpadsz.after.entity.Role;
 import com.tpadsz.after.entity.User;
 import com.tpadsz.after.entity.UserList;
 import com.tpadsz.after.service.AccountService;
+import com.tpadsz.after.utils.Encryption;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -52,6 +53,11 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
+    public List<Firm> findFirmByUid(String uid) {
+        return accountDao.findFirmByUid(uid);
+    }
+
+    @Override
     public List<UserList> searchBySuper(String account,Integer fid,Integer roleId,String startDate,String endDate) {
         return accountDao.searchBySuper(account,fid,roleId,startDate,endDate);
     }
@@ -88,6 +94,29 @@ public class AccountServiceImpl implements AccountService {
     @Override
     public User findByAccount(String account) {
         return accountDao.findByAccount(account);
+    }
+
+    @Override
+    public void updateAccount(String account, String randomPwd) {
+        Encryption.HashPassword password = Encryption.encrypt(Encryption.getMD5Str(randomPwd));
+        accountDao.updateAccount(password.getPassword(),password.getSalt(),account);
+    }
+
+    @Override
+    public void transferAccount(String uid, Integer fid, String randomPwd) {
+        accountDao.transferAccount(uid,fid);
+        Encryption.HashPassword password = Encryption.encrypt(Encryption.getMD5Str(randomPwd));
+        accountDao.updateTransferedAccount(password.getPassword(),password.getSalt(),uid);
+    }
+
+    @Override
+    public void delete(String uid) {
+        accountDao.delete(uid);
+    }
+
+    @Override
+    public void enable(String uid,Integer status) {
+        accountDao.enable(uid,status);
     }
 
 

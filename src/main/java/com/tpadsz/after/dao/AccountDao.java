@@ -44,4 +44,17 @@ public interface AccountDao {
     void generateDefaultNetwork(@Param("uid")String uid);
 
     User findByAccount(@Param("account")String account);
+
+    void updateAccount(@Param("pwd")String password, @Param("salt")String salt,@Param("account")String account);
+
+    void transferAccount(@Param("uid")String uid, @Param("fid")Integer fid);
+
+    void updateTransferedAccount(@Param("pwd")String password, @Param("salt")String salt, @Param("uid")String uid);
+
+    void delete(@Param("uid")String uid);
+
+
+    void enable(@Param("uid")String uid,@Param("status")Integer status);
+
+    List<Firm> findFirmByUid(@Param("uid")String uid);
 }
