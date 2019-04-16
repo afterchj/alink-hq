@@ -101,6 +101,7 @@ public class HomeController {
     public String account() {
         return "account/account";
     }
+
     @RequestMapping("/changePassword")
     public String changePassword() {
         return "account/changePassword";
@@ -142,16 +143,12 @@ public class HomeController {
 
     @ResponseBody
     @RequestMapping("/checkUser")
-    public String checkUser(User user) {
+    public String checkUser(String uname) {
+        logger.info("user:" + uname);
         String str;
         Map map = new HashMap();
-        String uname = user.getUname();
-        String mobile = user.getMobile();
         if (StringUtils.isNotEmpty(uname)) {
             map.put("uname", uname);
-        }
-        if (StringUtils.isNotEmpty(mobile)) {
-            map.put("mobile", mobile);
         }
         int count = userService.getCount(map);
         if (count > 0) {

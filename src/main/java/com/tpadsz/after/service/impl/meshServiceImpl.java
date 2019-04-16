@@ -1,7 +1,7 @@
 package com.tpadsz.after.service.impl;
 
 import com.tpadsz.after.dao.MeshDao;
-import com.tpadsz.after.service.meshService;
+import com.tpadsz.after.service.MeshService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -13,7 +13,7 @@ import java.util.Map;
  */
 
 @Service
-public class meshServiceImpl implements meshService {
+public class meshServiceImpl implements MeshService {
     @Resource
     private MeshDao meshDao;
 
