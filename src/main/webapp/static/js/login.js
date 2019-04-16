@@ -101,7 +101,9 @@ $(function () {
     $('#uname').val('');
     $('#pwd').val('');
 })
+
 function passwordLogin() {
+    var isBind=false;
     $('.password-login .add-hint').text('');
     $('.password-login .password-hint').text('');
     $('.password-login .page-hint ').text('');
@@ -127,7 +129,7 @@ function passwordLogin() {
     var e = new RegExp("[@]");
     var a=/^[a-zA-Z]+$/;
 
-    var isBind=false;
+
     // 检测是否被绑定
     $.ajax({
         type: "GET",
@@ -141,8 +143,9 @@ function passwordLogin() {
             if (res == "success") {
                 console.log("有这个用户名");  
                 isBind=true;
+
             }
-        },
+        }
     })
     console.log(isBind);
     if(unameVal==''){
@@ -208,14 +211,13 @@ function passwordLogin() {
         //想输入的是用户名
         console.log('想输入的是用户名');
         if(!isBind){
-            // $('.password-login .add-hint').text('登录名错误');
-            // $('.password-login .password-hint').text('');
+          
             if (pwdVal == '') {
                 $('.password-login .add-hint').text('登录名错误');
                 $('.password-login .password-hint').text('请输入密码');
             }else{
-                $('.password-login .page-hint ').text('登录名密码不正确');
-                $('.password-login .add-hint').text('');
+                // $('.password-login .page-hint ').text('登录名密码不正确');
+                $('.password-login .add-hint').text('登录名不存在');
                 $('.password-login .password-hint').text('');
             }
         }else{
@@ -225,6 +227,7 @@ function passwordLogin() {
                 $('.password-login .page-hint').text('');
             }else{
                 $("form:eq(0)").submit();
+                $('.password-login .add-hint').text('');
                 $('.password-login .page-hint').text('登录名密码不正确');
                 $('.password-login .password-hint').text('');
             }
@@ -235,6 +238,3 @@ function passwordLogin() {
     }
 }
 
-// function phoneLogin() {
-//     console.log('kk')
-// }
