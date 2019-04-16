@@ -198,7 +198,7 @@
 .password-login, .phone-login, .phone-find-password, .email-find-password {
     position: absolute;
     left: 50%;
-    top: 24%;
+    top: 96px;
     margin-left: -40%;
     display: none;
 }
@@ -206,7 +206,7 @@
 .password-login.active, .phone-login.active, .phone-find-password.active, .email-find-password.active {
     position: absolute;
     left: 50%;
-    top: 24%;
+    top: 96px;
     margin-left: -40%;
     display: block;
 }
@@ -215,7 +215,7 @@
     cursor: pointer;
 }
 
-p.false-alert {
+/* p.false-alert {
     font-size: 17px;
     color: #fb2a2a;
     text-align: center;
@@ -233,21 +233,21 @@ p.add-hint, p.password-hint, p.code-hint {
     color: #fb2a2a;
     text-align: left;
     visibility: hidden;
-    /* height:20px; */
+    /* height:20px; 
 }
 p.mobile-add-hint, p.mobile-password-hint, p.mobile-code-hint{
     font-size: 17px;
     color: #fb2a2a;
     text-align: left;
     visibility: visible;
-    /* height:20px; */
+    /* height:20px; 
 }
 p.email-add-hint, p.email-password-hint, p.email-code-hint{
     font-size: 17px;
     color: #fb2a2a;
     text-align: left;
     visibility: hidden;
-    /* height:20px; */
+    /* height:20px; 
 }
 
 p.add-hint.active, p.password-hint.active, p.page-hint.active, p.code-hint.active,p.email-add-hint.active {
@@ -259,15 +259,34 @@ p.page-hint {
     color: #fb2a2a;
     text-align: center;
     /* height:20px;
-    line-height:20px; */
+    line-height:20px; 
     visibility: hidden;
-}
+} */
 
-.errMsg {
+/* .errMsg {
     margin-bottom: 10px;
     text-align: center;
+} */
+p.add-hint,p.password-hint{
+    vertical-align: bottom;
+    color: red;
+    text-align: left;
+}
+p.page-hint{
+    vertical-align: bottom;
+    color: red;
+    text-align: center;
+    line-height: 80px;
 }
 .security-code.active{
     background-color: #A0A0A0;
     color: #fff;
+}
+.bottom-btn{
+    position: absolute;
+    bottom: 40px;
+}
+.c-f{
+    position: relative;
+    height: 416px;
 }
