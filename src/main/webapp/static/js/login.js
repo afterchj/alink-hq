@@ -178,7 +178,7 @@ function passwordLogin() {
                 $('#uname').val('');
                 $('#pwd').val('');
                 $('.password-login .add-hint').text('');
-                $('.password-login .page-hint').text('登录名密码不正确');
+                // $('.password-login .page-hint').text('登录名密码不正确');
                 $('.password-login .password-hint').text('');
             }
         }
@@ -202,21 +202,18 @@ function passwordLogin() {
                 $('.password-login .password-hint').text('请输入密码');
             }else{
                 $("form:eq(0)").submit();
-                $('.password-login .page-hint').text('登录名密码不正确');
+                // $('.password-login .page-hint').text('登录名密码不正确');
                 $('.password-login .password-hint').text('');
             }
            
         }
     }else if(a.test(unameVal) || unameVal.length<=6){
         //想输入的是用户名
-        console.log('想输入的是用户名');
         if(!isBind){
-          
             if (pwdVal == '') {
                 $('.password-login .add-hint').text('登录名错误');
                 $('.password-login .password-hint').text('请输入密码');
             }else{
-                // $('.password-login .page-hint ').text('登录名密码不正确');
                 $('.password-login .add-hint').text('登录名不存在');
                 $('.password-login .password-hint').text('');
             }
@@ -228,7 +225,7 @@ function passwordLogin() {
             }else{
                 $("form:eq(0)").submit();
                 $('.password-login .add-hint').text('');
-                $('.password-login .page-hint').text('登录名密码不正确');
+                // $('.password-login .page-hint').text('登录名密码不正确');
                 $('.password-login .password-hint').text('');
             }
         }
