@@ -15,7 +15,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import javax.annotation.Resource;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by chenhao.lu on 2019/4/9.
@@ -100,7 +102,7 @@ public class AccountController {
     }
 
     @RequestMapping(value = "/createAccount", method = RequestMethod.GET)
-    public void createAccount(String uid,
+    public String createAccount(String uid,
                               Model model) {
         Integer role_id = accountService.findRoleIdByUid(uid);
         List<Role> roleList = new ArrayList<>();
@@ -112,7 +114,8 @@ public class AccountController {
         }else if(role_id==3){
             firmList = accountService.findFirmByUid(uid);
         }
-
+        model.addAttribute("firmList", firmList);
+        return "userManage/createAccount";
 
     }
 
@@ -143,11 +146,35 @@ public class AccountController {
     }
 
 
+    @RequestMapping(value = "/transferPage", method = RequestMethod.GET)
+    public String transferPage(String uid, Model model) {
+        Integer role_id = accountService.findRoleIdByUid(uid);
+        List<Firm> firmList = new ArrayList<>();
+        if (role_id == 1) {
+            firmList = accountService.findFirmList();
+        }else if(role_id==2){
+            firmList = accountService.findFirmList();
+        }else if(role_id==3){
+            firmList = accountService.findFirmByUid(uid);
+        }
+        model.addAttribute("firmList", firmList);
+        return "userManage/useTurnOver";
+    }
+
     @RequestMapping(value = "/transfer", method = RequestMethod.POST)
     @ResponseBody
-    public void transfer(String uid,Integer fid, Model model) {
+    public Map<String,String> transfer(String uid, Integer fid, Model model) {
+        Map<String,String> map = new HashMap<>();
         String randomPwd = GenerateUtils.randomPwd();
-        accountService.transferAccount(uid,fid,randomPwd);
+        String info;
+        try {
+            accountService.transferAccount(uid, fid, randomPwd);
+            info="移交账号成功";
+        }catch (Exception e){
+            info="移交账号失败";
+        }
+        map.put("result",info);
+        return map;
     }
 
 

@@ -53,7 +53,6 @@ public interface AccountDao {
 
     void delete(@Param("uid")String uid);
 
-
     void enable(@Param("uid")String uid,@Param("status")Integer status);
 
     List<Firm> findFirmByUid(@Param("uid")String uid);
