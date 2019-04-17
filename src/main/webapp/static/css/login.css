@@ -132,7 +132,7 @@ body{
 
 .content .hint {
     font-size: 20px;
-    margin-top: 15px;
+    margin-top: 10px;
     height: 25px;
     color: #fff;
     /* width: 404px; */
@@ -247,20 +247,20 @@ display: none;
 /*}*/
 
 p.add-hint, p.password-hint, p.code-hint {
-    font-size: 17px;
+    font-size: 100%;
     color: #fb2a2a;
     text-align: left;
     display: block;
 }
 
 p.mobile-add-hint, p.mobile-password-hint, p.mobile-code-hint {
-    font-size: 17px;
+    font-size: 100%;
     color: #fb2a2a;
     text-align: left;
 }
 
 p.email-add-hint, p.email-password-hint, p.email-code-hint {
-    font-size: 17px;
+    font-size: 100%;
     color: #fb2a2a;
     text-align: left;
 }
@@ -280,7 +280,7 @@ p.add-hint.active, p.password-hint.active, p.page-hint.active, p.code-hint.activ
 /*}*/
 
 .page-hint {
-    font-size: 17px;
+    font-size: 100%;
     color: #fb2a2a;
     text-align: center;
     margin: 20px auto;
