@@ -9,15 +9,33 @@
     /*top: 193px;*/
 
 /*}*/
-.container{
-    background-image: url("/alink-hq/static/img/background.png");
+html,
+body{
+    height: 100%;
+    width:100%;
 }
-
+.container{
+    background-image: url(/alink-hq/static/img/background.png);
+    position: relative;
+    top: 0;
+    height: 80%;
+    width: 100%;
+    background-size: 100% 100%;
+}
+.logo{
+    padding: 60px 0 0 60px;
+}
+.content{
+    width: 28%;
+    padding:0 0 2% 60%;
+}
 ::-webkit-input-placeholder { /*Webkit browsers*/
     color: #999;
     font-size: 19px;
 }
-
+.icon-input{
+    height: 12%;
+}
 :-moz-placeholder { /*Mozilla Firefox 4 to 8*/
     color: #999;
     font-size: 16px;
@@ -34,23 +52,31 @@
 }
 
 .login-in-box {
-    top: 21px;
-    left: 22px;
-    right: 20px;
-    bottom: 38px;
+    top: 4%;
+    left: 4%;
+    right: 4%;
+    bottom: 7%;
+    border-radius: 5px;
+
 }
 
 .login-in-box-tab {
+    height: 20%;
+    vertical-align: bottom;
+    /* height: 100%; */
     font-size: 26px;
     color: #fff;
-    padding-top: 45px;
+    /* padding-top: 45px; */
     border-bottom: 1px solid #bbb;
 }
 
 .login-in-box-tab > div {
     width: 50%;
-    padding-bottom: 20px;
+    height: 50%;
+    /* padding-bottom: 20px; */
     text-align: center;
+    padding-top: 9.3%;
+    white-space: nowrap;
 }
 
 .content .login-in-box-l, .content .login-in-box-r {
@@ -68,23 +94,26 @@
 }
 
 .content .login-in-box-tab-content {
+    width: 100%;
+    height: 80%;
+    margin-top: 1%;
 }
 
 .content .login-in-box-tab-content input {
     display: block;
     border: 1px solid #797979;
-    width: 404px;
-    height: 48px;
-    line-height: 48px;
+    width: 100%;
+    height: 100%;
+    line-height: 100%;
     text-indent: 50px;
     border-radius: 5px;
     margin: 0;
 }
 
 .content .login-in-box-tab-content button {
-    width: 404px;
-    height: 52px;
-    font-size: 20px;
+    width: 100%;
+    height: 50px;
+    font-size: 19px;
     background-color: #006DC1;
     color: #fff;
     border: 1px solid #006DC1;
@@ -93,15 +122,16 @@
 }
 
 .icon {
-    left: 15px;
-    top: 10px;
+    left: 3%;
+    top: 12%;
 }
 
 .content .hint {
     font-size: 20px;
     margin-top: 15px;
+    height: 25px;
     color: #fff;
-    width: 404px;
+    /* width: 404px; */
     cursor: pointer;
 }
 
@@ -111,17 +141,18 @@
 }
 
 .login-in-box-foot {
-    top: 880px;
-    left: 350px;
-    right: 350px;
-    bottom: 30px;
+    width: 100%;
+    height: 15%;
     color: #333;
+    bottom: 0;
     font-size: 14px;
+    position: fixed;
 }
 
 .login-in-box-foot .twoCode .part {
     font-size: 14px;
     width: 33.33%;
+    white-space: nowrap;
 }
 
 .login-in-box-foot .twoCode .part > .part-right {
@@ -162,32 +193,35 @@
 
 .content .login-in-box-tab-content button.security-code {
     display: inline-block;
-    width: 130px;
-    margin-left: 22px;
-    height: 50px;
+    width: 33%;
+    margin-left: 3%;
+    height: 100%;
     position: absolute;
     font-size: 20px;
     top: 1px;
+    white-space: nowrap;
 }
 
 .content .login-in-box-tab-content input.phone {
     display: inline-block;
-    width: 252px;
+    width: 63%;
 }
 
 .password-login, .phone-login, .phone-find-password, .email-find-password {
-    position: absolute;
-    left: 50%;
-    top: 24%;
-    margin-left: -40%;
-    display: none;
+    /*position: absolute; */
+    /* left: 50%; */
+    /* top: 24%; */
+    /* margin-left: -40%; */
+display: none;
 }
 
 .password-login.active, .phone-login.active, .phone-find-password.active, .email-find-password.active {
-    position: absolute;
-    left: 50%;
-    top: 96px;
-    margin-left: -40%;
+    /*position: absolute;*/
+    /*left: 50%;*/
+    /*top: 96px;*/
+    /*margin-left: -40%;*/
+    width: 100%;
+    height: 100%;
     display: block;
 }
 
@@ -257,14 +291,17 @@ p.add-hint.active, p.password-hint.active, p.page-hint.active, p.code-hint.activ
 }
 .btn-bottom{
     position: absolute;
-    bottom: 40px;
+    bottom: 7%;
+    width: 100%;
 }
 .login-in-box-tab-content form{
     position: relative;
-    height: 406px;
+    height: 100%;
+    margin: 0px 8% 0 8%;
 }
 .twoCode,.link,.filing{
-    min-width: 700px;
+    min-width: 70%;
+    margin: 0 15%;
     white-space: nowrap;
 }
 /*遮罩层*/
@@ -353,4 +390,52 @@ p.add-hint.active, p.password-hint.active, p.page-hint.active, p.code-hint.activ
     border: 1px solid #3895DB;
     border-radius: 5px;
     cursor: pointer;
+}
+/* 判断ipad */
+
+@media screen and (min-width:300px) and (max-width:1000px){
+    body{
+        font-size: 14px;
+    }
+    .login-in-box-tab{
+        font-size: 14px;
+    }
+    .content .hint{
+        font-size: 14px;
+    }
+    .content .login-in-box-tab-content button{
+        font-size: 14px;
+    }
+    .content .login-in-box-tab-content button{
+        height: 40px;
+    }
+    .content .login-in-box-tab-content button.security-code{
+        font-size: 14px;
+    }
+    .login-in-box-tab{
+        font-size: 14px;
+    }
+}
+@media screen and (min-width:1000px) and (max-width:1300px){
+    body{
+        font-size: 16px;
+    }
+    .login-in-box-tab{
+        font-size: 16px;
+    }
+    .content .hint{
+        font-size: 16px;
+    }
+    .content .login-in-box-tab-content button{
+        font-size: 16px;
+    }
+    .content .login-in-box-tab-content button{
+        height: 40px;
+    }
+    .content .login-in-box-tab-content button.security-code{
+        font-size: 16px;
+    }
+    .login-in-box-tab{
+        font-size: 16px;
+    }
 }
