@@ -10,24 +10,39 @@
 </head>
 <body>
 <div class="f-r page-right" th:fragment="page">
+  <span>
+      <div th:switch="${page}">
+          <a th:case="1" href="javascript:void(0)">
+              <img src="/alink-hq/static/img/left-arrow.png" alt="">
+          </a>
+          <a th:case="*" th:href="@{/mesh/list(page=${page-1},size=${size})}">
+              <img src="/alink-hq/static/img/left-arrow.png" alt="" id="prev">
+          </a>
+      </div>
+  </span>
+    <span th:inline="text">[[${page}]]</span>
     <span>
-        <img src="/alink-hq/static/img/left-arrow.png" alt="">
+        <div th:switch="${page}">
+            <a th:case="${totalPage}" href="javascript:void(0)">
+                <img src="/alink-hq/static/img/right-arrow-color.png" alt="">
+            </a>
+            <a th:case="*" th:href="@{/mesh/list(page=${page+1},size=${size})}">
+                <img src="/alink-hq/static/img/right-arrow-color.png" alt="">
+            </a>
+        </div>
     </span>
-    <span>[[${page}]]</span>
-    <span>
-        <img src="/alink-hq/static/img/right-arrow-color.png" alt="">
-    </span>
-    <span class="m-l-15 m-r-20">共<span>[[${totalPage}]]</span>页</span>
+    <span class="m-l-15 m-r-20">共<span th:inline="text">[[${totalPage}]]</span>页</span>
     <span class="m-r-15">
-        <input type="number">
+        <input type="number" th:value="${page}" id="page" name="skip">
     </span>
     <span class="m-r-35">
-        <img src="/alink-hq/static/img/skip-color.png" alt="">
+        <img src="/alink-hq/static/img/skip-color.png" id="skip" alt="">
     </span>
     <span class="m-r-15r">每页显示：</span>
     <span class="m-r-20">
-        <select name="size" id="refresh">
+        <select id="size" name="size">
             <option value="10">10</option>
+            <option value="8">8</option>
             <option value="5">5</option>
         </select>
     </span>

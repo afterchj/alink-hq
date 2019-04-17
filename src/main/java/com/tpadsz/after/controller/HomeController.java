@@ -278,7 +278,7 @@ public class HomeController {
         }
         User loginUser = userService.selectByUsername(userName);
         session.setAttribute("user", loginUser);
-        return "projectManage/projectManage";
+        return "welcome";
     }
 
     @RequestMapping("/userList")

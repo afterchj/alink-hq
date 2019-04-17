@@ -46,4 +46,24 @@
     <select id="getCountByTable" resultType="int" parameterType="string" statementType="STATEMENT">
         select count(*) from ${_parameter}
     </select>
+
+    <select id="selectByMid" resultType="map" parameterType="list">
+        SELECT
+        m.mname,
+        m.mesh_id,
+        p.name
+        FROM
+        f_mesh m
+        INNER JOIN f_project p ON m.project_id = p.id
+        INNER JOIN (SELECT COUNT(1) pcount,mid FROM f_place GROUP BY mid) pl ON pl.mid=m.id
+        INNER JOIN (SELECT COUNT(1) scount,mid FROM f_scene GROUP BY mid) s ON s.mid=m.id
+        WHERE m.id IN
+        <foreach collection="list" item="mid" index="index" open="(" close=")" separator=",">
+            #{mid}
+        </foreach>
+    </select>
+
+    <select id="getProjects" resultType="OptionList">
+        SELECT id,`name` FROM f_project
+    </select>
 </mapper>
