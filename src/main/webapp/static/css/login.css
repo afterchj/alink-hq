@@ -205,28 +205,28 @@
     /*display: block;*/
 /*}*/
 
-/*p.add-hint, p.password-hint, p.code-hint {*/
-    /*font-size: 17px;*/
-    /*color: #fb2a2a;*/
-    /*text-align: left;*/
-    /*display: none;*/
-/*}*/
+p.add-hint, p.password-hint, p.code-hint {
+    font-size: 17px;
+    color: #fb2a2a;
+    text-align: left;
+    display: block;
+}
 
-/*p.mobile-add-hint, p.mobile-password-hint, p.mobile-code-hint {*/
-    /*font-size: 17px;*/
-    /*color: #fb2a2a;*/
-    /*text-align: left;*/
-/*}*/
+p.mobile-add-hint, p.mobile-password-hint, p.mobile-code-hint {
+    font-size: 17px;
+    color: #fb2a2a;
+    text-align: left;
+}
 
-/*p.email-add-hint, p.email-password-hint, p.email-code-hint {*/
-    /*font-size: 17px;*/
-    /*color: #fb2a2a;*/
-    /*text-align: left;*/
-/*}*/
+p.email-add-hint, p.email-password-hint, p.email-code-hint {
+    font-size: 17px;
+    color: #fb2a2a;
+    text-align: left;
+}
 
-/*p.add-hint.active, p.password-hint.active, p.page-hint.active, p.code-hint.active {*/
-    /*display: block;*/
-/*}*/
+p.add-hint.active, p.password-hint.active, p.page-hint.active, p.code-hint.active {
+    display: block;
+}
 
 /*p.page-hint {*/
     /*font-size: 17px;*/

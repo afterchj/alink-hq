@@ -4,9 +4,9 @@
     <meta charset="UTF-8"/>
     <title>Index首页</title>
     <link rel="stylesheet" th:href="@{/static/css/common.css}"/>
-    <link rel="stylesheet" href="/alink-hq/static/css/base.css" />
-    <link rel="stylesheet" href="/alink-hq/static/css/leftNav.css" />
-    <link rel="stylesheet" href="/alink-hq/static/css/projectManage.css" />
+    <link rel="stylesheet" href="/alink-hq/static/css/base.css"/>
+    <link rel="stylesheet" href="/alink-hq/static/css/leftNav.css"/>
+    <link rel="stylesheet" href="/alink-hq/static/css/projectManage.css"/>
     <script type="text/javascript" th:src="@{/static/js/jquery.min.js}"></script>
     <script type="text/javascript" th:src="@{/static/js/myLogin.js}"></script>
     <title>Spring MVC + Thymeleaf Example</title>
@@ -15,7 +15,8 @@
 <!-- Project ContextPath -->
 <div th:replace="common/head::head"></div>
 <div th:replace="common/left::left"></div>
-<h1>欢迎登陆：<span id="ctx" th:value="${application.ctx}"/> Hello</h1>
+<div class="main-right">
+    <h1>欢迎登陆：<span id="ctx" th:value="${application.ctx}"/> Hello</h1>
 </div>
 
 </body>

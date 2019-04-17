@@ -79,6 +79,8 @@ $(function () {
     function settime(obj) {
         if (countdown == 0) {
             obj.removeAttribute("disabled");
+            obj.style.background = "#006DC1";
+            obj.style.borderColor = "#006DC1";
             obj.innerHTML = "获取验证码";
             countdown = 60;
             return;

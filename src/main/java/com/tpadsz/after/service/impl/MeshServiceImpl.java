@@ -13,17 +13,17 @@ import java.util.Map;
  */
 
 @Service
-public class meshServiceImpl implements MeshService {
+public class MeshServiceImpl implements MeshService {
     @Resource
     private MeshDao meshDao;
 
     @Override
     public List<Map> selectByMap(Map map) {
-        return meshDao.getByMap(map);
+        return meshDao.selectByMap(map);
     }
 
     @Override
     public List<Map> getByMap(Map map) {
-        return null;
+        return meshDao.getByMap(map);
     }
 }

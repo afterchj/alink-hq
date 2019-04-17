@@ -11,4 +11,6 @@ public interface MeshDao {
     List<Map> selectByMap(Map map);
 
     List<Map> getByMap(Map map);
+
+    int getCountByTable(String tableName);
 }

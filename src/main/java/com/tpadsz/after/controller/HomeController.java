@@ -188,18 +188,18 @@ public class HomeController {
     @ResponseBody
     @RequestMapping("/verify")
     public String sendCode(String mobile, String email) {
-        logger.info("mobile=" + mobile + ",email=" + email);
         String str = "";
         Map map = new HashMap();
         if (StringUtils.isNotEmpty(mobile)) {
-            map.put("mobile", mobile);
+            map.put("uname", mobile);
             str = "mobile_";
         }
         if (StringUtils.isNotEmpty(email)) {
-            map.put("email", email);
+            map.put("uname", email);
             str = "email_";
         }
         int count = userService.getCount(map);
+        logger.info("mobile=" + mobile + ",email=" + email + ",count=" + count);
         if (count == 0) {
             str = str + "failure";
         } else {
