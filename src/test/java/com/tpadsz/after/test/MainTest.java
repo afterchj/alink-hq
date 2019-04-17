@@ -32,7 +32,7 @@ public class MainTest {
         map.put("uname", "test");
 //        map.put("account", "admin");
 //        map.put("mobile", "18170756879");
-//        map.put("email", "after@tpadsz.com");
+        map.put("email", "after@tpadsz.com");
         User user = new User();
         user.setMobile("18170756879");
 //        User user = getSqlSessionTemplate().selectOne("com.tpadsz.after.dao.UserExtendDao.selectByUsername", "超级管理员");
