@@ -1,121 +1,104 @@
-/**
- * Created by hongjian.chen on 2019/4/10.
- */
 $(function () {
-    var ctx = $("#ctx").val();
-    // console.log("Project ContextPath:" + _ctx);
-    console.log("路径:" + ctx);
-    $("#title li").click(function () {
-        $(this).addClass('bottom');  // 添加当前元素的样式
-        $(this).siblings('li').removeClass('bottom');  // 删除其他兄弟元素的样式
-    });
-    //为表单的必填文本框添加提示信息（选择form中的所有后代input元素）
-    $("#form1 :input.required").each(function () {
-        //通过jquery api：$("HTML字符串") 创建jquery对象
-        var $required = $("<strong class='high'>*</strong>");
-        //添加到this对象的父级对象下
-        $(this).parent().append($required);
-    });
-
     //为表单元素添加失去焦点事件
-    $("#form1 :input").blur(function () {
-        var $parent = $(this).parent();
-        $parent.find(".msg").remove(); //删除以前的提醒元素（find()：查找匹配元素集中元素的所有匹配元素）
-        //验证姓名
-        if ($(this).is("#uname")) {
-            var nameVal = $.trim(this.value); //原生js去空格方式：this.replace(/(^\s*)|(\s*$)/g, "")
-            var regName = /[~#^$@%&!*()<>:;'"{}【】 ]/;
-            if (nameVal == "" || regName.test(nameVal)) {
-                var errorMsg = " 账号非空，不包含特殊字符！";
-                //class='msg onError' 中间的空格是层叠样式的格式
-                $parent.append("<span class='msg onError'>" + errorMsg + "</span>");
-            }
-            else {
-                var okMsg = " 输入正确";
-                $parent.find(".high").remove();
-                $parent.append("<span class='msg onSuccess'>" + okMsg + "</span>");
-            }
+    // $("div.errMsg").html("");
+    //检测账号格式是否正确
+    // if ($(this).is("#uname")) {
+    //     var accountVal = $.trim(this.value); //原生js去空格方式：this.replace(/(^\s*)|(\s*$)/g, "")
+    //     if (accountVal == "") {
+    //         //class='msg onError' 中间的空格是层叠样式的格式
+    //         $('p.add-hint').addClass('active').text('登录账号不能为空！');
+    //     } else {
+    //         $('p.add-hint').html('');
+    //     }
+    // }
+    // if ($(this).is("#pwd")) {
+    //     var pwdVal = $.trim(this.value); //原生js去空格方式：this.replace(/(^\s*)|(\s*$)/g, "")
+    //     if (pwdVal == "") {
+    //         $('p.password-hint').addClass('active').text('密码不能为空！');
+    //     } else {
+    //         $('p.password-hint').removeClass('active').text('');
+    //     }
+    // }
+    // //验证手机
+    // if ($(this).is("#phone")) {
+    //     var mobileVal = $.trim(this.value);
+    //     var regMobile = /^[1][3,4,5,7,8,9][0-9]{9}$/;
+    //     if (mobileVal == "") {
+    //         $('p.add-hint').addClass('active').text('手机号不能为空！');
+    //     } else if (!regMobile.test(mobileVal)) {
+    //         $('p.add-hint').addClass('active').text('请输入正确的手机号！');
+    //     } else {
+    //         $('p.add-hint').removeClass('active').text('');
+    //     }
+    // }
+    $("#code").blur(function () {
+        var codeVal = $.trim(this.value); //原生js去空格方式：this.replace(/(^\s*)|(\s*$)/g, "")
+        if (codeVal == "") {
+            //class='msg onError' 中间的空格是层叠样式的格式
+            $('p.password-hint').addClass('active').text('验证码不能为空！');
+        } else {
+            $('p.password-hint').removeClass('active').text('');
         }
-        if ($(this).is("#pwd")) {
-            var pwdVal = $.trim(this.value); //原生js去空格方式：this.replace(/(^\s*)|(\s*$)/g, "")
-            if (pwdVal == "") {
-                var errorMsg = " 密码不能为空！";
-                //class='msg onError' 中间的空格是层叠样式的格式
-                $parent.append("<span class='msg onError'>" + errorMsg + "</span>");
-            }
+    });
+    //验证手机
+    $("#mobile").blur(function () {
+        var mobileVal = $.trim(this.value);
+        var regMobile = /^[1][3,4,5,7,8,9][0-9]{9}$/;
+        if (mobileVal == "") {
+            $('p.mobile-add-hint').addClass('active').text('手机号不能为空！');
+        } else if (!regMobile.test(mobileVal)) {
+            $('p.mobile-add-hint').addClass('active').text('请输入正确的手机号！');
+        } else {
+            $('p.mobile-add-hint').removeClass('active').text('');
         }
-        if ($(this).is("#pwd2")) {
-            var pwdVal = $.trim(this.value); //原生js去空格方式：this.replace(/(^\s*)|(\s*$)/g, "")
-            if (pwdVal == "") {
-                var errorMsg = " 密码不能为空！";
-                //class='msg onError' 中间的空格是层叠样式的格式
-                $parent.append("<span class='msg onError'>" + errorMsg + "</span>");
-            }
+    });
+    $("#code1").blur(function () {
+        var codeVal = $.trim(this.value); //原生js去空格方式：this.replace(/(^\s*)|(\s*$)/g, "")
+        if (codeVal == "") {
+            //class='msg onError' 中间的空格是层叠样式的格式
+            $('p.mobile-code-hint').addClass('active').text('验证码不能为空！');
+        } else {
+            $('p.mobile-code-hint').removeClass('active').text('');
         }
-        //验证手机
-        if ($(this).is("#mobile")) {
-            var mobileVal = $.trim(this.value);
-            var regMobile = /^[1][3,4,5,7,8,9][0-9]{9}$/;
-            if (mobileVal == "" || (mobileVal != "" && !regMobile.test(mobileVal))) {
-                var errorMsg = " 请输入正确的手机号！";
-                $parent.append("<span class='msg onError'>" + errorMsg + "</span>");
-            }
-            else {
-                var okMsg = " 输入正确";
-                $parent.find(".high").remove();
-                $parent.append("<span class='msg onSuccess'>" + okMsg + "</span>");
-            }
+    });
+    $("#pwd1").blur(function () {
+        var pwdVal = $.trim(this.value); //原生js去空格方式：this.replace(/(^\s*)|(\s*$)/g, "")
+        if (pwdVal == "") {
+            $('p.mobile-password-hint').addClass('active').text('密码不能为空！');
+        } else {
+            $('p.mobile-password-hint').removeClass('active').text('');
         }
-        //验证邮箱
-        if ($(this).is("#email")) {
-            var emailVal = $.trim(this.value);
-            var regEmail = /^([a-zA-Z]|[0-9])(\w|\-)+@[a-zA-Z0-9]+\.([a-zA-Z]{2,4})$/;
-            if (emailVal == "" || (emailVal != "" && !regEmail.test(emailVal))) {
-                var errorMsg = " 请输入正确的手机号！";
-                $parent.append("<span class='msg onError'>" + errorMsg + "</span>");
-            }
-            else {
-                var okMsg = " 输入正确";
-                $parent.find(".high").remove();
-                $parent.append("<span class='msg onSuccess'>" + okMsg + "</span>");
-            }
+    });
+    //验证邮箱
+    $("#email").blur(function () {
+        var emailVal = $.trim(this.value);
+        var regEmail = /^([a-zA-Z]|[0-9])(\w|\-)+@[a-zA-Z0-9]+\.([a-zA-Z]{2,4})$/;
+        if (emailVal == "") {
+            $('p.email-add-hint').addClass('active').text('邮箱不能为空！');
+        } else if (!regEmail.test(emailVal)) {
+            $('p.email-add-hint').addClass('active').text('请输入正确的邮箱！');
+        } else {
+            $('p.email-add-hint').removeClass('active').text('');
         }
-        if ($(this).is("#code")) {
-            var codeVal = $.trim(this.value); //原生js去空格方式：this.replace(/(^\s*)|(\s*$)/g, "")
-            if (codeVal == "") {
-                //class='msg onError' 中间的空格是层叠样式的格式
-                var errorMsg = "验证码不能为空！";
-                $parent.append("<span class='msg onError'>" + errorMsg + "</span>");
-            }
+    });
+    $("#code2").blur(function () {
+        var codeVal = $.trim(this.value); //原生js去空格方式：this.replace(/(^\s*)|(\s*$)/g, "")
+        if (codeVal == "") {
+            //class='msg onError' 中间的空格是层叠样式的格式
+            $('p.email-code-hint').addClass('active').text('验证码不能为空！');
+        } else {
+            $('p.email-code-hint').removeClass('active').text('');
         }
-        if ($(this).is("#code2")) {
-            var codeVal = $.trim(this.value); //原生js去空格方式：this.replace(/(^\s*)|(\s*$)/g, "")
-            if (codeVal == "") {
-                //class='msg onError' 中间的空格是层叠样式的格式
-                var errorMsg = "验证码不能为空！";
-                $parent.append("<span class='msg onError'>" + errorMsg + "</span>");
-            }
+    });
+    $("#pwd2").blur(function () {
+        var pwdVal = $.trim(this.value); //原生js去空格方式：this.replace(/(^\s*)|(\s*$)/g, "")
+        if (pwdVal == "") {
+            $('p.email-password-hint').addClass('active').text('密码不能为空！');
+        } else {
+            $('p.email-password-hint').removeClass('active').text('');
         }
-    }).keyup(function () {
-        //triggerHandler 防止事件执行完后，浏览器自动为标签获得焦点
-        $(this).triggerHandler("blur");
-    }).focus(function () {
-        $(this).triggerHandler("blur");
     });
 });
-
-
-function showForm(id) {
-    for (var i = 1; i < 3; i++) {
-        if (id == i) {
-            $("#login" + id).removeClass("myDisplay");
-            $("#errMsg" + id).removeClass("myDisplay");
-        } else {
-            $("#login" + i).addClass("myDisplay");
-            $("#errMsg" + i).addClass("myDisplay");
-        }
-    }
-}
 
 // 发送验证码
 function pushCode(flag) {
@@ -133,48 +116,40 @@ function pushCode(flag) {
             "mobile": mobile,
             "email": email
         },
-        async: false,
+        async: true,
         success: function (res) {
             console.log("result=" + res + ",mobile=" + mobile);
             if (res == "mobile_failure") {
-                $("#errMsg").html("<span style='font-weight: bold;color: red'>该手机号未绑定！</span>");
-                $("#mobile").focus();
-            }
-            if (res == "email_failure") {
-                $("#errMsg").html("<span style='font-weight: bold;color: red'>该手机号未绑定！</span>");
-                $("#email").focus();
+                $('p.mobile-add-hint').addClass('active').text('该手机号未绑定！');
+                $('p.add-hint').addClass('active').text('该手机号未绑定！');
+                // $("#mobile").focus();
+            } else if (res == "email_failure") {
+                $('p.email-add-hint').addClass('active').text('该邮箱未绑定！');
+            } else {
+                $('p.email-add-hint').removeClass('active').text('');
             }
         }
     })
 }
 
 function validate() {
-    var username = $("#uname").val();
-    var password = $("#pwd").val();
+    $("div.errMsg").html("");
+    var uname = $("#uname").val();
+    var pwd = $("#pwd").val();
+    var phone = $("#phone").val();
     var code = $("#code").val();
-    var mobile = $("#mobile").val();
-    var okUsername = false;
-    var okPassword = false;
-    var okMobile = false;
-    var okCode = false;
-    if (username != "") {
-        okUsername = true;
-    }
-    if (password != "") {
-        okPassword = true;
-    }
-    if (mobile != "") {
-        okMobile = true;
-    }
-    if (validateCode(mobile, code) == "success") {
-        okCode = true;
+    var flag = validateCode(phone, code);
+    if (uname != "" && pwd != "") {
+        $("form:eq(0)").submit();
     } else {
-        $("#errMsg2").html("<span style='font-weight: bold;color: red'>验证码不正确！</span>");
+        console.log("uname=" + uname + ",pwd=" + pwd + ",phone=" + phone + ",code=" + code + ",flag=" + flag);
     }
-
-    console.log("okUsername" + okUsername + ",okPassword" + okUsername + ",okPassword" + okMobile + ",okCode=" + okCode);
-    if (okUsername && okPassword || (okMobile && okCode)) {
-        $("#form1").submit();
+    if (flag == "success" && phone != "") {
+        $("form:eq(1)").submit();
+    } else {
+        console.log("flag=" + flag);
+        // $('p.page-hint').addClass('active').text('验证码不正确！');
+        // $("div.errMsg").html("<span style='font-weight: bold;color: red'>验证码不正确！</span>");
     }
 }
 /* 校验验证码 */
@@ -185,8 +160,7 @@ function validateCode(user, code) {
         url: "/alink-hq/checkCode",
         data: {
             "mobile": user,
-            "email": user,
-            "code": code,
+            "code": code
         },
         async: false,
         success: function (res) {
@@ -194,28 +168,30 @@ function validateCode(user, code) {
                 result = res;
             } else {
                 result = res;
-                $("#errMsg").html("<span style='font-weight: bold;color: red'>验证码不正确！</span>");
-                $("#code").focus();
+                $('p.page-hint').addClass('active').text('验证码不正确！');
+                // $("#code").focus();
             }
         }
     })
-    console.log("checkCode_result=" + result);
+    console.log("user=" + user + ",checkCode_result=" + result);
     return result;
 }
 
 function modifyPwd() {
-    var mobile = $("#mobile").val();
+    $("div.errMsg").html("");
     var email = $("#email").val();
-    var confirmPwd = "";
+    var mobile = $("#mobile").val();
+    var temp = "";
+    var pwd = "";
     var code = "";
-    var pwd = $("#pwd").val();
+    var pwd1 = $("#pwd1").val();
     var pwd2 = $("#pwd2").val();
-    if (pwd != "") {
-        confirmPwd = pwd;
+    if (pwd1 != "") {
+        pwd = pwd1;
     } else if (pwd2 != "") {
-        confirmPwd = pwd2;
+        pwd = pwd2;
     }
-    var code1 = $("#code").val();
+    var code1 = $("#code1").val();
     var code2 = $("#code2").val();
     if (code1 != "") {
         code = code1;
@@ -223,40 +199,54 @@ function modifyPwd() {
         code = code2;
     }
     if (mobile != "") {
+        temp = mobile;
         var result = validateCode(mobile, code);
     }
     if (email != "") {
+        temp = email;
         var result = validateCode(email, code);
     }
-    if (result == "success") {
-        $.ajax({
-            type: "GET",
-            url: "/alink-hq/restPwd",
-            data: {
-                "mobile": mobile,
-                "email": email,
-                "pwd": confirmPwd
-            },
-            async: false,
-            success: function (res) {
-                if (res == "success") {
-                    console.log("密码修改成功！");
-                    setInterval(go(), 1000);
-                }
-            }
-        })
-    } else {
-        $("#errMsg").removeClass("myDisplay");
-        $("#errMsg").html("<span style='font-weight: bold;color: red'>验证码不正确！</span>");
-        $("#code").focus();
+    // var flag = phoneFindPassword();
+    var flag = false;
+    if (temp != "" && code != "" && pwd != "") {
+        flag = true;
     }
-
-    function go() {
-        var flag = confirm("密码修改成功，是否直接跳转到用户列表？");
-        if (flag == true) {
-            location.href = "/alink-hq/userList";
-        } else {
-            location.href = "/alink-hq/userList";
+    console.log("flag=" + flag + ",code=" + code + ",pwd=" + pwd + ",result=" + result);
+    if (flag) {
+        if (result == "success") {
+            $.ajax({
+                type: "GET",
+                url: "/alink-hq/restPwd",
+                data: {
+                    "mobile": mobile,
+                    "email": email,
+                    "pwd": pwd
+                },
+                async: false,
+                success: function (res) {
+                    if (res == "success") {
+                        console.log("密码修改成功！");
+                        setInterval(go(), 1000);
+                    }
+                }
+            })
+        } else if (mobile != "") {
+            // $("div.errMsg").html("<span style='font-weight: bold;color: red'>验证码不正确！</span>");
+            $('p.page-hint').addClass('active').text('验证码不正确！');
+            $("#code1").focus();
+        } else if (email != "") {
+            $('p.page-hint').addClass('active').text('验证码不正确！');
+            $("#code2").focus();
         }
+    }
+    console.log("mobile=" + mobile + ",email=" + email);
+}
+
+function go() {
+    var flag = confirm("密码修改成功，是否直接跳转到用户列表？");
+    if (flag == true) {
+        location.href = "/alink-hq/userList";
+    } else {
+        location.href = "/alink-hq/userList";
     }
 }

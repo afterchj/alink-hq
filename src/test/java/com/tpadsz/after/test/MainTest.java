@@ -3,6 +3,7 @@ package com.tpadsz.after.test;
 import com.tpadsz.after.entity.User;
 import net.rubyeye.xmemcached.XMemcachedClient;
 import net.rubyeye.xmemcached.exception.MemcachedException;
+import org.apache.log4j.Logger;
 import org.junit.Test;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.context.ApplicationContext;
@@ -17,6 +18,8 @@ import java.util.concurrent.TimeoutException;
  */
 public class MainTest {
 
+    private static Logger logger = Logger.getLogger(MainTest.class);
+
     private SqlSessionTemplate getSqlSessionTemplate() {
         ApplicationContext ctx = new ClassPathXmlApplicationContext("classpath:applicationContext.xml");
         SqlSessionTemplate sqlSessionTemplate = (SqlSessionTemplate) ctx.getBean("sqlSessionTemplate");
@@ -26,16 +29,18 @@ public class MainTest {
     @Test
     public void testSqlSessionTemplate() {
         Map map = new HashMap();
-//        map.put("uname", "管理员");
-        map.put("account", "admin");
+        map.put("uname", "test");
+//        map.put("account", "admin");
 //        map.put("mobile", "18170756879");
         map.put("email", "after@tpadsz.com");
         User user = new User();
         user.setMobile("18170756879");
 //        User user = getSqlSessionTemplate().selectOne("com.tpadsz.after.dao.UserExtendDao.selectByUsername", "超级管理员");
-        System.out.println("user:" + getSqlSessionTemplate().selectList("com.tpadsz.after.dao.UserExtendDao.getPermissions", "超级管理员"));
-        System.out.println("user=" + getSqlSessionTemplate().selectOne("com.tpadsz.after.dao.UserDao.selectByUsername", user).toString());
-        System.out.println("count:" + getSqlSessionTemplate().selectOne("com.tpadsz.after.dao.UserDao.getCount", map));
+//        System.out.println("user:" + getSqlSessionTemplate().selectList("com.tpadsz.after.dao.UserExtendDao.getPermissions", "超级管理员"));
+        System.out.println("user=" + getSqlSessionTemplate().selectOne("com.tpadsz.after.dao.UserDao.selectByUsername", "test").toString());
+//        System.out.println("count:" + getSqlSessionTemplate().selectOne("com.tpadsz.after.dao.UserDao.getCount", map));
+        System.out.println("user:" + getSqlSessionTemplate().selectList("com.tpadsz.after.dao.MeshDao.getByMap", null).size());
+        System.out.println("count:" + getSqlSessionTemplate().selectOne("com.tpadsz.after.dao.MeshDao.getCountByTable", "f_mesh"));
     }
 
     @Test
@@ -56,4 +61,10 @@ public class MainTest {
         System.out.println("demo=======================" + xMemcachedClient.get("test"));
     }
 
+    public static void main(String[] args) {
+        int size = 8;
+        int total = 46;
+        int totalPage = total / size == 0 ? total / size : total / size + 1;
+        logger.info("total=" + total + ",totalPage=" + totalPage);
+    }
 }

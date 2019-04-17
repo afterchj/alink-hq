@@ -2,10 +2,10 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <head>
-    <title>导航栏</title>
-    <link rel="stylesheet" href="/alink-hq/static/css/base.css"/>
-    <link rel="stylesheet" href="/alink-hq/static/css/leftNav.css"/>
-    <link rel="stylesheet" href="/alink-hq/static/css/projectManage.css"/>
+    <!--<title>导航栏</title>-->
+    <!--<link rel="stylesheet" href="/alink-hq/static/css/base.css"/>-->
+    <!--<link rel="stylesheet" href="/alink-hq/static/css/leftNav.css"/>-->
+    <!--<link rel="stylesheet" href="/alink-hq/static/css/projectManage.css"/>-->
 </head>
 <body>
 <div th:fragment="head">
@@ -17,7 +17,7 @@
             <span class="nav-img">
                 <img src="/alink-hq/static/img/off-unclick .png" alt=""/>
             </span>
-            <span>退出</span>
+            <span><a style="color: white" th:href="@{/logOut}">退出</a></span>
         </div>
         <div class="f-r ad-nav">
             <span class="nav-img">

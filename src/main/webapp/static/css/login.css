@@ -75,7 +75,7 @@
     line-height: 48px;
     text-indent: 50px;
     border-radius: 5px;
-    margin: 10px 0 20px 0;
+    margin: 0;
 }
 
 .content .login-in-box-tab-content button {
@@ -164,7 +164,7 @@
     height: 50px;
     position: absolute;
     font-size: 20px;
-    top: 11px;
+    top: 1px;
 }
 
 .content .login-in-box-tab-content input.phone {
@@ -183,7 +183,7 @@
 .password-login.active, .phone-login.active, .phone-find-password.active, .email-find-password.active {
     position: absolute;
     left: 50%;
-    top: 24%;
+    top: 96px;
     margin-left: -40%;
     display: block;
 }
@@ -192,24 +192,24 @@
     cursor: pointer;
 }
 
-p.false-alert {
-    font-size: 17px;
-    color: #fb2a2a;
-    text-align: center;
-    height: 74px;
-    line-height: 74px;
-    display: none;
-}
+/*p.false-alert {*/
+    /*font-size: 17px;*/
+    /*color: #fb2a2a;*/
+    /*text-align: center;*/
+    /*height: 74px;*/
+    /*line-height: 74px;*/
+    /*display: none;*/
+/*}*/
 
-p.false-alert.active {
-    display: block;
-}
+/*p.false-alert.active {*/
+    /*display: block;*/
+/*}*/
 
 p.add-hint, p.password-hint, p.code-hint {
     font-size: 17px;
     color: #fb2a2a;
     text-align: left;
-    display: none;
+    display: block;
 }
 
 p.mobile-add-hint, p.mobile-password-hint, p.mobile-code-hint {
@@ -228,28 +228,35 @@ p.add-hint.active, p.password-hint.active, p.page-hint.active, p.code-hint.activ
     display: block;
 }
 
-p.page-hint {
+/*p.page-hint {*/
+    /*font-size: 17px;*/
+    /*color: #fb2a2a;*/
+    /*text-align: center;*/
+    /*!*height: 74px;*!*/
+    /*!*line-height: 74px;*!*/
+    /*margin: 20px auto;*/
+    /*display: none;*/
+/*}*/
+
+.page-hint {
     font-size: 17px;
     color: #fb2a2a;
     text-align: center;
-    /*height: 74px;*/
-    /*line-height: 74px;*/
-    margin: 20px auto;
-    display: none;
-}
-
-div.page-hint {
-    font-size: 17px;
-    color: #fb2a2a;
-    text-align: center;
     margin: 20px auto;
 }
-
+.add-hint,.password-hint{
+    height:40px;
+    text-align: left;
+    color: red;
+}
 .dsp {
     display: block;
 }
-
-.errMsg {
-    margin-bottom: 10px;
-    text-align: center;
+.btn-bottom{
+    position: absolute;
+    bottom: 40px;
+}
+.login-in-box-tab-content form{
+    position: relative;
+    height: 406px;
 }

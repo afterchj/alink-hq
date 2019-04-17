@@ -52,6 +52,11 @@ public class HomeController {
         return "index";
     }
 
+    @RequestMapping("/welcome")
+    public String welcome() {
+        return "welcome";
+    }
+
     @RequestMapping("/useList")
     public String useList() {
         return "userManage/useList";
@@ -67,6 +72,11 @@ public class HomeController {
         return "userManage/createAccount";
     }
 
+    @RequestMapping("/changeEmail")
+    public String changeEmail() {
+        return "account/changeEmail";
+    }
+
     @RequestMapping("/bindEmail")
     public String bindEmail() {
         return "account/bindEmail";
@@ -77,16 +87,26 @@ public class HomeController {
         return "account/bindPhone";
     }
 
+    @RequestMapping("/changePhone")
+    public String changePhone() {
+        return "account/changePhone";
+    }
 
     @RequestMapping("/fillUsername")
     public String fillUsername() {
         return "account/fillUsername";
     }
 
+    @RequestMapping("/changeUsername")
+    public String changeUsername() {
+        return "account/changeUsername";
+    }
+
     @RequestMapping("/account")
     public String account() {
         return "account/account";
     }
+
     @RequestMapping("/changePassword")
     public String changePassword() {
         return "account/changePassword";
@@ -128,16 +148,12 @@ public class HomeController {
 
     @ResponseBody
     @RequestMapping("/checkUser")
-    public String checkUser(User user) {
+    public String checkUser(String uname) {
+        logger.info("user:" + uname);
         String str;
         Map map = new HashMap();
-        String uname = user.getUname();
-        String mobile = user.getMobile();
         if (StringUtils.isNotEmpty(uname)) {
             map.put("uname", uname);
-        }
-        if (StringUtils.isNotEmpty(mobile)) {
-            map.put("mobile", mobile);
         }
         int count = userService.getCount(map);
         if (count > 0) {
@@ -167,18 +183,18 @@ public class HomeController {
     @ResponseBody
     @RequestMapping("/verify")
     public String sendCode(String mobile, String email) {
-        logger.info("mobile=" + mobile + ",email=" + email);
         String str = "";
         Map map = new HashMap();
         if (StringUtils.isNotEmpty(mobile)) {
-            map.put("mobile", mobile);
+            map.put("uname", mobile);
             str = "mobile_";
         }
         if (StringUtils.isNotEmpty(email)) {
-            map.put("email", email);
+            map.put("uname", email);
             str = "email_";
         }
         int count = userService.getCount(map);
+        logger.info("mobile=" + mobile + ",email=" + email + ",count=" + count);
         if (count == 0) {
             str = str + "failure";
         } else {

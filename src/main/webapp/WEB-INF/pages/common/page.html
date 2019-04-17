@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <!--<title>分页</title>-->
+    <!--<link rel="stylesheet" th:href="@{/static/css/laydate.css}"/>-->
+    <!--<link rel="stylesheet" href="/alink-hq/static/css/base.css"/>-->
+    <!--<link rel="stylesheet" href="/alink-hq/static/css/leftNav.css"/>-->
+    <!--<link rel="stylesheet" href="/alink-hq/static/css/projectManage.css"/>-->
+</head>
+<body>
+<div class="f-r page-right" th:fragment="page">
+    <span>
+        <img src="/alink-hq/static/img/left-arrow.png" alt="">
+    </span>
+    <span>[[${page}]]</span>
+    <span>
+        <img src="/alink-hq/static/img/right-arrow-color.png" alt="">
+    </span>
+    <span class="m-l-15 m-r-20">共<span>[[${totalPage}]]</span>页</span>
+    <span class="m-r-15">
+        <input type="number">
+    </span>
+    <span class="m-r-35">
+        <img src="/alink-hq/static/img/skip-color.png" alt="">
+    </span>
+    <span class="m-r-15r">每页显示：</span>
+    <span class="m-r-20">
+        <select name="size" id="refresh">
+            <option value="10">10</option>
+            <option value="5">5</option>
+        </select>
+    </span>
+</div>
+</body>
+</html>
