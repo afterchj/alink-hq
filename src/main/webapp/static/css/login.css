@@ -1,13 +1,16 @@
-.logo {
-    left: 60px;
-    top: 30px;
-    z-index: 999;
-}
+/*.logo {*/
+    /*left: 60px;*/
+    /*top: 30px;*/
+    /*z-index: 999;*/
+/*}*/
 
-.content {
-    right: 195px;
-    top: 193px;
+/*.content {*/
+    /*right: 195px;*/
+    /*top: 193px;*/
 
+/*}*/
+.container{
+    background-image: url("/alink-hq/static/img/background.png");
 }
 
 ::-webkit-input-placeholder { /*Webkit browsers*/

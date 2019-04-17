@@ -92,3 +92,56 @@
 #createAccount label.l-radio{
     margin-right: 50px;
 }
+
+#useTurnOver{
+    margin:20px 0;
+    border:1px solid #bbb;
+}
+#useTurnOver .f-nav{
+    height: 58px;
+    line-height: 58px;
+    padding-left: 25px;
+    font-size: 22px;
+    color: #111;
+    border-bottom: 1px solid #bbb;
+}
+#useTurnOver .accountMsg{
+    margin:20px 50px;
+    border:1px solid #bbb;
+    padding: 30px;
+}
+#useTurnOver .accountMsg label{
+    display: inline-block;
+    width:130px;
+    font-size: 18px;
+    color: #3c3c3c;
+}
+#useTurnOver .accountMsg input{
+    height: 40px;
+    font-size: 18px;
+    width: 60%;
+
+    text-indent: 10px;
+    color: #3c3c3c;
+}
+#useTurnOver .accountMsg div{
+    width:50%;
+}
+#useTurnOver .transfer-company{
+    text-align: center;
+}
+#useTurnOver .transfer-company label{
+    display: inline-block;
+    width: 180px;
+    font-size: 18px;
+    color: #3c3c3c;
+    text-align: left;
+}
+#useTurnOver .transfer-company select{
+    border:1px solid #bbb;
+    width:30%;
+    text-indent: 10px;
+    font-size: 18px;
+    color: #3c3c3c;
+    height: 46px;
+}

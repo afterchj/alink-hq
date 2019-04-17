@@ -126,7 +126,7 @@ function passwordLogin() {
     //验证邮箱
     var regEmail = /^([a-zA-Z]|[0-9])(\w|\-)+@[a-zA-Z0-9]+\.([a-zA-Z]{2,4})$/;
     var emailResult = regEmail.test(unameVal);
-    console.log(unameVal, pwdVal);
+    // console.log(unameVal, pwdVal);
     var p=/^[0-9]+$/;
     var e = new RegExp("[@]");
     var a=/^[a-zA-Z]+$/;
@@ -208,7 +208,7 @@ function passwordLogin() {
             }
            
         }
-    }else if(a.test(unameVal) || unameVal.length<=6){
+    }else if(a.test(unameVal) || unameVal.length<=8){
         //想输入的是用户名
         if(!isBind){
             if (pwdVal == '') {
@@ -267,4 +267,48 @@ function closeOverTime(){
     $('#shade-lay').removeClass('active');
     $('#shade-lay').css({'width':width,'height':height});
     $('.overtime').removeClass('active');
+}
+
+
+//手机验证码登录
+function phoneLogin(){
+    var phoneVal=$('#phone').val();
+    var codeVal=$('#code').val();
+    console.log(phoneVal,codeVal);
+    //验证手机号格式是否正确
+    var regPhone = /^[1][3,4,5,7,8,9][0-9]{9}$/;
+    var phoneResult = regPhone.test(phoneVal);
+    console.log(phoneResult);
+    if(phoneVal==''){
+        if(codeVal==''){
+            $('.phone-login .add-hint').text('请输入手机号');
+            $('.phone-login .password-hint').text('请输入验证码');
+            $('#phone').val('');
+            $('#code').val('');
+        }else{
+            $('.phone-login .add-hint').text('请输入手机号');
+            $('.phone-login .password-hint').text('');
+            $('#phone').val('');
+        }
+    }
+}
+
+function phoneCode(){
+    var phoneVal=$('#phone').val();
+    var codeVal=$('#code').val();
+    //验证手机号格式是否正确
+    var regPhone = /^[1][3,4,5,7,8,9][0-9]{9}$/;
+    var phoneResult = regPhone.test(phoneVal);
+    console.log(phoneResult);
+    if(phoneVal==''){
+        if(codeVal==''){
+            $('.phone-login .add-hint').text('请输入手机号');
+            $('#phone').val('');
+            $('#code').val('');
+        }else{
+            $('.phone-login .add-hint').text('请输入手机号');
+            $('.phone-login .password-hint').text('');
+            $('#phone').val('');
+        }
+    }
 }
