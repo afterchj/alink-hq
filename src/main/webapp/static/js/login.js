@@ -51,7 +51,7 @@ $(function(){
         var regEmail = /^([a-zA-Z]|[0-9])(\w|\-)+@[a-zA-Z0-9]+\.([a-zA-Z]{2,4})$/;
         var emailResult = regEmail.test(unameVal);
         console.log(unameVal);
-        if(unameVal.length>6 && p.test(unameVal)){
+        if(p.test(unameVal)){
             if(!phoneResult){
                 $('.password-login .add-hint').text('请输入正确的手机号');
                 $('.password-login .password-hint').text('');
@@ -99,10 +99,10 @@ $(function () {
 
 
 
-$(function () {
-    $('#uname').val('');
-    $('#pwd').val('');
-})
+// $(function () {
+//     $('#uname').val('');
+//     $('#pwd').val('');
+// })
 
 function passwordLogin() {
     var isBind=false;
@@ -156,9 +156,10 @@ function passwordLogin() {
             $('.password-login .password-hint').text('请输入密码');
         }else{
             $('.password-login .add-hint').text('请输入账号/用户名/邮箱/手机号');
+            $('#pwd').val('');
             $('.password-login .password-hint').text('');
         }
-    }else if (unameVal.length>6 && p.test(unameVal)) {
+    }else if (p.test(unameVal)) {
         //想输入的是手机号
         if (!phoneResult) {
             $('.password-login .add-hint').text('请输入正确的手机号');
@@ -170,17 +171,22 @@ function passwordLogin() {
             }else {
                 $('.password-login .add-hint').text('该手机号未绑定');
                 $('.password-login .password-hint').text('');
+                $('#pwd').val('');
             }
         }else if(isBind){
+
+
             if (pwdVal == '') {
                 $('.password-login .add-hint').text('');
                 $('.password-login .password-hint').text('请输入密码');
             }else{
+                 localStorage.setItem('useVal',unameVal);
+                // var passwordVal=  localStorage.setItem('passwordVal',pwdVal);
+                // console.log('记住的用户名',useVal);
+                // console.log('记住的密码',passwordVal);
                 $("form:eq(0)").submit();
-                $('#uname').val('');
                 $('#pwd').val('');
                 $('.password-login .add-hint').text('');
-                // $('.password-login .page-hint').text('登录名密码不正确');
                 $('.password-login .password-hint').text('');
             }
         }
@@ -196,26 +202,29 @@ function passwordLogin() {
             }else{
                 $('.password-login .add-hint').text('该邮箱未绑定');
                 $('.password-login .password-hint').text('');
+                $('#pwd').val(' ');
             }
         }else{
             if (pwdVal == '') {
                 $('.password-login .add-hint').text('');
                 $('.password-login .password-hint').text('请输入密码');
             }else{
+                 localStorage.setItem('useVal',unameVal);
                 $("form:eq(0)").submit();
                 // $('.password-login .page-hint').text('登录名密码不正确');
                 $('.password-login .password-hint').text('');
             }
-           
         }
-    }else if(a.test(unameVal) || unameVal.length<=8){
+    }else if(a.test(unameVal)){
         //想输入的是用户名
         if(!isBind){
             if (pwdVal == '') {
                 $('.password-login .add-hint').text('登录名错误');
                 $('.password-login .password-hint').text('请输入密码');
             }else{
-                $('.password-login .add-hint').text('登录名不存在');
+                $('.password-login .page-hint').text('登录名密码不正确');
+                // $('.password-login .add-hint').text('登录名密码不正确');
+                $('#pwd').val('');
                 $('.password-login .password-hint').text('');
             }
         }else{
@@ -224,6 +233,7 @@ function passwordLogin() {
                 $('.password-login .password-hint').text('请输入密码');
                 $('.password-login .page-hint').text('');
             }else{
+                localStorage.setItem('useVal',unameVal);
                 $("form:eq(0)").submit();
                 $('.password-login .add-hint').text('');
                 // $('.password-login .page-hint').text('登录名密码不正确');
@@ -231,10 +241,37 @@ function passwordLogin() {
             }
         }
     }else{
+        localStorage.setItem('useVal',unameVal);
+        // localStorage.setItem('passwordVal',pwdVal);
+        // console.log('记住的用户名',useVal);
+        // console.log('记住的密码',passwordVal);
+        $("form:eq(0)").submit();
         $('.password-login .add-hint').text();
         $('.password-login .password-hint').text('');
     }
 }
+$(function(){
+    var text=$('.errMsg p').text();
+    console.log(text);
+    if(text!=''){
+        var hasUse=localStorage.getItem('useVal');
+        // var hasPwd=localStorage.getItem('passwordVal');
+        console.log('hasUse',hasUse);
+        // console.log('hasPwd',hasPwd);
+        if(hasUse){
+            $('#uname').val(hasUse);
+        }
+        // if(hasPwd){
+        //     $('#pwd').val(hasPwd);
+        // }
+    }else{
+        localStorage.removeItem('useVal');
+        localStorage.removeItem('passwordVal');
+        localStorage.clear()
+        $('#uname').val('');
+        $('#pwd').val('');
+    }
+})
 // $(function(){
 //     overTime();
 // })
