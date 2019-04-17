@@ -1,0 +1,163 @@
+#createAccount .c-nav{
+    height: 58px;
+    line-height: 58px;
+    padding-left: 25px;
+    font-size: 22px;
+    color: #111;
+    border-bottom: 1px solid #bbb;
+}
+#createAccount .c-createAccount{
+    height: 842px;
+    margin: 30px 0;
+    border: 1px solid #bbb;
+}
+#createAccount .c-content{
+    padding: 10px 70px;
+    font-size: 21px;
+    color: #3c3c3c;
+}
+#createAccount form{
+    width: 800px;
+    margin: auto;
+    font-size: 21px;
+    color: #3c3c3c;
+    margin-top: 100px;
+}
+#createAccount form>div{
+    margin-bottom: 80px;
+}
+#createAccount form>div>label:first-child{
+    width: 150px;
+    text-align: right;
+    display: inline-block;
+    margin-right: 100px;
+}
+#createAccount form>div select,#createAccount form>div input[type='text']{
+    height: 42px;
+    border-radius: 5px;
+    border: 1px solid #bbb;
+   
+}
+#createAccount form>div select{
+    width: 328px;
+    font-size: 18px;
+    color: #666;
+}
+#createAccount form>div input[type='text']{
+    width: 62px;
+    border-radius: 0;
+    border-top: none;
+    border-bottom: none;
+    font-size: 21px;
+    color: #3c3c3c;
+    text-align: center;
+}
+.num{
+    border: 1px solid #bbb;
+    display: inline-block;
+    border-radius: 5px;
+}
+.num>div{
+    display: inline-block;
+    width: 44px;
+    height: 44px;
+    line-height: 44px;
+    text-align: center;
+}
+#createAccount form>div button{
+    height: 44px;
+    width: 125px;
+    color: #fff;
+    font-size: 20px;
+    letter-spacing: 5px;
+    border: 1px solid #3598db;
+    background-color: #3598db;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-left: 255px;
+   
+}
+#createAccount form>div button:active{
+    background-color: #0068ae;
+}
+#createAccount input[type="radio"]{
+    display: none;
+
+}
+
+#createAccount .c-content img{
+    margin-right: 30px;
+    cursor: pointer;
+}
+#createAccount label.l-radio{
+    margin-right: 50px;
+}
+.f-content{
+    width: 70%;
+    height: 300px;
+    margin: 50px auto;
+    border:1px solid #bbb;
+    overflow: auto;
+}
+#useTurnOver{
+    margin:20px 0;
+    border:1px solid #bbb;
+}
+#useTurnOver .f-nav{
+    height: 58px;
+    line-height: 58px;
+    padding-left: 25px;
+    font-size: 22px;
+    color: #111;
+    border-bottom: 1px solid #bbb;
+}
+#useTurnOver .accountMsg{
+    /*border:1px solid #bbb;*/
+    padding: 20px;
+}
+#useTurnOver .accountMsg label{
+    /*display: inline-block;*/
+    margin: 5px 20px;
+    /*width:300px;*/
+    /*margin-right: 30px;*/
+    font-size: 18px;
+    color: #3c3c3c;
+}
+#useTurnOver .accountMsg input{
+    /*height: 40px;*/
+    font-size: 18px;
+    width: 160px;
+    text-indent: 10px;
+    color: #3c3c3c;
+}
+#useTurnOver .accountMsg div{
+    text-align: right;
+    width:30%;
+}
+#useTurnOver .transfer-company{
+    text-align: center;
+}
+#useTurnOver .transfer-company label{
+    display: inline-block;
+    width: 180px;
+    font-size: 18px;
+    color: #3c3c3c;
+    text-align: left;
+}
+#useTurnOver .transfer-company select{
+    border:1px solid #bbb;
+    width:30%;
+    text-indent: 10px;
+    font-size: 18px;
+    color: #3c3c3c;
+    height: 46px;
+}
+.confirm-btn{
+    display: inline-block;
+    color: white;
+    background: #006DC1;
+    width: 130px;
+    margin-left: 22px;
+    height: 50px;
+    font-size: 20px;
+}

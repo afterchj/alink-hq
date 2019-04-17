@@ -98,53 +98,53 @@
                     <td colspan="9" class="clearfix page">
                         <div class="f-l">
                             <span class="selected-order">已选择
-                                <span class="amount">100</span>条数据
+                                <span class="amount">0</span>条数据
                             </span>
                             <span class="m-r-20">
-                                <img src="/alink-hq/static/img/turn-over.png" alt="">
+                                <img src="/alink-hq/static/img/turn-over.png" alt="" id="multiMove">
                             </span>
                             <span>
                                 <img src="/alink-hq/static/img/delete-over.png" alt="">
                             </span>
                         </div>
-                        <!--<div th:replace="common/page::page"></div>-->
-                        <div class="f-r page-right" th:fragment="page">
-                            <span>
-                                 <div th:switch="${page}">
-                                     <a th:case="1" href="javascript:void(0)">
-                                        <img src="/alink-hq/static/img/left-arrow.png" alt="">
-                                    </a>
-                                     <a th:case="*" th:href="@{/mesh/list(page=${page-1},size=${size})}">
-                                        <img src="/alink-hq/static/img/left-arrow.png" alt="" id="prev">
-                                    </a>
-                                 </div>
-                            </span>
-                            <span th:inline="text">[[${page}]]</span>
-                            <span>
-                                <div th:switch="${page}">
-                                     <a th:case="${totalPage}" href="javascript:void(0)">
-                                        <img src="/alink-hq/static/img/right-arrow-color.png" alt="">
-                                    </a>
-                                    <a th:case="*" th:href="@{/mesh/list(page=${page+1},size=${size})}">
-                                        <img src="/alink-hq/static/img/right-arrow-color.png" alt="">
-                                    </a>
-                                </div>
-                            </span>
-                            <span class="m-l-15 m-r-20">共<span th:inline="text">[[${totalPage}]]</span>页</span>
-                            <span class="m-r-15"><input type="number" th:value="${page}" id="page" name="skip">
-                            </span>
-                            <span class="m-r-35">
-                                <img src="/alink-hq/static/img/skip-color.png" id="skip" alt="">
-                            </span>
-                            <span class="m-r-15r">每页显示：</span>
-                            <span class="m-r-20">
-                                <select id="size" name="size">
-                                    <option value="10">10</option>
-                                    <option value="8">8</option>
-                                    <option value="5">5</option>
-                                </select>
-                            </span>
-                        </div>
+                        <div th:replace="common/page::page"></div>
+                        <!--<div class="f-r page-right">-->
+                        <!--<span>-->
+                        <!--<div th:switch="${page}">-->
+                        <!--<a th:case="1" href="javascript:void(0)">-->
+                        <!--<img src="/alink-hq/static/img/left-arrow.png" alt="">-->
+                        <!--</a>-->
+                        <!--<a th:case="*" th:href="@{/mesh/list(page=${page-1},size=${size})}">-->
+                        <!--<img src="/alink-hq/static/img/left-arrow.png" alt="" id="prev">-->
+                        <!--</a>-->
+                        <!--</div>-->
+                        <!--</span>-->
+                        <!--<span th:inline="text">[[${page}]]</span>-->
+                        <!--<span>-->
+                        <!--<div th:switch="${page}">-->
+                        <!--<a th:case="${totalPage}" href="javascript:void(0)">-->
+                        <!--<img src="/alink-hq/static/img/right-arrow-color.png" alt="">-->
+                        <!--</a>-->
+                        <!--<a th:case="*" th:href="@{/mesh/list(page=${page+1},size=${size})}">-->
+                        <!--<img src="/alink-hq/static/img/right-arrow-color.png" alt="">-->
+                        <!--</a>-->
+                        <!--</div>-->
+                        <!--</span>-->
+                        <!--<span class="m-l-15 m-r-20">共<span th:inline="text">[[${totalPage}]]</span>页</span>-->
+                        <!--<span class="m-r-15"><input type="number" th:value="${page}" id="page" name="skip">-->
+                        <!--</span>-->
+                        <!--<span class="m-r-35">-->
+                        <!--<img src="/alink-hq/static/img/skip-color.png" id="skip" alt="">-->
+                        <!--</span>-->
+                        <!--<span class="m-r-15r">每页显示：</span>-->
+                        <!--<span class="m-r-20">-->
+                        <!--<select id="size" name="size">-->
+                        <!--<option value="10">10</option>-->
+                        <!--<option value="8">8</option>-->
+                        <!--<option value="5">5</option>-->
+                        <!--</select>-->
+                        <!--</span>-->
+                        <!--</div>-->
                     </td>
                 </tr>
                 </tfoot>
@@ -191,25 +191,14 @@
         $("#size").val(size);
         //给全选的复选框添加事件
         $("#all").click(function () {
+            var length = $("input[name=mids]:checked").length;
             // this 全选的复选框
             var checked = this.checked;
             //获取name=mids的复选框 遍历输出复选框
             $("input[name=mids]").each(function () {
                 this.checked = checked;
             });
-        });
-
-        $("#size").change(function () {
-            var size = $("#size option:selected").val();
-            console.log("size=" + size);
-            location.href = "/alink-hq/mesh/list?size=" + size;
-//            size = $("#size").find("option:selected").val();
-        });
-        $("#skip").click(function () {
-            var page = $("#page").val();
-            var size = $("#size option:selected").val();
-            console.log("page=" + page + ",size=" + size);
-            location.href = "/alink-hq/mesh/list?page=" + page + "&size=" + size;
+            $(".amount").text(length);
         });
         //给name=mids的复选框绑定单击事件
         $("input[name=mids]").click(function () {
@@ -223,7 +212,29 @@
             } else {
                 $("#all")[0].checked = false;
             }
+            $(".amount").text(length);
         });
+        $("#size").change(function () {
+            var size = $("#size option:selected").val();
+            console.log("size=" + size);
+            location.href = "/alink-hq/mesh/list?size=" + size;
+//            size = $("#size").find("option:selected").val();
+        });
+        $("#skip").click(function () {
+            var page = $("#page").val();
+            var size = $("#size option:selected").val();
+//            console.log("page=" + page + ",size=" + size);
+            location.href = "/alink-hq/mesh/list?page=" + page + "&size=" + size;
+        });
+        $("#multiMove").click(function () {
+            var mids =[];//定义一个数组
+            $('input[name="mids"]:checked').each(function(){//遍历每一个名字为interest的复选框，其中选中的执行函数
+                mids.push($(this).val());//将选中的值添加到数组chk_value中
+            });
+            console.log("mids=" + typeof mids+ ",value=" + mids);
+            location.href = "/alink-hq/mesh/move?mids=" + mids;
+        });
+
     });
 </script>
 </body>

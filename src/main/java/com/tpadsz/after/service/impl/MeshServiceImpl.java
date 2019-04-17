@@ -1,6 +1,7 @@
 package com.tpadsz.after.service.impl;
 
 import com.tpadsz.after.dao.MeshDao;
+import com.tpadsz.after.entity.OptionList;
 import com.tpadsz.after.service.MeshService;
 import org.springframework.stereotype.Service;
 
@@ -25,5 +26,15 @@ public class MeshServiceImpl implements MeshService {
     @Override
     public List<Map> getByMap(Map map) {
         return meshDao.getByMap(map);
+    }
+
+    @Override
+    public List<Map> selectByMid(List list) {
+        return meshDao.selectByMid(list);
+    }
+
+    @Override
+    public List<OptionList> getProjects() {
+        return meshDao.getProjects();
     }
 }

@@ -9,8 +9,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 import java.util.concurrent.TimeoutException;
 
 /**
@@ -66,5 +65,11 @@ public class MainTest {
         int total = 46;
         int totalPage = total / size == 0 ? total / size : total / size + 1;
         logger.info("total=" + total + ",totalPage=" + totalPage);
+        String mids = "55,57,65,66,67";
+        String[] ids = mids.split(",");
+        List<String> list = new ArrayList(Arrays.asList(ids));
+        for (String id:list){
+            System.out.println(id);
+        }
     }
 }
