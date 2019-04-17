@@ -64,9 +64,9 @@ $(function () {
     $("#pwd1").blur(function () {
         var pwdVal = $.trim(this.value); //原生js去空格方式：this.replace(/(^\s*)|(\s*$)/g, "")
         if (pwdVal == "") {
-            $('p.email-password-hint').addClass('active').text('密码不能为空！');
+            $('p.mobile-password-hint').addClass('active').text('密码不能为空！');
         } else {
-            $('p.email-password-hint').removeClass('active').text('');
+            $('p.mobile-password-hint').removeClass('active').text('');
         }
     });
     //验证邮箱
