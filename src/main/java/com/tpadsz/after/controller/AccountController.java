@@ -33,8 +33,8 @@ public class AccountController {
 
     @RequestMapping(value = "/list", method = RequestMethod.GET)
     public String list(String uid, Integer pageNum, Integer pageSize, String account, Integer fid, Integer roleId,
-                         String startDate, String endDate,
-                         Model model) {
+                       String startDate, String endDate,
+                       Model model) {
         if (pageNum == null) {
             pageNum = 1;   //设置默认当前页
         }
@@ -134,7 +134,7 @@ public class AccountController {
         try {
             accountService.updateAccount(account, randomPwd);
             info = "重置密码成功";
-        }catch (Exception e){
+        } catch (Exception e) {
             info = "重置密码失败";
         }
         map.put("result", info);
@@ -174,12 +174,16 @@ public class AccountController {
         Map<String, String> map = new HashMap<>();
         String info;
         try {
-            accountService.delete(uid);
-            info="删除账号成功";
-        }catch (Exception e){
-            info="删除账号失败";
+            int count = accountService.delete(uid);
+            if (count == 0) {
+                info = "名下无项目，成功";
+            } else {
+                info = "名下有项目，跳转";
+            }
+        } catch (Exception e) {
+            info = "删除账号失败";
         }
-        map.put("result",info);
+        map.put("result", info);
         return map;
     }
 
@@ -191,10 +195,10 @@ public class AccountController {
         try {
             accountService.enable(uid, status);
             info = "启/禁用账号成功";
-        }catch (Exception e){
+        } catch (Exception e) {
             info = "启/禁用账号失败";
         }
-        map.put("result",info);
+        map.put("result", info);
         return map;
     }
 
