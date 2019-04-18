@@ -66,7 +66,7 @@ public class ShiroDbRealm extends AuthorizingRealm {
                 throw new LockedAccountException("该账号在别处登入！");
             }
         } else {
-            throw new UnknownAccountException("账号不存在！");
+            throw new UnknownAccountException("登录名错误");
         }
         try {
             byte[] salt = Encodes.decodeHex(user.getSalt());

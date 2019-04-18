@@ -40,7 +40,17 @@ $(function () {
 })
 
 $(function(){
+    $('#uname').click(function(){
+        var text= $('.password-login .add-hint').text();
+        if(text!=''){
+            $('.password-login .add-hint').text('');
+        }
+    })
     $('#pwd').click(function(){
+        var text= $('.password-login .password-hint').text();
+        if(text!=''){
+            $('.password-login .password-hint').text('');
+        }
         var unameVal = $('#uname').val();
         var p=/^[0-9]+$/;
         var e = new RegExp("[@]");
@@ -99,10 +109,6 @@ $(function () {
 
 
 
-// $(function () {
-//     $('#uname').val('');
-//     $('#pwd').val('');
-// })
 
 function passwordLogin() {
     var isBind=false;
@@ -336,7 +342,7 @@ function phoneCode(){
     //验证手机号格式是否正确
     var regPhone = /^[1][3,4,5,7,8,9][0-9]{9}$/;
     var phoneResult = regPhone.test(phoneVal);
-    console.log(phoneResult);
+    // console.log(phoneResult);
     if(phoneVal==''){
         if(codeVal==''){
             $('.phone-login .add-hint').text('请输入手机号');

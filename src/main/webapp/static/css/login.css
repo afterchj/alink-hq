@@ -15,48 +15,56 @@ body{
     width:100%;
 }
 .container{
-    background-image: url(/alink-hq/static/img/background.png);
-    position: relative;
-    top: 0;
-    height: 80%;
-    width: 100%;
-    background-size: 100% 100%;
+    background-color: #2a87d1;
+    width: 1500px;
+    margin: auto;
+
 }
 .logo{
-    padding: 60px 0 0 60px;
+    padding: 65px 0 80px 60px;
 }
 .content{
-    width: 28%;
-    padding:0 0 2% 60%;
+    width: 500px;
+    margin: 180px 0 0 200px;
+}
+.b-l{
+    width: 40%;
+}
+.b-r{
+    width:60%;
+}
+.foot-container{
+    /*width:1500px;*/
 }
 ::-webkit-input-placeholder { /*Webkit browsers*/
     color: #999;
-    font-size: 100%;
+    font-size: 18px;
 }
 .icon-input{
-    height: 12%;
+
 }
 :-moz-placeholder { /*Mozilla Firefox 4 to 8*/
     color: #999;
-    font-size: 100%;
+    font-size: 18px;
 }
 
 ::moz-placeholder { /*Mozilla Firefox 19+*/
     color: #999;
-    font-size: 100%;
+    font-size: 18px;
 }
 
 :-ms-input-placeholder { /*Internet Explorer 10+*/
     color: #999;
-    font-size: 100%;
+    font-size: 18px;
 }
 
 .login-in-box {
-    top: 4%;
-    left: 4%;
-    right: 4%;
-    bottom: 7%;
-    border-radius: 5px;
+    top: 20px;
+    left: 20px;
+    right: 20px;
+    bottom: 30px;
+    border-radius: 10px;
+    background-color: rgba(255,255,255,.27);
 
 }
 
@@ -64,7 +72,7 @@ body{
     height: 20%;
     vertical-align: bottom;
     /* height: 100%; */
-    font-size: 150%;
+    font-size: 22px;
     color: #fff;
     /* padding-top: 45px; */
     border-bottom: 1px solid #bbb;
@@ -95,27 +103,28 @@ body{
 }
 
 .content .login-in-box-tab-content {
-    width: 100%;
-    height: 80%;
-    margin-top: 1%;
+    /*width: 100%;*/
+    /*height: 80%;*/
+    /*margin-top: 1%;*/
 }
 
 .content .login-in-box-tab-content input {
     display: block;
     border: 1px solid #797979;
     width: 100%;
-    height: 100%;
-    line-height: 100%;
+    height: 48px;
+    line-height: 48px;
     text-indent: 50px;
     border-radius: 5px;
     margin: 0;
-    font-size: 100%;
+    font-size: 16px;
+    color: #3c3c3c;
 }
 
 .content .login-in-box-tab-content button {
     width: 100%;
-    height: 60%;
-    font-size: 100%;
+    height: 50px;
+    font-size: 19px;
     background-color: #006DC1;
     color: #fff;
     border: 1px solid #006DC1;
@@ -124,15 +133,13 @@ body{
 }
 
 .icon {
-    left: 3%;
-    top: 12%;
-    width: 8%;
-    height: 80%;
+    left: 10px;
+    top: 7px;
 }
 
 .content .hint {
-    font-size: 20px;
-    margin-top: 10px;
+
+    margin-top: 20px;
     height: 25px;
     color: #fff;
     /* width: 404px; */
@@ -145,26 +152,24 @@ body{
 }
 
 .login-in-box-foot {
-    width: 100%;
-    height: 15%;
-    color: #333;
-    bottom: 0;
-    font-size: 14px;
-    position: fixed;
+    width: 1300px;
+    margin: auto;
+    padding: 80px 0 30px 0;
+    min-width: 700px;
 }
 
 .login-in-box-foot .twoCode .part {
-    font-size: 14px;
+    font-size: 16px;
     width: 33.33%;
     white-space: nowrap;
 }
 
 .login-in-box-foot .twoCode .part > .part-right {
-    padding: 10px 0 10px 15px;
+    padding-left: 20px;
 }
 
 .login-in-box-foot .twoCode .part > .part-right > div {
-    line-height: 1.5;
+    line-height: 2;
 }
 
 .login-in-box-foot .part-icon {
@@ -197,18 +202,18 @@ body{
 
 .content .login-in-box-tab-content button.security-code {
     display: inline-block;
-    width: 33%;
-    margin-left: 3%;
-    height: 100%;
+    width: 135px;
+    margin-left: 15px;
+    height: 50px;
     position: absolute;
-    font-size: 100%;
+    font-size: 18px;
     top: 1px;
     white-space: nowrap;
 }
 
 .content .login-in-box-tab-content input.phone {
     display: inline-block;
-    width: 63%;
+    width: 225px;
 }
 
 .password-login, .phone-login, .phone-find-password, .email-find-password {
@@ -224,8 +229,8 @@ display: none;
     /*left: 50%;*/
     /*top: 96px;*/
     /*margin-left: -40%;*/
-    width: 100%;
-    height: 100%;
+    /*width: 100%;*/
+    /*height: 100%;*/
     display: block;
 }
 
@@ -247,20 +252,20 @@ display: none;
 /*}*/
 
 p.add-hint, p.password-hint, p.code-hint {
-    font-size: 100%;
+    font-size: 17px;
     color: #fb2a2a;
     text-align: left;
     display: block;
 }
 
 p.mobile-add-hint, p.mobile-password-hint, p.mobile-code-hint {
-    font-size: 100%;
+    font-size: 17px;
     color: #fb2a2a;
     text-align: left;
 }
 
 p.email-add-hint, p.email-password-hint, p.email-code-hint {
-    font-size: 100%;
+    font-size: 17px;
     color: #fb2a2a;
     text-align: left;
 }
@@ -268,7 +273,9 @@ p.email-add-hint, p.email-password-hint, p.email-code-hint {
 p.add-hint.active, p.password-hint.active, p.page-hint.active, p.code-hint.active {
     display: block;
 }
-
+.outer-container{
+    background-color: #2a87d1;
+}
 /*p.page-hint {*/
     /*font-size: 17px;*/
     /*color: #fb2a2a;*/
@@ -280,10 +287,10 @@ p.add-hint.active, p.password-hint.active, p.page-hint.active, p.code-hint.activ
 /*}*/
 
 .page-hint {
-    font-size: 100%;
+    font-size: 17px;
     color: #fb2a2a;
     text-align: center;
-    margin: 20px auto;
+    /* margin: 20px auto; */
 }
 .add-hint,.password-hint{
     height:40px;
@@ -295,19 +302,20 @@ p.add-hint.active, p.password-hint.active, p.page-hint.active, p.code-hint.activ
 }
 .btn-bottom{
     position: absolute;
-    bottom: 7%;
+    bottom: 0;
     width: 100%;
-    height: 23%;
+    height: 110px;
 }
 .login-in-box-tab-content form{
     position: relative;
-    height: 100%;
-    margin: 0px 8% 0 8%;
+    height: 371px;
+    margin: 0 40px;
 }
 .twoCode,.link,.filing{
-    min-width: 70%;
-    margin: 0 15%;
     white-space: nowrap;
+}
+.content .hint span{
+    font-size: 18px;
 }
 /*遮罩层*/
 
