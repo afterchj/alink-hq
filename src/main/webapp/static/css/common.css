@@ -1,19 +1,9 @@
-
-td {
-    width: 160px;
-    height: 30px;
-    border: 1px solid grey;
-    text-align: center;
-}
-
-a {
-    text-decoration: none;
-}
-
 /*#login1 input {*/
 /*width: 300px;*/
 /*}*/
-
+.amount{
+    color: red;
+}
 .myDisplay {
     display: none;
 }
@@ -30,13 +20,6 @@ a {
     width: 60%;
     height: 30%;
     margin: 10px auto;
-}
-.table li{
-    float: left;
-    margin-right: 10px;
-}
-.title li {
-    cursor: pointer;
 }
 
 .high {
@@ -59,10 +42,6 @@ a {
     width: 80%;
     margin: 10px auto;
     text-align: left;
-}
-
-.loginForm input {
-    height: 30px;
 }
 
 .loginBtn {
