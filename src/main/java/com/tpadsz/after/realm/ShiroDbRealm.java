@@ -70,7 +70,7 @@ public class ShiroDbRealm extends AuthorizingRealm {
         }
         try {
             byte[] salt = Encodes.decodeHex(user.getSalt());
-            info = new SimpleAuthenticationInfo(user.getUname(), user.getPwd(), ByteSource.Util.bytes(salt), getName());
+            info = new SimpleAuthenticationInfo(username, user.getPwd(), ByteSource.Util.bytes(salt), getName());
         } catch (Exception e) {
             throw new IncorrectCredentialsException("账号密码不正确！");
         }

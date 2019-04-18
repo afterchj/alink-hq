@@ -49,17 +49,19 @@ public class MeshController {
         List<Map> meshMap = meshService.selectByMid(list);
         logger.info("result=" + JSON.toJSONString(meshMap));
         modelMap.put("meshMap", meshMap);
+        modelMap.put("mids", mids);
         return "meshTemp/meshMove";
     }
 
     @RequestMapping("/saveUpdate")
-    public String save(String mids,String pid, ModelMap modelMap) {
+    public String save(String mids, String pid) {
+        logger.info("mids=" + mids + ",pid=" + pid);
         String[] ids = mids.split(",");
         List<String> list = new ArrayList(Arrays.asList(ids));
-        Map map=new HashMap();
-        List<Map> meshMap = meshService.selectByMid(list);
-        logger.info("result=" + JSON.toJSONString(meshMap));
-        modelMap.put("meshMap", meshMap);
+        Map map = new HashMap();
+        map.put("pid", pid);
+        map.put("list", list);
+        meshService.saveUpdate(map);
         return "redirect:/mesh/list";
     }
 
