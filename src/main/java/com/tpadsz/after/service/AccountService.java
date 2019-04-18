@@ -14,12 +14,6 @@ public interface AccountService {
 
     Integer findRoleIdByUid(String uid);
 
-    List<UserList> findUserListBySuper();
-
-    List<UserList> findUserListByAdmin();
-
-    List<UserList> findUserListByManager(List<String> uids);
-
     List<Firm> findFirmList();
 
     List<Role> findRoleList();

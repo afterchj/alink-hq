@@ -14,22 +14,6 @@
         SELECT uid FROM alink.f_user_customer AS t1 INNER JOIN alink.f_user_role AS t4 ON t1.uid = t4.user_id WHERE t4.role_id = 4 and t1.fid=(SELECT fid FROM f_user_customer WHERE uid=#{uid})
     </select>
 
-    <select id="findUserListBySuper" resultType="com.tpadsz.after.entity.UserList">
-        SELECT t1.id,t1.account,t1.uname,t1.mobile,t1.email,t3.coname,t4.role_id,DATE_FORMAT(t1.create_date,'%Y-%m-%d %H:%i:%s') AS create_date,t1.status FROM alink.f_user_account AS t1 INNER JOIN alink.f_user_customer AS t2 ON t1.id = t2.uid INNER JOIN alink.f_firm AS t3 ON t2.fid = t3.id INNER JOIN alink.f_user_role AS t4 ON t1.id = t4.user_id WHERE t4.role_id &lt;&gt;1 ORDER BY t1.update_date DESC,t1.create_date DESC
-    </select>
-
-    <select id="findUserListByAdmin" resultType="com.tpadsz.after.entity.UserList">
-        SELECT t1.id,t1.account,t1.uname,t1.mobile,t1.email,t3.coname,t4.role_id,DATE_FORMAT(t1.create_date,'%Y-%m-%d %H:%i:%s') AS create_date,t1.status FROM alink.f_user_account AS t1 INNER JOIN alink.f_user_customer AS t2 ON t1.id = t2.uid INNER JOIN alink.f_firm AS t3 ON t2.fid = t3.id INNER JOIN alink.f_user_role AS t4 ON t1.id = t4.user_id WHERE t4.role_id IN(3,4) ORDER BY t1.update_date DESC,t1.create_date DESC
-    </select>
-
-    <select id="findUserListByManager" resultType="com.tpadsz.after.entity.UserList">
-        SELECT t1.id,t1.account,t1.uname,t1.mobile,t1.email,t3.coname,t4.role_id,DATE_FORMAT(t1.create_date,'%Y-%m-%d
-        %H:%i:%s') AS create_date,t1.status FROM (SELECT * FROM alink.f_user_account WHERE id IN
-        <foreach item="item" collection="list" open="(" separator="," close=")">#{item}
-        </foreach>) AS t1 INNER JOIN alink.f_user_customer AS t2 ON t1.id = t2.uid INNER JOIN alink.f_firm AS t3 ON
-        t2.fid = t3.id ORDER BY t1.update_date DESC,t1.create_date DESC
-    </select>
-
     <select id="findFirmList" resultType="com.tpadsz.after.entity.Firm">
         SELECT id,coname FROM alink.f_firm ORDER BY id
     </select>

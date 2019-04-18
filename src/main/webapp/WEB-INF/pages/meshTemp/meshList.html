@@ -4,6 +4,7 @@
 <head>
     <title>网络列表</title>
     <script src="/alink-hq/static/js/jquery.min.js"></script>
+    <link rel="stylesheet" th:href="@{/static/css/common.css}"/>
     <link rel="stylesheet" th:href="@{/static/css/laydate.css}"/>
     <link rel="stylesheet" th:href="@{/static/css/base.css}"/>
     <link rel="stylesheet" th:href="@{/static/css/leftNav.css}"/>
@@ -74,7 +75,7 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr th:each="mesh:${meshList}">
+                <tr th:each="mesh:${pageInfo.list}">
                     <td><input type="checkbox" name="mids" th:value="${mesh.id}"></td>
                     <td th:text="${mesh.mname}"></td>
                     <td th:text="${mesh.mesh_id}"></td>
@@ -186,7 +187,7 @@
 </div>
 <script th:inline="javascript">
     $(function () {
-        var size = [[${size}]];
+        var size = [[${pageInfo.pageSize}]];
         console.log("type:" + typeof size + ",value=" + size);
         $("#size").val(size);
         //给全选的复选框添加事件
@@ -215,23 +216,24 @@
             $(".amount").text(length);
         });
         $("#size").change(function () {
+            var page = $("#page").val();
             var size = $("#size option:selected").val();
             console.log("size=" + size);
-            location.href = "/alink-hq/mesh/list?size=" + size;
+            location.href = "/alink-hq/mesh/list?pageNum=" + page + "&pageSize=" + size;
 //            size = $("#size").find("option:selected").val();
         });
         $("#skip").click(function () {
             var page = $("#page").val();
             var size = $("#size option:selected").val();
 //            console.log("page=" + page + ",size=" + size);
-            location.href = "/alink-hq/mesh/list?page=" + page + "&size=" + size;
+            location.href = "/alink-hq/mesh/list?pageNum=" + page + "&pageSize=" + size;
         });
         $("#multiMove").click(function () {
-            var mids =[];//定义一个数组
-            $('input[name="mids"]:checked').each(function(){//遍历每一个名字为interest的复选框，其中选中的执行函数
+            var mids = [];//定义一个数组
+            $('input[name="mids"]:checked').each(function () {//遍历每一个名字为interest的复选框，其中选中的执行函数
                 mids.push($(this).val());//将选中的值添加到数组chk_value中
             });
-            console.log("mids=" + typeof mids+ ",value=" + mids);
+            console.log("mids=" + typeof mids + ",value=" + mids);
             location.href = "/alink-hq/mesh/move?mids=" + mids;
         });
 
