@@ -20,16 +20,16 @@
             <img src="/alink-hq/static/img/go-back.png" alt="">
         </div>
     </div>
-    <form action="" class="">
+    <form th:action="@{/mesh/saveUpdate}" class="" method="get">
         <div id="useTurnOver">
             <div class="f-nav">
                 网络移动
             </div>
             <div class="f-content">
+                <input type="hidden" name="mids" th:value="${mids}">
                 <div class="accountMsg clearfix" th:each="mesh:${meshMap}">
                     <div class="f-l">
                         <label th:text="${mesh.mname}"></label>
-                        <!--<input type="text" th:value="${mesh.mesh_id}">-->
                     </div>
                     <div class="f-l">
                         <label for="mid">网络ID：</label>
@@ -59,7 +59,7 @@
                 </ul>
             </div>
             <div style="text-align: center;margin: 30px auto">
-                <button class="confirm-btn" type="button">确定移交</button>
+                <button class="confirm-btn" type="submit">确定移交</button>
             </div>
         </div>
     </form>

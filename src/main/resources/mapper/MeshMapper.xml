@@ -49,6 +49,7 @@
 
     <select id="selectByMid" resultType="map" parameterType="list">
         SELECT
+        m.id,
         m.mname,
         m.mesh_id,
         p.name
@@ -66,4 +67,12 @@
     <select id="getProjects" resultType="OptionList">
         SELECT id,`name` FROM f_project
     </select>
+
+    <update id="saveUpdate" parameterType="map">
+        UPDATE f_mesh SET project_id=#{pid}
+        WHERE id IN
+        <foreach collection="list" index="index" item="mid" separator="," open="(" close=")">
+            #{mid}
+        </foreach>
+    </update>
 </mapper>

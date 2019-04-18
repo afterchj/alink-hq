@@ -14,5 +14,6 @@ public interface MeshService {
     List<Map> getByMap(Map map);
 
     List<Map> selectByMid(List list);
+    void saveUpdate(Map map);
     List<OptionList> getProjects();
 }

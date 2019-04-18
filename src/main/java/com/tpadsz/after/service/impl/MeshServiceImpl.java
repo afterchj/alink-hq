@@ -34,6 +34,11 @@ public class MeshServiceImpl implements MeshService {
     }
 
     @Override
+    public void saveUpdate(Map map) {
+        meshDao.saveUpdate(map);
+    }
+
+    @Override
     public List<OptionList> getProjects() {
         return meshDao.getProjects();
     }
