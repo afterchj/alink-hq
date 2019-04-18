@@ -30,59 +30,9 @@ public class AccountController {
     @Resource
     private AccountService accountService;
 
+
     @RequestMapping(value = "/list", method = RequestMethod.GET)
-    public String list(String uid, Integer pageNum, Integer pageSize, Model model) {
-        if (pageNum == null) {
-            pageNum = 1;   //设置默认当前页
-        }
-        if (pageNum <= 0) {
-            pageNum = 1;
-        }
-        if (pageSize == null) {
-            pageSize = 10;    //设置默认每页显示的数据数
-        }
-        try {
-            Integer role_id = accountService.findRoleIdByUid(uid);
-            List<Role> roleList = new ArrayList<>();
-            List<Firm> firmList = getFirmInfo(role_id, uid);
-            List<UserList> userList = new ArrayList<>();
-            if (role_id == 1) {
-                PageHelper.startPage(pageNum, pageSize);
-                userList = accountService.findUserListBySuper();
-                roleList = accountService.findRoleList();
-                roleList.remove(0);
-            } else if (role_id == 2) {
-                PageHelper.startPage(pageNum, pageSize);
-                userList = accountService.findUserListByAdmin();
-                roleList = accountService.findRoleList();
-                for (int i = 0; i < role_id; i++) {
-                    roleList.remove(0);
-                }
-            } else if (role_id == 3) {
-                List<String> uids = accountService.findFirmUidOfUser(uid);
-                uids.remove(uid);
-                if (uids.size() != 0) {
-                    PageHelper.startPage(pageNum, pageSize);
-                    userList = accountService.findUserListByManager(uids);
-                }
-                roleList = accountService.findRoleList();
-                for (int i = 0; i < role_id; i++) {
-                    roleList.remove(0);
-                }
-            }
-            PageInfo<UserList> pageInfo = new PageInfo<UserList>(userList, pageSize);
-            model.addAttribute("pageInfo", pageInfo);
-            model.addAttribute("firmList", firmList);
-            model.addAttribute("roleList", roleList);
-        } catch (Exception e) {
-
-        }
-        return "userManage/useList";
-    }
-
-
-    @RequestMapping(value = "/search", method = RequestMethod.GET)
-    public String search(String uid, Integer pageNum, Integer pageSize, String account, Integer fid, Integer roleId,
+    public String list(String uid, Integer pageNum, Integer pageSize, String account, Integer fid, Integer roleId,
                          String startDate, String endDate,
                          Model model) {
         if (pageNum == null) {
@@ -130,6 +80,8 @@ public class AccountController {
             model.addAttribute("account", account);
             model.addAttribute("fid", fid);
             model.addAttribute("roleId", roleId);
+            model.addAttribute("startDate", startDate);
+            model.addAttribute("endDate", endDate);
         } catch (Exception e) {
 
         }

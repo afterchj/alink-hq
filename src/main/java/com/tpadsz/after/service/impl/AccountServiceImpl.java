@@ -28,21 +28,6 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
-    public List<UserList> findUserListBySuper() {
-        return accountDao.findUserListBySuper();
-    }
-
-    @Override
-    public List<UserList> findUserListByAdmin() {
-        return accountDao.findUserListByAdmin();
-    }
-
-    @Override
-    public List<UserList> findUserListByManager(List<String> uids) {
-        return accountDao.findUserListByManager(uids);
-    }
-
-    @Override
     public List<Firm> findFirmList() {
         return accountDao.findFirmList();
     }
@@ -111,7 +96,10 @@ public class AccountServiceImpl implements AccountService {
 
     @Override
     public void delete(String uid) {
+
         accountDao.delete(uid);
+
+
     }
 
     @Override
