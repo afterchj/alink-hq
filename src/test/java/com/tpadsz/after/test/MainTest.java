@@ -1,5 +1,6 @@
 package com.tpadsz.after.test;
 
+import com.alibaba.fastjson.JSON;
 import com.tpadsz.after.entity.User;
 import net.rubyeye.xmemcached.XMemcachedClient;
 import net.rubyeye.xmemcached.exception.MemcachedException;
@@ -60,6 +61,14 @@ public class MainTest {
         System.out.println("demo=======================" + xMemcachedClient.get("test"));
     }
 
+    @Test
+    public void testMesh(){
+        Map map=new HashMap();
+        map.put("role","admin");
+        map.put("uid",4);
+        List<Map> list=getSqlSessionTemplate().selectList("com.tpadsz.after.dao.MeshDao.getByMap", map);
+        System.out.println(JSON.toJSONString(list));
+    }
     public static void main(String[] args) {
         int size = 8;
         int total = 46;
