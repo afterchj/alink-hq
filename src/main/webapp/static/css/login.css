@@ -21,11 +21,11 @@ body{
 
 }
 .logo{
-    padding: 65px 0 80px 60px;
+    padding: 60px 0 0px 60px;
 }
 .content{
     width: 500px;
-    margin: 180px 0 0 300px;
+    margin: 125px 0 0 300px;
 }
 .b-l{
     width: 40%;
@@ -137,7 +137,7 @@ body{
 }
 .icon {
     left: 10px;
-    top: 7px;
+    top: 10px;
 }
 
 .content .hint {
@@ -162,7 +162,7 @@ body{
 }
 
 .login-in-box-foot .twoCode .part {
-    font-size: 16px;
+    font-size: 14px;
     width: 33.33%;
     white-space: nowrap;
 }
@@ -256,20 +256,20 @@ display: none;
 /*}*/
 
 p.add-hint, p.password-hint, p.code-hint {
-    font-size: 17px;
+    font-size: 16px;
     color: #fb2a2a;
     text-align: left;
     display: block;
 }
 
 p.mobile-add-hint, p.mobile-password-hint, p.mobile-code-hint {
-    font-size: 17px;
+    font-size: 16px;
     color: #fb2a2a;
     text-align: left;
 }
 
 p.email-add-hint, p.email-password-hint, p.email-code-hint {
-    font-size: 17px;
+    font-size: 16px;
     color: #fb2a2a;
     text-align: left;
 }
@@ -291,7 +291,7 @@ p.add-hint.active, p.password-hint.active, p.page-hint.active, p.code-hint.activ
 /*}*/
 
 .page-hint {
-    font-size: 17px;
+    font-size: 16px;
     color: #fb2a2a;
     text-align: center;
     /* margin: 20px auto; */

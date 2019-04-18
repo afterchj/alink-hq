@@ -108,9 +108,40 @@ $(function () {
         }, 1000)
     }
 })
+// window.onbeforeunload=function(){
+//
+//  var result=$('.errMsg p').html('');
+//
+//     return result;//必须有return ，不然只有ie有效，chrome无效
+//
+// }
+//check for Navigation Timing API support
+// if (window.performance) {
+//     console.info("window.performance works fine on this browser");
+// }
+// if (performance.navigation.type == 1) {
+//    $('.errMsg p').html('');
+//
+//
+// } else {
+//     console.info( "This page is not reloaded");
+// }
 
 $(function(){
-    $('body').click(function () {
+    $("input").focus(function(){
+        $('.errMsg p').html('');
+    });
+})
+
+    // var  isCalled=true;
+
+
+
+        // if(isCalled){
+        //     console.log('isCalled',isCalled);
+$(function(){
+    $('.container').click(function () {
+        console.log('我执行');
         var unameVal = $('#uname').val();
         var p=/^[0-9]+$/;
         var e = new RegExp("[@]");
@@ -142,188 +173,208 @@ $(function(){
     })
 })
 
+        // }
 
 
-function passwordLogin() {
-    $('.content .login-in-box-tab-content button').addClass('active');
-    var isBind=false;
-    // $('.password-login .add-hint').text('');
-    // $('.password-login .password-hint').text('');
-    // $('.password-login .page-hint ').text('');
-    //检测用户名格式是否正确
-    var unameVal = $('#uname').val();
-    var pwdVal = $('#pwd').val();
-    console.log(unameVal,pwdVal);
-    var regUserName = /^[a-zA-Z0-9\u4e00-\u9fa5]{2,6}$/;
-    var userNameResult = regUserName.test(unameVal);
-    //密码格式是否正确
-    var regPwd = /^[a-z0-9]{6,16}$/;
-    var pwdResult = regPwd.test(pwdVal);
-    //检测账号格式是否正确
-    var regAccount = /^[a-z A-Z]{5}[0-9]{3}/;
-    var accountResult = regAccount.test(unameVal);
-    //验证手机号是否正确
-    var regPhone = /^[1][3,4,5,7,8,9][0-9]{9}$/;
-    var phoneResult = regPhone.test(unameVal);
-    //验证邮箱
-    var regEmail = /^([a-zA-Z]|[0-9])(\w|\-)+@[a-zA-Z0-9]+\.([a-zA-Z]{2,4})$/;
-    var emailResult = regEmail.test(unameVal);
-    // console.log(unameVal, pwdVal);
-    var p=/^[0-9]*$/;
+    function passwordLogin() {
+        $('.content .login-in-box-tab-content button').addClass('active');
+        // $('body').on('click','.container',function(){
+        //     return false;
+        // })
+        // $('.container').click(function(){
+        // })
 
-    var e = new RegExp("[@]");
-    var a=/^[a-zA-Z]+$/;
-    // var u=/^[0-9a-zA-Z]*$/g;
-    // var n=/^[0-9]*$/;
-    // var h= /^[\u4e00-\u9fa5]+$/;
-    var h=new RegExp("[\u4e00-\u9fa5]");
-    console.log(h.test(unameVal));
-    // 检测是否被绑定
-    $.ajax({
-        type: "GET",
-        url: "/alink-hq/checkUser",
-        data: {
-            "uname": unameVal
-        },
-        async: false,
-        success: function (res) {
-            console.log(res);
-            if (res == "success") {
-                console.log("有这个用户名");  
-                isBind=true;
+        var isBind=false;
+        //检测用户名格式是否正确
+        var unameVal = $('#uname').val();
+        var pwdVal = $('#pwd').val();
+        console.log(unameVal,pwdVal);
+        var regUserName = /^[a-zA-Z0-9\u4e00-\u9fa5]{2,6}$/;
+        var userNameResult = regUserName.test(unameVal);
+        //密码格式是否正确
+        var regPwd = /^[a-z0-9]{6,16}$/;
+        var pwdResult = regPwd.test(pwdVal);
+        //检测账号格式是否正确
+        var regAccount = /^[a-z A-Z]{5}[0-9]{3}/;
+        var accountResult = regAccount.test(unameVal);
+        //验证手机号是否正确
+        var regPhone = /^[1][3,4,5,7,8,9][0-9]{9}$/;
+        var phoneResult = regPhone.test(unameVal);
+        //验证邮箱
+        var regEmail = /^([a-zA-Z]|[0-9])(\w|\-)+@[a-zA-Z0-9]+\.([a-zA-Z]{2,4})$/;
+        var emailResult = regEmail.test(unameVal);
+        // console.log(unameVal, pwdVal);
+        var p=/^[0-9]*$/;
 
+        var e = new RegExp("[@]");
+        var a=/^[a-zA-Z]+$/;
+        var h=new RegExp("[\u4e00-\u9fa5]");
+        console.log(h.test(unameVal));
+        // 检测是否被绑定
+        $.ajax({
+            type: "GET",
+            url: "/alink-hq/checkUser",
+            data: {
+                "uname": unameVal
+            },
+            async: false,
+            success: function (res) {
+                console.log(res);
+                if (res == "success") {
+                    console.log("有这个用户名");
+                    isBind=true;
+
+                }
             }
-        }
-    })
-    console.log(isBind);
-    if(unameVal==''){
-        if (pwdVal == '') {
-            $('.password-login .add-hint').text('请输入账号/用户名/邮箱/手机号');
-            $('.password-login .password-hint').text('请输入密码');
+        })
+        console.log(isBind);
+        if(unameVal==''){
+            if (pwdVal == '') {
+                $('.password-login .add-hint').text('请输入账号/用户名/邮箱/手机号');
+                $('.password-login .password-hint').text('请输入密码');
+            }else{
+                $('.password-login .add-hint').text('请输入账号/用户名/邮箱/手机号');
+                $('#pwd').val('');
+                $('.password-login .password-hint').text('');
+            }
+        }else if (p.test(unameVal)) {
+            //想输入的是手机号
+            console.log('想输入的是手机号');
+            console.log(isBind);
+            if (!phoneResult) {
+                $('.password-login .add-hint').text('请输入正确的手机号');
+                $('.password-login .password-hint').text('');
+            } else if(isBind) {
+                console.log('走了这部分1');
+                if (pwdVal == '') {
+                    $('.password-login .add-hint').text('');
+                    $('.password-login .password-hint').text('请输入密码');
+                }else{
+                    localStorage.setItem('useVal',unameVal);
+                    $("form:eq(0)").submit();
+                    $('#pwd').val('');
+                    $('.password-login .add-hint').text('');
+                    $('.password-login .password-hint').text('');
+                }
+            }else{
+                $('.container').unbind('click'); //K掉事件
+                console.log('走了这部分2');
+                if (pwdVal == '') {
+                    $('.password-login .add-hint').text('该手机号未绑定');
+                    $('.password-login .password-hint').text('请输入密码');
+                }else {
+                    $('.password-login .add-hint').text('该手机号未绑定');
+                    $('.password-login .password-hint').text('');
+                    $('#pwd').val('');
+                }
+            }
+            // else if(isBind){
+            //     if (pwdVal == '') {
+            //         $('.password-login .add-hint').text('');
+            //         $('.password-login .password-hint').text('请输入密码');
+            //     }else{
+            //          localStorage.setItem('useVal',unameVal);
+            //         // var passwordVal=  localStorage.setItem('passwordVal',pwdVal);
+            //         // console.log('记住的用户名',useVal);
+            //         // console.log('记住的密码',passwordVal);
+            //         $("form:eq(0)").submit();
+            //         $('#pwd').val('');
+            //         $('.password-login .add-hint').text('');
+            //         $('.password-login .password-hint').text('');
+            //     }
+            // }
+        }else if(e.test(unameVal)){
+            //想输入的是邮箱
+            if(!emailResult){
+                $('.password-login .add-hint').text('请输入正确的邮箱');
+                $('.password-login .password-hint').text('');
+            }else if(!isBind){
+                if (pwdVal == '') {
+                    $('.password-login .add-hint').text('该邮箱未绑定');
+                    $('.password-login .password-hint').text('请输入密码');
+                }else{
+                    $('.password-login .add-hint').text('该邮箱未绑定');
+                    $('.password-login .password-hint').text('');
+                    $('#pwd').val('');
+                }
+            }else{
+                if (pwdVal == '') {
+                    $('.password-login .add-hint').text('');
+                    $('.password-login .password-hint').text('请输入密码');
+                }else{
+                    localStorage.setItem('useVal',unameVal);
+                    $("form:eq(0)").submit();
+                    // $('.password-login .page-hint').text('登录名密码不正确');
+                    $('.password-login .password-hint').text('');
+                }
+            }
+            // }
+            // else if(a.test(unameVal)  || h.test(unameVal) || accountResult){
+            //     //想输入的是用户名或账号
+            //     console.log('想输入的是用户名或账号');
+            //     if(!isBind){
+            //         if (pwdVal == '') {
+            //             $('.password-login .add-hint').text('登录名错误');
+            //             $('.password-login .password-hint').text('请输入密码');
+            //         }else{
+            //             $('.password-login .page-hint').text('登录名密码不正确');
+            //             // $('.password-login .add-hint').text('登录名密码不正确');
+            //             $('#pwd').val('');
+            //             $('.password-login .password-hint').text('');
+            //         }
+            //     }else{
+            //         if(pwdVal==''){
+            //             $('.password-login .add-hint').text('');
+            //             $('.password-login .password-hint').text('请输入密码');
+            //             $('.password-login .page-hint').text('');
+            //         }else{
+            //             localStorage.setItem('useVal',unameVal);
+            //             $("form:eq(0)").submit();
+            //             $('.password-login .add-hint').text('');
+            //             // $('.password-login .page-hint').text('登录名密码不正确');
+            //             $('.password-login .password-hint').text('');
+            //         }
+            //     }
         }else{
-            $('.password-login .add-hint').text('请输入账号/用户名/邮箱/手机号');
-            $('#pwd').val('');
-            $('.password-login .password-hint').text('');
-        }
-    }else if (p.test(unameVal)) {
-        //想输入的是手机号
-        if (!phoneResult) {
-            $('.password-login .add-hint').text('请输入正确的手机号');
-            $('.password-login .password-hint').text('');
-        } else if(!isBind) {
-            if (pwdVal == '') {
-                $('.password-login .add-hint').text('该手机号未绑定');
-                $('.password-login .password-hint').text('请输入密码');
-            }else {
-                $('.password-login .add-hint').text('该手机号未绑定');
-                $('.password-login .password-hint').text('');
-                $('#pwd').val('');
-            }
-        }else if(isBind){
-
-
-            if (pwdVal == '') {
-                $('.password-login .add-hint').text('');
-                $('.password-login .password-hint').text('请输入密码');
+            // localStorage.setItem('useVal',unameVal);
+            // localStorage.setItem('passwordVal',pwdVal);
+            // console.log('记住的用户名',useVal);
+            // console.log('记住的密码',passwordVal);
+            // $("form:eq(0)").submit();
+            // $('.password-login .add-hint').text();
+            // $('.password-login .password-hint').text('');
+            //想输入的是用户名或账号
+            console.log('想输入的是用户名或账号');
+            if(!isBind){
+                if (pwdVal == '') {
+                    $('.password-login .add-hint').text('登录名错误');
+                    $('.password-login .password-hint').text('请输入密码');
+                    $('.password-login .page-hint').text('');
+                }else{
+                    $('.password-login .page-hint').text('登录名密码不正确');
+                    // $('.password-login .add-hint').text('登录名密码不正确');
+                    $('#pwd').val('');
+                    $('.password-login .password-hint').text('');
+                }
             }else{
-                 localStorage.setItem('useVal',unameVal);
-                // var passwordVal=  localStorage.setItem('passwordVal',pwdVal);
-                // console.log('记住的用户名',useVal);
-                // console.log('记住的密码',passwordVal);
-                $("form:eq(0)").submit();
-                $('#pwd').val('');
-                $('.password-login .add-hint').text('');
-                $('.password-login .password-hint').text('');
-            }
-        }
-    }else if(e.test(unameVal)){
-        //想输入的是邮箱
-        if(!emailResult){
-            $('.password-login .add-hint').text('请输入正确的邮箱');
-            $('.password-login .password-hint').text('');
-        }else if(!isBind){
-            if (pwdVal == '') {
-                $('.password-login .add-hint').text('该邮箱未绑定');
-                $('.password-login .password-hint').text('请输入密码');
-            }else{
-                $('.password-login .add-hint').text('该邮箱未绑定');
-                $('.password-login .password-hint').text('');
-                $('#pwd').val('');
-            }
-        }else{
-            if (pwdVal == '') {
-                $('.password-login .add-hint').text('');
-                $('.password-login .password-hint').text('请输入密码');
-            }else{
-                 localStorage.setItem('useVal',unameVal);
-                $("form:eq(0)").submit();
-                // $('.password-login .page-hint').text('登录名密码不正确');
-                $('.password-login .password-hint').text('');
-            }
-        }
-    // }
-    // else if(a.test(unameVal)  || h.test(unameVal) || accountResult){
-    //     //想输入的是用户名或账号
-    //     console.log('想输入的是用户名或账号');
-    //     if(!isBind){
-    //         if (pwdVal == '') {
-    //             $('.password-login .add-hint').text('登录名错误');
-    //             $('.password-login .password-hint').text('请输入密码');
-    //         }else{
-    //             $('.password-login .page-hint').text('登录名密码不正确');
-    //             // $('.password-login .add-hint').text('登录名密码不正确');
-    //             $('#pwd').val('');
-    //             $('.password-login .password-hint').text('');
-    //         }
-    //     }else{
-    //         if(pwdVal==''){
-    //             $('.password-login .add-hint').text('');
-    //             $('.password-login .password-hint').text('请输入密码');
-    //             $('.password-login .page-hint').text('');
-    //         }else{
-    //             localStorage.setItem('useVal',unameVal);
-    //             $("form:eq(0)").submit();
-    //             $('.password-login .add-hint').text('');
-    //             // $('.password-login .page-hint').text('登录名密码不正确');
-    //             $('.password-login .password-hint').text('');
-    //         }
-    //     }
-    }else{
-        // localStorage.setItem('useVal',unameVal);
-        // localStorage.setItem('passwordVal',pwdVal);
-        // console.log('记住的用户名',useVal);
-        // console.log('记住的密码',passwordVal);
-        // $("form:eq(0)").submit();
-        // $('.password-login .add-hint').text();
-        // $('.password-login .password-hint').text('');
-        //想输入的是用户名或账号
-        console.log('想输入的是用户名或账号');
-        if(!isBind){
-            if (pwdVal == '') {
-                $('.password-login .add-hint').text('登录名错误');
-                $('.password-login .password-hint').text('请输入密码');
-                $('.password-login .page-hint').text('');
-            }else{
-                $('.password-login .page-hint').text('登录名密码不正确');
-                // $('.password-login .add-hint').text('登录名密码不正确');
-                $('#pwd').val('');
-                $('.password-login .password-hint').text('');
-            }
-        }else{
-            if(pwdVal==''){
-                $('.password-login .add-hint').text('');
-                $('.password-login .password-hint').text('请输入密码');
-                $('.password-login .page-hint').text('');
-            }else{
-                localStorage.setItem('useVal',unameVal);
-                $("form:eq(0)").submit();
-                $('.password-login .add-hint').text('');
-                // $('.password-login .page-hint').text('登录名密码不正确');
-                $('.password-login .password-hint').text('');
+                if(pwdVal==''){
+                    $('.password-login .add-hint').text('');
+                    $('.password-login .password-hint').text('请输入密码');
+                    $('.password-login .page-hint').text('');
+                }else{
+                    localStorage.setItem('useVal',unameVal);
+                    // $("form:eq(0)").submit();
+                    $('.password-login .add-hint').text('');
+                    // $('.password-login .page-hint').text('登录名密码不正确');
+                    $('.password-login .password-hint').text('');
+                }
             }
         }
     }
-}
+
+
+
+
 $(function(){
     var text=$('.errMsg p').text();
     console.log(text);
@@ -423,14 +474,3 @@ function phoneCode(){
         }
     }
 }
-// window.onload=function() {
-//     function fixRem() {
-//         var windowWidth = document.documentElement.clientWidth || window.innerWidth || document.body.clientWidth;
-//         // windowWidth = windowWidth > 750 ? 750 : windowWidth;
-//         var rootSize = 28 * (windowWidth / 375);
-//         var htmlNode = document.getElementsByTagName("html")[0];
-//         htmlNode.style.fontSize = rootSize + 'px';
-//     }
-//     fixRem();
-//     window.addEventListener('resize', fixRem, false);
-// }
