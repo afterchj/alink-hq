@@ -19,6 +19,7 @@ audio, video {
 body {
     line-height:1;
     zoom: 1;
+    background: #bbb;
 }
 a{
     text-decoration:none;

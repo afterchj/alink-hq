@@ -14,6 +14,30 @@
     font-size: 24px;
     margin-left: 40px;
 }
+.container{
+    width: 1800px;    margin: auto;
+}
+.c-container{
+    width:1800px;
+    margin: auto;
+}
+.one-list>div{
+    height: 62px;
+    line-height: 62px;
+}
+.one-list>div a{
+    font-size: 26px;
+}
+.all-container{
+    background-color: #3895D6;
+
+}
+.main-left{
+
+    background-image: url(/alink-hq/static/img/left-list.png);
+    background-size: 100% 100%;
+    height: 872px;
+}
 .ad-nav img{
     margin-right: 15px;
     position: absolute;
@@ -33,10 +57,10 @@
     margin: 20px 58px 20px 323px;
 }
 .main-left{
-    padding: 45px 58px 45px 45px;
+    padding: 45px 0 45px 40px;
 }
 .main-left a{
-    font-size:26px;
+    font-size: 24px;
     color: #111;
 }
 .one-list{
@@ -49,12 +73,12 @@
     height: 62px;
     line-height: 62px;
     width: 190px;
-    margin-left: 30px;
+    padding-left: 30px;
     cursor: pointer;
 }
 .one-list img{
-    top:35%;
-    right:0;
+    top: 43%;
+    right: 15px;
     cursor: pointer;
 }
 .main-right-nav{
@@ -68,4 +92,7 @@
 }
 .main-right-nav>div:last-child{
     margin-right:15px;
+}
+.one-list li.active{
+    background-color: #bbb;
 }
