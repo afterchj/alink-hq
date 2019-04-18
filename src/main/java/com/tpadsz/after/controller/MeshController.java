@@ -2,7 +2,9 @@ package com.tpadsz.after.controller;
 
 import com.alibaba.fastjson.JSON;
 import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.tpadsz.after.entity.OptionList;
+import com.tpadsz.after.entity.UserList;
 import com.tpadsz.after.service.MeshService;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
@@ -28,17 +30,13 @@ public class MeshController {
     private Logger logger = Logger.getLogger(this.getClass());
 
     @RequestMapping("/list")
-    public String list(@RequestParam(required = false, defaultValue = "1") Integer page, @RequestParam(required = false, defaultValue = "10") Integer size, ModelMap modelMap) {
-        logger.info("page=" + page + ",size=" + size);
-        int total = meshService.getByMap(null).size();
-        int totalPage = total / size == 0 ? total / size : total / size + 1;
-        PageHelper.startPage(page, size);
+    public String list(@RequestParam(required = false, defaultValue = "1") Integer pageNum, @RequestParam(required = false, defaultValue = "10") Integer pageSize, ModelMap modelMap) {
+        logger.info("page=" + pageNum + ",size=" + pageSize);
+        PageHelper.startPage(pageNum, pageSize);
         List<Map> meshList = meshService.getByMap(null);
-        modelMap.put("page", page);
-        modelMap.put("size", size);
-        modelMap.put("totalPage", totalPage);
-        modelMap.put("meshList", meshList);
-        logger.info("total=" + total + ",totalPage=" + totalPage);
+        PageInfo<Map> pageInfo = new PageInfo(meshList, pageSize);
+        modelMap.put("pageInfo", pageInfo);
+        logger.info("total=" + pageInfo.getTotal() + ",pages=" + pageInfo.getPages());
         return "meshTemp/meshList";
     }
 
