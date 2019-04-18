@@ -1,43 +1,27 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.tpadsz.after.dao.MeshDao">
-
+<mapper namespace="com.tpadsz.after.dao.PlaceDao">
 
     <sql id="Base_Column_List">
-		m.id,
-        m.uid,
-        m.project_id,
+        p.id,
+        p.mid,
+        p.pname,
+        p.place_id,
         m.mname,
         m.mesh_id,
-        m.mesh_type,
-        p. name,
-        pl.pcount,
-        s.scount
+        g.gcount
 	</sql>
 
     <select id="getByMap" resultType="map" parameterType="map">
         SELECT
         <include refid="Base_Column_List"/>
         FROM
-        f_mesh m
-        INNER JOIN f_project p ON m.project_id = p.id
-        INNER JOIN (SELECT COUNT(1) pcount,mid FROM f_place GROUP BY mid) pl ON pl.mid=m.id
-        INNER JOIN (SELECT COUNT(1) scount,mid FROM f_scene GROUP BY mid) s ON s.mid=m.id
+        f_place p
+        INNER JOIN f_mesh m ON m.id = p.mid
+        INNER JOIN (SELECT COUNT(1) gcount,pid FROM f_group GROUP BY pid) g ON g.pid=p.id
         WHERE 1=1
-        <if test="uid!=null and uid!=''">
-            <choose>
-                <when test="role == 'manager'">
-                    AND m.uid IN (SELECT uid FROM f_user_customer c INNER JOIN f_user_role r ON c.uid=r.user_id WHERE r.role_id=4 AND c.fid=(SELECT c.fid FROM f_user_customer c WHERE c.uid=#{uid})) OR m.uid=#{uid}
-                </when >
-                <when test="role == 'admin'">
-                    AND m.uid IN (SELECT uid FROM f_user_customer c INNER JOIN f_user_role r ON c.uid=r.user_id WHERE r.role_id in (3,4)) OR m.uid=#{uid}
-                </when >
-                <when test="role == 'user'">
-                    AND m.uid =#{uid}
-                </when >
-                <!--<otherwise>-->
-                <!--</otherwise>-->
-            </choose>
+        <if test="mid!=null">
+            AND p.mid=#{mid}
         </if>
         <if test="pid!=null">
             AND m.project_id=#{pid}

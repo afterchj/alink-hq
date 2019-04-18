@@ -306,6 +306,6 @@ public class HomeController {
     public String logOut(HttpSession session) {
         logger.info("logOut...");
         session.removeAttribute("user");
-        return "redirect:/index";
+        return "redirect:/";
     }
 }
