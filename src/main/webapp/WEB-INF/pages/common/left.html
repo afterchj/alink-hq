@@ -33,7 +33,7 @@
                     </ul>
                 </li>
                 <li class="one-list">
-                    <a href="javascript:void(0);" tab="account">我的账户</a>
+                    <a th:href="@{/myAccount/myAccount(account=${session.user.getAccount()})}">我的账户</a>
                 </li>
             </ul>
         </div>

@@ -1,4 +1,5 @@
 $(function () {
+
     // 6-16 位数字、字母
     var match = /^[a-zA-Z0-9]{6,16}$/;
     var text = "请输入 6-16 位数字、字母";
@@ -47,15 +48,10 @@ $(function () {
                     success:function (msg) {
                         console.log("msg: "+msg.success);
                         if (msg.success=="密码修改成功"){
-                            alert("密码修改成功");
-                            //2s后跳转
-                            setTimeout(function () {
-                                var title = "密码";
-                                var content = "修改";
-                                parent.loding(title, content);
-                                window.location.href = "http://localhost:8080/alink-hq/myAccount/myAccount?account="+account;
-
-                            },2000);
+                            // alert("密码修改成功");
+                            var title = "密码";
+                            var content = "修改";
+                            loding(title, content, account);
                         }else {
                             alert(msg.success);
                         }
@@ -68,11 +64,12 @@ $(function () {
         }
     })
 });
-function loding(title,content){
+function loding(title,content,account){
     $('#preload-anim').addClass('active');
     $('#preload-anim .title').text(title+content+'成功！');
     setTimeout(function(){
         $('#preload-anim').removeClass('active');
         $('#preload-anim .title').text('');
+        window.location.href = "http://localhost:8080/alink-hq/myAccount/myAccount?account="+account;
     },2000)
 }

@@ -52,6 +52,9 @@ function countDown(obj, second, value) {
         // 按钮置为不可点击状态
 
         obj.attr("disabled", true);
+        obj.css("background","#A0A0A0");
+        // obj.style.background = "#A0A0A0";
+        // obj.style.borderColor = "#A0A0A0";
 //          obj.disabled = true;
         // 按钮里的内容呈现倒计时状态
 //          obj.value = buttonDefaultValue+'('+second+'S)';
@@ -60,15 +63,25 @@ function countDown(obj, second, value) {
         second--;
         // 一秒后重复执行
         setTimeout(function () {
-            countDown(obj, second);
+            countDown(obj, second, value);
         }, 1000);
         // 否则，按钮重置为初始状态
     } else {
         // 按钮置未可点击状态
 //          obj.disabled = false;
         obj.attr("disabled", false);
+        obj.css("background","#3598db")
+        // obj.style.background = "#3598db";
+        // obj.style.borderColor = "#A0A0A0";
         // 按钮里的内容恢复初始状态
 //          obj.value = '获取验证码';
         obj.text(value);
     }
 }
+$(function () {
+    $("#clickReturn").click(function () {
+        var account = $(".account").val();
+        window.location.href = "http://localhost:8080/alink-hq/myAccount/myAccount?account="+account;
+    });
+
+});

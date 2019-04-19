@@ -169,11 +169,10 @@ public class MyAccountController {
      * @return
      */
     @RequestMapping(value = "/myAccount", method = RequestMethod.GET)
-//    @ResponseBody
     public String myAccount(String account, Model model) {
         MyAccount myAccount = myAccountService.getAllByAccount(account);
         model.addAttribute("myAccount", myAccount);
-        return "account/account";
+        return "myAccount/account";
     }
 
     /**
@@ -185,7 +184,7 @@ public class MyAccountController {
     @RequestMapping(value = "/pwd", method = RequestMethod.GET)
     public String pwd(String account, Model model) {
         model.addAttribute("account", account);
-        return "account/changePassword";
+        return "myAccount/changePassword";
     }
 
     /**
@@ -198,11 +197,11 @@ public class MyAccountController {
     public String fillUname(String account,String flag,Model model){
         model.addAttribute("account", account);
         model.addAttribute("flag", flag);
-        return "account/fillUsername";
+        return "myAccount/fillUsername";
     }
 
     /**
-     * 跳转modifiUname.html
+     * 跳转changeUsername.html
      * @param account
      * @param model
      * @return
@@ -212,7 +211,7 @@ public class MyAccountController {
         model.addAttribute("account", account);
         model.addAttribute("uname", uname);
         model.addAttribute("flag", flag);
-        return "account/modifiUname";
+        return "myAccount/changeUsername";
     }
 
     /**
@@ -226,11 +225,11 @@ public class MyAccountController {
     public String fillMobile(String account,String flag,Model model){
         model.addAttribute("account", account);
         model.addAttribute("flag", flag);
-        return "account/bindPhone";
+        return "myAccount/bindPhone";
     }
 
     /**
-     * 跳转modifiMobile.html
+     * 跳转changePhone.html
      * @param account
      * @param model
      * @return
@@ -239,7 +238,7 @@ public class MyAccountController {
     public String modifiMobile(String account, String flag,Model model){
         model.addAttribute("account", account);
         model.addAttribute("flag", flag);
-        return "account/modifiMobile";
+        return "myAccount/changePhone";
     }
     /**
      * 跳转bindEmail.html
@@ -252,11 +251,11 @@ public class MyAccountController {
     public String fillEmail(String account,String flag,Model model){
         model.addAttribute("account", account);
         model.addAttribute("flag", flag);
-        return "account/bindEmail";
+        return "myAccount/bindEmail";
     }
 
     /**
-     * 跳转modifiEmail.html
+     * 跳转changeEmail.html
      * @param account
      * @param model
      * @return
@@ -265,6 +264,6 @@ public class MyAccountController {
     public String modifiEmail(String account, String flag,Model model){
         model.addAttribute("account", account);
         model.addAttribute("flag", flag);
-        return "account/modifiEmail";
+        return "myAccount/changeEmail";
     }
 }
