@@ -23,7 +23,7 @@
     <bean id="configProperties" class="org.springframework.beans.factory.config.PropertiesFactoryBean">
         <property name="locations">
             <list>
-                <value>classpath:setup.production.properties</value>
+                <value>classpath:setup.demo.properties</value>
                 <value>classpath:common.properties</value>
             </list>
         </property>
@@ -148,11 +148,7 @@
         </property>
     </bean>
     <!-- Use factory bean to build memcached client -->
-    <bean
-            id="memcachedClient"
-            factory-bean="memcachedClientBuilder"
-            factory-method="build"
-            destroy-method="shutdown"/>
+    <bean id="memcachedClient" factory-bean="memcachedClientBuilder" factory-method="build" destroy-method="shutdown"/>
     <!-- 开发环境配置文件 -->
     <!--<beans profile="development">-->
     <!--<bean id="configProperties" class="org.springframework.beans.factory.config.PropertiesFactoryBean">-->

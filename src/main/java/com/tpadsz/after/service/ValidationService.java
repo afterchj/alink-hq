@@ -6,8 +6,8 @@ import com.tpadsz.after.exception.InvalidCodeException;
 import com.tpadsz.after.utils.HttpUtils;
 import com.tpadsz.after.utils.email.SendMailUtil;
 import net.rubyeye.xmemcached.MemcachedClient;
-import net.rubyeye.xmemcached.XMemcachedClient;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,6 +19,7 @@ import java.util.Random;
 @Service
 public class ValidationService {
 
+    private Logger logger = Logger.getLogger(this.getClass());
     @Autowired
     private MemcachedClient client;
 
@@ -29,23 +30,31 @@ public class ValidationService {
         return code;
     }
 
-    public String sendEmailCode(String email,String flag) throws Exception{
+    public String sendEmailCode(String email, String flag) throws Exception {
         String key = String.format(MemcachedObjectType.CACHE_MESSAGE_VERIFICATION.getPrefix(), email);
         String code = prepare(key);
-        SendMailUtil.sendCode(code,email,flag);
+        SendMailUtil.sendCode(code, email, flag);
         return code;
     }
 
     public void checkCode(String code, String mobile) throws InvalidCodeException {
         String key = String.format(MemcachedObjectType.CACHE_MESSAGE_VERIFICATION.getPrefix(), mobile);
-        String value = getCode(key);
+        String value = null;
+        try {
+            value = client.get(key);
+        } catch (Exception e) {
+            logger.info("checkCode:" + e.getMessage());
+        }
+        if (value == null) {
+            throw new InvalidCodeException("500", "验证码已过期！");
+        }
         if (!StringUtils.equals(code, value)) {
-            throw new InvalidCodeException("验证码不正确！");
+            throw new InvalidCodeException("300", "验证码不正确！");
         }
     }
 
     private String prepare(String key) throws Exception {
-        String code = getRandomNum(6);
+        String code = client.get(key) == null ? getRandomNum(6) : client.get(key);
         client.set(key, MemcachedObjectType.CACHE_MESSAGE_VERIFICATION.getExpiredTime(), code);
         return code;
     }
@@ -57,15 +66,5 @@ public class ValidationService {
             sb.append(r.nextInt(10));
         }
         return sb.toString();
-    }
-
-    private String getCode(String key) {
-        String code = "";
-        try {
-            code = client.get(key);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return code;
     }
 }

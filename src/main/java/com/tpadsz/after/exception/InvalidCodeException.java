@@ -5,10 +5,19 @@ package com.tpadsz.after.exception;
  */
 public class InvalidCodeException extends Exception {
 
+    private String code;
+    private String message;
+
     public InvalidCodeException() {
+
     }
 
-    public InvalidCodeException(String message) {
+    public InvalidCodeException(String code,String message) {
         super(message);
+        this.code=code;
+    }
+
+    public String getCode() {
+        return code;
     }
 }
