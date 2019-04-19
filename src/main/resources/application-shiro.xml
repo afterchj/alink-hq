@@ -61,7 +61,6 @@
                 /static/** = anon
                 /rest/** = anon
                 /user/register = anon
-                /cms/** = authc,roles[admin]
                 /user/** = authc
                 /** = anon
             </value>

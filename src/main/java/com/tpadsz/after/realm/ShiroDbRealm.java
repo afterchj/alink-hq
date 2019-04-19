@@ -37,13 +37,8 @@ public class ShiroDbRealm extends AuthorizingRealm {
      */
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
-//        logger.info("doGetAuthorizationInfo...");
         String username = (String) principals.getPrimaryPrincipal();
         SimpleAuthorizationInfo authorizationInfo = new SimpleAuthorizationInfo();
-        List<String> permission = userExtendDao.getPermissions(username);
-//        logger.info("permission:" + JSON.toJSONString(permission));
-        List<String> roles = userExtendDao.getRoles(username);
-//        logger.info("role:" + JSON.toJSONString(roles));
         authorizationInfo.setRoles(new HashSet<>(userExtendDao.getRoles(username)));
         authorizationInfo.setStringPermissions(new HashSet<>(userExtendDao.getPermissions(username)));
         return authorizationInfo;
@@ -54,7 +49,6 @@ public class ShiroDbRealm extends AuthorizingRealm {
      */
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) {
-//        logger.info("doGetAuthenticationInfo...");
         String username = (String) token.getPrincipal();
 //        logger.info("username=" + username);
         User user = userExtendDao.selectByUsername(username);
