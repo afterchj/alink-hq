@@ -264,7 +264,7 @@ function passwordLogin() {
                 $('.password-login .page-hint').text('');
             } else {
                 localStorage.setItem('useVal', unameVal);
-                // $("form:eq(0)").submit();
+                $("form:eq(0)").submit();
                 $('.password-login .add-hint').text('');
                 // $('.password-login .page-hint').text('登录名密码不正确');
                 $('.password-login .password-hint').text('');

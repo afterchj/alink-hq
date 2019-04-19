@@ -14,8 +14,9 @@
             <ul>
                 <li class="one-list">
                     <div class="p-r">
-                        <a href="javascript:void(0);" tab="projectManage">项目管理</a><img
-                            src="/alink-hq/static/img/right-triange-un.png" alt="" class="p-a">
+                        <a href="javascript:void(0);" tab="projectManage">项目管理</a>
+                        <img src="/alink-hq/static/img/bottom-triangle-un.png" alt="" class="p-a on-off-triangle">
+                        <!--<img src="/alink-hq/static/img/right-triange-un.png" alt="" class="p-a on-off-triangle">-->
                     </div>
                     <ul class="active">
                         <li tab="projectList"><a th:href="@{/projectList}">项目列表</a></li>
@@ -24,8 +25,8 @@
                 </li>
                 <li class="one-list">
                     <div class="p-r">
-                        <a href="javascript:void(0);" tab="userManage">用户管理</a><img
-                            src="/alink-hq/static/img/bottom-triangle-un.png" alt="" class="p-a">
+                        <a href="javascript:void(0);" tab="userManage">用户管理</a>
+                        <img src="/alink-hq/static/img/bottom-triangle-un.png" alt="" class="p-a on-off-triangle">
                     </div>
                     <ul class="active">
                         <li tab="useList"><a th:href="@{/account/list(uid=15)}">用户列表</a></li>
@@ -41,7 +42,10 @@
 </div>
 <script src="/alink-hq/static/js/jquery.min.js"></script>
 <script>
-
+    $('.on-off-triangle').click(function () {
+        var imgUrl=$(this).attr('src');
+        console.log('imgUrl',imgUrl);
+    })
 </script>
 </body>
 </html>
