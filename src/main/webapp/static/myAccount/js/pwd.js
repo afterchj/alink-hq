@@ -48,28 +48,19 @@ $(function () {
                     success:function (msg) {
                         console.log("msg: "+msg.success);
                         if (msg.success=="密码修改成功"){
-                            // alert("密码修改成功");
-                            var title = "密码";
-                            var content = "修改";
-                            loding(title, content, account);
+                            var content = msg.success+"!";
+                            loadingSuccess(content, account);
                         }else {
-                            alert(msg.success);
+                            var content = msg.success;
+                            loadingError(content);
                         }
                     },
-                    error:function (err) {
-                        console.log("err: "+err);
+                    error:function () {
+                        var content = "加载失败，请重新尝试";
+                        loadingError(content);
                     }
                 });
             }
         }
     })
 });
-function loding(title,content,account){
-    $('#preload-anim').addClass('active');
-    $('#preload-anim .title').text(title+content+'成功！');
-    setTimeout(function(){
-        $('#preload-anim').removeClass('active');
-        $('#preload-anim .title').text('');
-        window.location.href = "http://localhost:8080/alink-hq/myAccount/myAccount?account="+account;
-    },2000)
-}

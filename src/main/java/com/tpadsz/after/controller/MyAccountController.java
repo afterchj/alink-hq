@@ -43,7 +43,7 @@ public class MyAccountController {
         Map<String,String> map = new HashMap<>();
         String info="密码修改成功";
         if (!success) {
-            info="密码修改失败";
+            info="加载失败，请重新尝试";
         }
         map.put("success",info);
         return map;
@@ -64,7 +64,7 @@ public class MyAccountController {
             info="修改用户名成功";
         }
         if (!success){
-            info="加载失败请重试";
+            info="加载失败，请重新尝试";
         }
         map.put("success", info);
         return map;

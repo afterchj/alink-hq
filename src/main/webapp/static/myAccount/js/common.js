@@ -53,6 +53,7 @@ function countDown(obj, second, value) {
 
         obj.attr("disabled", true);
         obj.css("background","#A0A0A0");
+        obj.css("borderColor","#A0A0A0");
         // obj.style.background = "#A0A0A0";
         // obj.style.borderColor = "#A0A0A0";
 //          obj.disabled = true;
@@ -70,7 +71,8 @@ function countDown(obj, second, value) {
         // 按钮置未可点击状态
 //          obj.disabled = false;
         obj.attr("disabled", false);
-        obj.css("background","#3598db")
+        obj.css("background","#3598db");
+        obj.css("borderColor","#3598db");
         // obj.style.background = "#3598db";
         // obj.style.borderColor = "#A0A0A0";
         // 按钮里的内容恢复初始状态
@@ -85,3 +87,22 @@ $(function () {
     });
 
 });
+
+function loadingSuccess(content,account){
+    $('#preload-anim').addClass('active');
+    $('#preload-anim .title').text(content);
+    setTimeout(function(){
+        $('#preload-anim').removeClass('active');
+        $('#preload-anim .title').text('');
+        window.location.href = "http://localhost:8080/alink-hq/myAccount/myAccount?account="+account;
+    },2000)
+}
+function loadingError(content){
+    $('#preload-anim').addClass('active');
+    $('#preload-anim .title').text(content);
+    setTimeout(function(){
+        $('#preload-anim').removeClass('active');
+        $('#preload-anim .title').text('');
+    },2000)
+}
+

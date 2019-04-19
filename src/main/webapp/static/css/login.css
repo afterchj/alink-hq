@@ -246,7 +246,7 @@ display: none;
     /*display: block;*/
 /*}*/
 
-p.add-hint, p.password-hint, p.code-hint {
+p.add-hint, p.password-hint, p.code-hint,p.success-hint{
     font-size: 100%;
     color: #fb2a2a;
     text-align: left;

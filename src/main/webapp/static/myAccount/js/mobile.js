@@ -43,7 +43,7 @@ $(function () {
                         $("p.phone-hint").addClass('active').text("该手机号已绑定");
                     }else if (msg.info=="success"){
 //                $("#sysCode").val(msg.sysCode);//保存系统验证码
-                        sendMessage($("#codeSubmit"), 2, "获取验证码");
+                        sendMessage($("#codeSubmit"), 60, "获取验证码");
                     }else {
                         alert("error");
                     }
@@ -79,7 +79,6 @@ function clickFillSubmit(event) {
         //激活码为空
         $("p.code-hint").addClass('active').text("请输入激活码");
     }
-
     if (!mobileFlag&&!codeFlag&&hintFlag){
         //邮箱和激活码不为空
         if ($.trim(code).length!=6){
@@ -101,28 +100,18 @@ function clickFillSubmit(event) {
                         $("p.code-hint").addClass('active').text("激活码不正确");
                     }else if (info=="dbError"){
                         //数据库异常
-                        $("p.code-hint").addClass('active').text("加载失败,请重试");
+                        var content = "加载失败，请重新尝试";
+                        loadingError(content);
                     }else {
-                        var title = "";
                         var content = event.data.alertText;
-                        loding(title, content, account);
+                        loadingSuccess(content, account);
                     }
-
                 },
-                error:function (err) {
-                    alert("加载失败,请重试");
-                    console.log("err: "+err);
+                error:function () {
+                    var content = "加载失败，请重新尝试";
+                    loadingError(content);
                 }
             });
-        }
-        function loding(title,content,account){
-            $('#preload-anim').addClass('active');
-            $('#preload-anim .title').text(title+content+'！');
-            setTimeout(function(){
-                $('#preload-anim').removeClass('active');
-                $('#preload-anim .title').text('');
-                window.location.href = "http://localhost:8080/alink-hq/myAccount/myAccount?account="+account;
-            },2000)
         }
     }
 }

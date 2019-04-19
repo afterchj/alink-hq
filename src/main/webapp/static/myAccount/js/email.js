@@ -104,30 +104,25 @@ $(function () {
                             $('p.code-hint').addClass('active').text("激活码不正确");
                         } else if (info == "dbError") {
                             //数据库异常
-                            $('p.code-hint').removeClass('active').text('');
-                            $('p.code-hint').addClass('active').text("加载失败,请重试");
+                            var content = "加载失败，请重新尝试";
+                            loadingError(content);
                         } else {
-                            var title = "";
-                            var content = "绑定成功";
-                            loding(title, content, account);
+                            var flag = $("#flag").val();
+                            var content;
+                            if (flag=='2'){
+                                content = "绑定成功！";
+                            }else {
+                                content = "修改绑定成功！";
+                            }
+                            loadingSuccess(content, account);
                         }
                     },
-                    error: function (err) {
-                        alert("加载失败,请重试");
-                        console.log("err: " + err);
+                    error: function () {
+                        var content = "加载失败，请重新尝试";
+                        loadingError(content);
                     }
                 });
             }
         }
     });
 });
-
-function loding(title, content, account) {
-    $('#preload-anim').addClass('active');
-    $('#preload-anim .title').text(title + content + '！');
-    setTimeout(function () {
-        $('#preload-anim').removeClass('active');
-        $('#preload-anim .title').text('');
-        window.location.href = "http://localhost:8080/alink-hq/myAccount/myAccount?account=" + account;
-    }, 2000)
-}

@@ -29,7 +29,7 @@ $(function () {
     $("#submit").click(function () {
         $('p.use-hint').removeClass('active').text('');
         var uname = $("#userNameNew").val();
-        if (uname='undefined'){
+        if (uname == undefined){
             uname = $("#userName").val();
         }
         var account = $(".account").val();
@@ -41,11 +41,9 @@ $(function () {
             $('p.use-hint').addClass('active').text("请输入用户名");
         }else if(!hintFlag){
             //提示框有提示
-            // $("#unameHint").text(text);
             $('p.use-hint').addClass('active').text(text);
         }else if ($(".name").val()==$.trim($("#userNameNew").val())){
             //用户名相同
-            // $("#unameHint").text("用户名相同");
             $('p.use-hint').addClass('active').text("用户名相同");
         }else {
             $.ajax({
@@ -57,32 +55,19 @@ $(function () {
                     console.log("msg: "+msg.success);
                     var success = new RegExp("成功");
                     if (success.test(msg.success)){
-                        // alert(msg.success);
-                        //2s后跳转
-                        // setTimeout(function () {
-                        //     window.location.href = "http://localhost:8080/alink-hq/myAccount/myAccount?account="+account;
-                        // },2000);
-                        // var title = "用户名";
-                        var content = msg.success;
-                        loding( content, account);
+                        var content = msg.success+"!";
+                        loadingSuccess( content, account);
                     }else {
-                        alert(msg.success);
+                        var content = msg.success+"!";
+                        loadingError(content);
                     }
                 },
-                error:function (err) {
-                    alert("加载失败,请重试");
-                    console.log("err: "+err);
+                error:function () {
+                    var content = "加载失败，请重新尝试";
+                    loadingError(content);
+
                 }
             });
         }
     });
 });
-function loding(content,account){
-    $('#preload-anim').addClass('active');
-    $('#preload-anim .title').text(content+'！');
-    setTimeout(function(){
-        $('#preload-anim').removeClass('active');
-        $('#preload-anim .title').text('');
-        window.location.href = "http://localhost:8080/alink-hq/myAccount/myAccount?account="+account;
-    },2000)
-}
