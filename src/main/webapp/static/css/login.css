@@ -24,8 +24,8 @@ body{
     padding: 60px 0 0px 60px;
 }
 .content{
-    width: 500px;
-    margin: 125px 0 0 300px;
+    width: 450px;
+    margin: 120px 0 0 300px;
 }
 .b-l{
     width: 40%;
@@ -38,24 +38,24 @@ body{
 }
 ::-webkit-input-placeholder { /*Webkit browsers*/
     color: #999;
-    font-size: 18px;
+    font-size: 16px;
 }
 .icon-input{
 
 }
 :-moz-placeholder { /*Mozilla Firefox 4 to 8*/
     color: #999;
-    font-size: 18px;
+    font-size: 16px;
 }
 
 ::moz-placeholder { /*Mozilla Firefox 19+*/
     color: #999;
-    font-size: 18px;
+    font-size: 16px;
 }
 
 :-ms-input-placeholder { /*Internet Explorer 10+*/
     color: #999;
-    font-size: 18px;
+    font-size: 16px;
 }
 
 .login-in-box {
@@ -72,7 +72,7 @@ body{
     height: 20%;
     vertical-align: bottom;
     /* height: 100%; */
-    font-size: 22px;
+    font-size: 21px;
     color: #fff;
     /* padding-top: 45px; */
     border-bottom: 1px solid #bbb;
@@ -112,8 +112,8 @@ body{
     display: block;
     border: 1px solid #797979;
     width: 100%;
-    height: 48px;
-    line-height: 48px;
+    height: 44px;
+    line-height: 44px;
     text-indent: 50px;
     border-radius: 5px;
     margin: 0;
@@ -137,12 +137,11 @@ body{
 }
 .icon {
     left: 10px;
-    top: 10px;
+    top: 7px;
 }
 
 .content .hint {
-
-    margin-top: 20px;
+    margin-top: 15px;
     height: 25px;
     color: #fff;
     /* width: 404px; */
@@ -162,7 +161,7 @@ body{
 }
 
 .login-in-box-foot .twoCode .part {
-    font-size: 14px;
+    font-size: 15px;
     width: 33.33%;
     white-space: nowrap;
 }
@@ -192,6 +191,7 @@ body{
 .login-in-box-foot .link {
     text-align: center;
     line-height: 2;
+    font-size: 14px;
 }
 
 .login-in-box-foot .link span {
@@ -201,15 +201,16 @@ body{
 .login-in-box-foot .filing {
     text-align: center;
     line-height: 2;
+    font-size: 14px;
 }
 
 .content .login-in-box-tab-content button.security-code {
     display: inline-block;
-    width: 135px;
+    width: 90px;
     margin-left: 15px;
-    height: 50px;
+    height: 46px;
     position: absolute;
-    font-size: 18px;
+    font-size: 15px;
     top: 1px;
     white-space: nowrap;
     letter-spacing: normal;
@@ -256,20 +257,20 @@ display: none;
 /*}*/
 
 p.add-hint, p.password-hint, p.code-hint {
-    font-size: 16px;
+    font-size: 15px;
     color: #fb2a2a;
     text-align: left;
     display: block;
 }
 
 p.mobile-add-hint, p.mobile-password-hint, p.mobile-code-hint {
-    font-size: 16px;
+    font-size: 15px;
     color: #fb2a2a;
     text-align: left;
 }
 
 p.email-add-hint, p.email-password-hint, p.email-code-hint {
-    font-size: 16px;
+    font-size: 15px;
     color: #fb2a2a;
     text-align: left;
 }
@@ -308,18 +309,18 @@ p.add-hint.active, p.password-hint.active, p.page-hint.active, p.code-hint.activ
     position: absolute;
     bottom: 0;
     width: 100%;
-    height: 110px;
+    height: 97px;
 }
 .login-in-box-tab-content form{
     position: relative;
-    height: 371px;
+    height: 330px;
     margin: 0 40px;
 }
 .twoCode,.link,.filing{
     white-space: nowrap;
 }
 .content .hint span{
-    font-size: 18px;
+    font-size: 16px;
 }
 /*遮罩层*/
 

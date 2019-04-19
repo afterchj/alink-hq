@@ -15,11 +15,14 @@ audio, video {
    /* background:transparent;*/
     outline-style:none;/*FF*/
 }
-
+table{
+    border-spacing: 0;
+    border-collapse: unset;
+}
 body {
     line-height:1;
     zoom: 1;
-    background: #fff;
+    background: #eef2f5;
 }
 a{
     text-decoration:none;

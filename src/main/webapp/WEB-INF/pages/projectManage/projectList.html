@@ -10,8 +10,13 @@
     <title>项目列表</title>
 </head>
 <body>
+
+
 <div th:replace="common/head::head"></div>
-<div th:replace="common/left::left"></div>
+
+<div class="c-container">
+    <div th:replace="common/left::left"></div>
+
 <div class="main-right">
     <div class="clearfix main-right-nav">
         <div class="f-l main-right-title">项目列表</div>
@@ -363,6 +368,7 @@
         </div>
     </div>
 </div>
+</div>
 <script src="/alink-hq/static/js/jquery.min.js"></script>
 <script src="/alink-hq/static/laydate/laydate.js"></script>
 <script>
@@ -373,7 +379,13 @@
     laydate.render({
         elem: '#end-time' //指定元素
     });
-
+    $('.one-list li').each(function () {
+        var tab = $(this).attr('tab');
+        if (tab == 'projectList') {
+            $(this).addClass('active').siblings().removeClass('active');
+            ;
+        }
+    })
     //复选框
     $('td.checkbox img').click(function () {
         var hasCheckbox = true;

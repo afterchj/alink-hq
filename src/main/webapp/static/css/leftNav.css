@@ -24,6 +24,7 @@
 .one-list>div{
     height: 62px;
     line-height: 62px;
+    padding-left: 40px;
 }
 .one-list>div a{
     font-size: 26px;
@@ -57,10 +58,10 @@
     margin: 20px 58px 20px 323px;
 }
 .main-left{
-    padding: 0 0 45px 40px;
+    padding: 0 0 45px 0;
 }
 .main-left a{
-    font-size: 24px;
+    font-size: 22px;
     color: #111;
 }
 .one-list{
@@ -72,8 +73,8 @@
     color: #111;
     height: 62px;
     line-height: 62px;
-    width: 190px;
-    padding-left: 30px;
+    /*width: 190px;*/
+    padding-left: 70px;
     cursor: pointer;
 }
 .one-list img{
@@ -94,5 +95,5 @@
     margin-right:15px;
 }
 .one-list li.active{
-    background-color: #bbb;
+    background-color: #eef2f5;
 }
