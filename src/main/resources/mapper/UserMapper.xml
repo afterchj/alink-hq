@@ -140,7 +140,7 @@
     </insert>
 
     <update id="updatePwd" parameterType="map">
-        UPDATE alink.f_user_account
+        UPDATE f_user_account
         <set>
             <if test="pwd != null">pwd=#{pwd},</if>
             <if test="salt != null">salt=#{salt},</if>
