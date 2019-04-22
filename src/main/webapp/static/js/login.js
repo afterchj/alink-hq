@@ -722,7 +722,7 @@ function restPwd(phoneVal, newPwd) {
             if (res == "success") {
                 console.log("密码修改成功！");
                 setInterval(function () {
-                    location.href = "/alink-hq/home";
+                    location.href = "/alink-hq";
                 }, 1000);
             }
         }

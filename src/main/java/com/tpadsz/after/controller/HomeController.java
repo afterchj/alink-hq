@@ -129,7 +129,7 @@ public class HomeController {
 
     @RequestMapping("/home")
     public String home() {
-        return "projectManage/projectList";
+        return "welcome";
     }
 
     @RequestMapping("/picture")
