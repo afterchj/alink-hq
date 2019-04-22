@@ -171,7 +171,6 @@ function passwordLogin() {
         success: function (res) {
             // console.log(res);
             if (res == "success") {
-                // console.log("有这个用户名");
                 isBind = true;
 
             }
@@ -189,13 +188,10 @@ function passwordLogin() {
         }
     } else if (p.test(unameVal)) {
         //想输入的是手机号
-        // console.log('想输入的是手机号');
-        // console.log(isBind);
         if (!phoneResult) {
             $('.password-login .add-hint').text('请输入正确的手机号');
             $('.password-login .password-hint').text('');
         } else if (isBind) {
-            // console.log('走了这部分1');
             if (pwdVal == '') {
                 $('.password-login .add-hint').text('');
                 $('.password-login .password-hint').text('请输入密码');
@@ -207,8 +203,7 @@ function passwordLogin() {
                 $('.password-login .password-hint').text('');
             }
         } else {
-            $('.container').unbind('click'); //K掉事件
-            // console.log('走了这部分2');
+            $('.container').unbind('click');
             if (pwdVal == '') {
                 $('.password-login .add-hint').text('该手机号未绑定');
                 $('.password-login .password-hint').text('请输入密码');
@@ -333,7 +328,6 @@ function closeOverTime() {
 
 //手机验证码登录
 function phoneLogin() {
-
     var isBind = false;
     var phoneVal = $('#phone-l').val();
     var codeVal = $('#code-l').val();
@@ -390,7 +384,6 @@ function phoneLogin() {
 }
 
 function phoneCode() {
-
     var isBind = false;
     var phoneVal = $('#phone-l').val();
     var codeVal = $('#code-l').val();
@@ -482,5 +475,56 @@ function validCode(phoneVal, codeVal) {
             }
         }
     })
+
+    // 手机找回密码
+    function phoneFindPwd(){
+        var isBind=false;
+        var phoneVal=$('#phone-f').val();
+        var codeVal=$('#code-f').val();
+        var newPwd=$('#pwd-f').val();
+        console.log(phoneVal,codeVal,newPwd);
+
+        // 检测是否被绑定
+        $.ajax({
+            type: "GET",
+            url: "/alink-hq/checkUser",
+            data: {
+                "uname": phoneVal
+            },
+            async: false,
+            success: function (res) {
+
+                if (res == "success") {
+                    isBind = true;
+                }
+            }
+        })
+        console.log('该手机号是否被绑定');
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 }
