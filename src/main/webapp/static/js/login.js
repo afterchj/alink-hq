@@ -430,7 +430,13 @@ function phoneLogin() {
             $('.phone-login .add-hint').text('');
             $('.phone-login .password-hint').text('请输入验证码');
         } else {
-            validCode(phoneVal, codeVal)
+           var isSuccess=validCode(phoneVal, codeVal);
+            console.log(isSuccess);
+            if(isSuccess=='success'){
+                $('.phone-login form').submit();
+            }else{
+                $('.phone-login .password-hint').text('验证码不正确');
+            }
         }
     }
 }
@@ -458,10 +464,11 @@ function phoneCode() {
             $('.phone-login .add-hint').text('该手机号未绑定');
             $('.phone-login .password-hint').text('');
             $('#code-l').val('');
+            $('.container').unbind('click');
         } else {
             $('.phone-login .add-hint').text('该手机号未绑定');
             $('.phone-login .password-hint').text('');
-
+            $('.container').unbind('click');
         }
     } else {
         if (codeVal == '') {
@@ -778,6 +785,7 @@ function keyup(){
 
 /* 校验验证码 */
 function validCode(phoneVal, codeVal) {
+    var result='';
     $.ajax({
         type: "GET",
         url: "/alink-hq/checkCode",
@@ -788,12 +796,15 @@ function validCode(phoneVal, codeVal) {
         async: false,
         success: function (res) {
             if (res == "success") {
+                result=res;
                 console.log('校验成功')
             } else {
+                result=res;
                 console.log('校验失败')
             }
         }
     })
+    return result;
 }
 
 //校验找回密码验证码
