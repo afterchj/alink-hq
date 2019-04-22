@@ -199,7 +199,11 @@
             ;
         }
     })
-
+    $('img').click(function () {
+        var imgUrl=$(this).attr('src');
+        console.log('imgUrl',imgUrl);
+        
+    })
     $(function(){
         myBrowser()
     })
