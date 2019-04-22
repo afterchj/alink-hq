@@ -43,19 +43,19 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
-    public List<UserList> searchBySuper(String account,Integer fid,Integer roleId,String startDate,String endDate) {
-        return accountDao.searchBySuper(account,fid,roleId,startDate,endDate);
+    public List<UserList> searchBySuper(String account, Integer fid, Integer roleId, String startDate, String endDate) {
+        return accountDao.searchBySuper(account, fid, roleId, startDate, endDate);
     }
 
     @Override
     public List<UserList> searchByAdmin(String account, Integer fid, Integer roleId, String startDate, String endDate) {
-        return accountDao.searchByAdmin(account,fid,roleId,startDate,endDate);
+        return accountDao.searchByAdmin(account, fid, roleId, startDate, endDate);
     }
 
     @Override
-    public List<UserList> searchByManager(String account, List<String> uids,String startDate, String
+    public List<UserList> searchByManager(String account, List<String> uids, String startDate, String
             endDate) {
-        return accountDao.searchByManager(account,uids,startDate,endDate);
+        return accountDao.searchByManager(account, uids, startDate, endDate);
     }
 
     @Override
@@ -69,10 +69,10 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
-    public void createAccount(User user,Integer fid, Integer roleId) {
+    public void createAccount(User user, Integer fid, Integer roleId) {
         accountDao.createAccount(user);
-        accountDao.createFirmInfo(Integer.parseInt(user.getId()),fid);
-        accountDao.createRoleInfo(Integer.parseInt(user.getId()),roleId);
+        accountDao.createFirmInfo(Integer.parseInt(user.getId()), fid);
+        accountDao.createRoleInfo(Integer.parseInt(user.getId()), roleId);
         accountDao.generateDefaultNetwork(user.getId());
     }
 
@@ -84,27 +84,28 @@ public class AccountServiceImpl implements AccountService {
     @Override
     public void updateAccount(String account, String randomPwd) {
         Encryption.HashPassword password = Encryption.encrypt(Encryption.getMD5Str(randomPwd));
-        accountDao.updateAccount(password.getPassword(),password.getSalt(),account);
+        accountDao.updateAccount(password.getPassword(), password.getSalt(), account);
     }
 
     @Override
     public void transferAccount(String uid, Integer fid, String randomPwd) {
-        accountDao.transferAccount(uid,fid);
+        accountDao.transferAccount(uid, fid);
         Encryption.HashPassword password = Encryption.encrypt(Encryption.getMD5Str(randomPwd));
-        accountDao.updateTransferedAccount(password.getPassword(),password.getSalt(),uid);
+        accountDao.updateTransferedAccount(password.getPassword(), password.getSalt(), uid);
     }
 
     @Override
-    public void delete(String uid) {
-
-        accountDao.delete(uid);
-
-
+    public int delete(String uid) {
+        int count = accountDao.findProjectByUid(uid);
+        if (count == 0) {
+            accountDao.delete(uid);
+        }
+        return count;
     }
 
     @Override
-    public void enable(String uid,Integer status) {
-        accountDao.enable(uid,status);
+    public void enable(String uid, Integer status) {
+        accountDao.enable(uid, status);
     }
 
 

@@ -10,7 +10,9 @@
     <link rel="stylesheet" href="/alink-hq/static/css/leftNav.css">
     <link rel="stylesheet" href="/alink-hq/static/css/account.css">
     <link rel="stylesheet" href="/alink-hq/static/css/loding.css"/>
-    <title>填写用户名</title>
+    <link rel="stylesheet" href="/alink-hq/static/css/projectManage.css"/>
+
+    <title>修改用户名</title>
     <style>
         input[type="text"] {background:white}
     </style>
@@ -21,7 +23,7 @@
     <div th:replace="common/left::left"></div>
     <div class="main-right">
     <div class="clearfix main-right-nav">
-        <div class="f-l main-right-title">填写用户名</div>
+        <div class="f-l main-right-title">修改用户名</div>
         <div class="f-r pointer">
             <img src="/alink-hq/static/img/go-back.png" alt="" id="clickReturn">
         </div>
@@ -34,9 +36,14 @@
             <div class="f-content ">
                 <form id="unameForm" action="#" onsubmit="return false" method="post">
                     <div style="margin-bottom:10px;">
-                        <p class="use-hint" style="height: 35px;"></p>
-                        <label for="">用户名：</label>
-                        <input type="text" placeholder="请输入用户名（2-6位中文、字母或数字）" id="userName" name="uname">
+                        <!--<p class="use-hint" style="padding-left: 139px;height: 35px;"></p>-->
+                        <label for="" style="width:130px;">原用户名：</label>
+                        <input type="text" placeholder="请输入用户名（2-6位中文、字母或数字）" id="userName" th:value="${uname}" readonly="readonly" class="name">
+                    </div>
+                    <div>
+                        <p class="use-hint" style="padding-left: 139px;height: 35px;"></p>
+                        <label for="" style="width:130px;">新用户名：</label>
+                        <input type="text" placeholder="请输入用户名（2-6位中文、字母或数字）" id="userNameNew" name="uname">
                     </div>
                     <input type="hidden" th:value="${account}" id="account" name="account" class="account"/>
                     <input type="hidden" th:value="${flag}" id="flag" name="flag"/>
@@ -63,27 +70,40 @@
             </div>
             <p class="title"></p>
         </div>
-    <!--<script src="/alink-hq/static/js/jquery.min.js"></script>-->
         <script src="/alink-hq/static/myAccount/js/jquery-3.3.1.min.js"></script>
         <script src="/alink-hq/static/myAccount/js/common.js"></script>
         <script src="/alink-hq/static/myAccount/js/uname.js"></script>
+    <!--<script src="/alink-hq/static/js/jquery.min.js"></script>-->
     <script>
         //验证用户名
 //        function vUserName() {
 //            var userVal = $('#userName').val();
+//            var userNameNewVal=$('#userNameNew').val();
 //            console.log('userVal', userVal);
 //            var userName = /^[a-zA-Z0-9\u4e00-\u9fa5]{2,6}$/;
 //            var userNameResult = userName.test(userVal);
+//
+//            var userNameNewResult = userName.test(userNameNewVal);
 //            console.log('userNameResult', userNameResult);
-//            if (!userNameResult) {
-//                $('p.use-hint').addClass('active');
-//                console.log('用户名不符合')
+//            if(userVal==''){
+//                $('p.use-hint').addClass('active').text('原用户名不能为空！');
 //                return false;
-//            } else {
-//                $('p.use-hint').removeClass('active');
-//                var title = "用户名";
-//                var content = "绑定";
-//                parent.loding(title, content);
+//            }else if(!userNameResult){
+//                $('p.use-hint').removeClass('active').text('');
+//                $('p.use-hint').addClass('active').text('原用户名格式不正确！');
+//                return false;
+//            }else if(userNameNewVal==''){
+//                $('p.use-hint2').addClass('active').text('新用户名不能为空！');
+//                return false;
+//            }else if(!userNameNewResult){
+//                $('p.use-hint2').removeClass('active').text('');
+//                $('p.use-hint2').addClass('active').text('新用户名格式不正确！');
+//                return false;
+//            }else {
+//                $('p.use-hint2').removeClass('active').text('');
+//                var title="用户名";
+//                var content="修改";
+//                parent.loding(title,content);
 //            }
 //        }
     </script>

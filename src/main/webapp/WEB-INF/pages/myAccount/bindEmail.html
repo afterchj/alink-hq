@@ -10,7 +10,8 @@
     <link rel="stylesheet" href="/alink-hq/static/css/leftNav.css" />
     <link rel="stylesheet" href="/alink-hq/static/css/account.css" />
     <link rel="stylesheet" href="/alink-hq/static/css/loding.css"/>
-    <title>修改手机号</title>
+    <link rel="stylesheet" href="/alink-hq/static/css/projectManage.css"/>
+    <title>绑定邮箱</title>
     <style>
         input[type="text"] {background:white}
     </style>
@@ -21,33 +22,33 @@
     <div th:replace="common/left::left"></div>
     <div class="main-right">
     <div class="clearfix main-right-nav">
-        <div class="f-l main-right-title">修改手机号</div>
+        <div class="f-l main-right-title">绑定邮箱</div>
         <div class="f-r pointer">
-            <img src="/alink-hq/static/img/go-back.png" alt="" id="clickReturn">
+            <img src="/alink-hq/static/img/go-back.png" alt="" id="clickReturn"/>
         </div>
     </div>
-    <div id="bindPhone">
-        <div class="b-bindPhone">
+    <div id="bindEmail">
+        <div class="b-bindEmail">
             <div class="b-nav">
-                修改手机号
+                绑定邮箱
             </div>
             <div class="b-content ">
-                <form id="mobileForm" action="#" onsubmit="return false" method="post">
+                <form id="emailForm" action="#" onsubmit="return false" method="post">
                     <div style="margin-bottom:10px;">
-                        <p class="phone-hint" style="height: 35px;"></p>
-                        <label for="">手机号：</label>
-                        <input type="text" placeholder="请输入手机号" id="phone" name="mobile"/>
+                        <p class="email-hint" style="height: 35px;"></p>
+                        <label for="">邮箱：</label>
+                        <input type="text" placeholder="请输入邮箱" id="email" name="email">
                     </div>
-                    <div class="verification-code">
+                    <div class="verification-code" >
                         <p class="code-hint" style="height: 35px;"></p>
-                        <label for="">验证码：</label>
-                        <input type="text" placeholder="请输入验证码" id="code" name="code"/>
-                        <button type="button" class="security-code" id="codeSubmit">获取验证码</button>
+                        <label for="">激活码：</label>
+                        <input type="text" placeholder="请输入激活码" id="code" name="code">
+                        <button type="button" class="security-code" id="codeSubmit">获取激活码</button>
                     </div>
-                    <input type="hidden" th:value="${account}" name="account" id="account_hidden" class="account"/>
+                    <input type="hidden" th:value="${account}" id="account" name="account" class="account"/>
                     <input type="hidden" th:value="${flag}" id="flag" name="flag"/>
                     <div class="submit-btn">
-                        <button type="submit" id="fillSubmit">立即修改</button>
+                        <button type="submit" id="fillSubmit">立即绑定</button>
                     </div>
                 </form>
             </div>
@@ -69,32 +70,32 @@
             </div>
             <p class="title"></p>
         </div>
-    <!--<script src="/alink-hq/static/js/jquery.min.js"></script>-->
         <script src="/alink-hq/static/myAccount/js/jquery-3.3.1.min.js"></script>
         <script src="/alink-hq/static/myAccount/js/common.js"></script>
-        <script src="/alink-hq/static/myAccount/js/mobile.js"></script>
+        <script src="/alink-hq/static/myAccount/js/email.js"></script>
+    <!--<script src="/alink-hq/static/js/jquery.min.js"></script>-->
     <script>
-        // 验证手机号
-//        function vPhone() {
-//            var phoneVal = $('#phone').val();
+        // 验证邮箱号
+//        function vEamil() {
+//            var emailVal = $('#email').val();
 //            var codeVal = $('#code').val();
-//            var phone = /^[1][3,4,5,7,8,9][0-9]{9}$/;
-//            var phoneResult = phone.test(phoneVal);
-//            if (phoneVal == '') {
-//                $('p.phone-hint').addClass('active').text('请输入手机号');
+//            var email = /^([a-zA-Z]|[0-9])(\w|\-)+@[a-zA-Z0-9]+\.([a-zA-Z]{2,4})$/;
+//            var emailResult = email.test(emailVal);
+//            if (emailVal == '') {
+//                $('p.email-hint').addClass('active').text('请输入邮箱号');
 //                return false;
-//            } else if (!phoneResult) {
-//                $('p.phone-hint').removeClass('active').text('');
-//                $('p.phone-hint').addClass('active').text('手机号格式不正确');
+//            } else if (!emailResult) {
+//                $('p.email-hint').removeClass('active').text('');
+//                $('p.email-hint').addClass('active').text('邮箱号格式不正确');
 //                return false;
 //            } else if (codeVal == '') {
-//                $('p.phone-hint').removeClass('active').text('');
+//                $('p.email-hint').removeClass('active').text('');
 //                $('p.code-hint').addClass('active').text('请输入验证码');
 //                return false;
 //            } else {
 //                $('p.code-hint').removeClass('active').text('');
-//                var title = "手机";
-//                var content = "修改";
+//                var title = "邮箱";
+//                var content = "绑定";
 //                parent.loding(title, content);
 //            }
 //        }
@@ -124,10 +125,6 @@
 //                    settime(obj)
 //                }, 1000)
 //            }
-
-            var alertText = "修改绑定成功";
-            //点击立即绑定
-            $("#fillSubmit").bind("click",{alertText:alertText},clickFillSubmit);
         })
     </script>
 </body>

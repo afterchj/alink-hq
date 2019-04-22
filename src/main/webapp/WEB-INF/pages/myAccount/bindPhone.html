@@ -10,7 +10,8 @@
     <link rel="stylesheet" href="/alink-hq/static/css/leftNav.css" />
     <link rel="stylesheet" href="/alink-hq/static/css/account.css" />
     <link rel="stylesheet" href="/alink-hq/static/css/loding.css"/>
-    <title>修改手机号</title>
+    <link rel="stylesheet" href="/alink-hq/static/css/projectManage.css"/>
+    <title>绑定手机号</title>
     <style>
         input[type="text"] {background:white}
     </style>
@@ -21,7 +22,7 @@
     <div th:replace="common/left::left"></div>
     <div class="main-right">
     <div class="clearfix main-right-nav">
-        <div class="f-l main-right-title">修改手机号</div>
+        <div class="f-l main-right-title">绑定手机号</div>
         <div class="f-r pointer">
             <img src="/alink-hq/static/img/go-back.png" alt="" id="clickReturn">
         </div>
@@ -29,25 +30,25 @@
     <div id="bindPhone">
         <div class="b-bindPhone">
             <div class="b-nav">
-                修改手机号
+                绑定手机号
             </div>
             <div class="b-content ">
                 <form id="mobileForm" action="#" onsubmit="return false" method="post">
                     <div style="margin-bottom:10px;">
                         <p class="phone-hint" style="height: 35px;"></p>
                         <label for="">手机号：</label>
-                        <input type="text" placeholder="请输入手机号" id="phone" name="mobile"/>
+                        <input type="text" placeholder="请输入手机号" id="phone" name="mobile">
                     </div>
-                    <div class="verification-code">
+                    <div class="verification-code" >
                         <p class="code-hint" style="height: 35px;"></p>
                         <label for="">验证码：</label>
-                        <input type="text" placeholder="请输入验证码" id="code" name="code"/>
+                        <input type="text" placeholder="请输入验证码" id="code" name="code">
                         <button type="button" class="security-code" id="codeSubmit">获取验证码</button>
                     </div>
-                    <input type="hidden" th:value="${account}" name="account" id="account_hidden" class="account"/>
+                    <input type="hidden" th:value="${account}" id="account" name="account" id="account_hidden" class="account"/>
                     <input type="hidden" th:value="${flag}" id="flag" name="flag"/>
                     <div class="submit-btn">
-                        <button type="submit" id="fillSubmit">立即修改</button>
+                        <button type="submit" id="fillSubmit">立即绑定</button>
                     </div>
                 </form>
             </div>
@@ -94,7 +95,7 @@
 //            } else {
 //                $('p.code-hint').removeClass('active').text('');
 //                var title = "手机";
-//                var content = "修改";
+//                var content = "绑定";
 //                parent.loding(title, content);
 //            }
 //        }
@@ -124,8 +125,7 @@
 //                    settime(obj)
 //                }, 1000)
 //            }
-
-            var alertText = "修改绑定成功";
+            var alertText = "绑定成功！";
             //点击立即绑定
             $("#fillSubmit").bind("click",{alertText:alertText},clickFillSubmit);
         })

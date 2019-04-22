@@ -99,7 +99,7 @@
                                                         openTab="start-use"></a></td>
                         <td class="p-r">
                             <img src="/alink-hq/static/img/edit.png" alt="" openTab="reset-pwd" class="reset-pwd">
-                            <a th:href="@{/account/transferPage(uid=15)}"><img src="/alink-hq/static/img/exchange.png"
+                            <a th:href="@{/account/transferPage(uid=${session.user.getId()})}"><img src="/alink-hq/static/img/exchange.png"
                                                                                alt="" class="center-img"></a>
                             <img src="/alink-hq/static/img/delete.png" alt="" class="delete-account"
                                  openTab="delete-account">
@@ -114,17 +114,17 @@
                         <td colspan="11" class="clearfix page">
                             <div class="f-r page-right">
                                 <span class="prev-page">
-                                    <a th:href="@{/account/list(pageNum=${pageInfo.prePage},uid=15)}">
+                                    <a th:href="@{/account/list(pageNum=${pageInfo.prePage},uid=${session.user.getId()})}">
 
                                         <img src="/alink-hq/static/img/left-arrow.png" alt=""></a>
                                 </span>
                                 <span th:text="${pageInfo.pageNum}" class="pages"></span>
                                 <span th:if="${pageInfo.hasNextPage}" class="next-page">
-                                    <a th:href="@{/account/list(pageNum=${pageInfo.nextPage},uid=15)}">
+                                    <a th:href="@{/account/list(pageNum=${pageInfo.nextPage},uid=${session.user.getId()})}">
                                         <img src="/alink-hq/static/img/right-arrow-color.png" alt=""></a>
                                 </span>
                                 <span th:unless="${pageInfo.hasNextPage}" class="next-page">
-                                    <a th:href="@{/account/list(pageNum=${pageInfo.pageNum},uid=15)}">
+                                    <a th:href="@{/account/list(pageNum=${pageInfo.pageNum},uid=${session.user.getId()})}">
                                         <img src="/alink-hq/static/img/right-arrow-color.png" alt=""></a>
                                 </span>
                                 <span class="m-l-15 m-r-20">

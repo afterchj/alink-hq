@@ -5,27 +5,46 @@ $(function () {
     var match = /^[0-9A-Za-z\u4e00-\u9fa5]{2,6}$/;
     var text = "请输入2-6 位中文、字母、数字";
     //输入框值发生改变
-    $("#uname").bind(
+    $("#userNameNew").bind(
         "input propertychange change",
-        {context:"#uname",hint:"#unameHint",match:match,text:text},
-        matchInput);
+        function () {
+            $('p.use-hint').removeClass('active').text('');
+            var context = $("#userNameNew").val();
+            if (!match.test(context)){
+                $('p.use-hint').addClass('active').text(text);
+            }else {
+                $('p.use-hint').removeClass('active').text('');
+            }});
+    $("#userName").bind(
+        "input propertychange change",
+        function () {
+            $('p.use-hint').removeClass('active').text('');
+            var context = $("#userName").val();
+            if (!match.test(context)){
+                $('p.use-hint').addClass('active').text(text);
+            }else {
+                $('p.use-hint').removeClass('active').text('');
+            }});
 
     $("#submit").click(function () {
-        $("#unameHint").empty();
-        var uname = $("#uname").val();
-        var account = $("#account").val();
+        $('p.use-hint').removeClass('active').text('');
+        var uname = $("#userNameNew").val();
+        if (uname == undefined){
+            uname = $("#userName").val();
+        }
+        var account = $(".account").val();
         var unameFlag = isEmpty(uname);
-        var unameHint = $("#unameHint").text();
+        var unameHint = $("#use-hint").text();
         var hintFlag = isEmpty(unameHint);
         console.log("form: "+$("#unameForm").serialize());
         if (unameFlag){
-            $("#unameHint").text("请输入用户名");
+            $('p.use-hint').addClass('active').text("请输入用户名");
         }else if(!hintFlag){
             //提示框有提示
-            $("#unameHint").text(text);
-        }else if ($(".name").val()==$.trim($("#uname").val())){
+            $('p.use-hint').addClass('active').text(text);
+        }else if ($(".name").val()==$.trim($("#userNameNew").val())){
             //用户名相同
-            $("#unameHint").text("用户名相同");
+            $('p.use-hint').addClass('active').text("用户名相同");
         }else {
             $.ajax({
                 type:"POST",
@@ -36,18 +55,17 @@ $(function () {
                     console.log("msg: "+msg.success);
                     var success = new RegExp("成功");
                     if (success.test(msg.success)){
-                        alert(msg.success);
-                        //2s后跳转
-                        setTimeout(function () {
-                            window.location.href = "http://localhost:8080/alink-hq/myAccount/myAccount?account="+account;
-                        },2000);
+                        var content = msg.success+"!";
+                        loadingSuccess( content, account);
                     }else {
-                        alert(msg.success);
+                        var content = msg.success+"!";
+                        loadingError(content);
                     }
                 },
-                error:function (err) {
-                    alert("加载失败,请重试");
-                    console.log("err: "+err);
+                error:function () {
+                    var content = "加载失败，请重新尝试";
+                    loadingError(content);
+
                 }
             });
         }
