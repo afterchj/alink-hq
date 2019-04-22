@@ -80,30 +80,31 @@ $(function () {
 
 //倒计时
 $(function () {
-
     $('.security-code').click(function () {
         //验证手机号是否正确
         var regPhone = /^[1][3,4,5,7,8,9][0-9]{9}$/;
         var phoneVal1=$('#phone-l').val();
         var phoneVal2=$('#phone-f').val();
-        // var isBind1 = checkExist(phoneVal1);
-        // var isBind2=checkExist(phoneVal2);
+        var isBind1 = checkExist(phoneVal1);
+        var isBind2=checkExist(phoneVal2);
         var phoneResult1= regPhone.test(phoneVal1);
         var phoneResult2= regPhone.test(phoneVal2);
         //验证邮箱
         var emailVal = $('#email-e').val();
         var regEmail = /^([a-zA-Z]|[0-9])(\w|\-)+@[a-zA-Z0-9]+\.([a-zA-Z]{2,4})$/;
         var emailResult=regEmail.test(emailVal);
+        var isBind3 = checkExist(emailVal);
         // var emailResult = regEmail.test(unameVal);
-        if(phoneVal1!='' &&  phoneResult1 ){
+
+        if(phoneVal1!='' &&  phoneResult1 && isBind1){
             $(this).addClass('active');
             settime(this);
         }
-        if(phoneVal2!='' && phoneResult2 ){
+        if(phoneVal2!='' && phoneResult2 && isBind2){
             $(this).addClass('active');
             settime(this);
         }
-        if(emailResult!='' && emailResult){
+        if(emailResult!='' && emailResult && isBind3){
             $(this).addClass('active');
             settime(this);
         }
