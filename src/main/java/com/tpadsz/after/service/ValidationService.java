@@ -45,7 +45,8 @@ public class ValidationService {
     }
 
     private String prepare(String key) throws Exception {
-        String code = getRandomNum(6);
+        String str = client.get(key);
+        String code = str == null ? getRandomNum(6) : str;
         client.set(key, MemcachedObjectType.CACHE_MESSAGE_VERIFICATION.getExpiredTime(), code);
         return code;
     }
