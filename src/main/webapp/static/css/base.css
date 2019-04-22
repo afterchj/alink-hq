@@ -9,16 +9,20 @@ audio, video {
     padding:0;
     border:0;
     outline:0;
-    font-family: SimSun;
-    font-size:1vw;
+    font-family: Microsoft Yahei;
+    font-size: 100%;
     vertical-align:baseline;
    /* background:transparent;*/
     outline-style:none;/*FF*/
 }
-
+table{
+    border-spacing: 0;
+    border-collapse: unset;
+}
 body {
     line-height:1;
     zoom: 1;
+    background: #eef2f5;
 }
 a{
     text-decoration:none;

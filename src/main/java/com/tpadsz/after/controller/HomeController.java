@@ -129,7 +129,7 @@ public class HomeController {
 
     @RequestMapping("/home")
     public String home() {
-        return "projectManage/projectManage";
+        return "projectManage/projectList";
     }
 
     @RequestMapping("/picture")
@@ -176,9 +176,15 @@ public class HomeController {
         try {
             validationService.checkCode(code, mobile);
             str = "success";
-        } catch (InvalidCodeException e) {
-            logger.error("errMsg" + e.getMessage());
-            str = "failure";
+        } catch (Exception e) {
+            logger.error("errMsg:" + e);
+            if (e instanceof InvalidCodeException){
+                if ("300".equals(((InvalidCodeException) e).getCode())){
+                    str = "failure";
+                }else {
+                    str="expire";
+                }
+            }
         } finally {
             logger.info("str=" + str + ",mobile=" + mobile + ",code=" + code);
             return str;

@@ -1,66 +1,69 @@
 <!doctype html>
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
-
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="/alink-hq/static/css/base.css" />
-    <link rel="stylesheet" href="/alink-hq/static/css/leftNav.css" />
-    <link rel="stylesheet" href="/alink-hq/static/css/projectManage.css" />
-
+    <script src="/alink-hq/static/js/browser.js"></script>
+    <link rel="stylesheet" href="/alink-hq/static/css/base.css"/>
+    <link rel="stylesheet" href="/alink-hq/static/css/leftNav.css"/>
+    <link rel="stylesheet" href="/alink-hq/static/css/projectManage.css"/>
     <title>用户列表</title>
 </head>
-
 <body>
+
 <div th:replace="common/head::head"></div>
-<div th:replace="common/left::left"></div>
-<div class="main-right">
-    <div class="clearfix main-right-nav">
-        <div class="f-l main-right-title">用户列表</div>
-        <div class="f-r pointer">
-            <img src="/alink-hq/static/img/create-project.png" alt="">
+
+    <div class="c-container">
+    <div th:replace="common/left::left"></div>
+    <div class="main-right">
+        <div class="clearfix main-right-nav">
+            <div class="f-l main-right-title">用户列表</div>
+            <div class="f-r pointer">
+                <img src="/alink-hq/static/img/create-project.png" alt="">
+            </div>
+            <div class="f-r pointer">
+                <img src="/alink-hq/static/img/go-back.png" alt="">
+            </div>
         </div>
-        <div class="f-r pointer">
-            <img src="/alink-hq/static/img/go-back.png" alt="">
-        </div>
-    </div>
-    <div id="projectList" class="">
-        <div class="search-condition ">
-            <form action="" class="clearfix">
-                <div class="f-l search" style="margin-right:125px;">
-                    <div>
-                        <label for="account">账号</label>
-                        <input type="text" id="account" placeholder="请输入账号">
+        <div id="projectList" class="">
+            <div class="search-condition ">
+                <form action="" class="clearfix">
+                    <div class="f-l search" style="margin-right:30px;">
+                        <div>
+                            <label for="account">账号</label>
+                            <input type="text" id="account" placeholder="请输入账号">
+                        </div>
+                        <div class="p-r">
+                            <label for="role">角色</label>
+                            <select name="role" id="role">
+                                <option th:each="role:${roleList}" th:value="${role.id}"
+                                        th:text="${role.roleName }"></option>
+                            </select>
+                        </div>
                     </div>
-                    <div class="p-r">
-                        <label for="role">角色</label>
-                        <select name="role" id="role">
-                            <option th:each="role:${roleList}" th:value="${role.id}" th:text="${role.roleName }"></option>
-                        </select>
+                    <div class="f-l search">
+                        <div>
+                            <label for="company">隶属公司</label>
+                            <select name="company" id="company">
+                                <option th:each="firm:${firmList}" th:value="${firm.id}"
+                                        th:text="${firm.coname }"></option>
+                            </select>
+                        </div>
+                        <div class="p-r">
+                            <label for="add-time">添加时间</label>
+                            <input type="text" id="add-time" placeholder="请选择日期" AUTOCOMPLETE="off">
+                            <img src="/alink-hq/static/img/date.png" alt="" class="p-a">
+                        </div>
                     </div>
-                </div>
-                <div class="f-l search">
-                    <div>
-                        <label for="company">隶属公司</label>
-                        <select name="company" id="company">
-                            <option th:each="firm:${firmList}" th:value="${firm.id}" th:text="${firm.coname }"></option>
-                        </select>
+                    <div class="f-r search-button ">
+                        <button type="submit" class="pointer">查询</button>
+                        <a href="" class="export" style="color: #3598db;">Excel导出</a>
                     </div>
-                    <div class="p-r">
-                        <label for="add-time">添加时间</label>
-                        <input type="text" id="add-time" placeholder="请选择日期" AUTOCOMPLETE="off">
-                        <img src="/alink-hq/static/img/date.png" alt="" class="p-a">
-                    </div>
-                </div>
-                <div class="f-r search-button ">
-                    <button type="submit" class="pointer">查询</button>
-                    <a href="" class="export" style="color: #3598db;">Excel导出</a>
-                </div>
-            </form>
-        </div>
-        <div class="search-result">
-            <!-- 有数据时 -->
-            <table border="1" class="hasData active">
-                <thead>
+                </form>
+            </div>
+            <div class="search-result">
+                <!-- 有数据时 -->
+                <table border="1" class="hasData active">
+                    <thead>
                     <tr>
                         <th>账号</th>
                         <th>用户名</th>
@@ -82,8 +85,8 @@
                         </th>
                         <th>操作</th>
                     </tr>
-                </thead>
-                <tbody>
+                    </thead>
+                    <tbody>
                     <tr th:each="user:${pageInfo.list}">
                         <td class="project-name" th:text="${user.account}"></td>
                         <td th:text="${user.uname}"></td>
@@ -92,34 +95,37 @@
                         <td th:text="${user.coname}"></td>
                         <td th:text="${user.role_id}"></td>
                         <td th:text="${user.create_date}"></td>
-                        <td th:text="${user.status}"><a href="javascript:void(0);" class="start-use" openTab="start-use"></a></td>
+                        <td th:text="${user.status}"><a href="javascript:void(0);" class="start-use"
+                                                        openTab="start-use"></a></td>
                         <td class="p-r">
                             <img src="/alink-hq/static/img/edit.png" alt="" openTab="reset-pwd" class="reset-pwd">
-                            <a th:href="@{/account/transferPage(uid=15)}"><img src="/alink-hq/static/img/exchange.png" alt="" class="center-img"></a>
-                            <img src="/alink-hq/static/img/delete.png" alt=""  class="delete-account" openTab="delete-account">
+                            <a th:href="@{/account/transferPage(uid=15)}"><img src="/alink-hq/static/img/exchange.png"
+                                                                               alt="" class="center-img"></a>
+                            <img src="/alink-hq/static/img/delete.png" alt="" class="delete-account"
+                                 openTab="delete-account">
                             <div class="popup p-a">
                                 重命名
                             </div>
                         </td>
                     </tr>
-                </tbody>
-                <tfoot>
+                    </tbody>
+                    <tfoot>
                     <tr>
                         <td colspan="11" class="clearfix page">
                             <div class="f-r page-right">
                                 <span class="prev-page">
                                     <a th:href="@{/account/list(pageNum=${pageInfo.prePage},uid=15)}">
 
-                                    <img src="/alink-hq/static/img/left-arrow.png" alt=""></a>
+                                        <img src="/alink-hq/static/img/left-arrow.png" alt=""></a>
                                 </span>
                                 <span th:text="${pageInfo.pageNum}" class="pages"></span>
                                 <span th:if="${pageInfo.hasNextPage}" class="next-page">
                                     <a th:href="@{/account/list(pageNum=${pageInfo.nextPage},uid=15)}">
-                                    <img src="/alink-hq/static/img/right-arrow-color.png" alt=""></a>
+                                        <img src="/alink-hq/static/img/right-arrow-color.png" alt=""></a>
                                 </span>
                                 <span th:unless="${pageInfo.hasNextPage}" class="next-page">
                                     <a th:href="@{/account/list(pageNum=${pageInfo.pageNum},uid=15)}">
-                                    <img src="/alink-hq/static/img/right-arrow-color.png" alt=""></a>
+                                        <img src="/alink-hq/static/img/right-arrow-color.png" alt=""></a>
                                 </span>
                                 <span class="m-l-15 m-r-20">
                                     共
@@ -142,11 +148,11 @@
                             </div>
                         </td>
                     </tr>
-                </tfoot>
-            </table>
-            <!-- 无数据时 -->
-            <table border="1" class="noData ">
-                <thead>
+                    </tfoot>
+                </table>
+                <!-- 无数据时 -->
+                <table border="1" class="noData ">
+                    <thead>
                     <tr>
                         <th>账号</th>
                         <th>用户名</th>
@@ -163,74 +169,83 @@
                         </th>
                         <th>操作</th>
                     </tr>
-                </thead>
-                <tbody>
+                    </thead>
+                    <tbody>
                     <tr>
                         <td colspan="8">
                             <img src="/alink-hq/static/img/no-data.png" alt="">
                             <p>暂无数据</p>
                         </td>
                     </tr>
-                </tbody>
-            </table>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
-    </div>
-    <script src="/alink-hq/static/js/jquery.min.js"></script>
-    <script src="/alink-hq/static/laydate/laydate.js"></script>
-    <script>
-        //日期选择
-        laydate.render({
-            elem: '#add-time', //指定元素
-            range: true
-        });
+</div>
+<script src="/alink-hq/static/js/jquery.min.js"></script>
+<script src="/alink-hq/static/laydate/laydate.js"></script>
 
+<script>
+    //日期选择
+    laydate.render({
+        elem: '#add-time', //指定元素
+        range: true
+    });
+    $('.one-list li').each(function () {
+        var tab = $(this).attr('tab');
+        if (tab == 'useList') {
+            $(this).addClass('active').siblings().removeClass('active');
+            ;
+        }
+    })
+    $('img').click(function () {
+        var imgUrl=$(this).attr('src');
+        console.log('imgUrl',imgUrl);
+        
+    })
+    $(function(){
+        myBrowser()
+    })
 
-        //跳转项目详情
-//        $('.project-name a').click( function () {
-//            var fileName = 'projectManage';
-//            var url = 'projectDetail';
-//            parent.goIframe(fileName, url);
-//        })
+    $('.start-use').click(function () {
+        var openTab = $(this).attr('openTab');
+        var text = $(this).text();
+        console.log(openTab);
+        parent.shade(openTab, text);
+        parent.scroll();
+    })
 
-        $('.start-use').click(function(){
-            var openTab=$(this).attr('openTab');
-            var text=$(this).text();
-            console.log(openTab);
-            parent.shade(openTab,text);
-            parent.scroll();
-        })
+    $('.reset-pwd').click(function () {
+        var openTab = $(this).attr('openTab');
+        console.log(openTab);
+        parent.shade(openTab);
+        parent.scroll();
+    })
+    $('.delete-account').click(function () {
+        var openTab = $(this).attr('openTab');
+        console.log(openTab);
+        parent.shade(openTab);
+        parent.scroll();
+    })
 
-        $('.reset-pwd').click(function(){
-            var openTab=$(this).attr('openTab');
-            console.log(openTab);
-            parent.shade(openTab);
-            parent.scroll();
-        })
-        $('.delete-account').click(function(){
-            var openTab=$(this).attr('openTab');
-            console.log(openTab);
-            parent.shade(openTab);
-            parent.scroll();
-        })
-
-        $(function(){
-            var page=parseInt($('.pages').text());
-            var pageTotal=parseInt($('.pageTotal').text());
-            console.log('page',page);
-            console.log('pageTotal',pageTotal);
-            if(page==1){
-                $('.prev-page img').attr('src','/alink-hq/static/img/left-arrow.png');
-                $(".prev-page ").attr("disabled", true);
-            }else{
-                $('.prev-page img').attr('src','/alink-hq/static/img/left-arrow-color.png');
-            }
-            if(page==pageTotal){
-                $('.next-page img').attr('src','/alink-hq/static/img/right-arrow.png');
-                $(".next-page ").attr("disabled", true);
-            }else{
-                $('.next-page img').attr('src','/alink-hq/static/img/right-arrow-color.png');
-            }
+    $(function () {
+        var page = parseInt($('.pages').text());
+        var pageTotal = parseInt($('.pageTotal').text());
+        console.log('page', page);
+        console.log('pageTotal', pageTotal);
+        if (page == 1) {
+            $('.prev-page img').attr('src', '/alink-hq/static/img/left-arrow.png');
+            $(".prev-page ").attr("disabled", true);
+        } else {
+            $('.prev-page img').attr('src', '/alink-hq/static/img/left-arrow-color.png');
+        }
+        if (page == pageTotal) {
+            $('.next-page img').attr('src', '/alink-hq/static/img/right-arrow.png');
+            $(".next-page ").attr("disabled", true);
+        } else {
+            $('.next-page img').attr('src', '/alink-hq/static/img/right-arrow-color.png');
+        }
 //            $('#prev-page').click(function(){
 //                if(page==1){
 //                    $('#prev-page img').attr('src','/alink-hq/static/img/left-arrow.png');
@@ -246,10 +261,10 @@
 //                }
 //            })
 
-        })
+    })
 
-       
-    </script>
+
+</script>
 </body>
 
 </html>

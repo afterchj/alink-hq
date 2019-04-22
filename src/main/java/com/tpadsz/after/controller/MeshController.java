@@ -29,17 +29,11 @@ public class MeshController {
     private Logger logger = Logger.getLogger(this.getClass());
 
     @RequestMapping("/list")
-    public String list(int uid, int pid, @RequestParam(required = false, defaultValue = "1") Integer pageNum, @RequestParam(required = false, defaultValue = "10") Integer pageSize, ModelMap modelMap) {
+    public String list(@RequestParam(required = false, defaultValue = "1") Integer pageNum, @RequestParam(required = false, defaultValue = "10") Integer pageSize, ModelMap modelMap) {
         logger.info("page=" + pageNum + ",size=" + pageSize);
         Map map = new HashMap();
-        if (uid != 0) {
-            map.put("uid", uid);
-        }
-        if (pid != 0) {
-            map.put("pid", pid);
-        }
         PageHelper.startPage(pageNum, pageSize);
-        List<Map> meshList = meshService.getByMap(null);
+        List<Map> meshList = meshService.getByMap(map);
         PageInfo<Map> pageInfo = new PageInfo(meshList, pageSize);
         modelMap.put("pageInfo", pageInfo);
         logger.info("total=" + pageInfo.getTotal() + ",pages=" + pageInfo.getPages());
