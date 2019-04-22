@@ -29,9 +29,7 @@ public class ShiroDbRealm extends AuthorizingRealm {
 
     @Autowired
     private UserExtendDao userExtendDao;
-
     private Logger logger = Logger.getLogger(this.getClass());
-
     /**
      * 登录之后用于授权
      */

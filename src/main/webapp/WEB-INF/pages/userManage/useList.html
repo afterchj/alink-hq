@@ -1,5 +1,6 @@
 <!doctype html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+>
 <head>
     <meta charset="UTF-8">
     <script src="/alink-hq/static/js/browser.js"></script>
@@ -12,7 +13,7 @@
 
 <div th:replace="common/head::head"></div>
 
-    <div class="c-container">
+<div class="c-container">
     <div th:replace="common/left::left"></div>
     <div class="main-right">
         <div class="clearfix main-right-nav">
@@ -55,7 +56,7 @@
                         </div>
                     </div>
                     <div class="f-r search-button ">
-                        <button type="submit" class="pointer">查询</button>
+                        <button type="button" class="pointer" onclick="condition()">查询</button>
                         <a href="" class="export" style="color: #3598db;">Excel导出</a>
                     </div>
                 </form>
@@ -93,14 +94,16 @@
                         <td th:text="${user.mobile}"></td>
                         <td th:text="${user.email}"></td>
                         <td th:text="${user.coname}"></td>
-                        <td th:text="${user.role_id}"></td>
+                        <td th:text="${user.role_id}" class="role"></td>
                         <td th:text="${user.create_date}"></td>
-                        <td th:text="${user.status}"><a href="javascript:void(0);" class="start-use"
-                                                        openTab="start-use"></a></td>
+                        <td th:text="${user.status}" class="status">
+                            <a href="javascript:void(0);" class="start-use" openTab="start-use"></a>
+                        </td>
                         <td class="p-r">
                             <img src="/alink-hq/static/img/edit.png" alt="" openTab="reset-pwd" class="reset-pwd">
-                            <a th:href="@{/account/transferPage(uid=${session.user.getId()})}"><img src="/alink-hq/static/img/exchange.png"
-                                                                               alt="" class="center-img"></a>
+                            <a th:href="@{/account/transferPage(uid=${session.user.id})}"><img
+                                    src="/alink-hq/static/img/exchange.png"
+                                    alt="" class="center-img"></a>
                             <img src="/alink-hq/static/img/delete.png" alt="" class="delete-account"
                                  openTab="delete-account">
                             <div class="popup p-a">
@@ -114,17 +117,17 @@
                         <td colspan="11" class="clearfix page">
                             <div class="f-r page-right">
                                 <span class="prev-page">
-                                    <a th:href="@{/account/list(pageNum=${pageInfo.prePage},uid=${session.user.getId()})}">
+                                    <a th:href="@{/account/list(pageNum=${pageInfo.prePage},uid=${session.user.id})}">
 
                                         <img src="/alink-hq/static/img/left-arrow.png" alt=""></a>
                                 </span>
                                 <span th:text="${pageInfo.pageNum}" class="pages"></span>
                                 <span th:if="${pageInfo.hasNextPage}" class="next-page">
-                                    <a th:href="@{/account/list(pageNum=${pageInfo.nextPage},uid=${session.user.getId()})}">
-                                        <img src="/alink-hq/static/img/right-arrow-color.png" alt=""></a>
+                                   <a th:href="@{/account/list(pageNum=${pageInfo.nextPage},uid=${session.user.id},pageSize=${pageInfo.pageSize},account=${account},fid=${fid},roleId=${roleId},startDate=${startDate},endDate=${endDate})}">
+                                       <img src="/alink-hq/static/img/right-arrow-color.png" alt=""></a>
                                 </span>
                                 <span th:unless="${pageInfo.hasNextPage}" class="next-page">
-                                    <a th:href="@{/account/list(pageNum=${pageInfo.pageNum},uid=${session.user.getId()})}">
+                                    <a th:href="@{/account/list(pageNum=${pageInfo.pageNum},uid=${session.user.id},pageSize=${pageInfo.pageSize},account=${account},fid=${fid},roleId=${roleId},startDate=${startDate},endDate=${endDate})}">
                                         <img src="/alink-hq/static/img/right-arrow-color.png" alt=""></a>
                                 </span>
                                 <span class="m-l-15 m-r-20">
@@ -196,15 +199,13 @@
         var tab = $(this).attr('tab');
         if (tab == 'useList') {
             $(this).addClass('active').siblings().removeClass('active');
-            ;
         }
     })
     $('img').click(function () {
-        var imgUrl=$(this).attr('src');
-        console.log('imgUrl',imgUrl);
-        
+        var imgUrl = $(this).attr('src');
+        console.log('imgUrl', imgUrl);
     })
-    $(function(){
+    $(function () {
         myBrowser()
     })
 
@@ -246,24 +247,100 @@
         } else {
             $('.next-page img').attr('src', '/alink-hq/static/img/right-arrow-color.png');
         }
-//            $('#prev-page').click(function(){
-//                if(page==1){
-//                    $('#prev-page img').attr('src','/alink-hq/static/img/left-arrow.png');
-//                }else{
-//                    $('#prev-page img').attr('src','/alink-hq/static/img/left-arrow-color.png');
-//                }
-//            })
-//            $('#next-page').click(function(){
-//                if(page==pageTotal){
-//                    $('#next-page img').attr('src','/alink-hq/static/img/right-arrow.png');
-//                }else{
-//                    $('#next-page img').attr('src','/alink-hq/static/img/right-arrow-color.png');
-//                }
-//            })
 
     })
 
+        //条件筛选
 
+$(function(){
+    var url = window.location.href;
+    var account = GetUrlParam("account");
+    var company =GetUrlParam("fid");
+    var role = GetUrlParam("roleId");
+    var startDate = GetUrlParam("startDate");
+    var endDate = GetUrlParam("endDate");
+    if(startDate=='' || endDate==''){
+
+    }else{
+        var addTime=startDate+' - '+endDate;
+        $('#add-time').val(addTime);
+    }
+
+    $('#account').val(account);
+    $('#role').val(role);
+    $('#company').val(company);
+
+//    var addTimeS=$('#add-time').val();
+//    console.log(addTimeS);
+//    if(addTime!=''){
+//
+//        $('#add-time').val(addTime);
+//    }else{
+//        $('#add-time').val('');
+//    }
+    $('table tr td.role').each(function(){
+        console.log($(this).text());
+        var roleId=parseInt($(this).text());
+        if(roleId==4){
+            $(this).text('施工人员');
+        }else if(roleId==3){
+            $(this).text('乙方管理员');
+        }else if(roleId==2){
+            $(this).text('管理员');
+        }
+    })
+    $('table tr td.status').each(function(){
+        console.log($(this).text());
+        var status=parseInt($(this).text());
+        if(status==1){
+            $(this).text('启用');
+        }else if(status==0){
+            $(this).text('禁用');
+        }
+    })
+    console.log(account, role, company, startDate, endDate,url);
+})
+
+    function condition() {
+        var url = window.location.href;
+
+        var i = url.indexOf("?");
+        var url2 = url.substring(0, i+1);
+        console.log('url2', url2);
+        var account = $('#account').val();
+        var role = $('#role').val();
+        var company = $('#company').val();
+        var addTime = $('#add-time').val();
+        var startDate = addTime.substring(0, 10);
+        var endDate = addTime.substring(13, 23);
+        var num = parseInt($('.pageTotal').text());
+        var userId =parseInt(GetUrlParam("uid"));
+        var newUrl = url2 +'uid='+userId+ '&pageNum=' + num + '&pageSize=10' + '&account=' + account + '&fid=' + company + '&roleId=' + role + '&startDate=' + startDate + '&endDate=' + endDate;
+        console.log(account, role, company, startDate, endDate, num);
+        location.href = newUrl;
+    }
+
+    //paraName 等找参数的名称
+    function GetUrlParam(paraName) {
+        var url = document.location.toString();
+        var arrObj = url.split("?");
+        if (arrObj.length > 1) {
+            var arrPara = arrObj[1].split("&");
+            var arr;
+
+            for (var i = 0; i < arrPara.length; i++) {
+                arr = arrPara[i].split("=");
+
+                if (arr != null && arr[0] == paraName) {
+                    return arr[1];
+                }
+            }
+            return "";
+        }
+        else {
+            return "";
+        }
+    }
 </script>
 </body>
 
