@@ -154,7 +154,6 @@ public class HomeController {
     @ResponseBody
     @RequestMapping("/checkUser")
     public String checkUser(String uname) {
-        logger.info("user:" + uname);
         String str;
         Map map = new HashMap();
         if (StringUtils.isNotEmpty(uname)) {
@@ -166,6 +165,8 @@ public class HomeController {
         } else {
             str = "failure";
         }
+        logger.info("user:" + uname+",count="+count);
+
         return str;
     }
 

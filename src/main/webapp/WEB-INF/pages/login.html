@@ -92,26 +92,26 @@
                         </div>
                         <!--手机找回密码-->
                         <div class="phone-find-password" tabContent="phone-find-password">
-                            <form th:action="${restPwd}">
+                            <form >
                                 <p class="mobile-add-hint" style="height: 25px;line-height:2;"></p>
                                 <div class="icon-input " >
-                                    <input type="phone" name="phone-f" id="phone-f" placeholder="请输入所绑定的手机号"
+                                    <input type="phone" name="phone-f" maxlength="11" id="phone-f" placeholder="请输入所绑定的手机号"
                                            style="text-indent: 15px;    height: 36px;line-height: 36px;"/>
                                 </div>
                                 <p class="mobile-code-hint" style="height:25px;line-height:2;"></p>
                                 <div class="icon-input p-r" >
                                     <input type="text" class="phone" name="code-f" id="code-f" placeholder="请输入验证码"
                                            style="text-indent: 15px;    height: 36px;line-height: 36px;"/>
-                                    <button class="security-code" type="button" onclick="" style="height:38px;">获取验证码</button>
+                                    <button class="security-code" type="button" onclick="phoneFindPwdCode()" style="height:38px;">获取验证码</button>
                                 </div>
                                 <p class="mobile-password-hint"style="height: 25px;line-height:2;"></p>
                                 <div class="icon-input  " >
-                                    <input type="password" name="pwd-f" id="pwd-f" placeholder="请输入新密码（6-16位数字、字母）"
+                                    <input type="password" name="pwd-f" id="pwd-f" onKeyUp="keyup()" maxlength="16" placeholder="请输入新密码（6-16位数字、字母）"
                                            style="text-indent: 15px;    height: 36px;line-height: 36px;"/>
                                 </div>
                                 <p class="page-hint" style="height: 30px;line-height:2;"></p>
                                 <div class="btn-bottom">
-                                    <button onclick="phoneFindPwd()" style="letter-spacing: 5px;height: 45px;">修改密码</button>
+                                    <button onclick="phoneFindPwd()" type="button" style="letter-spacing: 5px;height: 45px;">修改密码</button>
                                     <div class="clearfix hint">
                                         <span class="f-r go-login">已有账号，请点击这里登录</span>
                                     </div>
@@ -120,26 +120,26 @@
                         </div>
                         <!--邮箱找回密码-->
                         <div class="email-find-password" tabContent="email-find-password">
-                            <form th:action="${restPwd}">
+                            <form >
                                 <p class="email-add-hint" style="height: 25px;line-height:2;"></p>
                                 <div class="icon-input " >
-                                    <input type="email" name="email" id="email" placeholder=" 请输入所绑定的邮箱"
+                                    <input type="email" name="email-f" id="email-e" placeholder=" 请输入所绑定的邮箱"
                                            style="text-indent: 15px;    height: 36px;line-height: 36px;"/>
                                 </div>
                                 <p class="email-code-hint" style="height: 25px;line-height:2;"></p>
                                 <div class="icon-input p-r" >
-                                    <input type="text" class="phone" name="code" id="code2" placeholder="请输入验证码"
+                                    <input type="text" class="phone" name="code-e" id="code-e" placeholder="请输入验证码"
                                            style="text-indent: 15px;    height: 36px;line-height: 36px;"/>
-                                    <button class="security-code" type="button" onclick="pushCode('email')" style="height:36px;">获取验证码</button>
+                                    <button class="security-code" type="button" onclick="emailFindPwdCode()" style="height:36px;">获取验证码</button>
                                 </div>
                                 <p class="email-password-hint" style="height: 25px;line-height:2;"></p>
                                 <div class="icon-input " >
-                                    <input type="password" name="pwd" id="pwd2" placeholder="请输入新密码（6-16位数字、字母）"
+                                    <input type="password" name="pwd-e" id="pwd-e" placeholder="请输入新密码（6-16位数字、字母）"
                                            style="text-indent: 15px;    height: 36px;line-height: 36px;"/>
                                 </div>
                                 <p class="page-hint" style="height: 30px;line-height:2;"></p>
                                 <div class="btn-bottom">
-                                    <button onclick="modifyPwd()" style="letter-spacing: 5px;height: 45px;">修改密码</button>
+                                    <button onclick="emailFindPwd()" style="letter-spacing: 5px;height: 45px;" type="button">修改密码</button>
                                     <div class="clearfix hint">
                                         <span class="f-r go-login">已有账号，请点击这里登录</span>
                                     </div>
