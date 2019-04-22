@@ -1,14 +1,13 @@
 package com.tpadsz.after.controller;
 
-import com.alibaba.fastjson.JSONObject;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.tpadsz.after.entity.ProjectList;
 import com.tpadsz.after.entity.dd.ResultDict;
 import com.tpadsz.after.service.AccountService;
 import com.tpadsz.after.service.ProjectService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -30,37 +29,46 @@ public class ProjectController {
     @Resource
     private AccountService accountService;
 
-    @RequestMapping(value = "/list", method = RequestMethod.POST)
-    @ResponseBody
-    public String list(String uid, Model model) {
-        Integer role_id = accountService.findRoleIdByUid(uid);
-        List<ProjectList> list = new ArrayList<>();
-        if(role_id==1){
-            list = projectService.findProList();
-        }else if(role_id==3){
-            List<String> uids = accountService.findFirmUid(uid);
-            list = projectService.findProListByUids(uids);
-        }else if(role_id==4){
-            list = projectService.findProListByUid(uid);
+    @RequestMapping(value = "/list", method = RequestMethod.GET)
+    public String list(String uid, Integer pageNum, Integer pageSize, String account, String projectName,
+                       String startCreateDate, String endCreateDate, String startUpdateDate, String endUpdateDate,
+                       Model model) {
+        if (pageNum == null) {
+            pageNum = 1;   //设置默认当前页
+        }
+        if (pageNum <= 0) {
+            pageNum = 1;
+        }
+        if (pageSize == null) {
+            pageSize = 10;    //设置默认每页显示的数据数
         }
         try {
-
+            Integer role_id = accountService.findRoleIdByUid(uid);
+            List<ProjectList> list = new ArrayList<>();
+            if (role_id == 1 || role_id == 2) {
+                PageHelper.startPage(pageNum, pageSize);
+                list = projectService.searchBySuper(account, projectName, startCreateDate, endCreateDate,
+                        startUpdateDate, endUpdateDate);
+            } else if (role_id == 3) {
+                List<String> uids = accountService.findFirmUid(uid);
+                if (uids.size() != 0) {
+                    PageHelper.startPage(pageNum, pageSize);
+                    list = projectService.searchByManager(uids);
+                }
+            } else if (role_id == 4) {
+                PageHelper.startPage(pageNum, pageSize);
+                list = projectService.searchByUser(uid);
+            }
+            PageInfo<ProjectList> pageInfo = new PageInfo<ProjectList>(list, pageSize);
+            model.addAttribute("pageInfo", pageInfo);
+            model.addAttribute("account", account);
+            model.addAttribute("projectName", projectName);
+            model.addAttribute("startCreateDate", startCreateDate);
+            model.addAttribute("endCreateDate", endCreateDate);
+            model.addAttribute("startUpdateDate", startUpdateDate);
+            model.addAttribute("endUpdateDate", endUpdateDate);
         } catch (Exception e) {
 //            model.put("result", ResultDict.SYSTEM_ERROR.getCode());
-        }
-        return null;
-    }
-
-    @RequestMapping(value = "/list", method = RequestMethod.GET)
-    public String list(String uid, Integer pageNum, Integer pageSize, String projectName, Integer fid, Integer roleId,
-                       String startDate, String endDate,Model model) {
-
-        try {
-//            List<ProjectList> list = projectService.search(projectName, account, create_date, update_date);
-            model.addAttribute("result", ResultDict.SUCCESS.getCode());
-//            model.put("data", list);
-        } catch (Exception e) {
-            model.addAttribute("result", ResultDict.SYSTEM_ERROR.getCode());
         }
         return null;
     }

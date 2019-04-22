@@ -38,5 +38,21 @@ public class ProjectServiceImpl implements ProjectService {
         return projectDao.findProListByUid(uid);
     }
 
+    @Override
+    public List<ProjectList> searchBySuper(String account, String projectName, String startCreateDate, String
+            endCreateDate, String startUpdateDate, String endUpdateDate) {
+        return projectDao.searchBySuper(account,projectName,startCreateDate,endCreateDate,startUpdateDate,endUpdateDate);
+    }
+
+    @Override
+    public List<ProjectList> searchByManager(List<String> uids) {
+        return projectDao.searchByManager();
+    }
+
+    @Override
+    public List<ProjectList> searchByUser(String uid) {
+        return projectDao.searchByUser();
+    }
+
 
 }
