@@ -33,8 +33,7 @@ public class AccountController {
 
     @RequestMapping(value = "/list", method = RequestMethod.GET)
     public String list(String uid, Integer pageNum, Integer pageSize, String account, Integer fid, Integer roleId,
-                       String startDate, String endDate,
-                       Model model) {
+                       String startDate, String endDate,Model model) {
         if (pageNum == null) {
             pageNum = 1;   //设置默认当前页
         }

@@ -51,21 +51,16 @@ public class ProjectController {
         return null;
     }
 
-    @RequestMapping("/search")
-    @ResponseBody
-    public String search(@ModelAttribute("decodedParams") JSONObject params, ModelMap model) {
-        String uid = params.getString("uid");
-        String projectName = params.getString("projectName");
-        String account = params.getString("account");
-        String create_date = params.getString("create_date");
-        String update_date = params.getString("update_date");
+    @RequestMapping(value = "/list", method = RequestMethod.GET)
+    public String list(String uid, Integer pageNum, Integer pageSize, String projectName, Integer fid, Integer roleId,
+                       String startDate, String endDate,Model model) {
 
         try {
 //            List<ProjectList> list = projectService.search(projectName, account, create_date, update_date);
-            model.put("result", ResultDict.SUCCESS.getCode());
+            model.addAttribute("result", ResultDict.SUCCESS.getCode());
 //            model.put("data", list);
         } catch (Exception e) {
-            model.put("result", ResultDict.SYSTEM_ERROR.getCode());
+            model.addAttribute("result", ResultDict.SYSTEM_ERROR.getCode());
         }
         return null;
     }
