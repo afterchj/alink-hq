@@ -18,4 +18,10 @@ public interface ProjectDao {
 
     List<ProjectList> findProListByUid(@Param("uid") String uid);
 
+    List<ProjectList> searchBySuper(@Param("account")String account, @Param("projectName")String projectName, @Param("startCreateDate")String startCreateDate, @Param("endCreateDate")String endCreateDate, @Param("startUpdateDate")String
+            startUpdateDate, @Param("endUpdateDate")String endUpdateDate);
+
+    List<ProjectList> searchByManager();
+
+    List<ProjectList> searchByUser();
 }

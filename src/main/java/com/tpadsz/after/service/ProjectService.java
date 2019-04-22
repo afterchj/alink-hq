@@ -17,4 +17,10 @@ public interface ProjectService {
 
     List<ProjectList> findProListByUid(String uid);
 
+    List<ProjectList> searchBySuper(String account, String projectName, String startCreateDate, String endCreateDate, String
+            startUpdateDate, String endUpdateDate);
+
+    List<ProjectList> searchByManager(List<String> uids);
+
+    List<ProjectList> searchByUser(String uid);
 }
