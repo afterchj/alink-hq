@@ -82,7 +82,6 @@ public class AccountController {
             model.addAttribute("startDate", startDate);
             model.addAttribute("endDate", endDate);
         } catch (Exception e) {
-
         }
         return "userManage/useList";
     }

@@ -3,105 +3,105 @@
 <mapper namespace="com.tpadsz.after.dao.AccountDao">
 
     <select id="findRoleIdByUid" resultType="Integer" parameterType="string">
-        SELECT role_id FROM alink.f_user_role WHERE user_id=#{uid}
+        SELECT role_id FROM f_user_role WHERE user_id=#{uid}
     </select>
 
     <select id="findFirmUid" resultType="string" parameterType="string">
-        SELECT uid FROM alink.f_user_customer WHERE fid=(SELECT fid FROM f_user_customer WHERE uid=#{uid})
+        SELECT uid FROM f_user_customer WHERE fid=(SELECT fid FROM f_user_customer WHERE uid=#{uid})
     </select>
 
     <select id="findFirmUidOfUser" resultType="string" parameterType="string">
-        SELECT uid FROM alink.f_user_customer AS t1 INNER JOIN alink.f_user_role AS t4 ON t1.uid = t4.user_id WHERE t4.role_id = 4 and t1.fid=(SELECT fid FROM f_user_customer WHERE uid=#{uid})
+        SELECT uid FROM f_user_customer AS t1 INNER JOIN f_user_role AS t4 ON t1.uid = t4.user_id WHERE t4.role_id = 4 and t1.fid=(SELECT fid FROM f_user_customer WHERE uid=#{uid})
     </select>
 
     <select id="findFirmList" resultType="com.tpadsz.after.entity.Firm">
-        SELECT id,coname FROM alink.f_firm ORDER BY id
+        SELECT id,coname FROM f_firm ORDER BY id
     </select>
 
     <select id="findRoleList" resultType="com.tpadsz.after.entity.Role">
-        SELECT id,role_name AS roleName FROM alink.f_role ORDER BY id
+        SELECT id,role_name AS roleName FROM f_role ORDER BY id
     </select>
 
     <select id="findFirmByUid" resultType="com.tpadsz.after.entity.Firm" parameterType="string">
-        SELECT id,coname FROM alink.f_firm WHERE id=(SELECT fid FROM f_user_customer WHERE uid=#{uid})
+        SELECT id,coname FROM f_firm WHERE id=(SELECT fid FROM f_user_customer WHERE uid=#{uid})
     </select>
 
     <select id="findProjectByUid" resultType="int" parameterType="string">
-        SELECT COUNT(1) FROM alink.f_project WHERE uid=#{uid}
+        SELECT COUNT(1) FROM f_project WHERE uid=#{uid}
     </select>
 
     <select id="searchBySuper" resultType="com.tpadsz.after.entity.UserList">
-        SELECT t1.id,t1.account,t1.uname,t1.mobile,t1.email,t3.coname,t4.role_id,DATE_FORMAT(t1.create_date,'%Y-%m-%d %H:%i:%s') AS create_date,t1.status FROM (SELECT * FROM alink.f_user_account WHERE account=IFNULL(NULLIF(#{account},''),account) and create_date BETWEEN IFNULL(NULLIF(#{startDate},''),create_date) and IFNULL(NULLIF(#{endDate},''),create_date)) AS t1 INNER JOIN alink.f_user_customer AS t2 ON t1.id = t2.uid INNER JOIN alink.f_firm AS t3 ON t2.fid = t3.id INNER JOIN alink.f_user_role AS t4 ON t1.id = t4.user_id WHERE t2.fid = IFNULL(NULLIF(#{fid},''),fid) and t4.role_id &lt;&gt;1 and t4.role_id = IFNULL(NULLIF(#{roleId},''),t4.role_id) ORDER BY t1.update_date DESC,t1.create_date DESC
+        SELECT t1.id,t1.account,t1.uname,t1.mobile,t1.email,t3.coname,t4.role_id,DATE_FORMAT(t1.create_date,'%Y-%m-%d %H:%i:%s') AS create_date,t1.status FROM (SELECT * FROM f_user_account WHERE account=IFNULL(NULLIF(#{account},''),account) and create_date BETWEEN IFNULL(NULLIF(#{startDate},''),create_date) and IFNULL(NULLIF(#{endDate},''),create_date)) AS t1 INNER JOIN f_user_customer AS t2 ON t1.id = t2.uid INNER JOIN f_firm AS t3 ON t2.fid = t3.id INNER JOIN f_user_role AS t4 ON t1.id = t4.user_id WHERE t2.fid = IFNULL(NULLIF(#{fid},''),fid) and t4.role_id &lt;&gt;1 and t4.role_id = IFNULL(NULLIF(#{roleId},''),t4.role_id) ORDER BY t1.update_date DESC,t1.create_date DESC
     </select>
 
     <select id="searchByAdmin" resultType="com.tpadsz.after.entity.UserList">
-        SELECT t1.id,t1.account,t1.uname,t1.mobile,t1.email,t3.coname,t4.role_id,DATE_FORMAT(t1.create_date,'%Y-%m-%d %H:%i:%s') AS create_date,t1.status FROM (SELECT * FROM alink.f_user_account WHERE account=IFNULL(NULLIF(#{account},''),account) and create_date BETWEEN IFNULL(NULLIF(#{startDate},''),create_date) and IFNULL(NULLIF(#{endDate},''),create_date)) AS t1 INNER JOIN alink.f_user_customer AS t2 ON t1.id = t2.uid INNER JOIN alink.f_firm AS t3 ON t2.fid = t3.id INNER JOIN alink.f_user_role AS t4 ON t1.id = t4.user_id WHERE t2.fid = IFNULL(NULLIF(#{fid},''),fid) and t4.role_id IN(3,4) and t4.role_id = IFNULL(NULLIF(#{roleId},''),t4.role_id) ORDER BY t1.update_date DESC,t1.create_date DESC
+        SELECT t1.id,t1.account,t1.uname,t1.mobile,t1.email,t3.coname,t4.role_id,DATE_FORMAT(t1.create_date,'%Y-%m-%d %H:%i:%s') AS create_date,t1.status FROM (SELECT * FROM f_user_account WHERE account=IFNULL(NULLIF(#{account},''),account) and create_date BETWEEN IFNULL(NULLIF(#{startDate},''),create_date) and IFNULL(NULLIF(#{endDate},''),create_date)) AS t1 INNER JOIN f_user_customer AS t2 ON t1.id = t2.uid INNER JOIN f_firm AS t3 ON t2.fid = t3.id INNER JOIN f_user_role AS t4 ON t1.id = t4.user_id WHERE t2.fid = IFNULL(NULLIF(#{fid},''),fid) and t4.role_id IN(3,4) and t4.role_id = IFNULL(NULLIF(#{roleId},''),t4.role_id) ORDER BY t1.update_date DESC,t1.create_date DESC
     </select>
 
     <select id="searchByManager" resultType="com.tpadsz.after.entity.UserList">
         SELECT t1.id,t1.account,t1.uname,t1.mobile,t1.email,t3.coname,t4.role_id,DATE_FORMAT(t1.create_date,'%Y-%m-%d
-        %H:%i:%s') AS create_date,t1.status FROM (SELECT * FROM alink.f_user_account WHERE
+        %H:%i:%s') AS create_date,t1.status FROM (SELECT * FROM f_user_account WHERE
         account=IFNULL(NULLIF(#{account},''),account) and create_date BETWEEN
         IFNULL(NULLIF(#{startDate},''),create_date) and IFNULL(NULLIF(#{endDate},''),create_date) and id IN
         <foreach item="item" collection="list" open="(" separator="," close=")">#{item}
-        </foreach>) AS t1 INNER JOIN alink.f_user_customer AS t2 ON t1.id = t2.uid INNER JOIN alink.f_firm AS t3 ON
-        t2.fid = t3.id ORDER BY t1.update_date DESC,t1.create_date DESC
+        </foreach>) AS t1 INNER JOIN f_user_customer AS t2 ON t1.id = t2.uid INNER JOIN f_firm AS t3 ON
+        t2.fid = t3.id INNER JOIN f_user_role AS t4 ON t1.id = t4.user_id ORDER BY t1.update_date DESC,t1.create_date DESC
     </select>
 
 
     <insert id="createAccount" parameterType="string">
-        insert into alink.f_user_account (account,pwd,salt,create_date) values (#{account},#{pwd},#{salt},NOW())
+        insert into f_user_account (account,pwd,salt,create_date) values (#{account},#{pwd},#{salt},NOW())
         <selectKey keyProperty="id" order="AFTER" resultType="string">
             select LAST_INSERT_ID()
         </selectKey>
     </insert>
 
     <insert id="createFirmInfo" parameterType="integer">
-        insert into alink.f_user_customer (uid,fid,create_date) values (#{uid},#{fid},NOW())
+        insert into f_user_customer (uid,fid,create_date) values (#{uid},#{fid},NOW())
     </insert>
 
     <insert id="createRoleInfo" parameterType="integer">
-        insert into alink.f_user_role (user_id,role_id) values (#{uid},#{roleId})
+        insert into f_user_role (user_id,role_id) values (#{uid},#{roleId})
     </insert>
 
     <insert id="generateDefaultNetwork" parameterType="string" useGeneratedKeys="true" keyProperty="id">
         <selectKey keyProperty="count" resultType="int" order="BEFORE">
-            select count(*) from alink.f_mesh where mesh_id = '11223344' and uid= #{uid}
+            select count(*) from f_mesh where mesh_id = '11223344' and uid= #{uid}
         </selectKey>
         <if test="count==0">
-            INSERT INTO alink.f_mesh (mname,mesh_id,is_repeat,pwd,uid,project_id,create_date)
+            INSERT INTO f_mesh (mname,mesh_id,is_repeat,pwd,uid,project_id,create_date)
             VALUES('1122','11223344',#{uid},'3344',#{uid},0,NOW())
         </if>
     </insert>
 
     <select id="findByAccount" resultType="com.tpadsz.after.entity.User">
-        SELECT * FROM alink.f_user_account WHERE account=#{account}
+        SELECT * FROM f_user_account WHERE account=#{account}
     </select>
 
     <update id="updateAccount" parameterType="string">
-        update alink.f_user_account set pwd = #{pwd},salt = #{salt},update_date = NOW() where account=#{account}
+        update f_user_account set pwd = #{pwd},salt = #{salt},update_date = NOW() where account=#{account}
     </update>
 
     <update id="transferAccount">
-        update alink.f_user_customer set fid = #{fid},update_date = NOW() where uid=#{uid}
+        update f_user_customer set fid = #{fid},update_date = NOW() where uid=#{uid}
     </update>
 
     <update id="updateTransferedAccount" parameterType="string">
-        update alink.f_user_account set uname = NULL,mobile = NULL, email = NULL ,pwd = #{pwd},salt = #{salt},update_date = NOW() where id=#{uid}
+        update f_user_account set uname = NULL,mobile = NULL, email = NULL ,pwd = #{pwd},salt = #{salt},update_date = NOW() where id=#{uid}
     </update>
 
     <delete id="delete" parameterType="string">
-        DELETE FROM alink.f_user_account WHERE id=#{uid};
-        DELETE FROM alink.f_user_customer WHERE uid=#{uid};
-        DELETE FROM alink.f_user_role WHERE user_id=#{uid};
+        DELETE FROM f_user_account WHERE id=#{uid};
+        DELETE FROM f_user_customer WHERE uid=#{uid};
+        DELETE FROM f_user_role WHERE user_id=#{uid};
     </delete>
 
     <update id="enable">
         <if test="status == 0">
-        update alink.f_user_account set status = 1,update_date = NOW() where id=#{uid}
+        update f_user_account set status = 1,update_date = NOW() where id=#{uid}
         </if>
         <if test="status == 1">
-            update alink.f_user_account set status = 0,update_date = NOW() where id=#{uid}
+            update f_user_account set status = 0,update_date = NOW() where id=#{uid}
         </if>
     </update>
 
