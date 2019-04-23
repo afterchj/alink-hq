@@ -121,12 +121,14 @@
     margin-right: 20px;
 }
 #useTurnOver .accountMsg input{
-    height: 33px;
+    height: 32px;
     font-size: 14px;
-    width: 60%;
+    width: 220px;
     text-indent: 10px;
     border: 1px solid #bbb;
     color: #3c3c3c;
+    background-color: #f3f3f3;
+    border-radius: 5px;
 }
 .transfer-company label span{
     color: red;font-size: 20px;display: inline-block;
@@ -150,11 +152,13 @@
 }
 #useTurnOver .transfer-company select{
     border: 1px solid #bbb;
-    width: 30%;
+    width: 230px;
     text-indent: 10px;
     font-size: 14px;
     color: #3c3c3c;
-    height: 38px;
+    height: 35px;
+    background-color: #f3f3f3;
+    border-radius: 5px;
 }
 .img-exchange{
     text-align: center;

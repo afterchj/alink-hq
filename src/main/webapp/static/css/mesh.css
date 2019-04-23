@@ -93,64 +93,85 @@
     margin-right: 50px;
 }
 .f-content{
-    width: 70%;
-    height: 300px;
+    width: 800px;
+    height: auto;
     margin: 50px auto;
-    border:1px solid #bbb;
-    overflow: auto;
+    border: 2px solid #D9D9D9;
+    /* overflow: auto; */
+    max-height: 300px;
+    overflow-y: scroll;
 }
-#useTurnOver{
-    margin:20px 0;
-    border:1px solid #bbb;
+#meshTurnOver{
+    margin: 20px 0;
+    border: 1px solid #bbb;
+    background-color: #fff;
 }
-#useTurnOver .f-nav{
+#meshTurnOver .f-nav{
     height: 58px;
     line-height: 58px;
     padding-left: 25px;
     font-size: 22px;
     color: #111;
     border-bottom: 1px solid #bbb;
+    background-color: #fafafa;
 }
-#useTurnOver .accountMsg{
-    /*border:1px solid #bbb;*/
-    padding: 20px;
+#meshTurnOver .accountMsg{
+
+    padding: 30px;
 }
-#useTurnOver .accountMsg label{
-    /*display: inline-block;*/
-    margin: 5px 20px;
-    /*width:300px;*/
-    /*margin-right: 30px;*/
-    font-size: 18px;
+#meshTurnOver .accountMsg label{
+    display: inline-block;
+
+    width: 100px;
+
+    font-size: 16px;
     color: #3c3c3c;
 }
-#useTurnOver .accountMsg input{
-    /*height: 40px;*/
-    font-size: 18px;
-    width: 160px;
+#meshTurnOver .accountMsg input{
+
+    height: 30px;
+    font-size: 15px;
+    width: 120px;
     text-indent: 10px;
-    color: #3c3c3c;
+    color: #606060;
+    border: 1px solid #bbb;
+    background-color: #f3f3f3;
+    border-radius: 2px;
 }
-#useTurnOver .accountMsg div{
-    text-align: right;
-    width:30%;
-}
-#useTurnOver .transfer-company{
+/*#meshTurnOver .accountMsg div{*/
+    /*text-align: right;*/
+    /*width:30%;*/
+/*}*/
+#meshTurnOver .transfer-company{
     text-align: center;
+    padding: 40px;
+    border: 1px solid #bbb;
+    width: 600px;
+    margin: auto;
 }
-#useTurnOver .transfer-company label{
+#meshTurnOver .transfer-company label{
     display: inline-block;
     width: 180px;
-    font-size: 18px;
+    font-size: 16px;
     color: #3c3c3c;
     text-align: left;
 }
-#useTurnOver .transfer-company select{
-    border:1px solid #bbb;
-    width:30%;
+.transfer-company label span{
+    color: red;font-size: 20px;display: inline-block;
+    width: 20px;
+    height: 20px;
+    margin: auto;
+    vertical-align: middle;
+}
+#meshTurnOver .transfer-company select{
+    border: 1px solid #bbb;
+    width: 200px;
     text-indent: 10px;
-    font-size: 18px;
+    font-size: 15px;
     color: #3c3c3c;
-    height: 46px;
+    height: 35px;
+    border-radius: 5px;
+    background-color: #f3f3f3;
 }
 .confirm-btn{
     display: inline-block;
@@ -160,4 +181,34 @@
     margin-left: 22px;
     height: 50px;
     font-size: 20px;
+}
+.mesh-name{
+    width:20%;
+}
+.mesh-name span{
+    display: inline-block;
+    height: 29px;
+    line-height: 29px;
+}
+.mesh-id{
+    width:40%;
+}
+.mesh-project{
+    width:40%;
+}
+.confirm-btn{
+    width: 140px;
+    height: 42px;
+    border: 1px solid #3598db;
+    background-color: #3598db;
+    border-radius: 5px;
+    cursor: pointer;
+    color: #fff;
+    font-size: 17px;
+    letter-spacing: 5px;
+}
+.tranfer-btn{
+    text-align: center;
+    margin: 50px auto;
+    padding-bottom: 30px;
 }

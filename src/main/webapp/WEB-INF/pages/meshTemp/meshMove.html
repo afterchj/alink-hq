@@ -23,27 +23,27 @@
         </div>
     </div>
     <form th:action="@{/mesh/saveUpdate}" class="" method="get">
-        <div id="useTurnOver">
+        <div id="meshTurnOver">
             <div class="f-nav">
                 网络移动
             </div>
             <div class="f-content">
                 <input type="hidden" name="mids" th:value="${mids}">
                 <div class="accountMsg clearfix" th:each="mesh:${meshMap}">
-                    <div class="f-l">
-                        <label th:text="${mesh.mname}"></label>
+                    <div class="f-l mesh-name">
+                        <span th:text="${mesh.mname}"></span>
                     </div>
-                    <div class="f-l">
+                    <div class="f-l  mesh-id">
                         <label for="mid">网络ID：</label>
                         <input type="text" id="mid" th:value="${mesh.mesh_id}">
                     </div>
-                    <div class="f-l">
+                    <div class="f-l mesh-project">
                         <label for="project">属于项目：</label>
                         <input type="text" id="project" th:value="${mesh.name}">
                     </div>
                 </div>
             </div>
-            <div class="" style="text-align: center">
+            <div class="" style="text-align: center;    margin-bottom: 30px;">
                 <img src="/alink-hq/static/img/exchange-un.png" alt="">
             </div>
             <div class="transfer-company">
@@ -52,15 +52,15 @@
                     <option value="">11</option>
                 </select>
             </div>
-            <div>
-                <p><span>注意！</span><span>确认移交后</span></p>
-                <ul>
-                    <li>（1）账号中的项目保持不变；</li>
-                    <li>（2）该账号的用户名，绑定的手机号码及邮箱均会清空；</li>
-                    <li>（3）密码将会重置。</li>
-                </ul>
-            </div>
-            <div style="text-align: center;margin: 30px auto">
+            <!--<div>-->
+                <!--<p><span>注意！</span><span>确认移交后</span></p>-->
+                <!--<ul>-->
+                    <!--<li>（1）账号中的项目保持不变；</li>-->
+                    <!--<li>（2）该账号的用户名，绑定的手机号码及邮箱均会清空；</li>-->
+                    <!--<li>（3）密码将会重置。</li>-->
+                <!--</ul>-->
+            <!--</div>-->
+            <div  class="tranfer-btn">
                 <button class="confirm-btn" type="submit">确定移交</button>
             </div>
         </div>

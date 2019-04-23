@@ -36,7 +36,7 @@
                         <div class="p-r">
                             <label for="role">角色</label>
                             <select name="role" id="role">
-                                <option >请选择角色</option>
+                                <option>请选择角色</option>
                                 <option th:each="role:${roleList}" th:value="${role.id}"
                                         th:text="${role.roleName }"></option>
                             </select>
@@ -46,7 +46,7 @@
                         <div>
                             <label for="company">隶属公司</label>
                             <select name="company" id="company">
-                                <option >请选择公司</option>
+                                <option>请选择公司</option>
                                 <option th:each="firm:${firmList}" th:value="${firm.id}"
                                         th:text="${firm.coname }"></option>
                             </select>
@@ -91,7 +91,7 @@
                     </thead>
                     <tbody>
                     <tr th:each="user:${pageInfo.list}">
-                        <td class="project-name" th:text="${user.account}"></td>
+                        <td class="project-name use-account" th:text="${user.account}"></td>
                         <td th:text="${user.uname}"></td>
                         <td th:text="${user.mobile}"></td>
                         <td th:text="${user.email}"></td>
@@ -103,7 +103,7 @@
                         </td>
                         <td class="p-r">
                             <img src="/alink-hq/static/img/edit.png" alt="" openTab="reset-pwd" class="reset-pwd">
-                            <a th:href="@{/account/transferPage(uid=${session.user.id})}"><img
+                            <a th:href="@{/account/transferPage(uid=${session.user.id},account=${user.account},coname=${user.coname})}"><img
                                     src="/alink-hq/static/img/exchange.png"
                                     alt="" class="center-img"></a>
                             <img src="/alink-hq/static/img/delete.png" alt="" class="delete-account"
@@ -120,7 +120,6 @@
                             <div class="f-r page-right">
                                 <span class="prev-page">
                                     <a th:href="@{/account/list(pageNum=${pageInfo.prePage},uid=${session.user.id},pageSize=${pageInfo.pageSize},account=${account},fid=${fid},roleId=${roleId},startDate=${startDate},endDate=${endDate})}">
-
                                         <img src="/alink-hq/static/img/left-arrow.png" alt=""></a>
                                 </span>
                                 <span th:text="${pageInfo.pageNum}" class="pages"></span>
@@ -188,6 +187,8 @@
         </div>
     </div>
 </div>
+<input type="hidden" th:value="${session.user.id}" id="useId_hidden" name="useId"/>
+<!--<input type="hidden" th:value="${session.user.id}" id="useId_hidden" name="useId"/>-->
 <script src="/alink-hq/static/js/jquery.min.js"></script>
 <script src="/alink-hq/static/laydate/laydate.js"></script>
 
@@ -252,25 +253,25 @@
 
     })
 
-        //条件筛选
+    //条件筛选
 
-$(function(){
-    var url = window.location.href;
-    var account = GetUrlParam("account");
-    var company =GetUrlParam("fid");
-    var role = GetUrlParam("roleId");
-    var startDate = GetUrlParam("startDate");
-    var endDate = GetUrlParam("endDate");
-    if(startDate=='' || endDate==''){
+    $(function () {
+        var url = window.location.href;
+        var account = GetUrlParam("account");
+        var company = GetUrlParam("fid");
+        var role = GetUrlParam("roleId");
+        var startDate = GetUrlParam("startDate");
+        var endDate = GetUrlParam("endDate");
+        if (startDate == '' || endDate == '') {
 
-    }else{
-        var addTime=startDate+' - '+endDate;
-        $('#add-time').val(addTime);
-    }
+        } else {
+            var addTime = startDate + ' - ' + endDate;
+            $('#add-time').val(addTime);
+        }
 
-    $('#account').val(account);
-    $('#role').val(role);
-    $('#company').val(company);
+        $('#account').val(account);
+        $('#role').val(role);
+        $('#company').val(company);
 
 //    var addTimeS=$('#add-time').val();
 //    console.log(addTimeS);
@@ -280,43 +281,52 @@ $(function(){
 //    }else{
 //        $('#add-time').val('');
 //    }
-    $('table tr td.role').each(function(){
-        console.log($(this).text());
-        var roleId=parseInt($(this).text());
-        if(roleId==4){
-            $(this).text('施工人员');
-        }else if(roleId==3){
-            $(this).text('乙方管理员');
-        }else if(roleId==2){
-            $(this).text('管理员');
-        }
+        $('table tr td.role').each(function () {
+            console.log($(this).text());
+            var roleId = parseInt($(this).text());
+            if (roleId == 4) {
+                $(this).text('施工人员');
+            } else if (roleId == 3) {
+                $(this).text('乙方管理员');
+            } else if (roleId == 2) {
+                $(this).text('管理员');
+            }
+        })
+        $('table tr td.status').each(function () {
+            console.log($(this).text());
+            var status = parseInt($(this).text());
+            if (status == 1) {
+                $(this).text('启用');
+            } else if (status == 0) {
+                $(this).text('禁用');
+            }
+        })
+        console.log(account, role, company, startDate, endDate, url);
     })
-    $('table tr td.status').each(function(){
-        console.log($(this).text());
-        var status=parseInt($(this).text());
-        if(status==1){
-            $(this).text('启用');
-        }else if(status==0){
-            $(this).text('禁用');
-        }
-    })
-    console.log(account, role, company, startDate, endDate,url);
-})
 
     function condition() {
         var url = window.location.href;
         var i = url.indexOf("?");
-        var url2 = url.substring(0, i+1);
+        var url2 = url.substring(0, i + 1);
         console.log('url2', url2);
         var account = $('#account').val();
-        var role = $('#role').val();
-        var company = $('#company').val();
+
+        if ($('#company').val() != '请选择公司') {
+            var company = $('#company').val();
+        } else {
+            var company = '';
+        }
+        if ($('#role').val() != '请选择角色') {
+            var role = $('#role').val();
+        } else {
+            var role = '';
+        }
         var addTime = $('#add-time').val();
         var startDate = addTime.substring(0, 10);
         var endDate = addTime.substring(13, 23);
         var num = parseInt($('.pages').text());
-        var userId =parseInt(GetUrlParam("uid"));
-        var newUrl = url2 +'uid='+userId+ '&pageNum=' + num + '&pageSize=10' + '&account=' + account + '&fid='+company+ '&roleId=' + role + '&startDate=' + startDate + '&endDate=' + endDate;
+        var userId = parseInt($('#useId_hidden').val());
+        var newUrl = url2 + 'uid=' + userId + '&pageNum=' + num + '&pageSize=10' + '&account=' + account + '&fid=' + company + '&roleId=' + role + '&startDate=' + startDate + '&endDate=' + endDate;
         console.log(account, role, company, startDate, endDate, num);
         location.href = newUrl;
     }
@@ -342,6 +352,11 @@ $(function(){
             return "";
         }
     }
+
+//    $('.center-img').click(function(){
+//       var useAccount= $(this).parent().parent('td').siblings('td.use-account').text();
+//        console.log('useAccount',useAccount);
+//    })
 </script>
 </body>
 

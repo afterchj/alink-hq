@@ -44,8 +44,8 @@
                         <div class="transfer">
                             <div class="transfer-company">
                                 <label for=""><span style="">*</span>选择移交到的公司：</label>
-                                <select name="" id="">
-                                    <option value="">11</option>
+                                <select name="transfer-company" id="transfer-company">
+                                    <option value=""></option>
                                 </select>
                             </div>
                             <div class="attention">
@@ -69,7 +69,51 @@
 </div>
 <script src="/alink-hq/static/js/jquery.min.js"></script>
 <script>
+    $(function(){
+        var account = GetUrlParam("account");
+        var company =GetUrlParam("coname");
+        console.log(company);
+        $('#account').val(account);
+        $('#company').val(company);
+        $.ajax({
+            type: "GET",
+            url: "/alink-hq/account/transferPage.json",
+//            data: {username:$("#username").val(), content:$("#content").val()},
+            dataType: "json",
+            success: function(data){
+                console.log(data);
+//                $('#resText').empty();   //清空resText里面的所有内容
+//                var html = '';
+//                $.each(data, function(commentIndex, comment){
+//                    html += '<div class="comment"><h6>' + comment['username']
+//                            + ':</h6><p class="para"' + comment['content']
+//                            + '</p></div>';
+//                });
+//                $('#resText').html(html);
+            }
+        });
+    })
+    //paraName 等找参数的名称
+    function GetUrlParam(paraName) {
+        var url = document.location.toString();
+        var arrObj = url.split("?");
+        if (arrObj.length > 1) {
+            var arrPara = arrObj[1].split("&");
+            var arr;
 
+            for (var i = 0; i < arrPara.length; i++) {
+                arr = arrPara[i].split("=");
+
+                if (arr != null && arr[0] == paraName) {
+                    return arr[1];
+                }
+            }
+            return "";
+        }
+        else {
+            return "";
+        }
+    }
 </script>
 </body>
 
