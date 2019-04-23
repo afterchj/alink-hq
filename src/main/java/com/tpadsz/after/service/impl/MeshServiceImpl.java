@@ -39,7 +39,7 @@ public class MeshServiceImpl implements MeshService {
     }
 
     @Override
-    public List<OptionList> getProjects() {
-        return meshDao.getProjects();
+    public List<OptionList> getProjects(Integer uid) {
+        return meshDao.getProjects(uid);
     }
 }

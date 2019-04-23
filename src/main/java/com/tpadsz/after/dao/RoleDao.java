@@ -17,7 +17,7 @@ public interface RoleDao {
 
     int insertSelective(Role record);
 
-    Role selectById(Integer id);
+    String selectById(Integer uid);
 
     int updateByIdSelective(Role record);
 

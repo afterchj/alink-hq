@@ -49,7 +49,12 @@ public class HomeController {
 
     @RequestMapping("/index")
     public String index() {
-        return "index";
+        return "welcome";
+    }
+
+    @RequestMapping("/authError")
+    public String authError() {
+        return "authError";
     }
 
     @RequestMapping("/welcome")
@@ -165,7 +170,7 @@ public class HomeController {
         } else {
             str = "failure";
         }
-        logger.info("user:" + uname+",count="+count);
+        logger.info("user:" + uname + ",count=" + count);
 
         return str;
     }
@@ -179,11 +184,11 @@ public class HomeController {
             str = "success";
         } catch (Exception e) {
             logger.error("errMsg:" + e);
-            if (e instanceof InvalidCodeException){
-                if ("300".equals(((InvalidCodeException) e).getCode())){
+            if (e instanceof InvalidCodeException) {
+                if ("300".equals(((InvalidCodeException) e).getCode())) {
                     str = "failure";
-                }else {
-                    str="expire";
+                } else {
+                    str = "expire";
                 }
             }
         } finally {
