@@ -19,7 +19,7 @@
                         <!--<img src="/alink-hq/static/img/right-triange-un.png" alt="" class="p-a on-off-triangle">-->
                     </div>
                     <ul class="active">
-                        <li tab="projectList"><a th:href="@{/project/list(uid=${session.user.id})}">项目列表</a></li>
+                        <li tab="projectList"><a th:href="@{/project/list}">项目列表</a></li>
                         <li tab="networkList"><a th:href="@{/mesh/list}">网络列表</a></li>
                     </ul>
                 </li>
@@ -29,8 +29,8 @@
                         <img src="/alink-hq/static/img/bottom-triangle-un.png" alt="" class="p-a on-off-triangle">
                     </div>
                     <ul class="active">
-                        <li tab="useList"><a th:href="@{/account/list(uid=${session.user.id})}">用户列表</a></li>
-                        <li tab=""><a th:href="@{/account/createAccount(uid=${session.user.id})}">创建账号</a></li>
+                        <li tab="useList"><a th:href="@{/account/list}">用户列表</a></li>
+                        <li tab=""><a th:href="@{/account/createAccount}">创建账号</a></li>
                     </ul>
                 </li>
                 <li class="one-list">

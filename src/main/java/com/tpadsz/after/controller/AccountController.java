@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -32,8 +33,9 @@ public class AccountController {
 
 
     @RequestMapping(value = "/list", method = RequestMethod.GET)
-    public String list(String uid, Integer pageNum, Integer pageSize, String account, Integer fid, Integer roleId,
-                       String startDate, String endDate,Model model) {
+    public String list(Integer pageNum, Integer pageSize, String account, Integer fid, Integer roleId, String startDate, String endDate, HttpSession session, Model model) {
+        User loginUser = (User) session.getAttribute("user");
+        String uid = loginUser.getId();
         if (pageNum == null) {
             pageNum = 1;   //设置默认当前页
         }
@@ -87,8 +89,10 @@ public class AccountController {
     }
 
     @RequestMapping(value = "/createAccount", method = RequestMethod.GET)
-    public String createAccount(String uid,
+    public String createAccount(HttpSession session,
                                 Model model) {
+        User loginUser = (User) session.getAttribute("user");
+        String uid = loginUser.getId();
         Integer role_id = accountService.findRoleIdByUid(uid);
         List<Firm> firmList = getFirmInfo(role_id, uid);
         model.addAttribute("firmList", firmList);
@@ -141,7 +145,9 @@ public class AccountController {
 
 
     @RequestMapping(value = "/transferPage", method = RequestMethod.GET)
-    public String transferPage(String uid, Model model) {
+    public String transferPage(HttpSession session, Model model) {
+        User loginUser = (User) session.getAttribute("user");
+        String uid = loginUser.getId();
         Integer role_id = accountService.findRoleIdByUid(uid);
         List<Firm> firmList = getFirmInfo(role_id, uid);
         model.addAttribute("firmList", firmList);
