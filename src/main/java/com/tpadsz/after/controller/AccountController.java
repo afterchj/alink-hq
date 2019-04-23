@@ -145,12 +145,14 @@ public class AccountController {
 
 
     @RequestMapping(value = "/transferPage", method = RequestMethod.GET)
-    public String transferPage(HttpSession session, Model model) {
+    public String transferPage(HttpSession session,String account,String coname, Model model) {
         User loginUser = (User) session.getAttribute("user");
         String uid = loginUser.getId();
         Integer role_id = accountService.findRoleIdByUid(uid);
         List<Firm> firmList = getFirmInfo(role_id, uid);
         model.addAttribute("firmList", firmList);
+        model.addAttribute("account", account);
+        model.addAttribute("coname", coname);
         return "userManage/useTurnOver";
     }
 
