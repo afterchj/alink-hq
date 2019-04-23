@@ -36,6 +36,7 @@
                         <div class="p-r">
                             <label for="role">角色</label>
                             <select name="role" id="role">
+                                <option >请选择角色</option>
                                 <option th:each="role:${roleList}" th:value="${role.id}"
                                         th:text="${role.roleName }"></option>
                             </select>
@@ -45,6 +46,7 @@
                         <div>
                             <label for="company">隶属公司</label>
                             <select name="company" id="company">
+                                <option >请选择公司</option>
                                 <option th:each="firm:${firmList}" th:value="${firm.id}"
                                         th:text="${firm.coname }"></option>
                             </select>
@@ -117,7 +119,7 @@
                         <td colspan="11" class="clearfix page">
                             <div class="f-r page-right">
                                 <span class="prev-page">
-                                    <a th:href="@{/account/list(pageNum=${pageInfo.prePage},uid=${session.user.id})}">
+                                    <a th:href="@{/account/list(pageNum=${pageInfo.prePage},uid=${session.user.id},pageSize=${pageInfo.pageSize},account=${account},fid=${fid},roleId=${roleId},startDate=${startDate},endDate=${endDate})}">
 
                                         <img src="/alink-hq/static/img/left-arrow.png" alt=""></a>
                                 </span>
@@ -139,7 +141,7 @@
                                     <input type="number">
                                 </span>
                                 <span class="m-r-35">
-                                    <img src="/alink-hq/static/img/skip-color.png" alt="">
+                                    <img src="/alink-hq/static/img/skip.png" alt="">
                                 </span>
                                 <span class="m-r-15r">每页显示：</span>
                                 <span class="m-r-20">
@@ -303,7 +305,6 @@ $(function(){
 
     function condition() {
         var url = window.location.href;
-
         var i = url.indexOf("?");
         var url2 = url.substring(0, i+1);
         console.log('url2', url2);
@@ -313,9 +314,9 @@ $(function(){
         var addTime = $('#add-time').val();
         var startDate = addTime.substring(0, 10);
         var endDate = addTime.substring(13, 23);
-        var num = parseInt($('.pageTotal').text());
+        var num = parseInt($('.pages').text());
         var userId =parseInt(GetUrlParam("uid"));
-        var newUrl = url2 +'uid='+userId+ '&pageNum=' + num + '&pageSize=10' + '&account=' + account + '&fid=' + company + '&roleId=' + role + '&startDate=' + startDate + '&endDate=' + endDate;
+        var newUrl = url2 +'uid='+userId+ '&pageNum=' + num + '&pageSize=10' + '&account=' + account + '&fid='+company+ '&roleId=' + role + '&startDate=' + startDate + '&endDate=' + endDate;
         console.log(account, role, company, startDate, endDate, num);
         location.href = newUrl;
     }

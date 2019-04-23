@@ -123,7 +123,7 @@ img.toBottom {
 .search-result table td.page {
     height: 80px;
     line-height: 80px;
-    font-size: 14px;
+    font-size: 13px;
     color: #111;
 }
 
@@ -143,14 +143,15 @@ img.toBottom {
 
 .page-right>span {
     display: inline-block;
+
 }
 
 .page-right>span input,
 .page-right>span select {
     width: 68px;
-    height: 30px;
+    height: 26px;
     border: 1px solid #bbb;
-    font-size: 14px;
+    font-size: 13px;
     color: #3c3c3c;
     text-align: center;
 }

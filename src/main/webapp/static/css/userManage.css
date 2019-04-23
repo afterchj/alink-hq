@@ -94,8 +94,9 @@
 }
 
 #useTurnOver{
-    margin:20px 0;
-    border:1px solid #bbb;
+    margin: 20px 0;
+    border: 1px solid #bbb;
+    background-color: #fff;
 }
 #useTurnOver .f-nav{
     height: 58px;
@@ -103,26 +104,36 @@
     padding-left: 25px;
     font-size: 22px;
     color: #111;
+    background-color: #fafafa;
     border-bottom: 1px solid #bbb;
 }
 #useTurnOver .accountMsg{
-    margin:20px 50px;
-    border:1px solid #bbb;
-    padding: 30px;
+    margin: 40px 120px;
+    border: 1px solid #bbb;
+    padding: 35px;
 }
 #useTurnOver .accountMsg label{
     display: inline-block;
-    width:130px;
-    font-size: 18px;
+    width: 100px;
+    font-size: 16px;
     color: #3c3c3c;
+    text-align: right;
+    margin-right: 20px;
 }
 #useTurnOver .accountMsg input{
-    height: 40px;
-    font-size: 18px;
+    height: 33px;
+    font-size: 14px;
     width: 60%;
-
     text-indent: 10px;
+    border: 1px solid #bbb;
     color: #3c3c3c;
+}
+.transfer-company label span{
+    color: red;font-size: 20px;display: inline-block;
+    width: 20px;
+    height: 20px;
+    margin: auto;
+    vertical-align: middle;
 }
 #useTurnOver .accountMsg div{
     width:50%;
@@ -133,15 +144,50 @@
 #useTurnOver .transfer-company label{
     display: inline-block;
     width: 180px;
-    font-size: 18px;
+    font-size: 16px;
     color: #3c3c3c;
     text-align: left;
 }
 #useTurnOver .transfer-company select{
-    border:1px solid #bbb;
-    width:30%;
+    border: 1px solid #bbb;
+    width: 30%;
     text-indent: 10px;
-    font-size: 18px;
+    font-size: 14px;
     color: #3c3c3c;
-    height: 46px;
+    height: 38px;
+}
+.img-exchange{
+    text-align: center;
+    margin: 30px 0;
+}
+.transfer{
+    border: 1px solid #bbb;
+    width: 650px;
+    margin: 30px auto;
+    padding: 50px;
+}
+.attention{
+    margin: 60px 0 0 190px;
+    font-size: 15px;
+}
+.attention ul li,.attention p{
+    line-height: 1.7;
+}
+.attention span{
+    font-weight: bold;
+}
+.btn-transfer{
+    text-align: center;
+    padding: 35px 0  50px 0;
+}
+.btn-transfer button{
+    width: 140px;
+    height: 42px;
+    border: 1px solid #3598db;
+    background-color: #3598db;
+    border-radius: 5px;
+    cursor: pointer;
+    color: #fff;
+    font-size: 17px;
+    letter-spacing: 5px;
 }
