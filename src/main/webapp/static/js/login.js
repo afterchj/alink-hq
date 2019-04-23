@@ -150,15 +150,23 @@ $(function () {
     }
 })
 $(function () {
-    $("input").focus(function () {
+    $('#pwd').focus(function(){
+        console.log('获取焦点');
         $('.errMsg').html('');
-        $(this).parent().prev('p').text('');
-        // $('.container').unbind('click');
-    });
+        $('.password-login .password-hint').text('');
+        $('.password-login .page-hint').text('');
+
+    })
+    // $("input").focus(function () {
+    //     $('.errMsg p').html('');
+    //     $(this).parent().prev('p').text('');
+    //     // $('.container').unbind('click');
+    // });
 })
 
 //点击任意处检测手机或邮箱格式
 $(function () {
+
     var isPhone=true;
     $('.container').click(function () {
         // console.log('我执行');
@@ -190,8 +198,6 @@ $(function () {
                 } else {
                     $('.password-login .add-hint').text('');
                 }
-            }else{
-                isPhone=false;
             }
         }
         if (phoneValL !== '') {
@@ -203,7 +209,7 @@ $(function () {
                 } else {
                     $('.phone-login .add-hint').text('');
                 }
-            }else{
+            }else {
                 isPhone=false;
             }
         }
@@ -233,10 +239,15 @@ $(function () {
         $('#phone-f').focus(function(){
             $('.phone-find-password .mobile-add-hint').text('');
         });
-        $('#uname').focus(function(){
-            $('.password-login .add-hint').text('');
-        })
+
     }
+    $('#uname').focus(function(){
+        var p = /^[0-9]+$/;
+        var unameVal = $('#uname').val();
+        if(!p.test(unameVal) || unameVal.length!=11){
+            $('.password-login .add-hint').text('');
+        }
+    })
 })
 
 function passwordLogin() {
