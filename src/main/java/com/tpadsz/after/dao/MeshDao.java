@@ -1,6 +1,7 @@
 package com.tpadsz.after.dao;
 
 import com.tpadsz.after.entity.OptionList;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 import java.util.Map;
@@ -16,7 +17,7 @@ public interface MeshDao {
 
     List<Map> selectByMid(List list);
 
-    List<OptionList> getProjects();
+    List<OptionList> getProjects(@Param("uid") Integer uid);
 
     int getCountByTable(String tableName);
 

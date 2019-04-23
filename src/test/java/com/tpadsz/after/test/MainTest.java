@@ -1,7 +1,11 @@
 package com.tpadsz.after.test;
 
+import com.alibaba.fastjson.JSON;
+import com.tpadsz.after.entity.OptionList;
 import com.tpadsz.after.entity.Role;
 import com.tpadsz.after.entity.User;
+import com.tpadsz.after.service.MeshService;
+import com.tpadsz.after.service.impl.MeshServiceImpl;
 import net.rubyeye.xmemcached.XMemcachedClient;
 import net.rubyeye.xmemcached.exception.MemcachedException;
 import org.apache.log4j.Logger;
@@ -64,16 +68,25 @@ public class MainTest {
     @Test
     public void testMesh() {
         Map map = new HashMap();
-        map.put("role", "admin");
+        map.put("role", "manager");
         map.put("uid", 4);
-//        List<Map> list = getSqlSessionTemplate().selectList("com.tpadsz.after.dao.MeshDao.getByMap", map);
-        String role = getSqlSessionTemplate().selectOne("com.tpadsz.after.dao.RoleDao.selectById", 21);
-        List<Role> roles = getSqlSessionTemplate().selectList("com.tpadsz.after.dao.RoleDao.getAll");
-
-        logger.info("role=" + role);
-        logger.info("roles=" + roles);
+//        map.put("pid", 4);
+        List<Map> list = getSqlSessionTemplate().selectList("com.tpadsz.after.dao.MeshDao.getByMap", map);
+//        String role = getSqlSessionTemplate().selectOne("com.tpadsz.after.dao.RoleDao.selectById", 21);
+//        List<Role> roles = getSqlSessionTemplate().selectList("com.tpadsz.after.dao.RoleDao.getAll");
+//        List<OptionList> lists = getSqlSessionTemplate().selectList("com.tpadsz.after.dao.MeshDao.getProjects",8);
+//        logger.info("role=" + role);
+//        logger.info("roles=" + roles);
+        logger.info("lists=" + JSON.toJSONString(list.size()));
     }
 
+    @Test
+    public void testDao(){
+        ApplicationContext ctx = new ClassPathXmlApplicationContext("classpath:applicationContext.xml");
+        MeshService meshService= (MeshService) ctx.getBean("meshServiceImpl");
+        List<OptionList> lists = meshService.getProjects(0);
+        logger.info("lists=" + JSON.toJSONString(lists));
+    }
     public static void main(String[] args) {
         int size = 8;
         int total = 46;

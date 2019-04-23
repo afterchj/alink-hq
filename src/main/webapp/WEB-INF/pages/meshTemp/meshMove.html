@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -59,7 +59,7 @@
                 <!--<li>（3）密码将会重置。</li>-->
                 <!--</ul>-->
                 <!--</div>-->
-                <div  class="tranfer-btn">
+                <div class="tranfer-btn">
                     <button class="confirm-btn" type="submit">确定移交</button>
                 </div>
             </div>
@@ -67,13 +67,15 @@
     </div>
 </div>
 <script src="/alink-hq/static/js/jquery.min.js"></script>
-<script type="text/javascript">
-    $(function(){
-        $.getJSON("/alink-hq/mesh/getProjects",function(json){
+<script th:inline="javascript">
+    var uid = [[${session.user.id}]];
+    console.log("uid=" + uid);
+    $(function () {
+        $.getJSON("/alink-hq/mesh/getProjects", {"uid": uid}, function (json) {
             $("#pid option:first").remove();
             // 下面使用each进行遍历
-            $.each(json, function(i, item) {
-                $("#pid").append("<option value='"+item.id+"'>"+item.name+"</option>");
+            $.each(json, function (i, item) {
+                $("#pid").append("<option value='" + item.id + "'>" + item.name + "</option>");
             });
         })
     })

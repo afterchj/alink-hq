@@ -5,6 +5,7 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.tpadsz.after.entity.OptionList;
 import com.tpadsz.after.service.MeshService;
+import com.tpadsz.after.service.RoleService;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -25,13 +26,24 @@ public class MeshController {
 
     @Resource
     private MeshService meshService;
+    @Resource
+    private RoleService roleService;
 
     private Logger logger = Logger.getLogger(this.getClass());
 
     @RequestMapping("/list")
-    public String list(@RequestParam(required = false, defaultValue = "1") Integer pageNum, @RequestParam(required = false, defaultValue = "10") Integer pageSize, ModelMap modelMap) {
+    public String list(Integer uid, Integer pid, @RequestParam(required = false, defaultValue = "1") Integer pageNum, @RequestParam(required = false, defaultValue = "10") Integer pageSize, ModelMap modelMap) {
         logger.info("page=" + pageNum + ",size=" + pageSize);
         Map map = new HashMap();
+        if (uid != null) {
+            String role = roleService.selectById(uid);
+            map.put("role", role);
+            map.put("uid", uid);
+        }
+        if (pid != null) {
+            map.remove("uid");
+            map.put("pid", pid);
+        }
         PageHelper.startPage(pageNum, pageSize);
         List<Map> meshList = meshService.getByMap(map);
         PageInfo<Map> pageInfo = new PageInfo(meshList, pageSize);
@@ -65,8 +77,9 @@ public class MeshController {
 
     @ResponseBody
     @RequestMapping("/getProjects")
-    public List<OptionList> show() {
-        List<OptionList> meshMap = meshService.getProjects();
+    public List<OptionList> show(Integer uid) {
+        logger.info("uid=" + uid);
+        List<OptionList> meshMap = meshService.getProjects(null);
         return meshMap;
     }
 }

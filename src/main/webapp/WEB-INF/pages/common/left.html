@@ -20,7 +20,7 @@
                     </div>
                     <ul class="active">
                         <li tab="projectList"><a th:href="@{/project/list}">项目列表</a></li>
-                        <li tab="networkList"><a th:href="@{/mesh/list}">网络列表</a></li>
+                        <li tab="networkList"><a th:href="@{/mesh/list(uid=${session.user.id})}">网络列表</a></li>
                     </ul>
                 </li>
                 <li class="one-list">

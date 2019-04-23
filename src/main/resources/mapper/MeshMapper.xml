@@ -15,6 +15,26 @@
         s.scount
 	</sql>
 
+    <sql id="common_choose">
+        <if test="uid!=null and uid!=''">
+            <choose>
+                <when test="role == 'admin'">
+                    AND m.uid IN (SELECT u.id FROM f_user_account u INNER JOIN f_user_role r ON u.id=r.user_id WHERE r.role_id in (2,3,4))
+                </when>
+                <when test="role == 'manager'">
+                    AND m.uid IN (SELECT c.uid FROM f_user_customer c WHERE fid=(SELECT fid FROM f_user_customer WHERE uid=#{uid}))
+                <!--
+                    AND m.uid IN (SELECT c.uid FROM f_user_customer c INNER JOIN f_user_role r ON c.uid=r.user_id WHERE r.role_id in (4) AND fid=(SELECT fid FROM f_user_customer WHERE uid=#{uid})) OR m.uid=#{uid}
+                 -->
+                </when>
+                <when test="role == 'user'">
+                    AND m.uid =#{uid}
+                </when>
+                <!--<otherwise>-->
+                <!--</otherwise>-->
+            </choose>
+        </if>
+    </sql>
     <select id="getByMap" resultType="map" parameterType="map">
         SELECT
         <include refid="Base_Column_List"/>
@@ -24,23 +44,9 @@
         INNER JOIN (SELECT COUNT(1) pcount,mid FROM f_place GROUP BY mid) pl ON pl.mid=m.id
         INNER JOIN (SELECT COUNT(1) scount,mid FROM f_scene GROUP BY mid) s ON s.mid=m.id
         WHERE 1=1
-        <if test="uid!=null and uid!=''">
-            <choose>
-                <when test="role == 'manager'">
-                    AND m.uid IN (SELECT uid FROM f_user_customer c INNER JOIN f_user_role r ON c.uid=r.user_id WHERE r.role_id=4 AND c.fid=(SELECT c.fid FROM f_user_customer c WHERE c.uid=#{uid})) OR m.uid=#{uid}
-                </when >
-                <when test="role == 'admin'">
-                    AND m.uid IN (SELECT uid FROM f_user_customer c INNER JOIN f_user_role r ON c.uid=r.user_id WHERE r.role_id in (3,4)) OR m.uid=#{uid}
-                </when >
-                <when test="role == 'user'">
-                    AND m.uid =#{uid}
-                </when >
-                <!--<otherwise>-->
-                <!--</otherwise>-->
-            </choose>
-        </if>
-        <if test="pid!=null">
-            AND m.project_id=#{pid}
+        <include refid="common_choose"></include>
+        <if test="pid!=null and pid!=''">
+            AND p.id=#{pid}
         </if>
     </select>
 
@@ -76,8 +82,11 @@
         </foreach>
     </select>
 
-    <select id="getProjects" resultType="OptionList">
-        SELECT id,`name` FROM f_project
+    <select id="getProjects" resultType="OptionList" parameterType="int">
+        SELECT id,`name` FROM f_project WHERE 1=1
+        <if test="uid!=null and uid!=''">
+            AND uid=#{uid}
+        </if>
     </select>
 
     <update id="saveUpdate" parameterType="map">
