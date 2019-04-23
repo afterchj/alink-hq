@@ -9,11 +9,12 @@
     <link rel="stylesheet" href="/alink-hq/static/css/projectManage.css"/>
     <title>欢迎页</title>
     <style>
-        .main-right p {
-            font-size: 26px;
-            color: #3598DB;
-            font-weight: bold;
-        }
+       button{
+           color: white;
+           background-color: #006DC1;
+           width: 50px;
+           height: 30px;
+       }
     </style>
 </head>
 <body>
@@ -21,8 +22,9 @@
 <div class="c-container">
     <div th:replace="common/left::left"></div>
     <div class="main-right">
-        <p>欢迎进入</p>
-        <p>灯联网项目管理后台</p>
+        <h1>Sorry!</h1><br>
+        <h1>您没有权限访问！！！!</h1><br>
+       <div style="margin-left: 10%"> <button onclick="history.back()">返回</button></div>
     </div>
 </div>
 </body>

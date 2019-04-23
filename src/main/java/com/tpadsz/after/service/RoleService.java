@@ -9,5 +9,7 @@ public interface RoleService {
 	List<Role> getAll();
 	//根据角色名获取id
 	Integer getIdByRoleName(String roleName);
+
+	String selectById(Integer uid);
 	
 }

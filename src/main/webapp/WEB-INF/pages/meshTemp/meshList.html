@@ -12,11 +12,9 @@
 </head>
 <body>
 <div th:replace="common/head::head"></div>
-
 <div class="c-container">
     <div th:replace="common/left::left"></div>
     <div class="main-right">
-
         <div class="clearfix main-right-nav">
             <div class="f-l main-right-title">网络列表</div>
             <div class="f-r pointer">
@@ -36,9 +34,9 @@
                             <input type="text" id="name" placeholder="请输入项目名">
                         </div>
                         <!--<div class="p-r">-->
-                            <!--<label for="">网络状态</label>-->
-                            <!--<input type="text" id="start-time" placeholder="请选择日期" AUTOCOMPLETE="off">-->
-                            <!--<img src="/alink-hq/static/img/date.png" alt="" class="p-a">-->
+                        <!--<label for="">网络状态</label>-->
+                        <!--<input type="text" id="start-time" placeholder="请选择日期" AUTOCOMPLETE="off">-->
+                        <!--<img src="/alink-hq/static/img/date.png" alt="" class="p-a">-->
                         <!--</div>-->
                         <div>
                             <label for="name">网络状态</label>
@@ -51,9 +49,9 @@
                             <input type="text" placeholder="请输入账号">
                         </div>
                         <!--<div class="p-r">-->
-                            <!--<label for="">项目名称：</label>-->
-                            <!--<input type="text" id="end-time" placeholder="请选择日期" AUTOCOMPLETE="off">-->
-                            <!--<img src="/alink-hq/static/img/date.png" alt="" class="p-a">-->
+                        <!--<label for="">项目名称：</label>-->
+                        <!--<input type="text" id="end-time" placeholder="请选择日期" AUTOCOMPLETE="off">-->
+                        <!--<img src="/alink-hq/static/img/date.png" alt="" class="p-a">-->
                         <!--</div>-->
                         <div>
                             <label for="">项目名称：</label>
@@ -111,10 +109,10 @@
                             <span class="selected-order">已选择
                                 <span class="amount">0</span>条数据
                             </span>
-                            <span class="m-r-20">
+                                <span class="m-r-20">
                                 <img src="/alink-hq/static/img/true-over-un.png" alt="" id="multiMove">
                             </span>
-                            <span>
+                                <span>
                                 <img src="/alink-hq/static/img/delete-un.png" alt="">
                             </span>
                             </div>
@@ -159,7 +157,6 @@
         </div>
     </div>
 </div>
-
 <script th:inline="javascript">
     $(function () {
         var size = [[${pageInfo.pageSize}]];
@@ -167,14 +164,18 @@
         $("#size").val(size);
         //给全选的复选框添加事件
         $("#all").click(function () {
-            var length = $("input[name=mids]:checked").length;
+//            var length = $("input[name=mids]").length;
             // this 全选的复选框
             var checked = this.checked;
             //获取name=mids的复选框 遍历输出复选框
             $("input[name=mids]").each(function () {
                 this.checked = checked;
             });
-            $(".amount").text(length);
+            if (checked) {
+                $(".amount").text(size);
+            } else {
+                $(".amount").text(0);
+            }
         });
         //给name=mids的复选框绑定单击事件
         $("input[name=mids]").click(function () {

@@ -14,12 +14,12 @@
 	<select id="selectById" resultMap="BaseResultMap" parameterType="java.lang.Integer">
 		select
 		<include refid="Base_Column_List" />
-		from permission
+		from f_permission
 		where id = #{id,jdbcType=INTEGER}
 	</select>
 
 	<delete id="deleteById" parameterType="java.lang.Integer">
-		delete from permission
+		delete from f_permission
 		where id = #{id,jdbcType=INTEGER}
 	</delete>
 
@@ -28,7 +28,7 @@
 			order="AFTER">
 			SELECT LAST_INSERT_ID()
 		</selectKey>
-		insert into permission (permission_name)
+		insert into f_permission (permission_name)
 		values
 		(#{permissionName,jdbcType=VARCHAR})
 	</insert>
@@ -38,7 +38,7 @@
 			order="AFTER">
 			SELECT LAST_INSERT_ID()
 		</selectKey>
-		insert into permission
+		insert into f_permission
 		<trim prefix="(" suffix=")" suffixOverrides=",">
 			<if test="permissionName != null">
 				permission_name,
@@ -52,7 +52,7 @@
 	</insert>
 
 	<update id="updateByIdSelective" parameterType="Permission">
-		update permission
+		update f_permission
 		<set>
 			<if test="permissionName != null">
 				permission_name = #{permissionName,jdbcType=VARCHAR},
@@ -62,7 +62,7 @@
 	</update>
 
 	<update id="updateById" parameterType="Permission">
-		update permission
+		update f_permission
 		set
 		permission_name = #{permissionName,jdbcType=VARCHAR}
 		where id =

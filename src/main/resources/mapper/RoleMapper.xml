@@ -5,21 +5,24 @@
     <resultMap id="BaseResultMap" type="Role">
         <id column="id" property="id" jdbcType="INTEGER"/>
         <result column="role_name" property="roleName" jdbcType="VARCHAR"/>
+        <result column="role_type" property="roleType" jdbcType="VARCHAR"/>
     </resultMap>
 
     <sql id="Base_Column_List">
-		id , role_name
+		id ,role_name,role_type
 	</sql>
     <select id="getAll" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
-        from role
+        from f_role
     </select>
-    <select id="selectById" resultMap="BaseResultMap" parameterType="java.lang.Integer">
-        select
-        <include refid="Base_Column_List"/>
-        from role
-        where id = #{id,jdbcType=INTEGER}
+    <select id="selectById" resultType="string" parameterType="java.lang.Integer">
+        SELECT
+        r.role_type
+        FROM f_role r
+        INNER JOIN f_user_role ur ON ur.role_id = r.id
+        INNER JOIN f_user_account u ON u.id = ur.user_id
+        WHERE u.id = #{uid}
     </select>
 
     <select id="selectIdByName" resultType="java.lang.Integer">
@@ -28,7 +31,7 @@
 	</select>
 
     <delete id="deleteById" parameterType="java.lang.Integer">
-		delete from role
+		delete from f_role
 		where id = #{id,jdbcType=INTEGER}
 	</delete>
 
@@ -36,7 +39,7 @@
         <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER">
             SELECT LAST_INSERT_ID()
         </selectKey>
-        insert into role(role_name)
+        insert into f_role(role_name)
         values(#{roleName,jdbcType=VARCHAR})
     </insert>
 
@@ -45,7 +48,7 @@
                    order="AFTER">
             SELECT LAST_INSERT_ID()
         </selectKey>
-        insert into role
+        insert into f_role
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="roleName != null">
                 role_name,
@@ -59,7 +62,7 @@
     </insert>
 
     <update id="updateByIdSelective" parameterType="Role">
-        update role
+        update f_role
         <set>
             <if test="roleName != null">
                 role_name = #{roleName,jdbcType=VARCHAR},
@@ -69,7 +72,7 @@
     </update>
 
     <update id="updateById" parameterType="Role">
-		update role
+		update f_role
 		set role_name = #{roleName,jdbcType=VARCHAR}
 		where id = #{id,jdbcType=INTEGER}
 	</update>

@@ -5,6 +5,7 @@ public class Role {
 	private Integer id;
 	
 	private String roleName;
+	private String roleType;
 
 	public Integer getId() {
 		return id;
@@ -22,11 +23,17 @@ public class Role {
 		this.roleName = roleName;
 	}
 
+	public String getRoleType() {
+		return roleType;
+	}
+
+	public void setRoleType(String roleType) {
+		this.roleType = roleType;
+	}
+
 	@Override
 	public String toString() {
-		return "Role [id=" + id + ", roleName=" + roleName + "]";
+		return "Role [id=" + id + ", roleName=" + roleName + ", roleType=" + roleType + "]";
 	}
-	
-	
-	
+
 }
