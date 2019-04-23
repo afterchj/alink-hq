@@ -32,8 +32,19 @@
             <p>欢迎进入</p>
             <p>灯联网项目管理后台</p>
         </div>
-
     </div>
 </div>
+<script>
+    $('.on-off-triangle').click(function(){
+        var imgUrl=$(this).attr('src');
+        if(imgUrl=='/alink-hq/static/img/bottom-triangle-un.png'){
+            $(this).attr('src','/alink-hq/static/img/right-triange-un.png');
+            $(this).parent().parent('.one-list').find('.two-list').addClass('active');
+        }else{
+            $(this).attr('src','/alink-hq/static/img/bottom-triangle-un.png');
+            $(this).parent().parent('.one-list').find('.two-list').removeClass('active');
+        }
+    })
+</script>
 </body>
 </html>

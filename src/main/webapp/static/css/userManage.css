@@ -5,11 +5,13 @@
     font-size: 22px;
     color: #111;
     border-bottom: 1px solid #bbb;
+    background-color: #fafafa;
 }
 #createAccount .c-createAccount{
     height: 842px;
     margin: 30px 0;
     border: 1px solid #bbb;
+    background-color: #fff;
 }
 #createAccount .c-content{
     padding: 10px 70px;
@@ -19,9 +21,9 @@
 #createAccount form{
     width: 800px;
     margin: auto;
-    font-size: 21px;
+    font-size: 16px;
     color: #3c3c3c;
-    margin-top: 100px;
+    margin-top: 50px;
 }
 #createAccount form>div{
     margin-bottom: 80px;
@@ -33,14 +35,14 @@
     margin-right: 100px;
 }
 #createAccount form>div select,#createAccount form>div input[type='text']{
-    height: 42px;
+    height: 35px;
     border-radius: 5px;
     border: 1px solid #bbb;
    
 }
 #createAccount form>div select{
-    width: 328px;
-    font-size: 18px;
+    width: 300px;
+    font-size: 15px;
     color: #666;
 }
 #createAccount form>div input[type='text']{
@@ -48,7 +50,7 @@
     border-radius: 0;
     border-top: none;
     border-bottom: none;
-    font-size: 21px;
+    font-size: 15px;
     color: #3c3c3c;
     text-align: center;
 }
@@ -59,23 +61,22 @@
 }
 .num>div{
     display: inline-block;
-    width: 44px;
-    height: 44px;
-    line-height: 44px;
+    width: 37px;
+    height: 37px;
+    line-height: 37px;
     text-align: center;
 }
 #createAccount form>div button{
     height: 44px;
-    width: 125px;
+    width: 134px;
     color: #fff;
-    font-size: 20px;
+    font-size: 17px;
     letter-spacing: 5px;
     border: 1px solid #3598db;
     background-color: #3598db;
     border-radius: 5px;
     cursor: pointer;
     margin-left: 255px;
-   
 }
 #createAccount form>div button:active{
     background-color: #0068ae;
