@@ -142,7 +142,7 @@
                                 </span>
                                 <span class="m-r-15r">每页显示：</span>
                                 <span class="m-r-20">
-                                    <select name="" id="">
+                                    <select name="page-select" id="page-select">
                                         <option value="">10</option>
                                         <option value="">5</option>
                                     </select>
@@ -353,9 +353,7 @@
         var role = GetUrlParam("roleId");
         var startDate = GetUrlParam("startDate");
         var endDate = GetUrlParam("endDate");
-        if (startDate == '' || endDate == '') {
-
-        } else {
+        if (startDate != '' && endDate != '') {
             var addTime = startDate + ' - ' + endDate;
             $('#add-time').val(addTime);
         }
@@ -395,9 +393,7 @@
         }else{
             var url2=url+'?';
         }
-
         var account = $('#account').val();
-
         if ($('#company').val() != '请选择公司') {
             var company = $('#company').val();
         } else {
