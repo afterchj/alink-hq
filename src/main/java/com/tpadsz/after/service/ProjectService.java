@@ -9,18 +9,16 @@ import java.util.List;
  */
 public interface ProjectService {
 
-    List<ProjectList> findProList();
-
     List<ProjectList> search(String projectName, String account, String create_date, String update_date);
-
-    List<ProjectList> findProListByUids(List<String> uids);
-
-    List<ProjectList> findProListByUid(String uid);
 
     List<ProjectList> searchBySuper(String account, String projectName, String startCreateDate, String endCreateDate, String
             startUpdateDate, String endUpdateDate);
 
-    List<ProjectList> searchByManager(List<String> uids);
+    List<ProjectList> searchByManager(String account, String projectName, String startCreateDate, String endCreateDate, String
+            startUpdateDate, String endUpdateDate,List<Integer> ids);
 
-    List<ProjectList> searchByUser(String uid);
+    List<Integer> findProjectList(String uid);
+
+    List<ProjectList> searchByUser(String account, String projectName, String startCreateDate, String endCreateDate, String
+            startUpdateDate, String endUpdateDate, String uid);
 }
