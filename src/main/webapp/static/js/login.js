@@ -1,6 +1,6 @@
 $(function () {
     $(".login-in-box-tab>div:not('.icon-input')").click(function () {
-        $('.errMsg p').html('');
+        $('.errMsg').html('');
         $('p.page-hint').text('');
         $('p.add-hint').text('');
         $('p.password-hint').text('');
@@ -14,6 +14,12 @@ $(function () {
         $('#email-e').val('');
         $('#code-e').val('');
         $('#pwd-e').val('');
+        $('.email-find-password .email-add-hint').text('');
+        $('.email-find-password .email-code-hint').text('');
+        $('.email-find-password .email-password-hint').text('');
+        $('.phone-find-password .mobile-add-hint').text('');
+        $('.phone-find-password .mobile-code-hint').text('');
+        $('.phone-find-password .mobile-password-hint').text('');
         var tab = $(this).attr('tab').trim();
         $(this).addClass('active visible').siblings().removeClass('active');
         $('.login-in-box-tab-content>div').each(function () {
@@ -25,7 +31,7 @@ $(function () {
     })
     $('.forget-password').click(function () {
         $('.login-in-box-tab-content>div').each(function () {
-            $('.errMsg p').html('');
+            $('.errMsg ').html('');
             $('p.page-hint').text('');
             $('p.add-hint').text('');
             $('p.password-hint').text('');
@@ -39,6 +45,12 @@ $(function () {
             $('#email-e').val('');
             $('#code-e').val('');
             $('#pwd-e').val('');
+            $('.email-find-password .email-add-hint').text('');
+            $('.email-find-password .email-code-hint').text('');
+            $('.email-find-password .email-password-hint').text('');
+            $('.phone-find-password .mobile-add-hint').text('');
+            $('.phone-find-password .mobile-code-hint').text('');
+            $('.phone-find-password .mobile-password-hint').text('');
             var tabContent = $(this).attr('tabContent').trim();
             if (tabContent == 'phone-find-password') {
                 $(this).addClass('active').siblings().removeClass('active');
@@ -50,7 +62,7 @@ $(function () {
         })
     })
     $('.go-login').click(function () {
-        $('.errMsg p').html('');
+        $('.errMsg').html('');
         $('p.page-hint').text('');
         $('p.add-hint').text('');
         $('p.password-hint').text('');
@@ -64,6 +76,12 @@ $(function () {
         $('#email-e').val('');
         $('#code-e').val('');
         $('#pwd-e').val('');
+        $('.email-find-password .email-add-hint').text('');
+        $('.email-find-password .email-code-hint').text('');
+        $('.email-find-password .email-password-hint').text('');
+        $('.phone-find-password .mobile-add-hint').text('');
+        $('.phone-find-password .mobile-code-hint').text('');
+        $('.phone-find-password .mobile-password-hint').text('');
         $("div[tab='password-login']").addClass('visible active');
         $("div[tab='phone-login']").addClass('visible ');
         $("div[tab='phone-find-password']").removeClass('visible active');
@@ -83,33 +101,34 @@ $(function () {
     $('.security-code').click(function () {
         //验证手机号是否正确
         var regPhone = /^[1][3,4,5,7,8,9][0-9]{9}$/;
-        var phoneVal1=$('#phone-l').val();
-        var phoneVal2=$('#phone-f').val();
+        var phoneVal1 = $('#phone-l').val();
+        var phoneVal2 = $('#phone-f').val();
         var isBind1 = checkExist(phoneVal1);
-        var isBind2=checkExist(phoneVal2);
-        var phoneResult1= regPhone.test(phoneVal1);
-        var phoneResult2= regPhone.test(phoneVal2);
+        var isBind2 = checkExist(phoneVal2);
+        var phoneResult1 = regPhone.test(phoneVal1);
+        var phoneResult2 = regPhone.test(phoneVal2);
         //验证邮箱
         var emailVal = $('#email-e').val();
         var regEmail = /^([a-zA-Z]|[0-9])(\w|\-)+@[a-zA-Z0-9]+\.([a-zA-Z]{2,4})$/;
-        var emailResult=regEmail.test(emailVal);
+        var emailResult = regEmail.test(emailVal);
         var isBind3 = checkExist(emailVal);
         // var emailResult = regEmail.test(unameVal);
 
-        if(phoneVal1!='' &&  phoneResult1 && isBind1){
+        if (phoneVal1 != '' && phoneResult1 && isBind1) {
             $(this).addClass('active');
             settime(this);
         }
-        if(phoneVal2!='' && phoneResult2 && isBind2){
+        if (phoneVal2 != '' && phoneResult2 && isBind2) {
             $(this).addClass('active');
             settime(this);
         }
-        if(emailResult!='' && emailResult && isBind3){
+        if (emailResult != '' && emailResult && isBind3) {
             $(this).addClass('active');
             settime(this);
         }
     })
     var countdown = 60;
+
     function settime(obj) {
         if (countdown == 0) {
             obj.removeAttribute("disabled");
@@ -131,21 +150,30 @@ $(function () {
     }
 })
 $(function () {
-    $("input").focus(function () {
-        $('.errMsg p').html('');
-        $(this).parent().prev('p').text('');
-        // $('.container').unbind('click');
-    });
+    $('#pwd').focus(function(){
+        console.log('获取焦点');
+        $('.errMsg').html('');
+        $('.password-login .password-hint').text('');
+        $('.password-login .page-hint').text('');
+
+    })
+    // $("input").focus(function () {
+    //     $('.errMsg p').html('');
+    //     $(this).parent().prev('p').text('');
+    //     // $('.container').unbind('click');
+    // });
 })
 
 //点击任意处检测手机或邮箱格式
 $(function () {
+
+    var isPhone=true;
     $('.container').click(function () {
         // console.log('我执行');
         var unameVal = $('#uname').val();
         var phoneValL = $('#phone-l').val();
         var phoneValF = $('#phone-f').val();
-        var emailVal=$('#email-e').val();
+        var emailVal = $('#email-e').val();
         var p = /^[0-9]+$/;
         var e = new RegExp("[@]");
         //验证手机号是否正确
@@ -156,28 +184,24 @@ $(function () {
         //验证邮箱
         var regEmail = /^([a-zA-Z]|[0-9])(\w|\-)+@[a-zA-Z0-9]+\.([a-zA-Z]{2,4})$/;
         var emailResult = regEmail.test(unameVal);
-        var emailResult2=regEmail.test(emailVal);
-        // console.log(unameVal);
-        // console.log(phoneResult2);
+        var emailResult2 = regEmail.test(emailVal);
         if (unameVal !== '') {
-            if (p.test(unameVal)) {
+            if (p.test(unameVal) && unameVal.length==11) {
                 if (!phoneResult) {
                     $('.password-login .add-hint').text('请输入正确的手机号');
-                    // $('.password-login .password-hint').text('');
                 } else {
                     $('.password-login .add-hint').text('');
                 }
             } else if (e.test(unameVal)) {
                 if (!emailResult) {
                     $('.password-login .add-hint').text('请输入正确的邮箱');
-                    // $('.password-login .password-hint').text('');
                 } else {
                     $('.password-login .add-hint').text('');
                 }
             }
         }
         if (phoneValL !== '') {
-            if (p.test(phoneValL)) {
+            if (p.test(phoneValL) && phoneValL.length==11) {
                 if (!phoneResultL) {
                     $('.phone-login .add-hint').text('请输入正确的手机号');
                     $('.phone-find-password .mobile-code-hint').text('');
@@ -185,27 +209,46 @@ $(function () {
                 } else {
                     $('.phone-login .add-hint').text('');
                 }
+            }else {
+                isPhone=false;
             }
         }
         if (phoneValF !== '') {
-            if (p.test(phoneValF)) {
+            if (p.test(phoneValF)&& phoneValF.length==11) {
                 if (!phoneResultF) {
                     $('.phone-find-password .mobile-add-hint').text('请输入正确的手机号');
                 } else {
                     $('.phone-find-password .mobile-add-hint').text('');
                 }
+            }else{
+                isPhone=false;
             }
         }
         if (emailVal !== '') {
             if (!emailResult2) {
                 $('.email-find-password .email-add-hint').text('请输入正确的邮箱');
-            }else{
+            } else {
                 $('.email-find-password .email-add-hint').text('');
             }
         }
     })
-})
+    if(!isPhone){
+      $('#phone-l').focus(function(){
+          $('.phone-login .add-hint').text('');
+      });
+        $('#phone-f').focus(function(){
+            $('.phone-find-password .mobile-add-hint').text('');
+        });
 
+    }
+    $('#uname').focus(function(){
+        var p = /^[0-9]+$/;
+        var unameVal = $('#uname').val();
+        if(!p.test(unameVal) || unameVal.length!=11){
+            $('.password-login .add-hint').text('');
+        }
+    })
+})
 
 function passwordLogin() {
     $('.content .login-in-box-tab-content button').addClass('active');
@@ -258,7 +301,7 @@ function passwordLogin() {
             $('#pwd').val('');
             $('.password-login .password-hint').text('');
         }
-    } else if (p.test(unameVal)) {
+    } else if (p.test(unameVal) && unameVal.length==11) {
         //想输入的是手机号
         if (!phoneResult) {
             $('.password-login .add-hint').text('请输入正确的手机号');
@@ -311,7 +354,7 @@ function passwordLogin() {
         }
     } else {
         //想输入的是用户名或账号
-        console.log('想输入的是用户名或账号');
+
         if (!isBind) {
             if (pwdVal == '') {
                 $('.password-login .add-hint').text('登录名错误');
@@ -339,7 +382,7 @@ function passwordLogin() {
 
 
 $(function () {
-    var text = $('.errMsg p').text();
+    var text = $('.errMsg ').text();
     // console.log(text);
     if (text != '') {
         var hasUse = localStorage.getItem('useVal');
@@ -360,9 +403,9 @@ $(function () {
         // $('#pwd').val('');
     }
 })
-// $(function(){
-//     overTime();
-// })
+$(function(){
+    overTime();
+})
 //联系我们的弹出框
 function contact() {
     var width = window.screen.width;
@@ -400,12 +443,9 @@ function phoneLogin() {
     var phoneVal = $('#phone-l').val();
     var codeVal = $('#code-l').val();
     var isBind = checkExist(phoneVal);
-    console.log(phoneVal, codeVal);
     //验证手机号格式是否正确
     var regPhone = /^[1][3,4,5,7,8,9][0-9]{9}$/;
     var phoneResult = regPhone.test(phoneVal);
-    console.log(phoneResult);
-    console.log('手机号是否绑定', isBind);
     if (phoneVal == '') {
         if (codeVal == '') {
             $('.phone-login .add-hint').text('请输入手机号');
@@ -431,11 +471,11 @@ function phoneLogin() {
             $('.phone-login .add-hint').text('');
             $('.phone-login .password-hint').text('请输入验证码');
         } else {
-           var isSuccess=validCode(phoneVal, codeVal);
+            var isSuccess = validCode(phoneVal, codeVal);
             console.log(isSuccess);
-            if(isSuccess=='success'){
+            if (isSuccess == 'success') {
                 $('.phone-login form').submit();
-            }else{
+            } else {
                 $('.phone-login .password-hint').text('验证码不正确');
             }
         }
@@ -750,8 +790,8 @@ function restPwd2(emailVal, newPwd) {
     })
 }
 // 手机号是否被绑定
-function checkExist(phoneVal){
-    var isBind=false;
+function checkExist(phoneVal) {
+    var isBind = false;
     $.ajax({
         type: "GET",
         url: "/alink-hq/checkUser",
@@ -771,22 +811,39 @@ function checkExist(phoneVal){
 
 
 //新密码键盘事件
-function keyup(){
+function keyup() {
     var newPwd = $('#pwd-f').val();
-    console.log('newPwd', newPwd);
     //密码格式是否正确
     var regPwd = /^[a-z0-9]{6,16}$/;
     var pwdResult = regPwd.test(newPwd);
-    if (!pwdResult) {
+    if (newPwd!=''&& !pwdResult) {
         $('.phone-find-password .mobile-password-hint').text('请输入 6-16 位数字、字母');
     } else {
         $('.phone-find-password .mobile-password-hint').text('');
     }
 }
-
+//手机键盘事件
+function keyupPhone() {
+    var phoneVal1 = $('#phone-l').val();
+    var phoneVal2 = $('#phone-f').val();
+    //验证手机号格式是否正确
+    var regPhone = /^[1][3,4,5,7,8,9][0-9]{9}$/;
+    var phoneResult1 = regPhone.test(phoneVal1);
+    var phoneResult2 = regPhone.test(phoneVal2);
+    if (phoneVal1!='' && !phoneResult1) {
+        $('.phone-login .add-hint').text('请输入正确的手机号');
+    } else {
+        $('.phone-login .add-hint').text('');
+    }
+    if (phoneVal2!=''&& !phoneResult2) {
+        $('.phone-find-password .mobile-add-hint').text('请输入正确的手机号');
+    } else {
+        $('.phone-find-password .mobile-add-hint').text('');
+    }
+}
 /* 校验验证码 */
 function validCode(phoneVal, codeVal) {
-    var result='';
+    var result = '';
     $.ajax({
         type: "GET",
         url: "/alink-hq/checkCode",
@@ -797,10 +854,10 @@ function validCode(phoneVal, codeVal) {
         async: false,
         success: function (res) {
             if (res == "success") {
-                result=res;
+                result = res;
                 console.log('校验成功')
             } else {
-                result=res;
+                result = res;
                 console.log('校验失败')
             }
         }
@@ -836,7 +893,7 @@ function findValidCode(phoneVal, codeVal) {
 //邮箱找回密码
 function emailFindPwd() {
     var emailVal = $('#email-e').val();
-    var codeVal= $('#code-e').val();
+    var codeVal = $('#code-e').val();
     var newPwd = $('#pwd-e').val();
     console.log(emailVal, codeVal, newPwd);
     //密码格式是否正确
@@ -941,7 +998,7 @@ function emailFindPwd() {
 function emailFindPwdCode() {
 
     var emailVal = $('#email-e').val();
-    var codeVal= $('#code-e').val();
+    var codeVal = $('#code-e').val();
     var newPwd = $('#pwd-e').val();
     console.log(emailVal, codeVal, newPwd);
     //密码格式是否正确
@@ -1028,3 +1085,19 @@ function emailFindPwdCode() {
         }
     }
 }
+$(function(){
+    $('.contact-us').click(function(){
+        var height = window.screen.height;
+        $('.hide-iframe').addClass('active');
+        $('.hide-iframe').css('height',height);
+        $('.pop-iframe').addClass('active');
+    })
+
+
+        $('.hide-iframe').click(function(){
+            $('.hide-iframe').removeClass('active');
+            $('.pop-iframe').removeClass('active');
+
+        })
+
+})

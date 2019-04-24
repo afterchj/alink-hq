@@ -18,24 +18,9 @@ public class ProjectServiceImpl implements ProjectService {
     private ProjectDao projectDao;
 
     @Override
-    public List<ProjectList> findProList() {
-        return projectDao.findProList();
-    }
-
-    @Override
     public List<ProjectList> search(String projectName, String account, String create_date, String
             update_date) {
         return projectDao.search(projectName);
-    }
-
-    @Override
-    public List<ProjectList> findProListByUids(List<String> uids) {
-        return projectDao.findProListByUids(uids);
-    }
-
-    @Override
-    public List<ProjectList> findProListByUid(String uid) {
-        return projectDao.findProListByUid(uid);
     }
 
     @Override
@@ -45,13 +30,20 @@ public class ProjectServiceImpl implements ProjectService {
     }
 
     @Override
-    public List<ProjectList> searchByManager(List<String> uids) {
-        return projectDao.searchByManager();
+    public List<ProjectList> searchByManager(String account, String projectName, String startCreateDate, String
+            endCreateDate, String startUpdateDate, String endUpdateDate, List<Integer> ids) {
+        return projectDao.searchByManager(account,projectName,startCreateDate,endCreateDate,startUpdateDate,endUpdateDate,ids);
     }
 
     @Override
-    public List<ProjectList> searchByUser(String uid) {
-        return projectDao.searchByUser();
+    public List<Integer> findProjectList(String uid) {
+        return projectDao.findProjectList(uid);
+    }
+
+    @Override
+    public List<ProjectList> searchByUser(String account, String projectName, String startCreateDate, String
+            endCreateDate, String startUpdateDate, String endUpdateDate, String uid) {
+        return projectDao.searchByUser(account,projectName,startCreateDate,endCreateDate,startUpdateDate,endUpdateDate,uid);
     }
 
 

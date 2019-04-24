@@ -3,16 +3,16 @@ package com.tpadsz.after.controller;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.tpadsz.after.entity.ProjectList;
-import com.tpadsz.after.entity.dd.ResultDict;
+import com.tpadsz.after.entity.User;
 import com.tpadsz.after.service.AccountService;
 import com.tpadsz.after.service.ProjectService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,9 +30,11 @@ public class ProjectController {
     private AccountService accountService;
 
     @RequestMapping(value = "/list", method = RequestMethod.GET)
-    public String list(String uid, Integer pageNum, Integer pageSize, String account, String projectName,
+    public String list(Integer pageNum, Integer pageSize, String account, String projectName,
                        String startCreateDate, String endCreateDate, String startUpdateDate, String endUpdateDate,
-                       Model model) {
+                       HttpSession session, Model model) {
+        User loginUser = (User) session.getAttribute("user");
+        String uid = loginUser.getId();
         if (pageNum == null) {
             pageNum = 1;   //设置默认当前页
         }
@@ -50,28 +52,36 @@ public class ProjectController {
                 list = projectService.searchBySuper(account, projectName, startCreateDate, endCreateDate,
                         startUpdateDate, endUpdateDate);
             } else if (role_id == 3) {
-                List<String> uids = accountService.findFirmUid(uid);
-                if (uids.size() != 0) {
+                List<Integer> ids = projectService.findProjectList(uid);
+                if (ids.size() != 0) {
                     PageHelper.startPage(pageNum, pageSize);
-                    list = projectService.searchByManager(uids);
+                    list = projectService.searchByManager(account, projectName, startCreateDate, endCreateDate,
+                            startUpdateDate, endUpdateDate,ids);
                 }
             } else if (role_id == 4) {
                 PageHelper.startPage(pageNum, pageSize);
-                list = projectService.searchByUser(uid);
+                list = projectService.searchByUser(account, projectName, startCreateDate, endCreateDate,
+                        startUpdateDate, endUpdateDate,uid);
             }
             PageInfo<ProjectList> pageInfo = new PageInfo<ProjectList>(list, pageSize);
             model.addAttribute("pageInfo", pageInfo);
-            model.addAttribute("account", account);
-            model.addAttribute("projectName", projectName);
-            model.addAttribute("startCreateDate", startCreateDate);
-            model.addAttribute("endCreateDate", endCreateDate);
-            model.addAttribute("startUpdateDate", startUpdateDate);
-            model.addAttribute("endUpdateDate", endUpdateDate);
         } catch (Exception e) {
-//            model.put("result", ResultDict.SYSTEM_ERROR.getCode());
         }
-        return null;
+        return "projectManage/projectList";
     }
+
+    @RequestMapping(value = "/createProject", method = RequestMethod.GET)
+    public String createAccount(HttpSession session,
+                                Model model) {
+        User loginUser = (User) session.getAttribute("user");
+        String uid = loginUser.getId();
+        Integer role_id = accountService.findRoleIdByUid(uid);
+//        List<Firm> firmList = getFirmInfo(role_id, uid);
+//        model.addAttribute("firmList", firmList);
+        return "userManage/createAccount";
+    }
+
+
 
 
 }

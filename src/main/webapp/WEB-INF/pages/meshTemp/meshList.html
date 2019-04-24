@@ -183,7 +183,6 @@
             var length = $("input[name=mids]:checked").length;
             //未选中的长度
             var len = $("input[name=mids]").length;
-//            console.log("length=" + length+",len="+len);
             if (length == len) {
                 $("#all")[0].checked = true;
             } else {
@@ -214,6 +213,16 @@
         });
 
     });
+    $('.on-off-triangle').click(function(){
+        var imgUrl=$(this).attr('src');
+        if(imgUrl=='/alink-hq/static/img/bottom-triangle-un.png'){
+            $(this).attr('src','/alink-hq/static/img/right-triange-un.png');
+            $(this).parent().parent('.one-list').find('.two-list').addClass('active');
+        }else{
+            $(this).attr('src','/alink-hq/static/img/bottom-triangle-un.png');
+            $(this).parent().parent('.one-list').find('.two-list').removeClass('active');
+        }
+    })
 </script>
 </body>
 </html>

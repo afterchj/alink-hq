@@ -10,18 +10,15 @@ import java.util.List;
  */
 public interface ProjectDao {
 
-    List<ProjectList> findProList();
-
     List<ProjectList> search(@Param("projectName") String projectName);
 
-    List<ProjectList> findProListByUids(List<String> uids);
+    List<ProjectList> searchBySuper(@Param("account") String account, @Param("name") String projectName, @Param("startCreateDate") String startCreateDate, @Param("endCreateDate") String endCreateDate, @Param("startUpdateDate") String startUpdateDate, @Param("endUpdateDate") String endUpdateDate);
 
-    List<ProjectList> findProListByUid(@Param("uid") String uid);
+    List<Integer> findProjectList(@Param("uid") String uid);
 
-    List<ProjectList> searchBySuper(@Param("account")String account, @Param("projectName")String projectName, @Param("startCreateDate")String startCreateDate, @Param("endCreateDate")String endCreateDate, @Param("startUpdateDate")String
-            startUpdateDate, @Param("endUpdateDate")String endUpdateDate);
+    List<ProjectList> searchByManager(@Param("account") String account, @Param("name") String projectName, @Param("startCreateDate") String startCreateDate, @Param("endCreateDate") String endCreateDate, @Param("startUpdateDate") String startUpdateDate, @Param("endUpdateDate") String endUpdateDate, @Param("list")List<Integer> ids);
 
-    List<ProjectList> searchByManager();
 
-    List<ProjectList> searchByUser();
+    List<ProjectList> searchByUser(@Param("account")String account, @Param("name")String projectName, @Param("startCreateDate")String startCreateDate, @Param("endCreateDate")String endCreateDate, @Param("startUpdateDate")String
+            startUpdateDate, @Param("endUpdateDate")String endUpdateDate, @Param("uid")String uid);
 }

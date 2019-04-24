@@ -409,51 +409,55 @@ p.add-hint.active, p.password-hint.active, p.page-hint.active, p.code-hint.activ
     border-radius: 5px;
     cursor: pointer;
 }
-/* 判断ipad */
-
-/*@media screen and (min-width:300px) and (max-width:1000px){*/
-/*body{*/
-/*font-size: 14px;*/
-/*}*/
-/*.login-in-box-tab{*/
-/*font-size: 14px;*/
-/*}*/
-/*.content .hint{*/
-/*font-size: 14px;*/
-/*}*/
-/*.content .login-in-box-tab-content button{*/
-/*font-size: 14px;*/
-/*}*/
-/*.content .login-in-box-tab-content button{*/
-/*height: 40px;*/
-/*}*/
-/*.content .login-in-box-tab-content button.security-code{*/
-/*font-size: 14px;*/
-/*}*/
-/*.login-in-box-tab{*/
-/*font-size: 14px;*/
-/*}*/
-/*}*/
-/*@media screen and (min-width:1000px) and (max-width:1300px){*/
-/*body{*/
-/*font-size: 16px;*/
-/*}*/
-/*.login-in-box-tab{*/
-/*font-size: 16px;*/
-/*}*/
-/*.content .hint{*/
-/*font-size: 16px;*/
-/*}*/
-/*.content .login-in-box-tab-content button{*/
-/*font-size: 16px;*/
-/*}*/
-/*.content .login-in-box-tab-content button{*/
-/*height: 40px;*/
-/*}*/
-/*.content .login-in-box-tab-content button.security-code{*/
-/*font-size: 16px;*/
-/*}*/
-/*.login-in-box-tab{*/
-/*font-size: 16px;*/
-/*}*/
-/*}*/
+.hide-iframe.active {
+    display: block;
+}
+.hide-iframe {
+    position: absolute;
+    left: 0;
+    top: 0;
+    background-color: black;
+    z-index: 10;
+    -moz-opacity: 0.65;
+    opacity: .65;
+    filter: alpha(opacity=65);
+    display: none;
+    width: 100%;
+}
+.pop-nav {
+    padding: 20px 22px;
+    font-size: 22px;
+    color: #3c3c3c;
+    border-bottom: 1px solid #bbb;
+}
+.pop-content {
+    text-align: center;
+}
+.share-l{
+    width: 374px;
+    height: 298px;
+    border-right:1px solid #bbb;
+}
+.share-r{
+    width: 375px;
+    height: 298px;
+}
+.pop-content img{
+    width: 115px;
+    margin: 20px 0 10px 0;
+}
+.share-accounts{
+    font-size: 19px;
+    color: #3c3c3c;
+    margin-top: 30px;
+}
+.share-hint{
+    font-size: 16px;
+    color: #888;
+    margin-top: 15px;
+}
+.share-attention{
+    font-size: 16px;
+    color: #3c3c3c;
+    margin-bottom: 10px;
+}

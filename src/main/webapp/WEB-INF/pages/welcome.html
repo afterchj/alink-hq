@@ -9,10 +9,16 @@
     <link rel="stylesheet" href="/alink-hq/static/css/projectManage.css"/>
     <title>欢迎页</title>
     <style>
-        .main-right p {
-            font-size: 26px;
+
+        .welcome{
+            margin: 180px auto;
+            text-align: center;
+        }
+        .welcome p{
+            font-size: 42px;
             color: #3598DB;
             font-weight: bold;
+            line-height: 2;
         }
     </style>
 </head>
@@ -20,10 +26,26 @@
 <div th:replace="common/head::head"></div>
 <div class="c-container">
     <div th:replace="common/left::left"></div>
+
     <div class="main-right">
-        <p>欢迎进入</p>
-        <p>灯联网项目管理后台</p>
+        <div class="welcome">
+            <p>欢迎进入</p>
+            <p>灯联网项目管理后台</p>
+        </div>
     </div>
 </div>
+<script src="/alink-hq/static/js/jquery.min.js"></script>
+<script>
+    $('.on-off-triangle').click(function(){
+        var imgUrl=$(this).attr('src');
+        if(imgUrl=='/alink-hq/static/img/bottom-triangle-un.png'){
+            $(this).attr('src','/alink-hq/static/img/right-triange-un.png');
+            $(this).parent().parent('.one-list').find('.two-list').addClass('active');
+        }else{
+            $(this).attr('src','/alink-hq/static/img/bottom-triangle-un.png');
+            $(this).parent().parent('.one-list').find('.two-list').removeClass('active');
+        }
+    })
+</script>
 </body>
 </html>
