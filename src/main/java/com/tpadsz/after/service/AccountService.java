@@ -28,8 +28,6 @@ public interface AccountService {
 
     List<String> findFirmUidOfUser(String uid);
 
-    List<String> findFirmUid(String uid);
-
     void createAccount(User user,Integer fid, Integer roleId);
 
     User findByAccount(String account);
@@ -42,4 +40,5 @@ public interface AccountService {
 
     void enable(String uid, Integer status);
 
+    Integer findFirmUid(String uid, String userId);
 }

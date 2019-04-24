@@ -21,4 +21,6 @@ public interface ProjectDao {
 
     List<ProjectList> searchByUser(@Param("account")String account, @Param("name")String projectName, @Param("startCreateDate")String startCreateDate, @Param("endCreateDate")String endCreateDate, @Param("startUpdateDate")String
             startUpdateDate, @Param("endUpdateDate")String endUpdateDate, @Param("uid")String uid);
+
+    void createProject(@Param("name")String projectName, @Param("uid")String uid);
 }

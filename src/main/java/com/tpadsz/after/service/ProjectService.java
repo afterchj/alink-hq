@@ -21,4 +21,6 @@ public interface ProjectService {
 
     List<ProjectList> searchByUser(String account, String projectName, String startCreateDate, String endCreateDate, String
             startUpdateDate, String endUpdateDate, String uid);
+
+    void createProject(String projectName, String uid);
 }

@@ -6,6 +6,7 @@ import com.tpadsz.after.entity.Firm;
 import com.tpadsz.after.entity.Role;
 import com.tpadsz.after.entity.User;
 import com.tpadsz.after.entity.UserList;
+import com.tpadsz.after.entity.dd.ResultDict;
 import com.tpadsz.after.service.AccountService;
 import com.tpadsz.after.utils.GenerateUtils;
 import org.springframework.stereotype.Controller;
@@ -105,7 +106,6 @@ public class AccountController {
     public Map<String, String> create(Integer fid, Integer roleId, Integer num) {
         String account;
         Map<String, String> map = new HashMap<>();
-        String info;
         try {
             for (int i = 0; i < num; i++) {
                 User user = new User();
@@ -119,11 +119,10 @@ public class AccountController {
                 user.setSalt("0e9cc6f31100af96");
                 accountService.createAccount(user, fid, roleId);
             }
-            info = "创建账号成功";
+            map.put("result", ResultDict.SUCCESS.getCode());
         } catch (Exception e) {
-            info = "创建账号失败";
+            map.put("result", ResultDict.SYSTEM_ERROR.getCode());
         }
-        map.put("result", info);
         return map;
     }
 
@@ -132,14 +131,12 @@ public class AccountController {
     public Map<String, String> resetPwd(String account, Model model) {
         Map<String, String> map = new HashMap<>();
         String randomPwd = GenerateUtils.randomPwd();
-        String info;
         try {
             accountService.updateAccount(account, randomPwd);
-            info = "重置密码成功";
+            map.put("result", ResultDict.SUCCESS.getCode());
         } catch (Exception e) {
-            info = "重置密码失败";
+            map.put("result", ResultDict.SYSTEM_ERROR.getCode());
         }
-        map.put("result", info);
         return map;
     }
 
@@ -162,14 +159,12 @@ public class AccountController {
     public Map<String, String> transfer(String uid, Integer fid) {
         Map<String, String> map = new HashMap<>();
         String randomPwd = GenerateUtils.randomPwd();
-        String info;
         try {
             accountService.transferAccount(uid, fid, randomPwd);
-            info = "移交账号成功";
+            map.put("result", ResultDict.SUCCESS.getCode());
         } catch (Exception e) {
-            info = "移交账号失败";
+            map.put("result", ResultDict.SYSTEM_ERROR.getCode());
         }
-        map.put("result", info);
         return map;
     }
 
@@ -178,18 +173,16 @@ public class AccountController {
     @ResponseBody
     public Map<String, String> delete(String uid, Model model) {
         Map<String, String> map = new HashMap<>();
-        String info;
         try {
             int count = accountService.delete(uid);
             if (count == 0) {
-                info = "名下无项目，成功";
+                map.put("result", ResultDict.SUCCESS.getCode());
             } else {
-                info = "名下有项目，跳转";
+                map.put("result", ResultDict.PROJECT_EXISTED.getCode());
             }
         } catch (Exception e) {
-            info = "删除账号失败";
+            map.put("result", ResultDict.SYSTEM_ERROR.getCode());
         }
-        map.put("result", info);
         return map;
     }
 
@@ -197,14 +190,12 @@ public class AccountController {
     @ResponseBody
     public Map<String, String> enable(String uid, Integer status, Model model) {
         Map<String, String> map = new HashMap<>();
-        String info;
         try {
             accountService.enable(uid, status);
-            info = "启/禁用账号成功";
+            map.put("result", ResultDict.SUCCESS.getCode());
         } catch (Exception e) {
-            info = "启/禁用账号失败";
+            map.put("result", ResultDict.SYSTEM_ERROR.getCode());
         }
-        map.put("result", info);
         return map;
     }
 

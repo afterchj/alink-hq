@@ -25,8 +25,6 @@ public interface AccountDao {
 
     List<UserList> searchByManager(@Param("account")String account,@Param("list")List<String> uids,@Param("startDate")String startDate,@Param("endDate")String endDate);
 
-    List<String> findFirmUid(@Param("uid") String uid);
-
     List<String> findFirmUidOfUser(@Param("uid") String uid);
 
     int createAccount(User user);
@@ -53,4 +51,5 @@ public interface AccountDao {
 
     int findProjectByUid(@Param("uid")String uid);
 
+    Integer findFirmUid(@Param("uid")String uid, @Param("userId")String userId);
 }

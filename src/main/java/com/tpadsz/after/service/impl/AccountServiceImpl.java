@@ -64,11 +64,6 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
-    public List<String> findFirmUid(String uid) {
-        return accountDao.findFirmUid(uid);
-    }
-
-    @Override
     public void createAccount(User user, Integer fid, Integer roleId) {
         accountDao.createAccount(user);
         accountDao.createFirmInfo(Integer.parseInt(user.getId()), fid);
@@ -106,6 +101,11 @@ public class AccountServiceImpl implements AccountService {
     @Override
     public void enable(String uid, Integer status) {
         accountDao.enable(uid, status);
+    }
+
+    @Override
+    public Integer findFirmUid(String uid, String userId) {
+        return accountDao.findFirmUid(uid, userId);
     }
 
 

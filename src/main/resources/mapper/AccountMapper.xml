@@ -6,8 +6,8 @@
         SELECT role_id FROM f_user_role WHERE user_id=#{uid}
     </select>
 
-    <select id="findFirmUid" resultType="string" parameterType="string">
-        SELECT uid FROM f_user_customer WHERE fid=(SELECT fid FROM f_user_customer WHERE uid=#{uid})
+    <select id="findFirmUid" resultType="Integer" parameterType="string">
+        SELECT uid FROM f_user_customer WHERE fid=(SELECT fid FROM f_user_customer WHERE uid=#{uid}) and uid =#{userId}
     </select>
 
     <select id="findFirmUidOfUser" resultType="string" parameterType="string">

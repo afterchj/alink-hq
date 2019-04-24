@@ -46,5 +46,10 @@ public class ProjectServiceImpl implements ProjectService {
         return projectDao.searchByUser(account,projectName,startCreateDate,endCreateDate,startUpdateDate,endUpdateDate,uid);
     }
 
+    @Override
+    public void createProject(String projectName, String uid) {
+        projectDao.createProject(projectName,uid);
+    }
+
 
 }
