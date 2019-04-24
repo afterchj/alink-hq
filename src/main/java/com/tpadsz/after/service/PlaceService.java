@@ -1,6 +1,7 @@
 package com.tpadsz.after.service;
 
 import com.tpadsz.after.entity.OptionList;
+import com.tpadsz.after.entity.SearchDict;
 
 import java.util.List;
 import java.util.Map;
@@ -12,7 +13,7 @@ public interface PlaceService {
 
     List<Map> selectByMap(Map map);
 
-    List<Map> getByMap(Map map);
+    List<Map> getByMap(SearchDict dict);
 
     List<Map> selectByPid(List list);
 

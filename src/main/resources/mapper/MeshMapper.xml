@@ -56,7 +56,7 @@
             AND p.name LIKE CONCAT('%',#{pname},'%')
         </if>
         <if test="projectId!=null and projectId!=''">
-            AND  m.project_id=#{projectId}
+            AND m.project_id=#{projectId}
         </if>
     </select>
 

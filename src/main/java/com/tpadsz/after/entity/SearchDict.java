@@ -7,12 +7,16 @@ public class SearchDict {
 
     private Integer uid;
     private String role;
+    private Integer mid;
+    private Integer pid;
     private String mname;
     private String pname;
     private Integer status;
     private Integer meshId;
     private Integer projectId;
     private Integer placeId;
+    private Integer pageNum = 1;
+    private Integer pageSize = 10;
 
     public Integer getUid() {
         return uid;
@@ -28,6 +32,22 @@ public class SearchDict {
 
     public void setRole(String role) {
         this.role = role;
+    }
+
+    public Integer getMid() {
+        return mid;
+    }
+
+    public void setMid(Integer mid) {
+        this.mid = mid;
+    }
+
+    public Integer getPid() {
+        return pid;
+    }
+
+    public void setPid(Integer pid) {
+        this.pid = pid;
     }
 
     public String getMname() {
@@ -76,5 +96,21 @@ public class SearchDict {
 
     public void setPlaceId(Integer placeId) {
         this.placeId = placeId;
+    }
+
+    public Integer getPageNum() {
+        return pageNum;
+    }
+
+    public void setPageNum(Integer pageNum) {
+        this.pageNum = pageNum;
+    }
+
+    public Integer getPageSize() {
+        return pageSize;
+    }
+
+    public void setPageSize(Integer pageSize) {
+        this.pageSize = pageSize;
     }
 }

@@ -35,7 +35,7 @@
         </if>
     </sql>
 
-    <select id="getByMap" resultType="map" parameterType="map">
+    <select id="getByMap" resultType="map" parameterType="SearchDict">
         SELECT
         <include refid="Base_Column_List"/>
         FROM
@@ -44,11 +44,23 @@
         INNER JOIN (SELECT COUNT(1) gcount,pid FROM f_group GROUP BY pid) g ON g.pid=p.id
         WHERE 1=1
         <include refid="common_choose"/>
-        <if test="mid!=null">
+        <if test="mname!=null and mname!=''">
+            AND m.mname LIKE CONCAT('%',#{mname},'%')
+        </if>
+        <if test="meshId!=null and meshId!=''">
+            AND m.mesh_id LIKE CONCAT('%',#{meshId},'%')
+        </if>
+        <if test="pname!=null and pname!=''">
+            AND p.pname LIKE CONCAT('%',#{pname},'%')
+        </if>
+        <if test="placeId!=null and placeId!=''">
+            AND p.place_id LIKE CONCAT('%',#{placeId},'%')
+        </if>
+        <if test="mid!=null and mid!=''">
             AND p.mid=#{mid}
         </if>
-        <if test="pid!=null">
-            AND m.project_id=#{pid}
+        <if test="projectId!=null and projectId!=''">
+            AND m.project_id=#{projectId}
         </if>
     </select>
 

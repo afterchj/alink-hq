@@ -28,6 +28,7 @@
         <div id="meshList" class="">
             <form class="clearfix" th:action="@{/mesh/list}" method="post">
                 <input type="hidden" name="uid" th:value="${dict.uid}">
+                <input type="hidden" id="pageSize" th:value="${dict.pageSize}">
                 <div class="search-condition temp">
                     <div class="f-l search" style="margin-right:125px;">
                         <div>
@@ -58,7 +59,7 @@
                 </div>
                 <div class="search-result">
                     <!-- 有数据时 -->
-                    <table border="1" class="hasData active">
+                    <table border="1" class="hasData active" th:if="${pageInfo!=null}">
                         <thead>
                         <tr>
                             <th class="all-checkbox">
@@ -116,31 +117,25 @@
                         </tfoot>
                     </table>
                     <!-- 无数据时 -->
-                    <table border="1" class="noData ">
+                    <table th:if="${pageInfo==null}" border="1" class="noData active">
                         <thead>
                         <tr>
                             <th class="all-checkbox">
-                                <img src="/alink-hq/static/img/checkbox.png" alt="">全选
+                                <input type="checkbox" id="">全选
                             </th>
-                            <th>项目名称</th>
-                            <th>项目中选中网络数量</th>
-                            <th>施工人员</th>
-                            <th class="p-r">
-                                <span class="toTime">创建时间</span>
-                                <img src="/alink-hq/static/img/top-triangle.png" alt="" class="p-a toTop pointer">
-                                <img src="/alink-hq/static/img/bottom-triangle.png" alt="" class="p-a toBottom pointer">
-                            </th>
-                            <th class="p-r">
-                                <span class="toTime">更新时间</span>
-                                <img src="/alink-hq/static/img/top-triangle.png" alt="" class="p-a toTop pointer">
-                                <img src="/alink-hq/static/img/bottom-triangle.png" alt="" class="p-a toBottom pointer">
-                            </th>
+                            <th>网络名称</th>
+                            <th>网络ID</th>
+                            <th>网络类型</th>
+                            <th>属于项目</th>
+                            <th>区域数量</th>
+                            <th>场景数量</th>
+                            <th>状态</th>
                             <th>操作</th>
                         </tr>
                         </thead>
                         <tbody>
                         <tr>
-                            <td colspan="8">
+                            <td colspan="9">
                                 <img src="/alink-hq/static/img/no-data.png" alt="">
                                 <p>暂无数据</p>
                             </td>
@@ -152,92 +147,6 @@
         </div>
     </div>
 </div>
-<script th:inline="javascript">
-    $(function () {
-        var size = [[${pageInfo.pageSize}]];
-        console.log("type:" + typeof size + ",value=" + size);
-        $("#size").val(size);
-        //给全选的复选框添加事件
-        $("#all").click(function () {
-//            var length = $("input[name=mids]").length;
-            // this 全选的复选框
-            var checked = this.checked;
-            //获取name=mids的复选框 遍历输出复选框
-            $("input[name=mids]").each(function () {
-                this.checked = checked;
-            });
-            if (checked) {
-                $(".amount").text(size);
-            } else {
-                $(".amount").text(0);
-            }
-        });
-        //给name=mids的复选框绑定单击事件
-        $("input[name=mids]").click(function () {
-            //获取选中复选框长度
-            var length = $("input[name=mids]:checked").length;
-            //未选中的长度
-            var len = $("input[name=mids]").length;
-            if (length == len) {
-                $("#all")[0].checked = true;
-            } else {
-                $("#all")[0].checked = false;
-            }
-            $(".amount").text(length);
-        });
-        $("#prev").click(function () {
-            var page = $("#page").val();
-            if (page > 1) {
-                page--;
-                $("#page").val(page);
-                console.log("page=" + page);
-                $("form:eq(0)").submit();
-            }
-        });
-        $("#next").click(function () {
-            var page = $("#page").val();
-            var pages = parseInt($("#pages").text());
-            if (page < pages) {
-                page++;
-                $("#page").val(page);
-                console.log("page=" + page + ",pages=" + pages);
-                $("form:eq(0)").submit();
-            }
-        });
-        $("#size").change(function () {
-//            var page = $("#page").val();
-//            var size = $("#size option:selected").val();
-//            console.log("size=" + size);
-//            location.href = "/alink-hq/mesh/list?pageNum=" + page + "&pageSize=" + size;
-            $("form:eq(0)").submit();
-        });
-        $("#skip").click(function () {
-            $("form:eq(0)").submit();
-//            var page = $("#page").val();
-//            var size = $("#size option:selected").val();
-//            console.log("page=" + page + ",size=" + size);
-//            location.href = "/alink-hq/mesh/list?pageNum=" + page + "&pageSize=" + size;
-        });
-        $("#multiMove").click(function () {
-            var mids = [];//定义一个数组
-            $('input[name="mids"]:checked').each(function () {//遍历每一个名字为interest的复选框，其中选中的执行函数
-                mids.push($(this).val());//将选中的值添加到数组chk_value中
-            });
-            console.log("mids=" + typeof mids + ",value=" + mids);
-            location.href = "/alink-hq/mesh/move?mids=" + mids;
-        });
-
-    });
-    $('.on-off-triangle').click(function () {
-        var imgUrl = $(this).attr('src');
-        if (imgUrl == '/alink-hq/static/img/bottom-triangle-un.png') {
-            $(this).attr('src', '/alink-hq/static/img/right-triange-un.png');
-            $(this).parent().parent('.one-list').find('.two-list').addClass('active');
-        } else {
-            $(this).attr('src', '/alink-hq/static/img/bottom-triangle-un.png');
-            $(this).parent().parent('.one-list').find('.two-list').removeClass('active');
-        }
-    })
-</script>
+<script type="text/javascript" src="/alink-hq/static/js/mesh.js"></script>
 </body>
 </html>

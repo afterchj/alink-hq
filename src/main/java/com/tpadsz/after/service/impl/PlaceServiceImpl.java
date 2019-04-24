@@ -2,6 +2,7 @@ package com.tpadsz.after.service.impl;
 
 import com.tpadsz.after.dao.PlaceDao;
 import com.tpadsz.after.entity.OptionList;
+import com.tpadsz.after.entity.SearchDict;
 import com.tpadsz.after.service.PlaceService;
 import org.springframework.stereotype.Service;
 
@@ -25,8 +26,8 @@ public class PlaceServiceImpl implements PlaceService {
     }
 
     @Override
-    public List<Map> getByMap(Map map) {
-        return placeDao.getByMap(map);
+    public List<Map> getByMap(SearchDict dict) {
+        return placeDao.getByMap(dict);
     }
 
     @Override
