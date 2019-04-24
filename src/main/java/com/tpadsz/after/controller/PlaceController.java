@@ -1,10 +1,9 @@
 package com.tpadsz.after.controller;
 
-import com.alibaba.fastjson.JSON;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.tpadsz.after.entity.OptionList;
-import com.tpadsz.after.service.MeshService;
+import com.tpadsz.after.service.PlaceService;
 import com.tpadsz.after.service.RoleService;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
@@ -21,18 +20,18 @@ import java.util.*;
  */
 
 @Controller
-@RequestMapping("/mesh")
-public class MeshController {
+@RequestMapping("/place")
+public class PlaceController {
 
     @Resource
-    private MeshService meshService;
+    private PlaceService placeService;
     @Resource
     private RoleService roleService;
 
     private Logger logger = Logger.getLogger(this.getClass());
 
     @RequestMapping("/list")
-    public String list(Integer uid, Integer pid, @RequestParam(required = false, defaultValue = "1") Integer pageNum, @RequestParam(required = false, defaultValue = "10") Integer pageSize, ModelMap modelMap) {
+    public String list(Integer uid, Integer pid, Integer mid, @RequestParam(required = false, defaultValue = "1") Integer pageNum, @RequestParam(required = false, defaultValue = "10") Integer pageSize, ModelMap modelMap) {
         logger.info("page=" + pageNum + ",size=" + pageSize);
         Map map = new HashMap();
         if (uid != null) {
@@ -44,39 +43,39 @@ public class MeshController {
             map.remove("uid");
             map.put("pid", pid);
         }
+        if (mid != null) {
+            map.remove("uid");
+            map.put("mid", mid);
+        }
         PageHelper.startPage(pageNum, pageSize);
-        List<Map> meshList = meshService.getByMap(map);
-        PageInfo<Map> pageInfo = new PageInfo(meshList, pageSize);
+        List<Map> placeList = placeService.getByMap(map);
+        PageInfo<Map> pageInfo = new PageInfo(placeList, pageSize);
         modelMap.put("pageInfo", pageInfo);
         logger.info("total=" + pageInfo.getTotal() + ",pages=" + pageInfo.getPages());
-        return "meshTemp/meshList";
-    }
-
-    @RequestMapping("/move")
-    public String move(String mids, ModelMap modelMap) {
-        String[] ids = mids.split(",");
-        List<String> list = new ArrayList(Arrays.asList(ids));
-        List<Map> meshMap = meshService.selectByMid(list);
-        logger.info("result=" + JSON.toJSONString(meshMap));
-        modelMap.put("meshMap", meshMap);
-        modelMap.put("mids", mids);
-        return "meshTemp/meshMove";
-    }
-
-    @RequestMapping("/saveUpdate")
-    public String save(String mids, String pid) {
-        logger.info("mids=" + mids + ",pid=" + pid);
-        String[] ids = mids.split(",");
-        List<String> list = new ArrayList(Arrays.asList(ids));
-        Map map = new HashMap();
-        map.put("pid", pid);
-        map.put("list", list);
-        meshService.saveUpdate(map);
-        return "redirect:/mesh/list";
+        return "meshTemp/placeList";
     }
 
     @ResponseBody
-    @RequestMapping("/getProjects")
+    @RequestMapping("/delete")
+    public String move(String pids) {
+        String[] ids = pids.split(",");
+        List<String> list = new ArrayList(Arrays.asList(ids));
+        placeService.deleteByIds(list);
+        return "success";
+    }
+
+    @ResponseBody
+    @RequestMapping("/rename")
+    public String save(String name, Integer id) {
+        Map map = new HashMap();
+        map.put("id", id);
+        map.put("name", name);
+        placeService.rename(map);
+        return "success";
+    }
+
+    @ResponseBody
+    @RequestMapping("/getMesh")
     public List<OptionList> show(Integer uid) {
         logger.info("uid=" + uid);
         Map map = new HashMap();
@@ -85,7 +84,7 @@ public class MeshController {
             map.put("role", role);
             map.put("uid", uid);
         }
-        List<OptionList> meshMap = meshService.getProjects(map);
-        return meshMap;
+        List<OptionList> placeMap = placeService.getMesh(map);
+        return placeMap;
     }
 }

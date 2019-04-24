@@ -17,7 +17,7 @@ public interface MeshDao {
 
     List<Map> selectByMid(List list);
 
-    List<OptionList> getProjects(@Param("uid") Integer uid);
+    List<OptionList> getProjects(Map map);
 
     int getCountByTable(String tableName);
 

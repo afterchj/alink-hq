@@ -12,6 +12,29 @@
         g.gcount
 	</sql>
 
+    <sql id="common_choose">
+        <if test="uid!=null and uid!=''">
+            <choose>
+                <when test="role == 'admin'">
+                    AND m.uid IN (SELECT u.id FROM f_user_account u INNER JOIN f_user_role r ON u.id=r.user_id WHERE
+                    r.role_id in (2,3,4))
+                </when>
+                <when test="role == 'manager'">
+                    AND m.uid IN (SELECT c.uid FROM f_user_customer c WHERE fid=(SELECT fid FROM f_user_customer WHERE
+                    uid=#{uid}))
+                    <!--
+                        AND m.uid IN (SELECT c.uid FROM f_user_customer c INNER JOIN f_user_role r ON c.uid=r.user_id WHERE r.role_id in (4) AND fid=(SELECT fid FROM f_user_customer WHERE uid=#{uid})) OR m.uid=#{uid}
+                     -->
+                </when>
+                <when test="role == 'user'">
+                    AND m.uid =#{uid}
+                </when>
+                <!--<otherwise>-->
+                <!--</otherwise>-->
+            </choose>
+        </if>
+    </sql>
+
     <select id="getByMap" resultType="map" parameterType="map">
         SELECT
         <include refid="Base_Column_List"/>
@@ -20,6 +43,7 @@
         INNER JOIN f_mesh m ON m.id = p.mid
         INNER JOIN (SELECT COUNT(1) gcount,pid FROM f_group GROUP BY pid) g ON g.pid=p.id
         WHERE 1=1
+        <include refid="common_choose"/>
         <if test="mid!=null">
             AND p.mid=#{mid}
         </if>
@@ -39,9 +63,13 @@
         WHERE 1=1
     </select>
 
-    <select id="getCountByTable" resultType="int" parameterType="string" statementType="STATEMENT">
-        select count(*) from ${_parameter}
-    </select>
+    <delete id="deleteByIds" parameterType="list">
+        DELETE FROM f_place
+        WHERE id IN
+        <foreach collection="list" item="id" index="index" open="(" close=")" separator=",">
+            #{id}
+        </foreach>
+    </delete>
 
     <select id="selectByMid" resultType="map" parameterType="list">
         SELECT
@@ -60,15 +88,12 @@
         </foreach>
     </select>
 
-    <select id="getProjects" resultType="OptionList">
-        SELECT id,`name` FROM f_project
+    <select id="getMesh" resultType="OptionList">
+        SELECT CONCAT_WS('_',id,mesh_id) id, mname name FROM f_mesh m WHERE 1=1
+        <include refid="common_choose"/>
     </select>
 
-    <update id="saveUpdate" parameterType="map">
-        UPDATE f_mesh SET project_id=#{pid}
-        WHERE id IN
-        <foreach collection="list" index="index" item="mid" separator="," open="(" close=")">
-            #{mid}
-        </foreach>
+    <update id="rename" parameterType="map">
+        UPDATE f_place SET pname=#{name} WHERE id =#{id}
     </update>
 </mapper>
