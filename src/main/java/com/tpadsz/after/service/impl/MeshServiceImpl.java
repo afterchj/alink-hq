@@ -40,6 +40,16 @@ public class MeshServiceImpl implements MeshService {
     }
 
     @Override
+    public void saveRename(Map map) {
+        meshDao.saveRename(map);
+    }
+
+    @Override
+    public void deleteMeshByIds(List list) {
+        meshDao.deleteMeshByIds(list);
+    }
+
+    @Override
     public List<OptionList> getProjects(Map map) {
         return meshDao.getProjects(map);
     }

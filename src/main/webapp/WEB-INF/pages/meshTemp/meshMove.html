@@ -18,10 +18,10 @@
         <div class="clearfix main-right-nav">
             <div class="f-l main-right-title">网络移动</div>
             <div class="f-r pointer">
-                <img src="/alink-hq/static/img/go-back.png" alt="">
+                <img src="/alink-hq/static/img/go-back.png" alt="" onclick="history.back()">
             </div>
         </div>
-        <form th:action="@{/mesh/saveUpdate}" class="" method="get">
+        <form th:action="@{/mesh/saveUpdate}" class="" method="post">
             <div id="meshTurnOver">
                 <div class="f-nav">
                     网络移动
@@ -46,19 +46,11 @@
                     <img src="/alink-hq/static/img/exchange-un.png" alt="">
                 </div>
                 <div class="transfer-company">
-                    <label for="pid"><span>*</span>选择移交到的公司：</label>
+                    <label for="pid"><span>*</span>选择移动到的项目：</label>
                     <select name="pid" id="pid">
                         <option value="">11</option>
                     </select>
                 </div>
-                <!--<div>-->
-                <!--<p><span>注意！</span><span>确认移交后</span></p>-->
-                <!--<ul>-->
-                <!--<li>（1）账号中的项目保持不变；</li>-->
-                <!--<li>（2）该账号的用户名，绑定的手机号码及邮箱均会清空；</li>-->
-                <!--<li>（3）密码将会重置。</li>-->
-                <!--</ul>-->
-                <!--</div>-->
                 <div class="tranfer-btn">
                     <button class="confirm-btn" type="submit">确定移交</button>
                 </div>

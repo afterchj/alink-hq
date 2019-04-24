@@ -11,7 +11,6 @@ import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
@@ -33,31 +32,20 @@ public class MeshController {
     private Logger logger = Logger.getLogger(this.getClass());
 
     @RequestMapping("/list")
-    public String list(SearchDict dict, @RequestParam(required = false, defaultValue = "1") Integer pageNum, @RequestParam(required = false, defaultValue = "10") Integer pageSize, ModelMap modelMap) {
-        logger.info("dict=" + JSON.toJSONString(dict));
+    public String list(SearchDict dict, ModelMap modelMap) {
         String role = roleService.selectById(dict.getUid());
         dict.setRole(role);
-        PageHelper.startPage(pageNum, pageSize);
-        List<Map> meshList = meshService.getByMap(dict);
-        PageInfo<Map> pageInfo = new PageInfo(meshList, pageSize);
-        modelMap.put("pageInfo", pageInfo);
-        modelMap.put("dict",dict);
-        logger.info("page=" + pageNum + ",pages=" + pageInfo.getPages());
-        return "meshTemp/meshList";
-    }
-
-    @RequestMapping("/search")
-    public String search(SearchDict dict, @RequestParam(required = false, defaultValue = "1") Integer pageNum, @RequestParam(required = false, defaultValue = "10") Integer pageSize, ModelMap modelMap) {
-        PageHelper.startPage(pageNum, pageSize);
-        List<Map> meshList = meshService.selectByMap(dict);
         logger.info("dict=" + JSON.toJSONString(dict));
-        PageInfo<Map> pageInfo = new PageInfo(meshList, pageSize);
+        PageHelper.startPage(dict.getPageNum(), dict.getPageSize());
+        List<Map> meshList = meshService.getByMap(dict);
+        PageInfo<Map> pageInfo = new PageInfo(meshList, dict.getPageSize());
         if (pageInfo.getList().size() > 0) {
             modelMap.put("pageInfo", pageInfo);
         }
         modelMap.put("dict", dict);
         return "meshTemp/meshList";
     }
+
 
     @RequestMapping("/move")
     public String move(String mids, ModelMap modelMap) {
@@ -80,6 +68,27 @@ public class MeshController {
         map.put("list", list);
         meshService.saveUpdate(map);
         return "redirect:/mesh/list";
+    }
+
+    @RequestMapping("/delete")
+    public String save(String mids) {
+        logger.info("mids=" + mids);
+        String[] ids = mids.split(",");
+        List<String> list = new ArrayList(Arrays.asList(ids));
+        Map map = new HashMap();
+        map.put("list", list);
+        meshService.saveUpdate(map);
+        return "redirect:/mesh/list";
+    }
+
+    @ResponseBody
+    @RequestMapping("/rename")
+    public String rename(String name, Integer id) {
+        Map map = new HashMap();
+        map.put("name", name);
+        map.put("id", id);
+        meshService.saveRename(map);
+        return "success";
     }
 
     @ResponseBody

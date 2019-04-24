@@ -1,15 +1,16 @@
 package com.tpadsz.after.controller;
 
+import com.alibaba.fastjson.JSON;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.tpadsz.after.entity.OptionList;
+import com.tpadsz.after.entity.SearchDict;
 import com.tpadsz.after.service.PlaceService;
 import com.tpadsz.after.service.RoleService;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
@@ -31,37 +32,28 @@ public class PlaceController {
     private Logger logger = Logger.getLogger(this.getClass());
 
     @RequestMapping("/list")
-    public String list(Integer uid, Integer pid, Integer mid, @RequestParam(required = false, defaultValue = "1") Integer pageNum, @RequestParam(required = false, defaultValue = "10") Integer pageSize, ModelMap modelMap) {
-        logger.info("page=" + pageNum + ",size=" + pageSize);
-        Map map = new HashMap();
-        if (uid != null) {
-            String role = roleService.selectById(uid);
-            map.put("role", role);
-            map.put("uid", uid);
+    public String list(SearchDict dict, ModelMap modelMap) {
+        String role = roleService.selectById(dict.getUid());
+        dict.setRole(role);
+        logger.info("dict=" + JSON.toJSONString(dict));
+        PageHelper.startPage(dict.getPageNum(), dict.getPageSize());
+        List<Map> placeList = placeService.getByMap(dict);
+        PageInfo<Map> pageInfo = new PageInfo(placeList, dict.getPageSize());
+        if (pageInfo.getList().size() > 0) {
+            modelMap.put("pageInfo", pageInfo);
         }
-        if (pid != null) {
-            map.remove("uid");
-            map.put("pid", pid);
-        }
-        if (mid != null) {
-            map.remove("uid");
-            map.put("mid", mid);
-        }
-        PageHelper.startPage(pageNum, pageSize);
-        List<Map> placeList = placeService.getByMap(map);
-        PageInfo<Map> pageInfo = new PageInfo(placeList, pageSize);
-        modelMap.put("pageInfo", pageInfo);
+        modelMap.put("dict", dict);
         logger.info("total=" + pageInfo.getTotal() + ",pages=" + pageInfo.getPages());
         return "meshTemp/placeList";
     }
 
-    @ResponseBody
-    @RequestMapping("/delete")
+    @RequestMapping("/move")
     public String move(String pids) {
+        logger.info("pids=" + pids);
         String[] ids = pids.split(",");
         List<String> list = new ArrayList(Arrays.asList(ids));
         placeService.deleteByIds(list);
-        return "success";
+        return "redirect:/place/list";
     }
 
     @ResponseBody
@@ -70,7 +62,7 @@ public class PlaceController {
         Map map = new HashMap();
         map.put("id", id);
         map.put("name", name);
-        placeService.rename(map);
+        placeService.saveRename(map);
         return "success";
     }
 

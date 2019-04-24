@@ -1,6 +1,7 @@
 package com.tpadsz.after.dao;
 
 import com.tpadsz.after.entity.OptionList;
+import com.tpadsz.after.entity.SearchDict;
 
 import java.util.List;
 import java.util.Map;
@@ -12,7 +13,7 @@ public interface PlaceDao {
 
     List<Map> selectByMap(Map map);
 
-    List<Map> getByMap(Map map);
+    List<Map> getByMap(SearchDict dict);
 
     List<Map> selectByPid(List list);
 
@@ -20,5 +21,5 @@ public interface PlaceDao {
 
     void deleteByIds(List list);
 
-    void rename(Map map);
+    void saveRename(Map map);
 }

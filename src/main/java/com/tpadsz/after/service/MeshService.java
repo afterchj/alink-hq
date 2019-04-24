@@ -15,6 +15,12 @@ public interface MeshService {
     List<Map> getByMap(SearchDict map);
 
     List<Map> selectByMid(List list);
+
     void saveUpdate(Map map);
+
+    void saveRename(Map map);
+
+    void deleteMeshByIds(List list);
+
     List<OptionList> getProjects(Map map);
 }
