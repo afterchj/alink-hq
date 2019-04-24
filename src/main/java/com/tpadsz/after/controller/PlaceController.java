@@ -47,13 +47,13 @@ public class PlaceController {
         return "meshTemp/placeList";
     }
 
-    @ResponseBody
     @RequestMapping("/move")
     public String move(String pids) {
+        logger.info("pids=" + pids);
         String[] ids = pids.split(",");
         List<String> list = new ArrayList(Arrays.asList(ids));
         placeService.deleteByIds(list);
-        return "success";
+        return "redirect:/place/list";
     }
 
     @ResponseBody

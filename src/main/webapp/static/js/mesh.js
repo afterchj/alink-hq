@@ -66,15 +66,44 @@ $(function () {
 //            console.log("page=" + page + ",size=" + size);
 //            location.href = "/alink-hq/mesh/list?pageNum=" + page + "&pageSize=" + size;
     });
+    $(".rename").click(function () {
+        var mid = $(this).attr("alt");
+        var name = prompt("输入新名称：");
+        console.log("mid=" + mid + ",name=" + name);
+        $.ajax({
+            type: "post",
+            url: "/alink-hq/mesh/rename",
+            data: {
+                "name": name,
+                "mid": mid
+            },
+            async: true,
+            success: function (res) {
+                if (res == "success") {
+                   location.reload();
+                }
+            }
+        });
+        // location.href = "/alink-hq/mesh/rename?mid=" + mid + "&name=" + name;
+    });
     $("#multiMove").click(function () {
         var mids = [];//定义一个数组
         $('input[name="mids"]:checked').each(function () {//遍历每一个名字为interest的复选框，其中选中的执行函数
             mids.push($(this).val());//将选中的值添加到数组chk_value中
         });
-        console.log("mids=" + typeof mids + ",value=" + mids);
         location.href = "/alink-hq/mesh/move?mids=" + mids;
     });
 
+    $("#multiDel").click(function () {
+        var mids = [];//定义一个数组
+        $('input[name="mids"]:checked').each(function () {//遍历每一个名字为interest的复选框，其中选中的执行函数
+            mids.push($(this).val());//将选中的值添加到数组chk_value中
+        });
+        var flag = confirm("您确定要删除所选的区域吗？");
+        if (flag) {
+            location.href = "/alink-hq/mesh/delete?mids=" + mids;
+        }
+    })
 });
 $('.on-off-triangle').click(function () {
     var imgUrl = $(this).attr('src');

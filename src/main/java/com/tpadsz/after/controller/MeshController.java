@@ -70,6 +70,27 @@ public class MeshController {
         return "redirect:/mesh/list";
     }
 
+    @RequestMapping("/delete")
+    public String save(String mids) {
+        logger.info("mids=" + mids);
+        String[] ids = mids.split(",");
+        List<String> list = new ArrayList(Arrays.asList(ids));
+        Map map = new HashMap();
+        map.put("list", list);
+        meshService.saveUpdate(map);
+        return "redirect:/mesh/list";
+    }
+
+    @ResponseBody
+    @RequestMapping("/rename")
+    public String rename(String name, Integer mid) {
+        Map map = new HashMap();
+        map.put("name", name);
+        map.put("mid", mid);
+        meshService.saveRename(map);
+        return "success";
+    }
+
     @ResponseBody
     @RequestMapping("/getProjects")
     public List<OptionList> show(Integer uid) {

@@ -86,10 +86,10 @@
 
     <select id="selectByMid" resultType="map" parameterType="list">
         SELECT
-            m.id,
-            m.mname,
-            m.mesh_id,
-            p.name
+        m.id,
+        m.mname,
+        m.mesh_id,
+        p.name
         FROM f_mesh m
         INNER JOIN f_project p ON m.project_id = p.id
         INNER JOIN (SELECT COUNT(1) pcount,mid FROM f_place GROUP BY mid) pl ON pl.mid=m.id
@@ -105,8 +105,20 @@
         <include refid="common_choose"></include>
     </select>
 
+    <delete id="deleteMeshByIds" parameterType="list">
+        DELETE FROM f_mesh
+        WHERE id IN
+        <foreach collection="list" item="id" index="index" open="(" close=")" separator=",">
+            #{id}
+        </foreach>
+    </delete>
+
+    <update id="saveRename" parameterType="map">
+        UPDATE f_mesh SET mname=#{name},update_date=NOW() WHERE id =#{mid}
+    </update>
+
     <update id="saveUpdate" parameterType="map">
-        UPDATE f_mesh SET project_id=#{pid}
+        UPDATE f_mesh SET project_id=#{pid},update_date=NOW()
         WHERE id IN
         <foreach collection="list" index="index" item="mid" separator="," open="(" close=")">
             #{mid}

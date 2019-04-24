@@ -90,6 +90,9 @@ th {
 .center-img {
     margin: 0 30px;
 }
+.left-img {
+   margin-right: 30px;
+}
 
 img.toTop {
     top: 17px;
