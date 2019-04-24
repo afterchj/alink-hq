@@ -62,7 +62,7 @@ public class PlaceController {
         Map map = new HashMap();
         map.put("id", id);
         map.put("name", name);
-        placeService.rename(map);
+        placeService.saveRename(map);
         return "success";
     }
 

@@ -114,7 +114,7 @@
     </delete>
 
     <update id="saveRename" parameterType="map">
-        UPDATE f_mesh SET mname=#{name},update_date=NOW() WHERE id =#{mid}
+        UPDATE f_mesh SET mname=#{name},update_date=NOW() WHERE id =#{id}
     </update>
 
     <update id="saveUpdate" parameterType="map">

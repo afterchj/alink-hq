@@ -67,15 +67,15 @@ $(function () {
 //            location.href = "/alink-hq/mesh/list?pageNum=" + page + "&pageSize=" + size;
     });
     $(".rename").click(function () {
-        var mid = $(this).attr("alt");
-        var name = prompt("输入新名称：");
-        console.log("mid=" + mid + ",name=" + name);
+        var id = $(this).attr("alt");
+        var name = prompt("新名称：");
+        console.log("id=" + id + ",name=" + name);
         $.ajax({
             type: "post",
             url: "/alink-hq/mesh/rename",
             data: {
                 "name": name,
-                "mid": mid
+                "id": id
             },
             async: true,
             success: function (res) {

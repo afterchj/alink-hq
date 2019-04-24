@@ -46,7 +46,7 @@ public class PlaceServiceImpl implements PlaceService {
     }
 
     @Override
-    public void rename(Map map) {
-        placeDao.rename(map);
+    public void saveRename(Map map) {
+        placeDao.saveRename(map);
     }
 }

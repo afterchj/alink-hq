@@ -83,10 +83,10 @@ public class MeshController {
 
     @ResponseBody
     @RequestMapping("/rename")
-    public String rename(String name, Integer mid) {
+    public String rename(String name, Integer id) {
         Map map = new HashMap();
         map.put("name", name);
-        map.put("mid", mid);
+        map.put("id", id);
         meshService.saveRename(map);
         return "success";
     }
