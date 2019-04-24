@@ -59,7 +59,8 @@ public class ProjectController {
                 List<Integer> ids = projectService.findProjectList(uid);
                 if (ids.size() != 0) {
                     PageHelper.startPage(pageNum, pageSize);
-                    list = projectService.searchByManager(account, projectName, startCreateDate, endCreateDate,startUpdateDate, endUpdateDate, ids);
+                    list = projectService.searchByManager(account, projectName, startCreateDate, endCreateDate,
+                            startUpdateDate, endUpdateDate, ids);
                 }
             } else if (role_id == 4) {
                 PageHelper.startPage(pageNum, pageSize);
@@ -80,13 +81,12 @@ public class ProjectController {
     }
 
     @RequestMapping(value = "/createProject", method = RequestMethod.GET)
-    public String createAccount(HttpSession session,String account,
-                                Model model) {
+    public String createAccount(HttpSession session, Model model) {
         User loginUser = (User) session.getAttribute("user");
         String uid = loginUser.getId();
         Integer role_id = accountService.findRoleIdByUid(uid);
-        if(role_id==4){
-            model.addAttribute("account", account);
+        if (role_id == 4) {
+            model.addAttribute("account", loginUser.getAccount());
         }
         return "projectManage/createProject";
     }
@@ -100,14 +100,14 @@ public class ProjectController {
         String uid = loginUser.getId();
         try {
             User user = accountService.findByAccount(account);
-            if(user==null){
+            if (user == null) {
                 map.put("result", ResultDict.ACCOUNT_NOT_EXISTED.getCode());
                 return map;
             }
             Integer role_id = accountService.findRoleIdByUid(uid);
             if (role_id == 3) {
-                Integer firmUid = accountService.findFirmUid(uid,user.getId());
-                if(firmUid==null){
+                Integer firmUid = accountService.findFirmUid(uid, user.getId());
+                if (firmUid == null) {
                     map.put("result", ResultDict.NOT_SAME_COMPANY.getCode());
                     return map;
                 }
@@ -120,5 +120,14 @@ public class ProjectController {
         return map;
     }
 
+    @RequestMapping(value = "/rename", method = RequestMethod.POST)
+    public String rename(String projectId,String projectName, Model model) {
+
+
+
+
+//            model.addAttribute("account", loginUser.getAccount());
+        return "projectManage/createProject";
+    }
 
 }

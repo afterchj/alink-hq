@@ -23,8 +23,7 @@
 
     <select id="searchByUser" resultType="com.tpadsz.after.entity.ProjectList">
         SELECT t1.id,t1.name,count(t3.id) as meshNum,t2.account as account,DATE_FORMAT(t1.create_date,'%Y-%m-%d %H:%i:%s') AS create_date,DATE_FORMAT(t1.update_date,'%Y-%m-%d %H:%i:%s') AS update_date FROM
-        (SELECT * FROM f_project p WHERE p.name LIKE CONCAT('%',IFNULL(#{name},''),'%') and p.create_date BETWEEN IFNULL(NULLIF(#{startCreateDate},''),p.create_date) and IFNULL(NULLIF(#{endCreateDate},''),p.create_date) and p.update_date BETWEEN IFNULL(NULLIF(#{startUpdateDate},''),p.update_date) and IFNULL(NULLIF(#{endUpdateDate},''),p.update_date) and p.uid=#{uid}) AS t1 INNER JOIN f_user_account AS t2 ON t1.uid = t2.id INNER JOIN f_mesh AS t3 ON t1.id = t3.project_id WHERE t2.account=#{account}
-        GROUP BY t3.project_id ORDER BY t1.update_date DESC, t1.create_date DESC
+        (SELECT * FROM f_project p WHERE p.name LIKE CONCAT('%',IFNULL(#{name},''),'%') and p.create_date BETWEEN IFNULL(NULLIF(#{startCreateDate},''),p.create_date) and IFNULL(NULLIF(#{endCreateDate},''),p.create_date) and p.update_date BETWEEN IFNULL(NULLIF(#{startUpdateDate},''),p.update_date) and IFNULL(NULLIF(#{endUpdateDate},''),p.update_date) and p.uid=#{uid}) AS t1 INNER JOIN f_user_account AS t2 ON t1.uid = t2.id INNER JOIN f_mesh AS t3 ON t1.id = t3.project_id GROUP BY t3.project_id ORDER BY t1.update_date DESC, t1.create_date DESC
     </select>
 
     <insert id="createProject" parameterType="string">
