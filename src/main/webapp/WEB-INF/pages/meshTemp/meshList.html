@@ -26,134 +26,129 @@
         </div>
 
         <div id="meshList" class="">
-            <div class="search-condition ">
-                <form action="" class="clearfix">
+            <form class="clearfix" th:action="@{/mesh/list}" method="post">
+                <input type="hidden" name="uid" th:value="${dict.uid}">
+                <div class="search-condition temp">
                     <div class="f-l search" style="margin-right:125px;">
                         <div>
-                            <label for="name">网络名称</label>
-                            <input type="text" id="name" placeholder="请输入项目名">
+                            <label for="name">网络名称：</label>
+                            <input type="text" id="name" name="mname" th:value="${dict.mname}" placeholder="请输入网络名称">
                         </div>
-                        <!--<div class="p-r">-->
-                        <!--<label for="">网络状态</label>-->
-                        <!--<input type="text" id="start-time" placeholder="请选择日期" AUTOCOMPLETE="off">-->
-                        <!--<img src="/alink-hq/static/img/date.png" alt="" class="p-a">-->
-                        <!--</div>-->
                         <div>
-                            <label for="name">网络状态</label>
-                            <input type="text" id="name" placeholder="请输入网络状态">
+                            <label for="name">网络状态：</label>
+                            <select name="status">
+                                <option value="0">全部</option>
+                                <option value="1">未知</option>
+                            </select>
                         </div>
                     </div>
                     <div class="f-l search">
                         <div>
-                            <label for="">网络ID</label>
-                            <input type="text" placeholder="请输入账号">
+                            <label for="mid">网络ID：</label>
+                            <input type="text" id="mid" name="meshId" th:value="${dict.meshId}" placeholder="请输入网络ID">
                         </div>
-                        <!--<div class="p-r">-->
-                        <!--<label for="">项目名称：</label>-->
-                        <!--<input type="text" id="end-time" placeholder="请选择日期" AUTOCOMPLETE="off">-->
-                        <!--<img src="/alink-hq/static/img/date.png" alt="" class="p-a">-->
-                        <!--</div>-->
                         <div>
-                            <label for="">项目名称：</label>
-                            <input type="text" placeholder="请输入项目名称">
+                            <label for="pname">项目名称：</label>
+                            <input type="text" id="pname" name="pname" th:value="${dict.pname}" placeholder="请输入项目名称">
                         </div>
                     </div>
                     <div class="f-r search-button ">
                         <button type="submit" class="pointer">查询</button>
                     </div>
-                </form>
-            </div>
-            <div class="search-result">
-                <!-- 有数据时 -->
-                <table border="1" class="hasData active">
-                    <thead>
-                    <tr>
-                        <th class="all-checkbox">
-                            <input type="checkbox" id="all">全选
-                        </th>
-                        <th>网络名称</th>
-                        <th>网络ID</th>
-                        <th>网络类型</th>
-                        <th>属于项目</th>
-                        <th>区域数量</th>
-                        <th>场景数量</th>
-                        <th>状态</th>
-                        <th>操作</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr th:each="mesh:${pageInfo.list}">
-                        <td><input type="checkbox" name="mids" th:value="${mesh.id}"></td>
-                        <td th:text="${mesh.mname}"></td>
-                        <td th:text="${mesh.mesh_id}"></td>
-                        <td th:text="${mesh.mesh_type}"></td>
-                        <td th:text="${mesh.name}"></td>
-                        <td th:text="${mesh.pcount}"></td>
-                        <td th:text="${mesh.scount}"></td>
-                        <td>未知</td>
-                        <td class="p-r">
-                            <img src="/alink-hq/static/img/edit.png" alt="">
-                            <a th:href="@{/mesh/move(mids=${mesh.id})}"><img src="/alink-hq/static/img/exchange.png"
-                                                                             alt="" class="center-img"></a>
-                            <img src="/alink-hq/static/img/delete.png" alt="">
-                            <div class="popup p-a">
-                                重命名
-                            </div>
-                        </td>
-                    </tr>
-                    </tbody>
-                    <tfoot>
-                    <tr>
-                        <td colspan="9" class="clearfix page">
-                            <div class="f-l">
+                </div>
+                <div class="search-result">
+                    <!-- 有数据时 -->
+                    <table border="1" class="hasData active">
+                        <thead>
+                        <tr>
+                            <th class="all-checkbox">
+                                <input type="checkbox" id="all">全选
+                            </th>
+                            <th>网络名称</th>
+                            <th>网络ID</th>
+                            <th>网络类型</th>
+                            <th>属于项目</th>
+                            <th>区域数量</th>
+                            <th>场景数量</th>
+                            <th>状态</th>
+                            <th>操作</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="mesh:${pageInfo.list}">
+                            <td><input type="checkbox" name="mids" th:value="${mesh.id}"></td>
+                            <td th:text="${mesh.mname}"></td>
+                            <td th:text="${mesh.mesh_id}"></td>
+                            <td th:text="${mesh.mesh_type}"></td>
+                            <td th:text="${mesh.name}"></td>
+                            <td th:text="${mesh.pcount}"></td>
+                            <td th:text="${mesh.scount}"></td>
+                            <td>未知</td>
+                            <td class="p-r">
+                                <img src="/alink-hq/static/img/edit.png" alt="">
+                                <a th:href="@{/mesh/move(mids=${mesh.id})}">
+                                    <img src="/alink-hq/static/img/exchange.png" alt="" class="center-img">
+                                </a>
+                                <img src="/alink-hq/static/img/delete.png" alt="">
+                                <div class="popup p-a">
+                                    重命名
+                                </div>
+                            </td>
+                        </tr>
+                        </tbody>
+                        <tfoot>
+                        <tr>
+                            <td colspan="9" class="clearfix page">
+                                <div class="f-l">
                             <span class="selected-order">已选择
                                 <span class="amount">0</span>条数据
                             </span>
-                                <span class="m-r-20">
+                                    <span class="m-r-20">
                                 <img src="/alink-hq/static/img/true-over-un.png" alt="" id="multiMove">
                             </span>
-                                <span>
+                                    <span>
                                 <img src="/alink-hq/static/img/delete-un.png" alt="">
                             </span>
-                            </div>
-                            <div th:replace="common/page::page"></div>
-                        </td>
-                    </tr>
-                    </tfoot>
-                </table>
-                <!-- 无数据时 -->
-                <table border="1" class="noData ">
-                    <thead>
-                    <tr>
-                        <th class="all-checkbox">
-                            <img src="/alink-hq/static/img/checkbox.png" alt="">全选
-                        </th>
-                        <th>项目名称</th>
-                        <th>项目中选中网络数量</th>
-                        <th>施工人员</th>
-                        <th class="p-r">
-                            <span class="toTime">创建时间</span>
-                            <img src="/alink-hq/static/img/top-triangle.png" alt="" class="p-a toTop pointer">
-                            <img src="/alink-hq/static/img/bottom-triangle.png" alt="" class="p-a toBottom pointer">
-                        </th>
-                        <th class="p-r">
-                            <span class="toTime">更新时间</span>
-                            <img src="/alink-hq/static/img/top-triangle.png" alt="" class="p-a toTop pointer">
-                            <img src="/alink-hq/static/img/bottom-triangle.png" alt="" class="p-a toBottom pointer">
-                        </th>
-                        <th>操作</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                        <td colspan="8">
-                            <img src="/alink-hq/static/img/no-data.png" alt="">
-                            <p>暂无数据</p>
-                        </td>
-                    </tr>
-                    </tbody>
-                </table>
-            </div>
+                                </div>
+                                <div th:replace="common/page::page"></div>
+                            </td>
+                        </tr>
+                        </tfoot>
+                    </table>
+                    <!-- 无数据时 -->
+                    <table border="1" class="noData ">
+                        <thead>
+                        <tr>
+                            <th class="all-checkbox">
+                                <img src="/alink-hq/static/img/checkbox.png" alt="">全选
+                            </th>
+                            <th>项目名称</th>
+                            <th>项目中选中网络数量</th>
+                            <th>施工人员</th>
+                            <th class="p-r">
+                                <span class="toTime">创建时间</span>
+                                <img src="/alink-hq/static/img/top-triangle.png" alt="" class="p-a toTop pointer">
+                                <img src="/alink-hq/static/img/bottom-triangle.png" alt="" class="p-a toBottom pointer">
+                            </th>
+                            <th class="p-r">
+                                <span class="toTime">更新时间</span>
+                                <img src="/alink-hq/static/img/top-triangle.png" alt="" class="p-a toTop pointer">
+                                <img src="/alink-hq/static/img/bottom-triangle.png" alt="" class="p-a toBottom pointer">
+                            </th>
+                            <th>操作</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td colspan="8">
+                                <img src="/alink-hq/static/img/no-data.png" alt="">
+                                <p>暂无数据</p>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </form>
         </div>
     </div>
 </div>
@@ -190,18 +185,38 @@
             }
             $(".amount").text(length);
         });
-        $("#size").change(function () {
+        $("#prev").click(function () {
             var page = $("#page").val();
-            var size = $("#size option:selected").val();
-            console.log("size=" + size);
-            location.href = "/alink-hq/mesh/list?pageNum=" + page + "&pageSize=" + size;
-//            size = $("#size").find("option:selected").val();
+            if (page > 1) {
+                page--;
+                $("#page").val(page);
+                console.log("page=" + page);
+                $("form:eq(0)").submit();
+            }
+        });
+        $("#next").click(function () {
+            var page = $("#page").val();
+            var pages = parseInt($("#pages").text());
+            if (page < pages) {
+                page++;
+                $("#page").val(page);
+                console.log("page=" + page + ",pages=" + pages);
+                $("form:eq(0)").submit();
+            }
+        });
+        $("#size").change(function () {
+//            var page = $("#page").val();
+//            var size = $("#size option:selected").val();
+//            console.log("size=" + size);
+//            location.href = "/alink-hq/mesh/list?pageNum=" + page + "&pageSize=" + size;
+            $("form:eq(0)").submit();
         });
         $("#skip").click(function () {
-            var page = $("#page").val();
-            var size = $("#size option:selected").val();
+            $("form:eq(0)").submit();
+//            var page = $("#page").val();
+//            var size = $("#size option:selected").val();
 //            console.log("page=" + page + ",size=" + size);
-            location.href = "/alink-hq/mesh/list?pageNum=" + page + "&pageSize=" + size;
+//            location.href = "/alink-hq/mesh/list?pageNum=" + page + "&pageSize=" + size;
         });
         $("#multiMove").click(function () {
             var mids = [];//定义一个数组
@@ -213,13 +228,13 @@
         });
 
     });
-    $('.on-off-triangle').click(function(){
-        var imgUrl=$(this).attr('src');
-        if(imgUrl=='/alink-hq/static/img/bottom-triangle-un.png'){
-            $(this).attr('src','/alink-hq/static/img/right-triange-un.png');
+    $('.on-off-triangle').click(function () {
+        var imgUrl = $(this).attr('src');
+        if (imgUrl == '/alink-hq/static/img/bottom-triangle-un.png') {
+            $(this).attr('src', '/alink-hq/static/img/right-triange-un.png');
             $(this).parent().parent('.one-list').find('.two-list').addClass('active');
-        }else{
-            $(this).attr('src','/alink-hq/static/img/bottom-triangle-un.png');
+        } else {
+            $(this).attr('src', '/alink-hq/static/img/bottom-triangle-un.png');
             $(this).parent().parent('.one-list').find('.two-list').removeClass('active');
         }
     })

@@ -2,6 +2,7 @@ package com.tpadsz.after.service.impl;
 
 import com.tpadsz.after.dao.MeshDao;
 import com.tpadsz.after.entity.OptionList;
+import com.tpadsz.after.entity.SearchDict;
 import com.tpadsz.after.service.MeshService;
 import org.springframework.stereotype.Service;
 
@@ -19,12 +20,12 @@ public class MeshServiceImpl implements MeshService {
     private MeshDao meshDao;
 
     @Override
-    public List<Map> selectByMap(Map map) {
-        return meshDao.selectByMap(map);
+    public List<Map> selectByMap(SearchDict dict) {
+        return meshDao.selectByMap(dict);
     }
 
     @Override
-    public List<Map> getByMap(Map map) {
+    public List<Map> getByMap(SearchDict map) {
         return meshDao.getByMap(map);
     }
 

@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSON;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.tpadsz.after.entity.OptionList;
+import com.tpadsz.after.entity.SearchDict;
 import com.tpadsz.after.service.MeshService;
 import com.tpadsz.after.service.RoleService;
 import org.apache.log4j.Logger;
@@ -32,23 +33,29 @@ public class MeshController {
     private Logger logger = Logger.getLogger(this.getClass());
 
     @RequestMapping("/list")
-    public String list(Integer uid, Integer pid, @RequestParam(required = false, defaultValue = "1") Integer pageNum, @RequestParam(required = false, defaultValue = "10") Integer pageSize, ModelMap modelMap) {
-        logger.info("page=" + pageNum + ",size=" + pageSize);
-        Map map = new HashMap();
-        if (uid != null) {
-            String role = roleService.selectById(uid);
-            map.put("role", role);
-            map.put("uid", uid);
-        }
-        if (pid != null) {
-            map.remove("uid");
-            map.put("pid", pid);
-        }
+    public String list(SearchDict dict, @RequestParam(required = false, defaultValue = "1") Integer pageNum, @RequestParam(required = false, defaultValue = "10") Integer pageSize, ModelMap modelMap) {
+        logger.info("dict=" + JSON.toJSONString(dict));
+        String role = roleService.selectById(dict.getUid());
+        dict.setRole(role);
         PageHelper.startPage(pageNum, pageSize);
-        List<Map> meshList = meshService.getByMap(map);
+        List<Map> meshList = meshService.getByMap(dict);
         PageInfo<Map> pageInfo = new PageInfo(meshList, pageSize);
         modelMap.put("pageInfo", pageInfo);
-        logger.info("total=" + pageInfo.getTotal() + ",pages=" + pageInfo.getPages());
+        modelMap.put("dict",dict);
+        logger.info("page=" + pageNum + ",pages=" + pageInfo.getPages());
+        return "meshTemp/meshList";
+    }
+
+    @RequestMapping("/search")
+    public String search(SearchDict dict, @RequestParam(required = false, defaultValue = "1") Integer pageNum, @RequestParam(required = false, defaultValue = "10") Integer pageSize, ModelMap modelMap) {
+        PageHelper.startPage(pageNum, pageSize);
+        List<Map> meshList = meshService.selectByMap(dict);
+        logger.info("dict=" + JSON.toJSONString(dict));
+        PageInfo<Map> pageInfo = new PageInfo(meshList, pageSize);
+        if (pageInfo.getList().size() > 0) {
+            modelMap.put("pageInfo", pageInfo);
+        }
+        modelMap.put("dict", dict);
         return "meshTemp/meshList";
     }
 

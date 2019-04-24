@@ -1,6 +1,7 @@
 package com.tpadsz.after.dao;
 
 import com.tpadsz.after.entity.OptionList;
+import com.tpadsz.after.entity.SearchDict;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -11,9 +12,9 @@ import java.util.Map;
  */
 public interface MeshDao {
 
-    List<Map> selectByMap(Map map);
+    List<Map> selectByMap(SearchDict dict);
 
-    List<Map> getByMap(Map map);
+    List<Map> getByMap(SearchDict dict);
 
     List<Map> selectByMid(List list);
 
