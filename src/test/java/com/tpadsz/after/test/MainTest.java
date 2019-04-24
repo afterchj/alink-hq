@@ -74,18 +74,18 @@ public class MainTest {
         List<Map> list = getSqlSessionTemplate().selectList("com.tpadsz.after.dao.MeshDao.getByMap", map);
 //        String role = getSqlSessionTemplate().selectOne("com.tpadsz.after.dao.RoleDao.selectById", 21);
 //        List<Role> roles = getSqlSessionTemplate().selectList("com.tpadsz.after.dao.RoleDao.getAll");
-//        List<OptionList> lists = getSqlSessionTemplate().selectList("com.tpadsz.after.dao.MeshDao.getProjects",8);
+        List<OptionList> lists = getSqlSessionTemplate().selectList("com.tpadsz.after.dao.MeshDao.getProjects",map);
 //        logger.info("role=" + role);
 //        logger.info("roles=" + roles);
-        logger.info("lists=" + JSON.toJSONString(list.size()));
+        logger.info("lists=" + lists.size());
     }
 
     @Test
     public void testDao(){
         ApplicationContext ctx = new ClassPathXmlApplicationContext("classpath:applicationContext.xml");
         MeshService meshService= (MeshService) ctx.getBean("meshServiceImpl");
-        List<OptionList> lists = meshService.getProjects(0);
-        logger.info("lists=" + JSON.toJSONString(lists));
+        List<OptionList> lists = meshService.getProjects(null);
+        logger.info("lists=" + lists.size());
     }
     public static void main(String[] args) {
         int size = 8;

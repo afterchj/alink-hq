@@ -10,29 +10,33 @@
 <body>
 <div class="f-r page-right" th:fragment="page">
   <span>
-      <div th:switch="${pageInfo.pageNum}">
-          <a th:case="1" href="javascript:void(0)">
-              <img src="/alink-hq/static/img/left-arrow.png" alt="">
-          </a>
-          <a th:case="*" th:href="@{/mesh/list(pageNum=${pageInfo.pageNum}-1,pageSize=${pageInfo.pageSize})}">
-              <img src="/alink-hq/static/img/left-arrow.png" alt="" id="prev">
-          </a>
-      </div>
+      <!--<div th:switch="${pageInfo.pageNum}">-->
+      <!--<a th:case="1" href="javascript:void(0)">-->
+      <!--<img src="/alink-hq/static/img/left-arrow.png" alt="">-->
+      <!--</a>-->
+      <!--<a th:case="*" th:href="@{/mesh/list(uid=${session.user.id},pageNum=${pageInfo.pageNum}-1,pageSize=${pageInfo.pageSize})}">-->
+      <!--<img src="/alink-hq/static/img/left-arrow.png" alt="" id="prev">-->
+      <!--</a>-->
+      <!--</div>-->
+       <img src="/alink-hq/static/img/left-arrow.png" id="prev" alt="">
   </span>
     <span th:inline="text" id="pageNum">[[${pageInfo.pageNum}]]</span>
     <span>
-        <div th:switch="${pageInfo.pageNum}">
-            <a th:case="${pageInfo.total}" href="javascript:void(0)">
-                <img src="/alink-hq/static/img/right-arrow-color.png" alt="">
-            </a>
-            <a th:case="*" th:href="@{/mesh/list(pageNum=${pageInfo.pageNum+1},pageSize=${pageInfo.pageSize})}">
-                <img src="/alink-hq/static/img/right-arrow-color.png" alt="">
-            </a>
-        </div>
+        <!--<div th:switch="${pageInfo.pageNum}">-->
+            <!--<a th:case="${pageInfo.total}" href="javascript:void(0)">-->
+                <!--<img src="/alink-hq/static/img/right-arrow-color.png" alt="">-->
+            <!--</a>-->
+            <!--<a th:case="*"-->
+               <!--th:href="@{/mesh/list(uid=${session.user.id},pageNum=${pageInfo.pageNum+1},pageSize=${pageInfo.pageSize})}">-->
+                <!--<img src="/alink-hq/static/img/right-arrow-color.png" alt="">-->
+            <!--</a>-->
+        <!--</div>-->
+        <img src="/alink-hq/static/img/right-arrow-color.png" id="next" alt="">
     </span>
-    <span class="m-l-15 m-r-20">共<span class="amount" th:inline="text">[[${pageInfo.pages}]]</span>页/<span class="amount" th:inline="text">[[${pageInfo.total}]]</span>条数据</span>
+    <span class="m-l-15 m-r-20">共<span class="amount" id="pages" th:inline="text">[[${pageInfo.pages}]]</span>页/<span
+            class="amount" th:inline="text">[[${pageInfo.total}]]</span>条数据</span>
     <span class="m-r-15">
-        <input type="number" th:value="${pageInfo.pageNum}" id="page" name="skip">
+        <input type="number" th:value="${pageInfo.pageNum}" id="page" name="pageNum">
     </span>
     <span class="m-r-35">
         <img src="/alink-hq/static/img/skip.png" id="skip" alt="">

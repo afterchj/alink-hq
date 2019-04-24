@@ -10,7 +10,7 @@
         m.mname,
         m.mesh_id,
         m.mesh_type,
-        p. name,
+        p.name,
         pl.pcount,
         s.scount
 	</sql>
@@ -19,46 +19,65 @@
         <if test="uid!=null and uid!=''">
             <choose>
                 <when test="role == 'admin'">
-                    AND m.uid IN (SELECT u.id FROM f_user_account u INNER JOIN f_user_role r ON u.id=r.user_id WHERE r.role_id in (2,3,4))
+                    AND p.uid IN (SELECT u.id FROM f_user_account u INNER JOIN f_user_role r ON u.id=r.user_id WHERE
+                    r.role_id in (2,3,4))
                 </when>
                 <when test="role == 'manager'">
-                    AND m.uid IN (SELECT c.uid FROM f_user_customer c WHERE fid=(SELECT fid FROM f_user_customer WHERE uid=#{uid}))
-                <!--
-                    AND m.uid IN (SELECT c.uid FROM f_user_customer c INNER JOIN f_user_role r ON c.uid=r.user_id WHERE r.role_id in (4) AND fid=(SELECT fid FROM f_user_customer WHERE uid=#{uid})) OR m.uid=#{uid}
-                 -->
+                    AND p.uid IN (SELECT c.uid FROM f_user_customer c WHERE fid=(SELECT fid FROM f_user_customer WHERE
+                    uid=#{uid}))
+                    <!--
+                        AND p.uid IN (SELECT c.uid FROM f_user_customer c INNER JOIN f_user_role r ON c.uid=r.user_id WHERE r.role_id in (4) AND fid=(SELECT fid FROM f_user_customer WHERE uid=#{uid})) OR p.uid=#{uid}
+                     -->
                 </when>
                 <when test="role == 'user'">
-                    AND m.uid =#{uid}
+                    AND p.uid =#{uid}
                 </when>
                 <!--<otherwise>-->
                 <!--</otherwise>-->
             </choose>
         </if>
     </sql>
-    <select id="getByMap" resultType="map" parameterType="map">
+    <select id="getByMap" resultType="map" parameterType="SearchDict">
         SELECT
         <include refid="Base_Column_List"/>
-        FROM
-        f_mesh m
+        FROM f_mesh m
         INNER JOIN f_project p ON m.project_id = p.id
         INNER JOIN (SELECT COUNT(1) pcount,mid FROM f_place GROUP BY mid) pl ON pl.mid=m.id
         INNER JOIN (SELECT COUNT(1) scount,mid FROM f_scene GROUP BY mid) s ON s.mid=m.id
         WHERE 1=1
         <include refid="common_choose"></include>
-        <if test="pid!=null and pid!=''">
-            AND p.id=#{pid}
+        <if test="mname!=null and mname!=''">
+            AND m.mname LIKE CONCAT('%',#{mname},'%')
+        </if>
+        <if test="meshId!=null and meshId!=''">
+            AND m.mesh_id LIKE CONCAT('%',#{meshId},'%')
+        </if>
+        <if test="pname!=null and pname!=''">
+            AND p.name LIKE CONCAT('%',#{pname},'%')
+        </if>
+        <if test="projectId!=null and projectId!=''">
+            AND  m.project_id=#{projectId}
         </if>
     </select>
 
-    <select id="selectByMap" resultType="map">
+    <select id="selectByMap" resultType="map" parameterType="SearchDict">
         SELECT
         <include refid="Base_Column_List"/>
-        FROM
-        f_mesh m
+        FROM f_mesh m
         INNER JOIN f_project p ON m.project_id = p.id
         INNER JOIN (SELECT COUNT(1) pcount,mid FROM f_place GROUP BY mid) pl ON pl.mid=m.id
         INNER JOIN (SELECT COUNT(1) scount,mid FROM f_scene GROUP BY mid) s ON s.mid=m.id
         WHERE 1=1
+        <include refid="common_choose"></include>
+        <if test="mname!=null and mname!=''">
+            AND m.mname LIKE CONCAT('%',#{mname},'%')
+        </if>
+        <if test="meshId!=null and meshId!=''">
+            AND m.mesh_id LIKE CONCAT('%',#{meshId},'%')
+        </if>
+        <if test="pname!=null and pname!=''">
+            AND p.name LIKE CONCAT('%',#{pname},'%')
+        </if>
     </select>
 
     <select id="getCountByTable" resultType="int" parameterType="string" statementType="STATEMENT">
@@ -67,12 +86,11 @@
 
     <select id="selectByMid" resultType="map" parameterType="list">
         SELECT
-        m.id,
-        m.mname,
-        m.mesh_id,
-        p.name
-        FROM
-        f_mesh m
+            m.id,
+            m.mname,
+            m.mesh_id,
+            p.name
+        FROM f_mesh m
         INNER JOIN f_project p ON m.project_id = p.id
         INNER JOIN (SELECT COUNT(1) pcount,mid FROM f_place GROUP BY mid) pl ON pl.mid=m.id
         INNER JOIN (SELECT COUNT(1) scount,mid FROM f_scene GROUP BY mid) s ON s.mid=m.id
@@ -82,11 +100,9 @@
         </foreach>
     </select>
 
-    <select id="getProjects" resultType="OptionList" parameterType="int">
-        SELECT id,`name` FROM f_project WHERE 1=1
-        <if test="uid!=null and uid!=''">
-            AND uid=#{uid}
-        </if>
+    <select id="getProjects" resultType="OptionList" parameterType="map">
+        SELECT id,`name` FROM f_project p WHERE 1=1
+        <include refid="common_choose"></include>
     </select>
 
     <update id="saveUpdate" parameterType="map">

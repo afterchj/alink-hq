@@ -1,4 +1,4 @@
-package com.tpadsz.after.dao;
+package com.tpadsz.after.service;
 
 import com.tpadsz.after.entity.OptionList;
 
@@ -6,9 +6,9 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Created by hongjian.chen on 2019/4/18.
+ * Created by hongjian.chen on 2019/4/23.
  */
-public interface PlaceDao {
+public interface PlaceService {
 
     List<Map> selectByMap(Map map);
 
