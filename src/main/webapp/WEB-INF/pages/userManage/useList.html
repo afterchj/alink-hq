@@ -96,16 +96,15 @@
                         <td th:text="${user.coname}"></td>
                         <td th:text="${user.role_id}" class="role"></td>
                         <td th:text="${user.create_date}"></td>
-                        <td th:text="${user.status}" class="status">
-                            <a href="javascript:void(0);" id="start-use" openTab="start-use"></a>
+                        <td th:text="${user.status}" class="status pointer" openTab="start-use" id="start-use" >
                         </td>
                         <td class="p-r">
-                            <img src="/alink-hq/static/img/edit.png" alt="" openTab="reset-pwd" id="reset-pwd">
+                            <img src="/alink-hq/static/img/edit.png" alt="" openTab="reset-pwd" id="reset-pwd" class="pointer">
                             <a th:href="@{/account/transferPage(uid=${session.user.id},account=${user.account},coname=${user.coname})}"><img
                                     src="/alink-hq/static/img/exchange.png"
                                     alt="" class="center-img"></a>
                             <img src="/alink-hq/static/img/delete.png" alt="" id="delete-account"
-                                 openTab="delete-account">
+                                 openTab="delete-account" class="pointer">
                             <div class="popup p-a">
                                 重命名
                             </div>
@@ -145,10 +144,8 @@
                                 <span class="m-r-15r">每页显示：</span>
                                 <span class="m-r-20">
                                     <select name="page-select" id="page-select">
-
-                                        <option value="5">5</option>
-                                        <option value="6">6</option>
                                         <option value="10">10</option>
+                                        <option value="5">5</option>
                                     </select>
                                 </span>
                             </div>
@@ -198,12 +195,39 @@
         <div class="reset-pwd">您确定要重置该账号密码吗？</div>
         <div class="reset-pwd-hint">（重置后将无法重置，请慎重！）</div>
         <div class="pop-btn">
-            <button class="reduce">取消</button>
-            <button class="yes">确定</button>
+            <button class="reduce" type="button">取消</button>
+            <button class="yes" type="button">确定</button>
         </div>
     </div>
 </div>
+<!--新密码-->
+<div class="reset-passwords pop-iframe" openContent="new-pwd">
+    <div class="reset-passwords-nav p-r pop-nav">
+        新密码
+    </div>
+    <div class="reset-passwords-content pop-content">
+        <form action="">
+            <div class="main-part">
+                <div class="account-part">
+                    <span class="t-title t-account">账&nbsp;&nbsp;&nbsp;号：</span>
+                    <span class="t-content t-account-result"></span>
+                </div>
+                <div class="pwd-part">
+                    <span class="t-title t-pwd">新密码：</span>
+                    <span class="t-content t-pwd-result"></span>
+                </div>
+            </div>
 
+            <div class="pop-btn clearfix">
+                <div class="f-l pop-hint">请牢记新密码，关闭后将无法展示</div>
+                <div class="f-r">
+                    <button class="reduce" type="button">取消</button>
+                    <button class="yes" type="button">确定</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
 <!-- 确定启用禁用弹出框 -->
 <div class="confirm-on-off pop-iframe " openContent="start-use">
     <div class="confirm-on-off-nav p-r pop-nav">
@@ -211,10 +235,9 @@
     </div>
     <div class="pop-content">
         <div class="off-or-on"></div>
-        <!-- <div class="reset-pwd-hint">（重置后将无法重置，请慎重！）</div> -->
         <div class="pop-btn">
-            <button class="reduce">取消</button>
-            <button class="yes">确定</button>
+            <button class="reduce" type="button">取消</button>
+            <button class="yes" type="button">确定</button>
         </div>
     </div>
 </div>
@@ -225,11 +248,17 @@
         温馨提示
     </div>
     <div class="pop-content">
-        <div class="reset-pwd">您确定要删除该账号信息吗？</div>
-        <div class="reset-pwd-hint">（删除后将无法恢复，请慎重！）</div>
+        <div class="noProject active">
+            <div class="reset-pwd">您确定要删除该账号信息吗？</div>
+            <div class="reset-pwd-hint">（删除后将无法恢复，请慎重！）</div>
+        </div>
+        <div class="hasProject">
+            <div >当前账号名下有项</div>
+            <div>请移交后再进行删除！</div>
+        </div>
         <div class="pop-btn">
-            <button class="reduce">取消</button>
-            <button class="yes">确定</button>
+            <button class="reduce" type="button">取消</button>
+            <button class="yes" type="button">确定</button>
         </div>
     </div>
 </div>
@@ -283,23 +312,91 @@
             }
         })
     }
+    $(function(){
+        var  account='';
+        var status='';
+        var intStatus='';
+        $('td[openTab="start-use"]').click(function () {
+            var openTab = $(this).attr('openTab');
+            var text = $(this).text();
+            shade(openTab,text);
+             account=$(this).parent().siblings('.use-account').text();
+             status=$(this).text();
 
-    $('#start-use').click(function () {
-        var openTab = $(this).attr('openTab');
-        var text = $(this).text();
-        shade(openTab, text);
-        scroll();
+            if(status == '启用'){
+                 intStatus=1;
+            }else if(status == '禁用'){
+                 intStatus=0;
+            }
+            console.log(intStatus);
+        })
+        $('div[openContent="start-use"] button.yes').click(function(){
+            $.ajax({
+                type: "POST",
+                url: "/alink-hq/account/enable",
+                data: {account: account,status:intStatus},
+                dataType: "json",
+                success: function (res) {
+                    console.log(res);
+                    if (res.result == '000') {
+
+                    }
+                }
+            });
+        })
     })
 
-    $('#reset-pwd').click(function () {
-        var openTab = $(this).attr('openTab');
-        shade(openTab);
-        scroll();
+
+
+
+    $(function(){
+         var account='';
+        $('img[openTab="reset-pwd"]').click(function () {
+            var openTab = $(this).attr('openTab');
+            shade(openTab);
+             account=$(this).parent().siblings('.use-account').text();
+        })
+        $('div[openContent="reset-pwd"] button.yes').click(function(){
+            $('div[openContent="new-pwd"]').addClass('active');
+            $('.hide-iframe').addClass('active');
+            $.ajax({
+                type: "POST",
+                url: "/alink-hq/account/resetPwd",
+                data: {account: account},
+                dataType: "json",
+                success: function (res) {
+                    console.log(res);
+                    if (res.result == '000') {
+                        var pwd = res.pwd;
+                        var account = res.account;
+                        $('.t-account-result').text(account);
+                        $('.t-pwd-result').text(pwd);
+                    }
+                }
+            });
+        })
     })
-    $('#delete-account').click(function () {
+    $('img[openTab="delete-account"]').click(function () {
         var openTab = $(this).attr('openTab');
         shade(openTab);
-        scroll();
+        var account=$(this).parent().siblings('.use-account').text();
+//        console.log('account',account);
+        $.ajax({
+            type: "POST",
+            url: "/alink-hq/account/delete",
+            data: {account: account},
+            dataType: "json",
+            success: function (data) {
+                console.log(data.result);
+                if(data.result=='303'){
+                    $('.noProject').removeClass('active');
+                    $('.hasProject').addClass('active');
+                }else{
+                    $('.hasProject').removeClass('active');
+                    $('.noProject').addClass('active');
+                }
+            }
+        });
     })
 
 

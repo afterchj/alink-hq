@@ -427,3 +427,40 @@ th.all-checkbox {
     color: #fb2a2a;
     margin-top: 10px;
 }
+
+.noProject,.hasProject{
+    display: none;
+}
+.hasProject.active{
+    display: block;
+}
+.noProject.active{
+    display: block;
+}
+.pop-content .hasProject{
+    margin-top:50px;
+}
+.pop-content .hasProject>div{
+    margin-bottom: 20px;
+    font-size: 17px;
+    color: #3c3c3c;
+}
+.pop-content span{
+    display: inline-block;
+    width:49%;
+    color: #3c3c3c;
+}
+
+.main-part{
+    width:400px;
+    margin:30px auto;
+}
+.pop-content span.t-title{
+    text-align: right;
+}
+.pop-content span.t-content{
+    text-align: left;
+}
+.account-part{
+    margin-bottom: 30px;
+}

@@ -76,19 +76,22 @@
     </div>
     <div class="reset-passwords-content pop-content">
         <form action="">
-            <div>
-                <span class="t-title">账号：</span>
-                <span class="t-content">BM000</span>
+            <div class="main-part">
+                <div class="account-part">
+                    <span class="t-title t-account">账&nbsp;&nbsp;&nbsp;号：</span>
+                    <span class="t-content t-account-result"></span>
+                </div>
+                <div class="pwd-part">
+                    <span class="t-title t-pwd">新密码：</span>
+                    <span class="t-content t-pwd-result"></span>
+                </div>
             </div>
-            <div>
-                <span class="t-title">新密码：</span>
-                <span class="t-content">BM000</span>
-            </div>
+
             <div class="pop-btn clearfix">
                 <div class="f-l pop-hint">请牢记新密码，关闭后将无法展示</div>
                 <div class="f-r">
-                    <button class="reduce">取消</button>
-                    <button class="yes">确定</button>
+                    <button class="reduce" type="button">取消</button>
+                    <button class="yes" type="button">确定</button>
                 </div>
             </div>
         </form>
@@ -118,15 +121,29 @@
         }
     })
     $('.btn-transfer button').click(function () {
-        $('.pop-iframe').addClass('active');
-        shade()
+        var account = $("#account").val();
+        var fid = $("#transfer-company option:selected").val();
         $.ajax({
             type: "POST",
             url: "/alink-hq/account/transfer",
-            data: {account: $("#account").val(), fid: $("#company").val()},
+            data: {account: account, fid: fid},
             dataType: "json",
-            success: function (data) {
-                console.log(data);
+            success: function (res) {
+                console.log(res);
+                if (res.result == '000') {
+                    $('.pop-iframe').addClass('active');
+                    var width = document.body.scrollWidth;
+                    var height = document.body.scrollHeight;
+                    $('.hide-iframe').addClass('active');
+                    $('.hide-iframe').css({
+                        'width': width,
+                        'height': height
+                    })
+                    var pwd=res.pwd;
+                    var account=res.account;
+                    $('.t-account-result').text(account);
+                    $('.t-pwd-result').text(pwd);
+                }
 //                $('#resText').empty();   //清空resText里面的所有内容
 //                var html = '';
 //                $.each(data, function (commentIndex, comment) {
@@ -146,15 +163,6 @@
     $('.close').click(function () {
         hide();
     })
-    function shade() {
-        var width = document.body.scrollWidth;
-        var height = document.body.scrollHeight;
-        $('.hide-iframe').addClass('active');
-        $('.hide-iframe').css({
-            'width': width,
-            'height': height
-        })
-    }
     // 点击取消时
     $('.pop-content  .pop-btn .reduce').click(function () {
         hide();

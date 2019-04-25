@@ -276,4 +276,29 @@
     font-size: 15px;
     color: #fb2a2a;
     margin-top: 10px;
+
+}
+/*.pop-content .t-title.t-account {*/
+
+    /*font-size:16px;*/
+    /*color: #3c3c3c;*/
+/*}*/
+.pop-content span{
+     display: inline-block;
+     width:49%;
+     color: #3c3c3c;
+ }
+
+.main-part{
+    width:400px;
+    margin:30px auto;
+}
+.pop-content span.t-title{
+    text-align: right;
+}
+.pop-content span.t-content{
+    text-align: left;
+}
+.account-part{
+    margin-bottom: 30px;
 }
