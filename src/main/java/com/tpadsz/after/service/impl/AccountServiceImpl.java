@@ -90,10 +90,11 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
-    public int delete(String uid) {
-        int count = accountDao.findProjectByUid(uid);
+    public int delete(String account) {
+        User user = accountDao.findByAccount(account);
+        int count = accountDao.findProjectByUid(user.getId());
         if (count == 0) {
-            accountDao.delete(uid);
+            accountDao.delete(user.getId());
         }
         return count;
     }

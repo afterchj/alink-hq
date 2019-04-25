@@ -1,7 +1,6 @@
 package com.tpadsz.after.controller;
 
 import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONArray;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.tpadsz.after.entity.Firm;
@@ -180,10 +179,10 @@ public class AccountController {
 
     @RequestMapping(value = "/delete", method = RequestMethod.POST)
     @ResponseBody
-    public Map<String, String> delete(String uid, Model model) {
+    public Map<String, String> delete(String account) {
         Map<String, String> map = new HashMap<>();
         try {
-            int count = accountService.delete(uid);
+            int count = accountService.delete(account);
             if (count == 0) {
                 map.put("result", ResultDict.SUCCESS.getCode());
             } else {
