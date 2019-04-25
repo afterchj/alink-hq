@@ -134,6 +134,7 @@ body{
 }
 .content .login-in-box-tab-content button.active{
     background-color: #005aa0;
+    border: 1px solid #005aa0;
 }
 .icon {
     left: 10px;
@@ -418,11 +419,11 @@ p.add-hint.active, p.password-hint.active, p.page-hint.active, p.code-hint.activ
     top: 0;
     background-color: black;
     z-index: 10;
-    -moz-opacity: 0.65;
-    opacity: .65;
-    filter: alpha(opacity=65);
+    -moz-opacity: 0.45;
+    opacity: .45;
+    filter: alpha(opacity=45);
     display: none;
-    width: 100%;
+    /*width: 100%;*/
 }
 .pop-nav {
     padding: 20px 22px;

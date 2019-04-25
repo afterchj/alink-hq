@@ -56,7 +56,7 @@
                         </div>
                     </div>
                     <div class="f-r search-button ">
-                        <button type="button" class="pointer" onclick="condition()">查询</button>
+                        <button type="button" class="pointer" >查询</button>
                         <a href="" class="export" style="color: #3598db;">Excel导出</a>
                     </div>
                 </form>
@@ -131,20 +131,22 @@
                                 </span>
                                 <span class="m-l-15 m-r-20">
                                     共
-                                    <span th:text="${pageInfo.pages}" class="pageTotal"></span>
+                                    <span th:text="${pageInfo.pages}" class="pageTotal" id="pageTotal"></span>
                                     页/<span th:text="${pageInfo.total}"></span>条数据
                                 </span>
                                 <span class="m-r-15">
-                                    <input type="number">
+                                    <input type="number" min="1"  id="skipPage"  th:max="${pageInfo.pages}" oninput="skipLimit()"/>
                                 </span>
                                 <span class="m-r-35">
-                                    <img src="/alink-hq/static/img/skip.png" alt="">
+                                    <img src="/alink-hq/static/img/skip.png" id="skipPageBtn" class="cursor: pointer;" alt="">
                                 </span>
                                 <span class="m-r-15r">每页显示：</span>
                                 <span class="m-r-20">
                                     <select name="page-select" id="page-select">
-                                        <option value="">10</option>
-                                        <option value="">5</option>
+
+                                        <option value="5">5</option>
+                                        <option value="6">6</option>
+                                        <option value="10">10</option>
                                     </select>
                                 </span>
                             </div>
@@ -175,7 +177,7 @@
                     <tbody>
                     <tr>
                         <td colspan="8">
-                            <img src="/alink-hq/static/img/no-data.png" alt="">
+                            <img src="/alink-hq/static/img/no-data.png" id="skipPageBtn" alt="">
                             <p>暂无数据</p>
                         </td>
                     </tr>
@@ -230,6 +232,8 @@
     </div>
 </div>
 <div class="hide-iframe "></div>
+
+
 <script src="/alink-hq/static/js/jquery.min.js"></script>
 <script src="/alink-hq/static/laydate/laydate.js"></script>
 
@@ -252,12 +256,10 @@
     $('.pop-content  .pop-btn .yes').click(function () {
         hide();
         $(this).parents('.pop-iframe').removeClass('active');
-        // 其他逻辑代码
     })
     function shade(open, text) {
-        var width = window.screen.width;
-        var height = window.screen.height;
-        console.log(width, height);
+        var width = document.body.scrollWidth;
+        var height=document.body.scrollHeight;
         $('.hide-iframe').addClass('active');
         $('.hide-iframe').css({
             'width': '100%',
@@ -283,34 +285,40 @@
     $('#start-use').click(function () {
         var openTab = $(this).attr('openTab');
         var text = $(this).text();
-        console.log(openTab);
         shade(openTab, text);
         scroll();
     })
 
     $('#reset-pwd').click(function () {
         var openTab = $(this).attr('openTab');
-        console.log(openTab);
         shade(openTab);
         scroll();
     })
     $('#delete-account').click(function () {
         var openTab = $(this).attr('openTab');
-        console.log(openTab);
         shade(openTab);
         scroll();
     })
+
+
+
     //日期选择
     laydate.render({
         elem: '#add-time',
         range: true
     });
-    $('.one-list li').each(function () {
-        var tab = $(this).attr('tab');
-        if (tab == 'useList') {
-            $(this).addClass('active').siblings().removeClass('active');
-        }
+    $(function(){
+        myBrowser()
+        $('.one-list li').each(function () {
+            $('.main-left>ul>li.one-list:eq(1)').find('.on-off-triangle').attr('src', '/alink-hq/static/img/right-triange-un.png');
+            $('.main-left>ul>li.one-list:eq(1)').find('.two-list').addClass('active');
+            var tab = $(this).attr('tab');
+            if (tab == 'useList') {
+                $(this).addClass('active').siblings().removeClass('active');
+            }
+        })
     })
+
     $('.on-off-triangle').click(function () {
         var imgUrl = $(this).attr('src');
         if (imgUrl == '/alink-hq/static/img/bottom-triangle-un.png') {
@@ -321,10 +329,6 @@
             $(this).parent().parent('.one-list').find('.two-list').removeClass('active');
         }
     })
-    $(function () {
-        myBrowser()
-    })
-
 
     $(function () {
         var page = parseInt($('.pages').text());
@@ -344,8 +348,17 @@
             $('.next-page img').attr('src', '/alink-hq/static/img/right-arrow-color.png');
         }
     })
-    //条件筛选
 
+    function  skipLimit(){
+        var skipPage=parseInt($('#skipPage').val());
+        var pageTotal=parseInt($('.pageTotal').text()) ;
+        console.log(skipPage,pageTotal)
+        if(skipPage<1 || skipPage>pageTotal){
+            $('#skipPage').val('');
+        }
+    }
+
+    //条件筛选
     $(function () {
         var url = window.location.href;
         var account = GetUrlParam("account");
@@ -353,16 +366,23 @@
         var role = GetUrlParam("roleId");
         var startDate = GetUrlParam("startDate");
         var endDate = GetUrlParam("endDate");
+        var pageSize = GetUrlParam("pageSize");
+        var pageNum = GetUrlParam("pageNum");
+        $('#skipPage').val(pageNum);
+        $('#page-select option').each(function(){
+            if($(this).val()==pageSize){
+                $(this).attr("selected","selected");
+            }
+        })
         if (startDate != '' && endDate != '') {
             var addTime = startDate + ' - ' + endDate;
             $('#add-time').val(addTime);
         }
-
         $('#account').val(account);
         $('#role').val(role);
         $('#company').val(company);
         $('table tr td.role').each(function () {
-            console.log($(this).text());
+//            console.log($(this).text());
             var roleId = parseInt($(this).text());
             if (roleId == 4) {
                 $(this).text('施工人员');
@@ -381,10 +401,29 @@
                 $(this).text('禁用');
             }
         })
-        console.log(account, role, company, startDate, endDate, url);
+        //查询按钮点击
+        $('.search-button button').click(function(){
+            var pageSize=$('#page-select option:selected').val();
+            var pageNum=parseInt($('#skipPage').val());
+            condition(pageSize,pageNum);
+        })
+        //选择页数变化
+        $('#page-select').change(function(){
+            var pageSize=$(this).children('option:selected').val();
+            var pageNum=parseInt($('#skipPage').val());
+            condition(pageSize,pageNum);
+        });
+        //跳转页数变化
+        $('#skipPageBtn').click(function(){
+            var pageSize=$('#page-select option:selected').val();
+            var pageNum=parseInt($('#skipPage').val());
+            condition(pageSize,pageNum);
+        })
     })
 
-    function condition() {
+
+
+    function condition(pageSize,pageNum) {
         var url = window.location.href;
         var i = url.indexOf("?");
         if(i!=-1){
@@ -407,12 +446,16 @@
         var addTime = $('#add-time').val();
         var startDate = addTime.substring(0, 10);
         var endDate = addTime.substring(13, 23);
-        var num = parseInt($('.pages').text());
+
+        console.log('pageNum',pageNum);
 //        var userId = parseInt($('#useId_hidden').val());
-        var newUrl = url2 +'&pageNum=' + num + '&pageSize=10' + '&account=' + account + '&fid=' + company + '&roleId=' + role + '&startDate=' + startDate + '&endDate=' + endDate;
-        console.log(account, role, company, startDate, endDate, num);
+        var newUrl = url2 +'&pageNum=' + pageNum + '&pageSize='+pageSize + '&account=' + account + '&fid=' + company + '&roleId=' + role + '&startDate=' + startDate + '&endDate=' + endDate;
+//        console.log(account, role, company, startDate, endDate, num);
         location.href = newUrl;
     }
+
+    //选择每页展示时
+
 
     //paraName 等找参数的名称
     function GetUrlParam(paraName) {
@@ -421,10 +464,8 @@
         if (arrObj.length > 1) {
             var arrPara = arrObj[1].split("&");
             var arr;
-
             for (var i = 0; i < arrPara.length; i++) {
                 arr = arrPara[i].split("=");
-
                 if (arr != null && arr[0] == paraName) {
                     return arr[1];
                 }

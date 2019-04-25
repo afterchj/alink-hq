@@ -108,9 +108,10 @@
     })
     $(function(){
         $('.one-list li').each(function () {
+            $('.main-left>ul>li.one-list:eq(1)').find('.on-off-triangle').attr('src', '/alink-hq/static/img/right-triange-un.png');
+            $('.main-left>ul>li.one-list:eq(1)').find('.two-list').addClass('active');
             var tab = $(this).attr('tab');
             if (tab == 'createAccount') {
-                $(this).parent('.two-list').addClass('active');
                 $(this).addClass('active').siblings().removeClass('active');
             }
         })
