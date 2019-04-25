@@ -101,10 +101,10 @@
 
     <update id="enable">
         <if test="status == 0">
-        update f_user_account set status = 1,update_date = NOW() where id=#{uid}
+        update f_user_account set status = 1,update_date = NOW() where account=#{account}
         </if>
         <if test="status == 1">
-            update f_user_account set status = 0,update_date = NOW() where id=#{uid}
+            update f_user_account set status = 0,update_date = NOW() where account=#{account}
         </if>
     </update>
 

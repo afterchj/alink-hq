@@ -196,10 +196,10 @@ public class AccountController {
 
     @RequestMapping(value = "/enable", method = RequestMethod.POST)
     @ResponseBody
-    public Map<String, String> enable(String uid, Integer status, Model model) {
+    public Map<String, String> enable(String account, Integer status) {
         Map<String, String> map = new HashMap<>();
         try {
-            accountService.enable(uid, status);
+            accountService.enable(account, status);
             map.put("result", ResultDict.SUCCESS.getCode());
         } catch (Exception e) {
             map.put("result", ResultDict.SYSTEM_ERROR.getCode());
@@ -210,9 +210,7 @@ public class AccountController {
 
     private List<Firm> getFirmInfo(Integer role_id, String uid) {
         List<Firm> firmList = new ArrayList<>();
-        if (role_id == 1) {
-            firmList = accountService.findFirmList();
-        } else if (role_id == 2) {
+        if (role_id == 1 || role_id == 2) {
             firmList = accountService.findFirmList();
         } else if (role_id == 3) {
             firmList = accountService.findFirmByUid(uid);
