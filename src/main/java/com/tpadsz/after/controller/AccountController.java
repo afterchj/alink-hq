@@ -87,7 +87,7 @@ public class AccountController {
             model.addAttribute("endDate", endDate);
         } catch (Exception e) {
         }
-        return "userManage/useList";
+        return "userManage/userList";
     }
 
     @RequestMapping(value = "/createAccount", method = RequestMethod.GET)
@@ -156,7 +156,7 @@ public class AccountController {
         model.addAttribute("firmList", firmList);
         model.addAttribute("account", account);
         model.addAttribute("coname", coname);
-        return "userManage/useTurnOver";
+        return "userManage/userTurnOver";
     }
 
 

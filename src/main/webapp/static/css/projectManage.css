@@ -450,6 +450,9 @@ th.all-checkbox {
     width:49%;
     color: #3c3c3c;
 }
+.status:hover{
+   color:#14a5e8 ;
+}
 
 .main-part{
     width:400px;

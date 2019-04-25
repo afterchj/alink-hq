@@ -253,7 +253,7 @@
             <div class="reset-pwd-hint">（删除后将无法恢复，请慎重！）</div>
         </div>
         <div class="hasProject">
-            <div >当前账号名下有项</div>
+            <div >当前账号名下有项目</div>
             <div>请移交后再进行删除！</div>
         </div>
         <div class="pop-btn">
@@ -318,9 +318,9 @@
         var intStatus='';
         $('td[openTab="start-use"]').click(function () {
             var openTab = $(this).attr('openTab');
-            var text = $(this).text();
+            var text=$(this).text();
             shade(openTab,text);
-             account=$(this).parent().siblings('.use-account').text();
+             account=$(this).siblings('.use-account').text();
              status=$(this).text();
 
             if(status == '启用'){
@@ -328,9 +328,11 @@
             }else if(status == '禁用'){
                  intStatus=0;
             }
-            console.log(intStatus);
+
         })
         $('div[openContent="start-use"] button.yes').click(function(){
+            console.log(account);
+            console.log(intStatus);
             $.ajax({
                 type: "POST",
                 url: "/alink-hq/account/enable",
@@ -339,7 +341,7 @@
                 success: function (res) {
                     console.log(res);
                     if (res.result == '000') {
-
+                        location.reload();
                     }
                 }
             });
@@ -411,7 +413,7 @@
             $('.main-left>ul>li.one-list:eq(1)').find('.on-off-triangle').attr('src', '/alink-hq/static/img/right-triange-un.png');
             $('.main-left>ul>li.one-list:eq(1)').find('.two-list').addClass('active');
             var tab = $(this).attr('tab');
-            if (tab == 'useList') {
+            if (tab == 'userList') {
                 $(this).addClass('active').siblings().removeClass('active');
             }
         })

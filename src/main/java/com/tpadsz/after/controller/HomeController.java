@@ -64,7 +64,7 @@ public class HomeController {
 
     @RequestMapping("/useList")
     public String useList() {
-        return "userManage/useList";
+        return "userManage/userList";
     }
 
     @RequestMapping("/projectList")
@@ -77,9 +77,9 @@ public class HomeController {
         return "userManage/createAccount";
     }
 
-    @RequestMapping("/useTurnOver")
+    @RequestMapping("/userTurnOver")
     public String useTurnOver() {
-        return "userManage/useTurnOver";
+        return "userManage/userTurnOver";
     }
 
     @RequestMapping("/changeEmail")
