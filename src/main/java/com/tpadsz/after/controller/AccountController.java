@@ -1,5 +1,7 @@
 package com.tpadsz.after.controller;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.tpadsz.after.entity.Firm;
@@ -106,6 +108,7 @@ public class AccountController {
     public Map<String, String> create(Integer fid, Integer roleId, Integer num) {
         String account;
         Map<String, String> map = new HashMap<>();
+        List<String> list = new ArrayList<>();
         try {
             for (int i = 0; i < num; i++) {
                 User user = new User();
@@ -118,8 +121,10 @@ public class AccountController {
                 user.setPwd("dc10cc20d435f846425f1f7a31b5d293cb39e590");
                 user.setSalt("0e9cc6f31100af96");
                 accountService.createAccount(user, fid, roleId);
+                list.add(account);
             }
             map.put("result", ResultDict.SUCCESS.getCode());
+            map.put("accountList",JSON.toJSONString(list));
         } catch (Exception e) {
             map.put("result", ResultDict.SYSTEM_ERROR.getCode());
         }

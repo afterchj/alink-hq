@@ -57,7 +57,7 @@
     </insert>
 
     <insert id="createFirmInfo" parameterType="integer">
-        insert into f_user_customer (uid,fid,create_date) values (#{uid},#{fid},NOW())
+        insert into f_user_customer (uid,fid) values (#{uid},#{fid})
     </insert>
 
     <insert id="createRoleInfo" parameterType="integer">
@@ -86,7 +86,7 @@
     </update>
 
     <update id="transferAccount">
-        update f_user_customer set fid = #{fid},update_date = NOW() where uid=(SELECT id FROM f_user_account WHERE account=#{account})
+        update f_user_customer set fid = #{fid} where uid=(SELECT id FROM f_user_account WHERE account=#{account})
     </update>
 
     <update id="updateTransferedAccount" parameterType="string">
