@@ -128,12 +128,14 @@ public class AccountController {
 
     @RequestMapping(value = "/resetPwd", method = RequestMethod.POST)
     @ResponseBody
-    public Map<String, String> resetPwd(String account, Model model) {
+    public Map<String, String> resetPwd(String account) {
         Map<String, String> map = new HashMap<>();
         String randomPwd = GenerateUtils.randomPwd();
         try {
             accountService.updateAccount(account, randomPwd);
             map.put("result", ResultDict.SUCCESS.getCode());
+            map.put("account", account);
+            map.put("pwd", randomPwd);
         } catch (Exception e) {
             map.put("result", ResultDict.SYSTEM_ERROR.getCode());
         }
