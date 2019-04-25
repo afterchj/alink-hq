@@ -55,7 +55,7 @@
                                     </div>
                                 </div>
                                 <div class="btn-bottom">
-                                    <button type="button" onclick="passwordLogin()">登录</button>
+                                    <button type="button" onclick="passwordLogin()" onmousedown="mouseDown()" onmouseup="mouseUp()">登录</button>
                                     <div class="clearfix hint">
                                         <span class="f-l forget-password">忘记密码？</span>
                                         <span class="f-r contact-us">注册请联系我们</span>
@@ -82,7 +82,7 @@
                                 </div>
                                 <p class="page-hint" style="  height: 40px;line-height:4;"></p>
                                 <div class="btn-bottom">
-                                    <button type="button" onclick="phoneLogin()">登录</button>
+                                    <button type="button" onclick="phoneLogin()" onmousedown="mouseDown()" onmouseup="mouseUp()">登录</button>
                                     <div class="clearfix hint">
                                         <span class="f-l forget-password">忘记密码？</span>
                                         <span class="f-r contact-us" >注册请联系我们</span>
@@ -111,9 +111,9 @@
                                 </div>
                                 <p class="page-hint" style="height: 30px;line-height:2;"></p>
                                 <div class="btn-bottom">
-                                    <button onclick="phoneFindPwd()" type="button" style="letter-spacing: 5px;height: 45px;">修改密码</button>
+                                    <button onclick="phoneFindPwd()" type="button" style="letter-spacing: 5px;height: 45px;" onmousedown="mouseDown()" onmouseup="mouseUp()">修改密码</button>
                                     <div class="clearfix hint">
-                                        <span class="f-r go-login">已有账号，请点击这里登录</span>
+                                        <span class="f-r go-login">已有账号，请点击这里<span style="color: #006DC1;">登录</span></span>
                                     </div>
                                 </div>
                             </form>
@@ -123,7 +123,7 @@
                             <form >
                                 <p class="email-add-hint" style="height: 25px;line-height:2;"></p>
                                 <div class="icon-input " >
-                                    <input type="email" name="email-f" id="email-e" placeholder=" 请输入所绑定的邮箱"
+                                    <input type="email" name="email-e" id="email-e" placeholder=" 请输入所绑定的邮箱"
                                            style="text-indent: 15px;    height: 36px;line-height: 36px;"/>
                                 </div>
                                 <p class="email-code-hint" style="height: 25px;line-height:2;"></p>
@@ -134,14 +134,14 @@
                                 </div>
                                 <p class="email-password-hint" style="height: 25px;line-height:2;"></p>
                                 <div class="icon-input " >
-                                    <input type="password" name="pwd-e" id="pwd-e" placeholder="请输入新密码（6-16位数字、字母）"
+                                    <input type="password" name="pwd-e" onKeyUp="keyup()" id="pwd-e" maxlength="16" placeholder="请输入新密码（6-16位数字、字母）"
                                            style="text-indent: 15px;    height: 36px;line-height: 38px;"/>
                                 </div>
                                 <p class="page-hint" style="height: 30px;line-height:2;"></p>
                                 <div class="btn-bottom">
-                                    <button onclick="emailFindPwd()" style="letter-spacing: 5px;height: 45px;" type="button">修改密码</button>
+                                    <button onclick="emailFindPwd()" style="letter-spacing: 5px;height: 45px;" type="button" onmousedown="mouseDown()" onmouseup="mouseUp()">修改密码</button>
                                     <div class="clearfix hint">
-                                        <span class="f-r go-login">已有账号，请点击这里登录</span>
+                                        <span class="f-r go-login">已有账号，请点击这里<span style="color: #006DC1;">登录</span></span>
                                     </div>
                                 </div>
                             </form>

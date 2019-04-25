@@ -3,6 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
+    <script src="/alink-hq/static/js/browser.js"></script>
     <link rel="stylesheet" href="/alink-hq/static/css/base.css"/>
     <link rel="stylesheet" href="/alink-hq/static/css/leftNav.css"/>
     <link rel="stylesheet" href="/alink-hq/static/css/projectManage.css"/>
@@ -242,28 +243,28 @@
             $(this).attr('src', '/alink-hq/static/img/checkbox-gou.png');
             $('td.checkbox img').attr('src', '/alink-hq/static/img/checkbox-gou.png');
         }
-
-        // $('tbody tr').each(function () {
-        //     var imgUrl = $(this).children('td.checkbox').children('img').attr('src');
-        //     if (imgUrl != '../img/checkbox-gou.png') {
-        //         hasCheckbox = false;
-        //     }
-        // })
-        // if (hasCheckbox) {
-
-        //     $('td.checkbox img').attr('src', '../img/checkbox.png');
-        // } else {
-        //     $(this).attr('src', '../img/checkbox-gou.png');
-        //     $('td.checkbox img').attr('src', '../img/checkbox-gou.png');
-        // }
     })
-
-    //跳转项目详情
-    //    $('.project-name a').click(function () {
-    //        var fileName = 'projectManage';
-    //        var url = 'projectDetail';
-    //        parent.goIframe(fileName, url);
-    //    })
+    $(function(){
+        myBrowser()
+        $('.one-list li').each(function () {
+            $('.main-left>ul>li.one-list:eq(0)').find('.on-off-triangle').attr('src', '/alink-hq/static/img/right-triange-un.png');
+            $('.main-left>ul>li.one-list:eq(0)').find('.two-list').addClass('active');
+            var tab = $(this).attr('tab');
+            if (tab == 'projectList') {
+                $(this).addClass('active').siblings().removeClass('active');
+            }
+        })
+    })
+    $('.on-off-triangle').click(function () {
+        var imgUrl = $(this).attr('src');
+        if (imgUrl == '/alink-hq/static/img/bottom-triangle-un.png') {
+            $(this).attr('src', '/alink-hq/static/img/right-triange-un.png');
+            $(this).parent().parent('.one-list').find('.two-list').addClass('active');
+        } else {
+            $(this).attr('src', '/alink-hq/static/img/bottom-triangle-un.png');
+            $(this).parent().parent('.one-list').find('.two-list').removeClass('active');
+        }
+    })
 </script>
 </body>
 
