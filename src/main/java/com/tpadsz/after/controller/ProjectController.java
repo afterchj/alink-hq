@@ -1,5 +1,6 @@
 package com.tpadsz.after.controller;
 
+import com.alibaba.fastjson.JSONArray;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.tpadsz.after.entity.ProjectList;
@@ -121,13 +122,31 @@ public class ProjectController {
     }
 
     @RequestMapping(value = "/rename", method = RequestMethod.POST)
-    public String rename(String projectId,String projectName, Model model) {
-
-
-
-
-//            model.addAttribute("account", loginUser.getAccount());
-        return "projectManage/createProject";
+    @ResponseBody
+    public Map<String, String> rename(String projectId, String projectName) {
+        Map<String, String> map = new HashMap<>();
+        try {
+            projectService.renameProject(projectId, projectName);
+            map.put("result", ResultDict.SUCCESS.getCode());
+        } catch (Exception e) {
+            map.put("result", ResultDict.SYSTEM_ERROR.getCode());
+        }
+        return map;
     }
+
+
+    @RequestMapping(value = "/transferPage", method = RequestMethod.GET)
+    public String transferPage(HttpSession session, String projectInfo, Model model) {
+        User loginUser = (User) session.getAttribute("use r");
+        String uid = loginUser.getId();
+        List<ProjectList> projectList = JSONArray.parseArray(projectInfo, ProjectList.class);
+        Integer role_id = accountService.findRoleIdByUid(uid);
+//        List<Firm> firmList = getFirmInfo(role_id, uid);
+//        model.addAttribute("firmList", firmList);
+        model.addAttribute("account", "");
+        model.addAttribute("coname", "");
+        return "userManage/useTurnOver";
+    }
+
 
 }

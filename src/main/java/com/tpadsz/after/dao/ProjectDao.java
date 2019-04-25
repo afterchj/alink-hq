@@ -23,4 +23,6 @@ public interface ProjectDao {
             startUpdateDate, @Param("endUpdateDate")String endUpdateDate, @Param("uid")String uid);
 
     void createProject(@Param("name")String projectName, @Param("uid")String uid);
+
+    void renameProject(@Param("projectId") String projectId, @Param("name") String projectName);
 }

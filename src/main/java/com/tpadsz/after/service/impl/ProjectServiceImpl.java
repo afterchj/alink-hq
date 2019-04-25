@@ -51,5 +51,10 @@ public class ProjectServiceImpl implements ProjectService {
         projectDao.createProject(projectName,uid);
     }
 
+    @Override
+    public void renameProject(String projectId, String projectName) {
+        projectDao.renameProject(projectId,projectName);
+    }
+
 
 }

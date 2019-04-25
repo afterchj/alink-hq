@@ -10,6 +10,7 @@ public class ProjectList {
     private String name;
     private int meshNum;
     private String account;
+    private String coname;
     private String create_date;
     private String update_date;
     private String other;
@@ -44,6 +45,14 @@ public class ProjectList {
 
     public void setAccount(String account) {
         this.account = account;
+    }
+
+    public String getConame() {
+        return coname;
+    }
+
+    public void setConame(String coname) {
+        this.coname = coname;
     }
 
     public String getCreate_date() {

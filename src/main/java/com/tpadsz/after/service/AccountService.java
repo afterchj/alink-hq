@@ -34,7 +34,7 @@ public interface AccountService {
 
     void updateAccount(String account, String randomPwd);
 
-    void transferAccount(String uid, Integer fid, String randomPwd);
+    void transferAccount(String account, Integer fid, String randomPwd);
 
     int delete(String uid);
 

@@ -83,10 +83,10 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
-    public void transferAccount(String uid, Integer fid, String randomPwd) {
-        accountDao.transferAccount(uid, fid);
+    public void transferAccount(String account, Integer fid, String randomPwd) {
+        accountDao.transferAccount(account, fid);
         Encryption.HashPassword password = Encryption.encrypt(Encryption.getMD5Str(randomPwd));
-        accountDao.updateTransferedAccount(password.getPassword(), password.getSalt(), uid);
+        accountDao.updateTransferedAccount(password.getPassword(), password.getSalt(), account);
     }
 
     @Override

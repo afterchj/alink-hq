@@ -23,4 +23,6 @@ public interface ProjectService {
             startUpdateDate, String endUpdateDate, String uid);
 
     void createProject(String projectName, String uid);
+
+    void renameProject(String projectId, String projectName);
 }

@@ -156,12 +156,14 @@ public class AccountController {
 
     @RequestMapping(value = "/transfer", method = RequestMethod.POST)
     @ResponseBody
-    public Map<String, String> transfer(String uid, Integer fid) {
+    public Map<String, String> transfer(String account, Integer fid) {
         Map<String, String> map = new HashMap<>();
         String randomPwd = GenerateUtils.randomPwd();
         try {
-            accountService.transferAccount(uid, fid, randomPwd);
+            accountService.transferAccount(account, fid, randomPwd);
             map.put("result", ResultDict.SUCCESS.getCode());
+            map.put("account", account);
+            map.put("pwd", randomPwd);
         } catch (Exception e) {
             map.put("result", ResultDict.SYSTEM_ERROR.getCode());
         }

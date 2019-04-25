@@ -39,9 +39,9 @@ public interface AccountDao {
 
     void updateAccount(@Param("pwd")String password, @Param("salt")String salt,@Param("account")String account);
 
-    void transferAccount(@Param("uid")String uid, @Param("fid")Integer fid);
+    void transferAccount(@Param("account")String account, @Param("fid")Integer fid);
 
-    void updateTransferedAccount(@Param("pwd")String password, @Param("salt")String salt, @Param("uid")String uid);
+    void updateTransferedAccount(@Param("pwd")String password, @Param("salt")String salt, @Param("account")String account);
 
     void delete(@Param("uid")String uid);
 
