@@ -56,7 +56,7 @@
                         </div>
                     </div>
                     <div class="f-r search-button ">
-                        <button type="button" class="pointer" >查询</button>
+                        <button type="button" class="pointer">查询</button>
                         <a href="" class="export" style="color: #3598db;">Excel导出</a>
                     </div>
                 </form>
@@ -135,10 +135,12 @@
                                     页/<span th:text="${pageInfo.total}"></span>条数据
                                 </span>
                                 <span class="m-r-15">
-                                    <input type="number" min="1"  id="skipPage"  th:max="${pageInfo.pages}" oninput="skipLimit()"/>
+                                    <input type="number" min="1" id="skipPage" th:max="${pageInfo.pages}"
+                                           oninput="skipLimit()"/>
                                 </span>
                                 <span class="m-r-35">
-                                    <img src="/alink-hq/static/img/skip.png" id="skipPageBtn" class="cursor: pointer;" alt="">
+                                    <img src="/alink-hq/static/img/skip.png" id="skipPageBtn" class="cursor: pointer;"
+                                         alt="">
                                 </span>
                                 <span class="m-r-15r">每页显示：</span>
                                 <span class="m-r-20">
@@ -259,7 +261,7 @@
     })
     function shade(open, text) {
         var width = document.body.scrollWidth;
-        var height=document.body.scrollHeight;
+        var height = document.body.scrollHeight;
         $('.hide-iframe').addClass('active');
         $('.hide-iframe').css({
             'width': '100%',
@@ -301,13 +303,12 @@
     })
 
 
-
     //日期选择
     laydate.render({
         elem: '#add-time',
         range: true
     });
-    $(function(){
+    $(function () {
         myBrowser()
         $('.one-list li').each(function () {
             $('.main-left>ul>li.one-list:eq(1)').find('.on-off-triangle').attr('src', '/alink-hq/static/img/right-triange-un.png');
@@ -349,11 +350,11 @@
         }
     })
 
-    function  skipLimit(){
-        var skipPage=parseInt($('#skipPage').val());
-        var pageTotal=parseInt($('.pageTotal').text()) ;
-        console.log(skipPage,pageTotal)
-        if(skipPage<1 || skipPage>pageTotal){
+    function skipLimit() {
+        var skipPage = parseInt($('#skipPage').val());
+        var pageTotal = parseInt($('.pageTotal').text());
+        console.log(skipPage, pageTotal)
+        if (skipPage < 1 || skipPage > pageTotal) {
             $('#skipPage').val('');
         }
     }
@@ -369,9 +370,9 @@
         var pageSize = GetUrlParam("pageSize");
         var pageNum = GetUrlParam("pageNum");
         $('#skipPage').val(pageNum);
-        $('#page-select option').each(function(){
-            if($(this).val()==pageSize){
-                $(this).attr("selected","selected");
+        $('#page-select option').each(function () {
+            if ($(this).val() == pageSize) {
+                $(this).attr("selected", "selected");
             }
         })
         if (startDate != '' && endDate != '') {
@@ -402,35 +403,34 @@
             }
         })
         //查询按钮点击
-        $('.search-button button').click(function(){
-            var pageSize=$('#page-select option:selected').val();
-            var pageNum=parseInt($('#skipPage').val());
-            condition(pageSize,pageNum);
+        $('.search-button button').click(function () {
+            var pageSize = $('#page-select option:selected').val();
+            var pageNum = parseInt($('#skipPage').val());
+            condition(pageSize, pageNum);
         })
         //选择页数变化
-        $('#page-select').change(function(){
-            var pageSize=$(this).children('option:selected').val();
-            var pageNum=parseInt($('#skipPage').val());
-            condition(pageSize,pageNum);
+        $('#page-select').change(function () {
+            var pageSize = $(this).children('option:selected').val();
+            var pageNum = parseInt($('#skipPage').val());
+            condition(pageSize, pageNum);
         });
         //跳转页数变化
-        $('#skipPageBtn').click(function(){
-            var pageSize=$('#page-select option:selected').val();
-            var pageNum=parseInt($('#skipPage').val());
-            condition(pageSize,pageNum);
+        $('#skipPageBtn').click(function () {
+            var pageSize = $('#page-select option:selected').val();
+            var pageNum = parseInt($('#skipPage').val());
+            condition(pageSize, pageNum);
         })
     })
 
 
-
-    function condition(pageSize,pageNum) {
+    function condition(pageSize, pageNum) {
         var url = window.location.href;
         var i = url.indexOf("?");
-        if(i!=-1){
+        if (i != -1) {
             var url2 = url.substring(0, i + 1);
             console.log('url2', url2);
-        }else{
-            var url2=url+'?';
+        } else {
+            var url2 = url + '?';
         }
         var account = $('#account').val();
         if ($('#company').val() != '请选择公司') {
@@ -447,9 +447,9 @@
         var startDate = addTime.substring(0, 10);
         var endDate = addTime.substring(13, 23);
 
-        console.log('pageNum',pageNum);
+        console.log('pageNum', pageNum);
 //        var userId = parseInt($('#useId_hidden').val());
-        var newUrl = url2 +'&pageNum=' + pageNum + '&pageSize='+pageSize + '&account=' + account + '&fid=' + company + '&roleId=' + role + '&startDate=' + startDate + '&endDate=' + endDate;
+        var newUrl = url2 + '&pageNum=' + pageNum + '&pageSize=' + pageSize + '&account=' + account + '&fid=' + company + '&roleId=' + role + '&startDate=' + startDate + '&endDate=' + endDate;
 //        console.log(account, role, company, startDate, endDate, num);
         location.href = newUrl;
     }

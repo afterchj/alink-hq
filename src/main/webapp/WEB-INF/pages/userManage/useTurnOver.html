@@ -68,20 +68,103 @@
         </div>
     </div>
 </div>
+<!--重置密码 -->
+
+<div class="reset-passwords pop-iframe" openContent="">
+    <div class="reset-passwords-nav p-r pop-nav">
+        新密码
+    </div>
+    <div class="reset-passwords-content pop-content">
+        <form action="">
+            <div>
+                <span class="t-title">账号：</span>
+                <span class="t-content">BM000</span>
+            </div>
+            <div>
+                <span class="t-title">新密码：</span>
+                <span class="t-content">BM000</span>
+            </div>
+            <div class="pop-btn clearfix">
+                <div class="f-l pop-hint">请牢记新密码，关闭后将无法展示</div>
+                <div class="f-r">
+                    <button class="reduce">取消</button>
+                    <button class="yes">确定</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<div class="hide-iframe active"></div>
 <script src="/alink-hq/static/js/jquery.min.js"></script>
 <script>
-    $('.on-off-triangle').click(function(){
-        var imgUrl=$(this).attr('src');
-        if(imgUrl=='/alink-hq/static/img/bottom-triangle-un.png'){
-            $(this).attr('src','/alink-hq/static/img/right-triange-un.png');
+    $(function () {
+        $('.one-list li').each(function () {
+            $('.main-left>ul>li.one-list:eq(1)').find('.on-off-triangle').attr('src', '/alink-hq/static/img/right-triange-un.png');
+            $('.main-left>ul>li.one-list:eq(1)').find('.two-list').addClass('active');
+            var tab = $(this).attr('tab');
+            if (tab == 'useList') {
+                $(this).addClass('active').siblings().removeClass('active');
+            }
+        })
+    })
+    $('.on-off-triangle').click(function () {
+        var imgUrl = $(this).attr('src');
+        if (imgUrl == '/alink-hq/static/img/bottom-triangle-un.png') {
+            $(this).attr('src', '/alink-hq/static/img/right-triange-un.png');
             $(this).parent().parent('.one-list').find('.two-list').addClass('active');
-        }else{
-            $(this).attr('src','/alink-hq/static/img/bottom-triangle-un.png');
+        } else {
+            $(this).attr('src', '/alink-hq/static/img/bottom-triangle-un.png');
             $(this).parent().parent('.one-list').find('.two-list').removeClass('active');
         }
     })
-    $('.btn-transfer button').click(function(){
-        
+    $('.btn-transfer button').click(function () {
+        $('.pop-iframe').addClass('active');
+        shade()
+        $.ajax({
+            type: "POST",
+            url: "/alink-hq/account/transfer",
+            data: {account: $("#account").val(), fid: $("#company").val()},
+            dataType: "json",
+            success: function (data) {
+                console.log(data);
+//                $('#resText').empty();   //清空resText里面的所有内容
+//                var html = '';
+//                $.each(data, function (commentIndex, comment) {
+//                    html += '<div class="comment"><h6>' + comment['username']
+//                            + ':</h6><p class="para"' + comment['content']
+//                            + '</p></div>';
+//                });
+//                $('#resText').html(html);
+            }
+        });
+    })
+    function hide() {
+        $('.hide-iframe').removeClass('active');
+        $('.pop-iframe').removeClass('active');
+    }
+
+    $('.close').click(function () {
+        hide();
+    })
+    function shade() {
+        var width = document.body.scrollWidth;
+        var height = document.body.scrollHeight;
+        $('.hide-iframe').addClass('active');
+        $('.hide-iframe').css({
+            'width': width,
+            'height': height
+        })
+    }
+    // 点击取消时
+    $('.pop-content  .pop-btn .reduce').click(function () {
+        hide();
+        $(this).parents('.pop-iframe').removeClass('active');
+    })
+    // 点击确定时
+    $('.pop-content  .pop-btn .yes').click(function () {
+        hide();
+        $(this).parents('.pop-iframe').removeClass('active');
+        // 其他逻辑代码
     })
 </script>
 </body>
