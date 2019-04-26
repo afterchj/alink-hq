@@ -5,6 +5,7 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.tpadsz.after.entity.OptionList;
 import com.tpadsz.after.entity.SearchDict;
+import com.tpadsz.after.service.GroupService;
 import com.tpadsz.after.service.MeshService;
 import com.tpadsz.after.service.RoleService;
 import org.apache.log4j.Logger;
@@ -21,62 +22,59 @@ import java.util.*;
  */
 
 @Controller
-@RequestMapping("/mesh")
-public class MeshController {
+@RequestMapping("/group")
+public class GroupController {
 
     @Resource
-    private MeshService meshService;
+    private GroupService groupService;
     @Resource
     private RoleService roleService;
 
     private Logger logger = Logger.getLogger(this.getClass());
 
     @RequestMapping("/list")
-    public String list(SearchDict dict, ModelMap modelMap) {
+    public String groupList(SearchDict dict, ModelMap modelMap) {
         String role = roleService.selectById(dict.getUid());
         dict.setRole(role);
-        logger.info("dict=" + JSON.toJSONString(dict));
         PageHelper.startPage(dict.getPageNum(), dict.getPageSize());
-        List<Map> meshList = meshService.getByMap(dict);
+        List<Map> meshList = groupService.getByMap(dict);
         PageInfo<Map> pageInfo = new PageInfo(meshList, dict.getPageSize());
         if (pageInfo.getList().size() > 0) {
             modelMap.put("pageInfo", pageInfo);
         }
         modelMap.put("dict", dict);
-        return "meshTemp/meshList";
+        return "meshTemp/groupList";
     }
 
 
     @RequestMapping("/move")
-    public String move(String mids, ModelMap modelMap) {
-        String[] ids = mids.split(",");
+    public String move(String gids, ModelMap modelMap) {
+        String[] ids = gids.split(",");
         List<String> list = new ArrayList(Arrays.asList(ids));
-        List<Map> meshMap = meshService.selectByMid(list);
-        logger.info("result=" + JSON.toJSONString(meshMap));
-        modelMap.put("meshMap", meshMap);
-        modelMap.put("mids", mids);
-        return "meshTemp/meshMove";
+        List<Map> groupMap = groupService.selectByGid(list);
+        modelMap.put("groupMap", groupMap);
+        modelMap.put("gids", gids);
+        return "meshTemp/groupMove";
     }
 
     @RequestMapping("/saveUpdate")
-    public String save(String mids, String pid) {
-        logger.info("mids=" + mids + ",pid=" + pid);
-        String[] ids = mids.split(",");
+    public String save(String gids, String pid) {
+        String[] ids = gids.split(",");
         List<String> list = new ArrayList(Arrays.asList(ids));
         Map map = new HashMap();
         map.put("pid", pid);
         map.put("list", list);
-        meshService.saveUpdate(map);
-        return "redirect:/mesh/list";
+        groupService.saveUpdate(map);
+        return "redirect:/group/list";
     }
 
     @RequestMapping("/delete")
-    public String save(String mids) {
-        logger.info("mids=" + mids);
-        String[] ids = mids.split(",");
+    public String save(String gids) {
+        logger.info("gids=" + gids);
+        String[] ids = gids.split(",");
         List<String> list = new ArrayList(Arrays.asList(ids));
-        meshService.deleteMeshByIds(list);
-        return "redirect:/mesh/list";
+        groupService.deleteGroupByIds(list);
+        return "redirect:/group/list";
     }
 
     @ResponseBody
@@ -85,12 +83,12 @@ public class MeshController {
         Map map = new HashMap();
         map.put("name", name);
         map.put("id", id);
-        meshService.saveRename(map);
-        return "success";
+        groupService.saveRename(map);
+        return "ok";
     }
 
     @ResponseBody
-    @RequestMapping("/getProjects")
+    @RequestMapping("/getPlace")
     public List<OptionList> show(Integer uid) {
         Map map = new HashMap();
         if (uid != null) {
@@ -98,7 +96,7 @@ public class MeshController {
             map.put("role", role);
             map.put("uid", uid);
         }
-        List<OptionList> meshMap = meshService.getProjects(map);
+        List<OptionList> meshMap = groupService.getPlaces(map);
         return meshMap;
     }
 }

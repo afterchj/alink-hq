@@ -24,6 +24,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -57,9 +58,9 @@ public class HomeController {
         return "authError";
     }
 
-    @RequestMapping("/welcome")
+    @RequestMapping("/test")
     public String welcome() {
-        return "welcome";
+        return "test";
     }
 
     @RequestMapping("/useList")
@@ -133,7 +134,9 @@ public class HomeController {
     }
 
     @RequestMapping("/home")
-    public String home() {
+    public String home(String uname, HttpSession session) {
+        User loginUser = userService.selectByUsername(uname);
+        session.setAttribute("user", loginUser);
         return "welcome";
     }
 
@@ -150,10 +153,14 @@ public class HomeController {
     }
 
     @ResponseBody
-    @RequestMapping("/test")
-    public String test(String account) {
-        List<User> list = userService.selectAll();
-        return "";
+    @RequestMapping("/getContext")
+    public List<Map> getContext() {
+        List<Map> list = new ArrayList<>();
+        Map map = new HashMap();
+        map.put("id", 8);
+        map.put("label", "eight");
+        list.add(map);
+        return list;
     }
 
     @ResponseBody
@@ -171,7 +178,6 @@ public class HomeController {
             str = "failure";
         }
         logger.info("user:" + uname + ",count=" + count);
-
         return str;
     }
 
@@ -242,7 +248,7 @@ public class HomeController {
         if (StringUtils.isNotEmpty(email)) {
             map.put("email", email);
         }
-        logger.info("mobile=" + mobile + ",email=" + email + "pwd=" + pwd);
+        logger.info("mobile=" + mobile + ",email=" + email + ",pwd=" + pwd);
         ShiroDbRealm.HashPassword hashPassword = new ShiroDbRealm().encrypt(Encryption.getMD5Str(pwd));
         System.out.println(hashPassword.password + "\t" + hashPassword.salt);
         map.put("pwd", hashPassword.password);
@@ -261,14 +267,18 @@ public class HomeController {
     public String login(User user, HttpSession session, ModelMap map) {
         String userName = user.getUname();
         String pwd = user.getPwd();
+        String mobile = user.getMobile();
+        String email = user.getEmail();
         EasyTypeToken token;
-        if (StringUtils.isEmpty(pwd)) {
-            userName = user.getMobile();
+        if (StringUtils.isNotEmpty(mobile)) {
+            userName=mobile;
+            token = new EasyTypeToken(userName);
+        } else if (StringUtils.isNotEmpty(email)) {
+            userName=email;
             token = new EasyTypeToken(userName);
         } else {
             token = new EasyTypeToken(userName, Encryption.getMD5Str(pwd));
         }
-        logger.info("userName=" + userName + ",pwd=" + pwd);
         Subject subject = SecurityUtils.getSubject();
         try {
             subject.login(token);

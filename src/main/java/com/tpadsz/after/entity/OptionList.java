@@ -5,7 +5,7 @@ package com.tpadsz.after.entity;
  */
 public class OptionList {
     int id;
-    String name;
+    String label;
 
     public int getId() {
         return id;
@@ -15,11 +15,11 @@ public class OptionList {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getLabel() {
+        return label;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setLabel(String label) {
+        this.label = label;
     }
 }

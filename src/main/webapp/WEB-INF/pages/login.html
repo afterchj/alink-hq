@@ -61,7 +61,6 @@
                                         <span class="f-r contact-us">注册请联系我们</span>
                                     </div>
                                 </div>
-
                             </form>
                         </div>
                         <!--手机验证码登录-->
@@ -92,10 +91,10 @@
                         </div>
                         <!--手机找回密码-->
                         <div class="phone-find-password" tabContent="phone-find-password">
-                            <form >
+                            <form th:action="@{/login}" method="post">
                                 <p class="mobile-add-hint" style="height: 25px;line-height:2;"></p>
                                 <div class="icon-input " >
-                                    <input type="phone" name="phone-f" maxlength="11" id="phone-f" placeholder="请输入所绑定的手机号"
+                                    <input type="phone" name="mobile" maxlength="11" id="phone-f" placeholder="请输入所绑定的手机号"
                                            style="text-indent: 15px;    height: 36px;line-height: 36px;" oninput = "value=value.replace(/[^\d]/g,'')" onKeyUp="keyupPhone()" />
                                 </div>
                                 <p class="mobile-code-hint" style="height:25px;line-height:2;"></p>
@@ -120,10 +119,10 @@
                         </div>
                         <!--邮箱找回密码-->
                         <div class="email-find-password" tabContent="email-find-password">
-                            <form >
+                            <form th:action="@{/login}" method="post">
                                 <p class="email-add-hint" style="height: 25px;line-height:2;"></p>
                                 <div class="icon-input " >
-                                    <input type="email" name="email-e" id="email-e" placeholder=" 请输入所绑定的邮箱"
+                                    <input type="email" name="email" id="email-e" placeholder=" 请输入所绑定的邮箱"
                                            style="text-indent: 15px;    height: 36px;line-height: 36px;"/>
                                 </div>
                                 <p class="email-code-hint" style="height: 25px;line-height:2;"></p>

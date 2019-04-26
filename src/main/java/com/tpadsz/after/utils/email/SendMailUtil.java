@@ -44,7 +44,8 @@ public class SendMailUtil {
 //        properties.put("mail.smtp.port", 465);// 端口号
         properties.put("mail.smtp.auth", "true");
         properties.put("mail.smtp.ssl.enable", "true");// 设置是否使用ssl安全连接 ---一般都使用
-        properties.put("mail.debug", "true");// 设置是否显示debug信息 true 会在控制台显示相关信息
+        // 设置是否显示debug信息 true 会在控制台显示相关信息
+//        properties.put("mail.debug", "true");
         // 得到回话对象
         Session session = Session.getInstance(properties);
         // 获取邮件对象
@@ -54,7 +55,7 @@ public class SendMailUtil {
             // 设置发件人邮箱地址
             message.setFrom(new InternetAddress("service@tpadsz.com"));
             // 设置收件人邮箱地址
-//        message.setRecipients(Message.RecipientType.TO, new InternetAddress[]{new InternetAddress("after@tpadsz.com"),new InternetAddress("766256898@qq.com")});
+            //message.setRecipients(Message.RecipientType.TO, new InternetAddress[]{new InternetAddress("after@tpadsz.com"),new InternetAddress("766256898@qq.com")});
             message.setRecipient(Message.RecipientType.TO, new InternetAddress(to));//一个收件人
             // 设置邮件标题
             message.setSubject(subject);

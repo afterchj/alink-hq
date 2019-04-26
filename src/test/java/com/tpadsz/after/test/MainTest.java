@@ -87,6 +87,10 @@ public class MainTest {
         List<OptionList> lists = meshService.getProjects(null);
         logger.info("lists=" + lists.size());
     }
+    
+    @Test
+    public void test(){
+    }
     public static void main(String[] args) {
         int size = 8;
         int total = 46;

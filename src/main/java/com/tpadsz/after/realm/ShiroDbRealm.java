@@ -48,7 +48,7 @@ public class ShiroDbRealm extends AuthorizingRealm {
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) {
         String username = (String) token.getPrincipal();
-//        logger.info("username=" + username);
+        logger.info("username=" + username);
         User user = userExtendDao.selectByUsername(username);
         AuthenticationInfo info;
         if (null != user) {

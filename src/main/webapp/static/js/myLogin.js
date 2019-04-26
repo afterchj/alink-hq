@@ -226,7 +226,7 @@ function modifyPwd() {
                 success: function (res) {
                     if (res == "success") {
                         console.log("密码修改成功！");
-                        setInterval(go(), 1000);
+                        // setInterval(go(), 1000);
                     }
                 }
             })
@@ -242,11 +242,11 @@ function modifyPwd() {
     console.log("mobile=" + mobile + ",email=" + email);
 }
 
-function go() {
-    var flag = confirm("密码修改成功，是否直接跳转到用户列表？");
-    if (flag == true) {
-        location.href = "/alink-hq/userList";
-    } else {
-        location.href = "/alink-hq/userList";
-    }
-}
+// function go() {
+//     var flag = confirm("密码修改成功，是否直接跳转到用户列表？");
+//     if (flag == true) {
+//         location.href = "/alink-hq/";
+//     } else {
+//         location.href = "/alink-hq/";
+//     }
+// }

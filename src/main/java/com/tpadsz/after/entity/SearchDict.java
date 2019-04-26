@@ -11,6 +11,7 @@ public class SearchDict {
     private Integer pid;
     private String mname;
     private String pname;
+    private String gname;
     private Integer status;
     private Integer meshId;
     private Integer projectId;
@@ -64,6 +65,14 @@ public class SearchDict {
 
     public void setPname(String pname) {
         this.pname = pname;
+    }
+
+    public String getGname() {
+        return gname;
+    }
+
+    public void setGname(String gname) {
+        this.gname = gname;
     }
 
     public Integer getStatus() {
