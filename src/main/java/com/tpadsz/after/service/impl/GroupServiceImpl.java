@@ -4,6 +4,9 @@ import com.tpadsz.after.dao.GroupDao;
 import com.tpadsz.after.entity.OptionList;
 import com.tpadsz.after.entity.SearchDict;
 import com.tpadsz.after.service.GroupService;
+import org.apache.shiro.authz.AuthorizationException;
+import org.apache.shiro.authz.UnauthorizedException;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -40,12 +43,13 @@ public class GroupServiceImpl implements GroupService {
     }
 
     @Override
-    public void saveRename(Map map) {
+    public void saveRename(Map map){
         groupDao.saveRename(map);
     }
 
     @Override
-    public void deleteGroupByIds(List list) {
+    @RequiresPermissions("delete")
+    public void deleteGroupByIds(List list) throws AuthorizationException {
         groupDao.deleteGroupByIds(list);
     }
 

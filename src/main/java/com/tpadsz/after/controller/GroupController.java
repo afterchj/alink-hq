@@ -1,12 +1,10 @@
 package com.tpadsz.after.controller;
 
-import com.alibaba.fastjson.JSON;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.tpadsz.after.entity.OptionList;
 import com.tpadsz.after.entity.SearchDict;
 import com.tpadsz.after.service.GroupService;
-import com.tpadsz.after.service.MeshService;
 import com.tpadsz.after.service.RoleService;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
@@ -49,6 +47,7 @@ public class GroupController {
 
     @RequestMapping("/move")
     public String move(String gids, ModelMap modelMap) {
+        logger.info("gids=" + gids);
         String[] ids = gids.split(",");
         List<String> list = new ArrayList(Arrays.asList(ids));
         List<Map> groupMap = groupService.selectByGid(list);
@@ -73,7 +72,12 @@ public class GroupController {
         logger.info("gids=" + gids);
         String[] ids = gids.split(",");
         List<String> list = new ArrayList(Arrays.asList(ids));
-        groupService.deleteGroupByIds(list);
+        try {
+            groupService.deleteGroupByIds(list);
+        }catch (Exception e){
+            logger.warn(e);
+            return "authError";
+        }
         return "redirect:/group/list";
     }
 
@@ -89,7 +93,7 @@ public class GroupController {
 
     @ResponseBody
     @RequestMapping("/getPlace")
-    public List<OptionList> show(Integer uid) {
+    public List<OptionList> getPlaces(Integer uid) {
         Map map = new HashMap();
         if (uid != null) {
             String role = roleService.selectById(uid);

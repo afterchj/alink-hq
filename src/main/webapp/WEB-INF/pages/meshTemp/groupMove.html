@@ -21,24 +21,24 @@
                 <img src="/alink-hq/static/img/go-back.png" alt="" onclick="history.back()">
             </div>
         </div>
-        <form th:action="@{/mesh/saveUpdate}" class="" method="post">
+        <form th:action="@{/group/saveUpdate}" class="" method="post">
             <div id="meshTurnOver">
                 <div class="f-nav">
                     网络移动
                 </div>
                 <div class="f-content">
-                    <input type="hidden" name="mids" th:value="${gids}">
-                    <div class="accountMsg clearfix" th:each="mesh:${meshMap}">
+                    <input type="hidden" name="gids" th:value="${gids}">
+                    <div class="accountMsg clearfix" th:each="group:${groupMap}">
                         <div class="f-l mesh-name">
-                            <span th:text="${mesh.mname}"></span>
+                            <span th:text="${group.gname}"></span>
                         </div>
                         <div class="f-l  mesh-id">
                             <label for="mid">网络ID：</label>
-                            <input type="text" id="mid" th:value="${mesh.mesh_id}">
+                            <input type="text" id="mid" th:value="${group.mesh_id}">
                         </div>
                         <div class="f-l mesh-project">
-                            <label for="project">属于项目：</label>
-                            <input type="text" id="project" th:value="${mesh.name}">
+                            <label for="project">属于区域：</label>
+                            <input type="text" id="project" th:value="${group.pname}">
                         </div>
                     </div>
                 </div>
@@ -46,7 +46,7 @@
                     <img src="/alink-hq/static/img/exchange-un.png" alt="">
                 </div>
                 <div class="transfer-company">
-                    <label for="pid"><span>*</span>选择移动到的项目：</label>
+                    <label for="pid"><span>*</span>选择移动到的区域：</label>
                     <select name="pid" id="pid">
                         <option value="">11</option>
                     </select>
@@ -63,7 +63,7 @@
     var uid = [[${session.user.id}]];
     console.log("uid=" + uid);
     $(function () {
-        $.getJSON("/alink-hq/mesh/getProjects", {"uid": uid}, function (json) {
+        $.getJSON("/alink-hq/group/getPlace", {"nid": uid}, function (json) {
             $("#pid option:first").remove();
             // 下面使用each进行遍历
             $.each(json, function (i, item) {
