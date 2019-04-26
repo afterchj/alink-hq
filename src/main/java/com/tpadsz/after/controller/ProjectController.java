@@ -37,8 +37,7 @@ public class ProjectController {
 
     @RequestMapping(value = "/list", method = RequestMethod.GET)
     public String list(Integer pageNum, Integer pageSize, String account, String projectName,
-                       String startCreateDate, String endCreateDate, String startUpdateDate, String endUpdateDate,
-                       HttpSession session, Model model) {
+                       String startCreateDate, String endCreateDate, String startUpdateDate, String endUpdateDate,String sortFlag,HttpSession session, Model model) {
         User loginUser = (User) session.getAttribute("user");
         String uid = loginUser.getId();
         if (pageNum == null) {
@@ -56,18 +55,18 @@ public class ProjectController {
             if (role_id == 1 || role_id == 2) {
                 PageHelper.startPage(pageNum, pageSize);
                 list = projectService.searchBySuper(account, projectName, startCreateDate, endCreateDate,
-                        startUpdateDate, endUpdateDate);
+                        startUpdateDate, endUpdateDate,sortFlag);
             } else if (role_id == 3) {
                 List<Integer> ids = projectService.findProjectList(uid);
                 if (ids.size() != 0) {
                     PageHelper.startPage(pageNum, pageSize);
                     list = projectService.searchByManager(account, projectName, startCreateDate, endCreateDate,
-                            startUpdateDate, endUpdateDate, ids);
+                            startUpdateDate, endUpdateDate, ids,sortFlag);
                 }
             } else if (role_id == 4) {
                 PageHelper.startPage(pageNum, pageSize);
                 list = projectService.searchByUser(account, projectName, startCreateDate, endCreateDate,
-                        startUpdateDate, endUpdateDate, uid);
+                        startUpdateDate, endUpdateDate, uid,sortFlag);
             }
             PageInfo<ProjectList> pageInfo = new PageInfo<>(list, pageSize);
             model.addAttribute("pageInfo", pageInfo);
