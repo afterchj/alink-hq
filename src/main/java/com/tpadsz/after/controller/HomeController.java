@@ -1,6 +1,5 @@
 package com.tpadsz.after.controller;
 
-import com.github.pagehelper.PageHelper;
 import com.tpadsz.after.entity.User;
 import com.tpadsz.after.entity.dd.ResultDict;
 import com.tpadsz.after.exception.InvalidCodeException;
@@ -24,9 +23,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpSession;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -56,16 +53,6 @@ public class HomeController {
     @RequestMapping("/authError")
     public String authError() {
         return "authError";
-    }
-
-    @RequestMapping("/test")
-    public String welcome() {
-        return "test";
-    }
-
-    @RequestMapping("/useList")
-    public String useList() {
-        return "userManage/userList";
     }
 
     @RequestMapping("/projectList")
@@ -121,46 +108,6 @@ public class HomeController {
     @RequestMapping("/changePassword")
     public String changePassword() {
         return "account/changePassword";
-    }
-
-    @RequestMapping("/toLogin")
-    public String toLogin() {
-        return "index";
-    }
-
-    @RequestMapping("/toRest")
-    public String toRest() {
-        return "forgetPwd";
-    }
-
-    @RequestMapping("/home")
-    public String home(String uname, HttpSession session) {
-        User loginUser = userService.selectByUsername(uname);
-        session.setAttribute("user", loginUser);
-        return "welcome";
-    }
-
-    @RequestMapping("/picture")
-    public String picture() {
-        return "picture";
-    }
-
-    @ResponseBody
-    @RequestMapping("/show")
-    public List<User> show() {
-        List<User> list = userService.selectAll();
-        return list;
-    }
-
-    @ResponseBody
-    @RequestMapping("/getContext")
-    public List<Map> getContext() {
-        List<Map> list = new ArrayList<>();
-        Map map = new HashMap();
-        map.put("id", 8);
-        map.put("label", "eight");
-        list.add(map);
-        return list;
     }
 
     @ResponseBody
@@ -301,21 +248,6 @@ public class HomeController {
         User loginUser = userService.selectByUsername(userName);
         session.setAttribute("user", loginUser);
         return "welcome";
-    }
-
-    @RequestMapping("/userList")
-    public String userList(ModelMap map, Integer page, Integer rows) {
-        logger.info("userList..." + page);
-//        System.out.println("userList..." + page);
-        if (null == page || page < 1) {
-            page = 1;
-        }
-        PageHelper.startPage(page, 8);
-        List<User> list = userService.selectAll();
-        logger.info("page=" + page + ",size=" + rows);
-        map.put("page", page);
-        map.put("users", list);
-        return "userList";
     }
 
     /**

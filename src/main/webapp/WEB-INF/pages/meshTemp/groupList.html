@@ -33,12 +33,12 @@
                 <div class="search-condition temp">
                     <div class="f-l search" style="margin-right:125px;">
                         <div>
-                            <label for="name">组名称：</label>
-                            <input type="text" id="name" name="mname" th:value="${dict.gname}" placeholder="请输入组名称">
+                            <label for="gname">组名称：</label>
+                            <input type="text" id="gname" name="gname" th:value="${dict.gname}" placeholder="请输入组名称">
                         </div>
                         <div>
-                            <label for="gname">网络名称：</label>
-                            <input type="text" id="gname" name="gname" th:value="${dict.mname}" placeholder="请输入网络名称">
+                            <label for="mname">网络名称：</label>
+                            <input type="text" id="mname" name="mname" th:value="${dict.mname}" placeholder="请输入网络名称">
                         </div>
                     </div>
                     <div class="f-l search">
@@ -74,11 +74,12 @@
                             <td th:text="${group.mesh_id}"></td>
                             <td th:text="${group.lcount}"></td>
                             <td class="p-r">
-                                <img src="/alink-hq/static/img/edit.png" th:alt="${mesh.id}" class="rename">
+                                <img src="/alink-hq/static/img/edit.png" th:alt="${group.id}" class="rename">
                                 <a th:href="@{/group/move(gids=${group.id})}">
                                     <img src="/alink-hq/static/img/exchange.png" alt="" class="center-img">
                                 </a>
-                                <a th:href="@{/group/delete(mids=${group.id})}" onclick="return confirm('您确定要删除所选的网络吗？')">
+                                <a th:href="@{/group/delete(gids=${group.id})}"
+                                   onclick="return confirm('您确定要删除所选的网络吗？')">
                                     <img src="/alink-hq/static/img/delete.png" alt="" id="singleDel">
                                 </a>
                             </td>
@@ -133,8 +134,8 @@
 </div>
 <script type="text/javascript" src="/alink-hq/static/js/group.js"></script>
 <script>
-    $(function(){
-        myBrowser()
+    $(function () {
+        myBrowser();
         $('.one-list li').each(function () {
             $('.main-left>ul>li.one-list:eq(0)').find('.on-off-triangle').attr('src', '/alink-hq/static/img/right-triange-un.png');
             $('.main-left>ul>li.one-list:eq(0)').find('.two-list').addClass('active');
@@ -142,19 +143,18 @@
             if (tab == 'meshList') {
                 $(this).addClass('active').siblings().removeClass('active');
             }
+        });
+        $('.on-off-triangle').click(function () {
+            var imgUrl = $(this).attr('src');
+            if (imgUrl == '/alink-hq/static/img/bottom-triangle-un.png') {
+                $(this).attr('src', '/alink-hq/static/img/right-triange-un.png');
+                $(this).parent().parent('.one-list').find('.two-list').addClass('active');
+            } else {
+                $(this).attr('src', '/alink-hq/static/img/bottom-triangle-un.png');
+                $(this).parent().parent('.one-list').find('.two-list').removeClass('active');
+            }
         })
-    })
-
-    $('.on-off-triangle').click(function () {
-        var imgUrl = $(this).attr('src');
-        if (imgUrl == '/alink-hq/static/img/bottom-triangle-un.png') {
-            $(this).attr('src', '/alink-hq/static/img/right-triange-un.png');
-            $(this).parent().parent('.one-list').find('.two-list').addClass('active');
-        } else {
-            $(this).attr('src', '/alink-hq/static/img/bottom-triangle-un.png');
-            $(this).parent().parent('.one-list').find('.two-list').removeClass('active');
-        }
-    })
+    });
 </script>
 </body>
 </html>

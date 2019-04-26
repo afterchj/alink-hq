@@ -8,7 +8,7 @@
         g.gname,
         m.mname,
         m.mesh_id,
-        l.gcount
+        l.lcount
 	</sql>
 
     <sql id="common_choose">
@@ -36,7 +36,7 @@
         <include refid="Base_Column_List"/>
         FROM f_group g
         INNER JOIN f_mesh m ON m.id = g.mid
-        INNER JOIN (SELECT COUNT(1) gcount,gid FROM f_light GROUP BY gid) l ON g.id=l.gid
+        INNER JOIN (SELECT COUNT(1) lcount,gid FROM f_light GROUP BY gid) l ON g.id=l.gid
         <include refid="common_choose"></include>
         <if test="mname!=null and mname!=''">
             AND m.mname LIKE CONCAT('%',#{mname},'%')
@@ -44,11 +44,8 @@
         <if test="meshId!=null and meshId!=''">
             AND m.mesh_id LIKE CONCAT('%',#{meshId},'%')
         </if>
-        <if test="pname!=null and pname!=''">
-            AND p.name LIKE CONCAT('%',#{pname},'%')
-        </if>
-        <if test="projectId!=null and projectId!=''">
-            AND m.project_id=#{projectId}
+        <if test="gname!=null and gname!=''">
+            AND g.gname LIKE CONCAT('%',#{gname},'%')
         </if>
     </select>
 
@@ -91,13 +88,13 @@
 
     <select id="getPlaces" resultType="OptionList" parameterType="map">
         SELECT id,pname label FROM f_place WHERE 1=1
-        <if test="mid!=null and mid!=''">
-            AND mid=#{mid}
+        <if test="uid!=null and uid!=''">
+            AND uid=#{uid}
         </if>
     </select>
 
     <delete id="deleteGroupByIds" parameterType="list">
-        DELETE FROM f_mesh
+        DELETE FROM f_group
         WHERE id IN
         <foreach collection="list" item="id" index="index" open="(" close=")" separator=",">
             #{id}
@@ -105,14 +102,14 @@
     </delete>
 
     <update id="saveRename" parameterType="map">
-        UPDATE f_mesh SET mname=#{name},update_date=NOW() WHERE id =#{id}
+        UPDATE f_group SET gname=#{name},update_date=NOW() WHERE id =#{id}
     </update>
 
     <update id="saveUpdate" parameterType="map">
-        UPDATE f_mesh SET project_id=#{pid},update_date=NOW()
+        UPDATE f_group SET pid=#{pid},update_date=NOW()
         WHERE id IN
-        <foreach collection="list" index="index" item="mid" separator="," open="(" close=")">
-            #{mid}
+        <foreach collection="list" index="index" item="id" separator="," open="(" close=")">
+            #{id}
         </foreach>
     </update>
 </mapper>
