@@ -12,57 +12,56 @@
     <!--<link rel="stylesheet" href="/alink-hq/static/css/projectManage.css"/>-->
     <title>我的账户</title>
 </head>
-
 <body>
-<div th:include="common/head::head"></div>
-<div th:include="common/left::left"></div>
-<div class="main-right">
-    <div class="clearfix main-right-nav">
-        <div class="f-l main-right-title">我的账号</div>
-        <div class="f-r pointer">
-            <img src="/alink-hq/static/img/go-back.png" alt="" id="clickReturn"/>
-        </div>
-    </div>
-    <div id="account">
-        <div class="m-account">
-            <div class="a-nav">
-                我的账号
+<div th:replace="common/head::head"></div>
+<div class="c-container">
+    <div th:replace="common/left::left"></div>
+    <div class="main-right">
+        <div class="clearfix main-right-nav">
+            <div class="f-l main-right-title">我的账号</div>
+            <div class="f-r pointer">
+                <img src="/alink-hq/static/img/go-back.png" alt="" id="clickReturn"/>
             </div>
-            <div class="a-content">
-                <div>
-                    <span class="icon"><i class="dot-no"></i><img src="/alink-hq/static/img/password.png"
-                                                                  alt=""/></span>
-                    <span class="title">
-                        账号
-                    </span>
-                    <span th:text="${myAccount.getAccount()}"></span>
-                    <span>
-                        <a th:href="@{pwd(account=${myAccount.getAccount()})}" tab="myAccount/pwd">修改密码</a>
-                    </span>
+        </div>
+        <div id="account">
+            <div class="m-account">
+                <div class="a-nav">
+                    我的账号
                 </div>
-                <div>
-                    <span class="icon"><i
-                            th:class="${myAccount.getUname()==null or #strings.isEmpty(myAccount.getUname())}?'dot':'dot-no'"></i><img
-                            src="/alink-hq/static/img/account.png" alt=""/></span>
-                    <span class="title">
-                        用户名
-                    </span>
-                    <span th:text="${myAccount.getUname()==null or #strings.isEmpty(myAccount.getUname())}?'未填写':${myAccount.getUname()}"></span>
-                    <span>
-                        <!--<a href="javascript:void(0);" tab="fillUsername" style="display:none;">填写用户名</a>-->
-                        <!--<a href="javascript:void(0);" tab="changeUsername">修改用户名</a>-->
-                        <a th:if="${myAccount.getUname()==null or #strings.isEmpty(myAccount.getUname())}"
-                           th:href="@{fillUname(account=${myAccount.getAccount()},flag=0)}">填写用户名</a>
-    <a th:if="${myAccount.getUname()!=null and !#strings.isEmpty(myAccount.getUname())}"
-       th:href="@{modifiUname(account=${myAccount.getAccount()},uname=${myAccount.getUname()},flag=1)}">修改用户名</a>
-                    </span>
-                </div>
-                <div>
+                <div class="a-content">
+                    <div>
+                        <span class="icon"><i class="dot-no"></i><img src="/alink-hq/static/img/password.png"
+                                                                      alt=""/></span>
+                        <span class="title">
+                            账号
+                        </span>
+                            <span th:text="${myAccount.getAccount()}"></span>
+                        <span>
+                            <a th:href="@{pwd(account=${myAccount.getAccount()})}" tab="myAccount/pwd">修改密码</a>
+                        </span>
+                    </div>
+                    <div>
+                        <span class="icon"><i
+                                th:class="${myAccount.getUname()==null or #strings.isEmpty(myAccount.getUname())}?'dot':'dot-no'"></i><img
+                                src="/alink-hq/static/img/account.png" alt=""/></span>
+                        <span class="title">
+                            用户名
+                        </span>
+                            <span th:text="${myAccount.getUname()==null or #strings.isEmpty(myAccount.getUname())}?'未填写':${myAccount.getUname()}"></span>
+                        <span>
+                            <!--<a href="javascript:void(0);" tab="fillUsername" style="display:none;">填写用户名</a>-->
+                            <!--<a href="javascript:void(0);" tab="changeUsername">修改用户名</a>-->
+                            <a th:if="${myAccount.getUname()==null or #strings.isEmpty(myAccount.getUname())}"
+                               th:href="@{fillUname(account=${myAccount.getAccount()},flag=0)}">填写用户名</a>
+                                <a th:if="${myAccount.getUname()!=null and !#strings.isEmpty(myAccount.getUname())}" th:href="@{modifiUname(account=${myAccount.getAccount()},uname=${myAccount.getUname()},flag=1)}">修改用户名</a>
+                        </span>
+                    </div>
+                    <div>
                     <span class="icon"><i
                             th:class="${myAccount.getMobile()==null or #strings.isEmpty(myAccount.getMobile())}?'dot':'dot-no'"></i><img
                             src="/alink-hq/static/img/phone.png" alt=""/></span>
-                    <span class="title">手机号</span>
-                    <span th:text="${myAccount.getMobile()==null or #strings.isEmpty(myAccount.getMobile())}?'未填写':${myAccount.getMobile()}"></span>
+                        <span class="title">手机号</span>
+                        <span th:text="${myAccount.getMobile()==null or #strings.isEmpty(myAccount.getMobile())}?'未填写':${myAccount.getMobile()}"></span>
                     <span>
                         <!--<a href="javascript:void(0);" tab="bindPhone" style="display:none;">绑定手机号</a>-->
                         <!--<a href="javascript:void(0);" tab="changePhone">修改手机号</a>-->
@@ -77,20 +76,19 @@
                             <li>密码丢失时可以通过绑定的手机号轻松找回</li>
                         </ul>
                     </span>
-                </div>
-                <div>
+                    </div>
+                    <div>
                     <span class="icon"><i
                             th:class="${myAccount.getEmail()==null or #strings.isEmpty(myAccount.getEmail())}?'dot':'dot-no'"></i><img
                             src="/alink-hq/static/img/email.png" alt=""/></span>
-                    <span class="title">邮箱</span>
-                    <span th:text="${myAccount.getEmail()==null or #strings.isEmpty(myAccount.getEmail())}?'未填写':${myAccount.getEmail()}"></span>
+                        <span class="title">邮箱</span>
+                        <span th:text="${myAccount.getEmail()==null or #strings.isEmpty(myAccount.getEmail())}?'未填写':${myAccount.getEmail()}"></span>
                     <span>
                         <!--<a href="javascript:void(0);" tab="bindEmail" style="display:none;">绑定邮箱</a>-->
                         <!--<a href="javascript:void(0);" tab="changeEmail">修改邮箱</a>-->
                         <a th:if="${myAccount.getEmail()==null or #strings.isEmpty(myAccount.getEmail())}"
                            th:href="@{fillEmail(account=${myAccount.getAccount()},flag=0)}">绑定邮箱</a>
-    <a th:href="@{modifiEmail(account=${myAccount.getAccount()},flag=1)}"
-       th:if="${myAccount.getEmail()!=null and !#strings.isEmpty(myAccount.getEmail())}">修改邮箱</a>
+                        <a th:href="@{modifiEmail(account=${myAccount.getAccount()},flag=1)}"th:if="${myAccount.getEmail()!=null and !#strings.isEmpty(myAccount.getEmail())}">修改邮箱</a>
                     </span>
                     <span>
                         <ul>
@@ -98,24 +96,26 @@
                             <li>密码丢失时可以通过绑定的邮箱轻松找回</li>
                         </ul>
                     </span>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-    <input type="hidden" th:value="${session.user.getAccount()}" id="account_hidden" name="account" class="account"/>
-    <script src="/alink-hq/static/myAccount/js/jquery-3.3.1.min.js"></script>
-    <script src="/alink-hq/static/myAccount/js/common.js"></script>
-    <!--<script src="/alink-hq/static/js/jquery.min.js"></script>-->
-    <!--<script>-->
-    <!--//跳转到修改密码-->
-    <!--$('.a-content a').click(function(){-->
-    <!--var fileName='account';-->
-    <!--var url=$(this).attr('tab');-->
-    <!--var account = 'tpad1d12';-->
-    <!--console.log(url);-->
-    <!--parent.goAccountIframe(fileName,url,account);-->
-    <!--})-->
-    <!--</script>-->
+</div>
+<input type="hidden" th:value="${session.user.getAccount()}" id="account_hidden" name="account" class="account"/>
+<script src="/alink-hq/static/myAccount/js/jquery-3.3.1.min.js"></script>
+<script src="/alink-hq/static/myAccount/js/common.js"></script>
+<!--<script src="/alink-hq/static/js/jquery.min.js"></script>-->
+<!--<script>-->
+<!--//跳转到修改密码-->
+<!--$('.a-content a').click(function(){-->
+<!--var fileName='account';-->
+<!--var url=$(this).attr('tab');-->
+<!--var account = 'tpad1d12';-->
+<!--console.log(url);-->
+<!--parent.goAccountIframe(fileName,url,account);-->
+<!--})-->
+<!--</script>-->
 </body>
 
 </html>

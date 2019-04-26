@@ -12,8 +12,8 @@
     border: 1px solid #bbb;
 }
 #account .a-content{
-    padding: 10px 70px;
-    font-size: 21px;
+    padding: 10px 30px;
+    font-size: 16px;
     color: #3c3c3c;
 }
 #account .a-content>div{
@@ -32,10 +32,10 @@
 #account .title{
     display: inline-block;
     width: 65px;
-    margin-right: 205px;
+    margin-right: 100px;
 }
 #account .a-content>div>span:nth-child(3){
-    width: 350px;
+    width: 300px;
     display: inline-block;
 }
 #account .a-content>div>span:nth-child(4){
@@ -43,6 +43,7 @@
 }
 #account .a-content>div>span {
     display: inline-block;
+    vertical-align: middle;
 }
 #account .a-content>div>span ul {
     display: inline-block;
@@ -56,10 +57,11 @@
     border-bottom: 1px solid #003e68;
 }
 #account .a-content>div>span ul li{
-    font-size: 18px;
+    font-size: 14px;
     color: #666;
     list-style-type: disc;
-    line-height: 1.5;
+    /* line-height: 1; */
+    margin: 10px 0;
 }
 i.dot{
     display: inline-block;
@@ -83,6 +85,7 @@ i.dot-no{
     font-size: 22px;
     color: #111;
     border-bottom: 1px solid #bbb;
+    background-color: #fafafa;
 }
 #changePassword .c-changePwd,#bindPhone .b-bindPhone,#fillUsername .f-fillUsername,#bindEmail .b-bindEmail{
     height: 842px;
@@ -91,7 +94,7 @@ i.dot-no{
 }
 #changePassword form,#bindPhone form,#fillUsername form,#bindEmail form{
     margin: 100px auto;
-    font-size: 21px;
+    font-size: 16px;
     color: #3c3c3c;
     width: 500px;
 }
@@ -110,24 +113,25 @@ p.phone-hint.active,p.use-hint2.active,p.email-hint.active,p.pwd-hint.active,p.u
 }
 
 #changePassword form input,#bindPhone form input,#fillUsername form input,#bindEmail form input{
-    height: 42px;
+    height: 35px;
     width: 330px;
     border-radius: 5px;
     border: 1px solid #bbb;
-    font-size: 18px;
+    font-size: 14px;
     text-indent: 10px;
 }
 #changePassword form label,#bindPhone form label,#fillUsername form label,#bindEmail form label{
     display: inline-block;
-    width: 100px;
-    
+    width: 80px;
+    text-align: right;
+    margin-right: 20px;
 }
 #changePassword form>div,#bindPhone form>div,#fillUsername form>div,#bindEmail form>div{
     /* margin-bottom: 35px; */
 }
 #changePassword form button,#bindPhone form button,#fillUsername form button,#bindEmail form button{
-    height: 44px;
-    font-size: 20px;
+    height: 38px;
+    font-size: 17px;
     padding: 0 20px;
     background-color: #3598db;
     border-radius: 5px;
@@ -144,9 +148,12 @@ p.phone-hint.active,p.use-hint2.active,p.email-hint.active,p.pwd-hint.active,p.u
 }
 #bindPhone .verification-code button,#bindEmail .verification-code button{
     width: 115px;
-    font-size: 18px;
+    font-size: 16px;
     padding: 0;
     margin: 0;
-    margin: 0px 0 0 18px;
+    margin: 0px 0 2px 18px;
     vertical-align: middle;
+}
+#bindEmail,#account,#bindPhone,#changePassword,#fillUsername{
+    background-color: #fff;
 }

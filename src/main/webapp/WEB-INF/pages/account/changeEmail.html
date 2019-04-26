@@ -6,101 +6,106 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="/alink-hq/static/css/base.css" />
-    <link rel="stylesheet" href="/alink-hq/static/css/leftNav.css" />
-    <link rel="stylesheet" href="/alink-hq/static/css/account.css" />
+    <link rel="stylesheet" href="/alink-hq/static/css/base.css"/>
+    <link rel="stylesheet" href="/alink-hq/static/css/leftNav.css"/>
+    <link rel="stylesheet" href="/alink-hq/static/css/account.css"/>
     <link rel="stylesheet" href="/alink-hq/static/css/loding.css"/>
     <title>修改邮箱</title>
     <style>
-        input[type="text"] {background:white}
+        input[type="text"] {
+            background: white
+        }
     </style>
 </head>
 
 <body>
-    <div th:replace="common/head::head"></div>
+<div th:replace="common/head::head"></div>
+<div class="c-container">
     <div th:replace="common/left::left"></div>
     <div class="main-right">
-    <div class="clearfix main-right-nav">
-        <div class="f-l main-right-title">修改邮箱</div>
-        <div class="f-r pointer">
-            <img src="/alink-hq/static/img/go-back.png" alt="" id="clickReturn"/>
+        <div class="clearfix main-right-nav">
+            <div class="f-l main-right-title">修改邮箱</div>
+            <div class="f-r pointer">
+                <img src="/alink-hq/static/img/go-back.png" alt="" id="clickReturn"/>
+            </div>
+        </div>
+        <div id="bindEmail">
+            <div class="b-bindEmail">
+                <div class="b-nav">
+                    修改邮箱
+                </div>
+                <div class="b-content ">
+                    <form id="emailForm" action="#" onsubmit="return false" method="post">
+                        <div style="margin-bottom:10px;">
+                            <p class="email-hint" style="height: 35px;"></p>
+                            <label for="">邮箱：</label>
+                            <input type="text" placeholder="请输入邮箱" id="email" name="email"/>
+                        </div>
+                        <div class="verification-code">
+                            <p class="code-hint" style="height: 35px;"></p>
+                            <label for="">激活码：</label>
+                            <input type="text" placeholder="请输入激活码" id="code" name="code">
+                            <button type="button" class="security-code" id="codeSubmit">获取激活码</button>
+                        </div>
+                        <input type="hidden" th:value="${account}" id="account" name="account" class="account"/>
+                        <input type="hidden" th:value="${flag}" id="flag" name="flag"/>
+                        <div class="submit-btn">
+                            <button type="submit" id="fillSubmit">立即修改</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
         </div>
     </div>
-    <div id="bindEmail">
-        <div class="b-bindEmail">
-            <div class="b-nav">
-                修改邮箱
-            </div>
-            <div class="b-content ">
-                <form id="emailForm" action="#" onsubmit="return false" method="post">
-                    <div style="margin-bottom:10px;">
-                        <p class="email-hint" style="height: 35px;"></p>
-                        <label for="">邮箱：</label>
-                        <input type="text" placeholder="请输入邮箱" id="email" name="email"/>
-                    </div>
-                    <div class="verification-code" >
-                        <p class="code-hint" style="height: 35px;"></p>
-                        <label for="">激活码：</label>
-                        <input type="text" placeholder="请输入激活码" id="code" name="code">
-                        <button type="button" class="security-code" id="codeSubmit">获取激活码</button>
-                    </div>
-                    <input type="hidden" th:value="${account}" id="account" name="account" class="account"/>
-                    <input type="hidden" th:value="${flag}" id="flag" name="flag"/>
-                    <div class="submit-btn">
-                        <button type="submit" id="fillSubmit">立即修改</button>
-                    </div>
-                </form>
-            </div>
-        </div>
+</div>
+<div id="preload-anim">
+    <!-- <div style="margin: 20px auto; text-align: center; margin-bottom: 0px;">
+      <a href="http://www.100sucai.com/" target="_blank"><img src="100sucai.png" alt=""></a>
+    </div> -->
+    <div id="circularG">
+        <div id="circularG_1" class="circularG"></div>
+        <div id="circularG_2" class="circularG"></div>
+        <div id="circularG_3" class="circularG"></div>
+        <div id="circularG_4" class="circularG"></div>
+        <div id="circularG_5" class="circularG"></div>
+        <div id="circularG_6" class="circularG"></div>
+        <div id="circularG_7" class="circularG"></div>
+        <div id="circularG_8" class="circularG"></div>
     </div>
-        <div id="preload-anim">
-            <!-- <div style="margin: 20px auto; text-align: center; margin-bottom: 0px;">
-              <a href="http://www.100sucai.com/" target="_blank"><img src="100sucai.png" alt=""></a>
-            </div> -->
-            <div id="circularG">
-                <div id="circularG_1" class="circularG"></div>
-                <div id="circularG_2" class="circularG"></div>
-                <div id="circularG_3" class="circularG"></div>
-                <div id="circularG_4" class="circularG"></div>
-                <div id="circularG_5" class="circularG"></div>
-                <div id="circularG_6" class="circularG"></div>
-                <div id="circularG_7" class="circularG"></div>
-                <div id="circularG_8" class="circularG"></div>
-            </div>
-            <p class="title"></p>
-        </div>
-        <script src="/alink-hq/static/myAccount/js/jquery-3.3.1.min.js"></script>
-        <script src="/alink-hq/static/myAccount/js/common.js"></script>
-        <script src="/alink-hq/static/myAccount/js/email.js"></script>
-    <!--<script src="/alink-hq/static/js/jquery.min.js"></script>-->
-    <script>
-        // 验证邮箱号
-//        function vEamil() {
-//            var emailVal = $('#email').val();
-//            var codeVal = $('#code').val();
-//            var email = /^([a-zA-Z]|[0-9])(\w|\-)+@[a-zA-Z0-9]+\.([a-zA-Z]{2,4})$/;
-//            var emailResult = email.test(emailVal);
-//            if (emailVal == '') {
-//                $('p.email-hint').addClass('active').text('请输入邮箱号');
-//                return false;
-//            } else if (!emailResult) {
-//                $('p.email-hint').removeClass('active').text('');
-//                $('p.email-hint').addClass('active').text('邮箱号格式不正确');
-//                return false;
-//            } else if (codeVal == '') {
-//                $('p.email-hint').removeClass('active').text('');
-//                $('p.code-hint').addClass('active').text('请输入验证码');
-//                return false;
-//            } else {
-//                $('p.code-hint').removeClass('active').text('');
-//                var title = "邮箱";
-//                var content = "修改";
-//                parent.loding(title, content);
-//            }
-//        }
+    <p class="title"></p>
+</div>
+<script src="/alink-hq/static/myAccount/js/jquery-3.3.1.min.js"></script>
+<script src="/alink-hq/static/myAccount/js/common.js"></script>
+<script src="/alink-hq/static/myAccount/js/email.js"></script>
+<!--<script src="/alink-hq/static/js/jquery.min.js"></script>-->
+<script>
+    // 验证邮箱号
+    //        function vEamil() {
+    //            var emailVal = $('#email').val();
+    //            var codeVal = $('#code').val();
+    //            var email = /^([a-zA-Z]|[0-9])(\w|\-)+@[a-zA-Z0-9]+\.([a-zA-Z]{2,4})$/;
+    //            var emailResult = email.test(emailVal);
+    //            if (emailVal == '') {
+    //                $('p.email-hint').addClass('active').text('请输入邮箱号');
+    //                return false;
+    //            } else if (!emailResult) {
+    //                $('p.email-hint').removeClass('active').text('');
+    //                $('p.email-hint').addClass('active').text('邮箱号格式不正确');
+    //                return false;
+    //            } else if (codeVal == '') {
+    //                $('p.email-hint').removeClass('active').text('');
+    //                $('p.code-hint').addClass('active').text('请输入验证码');
+    //                return false;
+    //            } else {
+    //                $('p.code-hint').removeClass('active').text('');
+    //                var title = "邮箱";
+    //                var content = "修改";
+    //                parent.loding(title, content);
+    //            }
+    //        }
 
-        //验证码倒计时
-        $(function () {
+    //验证码倒计时
+    $(function () {
 //            $('.security-code').click(function () {
 //                $(this).addClass('active');
 //                settime(this);
@@ -124,8 +129,8 @@
 //                    settime(obj)
 //                }, 1000)
 //            }
-        })
-    </script>
+    })
+</script>
 </body>
 
 </html>

@@ -95,11 +95,13 @@ th {
 }
 
 img.toTop {
-    top: 17px;
+    top: 15px;
+    transform: scale(.9);
 }
 
 img.toBottom {
-    bottom: 17px;
+    bottom: 10px;
+    transform: scale(.9);
 }
 
 .toTime {
@@ -326,9 +328,9 @@ th.all-checkbox {
     text-align: center;
 }
 .pop-content .off-or-on{
-    font-size: 21px;
+    font-size: 18px;
     color: #3c3c3c;
-    margin-top:60px;
+    margin-top: 60px;
     text-align: center;
 }
 .pop-content .reset-pwd-hint{
@@ -466,4 +468,8 @@ th.all-checkbox {
 }
 .account-part{
     margin-bottom: 30px;
+}
+.hidden{
+    /*display: none;*/
+    visibility: hidden;
 }

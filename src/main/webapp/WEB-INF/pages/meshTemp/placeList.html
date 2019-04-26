@@ -3,6 +3,7 @@
 
 <head>
     <title>区域列表</title>
+    <script src="/alink-hq/static/js/browser.js"></script>
     <script src="/alink-hq/static/js/jquery.min.js"></script>
     <link rel="stylesheet" th:href="@{/static/css/common.css}"/>
     <link rel="stylesheet" th:href="@{/static/css/laydate.css}"/>
@@ -230,16 +231,19 @@
                 location.href = "/alink-hq/place/move?pids=" + pids;
             }
         });
+    });
+
+    $(function(){
         myBrowser()
         $('.one-list li').each(function () {
-            $('.main-left>ul>li.one-list:eq(1)').find('.on-off-triangle').attr('src', '/alink-hq/static/img/right-triange-un.png');
-            $('.main-left>ul>li.one-list:eq(1)').find('.two-list').addClass('active');
+            $('.main-left>ul>li.one-list:eq(0)').find('.on-off-triangle').attr('src', '/alink-hq/static/img/right-triange-un.png');
+            $('.main-left>ul>li.one-list:eq(0)').find('.two-list').addClass('active');
             var tab = $(this).attr('tab');
             if (tab == 'placeList') {
                 $(this).addClass('active').siblings().removeClass('active');
             }
         })
-    });
+    })
 
     $('.on-off-triangle').click(function () {
         var imgUrl = $(this).attr('src');
@@ -250,7 +254,7 @@
             $(this).attr('src', '/alink-hq/static/img/bottom-triangle-un.png');
             $(this).parent().parent('.one-list').find('.two-list').removeClass('active');
         }
-    });
+    })
 </script>
 </body>
 </html>

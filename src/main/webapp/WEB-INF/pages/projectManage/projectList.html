@@ -11,106 +11,100 @@
     <title>项目列表</title>
 </head>
 <body>
-
-
 <div th:replace="common/head::head"></div>
-
 <div class="c-container">
     <div th:replace="common/left::left"></div>
-
-<div class="main-right">
-    <div class="clearfix main-right-nav">
-        <div class="f-l main-right-title">项目列表</div>
-        <div class="f-r pointer">
-            <img src="/alink-hq/static/img/create-project.png" alt="">
+    <div class="main-right">
+        <div class="clearfix main-right-nav">
+            <div class="f-l main-right-title">项目列表</div>
+            <div class="f-r pointer">
+                <img src="/alink-hq/static/img/create-project.png" alt="">
+            </div>
+            <div class="f-r pointer">
+                <img src="/alink-hq/static/img/go-back.png" alt="">
+            </div>
         </div>
-        <div class="f-r pointer">
-            <img src="/alink-hq/static/img/go-back.png" alt="">
-        </div>
-    </div>
-    <!-- <div class="content-iframe">
-
-        </div> -->
-    <div id="projectList" class="">
-        <div class="search-condition ">
-            <form action="" class="clearfix">
-                <div class="f-l search" style="margin-right:125px;">
-                    <div>
-                        <label for="name">项目名</label>
-                        <input type="text" id="name" placeholder="请输入项目名">
-                    </div>
-                    <div class="p-r">
-                        <label for="">创建时间</label>
-                        <input type="text" id="start-time" placeholder="请选择日期" AUTOCOMPLETE="off">
-                        <img src="/alink-hq/static/img/date.png" alt="" class="p-a">
-                    </div>
-                </div>
-                <div class="f-l search">
-                    <div>
-                        <label for="">施工员工账号</label>
-                        <input type="text" placeholder="请输入账号">
-                    </div>
-                    <div class="p-r">
-                        <label for="">更新时间</label>
-                        <input type="text" id="end-time" placeholder="请选择日期" AUTOCOMPLETE="off">
-                        <img src="/alink-hq/static/img/date.png" alt="" class="p-a">
-                    </div>
-                </div>
-                <div class="f-r search-button ">
-                    <button type="submit" class="pointer">查询</button>
-                </div>
-            </form>
-        </div>
-        <div class="search-result">
-            <!-- 有数据时 -->
-            <table border="1" class="hasData active">
-                <thead>
-                <tr>
-                    <th class="all-checkbox">
-                        <img src="/alink-hq/static/img/checkbox.png" alt="">全选
-                    </th>
-                    <th>项目名称</th>
-                    <th>项目中选中网络数量</th>
-                    <th>施工人员</th>
-                    <th class="p-r">
-                        <span class="toTime">创建时间</span>
-                        <img src="/alink-hq/static/img/top-triangle.png" alt="" class="p-a toTop pointer">
-                        <img src="/alink-hq/static/img/bottom-triangle.png" alt="" class="p-a toBottom pointer">
-                    </th>
-                    <th class="p-r">
-                        <span class="toTime">更新时间</span>
-                        <img src="/alink-hq/static/img/top-triangle.png" alt="" class="p-a toTop pointer">
-                        <img src="/alink-hq/static/img/bottom-triangle.png" alt="" class="p-a toBottom pointer">
-                    </th>
-                    <th>操作</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr th:each="project:${pageInfo.list}">
-                    <td class="checkbox">
-                        <img src="/alink-hq/static/img/checkbox.png" alt="">
-                    </td>
-                    <td class="project-name" th:text="${project.name}">
-                        <a href="javascript:void(0);"></a>
-                    </td>
-                    <td th:text="${project.meshNum}"></td>
-                    <td th:text="${project.account}"></td>
-                    <td th:text="${project.create_date}"></td>
-                    <td th:text="${project.update_date}"></td>
-                    <td class="p-r">
-                        <img src="/alink-hq/static/img/edit.png" alt="">
-                        <img src="/alink-hq/static/img/exchange.png" alt="" class="center-img">
-                        <img src="/alink-hq/static/img/delete.png" alt="">
-                        <div class="popup p-a">
-                            重命名
+        <div id="projectList" class="">
+            <div class="search-condition ">
+                <form action="" class="clearfix">
+                    <div class="f-l search" style="margin-right:125px;">
+                        <div>
+                            <label for="">项目名</label>
+                            <input type="text" id="projectName" placeholder="请输入项目名">
                         </div>
-                    </td>
-                </tr>
-                </tbody>
-                <tfoot>
-                <tr>
-                    <td colspan="8" class="clearfix page">
-                        <div class="f-l">
+                        <div class="p-r">
+                            <label for="">创建时间</label>
+                            <input type="text" id="start-time" placeholder="请选择日期" AUTOCOMPLETE="off">
+                            <img src="/alink-hq/static/img/date.png" alt="" class="p-a">
+                        </div>
+                    </div>
+                    <div class="f-l search">
+                        <div>
+                            <label for="">施工员工账号</label>
+                            <input type="text" placeholder="请输入账号" id="account">
+                        </div>
+                        <div class="p-r">
+                            <label for="">更新时间</label>
+                            <input type="text" id="end-time" placeholder="请选择日期" AUTOCOMPLETE="off">
+                            <img src="/alink-hq/static/img/date.png" alt="" class="p-a">
+                        </div>
+                    </div>
+                    <div class="f-r search-button ">
+                        <button type="button" class="pointer">查询</button>
+                    </div>
+                </form>
+            </div>
+            <div class="search-result">
+                <!-- 有数据时 -->
+                <table border="1" class="hasData active">
+                    <thead>
+                    <tr>
+                        <th class="all-checkbox ">
+                            <span style="vertical-align: middle;"><img src="/alink-hq/static/img/checkbox.png" alt="" ></span>
+                            <span class="">全选</span>
+                        </th>
+                        <th>项目名称</th>
+                        <th>项目中选中网络数量</th>
+                        <th>施工人员</th>
+                        <th class="p-r">
+                            <span class="toTime">创建时间</span>
+                            <img src="/alink-hq/static/img/top-triangle.png" alt="" class="p-a toTop pointer">
+                            <img src="/alink-hq/static/img/bottom-triangle.png" alt="" class="p-a toBottom pointer">
+                        </th>
+                        <th class="p-r">
+                            <span class="toTime">更新时间</span>
+                            <img src="/alink-hq/static/img/top-triangle.png" alt="" class="p-a toTop pointer">
+                            <img src="/alink-hq/static/img/bottom-triangle.png" alt="" class="p-a toBottom pointer">
+                        </th>
+                        <th>操作</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="project:${pageInfo.list}">
+                        <td class="checkbox ">
+                            <img src="/alink-hq/static/img/checkbox.png" alt=""  class="pointer">
+                        </td>
+                        <td class="project-name" th:text="${project.name}">
+                            <a href="javascript:void(0);"></a>
+                        </td>
+                        <td th:text="${project.meshNum}"></td>
+                        <td th:text="${project.account}"></td>
+                        <td th:text="${project.create_date}"></td>
+                        <td th:text="${project.update_date}"></td>
+                        <td class="p-r">
+                            <img src="/alink-hq/static/img/edit.png" alt="">
+                            <img src="/alink-hq/static/img/exchange.png" alt="" class="center-img">
+                            <img src="/alink-hq/static/img/delete.png" alt="">
+                            <div class="popup p-a">
+                                重命名
+                            </div>
+                        </td>
+                    </tr>
+                    </tbody>
+                    <tfoot>
+                    <tr>
+                        <td colspan="8" class="clearfix page">
+                            <div class="f-l">
                                 <span class="selected-order">已选择
                                     <span class="amount">100</span>
                                     条订单
@@ -121,130 +115,135 @@
                             <span>
                                     <img src="/alink-hq/static/img/delete-un.png" alt="">
                                 </span>
-                        </div>
-                        <!--<div th:replace="common/page::page"></div>-->
-                        <div class="f-r page-right">
+                            </div>
+                            <!--<div th:replace="common/page::page"></div>-->
+                            <div class="f-r page-right">
                         <span>
                         <img src="/alink-hq/static/img/left-arrow.png" alt="">
                         </span>
-                            <span>1</span>
+                                <span>1</span>
                             <span>
                         <img src="/alink-hq/static/img/right-arrow-color.png" alt="">
                         </span>
                             <span class="m-l-15 m-r-20">
-                        共
-                        <span>9</span>
-                        页
+                          共
+                                    <span th:text="${pageInfo.pages}" class="pageTotal" id="pageTotal"></span>
+                                    页/<span th:text="${pageInfo.total}"></span>条数据
                         </span>
                             <span class="m-r-15">
-                        <input type="number">
+                        <input type="number" id="skipPage"/>
                         </span>
                             <span class="m-r-35">
-                        <img src="/alink-hq/static/img/skip.png" alt="">
+                        <img src="/alink-hq/static/img/skip.png" alt="" >
                         </span>
-                            <span class="m-r-15r">每页显示：</span>
+                                <span class="m-r-15r">每页显示：</span>
                             <span class="m-r-20">
-                        <select name="" id="">
-                        <option value="">10</option>
-                        <option value="">5</option>
+                        <select name="" id="page-select">
+                            <option value="10">10</option>
+                            <option value="5">5</option>
                         </select>
                         </span>
-                        </div>
-                    </td>
-                </tr>
-                </tfoot>
-            </table>
-            <!-- 无数据时 -->
-            <table border="1" class="noData ">
-                <thead>
-                <tr>
-                    <th class="all-checkbox">
-                        <img src="/alink-hq/static/img/checkbox.png" alt="">全选
-                    </th>
-                    <th>项目名称</th>
-                    <th>项目中选中网络数量</th>
-                    <th>施工人员</th>
-                    <th class="p-r">
-                        <span class="toTime">创建时间</span>
-                        <img src="/alink-hq/static/img/top-triangle.png" alt="" class="p-a toTop pointer">
-                        <img src="/alink-hq/static/img/bottom-triangle.png" alt="" class="p-a toBottom pointer">
-                    </th>
-                    <th class="p-r">
-                        <span class="toTime">更新时间</span>
-                        <img src="/alink-hq/static/img/top-triangle.png" alt="" class="p-a toTop pointer">
-                        <img src="/alink-hq/static/img/bottom-triangle.png" alt="" class="p-a toBottom pointer">
-                    </th>
-                    <th>操作</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr>
-                    <td colspan="8">
-                        <img src="/alink-hq/static/img/no-data.png" alt="">
-                        <p>暂无数据</p>
-                    </td>
-                </tr>
-                </tbody>
-            </table>
+                            </div>
+                        </td>
+                    </tr>
+                    </tfoot>
+                </table>
+                <!-- 无数据时 -->
+                <table border="1" class="noData ">
+                    <thead>
+                    <tr>
+                        <th class="all-checkbox">
+                            <img src="/alink-hq/static/img/checkbox.png" alt="">全选
+                        </th>
+                        <th>项目名称</th>
+                        <th>项目中选中网络数量</th>
+                        <th>施工人员</th>
+                        <th class="p-r">
+                            <span class="toTime">创建时间</span>
+                            <img src="/alink-hq/static/img/top-triangle.png" alt="" class="p-a toTop pointer">
+                            <img src="/alink-hq/static/img/bottom-triangle.png" alt="" class="p-a toBottom pointer">
+                        </th>
+                        <th class="p-r">
+                            <span class="toTime">更新时间</span>
+                            <img src="/alink-hq/static/img/top-triangle.png" alt="" class="p-a toTop pointer">
+                            <img src="/alink-hq/static/img/bottom-triangle.png" alt="" class="p-a toBottom pointer">
+                        </th>
+                        <th>操作</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td colspan="8">
+                            <img src="/alink-hq/static/img/no-data.png" alt="">
+                            <p>暂无数据</p>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
-</div>
 </div>
 <script src="/alink-hq/static/js/jquery.min.js"></script>
 <script src="/alink-hq/static/laydate/laydate.js"></script>
 <script>
     //日期选择
     laydate.render({
-        elem: '#start-time' //指定元素
+        elem: '#start-time' ,//指定元素
+        range: true
     });
     laydate.render({
-        elem: '#end-time' //指定元素
+        elem: '#end-time' ,//指定元素
+        range: true
     });
     $('.one-list li').each(function () {
         var tab = $(this).attr('tab');
         if (tab == 'projectList') {
             $(this).addClass('active').siblings().removeClass('active');
-            ;
         }
     })
     //复选框
-    $('td.checkbox img').click(function () {
-        var hasCheckbox = true;
-        var imgUrl = $(this).attr('src');
-
-        if (imgUrl == '/alink-hq/static/img/checkbox.png') {
-            $(this).attr('src', '/alink-hq/static/img/checkbox-gou.png');
-
-        } else {
-            $(this).attr('src', '/alink-hq/static/img/checkbox.png');
-
-            // $('th.all-checkbox>img').attr('src', '../img/checkbox.png');
-
-
+    $('.checkbox img').click(function(){
+        var hasCheckbox=false;
+        var imgUrl=$(this).attr('src');
+        var isCheckbox='/alink-hq/static/img/checkbox-gou.png';
+        var noCheckbox='/alink-hq/static/img/checkbox.png';
+        if(imgUrl==noCheckbox){
+            $(this).attr('src',isCheckbox);
+        }else{
+            $(this).attr('src',noCheckbox);
         }
-        $(this).parents('tbody').find('.checkbox img').each(function () {
-            var otherCheckbox = $(this).attr('src');
-            console.log('otherCheckbox', otherCheckbox);
-            if (otherCheckbox == '/alink-hq/static/img/checkbox.png') {
-                hasCheckbox = false;
-                // $('th.all-checkbox>img').attr('src', '../img/checkbox.png');
+        $('tbody .checkbox img').each(function(){
+            var imgUrl2= $(this).attr('src');
+            if(imgUrl2==noCheckbox){
+                hasCheckbox=true;
             }
         })
-
-    })
-
-    $('th.all-checkbox>img').click(function () {
-        var isCheckbox = $(this).attr('src');
-        // var hasCheckbox = true;
-        if (isCheckbox == '/alink-hq/static/img/checkbox-gou.png') {
-            $(this).attr('src', '/alink-hq/static/img/checkbox.png');
-            $('td.checkbox img').attr('src', '/alink-hq/static/img/checkbox.png');
-        } else {
-            $(this).attr('src', '/alink-hq/static/img/checkbox-gou.png');
-            $('td.checkbox img').attr('src', '/alink-hq/static/img/checkbox-gou.png');
+        if(!hasCheckbox){
+            $('.all-checkbox img').attr('src',isCheckbox);
+        }else{
+            $('.all-checkbox img').attr('src',noCheckbox);
         }
     })
-    $(function(){
+    $('.all-checkbox img').click(function(){
+        var imgUrl=$(this).attr('src');
+        var isCheckbox='/alink-hq/static/img/checkbox-gou.png';
+        var noCheckbox='/alink-hq/static/img/checkbox.png';
+        if(imgUrl==noCheckbox){
+            $(this).attr('src',isCheckbox);
+            $('tbody .checkbox img').each(function(){
+                $(this).attr('src',isCheckbox);
+            })
+        }else{
+            $(this).attr('src',noCheckbox);
+            $('tbody .checkbox img').each(function(){
+                $(this).attr('src',noCheckbox);
+            })
+        }
+    })
+
+
+    $(function () {
         myBrowser()
         $('.one-list li').each(function () {
             $('.main-left>ul>li.one-list:eq(0)').find('.on-off-triangle').attr('src', '/alink-hq/static/img/right-triange-un.png');
@@ -265,6 +264,135 @@
             $(this).parent().parent('.one-list').find('.two-list').removeClass('active');
         }
     })
+
+
+    //条件筛选
+    $(function () {
+        var url = window.location.href;
+        var account = GetUrlParam("account");
+        var projectName = GetUrlParam("projectName");
+        var startCreateDate = GetUrlParam("startCreateDate");
+        var endCreateDate = GetUrlParam("endCreateDate");
+        var startUpdateDate = GetUrlParam("startUpdateDate");
+        var endUpdateDate= GetUrlParam("endUpdateDate");
+        var pageSize = GetUrlParam("pageSize");
+        var pageNum = GetUrlParam("pageNum");
+        $('#skipPage').val(pageNum);
+        $('#page-select option').each(function () {
+            if ($(this).val() == pageSize) {
+                $(this).attr("selected", "selected");
+            }
+        })
+        if ( startCreateDate != '' && endCreateDate!= '') {
+            var startTime = startCreateDate + ' - ' + endCreateDate;
+            $('#start-time').val(startTime);
+        }
+        if ( startUpdateDate != '' && endUpdateDate!= '') {
+            var endTime = startUpdateDate + ' - ' + endUpdateDate;
+            $('#end-time').val(endTime);
+        }
+        $('#account').val(account);
+        $('#projectName').val(projectName);
+//        $('#company').val(company);
+//        $('table tr td.role').each(function () {
+////            console.log($(this).text());
+//            var roleId = parseInt($(this).text());
+//            if (roleId == 4) {
+//                $(this).text('施工人员');
+//            } else if (roleId == 3) {
+//                $(this).text('乙方管理员');
+//            } else if (roleId == 2) {
+//                $(this).text('管理员');
+//            }
+//        })
+//        $('table tr td.status').each(function () {
+////            console.log($(this).text());
+//            var status = parseInt($(this).text());
+//            if (status == 1) {
+//                $(this).text('启用');
+//            } else if (status == 0) {
+//                $(this).text('禁用');
+//            }
+//        })
+        //查询按钮点击
+        $('.search-button button').click(function () {
+            var pageSize = $('#page-select option:selected').val();
+            var pageNum = $('#skipPage').val();
+            if(pageNum==''){
+                pageNum==1;
+            }else{
+                pageNum=parseInt(pageNum);
+            }
+//            console.log('pageNum',pageNum);
+            condition(pageSize, pageNum);
+        })
+        //选择页数变化
+        $('#page-select').change(function () {
+            var pageSize = $(this).children('option:selected').val();
+            var pageNum = parseInt($('#skipPage').val());
+            condition(pageSize, pageNum);
+        });
+        //跳转页数变化
+        $('#skipPageBtn').click(function () {
+            var pageSize = $('#page-select option:selected').val();
+            var pageNum = parseInt($('#skipPage').val());
+            condition(pageSize, pageNum);
+        })
+    })
+    function condition(pageSize, pageNum) {
+        var url = window.location.href;
+        var i = url.indexOf("?");
+        if (i != -1) {
+            var url2 = url.substring(0, i + 1);
+//            console.log('url2', url2);
+        } else {
+            var url2 = url + '?';
+        }
+        var account = $('#account').val();
+        var projectName=$('#projectName').val();
+
+//        if ($('#company').val() != '请选择公司') {
+//            var company = $('#company').val();
+//        } else {
+//            var company = '';
+//        }
+//        if ($('#role').val() != '请选择角色') {
+//            var role = $('#role').val();
+//        } else {
+//            var role = '';
+//        }
+        var startTime = $('#start-time').val();
+        var startCreateDate = startTime.substring(0, 10);
+        var endCreateDate = startTime.substring(13, 23);
+        var endTime = $('#end-time').val();
+        var startUpdateDate = startTime.substring(0, 10);
+        var endUpdateDate = startTime.substring(13, 23);
+//        console.log('pageNum', pageNum);
+//        var userId = parseInt($('#useId_hidden').val());
+        var newUrl = url2 + '&pageNum=' + pageNum + '&pageSize=' + pageSize+'&projectName='+projectName + '&account=' + account + '&startCreateDate=' + startCreateDate + '&endCreateDate=' +endCreateDate+'&startUpdateDate='+startUpdateDate+'&endUpdateDate='+endUpdateDate;
+//        console.log(account, role, company, startDate, endDate, num);
+        location.href = newUrl;
+    }
+
+    //paraName 等找参数的名称
+    function GetUrlParam(paraName) {
+        var url = document.location.toString();
+        var arrObj = url.split("?");
+        if (arrObj.length > 1) {
+            var arrPara = arrObj[1].split("&");
+            var arr;
+            for (var i = 0; i < arrPara.length; i++) {
+                arr = arrPara[i].split("=");
+                if (arr != null && arr[0] == paraName) {
+                    return arr[1];
+                }
+            }
+            return "";
+        }
+        else {
+            return "";
+        }
+    }
 </script>
 </body>
 
