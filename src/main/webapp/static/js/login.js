@@ -1,24 +1,4 @@
 $(function () {
-    // $('.errMsg').html('');
-    // $('p.page-hint').text('');
-    // $('p.add-hint').text('');
-    // $('p.password-hint').text('');
-    // $('#phone-f').val('');
-    // $('#code-f').val('');
-    // $('#pwd-f').val('');
-    // $('#uname').val('');
-    // $('#phone-l').val('');
-    // $('#pwd').val('');
-    // $('#code-l').val('');
-    // $('#email-e').val('');
-    // $('#code-e').val('');
-    // $('#pwd-e').val('');
-    // $('.email-find-password .email-add-hint').text('');
-    // $('.email-find-password .email-code-hint').text('');
-    // $('.email-find-password .email-password-hint').text('');
-    // $('.phone-find-password .mobile-add-hint').text('');
-    // $('.phone-find-password .mobile-code-hint').text('');
-    // $('.phone-find-password .mobile-password-hint').text('');
     $(".login-in-box-tab>div:not('.icon-input')").click(function () {
         $('.errMsg').html('');
         $('p.page-hint').text('');
@@ -230,7 +210,33 @@ $(function () {
     //     // $('.container').unbind('click');
     // });
     //清空焦点事件
-
+    $("#uname").keyup(function(){
+        var unameVal = $('#uname').val();
+        var p = /^[0-9]+$/;
+        var e = new RegExp("[@]");
+        //验证手机号是否正确
+        var regPhone = /^[1][3,4,5,7,8,9][0-9]{9}$/;
+        var phoneResult = regPhone.test(unameVal);
+        //验证邮箱
+        var regEmail = /^([a-zA-Z]|[0-9])(\w|\-)+@[a-zA-Z0-9]+\.([a-zA-Z]{2,4})$/;
+        var emailResult = regEmail.test(unameVal);
+        if(p.test(unameVal) && unameVal.length == 11){
+            console.log('输入手机号')
+            if (unameVal != '' && !phoneResult) {
+                $('.password-login .add-hint').text('请输入正确的手机号');
+            } else {
+                $('.password-login .add-hint').text('');
+            }
+        }else if(e.test(unameVal)){
+            if (unameVal != '' && !emailResult) {
+                $('.password-login .add-hint').text('请输入正确的邮箱');
+            } else {
+                $('.password-login .add-hint').text('');
+            }
+        }else{
+            $('.password-login .add-hint').text('');
+        }
+    })
 })
 
 //点击任意处检测手机或邮箱格式
