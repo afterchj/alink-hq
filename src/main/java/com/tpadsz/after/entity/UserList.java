@@ -9,6 +9,7 @@ public class UserList {
     private String uname;
     private String mobile;
     private String email;
+    private Integer fid;
     private String coname;
     private String role_id;
     private String create_date;
@@ -52,6 +53,14 @@ public class UserList {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public Integer getFid() {
+        return fid;
+    }
+
+    public void setFid(Integer fid) {
+        this.fid = fid;
     }
 
     public String getConame() {

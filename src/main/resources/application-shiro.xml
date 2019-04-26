@@ -64,10 +64,14 @@
                 /style/** = anon
                 /static/** = anon
                 /rest/** = anon
+                /login = anon
+                /checkCode = anon
+                /restPwd = anon
+                /checkUser = anon
+                /verify = anon
                 /place/move = authc,perms[delete]
                 /mesh/delete = authc,perms[delete]
-                /mesh/** = authc
-                /** = anon
+                /** = authc
             </value>
         </property>
     </bean>

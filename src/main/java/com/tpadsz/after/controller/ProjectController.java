@@ -3,6 +3,7 @@ package com.tpadsz.after.controller;
 import com.alibaba.fastjson.JSONArray;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.tpadsz.after.entity.Firm;
 import com.tpadsz.after.entity.ProjectList;
 import com.tpadsz.after.entity.User;
 import com.tpadsz.after.entity.dd.ResultDict;
@@ -134,19 +135,41 @@ public class ProjectController {
         return map;
     }
 
-
     @RequestMapping(value = "/transferPage", method = RequestMethod.GET)
     public String transferPage(HttpSession session, String projectInfo, Model model) {
-        User loginUser = (User) session.getAttribute("use r");
+        User loginUser = (User) session.getAttribute("user");
         String uid = loginUser.getId();
         List<ProjectList> projectList = JSONArray.parseArray(projectInfo, ProjectList.class);
         Integer role_id = accountService.findRoleIdByUid(uid);
-//        List<Firm> firmList = getFirmInfo(role_id, uid);
-//        model.addAttribute("firmList", firmList);
-        model.addAttribute("account", "");
-        model.addAttribute("coname", "");
-        return "userManage/userTurnOver";
+        List<Firm> firmList = getFirmInfo(role_id, uid);
+        model.addAttribute("projectList", projectList);
+        model.addAttribute("firmList", firmList);
+        return "userManage/useTurnOver";
     }
 
+    @RequestMapping(value = "/transfer", method = RequestMethod.POST)
+    @ResponseBody
+    public Map<String, String> transfer(String account, Integer fid) {
+        Map<String, String> map = new HashMap<>();
+        try {
+//          accountService.transferAccount(account, fid);
+            map.put("result", ResultDict.SUCCESS.getCode());
+            map.put("account", account);
+        } catch (Exception e) {
+            map.put("result", ResultDict.SYSTEM_ERROR.getCode());
+        }
+        return map;
+    }
+
+
+    private List<Firm> getFirmInfo(Integer role_id, String uid) {
+        List<Firm> firmList = new ArrayList<>();
+        if (role_id == 1 || role_id == 2) {
+            firmList = accountService.findFirmList();
+        } else if (role_id == 3) {
+            firmList = accountService.findFirmByUid(uid);
+        }
+        return firmList;
+    }
 
 }
