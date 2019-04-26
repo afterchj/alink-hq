@@ -64,6 +64,7 @@
                 /style/** = anon
                 /static/** = anon
                 /rest/** = anon
+                /test/** = anon
                 /place/move = authc,perms[delete]
                 /mesh/delete = authc,perms[delete]
                 /mesh/** = authc

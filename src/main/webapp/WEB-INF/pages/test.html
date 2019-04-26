@@ -1,60 +1,51 @@
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<html lang="en">
 <head>
-    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
-    <title>jQueryStudy</title>
-    <style>
-        .int {
-            height: 30px;
-            text-align: left;
-            width: 600px;
-        }
-
-        label {
-            width: 200px;
-            margin-left: 20px;
-        }
-
-        .high {
-            color: red;
-        }
-
-        .msg {
-            font-size: 13px;
-        }
-
-        .onError {
-            color: red;
-        }
-
-        .onSuccess {
-            color: green;
-        }
-    </style>
-    <script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
-    <script type="text/javascript" src="static/js/test.js"></script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>jQuery UI Autocomplete - Default functionality</title>
+    <link rel="stylesheet" href="/alink-hq/static/css/jquery-ui.css">
+    <script src="/alink-hq/static/js/jquery.min.js"></script>
+    <script src="/alink-hq/static/js/jquery-ui.js"></script>
+    <script>
+        $( function() {
+            var availableTags = [
+                "ActionScript",
+                "AppleScript",
+                "Asp",
+                "BASIC",
+                "C",
+                "C++",
+                "Clojure",
+                "COBOL",
+                "ColdFusion",
+                "Erlang",
+                "Fortran",
+                "Groovy",
+                "Haskell",
+                "Java",
+                "JavaScript",
+                "Lisp",
+                "Perl",
+                "PHP",
+                "Python",
+                "Ruby",
+                "Scala",
+                "Scheme"
+            ];
+            $( "#tags" ).autocomplete({source: availableTags,limit:5});
+//             $("#tags").autocomplete({source:"/alink-hq/getContext",limit:5});
+        } );
+    </script>
 </head>
 <body>
-<form method="post" action="#">
-    <div class="int">
-        <label for="name">姓名：</label>
-        <input type="text" id="name" class="required"/>
-    </div>
-    <div class="int">
-        <label for="email">邮箱：</label>
-        <input type="text" id="email" class="required"/>
-    </div>
-    <div class="int">
-        <label for="address">住址：</label>
-        <input type="text" id="address"/>
-    </div>
-    <div class="int">
-        <input type="submit" value="提交" id="send" style="margin-left: 70px;"/>
-        <input type="reset" value="重置" id="res"/>
-    </div>
-</form>
-<script>
+<h1>搜索框下拉自动填充</h1>
+<hr/>
+<div class="ui-widget">
+    <label for="tags">Tags: </label>
+    <input id="tags">
+</div>
 
-</script>
+
 </body>
 </html>

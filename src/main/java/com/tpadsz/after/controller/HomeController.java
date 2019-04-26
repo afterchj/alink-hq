@@ -24,6 +24,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -57,9 +58,9 @@ public class HomeController {
         return "authError";
     }
 
-    @RequestMapping("/welcome")
+    @RequestMapping("/test")
     public String welcome() {
-        return "welcome";
+        return "test";
     }
 
     @RequestMapping("/useList")
@@ -150,10 +151,14 @@ public class HomeController {
     }
 
     @ResponseBody
-    @RequestMapping("/test")
-    public String test(String account) {
-        List<User> list = userService.selectAll();
-        return "";
+    @RequestMapping("/getContext")
+    public List<Map> getContext() {
+        List<Map> list = new ArrayList<>();
+        Map map = new HashMap();
+        map.put("id", 8);
+        map.put("label", "eight");
+        list.add(map);
+        return list;
     }
 
     @ResponseBody
