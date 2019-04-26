@@ -7,7 +7,7 @@
     <link rel="stylesheet" th:href="@{/static/css/base.css}">
     <link rel="stylesheet" th:href="@{/static/css/leftNav.css}">
     <link rel="stylesheet" th:href="@{/static/css/mesh.css}">
-    <title>移交账号</title>
+    <title>组移动</title>
 </head>
 
 <body>
@@ -16,7 +16,7 @@
     <div th:replace="common/left::left"></div>
     <div class="main-right">
         <div class="clearfix main-right-nav">
-            <div class="f-l main-right-title">网络移动</div>
+            <div class="f-l main-right-title">组移动</div>
             <div class="f-r pointer">
                 <img src="/alink-hq/static/img/go-back.png" alt="" onclick="history.back()">
             </div>
@@ -27,7 +27,7 @@
                     网络移动
                 </div>
                 <div class="f-content">
-                    <input type="hidden" name="mids" th:value="${mids}">
+                    <input type="hidden" name="mids" th:value="${gids}">
                     <div class="accountMsg clearfix" th:each="mesh:${meshMap}">
                         <div class="f-l mesh-name">
                             <span th:text="${mesh.mname}"></span>

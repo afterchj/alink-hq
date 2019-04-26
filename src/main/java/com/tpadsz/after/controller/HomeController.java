@@ -134,7 +134,9 @@ public class HomeController {
     }
 
     @RequestMapping("/home")
-    public String home() {
+    public String home(String uname, HttpSession session) {
+        User loginUser = userService.selectByUsername(uname);
+        session.setAttribute("user", loginUser);
         return "welcome";
     }
 

@@ -1,36 +1,30 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.tpadsz.after.dao.MeshDao">
-
+<mapper namespace="com.tpadsz.after.dao.GroupDao">
 
     <sql id="Base_Column_List">
-		m.id,
-        m.uid,
-        m.project_id,
+		g.id,
+        g.mid,
+        g.gname,
         m.mname,
         m.mesh_id,
-        m.mesh_type,
-        p.name,
-        pl.pcount,
-        s.scount
+        l.gcount
 	</sql>
 
     <sql id="common_choose">
         <if test="uid!=null and uid!=''">
             <choose>
                 <when test="role == 'admin'">
-                    AND p.uid IN (SELECT u.id FROM f_user_account u INNER JOIN f_user_role r ON u.id=r.user_id WHERE
-                    r.role_id in (2,3,4))
+                    AND m.uid IN (SELECT u.id FROM f_user_account u INNER JOIN f_user_role r ON u.id=r.user_id WHERE r.role_id in (2,3,4))
                 </when>
                 <when test="role == 'manager'">
-                    AND p.uid IN (SELECT c.uid FROM f_user_customer c WHERE fid=(SELECT fid FROM f_user_customer WHERE
-                    uid=#{uid}))
+                    AND m.uid IN (SELECT c.uid FROM f_user_customer c WHERE fid=(SELECT fid FROM f_user_customer WHERE uid=#{uid}))
                     <!--
-                        AND p.uid IN (SELECT c.uid FROM f_user_customer c INNER JOIN f_user_role r ON c.uid=r.user_id WHERE r.role_id in (4) AND fid=(SELECT fid FROM f_user_customer WHERE uid=#{uid})) OR p.uid=#{uid}
+                        AND m.uid IN (SELECT c.uid FROM f_user_customer c INNER JOIN f_user_role r ON c.uid=r.user_id WHERE r.role_id in (4) AND fid=(SELECT fid FROM f_user_customer WHERE uid=#{uid})) OR m.uid=#{uid}
                      -->
                 </when>
                 <when test="role == 'user'">
-                    AND p.uid =#{uid}
+                    AND m.uid =#{uid}
                 </when>
                 <!--<otherwise>-->
                 <!--</otherwise>-->
@@ -40,11 +34,9 @@
     <select id="getByMap" resultType="map" parameterType="SearchDict">
         SELECT
         <include refid="Base_Column_List"/>
-        FROM f_mesh m
-        INNER JOIN f_project p ON m.project_id = p.id
-        INNER JOIN (SELECT COUNT(1) pcount,mid FROM f_place GROUP BY mid) pl ON pl.mid=m.id
-        INNER JOIN (SELECT COUNT(1) scount,mid FROM f_scene GROUP BY mid) s ON s.mid=m.id
-        WHERE 1=1
+        FROM f_group g
+        INNER JOIN f_mesh m ON m.id = g.mid
+        INNER JOIN (SELECT COUNT(1) gcount,gid FROM f_light GROUP BY gid) l ON g.id=l.gid
         <include refid="common_choose"></include>
         <if test="mname!=null and mname!=''">
             AND m.mname LIKE CONCAT('%',#{mname},'%')
@@ -80,32 +72,31 @@
         </if>
     </select>
 
-    <select id="getCountByTable" resultType="int" parameterType="string" statementType="STATEMENT">
-        select count(*) from ${_parameter}
-    </select>
-
-    <select id="selectByMid" resultType="map" parameterType="list">
+    <select id="selectByGid" resultType="map" parameterType="list">
         SELECT
-        m.id,
-        m.mname,
-        m.mesh_id,
-        p.name
-        FROM f_mesh m
-        INNER JOIN f_project p ON m.project_id = p.id
-        INNER JOIN (SELECT COUNT(1) pcount,mid FROM f_place GROUP BY mid) pl ON pl.mid=m.id
-        INNER JOIN (SELECT COUNT(1) scount,mid FROM f_scene GROUP BY mid) s ON s.mid=m.id
-        WHERE m.id IN
-        <foreach collection="list" item="mid" index="index" open="(" close=")" separator=",">
-            #{mid}
+            g.id,
+            g.mid,
+            g.gname,
+            m.mesh_id,
+            p.id pid,
+            p.pname
+        FROM f_group g
+        INNER JOIN f_place p ON g.pid=p.id
+        INNER JOIN f_mesh m ON m.id=g.mid
+        WHERE g.id IN
+        <foreach collection="list" item="id" index="index" open="(" close=")" separator=",">
+            #{id}
         </foreach>
     </select>
 
-    <select id="getProjects" resultType="OptionList" parameterType="map">
-        SELECT id,name label FROM f_project p WHERE 1=1
-        <include refid="common_choose"></include>
+    <select id="getPlaces" resultType="OptionList" parameterType="map">
+        SELECT id,pname label FROM f_place WHERE 1=1
+        <if test="mid!=null and mid!=''">
+            AND mid=#{mid}
+        </if>
     </select>
 
-    <delete id="deleteMeshByIds" parameterType="list">
+    <delete id="deleteGroupByIds" parameterType="list">
         DELETE FROM f_mesh
         WHERE id IN
         <foreach collection="list" item="id" index="index" open="(" close=")" separator=",">

@@ -8,34 +8,25 @@
     <script src="/alink-hq/static/js/jquery.min.js"></script>
     <script src="/alink-hq/static/js/jquery-ui.js"></script>
     <script>
-        $( function() {
-            var availableTags = [
-                "ActionScript",
-                "AppleScript",
-                "Asp",
-                "BASIC",
-                "C",
-                "C++",
-                "Clojure",
-                "COBOL",
-                "ColdFusion",
-                "Erlang",
-                "Fortran",
-                "Groovy",
-                "Haskell",
-                "Java",
-                "JavaScript",
-                "Lisp",
-                "Perl",
-                "PHP",
-                "Python",
-                "Ruby",
-                "Scala",
-                "Scheme"
+        $(function () {
+            var json = [
+                {'id': '0', 'label': 'zero'},
+                {'id': '1', 'label': 'one'},
+                {'id': '2', 'label': 'two'},
+                {'id': '3', 'label': 'three'},
+                {'id': '4', 'label': 'four'},
+                {'id': '5', 'label': 'five'},
+                {'id': '6', 'label': 'six'},
+                {'id': '7', 'label': 'seven'},
+                {'id': '8', 'label': 'eight'},
+                {'id': '9', 'label': 'night'},
+                {'id': '10', 'label': 'ten'}
             ];
-            $( "#tags" ).autocomplete({source: availableTags,limit:5});
-//             $("#tags").autocomplete({source:"/alink-hq/getContext",limit:5});
-        } );
+            $.getJSON("/alink-hq/mesh/getProjects",{"uid": 18}, function (json) {
+                console.log(typeof json);
+                $("#tags").autocomplete({source: json, limit: 5});
+            });
+        });
     </script>
 </head>
 <body>
