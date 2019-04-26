@@ -566,9 +566,9 @@ function phoneLogin() {
             // console.log(isSuccess);
             if (isSuccess == 'success') {
                 $('.phone-login form').submit();
-            } else if(isSuccess=='failure'){
+            } else if (isSuccess == 'failure') {
                 $('.phone-login .password-hint').text('验证码不正确');
-            }else if (isSuccess == 'expire') {
+            } else if (isSuccess == 'expire') {
                 // $('.phone-find-password .mobile-add-hint').text('');
                 $('.phone-login .password-hint').text('验证码已超时，请重新获取');
                 // $('.phone-find-password .mobile-password-hint').text('请输入新密码');
@@ -918,7 +918,11 @@ function checkExist(phoneVal) {
     return isBind;
 }
 function go(str) {
-    location.href = "/alink-hq/home?uname=" + str;
+    if (str.indexOf('@') != -1) {
+        $("form:eq(3)").submit();
+    } else {
+        $("form:eq(2)").submit();
+    }
 }
 //新密码键盘事件
 function keyup() {

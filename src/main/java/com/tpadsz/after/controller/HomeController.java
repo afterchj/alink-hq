@@ -178,7 +178,6 @@ public class HomeController {
             str = "failure";
         }
         logger.info("user:" + uname + ",count=" + count);
-
         return str;
     }
 
@@ -249,7 +248,7 @@ public class HomeController {
         if (StringUtils.isNotEmpty(email)) {
             map.put("email", email);
         }
-        logger.info("mobile=" + mobile + ",email=" + email + "pwd=" + pwd);
+        logger.info("mobile=" + mobile + ",email=" + email + ",pwd=" + pwd);
         ShiroDbRealm.HashPassword hashPassword = new ShiroDbRealm().encrypt(Encryption.getMD5Str(pwd));
         System.out.println(hashPassword.password + "\t" + hashPassword.salt);
         map.put("pwd", hashPassword.password);
@@ -268,14 +267,18 @@ public class HomeController {
     public String login(User user, HttpSession session, ModelMap map) {
         String userName = user.getUname();
         String pwd = user.getPwd();
+        String mobile = user.getMobile();
+        String email = user.getEmail();
         EasyTypeToken token;
-        if (StringUtils.isEmpty(pwd)) {
-            userName = user.getMobile();
+        if (StringUtils.isNotEmpty(mobile)) {
+            userName=mobile;
+            token = new EasyTypeToken(userName);
+        } else if (StringUtils.isNotEmpty(email)) {
+            userName=email;
             token = new EasyTypeToken(userName);
         } else {
             token = new EasyTypeToken(userName, Encryption.getMD5Str(pwd));
         }
-        logger.info("userName=" + userName + ",pwd=" + pwd);
         Subject subject = SecurityUtils.getSubject();
         try {
             subject.login(token);
