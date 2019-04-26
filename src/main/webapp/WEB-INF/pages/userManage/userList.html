@@ -138,7 +138,7 @@
                                            oninput="skipLimit()"/>
                                 </span>
                                 <span class="m-r-35">
-                                    <img src="/alink-hq/static/img/skip.png" id="skipPageBtn" class="cursor: pointer;"
+                                    <img src="/alink-hq/static/img/skip.png" id="skipPageBtn" class="pointer"
                                          alt="">
                                 </span>
                                 <span class="m-r-15r">每页显示：</span>
@@ -493,7 +493,7 @@
             }
         })
         $('table tr td.status').each(function () {
-            console.log($(this).text());
+//            console.log($(this).text());
             var status = parseInt($(this).text());
             if (status == 1) {
                 $(this).text('启用');
@@ -510,7 +510,7 @@
             }else{
                 pageNum=parseInt(pageNum);
             }
-            console.log('pageNum',pageNum);
+//            console.log('pageNum',pageNum);
             condition(pageSize, pageNum);
         })
         //选择页数变化
@@ -533,7 +533,7 @@
         var i = url.indexOf("?");
         if (i != -1) {
             var url2 = url.substring(0, i + 1);
-            console.log('url2', url2);
+//            console.log('url2', url2);
         } else {
             var url2 = url + '?';
         }
@@ -552,7 +552,7 @@
         var startDate = addTime.substring(0, 10);
         var endDate = addTime.substring(13, 23);
 
-        console.log('pageNum', pageNum);
+//        console.log('pageNum', pageNum);
 //        var userId = parseInt($('#useId_hidden').val());
         var newUrl = url2 + '&pageNum=' + pageNum + '&pageSize=' + pageSize + '&account=' + account + '&fid=' + company + '&roleId=' + role + '&startDate=' + startDate + '&endDate=' + endDate;
 //        console.log(account, role, company, startDate, endDate, num);

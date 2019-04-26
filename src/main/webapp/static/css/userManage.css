@@ -53,6 +53,7 @@
     font-size: 15px;
     color: #3c3c3c;
     text-align: center;
+    background-color: #fff;
 }
 .num{
     border: 1px solid #bbb;
@@ -224,9 +225,9 @@
     top: 0;
     background-color: black;
     z-index: 10;
-    -moz-opacity: 0.65;
-    opacity: .65;
-    filter: alpha(opacity=65);
+    -moz-opacity: 0.45;
+    opacity: .45;
+    filter: alpha(opacity=45);
     display: none;
 }
 .pop-nav {
@@ -301,4 +302,57 @@
 }
 .account-part{
     margin-bottom: 30px;
+}
+.create-account-hint{
+    margin-left: 50px;
+    color: #fb2a2a;
+    font-size: 15px;
+}
+.pop-nav .close{
+    right:20px;
+}
+.c-width{
+    width: 146px;
+    height: 34px;
+    line-height: 34px;
+    border-bottom: 1px solid #bbb;
+    font-size: 14px;
+}
+.c-width.one{
+    border-right: 1px solid #bbb;
+}
+.c-list .c-width{
+    color: #3c3c3c;
+}
+.c-list{
+    overflow-y: auto;
+    overflow-x: hidden;
+    max-height: 105px;
+    background-color: #fff;
+}
+.confirm-create-iframe .c-main{
+    width: 293px;
+    border: 1px solid #bbb;
+    margin: 20px auto 15px;
+}
+.c-title {
+    background-color: #fafafa;
+}
+.create-content a{
+    color: #3598db;
+    cursor: pointer;
+}
+.create-content a:hover{
+    color: #003e68;
+}
+.create-content .c-hint{
+    color: #666;
+    margin-top: 11px;
+    font-size: 14px;
+}
+#preload-anim{
+    display: none;
+}
+#preload-anim.active{
+    display: block;
 }

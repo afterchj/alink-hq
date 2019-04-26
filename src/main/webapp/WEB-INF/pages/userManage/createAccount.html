@@ -6,6 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="/alink-hq/static/css/loding.css"/>
     <link rel="stylesheet" href="/alink-hq/static/css/base.css"/>
     <link rel="stylesheet" href="/alink-hq/static/css/leftNav.css"/>
     <link rel="stylesheet" href="/alink-hq/static/css/userManage.css"/>
@@ -33,24 +34,24 @@
                     <form th:action="@{/account/create}" method="GET">
                         <div>
                             <label for="">隶属公司：</label>
-                            <select name="" id="">
+                            <select name="" id="fid">
                                 <option th:each="firm:${firmList}" name="fid" th:value="${firm.id}"
                                         th:text="${firm.coname}"></option>
                             </select>
                         </div>
-                        <div>
+                        <div class="role-radio">
                             <label for="">角色：</label>
                             <label shiro:hasAnyRoles="super" for="" class="l-radio">
                                 <img src="/alink-hq/static/img/select-on.png" alt=""/>
-                                <input type="radio" value=""/>管理员
+                                <input type="radio" value="2"/>管理员
                             </label>
                             <label shiro:hasAnyRoles="super,admin" for="" class="l-radio">
                                 <img src="/alink-hq/static/img/select-un.png" alt=""/>
-                                <input type="radio" value=""/>乙方管理员
+                                <input type="radio" value="3"/>乙方管理员
                             </label>
                             <label shiro:hasAnyRoles="super,admin,manager" for="" class="l-radio">
                                 <img src="/alink-hq/static/img/select-un.png" alt=""/>
-                                <input type="radio" value=""/>施工人员
+                                <input type="radio" value="4"/>施工人员
                             </label>
                         </div>
                         <div>
@@ -60,9 +61,10 @@
                             <input type="text" name="num" th:value="1" class="create-num">
                             <div class="f-r add-num pointer">+</div>
                         </span>
+                            <span class="create-account-hint">最多一次可添加100个账号</span>
                         </div>
                         <div class="">
-                            <button type="submit" class="confirm-create" openTab="confirm-create">确定创建</button>
+                            <button type="button" class="confirm-create" openTab="confirm-create">确定创建</button>
                         </div>
                     </form>
                 </div>
@@ -70,18 +72,127 @@
         </div>
     </div>
 </div>
+<!-- 确定到处弹框 -->
+<div class="confirm-create-iframe  pop-iframe " openContent="confirm-create">
+    <div class="create-nav p-r pop-nav">
+        导出账号
+        <img src="/alink-hq/static/img/close.png" alt="" class="p-a pointer close">
+    </div>
+    <div class="create-content pop-content">
+        <div class="c-main">
+            <div class="c-title ">
+                <div class="clearfix">
+                    <div class="f-l c-width one">账号</div>
+                    <div class="f-l c-width two">密码</div>
+                </div>
+
+            </div>
+            <div class="c-list clearfix">
+                <!--<div class="clearfix">-->
+                <!--<div class="f-l c-width one">BN001</div>-->
+                <!--<div class="f-l c-width two">123456</div>-->
+                <!--</div>-->
+                <!--<div class="clearfix">-->
+                <!--<div class="f-l c-width one">BN001</div>-->
+                <!--<div class="f-l c-width two">123456</div>-->
+                <!--</div>-->
+                <!--<div class="clearfix">-->
+                <!--<div class="f-l c-width one">BN001</div>-->
+                <!--<div class="f-l c-width two">123456</div>-->
+                <!--</div>-->
+                <!--<div class="clearfix">-->
+                <!--<div class="f-l c-width one">BN001</div>-->
+                <!--<div class="f-l c-width two">123456</div>-->
+                <!--</div>-->
+            </div>
+        </div>
+        <a href="">Excel导出</a>
+        <p class="c-hint">注：请牢记/导出新账号密码，关闭后将无法展示。</p>
+    </div>
+</div>
+<div class="hide-iframe active"></div>
+<div id="preload-anim">
+    <div id="circularG">
+        <div id="circularG_1" class="circularG"></div>
+        <div id="circularG_2" class="circularG"></div>
+        <div id="circularG_3" class="circularG"></div>
+        <div id="circularG_4" class="circularG"></div>
+        <div id="circularG_5" class="circularG"></div>
+        <div id="circularG_6" class="circularG"></div>
+        <div id="circularG_7" class="circularG"></div>
+        <div id="circularG_8" class="circularG"></div>
+    </div>
+    <p class="title">
+
+    </p>
+</div>
 <script src="/alink-hq/static/js/jquery.min.js"></script>
 <script>
     $('button.confirm-create').click(function () {
-        var openTab = $(this).attr('openTab');
+        var fid = parseInt($('#fid option:selected').val());
+        var roleId;
+        var num = parseInt($('.create-num').val());
+        $('.role-radio .l-radio').each(function () {
+            var imgUrl = $(this).find('img').attr('src');
+            console.log(imgUrl);
+            if (imgUrl == '/alink-hq/static/img/select-on.png') {
+                roleId = parseInt($(this).find('input').val());
 
-        parent.shade(openTab);
-        parent.scroll();
+            }
+        })
+        console.log('roleId', roleId)
+        console.log('fid', fid);
+        console.log('num', num);
+        $.ajax({
+            type: "POST",
+            url: "/alink-hq/account/create",
+            data: {fid: fid, roleId: roleId, num: num},
+            dataType: "json",
+            success: function (res) {
+                if (res.result == '000') {
+                    $('.pop-iframe').addClass('active');
+                    var width = document.body.scrollWidth;
+                    var height = document.body.scrollHeight;
+                    $('.hide-iframe').addClass('active');
+                    $('.hide-iframe').css({
+                        'width': width,
+                        'height': height
+                    });
+                    var accountList = JSON.parse(res.accountList);
+                    var maxLength = accountList.length;
+                    if (maxLength > 3) {
+                        $('.c-title .c-width.two').css('width', ' 163px');
+                        $('.confirm-create-iframe .c-main').css('width', '310px');
+                    }
+                    for (var i = 0; i < accountList.length; i++) {
+                        var account = accountList[i];
+                        var pwd = '00000000';
+                        var content = '<div class="clearfix"><div class="f-l c-width one">' + account + '</div>'
+                                + '<div class="f-l c-width two">' + pwd + '</div></div>';
+                        $('.c-list').append(content);
+                    }
+                }else{
+                    $('#preload-anim').addClass('active');
+                    $('#preload-anim .title').text('加载失败，请重新尝试');
+                    setInterval(function () {
+                        $('#preload-anim').removeClass('active');
+                    }, 1000)
+                }
+            }
+        });
+    })
+    $('.pop-nav .close').click(function () {
+        $('.pop-iframe').removeClass('active');
+        $('.hide-iframe').removeClass('active');
+        $('#preload-anim').addClass('active');
+        $('#preload-anim .title').text(' 创建成功，正在跳转用户列表');
+        setInterval(function () {
+            window.location.href = '/alink-hq/account/list';
+        }, 1000)
     })
 
     $('#createAccount .c-content img').click(function () {
         var imgUrl = $(this).attr('src');
-        console.log('imgUrl', imgUrl);
         if (imgUrl == '/alink-hq/static/img/select-on.png') {
             $(this).attr('src', '/alink-hq/static/img/select-un.png');
             $(this).parent('label').siblings().find('img').attr('src', '/alink-hq/static/img/select-on.png');
@@ -99,14 +210,14 @@
             }
         })
         $('.reduce-num').click(function () {
-            if (num > 0) {
+            if (num > 1) {
                 num--;
                 $('.create-num').val(num);
             }
 
         })
     })
-    $(function(){
+    $(function () {
         $('.one-list li').each(function () {
             $('.main-left>ul>li.one-list:eq(1)').find('.on-off-triangle').attr('src', '/alink-hq/static/img/right-triange-un.png');
             $('.main-left>ul>li.one-list:eq(1)').find('.two-list').addClass('active');

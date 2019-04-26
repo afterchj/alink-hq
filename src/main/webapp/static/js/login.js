@@ -338,7 +338,6 @@ $(function () {
 })
 
 function passwordLogin() {
-    // $('.content .login-in-box-tab-content button').toggleClass('active');
     var isBind = false;
     //检测用户名格式是否正确
     var unameVal = $('#uname').val();
@@ -392,6 +391,7 @@ function passwordLogin() {
         if (!phoneResult) {
             $('.password-login .add-hint').text('请输入正确的手机号');
             $('.password-login .password-hint').text('');
+            $('#pwd').val('');
         } else if (isBind) {
             if (pwdVal == '') {
                 $('.password-login .add-hint').text('');
@@ -420,6 +420,7 @@ function passwordLogin() {
         if (!emailResult) {
             $('.password-login .add-hint').text('请输入正确的邮箱');
             $('.password-login .password-hint').text('');
+            $('#pwd').val('');
         } else if (!isBind) {
             $('.container').unbind('click');
             if (pwdVal == '') {
@@ -565,8 +566,12 @@ function phoneLogin() {
             // console.log(isSuccess);
             if (isSuccess == 'success') {
                 $('.phone-login form').submit();
-            } else {
+            } else if(isSuccess=='failure'){
                 $('.phone-login .password-hint').text('验证码不正确');
+            }else if (isSuccess == 'expire') {
+                // $('.phone-find-password .mobile-add-hint').text('');
+                $('.phone-login .password-hint').text('验证码已超时，请重新获取');
+                // $('.phone-find-password .mobile-password-hint').text('请输入新密码');
             }
         }
     }
@@ -719,7 +724,6 @@ function phoneFindPwdCode() {
         }
     } else {
         var codeResult = findValidCode(phoneVal, codeVal);
-        // console .log('codeResult', codeResult);
         if (codeVal == '') {
             if (newPwd == '') {
                 sendCode(phoneVal);
