@@ -25,14 +25,14 @@ public class ProjectServiceImpl implements ProjectService {
 
     @Override
     public List<ProjectList> searchBySuper(String account, String projectName, String startCreateDate, String
-            endCreateDate, String startUpdateDate, String endUpdateDate) {
-        return projectDao.searchBySuper(account,projectName,startCreateDate,endCreateDate,startUpdateDate,endUpdateDate);
+            endCreateDate, String startUpdateDate, String endUpdateDate,String sortFlag) {
+        return projectDao.searchBySuper(account,projectName,startCreateDate,endCreateDate,startUpdateDate,endUpdateDate,sortFlag);
     }
 
     @Override
     public List<ProjectList> searchByManager(String account, String projectName, String startCreateDate, String
-            endCreateDate, String startUpdateDate, String endUpdateDate, List<Integer> ids) {
-        return projectDao.searchByManager(account,projectName,startCreateDate,endCreateDate,startUpdateDate,endUpdateDate,ids);
+            endCreateDate, String startUpdateDate, String endUpdateDate, List<Integer> ids,String sortFlag) {
+        return projectDao.searchByManager(account,projectName,startCreateDate,endCreateDate,startUpdateDate,endUpdateDate,ids,sortFlag);
     }
 
     @Override
@@ -42,8 +42,8 @@ public class ProjectServiceImpl implements ProjectService {
 
     @Override
     public List<ProjectList> searchByUser(String account, String projectName, String startCreateDate, String
-            endCreateDate, String startUpdateDate, String endUpdateDate, String uid) {
-        return projectDao.searchByUser(account,projectName,startCreateDate,endCreateDate,startUpdateDate,endUpdateDate,uid);
+            endCreateDate, String startUpdateDate, String endUpdateDate, String uid,String sortFlag) {
+        return projectDao.searchByUser(account,projectName,startCreateDate,endCreateDate,startUpdateDate,endUpdateDate,uid,sortFlag);
     }
 
     @Override

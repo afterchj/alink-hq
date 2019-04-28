@@ -52,4 +52,6 @@ public interface AccountDao {
     int findProjectByUid(@Param("uid")String uid);
 
     Integer findFirmUid(@Param("uid")String uid, @Param("userId")String userId);
+
+    List<User> findAccountByFid(@Param("fid")Integer fid);
 }

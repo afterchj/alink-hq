@@ -1,6 +1,5 @@
 package com.tpadsz.after.entity;
 
-import java.util.Date;
 
 /**
  * Created by chenhao.lu on 2019/3/8.

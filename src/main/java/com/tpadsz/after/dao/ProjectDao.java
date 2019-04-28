@@ -12,15 +12,15 @@ public interface ProjectDao {
 
     List<ProjectList> search(@Param("projectName") String projectName);
 
-    List<ProjectList> searchBySuper(@Param("account") String account, @Param("name") String projectName, @Param("startCreateDate") String startCreateDate, @Param("endCreateDate") String endCreateDate, @Param("startUpdateDate") String startUpdateDate, @Param("endUpdateDate") String endUpdateDate);
+    List<ProjectList> searchBySuper(@Param("account") String account, @Param("name") String projectName, @Param("startCreateDate") String startCreateDate, @Param("endCreateDate") String endCreateDate, @Param("startUpdateDate") String startUpdateDate, @Param("endUpdateDate") String endUpdateDate,@Param("sortFlag") String sortFlag);
 
     List<Integer> findProjectList(@Param("uid") String uid);
 
-    List<ProjectList> searchByManager(@Param("account") String account, @Param("name") String projectName, @Param("startCreateDate") String startCreateDate, @Param("endCreateDate") String endCreateDate, @Param("startUpdateDate") String startUpdateDate, @Param("endUpdateDate") String endUpdateDate, @Param("list")List<Integer> ids);
+    List<ProjectList> searchByManager(@Param("account") String account, @Param("name") String projectName, @Param("startCreateDate") String startCreateDate, @Param("endCreateDate") String endCreateDate, @Param("startUpdateDate") String startUpdateDate, @Param("endUpdateDate") String endUpdateDate, @Param("list")List<Integer> ids,@Param("sortFlag") String sortFlag);
 
 
     List<ProjectList> searchByUser(@Param("account")String account, @Param("name")String projectName, @Param("startCreateDate")String startCreateDate, @Param("endCreateDate")String endCreateDate, @Param("startUpdateDate")String
-            startUpdateDate, @Param("endUpdateDate")String endUpdateDate, @Param("uid")String uid);
+            startUpdateDate, @Param("endUpdateDate")String endUpdateDate, @Param("uid")String uid,@Param("sortFlag") String sortFlag);
 
     void createProject(@Param("name")String projectName, @Param("uid")String uid);
 
