@@ -3,8 +3,11 @@
  */
 $(function () {
     var size = $("#pageSize").val();
-    console.log("type:" + typeof size + ",value=" + size);
     $("#size").val(size);
+    var amount = localStorage.getItem("amount");
+    if (amount != null) {
+        $(".amount").text(amount);
+    }
     //给全选的复选框添加事件
     $("#all").click(function () {
 //            var length = $("input[name=mids]").length;
@@ -15,8 +18,10 @@ $(function () {
             this.checked = checked;
         });
         if (checked) {
+            localStorage.setItem("amount", size);
             $(".amount").text(size);
         } else {
+            localStorage.setItem("amount", 0);
             $(".amount").text(0);
         }
     });
@@ -24,6 +29,7 @@ $(function () {
     $("input[name=mids]").click(function () {
         //获取选中复选框长度
         var length = $("input[name=mids]:checked").length;
+        localStorage.setItem("amount", length);
         //未选中的长度
         var len = $("input[name=mids]").length;
         if (length == len) {

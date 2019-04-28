@@ -82,7 +82,19 @@ th {
     /*cursor: pointer;*/
     background-color: #fff;
 }
-
+.search-result table input[type=checkbox]{
+    border: 1px solid #bbb;
+    width: 15px;
+    height: 14px;
+    outline: none;
+    border-radius: 0;
+    -webkit-appearance: none;
+    cursor: pointer;
+    background-color: #eef3f5;
+}
+.search-result table input[type=checkbox]:checked{
+    background: url("/alink-hq/static/img/checkbox-gou.png") no-repeat center;
+}
 .search-result table td a {
     color: #3c3c3c;
 }
@@ -295,16 +307,19 @@ th.all-checkbox {
 }
 
 .pop-content input {
-    height: 36px;
-    width: 316px;
+    height: 30px;
+    width: 249px;
     margin-bottom: 30px;
+    border: 1px solid #bbb;
+    border-radius: 2px;
+    text-indent: 10px;
 }
 
 .pop-content label {
     display: inline-block;
-    width: 150px;
+    width: 70px;
     margin-right: 30px;
-    font-size: 20px;
+    font-size: 16px;
     color: #3c3c3c;
     text-align: right;
 }
@@ -472,4 +487,12 @@ th.all-checkbox {
 .hidden{
     /*display: none;*/
     visibility: hidden;
+    width:0;
+}
+.pop-content .newName{
+    font-size: 16px;
+    height: 177px;
+    line-height: 177px;
+    margin: auto;
+    text-align: center;
 }
