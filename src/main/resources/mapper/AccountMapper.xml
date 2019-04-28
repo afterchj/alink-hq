@@ -26,6 +26,10 @@
         SELECT id,coname FROM f_firm WHERE id=(SELECT fid FROM f_user_customer WHERE uid=#{uid})
     </select>
 
+    <select id="findAccountByFid" resultType="com.tpadsz.after.entity.User" parameterType="Integer">
+        SELECT id,account FROM f_user_account WHERE id IN (SELECT uid FROM f_user_customer WHERE fid=#{fid})
+    </select>
+
     <select id="findProjectByUid" resultType="int" parameterType="string">
         SELECT COUNT(1) FROM f_project WHERE uid=#{uid}
     </select>
@@ -69,8 +73,8 @@
             select count(*) from f_mesh where mesh_id = '11223344' and uid= #{uid}
         </selectKey>
         <if test="count==0">
-            INSERT INTO f_mesh (mname,mesh_id,is_repeat,pwd,uid,project_id,create_date)
-            VALUES('1122','11223344',#{uid},'3344',#{uid},0,NOW())
+            INSERT INTO f_mesh (mname,mesh_id,is_repeat,pwd,uid,project_id,create_date,update_date)
+            VALUES('1122','11223344',#{uid},'3344',#{uid},0,NOW(),NOW())
         </if>
         <if test="count>0">
             select count(1) from f_mesh where mesh_id = '11223344' and uid= #{uid}

@@ -146,6 +146,14 @@ public class ProjectController {
         return "userManage/useTurnOver";
     }
 
+    @RequestMapping(value = "/findAccountByFid", method = RequestMethod.GET)
+    public String findAccountByFid(Integer fid, Model model) {
+        List<User> accounts = accountService.findAccountByFid(fid);
+        model.addAttribute("accounts", accounts);
+        return "userManage/useTurnOver";
+    }
+
+
     @RequestMapping(value = "/transfer", method = RequestMethod.POST)
     @ResponseBody
     public Map<String, String> transfer(String account, Integer fid) {
