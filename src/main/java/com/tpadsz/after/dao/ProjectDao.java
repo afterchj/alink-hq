@@ -30,5 +30,5 @@ public interface ProjectDao {
 
     void delete(@Param("id")Integer projectId);
 
-    int findRepeatNameByUid(@Param("uid")String uid, @Param("name") String projectName);
+    int findRepeatNameByUid(@Param("account")String account, @Param("name") String projectName);
 }

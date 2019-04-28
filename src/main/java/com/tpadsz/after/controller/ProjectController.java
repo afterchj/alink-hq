@@ -122,12 +122,10 @@ public class ProjectController {
 
     @RequestMapping(value = "/rename", method = RequestMethod.POST)
     @ResponseBody
-    public Map<String, String> rename(HttpSession session, Integer projectId, String projectName) {
+    public Map<String, String> rename(String account, Integer projectId, String projectName) {
         Map<String, String> map = new HashMap<>();
-        User loginUser = (User) session.getAttribute("user");
-        String uid = loginUser.getId();
         try {
-            int flag = projectService.renameProject(uid,projectId,projectName);
+            int flag = projectService.renameProject(account,projectId,projectName);
             if(flag==0) {
                 map.put("result", ResultDict.REPEAT_NAME.getCode());
             }else if(flag==1){

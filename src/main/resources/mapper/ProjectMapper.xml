@@ -75,7 +75,7 @@
     </insert>
 
     <select id="findRepeatNameByUid" resultType="int">
-        SELECT count(1) from f_project p where p.uid=#{uid} and p.name = #{name}
+        SELECT count(1) from f_project p where p.name = #{name} and p.uid=(SELECT id FROM f_user_account WHERE account=#{account})
     </select>
 
     <update id="renameProject">

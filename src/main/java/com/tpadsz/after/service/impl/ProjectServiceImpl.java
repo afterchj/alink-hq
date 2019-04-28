@@ -55,9 +55,9 @@ public class ProjectServiceImpl implements ProjectService {
     }
 
     @Override
-    public int renameProject(String uid, Integer projectId, String projectName) {
+    public int renameProject(String account, Integer projectId, String projectName) {
         int flag;
-        int count = projectDao.findRepeatNameByUid(uid, projectName);
+        int count = projectDao.findRepeatNameByUid(account, projectName);
         if(count==1){
             flag =0;
         }else {
