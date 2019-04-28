@@ -97,10 +97,10 @@
 
     <select id="selectByMid" resultType="map" parameterType="list">
         SELECT
-            m.id,
-            m.mname,
-            m.mesh_id,
-            p.name
+        m.id,
+        m.mname,
+        m.mesh_id,
+        p.name
         FROM f_mesh m
         INNER JOIN f_project p ON m.project_id = p.id
         INNER JOIN (SELECT COUNT(1) pcount,mid FROM f_place GROUP BY mid) pl ON pl.mid=m.id
@@ -110,7 +110,14 @@
             #{mid}
         </foreach>
     </select>
-
+    <select id="getCount" resultType="int" parameterType="map">
+        SELECT COUNT(1)
+        FROM
+            f_mesh m
+        INNER JOIN f_project p ON m.project_id = p.id
+        WHERE p.id = (SELECT project_id FROM f_mesh WHERE id=#{id})
+        AND m.mname = #{name}
+    </select>
     <select id="getProjects" resultType="OptionList" parameterType="map">
         SELECT id,name label FROM f_project p WHERE 1=1
         <include refid="common_choose"></include>

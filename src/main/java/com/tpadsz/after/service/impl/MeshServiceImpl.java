@@ -4,6 +4,7 @@ import com.tpadsz.after.dao.MeshDao;
 import com.tpadsz.after.entity.MeshInfo;
 import com.tpadsz.after.entity.OptionList;
 import com.tpadsz.after.entity.SearchDict;
+import com.tpadsz.after.exception.RepetitionException;
 import com.tpadsz.after.service.MeshService;
 import org.springframework.stereotype.Service;
 
@@ -41,12 +42,21 @@ public class MeshServiceImpl implements MeshService {
     }
 
     @Override
+    public int getCount(Map map) {
+        return meshDao.getCount(map);
+    }
+
+    @Override
     public void saveUpdate(Map map) {
         meshDao.saveUpdate(map);
     }
 
     @Override
-    public void saveRename(Map map) {
+    public void saveRename(Map map) throws RepetitionException {
+        int count = meshDao.getCount(map);
+        if (count > 0) {
+            throw new RepetitionException(301, "名字已存在！");
+        }
         meshDao.saveRename(map);
     }
 

@@ -6,6 +6,7 @@ import com.github.pagehelper.PageInfo;
 import com.tpadsz.after.entity.MeshInfo;
 import com.tpadsz.after.entity.OptionList;
 import com.tpadsz.after.entity.SearchDict;
+import com.tpadsz.after.exception.RepetitionException;
 import com.tpadsz.after.service.MeshService;
 import com.tpadsz.after.service.RoleService;
 import org.apache.log4j.Logger;
@@ -106,7 +107,12 @@ public class MeshController {
         Map map = new HashMap();
         map.put("name", name);
         map.put("id", id);
-        meshService.saveRename(map);
+        try {
+            meshService.saveRename(map);
+        } catch (RepetitionException e) {
+            logger.error(e);
+            return "fail";
+        }
         return "success";
     }
 

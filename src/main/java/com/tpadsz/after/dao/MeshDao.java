@@ -20,6 +20,8 @@ public interface MeshDao {
 
     MeshInfo getMeshInfo(Integer id);
 
+    int getCount(Map map);
+
     List<OptionList> getProjects(Map map);
 
     int getCountByTable(String tableName);
