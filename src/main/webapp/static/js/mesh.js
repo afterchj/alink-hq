@@ -23,10 +23,9 @@ $(function () {
     });
     var size = $("#pageSize").val();
     $("#size").val(size);
-    var amount = localStorage.getItem("amount");
-    if (amount != null) {
-        $(".amount").text(amount);
-    }
+    var length = $("input[name=mids]:checked").length;
+    console.log("length=" + length);
+    $("#amount").text(length);
     $("#newMesh").click(function () {
         location.href = "/alink-hq/mesh/create";
     });
@@ -40,18 +39,15 @@ $(function () {
             this.checked = checked;
         });
         if (checked) {
-            localStorage.setItem("amount", size);
-            $(".amount").text(size);
+            $("#amount").text(size);
         } else {
-            localStorage.setItem("amount", 0);
-            $(".amount").text(0);
+            $("#amount").text(0);
         }
     });
     //给name=mids的复选框绑定单击事件
     $("input[name=mids]").click(function () {
         //获取选中复选框长度
         var length = $("input[name=mids]:checked").length;
-        localStorage.setItem("amount", length);
         //未选中的长度
         var len = $("input[name=mids]").length;
         if (length == len) {
@@ -59,7 +55,7 @@ $(function () {
         } else {
             $("#all")[0].checked = false;
         }
-        $(".amount").text(length);
+        $("#amount").text(length);
     });
     $("#prev").click(function () {
         var page = $("#page").val();
@@ -94,26 +90,6 @@ $(function () {
 //            console.log("page=" + page + ",size=" + size);
 //            location.href = "/alink-hq/mesh/list?pageNum=" + page + "&pageSize=" + size;
     });
-    // $(".reset-name").click(function () {
-    //     var id = $(this).attr("alt");
-    //     var name = prompt("新名称：");
-    //     console.log("id=" + id + ",name=" + name);
-    //     $.ajax({
-    //         type: "post",
-    //         url: "/alink-hq/mesh/rename",
-    //         data: {
-    //             "name": name,
-    //             "id": id
-    //         },
-    //         async: true,
-    //         success: function (res) {
-    //             if (res == "success") {
-    //                location.reload();
-    //             }
-    //         }
-    //     });
-    //     // location.href = "/alink-hq/mesh/rename?mid=" + mid + "&name=" + name;
-    // });
     $("#multiMove").click(function () {
         var mids = [];//定义一个数组
         $('input[name="mids"]:checked').each(function () {//遍历每一个名字为interest的复选框，其中选中的执行函数
@@ -135,7 +111,7 @@ $(function () {
             'height': height
         });
 
-        // var flag = confirm("您确定要删除所选的区域吗？");
+        // var flag = confirm("您确定要删除所选的网络吗？");
         // if (flag) {
         //     location.href = "/alink-hq/mesh/delete?mids=" + mids;
         // }

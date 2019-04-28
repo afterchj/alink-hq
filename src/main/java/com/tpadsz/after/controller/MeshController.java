@@ -37,6 +37,7 @@ public class MeshController {
     public String list(SearchDict dict, ModelMap modelMap) {
         String role = roleService.selectById(dict.getUid());
         dict.setRole(role);
+        logger.info("dict=" + JSON.toJSONString(dict));
         PageHelper.startPage(dict.getPageNum(), dict.getPageSize());
         List<Map> meshList = meshService.getByMap(dict);
         PageInfo<Map> pageInfo = new PageInfo(meshList, dict.getPageSize());
@@ -73,7 +74,6 @@ public class MeshController {
         String[] ids = mids.split(",");
         List<String> list = new ArrayList(Arrays.asList(ids));
         List<Map> meshMap = meshService.selectByMid(list);
-        logger.info("result=" + JSON.toJSONString(meshMap));
         modelMap.put("meshMap", meshMap);
         modelMap.put("mids", mids);
         return "meshTemp/meshMove";
