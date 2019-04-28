@@ -8,6 +8,9 @@ $(function () {
     if (amount != null) {
         $(".amount").text(amount);
     }
+    $("#newMesh").click(function () {
+        location.href = "/alink-hq/mesh/create" ;
+    });
     //给全选的复选框添加事件
     $("#all").click(function () {
 //            var length = $("input[name=mids]").length;
@@ -86,7 +89,7 @@ $(function () {
             async: true,
             success: function (res) {
                 if (res == "success") {
-                   location.reload();
+                    location.reload();
                 }
             }
         });

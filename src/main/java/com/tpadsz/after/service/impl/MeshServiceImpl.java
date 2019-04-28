@@ -1,6 +1,7 @@
 package com.tpadsz.after.service.impl;
 
 import com.tpadsz.after.dao.MeshDao;
+import com.tpadsz.after.entity.MeshInfo;
 import com.tpadsz.after.entity.OptionList;
 import com.tpadsz.after.entity.SearchDict;
 import com.tpadsz.after.service.MeshService;
@@ -32,6 +33,11 @@ public class MeshServiceImpl implements MeshService {
     @Override
     public List<Map> selectByMid(List list) {
         return meshDao.selectByMid(list);
+    }
+
+    @Override
+    public MeshInfo getMeshInfo(Integer id) {
+        return meshDao.getMeshInfo(id);
     }
 
     @Override
