@@ -74,8 +74,22 @@
         INSERT INTO f_project (name,uid,create_date,update_date) VALUES(#{name},#{uid},NOW(),NOW())
     </insert>
 
+    <select id="findRepeatNameByUid" resultType="int">
+        SELECT count(1) from f_project p where p.uid=#{uid} and p.name = #{name}
+    </select>
+
     <update id="renameProject">
             update f_project p set p.name = #{name},p.update_date = NOW() where p.id=#{projectId}
     </update>
+
+    <update id="transferProject">
+        update f_project set uid = #{uid} where id=#{id}
+    </update>
+
+    <delete id="delete" parameterType="string">
+        DELETE FROM f_user_account WHERE id=#{uid};
+        DELETE FROM f_user_customer WHERE uid=#{uid};
+        DELETE FROM f_project WHERE user_id=#{uid};
+    </delete>
 
 </mapper>
