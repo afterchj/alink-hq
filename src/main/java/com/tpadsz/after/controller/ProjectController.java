@@ -175,10 +175,12 @@ public class ProjectController {
 
     @RequestMapping(value = "/delete", method = RequestMethod.POST)
     @ResponseBody
-    public Map<String, String> delete(Integer projectId) {
+    public Map<String, String> delete(String account, Integer projectId) {
         Map<String, String> map = new HashMap<>();
         try {
-            projectService.delete(projectId);
+            User user = accountService.findByAccount(account);
+            projectService.delete(user.getId(),projectId);
+
 
             map.put("result", ResultDict.SUCCESS.getCode());
         } catch (Exception e) {
