@@ -73,8 +73,17 @@ public class ProjectServiceImpl implements ProjectService {
     }
 
     @Override
-    public void delete(Integer projectId) {
-        projectDao.delete(projectId);
+    public void delete(String account,Integer projectId) {
+//        String uid = projectDao.find
+//        List<Integer> sids = projectDao.querySidByPid(projectId, account);
+//        if (sids.size() != 0) {
+//            projectDao.deleteSceneByPid(projectId, uid);
+//            projectDao.deleteSceneSettingBySid(sids);
+//        }
+//        projectDao.deleteGroupByPid(id, uid);
+//        projectDao.deleteGroupSettingByPid(id, uid);
+//        projectDao.deleteProByPid(id, uid);
+//        projectDao.deleteMeshByPid(id, uid);
     }
 
 
