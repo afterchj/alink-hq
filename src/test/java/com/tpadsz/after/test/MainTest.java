@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSON;
 import com.tpadsz.after.entity.OptionList;
 import com.tpadsz.after.entity.Role;
 import com.tpadsz.after.entity.User;
+import com.tpadsz.after.service.GroupService;
 import com.tpadsz.after.service.MeshService;
 import com.tpadsz.after.service.impl.MeshServiceImpl;
 import net.rubyeye.xmemcached.XMemcachedClient;
@@ -69,12 +70,13 @@ public class MainTest {
     public void testMesh() {
         Map map = new HashMap();
         map.put("role", "manager");
-        map.put("uid", 4);
+        map.put("uid", 18);
 //        map.put("pid", 4);
         List<Map> list = getSqlSessionTemplate().selectList("com.tpadsz.after.dao.MeshDao.getByMap", map);
 //        String role = getSqlSessionTemplate().selectOne("com.tpadsz.after.dao.RoleDao.selectById", 21);
 //        List<Role> roles = getSqlSessionTemplate().selectList("com.tpadsz.after.dao.RoleDao.getAll");
-        List<OptionList> lists = getSqlSessionTemplate().selectList("com.tpadsz.after.dao.MeshDao.getProjects",map);
+//        List<OptionList> lists = getSqlSessionTemplate().selectList("com.tpadsz.after.dao.MeshDao.getProjects",map);
+        List<OptionList> lists = getSqlSessionTemplate().selectList("com.tpadsz.after.dao.GroupDao.getPlaces",map);
 //        logger.info("role=" + role);
 //        logger.info("roles=" + roles);
         logger.info("lists=" + lists.size());
@@ -83,9 +85,14 @@ public class MainTest {
     @Test
     public void testDao(){
         ApplicationContext ctx = new ClassPathXmlApplicationContext("classpath:applicationContext.xml");
+        Map map = new HashMap();
+//        map.put("role", "manager");
+        map.put("uid", 18);
         MeshService meshService= (MeshService) ctx.getBean("meshServiceImpl");
-        List<OptionList> lists = meshService.getProjects(null);
-        logger.info("lists=" + lists.size());
+        GroupService groupService= (GroupService) ctx.getBean("groupServiceImpl");
+//        List<OptionList> lists = meshService.getProjects(null);
+        List<OptionList> lists = groupService.getPlaces(map);
+        logger.info("lists=" + lists);
     }
     
     @Test
