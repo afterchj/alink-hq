@@ -195,10 +195,12 @@ $(function () {
 $(function(){
     //重命名
     var projectId;
+    var account;
     // var projectName;
     $('.reset-name').click(function () {
-        projectId =$(this).parent().siblings('.checkbox ').find('input[type=checkbox]').val();
+        projectId =parseInt($(this).parent().siblings('.checkbox ').find('input[type=checkbox]').val());
         // projectName=$(this).parent().siblings('.project-name').find('a').text();
+        account=$(this).parent().siblings('.project-account').text();
         $('div[openContent="reset-name"]').addClass('active');
         var width = document.body.scrollWidth;
         var height = document.body.scrollHeight;
@@ -229,7 +231,7 @@ $(function(){
             $.ajax({
                 type: "POST",
                 url: "/alink-hq/project/rename",
-                data: {projectId: projectId,projectName:rename},
+                data: {projectId: projectId,projectName:rename,account:account},
                 dataType: "json",
                 success: function (res) {
                     console.log(res);

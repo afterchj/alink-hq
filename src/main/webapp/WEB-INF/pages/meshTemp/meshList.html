@@ -90,12 +90,15 @@
                             <td th:text="${mesh.scount}"></td>
                             <td>未知</td>
                             <td class="p-r">
-                                <img src="/alink-hq/static/img/edit.png" th:alt="${mesh.id}" class="rename">
+                                <img src="/alink-hq/static/img/edit.png" th:alt="${mesh.id}" class="reset-name pointer">
                                 <a th:href="@{/mesh/move(mids=${mesh.id})}">
-                                    <img src="/alink-hq/static/img/exchange.png" alt="" class="center-img">
+                                    <img src="/alink-hq/static/img/exchange.png" alt="" class="center-img pointer">
                                 </a>
-                                <a th:href="@{/mesh/delete(mids=${mesh.id})}" onclick="return confirm('您确定要删除所选的网络吗？')">
-                                    <img src="/alink-hq/static/img/delete.png" alt="" id="singleDel">
+                                <!--<a th:href="@{/mesh/delete(mids=${mesh.id})}" onclick="return confirm('您确定要删除所选的网络吗？')">-->
+                                    <!--<img src="/alink-hq/static/img/delete.png" alt="" id="singleDel">-->
+                                <!--</a>-->
+                                <a href="javascript:void(0);" class="singleDel pointer">
+                                    <img src="/alink-hq/static/img/delete.png" alt="" >
                                 </a>
                             </td>
                         </tr>
@@ -153,14 +156,31 @@
         </div>
     </div>
 </div>
+<!-- 重命名弹框 -->
+<div class="confirm-on-off pop-iframe  " openContent="reset-name">
+    <div class="confirm-on-off-nav p-r pop-nav">
+        重命名
+    </div>
+    <div class="pop-content">
+        <div class="newName">
+            <p class="rename-hint"></p>
+            <label for="rename">新名称</label>
+            <input type="text" placeholder="请输入（2-16位汉字、字母、数字）" id="rename" onkeyup="nameKeyUp()" maxlength="16"/>
+        </div>
+        <div class="pop-btn">
+            <button class="reduce">取消</button>
+            <button class="yes">确定</button>
+        </div>
+    </div>
+</div>
 <!-- 删除账户 -->
 <div class="pop-iframe" openContent="delete-mesh">
     <div class=" p-r pop-nav">
         温馨提示
     </div>
     <div class="pop-content">
-        <div class="reset-pwd">您确定要删除该所选的项目吗？</div>
-        <div class="reset-pwd-hint">（删除后项目中所有信息将无法恢复，请慎重！）</div>
+        <div class="reset-pwd">您确定要删除该所选的网络吗？</div>
+        <div class="reset-pwd-hint">（删除后网络中所有信息将无法恢复，请慎重！）</div>
         <div class="pop-btn">
             <button class="reduce">取消</button>
             <button class="yes">确定</button>
