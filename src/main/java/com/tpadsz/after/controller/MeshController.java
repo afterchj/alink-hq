@@ -3,8 +3,10 @@ package com.tpadsz.after.controller;
 import com.alibaba.fastjson.JSON;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.tpadsz.after.entity.MeshInfo;
 import com.tpadsz.after.entity.OptionList;
 import com.tpadsz.after.entity.SearchDict;
+import com.tpadsz.after.exception.RepetitionException;
 import com.tpadsz.after.service.MeshService;
 import com.tpadsz.after.service.RoleService;
 import org.apache.log4j.Logger;
@@ -47,12 +49,31 @@ public class MeshController {
     }
 
 
+    @RequestMapping("/info")
+    public String info(Integer id, ModelMap modelMap) {
+        MeshInfo meshInfo = meshService.getMeshInfo(id);
+        modelMap.put("meshInfo", meshInfo);
+        return "meshTemp/meshInfo";
+    }
+
+    @RequestMapping("/create")
+    public String create(Integer id, ModelMap modelMap) {
+        MeshInfo meshInfo = meshService.getMeshInfo(id);
+        modelMap.put("meshInfo", meshInfo);
+        return "meshTemp/meshCreate";
+    }
+
+    @RequestMapping("/save")
+    public String saveMesh(Integer pid) {
+        logger.info("pid=" + pid);
+        return "redirect:/mesh/list";
+    }
+
     @RequestMapping("/move")
     public String move(String mids, ModelMap modelMap) {
         String[] ids = mids.split(",");
         List<String> list = new ArrayList(Arrays.asList(ids));
         List<Map> meshMap = meshService.selectByMid(list);
-        logger.info("result=" + JSON.toJSONString(meshMap));
         modelMap.put("meshMap", meshMap);
         modelMap.put("mids", mids);
         return "meshTemp/meshMove";
@@ -71,7 +92,7 @@ public class MeshController {
     }
 
     @RequestMapping("/delete")
-    public String save(String mids) {
+    public String saveDelete(String mids) {
         logger.info("mids=" + mids);
         String[] ids = mids.split(",");
         List<String> list = new ArrayList(Arrays.asList(ids));
@@ -79,13 +100,19 @@ public class MeshController {
         return "redirect:/mesh/list";
     }
 
+
     @ResponseBody
     @RequestMapping("/rename")
     public String rename(String name, Integer id) {
         Map map = new HashMap();
         map.put("name", name);
         map.put("id", id);
-        meshService.saveRename(map);
+        try {
+            meshService.saveRename(map);
+        } catch (RepetitionException e) {
+            logger.error(e);
+            return "fail";
+        }
         return "success";
     }
 

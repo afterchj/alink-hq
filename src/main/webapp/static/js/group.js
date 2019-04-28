@@ -3,10 +3,8 @@
  */
 $(function () {
     var size = $("#pageSize").val();
-    var amount = localStorage.getItem("amount");
-    if (amount != null) {
-        $(".amount").text(amount);
-    }
+    var length = $("input[name=gids]:checked").length;
+    $("#amount").text(length);
     console.log("type:" + typeof size + ",value=" + size);
     $("#size").val(size);
     //给全选的复选框添加事件
@@ -19,18 +17,15 @@ $(function () {
             this.checked = checked;
         });
         if (checked) {
-            $(".amount").text(size);
-            localStorage.setItem("amount", size);
+            $("#amount").text(size);
         } else {
-            localStorage.setItem("amount", 0);
-            $(".amount").text(0);
+            $("#amount").text(0);
         }
     });
     //给name=mids的复选框绑定单击事件
     $("input[name=gids]").click(function () {
         //获取选中复选框长度
         var length = $("input[name=gids]:checked").length;
-        localStorage.setItem("amount", length);
         //未选中的长度
         var len = $("input[name=gids]").length;
         if (length == len) {
@@ -38,14 +33,13 @@ $(function () {
         } else {
             $("#all")[0].checked = false;
         }
-        $(".amount").text(length);
+        $("#amount").text(length);
     });
     $("#prev").click(function () {
         var page = $("#page").val();
         if (page > 1) {
             page--;
             $("#page").val(page);
-            console.log("page=" + page);
             $("form:eq(0)").submit();
         }
     });
