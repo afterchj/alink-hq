@@ -60,6 +60,13 @@ public class MeshController {
         modelMap.put("meshInfo", meshInfo);
         return "meshTemp/meshCreate";
     }
+
+    @RequestMapping("/save")
+    public String saveMesh(Integer pid) {
+        logger.info("pid=" + pid);
+        return "redirect:/mesh/list";
+    }
+
     @RequestMapping("/move")
     public String move(String mids, ModelMap modelMap) {
         String[] ids = mids.split(",");
@@ -84,13 +91,14 @@ public class MeshController {
     }
 
     @RequestMapping("/delete")
-    public String save(String mids) {
+    public String saveDelete(String mids) {
         logger.info("mids=" + mids);
         String[] ids = mids.split(",");
         List<String> list = new ArrayList(Arrays.asList(ids));
         meshService.deleteMeshByIds(list);
         return "redirect:/mesh/list";
     }
+
 
     @ResponseBody
     @RequestMapping("/rename")
