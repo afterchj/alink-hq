@@ -2,6 +2,27 @@
  * Created by hongjian.chen on 2019/4/24.
  */
 $(function () {
+    myBrowser()
+    $('.one-list li').each(function () {
+        $('.main-left>ul>li.one-list:eq(0)').find('.on-off-triangle').attr('src', '/alink-hq/static/img/right-triange-un.png');
+        $('.main-left>ul>li.one-list:eq(0)').find('.two-list').addClass('active');
+        var tab = $(this).attr('tab');
+        if (tab == 'meshList') {
+            $(this).addClass('active').siblings().removeClass('active');
+        }
+    });
+    $('.on-off-triangle').click(function () {
+        var imgUrl = $(this).attr('src');
+        if (imgUrl == '/alink-hq/static/img/bottom-triangle-un.png') {
+            $(this).attr('src', '/alink-hq/static/img/right-triange-un.png');
+            $(this).parent().parent('.one-list').find('.two-list').addClass('active');
+        } else {
+            $(this).attr('src', '/alink-hq/static/img/bottom-triangle-un.png');
+            $(this).parent().parent('.one-list').find('.two-list').removeClass('active');
+        }
+    });
+});
+$(function () {
     var size = $("#pageSize").val();
     $("#size").val(size);
     var amount = localStorage.getItem("amount");
@@ -104,6 +125,14 @@ $(function () {
         var mids = [];//定义一个数组
         $('input[name="mids"]:checked').each(function () {//遍历每一个名字为interest的复选框，其中选中的执行函数
             mids.push($(this).val());//将选中的值添加到数组chk_value中
+        });
+        $('div[openContent="delete-mesh"]').addClass('active');
+        var width = document.body.scrollWidth;
+        var height = document.body.scrollHeight;
+        $('.hide-iframe').addClass('active');
+        $('.hide-iframe').css({
+            'width': width,
+            'height': height
         });
         var flag = confirm("您确定要删除所选的区域吗？");
         if (flag) {

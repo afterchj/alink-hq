@@ -112,7 +112,6 @@ $(function () {
         var regEmail = /^([a-zA-Z]|[0-9])(\w|\-)+@[a-zA-Z0-9]+\.([a-zA-Z]{2,4})$/;
         var emailResult = regEmail.test(emailVal);
         var isBind3 = checkExist(emailVal);
-        // var emailResult = regEmail.test(unameVal);
         if (phoneVal1 != '' && phoneResult1 && isBind1) {
             $(this).addClass('active');
             settime(this);
@@ -165,9 +164,7 @@ $(function () {
     $('#phone-l').focus(function () {
         console.log('获取手机号焦点');
         $('.phone-login .add-hint').text('');
-        // $('.phone-login .password-hint').text('请输入验证码');
-        // $('.password-login .add-hint').text('');
-        // $('.errMsg').html('');
+
     })
     $('#code-l').focus(function () {
         console.log('手机验证码焦点');
@@ -199,16 +196,7 @@ $(function () {
         console.log('邮箱找回密码获取焦点3')
         $('.email-find-password .email-password-hint').text('');
     })
-    // $('#uname').focus(function(){
-    //     console.log('获取用户名焦点');
-    //     $('.password-login .add-hint').text('');
-    //     $('.errMsg').html('');
-    // })
-    // $("input").focus(function () {
-    //     $('.errMsg p').html('');
-    //     $(this).parent().prev('p').text('');
-    //     // $('.container').unbind('click');
-    // });
+
     //清空焦点事件
     $("#uname").keyup(function(){
         var unameVal = $('#uname').val();
@@ -241,7 +229,6 @@ $(function () {
 
 //点击任意处检测手机或邮箱格式
 $(function () {
-
     var isPhone = true;
     $('.container').click(function () {
         var unameVal = $('#uname').val();

@@ -92,7 +92,6 @@ public class ProjectController {
         return "projectManage/createProject";
     }
 
-
     @RequestMapping(value = "/create", method = RequestMethod.POST)
     @ResponseBody
     public Map<String, String> create(HttpSession session, String projectName, String account) {
