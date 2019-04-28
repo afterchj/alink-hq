@@ -91,12 +91,12 @@
                         <td th:text="${project.create_date}"></td>
                         <td th:text="${project.update_date}"></td>
                         <td class="p-r">
-                            <img src="/alink-hq/static/img/edit.png" alt="" class="pointer">
+                            <img src="/alink-hq/static/img/edit.png" alt="" class="pointer reset-name" >
                             <img src="/alink-hq/static/img/exchange.png" alt="" class="center-img">
-                            <img src="/alink-hq/static/img/delete.png" alt="" class="pointer">
-                            <div class="popup p-a">
-                                重命名
-                            </div>
+                            <img src="/alink-hq/static/img/delete.png" alt="" class="pointer ">
+                            <!--<div class="popup p-a">-->
+                                <!--重命名-->
+                            <!--</div>-->
                         </td>
                     </tr>
                     </tbody>
@@ -189,7 +189,7 @@
     </div>
 </div>
 <!-- 重命名弹框 -->
-<div class="confirm-on-off pop-iframe  active" openContent="reset-pwd">
+<div class="confirm-on-off pop-iframe  " openContent="reset-name">
     <div class="confirm-on-off-nav p-r pop-nav">
         重命名
     </div>
@@ -205,6 +205,7 @@
         </div>
     </div>
 </div>
+<div class="hide-iframe "></div>
 <script src="/alink-hq/static/js/jquery.min.js"></script>
 <script src="/alink-hq/static/laydate/laydate.js"></script>
 <script>
@@ -223,54 +224,54 @@
             $(this).addClass('active').siblings().removeClass('active');
         }
     })
-    $(function() {
-        //复选框
-        var dataAccount = 0;
-        $('.checkbox img').click(function () {
-            var hasCheckbox = false;
-            var imgUrl = $(this).attr('src');
-            var isCheckbox = '/alink-hq/static/img/checkbox-gou.png';
-            var noCheckbox = '/alink-hq/static/img/checkbox.png';
-            if (imgUrl == noCheckbox) {
-                $(this).attr('src', isCheckbox);
-                dataAccount++;
-            } else {
-                $(this).attr('src', noCheckbox);
-                dataAccount--;
-            }
-            $('tbody .checkbox img').each(function () {
-                var imgUrl2 = $(this).attr('src');
-                if (imgUrl2 == noCheckbox) {
-                    hasCheckbox = true;
-                }
-            })
-            if (!hasCheckbox) {
-                $('.all-checkbox img').attr('src', isCheckbox);
-            } else {
-                $('.all-checkbox img').attr('src', noCheckbox);
-            }
-            $('.amount').text(dataAccount);
-        })
-        $('.all-checkbox img').click(function () {
-            var imgUrl = $(this).attr('src');
-            var isCheckbox = '/alink-hq/static/img/checkbox-gou.png';
-            var noCheckbox = '/alink-hq/static/img/checkbox.png';
-            if (imgUrl == noCheckbox) {
-                dataAccount=$('tbody tr').length;
-                $(this).attr('src', isCheckbox);
-                $('tbody .checkbox img').each(function () {
-                    $(this).attr('src', isCheckbox);
-                })
-            } else {
-                dataAccount=0;
-                $(this).attr('src', noCheckbox);
-                $('tbody .checkbox img').each(function () {
-                    $(this).attr('src', noCheckbox);
-                })
-            }
-            $('.amount').text(dataAccount);
-        })
-    })
+//    $(function() {
+//        //复选框
+//        var dataAccount = 0;
+//        $('.checkbox img').click(function () {
+//            var hasCheckbox = false;
+//            var imgUrl = $(this).attr('src');
+//            var isCheckbox = '/alink-hq/static/img/checkbox-gou.png';
+//            var noCheckbox = '/alink-hq/static/img/checkbox.png';
+//            if (imgUrl == noCheckbox) {
+//                $(this).attr('src', isCheckbox);
+//                dataAccount++;
+//            } else {
+//                $(this).attr('src', noCheckbox);
+//                dataAccount--;
+//            }
+//            $('tbody .checkbox img').each(function () {
+//                var imgUrl2 = $(this).attr('src');
+//                if (imgUrl2 == noCheckbox) {
+//                    hasCheckbox = true;
+//                }
+//            })
+//            if (!hasCheckbox) {
+//                $('.all-checkbox img').attr('src', isCheckbox);
+//            } else {
+//                $('.all-checkbox img').attr('src', noCheckbox);
+//            }
+//            $('.amount').text(dataAccount);
+//        })
+//        $('.all-checkbox img').click(function () {
+//            var imgUrl = $(this).attr('src');
+//            var isCheckbox = '/alink-hq/static/img/checkbox-gou.png';
+//            var noCheckbox = '/alink-hq/static/img/checkbox.png';
+//            if (imgUrl == noCheckbox) {
+//                dataAccount=$('tbody tr').length;
+//                $(this).attr('src', isCheckbox);
+//                $('tbody .checkbox img').each(function () {
+//                    $(this).attr('src', isCheckbox);
+//                })
+//            } else {
+//                dataAccount=0;
+//                $(this).attr('src', noCheckbox);
+//                $('tbody .checkbox img').each(function () {
+//                    $(this).attr('src', noCheckbox);
+//                })
+//            }
+//            $('.amount').text(dataAccount);
+//        })
+//    })
 
     $(function () {
         myBrowser()
