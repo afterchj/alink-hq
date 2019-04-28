@@ -64,8 +64,8 @@
                         <thead>
                         <tr>
                             <th class="all-checkbox">
-
-                                <span style="vertical-align: sub;"><input type="checkbox" id="all"  class="pointer"></span>
+                                <span style="vertical-align: sub;"><input type="checkbox" id="all"
+                                                                          class="pointer"></span>
                                 <span class="">全选</span>
                             </th>
                             <th>网络名称</th>
@@ -79,8 +79,9 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr th:each="mesh:${pageInfo.list}" >
-                            <td class="checkbox "><input type="checkbox" name="mids" th:value="${mesh.id}" class=""></td>
+                        <tr th:each="mesh:${pageInfo.list}">
+                            <td class="checkbox "><input type="checkbox" name="mids" th:value="${mesh.id}" class="">
+                            </td>
                             <td th:text="${mesh.mname}"></td>
                             <td th:text="${mesh.mesh_id}"></td>
                             <td th:text="${mesh.mesh_type}"></td>
@@ -123,7 +124,10 @@
                         <thead>
                         <tr>
                             <th class="all-checkbox">
-                                <input type="checkbox" id="">全选
+                                 <span style="vertical-align: sub;">
+                                    <input type="checkbox" id="all" class="pointer">
+                                </span>
+                                <span class="">全选</span>
                             </th>
                             <th>网络名称</th>
                             <th>网络ID</th>
@@ -150,8 +154,8 @@
     </div>
 </div>
 <script type="text/javascript" src="/alink-hq/static/js/mesh.js"></script>
-<script>
-    $(function(){
+<script type="text/javascript">
+    $(function () {
         myBrowser()
         $('.one-list li').each(function () {
             $('.main-left>ul>li.one-list:eq(0)').find('.on-off-triangle').attr('src', '/alink-hq/static/img/right-triange-un.png');
@@ -160,79 +164,76 @@
             if (tab == 'meshList') {
                 $(this).addClass('active').siblings().removeClass('active');
             }
-        })
-    })
+        });
+        $('.on-off-triangle').click(function () {
+            var imgUrl = $(this).attr('src');
+            if (imgUrl == '/alink-hq/static/img/bottom-triangle-un.png') {
+                $(this).attr('src', '/alink-hq/static/img/right-triange-un.png');
+                $(this).parent().parent('.one-list').find('.two-list').addClass('active');
+            } else {
+                $(this).attr('src', '/alink-hq/static/img/bottom-triangle-un.png');
+                $(this).parent().parent('.one-list').find('.two-list').removeClass('active');
+            }
+        });
+    });
 
-//    $(function(){
-//        var dataAccount=0;
-//        //复选框
-//        $('.checkbox img').click(function(){
-//            var hasCheckbox=false;
-//            var imgUrl=$(this).attr('src');
-//            var isCheckbox='/alink-hq/static/img/checkbox-gou.png';
-//            var noCheckbox='/alink-hq/static/img/checkbox.png';
-//            if(imgUrl==noCheckbox){
-//                $(this).attr('src',isCheckbox);
-//                $(this).prev('input[type="checkbox"]').prop("checked",true);
-//                dataAccount++;
-//            }else{
-//                $(this).attr('src',noCheckbox);
-//                $(this).prev('input[type="checkbox"]').prop("checked",false);
-//                dataAccount--;
-//            }
-//            $('tbody .checkbox img').each(function(){
-//                var imgUrl2= $(this).attr('src');
-//                if(imgUrl2==noCheckbox){
-//                    hasCheckbox=true;
-//                }
-//            })
-//            if(!hasCheckbox){
-//                $('.all-checkbox img').attr('src',isCheckbox);
-//                $('#all').prop("checked",true);
-//            }else{
-//                $('.all-checkbox img').attr('src',noCheckbox);
-//                $('#all').prop("checked",false);
-//            }
-//            $('.amount').text(dataAccount);
-//        })
-//        $('.all-checkbox img').click(function(){
-////        $('#all').prop("checked",true);
-//            var imgUrl=$(this).attr('src');
-//            var isCheckbox='/alink-hq/static/img/checkbox-gou.png';
-//            var noCheckbox='/alink-hq/static/img/checkbox.png';
-//            if(imgUrl==noCheckbox){
-//                dataAccount=$('tbody tr').length;
-//                $(this).attr('src',isCheckbox);
-//                $('tbody .checkbox img').each(function(){
-//                    $(this).attr('src',isCheckbox);
-//                    $('#all').prop("checked",true);
-//                    $(this).prev('input[type="checkbox"]').prop("checked",true);
-//                })
-//            }else{
-//                dataAccount=0;
-//                $(this).attr('src',noCheckbox);
-//                $('tbody .checkbox img').each(function(){
-//                    $(this).attr('src',noCheckbox);
-//                    $('#all').prop("checked",false);
-//                    $(this).prev('input[type="checkbox"]').prop("checked",false);
-//                })
-//            }
-//            $('.amount').text(dataAccount);
-//        })
-//    })
-
-
-
-    $('.on-off-triangle').click(function () {
-        var imgUrl = $(this).attr('src');
-        if (imgUrl == '/alink-hq/static/img/bottom-triangle-un.png') {
-            $(this).attr('src', '/alink-hq/static/img/right-triange-un.png');
-            $(this).parent().parent('.one-list').find('.two-list').addClass('active');
-        } else {
-            $(this).attr('src', '/alink-hq/static/img/bottom-triangle-un.png');
-            $(this).parent().parent('.one-list').find('.two-list').removeClass('active');
-        }
-    })
+    //    $(function(){
+    //        var dataAccount=0;
+    //        //复选框
+    //        $('.checkbox img').click(function(){
+    //            var hasCheckbox=false;
+    //            var imgUrl=$(this).attr('src');
+    //            var isCheckbox='/alink-hq/static/img/checkbox-gou.png';
+    //            var noCheckbox='/alink-hq/static/img/checkbox.png';
+    //            if(imgUrl==noCheckbox){
+    //                $(this).attr('src',isCheckbox);
+    //                $(this).prev('input[type="checkbox"]').prop("checked",true);
+    //                dataAccount++;
+    //            }else{
+    //                $(this).attr('src',noCheckbox);
+    //                $(this).prev('input[type="checkbox"]').prop("checked",false);
+    //                dataAccount--;
+    //            }
+    //            $('tbody .checkbox img').each(function(){
+    //                var imgUrl2= $(this).attr('src');
+    //                if(imgUrl2==noCheckbox){
+    //                    hasCheckbox=true;
+    //                }
+    //            })
+    //            if(!hasCheckbox){
+    //                $('.all-checkbox img').attr('src',isCheckbox);
+    //                $('#all').prop("checked",true);
+    //            }else{
+    //                $('.all-checkbox img').attr('src',noCheckbox);
+    //                $('#all').prop("checked",false);
+    //            }
+    //            $('.amount').text(dataAccount);
+    //        })
+    //        $('.all-checkbox img').click(function(){
+    ////        $('#all').prop("checked",true);
+    //            var imgUrl=$(this).attr('src');
+    //            var isCheckbox='/alink-hq/static/img/checkbox-gou.png';
+    //            var noCheckbox='/alink-hq/static/img/checkbox.png';
+    //            if(imgUrl==noCheckbox){
+    //                dataAccount=$('tbody tr').length;
+    //                $(this).attr('src',isCheckbox);
+    //                $('tbody .checkbox img').each(function(){
+    //                    $(this).attr('src',isCheckbox);
+    //                    $('#all').prop("checked",true);
+    //                    $(this).prev('input[type="checkbox"]').prop("checked",true);
+    //                })
+    //            }else{
+    //                dataAccount=0;
+    //                $(this).attr('src',noCheckbox);
+    //                $('tbody .checkbox img').each(function(){
+    //                    $(this).attr('src',noCheckbox);
+    //                    $('#all').prop("checked",false);
+    //                    $(this).prev('input[type="checkbox"]').prop("checked",false);
+    //                })
+    //            }
+    //            $('.amount').text(dataAccount);
+    //        })
+    //    })
 </script>
 </body>
 </html>

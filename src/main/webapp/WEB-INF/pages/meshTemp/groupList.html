@@ -57,7 +57,10 @@
                         <thead>
                         <tr>
                             <th class="all-checkbox">
-                                <input type="checkbox" id="all">全选
+                                <span style="vertical-align: sub;">
+                                    <input type="checkbox" id="all" class="pointer">
+                                </span>
+                                <span class="">全选</span>
                             </th>
                             <th>组名称</th>
                             <th>属于网络</th>
@@ -109,7 +112,8 @@
                         <thead>
                         <tr>
                             <th class="all-checkbox">
-                                <input type="checkbox" id="">全选
+                                <span style="vertical-align: sub;"><input type="checkbox" class="pointer"></span>
+                                <span class="">全选</span>
                             </th>
                             <th>组名称</th>
                             <th>属于网络</th>
@@ -133,7 +137,7 @@
     </div>
 </div>
 <script type="text/javascript" src="/alink-hq/static/js/group.js"></script>
-<script>
+<script type="text/javascript">
     $(function () {
         myBrowser();
         $('.one-list li').each(function () {

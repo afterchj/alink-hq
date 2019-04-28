@@ -2,16 +2,16 @@
 /*width: 300px;*/
 /*}*/
 
-input[type='checkbox']{
-    width: 15px;
-    height: 16px;
-    /*background-color: #ffffff;*/
-    background-image: url("/alink-hq/static/img/checkbox-gou.png")no-repeat center;
-    /*-webkit-appearance:none;*/
-    /*border: 1px solid #c9c9c9;*/
-    border-radius: 2px;
-    outline: none;
-}
+/*input[type='checkbox']{*/
+    /*width: 15px;*/
+    /*height: 16px;*/
+    /*!*background-color: #ffffff;*!*/
+    /*background-image: url("/alink-hq/static/img/checkbox-gou.png")no-repeat center;*/
+    /*!*-webkit-appearance:none;*!*/
+    /*!*border: 1px solid #c9c9c9;*!*/
+    /*border-radius: 2px;*/
+    /*outline: none;*/
+/*}*/
 .amount{
     color: red;
 }
