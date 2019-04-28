@@ -25,14 +25,16 @@ public class ProjectServiceImpl implements ProjectService {
 
     @Override
     public List<ProjectList> searchBySuper(String account, String projectName, String startCreateDate, String
-            endCreateDate, String startUpdateDate, String endUpdateDate,String sortFlag) {
-        return projectDao.searchBySuper(account,projectName,startCreateDate,endCreateDate,startUpdateDate,endUpdateDate,sortFlag);
+            endCreateDate, String startUpdateDate, String endUpdateDate, String sortFlag) {
+        return projectDao.searchBySuper(account, projectName, startCreateDate, endCreateDate, startUpdateDate,
+                endUpdateDate, sortFlag);
     }
 
     @Override
     public List<ProjectList> searchByManager(String account, String projectName, String startCreateDate, String
-            endCreateDate, String startUpdateDate, String endUpdateDate, List<Integer> ids,String sortFlag) {
-        return projectDao.searchByManager(account,projectName,startCreateDate,endCreateDate,startUpdateDate,endUpdateDate,ids,sortFlag);
+            endCreateDate, String startUpdateDate, String endUpdateDate, List<Integer> ids, String sortFlag) {
+        return projectDao.searchByManager(account, projectName, startCreateDate, endCreateDate, startUpdateDate,
+                endUpdateDate, ids, sortFlag);
     }
 
     @Override
@@ -42,18 +44,37 @@ public class ProjectServiceImpl implements ProjectService {
 
     @Override
     public List<ProjectList> searchByUser(String account, String projectName, String startCreateDate, String
-            endCreateDate, String startUpdateDate, String endUpdateDate, String uid,String sortFlag) {
-        return projectDao.searchByUser(account,projectName,startCreateDate,endCreateDate,startUpdateDate,endUpdateDate,uid,sortFlag);
+            endCreateDate, String startUpdateDate, String endUpdateDate, String uid, String sortFlag) {
+        return projectDao.searchByUser(account, projectName, startCreateDate, endCreateDate, startUpdateDate,
+                endUpdateDate, uid, sortFlag);
     }
 
     @Override
     public void createProject(String projectName, String uid) {
-        projectDao.createProject(projectName,uid);
+        projectDao.createProject(projectName, uid);
     }
 
     @Override
-    public void renameProject(String projectId, String projectName) {
-        projectDao.renameProject(projectId,projectName);
+    public int renameProject(String account, Integer projectId, String projectName) {
+        int flag;
+        int count = projectDao.findRepeatNameByUid(account, projectName);
+        if(count==1){
+            flag =0;
+        }else {
+            projectDao.renameProject(projectId, projectName);
+            flag =1;
+        }
+        return flag;
+    }
+
+    @Override
+    public void transferProject(int id, String uid) {
+        projectDao.transferProject(id, uid);
+    }
+
+    @Override
+    public void delete(Integer projectId) {
+        projectDao.delete(projectId);
     }
 
 

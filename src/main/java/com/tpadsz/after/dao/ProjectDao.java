@@ -24,5 +24,11 @@ public interface ProjectDao {
 
     void createProject(@Param("name")String projectName, @Param("uid")String uid);
 
-    void renameProject(@Param("projectId") String projectId, @Param("name") String projectName);
+    void renameProject(@Param("projectId") Integer projectId, @Param("name") String projectName);
+
+    void transferProject(@Param("id")int id, @Param("uid")String uid);
+
+    void delete(@Param("id")Integer projectId);
+
+    int findRepeatNameByUid(@Param("account")String account, @Param("name") String projectName);
 }

@@ -391,9 +391,9 @@ th.all-checkbox {
     top: 0;
     background-color: black;
     z-index: 10;
-    -moz-opacity: 0.65;
-    opacity: .65;
-    filter: alpha(opacity=65);
+    -moz-opacity: 0.45;
+    opacity: .45;
+    filter: alpha(opacity=45);
     display: none;
 }
 .pop-nav {
@@ -491,8 +491,15 @@ th.all-checkbox {
 }
 .pop-content .newName{
     font-size: 16px;
-    height: 177px;
-    line-height: 177px;
-    margin: auto;
+    /*height: 177px;*/
+    /*line-height: 136px;*/
+    margin: 50px auto 0;
     text-align: center;
+}
+.pop-content p.rename-hint{
+    font-size: 14px;
+    color: #fb2a2a;
+    height: 20px;
+    padding-left: 227px;
+    text-align: left;
 }

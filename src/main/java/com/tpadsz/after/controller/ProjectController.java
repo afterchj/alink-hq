@@ -92,7 +92,6 @@ public class ProjectController {
         return "projectManage/createProject";
     }
 
-
     @RequestMapping(value = "/create", method = RequestMethod.POST)
     @ResponseBody
     public Map<String, String> create(HttpSession session, String projectName, String account) {
@@ -123,11 +122,15 @@ public class ProjectController {
 
     @RequestMapping(value = "/rename", method = RequestMethod.POST)
     @ResponseBody
-    public Map<String, String> rename(String projectId, String projectName) {
+    public Map<String, String> rename(String account, Integer projectId, String projectName) {
         Map<String, String> map = new HashMap<>();
         try {
-            projectService.renameProject(projectId, projectName);
-            map.put("result", ResultDict.SUCCESS.getCode());
+            int flag = projectService.renameProject(account,projectId,projectName);
+            if(flag==0) {
+                map.put("result", ResultDict.REPEAT_NAME.getCode());
+            }else if(flag==1){
+                map.put("result", ResultDict.SUCCESS.getCode());
+            }
         } catch (Exception e) {
             map.put("result", ResultDict.SYSTEM_ERROR.getCode());
         }
@@ -153,15 +156,31 @@ public class ProjectController {
         return "userManage/useTurnOver";
     }
 
-
     @RequestMapping(value = "/transfer", method = RequestMethod.POST)
     @ResponseBody
-    public Map<String, String> transfer(String account, Integer fid) {
+    public Map<String, String> transfer(String projectInfo,String uid) {
+        Map<String, String> map = new HashMap<>();
+        List<ProjectList> projectList = JSONArray.parseArray(projectInfo, ProjectList.class);
+        try {
+            for(ProjectList project : projectList){
+                projectService.transferProject(project.getId(),uid);
+            }
+            map.put("result", ResultDict.SUCCESS.getCode());
+        } catch (Exception e) {
+            map.put("result", ResultDict.SYSTEM_ERROR.getCode());
+        }
+        return map;
+    }
+
+
+    @RequestMapping(value = "/delete", method = RequestMethod.POST)
+    @ResponseBody
+    public Map<String, String> delete(Integer projectId) {
         Map<String, String> map = new HashMap<>();
         try {
-//          accountService.transferAccount(account, fid);
+            projectService.delete(projectId);
+
             map.put("result", ResultDict.SUCCESS.getCode());
-            map.put("account", account);
         } catch (Exception e) {
             map.put("result", ResultDict.SYSTEM_ERROR.getCode());
         }

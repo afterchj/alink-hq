@@ -91,12 +91,15 @@
                             <td th:text="${mesh.scount}"></td>
                             <td>未知</td>
                             <td class="p-r">
-                                <img src="/alink-hq/static/img/edit.png" th:alt="${mesh.id}" class="rename">
+                                <img src="/alink-hq/static/img/edit.png" th:alt="${mesh.id}" class="reset-name pointer">
                                 <a th:href="@{/mesh/move(mids=${mesh.id})}">
-                                    <img src="/alink-hq/static/img/exchange.png" alt="" class="center-img">
+                                    <img src="/alink-hq/static/img/exchange.png" alt="" class="center-img pointer">
                                 </a>
-                                <a th:href="@{/mesh/delete(mids=${mesh.id})}" onclick="return confirm('您确定要删除所选的网络吗？')">
-                                    <img src="/alink-hq/static/img/delete.png" alt="" id="singleDel">
+                                <!--<a th:href="@{/mesh/delete(mids=${mesh.id})}" onclick="return confirm('您确定要删除所选的网络吗？')">-->
+                                    <!--<img src="/alink-hq/static/img/delete.png" alt="" id="singleDel">-->
+                                <!--</a>-->
+                                <a href="javascript:void(0);" class="singleDel pointer">
+                                    <img src="/alink-hq/static/img/delete.png" alt="" >
                                 </a>
                             </td>
                         </tr>
@@ -154,87 +157,41 @@
         </div>
     </div>
 </div>
+<!-- 重命名弹框 -->
+<div class="confirm-on-off pop-iframe  " openContent="reset-name">
+    <div class="confirm-on-off-nav p-r pop-nav">
+        重命名
+    </div>
+    <div class="pop-content">
+        <div class="newName">
+            <p class="rename-hint"></p>
+            <label for="rename">新名称</label>
+            <input type="text" placeholder="请输入（2-16位汉字、字母、数字）" id="rename" onkeyup="nameKeyUp()" maxlength="16"/>
+        </div>
+        <div class="pop-btn">
+            <button class="reduce">取消</button>
+            <button class="yes">确定</button>
+        </div>
+    </div>
+</div>
+<!-- 删除账户 -->
+<div class="pop-iframe" openContent="delete-mesh">
+    <div class=" p-r pop-nav">
+        温馨提示
+    </div>
+    <div class="pop-content">
+        <div class="reset-pwd">您确定要删除该所选的网络吗？</div>
+        <div class="reset-pwd-hint">（删除后网络中所有信息将无法恢复，请慎重！）</div>
+        <div class="pop-btn">
+            <button class="reduce">取消</button>
+            <button class="yes">确定</button>
+        </div>
+    </div>
+</div>
+<div class="hide-iframe "></div>
 <script type="text/javascript" src="/alink-hq/static/js/mesh.js"></script>
 <script type="text/javascript">
-    $(function () {
-        myBrowser()
-        $('.one-list li').each(function () {
-            $('.main-left>ul>li.one-list:eq(0)').find('.on-off-triangle').attr('src', '/alink-hq/static/img/right-triange-un.png');
-            $('.main-left>ul>li.one-list:eq(0)').find('.two-list').addClass('active');
-            var tab = $(this).attr('tab');
-            if (tab == 'meshList') {
-                $(this).addClass('active').siblings().removeClass('active');
-            }
-        });
-        $('.on-off-triangle').click(function () {
-            var imgUrl = $(this).attr('src');
-            if (imgUrl == '/alink-hq/static/img/bottom-triangle-un.png') {
-                $(this).attr('src', '/alink-hq/static/img/right-triange-un.png');
-                $(this).parent().parent('.one-list').find('.two-list').addClass('active');
-            } else {
-                $(this).attr('src', '/alink-hq/static/img/bottom-triangle-un.png');
-                $(this).parent().parent('.one-list').find('.two-list').removeClass('active');
-            }
-        });
-    });
 
-    //    $(function(){
-    //        var dataAccount=0;
-    //        //复选框
-    //        $('.checkbox img').click(function(){
-    //            var hasCheckbox=false;
-    //            var imgUrl=$(this).attr('src');
-    //            var isCheckbox='/alink-hq/static/img/checkbox-gou.png';
-    //            var noCheckbox='/alink-hq/static/img/checkbox.png';
-    //            if(imgUrl==noCheckbox){
-    //                $(this).attr('src',isCheckbox);
-    //                $(this).prev('input[type="checkbox"]').prop("checked",true);
-    //                dataAccount++;
-    //            }else{
-    //                $(this).attr('src',noCheckbox);
-    //                $(this).prev('input[type="checkbox"]').prop("checked",false);
-    //                dataAccount--;
-    //            }
-    //            $('tbody .checkbox img').each(function(){
-    //                var imgUrl2= $(this).attr('src');
-    //                if(imgUrl2==noCheckbox){
-    //                    hasCheckbox=true;
-    //                }
-    //            })
-    //            if(!hasCheckbox){
-    //                $('.all-checkbox img').attr('src',isCheckbox);
-    //                $('#all').prop("checked",true);
-    //            }else{
-    //                $('.all-checkbox img').attr('src',noCheckbox);
-    //                $('#all').prop("checked",false);
-    //            }
-    //            $('.amount').text(dataAccount);
-    //        })
-    //        $('.all-checkbox img').click(function(){
-    ////        $('#all').prop("checked",true);
-    //            var imgUrl=$(this).attr('src');
-    //            var isCheckbox='/alink-hq/static/img/checkbox-gou.png';
-    //            var noCheckbox='/alink-hq/static/img/checkbox.png';
-    //            if(imgUrl==noCheckbox){
-    //                dataAccount=$('tbody tr').length;
-    //                $(this).attr('src',isCheckbox);
-    //                $('tbody .checkbox img').each(function(){
-    //                    $(this).attr('src',isCheckbox);
-    //                    $('#all').prop("checked",true);
-    //                    $(this).prev('input[type="checkbox"]').prop("checked",true);
-    //                })
-    //            }else{
-    //                dataAccount=0;
-    //                $(this).attr('src',noCheckbox);
-    //                $('tbody .checkbox img').each(function(){
-    //                    $(this).attr('src',noCheckbox);
-    //                    $('#all').prop("checked",false);
-    //                    $(this).prev('input[type="checkbox"]').prop("checked",false);
-    //                })
-    //            }
-    //            $('.amount').text(dataAccount);
-    //        })
-    //    })
 </script>
 </body>
 </html>

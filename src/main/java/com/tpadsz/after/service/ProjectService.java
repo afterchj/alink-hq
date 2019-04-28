@@ -24,5 +24,9 @@ public interface ProjectService {
 
     void createProject(String projectName, String uid);
 
-    void renameProject(String projectId, String projectName);
+    int renameProject(String account,Integer projectId, String projectName);
+
+    void transferProject(int id, String uid);
+
+    void delete(Integer projectId);
 }
