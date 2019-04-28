@@ -503,3 +503,68 @@ th.all-checkbox {
     padding-left: 227px;
     text-align: left;
 }
+#createProject .c-createProject {
+    height: 834px;
+    margin: 30px 0;
+    border: 1px solid #bbb;
+    background-color: #fff;
+}
+#createProject .c-nav {
+    height: 58px;
+    line-height: 58px;
+    padding-left: 25px;
+    font-size: 22px;
+    color: #111;
+    border-bottom: 1px solid #bbb;
+    background-color: #fafafa;
+}
+#createProject .c-content {
+    padding: 10px 70px;
+    font-size: 21px;
+    color: #3c3c3c;
+}
+#createProject form {
+    width: 800px;
+    margin: auto;
+    font-size: 16px;
+    color: #3c3c3c;
+    margin-top: 100px;
+    text-align: center;
+}
+#createProject input,#createProject select{
+    width: 300px;
+    font-size: 15px;
+    color: #666;
+    border: 1px solid #bbb;
+    text-indent: 10px;
+    height: 30px;
+    border-radius: 5px;
+}
+#createProject form label{
+    display: inline-block;
+    width: 130px;
+    text-align: right;
+    margin-right: 15px;
+}
+#createProject form>div{
+    margin-bottom: 15px;
+}
+#createProject form>div button {
+    height: 44px;
+    width: 134px;
+    color: #fff;
+    font-size: 17px;
+    letter-spacing: 5px;
+    border: 1px solid #3598db;
+    background-color: #3598db;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 30px;
+}
+.project-hint,.account-hint{
+    font-size: 14px;
+    color: #fb2a2a;
+    height: 20px;
+    margin-left: 325px;
+    text-align: left
+}
