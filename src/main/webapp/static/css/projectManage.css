@@ -82,7 +82,18 @@ th {
     /*cursor: pointer;*/
     background-color: #fff;
 }
-
+.search-result table input[type=checkbox]{
+    border: 1px solid #bbb;
+    width: 15px;
+    height: 14px;
+    outline: none;
+    border-radius: 0;
+    -webkit-appearance: none;
+    cursor: pointer;
+}
+.search-result table input[type=checkbox]:checked{
+    background: url("/alink-hq/static/img/checkbox-gou.png") no-repeat center;
+}
 .search-result table td a {
     color: #3c3c3c;
 }
@@ -472,4 +483,5 @@ th.all-checkbox {
 .hidden{
     /*display: none;*/
     visibility: hidden;
+    width:0;
 }

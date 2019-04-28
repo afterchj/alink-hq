@@ -1,6 +1,5 @@
 <!doctype html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-
 <head>
     <meta charset="UTF-8">
     <script src="/alink-hq/static/js/browser.js"></script>
@@ -60,7 +59,8 @@
                     <thead>
                     <tr>
                         <th class="all-checkbox ">
-                            <span style="vertical-align: middle;"><img src="/alink-hq/static/img/checkbox.png" alt="" ></span>
+                            <span style="vertical-align: middle;"><img src="/alink-hq/static/img/checkbox.png"
+                                                                       alt=""></span>
                             <span class="">全选</span>
                         </th>
                         <th>项目名称</th>
@@ -82,19 +82,19 @@
                     <tbody>
                     <tr th:each="project:${pageInfo.list}">
                         <td class="checkbox ">
-                            <img src="/alink-hq/static/img/checkbox.png" alt=""  class="pointer">
+                            <img src="/alink-hq/static/img/checkbox.png" alt="" class="pointer">
                         </td>
-                        <td class="project-name" th:text="${project.name}">
-                            <a href="javascript:void(0);"></a>
+                        <td class="project-name" >
+                            <a href="javascript:void(0);" th:text="${project.name}"></a>
                         </td>
                         <td th:text="${project.meshNum}"></td>
                         <td th:text="${project.account}"></td>
                         <td th:text="${project.create_date}"></td>
                         <td th:text="${project.update_date}"></td>
                         <td class="p-r">
-                            <img src="/alink-hq/static/img/edit.png" alt="">
+                            <img src="/alink-hq/static/img/edit.png" alt="" class="pointer">
                             <img src="/alink-hq/static/img/exchange.png" alt="" class="center-img">
-                            <img src="/alink-hq/static/img/delete.png" alt="">
+                            <img src="/alink-hq/static/img/delete.png" alt="" class="pointer">
                             <div class="popup p-a">
                                 重命名
                             </div>
@@ -106,7 +106,7 @@
                         <td colspan="8" class="clearfix page">
                             <div class="f-l">
                                 <span class="selected-order">已选择
-                                    <span class="amount">100</span>
+                                    <span class="amount">0</span>
                                     条订单
                                 </span>
                             <span class="m-r-20">
@@ -118,15 +118,20 @@
                             </div>
                             <!--<div th:replace="common/page::page"></div>-->
                             <div class="f-r page-right">
-                        <span>
-                        <img src="/alink-hq/static/img/left-arrow.png" alt="">
-                        </span>
-                                <span>1</span>
-                            <span>
-                        <img src="/alink-hq/static/img/right-arrow-color.png" alt="">
-                        </span>
-                            <span class="m-l-15 m-r-20">
-                          共
+                                <span class="prev-page">
+                                    <a th:href="@{/project/list(pageNum=${pageInfo.prePage},uid=${session.user.id},pageSize=${pageInfo.pageSize},account=${account},projectName=${projectName},startCreateDate=${startCreateDate},endCreateDate=${endCreateDate},startUpdateDate=${startUpdateDate},endUpdateDate=${endUpdateDate})}">
+                                        <img src="/alink-hq/static/img/left-arrow.png" alt=""></a>
+                                </span>
+                                <span th:text="${pageInfo.pageNum}" class="pages"></span>
+                                <span th:if="${pageInfo.hasNextPage}" class="next-page">
+                                   <a th:href="@{/project/list(pageNum=${pageInfo.nextPage},uid=${session.user.id},pageSize=${pageInfo.pageSize},account=${account},projectName=${projectName},startCreateDate=${startCreateDate},endCreateDate=${endCreateDate},startUpdateDate=${startUpdateDate},endUpdateDate=${endUpdateDate})}">
+                                       <img src="/alink-hq/static/img/right-arrow-color.png" alt=""></a>
+                                </span>
+                                <span th:unless="${pageInfo.hasNextPage}" class="next-page">
+                                     <a th:href="@{/project/list(pageNum=${pageInfo.nextPage},uid=${session.user.id},pageSize=${pageInfo.pageSize},account=${account},projectName=${projectName},startCreateDate=${startCreateDate},endCreateDate=${endCreateDate},startUpdateDate=${startUpdateDate},endUpdateDate=${endUpdateDate})}">
+                                         <img src="/alink-hq/static/img/right-arrow-color.png" alt=""></a>
+                                </span>
+                            <span class="m-l-15 m-r-20">共
                                     <span th:text="${pageInfo.pages}" class="pageTotal" id="pageTotal"></span>
                                     页/<span th:text="${pageInfo.total}"></span>条数据
                         </span>
@@ -134,7 +139,7 @@
                         <input type="number" id="skipPage"/>
                         </span>
                             <span class="m-r-35">
-                        <img src="/alink-hq/static/img/skip.png" alt="" >
+                        <img src="/alink-hq/static/img/skip.png" alt="">
                         </span>
                                 <span class="m-r-15r">每页显示：</span>
                             <span class="m-r-20">
@@ -165,8 +170,8 @@
                         </th>
                         <th class="p-r">
                             <span class="toTime">更新时间</span>
-                            <img src="/alink-hq/static/img/top-triangle.png" alt="" class="p-a toTop pointer">
-                            <img src="/alink-hq/static/img/bottom-triangle.png" alt="" class="p-a toBottom pointer">
+                            <img src="/alink-hq/static/img/top-triangle.png" alt="" class="p-a toTop1 pointer">
+                            <img src="/alink-hq/static/img/bottom-triangle.png" alt="" class="p-a toBottom1 pointer">
                         </th>
                         <th>操作</th>
                     </tr>
@@ -189,11 +194,11 @@
 <script>
     //日期选择
     laydate.render({
-        elem: '#start-time' ,//指定元素
+        elem: '#start-time',//指定元素
         range: true
     });
     laydate.render({
-        elem: '#end-time' ,//指定元素
+        elem: '#end-time',//指定元素
         range: true
     });
     $('.one-list li').each(function () {
@@ -202,46 +207,54 @@
             $(this).addClass('active').siblings().removeClass('active');
         }
     })
-    //复选框
-    $('.checkbox img').click(function(){
-        var hasCheckbox=false;
-        var imgUrl=$(this).attr('src');
-        var isCheckbox='/alink-hq/static/img/checkbox-gou.png';
-        var noCheckbox='/alink-hq/static/img/checkbox.png';
-        if(imgUrl==noCheckbox){
-            $(this).attr('src',isCheckbox);
-        }else{
-            $(this).attr('src',noCheckbox);
-        }
-        $('tbody .checkbox img').each(function(){
-            var imgUrl2= $(this).attr('src');
-            if(imgUrl2==noCheckbox){
-                hasCheckbox=true;
+    $(function() {
+        //复选框
+        var dataAccount = 0;
+        $('.checkbox img').click(function () {
+            var hasCheckbox = false;
+            var imgUrl = $(this).attr('src');
+            var isCheckbox = '/alink-hq/static/img/checkbox-gou.png';
+            var noCheckbox = '/alink-hq/static/img/checkbox.png';
+            if (imgUrl == noCheckbox) {
+                $(this).attr('src', isCheckbox);
+                dataAccount++;
+            } else {
+                $(this).attr('src', noCheckbox);
+                dataAccount--;
             }
+            $('tbody .checkbox img').each(function () {
+                var imgUrl2 = $(this).attr('src');
+                if (imgUrl2 == noCheckbox) {
+                    hasCheckbox = true;
+                }
+            })
+            if (!hasCheckbox) {
+                $('.all-checkbox img').attr('src', isCheckbox);
+            } else {
+                $('.all-checkbox img').attr('src', noCheckbox);
+            }
+            $('.amount').text(dataAccount);
         })
-        if(!hasCheckbox){
-            $('.all-checkbox img').attr('src',isCheckbox);
-        }else{
-            $('.all-checkbox img').attr('src',noCheckbox);
-        }
+        $('.all-checkbox img').click(function () {
+            var imgUrl = $(this).attr('src');
+            var isCheckbox = '/alink-hq/static/img/checkbox-gou.png';
+            var noCheckbox = '/alink-hq/static/img/checkbox.png';
+            if (imgUrl == noCheckbox) {
+                dataAccount=$('tbody tr').length;
+                $(this).attr('src', isCheckbox);
+                $('tbody .checkbox img').each(function () {
+                    $(this).attr('src', isCheckbox);
+                })
+            } else {
+                dataAccount=0;
+                $(this).attr('src', noCheckbox);
+                $('tbody .checkbox img').each(function () {
+                    $(this).attr('src', noCheckbox);
+                })
+            }
+            $('.amount').text(dataAccount);
+        })
     })
-    $('.all-checkbox img').click(function(){
-        var imgUrl=$(this).attr('src');
-        var isCheckbox='/alink-hq/static/img/checkbox-gou.png';
-        var noCheckbox='/alink-hq/static/img/checkbox.png';
-        if(imgUrl==noCheckbox){
-            $(this).attr('src',isCheckbox);
-            $('tbody .checkbox img').each(function(){
-                $(this).attr('src',isCheckbox);
-            })
-        }else{
-            $(this).attr('src',noCheckbox);
-            $('tbody .checkbox img').each(function(){
-                $(this).attr('src',noCheckbox);
-            })
-        }
-    })
-
 
     $(function () {
         myBrowser()
@@ -266,65 +279,92 @@
     })
 
 
+
+
     //条件筛选
     $(function () {
         var url = window.location.href;
         var account = GetUrlParam("account");
-        var projectName = GetUrlParam("projectName");
+        var projectName = decodeURIComponent(GetUrlParam("projectName"));
         var startCreateDate = GetUrlParam("startCreateDate");
         var endCreateDate = GetUrlParam("endCreateDate");
         var startUpdateDate = GetUrlParam("startUpdateDate");
-        var endUpdateDate= GetUrlParam("endUpdateDate");
+        var endUpdateDate = GetUrlParam("endUpdateDate");
         var pageSize = GetUrlParam("pageSize");
         var pageNum = GetUrlParam("pageNum");
+        var sortFlag = GetUrlParam("sortFlag");
         $('#skipPage').val(pageNum);
         $('#page-select option').each(function () {
             if ($(this).val() == pageSize) {
                 $(this).attr("selected", "selected");
             }
         })
-        if ( startCreateDate != '' && endCreateDate!= '') {
+        if (startCreateDate != '' && endCreateDate != '') {
             var startTime = startCreateDate + ' - ' + endCreateDate;
             $('#start-time').val(startTime);
         }
-        if ( startUpdateDate != '' && endUpdateDate!= '') {
+        if (startUpdateDate != '' && endUpdateDate != '') {
             var endTime = startUpdateDate + ' - ' + endUpdateDate;
             $('#end-time').val(endTime);
         }
         $('#account').val(account);
         $('#projectName').val(projectName);
-//        $('#company').val(company);
-//        $('table tr td.role').each(function () {
-////            console.log($(this).text());
-//            var roleId = parseInt($(this).text());
-//            if (roleId == 4) {
-//                $(this).text('施工人员');
-//            } else if (roleId == 3) {
-//                $(this).text('乙方管理员');
-//            } else if (roleId == 2) {
-//                $(this).text('管理员');
-//            }
-//        })
-//        $('table tr td.status').each(function () {
-////            console.log($(this).text());
-//            var status = parseInt($(this).text());
-//            if (status == 1) {
-//                $(this).text('启用');
-//            } else if (status == 0) {
-//                $(this).text('禁用');
-//            }
-//        })
-        //查询按钮点击
-        $('.search-button button').click(function () {
+        $('.toTop').click(function(){
+            var sortFlag='1';
             var pageSize = $('#page-select option:selected').val();
             var pageNum = $('#skipPage').val();
-            if(pageNum==''){
-                pageNum==1;
-            }else{
-                pageNum=parseInt(pageNum);
+            if (pageNum == '') {
+                pageNum == 1;
+            } else {
+                pageNum = parseInt(pageNum);
+            }
+            condition(pageSize, pageNum,sortFlag);
+        })
+        $('.toBottom').click(function(){
+            var sortFlag='';
+            var pageSize = $('#page-select option:selected').val();
+            var pageNum = $('#skipPage').val();
+            if (pageNum == '') {
+                pageNum == 1;
+            } else {
+                pageNum = parseInt(pageNum);
+            }
+            condition(pageSize, pageNum,sortFlag);
+        })
+        $('.toBottom1').click(function(){
+            var sortFlag='2';
+            var pageSize = $('#page-select option:selected').val();
+            var pageNum = $('#skipPage').val();
+            if (pageNum == '') {
+                pageNum == 1;
+            } else {
+                pageNum = parseInt(pageNum);
+            }
+            condition(pageSize, pageNum,sortFlag);
+        })
+        $('.toTop1').click(function(){
+            var sortFlag='3';
+            var pageSize = $('#page-select option:selected').val();
+            var pageNum = $('#skipPage').val();
+            if (pageNum == '') {
+                pageNum == 1;
+            } else {
+                pageNum = parseInt(pageNum);
+            }
+            condition(pageSize, pageNum,sortFlag);
+        })
+        //查询按钮点击
+        $('.search-button button').click(function () {
+            var sortFlag = GetUrlParam("sortFlag");
+            var pageSize = $('#page-select option:selected').val();
+            var pageNum = $('#skipPage').val();
+            if (pageNum == '') {
+                pageNum == 1;
+            } else {
+                pageNum = parseInt(pageNum);
             }
 //            console.log('pageNum',pageNum);
-            condition(pageSize, pageNum);
+            condition(pageSize, pageNum,sortFlag);
         })
         //选择页数变化
         $('#page-select').change(function () {
@@ -334,43 +374,34 @@
         });
         //跳转页数变化
         $('#skipPageBtn').click(function () {
+            var sortFlag = GetUrlParam("sortFlag");
             var pageSize = $('#page-select option:selected').val();
-            var pageNum = parseInt($('#skipPage').val());
-            condition(pageSize, pageNum);
+            var pageNum = $('#skipPage').val();
+            if (pageNum == '') {
+                pageNum == 1;
+            } else {
+                pageNum = parseInt(pageNum);
+            }
+            condition(pageSize, pageNum,sortFlag);
         })
     })
-    function condition(pageSize, pageNum) {
+    function condition(pageSize, pageNum,sortFlag) {
         var url = window.location.href;
         var i = url.indexOf("?");
         if (i != -1) {
             var url2 = url.substring(0, i + 1);
-//            console.log('url2', url2);
         } else {
             var url2 = url + '?';
         }
         var account = $('#account').val();
-        var projectName=$('#projectName').val();
-
-//        if ($('#company').val() != '请选择公司') {
-//            var company = $('#company').val();
-//        } else {
-//            var company = '';
-//        }
-//        if ($('#role').val() != '请选择角色') {
-//            var role = $('#role').val();
-//        } else {
-//            var role = '';
-//        }
+        var projectName = $('#projectName').val();
         var startTime = $('#start-time').val();
         var startCreateDate = startTime.substring(0, 10);
         var endCreateDate = startTime.substring(13, 23);
         var endTime = $('#end-time').val();
-        var startUpdateDate = startTime.substring(0, 10);
-        var endUpdateDate = startTime.substring(13, 23);
-//        console.log('pageNum', pageNum);
-//        var userId = parseInt($('#useId_hidden').val());
-        var newUrl = url2 + '&pageNum=' + pageNum + '&pageSize=' + pageSize+'&projectName='+projectName + '&account=' + account + '&startCreateDate=' + startCreateDate + '&endCreateDate=' +endCreateDate+'&startUpdateDate='+startUpdateDate+'&endUpdateDate='+endUpdateDate;
-//        console.log(account, role, company, startDate, endDate, num);
+        var startUpdateDate = endTime.substring(0, 10);
+        var endUpdateDate = endTime.substring(13, 23);
+        var newUrl = url2 + '&pageNum=' + pageNum+'&sortFlag='+sortFlag + '&pageSize=' + pageSize + '&projectName=' + projectName + '&account=' + account + '&startCreateDate=' + startCreateDate + '&endCreateDate=' + endCreateDate + '&startUpdateDate=' + startUpdateDate + '&endUpdateDate=' + endUpdateDate;
         location.href = newUrl;
     }
 
