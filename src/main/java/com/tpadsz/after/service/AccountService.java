@@ -41,4 +41,6 @@ public interface AccountService {
     void enable(String account, Integer status);
 
     Integer findFirmUid(String uid, String userId);
+
+    List<User> findAccountByFid(Integer fid);
 }

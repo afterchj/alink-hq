@@ -109,5 +109,10 @@ public class AccountServiceImpl implements AccountService {
         return accountDao.findFirmUid(uid, userId);
     }
 
+    @Override
+    public List<User> findAccountByFid(Integer fid) {
+        return accountDao.findAccountByFid(fid);
+    }
+
 
 }
