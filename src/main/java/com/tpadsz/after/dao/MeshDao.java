@@ -1,5 +1,6 @@
 package com.tpadsz.after.dao;
 
+import com.tpadsz.after.entity.MeshInfo;
 import com.tpadsz.after.entity.OptionList;
 import com.tpadsz.after.entity.SearchDict;
 
@@ -17,11 +18,16 @@ public interface MeshDao {
 
     List<Map> selectByMid(List list);
 
+    MeshInfo getMeshInfo(Integer id);
+
+    int getCount(Map map);
+
     List<OptionList> getProjects(Map map);
 
     int getCountByTable(String tableName);
 
     void saveUpdate(Map map);
+
     void saveRename(Map map);
 
     void deleteMeshByIds(List list);

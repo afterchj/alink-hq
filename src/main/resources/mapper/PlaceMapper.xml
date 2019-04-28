@@ -23,7 +23,7 @@
                     AND m.uid IN (SELECT c.uid FROM f_user_customer c WHERE fid=(SELECT fid FROM f_user_customer WHERE
                     uid=#{uid}))
                     <!--
-                        AND m.uid IN (SELECT c.uid FROM f_user_customer c INNER JOIN f_user_role r ON c.uid=r.user_id WHERE r.role_id in (4) AND fid=(SELECT fid FROM f_user_customer WHERE uid=#{uid})) OR m.uid=#{uid}
+                        AND m.uid IN (SELECT c.uid FROM f_user_customer c INNER JOIN f_user_role r ON c.uid=r.user_id WHERE r.role_id in (4) OR fid=(SELECT fid FROM f_user_customer WHERE uid=#{uid}))
                      -->
                 </when>
                 <when test="role == 'user'">

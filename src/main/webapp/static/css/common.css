@@ -77,3 +77,8 @@
     border-bottom: 2px solid dodgerblue;
     color: dodgerblue;
 }
+.p-nav li{
+    float: left;
+    margin-left: 20px;
+    margin-right: 30px;
+}

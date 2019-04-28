@@ -8,7 +8,7 @@
         g.gname,
         m.mname,
         m.mesh_id,
-        l.lcount
+        IFNULL(l.lcount,0) lcount
 	</sql>
 
     <sql id="common_choose">
@@ -20,7 +20,7 @@
                 <when test="role == 'manager'">
                     AND m.uid IN (SELECT c.uid FROM f_user_customer c WHERE fid=(SELECT fid FROM f_user_customer WHERE uid=#{uid}))
                     <!--
-                        AND m.uid IN (SELECT c.uid FROM f_user_customer c INNER JOIN f_user_role r ON c.uid=r.user_id WHERE r.role_id in (4) AND fid=(SELECT fid FROM f_user_customer WHERE uid=#{uid})) OR m.uid=#{uid}
+                        AND m.uid IN (SELECT c.uid FROM f_user_customer c INNER JOIN f_user_role r ON c.uid=r.user_id WHERE r.role_id in (4) OR fid=(SELECT fid FROM f_user_customer WHERE uid=#{uid}))
                      -->
                 </when>
                 <when test="role == 'user'">
@@ -36,7 +36,8 @@
         <include refid="Base_Column_List"/>
         FROM f_group g
         INNER JOIN f_mesh m ON m.id = g.mid
-        INNER JOIN (SELECT COUNT(1) lcount,gid FROM f_light GROUP BY gid) l ON g.id=l.gid
+        LEFT JOIN (SELECT COUNT(1) lcount,gid FROM f_light GROUP BY gid) l ON g.id=l.gid
+        WHERE 1=1
         <include refid="common_choose"></include>
         <if test="mname!=null and mname!=''">
             AND m.mname LIKE CONCAT('%',#{mname},'%')
@@ -47,6 +48,16 @@
         <if test="gname!=null and gname!=''">
             AND g.gname LIKE CONCAT('%',#{gname},'%')
         </if>
+        <if test="pid!=null and pid!=''">
+            AND g.pid=#{pid}
+        </if>
+        <if test="mid!=null and mid!=''">
+            AND m.id=#{mid}
+        </if>
+        <if test="projectId!=null and projectId!=''">
+            AND m.project_id=#{projectId}
+        </if>
+        ORDER BY lcount DESC
     </select>
 
     <select id="selectByMap" resultType="map" parameterType="SearchDict">
