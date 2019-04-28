@@ -47,7 +47,6 @@ public class GroupController {
 
     @RequestMapping("/move")
     public String move(String gids, ModelMap modelMap) {
-        logger.info("gids=" + gids);
         String[] ids = gids.split(",");
         List<String> list = new ArrayList(Arrays.asList(ids));
         List<Map> groupMap = groupService.selectByGid(list);
@@ -58,6 +57,7 @@ public class GroupController {
 
     @RequestMapping("/saveUpdate")
     public String save(String gids, String pid) {
+        logger.info("gids=" + gids + ",pid=" + pid);
         String[] ids = gids.split(",");
         List<String> list = new ArrayList(Arrays.asList(ids));
         Map map = new HashMap();
@@ -74,7 +74,7 @@ public class GroupController {
         List<String> list = new ArrayList(Arrays.asList(ids));
         try {
             groupService.deleteGroupByIds(list);
-        }catch (Exception e){
+        } catch (Exception e) {
             logger.warn(e);
             return "authError";
         }
