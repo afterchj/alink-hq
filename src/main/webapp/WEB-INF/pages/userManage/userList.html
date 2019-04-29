@@ -406,25 +406,6 @@
             var openTab = $(this).attr('openTab');
             shade(openTab);
             account=$(this).parent().siblings('.use-account').text();
-//        console.log('account',account);
-//        $.ajax({
-//            type: "POST",
-//            url: "/alink-hq/account/delete",
-//            data: {account: account},
-//            dataType: "json",
-//            success: function (data) {
-//                console.log(data.result);
-//                if(data.result=='303'){
-//                    $('.noProject').removeClass('active');
-//                    $('.hasProject').addClass('active');
-//                    //移交
-//                }else{
-//                    $('.hasProject').removeClass('active');
-//                    $('.noProject').addClass('active');
-////                    location.reload();
-//                }
-//            }
-//        });
         })
         $('div[openContent="delete-account"] button.yes').click(function(){
             $.ajax({
@@ -435,21 +416,17 @@
             success: function (data) {
                 console.log(data.result);
                 if(data.result=='303'){
-                    $('.noProject').removeClass('active');
-                    $('.hasProject').addClass('active');
                     //移交
                     $('div[openContent="delete-account-hasProject"]').addClass('active');
                     $('div[openContent="delete-account"]').removeClass('active');
                 }else if(data.result=='000'){
-                    $('.hasProject').removeClass('active');
-                    $('.noProject').addClass('active');
                     location.reload();
                 }
             }
         });
         })
         $('div[openContent="delete-account-hasProject"] button.yes').click(function(){
-            location.href('/alink-hq/project/list');
+            window.location.href='/alink-hq/project/list';
         })
     })
 
