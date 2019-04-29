@@ -122,6 +122,16 @@
         DELETE FROM f_mesh WHERE id IN (SELECT m.id from (SELECT id from f_mesh where project_id=#{id} and uid = #{uid}) AS m )
     </delete>
 
+    <select id="findPlaceNum" resultType="int">
+        SELECT count(*) from f_place where mid IN (SELECT id FROM f_mesh WHERE project_id=#{id})
+    </select>
 
+    <select id="findGroupNum" resultType="int">
+        SELECT count(*) from f_group where mid IN (SELECT id FROM f_mesh WHERE project_id=#{id})
+    </select>
+
+    <select id="findLightNum" resultType="int">
+        SELECT count(*) from f_light where mid IN (SELECT id FROM f_mesh WHERE project_id=#{id})
+    </select>
 
 </mapper>

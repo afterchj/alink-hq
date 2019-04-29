@@ -29,4 +29,10 @@ public interface ProjectService {
     void transferProject(int id, String uid);
 
     void delete(String uid,Integer projectId);
+
+    int findPlaceNum(Integer projectId);
+
+    int findGroupNum(Integer projectId);
+
+    int findLightNum(Integer projectId);
 }
