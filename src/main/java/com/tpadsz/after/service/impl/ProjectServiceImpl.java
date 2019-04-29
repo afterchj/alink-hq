@@ -77,14 +77,11 @@ public class ProjectServiceImpl implements ProjectService {
         List<Integer> sids = projectDao.querySidByPid(projectId, uid);
         if (sids.size() != 0) {
             projectDao.deleteSceneByPid(projectId, uid);
-            projectDao.deleteSceneSettingBySid(sids);
-            projectDao.deleteLightSettingBySid(sids, uid);
+            projectDao.deleteLightSettingBySid(sids);
         }
         projectDao.deleteGroupByPid(projectId, uid);
-        projectDao.deleteGroupSettingByPid(projectId, uid);
         projectDao.deleteProByPid(projectId, uid);
-//        projectDao.deleteLightByMid(projectId, uid);
-
+        projectDao.deleteLightByPid(projectId, uid);
         projectDao.deleteMeshByPid(projectId, uid);
     }
 

@@ -15,7 +15,6 @@ public class MyApplicationContext implements ServletContextAware {
     @Override
     public void setServletContext(ServletContext context) {
         String ctx = context.getContextPath();
-        System.out.println("ctx=" + ctx);
         context.setAttribute("ctx", ctx);
     }
 }
