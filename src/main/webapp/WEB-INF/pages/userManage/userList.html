@@ -138,7 +138,7 @@
                                            oninput="skipLimit()"/>
                                 </span>
                                 <span class="m-r-35">
-                                    <img src="/alink-hq/static/img/skip.png" id="skipPageBtn" class="pointer"
+                                    <img src="/alink-hq/static/img/skip.png" id="skipPageBtn" class="pointer" onmousedown="mouseDown()" onmouseup="mouseUp()"
                                          alt="">
                                 </span>
                                 <span class="m-r-15r">每页显示：</span>
@@ -481,7 +481,8 @@
     function skipLimit() {
         var skipPage = parseInt($('#skipPage').val());
         var pageTotal = parseInt($('.pageTotal').text());
-        console.log(skipPage, pageTotal)
+//        console.log(skipPage, pageTotal)
+        $('')
         if (skipPage < 1 || skipPage > pageTotal) {
             $('#skipPage').val('');
         }
@@ -568,10 +569,17 @@
 //            if(pageNum==''){
 //
 //            }
+
             condition(pageSize, pageNum);
         })
     })
-
+    function mouseDown() {
+        $('#skipPageBtn').attr('src','/alink-hq/static/img/skip-color.png');
+//        $('.btn-bottom button').addClass('active');
+    }
+    function mouseUp() {
+        $('#skipPageBtn').attr('src','/alink-hq/static/img/skip.png');
+    }
 
     function condition(pageSize, pageNum) {
         var url = window.location.href;
