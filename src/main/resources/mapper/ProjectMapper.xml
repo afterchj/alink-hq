@@ -98,8 +98,8 @@
         WHERE mid IN (SELECT m.id from (SELECT id from f_mesh where project_id=#{id} and uid = #{uid}) AS m )
     </delete>
 
-    <delete id="deleteSceneSettingBySid">
-        DELETE FROM f_scene_setting
+    <delete id="deleteLightSettingBySid">
+        DELETE FROM f_light_setting
         WHERE sid IN
         <foreach item="item" collection="list" open="(" separator="," close=")">
             #{item}
@@ -110,12 +110,12 @@
         DELETE FROM f_group WHERE mid IN (SELECT m.id from (SELECT id from f_mesh where project_id=#{id} and uid = #{uid}) AS m )
     </delete>
 
-    <delete id="deleteGroupSettingByPid">
-        DELETE FROM f_group_setting WHERE mid IN (SELECT m.id from (SELECT id from f_mesh where project_id=#{id} and uid = #{uid}) AS m )
-    </delete>
-
     <delete id="deleteProByPid">
         DELETE FROM f_project WHERE id=#{id} and uid = #{uid}
+    </delete>
+
+    <delete id="deleteLightByPid">
+        DELETE FROM f_light WHERE mid IN (SELECT m.id from (SELECT id from f_mesh where project_id=#{id} and uid = #{uid}) AS m )
     </delete>
 
     <delete id="deleteMeshByPid">
