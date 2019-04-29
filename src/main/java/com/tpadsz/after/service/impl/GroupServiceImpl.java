@@ -1,6 +1,7 @@
 package com.tpadsz.after.service.impl;
 
 import com.tpadsz.after.dao.GroupDao;
+import com.tpadsz.after.entity.MeshInfo;
 import com.tpadsz.after.entity.OptionList;
 import com.tpadsz.after.entity.SearchDict;
 import com.tpadsz.after.service.GroupService;
@@ -34,6 +35,11 @@ public class GroupServiceImpl implements GroupService {
     @Override
     public List<Map> selectByGid(List list) {
         return groupDao.selectByGid(list);
+    }
+
+    @Override
+    public MeshInfo getGroupInfo(int id) {
+        return groupDao.getGroupInfo(id);
     }
 
     @Override

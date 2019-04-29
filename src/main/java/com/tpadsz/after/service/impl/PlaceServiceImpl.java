@@ -1,6 +1,7 @@
 package com.tpadsz.after.service.impl;
 
 import com.tpadsz.after.dao.PlaceDao;
+import com.tpadsz.after.entity.MeshInfo;
 import com.tpadsz.after.entity.OptionList;
 import com.tpadsz.after.entity.SearchDict;
 import com.tpadsz.after.service.PlaceService;
@@ -38,6 +39,11 @@ public class PlaceServiceImpl implements PlaceService {
     @Override
     public List<OptionList> getMesh(Map map) {
         return placeDao.getMesh(map);
+    }
+
+    @Override
+    public MeshInfo getPlaceInfo(int id) {
+        return placeDao.getPlaceInfo(id);
     }
 
     @Override

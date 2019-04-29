@@ -3,6 +3,7 @@ package com.tpadsz.after.controller;
 import com.alibaba.fastjson.JSON;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.tpadsz.after.entity.MeshInfo;
 import com.tpadsz.after.entity.OptionList;
 import com.tpadsz.after.entity.SearchDict;
 import com.tpadsz.after.service.GroupService;
@@ -44,7 +45,12 @@ public class GroupController {
         modelMap.put("dict", dict);
         return "meshTemp/groupList";
     }
-
+    @RequestMapping("/info")
+    public String info(int id, ModelMap modelMap) {
+        MeshInfo meshInfo = groupService.getGroupInfo(id);
+        modelMap.put("meshInfo", meshInfo);
+        return "meshTemp/groupInfo";
+    }
 
     @RequestMapping("/move")
     public String move(String gids, ModelMap modelMap) {

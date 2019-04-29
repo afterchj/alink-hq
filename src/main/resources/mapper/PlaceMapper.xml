@@ -9,7 +9,7 @@
         p.place_id,
         m.mname,
         m.mesh_id,
-        g.gcount
+        IFNULL(g.gcount,0) gcount
 	</sql>
 
     <sql id="common_choose">
@@ -41,7 +41,7 @@
         FROM
         f_place p
         INNER JOIN f_mesh m ON m.id = p.mid
-        INNER JOIN (SELECT COUNT(1) gcount,pid FROM f_group GROUP BY pid) g ON g.pid=p.id
+        LEFT JOIN (SELECT COUNT(1) gcount,pid FROM f_group GROUP BY pid) g ON g.pid=p.id
         WHERE 1=1
         <include refid="common_choose"/>
         <if test="mname!=null and mname!=''">
@@ -62,13 +62,33 @@
         <if test="projectId!=null and projectId!=''">
             AND m.project_id=#{projectId}
         </if>
+        ORDER BY g.gcount DESC
+    </select>
+
+    <select id="getPlaceInfo" resultType="MeshInfo" parameterType="int">
+        SELECT
+             pl.id,
+             pl.mid,
+             pl.pname,
+             pl.place_id,
+             p.name,
+             m.mname,
+             m.mesh_id,
+             IFNULL(gc.gcount, 0) gcount,
+             IFNULL(l.lcount, 0) lcount
+        FROM f_place pl
+        INNER JOIN f_mesh m ON m.id=pl.mid
+        LEFT JOIN f_project p ON p.id=m.project_id
+        LEFT JOIN f_group g ON g.pid=pl.id
+        LEFT JOIN (SELECT COUNT(1) gcount,pid FROM f_group GROUP BY pid) gc ON gc.pid=pl.id
+        LEFT JOIN (SELECT COUNT(1) lcount,pid FROM f_light GROUP BY pid) l ON l.pid=pl.id
+        WHERE pl.id=#{id} LIMIT 1
     </select>
 
     <select id="selectByMap" resultType="map">
         SELECT
         <include refid="Base_Column_List"/>
-        FROM
-        f_mesh m
+        FROM f_mesh m
         INNER JOIN f_project p ON m.project_id = p.id
         INNER JOIN (SELECT COUNT(1) pcount,mid FROM f_place GROUP BY mid) pl ON pl.mid=m.id
         INNER JOIN (SELECT COUNT(1) scount,mid FROM f_scene GROUP BY mid) s ON s.mid=m.id
@@ -85,12 +105,11 @@
 
     <select id="selectByMid" resultType="map" parameterType="list">
         SELECT
-        m.id,
-        m.mname,
-        m.mesh_id,
-        p.name
-        FROM
-        f_mesh m
+            m.id,
+            m.mname,
+            m.mesh_id,
+            p.name
+        FROM f_mesh m
         INNER JOIN f_project p ON m.project_id = p.id
         INNER JOIN (SELECT COUNT(1) pcount,mid FROM f_place GROUP BY mid) pl ON pl.mid=m.id
         INNER JOIN (SELECT COUNT(1) scount,mid FROM f_scene GROUP BY mid) s ON s.mid=m.id

@@ -79,17 +79,35 @@
             AND p.name LIKE CONCAT('%',#{pname},'%')
         </if>
     </select>
-
+    <select id="getGroupInfo" resultType="MeshInfo" parameterType="int">
+        SELECT
+            g.id,
+            g.pid,
+            g.mid,
+            g.gname,
+            p.name,
+            m.project_id,
+            m.mname,
+            m.mesh_id,
+            pl.pname,
+            IFNULL(l.lcount,0) lcount
+        FROM f_group g
+        INNER JOIN f_mesh m ON m.id=g.mid
+        INNER JOIN f_project p ON p.id=m.project_id
+        LEFT JOIN f_place pl ON pl.id=g.pid
+        LEFT JOIN (SELECT COUNT(1) lcount,gid FROM f_light GROUP BY gid) l ON l.gid=g.id
+        WHERE g.id=#{id}
+    </select>
     <select id="selectByGid" resultType="map" parameterType="list">
         SELECT
             g.id,
             g.mid,
             g.gname,
             m.mesh_id,
-            p.id pid,
+            g.pid,
             p.pname
         FROM f_group g
-        INNER JOIN f_place p ON g.pid=p.id
+        LEFT JOIN f_place p ON g.pid=p.id
         INNER JOIN f_mesh m ON m.id=g.mid
         WHERE g.id IN
         <foreach collection="list" item="id" index="index" open="(" close=")" separator=",">

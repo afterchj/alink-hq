@@ -1,5 +1,6 @@
 package com.tpadsz.after.dao;
 
+import com.tpadsz.after.entity.MeshInfo;
 import com.tpadsz.after.entity.OptionList;
 import com.tpadsz.after.entity.SearchDict;
 
@@ -18,7 +19,11 @@ public interface GroupDao {
     List<Map> selectByGid(List list);
 
     List<OptionList> getPlaces(Map map);
+
+    MeshInfo getGroupInfo(int id);
+
     void saveUpdate(Map map);
+
     void saveRename(Map map);
 
     void deleteGroupByIds(List list);

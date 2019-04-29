@@ -6,9 +6,14 @@ package com.tpadsz.after.entity;
 public class MeshInfo {
 
     private int id;
+    private int mid;
+    private int pid;
     private String name;
     private String mname;
+    private String pname;
+    private String gname;
     private int mesh_id;
+    private int place_id;
     private int project_id;
     private int scount;
     private int pcount;
@@ -21,6 +26,22 @@ public class MeshInfo {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public int getMid() {
+        return mid;
+    }
+
+    public void setMid(int mid) {
+        this.mid = mid;
+    }
+
+    public int getPid() {
+        return pid;
+    }
+
+    public void setPid(int pid) {
+        this.pid = pid;
     }
 
     public String getName() {
@@ -45,6 +66,30 @@ public class MeshInfo {
 
     public void setMesh_id(int mesh_id) {
         this.mesh_id = mesh_id;
+    }
+
+    public String getPname() {
+        return pname;
+    }
+
+    public void setPname(String pname) {
+        this.pname = pname;
+    }
+
+    public String getGname() {
+        return gname;
+    }
+
+    public void setGname(String gname) {
+        this.gname = gname;
+    }
+
+    public int getPlace_id() {
+        return place_id;
+    }
+
+    public void setPlace_id(int place_id) {
+        this.place_id = place_id;
     }
 
     public int getProject_id() {
