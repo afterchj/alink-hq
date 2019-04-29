@@ -174,16 +174,27 @@ public class ProjectController {
 
     @RequestMapping(value = "/delete", method = RequestMethod.POST)
     @ResponseBody
-    public Map<String, String> delete(String account, Integer projectId) {
+    public Map<String, String> delete(String projectInfo) {
         Map<String, String> map = new HashMap<>();
+        List<ProjectList> projectList = JSONArray.parseArray(projectInfo, ProjectList.class);
         try {
-            User user = accountService.findByAccount(account);
-            projectService.delete(user.getId(),projectId);
+            for(ProjectList project : projectList){
+                User user = accountService.findByAccount(project.getAccount());
+                projectService.delete(user.getId(),project.getId());
+            }
             map.put("result", ResultDict.SUCCESS.getCode());
         } catch (Exception e) {
             map.put("result", ResultDict.SYSTEM_ERROR.getCode());
         }
         return map;
+    }
+
+    @RequestMapping(value = "/detail", method = RequestMethod.GET)
+    public String detail(String account, Integer projectId) {
+
+
+
+        return "projectManage/projectDetail";
     }
 
 
