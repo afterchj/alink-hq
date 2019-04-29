@@ -109,7 +109,7 @@ $(function () {
         var phoneResult2 = regPhone.test(phoneVal2);
         //验证邮箱
         var emailVal = $('#email-e').val();
-        var regEmail = /^([a-zA-Z]|[0-9])(\w|\-)+@[a-zA-Z0-9]+\.([a-zA-Z]{2,4})$/;
+        var regEmail = /^([A-Za-z0-9_\-\.\u4e00-\u9fa5])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,8})$/;
         var emailResult = regEmail.test(emailVal);
         var isBind3 = checkExist(emailVal);
         if (phoneVal1 != '' && phoneResult1 && isBind1) {
@@ -206,7 +206,7 @@ $(function () {
         var regPhone = /^[1][3,4,5,7,8,9][0-9]{9}$/;
         var phoneResult = regPhone.test(unameVal);
         //验证邮箱
-        var regEmail = /^([a-zA-Z]|[0-9])(\w|\-)+@[a-zA-Z0-9]+\.([a-zA-Z]{2,4})$/;
+        var regEmail = /^([A-Za-z0-9_\-\.\u4e00-\u9fa5])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,8})$/;
         var emailResult = regEmail.test(unameVal);
         if(p.test(unameVal) && unameVal.length == 11){
             console.log('输入手机号')
@@ -245,7 +245,7 @@ $(function () {
         var phoneResultL = regPhone.test(phoneValL);
         var phoneResultF = regPhone.test(phoneValF);
         //验证邮箱
-        var regEmail = /^([a-zA-Z]|[0-9])(\w|\-)+@[a-zA-Z0-9]+\.([a-zA-Z]{2,4})$/;
+        var regEmail = /^([A-Za-z0-9_\-\.\u4e00-\u9fa5])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,8})$/;
         var emailResult = regEmail.test(unameVal);
         var emailResult2 = regEmail.test(emailVal);
         //密码格式是否正确
@@ -348,7 +348,7 @@ function passwordLogin() {
     var regPhone = /^[1][3,4,5,7,8,9][0-9]{9}$/;
     var phoneResult = regPhone.test(unameVal);
     //验证邮箱
-    var regEmail = /^([a-zA-Z]|[0-9])(\w|\-)+@[a-zA-Z0-9]+\.([a-zA-Z]{2,4})$/;
+    var regEmail = /^([A-Za-z0-9_\-\.\u4e00-\u9fa5])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,8})$/;
     var emailResult = regEmail.test(unameVal);
     var p = /^[0-9]*$/;
 
@@ -1011,7 +1011,7 @@ function emailFindPwd() {
     var newPwd = $('#pwd-e').val();
     // console.log(emailVal, codeVal, newPwd);
     //验证邮箱
-    var regEmail = /^([a-zA-Z]|[0-9])(\w|\-)+@[a-zA-Z0-9]+\.([a-zA-Z]{2,4})$/;
+    var regEmail = /^([A-Za-z0-9_\-\.\u4e00-\u9fa5])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,8})$/;
     var emailResult = regEmail.test(emailVal);
     //密码格式是否正确
     var regPwd = /^[a-z0-9]{6,16}$/;
@@ -1122,13 +1122,13 @@ function emailFindPwdCode() {
     var emailVal = $('#email-e').val();
     var codeVal = $('#code-e').val();
     var newPwd = $('#pwd-e').val();
-    // console.log(emailVal, codeVal, newPwd);
+    console.log(emailVal, codeVal, newPwd);
     //密码格式是否正确
     var regPwd = /^[a-z0-9]{6,16}$/;
     var pwdResult = regPwd.test(newPwd);
     var isBind = checkExist(emailVal);
     //验证邮箱
-    var regEmail = /^([a-zA-Z]|[0-9])(\w|\-)+@[a-zA-Z0-9]+\.([a-zA-Z]{2,4})$/;
+    var regEmail = /^([A-Za-z0-9_\-\.\u4e00-\u9fa5])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,8})$/;
     var emailResult = regEmail.test(emailVal);
     // console.log('该邮箱是否被绑定', isBind);
     if (emailVal == '') {
@@ -1160,6 +1160,7 @@ function emailFindPwdCode() {
         //
         //     }
         // }
+        console.log('邮箱格式不正确');
         $('.email-find-password .email-add-hint').text('请输入正确的邮箱');
         $('.email-find-password .email-code-hint').text('');
         $('.email-find-password .email-password-hint').text('');

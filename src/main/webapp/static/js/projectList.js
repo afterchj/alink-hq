@@ -283,7 +283,34 @@ $(function () {
 
     })
     $('div[openContent="delete-project"] .yes').click(function(){
-        var json=[{}];
+        var jsonArray=[];
+        var projectName=$(this).parent('td').siblings('.project-id').find('a').text();
+        var account=$(this).parent('td').siblings('.project-account').text();
+        // var coname=$(this).parent('td').siblings('.project-coname').text();
+        console.log(projectName,account,coname);
+        var  msg={
+            projectId:projectId,
+            account:account,
+        }
+
+        jsonArray.push(msg);
+        var newJsonArray=JSON.stringify(jsonArray);
+        console.log(newJsonArray);
+        $.ajax({
+            type: "POST",
+            url: "/alink-hq/project/delete",
+            data: {projectInfo:newJsonArray},
+            dataType: "json",
+            success: function (res) {
+                console.log(res);
+                // if (res.result == '000') {
+                //     // $('p.rename-hint').text('');
+                //     // location.reload();
+                // } else if (res.result == '200') {
+                //     // $('p.rename-hint').text('已存在，请重新输入');
+                // }
+            }
+        });
     })
         // var jsonArray = [];//定义一个数组
         // $('input[name="..."]:checked').each(function () {//遍历每一个名字为interest的复选框，其中选中的执行函数
@@ -299,16 +326,21 @@ $(function () {
         var projectName=$(this).parent('td').siblings('.project-name').find('a').text();
         var account=$(this).parent('td').siblings('.project-account').text();
         var coname=$(this).parent('td').siblings('.project-coname').text();
+        var id=$(this).parent('td').siblings('.project-id').text();
         console.log(projectName,account,coname);
         var  msg={
-            projectName:projectName,
+            name:projectName,
             account:account,
-            coname:coname
+            coname:coname,
+            id:id
         }
+
         jsonArray.push(msg);
        var newJsonArray=JSON.stringify(jsonArray);
+        var projectInfo  = encodeURIComponent(newJsonArray);
+
         console.log(newJsonArray);
-        location.href='/alink-hq/project/transferPage?projectInfo='+1;
+        location.href='/alink-hq/project/transferPage?projectInfo='+projectInfo;
         // $.ajax({
         //     type: "POST",
         //     url: "/alink-hq/project/transferPage",
