@@ -93,7 +93,7 @@
                         <td class="p-r">
                             <img src="/alink-hq/static/img/edit.png" alt="" class="pointer reset-name">
                             <!--<a th:href="@{/project/transferPage(uid=${session.user.id},account=${user.account},coname=${user.coname})}">-->
-                                <img src="/alink-hq/static/img/exchange.png" alt="" class="center-img">
+                            <img src="/alink-hq/static/img/exchange.png" alt="" class="center-img">
                             <!--</a>-->
                             <img src="/alink-hq/static/img/delete.png" alt="" class="pointer delete-project">
                             <!--<div class="popup p-a">-->
@@ -111,10 +111,10 @@
                                     条订单
                                 </span>
                             <span class="m-r-20">
-                                    <img src="/alink-hq/static/img/true-over-un.png" alt="">
+                                    <img src="/alink-hq/static/img/true-over.png" alt="" class="pointer moment" >
                                 </span>
                             <span>
-                                    <img src="/alink-hq/static/img/delete-un.png" alt="">
+                                    <img src="/alink-hq/static/img/delete-btn.png" alt="" class="pointer moment" >
                                 </span>
                             </div>
                             <!--<div th:replace="common/page::page"></div>-->
@@ -137,10 +137,11 @@
                                     页/<span th:text="${pageInfo.total}"></span>条数据
                         </span>
                             <span class="m-r-15">
-                        <input type="number" id="skipPage"  oninput="skipLimit()" />
+                        <input type="number" id="skipPage" oninput="skipLimit()"/>
                         </span>
                             <span class="m-r-35">
-                        <img src="/alink-hq/static/img/skip.png" alt="" id="skipPageBtn" class="pointer">
+                        <img src="/alink-hq/static/img/skip.png" alt="" id="skipPageBtn" class="pointer"
+                             onmousedown="mouseDown()" onmouseup="mouseUp()">
                         </span>
                                 <span class="m-r-15r">每页显示：</span>
                             <span class="m-r-20">
