@@ -16,54 +16,53 @@ $('.one-list li').each(function () {
         $(this).addClass('active').siblings().removeClass('active');
     }
 })
-//    $(function() {
-//        //复选框
-//        var dataAccount = 0;
-//        $('.checkbox img').click(function () {
-//            var hasCheckbox = false;
-//            var imgUrl = $(this).attr('src');
-//            var isCheckbox = '/alink-hq/static/img/checkbox-gou.png';
-//            var noCheckbox = '/alink-hq/static/img/checkbox.png';
-//            if (imgUrl == noCheckbox) {
-//                $(this).attr('src', isCheckbox);
-//                dataAccount++;
-//            } else {
-//                $(this).attr('src', noCheckbox);
-//                dataAccount--;
-//            }
-//            $('tbody .checkbox img').each(function () {
-//                var imgUrl2 = $(this).attr('src');
-//                if (imgUrl2 == noCheckbox) {
-//                    hasCheckbox = true;
-//                }
-//            })
-//            if (!hasCheckbox) {
-//                $('.all-checkbox img').attr('src', isCheckbox);
-//            } else {
-//                $('.all-checkbox img').attr('src', noCheckbox);
-//            }
-//            $('.amount').text(dataAccount);
-//        })
-//        $('.all-checkbox img').click(function () {
-//            var imgUrl = $(this).attr('src');
-//            var isCheckbox = '/alink-hq/static/img/checkbox-gou.png';
-//            var noCheckbox = '/alink-hq/static/img/checkbox.png';
-//            if (imgUrl == noCheckbox) {
-//                dataAccount=$('tbody tr').length;
-//                $(this).attr('src', isCheckbox);
-//                $('tbody .checkbox img').each(function () {
-//                    $(this).attr('src', isCheckbox);
-//                })
-//            } else {
-//                dataAccount=0;
-//                $(this).attr('src', noCheckbox);
-//                $('tbody .checkbox img').each(function () {
-//                    $(this).attr('src', noCheckbox);
-//                })
-//            }
-//            $('.amount').text(dataAccount);
-//        })
-//    })
+
+
+
+$(function () {
+    var allChecked = false;
+    var accountNum=0;
+    //复选框监听--监听全选
+    $('#all').click(function () {
+        var checked = $(this).prop('checked');
+        if (checked) {
+            var length= $('tbody tr').length-1;
+            accountNum=length;
+            $('tbody .checkbox input').each(function () {
+                $(this).prop('checked', true);
+            })
+        } else {
+            accountNum=0;
+            $('tbody .checkbox input').each(function () {
+                $(this).prop('checked', false);
+            })
+        }
+        $('.amount').text(accountNum);
+    })
+    //复选框监听--监听单选
+    $('tbody .checkbox input').click(function () {
+        var checked=$(this).prop('checked');
+        if(checked){
+            accountNum++;
+        }else{
+            accountNum--;
+        }
+        $('tbody .checkbox input').each(function () {
+            var otherChecked = $(this).prop('checked');
+            if (!otherChecked) {
+                allChecked = true;
+            }else{
+                allChecked = false;
+            }
+        })
+        $('.amount').text(accountNum);
+        if(!allChecked){
+            $('#all').prop('checked',true);
+        }else{
+            $('#all').prop('checked',false);
+        }
+    })
+})
 
 
 $(function () {
@@ -177,8 +176,13 @@ $(function () {
     $('#page-select').change(function () {
         var sortFlag = GetUrlParam("sortFlag");
         var pageSize = $(this).children('option:selected').val();
-        var pageNum = parseInt($('#skipPage').val());
-        condition(pageSize, pageNum,sortFlag);
+        var pageNum = $('#skipPage').val();
+        if (pageNum == '') {
+            pageNum == 1;
+        } else {
+            pageNum = parseInt(pageNum);
+        }
+        condition(pageSize, pageNum, sortFlag);
     });
     //跳转页数变化
     $('#skipPageBtn').click(function () {
@@ -193,15 +197,15 @@ $(function () {
         condition(pageSize, pageNum, sortFlag);
     })
 })
-$(function(){
+$(function () {
     //重命名
     var projectId;
     var account;
     // var projectName;
     $('.reset-name').click(function () {
-        projectId =parseInt($(this).parent().siblings('.checkbox ').find('input[type=checkbox]').val());
+        projectId = parseInt($(this).parent().siblings('.checkbox ').find('input[type=checkbox]').val());
         // projectName=$(this).parent().siblings('.project-name').find('a').text();
-        account=$(this).parent().siblings('.project-account').text();
+        account = $(this).parent().siblings('.project-account').text();
         $('div[openContent="reset-name"]').addClass('active');
         var width = document.body.scrollWidth;
         var height = document.body.scrollHeight;
@@ -224,29 +228,33 @@ $(function(){
         var renameResult = regName.test(rename);
         if (rename == '') {
             $('p.rename-hint').text('请输入新名称');
-        }else if(rename!='' && !renameResult){
+        } else if (rename != '' && !renameResult) {
             $('p.rename-hint').text('请输入 2-16 位汉字、字母、数字');
-        }else{
+        } else {
             $('p.rename-hint').text('');
             console.log(projectId);
             $.ajax({
                 type: "POST",
                 url: "/alink-hq/project/rename",
-                data: {projectId: projectId,projectName:rename,account:account},
+                data: {projectId: projectId, projectName: rename, account: account},
                 dataType: "json",
                 success: function (res) {
                     console.log(res);
                     if (res.result == '000') {
                         $('p.rename-hint').text('');
                         location.reload();
-                    }else if(res.result=='306'){
+                    } else if (res.result == '306') {
                         $('p.rename-hint').text('已存在，请重新输入');
                     }
                 }
             });
         }
     })
-    $('.delete-project').click(function(){
+    //删除项目
+    $('.delete-project').click(function () {
+        projectId = parseInt($(this).parent().siblings('.checkbox ').find('input[type=checkbox]').val());
+        // projectName=$(this).parent().siblings('.project-name').find('a').text();
+        account = $(this).parent().siblings('.project-account').text();
         $('div[openContent="delete-project"]').addClass('active');
         var width = document.body.scrollWidth;
         var height = document.body.scrollHeight;
@@ -255,16 +263,77 @@ $(function(){
             'width': width,
             'height': height
         });
+        console.log(' projectId', projectId);
+        console.log('account',account);
+        // $.ajax({
+        //     type: "POST",
+        //     url: "/alink-hq/project/delete",
+        //     data: {projectId: projectId,account: account},
+        //     dataType: "json",
+        //     success: function (res) {
+        //         console.log(res);
+        //         if (res.result == '000') {
+        //             // $('p.rename-hint').text('');
+        //             // location.reload();
+        //         } else if (res.result == '200') {
+        //             // $('p.rename-hint').text('已存在，请重新输入');
+        //         }
+        //     }
+        // });
+
+    })
+    $('div[openContent="delete-project"] .yes').click(function(){
+        var json=[{}];
+    })
+        // var jsonArray = [];//定义一个数组
+        // $('input[name="..."]:checked').each(function () {//遍历每一个名字为interest的复选框，其中选中的执行函数
+        //     var json = new Object;
+        //     json.id = ..;
+        //     json.account = ..;
+        //     jsonArray.push(json);//将选中的值添加到数组chk_value中
+        // });
+        // location.href = "/alink-hq/project/delete?projectInfo=" + JSON.stringify(jsonArray);
+    //移交
+    $('.exchange-project').click(function(){
+        var jsonArray=[];
+        var projectName=$(this).parent('td').siblings('.project-name').find('a').text();
+        var account=$(this).parent('td').siblings('.project-account').text();
+        var coname=$(this).parent('td').siblings('.project-coname').text();
+        console.log(projectName,account,coname);
+        var  msg={
+            projectName:projectName,
+            account:account,
+            coname:coname
+        }
+        jsonArray.push(msg);
+       var newJsonArray=JSON.stringify(jsonArray);
+        console.log(newJsonArray);
+        location.href='/alink-hq/project/transferPage?projectInfo='+1;
+        // $.ajax({
+        //     type: "POST",
+        //     url: "/alink-hq/project/transferPage",
+        //     data: {projectInfo:newJsonArray},
+        //     dataType: "json",
+        //     success: function (res) {
+        //         console.log(res);
+        //         // if (res.result == '000') {
+        //         //     // $('p.rename-hint').text('');
+        //         //     // location.reload();
+        //         // } else if (res.result == '200') {
+        //         //     // $('p.rename-hint').text('已存在，请重新输入');
+        //         // }
+        //     }
+        // });
     })
 })
 //重命名校验
-function nameKeyUp(){
+function nameKeyUp() {
     var rename = $('#rename').val();
     var regreName = /^[a-zA-Z0-9\u4e00-\u9fa5]{2,16}$/;
     var renameResult = regreName.test(rename);
-    if(rename!='' && !renameResult){
+    if (rename != '' && !renameResult) {
         $('p.rename-hint').text('请输入 2-16 位汉字、字母、数字');
-    }else{
+    } else {
         $('p.rename-hint').text('');
     }
 }
@@ -288,6 +357,16 @@ function condition(pageSize, pageNum, sortFlag) {
     var newUrl = url2 + '&pageNum=' + pageNum + '&sortFlag=' + sortFlag + '&pageSize=' + pageSize + '&projectName=' + projectName + '&account=' + account + '&startCreateDate=' + startCreateDate + '&endCreateDate=' + endCreateDate + '&startUpdateDate=' + startUpdateDate + '&endUpdateDate=' + endUpdateDate;
     location.href = newUrl;
 }
+$('.moment').mousedown(function(){
+    var url=$(this).attr('src');
+    var newUrl=url.substr(0, url.length-4)+'-un.png';
+    $(this).attr('src',newUrl);
+})
+$('.moment').mouseup(function(){
+    var url=$(this).attr('src');
+    var newUrl=url.substr(0, url.length-7)+'.png';
+    $(this).attr('src',newUrl);
+})
 
 //paraName 等找参数的名称
 function GetUrlParam(paraName) {

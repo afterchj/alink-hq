@@ -145,14 +145,14 @@ public class ProjectController {
         List<Firm> firmList = getFirmInfo(role_id, uid);
         model.addAttribute("projectList", projectList);
         model.addAttribute("firmList", firmList);
-        return "userManage/useTurnOver";
+        return "projectManage/projectTurnOver";
     }
 
     @RequestMapping(value = "/findAccountByFid", method = RequestMethod.GET)
     public String findAccountByFid(Integer fid, Model model) {
         List<User> accounts = accountService.findAccountByFid(fid);
         model.addAttribute("accounts", accounts);
-        return "userManage/useTurnOver";
+        return "projectManage/projectTurnOver";
     }
 
     @RequestMapping(value = "/transfer", method = RequestMethod.POST)
@@ -174,16 +174,27 @@ public class ProjectController {
 
     @RequestMapping(value = "/delete", method = RequestMethod.POST)
     @ResponseBody
-    public Map<String, String> delete(String account, Integer projectId) {
+    public Map<String, String> delete(String projectInfo) {
         Map<String, String> map = new HashMap<>();
+        List<ProjectList> projectList = JSONArray.parseArray(projectInfo, ProjectList.class);
         try {
-            User user = accountService.findByAccount(account);
-            projectService.delete(user.getId(),projectId);
+            for(ProjectList project : projectList){
+                User user = accountService.findByAccount(project.getAccount());
+                projectService.delete(user.getId(),project.getId());
+            }
             map.put("result", ResultDict.SUCCESS.getCode());
         } catch (Exception e) {
             map.put("result", ResultDict.SYSTEM_ERROR.getCode());
         }
         return map;
+    }
+
+    @RequestMapping(value = "/detail", method = RequestMethod.GET)
+    public String detail(String account, Integer projectId) {
+
+
+
+        return "projectManage/projectDetail";
     }
 
 

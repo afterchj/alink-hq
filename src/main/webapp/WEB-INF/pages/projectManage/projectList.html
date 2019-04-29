@@ -58,10 +58,12 @@
                 <table border="1" class="hasData active">
                     <thead>
                     <tr>
+
                         <th class="all-checkbox ">
-                            <span style="vertical-align: sub;"><input type="checkbox" id="all" class="pointer"></span>
+                            <span style="vertical-align: sub;vertical-align: sub;width: 30px; display: inline-block;"><input type="checkbox" id="all" class="pointer"></span>
                             <span class="">全选</span>
                         </th>
+                        <th  style="display: none">所属公司</th>
                         <th>项目名称</th>
                         <th>项目中选中网络数量</th>
                         <th>施工人员</th>
@@ -80,9 +82,11 @@
                     </thead>
                     <tbody>
                     <tr th:each="project:${pageInfo.list}">
+
                         <td class="checkbox ">
                             <input type="checkbox" th:value="${project.id}" class="pointer">
                         </td>
+                        <td th:text="${project.coname}" style="display: none" class="project-coname"></td>
                         <td class="project-name k-link">
                             <a href="javascript:void(0);" th:text="${project.name}"></a>
                         </td>
@@ -93,7 +97,7 @@
                         <td class="p-r">
                             <img src="/alink-hq/static/img/edit.png" alt="" class="pointer reset-name">
                             <!--<a th:href="@{/project/transferPage(uid=${session.user.id},account=${user.account},coname=${user.coname})}">-->
-                                <img src="/alink-hq/static/img/exchange.png" alt="" class="center-img">
+                          <img src="/alink-hq/static/img/exchange.png" alt="" class="center-img pointer exchange-project">
                             <!--</a>-->
                             <img src="/alink-hq/static/img/delete.png" alt="" class="pointer delete-project">
                             <!--<div class="popup p-a">-->
@@ -111,10 +115,10 @@
                                     条订单
                                 </span>
                             <span class="m-r-20">
-                                    <img src="/alink-hq/static/img/true-over-un.png" alt="">
+                                    <img src="/alink-hq/static/img/true-over.png" alt="" class="pointer moment" >
                                 </span>
                             <span>
-                                    <img src="/alink-hq/static/img/delete-un.png" alt="">
+                                    <img src="/alink-hq/static/img/delete-btn.png" alt="" class="pointer moment" >
                                 </span>
                             </div>
                             <!--<div th:replace="common/page::page"></div>-->
@@ -137,10 +141,10 @@
                                     页/<span th:text="${pageInfo.total}"></span>条数据
                         </span>
                             <span class="m-r-15">
-                        <input type="number" id="skipPage"  oninput="skipLimit()" />
+                        <input type="number" id="skipPage" oninput="skipLimit()"/>
                         </span>
                             <span class="m-r-35">
-                        <img src="/alink-hq/static/img/skip.png" alt="" id="skipPageBtn" class="pointer">
+                        <img src="/alink-hq/static/img/skip.png" alt="" id="skipPageBtn" class="pointer moment"/>
                         </span>
                                 <span class="m-r-15r">每页显示：</span>
                             <span class="m-r-20">

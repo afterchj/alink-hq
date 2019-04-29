@@ -34,15 +34,14 @@ public interface ProjectDao {
 
     void deleteSceneByPid(@Param("id")Integer projectId, @Param("uid")String uid);
 
-    void deleteSceneSettingBySid(List<Integer> sids);
+    void deleteLightSettingBySid(List<Integer> sids);
 
     void deleteGroupByPid(@Param("id")Integer projectId, @Param("uid")String uid);
 
-    void deleteGroupSettingByPid(@Param("id")Integer projectId, @Param("uid")String uid);
-
     void deleteProByPid(@Param("id")Integer projectId, @Param("uid")String uid);
+
+    void deleteLightByPid(@Param("id")Integer projectId, @Param("uid")String uid);
 
     void deleteMeshByPid(@Param("id")Integer projectId, @Param("uid")String uid);
 
-    void deleteLightSettingBySid(List<Integer> sids, String uid);
 }
