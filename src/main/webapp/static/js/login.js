@@ -411,6 +411,7 @@ function passwordLogin() {
         //想输入的是邮箱
         console.log('想输入的是邮箱');
         if (!emailResult) {
+            console.log('输入的邮箱格式不正确')
             $('.password-login .add-hint').text('请输入正确的邮箱');
             $('.password-login .password-hint').text('');
             $('#pwd').val('');
