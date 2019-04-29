@@ -74,7 +74,7 @@
         INSERT INTO f_project (name,uid,create_date,update_date) VALUES(#{name},#{uid},NOW(),NOW())
     </insert>
 
-    <select id="findRepeatNameByUid" resultType="int">
+    <select id="findRepeatNameByAccount" resultType="int">
         SELECT count(1) from f_project p where p.name = #{name} and p.uid=(SELECT id FROM f_user_account WHERE account=#{account})
     </select>
 
@@ -86,10 +86,42 @@
         update f_project set uid = #{uid} where id=#{id}
     </update>
 
-    <!--<delete id="delete" parameterType="string">-->
-        <!--DELETE FROM f_user_account WHERE id=#{uid};-->
-        <!--DELETE FROM f_user_customer WHERE uid=#{uid};-->
-        <!--DELETE FROM f_project WHERE user_id=#{uid};-->
-    <!--</delete>-->
+
+    <select id="querySidByPid" resultType="integer">
+        SELECT id from f_scene where uid=#{uid} and mid IN (
+        SELECT m.id from f_mesh m where m.project_id=#{id} and m.uid = #{uid}
+        )
+    </select>
+
+    <delete id="deleteSceneByPid" parameterType="java.util.List">
+        DELETE FROM f_scene
+        WHERE mid IN (SELECT m.id from (SELECT id from f_mesh where project_id=#{id} and uid = #{uid}) AS m )
+    </delete>
+
+    <delete id="deleteSceneSettingBySid">
+        DELETE FROM f_scene_setting
+        WHERE sid IN
+        <foreach item="item" collection="list" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </delete>
+
+    <delete id="deleteGroupByPid">
+        DELETE FROM f_group WHERE mid IN (SELECT m.id from (SELECT id from f_mesh where project_id=#{id} and uid = #{uid}) AS m )
+    </delete>
+
+    <delete id="deleteGroupSettingByPid">
+        DELETE FROM f_group_setting WHERE mid IN (SELECT m.id from (SELECT id from f_mesh where project_id=#{id} and uid = #{uid}) AS m )
+    </delete>
+
+    <delete id="deleteProByPid">
+        DELETE FROM f_project WHERE id=#{id} and uid = #{uid}
+    </delete>
+
+    <delete id="deleteMeshByPid">
+        DELETE FROM f_mesh WHERE id IN (SELECT m.id from (SELECT id from f_mesh where project_id=#{id} and uid = #{uid}) AS m )
+    </delete>
+
+
 
 </mapper>

@@ -14,7 +14,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
@@ -53,7 +52,7 @@ public class ProjectController {
             Integer role_id = accountService.findRoleIdByUid(uid);
             List<ProjectList> list = new ArrayList<>();
             if (role_id == 1 || role_id == 2) {
-                PageHelper.startPage(pageNum, pageSize);
+                 PageHelper.startPage(pageNum, pageSize);
                 list = projectService.searchBySuper(account, projectName, startCreateDate, endCreateDate,
                         startUpdateDate, endUpdateDate,sortFlag);
             } else if (role_id == 3) {
@@ -180,8 +179,6 @@ public class ProjectController {
         try {
             User user = accountService.findByAccount(account);
             projectService.delete(user.getId(),projectId);
-
-
             map.put("result", ResultDict.SUCCESS.getCode());
         } catch (Exception e) {
             map.put("result", ResultDict.SYSTEM_ERROR.getCode());

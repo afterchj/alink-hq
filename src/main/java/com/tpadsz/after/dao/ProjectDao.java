@@ -28,7 +28,21 @@ public interface ProjectDao {
 
     void transferProject(@Param("id")int id, @Param("uid")String uid);
 
-    void delete(@Param("id")Integer projectId);
+    int findRepeatNameByAccount(@Param("account")String account, @Param("name") String projectName);
 
-    int findRepeatNameByUid(@Param("account")String account, @Param("name") String projectName);
+    List<Integer> querySidByPid(@Param("id")Integer projectId, @Param("uid")String uid);
+
+    void deleteSceneByPid(@Param("id")Integer projectId, @Param("uid")String uid);
+
+    void deleteSceneSettingBySid(List<Integer> sids);
+
+    void deleteGroupByPid(@Param("id")Integer projectId, @Param("uid")String uid);
+
+    void deleteGroupSettingByPid(@Param("id")Integer projectId, @Param("uid")String uid);
+
+    void deleteProByPid(@Param("id")Integer projectId, @Param("uid")String uid);
+
+    void deleteMeshByPid(@Param("id")Integer projectId, @Param("uid")String uid);
+
+    void deleteLightSettingBySid(List<Integer> sids, String uid);
 }

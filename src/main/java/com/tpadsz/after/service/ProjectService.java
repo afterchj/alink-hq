@@ -28,5 +28,5 @@ public interface ProjectService {
 
     void transferProject(int id, String uid);
 
-    void delete(String account,Integer projectId);
+    void delete(String uid,Integer projectId);
 }

@@ -57,7 +57,7 @@ public class ProjectServiceImpl implements ProjectService {
     @Override
     public int renameProject(String account, Integer projectId, String projectName) {
         int flag;
-        int count = projectDao.findRepeatNameByUid(account, projectName);
+        int count = projectDao.findRepeatNameByAccount(account, projectName);
         if(count==1){
             flag =0;
         }else {
@@ -73,17 +73,19 @@ public class ProjectServiceImpl implements ProjectService {
     }
 
     @Override
-    public void delete(String account,Integer projectId) {
-//        String uid = projectDao.find
-//        List<Integer> sids = projectDao.querySidByPid(projectId, account);
-//        if (sids.size() != 0) {
-//            projectDao.deleteSceneByPid(projectId, uid);
-//            projectDao.deleteSceneSettingBySid(sids);
-//        }
-//        projectDao.deleteGroupByPid(id, uid);
-//        projectDao.deleteGroupSettingByPid(id, uid);
-//        projectDao.deleteProByPid(id, uid);
-//        projectDao.deleteMeshByPid(id, uid);
+    public void delete(String uid,Integer projectId) {
+        List<Integer> sids = projectDao.querySidByPid(projectId, uid);
+        if (sids.size() != 0) {
+            projectDao.deleteSceneByPid(projectId, uid);
+            projectDao.deleteSceneSettingBySid(sids);
+            projectDao.deleteLightSettingBySid(sids, uid);
+        }
+        projectDao.deleteGroupByPid(projectId, uid);
+        projectDao.deleteGroupSettingByPid(projectId, uid);
+        projectDao.deleteProByPid(projectId, uid);
+//        projectDao.deleteLightByMid(projectId, uid);
+
+        projectDao.deleteMeshByPid(projectId, uid);
     }
 
 
