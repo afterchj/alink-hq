@@ -356,3 +356,13 @@
 #preload-anim.active{
     display: block;
 }
+.success{
+    display: none;
+    position: absolute;
+    top: 400px;
+    left: 50%;
+    z-index: 1000;
+}
+.success.active{
+    display: block;
+}

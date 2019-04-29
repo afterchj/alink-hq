@@ -97,7 +97,12 @@
         </form>
     </div>
 </div>
-<div class="hide-iframe active"></div>
+<div class="success ">
+    <div style="margin-bottom: 20px;"><img src="/alink-hq/static/img/success.png" alt=""></div>
+    <div><img src="/alink-hq/static/img/sucessfont.png" alt=""></div>
+
+</div>
+<div class="hide-iframe "></div>
 <script src="/alink-hq/static/js/jquery.min.js"></script>
 <script>
     $(function () {
@@ -144,16 +149,17 @@
                     $('.t-account-result').text(account);
                     $('.t-pwd-result').text(pwd);
                 }
-//                $('#resText').empty();   //清空resText里面的所有内容
-//                var html = '';
-//                $.each(data, function (commentIndex, comment) {
-//                    html += '<div class="comment"><h6>' + comment['username']
-//                            + ':</h6><p class="para"' + comment['content']
-//                            + '</p></div>';
-//                });
-//                $('#resText').html(html);
             }
         });
+    })
+    $('.reset-passwords-content button.yes').click(function(){
+        $('.hide-iframe').addClass('active');
+        $('.pop-iframe').removeClass('active');
+        $('.success').addClass('active');
+        setInterval(function(){
+            window.location.href='/alink-hq/account/list';
+        },1000)
+
     })
     function hide() {
         $('.hide-iframe').removeClass('active');
@@ -169,11 +175,11 @@
         $(this).parents('.pop-iframe').removeClass('active');
     })
     // 点击确定时
-    $('.pop-content  .pop-btn .yes').click(function () {
-        hide();
-        $(this).parents('.pop-iframe').removeClass('active');
-        // 其他逻辑代码
-    })
+//    $('.pop-content  .pop-btn .yes').click(function () {
+//        hide();
+//        $(this).parents('.pop-iframe').removeClass('active');
+//        // 其他逻辑代码
+//    })
 </script>
 </body>
 
