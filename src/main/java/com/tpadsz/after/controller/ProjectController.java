@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -140,11 +142,16 @@ public class ProjectController {
     public String transferPage(HttpSession session, String projectInfo, Model model) {
         User loginUser = (User) session.getAttribute("user");
         String uid = loginUser.getId();
-        List<ProjectList> projectList = JSONArray.parseArray(projectInfo, ProjectList.class);
-        Integer role_id = accountService.findRoleIdByUid(uid);
-        List<Firm> firmList = getFirmInfo(role_id, uid);
-        model.addAttribute("projectList", projectList);
-        model.addAttribute("firmList", firmList);
+        try {
+            String str = URLDecoder.decode(projectInfo, "utf-8");
+            List<ProjectList> projectList = JSONArray.parseArray(str, ProjectList.class);
+            Integer role_id = accountService.findRoleIdByUid(uid);
+            List<Firm> firmList = getFirmInfo(role_id, uid);
+            model.addAttribute("projectList", projectList);
+            model.addAttribute("firmList", firmList);
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
         return "projectManage/projectTurnOver";
     }
 
@@ -190,10 +197,12 @@ public class ProjectController {
     }
 
     @RequestMapping(value = "/detail", method = RequestMethod.GET)
-    public String detail(String account, Integer projectId) {
+    public String detail(String account, Integer projectId, Model model) {
+        User user = accountService.findByAccount(account);
 
 
 
+        model.addAttribute("user", user);
         return "projectManage/projectDetail";
     }
 
