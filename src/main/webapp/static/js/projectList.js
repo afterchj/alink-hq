@@ -250,7 +250,11 @@ $(function () {
             });
         }
     })
+    //删除项目
     $('.delete-project').click(function () {
+        projectId = parseInt($(this).parent().siblings('.checkbox ').find('input[type=checkbox]').val());
+        // projectName=$(this).parent().siblings('.project-name').find('a').text();
+        account = $(this).parent().siblings('.project-account').text();
         $('div[openContent="delete-project"]').addClass('active');
         var width = document.body.scrollWidth;
         var height = document.body.scrollHeight;
@@ -259,6 +263,67 @@ $(function () {
             'width': width,
             'height': height
         });
+        console.log(' projectId', projectId);
+        console.log('account',account);
+        // $.ajax({
+        //     type: "POST",
+        //     url: "/alink-hq/project/delete",
+        //     data: {projectId: projectId,account: account},
+        //     dataType: "json",
+        //     success: function (res) {
+        //         console.log(res);
+        //         if (res.result == '000') {
+        //             // $('p.rename-hint').text('');
+        //             // location.reload();
+        //         } else if (res.result == '200') {
+        //             // $('p.rename-hint').text('已存在，请重新输入');
+        //         }
+        //     }
+        // });
+
+    })
+    $('div[openContent="delete-project"] .yes').click(function(){
+        var json=[{}];
+    })
+        // var jsonArray = [];//定义一个数组
+        // $('input[name="..."]:checked').each(function () {//遍历每一个名字为interest的复选框，其中选中的执行函数
+        //     var json = new Object;
+        //     json.id = ..;
+        //     json.account = ..;
+        //     jsonArray.push(json);//将选中的值添加到数组chk_value中
+        // });
+        // location.href = "/alink-hq/project/delete?projectInfo=" + JSON.stringify(jsonArray);
+    //移交
+    $('.exchange-project').click(function(){
+        var jsonArray=[];
+        var projectName=$(this).parent('td').siblings('.project-name').find('a').text();
+        var account=$(this).parent('td').siblings('.project-account').text();
+        var coname=$(this).parent('td').siblings('.project-coname').text();
+        console.log(projectName,account,coname);
+        var  msg={
+            projectName:projectName,
+            account:account,
+            coname:coname
+        }
+        jsonArray.push(msg);
+       var newJsonArray=JSON.stringify(jsonArray);
+        console.log(newJsonArray);
+        location.href='/alink-hq/project/transferPage?projectInfo='+1;
+        // $.ajax({
+        //     type: "POST",
+        //     url: "/alink-hq/project/transferPage",
+        //     data: {projectInfo:newJsonArray},
+        //     dataType: "json",
+        //     success: function (res) {
+        //         console.log(res);
+        //         // if (res.result == '000') {
+        //         //     // $('p.rename-hint').text('');
+        //         //     // location.reload();
+        //         // } else if (res.result == '200') {
+        //         //     // $('p.rename-hint').text('已存在，请重新输入');
+        //         // }
+        //     }
+        // });
     })
 })
 //重命名校验
@@ -295,21 +360,14 @@ function condition(pageSize, pageNum, sortFlag) {
 $('.moment').mousedown(function(){
     var url=$(this).attr('src');
     var newUrl=url.substr(0, url.length-4)+'-un.png';
-    console.log(url);
-    console.log(newUrl);
     $(this).attr('src',newUrl);
 })
-// $('.moment').mouseover(function(){
-//     var url=$(this).attr('src');
-//     var newUrl=url.substr(0, url.length-7)+'.png';
-//     $(this).attr('src',newUrl);
-// })
-// function mouseDown() {
-//     // $('#skipPageBtn').attr('src', '/alink-hq/static/img/skip-color.png');
-// }
-// function mouseUp() {
-//     // $('#skipPageBtn').attr('src', '/alink-hq/static/img/skip.png');
-// }
+$('.moment').mouseup(function(){
+    var url=$(this).attr('src');
+    var newUrl=url.substr(0, url.length-7)+'.png';
+    $(this).attr('src',newUrl);
+})
+
 //paraName 等找参数的名称
 function GetUrlParam(paraName) {
     var url = document.location.toString();

@@ -145,14 +145,14 @@ public class ProjectController {
         List<Firm> firmList = getFirmInfo(role_id, uid);
         model.addAttribute("projectList", projectList);
         model.addAttribute("firmList", firmList);
-        return "userManage/useTurnOver";
+        return "projectManage/projectTurnOver";
     }
 
     @RequestMapping(value = "/findAccountByFid", method = RequestMethod.GET)
     public String findAccountByFid(Integer fid, Model model) {
         List<User> accounts = accountService.findAccountByFid(fid);
         model.addAttribute("accounts", accounts);
-        return "userManage/useTurnOver";
+        return "projectManage/projectTurnOver";
     }
 
     @RequestMapping(value = "/transfer", method = RequestMethod.POST)
