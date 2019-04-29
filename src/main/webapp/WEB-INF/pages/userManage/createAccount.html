@@ -58,7 +58,7 @@
                             <label for="">创建账号数量：</label>
                         <span class="num clearfix">
                             <div class="f-l reduce-num pointer">-</div>
-                            <input type="text" name="num" th:value="1" class="create-num">
+                            <input type="text" name="num" th:value="1" class="create-num" oninput="createNum()">
                             <div class="f-r add-num pointer">+</div>
                         </span>
                             <span class="create-account-hint">最多一次可添加100个账号</span>
@@ -171,7 +171,7 @@
                                 + '<div class="f-l c-width two">' + pwd + '</div></div>';
                         $('.c-list').append(content);
                     }
-                }else{
+                } else {
                     $('#preload-anim').addClass('active');
                     $('#preload-anim .title').text('加载失败，请重新尝试');
                     setInterval(function () {
@@ -204,12 +204,21 @@
     $(function () {
         var num = 1;
         $('.add-num').click(function () {
-            if (num <= 100) {
+            num = $('.create-num').val();
+
+            if (num != '') {
+                num = parseInt(num);
+            } else {
+                num = 1;
+            }
+            if (num < 100) {
                 num++;
                 $('.create-num').val(num);
             }
         })
         $('.reduce-num').click(function () {
+            num = $('.create-num').val();
+            console.log(num);
             if (num > 1) {
                 num--;
                 $('.create-num').val(num);
@@ -239,6 +248,12 @@
         }
     })
 
+    function createNum(){
+       var num= $('.create-num').val();
+        if(num>100 || num<1 || isNaN(num)){
+            $('.create-num').val('');
+        }
+    }
 </script>
 </body>
 
