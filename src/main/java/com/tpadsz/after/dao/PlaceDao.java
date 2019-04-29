@@ -1,5 +1,6 @@
 package com.tpadsz.after.dao;
 
+import com.tpadsz.after.entity.MeshInfo;
 import com.tpadsz.after.entity.OptionList;
 import com.tpadsz.after.entity.SearchDict;
 
@@ -18,6 +19,8 @@ public interface PlaceDao {
     List<Map> selectByPid(List list);
 
     List<OptionList> getMesh(Map map);
+
+    MeshInfo getPlaceInfo(int id);
 
     void deleteByIds(List list);
 

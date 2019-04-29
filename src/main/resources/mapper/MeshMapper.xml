@@ -10,8 +10,8 @@
         m.mesh_id,
         m.mesh_type,
         p.name,
-        pl.pcount,
-        s.scount
+       	IFNULL(pl.pcount,0) pcount,
+	    IFNULL(s.scount,0) scount
 	</sql>
 
     <sql id="common_choose">
@@ -41,8 +41,8 @@
         <include refid="Base_Column_List"/>
         FROM f_mesh m
         INNER JOIN f_project p ON m.project_id = p.id
-        INNER JOIN (SELECT COUNT(1) pcount,mid FROM f_place GROUP BY mid) pl ON pl.mid=m.id
-        INNER JOIN (SELECT COUNT(1) scount,mid FROM f_scene GROUP BY mid) s ON s.mid=m.id
+        LEFT JOIN (SELECT COUNT(1) pcount,mid FROM f_place GROUP BY mid) pl ON pl.mid=m.id
+        LEFT JOIN (SELECT COUNT(1) scount,mid FROM f_scene GROUP BY mid) s ON s.mid=m.id
         WHERE 1=1
         <include refid="common_choose"></include>
         <if test="mname!=null and mname!=''">
@@ -57,6 +57,7 @@
         <if test="projectId!=null and projectId!=''">
             AND m.project_id=#{projectId}
         </if>
+        ORDER BY m.id DESC
     </select>
 
     <select id="selectByMap" resultType="map" parameterType="SearchDict">
@@ -80,16 +81,23 @@
     </select>
     <select id="getMeshInfo" resultType="MeshInfo" parameterType="int">
         SELECT
-            m.id,m.project_id,m.mname,m.mesh_id,p.name,s.scount,pl.pcount,g.gcount,l.lcount
+             m.id,
+             m.project_id,
+             m.mname,
+             m.mesh_id,
+             p.name,
+             IFNULL(s.scount,0) scount,
+             IFNULL(pl.pcount,0) pcount,
+             IFNULL(g.gcount,0) gcount,
+             IFNULL(l.lcount,0) lcount
         FROM
-            f_mesh m
+             f_mesh m
         LEFT JOIN f_project p ON m.project_id = p.id
         LEFT JOIN (SELECT COUNT(1) pcount,mid FROM f_place GROUP BY mid) pl ON pl.mid=m.id
         LEFT JOIN (SELECT COUNT(1) scount,mid FROM f_scene GROUP BY mid) s ON s.mid=m.id
         LEFT JOIN (SELECT COUNT(1) gcount,mid FROM f_group GROUP BY mid) g ON g.mid=m.id
         LEFT JOIN (SELECT COUNT(1) lcount,mid FROM f_light GROUP BY mid) l ON l.mid=m.id
-        WHERE 1=1
-        AND m.id=#{id}
+        WHERE m.id=#{id}
     </select>
     <select id="getCountByTable" resultType="int" parameterType="string" statementType="STATEMENT">
         select count(*) from ${_parameter}
@@ -97,14 +105,12 @@
 
     <select id="selectByMid" resultType="map" parameterType="list">
         SELECT
-        m.id,
-        m.mname,
-        m.mesh_id,
-        p.name
+            m.id,
+            m.mname,
+            m.mesh_id,
+            p.name
         FROM f_mesh m
         INNER JOIN f_project p ON m.project_id = p.id
-        INNER JOIN (SELECT COUNT(1) pcount,mid FROM f_place GROUP BY mid) pl ON pl.mid=m.id
-        INNER JOIN (SELECT COUNT(1) scount,mid FROM f_scene GROUP BY mid) s ON s.mid=m.id
         WHERE m.id IN
         <foreach collection="list" item="mid" index="index" open="(" close=")" separator=",">
             #{mid}

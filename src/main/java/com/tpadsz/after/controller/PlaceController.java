@@ -1,8 +1,8 @@
 package com.tpadsz.after.controller;
 
-import com.alibaba.fastjson.JSON;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.tpadsz.after.entity.MeshInfo;
 import com.tpadsz.after.entity.OptionList;
 import com.tpadsz.after.entity.SearchDict;
 import com.tpadsz.after.service.PlaceService;
@@ -43,6 +43,13 @@ public class PlaceController {
         }
         modelMap.put("dict", dict);
         return "meshTemp/placeList";
+    }
+
+    @RequestMapping("/info")
+    public String info(int id, ModelMap modelMap) {
+        MeshInfo meshInfo = placeService.getPlaceInfo(id);
+        modelMap.put("meshInfo", meshInfo);
+        return "meshTemp/placeInfo";
     }
 
     @RequestMapping("/move")

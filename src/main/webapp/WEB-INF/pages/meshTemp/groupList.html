@@ -72,7 +72,7 @@
                         <tbody>
                         <tr th:each="group:${pageInfo.list}">
                             <td><input type="checkbox" name="gids" th:value="${group.id}"></td>
-                            <td th:text="${group.gname}"></td>
+                            <td class="k-link"><a th:href="@{/group/info(id=${group.id})}" th:text="${group.gname}"></a></td>
                             <td th:text="${group.mname}"></td>
                             <td th:text="${group.mesh_id}"></td>
                             <td th:text="${group.lcount}"></td>

@@ -18,7 +18,7 @@ public interface MeshDao {
 
     List<Map> selectByMid(List list);
 
-    MeshInfo getMeshInfo(Integer id);
+    MeshInfo getMeshInfo(int id);
 
     int getCount(Map map);
 

@@ -1,5 +1,6 @@
 package com.tpadsz.after.service;
 
+import com.tpadsz.after.entity.MeshInfo;
 import com.tpadsz.after.entity.OptionList;
 import com.tpadsz.after.entity.SearchDict;
 
@@ -15,6 +16,8 @@ public interface GroupService {
     List<Map> getByMap(SearchDict map);
 
     List<Map> selectByGid(List list);
+
+    MeshInfo getGroupInfo(int id);
 
     void saveUpdate(Map map);
 

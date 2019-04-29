@@ -1,5 +1,6 @@
 package com.tpadsz.after.service;
 
+import com.tpadsz.after.entity.MeshInfo;
 import com.tpadsz.after.entity.OptionList;
 import com.tpadsz.after.entity.SearchDict;
 
@@ -18,7 +19,7 @@ public interface PlaceService {
     List<Map> selectByPid(List list);
 
     List<OptionList> getMesh(Map map);
-
+    MeshInfo getPlaceInfo(int id);
     void deleteByIds(List list);
 
     void saveRename(Map map);
