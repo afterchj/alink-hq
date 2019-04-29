@@ -179,4 +179,7 @@ public class HttpUtils {
         return response;
     }
 
+    public static void main(String[] args) {
+        sendSms("","18170756879","000000");
+    }
 }
