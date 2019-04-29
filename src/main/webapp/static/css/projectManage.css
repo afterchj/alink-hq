@@ -208,8 +208,8 @@ th.all-checkbox {
 #projectDetail .p-detail {
     height: 842px;
     margin: 30px 0;
-
     border: 1px solid #bbb;
+    background-color: #fff;
 }
 
 #projectDetail .p-nav,
@@ -220,7 +220,7 @@ th.all-checkbox {
     font-size: 22px;
     color: #111;
     border-bottom: 1px solid #bbb;
-
+    background-color: #fafafa;
 }
 
 #projectDetail .c-nav {
@@ -228,7 +228,7 @@ th.all-checkbox {
 }
 
 #projectDetail .p-content {
-    padding: 50px 350px;
+    padding: 70px 350px;
 }
 
 #projectDetail .c-content {
@@ -236,18 +236,18 @@ th.all-checkbox {
 }
 
 #projectDetail .p-content span {
-    font-size: 21px;
+    font-size: 17px;
     color: #3c3c3c;
 }
 
 #projectDetail .p-content>div>div {
-    margin-bottom: 30px;
+    margin-bottom: 65px;
     width: 50%;
-    text-align: center;
+    text-align: left;
 }
 
 #projectDetail .p-content a {
-    font-size: 21px;
+    font-size: 17px;
     color: #3598db;
 }
 
@@ -567,4 +567,11 @@ th.all-checkbox {
     height: 20px;
     margin-left: 325px;
     text-align: left
+}
+#projectDetail .p-nav li{
+    font-size: 17px;
+}
+.search-result table td.k-link a:hover{
+    color: #17b4f1;
+    border-bottom: 1px solid #17b4f1;
 }

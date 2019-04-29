@@ -144,8 +144,10 @@
                                 <span class="m-r-15r">每页显示：</span>
                                 <span class="m-r-20">
                                     <select name="page-select" id="page-select">
+                                        <option value="20">20</option>
                                         <option value="10">10</option>
                                         <option value="5">5</option>
+
                                     </select>
                                 </span>
                             </div>
@@ -252,13 +254,33 @@
             <div class="reset-pwd">您确定要删除该账号信息吗？</div>
             <div class="reset-pwd-hint">（删除后将无法恢复，请慎重！）</div>
         </div>
-        <div class="hasProject">
+        <!--<div class="hasProject">-->
+            <!--<div >当前账号名下有项目</div>-->
+            <!--<div>请移交后再进行删除！</div>-->
+        <!--</div>-->
+        <div class="pop-btn">
+            <button class="reduce" type="button">取消</button>
+            <button class="yes" type="button">确定</button>
+        </div>
+    </div>
+</div>
+<!-- 删除账户-名下有项目 -->
+<div class="pop-iframe" openContent="delete-account-hasProject">
+    <div class=" p-r pop-nav">
+        温馨提示
+    </div>
+    <div class="pop-content">
+        <!--<div class="noProject active">-->
+            <!--<div class="reset-pwd">您确定要删除该账号信息吗？</div>-->
+            <!--<div class="reset-pwd-hint">（删除后将无法恢复，请慎重！）</div>-->
+        <!--</div>-->
+        <div class="hasProject active">
             <div >当前账号名下有项目</div>
             <div>请移交后再进行删除！</div>
         </div>
         <div class="pop-btn">
             <button class="reduce" type="button">取消</button>
-            <button class="yes" type="button">确定</button>
+            <button class="yes" type="button" style="width: 130px;letter-spacing: 5px;">移交项目</button>
         </div>
     </div>
 </div>
@@ -378,12 +400,34 @@
             });
         })
     })
-    $('img[openTab="delete-account"]').click(function () {
-        var openTab = $(this).attr('openTab');
-        shade(openTab);
-        var account=$(this).parent().siblings('.use-account').text();
+    $(function(){
+        var account;
+        $('img[openTab="delete-account"]').click(function () {
+            var openTab = $(this).attr('openTab');
+            shade(openTab);
+            account=$(this).parent().siblings('.use-account').text();
 //        console.log('account',account);
-        $.ajax({
+//        $.ajax({
+//            type: "POST",
+//            url: "/alink-hq/account/delete",
+//            data: {account: account},
+//            dataType: "json",
+//            success: function (data) {
+//                console.log(data.result);
+//                if(data.result=='303'){
+//                    $('.noProject').removeClass('active');
+//                    $('.hasProject').addClass('active');
+//                    //移交
+//                }else{
+//                    $('.hasProject').removeClass('active');
+//                    $('.noProject').addClass('active');
+////                    location.reload();
+//                }
+//            }
+//        });
+        })
+        $('div[openContent="delete-account"] button.yes').click(function(){
+            $.ajax({
             type: "POST",
             url: "/alink-hq/account/delete",
             data: {account: account},
@@ -393,13 +437,22 @@
                 if(data.result=='303'){
                     $('.noProject').removeClass('active');
                     $('.hasProject').addClass('active');
-                }else{
+                    //移交
+                    $('div[openContent="delete-account-hasProject"]').addClass('active');
+                    $('div[openContent="delete-account"]').removeClass('active');
+                }else if(data.result=='000'){
                     $('.hasProject').removeClass('active');
                     $('.noProject').addClass('active');
+                    location.reload();
                 }
             }
         });
+        })
+        $('div[openContent="delete-account-hasProject"] button.yes').click(function(){
+            location.href('/alink-hq/project/list');
+        })
     })
+
 
 
     //日期选择
@@ -479,8 +532,18 @@
             $('#add-time').val(addTime);
         }
         $('#account').val(account);
-        $('#role').val(role);
-        $('#company').val(company);
+
+        if(role==''){
+            $('#role option').eq(0).prop('selected',true);
+        }else{
+            $('#role').val(role);
+        }
+        if(company==''){
+            $('#company option').eq(0).prop('selected',true);
+        }else{
+            $('#company').val(company);
+        }
+
         $('table tr td.role').each(function () {
 //            console.log($(this).text());
             var roleId = parseInt($(this).text());

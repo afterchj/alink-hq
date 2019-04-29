@@ -83,7 +83,7 @@
                         <td class="checkbox ">
                             <input type="checkbox" th:value="${project.id}" class="pointer">
                         </td>
-                        <td class="project-name">
+                        <td class="project-name k-link">
                             <a href="javascript:void(0);" th:text="${project.name}"></a>
                         </td>
                         <td th:text="${project.meshNum}"></td>
@@ -137,10 +137,10 @@
                                     页/<span th:text="${pageInfo.total}"></span>条数据
                         </span>
                             <span class="m-r-15">
-                        <input type="number" id="skipPage"/>
+                        <input type="number" id="skipPage"  oninput="skipLimit()" />
                         </span>
                             <span class="m-r-35">
-                        <img src="/alink-hq/static/img/skip.png" alt="">
+                        <img src="/alink-hq/static/img/skip.png" alt="" id="skipPageBtn" class="pointer">
                         </span>
                                 <span class="m-r-15r">每页显示：</span>
                             <span class="m-r-20">

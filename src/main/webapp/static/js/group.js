@@ -2,6 +2,28 @@
  * Created by hongjian.chen on 2019/4/24.
  */
 $(function () {
+    myBrowser();
+    $('.one-list li').each(function () {
+        $('.main-left>ul>li.one-list:eq(0)').find('.on-off-triangle').attr('src', '/alink-hq/static/img/right-triange-un.png');
+        $('.main-left>ul>li.one-list:eq(0)').find('.two-list').addClass('active');
+        var tab = $(this).attr('tab');
+        if (tab == 'groupList') {
+            $(this).addClass('active').siblings().removeClass('active');
+        }
+    });
+    $('.on-off-triangle').click(function () {
+        var imgUrl = $(this).attr('src');
+        if (imgUrl == '/alink-hq/static/img/bottom-triangle-un.png') {
+            $(this).attr('src', '/alink-hq/static/img/right-triange-un.png');
+            $(this).parent().parent('.one-list').find('.two-list').addClass('active');
+        } else {
+            $(this).attr('src', '/alink-hq/static/img/bottom-triangle-un.png');
+            $(this).parent().parent('.one-list').find('.two-list').removeClass('active');
+        }
+    })
+});
+
+$(function () {
     var size = $("#pageSize").val();
     var length = $("input[name=gids]:checked").length;
     $("#amount").text(length);

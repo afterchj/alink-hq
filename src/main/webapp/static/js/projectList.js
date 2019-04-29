@@ -175,9 +175,10 @@ $(function () {
     })
     //选择页数变化
     $('#page-select').change(function () {
+        var sortFlag = GetUrlParam("sortFlag");
         var pageSize = $(this).children('option:selected').val();
         var pageNum = parseInt($('#skipPage').val());
-        condition(pageSize, pageNum);
+        condition(pageSize, pageNum,sortFlag);
     });
     //跳转页数变化
     $('#skipPageBtn').click(function () {
@@ -305,5 +306,13 @@ function GetUrlParam(paraName) {
     }
     else {
         return "";
+    }
+}
+function skipLimit() {
+    var skipPage = parseInt($('#skipPage').val());
+    var pageTotal = parseInt($('.pageTotal').text());
+    console.log(skipPage, pageTotal)
+    if (skipPage < 1 || skipPage > pageTotal) {
+        $('#skipPage').val('');
     }
 }
