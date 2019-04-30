@@ -55,8 +55,8 @@ public class LightController {
     public String move(String ids, ModelMap modelMap) {
         String[] ids1 = ids.split(",");
         List<String> list = new ArrayList(Arrays.asList(ids1));
-        List<Map> groupMap = lightService.selectByLid(list);
-        modelMap.put("groupMap", groupMap);
+        List<Map> lightMap = lightService.selectByLid(list);
+        modelMap.put("lightMap", lightMap);
         modelMap.put("ids", ids);
         return "meshTemp/lightMove";
     }
@@ -108,7 +108,7 @@ public class LightController {
 
     @ResponseBody
     @RequestMapping("/getGroup")
-    public List<OptionList> getPlaces(Integer uid) {
+    public List<OptionList> getGroups(Integer uid) {
         Map map = new HashMap();
         if (uid != null) {
             String role = roleService.selectById(uid);

@@ -9,12 +9,15 @@ public class MeshInfo {
     private int mid;
     private int pid;
     private int sid;
+    private int gid;
     private String name;
     private String mname;
     private String pname;
     private String gname;
     private String lname;
     private String lmac;
+    private String x;
+    private String y;
     private int mesh_id;
     private int place_id;
     private int project_id;
@@ -22,6 +25,7 @@ public class MeshInfo {
     private int pcount;
     private int gcount;
     private int lcount;
+    private int off;
 
     public int getId() {
         return id;
@@ -45,6 +49,14 @@ public class MeshInfo {
 
     public void setPid(int pid) {
         this.pid = pid;
+    }
+
+    public int getGid() {
+        return gid;
+    }
+
+    public void setGid(int gid) {
+        this.gid = gid;
     }
 
     public int getSid() {
@@ -85,6 +97,22 @@ public class MeshInfo {
 
     public void setLmac(String lmac) {
         this.lmac = lmac;
+    }
+
+    public String getX() {
+        return x;
+    }
+
+    public void setX(String x) {
+        this.x = x;
+    }
+
+    public String getY() {
+        return y;
+    }
+
+    public void setY(String y) {
+        this.y = y;
     }
 
     public int getMesh_id() {
@@ -157,5 +185,13 @@ public class MeshInfo {
 
     public void setLcount(int lcount) {
         this.lcount = lcount;
+    }
+
+    public int getOff() {
+        return off;
+    }
+
+    public void setOff(int off) {
+        this.off = off;
     }
 }

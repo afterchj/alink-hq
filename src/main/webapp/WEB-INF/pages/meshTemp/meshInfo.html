@@ -75,7 +75,7 @@
                             <span th:text="${meshInfo.lcount}"></span>
                         </div>
                         <div class="f-l">
-                            <a href="javascript:void(0);">查看灯列表</a>
+                            <a th:href="@{/light/list(mid=${meshInfo.id})}">查看灯列表</a>
                         </div>
                     </div>
                 </div>

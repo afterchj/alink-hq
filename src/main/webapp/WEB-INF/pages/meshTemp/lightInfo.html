@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="/alink-hq/static/css/common.css">
     <link rel="stylesheet" href="/alink-hq/static/css/leftNav.css">
     <link rel="stylesheet" href="/alink-hq/static/css/projectManage.css">
-    <title>区域详情</title>
+    <title>灯详情</title>
 </head>
 
 <body>
@@ -18,7 +18,7 @@
     <div th:replace="common/left::left"></div>
     <div class="main-right">
         <div class="clearfix main-right-nav">
-            <div class="f-l main-right-title">区域详情</div>
+            <div class="f-l main-right-title">灯详情</div>
             <div class="f-r pointer">
                 <img src="/alink-hq/static/img/go-back.png" alt="" onclick="history.back()">
             </div>
@@ -27,9 +27,19 @@
             <div class="p-detail">
                 <div class="p-nav">
                     <ul>
-                        <li>区域名：<label th:text="${meshInfo.pname}"></label></li>
-                        <li>区域ID：<label th:text="${meshInfo.place_id}"></label></li>
-                        <li>当前状态：未知</li>
+                        <li>灯名：<label th:text="${meshInfo.gname}"></label></li>
+                        <li>灯MAC地址：<label th:text="${meshInfo.lmac}"></label></li>
+                        <li>X（色温），Y（亮度）：
+                            <span th:text="${meshInfo.x}"></span><span>,&nbsp;&nbsp;</span>
+                            <span th:text="${meshInfo.y}"></span>
+                        </li>
+                        <li>当前状态：
+                            <div th:switch="${meshInfo.off}">
+                                <span th:case="1">开</span>
+                                <span th:case="0">关</span>
+                                <span th:case="*">未知</span>
+                            </div>
+                        </li>
                     </ul>
                 </div>
                 <div class="p-content">
@@ -49,30 +59,35 @@
                             <span>网络ID：</span>
                             <span th:text="${meshInfo.mesh_id}"></span>
                         </div>
-                        <!--<div class="f-l">-->
-                            <!--<span>网络ID：</span>-->
-                            <!--<span th:text="${meshInfo.mesh_id}"></span>-->
-                        <!--</div>-->
                         <div class="f-l">
                             <span><a th:href="@{/mesh/info(id=${meshInfo.mid})}">查看网络详情</a></span>
                         </div>
                     </div>
                     <div class="clearfix">
                         <div class="f-l">
-                            <span>区域中组的数量：</span>
-                            <span th:text="${meshInfo.gcount}"></span>
+                            <span>隶属区域：</span>
+                            <span th:text="${meshInfo.pname}"></span>
                         </div>
                         <div class="f-l">
-                            <a th:href="@{/group/list(mid=${meshInfo.mid})}">查看组列表</a>
+                            <a th:href="@{/place/info(id=${meshInfo.pid})}">查看区域详情</a>
                         </div>
                     </div>
                     <div class="clearfix">
                         <div class="f-l">
-                            <span>区域中灯的数量：</span>
-                            <span th:text="${meshInfo.lcount}"></span>
+                            <span>隶属组：</span>
+                            <span th:text="${meshInfo.gname}"></span>
                         </div>
                         <div class="f-l">
-                            <a th:href="@{/light/list(pid=${meshInfo.id})}">查看灯列表</a>
+                            <a th:href="@{/group/info(id=${meshInfo.gid})}">查看组详情</a>
+                        </div>
+                    </div>
+                    <div class="clearfix">
+                        <div class="f-l">
+                            <span>所在场景数量：</span>
+                            <span th:text="${meshInfo.scount}"></span>
+                        </div>
+                        <div class="f-l">
+                            <a href="javascript:void(0);">查看场景列表</a>
                         </div>
                     </div>
                 </div>
@@ -81,29 +96,6 @@
     </div>
 </div>
 <script src="/alink-hq/static/js/jquery.min.js"></script>
-<script type="text/javascript">
-    $(function () {
-//        myBrowser()
-        $('.one-list li').each(function () {
-            $('.main-left>ul>li.one-list:eq(0)').find('.on-off-triangle').attr('src', '/alink-hq/static/img/right-triange-un.png');
-            $('.main-left>ul>li.one-list:eq(0)').find('.two-list').addClass('active');
-            var tab = $(this).attr('tab');
-            if (tab == 'meshList') {
-                $(this).addClass('active').siblings().removeClass('active');
-            }
-        });
-        $('.on-off-triangle').click(function () {
-            var imgUrl = $(this).attr('src');
-            if (imgUrl == '/alink-hq/static/img/bottom-triangle-un.png') {
-                $(this).attr('src', '/alink-hq/static/img/right-triange-un.png');
-                $(this).parent().parent('.one-list').find('.two-list').addClass('active');
-            } else {
-                $(this).attr('src', '/alink-hq/static/img/bottom-triangle-un.png');
-                $(this).parent().parent('.one-list').find('.two-list').removeClass('active');
-            }
-        });
-    });
-</script>
 </body>
 
 </html>

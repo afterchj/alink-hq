@@ -153,6 +153,7 @@ public class HomeController {
     @ResponseBody
     @RequestMapping("/verify")
     public String sendCode(String mobile, String email) {
+        logger.info("mobile="+mobile+",email="+email);
         String str = "";
         try {
             if (StringUtils.isNotEmpty(mobile)) {

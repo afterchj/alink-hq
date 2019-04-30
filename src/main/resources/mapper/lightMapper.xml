@@ -48,14 +48,20 @@
         <if test="meshId!=null and meshId!=''">
             AND m.mesh_id LIKE CONCAT('%',#{meshId},'%')
         </if>
-        <if test="gname!=null and gname!=''">
-            AND g.gname LIKE CONCAT('%',#{gname},'%')
+        <if test="lname!=null and lname!=''">
+            AND l.lname LIKE CONCAT('%',#{lname},'%')
+        </if>
+        <if test="lmac!=null and lmac!=''">
+            AND l.lmac LIKE CONCAT('%',#{lmac},'%')
         </if>
         <if test="pid!=null and pid!=''">
-            AND g.pid=#{pid}
+            AND l.pid=#{pid}
         </if>
         <if test="mid!=null and mid!=''">
-            AND m.id=#{mid}
+            AND l.mid=#{mid}
+        </if>
+        <if test="gid!=null and gid!=''">
+            AND l.gid=#{gid}
         </if>
         <if test="projectId!=null and projectId!=''">
             AND m.project_id=#{projectId}
@@ -63,7 +69,7 @@
         ORDER BY l.mid DESC
     </select>
     <select id="getLightInfo" resultType="MeshInfo" parameterType="int">
-       SELECT
+        SELECT
             l.id,
             l.mid,
             l.pid,
@@ -75,6 +81,7 @@
             ls.off,
             s.id sid,
             m.project_id,
+            g.gname,
             p.name,
             m.mname,
             m.mesh_id,
@@ -82,6 +89,7 @@
             IFNULL(sc.scount,0) scount
         FROM f_light l
         INNER JOIN f_light_setting ls ON ls.lid=l.id
+        LEFT JOIN f_group g ON g.id=l.gid
         LEFT JOIN f_mesh m ON m.id=l.mid
         LEFT JOIN f_scene s ON s.mid=m.id
         LEFT JOIN f_project p ON p.id=m.project_id
