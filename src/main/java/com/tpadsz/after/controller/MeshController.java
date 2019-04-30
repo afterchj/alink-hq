@@ -70,12 +70,12 @@ public class MeshController {
     }
 
     @RequestMapping("/move")
-    public String move(String mids, ModelMap modelMap) {
-        String[] ids = mids.split(",");
-        List<String> list = new ArrayList(Arrays.asList(ids));
+    public String move(String ids, ModelMap modelMap) {
+        String[] idArray = ids.split(",");
+        List<String> list = new ArrayList(Arrays.asList(idArray));
         List<Map> meshMap = meshService.selectByMid(list);
         modelMap.put("meshMap", meshMap);
-        modelMap.put("mids", mids);
+        modelMap.put("ids", ids);
         return "meshTemp/meshMove";
     }
 
@@ -92,10 +92,10 @@ public class MeshController {
     }
 
     @RequestMapping("/delete")
-    public String saveDelete(String mids) {
-        logger.info("mids=" + mids);
-        String[] ids = mids.split(",");
-        List<String> list = new ArrayList(Arrays.asList(ids));
+    public String saveDelete(String ids) {
+        logger.info("ids=" + ids);
+        String[] idArray = ids.split(",");
+        List<String> list = new ArrayList(Arrays.asList(idArray));
         meshService.deleteMeshByIds(list);
         return "redirect:/mesh/list";
     }

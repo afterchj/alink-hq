@@ -71,17 +71,17 @@
                         </thead>
                         <tbody>
                         <tr th:each="group:${pageInfo.list}">
-                            <td><input type="checkbox" name="gids" th:value="${group.id}"></td>
+                            <td><input type="checkbox" name="ids" th:value="${group.id}"></td>
                             <td class="k-link"><a th:href="@{/group/info(id=${group.id})}" th:text="${group.gname}"></a></td>
                             <td th:text="${group.mname}"></td>
                             <td th:text="${group.mesh_id}"></td>
                             <td th:text="${group.lcount}"></td>
                             <td class="p-r">
                                 <img src="/alink-hq/static/img/edit.png" th:alt="${group.id}" class="rename">
-                                <a th:href="@{/group/move(gids=${group.id})}">
+                                <a th:href="@{/group/move(ids=${group.id})}">
                                     <img src="/alink-hq/static/img/exchange.png" alt="" class="center-img">
                                 </a>
-                                <a th:href="@{/group/delete(gids=${group.id})}"
+                                <a th:href="@{/group/delete(ids=${group.id})}"
                                    onclick="return confirm('您确定要删除所选的网络吗？')">
                                     <img src="/alink-hq/static/img/delete.png" alt="" id="singleDel">
                                 </a>
@@ -99,7 +99,7 @@
                                 <img src="/alink-hq/static/img/true-over-un.png" alt="" id="multiMove">
                             </span>
                                     <span>
-                                <img src="/alink-hq/static/img/delete-un.png" alt="" id="multiDel">
+                                <img src="/alink-hq/static/img/delete-btn-un.png" alt="" id="multiDel">
                             </span>
                                 </div>
                                 <div th:replace="common/page::page"></div>
@@ -136,29 +136,7 @@
         </div>
     </div>
 </div>
+<script type="text/javascript" src="/alink-hq/static/js/page.js"></script>
 <script type="text/javascript" src="/alink-hq/static/js/group.js"></script>
-<script type="text/javascript">
-    $(function () {
-//        myBrowser();
-        $('.one-list li').each(function () {
-            $('.main-left>ul>li.one-list:eq(0)').find('.on-off-triangle').attr('src', '/alink-hq/static/img/right-triange-un.png');
-            $('.main-left>ul>li.one-list:eq(0)').find('.two-list').addClass('active');
-            var tab = $(this).attr('tab');
-            if (tab == 'meshList') {
-                $(this).addClass('active').siblings().removeClass('active');
-            }
-        });
-        $('.on-off-triangle').click(function () {
-            var imgUrl = $(this).attr('src');
-            if (imgUrl == '/alink-hq/static/img/bottom-triangle-un.png') {
-                $(this).attr('src', '/alink-hq/static/img/right-triange-un.png');
-                $(this).parent().parent('.one-list').find('.two-list').addClass('active');
-            } else {
-                $(this).attr('src', '/alink-hq/static/img/bottom-triangle-un.png');
-                $(this).parent().parent('.one-list').find('.two-list').removeClass('active');
-            }
-        })
-    });
-</script>
 </body>
 </html>

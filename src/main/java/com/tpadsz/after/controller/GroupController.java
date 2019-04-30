@@ -53,12 +53,12 @@ public class GroupController {
     }
 
     @RequestMapping("/move")
-    public String move(String gids, ModelMap modelMap) {
-        String[] ids = gids.split(",");
-        List<String> list = new ArrayList(Arrays.asList(ids));
+    public String move(String ids, ModelMap modelMap) {
+        String[] ids1 = ids.split(",");
+        List<String> list = new ArrayList(Arrays.asList(ids1));
         List<Map> groupMap = groupService.selectByGid(list);
         modelMap.put("groupMap", groupMap);
-        modelMap.put("gids", gids);
+        modelMap.put("ids", ids);
         return "meshTemp/groupMove";
     }
 
@@ -75,10 +75,10 @@ public class GroupController {
     }
 
     @RequestMapping("/delete")
-    public String save(String gids) {
-        logger.info("gids=" + gids);
-        String[] ids = gids.split(",");
-        List<String> list = new ArrayList(Arrays.asList(ids));
+    public String save(String ids) {
+        logger.info("ids=" + ids);
+        String[] ids1 = ids.split(",");
+        List<String> list = new ArrayList(Arrays.asList(ids1));
         try {
             groupService.deleteGroupByIds(list);
         } catch (Exception e) {

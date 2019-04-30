@@ -77,17 +77,19 @@
                         </thead>
                         <tbody>
                         <tr th:each="place:${pageInfo.list}">
-                            <td class="checkbox"><input type="checkbox" name="pids" th:value="${place.id}"></td>
-                            <td class="k-link"><a th:href="@{/place/info(id=${place.id})}" th:text="${place.pname}"></a></td>
+                            <td class="checkbox"><input type="checkbox" name="ids" th:value="${place.id}"></td>
+                            <td class="k-link"><a th:href="@{/place/info(id=${place.id})}" th:text="${place.pname}"></a>
+                            </td>
                             <td th:text="${place.place_id}"></td>
                             <td th:text="${place.mname}"></td>
                             <td th:text="${place.mesh_id}"></td>
                             <td th:text="${place.gcount}"></td>
                             <td>未知</td>
                             <td class="p-r">
-                                <img src="/alink-hq/static/img/edit.png" th:alt="${place.id}" class="reset-name pointer" style="margin-right: 20px;">
-                                <!--<a th:href="@{/place/move(pids=${place.id})}" onclick="return confirm('您确定要删除所选的区域吗？')">-->
-                                    <!--<img src="/alink-hq/static/img/delete.png" alt="" class="left-img pointer">-->
+                                <img src="/alink-hq/static/img/edit.png" th:alt="${place.id}" class="reset-name pointer"
+                                     style="margin-right: 20px;">
+                                <!--<a th:href="@{/place/move(ids=${place.id})}" onclick="return confirm('您确定要删除所选的区域吗？')">-->
+                                <!--<img src="/alink-hq/static/img/delete.png" alt="" class="left-img pointer">-->
                                 <!--</a>-->
                                 <a href="javascript:void(0);" class="singleDel pointer">
                                     <img src="/alink-hq/static/img/delete.png" alt="" class="pointer">
@@ -103,7 +105,7 @@
                                 <span id="amount" class="amount">0</span>条数据
                             </span>
                                     <span>
-                                <img src="/alink-hq/static/img/delete-un.png" alt="" id="multiMove" class="pointer">
+                                <img src="/alink-hq/static/img/delete-btn-un.png" alt="" id="multiMove" class="pointer">
                              </span>
                                 </div>
                                 <div th:replace="common/page::page"></div>
@@ -174,6 +176,7 @@
     </div>
 </div>
 <div class="hide-iframe "></div>
+<script type="text/javascript" src="/alink-hq/static/js/page.js"></script>
 <script type="text/javascript" src="/alink-hq/static/js/place.js"></script>
 </body>
 </html>
