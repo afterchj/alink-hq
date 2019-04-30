@@ -142,4 +142,13 @@ $(function () {
         }
     }
 })
-;
+$('.moment').mousedown(function(){
+    var url=$(this).attr('src');
+    var newUrl=url.substr(0, url.length-4)+'-un.png';
+    $(this).attr('src',newUrl);
+})
+$('.moment').mouseup(function(){
+    var url=$(this).attr('src');
+    var newUrl=url.substr(0, url.length-7)+'.png';
+    $(this).attr('src',newUrl);
+})

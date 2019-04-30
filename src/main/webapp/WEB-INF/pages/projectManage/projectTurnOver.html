@@ -30,7 +30,7 @@
                     <!--<input type="hidden" name="mids" th:value="${mids}">-->
                     <div class="accountMsg clearfix" th:each="projectList:${projectList}">
                         <div class="f-l mesh-name">
-                            <span th:text="${projectList.projectName}"></span>
+                            <span th:text="${projectList.name}"></span>
                         </div>
                         <div class="f-l  mesh-id">
                             <label for="mid">施工负责人：</label>
@@ -46,11 +46,20 @@
                     <img src="/alink-hq/static/img/exchange-un.png" alt="">
                 </div>
                 <div class="transfer-company">
-                    <label for="pid"><span>*</span>选择移动到的项目：</label>
-                    <select name="pid" id="pid">
-                        <option value="">11</option>
-                    </select>
+                    <div>
+                        <label for="pid"><span>*</span>隶属公司：</label>
+                        <select name="pid" id="pid">
+                            <option value="">请选择公司</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="pid"><span>*</span>选择移交账号：</label>
+                        <select name="pid" id="pid">
+                            <option value="">请选择账号</option>
+                        </select>
+                    </div>
                 </div>
+
                 <div class="tranfer-btn">
                     <button class="confirm-btn" type="submit">确定移交</button>
                 </div>
@@ -59,38 +68,38 @@
     </div>
 </div>
 <script src="/alink-hq/static/js/jquery.min.js"></script>
-<script th:inline="javascript">
-    var uid = [[${session.user.id}]];
-    console.log("uid=" + uid);
-    $(function () {
-        $.getJSON("/alink-hq/mesh/getProjects", {"uid": uid}, function (json) {
-            $("#pid option:first").remove();
-            // 下面使用each进行遍历
-            $.each(json, function (i, item) {
-                $("#pid").append("<option value='" + item.id + "'>" + item.label + "</option>");
-            });
-        });
-        $('.one-list li').each(function () {
-            $('.main-left>ul>li.one-list:eq(0)').find('.on-off-triangle').attr('src', '/alink-hq/static/img/right-triange-un.png');
-            $('.main-left>ul>li.one-list:eq(0)').find('.two-list').addClass('active');
-            var tab = $(this).attr('tab');
-            if (tab == 'meshList') {
-                $(this).addClass('active').siblings().removeClass('active');
-            }
-        });
-        $('.on-off-triangle').click(function () {
-            var imgUrl = $(this).attr('src');
-            if (imgUrl == '/alink-hq/static/img/bottom-triangle-un.png') {
-                $(this).attr('src', '/alink-hq/static/img/right-triange-un.png');
-                $(this).parent().parent('.one-list').find('.two-list').addClass('active');
-            } else {
-                $(this).attr('src', '/alink-hq/static/img/bottom-triangle-un.png');
-                $(this).parent().parent('.one-list').find('.two-list').removeClass('active');
-            }
-        })
-    });
+<!--<script th:inline="javascript">-->
+    <!--var uid = [[${session.user.id}]];-->
+    <!--console.log("uid=" + uid);-->
+    <!--$(function () {-->
+        <!--$.getJSON("/alink-hq/mesh/getProjects", {"uid": uid}, function (json) {-->
+            <!--$("#pid option:first").remove();-->
+            <!--// 下面使用each进行遍历-->
+            <!--$.each(json, function (i, item) {-->
+                <!--$("#pid").append("<option value='" + item.id + "'>" + item.label + "</option>");-->
+            <!--});-->
+        <!--});-->
+        <!--$('.one-list li').each(function () {-->
+            <!--$('.main-left>ul>li.one-list:eq(0)').find('.on-off-triangle').attr('src', '/alink-hq/static/img/right-triange-un.png');-->
+            <!--$('.main-left>ul>li.one-list:eq(0)').find('.two-list').addClass('active');-->
+            <!--var tab = $(this).attr('tab');-->
+            <!--if (tab == 'meshList') {-->
+                <!--$(this).addClass('active').siblings().removeClass('active');-->
+            <!--}-->
+        <!--});-->
+        <!--$('.on-off-triangle').click(function () {-->
+            <!--var imgUrl = $(this).attr('src');-->
+            <!--if (imgUrl == '/alink-hq/static/img/bottom-triangle-un.png') {-->
+                <!--$(this).attr('src', '/alink-hq/static/img/right-triange-un.png');-->
+                <!--$(this).parent().parent('.one-list').find('.two-list').addClass('active');-->
+            <!--} else {-->
+                <!--$(this).attr('src', '/alink-hq/static/img/bottom-triangle-un.png');-->
+                <!--$(this).parent().parent('.one-list').find('.two-list').removeClass('active');-->
+            <!--}-->
+        <!--})-->
+    <!--});-->
 
-</script>
+<!--</script>-->
 </body>
 
 </html>

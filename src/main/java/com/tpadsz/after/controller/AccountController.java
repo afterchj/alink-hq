@@ -35,7 +35,8 @@ public class AccountController {
 
 
     @RequestMapping(value = "/list", method = RequestMethod.GET)
-    public String list(Integer pageNum, Integer pageSize, String account, Integer fid, Integer roleId, String startDate, String endDate, HttpSession session, Model model) {
+    public String list(Integer pageNum, Integer pageSize, String account, Integer fid, Integer roleId, String
+            startDate, String endDate, HttpSession session, Model model) {
         User loginUser = (User) session.getAttribute("user");
         String uid = loginUser.getId();
         if (pageNum == null) {
@@ -108,6 +109,10 @@ public class AccountController {
         String account;
         Map<String, String> map = new HashMap<>();
         List<String> list = new ArrayList<>();
+        if (fid == null || roleId == null || num == null || num > 100) {
+            map.put("result", ResultDict.SYSTEM_ERROR.getCode());
+            return map;
+        }
         try {
             for (int i = 0; i < num; i++) {
                 User user = new User();
@@ -123,7 +128,7 @@ public class AccountController {
                 list.add(account);
             }
             map.put("result", ResultDict.SUCCESS.getCode());
-            map.put("accountList",JSON.toJSONString(list));
+            map.put("accountList", JSON.toJSONString(list));
         } catch (Exception e) {
             map.put("result", ResultDict.SYSTEM_ERROR.getCode());
         }
@@ -148,7 +153,7 @@ public class AccountController {
 
 
     @RequestMapping(value = "/transferPage", method = RequestMethod.GET)
-    public String transferPage(HttpSession session,String account,String coname, Model model) {
+    public String transferPage(HttpSession session, String account, String coname, Model model) {
         User loginUser = (User) session.getAttribute("user");
         String uid = loginUser.getId();
         Integer role_id = accountService.findRoleIdByUid(uid);

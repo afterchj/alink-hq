@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -140,19 +142,26 @@ public class ProjectController {
     public String transferPage(HttpSession session, String projectInfo, Model model) {
         User loginUser = (User) session.getAttribute("user");
         String uid = loginUser.getId();
-        List<ProjectList> projectList = JSONArray.parseArray(projectInfo, ProjectList.class);
-        Integer role_id = accountService.findRoleIdByUid(uid);
-        List<Firm> firmList = getFirmInfo(role_id, uid);
-        model.addAttribute("projectList", projectList);
-        model.addAttribute("firmList", firmList);
+        try {
+            String str = URLDecoder.decode(projectInfo, "utf-8");
+            List<ProjectList> projectList = JSONArray.parseArray(str, ProjectList.class);
+            Integer role_id = accountService.findRoleIdByUid(uid);
+            List<Firm> firmList = getFirmInfo(role_id, uid);
+            model.addAttribute("projectList", projectList);
+            model.addAttribute("firmList", firmList);
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
         return "projectManage/projectTurnOver";
     }
 
-    @RequestMapping(value = "/findAccountByFid", method = RequestMethod.GET)
-    public String findAccountByFid(Integer fid, Model model) {
+    @RequestMapping(value = "/findAccountByFid", method = RequestMethod.POST)
+    @ResponseBody
+    public Map<String, List> findAccountByFid(Integer fid, Model model) {
+        Map<String, List> map = new HashMap<>();
         List<User> accounts = accountService.findAccountByFid(fid);
-        model.addAttribute("accounts", accounts);
-        return "projectManage/projectTurnOver";
+        map.put("accounts", accounts);
+        return map;
     }
 
     @RequestMapping(value = "/transfer", method = RequestMethod.POST)
@@ -190,10 +199,22 @@ public class ProjectController {
     }
 
     @RequestMapping(value = "/detail", method = RequestMethod.GET)
-    public String detail(String account, Integer projectId) {
-
-
-
+    public String detail(String account,String coname, Integer meshNum, Integer projectId, Model model) {
+        User user = accountService.findByAccount(account);
+        int placeNum = 0;
+        int groupNum = 0;
+        int lightNum = 0;
+        if(meshNum>0) {
+            placeNum = projectService.findPlaceNum(projectId);
+            groupNum = projectService.findGroupNum(projectId);
+            lightNum = projectService.findLightNum(projectId);
+        }
+        model.addAttribute("meshNum", meshNum);
+        model.addAttribute("placeNum", placeNum);
+        model.addAttribute("groupNum", groupNum);
+        model.addAttribute("lightNum", lightNum);
+        model.addAttribute("user", user);
+        model.addAttribute("coname", coname);
         return "projectManage/projectDetail";
     }
 

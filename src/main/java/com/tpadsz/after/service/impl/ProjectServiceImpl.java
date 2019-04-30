@@ -85,5 +85,20 @@ public class ProjectServiceImpl implements ProjectService {
         projectDao.deleteMeshByPid(projectId, uid);
     }
 
+    @Override
+    public int findPlaceNum(Integer projectId) {
+        return projectDao.findPlaceNum(projectId);
+    }
+
+    @Override
+    public int findGroupNum(Integer projectId) {
+        return projectDao.findGroupNum(projectId);
+    }
+
+    @Override
+    public int findLightNum(Integer projectId) {
+        return projectDao.findLightNum(projectId);
+    }
+
 
 }
