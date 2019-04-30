@@ -7,7 +7,7 @@
 .temp{
     height: 130px;
 }
-.search input ,.search select{
+.search input ,.search select,.search select option{
     width: 225px;
     height: 35px;
     border-radius: 1px;
@@ -574,4 +574,18 @@ th.all-checkbox {
 .search-result table td.k-link a:hover{
     color: #17b4f1;
     border-bottom: 1px solid #17b4f1;
+}
+input::-webkit-input-placeholder { /* WebKit browsers */
+    color: #999;
+}
+input::-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+    color: #999;
+    opacity:1;
+}
+input::-moz-placeholder { /* Mozilla Firefox 19+ */
+    color: #999;
+    opacity:1;
+}
+input:-ms-input-placeholder { /* Internet Explorer 10+ */
+    color: #999;
 }

@@ -52,7 +52,7 @@
                         <div class="p-r">
                             <label for="add-time">添加时间</label>
                             <input type="text" id="add-time" placeholder="请选择日期" AUTOCOMPLETE="off">
-                            <img src="/alink-hq/static/img/date.png" alt="" class="p-a">
+                            <img src="/alink-hq/static/img/date.png" alt="" class="p-a show-date">
                         </div>
                     </div>
                     <div class="f-r search-button ">
@@ -346,8 +346,8 @@
 
         })
         $('div[openContent="start-use"] button.yes').click(function(){
-            console.log(account);
-            console.log(intStatus);
+//            console.log(account);
+//            console.log(intStatus);
             $.ajax({
                 type: "POST",
                 url: "/alink-hq/account/enable",
@@ -430,6 +430,9 @@
         elem: '#add-time',
         range: true
     });
+   $('.show-date').click(function(){
+        $('#add-time').trigger('click');
+  })
     $(function () {
         myBrowser()
         $('.one-list li').each(function () {
@@ -483,7 +486,7 @@
     //条件筛选
     $(function () {
         var url = window.location.href;
-        var account = GetUrlParam("account");
+        var account =GetUrlParam("account") ;
         var company = GetUrlParam("fid");
         var role = GetUrlParam("roleId");
         var startDate = GetUrlParam("startDate");
@@ -500,7 +503,7 @@
             var addTime = startDate + ' - ' + endDate;
             $('#add-time').val(addTime);
         }
-        $('#account').val(account);
+        $('#account').val(decodeURI(account));
 
         if(role==''){
             $('#role option').eq(0).prop('selected',true);
@@ -595,9 +598,6 @@
         var newUrl = url2 + '&pageNum=' + pageNum + '&pageSize=' + pageSize + '&account=' + account + '&fid=' + company + '&roleId=' + role + '&startDate=' + startDate + '&endDate=' + endDate;
         location.href = newUrl;
     }
-
-    //选择每页展示时
-
 
     //paraName 等找参数的名称
     function GetUrlParam(paraName) {
