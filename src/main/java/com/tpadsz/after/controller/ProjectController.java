@@ -155,11 +155,13 @@ public class ProjectController {
         return "projectManage/projectTurnOver";
     }
 
-    @RequestMapping(value = "/findAccountByFid", method = RequestMethod.GET)
-    public String findAccountByFid(Integer fid, Model model) {
+    @RequestMapping(value = "/findAccountByFid", method = RequestMethod.POST)
+    @ResponseBody
+    public Map<String, List> findAccountByFid(Integer fid, Model model) {
+        Map<String, List> map = new HashMap<>();
         List<User> accounts = accountService.findAccountByFid(fid);
-        model.addAttribute("accounts", accounts);
-        return "projectManage/projectTurnOver";
+        map.put("accounts", accounts);
+        return map;
     }
 
     @RequestMapping(value = "/transfer", method = RequestMethod.POST)
@@ -197,12 +199,22 @@ public class ProjectController {
     }
 
     @RequestMapping(value = "/detail", method = RequestMethod.GET)
-    public String detail(String account, Integer projectId, Model model) {
+    public String detail(String account,String coname, Integer meshNum, Integer projectId, Model model) {
         User user = accountService.findByAccount(account);
-
-
-
+        int placeNum = 0;
+        int groupNum = 0;
+        int lightNum = 0;
+        if(meshNum>0) {
+            placeNum = projectService.findPlaceNum(projectId);
+            groupNum = projectService.findGroupNum(projectId);
+            lightNum = projectService.findLightNum(projectId);
+        }
+        model.addAttribute("meshNum", meshNum);
+        model.addAttribute("placeNum", placeNum);
+        model.addAttribute("groupNum", groupNum);
+        model.addAttribute("lightNum", lightNum);
         model.addAttribute("user", user);
+        model.addAttribute("coname", coname);
         return "projectManage/projectDetail";
     }
 

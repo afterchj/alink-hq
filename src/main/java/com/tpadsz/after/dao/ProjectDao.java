@@ -44,4 +44,9 @@ public interface ProjectDao {
 
     void deleteMeshByPid(@Param("id")Integer projectId, @Param("uid")String uid);
 
+    int findPlaceNum(@Param("id")Integer projectId);
+
+    int findGroupNum(@Param("id")Integer projectId);
+
+    int findLightNum(@Param("id")Integer projectId);
 }

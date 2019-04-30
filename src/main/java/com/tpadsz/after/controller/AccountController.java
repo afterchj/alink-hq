@@ -110,6 +110,7 @@ public class AccountController {
         Map<String, String> map = new HashMap<>();
         List<String> list = new ArrayList<>();
         if (fid == null || roleId == null || num == null || num > 100) {
+            map.put("result", ResultDict.SYSTEM_ERROR.getCode());
             return map;
         }
         try {
