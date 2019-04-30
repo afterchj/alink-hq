@@ -89,9 +89,9 @@
                         <td th:text="${project.id}" style="display: none" class="project-id"></td>
                         <td th:text="${project.coname}" style="display: none" class="project-coname"></td>
                         <td class="project-name k-link">
-                            <a href="javascript:void(0);" th:text="${project.name}"></a>
+                            <a th:href="@{/project/detail(account=${project.account},coname=${project.coname},meshNum=${project.meshNum},projectId=${project.id})}" th:text="${project.name}"></a>
                         </td>
-                        <td th:text="${project.meshNum}"></td>
+                        <td th:text="${project.meshNum}" class="meshNum"></td>
                         <td th:text="${project.account}" class="project-account"></td>
                         <td th:text="${project.create_date}"></td>
                         <td th:text="${project.update_date}"></td>
@@ -116,25 +116,25 @@
                                     条订单
                                 </span>
                             <span class="m-r-20">
-                                    <img src="/alink-hq/static/img/true-over.png" alt="" class="pointer moment" >
+                                    <img src="/alink-hq/static/img/true-over-un.png" alt="" class="pointer moment"  id="transfer-project">
                                 </span>
                             <span>
-                                    <img src="/alink-hq/static/img/delete-btn.png" alt="" class="pointer moment" >
+                                    <img src="/alink-hq/static/img/delete-btn-un.png" alt="" class="pointer moment" >
                                 </span>
                             </div>
                             <!--<div th:replace="common/page::page"></div>-->
                             <div class="f-r page-right">
                                 <span class="prev-page">
-                                    <a th:href="@{/project/list(pageNum=${pageInfo.prePage},uid=${session.user.id},pageSize=${pageInfo.pageSize},account=${account},projectName=${projectName},startCreateDate=${startCreateDate},endCreateDate=${endCreateDate},startUpdateDate=${startUpdateDate},endUpdateDate=${endUpdateDate})}">
+                                    <a th:href="@{/project/list(pageNum=${pageInfo.prePage},pageSize=${pageInfo.pageSize},account=${account},projectName=${projectName},startCreateDate=${startCreateDate},endCreateDate=${endCreateDate},startUpdateDate=${startUpdateDate},endUpdateDate=${endUpdateDate})}">
                                         <img src="/alink-hq/static/img/left-arrow.png" alt=""></a>
                                 </span>
                                 <span th:text="${pageInfo.pageNum}" class="pages"></span>
                                 <span th:if="${pageInfo.hasNextPage}" class="next-page">
-                                   <a th:href="@{/project/list(pageNum=${pageInfo.nextPage},uid=${session.user.id},pageSize=${pageInfo.pageSize},account=${account},projectName=${projectName},startCreateDate=${startCreateDate},endCreateDate=${endCreateDate},startUpdateDate=${startUpdateDate},endUpdateDate=${endUpdateDate})}">
+                                   <a th:href="@{/project/list(pageNum=${pageInfo.nextPage},pageSize=${pageInfo.pageSize},account=${account},projectName=${projectName},startCreateDate=${startCreateDate},endCreateDate=${endCreateDate},startUpdateDate=${startUpdateDate},endUpdateDate=${endUpdateDate})}">
                                        <img src="/alink-hq/static/img/right-arrow-color.png" alt=""></a>
                                 </span>
                                 <span th:unless="${pageInfo.hasNextPage}" class="next-page">
-                                     <a th:href="@{/project/list(pageNum=${pageInfo.nextPage},uid=${session.user.id},pageSize=${pageInfo.pageSize},account=${account},projectName=${projectName},startCreateDate=${startCreateDate},endCreateDate=${endCreateDate},startUpdateDate=${startUpdateDate},endUpdateDate=${endUpdateDate})}">
+                                     <a th:href="@{/project/list(pageNum=${pageInfo.nextPage},pageSize=${pageInfo.pageSize},account=${account},projectName=${projectName},startCreateDate=${startCreateDate},endCreateDate=${endCreateDate},startUpdateDate=${startUpdateDate},endUpdateDate=${endUpdateDate})}">
                                          <img src="/alink-hq/static/img/right-arrow-color.png" alt=""></a>
                                 </span>
                             <span class="m-l-15 m-r-20">共
@@ -231,5 +231,4 @@
 <script src="/alink-hq/static/laydate/laydate.js"></script>
 <script SRC="/alink-hq/static/js/projectList.js"></script>
 </body>
-
 </html>

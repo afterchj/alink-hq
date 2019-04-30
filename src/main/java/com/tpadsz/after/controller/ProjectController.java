@@ -147,6 +147,7 @@ public class ProjectController {
             List<ProjectList> projectList = JSONArray.parseArray(str, ProjectList.class);
             Integer role_id = accountService.findRoleIdByUid(uid);
             List<Firm> firmList = getFirmInfo(role_id, uid);
+            model.addAttribute("projectInfo", projectInfo);
             model.addAttribute("projectList", projectList);
             model.addAttribute("firmList", firmList);
         } catch (UnsupportedEncodingException e) {

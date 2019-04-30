@@ -152,6 +152,7 @@ $(function () {
     $('#uname').focus(function () {
         console.log('获取用户名焦点');
         $('.password-login .add-hint').text('');
+        $('.password-login .page-hint').text('');
         $('.errMsg').html('');
     })
     $('#pwd').focus(function () {
@@ -164,7 +165,6 @@ $(function () {
     $('#phone-l').focus(function () {
         console.log('获取手机号焦点');
         $('.phone-login .add-hint').text('');
-
     })
     $('#code-l').focus(function () {
         console.log('手机验证码焦点');
@@ -212,12 +212,16 @@ $(function () {
             console.log('输入手机号')
             if (unameVal != '' && !phoneResult) {
                 $('.password-login .add-hint').text('请输入正确的手机号');
+                $('.password-login .page-hint').text('');
+                $('.errMsg').html('');
             } else {
                 $('.password-login .add-hint').text('');
             }
         }else if(e.test(unameVal)){
             if (unameVal != '' && !emailResult) {
                 $('.password-login .add-hint').text('请输入正确的邮箱');
+                $('.password-login .page-hint').text('');
+                $('.errMsg').html('');
             } else {
                 $('.password-login .add-hint').text('');
             }
@@ -446,6 +450,7 @@ function passwordLogin() {
                 $('.password-login .page-hint').text('登录名密码不正确');
                 $('#pwd').val('');
                 $('.password-login .password-hint').text('');
+                $('.password-login .add-hint').text('');
             }
         } else {
             if (pwdVal == '') {
@@ -816,7 +821,7 @@ function phoneFindPwd() {
     } else {
         //验证验证码是否正确
         var codeResult = findValidCode(phoneVal, codeVal);
-        // console.log('codeResult', codeResult);
+        console.log('codeResult', codeResult);
         if (codeVal == '') {
             if (newPwd == '') {
                 $('.phone-find-password .mobile-add-hint').text('');
@@ -1060,7 +1065,6 @@ function emailFindPwd() {
                 $('.email-find-password .email-code-hint').text('请输入验证码');
                 $('.email-find-password .email-password-hint').text('');
                 $('#pwd-e').val('');
-
             }
         } else {
             if (newPwd == '') {
@@ -1119,7 +1123,6 @@ function emailFindPwd() {
 }
 //邮箱找回密码发送验证码
 function emailFindPwdCode() {
-
     var emailVal = $('#email-e').val();
     var codeVal = $('#code-e').val();
     var newPwd = $('#pwd-e').val();
@@ -1144,23 +1147,20 @@ function emailFindPwdCode() {
                 $('.email-find-password .email-password-hint').text('');
                 $('#pwd-e').val('');
             }
+        }else{
+            if (newPwd == '') {
+                $('.email-find-password .email-add-hint').text('请输入所绑定的邮箱');
+                $('.email-find-password .email-code-hint').text('');
+                $('.email-find-password .email-password-hint').text('请输入新密码');
+            } else if (pwdResult) {
+                $('.email-find-password .email-add-hint').text('请输入所绑定的邮箱');
+                $('.email-find-password .email-code-hint').text('');
+                $('.email-find-password .email-password-hint').text('');
+                $('#pwd-e').val('');
+            }
         }
-        if (newPwd == '') {
-            $('.email-find-password .email-add-hint').text('请输入所绑定的邮箱');
-            $('.email-find-password .email-code-hint').text('');
-            $('.email-find-password .email-password-hint').text('请输入新密码');
-        } else if (pwdResult) {
-            $('.email-find-password .email-add-hint').text('请输入所绑定的邮箱');
-            $('.email-find-password .email-code-hint').text('');
-            $('.email-find-password .email-password-hint').text('');
-            $('#pwd-e').val('');
-        }
+
     } else if (!emailResult) {
-        // if(codeVal == ''){
-        //     if (newPwd == '') {
-        //
-        //     }
-        // }
         console.log('邮箱格式不正确');
         $('.email-find-password .email-add-hint').text('请输入正确的邮箱');
         $('.email-find-password .email-code-hint').text('');
@@ -1194,9 +1194,6 @@ function emailFindPwdCode() {
             }
         }
     } else {
-        emailCode(emailVal);
-        // var codeResult = findValidCode(emailVal, codeVal);
-        // console.log('codeResult', codeResult);
         if (codeVal == '') {
             if (newPwd == '') {
                 emailCode(emailVal);

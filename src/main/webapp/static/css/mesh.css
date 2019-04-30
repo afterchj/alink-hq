@@ -209,3 +209,9 @@
     margin: 50px auto;
     padding-bottom: 30px;
 }
+.account-hint,.company-hint{
+    height: 20px;
+    font-size: 14px;
+    color: #fb2a2a;
+    margin-left: 50px;
+}

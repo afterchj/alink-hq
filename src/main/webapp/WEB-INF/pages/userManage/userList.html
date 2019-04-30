@@ -99,12 +99,12 @@
                         <td th:text="${user.status}" class="status pointer" openTab="start-use" id="start-use" >
                         </td>
                         <td class="p-r">
-                            <img src="/alink-hq/static/img/edit.png" alt="" openTab="reset-pwd" id="reset-pwd" class="pointer">
+                            <img src="/alink-hq/static/img/edit.png" alt="" openTab="reset-pwd" id="reset-pwd" class="pointer" th:title="重置密码">
                             <a th:href="@{/account/transferPage(uid=${session.user.id},account=${user.account},coname=${user.coname})}"><img
                                     src="/alink-hq/static/img/exchange.png"
-                                    alt="" class="center-img"></a>
+                                    alt="" class="center-img" th:title="移交账号"></a>
                             <img src="/alink-hq/static/img/delete.png" alt="" id="delete-account"
-                                 openTab="delete-account" class="pointer">
+                                 openTab="delete-account" class="pointer" th:title="删除">
                             <div class="popup p-a">
                                 重命名
                             </div>
@@ -194,7 +194,7 @@
     </div>
     <div class="pop-content">
         <div class="reset-pwd">您确定要重置该账号密码吗？</div>
-        <div class="reset-pwd-hint">（重置后将无法重置，请慎重！）</div>
+        <div class="reset-pwd-hint">（重置后将无法恢复，请慎重！）</div>
         <div class="pop-btn">
             <button class="reduce" type="button">取消</button>
             <button class="yes" type="button">确定</button>
@@ -253,10 +253,6 @@
             <div class="reset-pwd">您确定要删除该账号信息吗？</div>
             <div class="reset-pwd-hint">（删除后将无法恢复，请慎重！）</div>
         </div>
-        <!--<div class="hasProject">-->
-            <!--<div >当前账号名下有项目</div>-->
-            <!--<div>请移交后再进行删除！</div>-->
-        <!--</div>-->
         <div class="pop-btn">
             <button class="reduce" type="button">取消</button>
             <button class="yes" type="button">确定</button>
@@ -269,10 +265,6 @@
         温馨提示
     </div>
     <div class="pop-content">
-        <!--<div class="noProject active">-->
-            <!--<div class="reset-pwd">您确定要删除该账号信息吗？</div>-->
-            <!--<div class="reset-pwd-hint">（删除后将无法恢复，请慎重！）</div>-->
-        <!--</div>-->
         <div class="hasProject active">
             <div >当前账号名下有项目</div>
             <div>请移交后再进行删除！</div>
@@ -326,6 +318,8 @@
                     console.log(text);
                     if (text == '启用') {
                         $('.off-or-on').text('您确定要禁用该账户吗？');
+                        var content='<p style="  font-size: 15px;color: #fb2a2a;margin-top:30px;">禁用后，该账号将无法登录</p>';
+                        $('.off-or-on').after(content);
                     } else {
                         $('.off-or-on').text('您确定要启用该账户吗？');
                     }
@@ -481,8 +475,6 @@
     function skipLimit() {
         var skipPage = parseInt($('#skipPage').val());
         var pageTotal = parseInt($('.pageTotal').text());
-//        console.log(skipPage, pageTotal)
-
         if (skipPage < 1 || skipPage > pageTotal) {
             $('#skipPage').val('');
         }
@@ -566,10 +558,6 @@
         $('#skipPageBtn').click(function () {
             var pageSize = $('#page-select option:selected').val();
             var pageNum =$('#skipPage').val();
-//            if(pageNum==''){
-//
-//            }
-
             condition(pageSize, pageNum);
         })
     })
@@ -604,11 +592,7 @@
         var addTime = $('#add-time').val();
         var startDate = addTime.substring(0, 10);
         var endDate = addTime.substring(13, 23);
-
-//        console.log('pageNum', pageNum);
-//        var userId = parseInt($('#useId_hidden').val());
         var newUrl = url2 + '&pageNum=' + pageNum + '&pageSize=' + pageSize + '&account=' + account + '&fid=' + company + '&roleId=' + role + '&startDate=' + startDate + '&endDate=' + endDate;
-//        console.log(account, role, company, startDate, endDate, num);
         location.href = newUrl;
     }
 

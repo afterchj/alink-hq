@@ -43,8 +43,10 @@
                         </div>
                         <div class="transfer">
                             <div class="transfer-company">
+                                <p class="tranfer-company-hint"></p>
                                 <label for=""><span style="">*</span>选择移交到的公司：</label>
-                                <select name="transfer-company" id="transfer-company">
+                                <select name="transfer-company" id="transfer-company" class="pointer">
+                                    <option value="">请选择公司</option>
                                     <option th:each="firm:${firmList}" th:value="${firm.id}"
                                             th:text="${firm.coname }"></option>
                                 </select>
@@ -128,29 +130,35 @@
     $('.btn-transfer button').click(function () {
         var account = $("#account").val();
         var fid = $("#transfer-company option:selected").val();
-        $.ajax({
-            type: "POST",
-            url: "/alink-hq/account/transfer",
-            data: {account: account, fid: fid},
-            dataType: "json",
-            success: function (res) {
-                console.log(res);
-                if (res.result == '000') {
-                    $('.pop-iframe').addClass('active');
-                    var width = document.body.scrollWidth;
-                    var height = document.body.scrollHeight;
-                    $('.hide-iframe').addClass('active');
-                    $('.hide-iframe').css({
-                        'width': width,
-                        'height': height
-                    })
-                    var pwd=res.pwd;
-                    var account=res.account;
-                    $('.t-account-result').text(account);
-                    $('.t-pwd-result').text(pwd);
+        if(fid==''){
+            $('p.tranfer-company-hint').text('请选择公司');
+        }else{
+            $('p.tranfer-company-hint').text('');
+            $.ajax({
+                type: "POST",
+                url: "/alink-hq/account/transfer",
+                data: {account: account, fid: fid},
+                dataType: "json",
+                success: function (res) {
+                    console.log(res);
+                    if (res.result == '000') {
+                        $('.pop-iframe').addClass('active');
+                        var width = document.body.scrollWidth;
+                        var height = document.body.scrollHeight;
+                        $('.hide-iframe').addClass('active');
+                        $('.hide-iframe').css({
+                            'width': width,
+                            'height': height
+                        })
+                        var pwd=res.pwd;
+                        var account=res.account;
+                        $('.t-account-result').text(account);
+                        $('.t-pwd-result').text(pwd);
+                    }
                 }
-            }
-        });
+            });
+        }
+
     })
     $('.reset-passwords-content button.yes').click(function(){
         $('.hide-iframe').addClass('active');
@@ -159,8 +167,18 @@
         setInterval(function(){
             window.location.href='/alink-hq/account/list';
         },1000)
-
     })
+
+    //监听公司选择
+    $('#transfer-company').change(function(){
+        var selected=$(this).children('option:selected').val();
+        if(selected==''){
+            $('p.tranfer-company-hint').text('请选择公司');
+        }else{
+            $('p.tranfer-company-hint').text('');
+        }
+    })
+
     function hide() {
         $('.hide-iframe').removeClass('active');
         $('.pop-iframe').removeClass('active');
@@ -174,12 +192,6 @@
         hide();
         $(this).parents('.pop-iframe').removeClass('active');
     })
-    // 点击确定时
-//    $('.pop-content  .pop-btn .yes').click(function () {
-//        hide();
-//        $(this).parents('.pop-iframe').removeClass('active');
-//        // 其他逻辑代码
-//    })
 </script>
 </body>
 

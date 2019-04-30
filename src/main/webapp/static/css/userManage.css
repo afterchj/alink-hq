@@ -366,3 +366,20 @@
 .success.active{
     display: block;
 }
+p.off-hint{
+    font-size: 14px;
+    color: #fb2a2a;
+    margin-top:20px;
+}
+p.tranfer-company-hint{
+    font-size: 14px;
+    color: #fb2a2a;
+    margin-left: 30px;
+    height: 20px;
+}
+p.create-company-hint,p.create-num-hint{
+    font-size: 14px;
+    color: #fb2a2a;
+    margin-left: 255px;
+    height: 20px;
+}

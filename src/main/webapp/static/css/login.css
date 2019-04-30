@@ -217,6 +217,7 @@ body{
     top: 1px;
     white-space: nowrap;
     letter-spacing: normal;
+    padding: 0 10px;
 }
 
 .content .login-in-box-tab-content input.phone {

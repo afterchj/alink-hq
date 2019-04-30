@@ -4,13 +4,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="/alink-hq/static/css/loding.css"/>
     <link rel="stylesheet" th:href="@{/static/css/base.css}">
     <link rel="stylesheet" th:href="@{/static/css/leftNav.css}">
     <link rel="stylesheet" th:href="@{/static/css/mesh.css}">
     <title>移交账号</title>
+    <style>
+        #preload-anim{
+            display: none;
+        }
+        #preload-anim.active{
+            display: block;
+        }
+    </style>
 </head>
 
 <body>
+<input type="hidden" th:value="${projectInfo}" id="projectInfo">
 <div th:replace="common/head::head"></div>
 <div class="c-container">
     <div th:replace="common/left::left"></div>
@@ -21,85 +31,133 @@
                 <img src="/alink-hq/static/img/go-back.png" alt="" onclick="history.back()">
             </div>
         </div>
-        <form th:action="@{/mesh/saveUpdate}" class="" method="post">
+        <form class="" method="post">
             <div id="meshTurnOver">
                 <div class="f-nav">
                     网络移动
                 </div>
                 <div class="f-content">
-                    <!--<input type="hidden" name="mids" th:value="${mids}">-->
                     <div class="accountMsg clearfix" th:each="projectList:${projectList}">
                         <div class="f-l mesh-name">
                             <span th:text="${projectList.name}"></span>
                         </div>
                         <div class="f-l  mesh-id">
-                            <label for="mid">施工负责人：</label>
-                            <input type="text" id="mid" th:value="${projectList.account}">
+                            <label for="account">施工负责人：</label>
+                            <input type="text" id="account" th:value="${projectList.account}">
                         </div>
                         <div class="f-l mesh-project">
-                            <label for="project">隶属公司：</label>
-                            <input type="text" id="project" th:value="${projectList.coname}">
+                            <label for="coname">隶属公司：</label>
+                            <input type="text" id="coname" th:value="${projectList.coname}">
                         </div>
                     </div>
                 </div>
-                <div class="" style="text-align: center;    margin-bottom: 30px;">
+                <div class="" style="text-align: center;margin-bottom: 30px;">
                     <img src="/alink-hq/static/img/exchange-un.png" alt="">
                 </div>
                 <div class="transfer-company">
-                    <div>
-                        <label for="pid"><span>*</span>隶属公司：</label>
-                        <select name="pid" id="pid">
-                            <option value="">请选择公司</option>
+                    <p class="company-hint"></p>
+                    <div style="margin-bottom: 30px;">
+                        <label for="fid"><span>*</span>隶属公司：</label>
+                        <select name="fid" id="fid" class="pointer">
+                            <option value="" class="pointer">请选择公司</option>
+                            <option th:each="firm:${firmList}" th:value="${firm.id}" th:text="${firm.coname }" class="pointer"></option>
                         </select>
                     </div>
+                    <p class="account-hint"></p>
                     <div>
-                        <label for="pid"><span>*</span>选择移交账号：</label>
-                        <select name="pid" id="pid">
-                            <option value="">请选择账号</option>
+                        <label for="account-transfer"><span>*</span>选择移交账号：</label>
+                        <select name="account-transfer" id="account-transfer" class="pointer">
+                            <option value="" class="pointer">请选择账号</option>
                         </select>
                     </div>
                 </div>
 
                 <div class="tranfer-btn">
-                    <button class="confirm-btn" type="submit">确定移交</button>
+                    <button class="confirm-btn" type="button">确定移交</button>
                 </div>
             </div>
         </form>
     </div>
 </div>
+<div class="hide-iframe"></div>
+<div id="preload-anim">
+    <div id="circularG">
+        <div id="circularG_1" class="circularG"></div>
+        <div id="circularG_2" class="circularG"></div>
+        <div id="circularG_3" class="circularG"></div>
+        <div id="circularG_4" class="circularG"></div>
+        <div id="circularG_5" class="circularG"></div>
+        <div id="circularG_6" class="circularG"></div>
+        <div id="circularG_7" class="circularG"></div>
+        <div id="circularG_8" class="circularG"></div>
+    </div>
+    <p class="title">
+    </p>
+</div>
 <script src="/alink-hq/static/js/jquery.min.js"></script>
-<!--<script th:inline="javascript">-->
-    <!--var uid = [[${session.user.id}]];-->
-    <!--console.log("uid=" + uid);-->
-    <!--$(function () {-->
-        <!--$.getJSON("/alink-hq/mesh/getProjects", {"uid": uid}, function (json) {-->
-            <!--$("#pid option:first").remove();-->
-            <!--// 下面使用each进行遍历-->
-            <!--$.each(json, function (i, item) {-->
-                <!--$("#pid").append("<option value='" + item.id + "'>" + item.label + "</option>");-->
-            <!--});-->
-        <!--});-->
-        <!--$('.one-list li').each(function () {-->
-            <!--$('.main-left>ul>li.one-list:eq(0)').find('.on-off-triangle').attr('src', '/alink-hq/static/img/right-triange-un.png');-->
-            <!--$('.main-left>ul>li.one-list:eq(0)').find('.two-list').addClass('active');-->
-            <!--var tab = $(this).attr('tab');-->
-            <!--if (tab == 'meshList') {-->
-                <!--$(this).addClass('active').siblings().removeClass('active');-->
-            <!--}-->
-        <!--});-->
-        <!--$('.on-off-triangle').click(function () {-->
-            <!--var imgUrl = $(this).attr('src');-->
-            <!--if (imgUrl == '/alink-hq/static/img/bottom-triangle-un.png') {-->
-                <!--$(this).attr('src', '/alink-hq/static/img/right-triange-un.png');-->
-                <!--$(this).parent().parent('.one-list').find('.two-list').addClass('active');-->
-            <!--} else {-->
-                <!--$(this).attr('src', '/alink-hq/static/img/bottom-triangle-un.png');-->
-                <!--$(this).parent().parent('.one-list').find('.two-list').removeClass('active');-->
-            <!--}-->
-        <!--})-->
-    <!--});-->
+<script>
+    $(function () {
+        $('#fid').change(function () {
+            var fid = $(this).children('option:selected').val();
+            if(fid!=''){
+                fid = parseInt(fid);
+            }
+            console.log('fid', fid);
+            $.ajax({
+                type: "post",
+                url: "/alink-hq/project/findAccountByFid",
+                data: {fid: fid},
+                dataType: "json",
+                success: function (data) {
+                    console.log(data.accounts);
+                    var content = '';
+                    for (var i = 0; i < data.accounts.length; i++) {
+                        var uid = data.accounts[i].id;
+                        var accountName = data.accounts[i].account;
+                        content += '<option value="' + uid + '">' + accountName + '</option>';
+                    }
+                    $('#account-transfer').append(content);
+                }
+            });
+        })
+        $('.confirm-btn').click(function () {
+            var projectInfo=$('#projectInfo').val();
+            var fid=$('#fid option:selected').val();
+            var uid=$('#account-transfer option:selected').val();
+            console.log('uid',uid,'fid', fid);
+            if(uid==''){
+                $('.account-hint').text('请选择账号');
+            }else{
+                $('.account-hint').text('');
+            }
+            if(fid==''){
+                $('.company-hint').text('请选择公司')
+            }else{
+                $('.company-hint').text('');
+            }
+            if(fid!=''&& uid!=''){
+                $.ajax({
+                    type: "post",
+                    url: "/alink-hq/project/transfer",
+                    data: {projectInfo:projectInfo,uid:uid},
+                    dataType: "json",
+                    success: function (data) {
+                        console.log(data);
+                        if(data.result=='000'){
+                            $('#preload-anim').addClass('active');
+                            $('.hide-iframe').addClass('active');
+                            $('#preload-anim .title').text('移交成功，正在跳转项目列表');
+                            setInterval(function () {
+                                window.location.href = '/alink-hq/project/list';
+                            }, 1000)
+                        }
+                    }
+                })
+            }
 
-<!--</script>-->
+        })
+    })
+</script>
 </body>
 
 </html>

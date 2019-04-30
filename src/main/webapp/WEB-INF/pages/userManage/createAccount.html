@@ -32,9 +32,12 @@
                 </div>
                 <div class="c-content ">
                     <form th:action="@{/account/create}" method="GET">
+                        <p class="create-company-hint"></p>
                         <div>
-                            <label for="">隶属公司：</label>
-                            <select name="" id="fid">
+
+                            <label for="fid">隶属公司：</label>
+                            <select name="fid" id="fid" class="pointer">
+                                <option value="">请选择公司</option>
                                 <option th:each="firm:${firmList}" name="fid" th:value="${firm.id}"
                                         th:text="${firm.coname}"></option>
                             </select>
@@ -42,7 +45,7 @@
                         <div class="role-radio">
                             <label for="">角色：</label>
                             <label shiro:hasAnyRoles="super" for="" class="l-radio">
-                                <img src="/alink-hq/static/img/select-on.png" alt=""/>
+                                <img src="/alink-hq/static/img/select-un.png" alt=""/>
                                 <input type="radio" value="2"/>管理员
                             </label>
                             <label shiro:hasAnyRoles="super,admin" for="" class="l-radio">
@@ -50,15 +53,16 @@
                                 <input type="radio" value="3"/>乙方管理员
                             </label>
                             <label shiro:hasAnyRoles="super,admin,manager" for="" class="l-radio">
-                                <img src="/alink-hq/static/img/select-un.png" alt=""/>
+                                <img src="/alink-hq/static/img/select-on.png" alt=""/>
                                 <input type="radio" value="4"/>施工人员
                             </label>
                         </div>
+                        <p class="create-num-hint"></p>
                         <div>
                             <label for="">创建账号数量：</label>
                         <span class="num clearfix">
                             <div class="f-l reduce-num pointer">-</div>
-                            <input type="text" name="num" th:value="1" class="create-num" oninput="createNum()">
+                            <input type="text" name="num" value="1" class="create-num">
                             <div class="f-r add-num pointer">+</div>
                         </span>
                             <span class="create-account-hint">最多一次可添加100个账号</span>
@@ -88,22 +92,6 @@
 
             </div>
             <div class="c-list clearfix">
-                <!--<div class="clearfix">-->
-                <!--<div class="f-l c-width one">BN001</div>-->
-                <!--<div class="f-l c-width two">123456</div>-->
-                <!--</div>-->
-                <!--<div class="clearfix">-->
-                <!--<div class="f-l c-width one">BN001</div>-->
-                <!--<div class="f-l c-width two">123456</div>-->
-                <!--</div>-->
-                <!--<div class="clearfix">-->
-                <!--<div class="f-l c-width one">BN001</div>-->
-                <!--<div class="f-l c-width two">123456</div>-->
-                <!--</div>-->
-                <!--<div class="clearfix">-->
-                <!--<div class="f-l c-width one">BN001</div>-->
-                <!--<div class="f-l c-width two">123456</div>-->
-                <!--</div>-->
             </div>
         </div>
         <a href="">Excel导出</a>
@@ -129,57 +117,66 @@
 <script src="/alink-hq/static/js/jquery.min.js"></script>
 <script>
     $('button.confirm-create').click(function () {
-        var fid = parseInt($('#fid option:selected').val());
+        var fid = $('#fid option:selected').val();
+        if (fid == '') {
+            $('p.create-company-hint').text('请选择公司');
+        } else {
+            fid = parseInt(fid);
+            $('p.create-company-hint').text();
+        }
         var roleId;
-        var num = parseInt($('.create-num').val());
         $('.role-radio .l-radio').each(function () {
             var imgUrl = $(this).find('img').attr('src');
             console.log(imgUrl);
             if (imgUrl == '/alink-hq/static/img/select-on.png') {
                 roleId = parseInt($(this).find('input').val());
-
             }
         })
-        console.log('roleId', roleId)
-        console.log('fid', fid);
-        console.log('num', num);
-        $.ajax({
-            type: "POST",
-            url: "/alink-hq/account/create",
-            data: {fid: fid, roleId: roleId, num: num},
-            dataType: "json",
-            success: function (res) {
-                if (res.result == '000') {
-                    $('.pop-iframe').addClass('active');
-                    var width = document.body.scrollWidth;
-                    var height = document.body.scrollHeight;
-                    $('.hide-iframe').addClass('active');
-                    $('.hide-iframe').css({
-                        'width': width,
-                        'height': height
-                    });
-                    var accountList = JSON.parse(res.accountList);
-                    var maxLength = accountList.length;
-                    if (maxLength > 3) {
-                        $('.c-title .c-width.two').css('width', ' 163px');
-                        $('.confirm-create-iframe .c-main').css('width', '310px');
+        var num = $('.create-num').val();
+        if (num != '') {
+            num = parseInt(num);
+        }
+        console.log(fid,roleId,num);
+        if (fid != '' && roleId != '' ) {
+            $.ajax({
+                type: "POST",
+                url: "/alink-hq/account/create",
+                data: {fid: fid, roleId: roleId, num: num},
+                dataType: "json",
+                success: function (res) {
+                    if (res.result == '000') {
+                        $('.pop-iframe').addClass('active');
+                        var width = document.body.scrollWidth;
+                        var height = document.body.scrollHeight;
+                        $('.hide-iframe').addClass('active');
+                        $('.hide-iframe').css({
+                            'width': width,
+                            'height': height
+                        });
+                        var accountList = JSON.parse(res.accountList);
+                        var maxLength = accountList.length;
+                        if (maxLength > 3) {
+                            $('.c-title .c-width.two').css('width', ' 163px');
+                            $('.confirm-create-iframe .c-main').css('width', '310px');
+                        }
+                        for (var i = 0; i < accountList.length; i++) {
+                            var account = accountList[i];
+                            var pwd = '00000000';
+                            var content = '<div class="clearfix"><div class="f-l c-width one">' + account + '</div>'
+                                    + '<div class="f-l c-width two">' + pwd + '</div></div>';
+                            $('.c-list').append(content);
+                        }
+                    } else {
+                        $('#preload-anim').addClass('active');
+                        $('#preload-anim .title').text('加载失败，请重新尝试');
+                        setInterval(function () {
+                            $('#preload-anim').removeClass('active');
+                        }, 1000)
                     }
-                    for (var i = 0; i < accountList.length; i++) {
-                        var account = accountList[i];
-                        var pwd = '00000000';
-                        var content = '<div class="clearfix"><div class="f-l c-width one">' + account + '</div>'
-                                + '<div class="f-l c-width two">' + pwd + '</div></div>';
-                        $('.c-list').append(content);
-                    }
-                } else {
-                    $('#preload-anim').addClass('active');
-                    $('#preload-anim .title').text('加载失败，请重新尝试');
-                    setInterval(function () {
-                        $('#preload-anim').removeClass('active');
-                    }, 1000)
                 }
-            }
-        });
+            })
+        }
+
     })
     $('.pop-nav .close').click(function () {
         $('.pop-iframe').removeClass('active');
@@ -193,19 +190,17 @@
 
     $('#createAccount .c-content img').click(function () {
         var imgUrl = $(this).attr('src');
-        if (imgUrl == '/alink-hq/static/img/select-on.png') {
-            $(this).attr('src', '/alink-hq/static/img/select-un.png');
-            $(this).parent('label').siblings().find('img').attr('src', '/alink-hq/static/img/select-on.png');
-        } else {
-            $(this).attr('src', '/alink-hq/static/img/select-on.png');
-            $(this).parent('label').siblings().find('img').attr('src', '/alink-hq/static/img/select-un.png');
+        var isRadio='/alink-hq/static/img/select-on.png';
+        var noRadio='/alink-hq/static/img/select-un.png';
+        if(imgUrl==noRadio){
+            $(this).attr('src',isRadio);
+            $(this).parent('label').siblings().find('img').attr('src',noRadio);
         }
     })
     $(function () {
         var num = 1;
         $('.add-num').click(function () {
             num = $('.create-num').val();
-
             if (num != '') {
                 num = parseInt(num);
             } else {
@@ -236,7 +231,15 @@
             }
         })
     })
-
+    //监听公司选择
+    $('#fid').change(function () {
+        var selected = $(this).children('option:selected').val();
+        if (selected == '') {
+            $('p.create-company-hint').text('请选择公司');
+        } else {
+            $('p.create-company-hint').text('');
+        }
+    })
     $('.on-off-triangle').click(function () {
         var imgUrl = $(this).attr('src');
         if (imgUrl == '/alink-hq/static/img/bottom-triangle-un.png') {
@@ -248,12 +251,28 @@
         }
     })
 
-    function createNum(){
-       var num= $('.create-num').val();
-        if(num>100 || num<1 || isNaN(num)){
-            $('.create-num').val('');
+    $(".create-num").bind('input propertychange', function () {
+        var num = $(this).val();
+        if (num == '') {
+            $('p.create-num-hint').text('');
+        } else {
+            num = parseInt(num);
+            if (isNaN(num)) {
+                $('.create-num').val('');
+            } else {
+                if (num > 100) {
+                    $('.create-num').val('100');
+                    $('p.create-num-hint').text('一次最多创建100个账号');
+                } else if (num < 1) {
+                    $('.create-num').val('1');
+                    $('p.create-num-hint').text('不能再少了');
+                } else {
+                    $('p.create-num-hint').text('');
+                }
+            }
         }
-    }
+    })
+
 </script>
 </body>
 

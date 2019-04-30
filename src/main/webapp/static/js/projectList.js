@@ -284,15 +284,11 @@ $(function () {
     })
     $('div[openContent="delete-project"] .yes').click(function(){
         var jsonArray=[];
-        var projectName=$(this).parent('td').siblings('.project-id').find('a').text();
-        var account=$(this).parent('td').siblings('.project-account').text();
-        // var coname=$(this).parent('td').siblings('.project-coname').text();
-        console.log(projectName,account,coname);
+        console.log(projectId,account);
         var  msg={
             projectId:projectId,
             account:account,
         }
-
         jsonArray.push(msg);
         var newJsonArray=JSON.stringify(jsonArray);
         console.log(newJsonArray);
@@ -303,12 +299,11 @@ $(function () {
             dataType: "json",
             success: function (res) {
                 console.log(res);
-                // if (res.result == '000') {
-                //     // $('p.rename-hint').text('');
-                //     // location.reload();
-                // } else if (res.result == '200') {
-                //     // $('p.rename-hint').text('已存在，请重新输入');
-                // }
+                if (res.result == '000') {
+                    location.reload();
+                } else if (res.result == '200') {
+                    console.log('系统错误');
+                }
             }
         });
     })
@@ -334,29 +329,46 @@ $(function () {
             coname:coname,
             id:id
         }
-
         jsonArray.push(msg);
        var newJsonArray=JSON.stringify(jsonArray);
         var projectInfo  = encodeURIComponent(newJsonArray);
 
         console.log(newJsonArray);
         location.href='/alink-hq/project/transferPage?projectInfo='+projectInfo;
-        // $.ajax({
-        //     type: "POST",
-        //     url: "/alink-hq/project/transferPage",
-        //     data: {projectInfo:newJsonArray},
-        //     dataType: "json",
-        //     success: function (res) {
-        //         console.log(res);
-        //         // if (res.result == '000') {
-        //         //     // $('p.rename-hint').text('');
-        //         //     // location.reload();
-        //         // } else if (res.result == '200') {
-        //         //     // $('p.rename-hint').text('已存在，请重新输入');
-        //         // }
-        //     }
-        // });
     })
+
+    //跳转项目详情
+    // $('.project-name ').click(function(){
+    //     var jsonArray=[];
+    //     var coname=$(this).siblings('.project-coname').text();
+    //     var account=$(this).siblings('.project-account').text();
+    //     var meshNum=parseInt($(this).siblings('.meshNum').text());
+    //     var projectId=parseInt($(this).siblings('.project-id').text());
+    //     console.log(coname,account,meshNum,projectId);
+    //     // var  msg={
+    //     //     account:account,
+    //     //     coname:coname,
+    //     //     meshNum:meshNum,
+    //     //     projectId:projectId
+    //     // }
+    //     // jsonArray.push(msg);
+    //     // var newJsonArray=JSON.stringify(jsonArray);
+    //     // var projectInfo  = encodeURIComponent(newJsonArray);
+    //     $.ajax({
+    //         type: "get",
+    //         url: "/alink-hq/project/detail",
+    //         data: {coname:coname,account:account,meshNum:meshNum,projectId:projectId},
+    //         dataType: "text",
+    //         success: function (res) {
+    //             console.log(res);
+    //             // if (res.result == '000') {
+    //             //     location.reload();
+    //             // } else if (res.result == '200') {
+    //             //     console.log('系统错误');
+    //             // }
+    //         }
+    //     })
+    // })
 })
 //重命名校验
 function nameKeyUp() {
@@ -389,16 +401,17 @@ function condition(pageSize, pageNum, sortFlag) {
     var newUrl = url2 + '&pageNum=' + pageNum + '&sortFlag=' + sortFlag + '&pageSize=' + pageSize + '&projectName=' + projectName + '&account=' + account + '&startCreateDate=' + startCreateDate + '&endCreateDate=' + endCreateDate + '&startUpdateDate=' + startUpdateDate + '&endUpdateDate=' + endUpdateDate;
     location.href = newUrl;
 }
-$('.moment').mousedown(function(){
-    var url=$(this).attr('src');
-    var newUrl=url.substr(0, url.length-4)+'-un.png';
-    $(this).attr('src',newUrl);
-})
-$('.moment').mouseup(function(){
-    var url=$(this).attr('src');
-    var newUrl=url.substr(0, url.length-7)+'.png';
-    $(this).attr('src',newUrl);
-})
+// $('.moment').mousedown(function(){
+//
+//     var url=$(this).attr('src');
+//     var newUrl=url.substr(0, url.length-7)+'.png';
+//     $(this).attr('src',newUrl);
+// })
+// $('.moment').mouseup(function(){
+//     var url=$(this).attr('src');
+//     var newUrl=url.substr(0, url.length-4)+'-un.png';
+//     $(this).attr('src',newUrl);
+// })
 
 //paraName 等找参数的名称
 function GetUrlParam(paraName) {
@@ -427,3 +440,33 @@ function skipLimit() {
         $('#skipPage').val('');
     }
 }
+$('#transfer-project').click(function(){
+    var num=0;
+    var jsonArray=[];
+    $('tbody tr td.checkbox input').each(function(){
+        var checked=$(this).prop('checked');
+        // location.href='/alink-hq/project/transferPage?projectInfo='+projectInfo;
+        if(checked){
+            num++;
+            var projectName=$(this).parent('td').siblings('.project-name').find('a').text();
+            var account=$(this).parent('td').siblings('.project-account').text();
+            var coname=$(this).parent('td').siblings('.project-coname').text();
+            var id=$(this).parent('td').siblings('.project-id').text();
+            console.log(projectName,account,coname);
+            var  msg={
+                name:projectName,
+                account:account,
+                coname:coname,
+                id:id
+            }
+            jsonArray.push(msg);
+
+        }
+    })
+    console.log(num);
+    console.log(jsonArray);
+    var newJsonArray=JSON.stringify(jsonArray);
+    var projectInfo  = encodeURIComponent(newJsonArray);
+    console.log(newJsonArray);
+    location.href='/alink-hq/project/transferPage?projectInfo='+projectInfo;
+})
