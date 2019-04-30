@@ -8,10 +8,13 @@ public class MeshInfo {
     private int id;
     private int mid;
     private int pid;
+    private int sid;
     private String name;
     private String mname;
     private String pname;
     private String gname;
+    private String lname;
+    private String lmac;
     private int mesh_id;
     private int place_id;
     private int project_id;
@@ -44,6 +47,14 @@ public class MeshInfo {
         this.pid = pid;
     }
 
+    public int getSid() {
+        return sid;
+    }
+
+    public void setSid(int sid) {
+        this.sid = sid;
+    }
+
     public String getName() {
         return name;
     }
@@ -58,6 +69,22 @@ public class MeshInfo {
 
     public void setMname(String mname) {
         this.mname = mname;
+    }
+
+    public String getLname() {
+        return lname;
+    }
+
+    public void setLname(String lname) {
+        this.lname = lname;
+    }
+
+    public String getLmac() {
+        return lmac;
+    }
+
+    public void setLmac(String lmac) {
+        this.lmac = lmac;
     }
 
     public int getMesh_id() {

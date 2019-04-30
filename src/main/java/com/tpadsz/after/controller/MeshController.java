@@ -80,10 +80,10 @@ public class MeshController {
     }
 
     @RequestMapping("/saveUpdate")
-    public String save(String mids, String pid) {
-        logger.info("mids=" + mids + ",pid=" + pid);
-        String[] ids = mids.split(",");
-        List<String> list = new ArrayList(Arrays.asList(ids));
+    public String saveUpdate(String ids, String pid) {
+        logger.info("ids=" + ids + ",pid=" + pid);
+        String[] ids1 = ids.split(",");
+        List<String> list = new ArrayList(Arrays.asList(ids1));
         Map map = new HashMap();
         map.put("pid", pid);
         map.put("list", list);
@@ -92,7 +92,7 @@ public class MeshController {
     }
 
     @RequestMapping("/delete")
-    public String saveDelete(String ids) {
+    public String delete(String ids) {
         logger.info("ids=" + ids);
         String[] idArray = ids.split(",");
         List<String> list = new ArrayList(Arrays.asList(idArray));

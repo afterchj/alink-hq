@@ -27,7 +27,7 @@
                     网络移动
                 </div>
                 <div class="f-content">
-                    <input type="hidden" name="mids" th:value="${ids}">
+                    <input type="hidden" name="ids" th:value="${ids}">
                     <div class="accountMsg clearfix" th:each="mesh:${meshMap}">
                         <div class="f-l mesh-name">
                             <span th:text="${mesh.mname}"></span>

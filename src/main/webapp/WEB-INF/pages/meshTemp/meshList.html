@@ -91,15 +91,15 @@
                             <td th:text="${mesh.scount}"></td>
                             <td>未知</td>
                             <td class="p-r">
-                                <img src="/alink-hq/static/img/edit.png" th:alt="${mesh.id}" class="reset-name pointer">
+                                <img src="/alink-hq/static/img/edit.png" th:alt="${mesh.id}" class="reset-name pointer" title="重命名">
                                 <a th:href="@{/mesh/move(ids=${mesh.id})}">
-                                    <img src="/alink-hq/static/img/exchange.png" alt="" class="center-img pointer">
+                                    <img src="/alink-hq/static/img/exchange.png" alt="" class="center-img pointer"  title="移交">
                                 </a>
                                 <!--<a th:href="@{/mesh/delete(ids=${mesh.id})}" onclick="return confirm('您确定要删除所选的网络吗？')">-->
                                     <!--<img src="/alink-hq/static/img/delete.png" alt="" id="singleDel">-->
                                 <!--</a>-->
                                 <a href="javascript:void(0);" class="singleDel pointer">
-                                    <img src="/alink-hq/static/img/delete.png" alt="" >
+                                    <img src="/alink-hq/static/img/delete.png" alt=""  title="删除" >
                                 </a>
                             </td>
                         </tr>

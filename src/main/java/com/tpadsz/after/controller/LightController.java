@@ -5,7 +5,7 @@ import com.github.pagehelper.PageInfo;
 import com.tpadsz.after.entity.MeshInfo;
 import com.tpadsz.after.entity.OptionList;
 import com.tpadsz.after.entity.SearchDict;
-import com.tpadsz.after.service.GroupService;
+import com.tpadsz.after.service.LightService;
 import com.tpadsz.after.service.RoleService;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
@@ -21,11 +21,11 @@ import java.util.*;
  */
 
 @Controller
-@RequestMapping("/group")
-public class GroupController {
+@RequestMapping("/light")
+public class LightController {
 
     @Resource
-    private GroupService groupService;
+    private LightService lightService;
     @Resource
     private RoleService roleService;
 
@@ -36,29 +36,29 @@ public class GroupController {
         String role = roleService.selectById(dict.getUid());
         dict.setRole(role);
         PageHelper.startPage(dict.getPageNum(), dict.getPageSize());
-        List<Map> meshList = groupService.getByMap(dict);
+        List<Map> meshList = lightService.getByMap(dict);
         PageInfo<Map> pageInfo = new PageInfo(meshList, dict.getPageSize());
         if (pageInfo.getList().size() > 0) {
             modelMap.put("pageInfo", pageInfo);
         }
         modelMap.put("dict", dict);
-        return "meshTemp/groupList";
+        return "meshTemp/lightList";
     }
     @RequestMapping("/info")
     public String info(int id, ModelMap modelMap) {
-        MeshInfo meshInfo = groupService.getGroupInfo(id);
+        MeshInfo meshInfo = lightService.getLightInfo(id);
         modelMap.put("meshInfo", meshInfo);
-        return "meshTemp/groupInfo";
+        return "meshTemp/lightInfo";
     }
 
     @RequestMapping("/move")
     public String move(String ids, ModelMap modelMap) {
         String[] ids1 = ids.split(",");
         List<String> list = new ArrayList(Arrays.asList(ids1));
-        List<Map> groupMap = groupService.selectByGid(list);
+        List<Map> groupMap = lightService.selectByLid(list);
         modelMap.put("groupMap", groupMap);
         modelMap.put("ids", ids);
-        return "meshTemp/groupMove";
+        return "meshTemp/lightMove";
     }
     @RequestMapping("/create")
     public String create(Integer id, ModelMap modelMap) {
@@ -71,15 +71,15 @@ public class GroupController {
         return "redirect:/group/list";
     }
     @RequestMapping("/saveUpdate")
-    public String saveUpdate(String ids, String pid) {
-        logger.info("ids=" + ids + ",pid=" + pid);
+    public String saveUpdate(String ids, String gid) {
+        logger.info("ids=" + ids + ",pid=" + gid);
         String[] ids1 = ids.split(",");
         List<String> list = new ArrayList(Arrays.asList(ids1));
         Map map = new HashMap();
-        map.put("pid", pid);
+        map.put("gid", gid);
         map.put("list", list);
-        groupService.saveUpdate(map);
-        return "redirect:/group/list";
+        lightService.saveUpdate(map);
+        return "redirect:/light/list";
     }
 
     @RequestMapping("/delete")
@@ -88,12 +88,12 @@ public class GroupController {
         String[] ids1 = ids.split(",");
         List<String> list = new ArrayList(Arrays.asList(ids1));
         try {
-            groupService.deleteGroupByIds(list);
+            lightService.deleteLightByIds(list);
         } catch (Exception e) {
             logger.warn(e);
             return "authError";
         }
-        return "redirect:/group/list";
+        return "redirect:/light/list";
     }
 
     @ResponseBody
@@ -102,12 +102,12 @@ public class GroupController {
         Map map = new HashMap();
         map.put("name", name);
         map.put("id", id);
-        groupService.saveRename(map);
-        return "ok";
+        lightService.saveRename(map);
+        return "success";
     }
 
     @ResponseBody
-    @RequestMapping("/getPlace")
+    @RequestMapping("/getGroup")
     public List<OptionList> getPlaces(Integer uid) {
         Map map = new HashMap();
         if (uid != null) {
@@ -115,7 +115,7 @@ public class GroupController {
             map.put("role", role);
             map.put("uid", uid);
         }
-        List<OptionList> meshMap = groupService.getPlaces(map);
+        List<OptionList> meshMap = lightService.getGroups(map);
         return meshMap;
     }
 }

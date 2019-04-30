@@ -52,8 +52,18 @@ public class PlaceController {
         return "meshTemp/placeInfo";
     }
 
+    @RequestMapping("/create")
+    public String create(Integer id, ModelMap modelMap) {
+        return "meshTemp/placeCreate";
+    }
+
+    @RequestMapping("/save")
+    public String savePlace(Integer pid) {
+        logger.info("pid=" + pid);
+        return "redirect:/place/list";
+    }
     @RequestMapping("/move")
-    public String move(String ids) {
+    public String delete(String ids) {
         logger.info("ids=" + ids);
         String[] ids1 = ids.split(",");
         List<String> list = new ArrayList(Arrays.asList(ids1));
