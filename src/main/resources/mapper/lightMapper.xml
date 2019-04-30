@@ -97,18 +97,15 @@
         LEFT JOIN (SELECT COUNT(1) scount,mid FROM f_scene GROUP BY mid) sc ON sc.mid=l.mid
         WHERE l.id=#{id} LIMIT 1
     </select>
-    <select id="selectByGid" resultType="map" parameterType="list">
+    <select id="selectByLid" resultType="map" parameterType="list">
         SELECT
-            g.id,
-            g.mid,
-            g.gname,
-            m.mesh_id,
-            g.pid,
-            p.pname
-        FROM f_group g
-        LEFT JOIN f_place p ON g.pid=p.id
-        INNER JOIN f_mesh m ON m.id=g.mid
-        WHERE g.id IN
+            l.id,
+            IFNULL(l.lname,'null') lname,
+            l.lmac,
+            g.gname
+        FROM f_light l
+        LEFT JOIN f_group g ON g.id=l.gid
+        WHERE l.id in
         <foreach collection="list" item="id" index="index" open="(" close=")" separator=",">
             #{id}
         </foreach>

@@ -34,11 +34,11 @@
                             <span th:text="${meshInfo.y}"></span>
                         </li>
                         <li>当前状态：
-                            <div th:switch="${meshInfo.off}">
+                            <span th:switch="${meshInfo.off}">
                                 <span th:case="1">开</span>
                                 <span th:case="0">关</span>
                                 <span th:case="*">未知</span>
-                            </div>
+                            </span>
                         </li>
                     </ul>
                 </div>
