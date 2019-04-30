@@ -53,10 +53,10 @@ public class PlaceController {
     }
 
     @RequestMapping("/move")
-    public String move(String pids) {
-        logger.info("pids=" + pids);
-        String[] ids = pids.split(",");
-        List<String> list = new ArrayList(Arrays.asList(ids));
+    public String move(String ids) {
+        logger.info("ids=" + ids);
+        String[] ids1 = ids.split(",");
+        List<String> list = new ArrayList(Arrays.asList(ids1));
         placeService.deleteByIds(list);
         return "redirect:/place/list";
     }

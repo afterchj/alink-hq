@@ -1,8 +1,5 @@
 package com.tpadsz.after.utils.email;
 
-import net.rubyeye.xmemcached.XMemcachedClient;
-
-import javax.annotation.Resource;
 import javax.mail.Message;
 import javax.mail.MessagingException;
 import javax.mail.Session;
@@ -19,10 +16,6 @@ import java.util.Properties;
  */
 
 public class SendMailUtil {
-
-    @Resource
-    private XMemcachedClient memcachedClient;
-
     public static void sendCode(String code, String to, String flag) {
         String subject = "";
         StringBuilder builder = new StringBuilder("亲爱的用户：您好！\n");

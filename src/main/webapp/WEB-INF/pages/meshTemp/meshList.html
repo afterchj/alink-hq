@@ -81,7 +81,7 @@
                         </thead>
                         <tbody>
                         <tr th:each="mesh:${pageInfo.list}">
-                            <td class="checkbox"><input type="checkbox" name="mids" th:value="${mesh.id}" class="">
+                            <td class="checkbox"><input type="checkbox" name="ids" th:value="${mesh.id}" class="">
                             </td>
                             <td class="k-link"><a th:href="@{/mesh/info(id=${mesh.id})}" th:text="${mesh.mname}"></a></td>
                             <td th:text="${mesh.mesh_id}"></td>
@@ -92,10 +92,10 @@
                             <td>未知</td>
                             <td class="p-r">
                                 <img src="/alink-hq/static/img/edit.png" th:alt="${mesh.id}" class="reset-name pointer">
-                                <a th:href="@{/mesh/move(mids=${mesh.id})}">
+                                <a th:href="@{/mesh/move(ids=${mesh.id})}">
                                     <img src="/alink-hq/static/img/exchange.png" alt="" class="center-img pointer">
                                 </a>
-                                <!--<a th:href="@{/mesh/delete(mids=${mesh.id})}" onclick="return confirm('您确定要删除所选的网络吗？')">-->
+                                <!--<a th:href="@{/mesh/delete(ids=${mesh.id})}" onclick="return confirm('您确定要删除所选的网络吗？')">-->
                                     <!--<img src="/alink-hq/static/img/delete.png" alt="" id="singleDel">-->
                                 <!--</a>-->
                                 <a href="javascript:void(0);" class="singleDel pointer">
@@ -115,7 +115,7 @@
                                 <img src="/alink-hq/static/img/true-over-un.png" alt="" id="multiMove">
                             </span>
                                     <span>
-                                <img src="/alink-hq/static/img/delete-un.png" alt="" id="multiDel">
+                                <img src="/alink-hq/static/img/delete-btn-un.png" alt="" id="multiDel">
                             </span>
                                 </div>
                                 <div th:replace="common/page::page"></div>
@@ -189,29 +189,7 @@
     </div>
 </div>
 <div class="hide-iframe "></div>
+<script type="text/javascript" src="/alink-hq/static/js/page.js"></script>
 <script type="text/javascript" src="/alink-hq/static/js/mesh.js"></script>
-<script type="text/javascript">
-    $(function () {
-        myBrowser()
-        $('.one-list li').each(function () {
-            $('.main-left>ul>li.one-list:eq(0)').find('.on-off-triangle').attr('src', '/alink-hq/static/img/right-triange-un.png');
-            $('.main-left>ul>li.one-list:eq(0)').find('.two-list').addClass('active');
-            var tab = $(this).attr('tab');
-            if (tab == 'meshList') {
-                $(this).addClass('active').siblings().removeClass('active');
-            }
-        });
-        $('.on-off-triangle').click(function () {
-            var imgUrl = $(this).attr('src');
-            if (imgUrl == '/alink-hq/static/img/bottom-triangle-un.png') {
-                $(this).attr('src', '/alink-hq/static/img/right-triange-un.png');
-                $(this).parent().parent('.one-list').find('.two-list').addClass('active');
-            } else {
-                $(this).attr('src', '/alink-hq/static/img/bottom-triangle-un.png');
-                $(this).parent().parent('.one-list').find('.two-list').removeClass('active');
-            }
-        });
-    });
-</script>
 </body>
 </html>
