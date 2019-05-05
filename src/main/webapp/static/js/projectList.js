@@ -20,12 +20,18 @@ $('.one-list li').each(function () {
 
 $(function () {
     var allChecked = false;
-    var accountNum = 0;
+    var accountNum=0;
+    $('tbody .checkbox input').each(function () {
+       if($(this).prop('checked')){
+           accountNum++;
+       }
+    })
+    $('.amount').text(accountNum);
     //复选框监听--监听全选
     $('#all').click(function () {
         var checked = $(this).prop('checked');
         if (checked) {
-            var length = $('tbody tr').length - 1;
+            var length = $('tbody tr').length;
             accountNum = length;
             $('tbody .checkbox input').each(function () {
                 $(this).prop('checked', true);
@@ -246,33 +252,34 @@ $(function () {
     $('.delete-project').click(function () {
         projectId = parseInt($(this).parent().siblings('.checkbox ').find('input[type=checkbox]').val());
         account = $(this).parent().siblings('.project-account').text();
-        // console.log(projectId, account);
         var msg = {
             id: projectId,
             account: account,
         }
         deleteArray.push(msg);
-        $('div[openContent="delete-project"]').addClass('active');
-        var width = document.body.scrollWidth;
-        var height = document.body.scrollHeight;
-        $('.hide-iframe').addClass('active');
-        $('.hide-iframe').css({
-            'width': width,
-            'height': height
-        })
-        console.log(deleteArray);
+
+        if(deleteArray.length!=0){
+            $('div[openContent="delete-project"]').addClass('active');
+            var width = document.body.scrollWidth;
+            var height = document.body.scrollHeight;
+            $('.hide-iframe').addClass('active');
+            $('.hide-iframe').css({
+                'width': width,
+                'height': height
+            })
+        }
+
     })
     //确定删除
     $('div[openContent="delete-project"] .yes').click(function () {
         var newJsonArray = JSON.stringify(deleteArray);
-        // console.log(newJsonArray);
         $.ajax({
             type: "POST",
             url: "/alink-hq/project/delete",
             data: {projectInfo: newJsonArray},
             dataType: "json",
             success: function (res) {
-                console.log(res);
+                // console.log(res);
                 if (res.result == '000') {
                     location.reload();
                 } else if (res.result == '200') {
@@ -288,7 +295,6 @@ $(function () {
         var account = $(this).parent('td').siblings('.project-account').text();
         var coname = $(this).parent('td').siblings('.project-coname').text();
         var id = $(this).parent('td').siblings('.project-id').text();
-        // console.log(projectName, account, coname);
         var msg = {
             name: projectName,
             account: account,
@@ -307,7 +313,6 @@ $(function () {
             if (checked) {
                 var account = $(this).parent('td').siblings('.project-account').text();
                 var projectId =  parseInt($(this).parent('td').siblings('.project-id').text());
-                // console.log(account, projectId);
                 var msg = {
                     id: projectId,
                     account: account
@@ -315,15 +320,17 @@ $(function () {
                 deleteArray.push(msg);
             }
         })
-        $('div[openContent="delete-project"]').addClass('active');
-        var width = document.body.scrollWidth;
-        var height = document.body.scrollHeight;
-        $('.hide-iframe').addClass('active');
-        $('.hide-iframe').css({
-            'width': width,
-            'height': height
-        })
         console.log(deleteArray);
+        if(deleteArray.length!=0){
+            $('div[openContent="delete-project"]').addClass('active');
+            var width = document.body.scrollWidth;
+            var height = document.body.scrollHeight;
+            $('.hide-iframe').addClass('active');
+            $('.hide-iframe').css({
+                'width': width,
+                'height': height
+            })
+        }
     })
 
     //移交项目多个
@@ -346,15 +353,14 @@ $(function () {
                     id: id
                 }
                 jsonArray.push(msg);
-
             }
         })
-        // console.log(num);
-        // console.log(jsonArray);
+        console.log(jsonArray);
         var newJsonArray = JSON.stringify(jsonArray);
         var projectInfo = encodeURIComponent(newJsonArray);
-        // console.log(newJsonArray);
-        location.href = '/alink-hq/project/transferPage?projectInfo=' + projectInfo;
+        if(jsonArray.length!=0){
+            location.href = '/alink-hq/project/transferPage?projectInfo=' + projectInfo;
+        }
     })
     //取消按钮
     $('.pop-btn .reduce').click(function () {
@@ -369,15 +375,21 @@ $(function () {
     var pageTotal = parseInt($('.pageTotal').text());
     if (page == 1) {
         $('.prev-page img').attr('src', '/alink-hq/static/img/left-arrow.png');
-        $(".prev-page ").attr("disabled", true);
+        $(".prev-page ").addClass('disabled');
     } else {
         $('.prev-page img').attr('src', '/alink-hq/static/img/left-arrow-color.png');
     }
     if (page == pageTotal) {
         $('.next-page img').attr('src', '/alink-hq/static/img/right-arrow.png');
-        $(".next-page ").attr("disabled", true);
+        $(".next-page ").addClass('disabled');
     } else {
         $('.next-page img').attr('src', '/alink-hq/static/img/right-arrow-color.png');
+    }
+
+})
+$('.meshNum a').click(function(){
+    if($(this).text()==0){
+        $(this).prop('href','javascript:return false;');
     }
 })
 //paraName 等找参数的名称
