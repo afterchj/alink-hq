@@ -647,7 +647,7 @@ function emailCode(emailVal) {
         success: function (res) {
             // console.log(res);
             if (res == 'success') {
-                // console.log('成功发送');
+                console.log('成功发送邮箱');
             }
         }
     })

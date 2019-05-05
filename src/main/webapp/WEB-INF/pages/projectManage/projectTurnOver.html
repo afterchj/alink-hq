@@ -103,6 +103,7 @@
                 fid = parseInt(fid);
             }
             console.log('fid', fid);
+            $('#account-transfer').children().remove();
             $.ajax({
                 type: "post",
                 url: "/alink-hq/project/findAccountByFid",
