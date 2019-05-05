@@ -4,10 +4,12 @@
     border: 1px solid #bbb;
     background-color: #fff;
 }
-.temp{
+
+.temp {
     height: 130px;
 }
-.search input ,.search select,.search select option{
+
+.search input, .search select, .search select option {
     width: 225px;
     height: 35px;
     border-radius: 1px;
@@ -17,7 +19,7 @@
     text-indent: 10px;
 }
 
-.search>div {
+.search > div {
     margin-bottom: 26px;
 }
 
@@ -51,7 +53,7 @@
 }
 
 .search-result table {
-  border-collapse:collapse;
+    border-collapse: collapse;
     /*-moz-border-spacing: 0;*/
     /*-moz-border-collapse: unset;*/
     width: 100%;
@@ -82,7 +84,8 @@ th {
     /*cursor: pointer;*/
     background-color: #fff;
 }
-.search-result table input[type=checkbox]{
+
+.search-result table input[type=checkbox] {
     border: 1px solid #bbb;
     width: 15px;
     height: 14px;
@@ -92,9 +95,11 @@ th {
     cursor: pointer;
     background-color: #eef3f5;
 }
-.search-result table input[type=checkbox]:checked{
+
+.search-result table input[type=checkbox]:checked {
     background: url("/alink-hq/static/img/checkbox-gou.png") no-repeat center;
 }
+
 .search-result table td a {
     color: #3c3c3c;
 }
@@ -102,8 +107,9 @@ th {
 .center-img {
     margin: 0 30px;
 }
+
 .left-img {
-   margin-right: 30px;
+   margin-left: 30px;
 }
 
 img.toTop {
@@ -160,13 +166,13 @@ img.toBottom {
 
 }
 
-.page-right>span {
+.page-right > span {
     display: inline-block;
 
 }
 
-.page-right>span input,
-.page-right>span select {
+.page-right > span input,
+.page-right > span select {
     width: 68px;
     height: 26px;
     border: 1px solid #bbb;
@@ -174,9 +180,11 @@ img.toBottom {
     color: #3c3c3c;
     text-align: center;
 }
-.pageTotal{
+
+.pageTotal {
 
 }
+
 th.all-checkbox {
     cursor: pointer;
 }
@@ -240,7 +248,7 @@ th.all-checkbox {
     color: #3c3c3c;
 }
 
-#projectDetail .p-content>div>div {
+#projectDetail .p-content > div > div {
     margin-bottom: 65px;
     width: 50%;
     text-align: left;
@@ -256,7 +264,7 @@ th.all-checkbox {
     border-bottom: 1px solid #003e68;
 }
 
-#projectDetail .c-content>div {
+#projectDetail .c-content > div {
     text-align: left;
 
     font-size: 21px;
@@ -264,30 +272,21 @@ th.all-checkbox {
     margin-bottom: 30px;
 }
 
-
-
-
-
-
 .pop-nav img {
     right: 20px;
 
 }
 
-
-
-
-
-.c-width{
+.c-width {
     width: 163px;
     height: 38px;
     line-height: 38px;
     border-bottom: 1px solid #bbb;
 }
-.c-width.one{
+
+.c-width.one {
     border-right: 1px solid #bbb;
 }
-
 
 .pop-content a {
     display: inline-block;
@@ -324,45 +323,50 @@ th.all-checkbox {
     text-align: right;
 }
 
-
-
-.pop-iframe.active{
+.pop-iframe.active {
     display: block;
     z-index: 1000;
 }
-.c-list .c-width{
+
+.c-list .c-width {
     color: #3c3c3c;
 }
-.c-list{
-    overflow-y: scroll;overflow-x: hidden; max-height:116px;
+
+.c-list {
+    overflow-y: scroll;
+    overflow-x: hidden;
+    max-height: 116px;
 }
-.pop-content .reset-pwd{
+
+.pop-content .reset-pwd {
     font-size: 17px;
     color: #3c3c3c;
     margin-top: 60px;
     text-align: center;
 }
-.pop-content .off-or-on{
+
+.pop-content .off-or-on {
     font-size: 18px;
     color: #3c3c3c;
     margin-top: 60px;
     text-align: center;
 }
-.pop-content .reset-pwd-hint{
+
+.pop-content .reset-pwd-hint {
     font-size: 14px;
     color: red;
     margin-top: 20px;
     text-align: center;
 }
 
-
-
-#preload-anim{
+#preload-anim {
     display: none;
 }
-#preload-anim.active{
+
+#preload-anim.active {
     display: block;
 }
+
 .pop-iframe.active {
     display: block;
     z-index: 1000;
@@ -382,9 +386,11 @@ th.all-checkbox {
     display: none;
     z-index: 1000;
 }
+
 .hide-iframe.active {
     display: block;
 }
+
 .hide-iframe {
     position: absolute;
     left: 0;
@@ -396,6 +402,7 @@ th.all-checkbox {
     filter: alpha(opacity=45);
     display: none;
 }
+
 .pop-nav {
     padding: 20px 22px;
     font-size: 22px;
@@ -403,9 +410,11 @@ th.all-checkbox {
     border-bottom: 1px solid #bbb;
     background-color: #eef2f5;
 }
+
 .pop-content {
     text-align: center;
 }
+
 .pop-content .pop-btn {
     text-align: right;
     position: absolute;
@@ -415,6 +424,7 @@ th.all-checkbox {
     padding: 13px 20px 11px 40px;
     background-color: #eef2f5;
 }
+
 .pop-content .pop-btn .reduce {
     border: 1px solid #ccc;
     font-size: 16px;
@@ -428,6 +438,7 @@ th.all-checkbox {
     cursor: pointer;
     margin-right: 20px;
 }
+
 .pop-content .pop-btn .yes {
     border: 1px solid #3598DB;
     font-size: 16px;
@@ -439,76 +450,91 @@ th.all-checkbox {
     cursor: pointer;
     background-color: #3598DB;
 }
-.pop-hint{
+
+.pop-hint {
     font-size: 15px;
     color: #fb2a2a;
     margin-top: 10px;
 }
 
-.noProject,.hasProject{
+.noProject, .hasProject {
     display: none;
 }
-.hasProject.active{
+
+.hasProject.active {
     display: block;
 }
-.noProject.active{
+
+.noProject.active {
     display: block;
 }
-.pop-content .hasProject{
-    margin-top:50px;
+
+.pop-content .hasProject {
+    margin-top: 50px;
 }
-.pop-content .hasProject>div{
+
+.pop-content .hasProject > div {
     margin-bottom: 20px;
     font-size: 17px;
     color: #3c3c3c;
 }
-.pop-content span{
+
+.pop-content span {
     display: inline-block;
-    width:49%;
+    width: 49%;
     color: #3c3c3c;
 }
-.status:hover{
-   color:#14a5e8 ;
+
+.status:hover {
+    color: #14a5e8;
 }
 
-.main-part{
-    width:400px;
-    margin:30px auto;
+.main-part {
+    width: 400px;
+    margin: 30px auto;
 }
-.pop-content span.t-title{
+
+.pop-content span.t-title {
     text-align: right;
 }
-.pop-content span.t-content{
+
+.pop-content span.t-content {
     text-align: left;
 }
-.account-part{
+
+.account-part {
     margin-bottom: 30px;
 }
-.hidden{
+
+.hidden {
     /*display: none;*/
     visibility: hidden;
-    width:0;
+    width: 0;
 }
-.pop-content .newName{
+
+.pop-content .newName {
     font-size: 16px;
     /*height: 177px;*/
     /*line-height: 136px;*/
     margin: 50px auto 0;
     text-align: center;
 }
-.pop-content p.rename-hint{
+
+.pop-content p.rename-hint {
     font-size: 14px;
     color: #fb2a2a;
     height: 20px;
     padding-left: 227px;
     text-align: left;
 }
+
 #createProject .c-createProject {
     height: 834px;
     margin: 30px 0;
     border: 1px solid #bbb;
     background-color: #fff;
 }
+
 #createProject .c-nav {
     height: 58px;
     line-height: 58px;
@@ -518,11 +544,13 @@ th.all-checkbox {
     border-bottom: 1px solid #bbb;
     background-color: #fafafa;
 }
+
 #createProject .c-content {
     padding: 10px 70px;
     font-size: 21px;
     color: #3c3c3c;
 }
+
 #createProject form {
     width: 800px;
     margin: auto;
@@ -531,7 +559,8 @@ th.all-checkbox {
     margin-top: 100px;
     text-align: center;
 }
-#createProject input,#createProject select{
+
+#createProject input, #createProject select {
     width: 300px;
     font-size: 15px;
     color: #666;
@@ -540,16 +569,19 @@ th.all-checkbox {
     height: 30px;
     border-radius: 5px;
 }
-#createProject form label{
+
+#createProject form label {
     display: inline-block;
     width: 130px;
     text-align: right;
     margin-right: 15px;
 }
-#createProject form>div{
+
+#createProject form > div {
     margin-bottom: 15px;
 }
-#createProject form>div button {
+
+#createProject form > div button {
     height: 44px;
     width: 134px;
     color: #fff;
@@ -561,31 +593,38 @@ th.all-checkbox {
     cursor: pointer;
     margin-top: 30px;
 }
-.project-hint,.account-hint{
+
+.project-hint, .account-hint {
     font-size: 14px;
     color: #fb2a2a;
     height: 20px;
     margin-left: 325px;
     text-align: left
 }
-#projectDetail .p-nav li{
+
+#projectDetail .p-nav li {
     font-size: 17px;
 }
-.search-result table td.k-link a:hover{
+
+.search-result table td.k-link a:hover {
     color: #17b4f1;
     border-bottom: 1px solid #17b4f1;
 }
+
 input::-webkit-input-placeholder { /* WebKit browsers */
     color: #999;
 }
+
 input::-moz-placeholder { /* Mozilla Firefox 4 to 18 */
     color: #999;
-    opacity:1;
+    opacity: 1;
 }
+
 input::-moz-placeholder { /* Mozilla Firefox 19+ */
     color: #999;
-    opacity:1;
+    opacity: 1;
 }
+
 input:-ms-input-placeholder { /* Internet Explorer 10+ */
     color: #999;
 }

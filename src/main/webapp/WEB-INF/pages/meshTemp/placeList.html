@@ -86,13 +86,12 @@
                             <td th:text="${place.gcount}"></td>
                             <td>未知</td>
                             <td class="p-r">
-                                <img src="/alink-hq/static/img/edit.png" th:alt="${place.id}" class="reset-name pointer"
-                                     class="left-img" title="重命名">
+                                <img src="/alink-hq/static/img/edit.png" th:alt="${place.id}" class="reset-name pointer" title="重命名">
                                 <!--<a th:href="@{/place/move(ids=${place.id})}" onclick="return confirm('您确定要删除所选的区域吗？')">-->
                                 <!--<img src="/alink-hq/static/img/delete.png" alt="" class="left-img pointer">-->
                                 <!--</a>-->
                                 <a href="javascript:void(0);" class="singleDel pointer">
-                                    <img src="/alink-hq/static/img/delete.png" alt="" class="pointer" title="删除">
+                                    <img src="/alink-hq/static/img/delete.png" alt="" class="left-img pointer" title="删除">
                                 </a>
                             </td>
                         </tr>

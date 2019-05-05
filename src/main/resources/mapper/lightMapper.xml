@@ -9,9 +9,9 @@
         l.lmac,
         m.mname,
         m.mesh_id,
-        ls.x,
-        ls.y,
-        ls.off
+        IFNULL(ls.x,'null') x,
+        IFNULL(ls.y,'null') y,
+        IFNULL(ls.off,'null') off
 	</sql>
 
     <sql id="common_choose">
@@ -38,8 +38,8 @@
         SELECT
         <include refid="Base_Column_List"/>
         FROM f_light l
-        INNER JOIN f_light_setting ls ON ls.lid=l.id
         INNER JOIN f_mesh m ON m.id = l.mid
+        LEFT JOIN f_light_setting ls ON ls.lid=l.id
         WHERE 1=1
         <include refid="common_choose"></include>
         <if test="mname!=null and mname!=''">
@@ -88,9 +88,9 @@
             pl.pname,
             IFNULL(sc.scount,0) scount
         FROM f_light l
-        INNER JOIN f_light_setting ls ON ls.lid=l.id
-        LEFT JOIN f_group g ON g.id=l.gid
-        LEFT JOIN f_mesh m ON m.id=l.mid
+        LEFT JOIN f_light_setting ls ON ls.lid=l.id
+        INNER JOIN f_group g ON g.id=l.gid
+        INNER JOIN f_mesh m ON m.id=l.mid
         LEFT JOIN f_scene s ON s.mid=m.id
         LEFT JOIN f_project p ON p.id=m.project_id
         LEFT JOIN f_place pl ON pl.id=l.pid

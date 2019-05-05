@@ -2,7 +2,7 @@
  * Created by hongjian.chen on 2019/4/28.
  */
 $(function () {
-    myBrowser()
+    myBrowser();
     $('.one-list li').each(function () {
         $('.main-left>ul>li.one-list:eq(0)').find('.on-off-triangle').attr('src', '/alink-hq/static/img/right-triange-un.png');
         $('.main-left>ul>li.one-list:eq(0)').find('.two-list').addClass('active');
@@ -47,6 +47,7 @@ $(function () {
     var id;
     $('.reset-name').click(function () {
         id = $(this).attr("alt");
+        console.log("id="+id);
         // projectName=$(this).parent().siblings('.project-name').find('a').text();
         // account=$(this).parent().siblings('.project-account').text();
         $('div[openContent="reset-name"]').addClass('active');
