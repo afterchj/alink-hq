@@ -1,8 +1,10 @@
 package com.tpadsz.after.controller;
 
 import com.tpadsz.after.entity.MyAccount;
+import com.tpadsz.after.entity.User;
 import com.tpadsz.after.exception.InvalidCodeException;
 import com.tpadsz.after.service.MyAccountService;
+import com.tpadsz.after.service.UserService;
 import com.tpadsz.after.service.ValidationService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpSession;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -29,6 +32,9 @@ public class MyAccountController {
 
     @Resource
     private ValidationService validationService;
+
+    @Resource
+    private UserService userService;
 
     /**
      * 修改密码
@@ -51,24 +57,51 @@ public class MyAccountController {
 
     @RequestMapping(value = "/changeUserName", method = RequestMethod.POST)
     @ResponseBody
-    public Map<String,String> changeUserName(String account, String uname,String flag){
+    public Map<String,String> changeUserName(String account, String uname,String flag, HttpSession session){
         Map<String, String> map = new HashMap<>();
         boolean success = myAccountService.updateUserName(account,uname);
         String info = new String();
-        if ("0".equals(flag)){
-            //填写用户名
-            info="用户名填写成功";
-        }
-        if ("1".equals(flag)){
-            //修改用户名
-            info="修改用户名成功";
-        }
-        if (!success){
+        if (success){
+            if ("0".equals(flag)){
+                //填写用户名
+                info="用户名填写成功";
+            }
+            if ("1".equals(flag)){
+                //修改用户名
+                info="修改用户名成功";
+            }
+            User loginUser = userService.selectByUsername(uname);
+            session.setAttribute("user", loginUser);
+        }else {
             info="加载失败，请重新尝试";
         }
         map.put("success", info);
+
         return map;
     }
+
+    /**
+     * 查询用户名是否存在
+     * @param uname
+     * @return
+     */
+    @RequestMapping(value = "/getUserName", method = RequestMethod.POST)
+    @ResponseBody
+    public Map<String,String> getUserName(String uname){
+        Map<String, String> map = new HashMap<>();
+        boolean success = myAccountService.getUserName(uname);
+        String info;
+        if (success){
+            //存在账号
+            info="true";
+        }else {
+            info="false";
+        }
+        map.put("info",info);
+        return map;
+    }
+
+
 
     /**
      * 发送手机验证码

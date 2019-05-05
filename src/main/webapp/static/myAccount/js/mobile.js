@@ -7,9 +7,9 @@ $(function () {
     $("#phone").bind(
         "change",
         function () {
-            $('p.phone-hint').removeClass('active').text('');
             var context = $("#phone").val();
             if (!match.test($.trim(context))){
+                $('p.phone-hint').removeClass('active').text('');
                 $('p.phone-hint').addClass('active').text(text);
             }else {
                 $('p.phone-hint').removeClass('active').text('');
@@ -25,13 +25,14 @@ $(function () {
         var hintFlag = isEmpty(mobileHint);
         if (mobileFlag){
             //手机号为空
+            $("p.phone-hint").removeClass('active').text('');
             $("p.phone-hint").addClass('active').text("请输入手机号");
         }else if(!hintFlag){
             //手机号格式有误
             $("p.phone-hint").removeClass('active').text('');
             $("p.phone-hint").addClass('active').text("请输入正确的手机号");
         }else {
-            $("p.phone-hint").removeClass('active').text('');
+
             $.ajax({
                 type:"POST",
                 url:"/alink-hq/myAccount/sendCode",
@@ -40,6 +41,7 @@ $(function () {
                 success:function (msg) {
                     console.log("code: "+msg);
                     if (msg.info=="isBinding"){
+                        $("p.phone-hint").removeClass('active').text('');
                         $("p.phone-hint").addClass('active').text("该手机号已绑定");
                     }else if (msg.info=="success"){
 //                $("#sysCode").val(msg.sysCode);//保存系统验证码
@@ -59,7 +61,6 @@ $(function () {
 });
 
 function clickFillSubmit(event) {
-    $("p.code-hint").removeClass('active').text('');
     var mobile = $("#phone").val();
     var code = $("#code").val();//用户输入的验证码
 //          var sysCode  = $("#sysCode").val();//系统保存的验证码
@@ -77,12 +78,14 @@ function clickFillSubmit(event) {
     }
     if (codeFlag){
         //激活码为空
+        $("p.code-hint").removeClass('active').text('');
         $("p.code-hint").addClass('active').text("请输入激活码");
     }
     if (!mobileFlag&&!codeFlag&&hintFlag){
         //邮箱和激活码不为空
         if ($.trim(code).length!=6){
             //激活码不正确
+            $("p.code-hint").removeClass('active').text('');
             $("p.code-hint").addClass('active').text("激活码不正确");
         }else {
             $("p.phone-hint").removeClass('active').text('');
@@ -97,6 +100,7 @@ function clickFillSubmit(event) {
                     var info =msg.info;
                     if (info=="codeError"){
                         //验证码不正确
+                        $("p.code-hint").removeClass('active').text('');
                         $("p.code-hint").addClass('active').text("激活码不正确");
                     }else if (info=="dbError"){
                         //数据库异常

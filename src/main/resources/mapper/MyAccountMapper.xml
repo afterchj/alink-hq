@@ -30,4 +30,7 @@
         select count(*) FROM alink.f_user_account WHERE email=#{email}
     </select>
 
+    <select id="getUserName" resultType="int">
+        select count(*) FROM alink.f_user_account WHERE uname=#{uname}
+    </select>
 </mapper>

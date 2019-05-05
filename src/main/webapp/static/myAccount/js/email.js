@@ -7,9 +7,10 @@ $(function () {
     $("#email").bind(
         "change",
         function () {
-            $('p.email-hint').removeClass('active').text('');
+
             var context = $("#email").val();
             if (!match.test(context)) {
+                $('p.email-hint').removeClass('active').text('');
                 $('p.email-hint').addClass('active').text(text);
             } else {
                 $('p.email-hint').removeClass('active').text('');
@@ -25,13 +26,14 @@ $(function () {
         var hintFlag = isEmpty(emailHint);
         if (emailFlag) {
             //邮箱为空
+            $('p.email-hint').removeClass('active').text('');
             $('p.email-hint').addClass('active').text("请输入邮箱");
         } else if (!hintFlag) {
             //提示框有提示
             $('p.email-hint').removeClass('active').text('');
             $('p.email-hint').addClass('active').text(text);
         } else {
-            $('p.email-hint').removeClass('active').text('');
+
             $.ajax({
                 type: "POST",
                 url: "/alink-hq/myAccount/sendEmailCode",
@@ -40,6 +42,7 @@ $(function () {
                 success: function (msg) {
                     console.log("msg: " + msg.info);
                     if (msg.info == "isBinding") {
+                        $('p.email-hint').removeClass('active').text('');
                         $('p.email-hint').addClass('active').text("该邮箱已绑定");
                     } else if (msg.info == "success") {
                         sendMessage($("#codeSubmit"), 60, "获取激活码");
@@ -57,7 +60,7 @@ $(function () {
 
     //点击立即绑定
     $("#fillSubmit").click(function () {
-        $('p.code-hint').removeClass('active').text('');
+        // $('p.code-hint').removeClass('active').text('');
         var email = $("#email").val();
         var emailFlag = isEmpty(email);
         var code = $("#code").val();//用户输入的验证码
