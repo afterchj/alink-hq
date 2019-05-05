@@ -46,8 +46,8 @@
                         <div class="f-l">
                             <span>隶属网络：</span>
                             <span th:text="${meshInfo.mname}"></span>&nbsp;&nbsp;&nbsp;
-                            <span>网络ID：</span>
-                            <span th:text="${meshInfo.mesh_id}"></span>
+                            （<span>网络ID：</span>
+                            <span th:text="${meshInfo.mesh_id}"></span>）
                         </div>
                         <!--<div class="f-l">-->
                             <!--<span>网络ID：</span>-->
@@ -80,6 +80,38 @@
         </div>
     </div>
 </div>
+<!-- 重命名弹框 -->
+<div class="confirm-on-off pop-iframe  " openContent="reset-name">
+    <div class="confirm-on-off-nav p-r pop-nav">
+        重命名
+    </div>
+    <div class="pop-content">
+        <div class="newName">
+            <p class="rename-hint"></p>
+            <label for="rename">新名称</label>
+            <input type="text" placeholder="请输入（2-16位汉字、字母、数字）" id="rename" onkeyup="nameKeyUp()" maxlength="16"/>
+        </div>
+        <div class="pop-btn">
+            <button class="reduce">取消</button>
+            <button class="yes">确定</button>
+        </div>
+    </div>
+</div>
+<!-- 删除账户 -->
+<div class="pop-iframe" openContent="delete-mesh">
+    <div class=" p-r pop-nav">
+        温馨提示
+    </div>
+    <div class="pop-content">
+        <div class="reset-pwd">您确定要删除所选的网络吗？</div>
+        <div class="reset-pwd-hint">（删除后网络中所有信息将无法恢复，请慎重！）</div>
+        <div class="pop-btn">
+            <button class="reduce">取消</button>
+            <button class="yes">确定</button>
+        </div>
+    </div>
+</div>
+<div class="hide-iframe "></div>
 <script src="/alink-hq/static/js/jquery.min.js"></script>
 <script type="text/javascript">
     $(function () {

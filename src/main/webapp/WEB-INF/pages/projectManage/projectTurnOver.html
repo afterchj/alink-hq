@@ -27,7 +27,7 @@
     <div th:replace="common/left::left"></div>
     <div class="main-right">
         <div class="clearfix main-right-nav">
-            <div class="f-l main-right-title">网络移动</div>
+            <div class="f-l main-right-title">项目移交</div>
             <div class="f-r pointer">
                 <img src="/alink-hq/static/img/go-back.png" alt="" onclick="history.back()">
             </div>
@@ -35,7 +35,7 @@
         <form class="" method="post">
             <div id="meshTurnOver">
                 <div class="f-nav">
-                    网络移动
+                    项目移交
                 </div>
                 <div class="f-content scrollbar">
                     <div class="accountMsg clearfix" th:each="projectList:${projectList}">
@@ -71,7 +71,7 @@
                                 <!--<option value="" class="pointer">请选择账号</option>-->
                             <!--</select>-->
 
-                        <input type="text" id="account-transfer" placeholder="请选择账号">
+                        <input type="text" id="account-transfer" placeholder="请选择账号" uid="" autocomplete="off">
                         <span class="open-list"></span>
                         <div id="list">
                             <ul>
@@ -160,11 +160,18 @@
         $('#account-transfer').focus(function(){
             $('#list').addClass('active');
         })
-
+//        $('#account-transfer').blur(function(){
+//            $('#list').removeClass('active');
+//        })
         $('#account-transfer').bind('input propertychange', function() {
 
             console.log('list',list);
             var keyword=$(this).val();
+            if(keyword!=''){
+                $('.account-hint').text('');
+            }else{
+                $('.account-hint').text('请选择账号');
+            }
             var keyArr = [];
 //            $('#list ul').remove();
 //            var content='';
