@@ -39,4 +39,7 @@ public interface ProjectService {
     List<ProjectList> findNumAndUid(Integer projectId);
 
     ProjectList findAccountAndConame(String uid);
+
+    int findProjectByProjectId(int id);
+
 }

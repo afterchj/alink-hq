@@ -53,4 +53,7 @@ public interface ProjectDao {
     List<ProjectList> findNumAndUid(@Param("id")Integer projectId);
 
     ProjectList findAccountAndConame(@Param("uid")String uid);
+
+    int findProjectByProjectId(@Param("id")int id);
+
 }

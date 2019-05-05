@@ -169,14 +169,26 @@ public class ProjectController {
 
     @RequestMapping(value = "/transfer", method = RequestMethod.POST)
     @ResponseBody
-    public Map<String, String> transfer(String projectInfo, String uid) {
+    public Map<String, String> transfer(HttpSession session,String projectInfo, String uid) {
         Map<String, String> map = new HashMap<>();
         List<ProjectList> projectList = JSONArray.parseArray(projectInfo, ProjectList.class);
-
-
+        User loginUser = (User) session.getAttribute("user");
+        String userId = loginUser.getId();
+        int count = 0;
         try {
+            Integer role_id = accountService.findRoleIdByUid(userId);
             for (ProjectList project : projectList) {
-                projectService.transferProject(project.getId(), uid);
+                if(role_id == 1 || role_id == 2){
+                    count = projectService.findProjectByProjectId(project.getId());
+                }else if(role_id == 3){
+                    List<Integer> ids = projectService.findProjectList(userId);
+                    if(ids.contains(project.getId())){
+                        count = 1;
+                    }
+                }
+                if(count!=0){
+                    projectService.transferProject(project.getId(), uid);
+                }
             }
             map.put("result", ResultDict.SUCCESS.getCode());
         } catch (Exception e) {

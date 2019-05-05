@@ -110,5 +110,10 @@ public class ProjectServiceImpl implements ProjectService {
         return projectDao.findAccountAndConame(uid);
     }
 
+    @Override
+    public int findProjectByProjectId(int id) {
+        return projectDao.findProjectByProjectId(id);
+    }
+
 
 }

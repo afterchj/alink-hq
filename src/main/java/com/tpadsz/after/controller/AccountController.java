@@ -73,7 +73,6 @@ public class AccountController {
                 }
             } else if (role_id == 3) {
                 List<String> uids = accountService.findFirmUidOfUser(uid);
-                uids.remove(uid);
                 if (uids.size() != 0) {
                     PageHelper.startPage(pageNum, pageSize);
                     userList = accountService.searchByManager(account, uids, startDate, endDate);
@@ -173,13 +172,28 @@ public class AccountController {
 
     @RequestMapping(value = "/transfer", method = RequestMethod.POST)
     @ResponseBody
-    public Map<String, String> transfer(String account, Integer fid) {
+    public Map<String, String> transfer(HttpSession session, String account, Integer fid) {
         Map<String, String> map = new HashMap<>();
-        String randomPwd = GenerateUtils.randomPwd();
+        String randomPwd = "";
+        User loginUser = (User) session.getAttribute("user");
+        String uid = loginUser.getId();
         try {
-            accountService.transferAccount(account, fid, randomPwd);
+            Integer role_id1 = accountService.findRoleIdByUid(uid);
+            User user = accountService.findByAccount(account);
+            Integer role_id2 = accountService.findRoleIdByUid(user.getId());
+            if (role_id1 < 3 && role_id1 < role_id2) {
+                randomPwd = GenerateUtils.randomPwd();
+                accountService.transferAccount(account, fid, randomPwd);
+                map.put("account", account);
+            } else if (role_id1 == 3) {
+                randomPwd = GenerateUtils.randomPwd();
+                List<String> uids = accountService.findFirmUidOfUser(uid);
+                if (uids.contains(user.getId())) {
+                    accountService.transferAccount(account, fid, randomPwd);
+                    map.put("account", account);
+                }
+            }
             map.put("result", ResultDict.SUCCESS.getCode());
-            map.put("account", account);
             map.put("pwd", randomPwd);
         } catch (Exception e) {
             map.put("result", ResultDict.SYSTEM_ERROR.getCode());
@@ -214,7 +228,7 @@ public class AccountController {
         user.setStatus(status);
         try {
             accountService.enable(user);
-            if(status==1){
+            if (status == 1) {
                 String key = MemcachedObjectType.CACHE_TOKEN.getPrefix() + user.getId();
                 client.delete(key);
             }
