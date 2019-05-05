@@ -76,7 +76,7 @@ th {
 }
 
 .search-result table td {
-    height: 48px;
+    /*height: 48px;*/
     line-height: 48px;
     text-align: center;
     font-size: 14px;
@@ -240,7 +240,7 @@ th.all-checkbox {
 }
 
 #projectDetail .c-content {
-    padding: 50px 455px;
+    padding: 50px 400px;
 }
 
 #projectDetail .p-content span {
@@ -266,8 +266,7 @@ th.all-checkbox {
 
 #projectDetail .c-content > div {
     text-align: left;
-
-    font-size: 21px;
+    font-size: 17px;
     color: #3c3c3c;
     margin-bottom: 30px;
 }
