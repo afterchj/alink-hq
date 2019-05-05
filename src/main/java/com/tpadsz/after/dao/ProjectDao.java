@@ -49,4 +49,8 @@ public interface ProjectDao {
     int findGroupNum(@Param("id")Integer projectId);
 
     int findLightNum(@Param("id")Integer projectId);
+
+    List<ProjectList> findNumAndUid(@Param("id")Integer projectId);
+
+    ProjectList findAccountAndConame(@Param("uid")String uid);
 }

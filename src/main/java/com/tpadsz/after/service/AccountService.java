@@ -38,7 +38,7 @@ public interface AccountService {
 
     int delete(String account);
 
-    void enable(String account, Integer status);
+    void enable(User user);
 
     Integer findFirmUid(String uid, String userId);
 

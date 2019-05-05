@@ -100,8 +100,8 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
-    public void enable(String account, Integer status) {
-        accountDao.enable(account, status);
+    public void enable(User user) {
+        accountDao.enable(user);
     }
 
     @Override

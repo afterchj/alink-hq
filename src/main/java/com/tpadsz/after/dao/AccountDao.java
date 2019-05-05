@@ -45,7 +45,7 @@ public interface AccountDao {
 
     void delete(@Param("uid")String uid);
 
-    void enable(@Param("account")String account,@Param("status")Integer status);
+    int enable(User user);
 
     List<Firm> findFirmByUid(@Param("uid")String uid);
 

@@ -3,6 +3,7 @@ package com.tpadsz.after.controller;
 import com.alibaba.fastjson.JSON;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.tpadsz.after.constants.MemcachedObjectType;
 import com.tpadsz.after.entity.Firm;
 import com.tpadsz.after.entity.Role;
 import com.tpadsz.after.entity.User;
@@ -10,6 +11,8 @@ import com.tpadsz.after.entity.UserList;
 import com.tpadsz.after.entity.dd.ResultDict;
 import com.tpadsz.after.service.AccountService;
 import com.tpadsz.after.utils.GenerateUtils;
+import net.rubyeye.xmemcached.MemcachedClient;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -32,6 +35,9 @@ import java.util.Map;
 public class AccountController {
     @Resource
     private AccountService accountService;
+
+    @Autowired
+    private MemcachedClient client;
 
 
     @RequestMapping(value = "/list", method = RequestMethod.GET)
@@ -203,8 +209,15 @@ public class AccountController {
     @ResponseBody
     public Map<String, String> enable(String account, Integer status) {
         Map<String, String> map = new HashMap<>();
+        User user = new User();
+        user.setAccount(account);
+        user.setStatus(status);
         try {
-            accountService.enable(account, status);
+            accountService.enable(user);
+            if(status==1){
+                String key = MemcachedObjectType.CACHE_TOKEN.getPrefix() + user.getId();
+                client.delete(key);
+            }
             map.put("result", ResultDict.SUCCESS.getCode());
         } catch (Exception e) {
             map.put("result", ResultDict.SYSTEM_ERROR.getCode());

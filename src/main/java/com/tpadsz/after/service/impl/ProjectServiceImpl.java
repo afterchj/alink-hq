@@ -100,5 +100,15 @@ public class ProjectServiceImpl implements ProjectService {
         return projectDao.findLightNum(projectId);
     }
 
+    @Override
+    public List<ProjectList> findNumAndUid(Integer projectId) {
+        return projectDao.findNumAndUid(projectId);
+    }
+
+    @Override
+    public ProjectList findAccountAndConame(String uid) {
+        return projectDao.findAccountAndConame(uid);
+    }
+
 
 }

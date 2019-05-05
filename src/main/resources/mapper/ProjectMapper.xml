@@ -83,7 +83,7 @@
     </update>
 
     <update id="transferProject">
-        update f_project set uid = #{uid} where id=#{id}
+        update f_project set uid = #{uid},update_date = NOW() where id=#{id}
     </update>
 
 
@@ -134,4 +134,11 @@
         SELECT count(*) from f_light where mid IN (SELECT id FROM f_mesh WHERE project_id=#{id})
     </select>
 
+    <select id="findNumAndUid" resultType="com.tpadsz.after.entity.ProjectList">
+        SELECT id,uid FROM f_mesh WHERE project_id = #{id}
+    </select>
+
+    <select id="findAccountAndConame" resultType="com.tpadsz.after.entity.ProjectList">
+        SELECT t1.account,t1.mobile,t3.coname FROM f_user_account AS t1 WHERE id = #{uid} INNER JOIN f_user_customer AS t2 ON t1.id = t2.uid INNER JOIN f_firm AS t3 ON t2.fid = t3.id
+    </select>
 </mapper>

@@ -35,4 +35,8 @@ public interface ProjectService {
     int findGroupNum(Integer projectId);
 
     int findLightNum(Integer projectId);
+
+    List<ProjectList> findNumAndUid(Integer projectId);
+
+    ProjectList findAccountAndConame(String uid);
 }

@@ -14,6 +14,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 import java.io.UnsupportedEncodingException;
@@ -38,7 +39,8 @@ public class ProjectController {
 
     @RequestMapping(value = "/list", method = RequestMethod.GET)
     public String list(Integer pageNum, Integer pageSize, String account, String projectName,
-                       String startCreateDate, String endCreateDate, String startUpdateDate, String endUpdateDate,String sortFlag,HttpSession session, Model model) {
+                       String startCreateDate, String endCreateDate, String startUpdateDate, String endUpdateDate,
+                       String sortFlag, HttpSession session, Model model) {
         User loginUser = (User) session.getAttribute("user");
         String uid = loginUser.getId();
         if (pageNum == null) {
@@ -54,20 +56,20 @@ public class ProjectController {
             Integer role_id = accountService.findRoleIdByUid(uid);
             List<ProjectList> list = new ArrayList<>();
             if (role_id == 1 || role_id == 2) {
-                 PageHelper.startPage(pageNum, pageSize);
+                PageHelper.startPage(pageNum, pageSize);
                 list = projectService.searchBySuper(account, projectName, startCreateDate, endCreateDate,
-                        startUpdateDate, endUpdateDate,sortFlag);
+                        startUpdateDate, endUpdateDate, sortFlag);
             } else if (role_id == 3) {
                 List<Integer> ids = projectService.findProjectList(uid);
                 if (ids.size() != 0) {
                     PageHelper.startPage(pageNum, pageSize);
                     list = projectService.searchByManager(account, projectName, startCreateDate, endCreateDate,
-                            startUpdateDate, endUpdateDate, ids,sortFlag);
+                            startUpdateDate, endUpdateDate, ids, sortFlag);
                 }
             } else if (role_id == 4) {
                 PageHelper.startPage(pageNum, pageSize);
                 list = projectService.searchByUser(account, projectName, startCreateDate, endCreateDate,
-                        startUpdateDate, endUpdateDate, uid,sortFlag);
+                        startUpdateDate, endUpdateDate, uid, sortFlag);
             }
             PageInfo<ProjectList> pageInfo = new PageInfo<>(list, pageSize);
             model.addAttribute("pageInfo", pageInfo);
@@ -83,7 +85,7 @@ public class ProjectController {
     }
 
     @RequestMapping(value = "/createProject", method = RequestMethod.GET)
-    public String createAccount(HttpSession session, Model model) {
+    public String createProject(HttpSession session, Model model) {
         User loginUser = (User) session.getAttribute("user");
         String uid = loginUser.getId();
         Integer role_id = accountService.findRoleIdByUid(uid);
@@ -126,10 +128,10 @@ public class ProjectController {
     public Map<String, String> rename(String account, Integer projectId, String projectName) {
         Map<String, String> map = new HashMap<>();
         try {
-            int flag = projectService.renameProject(account,projectId,projectName);
-            if(flag==0) {
+            int flag = projectService.renameProject(account, projectId, projectName);
+            if (flag == 0) {
                 map.put("result", ResultDict.REPEAT_NAME.getCode());
-            }else if(flag==1){
+            } else if (flag == 1) {
                 map.put("result", ResultDict.SUCCESS.getCode());
             }
         } catch (Exception e) {
@@ -167,12 +169,14 @@ public class ProjectController {
 
     @RequestMapping(value = "/transfer", method = RequestMethod.POST)
     @ResponseBody
-    public Map<String, String> transfer(String projectInfo,String uid) {
+    public Map<String, String> transfer(String projectInfo, String uid) {
         Map<String, String> map = new HashMap<>();
         List<ProjectList> projectList = JSONArray.parseArray(projectInfo, ProjectList.class);
+
+
         try {
-            for(ProjectList project : projectList){
-                projectService.transferProject(project.getId(),uid);
+            for (ProjectList project : projectList) {
+                projectService.transferProject(project.getId(), uid);
             }
             map.put("result", ResultDict.SUCCESS.getCode());
         } catch (Exception e) {
@@ -188,9 +192,9 @@ public class ProjectController {
         Map<String, String> map = new HashMap<>();
         List<ProjectList> projectList = JSONArray.parseArray(projectInfo, ProjectList.class);
         try {
-            for(ProjectList project : projectList){
+            for (ProjectList project : projectList) {
                 User user = accountService.findByAccount(project.getAccount());
-                projectService.delete(user.getId(),project.getId());
+                projectService.delete(user.getId(), project.getId());
             }
             map.put("result", ResultDict.SUCCESS.getCode());
         } catch (Exception e) {
@@ -200,15 +204,30 @@ public class ProjectController {
     }
 
     @RequestMapping(value = "/detail", method = RequestMethod.GET)
-    public String detail(String account,String coname, Integer meshNum, Integer projectId, Model model) {
-        User user = accountService.findByAccount(account);
+    public String detail(String account, String coname, Integer meshNum, Integer projectId, Model model) {
         int placeNum = 0;
         int groupNum = 0;
         int lightNum = 0;
-        if(meshNum>0) {
-            placeNum = projectService.findPlaceNum(projectId);
-            groupNum = projectService.findGroupNum(projectId);
-            lightNum = projectService.findLightNum(projectId);
+        User user = new User();
+        if (account != null) {
+            user = accountService.findByAccount(account);
+            if (meshNum > 0) {
+                placeNum = projectService.findPlaceNum(projectId);
+                groupNum = projectService.findGroupNum(projectId);
+                lightNum = projectService.findLightNum(projectId);
+            }
+        } else {
+            List<ProjectList> list = projectService.findNumAndUid(projectId);
+            meshNum = list.size();
+            if (list.size() != 0) {
+                ProjectList projectList = projectService.findAccountAndConame(list.get(0).getUid());
+                user.setAccount(projectList.getAccount());
+                user.setMobile(projectList.getMobile());
+                coname = projectList.getConame();
+                placeNum = projectService.findPlaceNum(projectId);
+                groupNum = projectService.findGroupNum(projectId);
+                lightNum = projectService.findLightNum(projectId);
+            }
         }
         model.addAttribute("meshNum", meshNum);
         model.addAttribute("placeNum", placeNum);

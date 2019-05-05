@@ -103,7 +103,10 @@
         DELETE FROM f_user_role WHERE user_id=#{uid};
     </delete>
 
-    <update id="enable">
+    <update id="enable" parameterType="com.tpadsz.after.entity.User">
+        <selectKey keyProperty="id" order="BEFORE" resultType="String">
+            SELECT id FROM f_user_account WHERE account=#{account}
+        </selectKey>
         <if test="status == 0">
         update f_user_account set status = 1,update_date = NOW() where account=#{account}
         </if>
