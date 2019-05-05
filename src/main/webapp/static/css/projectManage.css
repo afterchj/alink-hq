@@ -627,3 +627,7 @@ input::-moz-placeholder { /* Mozilla Firefox 19+ */
 input:-ms-input-placeholder { /* Internet Explorer 10+ */
     color: #999;
 }
+.disabled{
+    cursor: not-allowed;
+    pointer-events:none;
+}

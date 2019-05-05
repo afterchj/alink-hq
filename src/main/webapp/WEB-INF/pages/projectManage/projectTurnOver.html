@@ -37,41 +37,46 @@
                 <div class="f-nav">
                     网络移动
                 </div>
-                <div class="f-content">
+                <div class="f-content scrollbar">
                     <div class="accountMsg clearfix" th:each="projectList:${projectList}">
                         <div class="f-l mesh-name">
                             <span th:text="${projectList.name}"></span>
                         </div>
                         <div class="f-l  mesh-id">
                             <label for="account">施工负责人：</label>
-                            <input type="text" id="account" th:value="${projectList.account}">
+                            <input type="text" id="account" th:value="${projectList.account}" readonly/>
                         </div>
                         <div class="f-l mesh-project">
                             <label for="coname">隶属公司：</label>
-                            <input type="text" id="coname" th:value="${projectList.coname}">
+                            <input type="text" id="coname" th:value="${projectList.coname}" readonly/>
                         </div>
                     </div>
                 </div>
                 <div class="" style="text-align: center;margin-bottom: 30px;">
                     <img src="/alink-hq/static/img/exchange-un.png" alt="">
                 </div>
-                <div class="transfer-company">
+                <div class="transfer-company p-r">
                     <p class="company-hint"></p>
                     <div style="margin-bottom: 30px;">
                         <label for="fid"><span>*</span>隶属公司：</label>
-                        <select name="fid" id="fid" class="pointer">
+                        <select name="fid" id="fid" class="pointer" >
                             <option value="" class="pointer">请选择公司</option>
                             <option th:each="firm:${firmList}" th:value="${firm.id}" th:text="${firm.coname }"
                                     class="pointer"></option>
                         </select>
                     </div>
                     <p class="account-hint"></p>
-                    <div>
-                        <label for="account-transfer"><span>*</span>选择移交账号：</label>
-                        <select name="account-transfer" id="account-transfer" class="pointer">
-                            <option value="" class="pointer">请选择账号</option>
-                        </select>
-                    </div>
+                        <label for="account-transfer" ><span>*</span>选择移交账号：</label>
+                            <!--<select name="account-transfer" id="account-transfer" class="pointer"  data-live-search="true">-->
+                                <!--<option value="" class="pointer">请选择账号</option>-->
+                            <!--</select>-->
+
+                        <input type="text" id="account-transfer" placeholder="请选择账号">
+                        <span class="open-list"></span>
+                        <div id="list">
+                            <ul>
+                            </ul>
+                        </div>
                 </div>
 
                 <div class="tranfer-btn">
@@ -99,12 +104,31 @@
 <script src="/alink-hq/static/js/jquery.min.js"></script>
 <script>
     $(function () {
+        var list=[];
         $('#fid').change(function () {
+            $('#account-transfer').val('');
             var fid = $(this).children('option:selected').val();
             if (fid != '') {
                 fid = parseInt(fid);
             }
-            $('#account-transfer>option').not(":eq(0)").remove();
+//            $('#account-transfer>option').not(":eq(0)").remove();
+//            $.ajax({
+//                type: "post",
+//                url: "/alink-hq/project/findAccountByFid",
+//                data: {fid: fid},
+//                dataType: "json",
+//                success: function (data) {
+//                    console.log(data.accounts);
+//                    var content = '';
+//                    for (var i = 0; i < data.accounts.length; i++) {
+//                        var uid = data.accounts[i].id;
+//                        var accountName = data.accounts[i].account;
+//                        content += '<option value="' + uid + '">' + accountName + '</option>';
+//                    }
+//                    $('#account-transfer').append(content);
+//                }
+//            })
+            $('#list ul').children().remove();
             $.ajax({
                 type: "post",
                 url: "/alink-hq/project/findAccountByFid",
@@ -116,16 +140,78 @@
                     for (var i = 0; i < data.accounts.length; i++) {
                         var uid = data.accounts[i].id;
                         var accountName = data.accounts[i].account;
-                        content += '<option value="' + uid + '">' + accountName + '</option>';
+                        content += '<li value="' + uid + '">' + accountName + '</li>';
                     }
-                    $('#account-transfer').append(content);
+                    $('#list ul').append(content);
+                    list=data.accounts;
+                    console.log('list',list);
                 }
             })
         })
+        $("#list ul").on("click",'li',function(){
+                console.log($(this).text());
+            $('#account-transfer').val($(this).text());
+            $('#account-transfer').attr('uid',$(this).attr('value'))
+            $('#list').removeClass('active');
+        });
+        $('.open-list').click(function(){
+            $('#list').toggleClass('active');
+        })
+        $('#account-transfer').focus(function(){
+            $('#list').addClass('active');
+        })
+
+        $('#account-transfer').bind('input propertychange', function() {
+
+            console.log('list',list);
+            var keyword=$(this).val();
+            var keyArr = [];
+//            $('#list ul').remove();
+//            var content='';
+            console.log('关键词为',keyword)
+            var reg = new RegExp(keyword);
+            console.log(reg);
+            for(var i=0;i<list.length;i++){
+                if(list[i].account!=null && list[i].account.match(reg)){
+
+                        var msg={
+                            uid:list[i].uid,
+                            account:list[i].account
+                        }
+                    keyArr.push(msg);
+
+                }
+            }
+            console.log('keyArr',keyArr);
+            var content='';
+            for(var i=0;i<keyArr.length;i++){
+                content += '<li value="' + keyArr[i].uid + '">' + keyArr[i].account + '</li>';
+            }
+
+            $('#list ul').children().remove();
+            $('#list ul').append(content);
+            if(keyArr.length==0){
+                $('#list').removeClass('active');
+            }
+        });
         $('.confirm-btn').click(function () {
             var projectInfo = $('#projectInfo').val();
             var fid = $('#fid option:selected').val();
-            var uid = $('#account-transfer option:selected').val();
+            var uid = $('#account-transfer').attr('uid');
+            var account=$('#account-transfer').val();
+//            var reg=new RegExp(account);
+            var hasAccount=true;
+            for(var i=0;i<list.length;i++){
+                if(list[i].account!=null && list[i].account==account){
+                    uid=list[i].id;
+                    hasAccount=true;
+                    console.log('找到了',uid,list[i].account);
+                    break;
+                }else{
+                    console.log('请输入完整的账号');
+                    hasAccount=false;
+                }
+            }
             if (uid == '') {
                 $('.account-hint').text('请选择账号');
             } else {
@@ -136,7 +222,8 @@
             } else {
                 $('.company-hint').text('');
             }
-            if (fid != '' && uid != '') {
+            console.log(fid,uid,hasAccount);
+            if (fid != '' && uid != '' && hasAccount) {
                 $.ajax({
                     type: "post",
                     url: "/alink-hq/project/transfer",
@@ -155,7 +242,6 @@
                     }
                 })
             }
-
         })
     })
     $(function () {
@@ -188,14 +274,14 @@
         }
     })
     //监听账号选择
-    $('#account-transfer').change(function(){
-        var selected=$(this).children('option:selected').val();
-        if(selected==''){
-            $('.account-hint').text('请选择账号');
-        }else{
-            $('.account-hint').text('');
-        }
-    })
+//    $('#account-transfer').change(function(){
+//        var selected=$(this).children('option:selected').val();
+//        if(selected==''){
+//            $('.account-hint').text('请选择账号');
+//        }else{
+//            $('.account-hint').text('');
+//        }
+//    })
 </script>
 </body>
 </html>

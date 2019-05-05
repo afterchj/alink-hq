@@ -55,7 +55,7 @@
             </div>
             <div class="search-result">
                 <!-- 有数据时 -->
-                <table border="1" class="hasData active">
+                <table border="1" class="hasData active" th:if="${pageInfo!=null}">
                     <thead>
                     <tr>
                         <th class="all-checkbox ">
@@ -90,16 +90,18 @@
                         <td class="project-name k-link">
                             <a th:href="@{/project/detail(account=${project.account},coname=${project.coname},meshNum=${project.meshNum},projectId=${project.id})}" th:text="${project.name}"></a>
                         </td>
-                        <td th:text="${project.meshNum}" class="meshNum"></td>
+                        <td  class="meshNum k-link">
+                            <a th:href="@{/mesh/list(projectId=${project.id})}" th:text="${project.meshNum}"></a>
+                        </td>
                         <td th:text="${project.account}" class="project-account"></td>
                         <td th:text="${project.create_date}"></td>
                         <td th:text="${project.update_date}"></td>
                         <td class="p-r">
-                            <img src="/alink-hq/static/img/edit.png" alt="" class="pointer reset-name">
+                            <img src="/alink-hq/static/img/edit.png" alt="" class="pointer reset-name"  th:title="重命名">
                             <!--<a th:href="@{/project/transferPage(uid=${session.user.id},account=${user.account},coname=${user.coname})}">-->
-                          <img src="/alink-hq/static/img/exchange.png" alt="" class="center-img pointer exchange-project">
+                          <img src="/alink-hq/static/img/exchange.png" alt="" class="center-img pointer exchange-project" th:title="移交">
                             <!--</a>-->
-                            <img src="/alink-hq/static/img/delete.png" alt="" class="pointer delete-project">
+                            <img src="/alink-hq/static/img/delete.png" alt="" class="pointer delete-project" th:title="删除">
                             <!--<div class="popup p-a">-->
                             <!--重命名-->
                             <!--</div>-->
@@ -159,7 +161,7 @@
                     </tfoot>
                 </table>
                 <!-- 无数据时 -->
-                <table border="1" class="noData ">
+                <table border="1" class="noData " th:if="${pageInfo==null}">
                     <thead>
                     <tr>
                         <th class="all-checkbox">
@@ -217,7 +219,7 @@
         温馨提示
     </div>
     <div class="pop-content">
-        <div class="reset-pwd">您确定要删除该所选的项目吗？</div>
+        <div class="reset-pwd">您确定要删除所选的项目吗？</div>
         <div class="reset-pwd-hint">（删除后项目中所有信息将无法恢复，请慎重！）</div>
         <div class="pop-btn">
             <button class="reduce">取消</button>
