@@ -167,8 +167,13 @@ public class MyAccountController {
             map.put("info",info);
             return map;
         } catch (InvalidCodeException e) {
-            //验证码不正确
-            map.put("info","codeError");
+            if ("300".equals(e.getCode())) {
+                //验证码不正确
+                map.put("info","codeError");
+            } else {
+                //验证码超时
+                map.put("info","codeTimeOut");
+            }
             return map;
         }
     }
@@ -188,8 +193,13 @@ public class MyAccountController {
             map.put("info",info);
             return map;
         } catch (InvalidCodeException e) {
-            //激活码不正确
-            map.put("info","codeError");
+            if ("300".equals(e.getCode())) {
+                //激活码不正确
+                map.put("info","codeError");
+            } else {
+                //激活码超时
+                map.put("info","codeTimeOut");
+            }
             return map;
         }
     }

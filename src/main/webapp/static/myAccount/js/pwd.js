@@ -1,21 +1,12 @@
 $(function () {
-
     // 6-16 位数字、字母
     var match = /^[a-zA-Z0-9]{6,16}$/;
     var text = "请输入 6-16 位数字、字母";
     //输入框值发生改变时显示提示
     $("#pwd1").bind(
         "input propertychange change",
-        function () {
-            $('p.pwd-hint').removeClass('active').text('');
-            var context = $("#pwd1").val();
-            if (!match.test(context)){
-                $('p.pwd-hint').addClass('active').text(text);
-            }else {
-                $('p.pwd-hint').removeClass('active').text('');
-            }
-        });
-
+        {hint:"pwd-hint",context:"#pwd1",text:text,match:match},
+        matchInput);
 
     $(".submitConfirm").click(function () {
         $('p.pwd-hint').removeClass('active').text('');

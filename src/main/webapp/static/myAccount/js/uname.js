@@ -5,61 +5,30 @@ $(function () {
     var match = /^[0-9A-Za-z\u4e00-\u9fa5]{2,6}$/;
     var text = "请输入2-6 位中文、字母、数字";
     //输入框值发生改变
-    $("#userNameNew").bind(
-        "input propertychange change",
-        // "input propertychange",
-        function () {
-
-            var context = $("#userNameNew").val();
-            if (!match.test(context)) {
-                $('p.use-hint').removeClass('active').text('');
-                $('p.use-hint').addClass('active').text(text);
-            } else {
-                $.ajax({
-                    type: "POST",
-                    url: "/alink-hq/myAccount/getUserName",
-                    data: "uname=" + context,
-                    dataType: "json",
-                    success: function (msg) {
-                        console.log("msg: " + msg.info);
-                        //存在用户名
-                        if (msg.info == "true") {
-                            $('p.use-hint').removeClass('active').text('');
-                            $('p.use-hint').addClass('active').text('已存在，请重新输入');
-                        } else {
-                            $('p.use-hint').removeClass('active').text('');
-                        }
+    $("input[id*='userName']").bind("input propertychange change",function () {
+        var context = $(this).val();
+        if (!match.test(context)) {
+            $('p.use-hint').removeClass('active').text('');
+            $('p.use-hint').addClass('active').text(text);
+        } else {
+            $.ajax({
+                type: "POST",
+                url: "/alink-hq/myAccount/getUserName",
+                data: "uname=" + context,
+                dataType: "json",
+                success: function (msg) {
+                    console.log("msg: " + msg.info);
+                    //存在用户名
+                    if (msg.info == "true") {
+                        $('p.use-hint').removeClass('active').text('');
+                        $('p.use-hint').addClass('active').text('已存在，请重新输入');
+                    } else {
+                        $('p.use-hint').removeClass('active').text('');
                     }
-                });
-            }
-        });
-    $("#userName").bind(
-        "input propertychange change",
-        // "input propertychange",
-        function () {
-            var context = $("#userName").val();
-            if (!match.test(context)) {
-                $('p.use-hint').removeClass('active').text('');
-                $('p.use-hint').addClass('active').text(text);
-            } else {
-                $.ajax({
-                    type: "POST",
-                    url: "/alink-hq/myAccount/getUserName",
-                    data: "uname=" + context,
-                    dataType: "json",
-                    success: function (msg) {
-                        console.log("msg: " + msg.info);
-                        //存在用户名
-                        if (msg.info == "true") {
-                            $('p.use-hint').removeClass('active').text('');
-                            $('p.use-hint').addClass('active').text('已存在，请重新输入');
-                        } else {
-                            $('p.use-hint').removeClass('active').text('');
-                        }
-                    }
-                });
-            }
-        });
+                }
+            });
+        }
+    });
 
     $("#submit").click(function () {
         // $('p.use-hint').removeClass('active').text('');
