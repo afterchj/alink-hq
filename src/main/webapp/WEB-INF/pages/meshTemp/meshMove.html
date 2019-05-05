@@ -27,18 +27,18 @@
                     网络移动
                 </div>
                 <div class="f-content">
-                    <input type="hidden" name="mids" th:value="${ids}">
+                    <input type="hidden" name="ids" th:value="${ids}">
                     <div class="accountMsg clearfix" th:each="mesh:${meshMap}">
                         <div class="f-l mesh-name">
                             <span th:text="${mesh.mname}"></span>
                         </div>
                         <div class="f-l  mesh-id">
                             <label for="mid">网络ID：</label>
-                            <input type="text" id="mid" th:value="${mesh.mesh_id}">
+                            <input type="text" id="mid" th:value="${mesh.mesh_id}" readonly>
                         </div>
                         <div class="f-l mesh-project">
                             <label for="project">属于项目：</label>
-                            <input type="text" id="project" th:value="${mesh.name}">
+                            <input type="text" id="project" th:value="${mesh.name}"  readonly>
                         </div>
                     </div>
                 </div>

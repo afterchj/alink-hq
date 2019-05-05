@@ -16,9 +16,9 @@
     <div class="main-right">
         <div class="clearfix main-right-nav">
             <div class="f-l main-right-title">用户列表</div>
-            <div class="f-r pointer">
-                <img src="/alink-hq/static/img/create-project.png" alt="">
-            </div>
+            <!--<div class="f-r pointer">-->
+                <!--<img src="/alink-hq/static/img/create-project.png" alt="">-->
+            <!--</div>-->
             <div class="f-r pointer">
                 <img src="/alink-hq/static/img/go-back.png" alt=""  onClick="javascript :history.back(-1);">
             </div>
@@ -33,7 +33,7 @@
                         </div>
                         <div class="p-r">
                             <label for="role">角色</label>
-                            <select name="role" id="role">
+                            <select name="role" id="role" style="text-indent: 4px;">
                                 <option>请选择角色</option>
                                 <option th:each="role:${roleList}" th:value="${role.id}"
                                         th:text="${role.roleName }"></option>
@@ -43,7 +43,7 @@
                     <div class="f-l search">
                         <div>
                             <label for="company">隶属公司</label>
-                            <select name="company" id="company">
+                            <select name="company" id="company" style="text-indent: 4px;">
                                 <option>请选择公司</option>
                                 <option th:each="firm:${firmList}" th:value="${firm.id}"
                                         th:text="${firm.coname }"></option>
@@ -52,7 +52,7 @@
                         <div class="p-r">
                             <label for="add-time">添加时间</label>
                             <input type="text" id="add-time" placeholder="请选择日期" AUTOCOMPLETE="off">
-                            <img src="/alink-hq/static/img/date.png" alt="" class="p-a">
+                            <img src="/alink-hq/static/img/date.png" alt="" class="p-a show-date">
                         </div>
                     </div>
                     <div class="f-r search-button ">
@@ -66,22 +66,22 @@
                 <table border="1" class="hasData active">
                     <thead>
                     <tr>
-                        <th>账号</th>
-                        <th>用户名</th>
-                        <th>绑定手机号</th>
-                        <th class="p-r">
+                        <th style="width: 120px;">账号</th>
+                        <th style="width: 80px;">用户名</th>
+                        <th style="width: 120px;">绑定手机号</th>
+                        <th class="p-r" style="width: 180px;">
                             绑定邮箱
                         </th>
-                        <th class="p-r">
+                        <th class="p-r"  style="width: 130px;">
                             隶属公司
                         </th>
-                        <th class="p-r">
+                        <th class="p-r"  style="width: 120px;">
                             角色
                         </th>
-                        <th class="p-r">
+                        <th class="p-r" style="width: 180px;">
                             添加时间
                         </th>
-                        <th class="p-r">
+                        <th class="p-r" style="width:80px;">
                             状态
                         </th>
                         <th>操作</th>
@@ -100,9 +100,9 @@
                         </td>
                         <td class="p-r">
                             <img src="/alink-hq/static/img/edit.png" alt="" openTab="reset-pwd" id="reset-pwd" class="pointer" th:title="重置密码">
-                            <a th:href="@{/account/transferPage(uid=${session.user.id},account=${user.account},coname=${user.coname})}"><img
+                            <a th:href="@{/account/transferPage(account=${user.account},coname=${user.coname})}"><img
                                     src="/alink-hq/static/img/exchange.png"
-                                    alt="" class="center-img" th:title="移交账号"></a>
+                                      alt="" class="center-img" th:title="移交账号"></a>
                             <img src="/alink-hq/static/img/delete.png" alt="" id="delete-account"
                                  openTab="delete-account" class="pointer" th:title="删除">
                             <div class="popup p-a">
@@ -116,16 +116,16 @@
                         <td colspan="11" class="clearfix page">
                             <div class="f-r page-right">
                                 <span class="prev-page">
-                                    <a th:href="@{/account/list(pageNum=${pageInfo.prePage},uid=${session.user.id},pageSize=${pageInfo.pageSize},account=${account},fid=${fid},roleId=${roleId},startDate=${startDate},endDate=${endDate})}">
+                                    <a th:href="@{/account/list(pageNum=${pageInfo.prePage},pageSize=${pageInfo.pageSize},account=${account},fid=${fid},roleId=${roleId},startDate=${startDate},endDate=${endDate})}">
                                         <img src="/alink-hq/static/img/left-arrow.png" alt=""></a>
                                 </span>
                                 <span th:text="${pageInfo.pageNum}" class="pages"></span>
                                 <span th:if="${pageInfo.hasNextPage}" class="next-page">
-                                   <a th:href="@{/account/list(pageNum=${pageInfo.nextPage},uid=${session.user.id},pageSize=${pageInfo.pageSize},account=${account},fid=${fid},roleId=${roleId},startDate=${startDate},endDate=${endDate})}">
+                                   <a th:href="@{/account/list(pageNum=${pageInfo.nextPage},pageSize=${pageInfo.pageSize},account=${account},fid=${fid},roleId=${roleId},startDate=${startDate},endDate=${endDate})}">
                                        <img src="/alink-hq/static/img/right-arrow-color.png" alt=""></a>
                                 </span>
                                 <span th:unless="${pageInfo.hasNextPage}" class="next-page">
-                                    <a th:href="@{/account/list(pageNum=${pageInfo.pageNum},uid=${session.user.id},pageSize=${pageInfo.pageSize},account=${account},fid=${fid},roleId=${roleId},startDate=${startDate},endDate=${endDate})}">
+                                    <a th:href="@{/account/list(pageNum=${pageInfo.pageNum},pageSize=${pageInfo.pageSize},account=${account},fid=${fid},roleId=${roleId},startDate=${startDate},endDate=${endDate})}">
                                         <img src="/alink-hq/static/img/right-arrow-color.png" alt=""></a>
                                 </span>
                                 <span class="m-l-15 m-r-20">
@@ -346,8 +346,8 @@
 
         })
         $('div[openContent="start-use"] button.yes').click(function(){
-            console.log(account);
-            console.log(intStatus);
+//            console.log(account);
+//            console.log(intStatus);
             $.ajax({
                 type: "POST",
                 url: "/alink-hq/account/enable",
@@ -430,6 +430,9 @@
         elem: '#add-time',
         range: true
     });
+   $('.show-date').click(function(){
+        $('#add-time').trigger('click');
+  })
     $(function () {
         myBrowser()
         $('.one-list li').each(function () {
@@ -456,8 +459,8 @@
     $(function () {
         var page = parseInt($('.pages').text());
         var pageTotal = parseInt($('.pageTotal').text());
-        console.log('page', page);
-        console.log('pageTotal', pageTotal);
+//        console.log('page', page);
+//        console.log('pageTotal', pageTotal);
         if (page == 1) {
             $('.prev-page img').attr('src', '/alink-hq/static/img/left-arrow.png');
             $(".prev-page ").attr("disabled", true);
@@ -483,7 +486,7 @@
     //条件筛选
     $(function () {
         var url = window.location.href;
-        var account = GetUrlParam("account");
+        var account =GetUrlParam("account") ;
         var company = GetUrlParam("fid");
         var role = GetUrlParam("roleId");
         var startDate = GetUrlParam("startDate");
@@ -500,7 +503,7 @@
             var addTime = startDate + ' - ' + endDate;
             $('#add-time').val(addTime);
         }
-        $('#account').val(account);
+        $('#account').val(decodeURI(account));
 
         if(role==''){
             $('#role option').eq(0).prop('selected',true);
@@ -595,9 +598,6 @@
         var newUrl = url2 + '&pageNum=' + pageNum + '&pageSize=' + pageSize + '&account=' + account + '&fid=' + company + '&roleId=' + role + '&startDate=' + startDate + '&endDate=' + endDate;
         location.href = newUrl;
     }
-
-    //选择每页展示时
-
 
     //paraName 等找参数的名称
     function GetUrlParam(paraName) {

@@ -153,35 +153,22 @@ public class HomeController {
     @ResponseBody
     @RequestMapping("/verify")
     public String sendCode(String mobile, String email) {
+        logger.info("mobile="+mobile+",email="+email);
         String str = "";
-        Map map = new HashMap();
-        if (StringUtils.isNotEmpty(mobile)) {
-            map.put("uname", mobile);
-            str = "mobile_";
-        }
-        if (StringUtils.isNotEmpty(email)) {
-            map.put("uname", email);
-            str = "email_";
-        }
-        int count = userService.getCount(map);
-        logger.info("mobile=" + mobile + ",email=" + email + ",count=" + count);
-        if (count == 0) {
-            str = str + "failure";
-        } else {
-            try {
-                if (StringUtils.isNotEmpty(mobile)) {
-                    validationService.sendCode("13", mobile);
-                    str = "success";
-                }
-                if (StringUtils.isNotEmpty(email)) {
-                    validationService.sendEmailCode(email, "reset");
-                    str = "success";
-                }
-            } catch (Exception e) {
-                str = "failure";
+        try {
+            if (StringUtils.isNotEmpty(mobile)) {
+                validationService.sendCode("13", mobile);
+                str = "success";
             }
+            if (StringUtils.isNotEmpty(email)) {
+                validationService.sendEmailCode(email, "reset");
+                str = "success";
+            }
+        } catch (Exception e) {
+            str = "failure";
+        } finally {
+            return str;
         }
-        return str;
     }
 
     @ResponseBody
@@ -218,10 +205,10 @@ public class HomeController {
         String email = user.getEmail();
         EasyTypeToken token;
         if (StringUtils.isNotEmpty(mobile)) {
-            userName=mobile;
+            userName = mobile;
             token = new EasyTypeToken(userName);
         } else if (StringUtils.isNotEmpty(email)) {
-            userName=email;
+            userName = email;
             token = new EasyTypeToken(userName);
         } else {
             token = new EasyTypeToken(userName, Encryption.getMD5Str(pwd));

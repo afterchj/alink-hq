@@ -83,7 +83,7 @@ function countDown(obj, second, value) {
 $(function () {
     $("#clickReturn").click(function () {
         var account = $(".account").val();
-        window.location.href = "http://localhost:8080/alink-hq/myAccount/myAccount?account="+account;
+        window.location.href = "http://iotsztp.com/alink-hq/myAccount/myAccount?account="+account;
     });
 
 });
@@ -94,7 +94,7 @@ function loadingSuccess(content,account){
     setTimeout(function(){
         $('#preload-anim').removeClass('active');
         $('#preload-anim .title').text('');
-        window.location.href = "http://localhost:8080/alink-hq/myAccount/myAccount?account="+account;
+        window.location.href = "http://iotsztp.com/alink-hq/myAccount/myAccount?account="+account;
     },2000)
 }
 function loadingError(content){

@@ -77,13 +77,13 @@
                             <td th:text="${group.mesh_id}"></td>
                             <td th:text="${group.lcount}"></td>
                             <td class="p-r">
-                                <img src="/alink-hq/static/img/edit.png" th:alt="${group.id}" class="rename">
+                                <img src="/alink-hq/static/img/edit.png" th:alt="${group.id}" class="rename"  title="重命名">
                                 <a th:href="@{/group/move(ids=${group.id})}">
-                                    <img src="/alink-hq/static/img/exchange.png" alt="" class="center-img">
+                                    <img src="/alink-hq/static/img/exchange.png" alt="" class="center-img" title="移交">
                                 </a>
                                 <a th:href="@{/group/delete(ids=${group.id})}"
                                    onclick="return confirm('您确定要删除所选的网络吗？')">
-                                    <img src="/alink-hq/static/img/delete.png" alt="" id="singleDel">
+                                    <img src="/alink-hq/static/img/delete.png" alt="" id="singleDel" title="删除">
                                 </a>
                             </td>
                         </tr>

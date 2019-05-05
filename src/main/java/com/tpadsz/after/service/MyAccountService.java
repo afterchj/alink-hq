@@ -22,4 +22,6 @@ public interface MyAccountService {
     int getEamil(String email);
 
     boolean updateEmail(String account, String email);
+
+    boolean getUserName(String uname);
 }

@@ -1,14 +1,17 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.tpadsz.after.dao.GroupDao">
+<mapper namespace="com.tpadsz.after.dao.LightDao">
 
     <sql id="Base_Column_List">
-		g.id,
-        g.mid,
-        g.gname,
+		l.id,
+        l.mid,
+        IFNULL(l.lname,'null') lname,
+        l.lmac,
         m.mname,
         m.mesh_id,
-        IFNULL(l.lcount,0) lcount
+        IFNULL(ls.x,'null') x,
+        IFNULL(ls.y,'null') y,
+        IFNULL(ls.off,'null') off
 	</sql>
 
     <sql id="common_choose">
@@ -34,9 +37,9 @@
     <select id="getByMap" resultType="map" parameterType="SearchDict">
         SELECT
         <include refid="Base_Column_List"/>
-        FROM f_group g
-        INNER JOIN f_mesh m ON m.id = g.mid
-        LEFT JOIN (SELECT COUNT(1) lcount,gid FROM f_light GROUP BY gid) l ON g.id=l.gid
+        FROM f_light l
+        INNER JOIN f_mesh m ON m.id = l.mid
+        LEFT JOIN f_light_setting ls ON ls.lid=l.id
         WHERE 1=1
         <include refid="common_choose"></include>
         <if test="mname!=null and mname!=''">
@@ -45,89 +48,81 @@
         <if test="meshId!=null and meshId!=''">
             AND m.mesh_id LIKE CONCAT('%',#{meshId},'%')
         </if>
-        <if test="gname!=null and gname!=''">
-            AND g.gname LIKE CONCAT('%',#{gname},'%')
+        <if test="lname!=null and lname!=''">
+            AND l.lname LIKE CONCAT('%',#{lname},'%')
+        </if>
+        <if test="lmac!=null and lmac!=''">
+            AND l.lmac LIKE CONCAT('%',#{lmac},'%')
         </if>
         <if test="pid!=null and pid!=''">
-            AND g.pid=#{pid}
+            AND l.pid=#{pid}
         </if>
         <if test="mid!=null and mid!=''">
-            AND m.id=#{mid}
+            AND l.mid=#{mid}
+        </if>
+        <if test="gid!=null and gid!=''">
+            AND l.gid=#{gid}
         </if>
         <if test="projectId!=null and projectId!=''">
             AND m.project_id=#{projectId}
         </if>
-        ORDER BY lcount DESC
+        ORDER BY l.mid DESC
     </select>
-
-    <select id="selectByMap" resultType="map" parameterType="SearchDict">
+    <select id="getLightInfo" resultType="MeshInfo" parameterType="int">
         SELECT
-        <include refid="Base_Column_List"/>
-        FROM f_mesh m
-        INNER JOIN f_project p ON m.project_id = p.id
-        INNER JOIN (SELECT COUNT(1) pcount,mid FROM f_place GROUP BY mid) pl ON pl.mid=m.id
-        INNER JOIN (SELECT COUNT(1) scount,mid FROM f_scene GROUP BY mid) s ON s.mid=m.id
-        WHERE 1=1
-        <include refid="common_choose"></include>
-        <if test="mname!=null and mname!=''">
-            AND m.mname LIKE CONCAT('%',#{mname},'%')
-        </if>
-        <if test="meshId!=null and meshId!=''">
-            AND m.mesh_id LIKE CONCAT('%',#{meshId},'%')
-        </if>
-        <if test="pname!=null and pname!=''">
-            AND p.name LIKE CONCAT('%',#{pname},'%')
-        </if>
-    </select>
-    <select id="getGroupInfo" resultType="MeshInfo" parameterType="int">
-        SELECT
-            g.id,
-            g.pid,
-            g.mid,
+            l.id,
+            l.mid,
+            l.pid,
+            l.gid,
+            IFNULL(l.lname,'null') lname,
+            l.lmac,
+            ls.x,
+            ls.y,
+            ls.off,
+            s.id sid,
+            m.project_id,
             g.gname,
             p.name,
-            m.project_id,
             m.mname,
             m.mesh_id,
             pl.pname,
-            IFNULL(l.lcount,0) lcount
-        FROM f_group g
-        INNER JOIN f_mesh m ON m.id=g.mid
-        INNER JOIN f_project p ON p.id=m.project_id
-        LEFT JOIN f_place pl ON pl.id=g.pid
-        LEFT JOIN (SELECT COUNT(1) lcount,gid FROM f_light GROUP BY gid) l ON l.gid=g.id
-        WHERE g.id=#{id}
+            IFNULL(sc.scount,0) scount
+        FROM f_light l
+        LEFT JOIN f_light_setting ls ON ls.lid=l.id
+        INNER JOIN f_group g ON g.id=l.gid
+        INNER JOIN f_mesh m ON m.id=l.mid
+        LEFT JOIN f_scene s ON s.mid=m.id
+        LEFT JOIN f_project p ON p.id=m.project_id
+        LEFT JOIN f_place pl ON pl.id=l.pid
+        LEFT JOIN (SELECT COUNT(1) scount,mid FROM f_scene GROUP BY mid) sc ON sc.mid=l.mid
+        WHERE l.id=#{id} LIMIT 1
     </select>
-    <select id="selectByGid" resultType="map" parameterType="list">
+    <select id="selectByLid" resultType="map" parameterType="list">
         SELECT
-            g.id,
-            g.mid,
-            g.gname,
-            m.mesh_id,
-            g.pid,
-            p.pname
-        FROM f_group g
-        LEFT JOIN f_place p ON g.pid=p.id
-        INNER JOIN f_mesh m ON m.id=g.mid
-        WHERE g.id IN
+            l.id,
+            IFNULL(l.lname,'null') lname,
+            l.lmac,
+            g.gname
+        FROM f_light l
+        LEFT JOIN f_group g ON g.id=l.gid
+        WHERE l.id in
         <foreach collection="list" item="id" index="index" open="(" close=")" separator=",">
             #{id}
         </foreach>
     </select>
 
-    <select id="getPlaces" resultType="OptionList" parameterType="map">
+    <select id="getGroups" resultType="OptionList" parameterType="map">
         SELECT
-            p.id,
-            p.pname label
-        FROM f_place p
-        INNER JOIN f_mesh m ON p.mid = m.id
+            g.id,
+            g.gname label
+        FROM WHERE f_group g
+        INNER JOIN f_mesh m ON m.id = g.mid
         WHERE 1=1
         <include refid="common_choose"></include>
-        LIMIT 1
     </select>
 
-    <delete id="deleteGroupByIds" parameterType="list">
-        DELETE FROM f_group
+    <delete id="deleteLightByIds" parameterType="list">
+        DELETE FROM f_light
         WHERE id IN
         <foreach collection="list" item="id" index="index" open="(" close=")" separator=",">
             #{id}
@@ -135,11 +130,11 @@
     </delete>
 
     <update id="saveRename" parameterType="map">
-        UPDATE f_group SET gname=#{name},update_date=NOW() WHERE id =#{id}
+        UPDATE f_light SET lname=#{name},update_date=NOW() WHERE id =#{id}
     </update>
 
     <update id="saveUpdate" parameterType="map">
-        UPDATE f_group SET pid=#{pid},update_date=NOW()
+        UPDATE f_light SET gid=#{gid},update_date=NOW()
         WHERE id IN
         <foreach collection="list" index="index" item="id" separator="," open="(" close=")">
             #{id}

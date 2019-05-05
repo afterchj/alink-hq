@@ -9,9 +9,12 @@ public class SearchDict {
     private String role;
     private Integer mid;
     private Integer pid;
+    private Integer gid;
     private String mname;
     private String pname;
     private String gname;
+    private String lname;
+    private String lmac;
     private Integer status;
     private Integer meshId;
     private Integer projectId;
@@ -51,6 +54,14 @@ public class SearchDict {
         this.pid = pid;
     }
 
+    public Integer getGid() {
+        return gid;
+    }
+
+    public void setGid(Integer gid) {
+        this.gid = gid;
+    }
+
     public String getMname() {
         return mname;
     }
@@ -73,6 +84,22 @@ public class SearchDict {
 
     public void setGname(String gname) {
         this.gname = gname;
+    }
+
+    public String getLname() {
+        return lname;
+    }
+
+    public void setLname(String lname) {
+        this.lname = lname;
+    }
+
+    public String getLmac() {
+        return lmac;
+    }
+
+    public void setLmac(String lmac) {
+        this.lmac = lmac;
     }
 
     public Integer getStatus() {

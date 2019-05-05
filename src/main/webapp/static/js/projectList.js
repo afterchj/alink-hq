@@ -18,21 +18,20 @@ $('.one-list li').each(function () {
 })
 
 
-
 $(function () {
     var allChecked = false;
-    var accountNum=0;
+    var accountNum = 0;
     //复选框监听--监听全选
     $('#all').click(function () {
         var checked = $(this).prop('checked');
         if (checked) {
-            var length= $('tbody tr').length-1;
-            accountNum=length;
+            var length = $('tbody tr').length - 1;
+            accountNum = length;
             $('tbody .checkbox input').each(function () {
                 $(this).prop('checked', true);
             })
         } else {
-            accountNum=0;
+            accountNum = 0;
             $('tbody .checkbox input').each(function () {
                 $(this).prop('checked', false);
             })
@@ -41,25 +40,25 @@ $(function () {
     })
     //复选框监听--监听单选
     $('tbody .checkbox input').click(function () {
-        var checked=$(this).prop('checked');
-        if(checked){
+        var checked = $(this).prop('checked');
+        if (checked) {
             accountNum++;
-        }else{
+        } else {
             accountNum--;
         }
         $('tbody .checkbox input').each(function () {
             var otherChecked = $(this).prop('checked');
             if (!otherChecked) {
                 allChecked = true;
-            }else{
+            } else {
                 allChecked = false;
             }
         })
         $('.amount').text(accountNum);
-        if(!allChecked){
-            $('#all').prop('checked',true);
-        }else{
-            $('#all').prop('checked',false);
+        if (!allChecked) {
+            $('#all').prop('checked', true);
+        } else {
+            $('#all').prop('checked', false);
         }
     })
 })
@@ -198,13 +197,12 @@ $(function () {
     })
 })
 $(function () {
-    //重命名
     var projectId;
     var account;
-    // var projectName;
+    var deleteArray=[];
+    //重命名弹框
     $('.reset-name').click(function () {
         projectId = parseInt($(this).parent().siblings('.checkbox ').find('input[type=checkbox]').val());
-        // projectName=$(this).parent().siblings('.project-name').find('a').text();
         account = $(this).parent().siblings('.project-account').text();
         $('div[openContent="reset-name"]').addClass('active');
         var width = document.body.scrollWidth;
@@ -215,12 +213,7 @@ $(function () {
             'height': height
         });
     })
-    //取消按钮
-    $('.pop-btn .reduce').click(function () {
-        $('div[openContent="reset-name"]').removeClass('active');
-        $('div[openContent="delete-project"]').removeClass('active');
-        $('.hide-iframe').removeClass('active');
-    })
+
     //弹框重命名里操作
     $('.pop-btn .yes').click(function () {
         var rename = $('#rename').val();
@@ -232,7 +225,6 @@ $(function () {
             $('p.rename-hint').text('请输入 2-16 位汉字、字母、数字');
         } else {
             $('p.rename-hint').text('');
-            console.log(projectId);
             $.ajax({
                 type: "POST",
                 url: "/alink-hq/project/rename",
@@ -250,11 +242,16 @@ $(function () {
             });
         }
     })
-    //删除项目
+    //删除项目弹框
     $('.delete-project').click(function () {
         projectId = parseInt($(this).parent().siblings('.checkbox ').find('input[type=checkbox]').val());
-        // projectName=$(this).parent().siblings('.project-name').find('a').text();
         account = $(this).parent().siblings('.project-account').text();
+        // console.log(projectId, account);
+        var msg = {
+            id: projectId,
+            account: account,
+        }
+        deleteArray.push(msg);
         $('div[openContent="delete-project"]').addClass('active');
         var width = document.body.scrollWidth;
         var height = document.body.scrollHeight;
@@ -262,40 +259,17 @@ $(function () {
         $('.hide-iframe').css({
             'width': width,
             'height': height
-        });
-        console.log(' projectId', projectId);
-        console.log('account',account);
-        // $.ajax({
-        //     type: "POST",
-        //     url: "/alink-hq/project/delete",
-        //     data: {projectId: projectId,account: account},
-        //     dataType: "json",
-        //     success: function (res) {
-        //         console.log(res);
-        //         if (res.result == '000') {
-        //             // $('p.rename-hint').text('');
-        //             // location.reload();
-        //         } else if (res.result == '200') {
-        //             // $('p.rename-hint').text('已存在，请重新输入');
-        //         }
-        //     }
-        // });
-
+        })
+        console.log(deleteArray);
     })
-    $('div[openContent="delete-project"] .yes').click(function(){
-        var jsonArray=[];
-        console.log(projectId,account);
-        var  msg={
-            projectId:projectId,
-            account:account,
-        }
-        jsonArray.push(msg);
-        var newJsonArray=JSON.stringify(jsonArray);
-        console.log(newJsonArray);
+    //确定删除
+    $('div[openContent="delete-project"] .yes').click(function () {
+        var newJsonArray = JSON.stringify(deleteArray);
+        // console.log(newJsonArray);
         $.ajax({
             type: "POST",
             url: "/alink-hq/project/delete",
-            data: {projectInfo:newJsonArray},
+            data: {projectInfo: newJsonArray},
             dataType: "json",
             success: function (res) {
                 console.log(res);
@@ -305,71 +279,136 @@ $(function () {
                     console.log('系统错误');
                 }
             }
-        });
+        })
     })
-        // var jsonArray = [];//定义一个数组
-        // $('input[name="..."]:checked').each(function () {//遍历每一个名字为interest的复选框，其中选中的执行函数
-        //     var json = new Object;
-        //     json.id = ..;
-        //     json.account = ..;
-        //     jsonArray.push(json);//将选中的值添加到数组chk_value中
-        // });
-        // location.href = "/alink-hq/project/delete?projectInfo=" + JSON.stringify(jsonArray);
-    //移交
-    $('.exchange-project').click(function(){
-        var jsonArray=[];
-        var projectName=$(this).parent('td').siblings('.project-name').find('a').text();
-        var account=$(this).parent('td').siblings('.project-account').text();
-        var coname=$(this).parent('td').siblings('.project-coname').text();
-        var id=$(this).parent('td').siblings('.project-id').text();
-        console.log(projectName,account,coname);
-        var  msg={
-            name:projectName,
-            account:account,
-            coname:coname,
-            id:id
+    //移交单个
+    $('.exchange-project').click(function () {
+        var jsonArray = [];
+        var projectName = $(this).parent('td').siblings('.project-name').find('a').text();
+        var account = $(this).parent('td').siblings('.project-account').text();
+        var coname = $(this).parent('td').siblings('.project-coname').text();
+        var id = $(this).parent('td').siblings('.project-id').text();
+        // console.log(projectName, account, coname);
+        var msg = {
+            name: projectName,
+            account: account,
+            coname: coname,
+            id: id
         }
         jsonArray.push(msg);
-       var newJsonArray=JSON.stringify(jsonArray);
-        var projectInfo  = encodeURIComponent(newJsonArray);
-
-        console.log(newJsonArray);
-        location.href='/alink-hq/project/transferPage?projectInfo='+projectInfo;
+        var newJsonArray = JSON.stringify(jsonArray);
+        var projectInfo = encodeURIComponent(newJsonArray);
+        location.href = '/alink-hq/project/transferPage?projectInfo=' + projectInfo;
+    })
+    //删除多个弹框
+    $('#delete-project').click(function () {
+        $('tbody tr td.checkbox input').each(function () {
+            var checked = $(this).prop('checked');
+            if (checked) {
+                var account = $(this).parent('td').siblings('.project-account').text();
+                var projectId =  parseInt($(this).parent('td').siblings('.project-id').text());
+                // console.log(account, projectId);
+                var msg = {
+                    id: projectId,
+                    account: account
+                }
+                deleteArray.push(msg);
+            }
+        })
+        $('div[openContent="delete-project"]').addClass('active');
+        var width = document.body.scrollWidth;
+        var height = document.body.scrollHeight;
+        $('.hide-iframe').addClass('active');
+        $('.hide-iframe').css({
+            'width': width,
+            'height': height
+        })
+        console.log(deleteArray);
     })
 
-    //跳转项目详情
-    // $('.project-name ').click(function(){
-    //     var jsonArray=[];
-    //     var coname=$(this).siblings('.project-coname').text();
-    //     var account=$(this).siblings('.project-account').text();
-    //     var meshNum=parseInt($(this).siblings('.meshNum').text());
-    //     var projectId=parseInt($(this).siblings('.project-id').text());
-    //     console.log(coname,account,meshNum,projectId);
-    //     // var  msg={
-    //     //     account:account,
-    //     //     coname:coname,
-    //     //     meshNum:meshNum,
-    //     //     projectId:projectId
-    //     // }
-    //     // jsonArray.push(msg);
-    //     // var newJsonArray=JSON.stringify(jsonArray);
-    //     // var projectInfo  = encodeURIComponent(newJsonArray);
-    //     $.ajax({
-    //         type: "get",
-    //         url: "/alink-hq/project/detail",
-    //         data: {coname:coname,account:account,meshNum:meshNum,projectId:projectId},
-    //         dataType: "text",
-    //         success: function (res) {
-    //             console.log(res);
-    //             // if (res.result == '000') {
-    //             //     location.reload();
-    //             // } else if (res.result == '200') {
-    //             //     console.log('系统错误');
-    //             // }
-    //         }
-    //     })
-    // })
+    //移交项目多个
+    $('#transfer-project').click(function () {
+        var num = 0;
+        var jsonArray = [];
+        $('tbody tr td.checkbox input').each(function () {
+            var checked = $(this).prop('checked');
+            if (checked) {
+                num++;
+                var projectName = $(this).parent('td').siblings('.project-name').find('a').text();
+                var account = $(this).parent('td').siblings('.project-account').text();
+                var coname = $(this).parent('td').siblings('.project-coname').text();
+                var id = $(this).parent('td').siblings('.project-id').text();
+                // console.log(projectName, account, coname);
+                var msg = {
+                    name: projectName,
+                    account: account,
+                    coname: coname,
+                    id: id
+                }
+                jsonArray.push(msg);
+
+            }
+        })
+        // console.log(num);
+        // console.log(jsonArray);
+        var newJsonArray = JSON.stringify(jsonArray);
+        var projectInfo = encodeURIComponent(newJsonArray);
+        // console.log(newJsonArray);
+        location.href = '/alink-hq/project/transferPage?projectInfo=' + projectInfo;
+    })
+    //取消按钮
+    $('.pop-btn .reduce').click(function () {
+        $('div[openContent="reset-name"]').removeClass('active');
+        $('div[openContent="delete-project"]').removeClass('active');
+        $('.hide-iframe').removeClass('active');
+        deleteArray= [];
+    })
 })
+$(function () {
+    var page = parseInt($('.pages').text());
+    var pageTotal = parseInt($('.pageTotal').text());
+    if (page == 1) {
+        $('.prev-page img').attr('src', '/alink-hq/static/img/left-arrow.png');
+        $(".prev-page ").attr("disabled", true);
+    } else {
+        $('.prev-page img').attr('src', '/alink-hq/static/img/left-arrow-color.png');
+    }
+    if (page == pageTotal) {
+        $('.next-page img').attr('src', '/alink-hq/static/img/right-arrow.png');
+        $(".next-page ").attr("disabled", true);
+    } else {
+        $('.next-page img').attr('src', '/alink-hq/static/img/right-arrow-color.png');
+    }
+})
+//paraName 等找参数的名称
+function GetUrlParam(paraName) {
+    var url = document.location.toString();
+    var arrObj = url.split("?");
+    if (arrObj.length > 1) {
+        var arrPara = arrObj[1].split("&");
+        var arr;
+        for (var i = 0; i < arrPara.length; i++) {
+            arr = arrPara[i].split("=");
+            if (arr != null && arr[0] == paraName) {
+                return arr[1];
+            }
+        }
+        return "";
+    }
+    else {
+        return "";
+    }
+}
+
+function skipLimit() {
+    var skipPage = parseInt($('#skipPage').val());
+    var pageTotal = parseInt($('.pageTotal').text());
+    // console.log(skipPage, pageTotal)
+    if (skipPage < 1 || skipPage > pageTotal) {
+        $('#skipPage').val('');
+    }
+}
+
 //重命名校验
 function nameKeyUp() {
     var rename = $('#rename').val();
@@ -401,72 +440,3 @@ function condition(pageSize, pageNum, sortFlag) {
     var newUrl = url2 + '&pageNum=' + pageNum + '&sortFlag=' + sortFlag + '&pageSize=' + pageSize + '&projectName=' + projectName + '&account=' + account + '&startCreateDate=' + startCreateDate + '&endCreateDate=' + endCreateDate + '&startUpdateDate=' + startUpdateDate + '&endUpdateDate=' + endUpdateDate;
     location.href = newUrl;
 }
-// $('.moment').mousedown(function(){
-//
-//     var url=$(this).attr('src');
-//     var newUrl=url.substr(0, url.length-7)+'.png';
-//     $(this).attr('src',newUrl);
-// })
-// $('.moment').mouseup(function(){
-//     var url=$(this).attr('src');
-//     var newUrl=url.substr(0, url.length-4)+'-un.png';
-//     $(this).attr('src',newUrl);
-// })
-
-//paraName 等找参数的名称
-function GetUrlParam(paraName) {
-    var url = document.location.toString();
-    var arrObj = url.split("?");
-    if (arrObj.length > 1) {
-        var arrPara = arrObj[1].split("&");
-        var arr;
-        for (var i = 0; i < arrPara.length; i++) {
-            arr = arrPara[i].split("=");
-            if (arr != null && arr[0] == paraName) {
-                return arr[1];
-            }
-        }
-        return "";
-    }
-    else {
-        return "";
-    }
-}
-function skipLimit() {
-    var skipPage = parseInt($('#skipPage').val());
-    var pageTotal = parseInt($('.pageTotal').text());
-    console.log(skipPage, pageTotal)
-    if (skipPage < 1 || skipPage > pageTotal) {
-        $('#skipPage').val('');
-    }
-}
-$('#transfer-project').click(function(){
-    var num=0;
-    var jsonArray=[];
-    $('tbody tr td.checkbox input').each(function(){
-        var checked=$(this).prop('checked');
-        // location.href='/alink-hq/project/transferPage?projectInfo='+projectInfo;
-        if(checked){
-            num++;
-            var projectName=$(this).parent('td').siblings('.project-name').find('a').text();
-            var account=$(this).parent('td').siblings('.project-account').text();
-            var coname=$(this).parent('td').siblings('.project-coname').text();
-            var id=$(this).parent('td').siblings('.project-id').text();
-            console.log(projectName,account,coname);
-            var  msg={
-                name:projectName,
-                account:account,
-                coname:coname,
-                id:id
-            }
-            jsonArray.push(msg);
-
-        }
-    })
-    console.log(num);
-    console.log(jsonArray);
-    var newJsonArray=JSON.stringify(jsonArray);
-    var projectInfo  = encodeURIComponent(newJsonArray);
-    console.log(newJsonArray);
-    location.href='/alink-hq/project/transferPage?projectInfo='+projectInfo;
-})

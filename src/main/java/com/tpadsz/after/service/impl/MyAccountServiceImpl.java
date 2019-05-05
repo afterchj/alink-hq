@@ -82,4 +82,13 @@ public class MyAccountServiceImpl implements MyAccountService {
         }
         return true;
     }
+
+    @Override
+    public boolean getUserName(String uname) {
+        int i = myAccountDao.getUserName(uname);
+        if (i==0){
+            return false;
+        }
+        return true;
+    }
 }

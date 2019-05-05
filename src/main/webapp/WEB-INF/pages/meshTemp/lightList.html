@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <head>
-    <title>区域列表</title>
+    <title>灯列表</title>
     <script src="/alink-hq/static/js/browser.js"></script>
     <script src="/alink-hq/static/js/jquery.min.js"></script>
     <link rel="stylesheet" th:href="@{/static/css/common.css}"/>
@@ -17,7 +17,7 @@
     <div th:replace="common/left::left"></div>
     <div class="main-right">
         <div class="clearfix main-right-nav">
-            <div class="f-l main-right-title">区域列表：</div>
+            <div class="f-l main-right-title">灯列表</div>
             <div class="f-r pointer">
                 <img src="/alink-hq/static/img/create-project.png" alt="">
             </div>
@@ -27,28 +27,28 @@
         </div>
 
         <div id="meshList" class="">
-            <form class="clearfix" th:action="@{/place/list}" method="post">
+            <form class="clearfix" th:action="@{/light/list}" method="post">
                 <input type="hidden" name="uid" th:value="${dict.uid}">
                 <input type="hidden" id="pageSize" th:value="${dict.pageSize}">
                 <div class="search-condition temp">
                     <div class="f-l search" style="margin-right:125px;">
                         <div>
-                            <label for="pname">区域名称：</label>
-                            <input type="text" id="pname" name="pname" th:value="${dict.pname}" placeholder="请输入区域名称">
+                            <label for="lname">灯名称：</label>
+                            <input type="text" id="lname" name="lname" th:value="${dict.lname}" placeholder="请输入灯名称">
                         </div>
                         <div>
-                            <label for="name">网络名称：</label>
-                            <input type="text" id="name" name="mname" th:value="${dict.mname}" placeholder="请输入网络名称">
+                            <label for="lmac">灯MAC地址：</label>
+                            <input type="text" id="lmac" name="lmac" th:value="${dict.lmac}" placeholder="请输入MAC地址">
                         </div>
                     </div>
                     <div class="f-l search">
                         <div>
-                            <label for="mid">网络ID：</label>
-                            <input type="text" id="mid" name="meshId" th:value="${dict.meshId}" placeholder="请输入网络ID">
+                            <label for="mname">网络名称：</label>
+                            <input type="text" id="mname" name="mname" th:value="${dict.mname}" placeholder="请输入网络名称">
                         </div>
                         <div>
-                            <label for="pid">区域ID：</label>
-                            <input type="text" id="pid" name="placeId" th:value="${dict.placeId}" placeholder="请输入区域ID">
+                            <label for="mid">网络ID：</label>
+                            <input type="text" id="mid" name="meshId" th:value="${dict.meshId}" placeholder="请输入网络ID">
                         </div>
                     </div>
                     <div class="f-r search-button ">
@@ -66,46 +66,53 @@
                                 </span>
                                 <span class="">全选</span>
                             </th>
-                            <th>区域名称</th>
-                            <th>区域ID</th>
+                            <th>灯名称</th>
+                            <th>灯MAC地址</th>
                             <th>属于网络</th>
                             <th>网络ID</th>
-                            <th>组数量</th>
+                            <th>X（色温），Y（亮度）</th>
                             <th>状态</th>
                             <th>操作</th>
                         </tr>
                         </thead>
                         <tbody>
-                        <tr th:each="place:${pageInfo.list}">
-                            <td class="checkbox"><input type="checkbox" name="ids" th:value="${place.id}"></td>
-                            <td class="k-link"><a th:href="@{/place/info(id=${place.id})}" th:text="${place.pname}"></a>
+                        <tr th:each="light:${pageInfo.list}">
+                            <td><input type="checkbox" name="ids" th:value="${light.id}"></td>
+                            <td class="k-link"><a th:href="@{/light/info(id=${light.id})}" th:text="${light.lname}"></a></td>
+                            <td th:text="${light.lmac}"></td>
+                            <td th:text="${light.mname}"></td>
+                            <td th:text="${light.mesh_id}"></td>
+                            <td><span th:text="${light.x}"></span><span>,&nbsp;&nbsp;</span><span th:text="${light.y}"></span></td>
+                            <td th:switch="${light.off}">
+                                <span th:case="1">开</span>
+                                <span th:case="0">关</span>
+                                <span th:case="*">未知</span>
                             </td>
-                            <td th:text="${place.place_id}"></td>
-                            <td th:text="${place.mname}"></td>
-                            <td th:text="${place.mesh_id}"></td>
-                            <td th:text="${place.gcount}"></td>
-                            <td>未知</td>
                             <td class="p-r">
-                                <img src="/alink-hq/static/img/edit.png" th:alt="${place.id}" class="reset-name pointer" title="重命名">
-                                <!--<a th:href="@{/place/move(ids=${place.id})}" onclick="return confirm('您确定要删除所选的区域吗？')">-->
-                                <!--<img src="/alink-hq/static/img/delete.png" alt="" class="left-img pointer">-->
-                                <!--</a>-->
-                                <a href="javascript:void(0);" class="singleDel pointer">
-                                    <img src="/alink-hq/static/img/delete.png" alt="" class="left-img pointer" title="删除">
+                                <img src="/alink-hq/static/img/edit.png" th:alt="${light.id}" class="rename"  title="重命名">
+                                <a th:href="@{/light/move(ids=${light.id})}">
+                                    <img src="/alink-hq/static/img/exchange.png" alt="" class="center-img" title="移交">
+                                </a>
+                                <a th:href="@{/light/delete(ids=${light.id})}"
+                                   onclick="return confirm('您确定要删除所选的网络吗？')">
+                                    <img src="/alink-hq/static/img/delete.png" alt="" id="singleDel" title="删除">
                                 </a>
                             </td>
                         </tr>
                         </tbody>
                         <tfoot>
                         <tr>
-                            <td colspan="9" class="clearfix page">
+                            <td colspan="8" class="clearfix page">
                                 <div class="f-l">
                             <span class="selected-order">已选择
-                                <span id="amount" class="amount">0</span>条数据
+                                 <span id="amount" class="amount">0</span>条数据
+                            </span>
+                                    <span class="m-r-20">
+                                <img src="/alink-hq/static/img/true-over-un.png" alt="" id="multiMove">
                             </span>
                                     <span>
-                                <img src="/alink-hq/static/img/delete-btn-un.png" alt="" id="multiMove" class="pointer">
-                             </span>
+                                <img src="/alink-hq/static/img/delete-btn-un.png" alt="" id="multiDel">
+                            </span>
                                 </div>
                                 <div th:replace="common/page::page"></div>
                             </td>
@@ -120,18 +127,16 @@
                                 <span style="vertical-align: sub;"><input type="checkbox" class="pointer"></span>
                                 <span class="">全选</span>
                             </th>
-                            <th>区域名称</th>
-                            <th>区域ID</th>
+                            <th>组名称</th>
                             <th>属于网络</th>
                             <th>网络ID</th>
-                            <th>组数量</th>
-                            <th>状态</th>
+                            <th>灯数量</th>
                             <th>操作</th>
                         </tr>
                         </thead>
                         <tbody>
                         <tr>
-                            <td colspan="8">
+                            <td colspan="9">
                                 <img src="/alink-hq/static/img/no-data.png" alt="">
                                 <p>暂无数据</p>
                             </td>
@@ -143,39 +148,7 @@
         </div>
     </div>
 </div>
-<!-- 重命名弹框 -->
-<div class="confirm-on-off pop-iframe  " openContent="reset-name">
-    <div class="confirm-on-off-nav p-r pop-nav">
-        重命名
-    </div>
-    <div class="pop-content">
-        <div class="newName">
-            <p class="rename-hint"></p>
-            <label for="rename">新名称</label>
-            <input type="text" placeholder="请输入（2-16位汉字、字母、数字）" id="rename" onkeyup="nameKeyUp()" maxlength="16"/>
-        </div>
-        <div class="pop-btn">
-            <button class="reduce">取消</button>
-            <button class="yes">确定</button>
-        </div>
-    </div>
-</div>
-<!-- 删除账户 -->
-<div class="pop-iframe" openContent="delete-place">
-    <div class=" p-r pop-nav">
-        温馨提示
-    </div>
-    <div class="pop-content">
-        <div class="reset-pwd">您确定要删除所选的区域吗？</div>
-        <div class="reset-pwd-hint">删除后将无法恢复，请慎重！</div>
-        <div class="pop-btn">
-            <button class="reduce">取消</button>
-            <button class="yes">确定</button>
-        </div>
-    </div>
-</div>
-<div class="hide-iframe "></div>
 <script type="text/javascript" src="/alink-hq/static/js/page.js"></script>
-<script type="text/javascript" src="/alink-hq/static/js/place.js"></script>
+<script type="text/javascript" src="/alink-hq/static/js/light.js"></script>
 </body>
 </html>

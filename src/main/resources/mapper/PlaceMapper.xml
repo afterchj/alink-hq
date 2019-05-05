@@ -120,7 +120,7 @@
     </select>
 
     <select id="getMesh" resultType="OptionList">
-        SELECT CONCAT_WS('_',id,mesh_id) id, mname name FROM f_mesh m WHERE 1=1
+        SELECT CONCAT_WS('_',id,mesh_id) id, mname label FROM f_mesh m WHERE 1=1
         <include refid="common_choose"/>
     </select>
 

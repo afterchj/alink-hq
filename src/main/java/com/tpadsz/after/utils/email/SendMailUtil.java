@@ -74,7 +74,7 @@ public class SendMailUtil {
 
     public static void main(String[] args) {
         String code = "123456";
-        String to = "766256898@qq.com";
+        String to = "quanhua.shi@tpadsz.com";
         sendCode(code, to, "reset");
     }
 }

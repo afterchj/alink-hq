@@ -26,4 +26,6 @@ public interface MyAccountDao {
     int getEmail(@Param("email") String email);
 
     int updateEmail(@Param("account") String account, @Param("email") String email);
+
+    int getUserName(@Param("uname") String uname);//查询用户名
 }

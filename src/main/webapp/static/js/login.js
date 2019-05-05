@@ -621,7 +621,7 @@ function phoneCode() {
 function sendCode(phoneVal) {
     $.ajax({
         type: "GET",
-        url: "/alink-hq/verify/",
+        url: "/alink-hq/verify",
         data: {
             "mobile": phoneVal
             // "email": email
@@ -638,7 +638,7 @@ function sendCode(phoneVal) {
 function emailCode(emailVal) {
     $.ajax({
         type: "GET",
-        url: "/alink-hq/verify/",
+        url: "/alink-hq/verify",
         data: {
             // "mobile": phoneVal
             "email": emailVal
@@ -647,7 +647,7 @@ function emailCode(emailVal) {
         success: function (res) {
             // console.log(res);
             if (res == 'success') {
-                // console.log('成功发送');
+                console.log('成功发送邮箱');
             }
         }
     })
@@ -1194,27 +1194,15 @@ function emailFindPwdCode() {
             }
         }
     } else {
+        emailCode(emailVal);
+        console.log("emailVal="+emailVal);
         if (codeVal == '') {
             if (newPwd == '') {
-                emailCode(emailVal);
             } else if (pwdResult) {
-                emailCode(emailVal);
                 $('.email-find-password .email-add-hint').text('');
                 $('.email-find-password .email-code-hint').text('');
                 $('.email-find-password .email-password-hint').text('');
                 $('#pwd-e').val('');
-            }
-        } else if (codeResult == 'failure') {
-            if (newPwd == '') {
-                emailCode(emailVal)
-            } else if (pwdResult) {
-                emailCode(emailVal)
-            }
-        } else if (codeResult == 'success') {
-            if (newPwd == '') {
-                emailCode(emailVal)
-            } else if (pwdResult) {
-                emailCode(emailVal)
             }
         }
     }
