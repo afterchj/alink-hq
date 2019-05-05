@@ -10,10 +10,11 @@
     <link rel="stylesheet" th:href="@{/static/css/mesh.css}">
     <title>移交账号</title>
     <style>
-        #preload-anim{
+        #preload-anim {
             display: none;
         }
-        #preload-anim.active{
+
+        #preload-anim.active {
             display: block;
         }
     </style>
@@ -60,7 +61,8 @@
                         <label for="fid"><span>*</span>隶属公司：</label>
                         <select name="fid" id="fid" class="pointer">
                             <option value="" class="pointer">请选择公司</option>
-                            <option th:each="firm:${firmList}" th:value="${firm.id}" th:text="${firm.coname }" class="pointer"></option>
+                            <option th:each="firm:${firmList}" th:value="${firm.id}" th:text="${firm.coname }"
+                                    class="pointer"></option>
                         </select>
                     </div>
                     <p class="account-hint"></p>
@@ -99,11 +101,10 @@
     $(function () {
         $('#fid').change(function () {
             var fid = $(this).children('option:selected').val();
-            if(fid!=''){
+            if (fid != '') {
                 fid = parseInt(fid);
             }
-            console.log('fid', fid);
-            $('#account-transfer').children().remove();
+            $('#account-transfer>option').not(":eq(0)").remove();
             $.ajax({
                 type: "post",
                 url: "/alink-hq/project/findAccountByFid",
@@ -119,32 +120,31 @@
                     }
                     $('#account-transfer').append(content);
                 }
-            });
+            })
         })
         $('.confirm-btn').click(function () {
-            var projectInfo=$('#projectInfo').val();
-            var fid=$('#fid option:selected').val();
-            var uid=$('#account-transfer option:selected').val();
-            console.log('uid',uid,'fid', fid);
-            if(uid==''){
+            var projectInfo = $('#projectInfo').val();
+            var fid = $('#fid option:selected').val();
+            var uid = $('#account-transfer option:selected').val();
+            if (uid == '') {
                 $('.account-hint').text('请选择账号');
-            }else{
+            } else {
                 $('.account-hint').text('');
             }
-            if(fid==''){
+            if (fid == '') {
                 $('.company-hint').text('请选择公司')
-            }else{
+            } else {
                 $('.company-hint').text('');
             }
-            if(fid!=''&& uid!=''){
+            if (fid != '' && uid != '') {
                 $.ajax({
                     type: "post",
                     url: "/alink-hq/project/transfer",
-                    data: {projectInfo:projectInfo,uid:uid},
+                    data: {projectInfo: projectInfo, uid: uid},
                     dataType: "json",
                     success: function (data) {
                         console.log(data);
-                        if(data.result=='000'){
+                        if (data.result == '000') {
                             $('#preload-anim').addClass('active');
                             $('.hide-iframe').addClass('active');
                             $('#preload-anim .title').text('移交成功，正在跳转项目列表');
@@ -158,7 +158,44 @@
 
         })
     })
+    $(function () {
+        $('.one-list li').each(function () {
+            $('.main-left>ul>li.one-list:eq(0)').find('.on-off-triangle').attr('src', '/alink-hq/static/img/right-triange-un.png');
+            $('.main-left>ul>li.one-list:eq(0)').find('.two-list').addClass('active');
+            var tab = $(this).attr('tab');
+            if (tab == 'projectList') {
+                $(this).addClass('active').siblings().removeClass('active');
+            }
+        })
+        $('.on-off-triangle').click(function () {
+            var imgUrl = $(this).attr('src');
+            if (imgUrl == '/alink-hq/static/img/bottom-triangle-un.png') {
+                $(this).attr('src', '/alink-hq/static/img/right-triange-un.png');
+                $(this).parent().parent('.one-list').find('.two-list').addClass('active');
+            } else {
+                $(this).attr('src', '/alink-hq/static/img/bottom-triangle-un.png');
+                $(this).parent().parent('.one-list').find('.two-list').removeClass('active');
+            }
+        })
+    })
+    //监听公司选择
+    $('#fid').change(function(){
+        var selected=$(this).children('option:selected').val();
+        if(selected==''){
+            $('.company-hint').text('请选择公司');
+        }else{
+            $('.company-hint').text('');
+        }
+    })
+    //监听账号选择
+    $('#account-transfer').change(function(){
+        var selected=$(this).children('option:selected').val();
+        if(selected==''){
+            $('.account-hint').text('请选择账号');
+        }else{
+            $('.account-hint').text('');
+        }
+    })
 </script>
 </body>
-
 </html>
