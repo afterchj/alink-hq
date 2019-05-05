@@ -241,6 +241,7 @@ public class ProjectController {
                 lightNum = projectService.findLightNum(projectId);
             }
         }
+        model.addAttribute("projectId", projectId);
         model.addAttribute("meshNum", meshNum);
         model.addAttribute("placeNum", placeNum);
         model.addAttribute("groupNum", groupNum);

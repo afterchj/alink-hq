@@ -16,6 +16,18 @@
         input[type="text"] {
             background: white
         }
+        p.success-hint{
+            font-size: 15px;
+            color: red;
+            padding-left: 106px;
+            line-height: 2;
+            /* display: none; */
+            visibility: hidden;
+        }
+        p.success-hint.active{
+            /* display: block; */
+            visibility:visible;
+        }
     </style>
 </head>
 
@@ -47,6 +59,7 @@
                             <label for="">激活码：</label>
                             <input type="text" placeholder="请输入激活码" id="code" name="code">
                             <button type="button" class="security-code" id="codeSubmit">获取激活码</button>
+                            <p class="success-hint" style="height: 35px;"></p>
                         </div>
                         <input type="hidden" th:value="${account}" id="account" name="account" class="account"/>
                         <input type="hidden" th:value="${flag}" id="flag" name="flag"/>
