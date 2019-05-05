@@ -18,9 +18,9 @@ function isEmpty(value){
  * 匹配输入框
  */
 function matchInput(event) {
-    $('p.'+event.data.hint).removeClass('active').text('');
     var context = $(event.data.context).val();
-    if (!event.data.match.test(context)){
+    if (!(event.data.match).test(context)){
+        $('p.'+event.data.hint).removeClass('active').text('');
         $('p.'+event.data.hint).addClass('active').text(event.data.text);
     }else {
         $('p.'+event.data.hint).removeClass('active').text('');

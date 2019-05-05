@@ -4,18 +4,19 @@ $(function () {
     var match=/^(\+?0?86\-?)?1[345789]\d{9}$/;
     var text = "请输入正确的手机号";
     //鼠标点击任意一处 判断手机号是否正确
+    // $("#phone").bind("change", function () {
+    //         var context = $("#phone").val();
+    //         if (!match.test($.trim(context))){
+    //             $('p.phone-hint').removeClass('active').text('');
+    //             $('p.phone-hint').addClass('active').text(text);
+    //         }else {
+    //             $('p.phone-hint').removeClass('active').text('');
+    //         }
+    //     });
     $("#phone").bind(
         "change",
-        function () {
-            var context = $("#phone").val();
-            if (!match.test($.trim(context))){
-                $('p.phone-hint').removeClass('active').text('');
-                $('p.phone-hint').addClass('active').text(text);
-            }else {
-                $('p.phone-hint').removeClass('active').text('');
-            }
-        });
-
+        {hint:"phone-hint",context:"#phone",text:text,match:match},
+        matchInput);
     //点击获取验证码
     $("#codeSubmit").click(function () {
         $("p.code-hint").removeClass('active').text('');
@@ -32,7 +33,6 @@ $(function () {
             $("p.phone-hint").removeClass('active').text('');
             $("p.phone-hint").addClass('active').text("请输入正确的手机号");
         }else {
-
             $.ajax({
                 type:"POST",
                 url:"/alink-hq/myAccount/sendCode",
@@ -102,6 +102,10 @@ function clickFillSubmit(event) {
                         //验证码不正确
                         $("p.code-hint").removeClass('active').text('');
                         $("p.code-hint").addClass('active').text("激活码不正确");
+                    }else if (info=="codeTimeOut"){
+                        //验证码超时
+                        $("p.code-hint").removeClass('active').text('');
+                        $("p.code-hint").addClass('active').text("验证码已超时，请重新获取");
                     }else if (info=="dbError"){
                         //数据库异常
                         var content = "加载失败，请重新尝试";
