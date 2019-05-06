@@ -75,19 +75,18 @@
             g.id,
             m.id mid,
             IFNULL(g.gname, 'null') gname,
-            IFNULL(p.name, 'null') name,
+            IFNULL(p. NAME, 'null') NAME,
             m.project_id,
             m.mname,
             m.mesh_id,
             pl.pname,
             pl.id pid,
-            IFNULL(l.lcount, 0) lcount
-        FROM
-            f_group g
+            COUNT(0) lcount
+        FROM f_group g
         LEFT JOIN f_mesh m ON m.id = g.mid
         LEFT JOIN f_project p ON p.id = m.project_id
         LEFT JOIN f_place pl ON pl.id = g.pid
-        LEFT JOIN (SELECT COUNT(1) lcount,gid FROM f_light l LEFT JOIN f_light_setting ls ON l.id=ls.lid GROUP BY gid) l ON l.gid = g.id
+        LEFT JOIN (SELECT COUNT(1) lcount,l.id,l.gid FROM f_light l LEFT JOIN f_light_setting ls ON l.id = ls.lid GROUP BY l.id,gid) l ON l.gid = g.id
         WHERE g.id=#{id}
     </select>
     <select id="selectByGid" resultType="map" parameterType="list">
