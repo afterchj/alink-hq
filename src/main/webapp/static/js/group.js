@@ -129,19 +129,19 @@ $(function () {
     });
 });
 $(function () {
-    var page = parseInt($('.pages').text());
-    var pageTotal = parseInt($('.pageTotal').text());
+    var page = parseInt($('#pageNum').text());
+    var pageTotal = parseInt($('#pages').text());
     if (page == 1) {
-        $('.prev-page img').attr('src', '/alink-hq/static/img/left-arrow.png');
-        $(".prev-page ").addClass('disabled');
+        $('#prev').attr('src', '/alink-hq/static/img/left-arrow.png');
+        $("#prev").addClass('disabled');
     } else {
-        $('.prev-page img').attr('src', '/alink-hq/static/img/left-arrow-color.png');
+        $('#prev').attr('src', '/alink-hq/static/img/left-arrow-color.png');
     }
     if (page == pageTotal) {
-        $('.next-page img').attr('src', '/alink-hq/static/img/right-arrow.png');
-        $(".next-page ").addClass('disabled');
+        $('#next').attr('src', '/alink-hq/static/img/right-arrow.png');
+        $("#next").addClass('disabled');
     } else {
-        $('.next-page img').attr('src', '/alink-hq/static/img/right-arrow-color.png');
+        $('#next').attr('src', '/alink-hq/static/img/right-arrow-color.png');
     }
 })
 function nameKeyUp(){
