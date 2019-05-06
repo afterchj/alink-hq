@@ -89,14 +89,14 @@
                                 <span th:case="*">未知</span>
                             </td>
                             <td class="p-r">
-                                <img src="/alink-hq/static/img/edit.png" th:alt="${light.id}" class="rename"  title="重命名">
+                                <img src="/alink-hq/static/img/edit.png" th:alt="${light.id}" class="rename pointer"  title="重命名">
                                 <a th:href="@{/light/move(ids=${light.id})}">
-                                    <img src="/alink-hq/static/img/exchange.png" alt="" class="center-img" title="移交">
+                                    <img src="/alink-hq/static/img/exchange.png" alt="" class="center-img pointer" title="移交">
                                 </a>
-                                <a th:href="@{/light/delete(ids=${light.id})}"
-                                   onclick="return confirm('您确定要删除所选的网络吗？')">
-                                    <img src="/alink-hq/static/img/delete.png" alt="" id="singleDel" title="删除">
-                                </a>
+                                <!--<a th:href="@{/light/delete(ids=${light.id})}"-->
+                                   <!--onclick="return confirm('您确定要删除所选的网络吗？')">-->
+                                    <img src="/alink-hq/static/img/delete.png" alt="" class="singleDel pointer" title="删除">
+                                <!--</a>-->
                             </td>
                         </tr>
                         </tbody>
@@ -148,6 +148,40 @@
         </div>
     </div>
 </div>
+<!-- 重命名弹框 -->
+<div class="confirm-on-off pop-iframe  " openContent="reset-name">
+    <div class="confirm-on-off-nav p-r pop-nav">
+        重命名
+    </div>
+    <div class="pop-content">
+        <div class="newName">
+            <p class="rename-hint"></p>
+            <label for="rename">新名称</label>
+            <input type="text" placeholder="请输入（2-16位汉字、字母、数字）" id="rename" onkeyup="nameKeyUp()" maxlength="16"/>
+        </div>
+        <div class="pop-btn">
+            <button class="reduce">取消</button>
+            <button class="yes">确定</button>
+        </div>
+    </div>
+</div>
+<!-- 删除账户 -->
+<div class="pop-iframe" openContent="delete-mesh">
+    <div class=" p-r pop-nav">
+        温馨提示
+    </div>
+    <div class="pop-content">
+        <div class="reset-pwd">您确定要删除所选的组吗？</div>
+        <div class="reset-pwd-hint">
+            删除后所选组所有的灯将会进入所属网络未分组中请慎重！
+        </div>
+        <div class="pop-btn">
+            <button class="reduce">取消</button>
+            <button class="yes">确定</button>
+        </div>
+    </div>
+</div>
+<div class="hide-iframe "></div>
 <script type="text/javascript" src="/alink-hq/static/js/left.js"></script>
 <script type="text/javascript" src="/alink-hq/static/js/page.js"></script>
 <script type="text/javascript" src="/alink-hq/static/js/light.js"></script>

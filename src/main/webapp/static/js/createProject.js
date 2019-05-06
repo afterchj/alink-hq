@@ -12,10 +12,16 @@ $('.confirm-create').click(function () {
     var account = $('#account').val();
     if(projectName==''){
         $('.project-hint').text('请输入项目名称');
+    }else{
+        $('.project-hint').text('');
     }
     if (account == '') {
         $('.account-hint').text('请输入施工人员账号');
-    } else {
+    }else{
+        $('.account-hint').text('');
+    }
+    console.log(projectName,account);
+    if(projectName!='' &&  account!=''){
         $.ajax({
             type: "post",
             url: "/alink-hq/project/create",

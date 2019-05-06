@@ -98,8 +98,10 @@
                         <td th:if="${user.role_id=='3'}" th:text="乙方管理员" class="role"></td>
                         <td th:if="${user.role_id=='4'}" th:text="施工人员" class="role"></td>
                         <td th:text="${user.create_date}"></td>
-                        <td th:text="${user.status}" class="status pointer" openTab="start-use" id="start-use">
-                        </td>
+                        <!--<td th:text="${user.status}" class="status pointer" openTab="start-use" id="start-use">-->
+                        <!--</td>-->
+                        <td th:if="${user.status=='1'}" th:text="启用" openTab="start-use" id="start-use" class="status pointer"></td>
+                        <td th:if="${user.status=='0'}" th:text="禁用" openTab="start-use" id="start-use" class="status pointer"></td>
                         <td class="p-r">
                             <img src="/alink-hq/static/img/edit.png" alt="" openTab="reset-pwd" id="reset-pwd"
                                  class="pointer" th:title="重置密码">
