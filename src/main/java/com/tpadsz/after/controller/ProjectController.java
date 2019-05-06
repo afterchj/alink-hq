@@ -72,7 +72,9 @@ public class ProjectController {
                         startUpdateDate, endUpdateDate, uid, sortFlag);
             }
             PageInfo<ProjectList> pageInfo = new PageInfo<>(list, pageSize);
-            model.addAttribute("pageInfo", pageInfo);
+            if (pageInfo.getList().size() > 0) {
+                model.addAttribute("pageInfo", pageInfo);
+            }
             model.addAttribute("account", account);
             model.addAttribute("projectName", projectName);
             model.addAttribute("startCreateDate", startCreateDate);
