@@ -1,5 +1,5 @@
 .nav-top{
-    background-color: #3598db;
+
     height: 100px;
     line-height: 100px;
     padding: 0 58px 0 45px;
@@ -11,7 +11,6 @@
     font-weight:bold;
 }
 .ad-nav{
-    font-size: 24px;
     margin-left: 40px;
 }
 .container{
@@ -39,17 +38,20 @@
 
 }
 .ad-nav img{
-    margin-right: 15px;
+    width: 25px;
     position: absolute;
     top: 50%;
-    margin-top: -30px;
+    margin-top: -22px;
+    height: 25px;
 }
 .ad-nav span{
     display: inline-block;
+    font-size: 18px;
 }
 .ad-nav span.nav-img{
     position: relative;
-    width:50px;
+    width: 32px;
+    display: inline-block;
 }
 .main-right{
     margin: 0 58px 20px 323px;
