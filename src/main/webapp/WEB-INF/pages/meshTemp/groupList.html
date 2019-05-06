@@ -77,16 +77,16 @@
                             <td th:text="${group.mesh_id}"></td>
                             <td th:text="${group.lcount}"></td>
                             <td class="p-r">
-                                <img src="/alink-hq/static/img/edit.png" th:alt="${group.id}" class="rename"  title="重命名">
+                                <img src="/alink-hq/static/img/edit.png" th:alt="${group.id}" class="rename pointer"  title="重命名">
                                 <a th:href="@{/group/move(ids=${group.id})}">
-                                    <img src="/alink-hq/static/img/exchange.png" alt="" class="center-img" title="移交">
+                                    <img src="/alink-hq/static/img/exchange.png" alt="" class="center-img pointer" title="移交">
                                 </a>
                                 <!--<a th:href="@{/group/delete(ids=${group.id})}">-->
                                     <!--<img src="/alink-hq/static/img/delete.png" alt="" id="singleDel" title="删除">-->
                                 <!--</a>-->
-                                <a href="javascript:void(0);" class="singleDel pointer">
-                                    <img src="/alink-hq/static/img/delete.png" alt="" id="singleDel" title="删除" >
-                                </a>
+                                <!--<a href="javascript:void(0);" class="singleDel pointer">-->
+                                    <img src="/alink-hq/static/img/delete.png" alt="" id="singleDel" class="pointer" title="删除" >
+                                <!--</a>-->
                             </td>
                         </tr>
                         </tbody>
@@ -161,8 +161,10 @@
         温馨提示
     </div>
     <div class="pop-content">
-        <div class="reset-pwd">您确定要删除所选的网络吗？</div>
-        <div class="reset-pwd-hint">（删除后网络中所有信息将无法恢复，请慎重！）</div>
+        <div class="reset-pwd">您确定要删除所选的组吗？</div>
+        <div class="reset-pwd-hint">
+            删除后所选组所有的灯将会进入所属网络未分组中请慎重！
+        </div>
         <div class="pop-btn">
             <button class="reduce">取消</button>
             <button class="yes">确定</button>
