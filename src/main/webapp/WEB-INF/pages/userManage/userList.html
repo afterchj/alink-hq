@@ -63,7 +63,7 @@
             </div>
             <div class="search-result">
                 <!-- 有数据时 -->
-                <table border="1" class="hasData active">
+                <table border="1" class="hasData active" th:if="${pageInfo!=null}">
                     <thead>
                     <tr>
                         <th style="width: 120px;">账号</th>
@@ -158,7 +158,7 @@
                     </tfoot>
                 </table>
                 <!-- 无数据时 -->
-                <table border="1" class="noData ">
+                <table border="1" class="noData " th:if="${pageInfo==null}">
                     <thead>
                     <tr>
                         <th>账号</th>
