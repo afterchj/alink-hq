@@ -47,16 +47,12 @@
         </div>
     </div>
 </div>
+<script type="text/javascript" src="/alink-hq/static/js/left.js"></script>
 <script>
     $(function () {
-        $('.one-list li').each(function () {
-            $('.main-left>ul>li.one-list:eq(1)').find('.on-off-triangle').attr('src', '/alink-hq/static/img/right-triange-un.png');
-            $('.main-left>ul>li.one-list:eq(1)').find('.two-list').addClass('active');
-            var tab = $(this).attr('tab');
-            if (tab == 'meshList') {
-                $(this).addClass('active').siblings().removeClass('active');
-            }
-        })
+        var tabs="meshList";
+        var index=0;
+        left(tabs,index);
     })
 </script>
 </body>

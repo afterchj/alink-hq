@@ -3,26 +3,9 @@
  */
 $(function () {
     myBrowser();
-    var height=$(document).height();
-    $('.main-left').css('height',height);
-    $('.one-list li').each(function () {
-        $('.main-left>ul>li.one-list:eq(0)').find('.on-off-triangle').attr('src', '/alink-hq/static/img/right-triange-un.png');
-        $('.main-left>ul>li.one-list:eq(0)').find('.two-list').addClass('active');
-        var tab = $(this).attr('tab');
-        if (tab == 'groupList') {
-            $(this).addClass('active').siblings().removeClass('active');
-        }
-    });
-    $('.on-off-triangle').click(function () {
-        var imgUrl = $(this).attr('src');
-        if (imgUrl == '/alink-hq/static/img/bottom-triangle-un.png') {
-            $(this).attr('src', '/alink-hq/static/img/right-triange-un.png');
-            $(this).parent().parent('.one-list').find('.two-list').addClass('active');
-        } else {
-            $(this).attr('src', '/alink-hq/static/img/bottom-triangle-un.png');
-            $(this).parent().parent('.one-list').find('.two-list').removeClass('active');
-        }
-    });
+    var tabs='groupList';
+    var index=0;
+    left(tabs,index);
     var id;
     var ids=[];
     //重命名弹框
@@ -125,24 +108,7 @@ $(function () {
         if(idss.length>0){
             location.href = "/alink-hq/group/move?ids=" + idss;
         }
-
-    });
-});
-$(function () {
-    var page = parseInt($('.pages').text());
-    var pageTotal = parseInt($('.pageTotal').text());
-    if (page == 1) {
-        $('.prev-page img').attr('src', '/alink-hq/static/img/left-arrow.png');
-        $(".prev-page ").addClass('disabled');
-    } else {
-        $('.prev-page img').attr('src', '/alink-hq/static/img/left-arrow-color.png');
-    }
-    if (page == pageTotal) {
-        $('.next-page img').attr('src', '/alink-hq/static/img/right-arrow.png');
-        $(".next-page ").addClass('disabled');
-    } else {
-        $('.next-page img').attr('src', '/alink-hq/static/img/right-arrow-color.png');
-    }
+    })
 })
 function nameKeyUp(){
     var name=$('#rename').val();

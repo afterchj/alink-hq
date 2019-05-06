@@ -9,7 +9,8 @@ audio, video {
     padding:0;
     border:0;
     outline:0;
-    font-family: Microsoft Yahei;
+    /*font-family: Helvetica, 'Hiragino Sans GB', 'Microsoft Yahei', '微软雅黑', Arial, sans-serif;*/
+    /*font: 12px/1.5 tahoma,arial,'Hiragino Sans GB',\5b8b\4f53,sans-serif;*/
     font-size: 100%;
     vertical-align:baseline;
     /* background:transparent;*/
@@ -23,6 +24,8 @@ body {
     line-height:1;
     zoom: 1;
     background: #eef2f5;
+    font-family: Helvetica,Arial,"Hiragino Sans GB","Microsoft Yahei","微软雅黑",STHeiti,"华文细黑",sans-serif;
+    font-size: 14px;
 }
 a{
     text-decoration:none;

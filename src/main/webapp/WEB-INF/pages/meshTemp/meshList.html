@@ -20,8 +20,10 @@
             <div class="f-l main-right-title">网络列表</div>
             <div class="f-r pointer">
                <a th:href="@{/mesh/create/(id=0)}">
-                   <img src="/alink-hq/static/img/create-project.png" alt="" id="newMesh">
+                   <div class="create" d="newMesh">+&nbsp;创建网络</div>
+                   <!--<img src="/alink-hq/static/img/create-project.png" alt="" id="newMesh">-->
                </a>
+
             </div>
             <div class="f-r pointer">
                 <img src="/alink-hq/static/img/go-back.png" alt="" onclick="history.back()">
@@ -191,6 +193,7 @@
     </div>
 </div>
 <div class="hide-iframe "></div>
+<script type="text/javascript" src="/alink-hq/static/js/left.js"></script>
 <script type="text/javascript" src="/alink-hq/static/js/page.js"></script>
 <script type="text/javascript" src="/alink-hq/static/js/mesh.js"></script>
 </body>

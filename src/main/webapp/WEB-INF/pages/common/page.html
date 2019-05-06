@@ -6,6 +6,7 @@
     <!--<link rel="stylesheet" href="/alink-hq/static/css/base.css"/>-->
     <!--<link rel="stylesheet" href="/alink-hq/static/css/leftNav.css"/>-->
     <!--<link rel="stylesheet" href="/alink-hq/static/css/projectManage.css"/>-->
+    <!--<script src="/alink-hq/static/js/jquery.min.js"></script>-->
 </head>
 <body>
 <div class="f-r page-right" th:fragment="page">
@@ -50,5 +51,23 @@
         </select>
     </span>
 </div>
+<!--<script>-->
+    <!--$(function () {-->
+        <!--var page = parseInt($('#pageNum').text());-->
+        <!--var pageTotal = parseInt($('#pages').text());-->
+        <!--if (page == 1) {-->
+            <!--$('#prev').attr('src', '/alink-hq/static/img/left-arrow.png');-->
+            <!--$("#prev").addClass('disabled');-->
+        <!--} else {-->
+            <!--$('#prev').attr('src', '/alink-hq/static/img/left-arrow-color.png');-->
+        <!--}-->
+        <!--if (page == pageTotal) {-->
+            <!--$('#next').attr('src', '/alink-hq/static/img/right-arrow.png');-->
+            <!--$("#next").addClass('disabled');-->
+        <!--} else {-->
+            <!--$('#next').attr('src', '/alink-hq/static/img/right-arrow-color.png');-->
+        <!--}-->
+    <!--})-->
+<!--</script>-->
 </body>
 </html>

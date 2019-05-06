@@ -33,7 +33,7 @@
                     <div>
                     <span class="icon">
                         <i class="dot-no"></i>
-                        <img src="/alink-hq/static/img/password.png" alt="" />
+                        <img src="/alink-hq/static/img/password.png" alt=""/>
                     </span>
                         <span class="title">账号</span>
                         <span th:text="${myAccount.getAccount()}"></span>
@@ -104,37 +104,29 @@
             </div>
         </div>
     </div>
+</div>
+<input type="hidden" th:value="${session.user.getAccount()}" id="account_hidden" name="account" class="account"/>
+<script src="/alink-hq/static/myAccount/js/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="/alink-hq/static/js/left.js"></script>
+<script src="/alink-hq/static/myAccount/js/common.js"></script>
+<script>
 
-    <input type="hidden" th:value="${session.user.getAccount()}" id="account_hidden" name="account" class="account"/>
-    <script src="/alink-hq/static/myAccount/js/jquery-3.3.1.min.js"></script>
-    <script src="/alink-hq/static/myAccount/js/common.js"></script>
-    <script>
-//        $('.on-off-triangle').click(function () {
-//            var imgUrl = $(this).attr('src');
-//            if (imgUrl == '/alink-hq/static/img/bottom-triangle-un.png') {
-//                $(this).attr('src', '/alink-hq/static/img/right-triange-un.png');
-//                $(this).parent().parent('.one-list').find('.two-list').addClass('active');
-//            } else {
-//                $(this).attr('src', '/alink-hq/static/img/bottom-triangle-un.png');
-//                $(this).parent().parent('.one-list').find('.two-list').removeClass('active');
-//            }
-//        })
-        $(function(){
-            var height=$(document).height();
-            $('.main-left').css('height',height);
-        })
-    </script>
-    <!--<script src="/alink-hq/static/js/jquery.min.js"></script>-->
-    <!--<script>-->
-    <!--//跳转到修改密码-->
-    <!--$('.a-content a').click(function(){-->
-    <!--var fileName='account';-->
-    <!--var url=$(this).attr('tab');-->
-    <!--var account = 'tpad1d12';-->
-    <!--console.log(url);-->
-    <!--parent.goAccountIframe(fileName,url,account);-->
-    <!--})-->
-    <!--</script>-->
+//    $(function () {
+//        var tabs="account";
+//        left(tabs);
+//    })
+</script>
+<!--<script src="/alink-hq/static/js/jquery.min.js"></script>-->
+<!--<script>-->
+<!--//跳转到修改密码-->
+<!--$('.a-content a').click(function(){-->
+<!--var fileName='account';-->
+<!--var url=$(this).attr('tab');-->
+<!--var account = 'tpad1d12';-->
+<!--console.log(url);-->
+<!--parent.goAccountIframe(fileName,url,account);-->
+<!--})-->
+<!--</script>-->
 </body>
 
 </html>

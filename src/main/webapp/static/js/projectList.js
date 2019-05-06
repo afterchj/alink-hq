@@ -71,25 +71,10 @@ $(function () {
 
 
 $(function () {
-    myBrowser()
-    $('.one-list li').each(function () {
-        $('.main-left>ul>li.one-list:eq(0)').find('.on-off-triangle').attr('src', '/alink-hq/static/img/right-triange-un.png');
-        $('.main-left>ul>li.one-list:eq(0)').find('.two-list').addClass('active');
-        var tab = $(this).attr('tab');
-        if (tab == 'projectList') {
-            $(this).addClass('active').siblings().removeClass('active');
-        }
-    })
-})
-$('.on-off-triangle').click(function () {
-    var imgUrl = $(this).attr('src');
-    if (imgUrl == '/alink-hq/static/img/bottom-triangle-un.png') {
-        $(this).attr('src', '/alink-hq/static/img/right-triange-un.png');
-        $(this).parent().parent('.one-list').find('.two-list').addClass('active');
-    } else {
-        $(this).attr('src', '/alink-hq/static/img/bottom-triangle-un.png');
-        $(this).parent().parent('.one-list').find('.two-list').removeClass('active');
-    }
+    myBrowser();
+    var tabs = "projectList";
+    var index=0;
+    left(tabs,index);
 })
 
 
@@ -217,7 +202,7 @@ $(function () {
         $('.hide-iframe').css({
             'width': width,
             'height': height
-        });
+        })
     })
 
     //弹框重命名里操作
@@ -257,7 +242,6 @@ $(function () {
             account: account,
         }
         deleteArray.push(msg);
-
         if(deleteArray.length!=0){
             $('div[openContent="delete-project"]').addClass('active');
             var width = document.body.scrollWidth;
@@ -268,7 +252,6 @@ $(function () {
                 'height': height
             })
         }
-
     })
     //确定删除
     $('div[openContent="delete-project"] .yes').click(function () {
@@ -282,8 +265,10 @@ $(function () {
                 // console.log(res);
                 if (res.result == '000') {
                     location.reload();
+                    $('tbody tr td.checkbox input').prop('checked',false);
+                    $('#all').prop('checked',false);
                 } else if (res.result == '200') {
-                    console.log('系统错误');
+                     console.log('系统错误');
                 }
             }
         })

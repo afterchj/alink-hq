@@ -101,6 +101,7 @@
     <p class="title">
     </p>
 </div>
+<script type="text/javascript" src="/alink-hq/static/js/left.js"></script>
 <script src="/alink-hq/static/js/jquery.min.js"></script>
 <script>
     $(function () {
@@ -252,24 +253,9 @@
         })
     })
     $(function () {
-        $('.one-list li').each(function () {
-            $('.main-left>ul>li.one-list:eq(0)').find('.on-off-triangle').attr('src', '/alink-hq/static/img/right-triange-un.png');
-            $('.main-left>ul>li.one-list:eq(0)').find('.two-list').addClass('active');
-            var tab = $(this).attr('tab');
-            if (tab == 'projectList') {
-                $(this).addClass('active').siblings().removeClass('active');
-            }
-        })
-        $('.on-off-triangle').click(function () {
-            var imgUrl = $(this).attr('src');
-            if (imgUrl == '/alink-hq/static/img/bottom-triangle-un.png') {
-                $(this).attr('src', '/alink-hq/static/img/right-triange-un.png');
-                $(this).parent().parent('.one-list').find('.two-list').addClass('active');
-            } else {
-                $(this).attr('src', '/alink-hq/static/img/bottom-triangle-un.png');
-                $(this).parent().parent('.one-list').find('.two-list').removeClass('active');
-            }
-        })
+        var tabs="projectList";
+        var index=0;
+        left(tabs,index);
     })
     //监听公司选择
     $('#fid').change(function(){
@@ -280,10 +266,7 @@
             $('.company-hint').text('');
         }
     })
-    $(function(){
-        var height=$(document).height();
-        $('.main-left').css('height',height);
-    })
+
     //监听账号选择
 //    $('#account-transfer').change(function(){
 //        var selected=$(this).children('option:selected').val();

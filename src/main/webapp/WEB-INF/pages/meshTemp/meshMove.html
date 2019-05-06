@@ -59,6 +59,7 @@
     </div>
 </div>
 <script src="/alink-hq/static/js/jquery.min.js"></script>
+<script type="text/javascript" src="/alink-hq/static/js/left.js"></script>
 <script th:inline="javascript">
     var uid = [[${session.user.id}]];
     console.log("uid=" + uid);
@@ -70,14 +71,9 @@
                 $("#pid").append("<option value='" + item.id + "'>" + item.label + "</option>");
             });
         });
-        $('.one-list li').each(function () {
-            $('.main-left>ul>li.one-list:eq(0)').find('.on-off-triangle').attr('src', '/alink-hq/static/img/right-triange-un.png');
-            $('.main-left>ul>li.one-list:eq(0)').find('.two-list').addClass('active');
-            var tab = $(this).attr('tab');
-            if (tab == 'meshList') {
-                $(this).addClass('active').siblings().removeClass('active');
-            }
-        });
+        var tabs="meshList";
+        var index=0;
+        left(tabs,index);
     });
 
 </script>

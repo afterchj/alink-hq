@@ -76,12 +76,13 @@ th {
 }
 
 .search-result table td {
-    /*height: 48px;*/
-    line-height: 48px;
+    height: 48px;
+    /* line-height: 48px; */
     text-align: center;
     font-size: 14px;
+    vertical-align: middle;
     color: #3c3c3c;
-    /*cursor: pointer;*/
+    /* cursor: pointer; */
     background-color: #fff;
 }
 

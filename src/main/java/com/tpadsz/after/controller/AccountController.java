@@ -83,7 +83,9 @@ public class AccountController {
                 }
             }
             PageInfo<UserList> pageInfo = new PageInfo<UserList>(userList, pageSize);
-            model.addAttribute("pageInfo", pageInfo);
+            if (pageInfo.getList().size() > 0) {
+                model.addAttribute("pageInfo", pageInfo);
+            }
             model.addAttribute("firmList", firmList);
             model.addAttribute("roleList", roleList);
             model.addAttribute("account", account);
@@ -230,7 +232,7 @@ public class AccountController {
             accountService.enable(user);
             if (status == 1) {
                 String key = MemcachedObjectType.CACHE_TOKEN.getPrefix() + user.getId();
-                client.delete(key);
+                client.set(key, 0, "disabled");
             }
             map.put("result", ResultDict.SUCCESS.getCode());
         } catch (Exception e) {
