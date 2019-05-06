@@ -280,6 +280,10 @@
             $('.company-hint').text('');
         }
     })
+    $(function(){
+        var height=$(document).height();
+        $('.main-left').css('height',height);
+    })
     //监听账号选择
 //    $('#account-transfer').change(function(){
 //        var selected=$(this).children('option:selected').val();

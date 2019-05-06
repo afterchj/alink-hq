@@ -192,6 +192,10 @@
         hide();
         $(this).parents('.pop-iframe').removeClass('active');
     })
+    $(function(){
+        var height=$(document).height();
+        $('.main-left').css('height',height);
+    })
 </script>
 </body>
 

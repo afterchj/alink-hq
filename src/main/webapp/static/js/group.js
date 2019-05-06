@@ -3,6 +3,8 @@
  */
 $(function () {
     myBrowser();
+    var height=$(document).height();
+    $('.main-left').css('height',height);
     $('.one-list li').each(function () {
         $('.main-left>ul>li.one-list:eq(0)').find('.on-off-triangle').attr('src', '/alink-hq/static/img/right-triange-un.png');
         $('.main-left>ul>li.one-list:eq(0)').find('.two-list').addClass('active');

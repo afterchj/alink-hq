@@ -153,3 +153,7 @@ $('.on-off-triangle').click(function () {
         $(this).parent().parent('.one-list').find('.two-list').removeClass('active');
     }
 });
+$(function(){
+    var height=$(document).height();
+    $('.main-left').css('height',height);
+})

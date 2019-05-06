@@ -11,8 +11,8 @@
 </head>
 <body>
 <div th:replace="common/head::head"></div>
-<div class="c-container">
-    <div th:replace="common/left::left"></div>
+<div class="c-container ">
+    <div th:replace="common/left::left" ></div>
     <div class="main-right">
         <div class="clearfix main-right-nav">
             <div class="f-l main-right-title">用户列表</div>
@@ -328,6 +328,7 @@
         })
     }
     $(function(){
+
         var  account='';
         var status='';
         var intStatus='';
@@ -459,8 +460,6 @@
     $(function () {
         var page = parseInt($('.pages').text());
         var pageTotal = parseInt($('.pageTotal').text());
-//        console.log('page', page);
-//        console.log('pageTotal', pageTotal);
         if (page == 1) {
             $('.prev-page img').attr('src', '/alink-hq/static/img/left-arrow.png');
             $(".prev-page ").attr("disabled", true);
@@ -485,6 +484,8 @@
 
     //条件筛选
     $(function () {
+        var height=$(document).height();
+        $('.main-left').css('height',height);
         var url = window.location.href;
         var account =GetUrlParam("account") ;
         var company = GetUrlParam("fid");
@@ -517,7 +518,6 @@
         }
 
         $('table tr td.role').each(function () {
-//            console.log($(this).text());
             var roleId = parseInt($(this).text());
             if (roleId == 4) {
                 $(this).text('施工人员');
@@ -528,7 +528,6 @@
             }
         })
         $('table tr td.status').each(function () {
-//            console.log($(this).text());
             var status = parseInt($(this).text());
             if (status == 1) {
                 $(this).text('启用');
@@ -553,8 +552,6 @@
             var pageSize = $(this).children('option:selected').val();
             var pageNum=$('#skipPage').val();
             console.log(pageNum);
-
-//            var pageNum = parseInt($('#skipPage').val());
             condition(pageSize, pageNum);
         });
         //跳转页数变化
@@ -566,7 +563,6 @@
     })
     function mouseDown() {
         $('#skipPageBtn').attr('src','/alink-hq/static/img/skip-color.png');
-//        $('.btn-bottom button').addClass('active');
     }
     function mouseUp() {
         $('#skipPageBtn').attr('src','/alink-hq/static/img/skip.png');
