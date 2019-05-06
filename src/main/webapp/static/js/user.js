@@ -222,31 +222,33 @@ $(function () {
             $(this).text('禁用');
         }
     })
+    //查询按钮点击
+    $('.search-button button').click(function () {
+        var pageSize = $('#page-select option:selected').val();
+        var pageNum = $('#skipPage').val();
+        if(!pageNum){
+            pageNum=1;
+        }
+        if(!pageSize){
+            pageSize=10;
+        }
+        condition(pageSize, pageNum);
+    })
+//选择页数变化
+    $('#page-select').change(function () {
+        var pageSize = $(this).children('option:selected').val();
+        var pageNum = $('#skipPage').val();
+        condition(pageSize, pageNum);
+    });
+//跳转页数变化
+    $('#skipPageBtn').click(function () {
+        var pageSize = $('#page-select option:selected').val();
+        var pageNum = $('#skipPage').val();
+        condition(pageSize, pageNum);
+    })
 
 })
-//查询按钮点击
-$('.search-button button').click(function () {
-    var pageSize = $('#page-select option:selected').val();
-    var pageNum = $('#skipPage').val();
-    if (pageNum == '') {
-        pageNum == 1;
-    } else {
-        pageNum = parseInt(pageNum);
-    }
-    condition(pageSize, pageNum);
-})
-//选择页数变化
-$('#page-select').change(function () {
-    var pageSize = $(this).children('option:selected').val();
-    var pageNum = $('#skipPage').val();
-    condition(pageSize, pageNum);
-});
-//跳转页数变化
-$('#skipPageBtn').click(function () {
-    var pageSize = $('#page-select option:selected').val();
-    var pageNum = $('#skipPage').val();
-    condition(pageSize, pageNum);
-})
+
 function mouseDown() {
     $('#skipPageBtn').attr('src', '/alink-hq/static/img/skip-color.png');
 }
