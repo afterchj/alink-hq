@@ -78,9 +78,9 @@
                         <tbody>
                         <tr th:each="light:${pageInfo.list}">
                             <td><input type="checkbox" name="ids" th:value="${light.id}"></td>
-                            <td class="k-link"><a th:href="@{/light/info(id=${light.id})}" th:text="${light.lname}"></a></td>
+                            <td class="k-link lname"><a th:href="@{/light/info(id=${light.id})}" th:text="${light.lname}"></a></td>
                             <td th:text="${light.lmac}"></td>
-                            <td th:text="${light.mname}"></td>
+                            <td th:text="${light.mname}" class="mname"></td>
                             <td th:text="${light.mesh_id}"></td>
                             <td><span th:text="${light.x}"></span><span>,&nbsp;&nbsp;</span><span th:text="${light.y}"></span></td>
                             <td th:switch="${light.off}">
@@ -89,13 +89,13 @@
                                 <span th:case="*">未知</span>
                             </td>
                             <td class="p-r">
-                                <img src="/alink-hq/static/img/edit.png" th:alt="${light.id}" class="rename pointer"  title="重命名">
+                                <img src="/alink-hq/static/img/edit.png" th:alt="${light.id}"  class="rename pointer"  title="重命名">
                                 <a th:href="@{/light/move(ids=${light.id})}">
-                                    <img src="/alink-hq/static/img/exchange.png" alt="" class="center-img pointer" title="移交">
+                                    <img src="/alink-hq/static/img/exchange.png" th:alt="${light.id}" class="center-img pointer" title="移交">
                                 </a>
                                 <!--<a th:href="@{/light/delete(ids=${light.id})}"-->
                                    <!--onclick="return confirm('您确定要删除所选的网络吗？')">-->
-                                    <img src="/alink-hq/static/img/delete.png" alt="" class="singleDel pointer" title="删除">
+                                    <img src="/alink-hq/static/img/delete.png" th:alt="${light.id}"   class="singleDel pointer" title="删除">
                                 <!--</a>-->
                             </td>
                         </tr>
@@ -171,9 +171,9 @@
         温馨提示
     </div>
     <div class="pop-content">
-        <div class="reset-pwd">您确定要删除所选的组吗？</div>
+        <div class="reset-pwd">您确定要删除所选的灯吗？</div>
         <div class="reset-pwd-hint">
-            删除后所选组所有的灯将会进入所属网络未分组中请慎重！
+            删除该灯将会退出网络，请慎重！
         </div>
         <div class="pop-btn">
             <button class="reduce">取消</button>

@@ -202,7 +202,7 @@ $(function () {
         $('.hide-iframe').css({
             'width': width,
             'height': height
-        });
+        })
     })
 
     //弹框重命名里操作
@@ -242,7 +242,6 @@ $(function () {
             account: account,
         }
         deleteArray.push(msg);
-
         if(deleteArray.length!=0){
             $('div[openContent="delete-project"]').addClass('active');
             var width = document.body.scrollWidth;
@@ -253,7 +252,6 @@ $(function () {
                 'height': height
             })
         }
-
     })
     //确定删除
     $('div[openContent="delete-project"] .yes').click(function () {
@@ -267,8 +265,10 @@ $(function () {
                 // console.log(res);
                 if (res.result == '000') {
                     location.reload();
+                    $('tbody tr td.checkbox input').prop('checked',false);
+                    $('#all').prop('checked',false);
                 } else if (res.result == '200') {
-                    console.log('系统错误');
+                     console.log('系统错误');
                 }
             }
         })

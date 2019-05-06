@@ -12,11 +12,6 @@ $('.confirm-create').click(function () {
     var account = $('#account').val();
     var regName = /^[a-zA-Z0-9\u4e00-\u9fa5]{2,16}$/;
     var renameResult = regName.test(projectName);
-    if(projectName==''){
-        $('.project-hint').text('请输入项目名称');
-    }else{
-        $('.project-hint').text('');
-    }
     if (account == '') {
         $('.account-hint').text('请输入施工人员账号');
     }else{
@@ -24,6 +19,8 @@ $('.confirm-create').click(function () {
     }
     if(!renameResult && projectName!=''){
         $('.project-hint').text('请输入 2-16 位汉字、字母、数字');
+    }else if(projectName==''){
+        $('.project-hint').text('请输入项目名称');
     }else{
         $('.project-hint').text('');
     }
