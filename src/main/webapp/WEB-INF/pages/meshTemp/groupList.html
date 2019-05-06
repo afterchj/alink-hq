@@ -19,7 +19,9 @@
         <div class="clearfix main-right-nav">
             <div class="f-l main-right-title">组列表</div>
             <div class="f-r pointer">
-                <img src="/alink-hq/static/img/create-project.png" alt="">
+                <!--<img src="/alink-hq/static/img/create-project.png" alt="">-->
+
+                <div class="create">+&nbsp;创建组</div>
             </div>
             <div class="f-r pointer">
                 <img src="/alink-hq/static/img/go-back.png" alt="" onclick="history.back()">
@@ -79,13 +81,13 @@
                             <td class="p-r">
                                 <img src="/alink-hq/static/img/edit.png" th:alt="${group.id}" class="rename pointer"  title="重命名">
                                 <a th:href="@{/group/move(ids=${group.id})}">
-                                    <img src="/alink-hq/static/img/exchange.png" alt="" class="center-img pointer" title="移交">
+                                    <img src="/alink-hq/static/img/exchange.png" th:alt="${group.id}" class="center-img pointer" title="移交">
                                 </a>
                                 <!--<a th:href="@{/group/delete(ids=${group.id})}">-->
                                     <!--<img src="/alink-hq/static/img/delete.png" alt="" id="singleDel" title="删除">-->
                                 <!--</a>-->
                                 <!--<a href="javascript:void(0);" class="singleDel pointer">-->
-                                    <img src="/alink-hq/static/img/delete.png" alt="" id="singleDel" class="pointer" title="删除" >
+                                    <img src="/alink-hq/static/img/delete.png" alt="" th:alt="${group.id}" class="singleDel pointer"  title="删除" >
                                 <!--</a>-->
                             </td>
                         </tr>

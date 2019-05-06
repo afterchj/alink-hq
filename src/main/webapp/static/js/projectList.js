@@ -385,7 +385,6 @@ $(function () {
     } else {
         $('.next-page img').attr('src', '/alink-hq/static/img/right-arrow-color.png');
     }
-
 })
 $('.meshNum a').click(function(){
     if($(this).text()==0){
