@@ -7,6 +7,7 @@
         l.mid,
         IFNULL(l.lname,'null') lname,
         l.lmac,
+        m.project_id,
         m.mname,
         m.mesh_id,
         IFNULL(ls.x,'null') x,
@@ -66,14 +67,11 @@
         <if test="projectId!=null and projectId!=''">
             AND m.project_id=#{projectId}
         </if>
-        ORDER BY l.mid DESC
     </select>
     <select id="getLightInfo" resultType="MeshInfo" parameterType="int">
         SELECT
             l.id,
             l.mid,
-            l.pid,
-            l.gid,
             IFNULL(l.lname,'null') lname,
             l.lmac,
             ls.x,
@@ -81,16 +79,18 @@
             ls.off,
             s.id sid,
             m.project_id,
-            g.gname,
+            g.id gid,
+            IFNULL(g.gname,'null') gname,
             p.name,
             m.mname,
             m.mesh_id,
+            pl.id pid,
             pl.pname,
             IFNULL(sc.scount,0) scount
         FROM f_light l
         LEFT JOIN f_light_setting ls ON ls.lid=l.id
-        INNER JOIN f_group g ON g.id=l.gid
-        INNER JOIN f_mesh m ON m.id=l.mid
+        LEFT JOIN f_group g ON g.id=l.gid
+        LEFT JOIN f_mesh m ON m.id=l.mid
         LEFT JOIN f_scene s ON s.mid=m.id
         LEFT JOIN f_project p ON p.id=m.project_id
         LEFT JOIN f_place pl ON pl.id=l.pid
@@ -102,7 +102,7 @@
             l.id,
             IFNULL(l.lname,'null') lname,
             l.lmac,
-            g.gname
+            IFNULL(g.gname,'null') gname
         FROM f_light l
         LEFT JOIN f_group g ON g.id=l.gid
         WHERE l.id in

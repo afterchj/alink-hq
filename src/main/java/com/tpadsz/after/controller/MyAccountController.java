@@ -38,42 +38,43 @@ public class MyAccountController {
 
     /**
      * 修改密码
+     *
      * @param account 账号
      * @param newPwd  新密码
      * @return
      */
     @RequestMapping(value = "/changePwd", method = RequestMethod.POST)
     @ResponseBody
-    public Map<String,String> confirmChange(String account, String newPwd) {
+    public Map<String, String> confirmChange(String account, String newPwd) {
         boolean success = myAccountService.updatePwd(account, newPwd);
-        Map<String,String> map = new HashMap<>();
-        String info="密码修改成功";
+        Map<String, String> map = new HashMap<>();
+        String info = "密码修改成功";
         if (!success) {
-            info="加载失败，请重新尝试";
+            info = "加载失败，请重新尝试";
         }
-        map.put("success",info);
+        map.put("success", info);
         return map;
     }
 
     @RequestMapping(value = "/changeUserName", method = RequestMethod.POST)
     @ResponseBody
-    public Map<String,String> changeUserName(String account, String uname,String flag, HttpSession session){
+    public Map<String, String> changeUserName(String account, String uname, String flag, HttpSession session) {
         Map<String, String> map = new HashMap<>();
-        boolean success = myAccountService.updateUserName(account,uname);
+        boolean success = myAccountService.updateUserName(account, uname);
         String info = new String();
-        if (success){
-            if ("0".equals(flag)){
+        if (success) {
+            if ("0".equals(flag)) {
                 //填写用户名
-                info="用户名填写成功";
+                info = "用户名填写成功";
             }
-            if ("1".equals(flag)){
+            if ("1".equals(flag)) {
                 //修改用户名
-                info="修改用户名成功";
+                info = "修改用户名成功";
             }
             User loginUser = userService.selectByUsername(uname);
             session.setAttribute("user", loginUser);
-        }else {
-            info="加载失败，请重新尝试";
+        } else {
+            info = "加载失败，请重新尝试";
         }
         map.put("success", info);
 
@@ -82,124 +83,119 @@ public class MyAccountController {
 
     /**
      * 查询用户名是否存在
+     *
      * @param uname
      * @return
      */
     @RequestMapping(value = "/getUserName", method = RequestMethod.POST)
     @ResponseBody
-    public Map<String,String> getUserName(String uname){
+    public Map<String, String> getUserName(String uname) {
         Map<String, String> map = new HashMap<>();
         boolean success = myAccountService.getUserName(uname);
         String info;
-        if (success){
+        if (success) {
             //存在账号
-            info="true";
-        }else {
-            info="false";
+            info = "true";
+        } else {
+            info = "false";
         }
-        map.put("info",info);
+        map.put("info", info);
         return map;
     }
 
 
-
     /**
      * 发送手机验证码
+     *
      * @param mobile 手机
      * @return
      */
     @RequestMapping(value = "/sendCode", method = RequestMethod.POST)
     @ResponseBody
-    public Map<String, String> sendCode(String mobile){
+    public Map<String, String> sendCode(String mobile) {
         int count = myAccountService.getMobile(mobile);
         Map<String, String> map = new HashMap<>();
 //        String sysCode;
-        if (count>0){
-            map.put("info","isBinding");
+        if (count > 0) {
+            map.put("info", "isBinding");
             return map;
         }
         try {
-            validationService.sendCode("13",mobile);
-            map.put("info","success");
+            validationService.sendCode("13", mobile);
+            map.put("info", "success");
 //            map.put("sysCode",sysCode);
             return map;
         } catch (Exception e) {
-            map.put("info","error");
+            map.put("info", "error");
             return map;
         }
     }
 
     /**
      * 发送email激活码
+     *
      * @param email 邮箱
      * @return
      */
     @RequestMapping(value = "/sendEmailCode", method = RequestMethod.POST)
     @ResponseBody
-    public Map<String,String> sendEmailCode(String email){
-       int count = myAccountService.getEamil(email);
+    public Map<String, String> sendEmailCode(String email) {
+        int count = myAccountService.getEamil(email);
         Map<String, String> map = new HashMap<>();
-        if (count>0){
-            map.put("info","isBinding");
+        if (count > 0) {
+            map.put("info", "isBinding");
             return map;
         }
         try {
-            validationService.sendEmailCode(email,"bind");
-            map.put("info","success");
+            validationService.sendEmailCode(email, "bind");
+            map.put("info", "success");
             return map;
         } catch (Exception e) {
-            map.put("info","error");
+            map.put("info", "error");
             return map;
         }
     }
+
     @RequestMapping(value = "/changeMobile", method = RequestMethod.POST)
     @ResponseBody
-    public Map<String,String> changeMobile(String mobile,String code, String account){
+    public Map<String, String> changeMobile(String mobile, String code, String account) {
         Map<String, String> map = new HashMap<>();
         boolean success;
         try {
-            validationService.checkCode(code,mobile);
-            success = myAccountService.updateMobile(account,mobile);
+            validationService.checkCode(code, mobile);
+            success = myAccountService.updateMobile(account, mobile);
             String info = "success";
-            if (!success){
+            if (!success) {
                 info = "dbError";
             }
-            map.put("info",info);
+            map.put("info", info);
             return map;
         } catch (InvalidCodeException e) {
-            if ("300".equals(e.getCode())) {
-                //验证码不正确
-                map.put("info","codeError");
-            } else {
-                //验证码超时
-                map.put("info","codeTimeOut");
-            }
+//            if ("300".equals(e.getCode())) {
+            //验证码不正确
+            map.put("info", "codeError");
+//            }
             return map;
         }
     }
 
     @RequestMapping(value = "/changeEmail", method = RequestMethod.POST)
     @ResponseBody
-    public Map<String,String> changeEmail(String email,String code, String account){
+    public Map<String, String> changeEmail(String email, String code, String account) {
         Map<String, String> map = new HashMap<>();
         boolean success;
         try {
-            validationService.checkCode(code,email);
-            success = myAccountService.updateEmail(account,email);
+            validationService.checkCode(code, email);
+            success = myAccountService.updateEmail(account, email);
             String info = "success";
-            if (!success){
+            if (!success) {
                 info = "dbError";
             }
-            map.put("info",info);
+            map.put("info", info);
             return map;
         } catch (InvalidCodeException e) {
-            if ("300".equals(e.getCode())) {
-                //激活码不正确
-                map.put("info","codeError");
-            } else {
-                //激活码超时
-                map.put("info","codeTimeOut");
-            }
+            //激活码不正确
+            map.put("info", "codeError");
             return map;
         }
     }
@@ -207,6 +203,7 @@ public class MyAccountController {
     /**
      * 展示我的账号信息
      * 跳转到account.html
+     *
      * @param account
      * @param model
      * @return
@@ -220,6 +217,7 @@ public class MyAccountController {
 
     /**
      * 跳转changePassword.html
+     *
      * @param account
      * @param model
      * @return
@@ -232,12 +230,13 @@ public class MyAccountController {
 
     /**
      * 跳转fillUsername.html
+     *
      * @param account
      * @param model
      * @return
      */
     @RequestMapping(value = "/fillUname", method = RequestMethod.GET)
-    public String fillUname(String account,String flag,Model model){
+    public String fillUname(String account, String flag, Model model) {
         model.addAttribute("account", account);
         model.addAttribute("flag", flag);
         return "myAccount/fillUsername";
@@ -245,12 +244,13 @@ public class MyAccountController {
 
     /**
      * 跳转changeUsername.html
+     *
      * @param account
      * @param model
      * @return
      */
     @RequestMapping(value = "/modifiUname", method = RequestMethod.GET)
-    public String modifiUname(String account,String uname, String flag,Model model){
+    public String modifiUname(String account, String uname, String flag, Model model) {
         model.addAttribute("account", account);
         model.addAttribute("uname", uname);
         model.addAttribute("flag", flag);
@@ -259,13 +259,14 @@ public class MyAccountController {
 
     /**
      * 跳转bindPhone.html
+     *
      * @param account
      * @param flag
      * @param model
      * @return
      */
     @RequestMapping(value = "/fillMobile", method = RequestMethod.GET)
-    public String fillMobile(String account,String flag,Model model){
+    public String fillMobile(String account, String flag, Model model) {
         model.addAttribute("account", account);
         model.addAttribute("flag", flag);
         return "myAccount/bindPhone";
@@ -273,25 +274,28 @@ public class MyAccountController {
 
     /**
      * 跳转changePhone.html
+     *
      * @param account
      * @param model
      * @return
      */
     @RequestMapping(value = "/modifiMobile", method = RequestMethod.GET)
-    public String modifiMobile(String account, String flag,Model model){
+    public String modifiMobile(String account, String flag, Model model) {
         model.addAttribute("account", account);
         model.addAttribute("flag", flag);
         return "myAccount/changePhone";
     }
+
     /**
      * 跳转bindEmail.html
+     *
      * @param account
      * @param flag
      * @param model
      * @return
      */
     @RequestMapping(value = "/fillEmail", method = RequestMethod.GET)
-    public String fillEmail(String account,String flag,Model model){
+    public String fillEmail(String account, String flag, Model model) {
         model.addAttribute("account", account);
         model.addAttribute("flag", flag);
         return "myAccount/bindEmail";
@@ -299,12 +303,13 @@ public class MyAccountController {
 
     /**
      * 跳转changeEmail.html
+     *
      * @param account
      * @param model
      * @return
      */
     @RequestMapping(value = "/modifiEmail", method = RequestMethod.GET)
-    public String modifiEmail(String account, String flag,Model model){
+    public String modifiEmail(String account, String flag, Model model) {
         model.addAttribute("account", account);
         model.addAttribute("flag", flag);
         return "myAccount/changeEmail";

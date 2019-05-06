@@ -70,7 +70,7 @@
              pl.id,
              pl.mid,
              pl.pname,
-             pl.place_id,
+             p.id place_id,
              p.name,
              m.mname,
              m.mesh_id,

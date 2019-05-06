@@ -12,16 +12,21 @@ $(function () {
         }
     });
 
-    // $('.on-off-triangle').click(function () {
-    //     var imgUrl = $(this).attr('src');
-    //     if (imgUrl == '/alink-hq/static/img/bottom-triangle-un.png') {
-    //         $(this).attr('src', '/alink-hq/static/img/right-triange-un.png');
-    //         $(this).parent().parent('.one-list').find('.two-list').addClass('active');
-    //     } else {
-    //         $(this).attr('src', '/alink-hq/static/img/bottom-triangle-un.png');
-    //         $(this).parent().parent('.one-list').find('.two-list').removeClass('active');
-    //     }
-    // });
+    $('.on-off-triangle').click(function () {
+        var imgUrl = $(this).attr('src');
+        if (imgUrl == '/alink-hq/static/img/bottom-triangle-un.png') {
+            $(this).attr('src', '/alink-hq/static/img/right-triange-un.png');
+            $(this).parent().parent('.one-list').find('.two-list').addClass('active');
+        } else {
+            $(this).attr('src', '/alink-hq/static/img/bottom-triangle-un.png');
+            $(this).parent().parent('.one-list').find('.two-list').removeClass('active');
+        }
+    });
+
+    // $("#newMesh").click(function () {
+    //     location.href="/alink-hq/create";
+    //     });
+    //
     $("#multiMove").click(function () {
         var ids = [];//定义一个数组
         $('input[name="ids"]:checked').each(function () {//遍历每一个名字为interest的复选框，其中选中的执行函数

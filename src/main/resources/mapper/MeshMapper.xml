@@ -82,9 +82,9 @@
     <select id="getMeshInfo" resultType="MeshInfo" parameterType="int">
         SELECT
              m.id,
-             m.project_id,
              m.mname,
              m.mesh_id,
+             p.id project_id,
              p.name,
              IFNULL(s.scount,0) scount,
              IFNULL(pl.pcount,0) pcount,
