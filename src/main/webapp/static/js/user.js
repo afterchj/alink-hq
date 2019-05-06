@@ -204,16 +204,16 @@ $(function () {
         $('#company').val(company);
     }
 
-    $('table tr td.role').each(function () {
-        var roleId = parseInt($(this).text());
-        if (roleId == 4) {
-            $(this).text('施工人员');
-        } else if (roleId == 3) {
-            $(this).text('乙方管理员');
-        } else if (roleId == 2) {
-            $(this).text('管理员');
-        }
-    })
+    // $('table tr td.role').each(function () {
+    //     var roleId = parseInt($(this).text());
+    //     if (roleId == 4) {
+    //         $(this).text('施工人员');
+    //     } else if (roleId == 3) {
+    //         $(this).text('乙方管理员');
+    //     } else if (roleId == 2) {
+    //         $(this).text('管理员');
+    //     }
+    // })
     $('table tr td.status').each(function () {
         var status = parseInt($(this).text());
         if (status == 1) {
