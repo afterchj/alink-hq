@@ -43,6 +43,7 @@ $(function () {
         });
         // location.href = "/alink-hq/mesh/rename?mid=" + mid + "&name=" + name;
     });
+    var ids = [];//定义一个数组
     $("#multiMove").click(function () {
         var ids = [];//定义一个数组
         $('input[name="ids"]:checked').each(function () {//遍历每一个名字为interest的复选框，其中选中的执行函数
@@ -64,9 +65,35 @@ $(function () {
             'width': width,
             'height': height
         });
-        var flag = confirm("您确定要删除所选的区域吗？");
-        if (flag) {
+        // var flag = confirm("您确定要删除所选的区域吗？");
+        // if (flag) {
+        //     location.href = "/alink-hq/group/delete?ids=" + ids;
+        // }
+    })
+    //单选删除
+    var ids;
+    $('#singleDel').click(function () {
+        ids = $(this).parent().siblings('.checkbox').find('input').val();
+        $('div[openContent="delete-mesh"]').addClass('active');
+        var width = document.body.scrollWidth;
+        var height = document.body.scrollHeight;
+        $('.hide-iframe').addClass('active');
+        $('.hide-iframe').css({
+            'width': width,
+            'height': height
+        });
+    });
+    $('.pop-btn .reduce').click(function () {
+        $('div[openContent="delete-mesh"]').removeClass('active');
+        // $('div[openContent="delete-project"]').removeClass('active');
+        $('.hide-iframe').removeClass('active');
+    });
+    $('.pop-btn .yes').click(function () {
+        deleteMesh(ids);
+    });
+    function deleteMesh(ids) {
+        if (ids) {
             location.href = "/alink-hq/group/delete?ids=" + ids;
         }
-    })
+    }
 });

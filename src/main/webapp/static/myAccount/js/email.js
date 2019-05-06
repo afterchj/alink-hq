@@ -20,7 +20,7 @@ $(function () {
     //点击获取激活码
     $("#codeSubmit").click(function () {
         $('p.code-hint').removeClass('active').text('');
-        $("p.success-hint").removeClass("active").text('');
+        $("span.success-hint").removeClass("active").text('');
         var email = $("#email").val();
         var emailFlag = isEmpty(email);
         var emailHint = $("p.email-hint").text();
@@ -47,7 +47,7 @@ $(function () {
                         $('p.email-hint').addClass('active').text("该邮箱已绑定");
                     } else if (msg.info == "success") {
                         sendMessage($("#codeSubmit"), 60, "获取激活码");
-                        $("p.success-hint").addClass("active").text("请登录邮箱查收");
+                        $("span.success-hint").addClass("active").text("请登录邮箱查收");
                     } else {
                         alert("加载失败,请重试");
                     }
