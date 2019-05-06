@@ -36,7 +36,7 @@
 .main-left{
     background-image: url(/alink-hq/static/img/left-list.png);
     background-size: 100% 100%;
-    height: 897px;
+
 }
 .ad-nav img{
     margin-right: 15px;
@@ -55,9 +55,7 @@
     margin: 0 58px 20px 323px;
     padding: 20px 0 0 0;
 }
-.main-left{
-    padding: 0 0 45px 0;
-}
+
 .main-left a{
     font-size: 22px;
     color: #111;

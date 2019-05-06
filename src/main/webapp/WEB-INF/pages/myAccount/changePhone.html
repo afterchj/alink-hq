@@ -90,6 +90,10 @@
             $(this).parent().parent('.one-list').find('.two-list').removeClass('active');
         }
     })
+    $(function(){
+        var height=$(document).height();
+        $('.main-left').css('height',height);
+    })
     // 验证手机号
     //        function vPhone() {
     //            var phoneVal = $('#phone').val();

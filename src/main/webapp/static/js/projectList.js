@@ -392,6 +392,10 @@ $('.meshNum a').click(function(){
         $(this).prop('href','javascript:return false;');
     }
 })
+$(function(){
+    var height=$(document).height();
+    $('.main-left').css('height',height);
+})
 //paraName 等找参数的名称
 function GetUrlParam(paraName) {
     var url = document.location.toString();

@@ -94,7 +94,7 @@
 }
 .f-content{
     width: 800px;
-    height: auto;
+    /* height: auto; */
     margin: 50px auto;
     border: 1px solid #bbb;
     padding: 15px 30px;

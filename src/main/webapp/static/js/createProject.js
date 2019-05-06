@@ -1,6 +1,29 @@
 /**
  * Created by qian.chen on 2019/4/28.
  */
+$(function(){
+    var height=$(document).height();
+    $('.main-left').css('height',height);
+    $('.one-list li').each(function () {
+        $('.main-left>ul>li.one-list:eq(0)').find('.on-off-triangle').attr('src', '/alink-hq/static/img/right-triange-un.png');
+        $('.main-left>ul>li.one-list:eq(0)').find('.two-list').addClass('active');
+        var tab = $(this).attr('tab');
+        if (tab == 'groupList') {
+            $(this).addClass('active').siblings().removeClass('active');
+        }
+    });
+    $('.on-off-triangle').click(function () {
+        var imgUrl = $(this).attr('src');
+        if (imgUrl == '/alink-hq/static/img/bottom-triangle-un.png') {
+            $(this).attr('src', '/alink-hq/static/img/right-triange-un.png');
+            $(this).parent().parent('.one-list').find('.two-list').addClass('active');
+        } else {
+            $(this).attr('src', '/alink-hq/static/img/bottom-triangle-un.png');
+            $(this).parent().parent('.one-list').find('.two-list').removeClass('active');
+        }
+    });
+})
+
 $('.confirm-create').click(function () {
     var projectName = $('#projectName').val();
     var account = $('#account').val();
@@ -26,8 +49,6 @@ $('.confirm-create').click(function () {
                     $('.account-hint').text('不是同一个公司的账号');
                 } else if (res.result == '000') {
                     console.log('创建成功!');
-                    // // $('form').submit();
-                    // location.href = '/alink-hq/project/list';
                     $('#preload-anim').addClass('active');
                     $('#preload-anim .title').text('创建成功！');
                     setInterval(function () {

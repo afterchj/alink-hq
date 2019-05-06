@@ -62,6 +62,8 @@
 <script th:inline="javascript">
     var uid = [[${session.user.id}]];
     $(function () {
+        var height=$(document).height();
+        $('.main-left').css('height',height);
        console.log("pid="+$("#pid option:selected").val()) ;
         $.getJSON("/alink-hq/group/getPlace", {"uid": uid}, function (json) {
             if(json!=''){

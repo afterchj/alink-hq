@@ -125,3 +125,7 @@ $(function () {
     }
 });
 
+$(function(){
+    var height=$(document).height();
+    $('.main-left').css('height',height);
+})
