@@ -57,6 +57,8 @@ $(function () {
                     success: function (res) {
                         if (res == "ok") {
                             location.reload();
+                        } else {
+                            alert("组名称不能重复！");
                         }
                     }
                 })

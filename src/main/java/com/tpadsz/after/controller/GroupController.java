@@ -5,6 +5,7 @@ import com.github.pagehelper.PageInfo;
 import com.tpadsz.after.entity.MeshInfo;
 import com.tpadsz.after.entity.OptionList;
 import com.tpadsz.after.entity.SearchDict;
+import com.tpadsz.after.exception.RepetitionException;
 import com.tpadsz.after.service.GroupService;
 import com.tpadsz.after.service.RoleService;
 import org.apache.log4j.Logger;
@@ -102,7 +103,11 @@ public class GroupController {
         Map map = new HashMap();
         map.put("name", name);
         map.put("id", id);
-        groupService.saveRename(map);
+        try {
+            groupService.saveRename(map);
+        } catch (RepetitionException e) {
+            return "fail";
+        }
         return "ok";
     }
 

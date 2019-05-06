@@ -4,6 +4,7 @@ import com.tpadsz.after.dao.GroupDao;
 import com.tpadsz.after.entity.MeshInfo;
 import com.tpadsz.after.entity.OptionList;
 import com.tpadsz.after.entity.SearchDict;
+import com.tpadsz.after.exception.RepetitionException;
 import com.tpadsz.after.service.GroupService;
 import org.apache.shiro.authz.AuthorizationException;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
@@ -43,12 +44,21 @@ public class GroupServiceImpl implements GroupService {
     }
 
     @Override
+    public int getCount(Map map) {
+        return groupDao.getCount(map);
+    }
+
+    @Override
     public void saveUpdate(Map map) {
         groupDao.saveUpdate(map);
     }
 
     @Override
-    public void saveRename(Map map){
+    public void saveRename(Map map) throws RepetitionException {
+        int count = groupDao.getCount(map);
+        if (count > 0) {
+            throw new RepetitionException(301, "名字已存在！");
+        }
         groupDao.saveRename(map);
     }
 

@@ -5,6 +5,7 @@ import com.github.pagehelper.PageInfo;
 import com.tpadsz.after.entity.MeshInfo;
 import com.tpadsz.after.entity.OptionList;
 import com.tpadsz.after.entity.SearchDict;
+import com.tpadsz.after.exception.RepetitionException;
 import com.tpadsz.after.service.PlaceService;
 import com.tpadsz.after.service.RoleService;
 import org.apache.log4j.Logger;
@@ -77,7 +78,11 @@ public class PlaceController {
         Map map = new HashMap();
         map.put("id", id);
         map.put("name", name);
-        placeService.saveRename(map);
+        try {
+            placeService.saveRename(map);
+        } catch (RepetitionException e) {
+            return "fail";
+        }
         return "success";
     }
 

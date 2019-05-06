@@ -3,6 +3,7 @@ package com.tpadsz.after.service;
 import com.tpadsz.after.entity.MeshInfo;
 import com.tpadsz.after.entity.OptionList;
 import com.tpadsz.after.entity.SearchDict;
+import com.tpadsz.after.exception.RepetitionException;
 
 import java.util.List;
 import java.util.Map;
@@ -19,8 +20,12 @@ public interface PlaceService {
     List<Map> selectByPid(List list);
 
     List<OptionList> getMesh(Map map);
+
     MeshInfo getPlaceInfo(int id);
+
+    int getCount(Map map);
+
     void deleteByIds(List list);
 
-    void saveRename(Map map);
+    void saveRename(Map map) throws RepetitionException;
 }

@@ -22,6 +22,8 @@ public interface GroupDao {
 
     MeshInfo getGroupInfo(int id);
 
+    int getCount(Map map);
+
     void saveUpdate(Map map);
 
     void saveRename(Map map);

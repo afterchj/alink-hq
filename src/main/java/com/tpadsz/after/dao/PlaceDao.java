@@ -22,6 +22,8 @@ public interface PlaceDao {
 
     MeshInfo getPlaceInfo(int id);
 
+    int getCount(Map map);
+
     void deleteByIds(List list);
 
     void saveRename(Map map);

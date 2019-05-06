@@ -16,10 +16,12 @@
         <if test="uid!=null and uid!=''">
             <choose>
                 <when test="role == 'admin'">
-                    AND m.uid IN (SELECT u.id FROM f_user_account u INNER JOIN f_user_role r ON u.id=r.user_id WHERE r.role_id in (2,3,4))
+                    AND m.uid IN (SELECT u.id FROM f_user_account u INNER JOIN f_user_role r ON u.id=r.user_id WHERE
+                    r.role_id in (2,3,4))
                 </when>
                 <when test="role == 'manager'">
-                    AND m.uid IN (SELECT c.uid FROM f_user_customer c WHERE fid=(SELECT fid FROM f_user_customer WHERE uid=#{uid}))
+                    AND m.uid IN (SELECT c.uid FROM f_user_customer c WHERE fid=(SELECT fid FROM f_user_customer WHERE
+                    uid=#{uid}))
                     <!--
                         AND m.uid IN (SELECT c.uid FROM f_user_customer c INNER JOIN f_user_role r ON c.uid=r.user_id WHERE r.role_id in (4) OR fid=(SELECT fid FROM f_user_customer WHERE uid=#{uid}))
                      -->
@@ -61,25 +63,13 @@
         ORDER BY lcount DESC
     </select>
 
-    <select id="selectByMap" resultType="map" parameterType="SearchDict">
-        SELECT
-        <include refid="Base_Column_List"/>
-        FROM f_mesh m
-        INNER JOIN f_project p ON m.project_id = p.id
-        INNER JOIN (SELECT COUNT(1) pcount,mid FROM f_place GROUP BY mid) pl ON pl.mid=m.id
-        INNER JOIN (SELECT COUNT(1) scount,mid FROM f_scene GROUP BY mid) s ON s.mid=m.id
-        WHERE 1=1
-        <include refid="common_choose"></include>
-        <if test="mname!=null and mname!=''">
-            AND m.mname LIKE CONCAT('%',#{mname},'%')
-        </if>
-        <if test="meshId!=null and meshId!=''">
-            AND m.mesh_id LIKE CONCAT('%',#{meshId},'%')
-        </if>
-        <if test="pname!=null and pname!=''">
-            AND p.name LIKE CONCAT('%',#{pname},'%')
-        </if>
+    <select id="getCount" resultType="int" parameterType="map">
+        SELECT COUNT(1) FROM f_group g
+        INNER JOIN f_mesh m ON m.id = g.mid
+        WHERE m.id = (SELECT mid FROM f_group WHERE id=#{id})
+        AND g.gname = #{name}
     </select>
+
     <select id="getGroupInfo" resultType="MeshInfo" parameterType="int">
         SELECT
             g.id,
@@ -101,12 +91,12 @@
     </select>
     <select id="selectByGid" resultType="map" parameterType="list">
         SELECT
-            g.id,
-            g.mid,
-            g.gname,
-            m.mesh_id,
-            g.pid,
-            p.pname
+        g.id,
+        g.mid,
+        g.gname,
+        m.mesh_id,
+        g.pid,
+        p.pname
         FROM f_group g
         LEFT JOIN f_place p ON g.pid=p.id
         INNER JOIN f_mesh m ON m.id=g.mid
@@ -118,8 +108,8 @@
 
     <select id="getPlaces" resultType="OptionList" parameterType="map">
         SELECT
-            p.id,
-            p.pname label
+        p.id,
+        p.pname label
         FROM f_place p
         INNER JOIN f_mesh m ON p.mid = m.id
         WHERE 1=1

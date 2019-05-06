@@ -73,6 +73,8 @@ $(function () {
             success: function (res) {
                 if (res == "success") {
                     location.reload();
+                } else {
+                    alert("区域名称不能重复！");
                 }
             }
         })
