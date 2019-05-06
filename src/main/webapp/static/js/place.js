@@ -3,14 +3,9 @@
  */
 $(function () {
     myBrowser();
-    $('.one-list li').each(function () {
-        $('.main-left>ul>li.one-list:eq(0)').find('.on-off-triangle').attr('src', '/alink-hq/static/img/right-triange-un.png');
-        $('.main-left>ul>li.one-list:eq(0)').find('.two-list').addClass('active');
-        var tab = $(this).attr('tab');
-        if (tab == 'placeList') {
-            $(this).addClass('active').siblings().removeClass('active');
-        }
-    });
+    var tabs="placeList";
+    var index=0;
+    left(tabs,index);
     $("#multiMove").click(function () {
         var ids = [];//定义一个数组
         $('input[name="ids"]:checked').each(function () {//遍历每一个名字为interest的复选框，其中选中的执行函数

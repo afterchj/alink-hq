@@ -67,3 +67,19 @@ $(function () {
 //            location.href = "/alink-hq/mesh/list?pageNum=" + page + "&pageSize=" + size;
     });
 });
+$(function () {
+    var page = parseInt($('#pageNum').text());
+    var pageTotal = parseInt($('#pages').text());
+    if (page == 1) {
+        $('#prev').attr('src', '/alink-hq/static/img/left-arrow.png');
+        $("#prev").addClass('disabled');
+    } else {
+        $('#prev').attr('src', '/alink-hq/static/img/left-arrow-color.png');
+    }
+    if (page == pageTotal) {
+        $('#next').attr('src', '/alink-hq/static/img/right-arrow.png');
+        $("#next").addClass('disabled');
+    } else {
+        $('#next').attr('src', '/alink-hq/static/img/right-arrow-color.png');
+    }
+})

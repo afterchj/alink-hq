@@ -12,15 +12,15 @@
 <body>
 <div th:replace="common/head::head"></div>
 <div class="c-container ">
-    <div th:replace="common/left::left" ></div>
+    <div th:replace="common/left::left"></div>
     <div class="main-right">
         <div class="clearfix main-right-nav">
             <div class="f-l main-right-title">用户列表</div>
             <!--<div class="f-r pointer">-->
-                <!--<img src="/alink-hq/static/img/create-project.png" alt="">-->
+            <!--<img src="/alink-hq/static/img/create-project.png" alt="">-->
             <!--</div>-->
             <div class="f-r pointer">
-                <img src="/alink-hq/static/img/go-back.png" alt=""  onClick="javascript :history.back(-1);">
+                <img src="/alink-hq/static/img/go-back.png" alt="" onClick="javascript :history.back(-1);">
             </div>
         </div>
         <div id="projectList" class="">
@@ -72,10 +72,10 @@
                         <th class="p-r" style="width: 180px;">
                             绑定邮箱
                         </th>
-                        <th class="p-r"  style="width: 130px;">
+                        <th class="p-r" style="width: 130px;">
                             隶属公司
                         </th>
-                        <th class="p-r"  style="width: 120px;">
+                        <th class="p-r" style="width: 120px;">
                             角色
                         </th>
                         <th class="p-r" style="width: 180px;">
@@ -96,13 +96,14 @@
                         <td th:text="${user.coname}"></td>
                         <td th:text="${user.role_id}" class="role"></td>
                         <td th:text="${user.create_date}"></td>
-                        <td th:text="${user.status}" class="status pointer" openTab="start-use" id="start-use" >
+                        <td th:text="${user.status}" class="status pointer" openTab="start-use" id="start-use">
                         </td>
                         <td class="p-r">
-                            <img src="/alink-hq/static/img/edit.png" alt="" openTab="reset-pwd" id="reset-pwd" class="pointer" th:title="重置密码">
+                            <img src="/alink-hq/static/img/edit.png" alt="" openTab="reset-pwd" id="reset-pwd"
+                                 class="pointer" th:title="重置密码">
                             <a th:href="@{/account/transferPage(account=${user.account},coname=${user.coname})}"><img
                                     src="/alink-hq/static/img/exchange.png"
-                                      alt="" class="center-img" th:title="移交账号"></a>
+                                    alt="" class="center-img" th:title="移交账号"></a>
                             <img src="/alink-hq/static/img/delete.png" alt="" id="delete-account"
                                  openTab="delete-account" class="pointer" th:title="删除">
                             <div class="popup p-a">
@@ -138,7 +139,8 @@
                                            oninput="skipLimit()"/>
                                 </span>
                                 <span class="m-r-35">
-                                    <img src="/alink-hq/static/img/skip.png" id="skipPageBtn" class="pointer" onmousedown="mouseDown()" onmouseup="mouseUp()"
+                                    <img src="/alink-hq/static/img/skip.png" id="skipPageBtn" class="pointer"
+                                         onmousedown="mouseDown()" onmouseup="mouseUp()"
                                          alt="">
                                 </span>
                                 <span class="m-r-15r">每页显示：</span>
@@ -266,7 +268,7 @@
     </div>
     <div class="pop-content">
         <div class="hasProject active">
-            <div >当前账号名下有项目</div>
+            <div>当前账号名下有项目</div>
             <div>请移交后再进行删除！</div>
         </div>
         <div class="pop-btn">
@@ -276,345 +278,10 @@
     </div>
 </div>
 <div class="hide-iframe "></div>
-
-
 <script src="/alink-hq/static/js/jquery.min.js"></script>
 <script src="/alink-hq/static/laydate/laydate.js"></script>
-
-<script>
-
-    function hide() {
-        $('.hide-iframe').removeClass('active');
-        $('.confirm-create-iframe').removeClass('active');
-    }
-
-    $('.close').click(function () {
-        hide();
-    })
-    // 点击取消时
-    $('.pop-content  .pop-btn .reduce').click(function () {
-        hide();
-        $(this).parents('.pop-iframe').removeClass('active');
-    })
-    // 点击确定时
-    $('.pop-content  .pop-btn .yes').click(function () {
-        hide();
-        $(this).parents('.pop-iframe').removeClass('active');
-    })
-    function shade(open, text) {
-        var width = document.body.scrollWidth;
-        var height = document.body.scrollHeight;
-        $('.hide-iframe').addClass('active');
-        $('.hide-iframe').css({
-            'width': width,
-            'height': height
-        });
-        $('.pop-iframe').each(function () {
-            var openContent = $(this).attr('openContent');
-            console.log(openContent, open);
-            if (openContent == open) {
-                $(this).addClass('active');
-                if (open == 'start-use') {
-                    console.log(text);
-                    if (text == '启用') {
-                        $('.off-or-on').text('您确定要禁用该账户吗？');
-                        var content='<p style="  font-size: 15px;color: #fb2a2a;margin-top:30px;">禁用后，该账号将无法登录</p>';
-                        $('.off-or-on').after(content);
-                    } else {
-                        $('.off-or-on').text('您确定要启用该账户吗？');
-                    }
-                }
-            }
-        })
-    }
-    $(function(){
-
-        var  account='';
-        var status='';
-        var intStatus='';
-        $('td[openTab="start-use"]').click(function () {
-            var openTab = $(this).attr('openTab');
-            var text=$(this).text();
-            shade(openTab,text);
-             account=$(this).siblings('.use-account').text();
-             status=$(this).text();
-
-            if(status == '启用'){
-                 intStatus=1;
-            }else if(status == '禁用'){
-                 intStatus=0;
-            }
-
-        })
-        $('div[openContent="start-use"] button.yes').click(function(){
-//            console.log(account);
-//            console.log(intStatus);
-            $.ajax({
-                type: "POST",
-                url: "/alink-hq/account/enable",
-                data: {account: account,status:intStatus},
-                dataType: "json",
-                success: function (res) {
-                    console.log(res);
-                    if (res.result == '000') {
-                        location.reload();
-                    }
-                }
-            });
-        })
-    })
-
-
-
-
-    $(function(){
-         var account='';
-        $('img[openTab="reset-pwd"]').click(function () {
-            var openTab = $(this).attr('openTab');
-            shade(openTab);
-             account=$(this).parent().siblings('.use-account').text();
-        })
-        $('div[openContent="reset-pwd"] button.yes').click(function(){
-            $('div[openContent="new-pwd"]').addClass('active');
-            $('.hide-iframe').addClass('active');
-            $.ajax({
-                type: "POST",
-                url: "/alink-hq/account/resetPwd",
-                data: {account: account},
-                dataType: "json",
-                success: function (res) {
-                    console.log(res);
-                    if (res.result == '000') {
-                        var pwd = res.pwd;
-                        var account = res.account;
-                        $('.t-account-result').text(account);
-                        $('.t-pwd-result').text(pwd);
-                    }
-                }
-            });
-        })
-    })
-    $(function(){
-        var account;
-        $('img[openTab="delete-account"]').click(function () {
-            var openTab = $(this).attr('openTab');
-            shade(openTab);
-            account=$(this).parent().siblings('.use-account').text();
-        })
-        $('div[openContent="delete-account"] button.yes').click(function(){
-            $.ajax({
-            type: "POST",
-            url: "/alink-hq/account/delete",
-            data: {account: account},
-            dataType: "json",
-            success: function (data) {
-                console.log(data.result);
-                if(data.result=='303'){
-                    //移交
-                    $('div[openContent="delete-account-hasProject"]').addClass('active');
-                    $('div[openContent="delete-account"]').removeClass('active');
-                }else if(data.result=='000'){
-                    location.reload();
-                }
-            }
-        });
-        })
-        $('div[openContent="delete-account-hasProject"] button.yes').click(function(){
-            window.location.href='/alink-hq/project/list';
-        })
-    })
-
-
-
-    //日期选择
-    laydate.render({
-        elem: '#add-time',
-        range: true
-    });
-   $('.show-date').click(function(){
-        $('#add-time').trigger('click');
-  })
-    $(function () {
-        myBrowser()
-        $('.one-list li').each(function () {
-            $('.main-left>ul>li.one-list:eq(1)').find('.on-off-triangle').attr('src', '/alink-hq/static/img/right-triange-un.png');
-            $('.main-left>ul>li.one-list:eq(1)').find('.two-list').addClass('active');
-            var tab = $(this).attr('tab');
-            if (tab == 'userList') {
-                $(this).addClass('active').siblings().removeClass('active');
-            }
-        })
-    })
-
-    $('.on-off-triangle').click(function () {
-        var imgUrl = $(this).attr('src');
-        if (imgUrl == '/alink-hq/static/img/bottom-triangle-un.png') {
-            $(this).attr('src', '/alink-hq/static/img/right-triange-un.png');
-            $(this).parent().parent('.one-list').find('.two-list').addClass('active');
-        } else {
-            $(this).attr('src', '/alink-hq/static/img/bottom-triangle-un.png');
-            $(this).parent().parent('.one-list').find('.two-list').removeClass('active');
-        }
-    })
-
-    $(function () {
-        var page = parseInt($('.pages').text());
-        var pageTotal = parseInt($('.pageTotal').text());
-        if (page == 1) {
-            $('.prev-page img').attr('src', '/alink-hq/static/img/left-arrow.png');
-            $(".prev-page ").attr("disabled", true);
-        } else {
-            $('.prev-page img').attr('src', '/alink-hq/static/img/left-arrow-color.png');
-        }
-        if (page == pageTotal) {
-            $('.next-page img').attr('src', '/alink-hq/static/img/right-arrow.png');
-            $(".next-page ").attr("disabled", true);
-        } else {
-            $('.next-page img').attr('src', '/alink-hq/static/img/right-arrow-color.png');
-        }
-    })
-
-    function skipLimit() {
-        var skipPage = parseInt($('#skipPage').val());
-        var pageTotal = parseInt($('.pageTotal').text());
-        if (skipPage < 1 || skipPage > pageTotal) {
-            $('#skipPage').val('');
-        }
-    }
-
-    //条件筛选
-    $(function () {
-        var height=$(document).height();
-        $('.main-left').css('height',height);
-        var url = window.location.href;
-        var account =GetUrlParam("account") ;
-        var company = GetUrlParam("fid");
-        var role = GetUrlParam("roleId");
-        var startDate = GetUrlParam("startDate");
-        var endDate = GetUrlParam("endDate");
-        var pageSize = GetUrlParam("pageSize");
-        var pageNum = GetUrlParam("pageNum");
-        $('#skipPage').val(pageNum);
-        $('#page-select option').each(function () {
-            if ($(this).val() == pageSize) {
-                $(this).attr("selected", "selected");
-            }
-        })
-        if (startDate != '' && endDate != '') {
-            var addTime = startDate + ' - ' + endDate;
-            $('#add-time').val(addTime);
-        }
-        $('#account').val(decodeURI(account));
-
-        if(role==''){
-            $('#role option').eq(0).prop('selected',true);
-        }else{
-            $('#role').val(role);
-        }
-        if(company==''){
-            $('#company option').eq(0).prop('selected',true);
-        }else{
-            $('#company').val(company);
-        }
-
-        $('table tr td.role').each(function () {
-            var roleId = parseInt($(this).text());
-            if (roleId == 4) {
-                $(this).text('施工人员');
-            } else if (roleId == 3) {
-                $(this).text('乙方管理员');
-            } else if (roleId == 2) {
-                $(this).text('管理员');
-            }
-        })
-        $('table tr td.status').each(function () {
-            var status = parseInt($(this).text());
-            if (status == 1) {
-                $(this).text('启用');
-            } else if (status == 0) {
-                $(this).text('禁用');
-            }
-        })
-        //查询按钮点击
-        $('.search-button button').click(function () {
-            var pageSize = $('#page-select option:selected').val();
-            var pageNum = $('#skipPage').val();
-            if(pageNum==''){
-                pageNum==1;
-            }else{
-                pageNum=parseInt(pageNum);
-            }
-//            console.log('pageNum',pageNum);
-            condition(pageSize, pageNum);
-        })
-        //选择页数变化
-        $('#page-select').change(function () {
-            var pageSize = $(this).children('option:selected').val();
-            var pageNum=$('#skipPage').val();
-            console.log(pageNum);
-            condition(pageSize, pageNum);
-        });
-        //跳转页数变化
-        $('#skipPageBtn').click(function () {
-            var pageSize = $('#page-select option:selected').val();
-            var pageNum =$('#skipPage').val();
-            condition(pageSize, pageNum);
-        })
-    })
-    function mouseDown() {
-        $('#skipPageBtn').attr('src','/alink-hq/static/img/skip-color.png');
-    }
-    function mouseUp() {
-        $('#skipPageBtn').attr('src','/alink-hq/static/img/skip.png');
-    }
-
-    function condition(pageSize, pageNum) {
-        var url = window.location.href;
-        var i = url.indexOf("?");
-        if (i != -1) {
-            var url2 = url.substring(0, i + 1);
-//            console.log('url2', url2);
-        } else {
-            var url2 = url + '?';
-        }
-        var account = $('#account').val();
-        if ($('#company').val() != '请选择公司') {
-            var company = $('#company').val();
-        } else {
-            var company = '';
-        }
-        if ($('#role').val() != '请选择角色') {
-            var role = $('#role').val();
-        } else {
-            var role = '';
-        }
-        var addTime = $('#add-time').val();
-        var startDate = addTime.substring(0, 10);
-        var endDate = addTime.substring(13, 23);
-        var newUrl = url2 + '&pageNum=' + pageNum + '&pageSize=' + pageSize + '&account=' + account + '&fid=' + company + '&roleId=' + role + '&startDate=' + startDate + '&endDate=' + endDate;
-        location.href = newUrl;
-    }
-
-    //paraName 等找参数的名称
-    function GetUrlParam(paraName) {
-        var url = document.location.toString();
-        var arrObj = url.split("?");
-        if (arrObj.length > 1) {
-            var arrPara = arrObj[1].split("&");
-            var arr;
-            for (var i = 0; i < arrPara.length; i++) {
-                arr = arrPara[i].split("=");
-                if (arr != null && arr[0] == paraName) {
-                    return arr[1];
-                }
-            }
-            return "";
-        }
-        else {
-            return "";
-        }
-    }
-</script>
+<script type="text/javascript" src="/alink-hq/static/js/left.js"></script>
+<script src="/alink-hq/static/js/user.js"></script>
 </body>
 
 </html>

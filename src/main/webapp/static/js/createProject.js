@@ -2,26 +2,9 @@
  * Created by qian.chen on 2019/4/28.
  */
 $(function(){
-    var height=$(document).height();
-    $('.main-left').css('height',height);
-    $('.one-list li').each(function () {
-        $('.main-left>ul>li.one-list:eq(0)').find('.on-off-triangle').attr('src', '/alink-hq/static/img/right-triange-un.png');
-        $('.main-left>ul>li.one-list:eq(0)').find('.two-list').addClass('active');
-        var tab = $(this).attr('tab');
-        if (tab == 'groupList') {
-            $(this).addClass('active').siblings().removeClass('active');
-        }
-    });
-    $('.on-off-triangle').click(function () {
-        var imgUrl = $(this).attr('src');
-        if (imgUrl == '/alink-hq/static/img/bottom-triangle-un.png') {
-            $(this).attr('src', '/alink-hq/static/img/right-triange-un.png');
-            $(this).parent().parent('.one-list').find('.two-list').addClass('active');
-        } else {
-            $(this).attr('src', '/alink-hq/static/img/bottom-triangle-un.png');
-            $(this).parent().parent('.one-list').find('.two-list').removeClass('active');
-        }
-    });
+    var tabs="projectList";
+    var index=0;
+    left(tabs,index);
 })
 
 $('.confirm-create').click(function () {

@@ -59,12 +59,12 @@
     </div>
 </div>
 <script src="/alink-hq/static/js/jquery.min.js"></script>
+<script type="text/javascript" src="/alink-hq/static/js/left.js"></script>
 <script type="text/javascript" src="/alink-hq/static/js/light.js"></script>
 <script th:inline="javascript">
     var uid = [[${session.user.id}]];
     $(function () {
-        var height=$(document).height();
-        $('.main-left').css('height',height);
+
         console.log("gid=" + $("#gid option:selected").val());
         $.getJSON("/alink-hq/group/getGroup", {"uid": uid}, function (json) {
             if (json != '') {
@@ -75,14 +75,9 @@
                 $("#gid").append("<option value='" + item.id + "'>" + item.label + "</option>");
             });
         });
-        $('.one-list li').each(function () {
-            $('.main-left>ul>li.one-list:eq(0)').find('.on-off-triangle').attr('src', '/alink-hq/static/img/right-triange-un.png');
-            $('.main-left>ul>li.one-list:eq(0)').find('.two-list').addClass('active');
-            var tab = $(this).attr('tab');
-            if (tab == 'lightList') {
-                $(this).addClass('active').siblings().removeClass('active');
-            }
-        });
+        var tabs="lightList";
+        var index=0;
+        left(tabs,index);
     });
 </script>
 </body>

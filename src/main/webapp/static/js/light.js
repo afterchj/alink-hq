@@ -3,16 +3,9 @@
  */
 $(function () {
     myBrowser();
-    var height=$(document).height();
-    $('.main-left').css('height',height);
-    $('.one-list li').each(function () {
-        $('.main-left>ul>li.one-list:eq(0)').find('.on-off-triangle').attr('src', '/alink-hq/static/img/right-triange-un.png');
-        $('.main-left>ul>li.one-list:eq(0)').find('.two-list').addClass('active');
-        var tab = $(this).attr('tab');
-        if (tab == 'lightList') {
-            $(this).addClass('active').siblings().removeClass('active');
-        }
-    });
+    var tabs="lightList";
+    var index=0;
+    left(tabs,index);
     $(".rename").click(function () {
         var id = $(this).attr("alt");
         var name = prompt("新名称：");

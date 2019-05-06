@@ -1,11 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-
 <head>
-    <!--<title>导航栏</title>-->
-    <!--<link rel="stylesheet" href="/alink-hq/static/css/base.css"/>-->
-    <!--<link rel="stylesheet" href="/alink-hq/static/css/leftNav.css"/>-->
-    <!--<link rel="stylesheet" href="/alink-hq/static/css/projectManage.css"/>-->
 </head>
 <body>
 <div th:fragment="left">
@@ -43,21 +38,6 @@
             </ul>
         </div>
     </div>
-    <script src="/alink-hq/static/myAccount/js/jquery-3.3.1.min.js"></script>
-    <script>
-        $(function () {
-            $('.on-off-triangle').click(function () {
-                var imgUrl = $(this).attr('src');
-                if (imgUrl == '/alink-hq/static/img/bottom-triangle-un.png') {
-                    $(this).attr('src', '/alink-hq/static/img/right-triange-un.png');
-                    $(this).parent().parent('.one-list').find('.two-list').addClass('active');
-                } else {
-                    $(this).attr('src', '/alink-hq/static/img/bottom-triangle-un.png');
-                    $(this).parent().parent('.one-list').find('.two-list').removeClass('active');
-                }
-            });
-        });
-    </script>
 </div>
 </body>
 </html>
