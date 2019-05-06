@@ -163,7 +163,7 @@ img.toBottom {
 .page img {
     vertical-align: middle;
     transform: scale(0.85);
-
+    cursor: pointer;
 }
 
 .page-right > span {

@@ -20,7 +20,7 @@ $(function () {
     //点击获取激活码
     $("#codeSubmit").click(function () {
         $('p.code-hint').removeClass('active').text('');
-        $("p.success-hint").removeClass("active").text('');
+        $("span.success-hint").removeClass("active").text('');
         var email = $("#email").val();
         var emailFlag = isEmpty(email);
         var emailHint = $("p.email-hint").text();
@@ -32,9 +32,8 @@ $(function () {
         } else if (!hintFlag) {
             //提示框有提示
             $('p.email-hint').removeClass('active').text('');
-            $('p.email-hint').addClass('active').text(text);
+            $('p.email-hint').addClass('active').text(emailHint);
         } else {
-
             $.ajax({
                 type: "POST",
                 url: "/alink-hq/myAccount/sendEmailCode",
@@ -47,7 +46,7 @@ $(function () {
                         $('p.email-hint').addClass('active').text("该邮箱已绑定");
                     } else if (msg.info == "success") {
                         sendMessage($("#codeSubmit"), 60, "获取激活码");
-                        $("p.success-hint").addClass("active").text("请登录邮箱查收");
+                        $("span.success-hint").addClass("active").text("请登录邮箱查收");
                     } else {
                         alert("加载失败,请重试");
                     }
@@ -108,11 +107,13 @@ $(function () {
                             //验证码不正确
                             $('p.code-hint').removeClass('active').text('');
                             $('p.code-hint').addClass('active').text("激活码不正确");
-                        }else if (info=="codeTimeOut"){
-                            //验证码超时
-                            $("p.code-hint").removeClass('active').text('');
-                            $("p.code-hint").addClass('active').text("验证码已超时，请重新获取");
-                        } else if (info == "dbError") {
+                        }
+                        // else if (info=="codeTimeOut"){
+                        //     //验证码超时
+                        //     $("p.code-hint").removeClass('active').text('');
+                        //     $("p.code-hint").addClass('active').text("验证码已超时，请重新获取");
+                        // }
+                        else if (info == "dbError") {
                             //数据库异常
                             var content = "加载失败，请重新尝试";
                             loadingError(content);

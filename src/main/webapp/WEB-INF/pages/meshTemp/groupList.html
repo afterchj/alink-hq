@@ -71,7 +71,7 @@
                         </thead>
                         <tbody>
                         <tr th:each="group:${pageInfo.list}">
-                            <td><input type="checkbox" name="ids" th:value="${group.id}"></td>
+                            <td class=""><input type="checkbox" name="ids" th:value="${group.id}" ></td>
                             <td class="k-link"><a th:href="@{/group/info(id=${group.id})}" th:text="${group.gname}"></a></td>
                             <td th:text="${group.mname}"></td>
                             <td th:text="${group.mesh_id}"></td>
@@ -81,9 +81,11 @@
                                 <a th:href="@{/group/move(ids=${group.id})}">
                                     <img src="/alink-hq/static/img/exchange.png" alt="" class="center-img" title="移交">
                                 </a>
-                                <a th:href="@{/group/delete(ids=${group.id})}"
-                                   onclick="return confirm('您确定要删除所选的网络吗？')">
-                                    <img src="/alink-hq/static/img/delete.png" alt="" id="singleDel" title="删除">
+                                <!--<a th:href="@{/group/delete(ids=${group.id})}">-->
+                                    <!--<img src="/alink-hq/static/img/delete.png" alt="" id="singleDel" title="删除">-->
+                                <!--</a>-->
+                                <a href="javascript:void(0);" class="singleDel pointer">
+                                    <img src="/alink-hq/static/img/delete.png" alt="" id="singleDel" title="删除" >
                                 </a>
                             </td>
                         </tr>
@@ -136,6 +138,38 @@
         </div>
     </div>
 </div>
+<!-- 重命名弹框 -->
+<div class="confirm-on-off pop-iframe  " openContent="reset-name">
+    <div class="confirm-on-off-nav p-r pop-nav">
+        重命名
+    </div>
+    <div class="pop-content">
+        <div class="newName">
+            <p class="rename-hint"></p>
+            <label for="rename">新名称</label>
+            <input type="text" placeholder="请输入（2-16位汉字、字母、数字）" id="rename" onkeyup="nameKeyUp()" maxlength="16"/>
+        </div>
+        <div class="pop-btn">
+            <button class="reduce">取消</button>
+            <button class="yes">确定</button>
+        </div>
+    </div>
+</div>
+<!-- 删除账户 -->
+<div class="pop-iframe" openContent="delete-mesh">
+    <div class=" p-r pop-nav">
+        温馨提示
+    </div>
+    <div class="pop-content">
+        <div class="reset-pwd">您确定要删除所选的网络吗？</div>
+        <div class="reset-pwd-hint">（删除后网络中所有信息将无法恢复，请慎重！）</div>
+        <div class="pop-btn">
+            <button class="reduce">取消</button>
+            <button class="yes">确定</button>
+        </div>
+    </div>
+</div>
+<div class="hide-iframe "></div>
 <script type="text/javascript" src="/alink-hq/static/js/page.js"></script>
 <script type="text/javascript" src="/alink-hq/static/js/group.js"></script>
 </body>

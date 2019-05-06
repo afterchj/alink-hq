@@ -31,7 +31,7 @@ $(function () {
         }else if(!hintFlag){
             //手机号格式有误
             $("p.phone-hint").removeClass('active').text('');
-            $("p.phone-hint").addClass('active').text("请输入正确的手机号");
+            $("p.phone-hint").addClass('active').text(mobileHint);
         }else {
             $.ajax({
                 type:"POST",
@@ -71,9 +71,11 @@ function clickFillSubmit(event) {
     var codeFlag = isEmpty(code);
     if (mobileFlag){
         //为空
+        $("p.phone-hint").removeClass('active').text('');
         $("p.phone-hint").addClass('active').text("请输入手机号");
     }else if($.trim(mobileHint)=="请输入正确的手机号"){
         //手机号格式有误
+        $("p.phone-hint").removeClass('active').text('');
         $("p.phone-hint").addClass('active').text("请输入正确的手机号");
     }
     if (codeFlag){
@@ -102,11 +104,13 @@ function clickFillSubmit(event) {
                         //验证码不正确
                         $("p.code-hint").removeClass('active').text('');
                         $("p.code-hint").addClass('active').text("激活码不正确");
-                    }else if (info=="codeTimeOut"){
-                        //验证码超时
-                        $("p.code-hint").removeClass('active').text('');
-                        $("p.code-hint").addClass('active').text("验证码已超时，请重新获取");
-                    }else if (info=="dbError"){
+                    }
+                    // else if (info=="codeTimeOut"){
+                    //     //验证码超时
+                    //     $("p.code-hint").removeClass('active').text('');
+                    //     $("p.code-hint").addClass('active').text("验证码已超时，请重新获取");
+                    // }
+                    else if (info=="dbError"){
                         //数据库异常
                         var content = "加载失败，请重新尝试";
                         loadingError(content);
