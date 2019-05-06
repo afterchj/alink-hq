@@ -21,7 +21,7 @@
         <div class="clearfix main-right-nav">
             <div class="f-l main-right-title">我的账号</div>
             <div class="f-r pointer">
-                <img src="/alink-hq/static/img/go-back.png" alt=""/>
+                <img src="/alink-hq/static/img/go-back.png" alt="" id="clickReturn"/>
             </div>
         </div>
         <div id="account">
@@ -31,11 +31,11 @@
                 </div>
                 <div class="a-content">
                     <div>
-                    <span class="icon"><i class="dot-no"></i><img src="/alink-hq/static/img/password.png"
-                                                                  alt=""/></span>
-                    <span class="title">
-                        账号
+                    <span class="icon">
+                        <i class="dot-no"></i>
+                        <img src="/alink-hq/static/img/password.png" alt="" />
                     </span>
+                        <span class="title">账号</span>
                         <span th:text="${myAccount.getAccount()}"></span>
                     <span>
                         <a th:href="@{pwd(account=${myAccount.getAccount()})}" tab="myAccount/pwd">修改密码</a>
