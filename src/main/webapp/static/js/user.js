@@ -226,10 +226,11 @@ $(function () {
     $('.search-button button').click(function () {
         var pageSize = $('#page-select option:selected').val();
         var pageNum = $('#skipPage').val();
-        if (pageNum == '') {
-            pageNum == 1;
-        } else {
-            pageNum = parseInt(pageNum);
+        if(!pageNum){
+            pageNum=1;
+        }
+        if(!pageSize){
+            pageSize=10;
         }
         condition(pageSize, pageNum);
     })
