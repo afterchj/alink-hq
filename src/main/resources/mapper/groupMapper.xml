@@ -6,6 +6,7 @@
 		g.id,
         g.mid,
         g.gname,
+        m.project_id,
         m.mname,
         m.mesh_id,
         IFNULL(l.lcount,0) lcount
@@ -82,14 +83,14 @@
     <select id="getGroupInfo" resultType="MeshInfo" parameterType="int">
         SELECT
             g.id,
-            g.pid,
-            g.mid,
-            g.gname,
+            m.id mid,
+            IFNULL(g.gname,'null') gname,
             p.name,
             m.project_id,
             m.mname,
             m.mesh_id,
             pl.pname,
+            pl.id pid,
             IFNULL(l.lcount,0) lcount
         FROM f_group g
         INNER JOIN f_mesh m ON m.id=g.mid

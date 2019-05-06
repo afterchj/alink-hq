@@ -39,7 +39,7 @@
                             <span th:text="${meshInfo.name}"></span>
                         </div>
                         <div class="f-l">
-                            <a href="javascript:void(0);">查看项目详情</a>
+                            <a th:href="@{/project/detail(projectId=${meshInfo.project_id})}">查看项目详情</a>
                         </div>
                     </div>
                     <div class="clearfix">
@@ -88,7 +88,7 @@
             $('.main-left>ul>li.one-list:eq(0)').find('.on-off-triangle').attr('src', '/alink-hq/static/img/right-triange-un.png');
             $('.main-left>ul>li.one-list:eq(0)').find('.two-list').addClass('active');
             var tab = $(this).attr('tab');
-            if (tab == 'meshList') {
+            if (tab == 'placeList') {
                 $(this).addClass('active').siblings().removeClass('active');
             }
         });
