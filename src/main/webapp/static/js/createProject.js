@@ -10,6 +10,8 @@ $(function(){
 $('.confirm-create').click(function () {
     var projectName = $('#projectName').val();
     var account = $('#account').val();
+    var regName = /^[a-zA-Z0-9\u4e00-\u9fa5]{2,16}$/;
+    var renameResult = regName.test(projectName);
     if(projectName==''){
         $('.project-hint').text('请输入项目名称');
     }else{
@@ -20,8 +22,13 @@ $('.confirm-create').click(function () {
     }else{
         $('.account-hint').text('');
     }
+    if(!renameResult && projectName!=''){
+        $('.project-hint').text('请输入 2-16 位汉字、字母、数字');
+    }else{
+        $('.project-hint').text('');
+    }
     console.log(projectName,account);
-    if(projectName!='' &&  account!=''){
+    if(projectName!='' &&  account!='' && renameResult){
         $.ajax({
             type: "post",
             url: "/alink-hq/project/create",
