@@ -3,8 +3,8 @@
  */
 $(function () {
     myBrowser();
-    var height=$(document).height();
-    $('.main-left').css('height',height);
+    var height = $(document).height();
+    $('.main-left').css('height', height);
     $('.one-list li').each(function () {
         $('.main-left>ul>li.one-list:eq(0)').find('.on-off-triangle').attr('src', '/alink-hq/static/img/right-triange-un.png');
         $('.main-left>ul>li.one-list:eq(0)').find('.two-list').addClass('active');
@@ -13,19 +13,9 @@ $(function () {
             $(this).addClass('active').siblings().removeClass('active');
         }
     });
-    $('.on-off-triangle').click(function () {
-        var imgUrl = $(this).attr('src');
-        if (imgUrl == '/alink-hq/static/img/bottom-triangle-un.png') {
-            $(this).attr('src', '/alink-hq/static/img/right-triange-un.png');
-            $(this).parent().parent('.one-list').find('.two-list').addClass('active');
-        } else {
-            $(this).attr('src', '/alink-hq/static/img/bottom-triangle-un.png');
-            $(this).parent().parent('.one-list').find('.two-list').removeClass('active');
-        }
-    });
     var id;
     //重命名弹框
-    $('.rename').click(function(){
+    $('.rename').click(function () {
         id = $(this).attr("alt");
         $('div[openContent="reset-name"]').addClass('active');
         var width = document.body.scrollWidth;
@@ -35,44 +25,43 @@ $(function () {
             'width': width,
             'height': height
         })
-    })
+    });
     //重命名确定
-    $('div[openContent="reset-name"] button.yes').click(function(){
-        var name=$('#rename').val();
+    $('div[openContent="reset-name"] button.yes').click(function () {
+        var name = $('#rename').val();
         var regUserName = /^[a-zA-Z0-9\u4e00-\u9fa5]{2,6}$/;
         var userNameResult = regUserName.test(name);
-        if(name==''){
+        if (name == '') {
             $('p.rename-hint').text('请输入新名称');
-        }else if(!userNameResult){
+        } else if (!userNameResult) {
             $('p.rename-hint').text('请输入 2-6 位汉字、字母、数字');
-        }else{
-                $.ajax({
-                    type: "post",
-                    url: "/alink-hq/group/rename",
-                    data: {
-                        "name": name,
-                        "id": id
-                    },
-                    async: true,
-                    success: function (res) {
-                        if (res == "ok") {
-                            location.reload();
-                        } else {
-                            alert("组名称不能重复！");
-                        }
+        } else {
+            $.ajax({
+                type: "post",
+                url: "/alink-hq/group/rename",
+                data: {
+                    "name": name,
+                    "id": id
+                },
+                async: true,
+                success: function (res) {
+                    if (res == "ok") {
+                        location.reload();
+                    } else {
+                        alert("组名称不能重复！");
                     }
-                })
+                }
+            })
         }
-    })
+    });
     //重命名取消
-    $('div[openContent="reset-name"] button.reduce').click(function(){
+    $('div[openContent="reset-name"] button.reduce').click(function () {
         $('.hide-iframe').removeClass('active');
         $('div[openContent="reset-name"]').removeClass('active');
-    })
-
+    });
     //删除弹框出现--单选
-    $('#singleDel').click(function(){
-         $('div[openContent="delete-mesh"]').addClass('active');
+    $('#singleDel').click(function () {
+        $('div[openContent="delete-mesh"]').addClass('active');
         var width = document.body.scrollWidth;
         var height = document.body.scrollHeight;
         $('.hide-iframe').addClass('active');
@@ -80,11 +69,11 @@ $(function () {
             'width': width,
             'height': height
         })
-    })
+    });
     //删除确定--单选
-    $('div[openContent="delete-mesh"] button.yes').click(function(){
-        
-    })
+    $('div[openContent="delete-mesh"] button.yes').click(function () {
+
+    });
     // $(".rename").click(function () {
     //     var id = $(this).attr("alt");
     //     var name = prompt("新名称：");

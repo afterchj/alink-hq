@@ -12,17 +12,6 @@ $(function () {
         }
     });
 
-    $('.on-off-triangle').click(function () {
-        var imgUrl = $(this).attr('src');
-        if (imgUrl == '/alink-hq/static/img/bottom-triangle-un.png') {
-            $(this).attr('src', '/alink-hq/static/img/right-triange-un.png');
-            $(this).parent().parent('.one-list').find('.two-list').addClass('active');
-        } else {
-            $(this).attr('src', '/alink-hq/static/img/bottom-triangle-un.png');
-            $(this).parent().parent('.one-list').find('.two-list').removeClass('active');
-        }
-    });
-
     // $("#newMesh").click(function () {
     //     location.href="/alink-hq/create";
     //     });

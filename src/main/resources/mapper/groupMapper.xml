@@ -96,7 +96,7 @@
         g.gname,
         m.mesh_id,
         g.pid,
-        p.pname
+        IFNULL(p.pname,'null') pname
         FROM f_group g
         LEFT JOIN f_place p ON g.pid=p.id
         INNER JOIN f_mesh m ON m.id=g.mid
