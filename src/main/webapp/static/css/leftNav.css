@@ -112,3 +112,20 @@
     text-align: center;
     font-size: 17px;
 }
+.goBack{
+    border: 2px solid #3895D6;
+    color: #3895D6;
+    height: 30px;
+    line-height: 30px;
+    width: 100px;
+    border-radius: 5px;
+    text-align: center;
+    font-size: 18px;
+}
+.triangle-facing-left {
+    display: inline-block;
+    margin: 72px;
+    border-left: 24px solid; border-bottom: 24px solid;
+    width: 120px; height: 120px;
+    transform: rotate(45deg);
+}

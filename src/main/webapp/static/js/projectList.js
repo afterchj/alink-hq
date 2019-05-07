@@ -81,7 +81,7 @@ $(function () {
 //条件筛选
 $(function () {
     var url = window.location.href;
-    var account = GetUrlParam("account");
+    var account = decodeURIComponent(GetUrlParam("account"));
     var projectName = decodeURIComponent(GetUrlParam("projectName"));
     var startCreateDate = GetUrlParam("startCreateDate");
     var endCreateDate = GetUrlParam("endCreateDate");
@@ -137,6 +137,7 @@ $(function () {
         } else {
             pageNum = parseInt(pageNum);
         }
+        console.log(sortFlag);
         condition(pageSize, pageNum, sortFlag);
     })
     $('.toTop1').click(function () {
@@ -148,6 +149,7 @@ $(function () {
         } else {
             pageNum = parseInt(pageNum);
         }
+        console.log(sortFlag);
         condition(pageSize, pageNum, sortFlag);
     })
     //查询按钮点击
@@ -155,10 +157,11 @@ $(function () {
         var sortFlag = GetUrlParam("sortFlag");
         var pageSize = $('#page-select option:selected').val();
         var pageNum = $('#skipPage').val();
-        if (pageNum == '') {
-            pageNum == 1;
-        } else {
-            pageNum = parseInt(pageNum);
+        if(!pageNum){
+            pageNum ='';
+        }
+        if(!pageSize){
+            pageSize='';
         }
         condition(pageSize, pageNum, sortFlag);
     })

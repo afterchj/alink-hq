@@ -81,6 +81,7 @@ public class ProjectController {
             model.addAttribute("endCreateDate", endCreateDate);
             model.addAttribute("startUpdateDate", startUpdateDate);
             model.addAttribute("endUpdateDate", endUpdateDate);
+            model.addAttribute("sortFlag", sortFlag);
         } catch (Exception e) {
         }
         return "projectManage/projectList";

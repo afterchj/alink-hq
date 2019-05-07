@@ -159,6 +159,8 @@ img.toBottom {
 
 .search-result table .selected-order .amount {
     color: red;
+    display: inline-block;
+    width: 20px;
 }
 
 .page img {
@@ -605,7 +607,9 @@ th.all-checkbox {
 #projectDetail .p-nav li {
     font-size: 17px;
 }
-
+.search-result table td.k-link a{
+    color: #17b4f1;
+}
 .search-result table td.k-link a:hover {
     color: #17b4f1;
     border-bottom: 1px solid #17b4f1;

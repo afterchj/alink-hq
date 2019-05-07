@@ -27,8 +27,8 @@
         </div>
         <div id="projectDetail">
             <div class="p-detail">
-                <div class="p-nav">
-                    灯联网项目详情
+                <div class="p-nav" th:text="${projectName}" >
+
                 </div>
                 <div class="p-content">
                     <div class="clearfix">
@@ -90,6 +90,7 @@
     </div>
 </div>
 <script src="/alink-hq/static/js/jquery.min.js"></script>
+<script type="text/javascript" src="/alink-hq/static/js/left.js"></script>
 <script type="text/javascript">
     $(function () {
         var tabs="projectList";
