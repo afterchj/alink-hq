@@ -46,6 +46,7 @@
                     <img src="/alink-hq/static/img/exchange-un.png" alt="">
                 </div>
                 <div class="transfer-company">
+                    <p class="trans-hint"></p>
                     <label for="pid"><span>*</span>选择移动到的区域：</label>
                     <select name="pid" id="pid">
                         <option value="0">区域1</option>
@@ -53,10 +54,26 @@
                 </div>
                 <div class="tranfer-btn">
                     <button class="confirm-btn" type="submit">确定移交</button>
+                    <!--<button class="confirm-btn" type="button">确定移交</button>-->
                 </div>
             </div>
         </form>
     </div>
+</div>
+<div class="hide-iframe"></div>
+<div id="preload-anim">
+    <div id="circularG">
+        <div id="circularG_1" class="circularG"></div>
+        <div id="circularG_2" class="circularG"></div>
+        <div id="circularG_3" class="circularG"></div>
+        <div id="circularG_4" class="circularG"></div>
+        <div id="circularG_5" class="circularG"></div>
+        <div id="circularG_6" class="circularG"></div>
+        <div id="circularG_7" class="circularG"></div>
+        <div id="circularG_8" class="circularG"></div>
+    </div>
+    <p class="title">
+    </p>
 </div>
 <script src="/alink-hq/static/js/jquery.min.js"></script>
 <script type="text/javascript" src="/alink-hq/static/js/left.js"></script>
@@ -77,6 +94,21 @@
             });
         });
     });
+//    $('.confirm-btn').click(function(){
+//        var pid=$('#pid option:selected').val();
+//        if(pid=''){
+//            $('.trans-hint').text('请选择移交的区域');
+//        }else{
+//            $('.trans-hint').text('');
+//            $('#preload-anim').addClass('active');
+//            $('.hide-iframe').addClass('active');
+//            $('#preload-anim .title').text('移交成功，正在跳转组列表');
+//            setInterval(function () {
+////                window.location.href = '/alink-hq/project/list';
+//                $('form').submit();
+//            }, 1000)
+//        }
+//    })
 </script>
 </body>
 </html>

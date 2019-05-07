@@ -46,23 +46,30 @@ $(function () {
     });
     $('div[openContent="reset-name"]  .pop-btn .yes').click(function () {
         var name = $('#rename').val();
-        if (name == '')return;
-        $.ajax({
-            type: "post",
-            url: "/alink-hq/place/rename",
-            data: {
-                "name": name,
-                "id": id
-            },
-            async: true,
-            success: function (res) {
-                if (res == "success") {
-                    location.reload();
-                } else {
-                    alert("区域名称不能重复！");
+        var regUserName = /^[a-zA-Z0-9\u4e00-\u9fa5]{2,6}$/;
+        var userNameResult = regUserName.test(name);
+        if(name==''){
+            $('p.rename-hint').text('请输入新名称');
+        }else if(!userNameResult){
+            $('p.rename-hint').text('请输入 2-6 位汉字、字母、数字');
+        }else {
+            $.ajax({
+                type: "post",
+                url: "/alink-hq/place/rename",
+                data: {
+                    "name": name,
+                    "id": id
+                },
+                async: true,
+                success: function (res) {
+                    if (res == "success") {
+                        location.reload();
+                    } else {
+                        $('p.rename-hint').text('已存在，请重新输入');
+                    }
                 }
-            }
-        })
+            })
+        }
     });
     //取消按钮
     $('div[openContent="reset-name"] .pop-btn .reduce').click(function () {
@@ -116,3 +123,14 @@ $(function(){
     var height=$(document).height();
     $('.main-left').css('height',height);
 })
+//重命名校验
+function nameKeyUp() {
+    var rename = $('#rename').val();
+    var regreName = /^[a-zA-Z0-9\u4e00-\u9fa5]{2,16}$/;
+    var renameResult = regreName.test(rename);
+    if (rename != '' && !renameResult) {
+        $('p.rename-hint').text('请输入 2-16 位汉字、字母、数字');
+    } else {
+        $('p.rename-hint').text('');
+    }
+}
