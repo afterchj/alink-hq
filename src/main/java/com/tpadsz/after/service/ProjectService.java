@@ -1,6 +1,7 @@
 package com.tpadsz.after.service;
 
 import com.tpadsz.after.entity.ProjectList;
+import com.tpadsz.after.entity.User;
 
 import java.util.List;
 
@@ -22,7 +23,7 @@ public interface ProjectService {
     List<ProjectList> searchByUser(String account, String projectName, String startCreateDate, String endCreateDate, String
             startUpdateDate, String endUpdateDate, String uid,String sortFlag);
 
-    void createProject(String projectName, String uid);
+    int createProject(String projectName, User user);
 
     int renameProject(String account,Integer projectId, String projectName);
 
