@@ -102,30 +102,42 @@
     background-color: #eef2f5;
 }
 .create{
-    background-color: #0068AE;
+    background-color: #3598DB;
     color: #fff;
-    border: 1px solid #0068AE;
-    height: 32px;
-    width: 100px;
-    line-height: 32px;
+    border: 1px solid #3598DB;
+    height: 34px;
+    width: 95px;
+    line-height: 34px;
     border-radius: 5px;
     text-align: center;
     font-size: 17px;
 }
 .goBack{
-    border: 2px solid #3895D6;
-    color: #3895D6;
-    height: 30px;
-    line-height: 30px;
-    width: 100px;
+    border: 2px solid #3598DB;
+    color: #3598DB;
+    height: 32px;
+    line-height: 32px;
+    width: 70px;
     border-radius: 5px;
     text-align: center;
-    font-size: 18px;
+    font-size: 17px;
+    background-color: #fff;
 }
 .triangle-facing-left {
     display: inline-block;
-    margin: 72px;
-    border-left: 24px solid; border-bottom: 24px solid;
-    width: 120px; height: 120px;
+    /* margin: 72px; */
+    border-left: 3px solid;
+    border-bottom: 3px solid;
+    width: 10px;
+    height: 10px;
     transform: rotate(45deg);
+}
+
+.goBack span,.create span{
+    display: inline-block;
+    vertical-align: middle;
+}
+.goBack span:nth-child(1),.create span:nth-child(1){
+    font-size:25px;
+    margin-right: 5px;
 }

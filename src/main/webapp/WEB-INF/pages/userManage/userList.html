@@ -16,10 +16,15 @@
         <div class="clearfix main-right-nav">
             <div class="f-l main-right-title">用户列表</div>
             <div class="f-r pointer">
-             <a th:href="@{/account/createAccount}"><div class="create" >+&nbsp;创建账号</div></a>
+                <a th:href="@{/account/createAccount}">
+                    <div class="create"><span>+</span><span>创建账号</span></div>
+                </a>
             </div>
             <div class="f-r pointer">
-                <img src="/alink-hq/static/img/go-back.png" alt="" onClick="javascript :history.back(-1);">
+                <div class="goBack" onClick="javascript :history.back(-1);">
+                    <span ><</span><span>返回</span>
+                </div>
+                <!--<img src="/alink-hq/static/img/go-back.png" alt="" onClick="javascript :history.back(-1);">-->
             </div>
         </div>
         <div id="projectList" class="">
@@ -100,8 +105,10 @@
                         <td th:text="${user.create_date}"></td>
                         <!--<td th:text="${user.status}" class="status pointer" openTab="start-use" id="start-use">-->
                         <!--</td>-->
-                        <td th:if="${user.status=='1'}" th:text="启用" openTab="start-use" id="start-use" class="status pointer"></td>
-                        <td th:if="${user.status=='0'}" th:text="禁用" openTab="start-use" id="start-use" class="status pointer"></td>
+                        <td th:if="${user.status=='1'}" th:text="启用" openTab="start-use" id="start-use"
+                            class="status pointer"></td>
+                        <td th:if="${user.status=='0'}" th:text="禁用" openTab="start-use" id="start-use"
+                            class="status pointer"></td>
                         <td class="p-r">
                             <img src="/alink-hq/static/img/edit.png" alt="" openTab="reset-pwd" id="reset-pwd"
                                  class="pointer" th:title="重置密码">

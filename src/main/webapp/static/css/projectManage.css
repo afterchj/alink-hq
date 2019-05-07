@@ -636,3 +636,13 @@ input:-ms-input-placeholder { /* Internet Explorer 10+ */
     cursor: not-allowed;
     pointer-events:none;
 }
+#skipPageBtn{
+    width: 60px;
+    height: 30px;
+    line-height: 30px;
+    font-size: 15px;
+    border: 1px solid #bbb;
+    border-radius: 5px;
+    color: #333;
+    background-image: linear-gradient(to bottom , #7A88FF, #7AFFAF);
+}

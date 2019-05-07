@@ -20,13 +20,18 @@
             <div class="f-l main-right-title">网络列表</div>
             <div class="f-r pointer">
                <a th:href="@{/mesh/create/(id=0)}">
-                   <div class="create" d="newMesh">+&nbsp;创建网络</div>
+
+                   <div class="create"><span>+</span><span>创建网络</span></div>
                    <!--<img src="/alink-hq/static/img/create-project.png" alt="" id="newMesh">-->
                </a>
 
             </div>
             <div class="f-r pointer">
-                <img src="/alink-hq/static/img/go-back.png" alt="" onclick="history.back()">
+                <div class="goBack" onClick="javascript :history.back(-1);" >
+                    <!--<span class="triangle-facing-left"></span>-->
+                    <span ><</span><span>返回</span>
+                </div>
+                <!--<img src="/alink-hq/static/img/go-back.png" alt="" onclick="history.back()">-->
             </div>
         </div>
 

@@ -18,7 +18,11 @@
         <div class="clearfix main-right-nav">
             <div class="f-l main-right-title">组移动</div>
             <div class="f-r pointer">
-                <img src="/alink-hq/static/img/go-back.png" alt="" onclick="history.back()">
+                <div class="goBack" onClick="javascript :history.back(-1);" >
+                    <!--<span class="triangle-facing-left"></span>-->
+                    <span ><</span><span>返回</span>
+                </div>
+                <!--<img src="/alink-hq/static/img/go-back.png" alt="" onclick="history.back()">-->
             </div>
         </div>
         <form th:action="@{/group/saveUpdate}" class="" method="post">

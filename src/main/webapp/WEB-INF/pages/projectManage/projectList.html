@@ -17,10 +17,14 @@
         <div class="clearfix main-right-nav">
             <div class="f-l main-right-title">项目列表</div>
             <div class="f-r pointer">
-                <a th:href="@{/project/createAccount}"><div class="create" >+&nbsp;创建项目</div></a>
+                <a th:href="@{/project/createProject}"><div class="create" ><span >+</span><span>创建项目</span></div></a>
             </div>
             <div class="f-r pointer">
-                <img src="/alink-hq/static/img/go-back.png" alt="" onclick="history.back()">
+                <div class="goBack" onClick="javascript :history.back(-1);" >
+                    <!--<span class="triangle-facing-left"></span>-->
+                    <span ><</span><span>返回</span>
+                </div>
+                <!--<img src="/alink-hq/static/img/go-back.png" alt="" onclick="history.back()">-->
             </div>
         </div>
         <div id="projectList" class="">
@@ -146,7 +150,8 @@
                         <input type="number" id="skipPage" oninput="skipLimit()"/>
                         </span>
                             <span class="m-r-35">
-                        <img src="/alink-hq/static/img/skip.png" alt="" id="skipPageBtn" class="pointer moment"/>
+                                <div id="skipPageBtn" class="pointer moment">跳转</div>
+                        <!--<img src="/alink-hq/static/img/skip.png" alt="" id="skipPageBtn" class="pointer moment"/>-->
                         </span>
                                 <span class="m-r-15r">每页显示：</span>
                             <span class="m-r-20">
