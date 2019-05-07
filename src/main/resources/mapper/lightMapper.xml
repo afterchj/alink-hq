@@ -67,6 +67,7 @@
         <if test="projectId!=null and projectId!=''">
             AND m.project_id=#{projectId}
         </if>
+        GROUP BY l.id
     </select>
     <select id="getLightInfo" resultType="MeshInfo" parameterType="int">
         SELECT
@@ -88,7 +89,7 @@
             pl.pname,
             IFNULL(sc.scount,0) scount
         FROM f_light l
-        LEFT JOIN f_light_setting ls ON ls.lid=l.id
+        INNER JOIN f_light_setting ls ON ls.lid=l.id
         LEFT JOIN f_group g ON g.id=l.gid
         LEFT JOIN f_mesh m ON m.id=l.mid
         LEFT JOIN f_scene s ON s.mid=m.id
