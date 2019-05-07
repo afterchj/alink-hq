@@ -9,7 +9,7 @@
             <ul>
                 <li class="one-list">
                     <div class="p-r">
-                        <a href="javascript:void(0);" tab="projectManage">项目管理</a>
+                        <a th:href="@{/project/list}" tab="projectManage">项目管理</a>
                         <img src="/alink-hq/static/img/bottom-triangle-un.png" alt="" class="p-a on-off-triangle">
                     </div>
                     <ul class=" two-list">
@@ -22,7 +22,7 @@
                 </li>
                 <li class="one-list">
                     <div class="p-r">
-                        <a href="javascript:void(0);" tab="userManage">用户管理</a>
+                        <a th:href="@{/account/list}"  tab="userManage">用户管理</a>
                         <img src="/alink-hq/static/img/bottom-triangle-un.png" alt="" class="p-a on-off-triangle">
                     </div>
                     <ul class=" two-list">
@@ -39,5 +39,6 @@
         </div>
     </div>
 </div>
+<script src="/alink-hq/static/js/jquery.min.js"></script>
 </body>
 </html>

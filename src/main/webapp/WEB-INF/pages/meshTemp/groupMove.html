@@ -34,11 +34,11 @@
                         </div>
                         <div class="f-l  mesh-id">
                             <label for="mid">网络ID：</label>
-                            <input type="text" id="mid" th:value="${group.mesh_id}">
+                            <input type="text" id="mid" th:value="${group.mesh_id}" readonly>
                         </div>
                         <div class="f-l mesh-project">
                             <label for="project">属于区域：</label>
-                            <input type="text" id="project" th:value="${group.pname}">
+                            <input type="text" id="project" th:value="${group.pname}" readonly>
                         </div>
                     </div>
                 </div>
@@ -77,7 +77,6 @@
             });
         });
     });
-
 </script>
 </body>
 </html>
