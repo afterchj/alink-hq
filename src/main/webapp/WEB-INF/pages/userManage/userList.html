@@ -125,13 +125,9 @@
                                         <img src="/alink-hq/static/img/left-arrow.png" alt=""></a>
                                 </span>
                                 <span th:text="${pageInfo.pageNum}" class="pages"></span>
-                                <span th:if="${pageInfo.hasNextPage}" class="next-page">
+                                <span class="next-page">
                                    <a th:href="@{/account/list(pageNum=${pageInfo.nextPage},pageSize=${pageInfo.pageSize},account=${account},fid=${fid},roleId=${roleId},startDate=${startDate},endDate=${endDate})}">
                                        <img src="/alink-hq/static/img/right-arrow-color.png" alt=""></a>
-                                </span>
-                                <span th:unless="${pageInfo.hasNextPage}" class="next-page">
-                                    <a th:href="@{/account/list(pageNum=${pageInfo.pageNum},pageSize=${pageInfo.pageSize},account=${account},fid=${fid},roleId=${roleId},startDate=${startDate},endDate=${endDate})}">
-                                        <img src="/alink-hq/static/img/right-arrow-color.png" alt=""></a>
                                 </span>
                                 <span class="m-l-15 m-r-20">
                                     共

@@ -151,13 +151,13 @@ $(function () {
     var pageTotal = parseInt($('.pageTotal').text());
     if (page == 1) {
         $('.prev-page img').attr('src', '/alink-hq/static/img/left-arrow.png');
-        $(".prev-page ").attr("disabled", true);
+        $(".prev-page ").addClass('disabled');
     } else {
         $('.prev-page img').attr('src', '/alink-hq/static/img/left-arrow-color.png');
     }
     if (page == pageTotal) {
         $('.next-page img').attr('src', '/alink-hq/static/img/right-arrow.png');
-        $(".next-page ").attr("disabled", true);
+        $(".next-page ").addClass('disabled');
     } else {
         $('.next-page img').attr('src', '/alink-hq/static/img/right-arrow-color.png');
     }

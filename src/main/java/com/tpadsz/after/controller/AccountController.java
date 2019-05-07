@@ -52,7 +52,7 @@ public class AccountController {
             pageNum = 1;
         }
         if (pageSize == null) {
-            pageSize = 10;    //设置默认每页显示的数据数
+            pageSize = 20;    //设置默认每页显示的数据数
         }
         try {
             Integer role_id = accountService.findRoleIdByUid(uid);
