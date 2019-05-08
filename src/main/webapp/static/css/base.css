@@ -15,6 +15,7 @@ audio, video {
     vertical-align:baseline;
     /* background:transparent;*/
     outline-style:none;/*FF*/
+
 }
 table{
     border-spacing: 0;
@@ -111,4 +112,7 @@ ul li{
 .unclick{
     cursor: not-allowed;
     /*pointer-events:none;*/
+}
+.font{
+    transform: scale(1,.95);
 }
