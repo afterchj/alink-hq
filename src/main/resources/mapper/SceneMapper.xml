@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.tpadsz.after.dao.SceneDao">
+
+
+    <select id="findProjectList" resultType="Integer">
+        SELECT DISTINCT(id) FROM f_project WHERE uid IN (SELECT uid FROM f_user_customer WHERE fid=(SELECT fid FROM f_user_customer WHERE uid=#{uid}))
+    </select>
+
+    <select id="searchSceneList" resultType="com.tpadsz.after.entity.SceneList">
+        SELECT t1.id,t1.name,IFNULL(t5.meshNum,0) as meshNum,t2.account as account,t4.coname as coname,DATE_FORMAT(t1.create_date,'%Y-%m-%d %H:%i:%s') AS create_date,DATE_FORMAT(t1.update_date,'%Y-%m-%d %H:%i:%s') AS update_date FROM
+        (SELECT * FROM  f_project p WHERE p.name LIKE CONCAT('%',IFNULL(#{name},''),'%') and p.create_date BETWEEN IFNULL(NULLIF(#{startCreateDate},''),p.create_date) and IFNULL(NULLIF(#{endCreateDate},''),p.create_date) and p.update_date BETWEEN IFNULL(NULLIF(#{startUpdateDate},''),p.update_date) and IFNULL(NULLIF(#{endUpdateDate},''),p.update_date)) AS t1 INNER JOIN f_user_account AS t2 ON t1.uid = t2.id INNER JOIN f_user_customer AS t3 ON t2.id = t3.uid INNER JOIN f_firm AS t4 ON t3.fid = t4.id LEFT JOIN (SELECT count(id) AS meshNum,project_id FROM f_mesh GROUP BY project_id) AS t5 ON t1.id = t5.project_id WHERE t2.account LIKE CONCAT('%',IFNULL(#{account},''),'%') ORDER BY
+    </select>
+
+
+
+</mapper>

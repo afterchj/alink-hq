@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
 <head>
     <meta charset="UTF-8">
     <script src="/alink-hq/static/js/browser.js"></script>
@@ -104,21 +104,22 @@
                         <td th:text="${project.account}" class="project-account"></td>
                         <td th:text="${project.create_date}"></td>
                         <td th:text="${project.update_date}"></td>
-                        <td class="p-r">
-                            <img  src="/alink-hq/static/img/edit.png" alt="" class="pointer reset-name" th:title="重命名">
-                            <!--不能重命名-->
-                            <img   src="/alink-hq/static/img/un-rename.png" alt="" class="pointer  unclick" th:title="无法操作">
+                        <td shiro:hasAnyRoles="super,admin,manager" class="p-r">
+                            <img src="/alink-hq/static/img/edit.png" alt="" class="pointer reset-name" th:title="重命名">
 
                             <img src="/alink-hq/static/img/exchange.png" alt="" class="center-img pointer exchange-project " th:title="移交项目">
+                            <img src="/alink-hq/static/img/delete.png" alt="" class="pointer delete-project" th:title="删除">
+                            <!--重命名-->
+                        </td>
+
+                        <td shiro:hasAnyRoles="user" class="p-r">
+                            <!--不能重命名-->
+                            <img src="/alink-hq/static/img/un-rename.png" alt="" class="pointer  unclick" th:title="无法操作">
                             <!--不能移交-->
                             <img src="/alink-hq/static/img/un-exchange.png" alt="" class="center-img pointer  unclick" th:title="无法操作">
-
-                            <img src="/alink-hq/static/img/delete.png" alt="" class="pointer delete-project" th:title="删除">
                             <!--不能删除-->
                             <img src="/alink-hq/static/img/un-delete.png" alt="" class="pointer   unclick" th:title="无法操作">
-
                             <!--重命名-->
-
                         </td>
                     </tr>
                     </tbody>
