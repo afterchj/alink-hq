@@ -67,11 +67,11 @@
                                 </span>
                                 <span class="">全选</span>
                             </th>
-                            <th>组名称</th>
-                            <th>属于网络</th>
-                            <th>网络ID</th>
-                            <th>灯数量</th>
-                            <th>操作</th>
+                            <th><span>组名称</span></th>
+                            <th><span>属于网络</span></th>
+                            <th><span>网络ID</span></th>
+                            <th><span>灯数量</span></th>
+                            <th><span>操作</span></th>
                         </tr>
                         </thead>
                         <tbody>
@@ -102,11 +102,19 @@
                             <span class="selected-order">已选择
                                  <span id="amount" class="amount">0</span>条数据
                             </span>
+                                    <!--<span class="m-r-20">-->
+                                <!--<img src="/alink-hq/static/img/true-over-un.png" alt="" id="multiMove">-->
+                            <!--</span>-->
+                                    <!--<span>-->
+                                <!--<img src="/alink-hq/static/img/delete-btn-un.png" alt="" id="multiDel">-->
+                            <!--</span>-->
                                     <span class="m-r-20">
-                                <img src="/alink-hq/static/img/true-over-un.png" alt="" id="multiMove">
+
+                                <span class="skipPageBtn pointer moment" id="multiMove">移交</span>
                             </span>
-                                    <span>
-                                <img src="/alink-hq/static/img/delete-btn-un.png" alt="" id="multiDel">
+                            <span>
+
+                                <span class="skipPageBtn pointer moment" id="multiDel">删除</span>
                             </span>
                                 </div>
                                 <div th:replace="common/page::page"></div>

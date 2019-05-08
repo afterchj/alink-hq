@@ -25,8 +25,9 @@ body {
     line-height:1;
     zoom: 1;
     background: #eef2f5;
-    font-family: Helvetica,Arial,"Hiragino Sans GB","Microsoft Yahei","微软雅黑",STHeiti,"华文细黑",sans-serif;
+    font-family: arial,"Hiragino Sans GB","Microsoft Yahei","微软雅黑","宋体",Tahoma,Arial,Helvetica,STHeiti;
     font-size: 14px;
+
 }
 a{
     text-decoration:none;
@@ -117,3 +118,14 @@ ul li{
     /*!*transform: scale(.98,.95);*!*/
     /*!*display: inline-block;*!*/
 /*}*/
+.search-result table th span{
+    display: inline-block;
+    transform: scale(1,.95);
+}
+label{
+    display: inline-block;
+    transform: scale(1,.95);
+}
+button{
+    transform: scale(1,.95);
+}

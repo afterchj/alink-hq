@@ -81,14 +81,14 @@ function clickFillSubmit(event) {
     if (codeFlag){
         //激活码为空
         $("p.code-hint").removeClass('active').text('');
-        $("p.code-hint").addClass('active').text("请输入激活码");
+        $("p.code-hint").addClass('active').text("请输入验证码");
     }
     if (!mobileFlag&&!codeFlag&&hintFlag){
         //邮箱和激活码不为空
         if ($.trim(code).length!=6){
             //激活码不正确
             $("p.code-hint").removeClass('active').text('');
-            $("p.code-hint").addClass('active').text("激活码不正确");
+            $("p.code-hint").addClass('active').text("验证码不正确");
         }else {
             $("p.phone-hint").removeClass('active').text('');
             $.ajax({
@@ -103,7 +103,7 @@ function clickFillSubmit(event) {
                     if (info=="codeError"){
                         //验证码不正确
                         $("p.code-hint").removeClass('active').text('');
-                        $("p.code-hint").addClass('active').text("激活码不正确");
+                        $("p.code-hint").addClass('active').text("验证码不正确");
                     }
                     // else if (info=="codeTimeOut"){
                     //     //验证码超时
