@@ -108,3 +108,7 @@ ul li{
     text-overflow:ellipsis;
     white-space:nowrap
 }
+.unclick{
+    cursor: not-allowed;
+    /*pointer-events:none;*/
+}

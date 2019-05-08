@@ -105,16 +105,20 @@
                         <td th:text="${project.create_date}"></td>
                         <td th:text="${project.update_date}"></td>
                         <td class="p-r">
-                            <img src="/alink-hq/static/img/edit.png" alt="" class="pointer reset-name" th:title="重命名">
-                            <!--<a th:href="@{/project/transferPage(uid=${session.user.id},account=${user.account},coname=${user.coname})}">-->
-                            <img src="/alink-hq/static/img/exchange.png" alt=""
-                                 class="center-img pointer exchange-project" th:title="移交">
-                            <!--</a>-->
-                            <img src="/alink-hq/static/img/delete.png" alt="" class="pointer delete-project"
-                                 th:title="删除">
-                            <!--<div class="popup p-a">-->
+                            <img  src="/alink-hq/static/img/edit.png" alt="" class="pointer reset-name" th:title="重命名">
+                            <!--不能重命名-->
+                            <img   src="/alink-hq/static/img/un-rename.png" alt="" class="pointer  unclick" th:title="无法操作">
+
+                            <img src="/alink-hq/static/img/exchange.png" alt="" class="center-img pointer exchange-project " th:title="移交项目">
+                            <!--不能移交-->
+                            <img src="/alink-hq/static/img/un-exchange.png" alt="" class="center-img pointer  unclick" th:title="无法操作">
+
+                            <img src="/alink-hq/static/img/delete.png" alt="" class="pointer delete-project" th:title="删除">
+                            <!--不能删除-->
+                            <img src="/alink-hq/static/img/un-delete.png" alt="" class="pointer   unclick" th:title="无法操作">
+
                             <!--重命名-->
-                            <!--</div>-->
+
                         </td>
                     </tr>
                     </tbody>
