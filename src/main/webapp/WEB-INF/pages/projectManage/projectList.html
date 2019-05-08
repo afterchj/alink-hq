@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
 <head>
     <meta charset="UTF-8">
     <script src="/alink-hq/static/js/browser.js"></script>
@@ -34,22 +34,22 @@
                 <form action="" class="clearfix">
                     <div class="f-l search" style="margin-right:125px;">
                         <div>
-                            <label for="" class="font">项目名</label>
+                            <label for="">项目名</label>
                             <input type="text" id="projectName" placeholder="请输入项目名">
                         </div>
                         <div class="p-r">
-                            <label for="" class="font">创建时间</label>
+                            <label for="">创建时间</label>
                             <input type="text" id="start-time" placeholder="请选择日期" AUTOCOMPLETE="off">
                             <img src="/alink-hq/static/img/date.png" alt="" class="p-a">
                         </div>
                     </div>
                     <div class="f-l search">
                         <div>
-                            <label for="" class="font">施工员工账号</label>
+                            <label for="">施工员工账号</label>
                             <input type="text" placeholder="请输入账号" id="account">
                         </div>
                         <div class="p-r">
-                            <label for="" class="font">更新时间</label>
+                            <label for="">更新时间</label>
                             <input type="text" id="end-time" placeholder="请选择日期" AUTOCOMPLETE="off">
                             <img src="/alink-hq/static/img/date.png" alt="" class="p-a">
                         </div>
@@ -61,29 +61,29 @@
             </div>
             <div class="search-result">
                 <!-- 有数据时 -->
-                <table border="1" class="hasData active " th:if="${pageInfo!=null}">
+                <table border="1" class="hasData active" th:if="${pageInfo!=null}">
                     <thead>
-                    <tr >
-                        <th class="all-checkbox  " style="width: 120px;">
+                    <tr>
+                        <th class="all-checkbox " style="width: 120px;">
                             <span style="vertical-align: sub;vertical-align: sub;width: 30px; display: inline-block;"><input
                                     type="checkbox" id="all" class="pointer"></span>
                             <span class="">全选</span>
                         </th>
-                        <th style="display: none" >所属公司</th>
-                        <th style="width: 200px;" >项目名称</th>
+                        <th style="display: none">所属公司</th>
+                        <th style="width: 200px;">项目名称</th>
                         <th style="width: 180px;">项目中选中网络数量</th>
-                        <th style="width: 180px;" >施工人员</th>
-                        <th class="p-r " style="width: 200px;">
+                        <th style="width: 180px;">施工人员</th>
+                        <th class="p-r" style="width: 200px;">
                             <span class="toTime">创建时间</span>
                             <img src="/alink-hq/static/img/fewer.png" alt="" class="p-a toTop  sort-t pointer">
                             <img src="/alink-hq/static/img/unfold.png" alt="" class="p-a toBottom sort-b  pointer">
                         </th>
-                        <th class="p-r " style="width: 200px;">
+                        <th class="p-r" style="width: 200px;">
                             <span class="toTime">更新时间</span>
                             <img src="/alink-hq/static/img/fewer.png" alt="" class="p-a  toTop1 sort-t pointer">
                             <img src="/alink-hq/static/img/unfold.png" alt="" class="p-a  toBottom1  sort-b pointer">
                         </th>
-                        <th >操作</th>
+                        <th>操作</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -92,39 +92,40 @@
                         <td class="checkbox ">
                             <input type="checkbox" th:value="${project.id}" class="pointer">
                         </td>
-                        <td th:text="${project.id}" style="display: none" class="project-id "></td>
-                        <td th:text="${project.coname}" style="display: none" class="project-coname "></td>
-                        <td class="project-name k-link ">
+                        <td th:text="${project.id}" style="display: none" class="project-id"></td>
+                        <td th:text="${project.coname}" style="display: none" class="project-coname"></td>
+                        <td class="project-name k-link">
                             <a th:href="@{/project/detail(account=${project.account},coname=${project.coname},meshNum=${project.meshNum},projectId=${project.id},projectName=${project.name})}"
                                th:text="${project.name}"></a>
                         </td>
-                        <td class="meshNum k-link ">
+                        <td class="meshNum k-link">
                             <a th:href="@{/mesh/list(projectId=${project.id})}" th:text="${project.meshNum}"></a>
                         </td>
-                        <td th:text="${project.account}" class="project-account " ></td>
-                        <td th:text="${project.create_date}" ></td>
-                        <td th:text="${project.update_date}" ></td>
-                        <td class="p-r ">
-                            <img  src="/alink-hq/static/img/edit.png" alt="" class="pointer reset-name" th:title="重命名">
-                            <!--不能重命名-->
-                            <img   src="/alink-hq/static/img/un-rename.png" alt="" class="pointer  unclick" th:title="无法操作">
+                        <td th:text="${project.account}" class="project-account"></td>
+                        <td th:text="${project.create_date}"></td>
+                        <td th:text="${project.update_date}"></td>
+                        <td shiro:hasAnyRoles="super,admin,manager" class="p-r">
+                            <img src="/alink-hq/static/img/edit.png" alt="" class="pointer reset-name" th:title="重命名">
 
                             <img src="/alink-hq/static/img/exchange.png" alt="" class="center-img pointer exchange-project " th:title="移交项目">
+                            <img src="/alink-hq/static/img/delete.png" alt="" class="pointer delete-project" th:title="删除">
+                            <!--重命名-->
+                        </td>
+
+                        <td shiro:hasAnyRoles="user" class="p-r">
+                            <!--不能重命名-->
+                            <img src="/alink-hq/static/img/un-rename.png" alt="" class="pointer  unclick" th:title="无法操作">
                             <!--不能移交-->
                             <img src="/alink-hq/static/img/un-exchange.png" alt="" class="center-img pointer  unclick" th:title="无法操作">
-
-                            <img src="/alink-hq/static/img/delete.png" alt="" class="pointer delete-project" th:title="删除">
                             <!--不能删除-->
                             <img src="/alink-hq/static/img/un-delete.png" alt="" class="pointer   unclick" th:title="无法操作">
-
                             <!--重命名-->
-
                         </td>
                     </tr>
                     </tbody>
                     <tfoot>
                     <tr>
-                        <td colspan="8" class="clearfix page ">
+                        <td colspan="8" class="clearfix page">
                             <div class="f-l">
                                 <span class="selected-order">已选择
                                     <span class="amount">0</span>
