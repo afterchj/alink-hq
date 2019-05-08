@@ -93,7 +93,7 @@
     margin-right: 50px;
 }
 .f-content{
-    width: 800px;
+    width: 1000px;
     /* height: auto; */
     margin: 50px auto;
     border: 1px solid #bbb;
@@ -128,7 +128,7 @@
 #meshTurnOver .accountMsg input{
     height: 30px;
     font-size: 14px;
-    width: 120px;
+    width: 220px;
     text-indent: 10px;
     color: #606060;
     border: 1px solid #bbb;

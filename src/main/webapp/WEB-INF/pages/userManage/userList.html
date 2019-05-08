@@ -71,12 +71,12 @@
                     <thead>
                     <tr>
                         <th style="width: 120px;">账号</th>
-                        <th style="width: 80px;">用户名</th>
-                        <th style="width: 120px;">绑定手机号</th>
+                        <th style="width: 120px;">用户名</th>
+                        <th style="width: 150px;">绑定手机号</th>
                         <th class="p-r" style="width: 180px;">
                             绑定邮箱
                         </th>
-                        <th class="p-r" style="width: 130px;">
+                        <th class="p-r" style="width: 220px;">
                             隶属公司
                         </th>
                         <th class="p-r" style="width: 120px;">
@@ -146,9 +146,10 @@
                                            oninput="skipLimit()"/>
                                 </span>
                                 <span class="m-r-35">
-                                    <img src="/alink-hq/static/img/skip.png" id="skipPageBtn" class="pointer"
-                                         onmousedown="mouseDown()" onmouseup="mouseUp()"
-                                         alt="">
+                                    <!--<img src="/alink-hq/static/img/skip.png" id="skipPageBtn" class="pointer"-->
+                                         <!--onmousedown="mouseDown()" onmouseup="mouseUp()"-->
+                                         <!--alt="">-->
+                                     <div id="skipPageBtn" class="pointer moment skipPageBtn">跳转</div>
                                 </span>
                                 <span class="m-r-15r">每页显示：</span>
                                 <span class="m-r-20">
@@ -167,26 +168,32 @@
                 <table border="1" class="noData active" th:if="${pageInfo==null}">
                     <thead>
                     <tr>
-                        <th>账号</th>
-                        <th>用户名</th>
-                        <th>绑定手机号</th>
-                        <th class="p-r">
-                            <span class="toTime">绑定邮箱</span>
-                            <img src="/alink-hq/static/img/top-triangle.png" alt="" class="p-a toTop pointer">
-                            <img src="/alink-hq/static/img/bottom-triangle.png" alt="" class="p-a toBottom pointer">
+                        <th style="width: 120px;">账号</th>
+                        <th style="width: 120px;">用户名</th>
+                        <th style="width: 150px;">绑定手机号</th>
+                        <th class="p-r" style="width: 180px;">
+                            绑定邮箱
                         </th>
-                        <th class="p-r">
-                            <span class="toTime">隶属公司</span>
-                            <img src="/alink-hq/static/img/top-triangle.png" alt="" class="p-a toTop pointer">
-                            <img src="/alink-hq/static/img/bottom-triangle.png" alt="" class="p-a toBottom pointer">
+                        <th class="p-r" style="width: 220px;">
+                            隶属公司
+                        </th>
+                        <th class="p-r" style="width: 120px;">
+                            角色
+                        </th>
+                        <th class="p-r" style="width: 180px;">
+                            添加时间
+                        </th>
+                        <th class="p-r" style="width:80px;">
+                            状态
                         </th>
                         <th>操作</th>
                     </tr>
                     </thead>
                     <tbody>
                     <tr>
-                        <td colspan="8">
+                        <td colspan="9">
                             <img src="/alink-hq/static/img/no-data.png" id="skipPageBtn" alt="">
+
                             <p>暂无数据</p>
                         </td>
                     </tr>

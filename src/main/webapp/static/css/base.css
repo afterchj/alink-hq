@@ -103,3 +103,8 @@ ul li{
 .p-f{
     position: fixed;
 }
+.overflow{
+    overflow:hidden;
+    text-overflow:ellipsis;
+    white-space:nowrap
+}

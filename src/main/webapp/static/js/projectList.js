@@ -10,12 +10,12 @@ laydate.render({
     elem: '#end-time',//指定元素
     range: true
 });
-$('.one-list li').each(function () {
-    var tab = $(this).attr('tab');
-    if (tab == 'projectList') {
-        $(this).addClass('active').siblings().removeClass('active');
-    }
-})
+// $('.one-list li').each(function () {
+//     var tab = $(this).attr('tab');
+//     if (tab == 'projectList') {
+//         $(this).addClass('active').siblings().removeClass('active');
+//     }
+// })
 
 
 $(function () {
@@ -90,6 +90,28 @@ $(function () {
     var pageSize = GetUrlParam("pageSize");
     var pageNum = GetUrlParam("pageNum");
     var sortFlag = GetUrlParam("sortFlag");
+    console.log(sortFlag);
+    if(sortFlag==''){
+        $('.toBottom').attr('src','/alink-hq/static/img/unfold-color.png');
+        $('.toTop').attr('src','/alink-hq/static/img/fewer.png');
+        $('.toBottom1').attr('src','/alink-hq/static/img/unfold.png');
+        $('.toTop1').attr('src','/alink-hq/static/img/fewer.png');
+    }else if(sortFlag == '1'){
+        $('.toTop').attr('src','/alink-hq/static/img/fewer-color.png');
+        $('.toBottom').attr('src','/alink-hq/static/img/unfold.png');
+        $('.toBottom1').attr('src','/alink-hq/static/img/unfold.png');
+        $('.toTop1').attr('src','/alink-hq/static/img/fewer.png');
+    }else if(sortFlag == '2'){
+        $('.toBottom1').attr('src','/alink-hq/static/img/unfold-color.png');
+        $('.toTop').attr('src','/alink-hq/static/img/fewer.png');
+        $('.toBottom').attr('src','/alink-hq/static/img/unfold.png');
+        $('.toTop1').attr('src','/alink-hq/static/img/fewer.png');
+    }else if(sortFlag == '3'){
+        $('.toTop1').attr('src','/alink-hq/static/img/fewer-color.png');
+        $('.toTop').attr('src','/alink-hq/static/img/fewer.png');
+        $('.toBottom').attr('src','/alink-hq/static/img/unfold.png');
+        $('.toBottom1').attr('src','/alink-hq/static/img/unfold.png');
+    }
     $('#skipPage').val(pageNum);
     $('#page-select option').each(function () {
         if ($(this).val() == pageSize) {
@@ -115,6 +137,7 @@ $(function () {
         } else {
             pageNum = parseInt(pageNum);
         }
+        // $(this).attr('src','/alink-hq/static/img/fewer-color.png');
         condition(pageSize, pageNum, sortFlag);
     })
     $('.toBottom').click(function () {
@@ -126,6 +149,7 @@ $(function () {
         } else {
             pageNum = parseInt(pageNum);
         }
+        // $(this).attr('src','/alink-hq/static/img/unfold-color.png')
         condition(pageSize, pageNum, sortFlag);
     })
     $('.toBottom1').click(function () {
@@ -137,7 +161,7 @@ $(function () {
         } else {
             pageNum = parseInt(pageNum);
         }
-        console.log(sortFlag);
+        // $(this).attr('src','/alink-hq/static/img/unfold-color.png')
         condition(pageSize, pageNum, sortFlag);
     })
     $('.toTop1').click(function () {
@@ -149,7 +173,7 @@ $(function () {
         } else {
             pageNum = parseInt(pageNum);
         }
-        console.log(sortFlag);
+        // $(this).attr('src','/alink-hq/static/img/fewer-color.png')
         condition(pageSize, pageNum, sortFlag);
     })
     //查询按钮点击

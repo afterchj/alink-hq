@@ -47,11 +47,11 @@
                         </div>
                         <div class="f-l  mesh-id">
                             <label for="account">施工负责人：</label>
-                            <input type="text" id="account" th:value="${projectList.account}" readonly/>
+                            <input type="text" id="account" th:value="${projectList.account}" class="overflow" th:title="${projectList.account}" readonly/>
                         </div>
                         <div class="f-l mesh-project">
                             <label for="coname">隶属公司：</label>
-                            <input type="text" id="coname" th:value="${projectList.coname}" readonly/>
+                            <input type="text" id="coname" th:value="${projectList.coname}" class="overflow" th:title="${projectList.coname}" readonly/>
                         </div>
                     </div>
                 </div>
@@ -62,7 +62,7 @@
                     <p class="company-hint"></p>
                     <div style="margin-bottom: 30px;">
                         <label for="fid"><span>*</span>隶属公司：</label>
-                        <select name="fid" id="fid" class="pointer" >
+                        <select name="fid" id="fid" class="pointer overflow" >
                             <option value="" class="pointer">请选择公司</option>
                             <option th:each="firm:${firmList}" th:value="${firm.id}" th:text="${firm.coname }"
                                     class="pointer"></option>
@@ -74,7 +74,7 @@
                                 <!--<option value="" class="pointer">请选择账号</option>-->
                             <!--</select>-->
 
-                        <input type="text" id="account-transfer" placeholder="请选择账号" uid="" autocomplete="off">
+                        <input type="text" id="account-transfer" placeholder="请选择账号" uid="" autocomplete="off" class="overflow">
                         <span class="open-list"></span>
                         <div id="list">
                             <ul>
@@ -104,8 +104,9 @@
     <p class="title">
     </p>
 </div>
-<script type="text/javascript" src="/alink-hq/static/js/left.js"></script>
+
 <script src="/alink-hq/static/js/jquery.min.js"></script>
+<script type="text/javascript" src="/alink-hq/static/js/left.js"></script>
 <script>
     $(function () {
         var list=[];
