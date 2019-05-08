@@ -77,6 +77,7 @@ public class ProjectController {
             }
             model.addAttribute("account", account);
             model.addAttribute("projectName", projectName);
+            model.addAttribute("role_id", role_id);
             model.addAttribute("startCreateDate", startCreateDate);
             model.addAttribute("endCreateDate", endCreateDate);
             model.addAttribute("startUpdateDate", startUpdateDate);
