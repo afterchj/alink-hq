@@ -132,12 +132,16 @@
                             <div class="f-r page-right">
                                 <span class="prev-page">
                                     <a th:href="@{/account/list(pageNum=${pageInfo.prePage},pageSize=${pageInfo.pageSize},account=${account},fid=${fid},roleId=${roleId},startDate=${startDate},endDate=${endDate})}">
-                                        <img src="/alink-hq/static/img/left-arrow.png" alt=""></a>
+                                        <!--<img src="/alink-hq/static/img/left-arrow.png" alt="">-->
+                                        <span class="prev " ><span><</span></span></a>
+                                    </a>
                                 </span>
                                 <span th:text="${pageInfo.pageNum}" class="pages"></span>
                                 <span class="next-page">
                                    <a th:href="@{/account/list(pageNum=${pageInfo.nextPage},pageSize=${pageInfo.pageSize},account=${account},fid=${fid},roleId=${roleId},startDate=${startDate},endDate=${endDate})}">
-                                       <img src="/alink-hq/static/img/right-arrow-color.png" alt=""></a>
+                                       <!--<img src="/alink-hq/static/img/right-arrow-color.png" alt="">-->
+                                       <span class="next"><span>></span></span>
+                                   </a>
                                 </span>
                                 <span class="m-l-15 m-r-20">
                                     共

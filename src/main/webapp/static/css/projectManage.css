@@ -658,3 +658,25 @@ input:-ms-input-placeholder { /* Internet Explorer 10+ */
     color: #000;
     background-image: linear-gradient(to bottom , #fff 40%, #d2d3d6 );
 }
+
+.prev,.next{
+    width: 32px;
+    height: 30px;
+    line-height: 30px;
+    border: 1px solid #ccc;
+    display: inline-block;
+    border-radius: 5px;
+    cursor: pointer;
+    vertical-align: middle;
+}
+.prev span,.next span{
+    font-size: 24px;
+    color: #999;
+    /*transform: scale(1,.95);*/
+}
+.prev.active span,.next.active span{
+   color:#3598DB;
+}
+.pages{
+    width:20px;
+}
