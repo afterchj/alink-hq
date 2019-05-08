@@ -63,9 +63,9 @@
                     <div style="margin-bottom: 30px;">
                         <label for="fid"><span>*</span>隶属公司：</label>
                         <select name="fid" id="fid" class="pointer overflow" >
-                            <option value="" class="pointer">请选择公司</option>
+                            <option value="" class="pointer overflow">请选择公司</option>
                             <option th:each="firm:${firmList}" th:value="${firm.id}" th:text="${firm.coname }"
-                                    class="pointer"></option>
+                                    class="pointer overflow"></option>
                         </select>
                     </div>
                     <p class="account-hint"></p>
@@ -76,7 +76,7 @@
 
                         <input type="text" id="account-transfer" placeholder="请选择账号" uid="" autocomplete="off" class="overflow">
                         <span class="open-list"></span>
-                        <div id="list">
+                        <div id="list" class="overflow">
                             <ul>
                             </ul>
                         </div>

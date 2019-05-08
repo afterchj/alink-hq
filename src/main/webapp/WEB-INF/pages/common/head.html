@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-
 <head>
     <!--<title>导航栏</title>-->
     <!--<link rel="stylesheet" href="/alink-hq/static/css/base.css"/>-->
@@ -23,10 +22,13 @@
         </div>
         <div class="f-r ad-nav">
             <span class="nav-img">
-                <img src="/alink-hq/static/img/admin.png" alt=""/>
+                <img src="/alink-hq/static/img/admin.png" alt="" style="margin-top: -17px;"/>
             </span>
             <span th:if="${session.user}!=null">
                 <span th:text="${session.user.uname}"></span>
+            </span>
+            <span th:if="${session.user.uname}==null">
+                <span th:text="admin"></span>
             </span>
             <!--<span>admin</span>-->
         </div>
@@ -34,6 +36,5 @@
 </div>
     </div>
 </div>
-
 </body>
 </html>

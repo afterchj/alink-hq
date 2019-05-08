@@ -163,7 +163,7 @@
 }
 #meshTurnOver .transfer-company select{
     border: 1px solid #bbb;
-    width: 200px;
+    width: 250px;
     text-indent: 10px;
     font-size: 15px;
     color: #3c3c3c;
@@ -265,7 +265,7 @@
     background-color: #f3f3f3;
     height: 30px;
     border-radius: 5px;
-    width:200px;
+    width:250px;
     text-indent: 15px;
     font-size: 15px;
 }
@@ -277,7 +277,7 @@
     border-right: 3px solid transparent;
     border-top: 6px solid #333;
     position: absolute;
-    right: 155px;
+    right: 130px;
     bottom: 55px;
     cursor: pointer;
 

@@ -46,7 +46,9 @@
                                 <!--<option th:each="firm:${firmList}" name="account" th:value="${firm.id}"-->
                                         <!--th:text="${firm.coname}"></option>-->
                             <!--</select>-->
-                            <input type="text" placeholder="请输入施工人员" id="account"/>
+
+                            <input type="text" placeholder="请输入施工人员" id="account" th:if="${account}!=null"/>
+                            <input type="text"  id="account" th:if="${account}==null" th:value="${account}"/>
                         </div>
                         <div class="">
                             <button type="button" class="confirm-create" openTab="confirm-create">确定创建</button>

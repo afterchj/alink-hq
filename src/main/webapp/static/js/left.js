@@ -28,12 +28,12 @@ $('.on-off-triangle').click(function () {
     //     $(this).attr('src', '/alink-hq/static/img/left-fewer.png');
     //     $(this).parent().parent('.one-list').addClass('active');
     // }
-    if(imgUrl == '/alink-hq/static/img/left-fewer.png') {
-        $(this).attr('src', '/alink-hq/static/img/left-open.png');
+    if(imgUrl == '/alink-hq/static/img/left-add.png') {
+        $(this).attr('src', '/alink-hq/static/img/left-reduce.png');
         $(this).parent().parent('.one-list').removeClass('active');
         // $(this).parent().parent('.one-list').find('.two-list').removeClass('active');
-    }else if(imgUrl == '/alink-hq/static/img/left-open.png'){
-        $(this).attr('src', '/alink-hq/static/img/left-fewer.png');
+    }else if(imgUrl == '/alink-hq/static/img/left-reduce.png'){
+        $(this).attr('src', '/alink-hq/static/img/left-add.png');
         $(this).parent().parent('.one-list').addClass('active');
     }
 })
