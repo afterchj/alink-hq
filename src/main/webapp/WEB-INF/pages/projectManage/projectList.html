@@ -34,22 +34,22 @@
                 <form action="" class="clearfix">
                     <div class="f-l search" style="margin-right:125px;">
                         <div>
-                            <label for="projectName" class="font">项目名</label>
+                            <label for="projectName" >项目名</label>
                             <input type="text" id="projectName" placeholder="请输入项目名">
                         </div>
                         <div class="p-r">
-                            <label for="start-time" class="font">创建时间</label>
+                            <label for="start-time" >创建时间</label>
                             <input type="text" id="start-time" placeholder="请选择日期" AUTOCOMPLETE="off">
                             <img src="/alink-hq/static/img/date.png" alt="" class="p-a">
                         </div>
                     </div>
                     <div class="f-l search">
                         <div>
-                            <label for="account" class="font">施工员工账号</label>
+                            <label for="account" >施工员工账号</label>
                             <input type="text" placeholder="请输入账号" id="account">
                         </div>
                         <div class="p-r">
-                            <label for="end-time" class="font">更新时间</label>
+                            <label for="end-time" >更新时间</label>
                             <input type="text" id="end-time" placeholder="请选择日期" AUTOCOMPLETE="off">
                             <img src="/alink-hq/static/img/date.png" alt="" class="p-a">
                         </div>
@@ -106,10 +106,8 @@
                         <td th:text="${project.update_date}"></td>
                         <td th:if="${role_id!=4}" class="p-r">
                             <img src="/alink-hq/static/img/edit.png" alt="" class="pointer reset-name" th:title="重命名">
-
                             <img src="/alink-hq/static/img/exchange.png" alt="" class="center-img pointer exchange-project " th:title="移交项目">
                             <img src="/alink-hq/static/img/delete.png" alt="" class="pointer delete-project" th:title="删除">
-                            <!--重命名-->
                         </td>
 
                         <td th:if="${role_id==4}" class="p-r">

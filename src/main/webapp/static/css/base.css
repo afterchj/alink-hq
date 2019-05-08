@@ -113,7 +113,7 @@ ul li{
     cursor: not-allowed;
     /*pointer-events:none;*/
 }
-.font{
-    transform: scale(1,.95);
-    display: inline-block;
-}
+/*.font{*/
+    /*!*transform: scale(.98,.95);*!*/
+    /*!*display: inline-block;*!*/
+/*}*/
