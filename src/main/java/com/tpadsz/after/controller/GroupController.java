@@ -1,5 +1,6 @@
 package com.tpadsz.after.controller;
 
+import com.alibaba.fastjson.JSON;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.tpadsz.after.entity.MeshInfo;
@@ -69,8 +70,8 @@ public class GroupController {
     }
 
     @RequestMapping("/save")
-    public String savePlace(Integer pid) {
-        logger.info("pid=" + pid);
+    public String saveGroup(SearchDict dict) {
+        logger.info("pid=" + dict.getMid());
         return "redirect:/group/list";
     }
 
@@ -125,6 +126,19 @@ public class GroupController {
             map.put("uid", uid);
         }
         List<OptionList> meshMap = groupService.getPlaces(map);
+        return meshMap;
+    }
+
+    @ResponseBody
+    @RequestMapping("/getMesh")
+    public List<OptionList> getMesh(Integer uid) {
+        Map map = new HashMap();
+        if (uid != null) {
+            String role = roleService.selectById(uid);
+            map.put("role", role);
+            map.put("uid", uid);
+        }
+        List<OptionList> meshMap = groupService.getMesh(map);
         return meshMap;
     }
 }

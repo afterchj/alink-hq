@@ -29,4 +29,6 @@ public interface GroupService {
     void deleteGroupByIds(List list);
 
     List<OptionList> getPlaces(Map map);
+
+    List<OptionList> getMesh(Map map);
 }
