@@ -33,11 +33,30 @@
                     创建组
                 </div>
                 <div class="c-content ">
-                    <form th:action="@{/group/save}" method="GET">
+                    <div class="subjection">隶属项目：XXXX</div>
+                    <div class="process clearfix">
+
+                            <div class="f-l part">
+                                <img src="/alink-hq/static/img/fill-1-on.png" alt="">
+                                <span>选择网络</span>
+                            </div>
+                            <div class="f-l part  line ">……</div>
+                            <div class="f-l part">
+                                <img src="/alink-hq/static/img/fill-2-no.png" alt="">
+                                <span>选择区域</span>
+                            </div>
+                            <div class="f-l part  line ">……</div>
+                            <div class="f-l part">
+                                <img src="/alink-hq/static/img/fill-3-no.png" alt="">
+                                <span>输入名称</span>
+                            </div>
+
+                    </div>
+                    <form th:action="@{/group/save}" method="GET"  style="margin-top: 0;">
                         <div>
                             <p class="project-hint"></p>
                             <label for="mid">选择网络：</label>
-                            <select id="mid" name="mid">
+                            <select id="mid" name="mid" style="height:35px;">
                                 <option value="0">全部</option>
                             </select>
                         </div>
@@ -47,7 +66,7 @@
                             <input type="text" id="meshId">
                         </div>
                         <div class="">
-                            <button type="button" class="confirm-create" openTab="confirm-create">确定创建</button>
+                            <button type="button" class="confirm-create" openTab="confirm-create">下一步</button>
                         </div>
                     </form>
                 </div>

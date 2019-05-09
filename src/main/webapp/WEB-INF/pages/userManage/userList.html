@@ -17,11 +17,11 @@
             <div class="f-l main-right-title">用户列表</div>
             <div class="f-r pointer">
                 <a th:href="@{/account/createAccount}">
-                    <div class="create"><span>+</span><span>创建账号</span></div>
+                    <div class="create" onmousedown="createBtnMouseDown()" onmouseup="createBtnMouseUp()"><span>+</span><span>创建账号</span></div>
                 </a>
             </div>
             <div class="f-r pointer">
-                <div class="goBack" onClick="javascript :history.back(-1);">
+                <div class="goBack" onClick="javascript :history.back(-1);" onmousedown="backBtnMouseDown()" onmouseup="backBtnMouseUp()">
                     <span ><</span><span>返回</span>
                 </div>
                 <!--<img src="/alink-hq/static/img/go-back.png" alt="" onClick="javascript :history.back(-1);">-->
@@ -156,7 +156,7 @@
                                     <!--<img src="/alink-hq/static/img/skip.png" id="skipPageBtn" class="pointer"-->
                                          <!--onmousedown="mouseDown()" onmouseup="mouseUp()"-->
                                          <!--alt="">-->
-                                     <div id="skipPageBtn" class="pointer moment skipPageBtn">跳转</div>
+                                     <div id="skipPageBtn" class="pointer moment skipPageBtn" onmousedown="skipBtnMouseDown()" onmouseup="skipBtnMouseUp()">跳转</div>
                                 </span>
                                 <span class="m-r-15r">每页显示：</span>
                                 <span class="m-r-20">
@@ -305,6 +305,7 @@
 <script src="/alink-hq/static/laydate/laydate.js"></script>
 <script type="text/javascript" src="/alink-hq/static/js/left.js"></script>
 <script src="/alink-hq/static/js/user.js"></script>
+<script src="/alink-hq/static/js/moment.js"></script>
 </body>
 
 </html>

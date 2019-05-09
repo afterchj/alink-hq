@@ -18,11 +18,11 @@
             <div class="f-l main-right-title">项目列表</div>
             <div class="f-r pointer">
                 <a th:href="@{/project/createProject}">
-                    <div class="create"><span>+</span><span>创建项目</span></div>
+                    <div class="create"  onmousedown="createBtnMouseDown()" onmouseup="createBtnMouseUp()"><span>+</span><span>创建项目</span></div>
                 </a>
             </div>
             <div class="f-r pointer">
-                <div class="goBack" onClick="javascript :history.back(-1);">
+                <div class="goBack" onClick="javascript :history.back(-1);"onmousedown="backBtnMouseDown()" onmouseup="backBtnMouseUp()">
                     <!--<span class="triangle-facing-left"></span>-->
                     <span><</span><span>返回</span>
                 </div>
@@ -137,12 +137,12 @@
                             <span class="m-r-20">
                                     <!--<img src="/alink-hq/static/img/true-over-un.png" alt="" class="pointer moment"-->
                                 <!--id="transfer-project">-->
-                                <span class="skipPageBtn pointer moment" id="transfer-project">移交</span>
+                                <span class="skipPageBtn pointer moment" onmousedown="exchangeBtnMouseDown()" onmouseup="exchangeBtnMouseUp()" id="transfer-project">移交</span>
                             </span>
                             <span>
                                     <!--<img src="/alink-hq/static/img/delete-btn-un.png" alt="" class="pointer moment"-->
                                 <!--id="delete-project">-->
-                                <span class="skipPageBtn pointer moment" id="delete-project">删除</span>
+                                <span class="skipPageBtn pointer moment" onmousedown="deleteBtnMouseDown()" onmouseup="deleteBtnMouseUp()" id="delete-project">删除</span>
                             </span>
                             </div>
                             <!--<div th:replace="common/page::page"></div>-->
@@ -167,7 +167,7 @@
                         <input type="number" id="skipPage" oninput="skipLimit()"/>
                         </span>
                             <span class="m-r-35">
-                                <div id="skipPageBtn" class="pointer moment skipPageBtn">跳转</div>
+                                <div id="skipPageBtn" class="pointer moment skipPageBtn" onmousedown="skipBtnMouseDown()" onmouseup="skipBtnMouseUp()">跳转</div>
                                 <!--<img src="/alink-hq/static/img/skip.png" alt="" id="skipPageBtn" class="pointer moment"/>-->
                         </span>
                                 <span class="m-r-15r">每页显示：</span>
@@ -259,5 +259,6 @@
 <script type="text/javascript" src="/alink-hq/static/js/left.js"></script>
 <script src="/alink-hq/static/laydate/laydate.js"></script>
 <script src="/alink-hq/static/js/projectList.js"></script>
+<script src="/alink-hq/static/js/moment.js"></script>
 </body>
 </html>

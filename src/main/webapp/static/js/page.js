@@ -88,3 +88,31 @@ $(function () {
         $(".next").addClass('active');
     }
 })
+// //创建点击
+// function createBtnMouseDown(){
+//     $('.create').addClass('active');
+// }
+// function createBtnMouseUp(){
+//     $('.create').removeClass('active');
+// }
+// //移动
+// function exchangeBtnMouseDown(){
+//     $('#transfer-project').addClass('active');
+// }
+// function exchangeBtnMouseUp(){
+//     $('#transfer-project').removeClass('active');
+// }
+// //删除
+// function deleteBtnMouseDown(){
+//     $('#delete-project').addClass('active');
+// }
+// function deleteBtnMouseUp(){
+//     $('#delete-project').removeClass('active');
+// }
+// //跳转
+// function skipBtnMouseDown(){
+//     $('#skipPageBtn').addClass('active');
+// }
+// function skipBtnMouseUp(){
+//     $('#skipPageBtn').removeClass('active');
+// }
