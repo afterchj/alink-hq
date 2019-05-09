@@ -5,6 +5,7 @@
     <sql id="Base_Column_List">
 		l.id,
         l.mid,
+        l.pid,
         IFNULL(l.lname,'null') lname,
         l.lmac,
         m.project_id,
@@ -40,6 +41,7 @@
         <include refid="Base_Column_List"/>
         FROM f_light l
         INNER JOIN f_mesh m ON m.id = l.mid
+        LEFT JOIN f_place pl ON pl.id=l.pid
         LEFT JOIN f_light_setting ls ON ls.lid=l.id
         WHERE 1=1
         <include refid="common_choose"></include>
@@ -95,7 +97,7 @@
         LEFT JOIN f_scene s ON s.mid=m.id
         LEFT JOIN f_project p ON p.id=m.project_id
         LEFT JOIN f_place pl ON pl.id=l.pid
-        LEFT JOIN (SELECT COUNT(1) scount,mid FROM f_scene GROUP BY mid) sc ON sc.mid=l.mid
+        LEFT JOIN (SELECT COUNT(1) scount,sid FROM f_light_setting GROUP BY sid) sc ON sc.sid=s.id
         WHERE l.id=#{id} LIMIT 1
     </select>
     <select id="selectByLid" resultType="map" parameterType="list">

@@ -1,0 +1,59 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>jQuery UI Autocomplete - Default functionality</title>
+    <link rel="stylesheet" href="/alink-hq/static/css/jquery-ui.css">
+    <link rel="stylesheet" href="/alink-hq/static/css/base.css">
+    <link rel="stylesheet" href="/alink-hq/static/css/common.css">
+    <link rel="stylesheet" href="/alink-hq/static/css/leftNav.css">
+    <link rel="stylesheet" href="/alink-hq/static/css/projectManage.css">
+    <script src="/alink-hq/static/js/jquery.min.js"></script>
+    <script src="/alink-hq/static/js/jquery-ui.js"></script>
+    <script>
+        $(function () {
+            var json = [
+                {'id': '0', 'label': 'zero'},
+                {'id': '1', 'label': 'one'},
+                {'id': '2', 'label': 'two'},
+                {'id': '3', 'label': 'three'},
+                {'id': '4', 'label': 'four'},
+                {'id': '5', 'label': 'five'},
+                {'id': '6', 'label': 'six'},
+                {'id': '7', 'label': 'seven'},
+                {'id': '8', 'label': 'eight'},
+                {'id': '9', 'label': 'night'},
+                {'id': '10', 'label': 'ten'}
+            ];
+            $("#tags").autocomplete({source: json, limit: 5});
+//            $.getJSON("/alink-hq/mesh/getProjects", {"uid": 18}, function (json) {
+//                console.log(typeof json);
+//                $("#tags").autocomplete({source: json, limit: 5});
+//            });
+        });
+    </script>
+</head>
+<body>
+<div th:replace="common/head::head"></div>
+<div class="c-container">
+    <div th:replace="common/left::left"></div>
+    <div class="main-right">
+        <h1>搜索框下拉自动填充</h1>
+        <hr/>
+        <div class="ui-widget">
+            <label for="tags">Tags: </label>
+            <input id="tags">
+        </div>
+    </div>
+</div>
+<script type="text/javascript" src="/alink-hq/static/js/left.js"></script>
+<script>
+    $(function () {
+        var tabs="meshList";
+        var index=0;
+        left(tabs,index);
+    })
+</script>
+</body>
+</html>
