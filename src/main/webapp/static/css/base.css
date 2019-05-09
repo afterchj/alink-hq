@@ -129,3 +129,6 @@ label{
 button{
     transform: scale(1,.95);
 }
+.all-checkbox{
+    width:120px;
+}

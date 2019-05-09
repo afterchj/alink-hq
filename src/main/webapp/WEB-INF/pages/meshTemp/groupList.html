@@ -70,15 +70,15 @@
                             <th><span>属于网络</span></th>
                             <th><span>网络ID</span></th>
                             <th><span>灯数量</span></th>
-                            <th><span>操作</span></th>
+                            <th class="operation"><span>操作</span></th>
                         </tr>
                         </thead>
                         <tbody>
                         <tr th:each="group:${pageInfo.list}">
                             <td class=""><input type="checkbox" name="ids" th:value="${group.id}" ></td>
                             <td class="k-link"><a th:href="@{/group/info(id=${group.id})}" th:text="${group.gname}"></a></td>
-                            <td th:text="${group.mname}"></td>
-                            <td th:text="${group.mesh_id}"></td>
+                            <td th:text="${group.mname}" class="meshName"></td>
+                            <td th:text="${group.mesh_id}" ></td>
                             <td th:text="${group.lcount}"></td>
                             <td class="p-r">
                                 <img src="/alink-hq/static/img/edit.png" th:alt="${group.id}" class="rename pointer"  title="重命名">
@@ -176,6 +176,22 @@
         <div class="reset-pwd-hint">
             删除后所选组所有的灯将会进入所属网络未分组中请慎重！
         </div>
+        <div class="pop-btn">
+            <button class="reduce">取消</button>
+            <button class="yes">确定</button>
+        </div>
+    </div>
+</div>
+<!-- 不可移动不同网络下的组 -->
+<div class="pop-iframe " openContent="exchange">
+    <div class=" p-r pop-nav">
+        温馨提示
+    </div>
+    <div class="pop-content">
+        <div class="reset-pwd">不同网络下的组不可进行移动</div>
+        <!--<div class="reset-pwd-hint">-->
+            <!--删除后所选组所有的灯将会进入所属网络未分组中请慎重！-->
+        <!--</div>-->
         <div class="pop-btn">
             <button class="reduce">取消</button>
             <button class="yes">确定</button>
