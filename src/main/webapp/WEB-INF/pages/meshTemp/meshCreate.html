@@ -86,6 +86,15 @@
             });
         });
     });
+    $('.confirm-create').click(function(){
+        var mname=$('#mname').val();
+        var pid = $('#pid option:selected').val();
+        if(pid==''){
+            $('.project-hint').text('请选择移动到的项目');
+        }else{
+            $('.project-hint').text('');
+        }
+    })
     //监听网络选择
     $('#pid').change(function(){
         var pid = $('#pid option:selected').val();
