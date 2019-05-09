@@ -52,7 +52,7 @@
                             <span th:text="${meshInfo.scount}"></span>
                         </div>
                         <div class="f-l">
-                            <a href="javascript:void(0);">查看场景列表</a>
+                            <a th:href="@{/scene/list(meshName=${meshInfo.mname},meshId=${meshInfo.mesh_id},mid=${meshInfo.id})}">查看场景列表</a>
                         </div>
                     </div>
                     <div class="clearfix">
