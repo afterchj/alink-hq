@@ -70,6 +70,7 @@ public class LightController {
         logger.info("pid=" + pid);
         return "redirect:/group/list";
     }
+    @ResponseBody
     @RequestMapping("/saveUpdate")
     public String saveUpdate(String ids, String gid) {
         logger.info("ids=" + ids + ",pid=" + gid);
@@ -79,7 +80,8 @@ public class LightController {
         map.put("gid", gid);
         map.put("list", list);
         lightService.saveUpdate(map);
-        return "redirect:/light/list";
+        return "ok";
+//        return "redirect:/light/list";
     }
 
     @RequestMapping("/delete")

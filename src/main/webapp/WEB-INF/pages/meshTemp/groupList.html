@@ -30,7 +30,6 @@
                 <!--<img src="/alink-hq/static/img/go-back.png" alt="" onclick="history.back()">-->
             </div>
         </div>
-
         <div id="meshList" class="">
             <form class="clearfix" th:action="@{/group/list}" method="post">
                 <input type="hidden" name="uid" th:value="${dict.uid}">
@@ -67,19 +66,19 @@
                                 </span>
                                 <span class="">全选</span>
                             </th>
-                            <th>组名称</th>
-                            <th>属于网络</th>
-                            <th>网络ID</th>
-                            <th>灯数量</th>
-                            <th>操作</th>
+                            <th><span>组名称</span></th>
+                            <th><span>属于网络</span></th>
+                            <th><span>网络ID</span></th>
+                            <th><span>灯数量</span></th>
+                            <th class="operation"><span>操作</span></th>
                         </tr>
                         </thead>
                         <tbody>
                         <tr th:each="group:${pageInfo.list}">
                             <td class=""><input type="checkbox" name="ids" th:value="${group.id}" ></td>
                             <td class="k-link"><a th:href="@{/group/info(id=${group.id})}" th:text="${group.gname}"></a></td>
-                            <td th:text="${group.mname}"></td>
-                            <td th:text="${group.mesh_id}"></td>
+                            <td th:text="${group.mname}" class="meshName"></td>
+                            <td th:text="${group.mesh_id}" ></td>
                             <td th:text="${group.lcount}"></td>
                             <td class="p-r">
                                 <img src="/alink-hq/static/img/edit.png" th:alt="${group.id}" class="rename pointer"  title="重命名">
@@ -102,11 +101,18 @@
                             <span class="selected-order">已选择
                                  <span id="amount" class="amount">0</span>条数据
                             </span>
+                                    <!--<span class="m-r-20">-->
+                                <!--<img src="/alink-hq/static/img/true-over-un.png" alt="" id="multiMove">-->
+                            <!--</span>-->
+                                    <!--<span>-->
+                                <!--<img src="/alink-hq/static/img/delete-btn-un.png" alt="" id="multiDel">-->
+                            <!--</span>-->
                                     <span class="m-r-20">
-                                <img src="/alink-hq/static/img/true-over-un.png" alt="" id="multiMove">
+                                <span class="skipPageBtn pointer moment" id="multiMove">移交</span>
                             </span>
-                                    <span>
-                                <img src="/alink-hq/static/img/delete-btn-un.png" alt="" id="multiDel">
+                            <span>
+
+                                <span class="skipPageBtn pointer moment" id="multiDel">删除</span>
                             </span>
                                 </div>
                                 <div th:replace="common/page::page"></div>
@@ -170,6 +176,22 @@
         <div class="reset-pwd-hint">
             删除后所选组所有的灯将会进入所属网络未分组中请慎重！
         </div>
+        <div class="pop-btn">
+            <button class="reduce">取消</button>
+            <button class="yes">确定</button>
+        </div>
+    </div>
+</div>
+<!-- 不可移动不同网络下的组 -->
+<div class="pop-iframe " openContent="exchange">
+    <div class=" p-r pop-nav">
+        温馨提示
+    </div>
+    <div class="pop-content">
+        <div class="reset-pwd">不同网络下的组不可进行移动</div>
+        <!--<div class="reset-pwd-hint">-->
+            <!--删除后所选组所有的灯将会进入所属网络未分组中请慎重！-->
+        <!--</div>-->
         <div class="pop-btn">
             <button class="reduce">取消</button>
             <button class="yes">确定</button>

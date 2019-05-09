@@ -19,17 +19,17 @@
         <div class="clearfix main-right-nav">
             <div class="f-l main-right-title">网络列表</div>
             <div class="f-r pointer">
-               <a th:href="@{/mesh/create/(id=0)}">
+                <a th:href="@{/mesh/create/(id=0)}">
 
-                   <div class="create"><span>+</span><span>创建网络</span></div>
-                   <!--<img src="/alink-hq/static/img/create-project.png" alt="" id="newMesh">-->
-               </a>
+                    <div class="create"><span>+</span><span>创建网络</span></div>
+                    <!--<img src="/alink-hq/static/img/create-project.png" alt="" id="newMesh">-->
+                </a>
 
             </div>
             <div class="f-r pointer">
-                <div class="goBack" onClick="javascript :history.back(-1);" >
+                <div class="goBack" onClick="javascript :history.back(-1);">
                     <!--<span class="triangle-facing-left"></span>-->
-                    <span ><</span><span>返回</span>
+                    <span><</span><span>返回</span>
                 </div>
                 <!--<img src="/alink-hq/static/img/go-back.png" alt="" onclick="history.back()">-->
             </div>
@@ -47,7 +47,7 @@
                         </div>
                         <div>
                             <label for="name" class="font">网络状态</label>
-                            <select name="status">
+                            <select name="status" style=" height: 38px;line-height: 38px;">
                                 <option value="0">全部</option>
                                 <option value="1">未知</option>
                             </select>
@@ -78,21 +78,22 @@
                                 </span>
                                 <span class="">全选</span>
                             </th>
-                            <th>网络名称</th>
-                            <th>网络ID</th>
-                            <th>网络类型</th>
-                            <th>属于项目</th>
-                            <th>区域数量</th>
-                            <th>场景数量</th>
-                            <th>状态</th>
-                            <th>操作</th>
+                            <th><span>网络名称</span></th>
+                            <th><span>网络ID</span></th>
+                            <th><span>网络类型</span></th>
+                            <th><span>属于项目</span></th>
+                            <th><span>区域数量</span></th>
+                            <th><span>场景数量</span></th>
+                            <th><span>状态</span></th>
+                            <th class="operation"><span>操作</span></th>
                         </tr>
                         </thead>
                         <tbody>
                         <tr th:each="mesh:${pageInfo.list}">
                             <td class="checkbox"><input type="checkbox" name="ids" th:value="${mesh.id}" class="">
                             </td>
-                            <td class="k-link"><a th:href="@{/mesh/info(id=${mesh.id})}" th:text="${mesh.mname}"></a></td>
+                            <td class="k-link"><a th:href="@{/mesh/info(id=${mesh.id})}" th:text="${mesh.mname}"></a>
+                            </td>
                             <td th:text="${mesh.mesh_id}"></td>
                             <td th:text="${mesh.mesh_type}"></td>
                             <td th:text="${mesh.name}"></td>
@@ -100,15 +101,17 @@
                             <td th:text="${mesh.scount}"></td>
                             <td>未知</td>
                             <td class="p-r">
-                                <img src="/alink-hq/static/img/edit.png" th:alt="${mesh.id}" class="reset-name pointer" title="重命名">
+                                <img src="/alink-hq/static/img/edit.png" th:alt="${mesh.id}" class="reset-name pointer"
+                                     title="重命名">
                                 <a th:href="@{/mesh/move(ids=${mesh.id})}">
-                                    <img src="/alink-hq/static/img/exchange.png" alt="" class="center-img pointer"  title="移交">
+                                    <img src="/alink-hq/static/img/exchange.png" alt="" class="center-img pointer"
+                                         title="移交">
                                 </a>
                                 <!--<a th:href="@{/mesh/delete(ids=${mesh.id})}" onclick="return confirm('您确定要删除所选的网络吗？')">-->
-                                    <!--<img src="/alink-hq/static/img/delete.png" alt="" id="singleDel">-->
+                                <!--<img src="/alink-hq/static/img/delete.png" alt="" id="singleDel">-->
                                 <!--</a>-->
                                 <a href="javascript:void(0);" class="singleDel pointer">
-                                    <img src="/alink-hq/static/img/delete.png" alt=""  title="删除" >
+                                    <img src="/alink-hq/static/img/delete.png" alt="" title="删除">
                                 </a>
                             </td>
                         </tr>
@@ -120,12 +123,21 @@
                             <span class="selected-order">已选择
                                 <span id="amount" class="amount">0</span>条数据
                             </span>
+                                    <!--<span class="m-r-20">-->
+                                <!--<img src="/alink-hq/static/img/true-over-un.png" alt="" id="multiMove">-->
+                            <!--</span>-->
+                                    <!--<span>-->
+                                <!--<img src="/alink-hq/static/img/delete-btn-un.png" alt="" id="multiDel">-->
+                            <!--</span>-->
                                     <span class="m-r-20">
-                                <img src="/alink-hq/static/img/true-over-un.png" alt="" id="multiMove">
+
+                                <span class="skipPageBtn pointer moment" id="multiMove">移交</span>
                             </span>
-                                    <span>
-                                <img src="/alink-hq/static/img/delete-btn-un.png" alt="" id="multiDel">
+                            <span>
+
+                                <span class="skipPageBtn pointer moment" id="multiDel">删除</span>
                             </span>
+
                                 </div>
                                 <div th:replace="common/page::page"></div>
                             </td>

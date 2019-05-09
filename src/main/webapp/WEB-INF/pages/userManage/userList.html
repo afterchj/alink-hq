@@ -30,7 +30,7 @@
         <div id="projectList" class="">
             <div class="search-condition ">
                 <form action="" class="clearfix">
-                    <div class="f-l search" style="margin-right:30px;">
+                    <div class="f-l search" style="margin-right:125px;">
                         <div>
                             <label for="account">账号</label>
                             <input type="text" id="account" placeholder="请输入账号">
@@ -61,7 +61,7 @@
                     </div>
                     <div class="f-r search-button ">
                         <button type="button" class="pointer">查询</button>
-                        <a href="" class="export" style="color: #3598db;">Excel导出</a>
+                        <a href="" class="export" >Excel导出</a>
                     </div>
                 </form>
             </div>
@@ -70,25 +70,25 @@
                 <table border="1" class="hasData active" th:if="${pageInfo!=null}">
                     <thead>
                     <tr>
-                        <th style="width: 120px;">账号</th>
-                        <th style="width: 120px;">用户名</th>
-                        <th style="width: 150px;">绑定手机号</th>
+                        <th style="width: 120px;"><span>账号</span></th>
+                        <th style="width: 120px;"><span>用户名</span></th>
+                        <th style="width: 150px;"><span>绑定手机号</span></th>
                         <th class="p-r" style="width: 180px;">
-                            绑定邮箱
+                            <span>绑定邮箱</span>
                         </th>
                         <th class="p-r" style="width: 220px;">
-                            隶属公司
+                            <span>隶属公司</span>
                         </th>
                         <th class="p-r" style="width: 120px;">
-                            角色
+                            <span>角色</span>
                         </th>
                         <th class="p-r" style="width: 180px;">
-                            添加时间
+                            <span>添加时间</span>
                         </th>
                         <th class="p-r" style="width:80px;">
-                            状态
+                            <span>状态</span>
                         </th>
-                        <th>操作</th>
+                        <th class="operation"><span>操作</span></th>
                     </tr>
                     </thead>
                     <tbody>
@@ -112,9 +112,12 @@
                         <td class="p-r">
                             <img src="/alink-hq/static/img/edit.png" alt="" openTab="reset-pwd" id="reset-pwd"
                                  class="pointer" th:title="重置密码">
-                            <a th:href="@{/account/transferPage(account=${user.account},coname=${user.coname})}"><img
+                            <a th:if="${user.role_id=='4'}" th:href="@{/account/transferPage(account=${user.account},coname=${user.coname})}"><img
                                     src="/alink-hq/static/img/exchange.png"
                                     alt="" class="center-img" th:title="移交账号"></a>
+                            <a  th:if="${user.role_id!='4'}" href="javascript:void(0);"  class="unclick"><img
+                                    src="/alink-hq/static/img/un-exchange.png"
+                                    alt="" class="center-img" th:title="不可移交"></a>
                             <img src="/alink-hq/static/img/delete.png" alt="" id="delete-account"
                                  openTab="delete-account" class="pointer" th:title="删除">
                             <div class="popup p-a">
@@ -129,12 +132,16 @@
                             <div class="f-r page-right">
                                 <span class="prev-page">
                                     <a th:href="@{/account/list(pageNum=${pageInfo.prePage},pageSize=${pageInfo.pageSize},account=${account},fid=${fid},roleId=${roleId},startDate=${startDate},endDate=${endDate})}">
-                                        <img src="/alink-hq/static/img/left-arrow.png" alt=""></a>
+                                        <!--<img src="/alink-hq/static/img/left-arrow.png" alt="">-->
+                                        <span class="prev " ><span><</span></span></a>
+                                    </a>
                                 </span>
                                 <span th:text="${pageInfo.pageNum}" class="pages"></span>
                                 <span class="next-page">
                                    <a th:href="@{/account/list(pageNum=${pageInfo.nextPage},pageSize=${pageInfo.pageSize},account=${account},fid=${fid},roleId=${roleId},startDate=${startDate},endDate=${endDate})}">
-                                       <img src="/alink-hq/static/img/right-arrow-color.png" alt=""></a>
+                                       <!--<img src="/alink-hq/static/img/right-arrow-color.png" alt="">-->
+                                       <span class="next"><span>></span></span>
+                                   </a>
                                 </span>
                                 <span class="m-l-15 m-r-20">
                                     共
@@ -154,9 +161,11 @@
                                 <span class="m-r-15r">每页显示：</span>
                                 <span class="m-r-20">
                                     <select name="page-select" id="page-select">
-                                        <option value="20">20</option>
+
                                         <option value="10">10</option>
-                                        <option value="5">5</option>
+                                        <option value="30">30</option>
+                                        <option value="50">50</option>
+                                        <option value="100">100</option>
                                     </select>
                                 </span>
                             </div>

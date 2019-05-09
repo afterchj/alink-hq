@@ -9,15 +9,15 @@
     <link rel="stylesheet" th:href="@{/static/css/leftNav.css}">
     <link rel="stylesheet" th:href="@{/static/css/mesh.css}">
     <title>移交账号</title>
-    <style>
-        #preload-anim {
-            display: none;
-        }
+    <!--<style>-->
+        <!--#preload-anim {-->
+            <!--display: none;-->
+        <!--}-->
 
-        #preload-anim.active {
-            display: block;
-        }
-    </style>
+        <!--#preload-anim.active {-->
+            <!--display: block;-->
+        <!--}-->
+    <!--</style>-->
 </head>
 
 <body>
@@ -162,9 +162,17 @@
         $('.open-list').click(function(){
             $('#list').toggleClass('active');
         })
-        $('#account-transfer').focus(function(){
+        $('#account-transfer').click(function(){
             $('#list').addClass('active');
+//            $('#account-transfer').addClass('active');
+            console.log($('#list ul').height());
+            if($('#list ul').height()==0){
+                $('#list').removeClass('active');
+            }
         })
+//        $('#account-transfer').blur(function(){
+//            $('#account-transfer').removeClass('active');
+//        })
 //        $('#account-transfer').blur(function(){
 //            $('#list').removeClass('active');
 //        })

@@ -45,6 +45,7 @@ public class GroupController {
         modelMap.put("dict", dict);
         return "meshTemp/groupList";
     }
+
     @RequestMapping("/info")
     public String info(int id, ModelMap modelMap) {
         MeshInfo meshInfo = groupService.getGroupInfo(id);
@@ -61,6 +62,7 @@ public class GroupController {
         modelMap.put("ids", ids);
         return "meshTemp/groupMove";
     }
+
     @RequestMapping("/create")
     public String create(Integer id, ModelMap modelMap) {
         return "meshTemp/groupCreate";
@@ -71,16 +73,18 @@ public class GroupController {
         logger.info("pid=" + pid);
         return "redirect:/group/list";
     }
+
+    @ResponseBody
     @RequestMapping("/saveUpdate")
     public String saveUpdate(String ids, String pid) {
-        logger.info("ids=" + ids + ",pid=" + pid);
         String[] ids1 = ids.split(",");
         List<String> list = new ArrayList(Arrays.asList(ids1));
         Map map = new HashMap();
         map.put("pid", pid);
         map.put("list", list);
         groupService.saveUpdate(map);
-        return "redirect:/group/list";
+        return "ok";
+//        return "redirect:/group/list";
     }
 
     @RequestMapping("/delete")

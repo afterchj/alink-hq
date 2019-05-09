@@ -98,16 +98,47 @@ $(function () {
             'height': height
         })
     })
-   //移交
+   //移交多选
     $("#multiMove").click(function () {
         var idss = [];
+        var meshArr=[];
+        var isTrue=true;
         $('input[name="ids"]:checked').each(function () {
+            var meshName=$(this).parent().siblings('.meshName').text();
+
             idss.push($(this).val());
+            meshArr.push(meshName);
         });
         console.log(idss);
-        if(idss.length>0){
-            location.href = "/alink-hq/group/move?ids=" + idss;
+        console.log(meshArr);
+        if(meshArr.length>0){
+            for(var i=0;i<meshArr.length;i++){
+                if(meshArr.indexOf(meshArr[i])!=0){
+                    isTrue=false;
+                    break;
+                }
+            }
         }
+        console.log(isTrue);
+        if(isTrue){
+            if(idss.length>0){
+                location.href = "/alink-hq/group/move?ids=" + idss;
+            }
+        }else{
+            $('div[openContent="exchange"]').addClass('active');
+            var width = document.body.scrollWidth;
+            var height = document.body.scrollHeight;
+            $('.hide-iframe').addClass('active');
+            $('.hide-iframe').css({
+                'width': width,
+                'height': height
+            })
+        }
+    })
+    //无法移动的确定以及取消
+    $('div[openContent="exchange"] .yes,div[openContent="exchange"] .reduce').click(function(){
+        $('.hide-iframe').removeClass('active');
+        $('div[openContent="exchange"]').removeClass('active');
     })
 })
 function nameKeyUp(){

@@ -204,6 +204,7 @@
     color: #fff;
     font-size: 17px;
     letter-spacing: 5px;
+    transform: initial;
 }
 .tranfer-btn{
     text-align: center;
@@ -214,7 +215,11 @@
     height: 20px;
     font-size: 14px;
     color: #fb2a2a;
-    margin-left: 50px;
+    margin-left: 0;
+}
+#account-transfer.active{
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
 }
 .scrollbar::-webkit-scrollbar {/*滚动条整体样式*/
     width: 15px;     /*高宽分别对应横竖滚动条的尺寸*/
@@ -235,12 +240,14 @@
     background: #f3f3f3;
 }
 #list{
-    width: 200px;
-    margin-left: 291px;
+    width: 250px;
+    margin-left: 266px;
+    margin-top: 0;
     border: 1px solid #bbb;
-    max-height: 150px;
+    max-height: 200px;
     overflow-y: auto;
-    border-top: none;
+    /*border-top: none;*/
+    z-index: 1000;
     display: none;
 }
 #list.active{
@@ -298,4 +305,10 @@
 #account-transfer:-ms-input-placeholder { /* Internet Explorer 10+ */
     color:    #3c3c3c;
     font-size: 15px;
+}
+p.trans-hint{
+    font-size: 14px;
+    color: red;
+    height: 20px;
+    margin-left: 45px;
 }

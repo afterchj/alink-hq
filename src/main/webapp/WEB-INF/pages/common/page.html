@@ -19,9 +19,10 @@
       <!--<img src="/alink-hq/static/img/left-arrow.png" alt="" id="prev">-->
       <!--</a>-->
       <!--</div>-->
-       <img src="/alink-hq/static/img/left-arrow.png" id="prev" alt="">
+       <!--<img src="/alink-hq/static/img/left-arrow.png" id="prev" alt="">-->
+      <span class="prev active" id="prev"><span><</span></span>
   </span>
-    <span th:inline="text" id="pageNum">[[${pageInfo.pageNum}]]</span>
+    <span th:inline="text" id="pageNum" style="width: 20px">[[${pageInfo.pageNum}]]</span>
     <span>
         <!--<div th:switch="${pageInfo.pageNum}">-->
             <!--<a th:case="${pageInfo.total}" href="javascript:void(0)">-->
@@ -32,12 +33,13 @@
                 <!--<img src="/alink-hq/static/img/right-arrow-color.png" alt="">-->
             <!--</a>-->
         <!--</div>-->
-        <img src="/alink-hq/static/img/right-arrow-color.png" id="next" alt="">
+        <!--<img src="/alink-hq/static/img/right-arrow-color.png" id="next" alt="">-->
+        <span class="next" id="next"><span>></span></span>
     </span>
     <span class="m-l-15 m-r-20">共<span class="amount" id="pages" th:inline="text">[[${pageInfo.pages}]]</span>页/
         <span class="amount  pageTotal" th:inline="text">[[${pageInfo.total}]]</span>条数据</span>
     <span class="m-r-15">
-        <input type="number" th:value="${pageInfo.pageNum}" id="page" name="pageNum">
+        <input type="number" th:value="${pageInfo.pageNum}" id="page" name="pageNum" style="    height: 22px;">
     </span>
     <span class="m-r-35">
         <!--<img src="/alink-hq/static/img/skip.png" id="skip" alt="" class="pointer">-->

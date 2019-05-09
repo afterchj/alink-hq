@@ -44,6 +44,7 @@
 #account .a-content>div>span {
     display: inline-block;
     vertical-align: middle;
+    transform: scale(1,.95);
 }
 #account .a-content>div>span ul {
     display: inline-block;
@@ -62,6 +63,7 @@
     list-style-type: disc;
     /* line-height: 1; */
     margin: 10px 0;
+    transform: scale(1,.95);
 }
 i.dot{
     display: inline-block;

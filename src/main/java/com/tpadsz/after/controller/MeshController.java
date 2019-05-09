@@ -79,6 +79,7 @@ public class MeshController {
         return "meshTemp/meshMove";
     }
 
+    @ResponseBody
     @RequestMapping("/saveUpdate")
     public String saveUpdate(String ids, String pid) {
         logger.info("ids=" + ids + ",pid=" + pid);
@@ -88,7 +89,8 @@ public class MeshController {
         map.put("pid", pid);
         map.put("list", list);
         meshService.saveUpdate(map);
-        return "redirect:/mesh/list";
+//        return "redirect:/mesh/list";
+        return "ok";
     }
 
     @RequestMapping("/delete")
