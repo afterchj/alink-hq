@@ -28,7 +28,11 @@
         <div class="clearfix main-right-nav">
             <div class="f-l main-right-title">修改用户名</div>
             <div class="f-r pointer">
-                <img src="/alink-hq/static/img/go-back.png" alt="" id="clickReturn">
+                <div class="goBack" onClick="javascript :history.back(-1);" >
+                    <!--<span class="triangle-facing-left"></span>-->
+                    <span ><</span><span>返回</span>
+                </div>
+                <!--<img src="/alink-hq/static/img/go-back.png" alt="" id="clickReturn">-->
             </div>
         </div>
         <div id="fillUsername">
@@ -45,7 +49,7 @@
                                    readonly="readonly" class="name">
                         </div>
                         <div>
-                            <p class="use-hint" style="padding-left: 139px;height: 35px;"></p>
+                            <p class="use-hint" style="padding-left: 155px;height: 35px;"></p>
                             <label for="" style="width:130px;">新用户名：</label>
                             <input type="text" placeholder="请输入用户名（2-6位中文、字母或数字）" id="userNameNew" name="uname">
                         </div>

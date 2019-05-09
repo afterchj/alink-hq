@@ -10,12 +10,12 @@ laydate.render({
     elem: '#end-time',//指定元素
     range: true
 });
-$('.one-list li').each(function () {
-    var tab = $(this).attr('tab');
-    if (tab == 'projectList') {
-        $(this).addClass('active').siblings().removeClass('active');
-    }
-})
+// $('.one-list li').each(function () {
+//     var tab = $(this).attr('tab');
+//     if (tab == 'projectList') {
+//         $(this).addClass('active').siblings().removeClass('active');
+//     }
+// })
 
 
 $(function () {
@@ -81,7 +81,7 @@ $(function () {
 //条件筛选
 $(function () {
     var url = window.location.href;
-    var account = GetUrlParam("account");
+    var account = decodeURIComponent(GetUrlParam("account"));
     var projectName = decodeURIComponent(GetUrlParam("projectName"));
     var startCreateDate = GetUrlParam("startCreateDate");
     var endCreateDate = GetUrlParam("endCreateDate");
@@ -90,6 +90,28 @@ $(function () {
     var pageSize = GetUrlParam("pageSize");
     var pageNum = GetUrlParam("pageNum");
     var sortFlag = GetUrlParam("sortFlag");
+    console.log(sortFlag);
+    if(sortFlag==''){
+        $('.toBottom').attr('src','/alink-hq/static/img/unfold-color.png');
+        $('.toTop').attr('src','/alink-hq/static/img/fewer.png');
+        $('.toBottom1').attr('src','/alink-hq/static/img/unfold.png');
+        $('.toTop1').attr('src','/alink-hq/static/img/fewer.png');
+    }else if(sortFlag == '1'){
+        $('.toTop').attr('src','/alink-hq/static/img/fewer-color.png');
+        $('.toBottom').attr('src','/alink-hq/static/img/unfold.png');
+        $('.toBottom1').attr('src','/alink-hq/static/img/unfold.png');
+        $('.toTop1').attr('src','/alink-hq/static/img/fewer.png');
+    }else if(sortFlag == '2'){
+        $('.toBottom1').attr('src','/alink-hq/static/img/unfold-color.png');
+        $('.toTop').attr('src','/alink-hq/static/img/fewer.png');
+        $('.toBottom').attr('src','/alink-hq/static/img/unfold.png');
+        $('.toTop1').attr('src','/alink-hq/static/img/fewer.png');
+    }else if(sortFlag == '3'){
+        $('.toTop1').attr('src','/alink-hq/static/img/fewer-color.png');
+        $('.toTop').attr('src','/alink-hq/static/img/fewer.png');
+        $('.toBottom').attr('src','/alink-hq/static/img/unfold.png');
+        $('.toBottom1').attr('src','/alink-hq/static/img/unfold.png');
+    }
     $('#skipPage').val(pageNum);
     $('#page-select option').each(function () {
         if ($(this).val() == pageSize) {
@@ -115,6 +137,7 @@ $(function () {
         } else {
             pageNum = parseInt(pageNum);
         }
+        // $(this).attr('src','/alink-hq/static/img/fewer-color.png');
         condition(pageSize, pageNum, sortFlag);
     })
     $('.toBottom').click(function () {
@@ -126,6 +149,7 @@ $(function () {
         } else {
             pageNum = parseInt(pageNum);
         }
+        // $(this).attr('src','/alink-hq/static/img/unfold-color.png')
         condition(pageSize, pageNum, sortFlag);
     })
     $('.toBottom1').click(function () {
@@ -137,6 +161,7 @@ $(function () {
         } else {
             pageNum = parseInt(pageNum);
         }
+        // $(this).attr('src','/alink-hq/static/img/unfold-color.png')
         condition(pageSize, pageNum, sortFlag);
     })
     $('.toTop1').click(function () {
@@ -148,6 +173,7 @@ $(function () {
         } else {
             pageNum = parseInt(pageNum);
         }
+        // $(this).attr('src','/alink-hq/static/img/fewer-color.png')
         condition(pageSize, pageNum, sortFlag);
     })
     //查询按钮点击
@@ -155,10 +181,11 @@ $(function () {
         var sortFlag = GetUrlParam("sortFlag");
         var pageSize = $('#page-select option:selected').val();
         var pageNum = $('#skipPage').val();
-        if (pageNum == '') {
-            pageNum == 1;
-        } else {
-            pageNum = parseInt(pageNum);
+        if(!pageNum){
+            pageNum ='';
+        }
+        if(!pageSize){
+            pageSize='';
         }
         condition(pageSize, pageNum, sortFlag);
     })
@@ -359,16 +386,23 @@ $(function () {
     var page = parseInt($('.pages').text());
     var pageTotal = parseInt($('.pageTotal').text());
     if (page == 1) {
-        $('.prev-page img').attr('src', '/alink-hq/static/img/left-arrow.png');
-        $(".prev-page ").addClass('disabled');
+        // $('.prev-page img').attr('src', '/alink-hq/static/img/left-arrow.png');
+        // $(".prev-page ").addClass('disabled');
+        $('.prev').removeClass('active');
+        $(".prev-page").addClass('disabled');
+
     } else {
-        $('.prev-page img').attr('src', '/alink-hq/static/img/left-arrow-color.png');
+        // $('.prev-page img').attr('src', '/alink-hq/static/img/left-arrow-color.png');
+        $('.prev').addClass('active');
     }
     if (page == pageTotal) {
-        $('.next-page img').attr('src', '/alink-hq/static/img/right-arrow.png');
-        $(".next-page ").addClass('disabled');
+        $('.next').removeClass('active');
+        $(".next-page").addClass('disabled');
+        // $('.next-page img').attr('src', '/alink-hq/static/img/right-arrow.png');
+        // $(".next-page ").addClass('disabled');
     } else {
-        $('.next-page img').attr('src', '/alink-hq/static/img/right-arrow-color.png');
+        // $('.next-page img').attr('src', '/alink-hq/static/img/right-arrow-color.png');
+        $(".next").addClass('active');
     }
 })
 $('.meshNum a').click(function(){

@@ -93,7 +93,7 @@
     margin-right: 50px;
 }
 .f-content{
-    width: 800px;
+    width: 1000px;
     /* height: auto; */
     margin: 50px auto;
     border: 1px solid #bbb;
@@ -128,7 +128,7 @@
 #meshTurnOver .accountMsg input{
     height: 30px;
     font-size: 14px;
-    width: 120px;
+    width: 220px;
     text-indent: 10px;
     color: #606060;
     border: 1px solid #bbb;
@@ -163,7 +163,7 @@
 }
 #meshTurnOver .transfer-company select{
     border: 1px solid #bbb;
-    width: 200px;
+    width: 250px;
     text-indent: 10px;
     font-size: 15px;
     color: #3c3c3c;
@@ -204,6 +204,7 @@
     color: #fff;
     font-size: 17px;
     letter-spacing: 5px;
+    transform: initial;
 }
 .tranfer-btn{
     text-align: center;
@@ -214,7 +215,11 @@
     height: 20px;
     font-size: 14px;
     color: #fb2a2a;
-    margin-left: 50px;
+    margin-left: 0;
+}
+#account-transfer.active{
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
 }
 .scrollbar::-webkit-scrollbar {/*滚动条整体样式*/
     width: 15px;     /*高宽分别对应横竖滚动条的尺寸*/
@@ -235,12 +240,14 @@
     background: #f3f3f3;
 }
 #list{
-    width: 200px;
-    margin-left: 291px;
+    width: 250px;
+    margin-left: 266px;
+    margin-top: 0;
     border: 1px solid #bbb;
-    max-height: 150px;
+    max-height: 200px;
     overflow-y: auto;
-    border-top: none;
+    /*border-top: none;*/
+    z-index: 1000;
     display: none;
 }
 #list.active{
@@ -265,7 +272,7 @@
     background-color: #f3f3f3;
     height: 30px;
     border-radius: 5px;
-    width:200px;
+    width:250px;
     text-indent: 15px;
     font-size: 15px;
 }
@@ -277,7 +284,7 @@
     border-right: 3px solid transparent;
     border-top: 6px solid #333;
     position: absolute;
-    right: 155px;
+    right: 130px;
     bottom: 55px;
     cursor: pointer;
 

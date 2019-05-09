@@ -22,13 +22,16 @@
                 <img src="./img/create-project.png" alt="">
             </div> -->
             <div class="f-r pointer">
-                <img src="/alink-hq/static/img/go-back.png" alt="" onclick="history.back()">
+                <div class="goBack" onClick="javascript :history.back(-1);">
+                    <span ><</span><span>返回</span>
+                </div>
+                <!--<img src="/alink-hq/static/img/go-back.png" alt="" onclick="history.back()">-->
             </div>
         </div>
         <div id="projectDetail">
             <div class="p-detail">
-                <div class="p-nav">
-                    灯联网项目详情
+                <div class="p-nav" th:text="${projectName}" >
+
                 </div>
                 <div class="p-content">
                     <div class="clearfix">
@@ -90,6 +93,7 @@
     </div>
 </div>
 <script src="/alink-hq/static/js/jquery.min.js"></script>
+<script type="text/javascript" src="/alink-hq/static/js/left.js"></script>
 <script type="text/javascript">
     $(function () {
         var tabs="projectList";

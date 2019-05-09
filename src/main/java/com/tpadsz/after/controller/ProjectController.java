@@ -77,10 +77,12 @@ public class ProjectController {
             }
             model.addAttribute("account", account);
             model.addAttribute("projectName", projectName);
+            model.addAttribute("role_id", role_id);
             model.addAttribute("startCreateDate", startCreateDate);
             model.addAttribute("endCreateDate", endCreateDate);
             model.addAttribute("startUpdateDate", startUpdateDate);
             model.addAttribute("endUpdateDate", endUpdateDate);
+            model.addAttribute("sortFlag", sortFlag);
         } catch (Exception e) {
         }
         return "projectManage/projectList";
@@ -117,8 +119,12 @@ public class ProjectController {
                     return map;
                 }
             }
-            projectService.createProject(projectName, user.getId());
-            map.put("result", ResultDict.SUCCESS.getCode());
+            int flag = projectService.createProject(projectName, user);
+            if (flag == 0) {
+                map.put("result", ResultDict.REPEAT_NAME.getCode());
+            } else if (flag == 1) {
+                map.put("result", ResultDict.SUCCESS.getCode());
+            }
         } catch (Exception e) {
             map.put("result", ResultDict.SYSTEM_ERROR.getCode());
         }
@@ -218,7 +224,7 @@ public class ProjectController {
     }
 
     @RequestMapping(value = "/detail", method = RequestMethod.GET)
-    public String detail(String account, String coname, Integer meshNum, Integer projectId, Model model) {
+    public String detail(String projectName,String account, String coname, Integer meshNum, Integer projectId, Model model) {
         int placeNum = 0;
         int groupNum = 0;
         int lightNum = 0;
@@ -244,6 +250,7 @@ public class ProjectController {
             }
         }
         model.addAttribute("projectId", projectId);
+        model.addAttribute("projectName", projectName);
         model.addAttribute("meshNum", meshNum);
         model.addAttribute("placeNum", placeNum);
         model.addAttribute("groupNum", groupNum);

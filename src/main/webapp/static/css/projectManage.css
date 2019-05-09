@@ -1,6 +1,6 @@
 .search-condition {
     margin: 30px 0;
-    padding: 30px 65px 25px 65px;
+    padding: 40px 65px 10px 65px;
     border: 1px solid #bbb;
     background-color: #fff;
 }
@@ -10,7 +10,7 @@
 }
 
 .search input, .search select, .search select option {
-    width: 225px;
+    width: 275px;
     height: 35px;
     border-radius: 1px;
     border: 1px solid #bbb;
@@ -24,16 +24,24 @@
 }
 
 .search-button button {
-    width: 110px;
-    height: 38px;
-    font-size: 18px;
+    width: 100px;
+    height: 42px;
+    font-size: 19px;
     letter-spacing: 10px;
     background-color: #ffb500;
     border: 1px solid #ffb500;
     border-radius: 5px;
+    padding-left: 10px;
     color: #fff;
+    transform: scale(1,.9);
+    margin-right: 10px;
 }
-
+.sort-t{
+    top: 14px;
+}
+.sort-b{
+    bottom: 18px;
+}
 .search label {
     margin-right: 30px;
     font-size: 16px;
@@ -44,7 +52,7 @@
 }
 
 .search-button {
-    margin-top: 60px;
+    margin-top: 59px;
 }
 
 .search img {
@@ -113,15 +121,14 @@ th {
    margin-left: 30px;
 }
 
-img.toTop {
-    top: 15px;
-    transform: scale(.9);
-}
+/*img.toTop {*/
+    /*top: 14px;*/
+    /*!* transform: scale(.9); *!*/
+/*}*/
 
-img.toBottom {
-    bottom: 10px;
-    transform: scale(.9);
-}
+/*img.toBottom {*/
+    /*bottom: 18px;*/
+/*}*/
 
 .toTime {
     margin-right: 8px;
@@ -159,6 +166,8 @@ img.toBottom {
 
 .search-result table .selected-order .amount {
     color: red;
+    display: inline-block;
+    width: 20px;
 }
 
 .page img {
@@ -431,12 +440,13 @@ th.all-checkbox {
     color: #3c3c3c;
     border-radius: 5px;
     height: 35px;
-    width: 90px;
+    width: 80px;
     line-height: 35px;
-    letter-spacing: 10px;
+    letter-spacing: 9px;
     background-color: #fafafa;
     cursor: pointer;
     margin-right: 20px;
+    padding-left: 10px;
 }
 
 .pop-content .pop-btn .yes {
@@ -445,10 +455,11 @@ th.all-checkbox {
     color: #fff;
     border-radius: 5px;
     height: 35px;
-    width: 90px;
+    width: 80px;
     letter-spacing: 10px;
     cursor: pointer;
     background-color: #3598DB;
+    padding-left: 10px;
 }
 
 .pop-hint {
@@ -601,11 +612,15 @@ th.all-checkbox {
     margin-left: 325px;
     text-align: left
 }
-
+#skipPage{
+    height: 22px;
+}
 #projectDetail .p-nav li {
     font-size: 17px;
 }
-
+.search-result table td.k-link a{
+    color: #0B78CE;
+}
 .search-result table td.k-link a:hover {
     color: #17b4f1;
     border-bottom: 1px solid #17b4f1;
@@ -631,4 +646,37 @@ input:-ms-input-placeholder { /* Internet Explorer 10+ */
 .disabled{
     cursor: not-allowed;
     pointer-events:none;
+}
+.skipPageBtn{
+    display: inline-block;
+    width: 60px;
+    height: 30px;
+    line-height: 30px;
+    font-size: 15px;
+    border: 1px solid #bbb;
+    border-radius: 5px;
+    color: #000;
+    background-image: linear-gradient(to bottom , #fff 40%, #d2d3d6 );
+}
+
+.prev,.next{
+    width: 32px;
+    height: 30px;
+    line-height: 30px;
+    border: 1px solid #ccc;
+    display: inline-block;
+    border-radius: 5px;
+    cursor: pointer;
+    vertical-align: middle;
+}
+.prev span,.next span{
+    font-size: 24px;
+    color: #999;
+    /*transform: scale(1,.95);*/
+}
+.prev.active span,.next.active span{
+   color:#3598DB;
+}
+.pages{
+    width:20px;
 }

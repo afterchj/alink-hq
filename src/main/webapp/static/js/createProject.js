@@ -12,6 +12,21 @@ $('.confirm-create').click(function () {
     var account = $('#account').val();
     var regName = /^[a-zA-Z0-9\u4e00-\u9fa5]{2,16}$/;
     var renameResult = regName.test(projectName);
+    // $.ajax({
+    //     type: "POST",
+    //     url: "/alink-hq/project/rename",
+    //     data: {projectId: projectId, projectName: rename, account: account},
+    //     dataType: "json",
+    //     success: function (res) {
+    //         console.log(res);
+    //         if (res.result == '000') {
+    //             $('p.rename-hint').text('');
+    //             location.reload();
+    //         } else if (res.result == '306') {
+    //             $('p.rename-hint').text('已存在，请重新输入');
+    //         }
+    //     }
+    // });
     if (account == '') {
         $('.account-hint').text('请输入施工人员账号');
     }else{
@@ -40,6 +55,8 @@ $('.confirm-create').click(function () {
                     $('.account-hint').text('该账号不存在');
                 } else if (res.result == '304') {
                     $('.account-hint').text('不是同一个公司的账号');
+                }else if(res.result == '306'){
+                    $('.project-hint').text('该项目名已存在');
                 } else if (res.result == '000') {
                     console.log('创建成功!');
                     $('#preload-anim').addClass('active');

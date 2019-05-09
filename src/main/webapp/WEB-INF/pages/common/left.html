@@ -7,10 +7,10 @@
     <div class="main p-r">
         <div class="p-a main-left">
             <ul>
-                <li class="one-list">
+                <li class="one-list active ">
                     <div class="p-r">
-                        <a href="javascript:void(0);" tab="projectManage">项目管理</a>
-                        <img src="/alink-hq/static/img/bottom-triangle-un.png" alt="" class="p-a on-off-triangle">
+                        <a th:href="@{/project/list}" tab="projectManage">项目管理</a>
+                        <img src="/alink-hq/static/img/left-reduce.png" alt="" class="p-a on-off-triangle">
                     </div>
                     <ul class=" two-list">
                         <li tab="projectList"><a th:href="@{/project/list}">项目列表</a></li>
@@ -20,12 +20,12 @@
                         <li tab="lightList"><a th:href="@{/light/list(uid=${session.user.id})}">灯列表</a></li>
                     </ul>
                 </li>
-                <li class="one-list">
+                <li class="one-list active">
                     <div class="p-r">
-                        <a href="javascript:void(0);" tab="userManage">用户管理</a>
-                        <img src="/alink-hq/static/img/bottom-triangle-un.png" alt="" class="p-a on-off-triangle">
+                        <a th:href="@{/account/list}"  tab="userManage">用户管理</a>
+                        <img src="/alink-hq/static/img/left-reduce.png" alt="" class="p-a on-off-triangle">
                     </div>
-                    <ul class=" two-list">
+                    <ul class=" two-list ">
                         <li tab="userList"><a th:href="@{/account/list}">用户列表</a></li>
                         <li tab="createAccount"><a th:href="@{/account/createAccount}">创建账号</a></li>
                     </ul>
@@ -39,5 +39,6 @@
         </div>
     </div>
 </div>
+<script src="/alink-hq/static/js/jquery.min.js"></script>
 </body>
 </html>

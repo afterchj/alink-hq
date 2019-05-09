@@ -22,7 +22,10 @@
         <div class="clearfix main-right-nav">
             <div class="f-l main-right-title">创建账号</div>
             <div class="f-r pointer">
-                <img src="/alink-hq/static/img/go-back.png" onClick="javascript :history.back(-1);" alt=""/>
+                <div class="goBack" onClick="javascript :history.back(-1);">
+                    <span ><</span><span>返回</span>
+                </div>
+                <!--<img src="/alink-hq/static/img/go-back.png" onClick="javascript :history.back(-1);" alt=""/>-->
             </div>
         </div>
         <div id="createAccount">
@@ -223,7 +226,7 @@
         })
     })
     $(function () {
-        var tabs="userList";
+        var tabs="createAccount";
         var index=1;
         left(tabs,index);
     })

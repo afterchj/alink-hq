@@ -2,6 +2,7 @@ package com.tpadsz.after.service.impl;
 
 import com.tpadsz.after.dao.ProjectDao;
 import com.tpadsz.after.entity.ProjectList;
+import com.tpadsz.after.entity.User;
 import com.tpadsz.after.service.ProjectService;
 import org.springframework.stereotype.Service;
 
@@ -50,8 +51,16 @@ public class ProjectServiceImpl implements ProjectService {
     }
 
     @Override
-    public void createProject(String projectName, String uid) {
-        projectDao.createProject(projectName, uid);
+    public int createProject(String projectName, User user) {
+        int flag;
+        int count = projectDao.findRepeatNameByAccount(user.getAccount(), projectName);
+        if(count==1){
+            flag = 0;
+        }else {
+            projectDao.createProject(projectName, user.getId());
+            flag = 1;
+        }
+        return flag;
     }
 
     @Override
