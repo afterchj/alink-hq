@@ -8,6 +8,7 @@ import com.tpadsz.after.entity.OptionList;
 import com.tpadsz.after.entity.SearchDict;
 import com.tpadsz.after.exception.RepetitionException;
 import com.tpadsz.after.service.GroupService;
+import com.tpadsz.after.service.MeshService;
 import com.tpadsz.after.service.RoleService;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpSession;
 import java.util.*;
 
 /**
@@ -30,11 +32,15 @@ public class GroupController {
     private GroupService groupService;
     @Resource
     private RoleService roleService;
-
+    @Resource
+    private MeshService meshService;
     private Logger logger = Logger.getLogger(this.getClass());
 
     @RequestMapping("/list")
-    public String list(SearchDict dict, ModelMap modelMap) {
+    public String list(SearchDict dict, ModelMap modelMap, HttpSession session) {
+        OptionList project = meshService.getProject(dict.getProjectId());
+        session.setAttribute("project", project);
+        logger.info("project=" + JSON.toJSONString(project));
         String role = roleService.selectById(dict.getUid());
         dict.setRole(role);
         PageHelper.startPage(dict.getPageNum(), dict.getPageSize());

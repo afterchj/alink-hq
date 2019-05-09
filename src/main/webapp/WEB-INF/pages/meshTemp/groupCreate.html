@@ -33,6 +33,7 @@
                     创建组
                 </div>
                 <div class="c-content ">
+                    <label for="name">率属项目：</label><span id="name" th:text="${session.project.label}"></span>
                     <form th:action="@{/group/save}" method="GET">
                         <div>
                             <p class="project-hint"></p>
@@ -82,7 +83,11 @@
             }
             // 下面使用each进行遍历
             $.each(json, function (i, item) {
-                $("#mid").append("<option value='" + item.id + "'>" + item.label + "</option>");
+                if (item.label==$("#name").text()){
+                    $("#mid").append("<option value='" + item.id + "' selected>" + item.label + "</option>");
+                }else {
+                    $("#mid").append("<option value='" + item.id + "'>" + item.label + "</option>");
+                }
             });
             var str = $("#mid option:selected").val();
             $("#meshId").val(str.substr(0,str.indexOf("_")));

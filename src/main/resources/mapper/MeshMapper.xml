@@ -130,6 +130,9 @@
         <include refid="common_choose"></include>
     </select>
 
+    <select id="getProject" resultType="OptionList" parameterType="int">
+        SELECT id,name label FROM f_project p WHERE id=#{projectId}
+    </select>
     <delete id="deleteMeshByIds" parameterType="list">
         DELETE FROM f_mesh
         WHERE id IN

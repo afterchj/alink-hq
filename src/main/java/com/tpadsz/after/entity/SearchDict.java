@@ -10,6 +10,7 @@ public class SearchDict {
     private Integer mid;
     private Integer pid;
     private Integer gid;
+    private Integer name;
     private String mname;
     private String pname;
     private String gname;
@@ -60,6 +61,14 @@ public class SearchDict {
 
     public void setGid(Integer gid) {
         this.gid = gid;
+    }
+
+    public Integer getName() {
+        return name;
+    }
+
+    public void setName(Integer name) {
+        this.name = name;
     }
 
     public String getMname() {

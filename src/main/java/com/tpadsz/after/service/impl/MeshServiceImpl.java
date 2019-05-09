@@ -61,6 +61,11 @@ public class MeshServiceImpl implements MeshService {
     }
 
     @Override
+    public OptionList getProject(int projectId) {
+        return meshDao.getProject(projectId);
+    }
+
+    @Override
     public void deleteMeshByIds(List list) {
         meshDao.deleteMeshByIds(list);
     }

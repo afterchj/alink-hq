@@ -26,6 +26,8 @@ public interface MeshService {
 
     void saveRename(Map map)throws RepetitionException;
 
+    OptionList getProject(int projectId);
+
     void deleteMeshByIds(List list);
 
     List<OptionList> getProjects(Map map);
