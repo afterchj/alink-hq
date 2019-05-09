@@ -366,6 +366,8 @@ th.all-checkbox {
     color: #3c3c3c;
     margin-top: 60px;
     text-align: center;
+    font-weight: bold;
+    transform: scale(1,.95);
 }
 
 .pop-content .reset-pwd-hint {
@@ -665,7 +667,9 @@ input:-ms-input-placeholder { /* Internet Explorer 10+ */
     color: #000;
     background-image: linear-gradient(to bottom , #fff 40%, #d2d3d6 );
 }
-
+.skipPageBtn.active{
+    background: #DFDFDF;
+}
 .prev,.next{
     width: 32px;
     height: 30px;
@@ -695,4 +699,32 @@ input:-ms-input-placeholder { /* Internet Explorer 10+ */
     transform: scale(1,.95);
     color: #3598db;
 
+}
+.subjection{
+    text-align: right;
+    font-size: 19px;
+    transform: scale(1,.95);
+    margin:15px 0;
+}
+.process{
+    color: #555;
+    text-align: center;
+    width: 800px;
+    margin: 100px auto 30px;
+
+}
+.process span{
+    display: inline-block;
+    font-size: 17px;
+    vertical-align: middle;
+    height: 50px;
+    transform: scale(1,.95);
+    margin: 0 0 0 5px;
+
+}
+.process .part{
+    height: 50px;
+}
+.process .line{
+    margin: 7px 85px;
 }

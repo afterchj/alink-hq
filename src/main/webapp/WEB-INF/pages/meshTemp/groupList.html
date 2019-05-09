@@ -20,12 +20,12 @@
             <div class="f-l main-right-title">组列表</div>
             <div class="f-r pointer">
                 <a th:href="@{/group/create}">
-                    <div class="create"><span>+</span><span>创建组</span></div>
+                    <div class="create" onmousedown="createBtnMouseDown()" onmouseup="createBtnMouseUp()"><span>+</span><span>创建组</span></div>
                 </a>
                 <!--<div class="create" >+&nbsp;创建灯</div>-->
             </div>
             <div class="f-r pointer">
-                <div class="goBack" onClick="javascript :history.back();">
+                <div class="goBack" onClick="javascript :history.back();" onmousedown="backBtnMouseDown()" onmouseup="backBtnMouseUp()">
                     <!--<span class="triangle-facing-left"></span>-->
                     <span><</span><span>返回</span>
                 </div>
@@ -114,11 +114,11 @@
                                     <!--<img src="/alink-hq/static/img/delete-btn-un.png" alt="" id="multiDel">-->
                                     <!--</span>-->
                                     <span class="m-r-20">
-                                <span class="skipPageBtn pointer moment" id="multiMove">移交</span>
+                                <span class="skipPageBtn pointer moment" onmousedown="exchangeBtnMouseDown()" onmouseup="exchangeBtnMouseUp()"  id="multiMove">移交</span>
                             </span>
                                     <span>
 
-                                <span class="skipPageBtn pointer moment" id="multiDel">删除</span>
+                                <span class="skipPageBtn pointer moment"  onmousedown="deleteBtnMouseDown()" onmouseup="deleteBtnMouseUp()" id="multiDel">删除</span>
                             </span>
                                 </div>
                                 <div th:replace="common/page::page"></div>
@@ -208,5 +208,6 @@
 <script type="text/javascript" src="/alink-hq/static/js/left.js"></script>
 <script type="text/javascript" src="/alink-hq/static/js/page.js"></script>
 <script type="text/javascript" src="/alink-hq/static/js/group.js"></script>
+<script src="/alink-hq/static/js/moment.js"></script>
 </body>
 </html>

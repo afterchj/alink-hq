@@ -11,21 +11,26 @@ $(function () {
         $('input[name="ids"]:checked').each(function () {
             ids.push($(this).val());
         });
-        location.href = "/alink-hq/mesh/move?ids=" + ids;
+        if(ids.length>0) {
+            location.href = "/alink-hq/mesh/move?ids=" + ids;
+        }
     });
     var ids = [];//定义一个数组
     $("#multiDel").click(function () {
         $('input[name="ids"]:checked').each(function () {
             ids.push($(this).val());
         });
-        $('div[openContent="delete-mesh"]').addClass('active');
-        var width = document.body.scrollWidth;
-        var height = document.body.scrollHeight;
-        $('.hide-iframe').addClass('active');
-        $('.hide-iframe').css({
-            'width': width,
-            'height': height
-        });
+        if(ids.length>0){
+            $('div[openContent="delete-mesh"]').addClass('active');
+            var width = document.body.scrollWidth;
+            var height = document.body.scrollHeight;
+            $('.hide-iframe').addClass('active');
+            $('.hide-iframe').css({
+                'width': width,
+                'height': height
+            });
+        }
+
     });
     $('.pop-btn .yes').click(function () {
         console.log('ids', ids);
