@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="/alink-hq/static/css/loding.css"/>
     <link rel="stylesheet" th:href="@{/static/css/base.css}">
     <link rel="stylesheet" th:href="@{/static/css/leftNav.css}">
     <link rel="stylesheet" th:href="@{/static/css/mesh.css}">
@@ -50,39 +51,102 @@
                     <img src="/alink-hq/static/img/exchange-un.png" alt="">
                 </div>
                 <div class="transfer-company">
+                    <p class="trans-hint"  style="margin-left:55px;"></p>
                     <label for="gid"><span>*</span>选择移动到的组：</label>
                     <select name="gid" id="gid">
+                        <option value="">选择移动到的组</option>
                         <option value="1">未分组1</option>
                     </select>
                 </div>
                 <div class="tranfer-btn">
-                    <button class="confirm-btn" type="submit">确定移动</button>
+                    <button class="confirm-btn" type="button">确定移动</button>
                 </div>
             </div>
         </form>
     </div>
 </div>
+<div class="hide-iframe"></div>
+<div id="preload-anim">
+    <div id="circularG">
+        <div id="circularG_1" class="circularG"></div>
+        <div id="circularG_2" class="circularG"></div>
+        <div id="circularG_3" class="circularG"></div>
+        <div id="circularG_4" class="circularG"></div>
+        <div id="circularG_5" class="circularG"></div>
+        <div id="circularG_6" class="circularG"></div>
+        <div id="circularG_7" class="circularG"></div>
+        <div id="circularG_8" class="circularG"></div>
+    </div>
+    <p class="title">
+    </p>
+</div>
 <script src="/alink-hq/static/js/jquery.min.js"></script>
 <script type="text/javascript" src="/alink-hq/static/js/left.js"></script>
-<script type="text/javascript" src="/alink-hq/static/js/light.js"></script>
 <script th:inline="javascript">
     var uid = [[${session.user.id}]];
     $(function () {
-
-        console.log("gid=" + $("#gid option:selected").val());
-        $.getJSON("/alink-hq/group/getGroup", {"uid": uid}, function (json) {
-            if (json != '') {
-                $("#gid option:first").remove();
-            }
-            // 下面使用each进行遍历
-            $.each(json, function (i, item) {
-                $("#gid").append("<option value='" + item.id + "'>" + item.label + "</option>");
-            });
-        });
         var tabs="lightList";
         var index=0;
         left(tabs,index);
-    });
+        console.log("gid=" + $("#gid option:selected").val());
+        $.getJSON("/alink-hq/group/getGroup", {"uid": uid}, function (json) {
+            if (json != '') {
+                $("#gid option:first").siblings().remove();
+            }
+//            console.log(json)
+            // 下面使用each进行遍历
+            $.each(json, function (i, item) {
+                $("#gid").append("<option value='" + item.id + "'>" + item.label + "</option>");
+            })
+        })
+    })
+    $('.confirm-btn').click(function () {
+        var gid = $('#gid option:selected').val();
+        var ids = $('input[name="ids"]').val();
+        console.log(ids, gid);
+        if (gid == '') {
+            $('.trans-hint').text('请选择移动到的组');
+        } else {
+            $('.trans-hint').text('');
+//            $('#preload-anim').addClass('active');
+//            $('.hide-iframe').addClass('active');
+//            $('#preload-anim .title').text('移交成功，正在跳转组列表');
+            $.ajax({
+                type: "post",
+                url: "/alink-hq/light/saveUpdate",
+                data: {ids: ids, gid: gid},
+                success: function (res) {
+                    console.log(res);
+                    if (res == 'ok') {
+                        $('#preload-anim').addClass('active');
+                        $('.hide-iframe').addClass('active');
+                        $('#preload-anim .title').text('移交成功，正在跳转灯列表');
+                        setInterval(function () {
+                            location.href = '/alink-hq/light/list';
+                        }, 1000)
+                    }else{
+                        $('#preload-anim').addClass('active');
+                        $('.hide-iframe').addClass('active');
+                        $('#preload-anim .title').text('加载失败，请重新尝试');
+                        setInterval(function () {
+                            $('#preload-anim').removeClass('active');
+                            $('.hide-iframe').removeClass('active');
+                        }, 1000)
+                    }
+                }
+            })
+
+        }
+    })
+    //监听区域选择
+    $('#gid').change(function(){
+        var gid = $('#gid option:selected').val();
+        if(gid==''){
+            $('.trans-hint').text('请选择移动到的组');
+        }else{
+            $('.trans-hint').text('');
+        }
+    })
 </script>
 </body>
 </html>

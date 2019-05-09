@@ -106,6 +106,8 @@ $(function () {
     //移交
     $("#multiMove").click(function () {
         var idss = [];
+        var meshArr=[];
+        var isTrue=true;
         $('input[name="ids"]:checked').each(function () {
             idss.push($(this).val());
         });
