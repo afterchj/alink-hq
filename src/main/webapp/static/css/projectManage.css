@@ -81,6 +81,8 @@ th {
     color: #111;
     font-weight: normal;
     background-color: #fafafa;
+
+
 }
 
 .search-result table td {
@@ -92,6 +94,8 @@ th {
     color: #3c3c3c;
     /* cursor: pointer; */
     background-color: #fff;
+    /*border-top: 0;*/
+    /*border-right: 0;*/
 }
 
 .search-result table input[type=checkbox] {
@@ -191,12 +195,11 @@ th {
     text-align: center;
 }
 
-.pageTotal {
 
-}
 
 th.all-checkbox {
     cursor: pointer;
+
 }
 
 .hasData,
@@ -207,6 +210,8 @@ th.all-checkbox {
 .hasData.active,
 .noData.active {
     display: table;
+    border-left: 0;
+    border-bottom: 0;
 }
 
 .search-result table.noData td {
