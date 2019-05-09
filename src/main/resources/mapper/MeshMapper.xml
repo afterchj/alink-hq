@@ -99,6 +99,7 @@
         LEFT JOIN (SELECT COUNT(1) lcount,mid FROM f_light GROUP BY mid) l ON l.mid=m.id
         WHERE m.id=#{id}
     </select>
+
     <select id="getCountByTable" resultType="int" parameterType="string" statementType="STATEMENT">
         select count(*) from ${_parameter}
     </select>

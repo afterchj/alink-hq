@@ -58,8 +58,8 @@ public class MeshController {
 
     @RequestMapping("/create")
     public String create(Integer id, ModelMap modelMap) {
-        MeshInfo meshInfo = meshService.getMeshInfo(id);
-        modelMap.put("meshInfo", meshInfo);
+//        MeshInfo meshInfo = meshService.getMeshInfo(id);
+//        modelMap.put("meshInfo", meshInfo);
         return "meshTemp/meshCreate";
     }
 
