@@ -348,10 +348,12 @@ th.all-checkbox {
 }
 
 .pop-content .reset-pwd {
-    font-size: 17px;
+    font-size: 18px;
     color: #3c3c3c;
     margin-top: 60px;
     text-align: center;
+    font-weight: bold;
+    transform: scale(1,.95);
 }
 
 .pop-content .off-or-on {

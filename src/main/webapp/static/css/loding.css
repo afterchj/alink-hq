@@ -145,3 +145,10 @@
             transform: scale(0.3);
   }
 }
+#preload-anim {
+  display: none;
+}
+
+#preload-anim.active {
+  display: block;
+}
