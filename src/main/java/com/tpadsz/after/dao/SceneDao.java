@@ -11,6 +11,14 @@ import java.util.List;
 public interface SceneDao {
 
 
-    List<SceneList> searchSceneList(@Param("sceneName") String sceneName, @Param("sceneId") String sceneId, @Param
-            ("meshName") String meshName, @Param("meshId") String meshId);
+    List<SceneList> searchSceneList(@Param("sceneName") String sceneName, @Param("sceneId") String sceneId,@Param("meshName") String meshName,@Param("meshId") String meshId,@Param("mid") Integer mid);
+
+
+    int findRepeatNameBySid(@Param("sceneName")String sceneName, @Param("sid")Integer sid);
+
+    void renameScene(@Param("sceneName")String sceneName, @Param("sid")Integer sid);
+
+    void delete(@Param("sid")Integer sid);
+
+    void saveSceneName(@Param("sceneName")String sceneName, @Param("sid")Integer sid);
 }

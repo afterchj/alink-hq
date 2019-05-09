@@ -18,7 +18,32 @@ public class SceneServiceImpl implements SceneService {
 
 
     @Override
-    public List<SceneList> searchSceneList(String sceneName, String sceneId, String meshName, String meshId) {
-        return sceneDao.searchSceneList(sceneName,sceneId,meshName,meshId);
+    public List<SceneList> searchSceneList(String sceneName, String sceneId,String meshName,String meshId,Integer mid) {
+        return sceneDao.searchSceneList(sceneName,sceneId,meshName,meshId,mid);
     }
+
+    @Override
+    public int renameScene(String sceneName, Integer sid) {
+        int flag;
+        int count = sceneDao.findRepeatNameBySid(sceneName, sid);
+        if(count>0){
+            flag =0;
+        }else {
+            sceneDao.renameScene(sceneName,sid);
+            flag =1;
+        }
+        return flag;
+    }
+
+    @Override
+    public void delete(Integer sid) {
+        sceneDao.delete(sid);
+    }
+
+    @Override
+    public void saveSceneName(String sceneName, Integer sid) {
+        sceneDao.saveSceneName(sceneName,sid);
+    }
+
+
 }

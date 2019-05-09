@@ -3,15 +3,25 @@
 <mapper namespace="com.tpadsz.after.dao.SceneDao">
 
 
-    <select id="findProjectList" resultType="Integer">
-        SELECT DISTINCT(id) FROM f_project WHERE uid IN (SELECT uid FROM f_user_customer WHERE fid=(SELECT fid FROM f_user_customer WHERE uid=#{uid}))
-    </select>
-
     <select id="searchSceneList" resultType="com.tpadsz.after.entity.SceneList">
-        SELECT t1.id,t1.name,IFNULL(t5.meshNum,0) as meshNum,t2.account as account,t4.coname as coname,DATE_FORMAT(t1.create_date,'%Y-%m-%d %H:%i:%s') AS create_date,DATE_FORMAT(t1.update_date,'%Y-%m-%d %H:%i:%s') AS update_date FROM
-        (SELECT * FROM  f_project p WHERE p.name LIKE CONCAT('%',IFNULL(#{name},''),'%') and p.create_date BETWEEN IFNULL(NULLIF(#{startCreateDate},''),p.create_date) and IFNULL(NULLIF(#{endCreateDate},''),p.create_date) and p.update_date BETWEEN IFNULL(NULLIF(#{startUpdateDate},''),p.update_date) and IFNULL(NULLIF(#{endUpdateDate},''),p.update_date)) AS t1 INNER JOIN f_user_account AS t2 ON t1.uid = t2.id INNER JOIN f_user_customer AS t3 ON t2.id = t3.uid INNER JOIN f_firm AS t4 ON t3.fid = t4.id LEFT JOIN (SELECT count(id) AS meshNum,project_id FROM f_mesh GROUP BY project_id) AS t5 ON t1.id = t5.project_id WHERE t2.account LIKE CONCAT('%',IFNULL(#{account},''),'%') ORDER BY
+        SELECT s.id,s.sname AS sceneName,s.scene_id AS sceneId,#{meshName} AS meshName,#{meshId} AS meshId FROM f_scene s WHERE s.sname LIKE CONCAT('%',IFNULL(#{sceneName},''),'%') and s.scene_id LIKE CONCAT('%',IFNULL(#{sceneId},''),'%') and s.mid=#{mid} ORDER BY s.scene_id
     </select>
 
+    <select id="findRepeatNameBySid" resultType="int">
+        SELECT count(1) from f_scene s where s.sname = #{sceneName} and s.mid=(SELECT mid FROM f_scene WHERE id=#{sid})
+    </select>
+
+    <update id="renameScene">
+        update f_scene s set s.name = #{sceneName},s.update_date = NOW() where s.id=#{sid}
+    </update>
+
+    <delete id="deleteScene" parameterType="int">
+        DELETE FROM f_scene WHERE id = #{sid}
+    </delete>
+
+    <update id="saveSceneName">
+        UPDATE f_scene SET sname = #{sceneName},update_date=NOW() WHERE sid =#{sid}
+    </update>
 
 
 </mapper>
