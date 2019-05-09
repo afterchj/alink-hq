@@ -4,14 +4,14 @@ package com.tpadsz.after.entity;
  * Created by hongjian.chen on 2019/4/17.
  */
 public class OptionList {
-    int id;
+    String id;
     String label;
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 

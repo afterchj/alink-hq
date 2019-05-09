@@ -20,6 +20,8 @@ public interface GroupDao {
 
     List<OptionList> getPlaces(Map map);
 
+    List<OptionList> getMesh(Map map);
+
     MeshInfo getGroupInfo(int id);
 
     int getCount(Map map);

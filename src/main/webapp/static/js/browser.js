@@ -9,6 +9,9 @@ function myBrowser() {
     if (userAgent.indexOf("Firefox") > -1) { //判断是否Firefox浏览器
         console.log('火狐');
         $('table').css({'border-spacing': 0,'border-collapse': 'unset'});
+        $('.search-result table td').css({'border-top': '0','border-right': '0'});
+        $('.search-result table th').css({'border-top': '0','border-right': '0'});
+
         return "FF";
     }
     ;

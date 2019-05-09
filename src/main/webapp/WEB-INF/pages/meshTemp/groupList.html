@@ -19,13 +19,15 @@
         <div class="clearfix main-right-nav">
             <div class="f-l main-right-title">组列表</div>
             <div class="f-r pointer">
-                <div class="create"><span>+</span><span>创建组</span></div>
+                <a th:href="@{/group/create}">
+                    <div class="create"><span>+</span><span>创建组</span></div>
+                </a>
                 <!--<div class="create" >+&nbsp;创建灯</div>-->
             </div>
             <div class="f-r pointer">
-                <div class="goBack" onClick="javascript :history.back(-1);" >
+                <div class="goBack" onClick="javascript :history.back();">
                     <!--<span class="triangle-facing-left"></span>-->
-                    <span ><</span><span>返回</span>
+                    <span><</span><span>返回</span>
                 </div>
                 <!--<img src="/alink-hq/static/img/go-back.png" alt="" onclick="history.back()">-->
             </div>
@@ -75,21 +77,25 @@
                         </thead>
                         <tbody>
                         <tr th:each="group:${pageInfo.list}">
-                            <td class=""><input type="checkbox" name="ids" th:value="${group.id}" ></td>
-                            <td class="k-link"><a th:href="@{/group/info(id=${group.id})}" th:text="${group.gname}"></a></td>
+                            <td class=""><input type="checkbox" name="ids" th:value="${group.id}"></td>
+                            <td class="k-link"><a th:href="@{/group/info(id=${group.id})}" th:text="${group.gname}"></a>
+                            </td>
                             <td th:text="${group.mname}" class="meshName"></td>
-                            <td th:text="${group.mesh_id}" ></td>
+                            <td th:text="${group.mesh_id}"></td>
                             <td th:text="${group.lcount}"></td>
                             <td class="p-r">
-                                <img src="/alink-hq/static/img/edit.png" th:alt="${group.id}" class="rename pointer"  title="重命名">
+                                <img src="/alink-hq/static/img/edit.png" th:alt="${group.id}" class="rename pointer"
+                                     title="重命名">
                                 <a th:href="@{/group/move(ids=${group.id})}">
-                                    <img src="/alink-hq/static/img/exchange.png" th:alt="${group.id}" class="center-img pointer" title="移交">
+                                    <img src="/alink-hq/static/img/exchange.png" th:alt="${group.id}"
+                                         class="center-img pointer" title="移交">
                                 </a>
                                 <!--<a th:href="@{/group/delete(ids=${group.id})}">-->
-                                    <!--<img src="/alink-hq/static/img/delete.png" alt="" id="singleDel" title="删除">-->
+                                <!--<img src="/alink-hq/static/img/delete.png" alt="" id="singleDel" title="删除">-->
                                 <!--</a>-->
                                 <!--<a href="javascript:void(0);" class="singleDel pointer">-->
-                                    <img src="/alink-hq/static/img/delete.png" alt="" th:alt="${group.id}" class="singleDel pointer"  title="删除" >
+                                <img src="/alink-hq/static/img/delete.png" alt="" th:alt="${group.id}"
+                                     class="singleDel pointer" title="删除">
                                 <!--</a>-->
                             </td>
                         </tr>
@@ -102,15 +108,15 @@
                                  <span id="amount" class="amount">0</span>条数据
                             </span>
                                     <!--<span class="m-r-20">-->
-                                <!--<img src="/alink-hq/static/img/true-over-un.png" alt="" id="multiMove">-->
-                            <!--</span>-->
+                                    <!--<img src="/alink-hq/static/img/true-over-un.png" alt="" id="multiMove">-->
+                                    <!--</span>-->
                                     <!--<span>-->
-                                <!--<img src="/alink-hq/static/img/delete-btn-un.png" alt="" id="multiDel">-->
-                            <!--</span>-->
+                                    <!--<img src="/alink-hq/static/img/delete-btn-un.png" alt="" id="multiDel">-->
+                                    <!--</span>-->
                                     <span class="m-r-20">
                                 <span class="skipPageBtn pointer moment" id="multiMove">移交</span>
                             </span>
-                            <span>
+                                    <span>
 
                                 <span class="skipPageBtn pointer moment" id="multiDel">删除</span>
                             </span>
@@ -190,7 +196,7 @@
     <div class="pop-content">
         <div class="reset-pwd">不同网络下的组不可进行移动</div>
         <!--<div class="reset-pwd-hint">-->
-            <!--删除后所选组所有的灯将会进入所属网络未分组中请慎重！-->
+        <!--删除后所选组所有的灯将会进入所属网络未分组中请慎重！-->
         <!--</div>-->
         <div class="pop-btn">
             <button class="reduce">取消</button>

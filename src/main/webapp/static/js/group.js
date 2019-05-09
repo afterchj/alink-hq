@@ -105,12 +105,11 @@ $(function () {
         var isTrue=true;
         $('input[name="ids"]:checked').each(function () {
             var meshName=$(this).parent().siblings('.meshName').text();
-
             idss.push($(this).val());
             meshArr.push(meshName);
         });
-        console.log(idss);
-        console.log(meshArr);
+        // console.log(idss);
+        // console.log(meshArr);
         if(meshArr.length>0){
             for(var i=0;i<meshArr.length;i++){
                 if(meshArr.indexOf(meshArr[i])!=0){
@@ -119,7 +118,7 @@ $(function () {
                 }
             }
         }
-        console.log(isTrue);
+        // console.log(isTrue);
         if(isTrue){
             if(idss.length>0){
                 location.href = "/alink-hq/group/move?ids=" + idss;

@@ -72,4 +72,9 @@ public class GroupServiceImpl implements GroupService {
     public List<OptionList> getPlaces(Map map) {
         return groupDao.getPlaces(map);
     }
+
+    @Override
+    public List<OptionList> getMesh(Map map) {
+        return groupDao.getMesh(map);
+    }
 }

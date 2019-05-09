@@ -117,6 +117,12 @@
         LIMIT 1
     </select>
 
+    <select id="getMesh" resultType="OptionList" parameterType="map">
+        SELECT CONCAT_WS('_',id,mesh_id) id,mesh_id, mname label FROM f_mesh m
+        WHERE 1=1
+        <include refid="common_choose"></include>
+        GROUP BY mesh_id
+    </select>
     <delete id="deleteGroupByIds" parameterType="list">
         DELETE FROM f_group
         WHERE id IN
