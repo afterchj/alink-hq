@@ -97,11 +97,10 @@ public class SceneController {
     }
 
     @RequestMapping(value = "/detail", method = RequestMethod.GET)
-    public String detail(String projectName,String account, String coname, Integer meshNum, Integer projectId, Model model) {
-        int placeNum = 0;
-        int groupNum = 0;
-        int lightNum = 0;
-        User user = new User();
+    public String detail(Integer sid,String sceneName, Integer sceneId, String meshName, String meshId, Model model) {
+        int projectId = sceneService.findProjectIdByMeshId(meshId);
+
+
         int a = 1;
 //        if (account != null) {
 //            user = accountService.findByAccount(account);
@@ -113,11 +112,7 @@ public class SceneController {
 //            }
 //        }
 //        model.addAttribute("placeNum", placeNum);
-        model.addAttribute("groupNum", groupNum);
-        model.addAttribute("lightNum", lightNum);
-        model.addAttribute("user", user);
-        model.addAttribute("coname", coname);
-        return "projectManage/projectDetail";
+        return "sceneManage/sceneDetail";
     }
 
 }

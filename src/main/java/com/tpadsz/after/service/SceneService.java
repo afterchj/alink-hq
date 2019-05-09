@@ -17,4 +17,6 @@ public interface SceneService {
     void delete(Integer sid);
 
     void saveSceneName(String sceneName, Integer sid);
+
+    int findProjectIdByMeshId(String meshId);
 }

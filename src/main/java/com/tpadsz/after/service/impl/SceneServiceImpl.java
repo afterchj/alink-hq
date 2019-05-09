@@ -45,5 +45,10 @@ public class SceneServiceImpl implements SceneService {
         sceneDao.saveSceneName(sceneName,sid);
     }
 
+    @Override
+    public int findProjectIdByMeshId(String meshId) {
+        return sceneDao.findProjectIdByMeshId(meshId);
+    }
+
 
 }

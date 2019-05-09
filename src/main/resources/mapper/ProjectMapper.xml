@@ -83,7 +83,10 @@
     </update>
 
     <update id="transferProject">
-        update f_project set uid = #{uid},update_date = NOW() where id=#{id}
+        update f_project set uid = #{uid},update_date = NOW() where id=#{id};
+        update f_place set uid = #{uid},update_date = NOW() where mid IN ( SELECT id FROM f_mesh WHERE project_id=#{id});
+        update f_scene set uid = #{uid},update_date = NOW() where mid IN ( SELECT id FROM f_mesh WHERE project_id=#{id});
+        update f_mesh set uid = #{uid},update_date = NOW() where project_id=#{id};
     </update>
 
 

@@ -21,4 +21,6 @@ public interface SceneDao {
     void delete(@Param("sid")Integer sid);
 
     void saveSceneName(@Param("sceneName")String sceneName, @Param("sid")Integer sid);
+
+    int findProjectIdByMeshId(@Param("meshId")String meshId);
 }
