@@ -10,5 +10,13 @@ import java.util.List;
 public interface SceneService {
 
 
-    List<SceneList> searchSceneList(String sceneName, String sceneId, String meshName, String meshId);
+    List<SceneList> searchSceneList(String sceneName, String sceneId,String meshName,String meshId,Integer mid);
+
+    int renameScene(String sceneName, Integer sid);
+
+    void delete(Integer sid);
+
+    void saveSceneName(String sceneName, Integer sid);
+
+    int findProjectIdByMeshId(String meshId);
 }
