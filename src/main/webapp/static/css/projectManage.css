@@ -680,3 +680,12 @@ input:-ms-input-placeholder { /* Internet Explorer 10+ */
 .pages{
     width:20px;
 }
+.operation{
+    width:220px;
+}
+.export{
+    font-size: 18px;
+    transform: scale(1,.95);
+    color: #3598db;
+
+}
