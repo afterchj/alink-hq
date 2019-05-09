@@ -57,11 +57,11 @@
                             <p class="project-hint"></p>
                             <label for="mid">选择网络：</label>
                             <select id="mid" name="mid" style="height:35px;">
-                                <option value="0">全部</option>
+                                <option value="">请选择网络</option>
                             </select>
                         </div>
                         <div>
-                            <p class="project-hint"></p>
+                            <p class="" style="height: 20px"></p>
                             <label for="mid">网络ID：</label>
                             <input type="text" id="meshId">
                         </div>
@@ -97,7 +97,7 @@
         left(tabs, index);
         $.getJSON("/alink-hq/group/getMesh", {"uid": uid}, function (json) {
             if (json != '') {
-                $("#mid option:first").remove();
+                $("#mid option:first").siblings().remove();
             }
             // 下面使用each进行遍历
             $.each(json, function (i, item) {
@@ -107,12 +107,34 @@
             $("#meshId").val(str.substr(0,str.indexOf("_")));
             $("#mid").change(function () {
                 var mid = $("#mid option:selected").val();
+                if(mid==''){
+                    $('.project-hint').text('请选择网络');
+                }else{
+                    $('.project-hint').text('');
+                }
                 var meshId = mid.substr(mid.indexOf("_") + 1);
                 console.log("mid=" + mid + ",meshId=" + meshId);
                 $("#meshId").val(meshId);
             });
         });
     });
+    $('.confirm-create').click(function(){
+        var mid = $("#mid option:selected").val();
+        if(mid==''){
+            $('.project-hint').text('请选择网络');
+        }else{
+            $('.project-hint').text('');
+        }
+    })
+    //监听网络选择
+//    $('#mid').change(function(){
+//        var mid = $('#pid option:selected').val();
+//        if(mid==''){
+//            $('.project-hint').text('请选择网络');
+//        }else{
+//            $('.project-hint').text('');
+//        }
+//    })
 </script>
 </body>
 </html>
