@@ -141,6 +141,11 @@ $(function () {
             })
         }
     })
+    //无法移动的确定以及取消
+    $('div[openContent="exchange"] .yes,div[openContent="exchange"] .reduce').click(function(){
+        $('.hide-iframe').removeClass('active');
+        $('div[openContent="exchange"]').removeClass('active');
+    })
 })
 function nameKeyUp(){
     var name=$('#rename').val();
