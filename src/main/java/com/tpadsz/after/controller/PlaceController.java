@@ -61,14 +61,22 @@ public class PlaceController {
     public String create(Integer projectId, ModelMap modelMap) {
         OptionList project = meshService.getProject(projectId);
         modelMap.put("project", project);
-        logger.info("project=" + JSON.toJSONString(project));
         return "meshTemp/placeCreate";
     }
 
+    @ResponseBody
     @RequestMapping("/save")
-    public String savePlace(Integer pid) {
-        logger.info("pid=" + pid);
-        return "redirect:/place/list";
+    public String savePlace(SearchDict dict) {
+        Map map = JSON.parseObject(JSON.toJSONString(dict));
+        try {
+            placeService.save(map);
+        } catch (RepetitionException e) {
+            return "fail";
+        } catch (Exception e) {
+            return "netFail";
+        }
+        return "ok";
+//        return "redirect:/place/list";
     }
 
     @RequestMapping("/move")

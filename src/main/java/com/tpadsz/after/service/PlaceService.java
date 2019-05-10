@@ -23,6 +23,8 @@ public interface PlaceService {
 
     MeshInfo getPlaceInfo(int id);
 
+    void save(Map map) throws RepetitionException;
+
     int getCount(Map map);
 
     void deleteByIds(List list);
