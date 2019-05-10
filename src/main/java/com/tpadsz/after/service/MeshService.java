@@ -21,7 +21,7 @@ public interface MeshService {
 
     int getCount(Map map);
 
-    void save(SearchDict dict);
+    void save(Map dict);
 
     void saveUpdate(Map map);
 

@@ -27,7 +27,7 @@ public interface MeshDao {
 
     int getCountByTable(String tableName);
 
-    void save(SearchDict dict);
+    void save(Map dict);
 
     void saveUpdate(Map map);
 
