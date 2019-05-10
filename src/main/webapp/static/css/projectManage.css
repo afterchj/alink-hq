@@ -614,7 +614,7 @@ th.all-checkbox {
     margin-top: 30px;
 }
 
-.project-hint, .account-hint {
+.project-hint, .account-hint,.place-hint {
     font-size: 14px;
     color: #fb2a2a;
     height: 20px;
@@ -727,4 +727,10 @@ input:-ms-input-placeholder { /* Internet Explorer 10+ */
 }
 .process .line{
     margin: 7px 85px;
+}
+.select-mesh-step,.select-place-step,.select-group-step{
+    display: none;
+}
+.select-mesh-step.active,.select-place-step.active,.select-group-step.active{
+    display: block;
 }
