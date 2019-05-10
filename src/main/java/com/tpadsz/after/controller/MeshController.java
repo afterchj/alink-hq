@@ -57,15 +57,14 @@ public class MeshController {
     }
 
     @RequestMapping("/create")
-    public String create(Integer id, ModelMap modelMap) {
-//        MeshInfo meshInfo = meshService.getMeshInfo(id);
-//        modelMap.put("meshInfo", meshInfo);
+    public String create() {
         return "meshTemp/meshCreate";
     }
 
     @RequestMapping("/save")
-    public String saveMesh(Integer pid) {
-        logger.info("pid=" + pid);
+    public String saveMesh(SearchDict dict) {
+        logger.info("pid=" + dict.getProjectId());
+        meshService.save(dict);
         return "redirect:/mesh/list";
     }
 

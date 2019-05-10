@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
-import javax.servlet.http.HttpSession;
 import java.util.*;
 
 /**
@@ -37,10 +36,7 @@ public class GroupController {
     private Logger logger = Logger.getLogger(this.getClass());
 
     @RequestMapping("/list")
-    public String list(SearchDict dict, ModelMap modelMap, HttpSession session) {
-        OptionList project = meshService.getProject(dict.getProjectId());
-        session.setAttribute("project", project);
-        logger.info("project=" + JSON.toJSONString(project));
+    public String list(SearchDict dict, ModelMap modelMap) {
         String role = roleService.selectById(dict.getUid());
         dict.setRole(role);
         PageHelper.startPage(dict.getPageNum(), dict.getPageSize());
@@ -71,7 +67,10 @@ public class GroupController {
     }
 
     @RequestMapping("/create")
-    public String create(Integer id, ModelMap modelMap) {
+    public String create(Integer projectId, ModelMap modelMap) {
+        OptionList project = meshService.getProject(projectId);
+        modelMap.put("project", project);
+        logger.info("project=" + JSON.toJSONString(project));
         return "meshTemp/groupCreate";
     }
 

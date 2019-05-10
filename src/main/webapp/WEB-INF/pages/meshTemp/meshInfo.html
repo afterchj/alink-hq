@@ -61,7 +61,7 @@
                             <span th:text="${meshInfo.pcount}"></span>
                         </div>
                         <div class="f-l">
-                            <a th:href="@{/place/list(mid=${meshInfo.id})}">查看区域列表</a>
+                            <a th:href="@{/place/list(projectId=${meshInfo.project_id},mid=${meshInfo.id})}">查看区域列表</a>
                         </div>
                     </div>
                     <div class="clearfix">

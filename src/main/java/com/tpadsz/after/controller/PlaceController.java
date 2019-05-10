@@ -1,11 +1,13 @@
 package com.tpadsz.after.controller;
 
+import com.alibaba.fastjson.JSON;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.tpadsz.after.entity.MeshInfo;
 import com.tpadsz.after.entity.OptionList;
 import com.tpadsz.after.entity.SearchDict;
 import com.tpadsz.after.exception.RepetitionException;
+import com.tpadsz.after.service.MeshService;
 import com.tpadsz.after.service.PlaceService;
 import com.tpadsz.after.service.RoleService;
 import org.apache.log4j.Logger;
@@ -29,6 +31,8 @@ public class PlaceController {
     private PlaceService placeService;
     @Resource
     private RoleService roleService;
+    @Resource
+    private MeshService meshService;
 
     private Logger logger = Logger.getLogger(this.getClass());
 
@@ -54,7 +58,10 @@ public class PlaceController {
     }
 
     @RequestMapping("/create")
-    public String create(Integer id, ModelMap modelMap) {
+    public String create(Integer projectId, ModelMap modelMap) {
+        OptionList project = meshService.getProject(projectId);
+        modelMap.put("project", project);
+        logger.info("project=" + JSON.toJSONString(project));
         return "meshTemp/placeCreate";
     }
 
@@ -63,6 +70,7 @@ public class PlaceController {
         logger.info("pid=" + pid);
         return "redirect:/place/list";
     }
+
     @RequestMapping("/move")
     public String delete(String ids) {
         logger.info("ids=" + ids);

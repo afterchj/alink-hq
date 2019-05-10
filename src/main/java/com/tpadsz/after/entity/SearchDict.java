@@ -5,6 +5,7 @@ package com.tpadsz.after.entity;
  */
 public class SearchDict {
 
+    private Integer id;
     private Integer uid;
     private String role;
     private Integer mid;
@@ -18,10 +19,18 @@ public class SearchDict {
     private String lmac;
     private Integer status;
     private Integer meshId;
-    private Integer projectId;
+    private Integer projectId=0;
     private Integer placeId;
     private Integer pageNum = 1;
     private Integer pageSize = 10;
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
     public Integer getUid() {
         return uid;

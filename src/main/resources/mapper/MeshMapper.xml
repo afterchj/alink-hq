@@ -2,6 +2,13 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.tpadsz.after.dao.MeshDao">
 
+    <parameterMap id="meshMapper" type="SearchDict">
+        <parameter property="id" mode="IN"/>
+        <parameter property="uid" mode="IN"/>
+        <parameter property="name" mode="IN"/>
+        <parameter property="mid" mode="OUT" jdbcType="INTEGER"/>
+    </parameterMap>
+
     <sql id="Base_Column_List">
 		m.id,
         m.uid,
@@ -60,25 +67,10 @@
         ORDER BY m.id DESC
     </select>
 
-    <select id="selectByMap" resultType="map" parameterType="SearchDict">
-        SELECT
-        <include refid="Base_Column_List"/>
-        FROM f_mesh m
-        INNER JOIN f_project p ON m.project_id = p.id
-        INNER JOIN (SELECT COUNT(1) pcount,mid FROM f_place GROUP BY mid) pl ON pl.mid=m.id
-        INNER JOIN (SELECT COUNT(1) scount,mid FROM f_scene GROUP BY mid) s ON s.mid=m.id
-        WHERE 1=1
-        <include refid="common_choose"></include>
-        <if test="mname!=null and mname!=''">
-            AND m.mname LIKE CONCAT('%',#{mname},'%')
-        </if>
-        <if test="meshId!=null and meshId!=''">
-            AND m.mesh_id LIKE CONCAT('%',#{meshId},'%')
-        </if>
-        <if test="pname!=null and pname!=''">
-            AND p.name LIKE CONCAT('%',#{pname},'%')
-        </if>
+    <select id="save" parameterType="meshMapper" statementType="CALLABLE">
+         CALL regist_user (?,?,?)
     </select>
+
     <select id="getMeshInfo" resultType="MeshInfo" parameterType="int">
         SELECT
              m.id,
@@ -106,10 +98,10 @@
 
     <select id="selectByMid" resultType="map" parameterType="list">
         SELECT
-            m.id,
-            m.mname,
-            m.mesh_id,
-            p.name
+        m.id,
+        m.mname,
+        m.mesh_id,
+        p.name
         FROM f_mesh m
         INNER JOIN f_project p ON m.project_id = p.id
         WHERE m.id IN

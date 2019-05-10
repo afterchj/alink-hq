@@ -22,11 +22,6 @@ public class MeshServiceImpl implements MeshService {
     private MeshDao meshDao;
 
     @Override
-    public List<Map> selectByMap(SearchDict dict) {
-        return meshDao.selectByMap(dict);
-    }
-
-    @Override
     public List<Map> getByMap(SearchDict map) {
         return meshDao.getByMap(map);
     }
@@ -44,6 +39,11 @@ public class MeshServiceImpl implements MeshService {
     @Override
     public int getCount(Map map) {
         return meshDao.getCount(map);
+    }
+
+    @Override
+    public void save(SearchDict dict) {
+        meshDao.save(dict);
     }
 
     @Override

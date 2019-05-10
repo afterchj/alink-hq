@@ -12,7 +12,6 @@ import java.util.Map;
  */
 public interface MeshDao {
 
-    List<Map> selectByMap(SearchDict dict);
 
     List<Map> getByMap(SearchDict dict);
 
@@ -27,6 +26,8 @@ public interface MeshDao {
     List<OptionList> getProjects(Map map);
 
     int getCountByTable(String tableName);
+
+    void save(SearchDict dict);
 
     void saveUpdate(Map map);
 
