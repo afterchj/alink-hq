@@ -61,7 +61,7 @@
                                 </select>
                             </div>
                             <div>
-                                <p class="" style="height: 20px"></p>
+                                <p class="" style="height: 35px"></p>
                                 <label for="meshId">网络ID：</label>
                                 <input type="text" id="meshId">
                             </div>
@@ -81,6 +81,7 @@
                             </div>
 
                             <div class="">
+                                <button type="button" class="back-btn" >上一步</button>
                                 <button type="button" class="confirm-create" openTab="confirm-create">下一步</button>
                             </div>
                         </div>
@@ -88,11 +89,12 @@
                         <!--输入组名-->
                         <div class="select-group-step step">
                             <div>
-                                <p class="group-hint" style="height: 20px"></p>
+                                <p class="group-hint"></p>
                                 <label for="group">组名：</label>
                                 <input type="text" id="group" placeholder="请输入（2-16 位汉字、字母、数字）">
                             </div>
                             <div class="">
+                                <button type="button" class="back-btn" >上一步</button>
                                 <button type="button" class="confirm-create" openTab="confirm-create">下一步</button>
                             </div>
                         </div>
@@ -119,7 +121,8 @@
 <script type="text/javascript" src="/alink-hq/static/js/jquery.min.js"></script>
 <script type="text/javascript" src="/alink-hq/static/js/left.js"></script>
 <script th:inline="javascript">
-    var uid = [[${session.user.id}]]
+    var uid = [[${session.user.id}]];
+    var mid,pid,meshId,placeIds;
     $(function () {
         var tabs = "groupList"
         var index = 0
@@ -135,13 +138,13 @@
             var str = $("#mid option:selected").val()
             $("#meshId").val(str.substr(0,str.indexOf("_")))
             $("#mid").change(function () {
-                var mid = $("#mid option:selected").val()
+                 mid = $("#mid option:selected").val()
                 if(mid==''){
                     $('.project-hint').text('请选择网络')
                 }else{
                     $('.project-hint').text('')
                 }
-                var meshId = mid.substr(mid.indexOf("_") + 1)
+                 meshId = mid.substr(mid.indexOf("_") + 1)
 //                console.log("mid=" + mid + ",meshId=" + meshId);
                 $("#meshId").val(meshId);
             })
@@ -149,7 +152,7 @@
     })
     //选择网络后下一步
     $('.select-mesh-step .confirm-create').click(function(){
-        var mid = $("#mid option:selected").val()
+         mid = $("#mid option:selected").val()
         if(mid==''){
             $('.project-hint').text('请选择网络')
         }else{
@@ -169,23 +172,22 @@
                 var str = $("#place option:selected").val()
                 $("#place").val(str.substr(0,str.indexOf("_")))
                 $("#place").change(function () {
-                    var placeId = $("#place option:selected").val()
-                    console.log(placeId)
-                    if(placeId==''){
+                     pid = $("#place option:selected").val()
+                    if(pid==''){
                         $('.place-hint').text('请选择区域')
                     }else{
                         $('.place-hint').text('')
                     }
-                    var placeIds = placeId.substr(placeId.indexOf("_") + 1)
-                    $("#place").val(placeIds);
+//                     placeIds = pid.substr(pid.indexOf("_") + 1)
+//                    $("#place").val(placeIds);
                 })
             })
         }
     })
     //选择区域后下一步
     $('.select-place-step .confirm-create').click(function(){
-        var placeId = $("#place option:selected").val()
-        if(placeId==''){
+         pid = $("#place option:selected").val()
+        if(pid==''){
             $('.place-hint').text('请选择区域')
         }else{
             $('.place-hint').text('')
@@ -193,11 +195,11 @@
             $('#two-step').attr('src','/alink-hq/static/img/fill-2-is.png')
             $('#three-step').attr('src','/alink-hq/static/img/fill-3-on.png')
             $('.select-group-step').addClass('active').siblings('.step').removeClass('active')
-            $("#group").change(function () {
+            $("#group").bind("input propertychange",function () {
                 var groupId=$('#group').val()
                 var regName = /^[a-zA-Z0-9\u4e00-\u9fa5]{2,16}$/
                 var groupResult = regName.test(groupId)
-                console.log('groupId',groupId)
+
                 if(groupId!='' && groupResult){
                     $('.group-hint').text('')
                 }else{
@@ -206,19 +208,43 @@
             })
         }
     })
+    //选择区域后上一步
+    $('.select-place-step .back-btn').click(function(){
+        $('#one-step').attr('src','/alink-hq/static/img/fill-1-on.png')
+        $('#two-step').attr('src','/alink-hq/static/img/fill-2-no.png')
+        $('#three-step').attr('src','/alink-hq/static/img/fill-3-no.png')
+        $('.select-mesh-step').addClass('active').siblings('.step').removeClass('active')
+        $("#meshId").val(meshId);
+        $("#mid option:selected").val(mid)
+    })
     //输入组的确定
     $('.select-group-step .confirm-create').click(function(){
         var groupId=$('#group').val()
         var regName = /^[a-zA-Z0-9\u4e00-\u9fa5]{2,16}$/
         var groupResult = regName.test(groupId)
-        console.log('groupId',groupId)
+        console.log('groupId',groupId,'mid',mid,'pid',pid)
         if(groupId!='' && groupResult){
             $('.group-hint').text('')
-
+            $.ajax({
+                type: "post",
+                url: "/alink-hq/group/save",
+                data: {mid:mid, pid:pid,name:groupId},
+                sucess: function(res){
+                    console.log(res);
+                }
+            })
         }else{
             $('.group-hint').text('请输入（2-16 位汉字、字母、数字）')
         }
-
+    })
+    //输入组的上一步
+    $('.select-group-step .back-btn').click(function(){
+        $('#one-step').attr('src','/alink-hq/static/img/fill-1-is.png')
+        $('#two-step').attr('src','/alink-hq/static/img/fill-2-on.png')
+        $('#three-step').attr('src','/alink-hq/static/img/fill-3-no.png')
+        $('.select-place-step').addClass('active').siblings('.step').removeClass('active')
+//        $("#meshId").val(meshId);
+        $("#place option:selected").val(pid);
     })
     //监听网络选择
 //    $('#mid').change(function(){
