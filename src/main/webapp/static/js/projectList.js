@@ -137,7 +137,6 @@ $(function () {
         } else {
             pageNum = parseInt(pageNum);
         }
-        // $(this).attr('src','/alink-hq/static/img/fewer-color.png');
         condition(pageSize, pageNum, sortFlag);
     })
     $('.toBottom').click(function () {
@@ -149,7 +148,6 @@ $(function () {
         } else {
             pageNum = parseInt(pageNum);
         }
-        // $(this).attr('src','/alink-hq/static/img/unfold-color.png')
         condition(pageSize, pageNum, sortFlag);
     })
     $('.toBottom1').click(function () {
@@ -161,7 +159,6 @@ $(function () {
         } else {
             pageNum = parseInt(pageNum);
         }
-        // $(this).attr('src','/alink-hq/static/img/unfold-color.png')
         condition(pageSize, pageNum, sortFlag);
     })
     $('.toTop1').click(function () {
@@ -173,7 +170,6 @@ $(function () {
         } else {
             pageNum = parseInt(pageNum);
         }
-        // $(this).attr('src','/alink-hq/static/img/fewer-color.png')
         condition(pageSize, pageNum, sortFlag);
     })
     //查询按钮点击
@@ -386,22 +382,15 @@ $(function () {
     var page = parseInt($('.pages').text());
     var pageTotal = parseInt($('.pageTotal').text());
     if (page == 1) {
-        // $('.prev-page img').attr('src', '/alink-hq/static/img/left-arrow.png');
-        // $(".prev-page ").addClass('disabled');
         $('.prev').removeClass('active');
         $(".prev-page").addClass('disabled');
-
     } else {
-        // $('.prev-page img').attr('src', '/alink-hq/static/img/left-arrow-color.png');
         $('.prev').addClass('active');
     }
     if (page == pageTotal) {
         $('.next').removeClass('active');
         $(".next-page").addClass('disabled');
-        // $('.next-page img').attr('src', '/alink-hq/static/img/right-arrow.png');
-        // $(".next-page ").addClass('disabled');
     } else {
-        // $('.next-page img').attr('src', '/alink-hq/static/img/right-arrow-color.png');
         $(".next").addClass('active');
     }
 })
@@ -437,7 +426,6 @@ function GetUrlParam(paraName) {
 function skipLimit() {
     var skipPage = parseInt($('#skipPage').val());
     var pageTotal = parseInt($('.pageTotal').text());
-    // console.log(skipPage, pageTotal)
     if (skipPage < 1 || skipPage > pageTotal) {
         $('#skipPage').val('');
     }
