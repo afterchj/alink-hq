@@ -26,7 +26,7 @@
 
             </div>
             <div class="f-r pointer">
-                <div class="goBack" onClick="javascript :history.back(-1);" onmousedown="backBtnMouseDown()" onmouseup="backBtnMouseUp()">
+                <div class="goBack" onClick="javascript :history.back();" onmousedown="backBtnMouseDown()" onmouseup="backBtnMouseUp()">
                     <!--<span class="triangle-facing-left"></span>-->
                     <span><</span><span>返回</span>
                 </div>
@@ -100,7 +100,7 @@
                             <td th:text="${mesh.scount}"></td>
                             <td>未知</td>
                             <td class="p-r">
-                                <img src="/alink-hq/static/img/edit.png" th:alt="${mesh.project_id}" class="reset-name pointer"
+                                <img src="/alink-hq/static/img/edit.png" th:alt="${mesh.id}" class="reset-name pointer"
                                      title="重命名">
                                 <a th:href="@{/mesh/move(ids=${mesh.id})}">
                                     <img src="/alink-hq/static/img/exchange.png" alt="" class="center-img pointer"

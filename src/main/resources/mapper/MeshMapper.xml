@@ -113,8 +113,19 @@
     </select>
     <select id="getCount" resultType="int" parameterType="map">
         SELECT COUNT(1)
-        FROM f_mesh m
-        WHERE m.project_id = (SELECT id FROM f_project WHERE id = #{id}) AND m.mname = #{name}
+        FROM
+        f_mesh m
+        INNER JOIN f_project p ON m.project_id = p.id
+        WHERE 1=1
+        <choose>
+            <when test="projectId!=null and projectId!=''">
+                AND m.project_id = (SELECT id FROM f_project WHERE id = #{projectId})
+            </when>
+            <otherwise>
+                AND p.id = (SELECT project_id FROM f_mesh WHERE id=#{id})
+            </otherwise>
+        </choose>
+        AND m.mname = #{name}
     </select>
     <select id="getProjects" resultType="OptionList" parameterType="map">
         SELECT id,name label FROM f_project p WHERE 1=1

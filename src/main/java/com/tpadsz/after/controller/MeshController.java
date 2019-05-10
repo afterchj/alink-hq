@@ -66,6 +66,7 @@ public class MeshController {
         map.put("id", dict.getId());
         map.put("uid", dict.getUid());
         map.put("name", dict.getName());
+        map.put("projectId",dict.getId());
         try {
             meshService.save(map);
         } catch (RepetitionException e) {
