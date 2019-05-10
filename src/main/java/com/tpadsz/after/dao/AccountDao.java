@@ -1,9 +1,6 @@
 package com.tpadsz.after.dao;
 
-import com.tpadsz.after.entity.Firm;
-import com.tpadsz.after.entity.Role;
-import com.tpadsz.after.entity.User;
-import com.tpadsz.after.entity.UserList;
+import com.tpadsz.after.entity.*;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -33,7 +30,7 @@ public interface AccountDao {
 
     void createRoleInfo(@Param("uid")Integer uid, @Param("roleId")Integer roleId);
 
-    void generateDefaultNetwork(@Param("uid")String uid);
+    void generateDefaultNetwork(MeshInfo meshInfo);
 
     User findByAccount(@Param("account")String account);
 
@@ -54,4 +51,8 @@ public interface AccountDao {
     Integer findFirmUid(@Param("uid")String uid, @Param("userId")String userId);
 
     List<User> findAccountByFid(@Param("fid")Integer fid);
+
+    void createPlace(@Param("uid")String uid, @Param("mid")Integer mid);
+
+    int findDefaultNetworkByUid(@Param("uid")String uid);
 }

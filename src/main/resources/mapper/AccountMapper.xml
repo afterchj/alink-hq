@@ -68,17 +68,20 @@
         insert into f_user_role (user_id,role_id) values (#{uid},#{roleId})
     </insert>
 
-    <insert id="generateDefaultNetwork" parameterType="string" useGeneratedKeys="true" keyProperty="id">
-        <selectKey keyProperty="count" resultType="int" order="BEFORE">
-            select count(*) from f_mesh where mesh_id = '11223344' and uid= #{uid}
+    <select id="findDefaultNetworkByUid" resultType="int" parameterType="string">
+        select count(*) from f_mesh where mesh_id = '11223344' and uid= #{uid}
+    </select>
+
+    <insert id="generateDefaultNetwork" parameterType="com.tpadsz.after.entity.MeshInfo" useGeneratedKeys="true" keyProperty="id">
+        <selectKey keyProperty="id" order="AFTER" resultType="int">
+            select LAST_INSERT_ID()
         </selectKey>
-        <if test="count==0">
             INSERT INTO f_mesh (mname,mesh_id,is_repeat,pwd,uid,project_id,create_date,update_date)
-            VALUES('1122','11223344',#{uid},'3344',#{uid},0,NOW(),NOW())
-        </if>
-        <if test="count>0">
-            select count(1) from f_mesh where mesh_id = '11223344' and uid= #{uid}
-        </if>
+            VALUES(#{mname},#{mesh_id},#{pcount},'3344',#{pcount},0,NOW(),NOW())
+    </insert>
+
+    <insert id="createPlace">
+        INSERT INTO f_place (place_id,pname,uid,mid,create_date,update_date) VALUES(1,'区域1',#{uid},#{mid},NOW(),NOW())
     </insert>
 
     <select id="findByAccount" resultType="com.tpadsz.after.entity.User">
