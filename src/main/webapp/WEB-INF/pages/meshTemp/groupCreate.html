@@ -34,7 +34,7 @@
                 </div>
                 <div class="c-content ">
                     <div class="subjection">隶属项目：<span th:inline="text">[[${project.label}]]</span></div>
-                    <form th:action="@{/group/save}" method="GET"  style="margin-top: 0;">
+                    <form th:action="@{/group/save}" method="GET" style="margin-top: 0;">
                         <div class="process clearfix">
                             <div class="f-l part">
                                 <img src="/alink-hq/static/img/fill-1-on.png" alt="" id="one-step">
@@ -81,7 +81,7 @@
                             </div>
 
                             <div class="">
-                                <button type="button" class="back-btn" >上一步</button>
+                                <button type="button" class="back-btn">上一步</button>
                                 <button type="button" class="confirm-create" openTab="confirm-create">下一步</button>
                             </div>
                         </div>
@@ -94,7 +94,7 @@
                                 <input type="text" id="group" placeholder="请输入（2-16 位汉字、字母、数字）">
                             </div>
                             <div class="">
-                                <button type="button" class="back-btn" >上一步</button>
+                                <button type="button" class="back-btn">上一步</button>
                                 <button type="button" class="confirm-create" openTab="confirm-create">完成</button>
                             </div>
                         </div>
@@ -122,11 +122,11 @@
 <script type="text/javascript" src="/alink-hq/static/js/left.js"></script>
 <script th:inline="javascript">
     var uid = [[${session.user.id}]];
-    var mid,pid,meshId,placeIds;
+    var mid, pid, meshId;
     $(function () {
-        var tabs = "groupList"
-        var index = 0
-        left(tabs, index)
+        var tabs = "groupList";
+        var index = 0;
+        left(tabs, index);
         $.getJSON("/alink-hq/group/getMesh", {"uid": uid}, function (json) {
             if (json != '') {
                 $("#mid option:first").siblings().remove()
@@ -135,143 +135,136 @@
             $.each(json, function (i, item) {
                 $("#mid").append("<option value='" + item.id + "'>" + item.label + "</option>");
             });
-            var str = $("#mid option:selected").val()
-            $("#meshId").val(str.substr(0,str.indexOf("_")))
+            var str = $("#mid option:selected").val();
+            $("#meshId").val(str.substr(0, str.indexOf("_")));
             $("#mid").change(function () {
-                 mid = $("#mid option:selected").val()
-                if(mid==''){
-                    $('.project-hint').text('请选择网络')
-                }else{
-                    $('.project-hint').text('')
+                mid = $("#mid option:selected").val();
+                if (mid == '') {
+                    $('.project-hint').text('请选择网络');
+                } else {
+                    $('.project-hint').text('');
                 }
-                 meshId = mid.substr(mid.indexOf("_") + 1)
+                meshId = mid.substr(mid.indexOf("_") + 1);
 //                console.log("mid=" + mid + ",meshId=" + meshId);
                 $("#meshId").val(meshId);
             })
-        })
-    })
-    //选择网络后下一步
-    $('.select-mesh-step .confirm-create').click(function(){
-         mid = $("#mid option:selected").val()
-        if(mid==''){
-            $('.project-hint').text('请选择网络')
-        }else{
-            $('.project-hint').text('')
-            $('#one-step').attr('src','/alink-hq/static/img/fill-1-is.png')
-            $('#two-step').attr('src','/alink-hq/static/img/fill-2-on.png')
-            $('#three-step').attr('src','/alink-hq/static/img/fill-3-no.png')
-            $('.select-place-step').addClass('active').siblings('.step').removeClass('active')
-            $.getJSON("/alink-hq/group/getPlace", {"uid": uid}, function (json) {
-                if (json != '') {
-                    $("#place option:first").siblings().remove();
-                }
-                // 下面使用each进行遍历
-                $.each(json, function (i, item) {
-                    $("#place").append("<option value='" + item.id + "'>" + item.label + "</option>")
-                });
-                var str = $("#place option:selected").val()
-                $("#place").val(str.substr(0,str.indexOf("_")))
-                $("#place").change(function () {
-                     pid = $("#place option:selected").val()
-                    if(pid==''){
-                        $('.place-hint').text('请选择区域')
-                    }else{
-                        $('.place-hint').text('')
+        });
+        //选择网络后下一步
+        $('.select-mesh-step .confirm-create').click(function () {
+            mid = $("#mid option:selected").val();
+            if (mid == '') {
+                $('.project-hint').text('请选择网络')
+            } else {
+                $('.project-hint').text('')
+                $('#one-step').attr('src', '/alink-hq/static/img/fill-1-is.png');
+                $('#two-step').attr('src', '/alink-hq/static/img/fill-2-on.png');
+                $('#three-step').attr('src', '/alink-hq/static/img/fill-3-no.png');
+                $('.select-place-step').addClass('active').siblings('.step').removeClass('active');
+                $.getJSON("/alink-hq/group/getPlace", {"uid": uid}, function (json) {
+                    if (json != '') {
+                        $("#place option:first").siblings().remove();
                     }
+                    // 下面使用each进行遍历
+                    $.each(json, function (i, item) {
+                        $("#place").append("<option value='" + item.id + "'>" + item.label + "</option>")
+                    });
+                    var str = $("#place option:selected").val();
+                    console.log("str",str);
+                    $("#place").val(str.substr(0, str.indexOf("_")));
+                    $("#place").change(function () {
+                        pid = $("#place option:selected").val();
+                        if (pid == '') {
+                            $('.place-hint').text('请选择区域');
+                        } else {
+                            $('.place-hint').text('');
+                        }
 //                     placeIds = pid.substr(pid.indexOf("_") + 1)
 //                    $("#place").val(placeIds);
+                    })
                 })
-            })
-        }
-    })
-    //选择区域后下一步
-    $('.select-place-step .confirm-create').click(function(){
-         pid = $("#place option:selected").val()
-        if(pid==''){
-            $('.place-hint').text('请选择区域')
-        }else{
-            $('.place-hint').text('')
-            $('#one-step').attr('src','/alink-hq/static/img/fill-1-is.png')
-            $('#two-step').attr('src','/alink-hq/static/img/fill-2-is.png')
-            $('#three-step').attr('src','/alink-hq/static/img/fill-3-on.png')
-            $('.select-group-step').addClass('active').siblings('.step').removeClass('active')
-            $("#group").bind("input propertychange",function () {
-                var groupId=$('#group').val()
-                var regName = /^[a-zA-Z0-9\u4e00-\u9fa5]{2,16}$/
-                var groupResult = regName.test(groupId)
-
-                if(groupId!='' && groupResult){
-                    $('.group-hint').text('')
-                }else{
-                    $('.group-hint').text('请输入（2-16 位汉字、字母、数字）')
-                }
-            })
-        }
-    })
-    //选择区域后上一步
-    $('.select-place-step .back-btn').click(function(){
-        $('#one-step').attr('src','/alink-hq/static/img/fill-1-on.png')
-        $('#two-step').attr('src','/alink-hq/static/img/fill-2-no.png')
-        $('#three-step').attr('src','/alink-hq/static/img/fill-3-no.png')
-        $('.select-mesh-step').addClass('active').siblings('.step').removeClass('active')
-        $("#meshId").val(meshId);
-        $("#mid option:selected").val(mid)
-    })
-    //输入组的确定
-    $('.select-group-step .confirm-create').click(function(){
-        var groupId=$('#group').val()
-        var regName = /^[a-zA-Z0-9\u4e00-\u9fa5]{2,16}$/
-        var groupResult = regName.test(groupId)
-
-        var mids=mid.substr(0,mid.indexOf("_"));
-        console.log('groupId',groupId,'mid',mids,'pid',pid);
-        if(groupId!='' && groupResult){
-            $('.group-hint').text('')
-            $.ajax({
-                type: "get",
-                url: "/alink-hq/group/save",
-                data: {mid:mids, pid:pid,name:decodeURIComponent(groupId)},
-                success: function(res){
-                    console.log('mids',mids);
-                    console.log(res);
-                    if(res=='ok'){
-                        $('#preload-anim').addClass('active');
-                        $('#preload-anim .title').text('创建成功！');
-                        setInterval(function () {
-                            $('#preload-anim').removeClass('active');
-                            location.href = '/alink-hq/group/list';
-                        }, 1000)
-                    }else{
-                        $('#preload-anim').addClass('active');
-                        $('#preload-anim .title').text('加载失败，请重新尝试');
-                        setInterval(function () {
-                            $('#preload-anim').removeClass('active');
-                        }, 1000)
+            }
+        });
+        //选择区域后下一步
+        $('.select-place-step .confirm-create').click(function () {
+            pid = $("#place option:selected").val();
+            if (pid == '') {
+                $('.place-hint').text('请选择区域')
+            } else {
+                $('.place-hint').text('');
+                $('#one-step').attr('src', '/alink-hq/static/img/fill-1-is.png');
+                $('#two-step').attr('src', '/alink-hq/static/img/fill-2-is.png');
+                $('#three-step').attr('src', '/alink-hq/static/img/fill-3-on.png');
+                $('.select-group-step').addClass('active').siblings('.step').removeClass('active');
+                $("#group").bind("input propertychange", function () {
+                    var groupId = $('#group').val();
+                    var regName = /^[a-zA-Z0-9\u4e00-\u9fa5]{2,16}$/;
+                    var groupResult = regName.test(groupId);
+                    if (groupId != '' && groupResult) {
+                        $('.group-hint').text('')
+                    } else {
+                        $('.group-hint').text('请输入（2-16 位汉字、字母、数字）')
                     }
-                }
-            })
-        }else{
-            $('.group-hint').text('请输入（2-16 位汉字、字母、数字）')
-        }
-    })
-    //输入组的上一步
-    $('.select-group-step .back-btn').click(function(){
-        $('#one-step').attr('src','/alink-hq/static/img/fill-1-is.png')
-        $('#two-step').attr('src','/alink-hq/static/img/fill-2-on.png')
-        $('#three-step').attr('src','/alink-hq/static/img/fill-3-no.png')
-        $('.select-place-step').addClass('active').siblings('.step').removeClass('active')
+                })
+            }
+        });
+        //选择区域后上一步
+        $('.select-place-step .back-btn').click(function () {
+            $('#one-step').attr('src', '/alink-hq/static/img/fill-1-on.png');
+            $('#two-step').attr('src', '/alink-hq/static/img/fill-2-no.png');
+            $('#three-step').attr('src', '/alink-hq/static/img/fill-3-no.png');
+            $('.select-mesh-step').addClass('active').siblings('.step').removeClass('active');
+            $("#meshId").val(meshId);
+            $("#mid option:selected").val(mid);
+        });
+        //输入组的确定
+        $('.select-group-step .confirm-create').click(function () {
+            var groupId = $('#group').val();
+            var regName = /^[a-zA-Z0-9\u4e00-\u9fa5]{2,16}$/;
+            var groupResult = regName.test(groupId);
+
+            var mids = mid.substr(0, mid.indexOf("_"));
+            console.log('groupId', groupId, 'mid', mids, 'pid', pid);
+            if (groupId != '' && groupResult) {
+                $('.group-hint').text('');
+                $.ajax({
+                    type: "post",
+                    url: "/alink-hq/group/save",
+                    data: {"mid": mids, "pid": pid, "name": groupId},
+//                    data: {mid:mids, pid:pid,name:decodeURIComponent(groupId)},
+                    success: function (res) {
+                        console.log('mids', mids);
+                        console.log(res);
+                        if (res == 'ok') {
+                            $('#preload-anim').addClass('active');
+                            $('#preload-anim .title').text('创建成功！');
+                            setInterval(function () {
+                                $('#preload-anim').removeClass('active');
+                                location.href = '/alink-hq/group/list';
+                            }, 1000)
+                        } else {
+                            $('#preload-anim').addClass('active');
+                            $('#preload-anim .title').text('加载失败，请重新尝试');
+                            setInterval(function () {
+                                $('#preload-anim').removeClass('active');
+                            }, 1000)
+                        }
+                    }
+                })
+            } else {
+                $('.group-hint').text('请输入（2-16 位汉字、字母、数字）');
+            }
+        });
+        //输入组的上一步
+        $('.select-group-step .back-btn').click(function () {
+            $('#one-step').attr('src', '/alink-hq/static/img/fill-1-is.png');
+            $('#two-step').attr('src', '/alink-hq/static/img/fill-2-on.png');
+            $('#three-step').attr('src', '/alink-hq/static/img/fill-3-no.png');
+            $('.select-place-step').addClass('active').siblings('.step').removeClass('active');
 //        $("#meshId").val(meshId);
-        $("#place option:selected").val(pid);
-    })
-    //监听网络选择
-//    $('#mid').change(function(){
-//        var mid = $('#pid option:selected').val();
-//        if(mid==''){
-//            $('.project-hint').text('请选择网络');
-//        }else{
-//            $('.project-hint').text('');
-//        }
-//    })
+            $("#place option:selected").val(pid);
+        });
+    });
+
 </script>
 </body>
 </html>

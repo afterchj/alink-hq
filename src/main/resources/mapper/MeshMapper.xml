@@ -69,7 +69,8 @@
         <if test="projectId!=null and projectId!=''">
             AND m.project_id=#{projectId}
         </if>
-        ORDER BY m.id DESC
+        GROUP BY m.uid,m.mesh_id
+        ORDER BY scount DESC,m.create_date DESC
     </select>
 
     <select id="getMeshInfo" resultType="MeshInfo" parameterType="int">

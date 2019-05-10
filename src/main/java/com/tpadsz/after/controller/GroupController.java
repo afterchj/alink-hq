@@ -77,7 +77,7 @@ public class GroupController {
     @ResponseBody
     @RequestMapping("/save")
     public String saveGroup(SearchDict dict) {
-        logger.info("pid=" + dict.getMid());
+        logger.info("name=" + dict.getName());
         groupService.save(dict);
         return "ok";
 //        return "redirect:/group/list";

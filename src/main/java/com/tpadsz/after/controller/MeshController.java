@@ -66,7 +66,11 @@ public class MeshController {
         map.put("id", dict.getId());
         map.put("uid", dict.getUid());
         map.put("name", dict.getName());
-        meshService.save(map);
+        try {
+            meshService.save(map);
+        } catch (RepetitionException e) {
+            return "fail";
+        }
         return "ok";
 //        return "redirect:/mesh/list";
     }

@@ -42,7 +42,11 @@ public class MeshServiceImpl implements MeshService {
     }
 
     @Override
-    public void save(Map dict) {
+    public void save(Map dict) throws RepetitionException {
+        int count = meshDao.getCount(dict);
+        if (count > 0) {
+            throw new RepetitionException(301, "名字已存在！");
+        }
         meshDao.save(dict);
     }
 
