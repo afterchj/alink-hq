@@ -11,7 +11,7 @@ public class SearchDict {
     private Integer mid;
     private Integer pid;
     private Integer gid;
-    private Integer name;
+    private String name;
     private String mname;
     private String pname;
     private String gname;
@@ -72,11 +72,11 @@ public class SearchDict {
         this.gid = gid;
     }
 
-    public Integer getName() {
+    public String getName() {
         return name;
     }
 
-    public void setName(Integer name) {
+    public void setName(String name) {
         this.name = name;
     }
 

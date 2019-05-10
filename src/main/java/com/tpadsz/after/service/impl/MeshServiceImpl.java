@@ -42,7 +42,7 @@ public class MeshServiceImpl implements MeshService {
     }
 
     @Override
-    public void save(SearchDict dict) {
+    public void save(Map dict) {
         meshDao.save(dict);
     }
 

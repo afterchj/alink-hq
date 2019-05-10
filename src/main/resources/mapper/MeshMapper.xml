@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.tpadsz.after.dao.MeshDao">
 
-    <parameterMap id="createMapper" type="SearchDict">
+    <parameterMap id="createMapper" type="map">
         <parameter property="id" mode="IN"/>
         <parameter property="uid" mode="IN"/>
         <parameter property="name" mode="IN"/>

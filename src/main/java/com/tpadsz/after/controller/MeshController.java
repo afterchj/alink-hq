@@ -37,7 +37,6 @@ public class MeshController {
     public String list(SearchDict dict, ModelMap modelMap) {
         String role = roleService.selectById(dict.getUid());
         dict.setRole(role);
-        logger.info("dict=" + JSON.toJSONString(dict));
         PageHelper.startPage(dict.getPageNum(), dict.getPageSize());
         List<Map> meshList = meshService.getByMap(dict);
         PageInfo<Map> pageInfo = new PageInfo(meshList, dict.getPageSize());
@@ -63,8 +62,11 @@ public class MeshController {
 
     @RequestMapping("/save")
     public String saveMesh(SearchDict dict) {
-        logger.info("pid=" + dict.getProjectId());
-        meshService.save(dict);
+        Map map = new HashMap();
+        map.put("id", dict.getId());
+        map.put("uid", dict.getUid());
+        map.put("name", dict.getName());
+        meshService.save(map);
         return "redirect:/mesh/list";
     }
 
