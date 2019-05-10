@@ -3,9 +3,9 @@ package com.tpadsz.after.controller;
 import com.alibaba.fastjson.JSONArray;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.tpadsz.after.entity.MeshInfo;
 import com.tpadsz.after.entity.ProjectList;
 import com.tpadsz.after.entity.SceneList;
-import com.tpadsz.after.entity.User;
 import com.tpadsz.after.entity.dd.ResultDict;
 import com.tpadsz.after.service.SceneService;
 import org.springframework.stereotype.Controller;
@@ -15,8 +15,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
-import javax.servlet.http.HttpSession;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -32,7 +30,7 @@ public class SceneController {
     private SceneService sceneService;
 
     @RequestMapping(value = "/list", method = RequestMethod.GET)
-    public String list(Integer pageNum, Integer pageSize, String sceneName, String sceneId,String meshName,String meshId,Integer mid,Model model) {
+    public String list(Integer pageNum, Integer pageSize, String sceneName, Integer sceneId,Integer lid, String meshName,String meshId,Integer mid,Model model) {
         if (pageNum == null) {
             pageNum = 1;   //设置默认当前页
         }
@@ -44,7 +42,7 @@ public class SceneController {
         }
         try {
             PageHelper.startPage(pageNum, pageSize);
-            List<SceneList> list = sceneService.searchSceneList(sceneName, sceneId,meshName,meshId,mid);
+            List<SceneList> list = sceneService.searchSceneList(sceneName, sceneId,lid,meshName,meshId,mid);
             PageInfo<SceneList> pageInfo = new PageInfo<>(list, pageSize);
             if (pageInfo.getList().size() > 0) {
                 model.addAttribute("pageInfo", pageInfo);
@@ -65,7 +63,7 @@ public class SceneController {
         try {
             int flag = sceneService.renameScene(sceneName, sid);
             if (flag == 0) {
-                map.put("result", ResultDict.REPEAT_NAME.getCode());
+                map.put("result", ResultDict.REPEAT_SCENE_NAME.getCode());
             } else if (flag == 1) {
                 map.put("result", ResultDict.SUCCESS.getCode());
             }
@@ -98,11 +96,13 @@ public class SceneController {
     }
 
     @RequestMapping(value = "/detail", method = RequestMethod.GET)
-    public String detail(Integer sid,String sceneName, Integer sceneId, String meshName, String meshId, Model model) {
+    public String detail(Integer sid,Integer lid,String sceneName, Integer sceneId, String meshName, String meshId, Model model) {
         ProjectList projectList = sceneService.findProjectByMeshId(meshId);
-
-
-        int a = 1;
+        if(lid==null) {
+            List<MeshInfo> placeList = sceneService.findPlaceBySid(sid);
+            List<MeshInfo> groupList = sceneService.findGroupByPid(placeList.get(0).getPid());
+            List<MeshInfo> lightList = sceneService.findLightByGid(groupList.get(0).getGid());
+        }
 //        if (account != null) {
 //            user = accountService.findByAccount(account);
 //            if (meshNum > 0) {

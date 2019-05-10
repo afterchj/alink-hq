@@ -8,6 +8,7 @@ public class SceneList {
     private int id;
     private String sceneName;
     private int sceneId;
+    private int lid;
     private String meshName;
     private String meshId;
     private String status;
@@ -35,6 +36,14 @@ public class SceneList {
 
     public void setSceneId(int sceneId) {
         this.sceneId = sceneId;
+    }
+
+    public int getLid() {
+        return lid;
+    }
+
+    public void setLid(int lid) {
+        this.lid = lid;
     }
 
     public String getMeshName() {

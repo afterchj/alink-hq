@@ -4,7 +4,19 @@
 
 
     <select id="searchSceneList" resultType="com.tpadsz.after.entity.SceneList">
-        SELECT s.id,s.sname AS sceneName,s.scene_id AS sceneId,#{meshName} AS meshName,#{meshId} AS meshId FROM f_scene s WHERE s.sname LIKE CONCAT('%',IFNULL(#{sceneName},''),'%') and s.scene_id LIKE CONCAT('%',IFNULL(#{sceneId},''),'%') and s.mid=#{mid} ORDER BY s.scene_id
+        SELECT s.id,s.sname AS sceneName,s.scene_id AS sceneId,#{lid} AS lid,#{meshName} AS meshName,#{meshId} AS meshId FROM f_scene s WHERE s.sname LIKE CONCAT('%',IFNULL(#{sceneName},''),'%') and s.scene_id LIKE CONCAT('%',IFNULL(#{sceneId},''),'%') and s.mid=#{mid} ORDER BY s.scene_id
+    </select>
+
+    <select id="findPlaceBySid" resultType="com.tpadsz.after.entity.MeshInfo">
+        SELECT id AS pid,place_id,pname FROM f_place WHERE mid = (SELECT mid FROM f_scene WHERE id=#{sid})
+    </select>
+
+    <select id="findGroupByPid" resultType="com.tpadsz.after.entity.MeshInfo">
+        SELECT id AS gid,gname FROM f_group WHERE pid = #{pid}
+    </select>
+
+    <select id="findLightByGid" resultType="com.tpadsz.after.entity.MeshInfo">
+        SELECT id,lmac,lname,x,y FROM f_light AS t1 INNER JOIN f_light_setting AS t2 ON t1.id = t2.uid WHERE gid = #{gid}
     </select>
 
     <select id="findRepeatNameBySid" resultType="int">
