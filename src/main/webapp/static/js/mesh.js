@@ -32,10 +32,6 @@ $(function () {
         }
 
     });
-    $('.pop-btn .yes').click(function () {
-        console.log('ids', ids);
-        deleteMesh(ids);
-    });
     //单选删除
     var ids;
     $('.singleDel').click(function () {
@@ -54,7 +50,7 @@ $(function () {
         $('.hide-iframe').removeClass('active');
     });
 
-    $('.pop-btn .yes').click(function () {
+    $('div[openContent="delete-mesh"] .pop-btn .yes').click(function () {
         deleteMesh(ids);
     });
     //单选重命名
@@ -132,17 +128,3 @@ function deleteMesh(ids) {
         location.href = "/alink-hq/mesh/delete?ids=" + ids;
     }
 }
-// $('.on-off-triangle').click(function () {
-//     var imgUrl = $(this).attr('src');
-//     if (imgUrl == '/alink-hq/static/img/bottom-triangle-un.png') {
-//         $(this).attr('src', '/alink-hq/static/img/right-triange-un.png');
-//         $(this).parent().parent('.one-list').find('.two-list').addClass('active');
-//     } else {
-//         $(this).attr('src', '/alink-hq/static/img/bottom-triangle-un.png');
-//         $(this).parent().parent('.one-list').find('.two-list').removeClass('active');
-//     }
-// });
-// $(function(){
-//     var height=$(document).height();
-//     $('.main-left').css('height',height);
-// })

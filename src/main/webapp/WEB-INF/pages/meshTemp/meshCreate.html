@@ -21,7 +21,7 @@
             <!--<img src="/alink-hq/static/img/create-project.png" alt="">-->
             <!--</div>-->
             <div class="f-r pointer">
-                <div class="goBack" onClick="javascript :history.back();">
+                <div class="goBack" onClick="javascript :history.back();" onmousedown="backBtnMouseDown()" onmouseup="backBtnMouseUp()">
                     <span><</span><span>返回</span>
                 </div>
                 <!--<img src="/alink-hq/static/img/go-back.png" alt="" onclick="history.back()">-->
@@ -36,15 +36,15 @@
                     <form th:action="@{/mesh/save}" method="POST">
                         <input type="hidden" id="uid" name="uid" th:value="${session.user.id}">
                         <div>
-                            <p class="project-hint"></p>
-                            <label for="name">网络名：</label>
-                            <input type="text" id="name" name="name" placeholder="请输入（2-16位汉字、字母、数字）">
+                            <p class="mesh-hint"></p>
+                            <label for="mesh">网络名：</label>
+                            <input type="text" id="mesh" name="mesh" placeholder="请输入（2-16位汉字、字母、数字）">
                         </div>
                         <div>
                             <p class="project-hint"></p>
-                            <label for="id">隶属项目：</label>
-                            <select id="id" name="id">
-                                <option value="0">请选择项目</option>
+                            <label for="projectId">隶属项目：</label>
+                            <select id="projectId" name="projectId" style="height: 33px;">
+                                <option value="">请选择项目</option>
                             </select>
                         </div>
                         <div class="">
@@ -71,6 +71,7 @@
 </div>
 <script type="text/javascript" src="/alink-hq/static/js/jquery.min.js"></script>
 <script type="text/javascript" src="/alink-hq/static/js/left.js"></script>
+<script src="/alink-hq/static/js/moment.js"></script>
 <script th:inline="javascript">
     var uid = [[${session.user.id}]];
     $(function () {
@@ -79,32 +80,104 @@
         left(tabs, index);
         $.getJSON("/alink-hq/mesh/getProjects", {"uid": uid}, function (json) {
             if (json != '') {
-                $("#id option:first").remove();
+                $("#projectId option:first").siblings().remove();
             }
             // 下面使用each进行遍历
             $.each(json, function (i, item) {
-                $("#id").append("<option value='" + item.id + "'>" + item.label + "</option>");
+                $("#projectId").append("<option value='" + item.id + "'>" + item.label + "</option>");
             });
         });
     });
     $('.confirm-create').click(function(){
-        var mname=$('#mname').val();
-        var pid = $('#pid option:selected').val();
-        if(pid==''){
+        var mesh=$('#mesh').val()
+        var projectId = $('#projectId option:selected').val()
+        var regName = /^[a-zA-Z0-9\u4e00-\u9fa5]{2,16}$/
+        var meshResult = regName.test(mesh)
+        if(projectId==''){
+            $('.project-hint').text('请选择项目')
+        }else{
+            $('.project-hint').text('')
+        }
+        if(mesh==''){
+            $('.mesh-hint').text('请输入网络名')
+        }else if(!meshResult){
+            $('.mesh-hint').text('请输入（2-16 位汉字、字母、数字）')
+        }else{
+            $('.mesh-hint').text('')
+        }
+        if(projectId!='' && mesh!='' && meshResult){
+            console.log(mesh,projectId);
+//            var renameResult=rename(projectId,mesh);
+//            console.log('renameResult',renameResult);
+//            if(projectId!='' && mesh!='' && meshResult && rename){
+                $.ajax({
+                    type: "get",
+                    url: "/alink-hq/mesh/save",
+                    data: {uid:uid, id:projectId,name:decodeURIComponent(mesh)},
+                    success: function(res){
+                        if(res=='ok'){
+                            $('#preload-anim').addClass('active');
+                            $('#preload-anim .title').text('创建成功！');
+                            setInterval(function () {
+                                $('#preload-anim').removeClass('active');
+                                location.href = '/alink-hq/mesh/list';
+                            }, 1000)
+                        }else if(res=='fail'){
+                            $('.mesh-hint').text('已存在，请重新输入');
+                        }else{
+                            $('#preload-anim').addClass('active');
+                            $('#preload-anim .title').text('加载失败，请重新尝试');
+                            setInterval(function () {
+                                $('#preload-anim').removeClass('active');
+                            }, 1000)
+                        }
+                    }
+                })
+//            }
+        }
+    })
+    //监听项目选择
+    $('#projectId').change(function(){
+        var projectId = $('#projectId option:selected').val();
+        if(projectId==''){
             $('.project-hint').text('请选择移动到的项目');
         }else{
             $('.project-hint').text('');
         }
     })
-    //监听网络选择
-    $('#id').change(function(){
-        var pid = $('#pid option:selected').val();
-        if(pid==''){
-            $('.trans-hint').text('请选择移动到的项目');
+    //监听网络名输入
+    $("#mesh").bind("input propertychange",function () {
+        var mesh=$('#mesh').val()
+        var regName = /^[a-zA-Z0-9\u4e00-\u9fa5]{2,16}$/
+        var meshResult = regName.test(mesh)
+        if(mesh==''){
+            $('.mesh-hint').text('请输入网络名')
+        }else if(!meshResult){
+            $('.mesh-hint').text('请输入（2-16 位汉字、字母、数字）')
         }else{
-            $('.trans-hint').text('');
+            $('.mesh-hint').text('')
         }
     })
+    function rename(id,name){
+        var result;
+        $.ajax({
+            type: "post",
+            url: "/alink-hq/mesh/rename",
+            data: {
+                "name": name,
+                "id": id
+            },
+            async: false,
+            success: function (res) {
+                result=res;
+//                if (res != "success") {
+//
+//                    $('.mesh-hint').text('已存在，请重新输入');
+//                }
+            }
+        })
+        return result;
+    }
 </script>
 </body>
 </html>
