@@ -614,7 +614,7 @@ th.all-checkbox {
     margin-top: 70px;
 }
 
-.project-hint, .account-hint,.place-hint,.group-hint {
+.project-hint, .account-hint,.place-hint,.group-hint,.mesh-hint {
     font-size: 14px;
     color: #fb2a2a;
     height: 20px;
