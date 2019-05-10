@@ -127,7 +127,7 @@
         <selectKey keyProperty="id" order="BEFORE" resultType="int">
             SELECT max(group_id)+1 FROM f_group WHERE mid=#{mid}
         </selectKey>
-        INSERT INTO f_group(group_id,gname,mid,pid,create_date) VALUES(#{id,#{name},#{mid},#{pid},now())
+        INSERT INTO f_group(group_id,gname,mid,pid,create_date) VALUES(#{id},#{name},#{mid},#{pid},now())
     </insert>
 
     <delete id="deleteGroupByIds" parameterType="list">
