@@ -1,10 +1,12 @@
 package com.tpadsz.after.service.impl;
 
 import com.tpadsz.after.dao.SceneDao;
+import com.tpadsz.after.entity.MeshInfo;
 import com.tpadsz.after.entity.ProjectList;
 import com.tpadsz.after.entity.SceneList;
 import com.tpadsz.after.service.SceneService;
 import org.springframework.stereotype.Service;
+
 import javax.annotation.Resource;
 import java.util.List;
 
@@ -19,8 +21,8 @@ public class SceneServiceImpl implements SceneService {
 
 
     @Override
-    public List<SceneList> searchSceneList(String sceneName, String sceneId,String meshName,String meshId,Integer mid) {
-        return sceneDao.searchSceneList(sceneName,sceneId,meshName,meshId,mid);
+    public List<SceneList> searchSceneList(String sceneName, Integer sceneId,Integer lid,String meshName,String meshId,Integer mid) {
+        return sceneDao.searchSceneList(sceneName,sceneId,lid,meshName,meshId,mid);
     }
 
     @Override
@@ -49,6 +51,21 @@ public class SceneServiceImpl implements SceneService {
     @Override
     public ProjectList findProjectByMeshId(String meshId) {
         return sceneDao.findProjectByMeshId(meshId);
+    }
+
+    @Override
+    public List<MeshInfo> findPlaceBySid(Integer sid) {
+        return sceneDao.findPlaceBySid(sid);
+    }
+
+    @Override
+    public List<MeshInfo> findGroupByPid(Integer pid) {
+        return sceneDao.findGroupByPid(pid);
+    }
+
+    @Override
+    public List<MeshInfo> findLightByGid(Integer gid) {
+        return sceneDao.findLightByGid(gid);
     }
 
 
