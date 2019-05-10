@@ -70,6 +70,8 @@ public class MeshController {
             meshService.save(map);
         } catch (RepetitionException e) {
             return "fail";
+        } catch (Exception e) {
+            return "netFail";
         }
         return "ok";
 //        return "redirect:/mesh/list";
