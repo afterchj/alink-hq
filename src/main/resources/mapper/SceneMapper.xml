@@ -23,8 +23,8 @@
         UPDATE f_scene SET sname = #{sceneName},update_date=NOW() WHERE sid =#{sid}
     </update>
 
-    <select id="findProjectIdByMeshId" resultType="int">
-        SELECT project_id from f_mesh where mesh_id = #{meshId}
+    <select id="findProjectByMeshId" resultType="com.tpadsz.after.entity.ProjectList">
+        SELECT p.id,p.name FROM f_project p WHERE p.id = (SELECT project_id FROM f_mesh WHERE mesh_id = #{meshId})
     </select>
 
 </mapper>

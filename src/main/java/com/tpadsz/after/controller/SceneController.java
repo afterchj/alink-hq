@@ -3,6 +3,7 @@ package com.tpadsz.after.controller;
 import com.alibaba.fastjson.JSONArray;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.tpadsz.after.entity.ProjectList;
 import com.tpadsz.after.entity.SceneList;
 import com.tpadsz.after.entity.User;
 import com.tpadsz.after.entity.dd.ResultDict;
@@ -98,7 +99,7 @@ public class SceneController {
 
     @RequestMapping(value = "/detail", method = RequestMethod.GET)
     public String detail(Integer sid,String sceneName, Integer sceneId, String meshName, String meshId, Model model) {
-        int projectId = sceneService.findProjectIdByMeshId(meshId);
+        ProjectList projectList = sceneService.findProjectByMeshId(meshId);
 
 
         int a = 1;

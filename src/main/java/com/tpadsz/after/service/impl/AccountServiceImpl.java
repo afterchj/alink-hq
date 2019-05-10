@@ -1,10 +1,7 @@
 package com.tpadsz.after.service.impl;
 
 import com.tpadsz.after.dao.AccountDao;
-import com.tpadsz.after.entity.Firm;
-import com.tpadsz.after.entity.Role;
-import com.tpadsz.after.entity.User;
-import com.tpadsz.after.entity.UserList;
+import com.tpadsz.after.entity.*;
 import com.tpadsz.after.service.AccountService;
 import com.tpadsz.after.utils.Encryption;
 import org.springframework.stereotype.Service;
@@ -68,7 +65,15 @@ public class AccountServiceImpl implements AccountService {
         accountDao.createAccount(user);
         accountDao.createFirmInfo(Integer.parseInt(user.getId()), fid);
         accountDao.createRoleInfo(Integer.parseInt(user.getId()), roleId);
-        accountDao.generateDefaultNetwork(user.getId());
+        MeshInfo meshInfo = new MeshInfo();
+        meshInfo.setMname("1122");
+        meshInfo.setMesh_id(11223344);
+        meshInfo.setPcount(Integer.parseInt(user.getId()));
+        int count = accountDao.findDefaultNetworkByUid(user.getId());
+        if(count==0) {
+            accountDao.generateDefaultNetwork(meshInfo);
+            accountDao.createPlace(user.getId(),meshInfo.getId());
+        }
     }
 
     @Override
