@@ -20,7 +20,7 @@
         <div class="clearfix main-right-nav">
             <div class="f-l main-right-title">区域详情</div>
             <div class="f-r pointer">
-                <div class="goBack" onClick="javascript :history.back(-1);" >
+                <div class="goBack" onClick="javascript :history.back(-1);" onmousedown="backBtnMouseDown()" onmouseup="backBtnMouseUp()">
                     <!--<span class="triangle-facing-left"></span>-->
                     <span ><</span><span>返回</span>
                 </div>
@@ -118,6 +118,7 @@
 <div class="hide-iframe "></div>
 <script src="/alink-hq/static/js/jquery.min.js"></script>
 <script type="text/javascript" src="/alink-hq/static/js/left.js"></script>
+<script src="/alink-hq/static/js/moment.js"></script>
 <script type="text/javascript">
     $(function () {
         var tabs="placeList";

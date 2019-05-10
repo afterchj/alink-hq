@@ -77,8 +77,14 @@ public class GroupController {
     @ResponseBody
     @RequestMapping("/save")
     public String saveGroup(SearchDict dict) {
-        logger.info("pid=" + dict.getMid());
-        groupService.save(dict);
+        logger.info("name=" + dict.getName());
+        try {
+            groupService.save(dict);
+        } catch (RepetitionException e) {
+            return "fail";
+        } catch (Exception e) {
+            return "netFail";
+        }
         return "ok";
 //        return "redirect:/group/list";
     }
@@ -112,12 +118,9 @@ public class GroupController {
 
     @ResponseBody
     @RequestMapping("/rename")
-    public String rename(String name, Integer id) {
-        Map map = new HashMap();
-        map.put("name", name);
-        map.put("id", id);
+    public String rename(SearchDict dict) {
         try {
-            groupService.saveRename(map);
+            groupService.saveRename(dict);
         } catch (RepetitionException e) {
             return "fail";
         }

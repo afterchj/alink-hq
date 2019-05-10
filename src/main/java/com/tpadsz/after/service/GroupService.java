@@ -20,13 +20,13 @@ public interface GroupService {
 
     MeshInfo getGroupInfo(int id);
 
-    int getCount(Map map);
+    int getCount(SearchDict map);
 
-    void save(SearchDict dict);
+    void save(SearchDict dict) throws RepetitionException;
 
     void saveUpdate(Map map);
 
-    void saveRename(Map map) throws RepetitionException;
+    void saveRename(SearchDict map) throws RepetitionException;
 
     void deleteGroupByIds(List list);
 

@@ -69,7 +69,8 @@
         <if test="projectId!=null and projectId!=''">
             AND m.project_id=#{projectId}
         </if>
-        ORDER BY m.id DESC
+        GROUP BY m.uid,m.mesh_id
+        ORDER BY scount DESC,m.create_date DESC
     </select>
 
     <select id="getMeshInfo" resultType="MeshInfo" parameterType="int">
@@ -113,9 +114,17 @@
     <select id="getCount" resultType="int" parameterType="map">
         SELECT COUNT(1)
         FROM
-            f_mesh m
+        f_mesh m
         INNER JOIN f_project p ON m.project_id = p.id
-        WHERE p.id = (SELECT project_id FROM f_mesh WHERE id=#{id})
+        WHERE 1=1
+        <choose>
+            <when test="projectId!=null and projectId!=''">
+                AND m.project_id = (SELECT id FROM f_project WHERE id = #{projectId})
+            </when>
+            <otherwise>
+                AND p.id = (SELECT project_id FROM f_mesh WHERE id=#{id})
+            </otherwise>
+        </choose>
         AND m.mname = #{name}
     </select>
     <select id="getProjects" resultType="OptionList" parameterType="map">

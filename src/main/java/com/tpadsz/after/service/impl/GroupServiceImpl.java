@@ -44,12 +44,16 @@ public class GroupServiceImpl implements GroupService {
     }
 
     @Override
-    public int getCount(Map map) {
+    public int getCount(SearchDict map) {
         return groupDao.getCount(map);
     }
 
     @Override
-    public void save(SearchDict dict) {
+    public void save(SearchDict dict) throws RepetitionException {
+        int count = groupDao.getCount(dict);
+        if (count > 0) {
+            throw new RepetitionException(301, "名字已存在！");
+        }
         groupDao.save(dict);
     }
 
@@ -59,7 +63,7 @@ public class GroupServiceImpl implements GroupService {
     }
 
     @Override
-    public void saveRename(Map map) throws RepetitionException {
+    public void saveRename(SearchDict map) throws RepetitionException {
         int count = groupDao.getCount(map);
         if (count > 0) {
             throw new RepetitionException(301, "名字已存在！");

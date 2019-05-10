@@ -21,7 +21,7 @@ public interface MeshService {
 
     int getCount(Map map);
 
-    void save(Map dict);
+    void save(Map dict) throws RepetitionException;
 
     void saveUpdate(Map map);
 
