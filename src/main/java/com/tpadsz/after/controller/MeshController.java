@@ -1,6 +1,5 @@
 package com.tpadsz.after.controller;
 
-import com.alibaba.fastjson.JSON;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.tpadsz.after.entity.MeshInfo;
@@ -60,6 +59,7 @@ public class MeshController {
         return "meshTemp/meshCreate";
     }
 
+    @ResponseBody
     @RequestMapping("/save")
     public String saveMesh(SearchDict dict) {
         Map map = new HashMap();
@@ -67,7 +67,8 @@ public class MeshController {
         map.put("uid", dict.getUid());
         map.put("name", dict.getName());
         meshService.save(map);
-        return "redirect:/mesh/list";
+        return "ok";
+//        return "redirect:/mesh/list";
     }
 
     @RequestMapping("/move")

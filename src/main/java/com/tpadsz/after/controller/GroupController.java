@@ -74,10 +74,13 @@ public class GroupController {
         return "meshTemp/groupCreate";
     }
 
+    @ResponseBody
     @RequestMapping("/save")
     public String saveGroup(SearchDict dict) {
         logger.info("pid=" + dict.getMid());
-        return "redirect:/group/list";
+        groupService.save(dict);
+        return "ok";
+//        return "redirect:/group/list";
     }
 
     @ResponseBody

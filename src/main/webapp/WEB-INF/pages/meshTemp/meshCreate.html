@@ -34,7 +34,7 @@
                 </div>
                 <div class="c-content ">
                     <form th:action="@{/mesh/save}" method="POST">
-                        <input type="hidden" name="uid" th:value="${session.user.id}">
+                        <input type="hidden" id="uid" name="uid" th:value="${session.user.id}">
                         <div>
                             <p class="project-hint"></p>
                             <label for="name">网络名：</label>
@@ -48,7 +48,7 @@
                             </select>
                         </div>
                         <div class="">
-                            <button type="submit" class="confirm-create" openTab="confirm-create">确定创建</button>
+                            <button type="button" class="confirm-create" openTab="confirm-create">确定创建</button>
                         </div>
                     </form>
                 </div>
