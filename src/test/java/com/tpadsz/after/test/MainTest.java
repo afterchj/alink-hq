@@ -68,12 +68,16 @@ public class MainTest {
         Map map = new HashMap();
         map.put("role", "manager");
         map.put("uid", 18);
-        map.put("id", 18604);
-        map.put("name", "哈哈哈");
+        map.put("id", 1);
+        map.put("mid", 1);
+        map.put("name", "区域1");
 //        map.put("projectId", 248);
 //        map.put("pid", 4);
-        int count = getSqlSessionTemplate().selectOne("com.tpadsz.after.dao.MeshDao.getCount", map);
+//        int count = getSqlSessionTemplate().selectOne("com.tpadsz.after.dao.MeshDao.getCount", map);
+        int count = getSqlSessionTemplate().selectOne("com.tpadsz.after.dao.PlaceDao.getCount", map);
         logger.info(count);
+        getSqlSessionTemplate().insert("com.tpadsz.after.dao.PlaceDao.save",map);
+
 //        List<Map> list = getSqlSessionTemplate().selectList("com.tpadsz.after.dao.MeshDao.getByMap", map);
 //        String role = getSqlSessionTemplate().selectOne("com.tpadsz.after.dao.RoleDao.selectById", 21);
 //        List<Role> roles = getSqlSessionTemplate().selectList("com.tpadsz.after.dao.RoleDao.getAll");

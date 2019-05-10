@@ -48,6 +48,15 @@ public class PlaceServiceImpl implements PlaceService {
     }
 
     @Override
+    public void save(Map map) throws RepetitionException {
+        int count = placeDao.getCount(map);
+        if (count > 0) {
+            throw new RepetitionException(301, "名字已存在！");
+        }
+        placeDao.save(map);
+    }
+
+    @Override
     public int getCount(Map map) {
         return placeDao.getCount(map);
     }
@@ -58,9 +67,9 @@ public class PlaceServiceImpl implements PlaceService {
     }
 
     @Override
-    public void saveRename(Map map) throws RepetitionException{
-        int count=placeDao.getCount(map);
-        if (count>0){
+    public void saveRename(Map map) throws RepetitionException {
+        int count = placeDao.getCount(map);
+        if (count > 0) {
             throw new RepetitionException(301, "名字已存在！");
         }
         placeDao.saveRename(map);

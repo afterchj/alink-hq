@@ -35,6 +35,13 @@
         </if>
     </sql>
 
+    <insert id="save" parameterType="map">
+        <selectKey keyProperty="id" order="BEFORE" resultType="int">
+            SELECT IFNULL(max(place_id)+1,1) FROM f_place WHERE mid=#{mid}
+        </selectKey>
+        INSERT INTO f_place(place_id,pname,uid,mid,create_date) VALUES(#{id},#{name},#{uid},#{mid},now())
+    </insert>
+
     <select id="getByMap" resultType="map" parameterType="SearchDict">
         SELECT
         <include refid="Base_Column_List"/>
@@ -91,8 +98,16 @@
         SELECT COUNT(1)
         FROM f_place p
         INNER JOIN f_mesh m ON m.id = p.mid
-        WHERE m.id = (SELECT mid FROM f_place WHERE id=#{id})
-        AND p.pname =  #{name}
+        WHERE 1=1
+        <choose>
+            <when test="mid!=null and mid!=''">
+                AND p.mid=#{mid}
+            </when>
+            <otherwise>
+                AND m.id = (SELECT mid FROM f_place WHERE id=#{id})
+            </otherwise>
+        </choose>
+        AND p.pname = #{name}
     </select>
 
     <delete id="deleteByIds" parameterType="list">
