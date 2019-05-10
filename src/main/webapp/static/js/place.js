@@ -6,19 +6,22 @@ $(function () {
     var tabs="placeList";
     var index=0;
     left(tabs,index);
-    $("#multiMove").click(function () {
+    $("#multiDel").click(function () {
         var ids = [];//定义一个数组
         $('input[name="ids"]:checked').each(function () {//遍历每一个名字为interest的复选框，其中选中的执行函数
             ids.push($(this).val());//将选中的值添加到数组chk_value中
         });
-        $('div[openContent="delete-place"]').addClass('active');
-        var width = document.body.scrollWidth;
-        var height = document.body.scrollHeight;
-        $('.hide-iframe').addClass('active');
-        $('.hide-iframe').css({
-            'width': width,
-            'height': height
-        });
+        if(ids.length>0){
+            $('div[openContent="delete-place"]').addClass('active');
+            var width = document.body.scrollWidth;
+            var height = document.body.scrollHeight;
+            $('.hide-iframe').addClass('active');
+            $('.hide-iframe').css({
+                'width': width,
+                'height': height
+            });
+        }
+
         // var flag = confirm("您确定要删除所选的区域吗？");
         // if (flag) {
         //     location.href = "/alink-hq/place/move?ids=" + ids;

@@ -5,11 +5,13 @@ package com.tpadsz.after.entity;
  */
 public class SearchDict {
 
+    private Integer id;
     private Integer uid;
     private String role;
     private Integer mid;
     private Integer pid;
     private Integer gid;
+    private String name;
     private String mname;
     private String pname;
     private String gname;
@@ -17,10 +19,18 @@ public class SearchDict {
     private String lmac;
     private Integer status;
     private Integer meshId;
-    private Integer projectId;
+    private Integer projectId=0;
     private Integer placeId;
     private Integer pageNum = 1;
     private Integer pageSize = 10;
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
     public Integer getUid() {
         return uid;
@@ -60,6 +70,14 @@ public class SearchDict {
 
     public void setGid(Integer gid) {
         this.gid = gid;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getMname() {

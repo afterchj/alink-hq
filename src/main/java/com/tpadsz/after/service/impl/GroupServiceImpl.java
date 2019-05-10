@@ -49,6 +49,11 @@ public class GroupServiceImpl implements GroupService {
     }
 
     @Override
+    public void save(SearchDict dict) {
+        groupDao.save(dict);
+    }
+
+    @Override
     public void saveUpdate(Map map) {
         groupDao.saveUpdate(map);
     }

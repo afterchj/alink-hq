@@ -12,7 +12,6 @@ import java.util.Map;
  * Created by hongjian.chen on 2019/4/15.
  */
 public interface MeshService {
-    List<Map> selectByMap(SearchDict dict);
 
     List<Map> getByMap(SearchDict map);
 
@@ -22,9 +21,13 @@ public interface MeshService {
 
     int getCount(Map map);
 
+    void save(Map dict);
+
     void saveUpdate(Map map);
 
     void saveRename(Map map)throws RepetitionException;
+
+    OptionList getProject(int projectId);
 
     void deleteMeshByIds(List list);
 

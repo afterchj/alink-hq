@@ -88,15 +88,17 @@ $(function () {
             idss.push($(this).val());
         });
         ids=idss;
-        console.log(ids);
-        $('div[openContent="delete-mesh"]').addClass('active');
-        var width = document.body.scrollWidth;
-        var height = document.body.scrollHeight;
-        $('.hide-iframe').addClass('active');
-        $('.hide-iframe').css({
-            'width': width,
-            'height': height
-        })
+        if(ids.length>0){
+            console.log(ids);
+            $('div[openContent="delete-mesh"]').addClass('active');
+            var width = document.body.scrollWidth;
+            var height = document.body.scrollHeight;
+            $('.hide-iframe').addClass('active');
+            $('.hide-iframe').css({
+                'width': width,
+                'height': height
+            })
+        }
     })
    //移交多选
     $("#multiMove").click(function () {

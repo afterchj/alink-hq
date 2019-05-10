@@ -15,6 +15,7 @@
 .container{
     width: 1650px;
     margin: auto;
+    background-color: #3598DB;
 }
 .c-container{
     width: 1650px;
@@ -129,6 +130,14 @@
     text-align: center;
     font-size: 16px;
     background-color: #fff;
+}
+.goBack.active{
+    border-color: #0068AE;
+    color: #0068AE;
+}
+.create.active{
+    border-color: #0068AE;
+    background-color: #0068AE;
 }
 .triangle-facing-left {
     display: inline-block;

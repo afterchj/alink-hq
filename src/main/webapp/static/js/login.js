@@ -156,14 +156,14 @@ $(function () {
         $('.errMsg').html('');
     })
     $('#pwd').focus(function () {
-        console.log('获取密码焦点');
+        // console.log('获取密码焦点');
         $('.errMsg').html('');
         $('.password-login .password-hint').text('');
         $('.password-login .page-hint').text('');
     })
     //手机验证码获取焦点
     $('#phone-l').focus(function () {
-        console.log('获取手机号焦点');
+        // console.log('获取手机号焦点');
         $('.phone-login .add-hint').text('');
     })
     $('#code-l').focus(function () {
@@ -172,28 +172,28 @@ $(function () {
     })
     //手机找回密码获取焦点
     $('#phone-f').focus(function () {
-        console.log('手机找回密码获取焦点1')
+        // console.log('手机找回密码获取焦点1')
         $('.phone-find-password .mobile-add-hint').text('');
     })
     $('#code-f').focus(function () {
-        console.log('手机找回密码获取焦点2')
+        // console.log('手机找回密码获取焦点2')
         $('.phone-find-password .mobile-code-hint').text('');
     })
     $('#pwd-f').focus(function () {
-        console.log('手机找回密码获取焦点3')
+        // console.log('手机找回密码获取焦点3')
         $('.phone-find-password .mobile-password-hint').text('');
     })
     //邮箱找回密码获取焦点
     $('#email-e').focus(function () {
-        console.log('邮箱找回密码获取焦点1')
+        // console.log('邮箱找回密码获取焦点1')
         $('.email-find-password .email-add-hint').text('');
     })
     $('#code-e').focus(function () {
-        console.log('邮箱找回密码获取焦点2')
+        // console.log('邮箱找回密码获取焦点2')
         $('.email-find-password .email-code-hint').text('');
     })
     $('#pwd-e').focus(function () {
-        console.log('邮箱找回密码获取焦点3')
+        // console.log('邮箱找回密码获取焦点3')
         $('.email-find-password .email-password-hint').text('');
     })
 
@@ -209,7 +209,7 @@ $(function () {
         var regEmail = /^([A-Za-z0-9_\-\.\u4e00-\u9fa5])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,8})$/;
         var emailResult = regEmail.test(unameVal);
         if(p.test(unameVal) && unameVal.length == 11){
-            console.log('输入手机号')
+            // console.log('输入手机号')
             if (unameVal != '' && !phoneResult) {
                 $('.password-login .add-hint').text('请输入正确的手机号');
                 $('.password-login .page-hint').text('');
@@ -355,7 +355,6 @@ function passwordLogin() {
     var regEmail = /^([A-Za-z0-9_\-\.\u4e00-\u9fa5])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,8})$/;
     var emailResult = regEmail.test(unameVal);
     var p = /^[0-9]*$/;
-
     var e = new RegExp("[@]");
     var a = /^[a-zA-Z]+$/;
     var h = new RegExp("[\u4e00-\u9fa5]");
@@ -373,7 +372,7 @@ function passwordLogin() {
             }
         }
     })
-    console.log(isBind);
+    // console.log(isBind);
     if (unameVal == '') {
         if (pwdVal == '') {
             $('.password-login .add-hint').text('请输入账号/用户名/邮箱/手机号');
@@ -413,9 +412,9 @@ function passwordLogin() {
         }
     } else if (e.test(unameVal)) {
         //想输入的是邮箱
-        console.log('想输入的是邮箱');
+        // console.log('想输入的是邮箱');
         if (!emailResult) {
-            console.log('输入的邮箱格式不正确')
+            // console.log('输入的邮箱格式不正确')
             $('.password-login .add-hint').text('请输入正确的邮箱');
             $('.password-login .password-hint').text('');
             $('#pwd').val('');
@@ -490,9 +489,6 @@ $(function () {
         // $('#pwd').val('');
     }
 })
-// $(function(){
-//     overTime();
-// })
 //联系我们的弹出框
 function contact() {
     var width = window.screen.width;
@@ -821,7 +817,7 @@ function phoneFindPwd() {
     } else {
         //验证验证码是否正确
         var codeResult = findValidCode(phoneVal, codeVal);
-        console.log('codeResult', codeResult);
+        // console.log('codeResult', codeResult);
         if (codeVal == '') {
             if (newPwd == '') {
                 $('.phone-find-password .mobile-add-hint').text('');
@@ -1077,7 +1073,6 @@ function emailFindPwd() {
                 $('.email-find-password .email-code-hint').text('');
                 $('.email-find-password .email-password-hint').text('');
                 $('#pwd-e').val('');
-
             }
         }
     } else {
@@ -1161,7 +1156,7 @@ function emailFindPwdCode() {
         }
 
     } else if (!emailResult) {
-        console.log('邮箱格式不正确');
+        // console.log('邮箱格式不正确');
         $('.email-find-password .email-add-hint').text('请输入正确的邮箱');
         $('.email-find-password .email-code-hint').text('');
         $('.email-find-password .email-password-hint').text('');
@@ -1195,7 +1190,7 @@ function emailFindPwdCode() {
         }
     } else {
         emailCode(emailVal);
-        console.log("emailVal="+emailVal);
+        // console.log("emailVal="+emailVal);
         if (codeVal == '') {
             if (newPwd == '') {
             } else if (pwdResult) {

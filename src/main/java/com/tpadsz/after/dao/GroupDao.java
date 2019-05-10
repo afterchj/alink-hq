@@ -26,6 +26,8 @@ public interface GroupDao {
 
     int getCount(Map map);
 
+    void save(SearchDict dict);
+
     void saveUpdate(Map map);
 
     void saveRename(Map map);

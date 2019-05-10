@@ -8,6 +8,7 @@ import com.tpadsz.after.entity.OptionList;
 import com.tpadsz.after.entity.SearchDict;
 import com.tpadsz.after.exception.RepetitionException;
 import com.tpadsz.after.service.GroupService;
+import com.tpadsz.after.service.MeshService;
 import com.tpadsz.after.service.RoleService;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
@@ -30,7 +31,8 @@ public class GroupController {
     private GroupService groupService;
     @Resource
     private RoleService roleService;
-
+    @Resource
+    private MeshService meshService;
     private Logger logger = Logger.getLogger(this.getClass());
 
     @RequestMapping("/list")
@@ -65,14 +67,20 @@ public class GroupController {
     }
 
     @RequestMapping("/create")
-    public String create(Integer id, ModelMap modelMap) {
+    public String create(Integer projectId, ModelMap modelMap) {
+        OptionList project = meshService.getProject(projectId);
+        modelMap.put("project", project);
+        logger.info("project=" + JSON.toJSONString(project));
         return "meshTemp/groupCreate";
     }
 
+    @ResponseBody
     @RequestMapping("/save")
     public String saveGroup(SearchDict dict) {
         logger.info("pid=" + dict.getMid());
-        return "redirect:/group/list";
+        groupService.save(dict);
+        return "ok";
+//        return "redirect:/group/list";
     }
 
     @ResponseBody

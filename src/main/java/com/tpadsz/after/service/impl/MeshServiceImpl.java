@@ -22,11 +22,6 @@ public class MeshServiceImpl implements MeshService {
     private MeshDao meshDao;
 
     @Override
-    public List<Map> selectByMap(SearchDict dict) {
-        return meshDao.selectByMap(dict);
-    }
-
-    @Override
     public List<Map> getByMap(SearchDict map) {
         return meshDao.getByMap(map);
     }
@@ -47,6 +42,11 @@ public class MeshServiceImpl implements MeshService {
     }
 
     @Override
+    public void save(Map dict) {
+        meshDao.save(dict);
+    }
+
+    @Override
     public void saveUpdate(Map map) {
         meshDao.saveUpdate(map);
     }
@@ -58,6 +58,11 @@ public class MeshServiceImpl implements MeshService {
             throw new RepetitionException(301, "名字已存在！");
         }
         meshDao.saveRename(map);
+    }
+
+    @Override
+    public OptionList getProject(int projectId) {
+        return meshDao.getProject(projectId);
     }
 
     @Override

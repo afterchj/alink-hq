@@ -33,21 +33,38 @@
                     创建组
                 </div>
                 <div class="c-content ">
-                    <form th:action="@{/group/save}" method="GET">
+                    <div class="subjection">隶属项目：<span th:inline="text">[[${project.label}]]</span></div>
+                    <form th:action="@{/group/save}" method="GET"  style="margin-top: 0;">
+                        <div class="process clearfix">
+                            <div class="f-l part">
+                                <img src="/alink-hq/static/img/fill-1-on.png" alt="">
+                                <span>选择网络</span>
+                            </div>
+                            <div class="f-l part  line ">……</div>
+                            <div class="f-l part">
+                                <img src="/alink-hq/static/img/fill-2-no.png" alt="">
+                                <span>选择区域</span>
+                            </div>
+                            <div class="f-l part  line ">……</div>
+                            <div class="f-l part">
+                                <img src="/alink-hq/static/img/fill-3-no.png" alt="">
+                                <span>输入名称</span>
+                            </div>
+                        </div>
                         <div>
                             <p class="project-hint"></p>
                             <label for="mid">选择网络：</label>
-                            <select id="mid" name="mid">
-                                <option value="0">全部</option>
+                            <select id="mid" name="mid" style="height:35px;">
+                                <option value="">请选择网络</option>
                             </select>
                         </div>
                         <div>
-                            <p class="project-hint"></p>
-                            <label for="mid">网络ID：</label>
+                            <p class="" style="height: 20px"></p>
+                            <label for="meshId">网络ID：</label>
                             <input type="text" id="meshId">
                         </div>
                         <div class="">
-                            <button type="button" class="confirm-create" openTab="confirm-create">确定创建</button>
+                            <button type="button" class="confirm-create" openTab="confirm-create">下一步</button>
                         </div>
                     </form>
                 </div>
@@ -78,7 +95,7 @@
         left(tabs, index);
         $.getJSON("/alink-hq/group/getMesh", {"uid": uid}, function (json) {
             if (json != '') {
-                $("#mid option:first").remove();
+                $("#mid option:first").siblings().remove();
             }
             // 下面使用each进行遍历
             $.each(json, function (i, item) {
@@ -88,12 +105,34 @@
             $("#meshId").val(str.substr(0,str.indexOf("_")));
             $("#mid").change(function () {
                 var mid = $("#mid option:selected").val();
+                if(mid==''){
+                    $('.project-hint').text('请选择网络');
+                }else{
+                    $('.project-hint').text('');
+                }
                 var meshId = mid.substr(mid.indexOf("_") + 1);
                 console.log("mid=" + mid + ",meshId=" + meshId);
                 $("#meshId").val(meshId);
             });
         });
     });
+    $('.confirm-create').click(function(){
+        var mid = $("#mid option:selected").val();
+        if(mid==''){
+            $('.project-hint').text('请选择网络');
+        }else{
+            $('.project-hint').text('');
+        }
+    })
+    //监听网络选择
+//    $('#mid').change(function(){
+//        var mid = $('#pid option:selected').val();
+//        if(mid==''){
+//            $('.project-hint').text('请选择网络');
+//        }else{
+//            $('.project-hint').text('');
+//        }
+//    })
 </script>
 </body>
 </html>
