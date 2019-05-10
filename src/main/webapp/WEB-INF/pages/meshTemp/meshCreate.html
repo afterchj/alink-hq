@@ -82,7 +82,6 @@
             if (json != '') {
                 $("#projectId option:first").siblings().remove();
             }
-            // 下面使用each进行遍历
             $.each(json, function (i, item) {
                 $("#projectId").append("<option value='" + item.id + "'>" + item.label + "</option>");
             });
@@ -106,10 +105,6 @@
             $('.mesh-hint').text('')
         }
         if(projectId!='' && mesh!='' && meshResult){
-            console.log(mesh,projectId);
-//            var renameResult=rename(projectId,mesh);
-//            console.log('renameResult',renameResult);
-//            if(projectId!='' && mesh!='' && meshResult && rename){
                 $.ajax({
                     type: "get",
                     url: "/alink-hq/mesh/save",
@@ -133,8 +128,7 @@
                         }
                     }
                 })
-//            }
-        }
+            }
     })
     //监听项目选择
     $('#projectId').change(function(){
@@ -158,26 +152,6 @@
             $('.mesh-hint').text('')
         }
     })
-    function rename(id,name){
-        var result;
-        $.ajax({
-            type: "post",
-            url: "/alink-hq/mesh/rename",
-            data: {
-                "name": name,
-                "id": id
-            },
-            async: false,
-            success: function (res) {
-                result=res;
-//                if (res != "success") {
-//
-//                    $('.mesh-hint').text('已存在，请重新输入');
-//                }
-            }
-        })
-        return result;
-    }
 </script>
 </body>
 </html>
