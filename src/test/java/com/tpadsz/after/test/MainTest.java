@@ -68,33 +68,39 @@ public class MainTest {
         Map map = new HashMap();
         map.put("role", "manager");
         map.put("uid", 18);
+        map.put("id", 18604);
+        map.put("name", "哈哈哈");
+//        map.put("projectId", 248);
 //        map.put("pid", 4);
-        List<Map> list = getSqlSessionTemplate().selectList("com.tpadsz.after.dao.MeshDao.getByMap", map);
+        int count = getSqlSessionTemplate().selectOne("com.tpadsz.after.dao.MeshDao.getCount", map);
+        logger.info(count);
+//        List<Map> list = getSqlSessionTemplate().selectList("com.tpadsz.after.dao.MeshDao.getByMap", map);
 //        String role = getSqlSessionTemplate().selectOne("com.tpadsz.after.dao.RoleDao.selectById", 21);
 //        List<Role> roles = getSqlSessionTemplate().selectList("com.tpadsz.after.dao.RoleDao.getAll");
 //        List<OptionList> lists = getSqlSessionTemplate().selectList("com.tpadsz.after.dao.MeshDao.getProjects",map);
-        List<OptionList> lists = getSqlSessionTemplate().selectList("com.tpadsz.after.dao.GroupDao.getPlaces",map);
+//        List<OptionList> lists = getSqlSessionTemplate().selectList("com.tpadsz.after.dao.GroupDao.getPlaces",map);
 //        logger.info("role=" + role);
 //        logger.info("roles=" + roles);
-        logger.info("lists=" + lists.size());
+//        logger.info("lists=" + lists.size());
     }
 
     @Test
-    public void testDao(){
+    public void testDao() {
         ApplicationContext ctx = new ClassPathXmlApplicationContext("classpath:applicationContext.xml");
         Map map = new HashMap();
 //        map.put("role", "manager");
         map.put("uid", 18);
-        MeshService meshService= (MeshService) ctx.getBean("meshServiceImpl");
-        GroupService groupService= (GroupService) ctx.getBean("groupServiceImpl");
+        MeshService meshService = (MeshService) ctx.getBean("meshServiceImpl");
+        GroupService groupService = (GroupService) ctx.getBean("groupServiceImpl");
 //        List<OptionList> lists = meshService.getProjects(null);
         List<OptionList> lists = groupService.getPlaces(map);
         logger.info("lists=" + lists);
     }
-    
+
     @Test
-    public void test(){
+    public void test() {
     }
+
     public static void main(String[] args) {
         int size = 8;
         int total = 46;

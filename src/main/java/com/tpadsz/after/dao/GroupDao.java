@@ -24,13 +24,13 @@ public interface GroupDao {
 
     MeshInfo getGroupInfo(int id);
 
-    int getCount(Map map);
+    int getCount(SearchDict map);
 
     void save(SearchDict dict);
 
     void saveUpdate(Map map);
 
-    void saveRename(Map map);
+    void saveRename(SearchDict map);
 
     void deleteGroupByIds(List list);
 }

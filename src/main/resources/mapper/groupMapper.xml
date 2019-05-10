@@ -63,10 +63,18 @@
         ORDER BY lcount DESC
     </select>
 
-    <select id="getCount" resultType="int" parameterType="map">
+    <select id="getCount" resultType="int" parameterType="SearchDict">
         SELECT COUNT(1) FROM f_group g
-        INNER JOIN f_mesh m ON m.id = g.mid
-        WHERE m.id = (SELECT mid FROM f_group WHERE id=#{id})
+        INNER JOIN f_place p ON p.id = g.pid
+        WHERE 1=1
+        <choose>
+            <when test="pid!=null and pid!=''">
+                AND p.id=#{pid}
+            </when>
+            <otherwise>
+                AND p.id = (SELECT pid FROM f_group WHERE id=#{id})
+            </otherwise>
+        </choose>
         AND g.gname = #{name}
     </select>
 
