@@ -222,7 +222,6 @@
             var groupId = $('#group').val();
             var regName = /^[a-zA-Z0-9\u4e00-\u9fa5]{2,16}$/;
             var groupResult = regName.test(groupId);
-
             var mids = mid.substr(0, mid.indexOf("_"));
             console.log('groupId', groupId, 'mid', mids, 'pid', pid);
             if (groupId != '' && groupResult) {
@@ -231,10 +230,10 @@
                     type: "post",
                     url: "/alink-hq/group/save",
                     data: {"mid": mids, "pid": pid, "name": groupId},
-//                    data: {mid:mids, pid:pid,name:decodeURIComponent(groupId)},
+//                   data: {mid:mids, pid:pid,name:decodeURIComponent(groupId)},
                     success: function (res) {
-                        console.log('mids', mids);
-                        console.log(res);
+//                        console.log('mids', mids);
+//                        console.log(res);
                         if (res == 'ok') {
                             $('#preload-anim').addClass('active');
                             $('#preload-anim .title').text('创建成功！');
@@ -242,6 +241,8 @@
                                 $('#preload-anim').removeClass('active');
                                 location.href = '/alink-hq/group/list';
                             }, 1000)
+                        }else if(res=='fail'){
+                            $('.group-hint').text('已存在，请重新输入');
                         } else {
                             $('#preload-anim').addClass('active');
                             $('#preload-anim .title').text('加载失败，请重新尝试');
