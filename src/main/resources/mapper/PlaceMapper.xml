@@ -74,6 +74,7 @@
              p.name,
              m.mname,
              m.mesh_id,
+             m.project_id,
              IFNULL(gc.gcount, 0) gcount,
              IFNULL(l.lcount, 0) lcount
         FROM f_place pl
