@@ -222,15 +222,32 @@
         var groupId=$('#group').val()
         var regName = /^[a-zA-Z0-9\u4e00-\u9fa5]{2,16}$/
         var groupResult = regName.test(groupId)
-        console.log('groupId',groupId,'mid',mid,'pid',pid)
+
+        var mids=mid.substr(0,mid.indexOf("_"));
+        console.log('groupId',groupId,'mid',mids,'pid',pid);
         if(groupId!='' && groupResult){
             $('.group-hint').text('')
             $.ajax({
-                type: "post",
+                type: "get",
                 url: "/alink-hq/group/save",
-                data: {mid:mid, pid:pid,name:groupId},
-                sucess: function(res){
+                data: {mid:mids, pid:pid,name:decodeURIComponent(groupId)},
+                success: function(res){
+                    console.log('mids',mids);
                     console.log(res);
+                    if(res=='ok'){
+                        $('#preload-anim').addClass('active');
+                        $('#preload-anim .title').text('创建成功！');
+                        setInterval(function () {
+                            $('#preload-anim').removeClass('active');
+                            location.href = '/alink-hq/group/list';
+                        }, 1000)
+                    }else{
+                        $('#preload-anim').addClass('active');
+                        $('#preload-anim .title').text('加载失败，请重新尝试');
+                        setInterval(function () {
+                            $('#preload-anim').removeClass('active');
+                        }, 1000)
+                    }
                 }
             })
         }else{
