@@ -16,7 +16,11 @@
     </select>
 
     <select id="findLightByGid" resultType="com.tpadsz.after.entity.MeshInfo">
-        SELECT id,lmac,lname,x,y FROM f_light AS t1 INNER JOIN f_light_setting AS t2 ON t1.id = t2.uid WHERE gid = #{gid}
+        SELECT t1.id,t1.lmac,t1.lname,t2.x,t2.y FROM f_light AS t1 INNER JOIN f_light_setting AS t2 ON t1.id = t2.lid WHERE t1.gid = #{gid}
+    </select>
+
+    <select id="findLightInfoByLid" resultType="com.tpadsz.after.entity.MeshInfo">
+        SELECT t1.mid,t1.pid,t1.gid,t2.x,t2.y FROM f_light AS t1 INNER JOIN f_light_setting AS t2 ON t1.id = t2.lid WHERE t1.id = #{lid}
     </select>
 
     <select id="findRepeatNameBySid" resultType="int">
@@ -35,8 +39,8 @@
         UPDATE f_scene SET sname = #{sceneName},update_date=NOW() WHERE sid =#{sid}
     </update>
 
-    <select id="findProjectByMeshId" resultType="com.tpadsz.after.entity.ProjectList">
-        SELECT p.id,p.name FROM f_project p WHERE p.id = (SELECT project_id FROM f_mesh WHERE mesh_id = #{meshId})
+    <select id="findProjectByMeshId" resultType="com.tpadsz.after.entity.MeshInfo">
+        SELECT t1.id AS project_id,t1.name,t2.id AS mid FROM f_project AS t1 INNER JOIN f_mesh AS t2 ON t1.id = t2.project_id WHERE t2.mesh_id = #{meshId}
     </select>
 
 </mapper>
