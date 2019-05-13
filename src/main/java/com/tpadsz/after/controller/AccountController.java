@@ -10,8 +10,11 @@ import com.tpadsz.after.entity.User;
 import com.tpadsz.after.entity.UserList;
 import com.tpadsz.after.entity.dd.ResultDict;
 import com.tpadsz.after.service.AccountService;
+import com.tpadsz.after.utils.ExcelUtil;
 import com.tpadsz.after.utils.GenerateUtils;
 import net.rubyeye.xmemcached.MemcachedClient;
+import org.apache.commons.lang3.StringUtils;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,7 +23,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -82,7 +89,7 @@ public class AccountController {
                     roleList.remove(0);
                 }
             }
-            PageInfo<UserList> pageInfo = new PageInfo<UserList>(userList, pageSize);
+            PageInfo<UserList> pageInfo = new PageInfo<>(userList, pageSize);
             if (pageInfo.getList().size() > 0) {
                 model.addAttribute("pageInfo", pageInfo);
             }
@@ -97,6 +104,93 @@ public class AccountController {
         }
         return "userManage/userList";
     }
+
+    /**
+     * 导出excel
+     * @param account
+     * @param fid
+     * @param roleId
+     * @param startDate
+     * @param endDate
+     * @param session
+     * @param response
+     */
+    @RequestMapping(value = "/getUserListExcel")
+    @ResponseBody
+    public void getUserListExcel(String account, Integer fid, Integer roleId, String
+            startDate, String endDate, HttpSession session, HttpServletResponse response) {
+        User loginUser = (User) session.getAttribute("user");
+        String uid = loginUser.getId();
+        Integer role_id = accountService.findRoleIdByUid(uid);
+        List<UserList> userList = new ArrayList<>();
+        if (role_id == 1) {
+            userList = accountService.searchBySuper(account, fid, roleId, startDate, endDate);
+        } else if (role_id == 2) {
+            userList = accountService.searchByAdmin(account, fid, roleId, startDate, endDate);
+        } else if (role_id == 3) {
+            List<String> uids = accountService.findFirmUidOfUser(uid);
+            if (uids.size() != 0) {
+                userList = accountService.searchByManager(account, uids, startDate, endDate);
+            }
+        }
+        //excel标题
+        String[] title = {"账号", "用户名", "绑定手机号", "绑定邮箱", "隶属公司", "角色", "添加时间", "状态"};
+        String[][] values = new String[userList.size()][title.length];
+        for (int i = 0; i < userList.size(); i++) {
+            UserList userList1 = userList.get(i);
+            values[i][0] = userList1.getAccount();
+            if (StringUtils.isNotBlank(userList1.getUname())) {
+                values[i][1] = userList1.getUname();
+            }
+            if (StringUtils.isNotBlank(userList1.getMobile())) {
+                values[i][2] = userList1.getMobile();
+            }
+            if (StringUtils.isNotBlank(userList1.getEmail())) {
+                values[i][3] = userList1.getEmail();
+            }
+            if (StringUtils.isNotBlank(userList1.getConame())) {
+                values[i][4] = userList1.getConame();
+            }
+            if (StringUtils.isNotBlank(userList1.getRole_id())) {
+                if ("1".equals(userList1.getRole_id())) {
+                    values[i][5] = "超级管理员";
+                } else if ("2".equals(userList1.getRole_id())) {
+                    values[i][5] = "管理员";
+                } else if ("3".equals(userList1.getRole_id())) {
+                    values[i][5] = "乙方管理员";
+                } else if ("4".equals(userList1.getRole_id())) {
+                    values[i][5] = "施工人员";
+                }
+            }
+            if (StringUtils.isNotBlank(userList1.getCreate_date())) {
+                values[i][6] = userList1.getCreate_date();
+            }
+            if (StringUtils.isNotBlank(userList1.getStatus())) {
+                if ("1".equals(userList1.getStatus())) {
+                    values[i][7] = "启用";
+                } else {
+                    values[i][7] = "禁用";
+                }
+            }
+        }
+        HSSFWorkbook wb = ExcelUtil.getHSSFWorkbook("用户列表", title, values, null);
+        String fileName = "用户列表-" + System.currentTimeMillis();
+        try {
+            response.setHeader("content-disposition", "attachment;filename=" + new String(fileName.getBytes(),
+                    "ISO8859-1") + ".xls");//中文乱码
+            response.setContentType("application/vnd.ms-excel");
+            response.setCharacterEncoding("utf-8");
+            OutputStream ouputStream = response.getOutputStream();
+            wb.write(ouputStream);
+            ouputStream.flush();
+            ouputStream.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
 
     @RequestMapping(value = "/createAccount", method = RequestMethod.GET)
     public String createAccount(HttpSession session,

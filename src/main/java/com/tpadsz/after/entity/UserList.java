@@ -95,4 +95,19 @@ public class UserList {
         this.status = status;
     }
 
+    @Override
+    public String toString() {
+        return "UserList{" +
+                "id=" + id +
+                ", account='" + account + '\'' +
+                ", uname='" + uname + '\'' +
+                ", mobile='" + mobile + '\'' +
+                ", email='" + email + '\'' +
+                ", fid=" + fid +
+                ", coname='" + coname + '\'' +
+                ", role_id='" + role_id + '\'' +
+                ", create_date='" + create_date + '\'' +
+                ", status='" + status + '\'' +
+                '}';
+    }
 }
