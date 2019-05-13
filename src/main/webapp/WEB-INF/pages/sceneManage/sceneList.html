@@ -38,12 +38,12 @@
                 <div class="search-condition temp clearfix">
                     <div class="f-l search" style="margin-right:125px;">
                         <div>
-                            <label for="pname" class="font">场景名称</label>
-                            <input type="text" id="pname" name="pname" placeholder="请输入场景名称">
+                            <label for="sceneName" class="font">场景名称</label>
+                            <input type="text" id="sceneName" name="sceneName" placeholder="请输入场景名称">
                         </div>
                         <div>
-                            <label for="name" class="font">场景ID</label>
-                            <input type="text" id="name" name="mname" placeholder="请输入场景ID">
+                            <label for="sceneId" class="font">场景ID</label>
+                            <input type="text" id="sceneId" name="sceneId" placeholder="请输入场景ID">
                         </div>
                     </div>
                     <div class="f-l search">
@@ -79,13 +79,13 @@
                         <tbody>
                         <tr th:each="scene:${pageInfo.list}">
                             <td class="checkbox"><input type="checkbox" name="ids" th:value="${scene.id}"></td>
-                            <td class="k-link">
+                            <td class="k-link sceneName">
                                 <!--<a th:href="@{/se/info(id=${scene.id})}" th:text="${scene.sceneName}">-->
                                 <!---->
                                 <!--</a>-->
                                 <a href="" th:text="${scene.sceneName}"></a>
                             </td>
-                            <td th:text="${scene.sceneId}"></td>
+                            <td class="sceneId" th:text="${scene.sceneId}"></td>
                             <td th:text="${scene.meshName}"></td>
                             <td th:text="${scene.meshId}"></td>
                             <!--<td th:text="${place.gcount}"></td>-->

@@ -3,15 +3,15 @@
  */
 $(function () {
     myBrowser();
-    var tabs="meshList";
-    var index=0;
-    left(tabs,index);
+    var tabs = "meshList";
+    var index = 0;
+    left(tabs, index);
     $("#multiDel").click(function () {
         var ids = [];
         $('input[name="ids"]:checked').each(function () {
             ids.push($(this).val());
         });
-        if(ids.length>0){
+        if (ids.length > 0) {
             $('div[openContent="delete-place"]').addClass('active');
             var width = document.body.scrollWidth;
             var height = document.body.scrollHeight;
@@ -46,11 +46,11 @@ $(function () {
         var name = $('#rename').val();
         var regUserName = /^[a-zA-Z0-9\u4e00-\u9fa5]{2,6}$/;
         var userNameResult = regUserName.test(name);
-        if(name==''){
+        if (name == '') {
             $('p.rename-hint').text('请输入新名称');
-        }else if(!userNameResult){
+        } else if (!userNameResult) {
             $('p.rename-hint').text('请输入 2-6 位汉字、字母、数字');
-        }else {
+        } else {
             $.ajax({
                 type: "post",
                 url: "/alink-hq/place/rename",
@@ -117,9 +117,9 @@ $(function () {
     }
 });
 
-$(function(){
-    var height=$(document).height();
-    $('.main-left').css('height',height);
+$(function () {
+    var height = $(document).height();
+    $('.main-left').css('height', height);
 })
 //重命名校验
 function nameKeyUp() {
@@ -133,26 +133,31 @@ function nameKeyUp() {
     }
 }
 //条件筛选
-$(function(){
-    var url = window.location.href;
-
-
-    $('.search-button button').click(function(){
-
+$(function () {
+    // var url = window.location.href;
+    $('.search-button button').click(function () {
+        var sceneName = $('#sceneName').val();
+        var sceneId = $('#sceneId').val();
+        console.log(sceneId, sceneName);
+        condition(sceneName, sceneId);
     })
 })
 
 //查询条件
-function condition(sceneName,sceneId){
+function condition(sceneName, sceneId) {
     var url = window.location.href;
+
     var i = url.indexOf("?");
     if (i != -1) {
         var url2 = url.substring(0, i + 1);
     } else {
         var url2 = url + '?';
     }
-    var newUrl = url2 + '&sceneName=' + sceneName + '&sceneName=' + sceneId ;
+    var newUrl = url2 + '&sceneName=' + sceneName + '&sceneId=' + sceneId;
     location.href = newUrl;
+    console.log(sceneId, sceneName);
+    $('#sceneName').val(sceneName);
+    $('#sceneId').val(sceneId);
 }
 //查找参数的名称
 function GetUrlParam(paraName) {
