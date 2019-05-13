@@ -107,12 +107,8 @@ public class PlaceController {
     public List<OptionList> show(Integer uid) {
         logger.info("uid=" + uid);
         Map map = new HashMap();
-        if (uid != null) {
-            String role = roleService.selectById(uid);
-            map.put("role", role);
-            map.put("uid", uid);
-        }
-        List<OptionList> placeMap = placeService.getMesh(map);
+        map.put("uid", uid);
+        List<OptionList> placeMap = meshService.getMesh(map);
         return placeMap;
     }
 }

@@ -60,7 +60,7 @@
         <if test="projectId!=null and projectId!=''">
             AND m.project_id=#{projectId}
         </if>
-        ORDER BY lcount DESC
+        ORDER BY g.update_date DESC,lcount DESC
     </select>
 
     <select id="getCount" resultType="int" parameterType="SearchDict">

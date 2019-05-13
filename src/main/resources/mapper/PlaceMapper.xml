@@ -9,6 +9,7 @@
         p.place_id,
         m.mname,
         m.mesh_id,
+        m.project_id,
         IFNULL(g.gcount,0) gcount
 	</sql>
 
@@ -48,6 +49,7 @@
         FROM
         f_place p
         INNER JOIN f_mesh m ON m.id = p.mid
+        INNER JOIN f_project pt ON pt.id=m.project_id
         LEFT JOIN (SELECT COUNT(1) gcount,pid FROM f_group GROUP BY pid) g ON g.pid=p.id
         WHERE 1=1
         <include refid="common_choose"/>
@@ -69,7 +71,8 @@
         <if test="projectId!=null and projectId!=''">
             AND m.project_id=#{projectId}
         </if>
-        ORDER BY g.gcount DESC
+        GROUP BY m.uid,m.mesh_id
+        ORDER BY p.update_date DESC,g.gcount DESC
     </select>
 
     <select id="getPlaceInfo" resultType="MeshInfo" parameterType="int">

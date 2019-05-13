@@ -78,4 +78,9 @@ public class MeshServiceImpl implements MeshService {
     public List<OptionList> getProjects(Map map) {
         return meshDao.getProjects(map);
     }
+
+    @Override
+    public List<OptionList> getMesh(Map map) {
+        return meshDao.getMesh(map);
+    }
 }

@@ -3,23 +3,16 @@
  */
 //日期选择
 laydate.render({
-    elem: '#start-time',//指定元素
+    elem: '#start-time',
     range: true
 });
 laydate.render({
-    elem: '#end-time',//指定元素
+    elem: '#end-time',
     range: true
 });
-// $('.one-list li').each(function () {
-//     var tab = $(this).attr('tab');
-//     if (tab == 'projectList') {
-//         $(this).addClass('active').siblings().removeClass('active');
-//     }
-// })
 
 
 $(function () {
-    var allChecked = false;
     var accountNum=0;
     $('tbody .checkbox input').each(function () {
        if($(this).prop('checked')){
@@ -46,6 +39,7 @@ $(function () {
     })
     //复选框监听--监听单选
     $('tbody .checkbox input').click(function () {
+        var allChecked = true;
         var checked = $(this).prop('checked');
         if (checked) {
             accountNum++;
@@ -55,23 +49,20 @@ $(function () {
         $('tbody .checkbox input').each(function () {
             var otherChecked = $(this).prop('checked');
             if (!otherChecked) {
-                allChecked = true;
-            } else {
                 allChecked = false;
             }
         })
         $('.amount').text(accountNum);
         if (!allChecked) {
-            $('#all').prop('checked', true);
-        } else {
             $('#all').prop('checked', false);
+        } else {
+            $('#all').prop('checked',true );
         }
     })
 })
 
 
 $(function () {
-    myBrowser();
     var tabs = "projectList";
     var index=0;
     left(tabs,index);
@@ -90,7 +81,7 @@ $(function () {
     var pageSize = GetUrlParam("pageSize");
     var pageNum = GetUrlParam("pageNum");
     var sortFlag = GetUrlParam("sortFlag");
-    console.log(sortFlag);
+    // console.log(sortFlag);
     if(sortFlag==''){
         $('.toBottom').attr('src','/alink-hq/static/img/unfold-color.png');
         $('.toTop').attr('src','/alink-hq/static/img/fewer.png');
@@ -137,7 +128,7 @@ $(function () {
         } else {
             pageNum = parseInt(pageNum);
         }
-        condition(pageSize, pageNum, sortFlag);
+        condition(pageSize, 1, sortFlag);
     })
     $('.toBottom').click(function () {
         var sortFlag = '';
@@ -148,7 +139,7 @@ $(function () {
         } else {
             pageNum = parseInt(pageNum);
         }
-        condition(pageSize, pageNum, sortFlag);
+        condition(pageSize, 1, sortFlag);
     })
     $('.toBottom1').click(function () {
         var sortFlag = '2';
@@ -159,7 +150,7 @@ $(function () {
         } else {
             pageNum = parseInt(pageNum);
         }
-        condition(pageSize, pageNum, sortFlag);
+        condition(pageSize, 1, sortFlag);
     })
     $('.toTop1').click(function () {
         var sortFlag = '3';
@@ -170,7 +161,7 @@ $(function () {
         } else {
             pageNum = parseInt(pageNum);
         }
-        condition(pageSize, pageNum, sortFlag);
+        condition(pageSize, 1, sortFlag);
     })
     //查询按钮点击
     $('.search-button button').click(function () {

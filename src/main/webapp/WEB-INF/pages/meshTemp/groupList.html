@@ -80,15 +80,19 @@
                             <td class=""><input type="checkbox" name="ids" th:value="${group.id}"></td>
                             <td class="k-link"><a th:href="@{/group/info(id=${group.id})}" th:text="${group.gname}"></a>
                             </td>
-                            <td th:text="${group.mname}" class="meshName"></td>
+                            <td class="k-link">
+                                <a th:href="@{/mesh/info(id=${group.mid})}" th:text="${group.mname}"></a>
+                            </td>
                             <td th:text="${group.mesh_id}"></td>
-                            <td th:text="${group.lcount}"></td>
+                            <td class="k-link">
+                                <a th:href="@{/light/list(gid=${group.id})}" th:text="${group.lcount}"></a>
+                            </td>
                             <td class="p-r">
                                 <img src="/alink-hq/static/img/edit.png" th:alt="${group.id}" class="rename pointer"
                                      title="重命名">
                                 <a th:href="@{/group/move(ids=${group.id})}">
                                     <img src="/alink-hq/static/img/exchange.png" th:alt="${group.id}"
-                                         class="center-img pointer" title="移交">
+                                         class="center-img pointer" title="移动">
                                 </a>
                                 <!--<a th:href="@{/group/delete(ids=${group.id})}">-->
                                 <!--<img src="/alink-hq/static/img/delete.png" alt="" id="singleDel" title="删除">-->
@@ -114,7 +118,7 @@
                                     <!--<img src="/alink-hq/static/img/delete-btn-un.png" alt="" id="multiDel">-->
                                     <!--</span>-->
                                     <span class="m-r-20">
-                                <span class="skipPageBtn pointer moment" onmousedown="exchangeBtnMouseDown()" onmouseup="exchangeBtnMouseUp()"  id="multiMove">移交</span>
+                                <span class="skipPageBtn pointer moment" onmousedown="exchangeBtnMouseDown()" onmouseup="exchangeBtnMouseUp()"  id="multiMove">移动</span>
                             </span>
                                     <span>
 

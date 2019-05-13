@@ -2,7 +2,7 @@
  * Created by hongjian.chen on 2019/4/24.
  */
 $(function () {
-    myBrowser();
+    // myBrowser();
     var tabs="lightList";
     var index=0;
     left(tabs,index);

@@ -20,7 +20,8 @@
             <div class="f-l main-right-title font">区域列表</div>
             <div class="f-r pointer">
                 <a th:href="@{/place/create(projectId=${dict.projectId})}">
-                    <div class="create" onmousedown="createBtnMouseDown()" onmouseup="createBtnMouseUp()"><span>+</span><span>创建区域</span></div>
+                    <div class="create" onmousedown="createBtnMouseDown()" onmouseup="createBtnMouseUp()"><span>+</span><span>创建区域</span>
+                    </div>
                 </a>
                 <!--<div class="create" >+&nbsp;创建灯</div>-->
             </div>
@@ -88,9 +89,13 @@
                             <td class="k-link"><a th:href="@{/place/info(id=${place.id})}" th:text="${place.pname}"></a>
                             </td>
                             <td th:text="${place.place_id}"></td>
-                            <td th:text="${place.mname}"></td>
+                            <td class="k-link">
+                                <a th:href="@{/mesh/info(id=${place.mid})}" th:text="${place.mname}"></a>
+                            </td>
                             <td th:text="${place.mesh_id}"></td>
-                            <td th:text="${place.gcount}"></td>
+                            <td class="k-link">
+                                <a th:href="@{/group/list(projectId=${place.project_id},pid=${place.id})}" th:text="${place.gcount}"></a>
+                            </td>
                             <td>未知</td>
                             <td class="p-r">
                                 <img src="/alink-hq/static/img/edit.png" th:alt="${place.id}" class="reset-name pointer"

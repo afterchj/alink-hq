@@ -2,7 +2,6 @@
  * Created by qian.chen on 2019/5/10.
  */
 $(function () {
-    myBrowser();
     var tabs = "meshList";
     var index = 0;
     left(tabs, index);
@@ -21,18 +20,15 @@ $(function () {
                 'height': height
             });
         }
-        $('.pop-btn .yes').click(function () {
-            console.log("ids=" + ids);
-            deletePlace(ids);
-        })
+        // $('.pop-btn .yes').click(function () {
+        //     console.log("ids=" + ids);
+        //     deletePlace(ids);
+        // })
     });
     //单选重命名
     var id;
     $('.reset-name').click(function () {
         id = $(this).attr("alt");
-        // console.log("id="+id);
-        // projectName=$(this).parent().siblings('.project-name').find('a').text();
-        // account=$(this).parent().siblings('.project-account').text();
         $('div[openContent="reset-name"]').addClass('active');
         var width = document.body.scrollWidth;
         var height = document.body.scrollHeight;
@@ -53,17 +49,20 @@ $(function () {
         } else {
             $.ajax({
                 type: "post",
-                url: "/alink-hq/place/rename",
+                url: "/alink-hq/scene/rename",
                 data: {
-                    "name": name,
-                    "id": id
+                    "sceneName": name,
+                    "sid": id
                 },
                 async: true,
                 success: function (res) {
-                    if (res == "success") {
+                    console.log(res);
+                    if (res.result == "000") {
                         location.reload();
-                    } else {
+                    } else if(res.result == "307") {
                         $('p.rename-hint').text('已存在，请重新输入');
+                    }else if(res.result == "200"){
+                        console.log('系统错误');
                     }
                 }
             })
@@ -72,9 +71,8 @@ $(function () {
     //取消按钮
     $('div[openContent="reset-name"] .pop-btn .reduce').click(function () {
         $('div[openContent="reset-name"]').removeClass('active');
-        // $('div[openContent="delete-project"]').removeClass('active');
         $('.hide-iframe').removeClass('active');
-    });
+    })
     //重命名校验
     function nameKeyUp() {
         var rename = $('#rename').val();
@@ -86,7 +84,6 @@ $(function () {
             $('p.rename-hint').text('');
         }
     }
-
     //单选删除
     var ids;
     $('.singleDel').click(function () {
@@ -100,27 +97,22 @@ $(function () {
             'height': height
         });
     });
-    $('.pop-btn .reduce').click(function () {
-        $('div[openContent="delete-place"]').removeClass('active');
-        // $('div[openContent="delete-project"]').removeClass('active');
-        $('.hide-iframe').removeClass('active');
-    });
+    // $('div[openContent="delete-place"] .pop-btn .reduce').click(function () {
+    //     $('div[openContent="delete-place"]').removeClass('active');
+    //     // $('div[openContent="delete-project"]').removeClass('active');
+    //     $('.hide-iframe').removeClass('active');
+    // });
 
-    $('.pop-btn .yes').click(function () {
-        console.log("ids=" + ids);
-        deletePlace(ids);
-    })
+    // $('.pop-btn .yes').click(function () {
+    //     console.log("ids=" + ids);
+    //     deletePlace(ids);
+    // })
     function deletePlace(ids) {
         if (ids) {
             location.href = "/alink-hq/place/move?ids=" + ids;
         }
     }
 });
-
-$(function () {
-    var height = $(document).height();
-    $('.main-left').css('height', height);
-})
 //重命名校验
 function nameKeyUp() {
     var rename = $('#rename').val();
@@ -132,49 +124,108 @@ function nameKeyUp() {
         $('p.rename-hint').text('');
     }
 }
+//id不能为非数字
+$('#sceneId').on('input propertychange',function(){
+    var sceneId=$(this).val();
+    if(sceneId!=''  && isNaN(sceneId)){
+        $(this).val('');
+    }
+})
 //条件筛选
 $(function () {
-    // var url = window.location.href;
+    //向左向右
+    var page = parseInt($('#pageNum').text());
+    var pageTotal = parseInt($('#pages').text());
+    if (page == 1) {
+        $('.prev').removeClass('active');
+        $(".prev").addClass('disabled');
+    } else {
+        $('.prev').addClass('active');
+    }
+    if (page == pageTotal) {
+        $('.next').removeClass('active');
+        $(".next").addClass('disabled');
+    } else {
+        $(".next").addClass('active');
+    }
+    var sceneName = decodeURIComponent(GetUrlParam("sceneName"));
+    var sceneId  = decodeURIComponent(GetUrlParam("sceneId"));
+    var pageSize = GetUrlParam("pageSize");
+    var pageNum = GetUrlParam("pageNum");
+    if(!pageSize){
+        pageSize=10;
+    }
+    if(!pageNum){
+        pageNum='';
+    }
+    $('#sceneName').val(sceneName);
+    $('#sceneId').val(sceneId);
+    if(pageNum==''){
+        $('#page').val('1');
+    }else{
+        $('#page').val(pageNum);
+    }
+    $('#size').children('option[value='+pageSize+']').prop('selected','selected');
+    //点击查询按钮时
     $('.search-button button').click(function () {
-        var sceneName = $('#sceneName').val();
-        var sceneId = $('#sceneId').val();
-        console.log(sceneId, sceneName);
-        condition(sceneName, sceneId);
+        sceneName = $('#sceneName').val();
+        sceneId = $('#sceneId').val();
+        condition(sceneName, sceneId,pageSize,pageNum);
+    })
+    //选择页数变化
+    $('#size').change(function () {
+         pageSize = $(this).children('option:selected').val();
+         pageNum = $('#page').val();
+        if (pageNum == '') {
+            pageNum == 1;
+        } else {
+            pageNum = parseInt(pageNum);
+        }
+        condition(sceneName, sceneId,pageSize, pageNum);
+    })
+    //点击上一页
+    $('#prev').click(function(){
+        if(pageNum==''){
+            pageNum=1;
+        }
+        pageNum=parseInt(pageNum)-1;
+        condition(sceneName,sceneId,pageSize,pageNum)
+    })
+    //点击下一页
+    $('#next').click(function(){
+        if(pageNum==''){
+            pageNum=1;
+        }
+        pageNum=parseInt(pageNum)+1;
+        condition(sceneName,sceneId,pageSize,pageNum)
+    })
+    //点击跳转
+    $('#skip').click(function(){
+        if($('#page').val()!=''&& parseInt($('#page').val())>=parseInt(pageTotal)){
+            pageNum= parseInt(pageTotal);
+            condition(sceneName,sceneId,pageSize,pageNum)
+        }else if($('#page').val()!=''&& parseInt($('#page').val())<=1){
+            pageNum= 1;
+            condition(sceneName,sceneId,pageSize,pageNum)
+        }else if($('#page').val()==''){
+            pageNum= 1;
+            condition(sceneName,sceneId,pageSize,pageNum)
+        }else{
+            pageNum=$('#page').val();
+            condition(sceneName,sceneId,pageSize,pageNum)
+        }
     })
 })
 
 //查询条件
-function condition(sceneName, sceneId) {
+function condition(sceneName,sceneId,pageSize,pageNum) {
     var url = window.location.href;
-
     var i = url.indexOf("?");
     if (i != -1) {
         var url2 = url.substring(0, i + 1);
     } else {
         var url2 = url + '?';
     }
-    var newUrl = url2 + '&sceneName=' + sceneName + '&sceneId=' + sceneId;
+    var newUrl = url2+'&meshName=测试网络01&meshId=71501234&mid=731'+'&pageSize='+pageSize+'&pageNum='+pageNum + '&sceneName=' + sceneName + '&sceneId=' + sceneId;
     location.href = newUrl;
-    console.log(sceneId, sceneName);
-    $('#sceneName').val(sceneName);
-    $('#sceneId').val(sceneId);
-}
-//查找参数的名称
-function GetUrlParam(paraName) {
-    var url = document.location.toString();
-    var arrObj = url.split("?");
-    if (arrObj.length > 1) {
-        var arrPara = arrObj[1].split("&");
-        var arr;
-        for (var i = 0; i < arrPara.length; i++) {
-            arr = arrPara[i].split("=");
-            if (arr != null && arr[0] == paraName) {
-                return arr[1];
-            }
-        }
-        return "";
-    }
-    else {
-        return "";
-    }
 }

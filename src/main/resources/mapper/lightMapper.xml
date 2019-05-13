@@ -41,7 +41,7 @@
         <include refid="Base_Column_List"/>
         FROM f_light l
         INNER JOIN f_mesh m ON m.id = l.mid
-        LEFT JOIN f_place pl ON pl.id=l.pid
+        INNER JOIN f_place pl ON pl.id=l.pid
         LEFT JOIN f_light_setting ls ON ls.lid=l.id
         WHERE 1=1
         <include refid="common_choose"></include>
@@ -70,9 +70,10 @@
             AND m.project_id=#{projectId}
         </if>
         GROUP BY l.id
+        ORDER BY l.update_date DESC
     </select>
     <select id="getLightInfo" resultType="MeshInfo" parameterType="int">
-        SELECT
+       SELECT
             l.id,
             l.mid,
             IFNULL(l.lname,'null') lname,
@@ -89,15 +90,14 @@
             m.mesh_id,
             pl.id pid,
             pl.pname,
-            IFNULL(sc.scount,0) scount
+            IFNULL(s.scount,0) scount
         FROM f_light l
         INNER JOIN f_light_setting ls ON ls.lid=l.id
         LEFT JOIN f_group g ON g.id=l.gid
         LEFT JOIN f_mesh m ON m.id=l.mid
-        LEFT JOIN f_scene s ON s.mid=m.id
         LEFT JOIN f_project p ON p.id=m.project_id
         LEFT JOIN f_place pl ON pl.id=l.pid
-        LEFT JOIN (SELECT COUNT(1) scount,sid FROM f_light_setting GROUP BY sid) sc ON sc.sid=s.id
+        LEFT JOIN (SELECT COUNT(1) scount,id,mid FROM f_scene GROUP BY mid) s ON s.mid=m.id
         WHERE l.id=#{id} LIMIT 1
     </select>
     <select id="selectByLid" resultType="map" parameterType="list">
@@ -118,9 +118,10 @@
         SELECT
             g.id,
             g.gname label
-        FROM WHERE f_group g
+        FROM f_group g
         INNER JOIN f_mesh m ON m.id = g.mid
         WHERE 1=1
+        GROUP BY mid
         <include refid="common_choose"></include>
     </select>
 

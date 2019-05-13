@@ -82,10 +82,12 @@
                         </thead>
                         <tbody>
                         <tr th:each="light:${pageInfo.list}">
-                            <td class="pid"><input type="checkbox" name="ids" th:value="${light.id}"><input type="hidden" name="pid" th:value="${light.pid}"></td>
+                            <td class="pid"><input type="checkbox" name="ids" th:value="${light.id}"><input type="hidden" th:value="${light.pid}"></td>
                             <td class="k-link lname"><a th:href="@{/light/info(id=${light.id})}" th:text="${light.lname}"></a></td>
                             <td th:text="${light.lmac}"></td>
-                            <td th:text="${light.mname}" class="mname"></td>
+                            <td class="k-link">
+                                <a th:href="@{/mesh/info(id=${light.mid})}" th:text="${light.mname}"></a>
+                            </td>
                             <td th:text="${light.mesh_id}"></td>
                             <td><span th:text="${light.x}"></span><span>,&nbsp;&nbsp;</span><span th:text="${light.y}"></span></td>
                             <td th:switch="${light.off}">
@@ -96,7 +98,7 @@
                             <td class="p-r">
                                 <img src="/alink-hq/static/img/edit.png" th:alt="${light.id}"  class="rename pointer"  title="重命名">
                                 <a th:href="@{/light/move(ids=${light.id})}">
-                                    <img src="/alink-hq/static/img/exchange.png" th:alt="${light.id}" class="center-img pointer" title="移交">
+                                    <img src="/alink-hq/static/img/exchange.png" th:alt="${light.id}" class="center-img pointer" title="移动">
                                 </a>
                                 <!--<a th:href="@{/light/delete(ids=${light.id})}"-->
                                    <!--onclick="return confirm('您确定要删除所选的网络吗？')">-->
@@ -120,7 +122,7 @@
                             <!--</span>-->
                                                                         <span class="m-r-20">
 
-                                <span class="skipPageBtn pointer moment" onmousedown="exchangeBtnMouseDown()" onmouseup="exchangeBtnMouseUp()" id="multiMove">移交</span>
+                                <span class="skipPageBtn pointer moment" onmousedown="exchangeBtnMouseDown()" onmouseup="exchangeBtnMouseUp()" id="multiMove">移动</span>
                             </span>
                             <span>
 
