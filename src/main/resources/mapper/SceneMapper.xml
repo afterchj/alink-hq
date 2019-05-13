@@ -39,7 +39,7 @@
         update f_scene s set s.sname = #{sceneName},s.update_date = NOW() where s.id=#{sid}
     </update>
 
-    <delete id="deleteScene" parameterType="int">
+    <delete id="delete" parameterType="int">
         DELETE FROM f_scene WHERE id = #{sid}
     </delete>
 
