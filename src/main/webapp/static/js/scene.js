@@ -2,7 +2,7 @@
  * Created by qian.chen on 2019/5/10.
  */
 $(function () {
-    myBrowser();
+   
     var tabs = "meshList";
     var index = 0;
     left(tabs, index);

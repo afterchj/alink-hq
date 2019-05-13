@@ -2,20 +2,33 @@
  * Created by hongjian.chen on 2019/4/24.
  */
 $(function () {
-    myBrowser();
     var tabs="meshList";
     var index=0;
     left(tabs,index);
     $("#multiMove").click(function () {
-        var ids = [];//定义一个数组
+        var ids = [];
+        var uid=[];
         $('input[name="ids"]:checked').each(function () {
             ids.push($(this).val());
+            uid.push($(this).next('.uid').val());
         });
-        if(ids.length>0) {
+        console.log('uid',uid);
+        var result= isRepeat(uid);
+        console.log(result);
+        if(result && ids.length>0){
             location.href = "/alink-hq/mesh/move?ids=" + ids;
+        }else{
+            $('div[openContent="exchange"]').addClass('active');
+            var width = document.body.scrollWidth;
+            var height = document.body.scrollHeight;
+            $('.hide-iframe').addClass('active');
+            $('.hide-iframe').css({
+                'width': width,
+                'height': height
+            });
         }
     });
-    var ids = [];//定义一个数组
+    var ids = [];
     $("#multiDel").click(function () {
         $('input[name="ids"]:checked').each(function () {
             ids.push($(this).val());
@@ -45,11 +58,18 @@ $(function () {
             'height': height
         });
     });
-    $('.pop-btn .reduce').click(function () {
+    $('div[openContent="delete-mesh"] .pop-btn .reduce').click(function () {
         $('div[openContent="delete-mesh"]').removeClass('active');
         $('.hide-iframe').removeClass('active');
     });
-
+    $('div[openContent="exchange"]  .pop-btn .reduce').click(function(){
+        $('div[openContent="exchange"]').removeClass('active');
+        $('.hide-iframe').removeClass('active');
+    })
+    $('div[openContent="exchange"]  .pop-btn .yes').click(function(){
+        $('div[openContent="exchange"]').removeClass('active');
+        $('.hide-iframe').removeClass('active');
+    })
     $('div[openContent="delete-mesh"] .pop-btn .yes').click(function () {
         deleteMesh(ids);
     });
@@ -100,16 +120,6 @@ $(function () {
         $('.hide-iframe').removeClass('active');
     });
 
-})
-$('.moment').mousedown(function(){
-    var url=$(this).attr('src');
-    var newUrl=url.substr(0, url.length-4)+'-un.png';
-    $(this).attr('src',newUrl);
-})
-$('.moment').mouseup(function(){
-    var url=$(this).attr('src');
-    var newUrl=url.substr(0, url.length-7)+'.png';
-    $(this).attr('src',newUrl);
 })
 //重命名校验
 function nameKeyUp() {

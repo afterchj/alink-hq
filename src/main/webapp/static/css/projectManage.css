@@ -61,17 +61,19 @@
 }
 
 .search-result table {
-    border-collapse: collapse;
+    /*border-collapse: collapse;*/
     /*-moz-border-spacing: 0;*/
     /*-moz-border-collapse: unset;*/
     width: 100%;
     margin-bottom: 35px;
 }
 
-.search-result table,
+.search-result table
 td,
 th {
-    border: 1px solid #bbb;
+
+    border-left: #bbb 1px solid;
+    border-bottom: #bbb 1px solid;
 }
 
 .search-result table th {
@@ -205,13 +207,18 @@ th.all-checkbox {
 .hasData,
 .noData {
     display: none;
+    border-left: 0;
+    border-bottom: 0;
+    border-spacing: 0;
+    border-collapse: unset;
+    border-top: #bbb 1px solid;
+    border-right: #bbb 1px solid;
 }
 
 .hasData.active,
 .noData.active {
     display: table;
-    border-left: 0;
-    border-bottom: 0;
+
 }
 
 .search-result table.noData td {
