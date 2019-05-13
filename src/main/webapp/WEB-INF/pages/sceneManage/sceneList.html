@@ -19,17 +19,10 @@
         <div class="clearfix main-right-nav">
             <div class="f-l main-right-title font">场景列表</div>
             <div class="f-r pointer">
-                <!--<a th:href="@{/place/create(projectId=${dict.projectId})}">-->
-                <!--<div class="create" onmousedown="createBtnMouseDown()" onmouseup="createBtnMouseUp()"><span>+</span><span>创建区域</span></div>-->
-                <!--</a>-->
-                <!--<div class="create" >+&nbsp;创建灯</div>-->
-            </div>
-            <div class="f-r pointer">
                 <div class="goBack" onClick="javascript :history.back(-1);" onmousedown="backBtnMouseDown()"
                      onmouseup="backBtnMouseUp()">
                     <span><</span><span>返回</span>
                 </div>
-                <!--<img src="/alink-hq/static/img/go-back.png" alt="" onclick="history.back()">-->
             </div>
         </div>
 
@@ -71,7 +64,6 @@
                             <th><span>场景ID</span></th>
                             <th><span>属于网络</span></th>
                             <th><span>网络ID</span></th>
-                            <!--<th><span>组数量</span></th>-->
                             <th><span>状态</span></th>
                             <th class="operation"><span>操作</span></th>
                         </tr>
@@ -80,22 +72,15 @@
                         <tr th:each="scene:${pageInfo.list}">
                             <td class="checkbox"><input type="checkbox" name="ids" th:value="${scene.id}"></td>
                             <td class="k-link sceneName">
-                                <!--<a th:href="@{/se/info(id=${scene.id})}" th:text="${scene.sceneName}">-->
-                                <!---->
-                                <!--</a>-->
                                 <a href="" th:text="${scene.sceneName}"></a>
                             </td>
                             <td class="sceneId" th:text="${scene.sceneId}"></td>
                             <td th:text="${scene.meshName}"></td>
                             <td th:text="${scene.meshId}"></td>
-                            <!--<td th:text="${place.gcount}"></td>-->
-                            <td>未知</td>
+                            <td></td>
                             <td class="p-r">
                                 <img src="/alink-hq/static/img/edit.png" th:alt="${scene.id}" class="reset-name pointer"
                                      title="重命名">
-                                <!--<a th:href="@{/place/move(ids=${place.id})}" onclick="return confirm('您确定要删除所选的区域吗？')">-->
-                                <!--<img src="/alink-hq/static/img/delete.png" alt="" class="left-img pointer">-->
-                                <!--</a>-->
                                 <a href="javascript:void(0);" class="singleDel pointer">
                                     <img src="/alink-hq/static/img/delete.png" alt="" class="left-img pointer"
                                          title="删除">
@@ -115,7 +100,34 @@
                                       onmouseup="deleteBtnMouseUp()" id="multiDel">删除</span>
                             </span>
                                 </div>
-                                <div th:replace="common/page::page"></div>
+                                <!--<div th:replace="common/page::page"></div>-->
+                                <div class="f-r page-right">
+                                    <span>
+                                        <span class="prev active" id="prev"><span><</span></span>
+                                    </span>
+                                         <span th:inline="text" id="pageNum" style="width: 20px">[[${pageInfo.pageNum}]]</span>
+                                    <span>
+                                         <span class="next" id="next"><span>></span></span>
+                                    </span>
+                                    <span class="m-l-15 m-r-20">共<span class="amount" id="pages" th:inline="text">[[${pageInfo.pages}]]</span>页/
+                                         <span class="amount  pageTotal" th:inline="text">[[${pageInfo.total}]]</span>条数据</span>
+                                    <span class="m-r-15">
+                                         <input type="number" th:value="${pageInfo.pageNum}" id="page" name="pageNum" style="    height: 22px;">
+                                    </span>
+                                    <span class="m-r-35">
+                                        <div id="skip" class="pointer moment skipPageBtn" onmousedown="skipBtnMouseDown()" onmouseup="skipBtnMouseUp()">跳转
+                                    </div>
+                                    </span>
+                                    <span class="m-r-15r">每页显示：</span>
+                                    <span class="m-r-20">
+                                        <select id="size" name="pageSize">
+                                            <option value="10" selected>10</option>
+                                            <option value="30">30</option>
+                                            <option value="50">50</option>
+                                            <option value="50">100</option>
+                                        </select>
+                                </span>
+                                </div>
                             </td>
                         </tr>
                         </tfoot>
@@ -146,7 +158,6 @@
                         </tr>
                         </tbody>
                     </table>
-
                 </div>
             </form>
         </div>

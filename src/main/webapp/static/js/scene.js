@@ -2,7 +2,7 @@
  * Created by qian.chen on 2019/5/10.
  */
 $(function () {
-   
+
     var tabs = "meshList";
     var index = 0;
     left(tabs, index);
@@ -134,47 +134,34 @@ function nameKeyUp() {
 }
 //条件筛选
 $(function () {
-    // var url = window.location.href;
+    var pageSize = GetUrlParam("pageSize");
+    var pageNum = GetUrlParam("pageNum");
+    if(!pageSize){
+        pageSize='';
+    }
+    if(!pageNum){
+        pageNum='';
+    }
+    //点击查询按钮时
     $('.search-button button').click(function () {
         var sceneName = $('#sceneName').val();
         var sceneId = $('#sceneId').val();
-        console.log(sceneId, sceneName);
-        condition(sceneName, sceneId);
+        // console.log(sceneId, sceneName);
+        condition(sceneName, sceneId,pageSize,pageNum);
     })
 })
 
 //查询条件
-function condition(sceneName, sceneId) {
+function condition(sceneName,sceneId,pageSize,pageNum) {
     var url = window.location.href;
-
     var i = url.indexOf("?");
     if (i != -1) {
         var url2 = url.substring(0, i + 1);
     } else {
         var url2 = url + '?';
     }
-    var newUrl = url2 + '&sceneName=' + sceneName + '&sceneId=' + sceneId;
+    var newUrl = url2+'&meshName=测试网络01&meshId=71501234&mid=731'+'&pageSize='+pageSize+'&pageNum='+pageNum + '&sceneName=' + sceneName + '&sceneId=' + sceneId;
     location.href = newUrl;
-    console.log(sceneId, sceneName);
     $('#sceneName').val(sceneName);
     $('#sceneId').val(sceneId);
-}
-//查找参数的名称
-function GetUrlParam(paraName) {
-    var url = document.location.toString();
-    var arrObj = url.split("?");
-    if (arrObj.length > 1) {
-        var arrPara = arrObj[1].split("&");
-        var arr;
-        for (var i = 0; i < arrPara.length; i++) {
-            arr = arrPara[i].split("=");
-            if (arr != null && arr[0] == paraName) {
-                return arr[1];
-            }
-        }
-        return "";
-    }
-    else {
-        return "";
-    }
 }
