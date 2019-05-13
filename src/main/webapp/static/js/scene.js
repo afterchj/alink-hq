@@ -20,10 +20,10 @@ $(function () {
                 'height': height
             });
         }
-        $('.pop-btn .yes').click(function () {
-            console.log("ids=" + ids);
-            deletePlace(ids);
-        })
+        // $('.pop-btn .yes').click(function () {
+        //     console.log("ids=" + ids);
+        //     deletePlace(ids);
+        // })
     });
     //单选重命名
     var id;
@@ -49,17 +49,20 @@ $(function () {
         } else {
             $.ajax({
                 type: "post",
-                url: "/alink-hq/place/rename",
+                url: "/alink-hq/scene/rename",
                 data: {
-                    "name": name,
-                    "id": id
+                    "sceneName": name,
+                    "sid": id
                 },
                 async: true,
                 success: function (res) {
-                    if (res == "success") {
+                    console.log(res);
+                    if (res.result == "000") {
                         location.reload();
-                    } else {
+                    } else if(res.result == "307") {
                         $('p.rename-hint').text('已存在，请重新输入');
+                    }else if(res.result == "200"){
+                        console.log('系统错误');
                     }
                 }
             })
@@ -69,7 +72,7 @@ $(function () {
     $('div[openContent="reset-name"] .pop-btn .reduce').click(function () {
         $('div[openContent="reset-name"]').removeClass('active');
         $('.hide-iframe').removeClass('active');
-    });
+    })
     //重命名校验
     function nameKeyUp() {
         var rename = $('#rename').val();
@@ -81,7 +84,6 @@ $(function () {
             $('p.rename-hint').text('');
         }
     }
-
     //单选删除
     var ids;
     $('.singleDel').click(function () {
@@ -95,16 +97,16 @@ $(function () {
             'height': height
         });
     });
-    $('.pop-btn .reduce').click(function () {
-        $('div[openContent="delete-place"]').removeClass('active');
-        // $('div[openContent="delete-project"]').removeClass('active');
-        $('.hide-iframe').removeClass('active');
-    });
+    // $('div[openContent="delete-place"] .pop-btn .reduce').click(function () {
+    //     $('div[openContent="delete-place"]').removeClass('active');
+    //     // $('div[openContent="delete-project"]').removeClass('active');
+    //     $('.hide-iframe').removeClass('active');
+    // });
 
-    $('.pop-btn .yes').click(function () {
-        console.log("ids=" + ids);
-        deletePlace(ids);
-    })
+    // $('.pop-btn .yes').click(function () {
+    //     console.log("ids=" + ids);
+    //     deletePlace(ids);
+    // })
     function deletePlace(ids) {
         if (ids) {
             location.href = "/alink-hq/place/move?ids=" + ids;
@@ -122,6 +124,13 @@ function nameKeyUp() {
         $('p.rename-hint').text('');
     }
 }
+//id不能为非数字
+$('#sceneId').on('input propertychange',function(){
+    var sceneId=$(this).val();
+    if(sceneId!=''  && isNaN(sceneId)){
+        $(this).val('');
+    }
+})
 //条件筛选
 $(function () {
     //向左向右
@@ -151,7 +160,11 @@ $(function () {
     }
     $('#sceneName').val(sceneName);
     $('#sceneId').val(sceneId);
-    $('#page').val(pageNum);
+    if(pageNum==''){
+        $('#page').val('1');
+    }else{
+        $('#page').val(pageNum);
+    }
     $('#size').children('option[value='+pageSize+']').prop('selected','selected');
     //点击查询按钮时
     $('.search-button button').click(function () {
@@ -193,6 +206,12 @@ $(function () {
             condition(sceneName,sceneId,pageSize,pageNum)
         }else if($('#page').val()!=''&& parseInt($('#page').val())<=1){
             pageNum= 1;
+            condition(sceneName,sceneId,pageSize,pageNum)
+        }else if($('#page').val()==''){
+            pageNum= 1;
+            condition(sceneName,sceneId,pageSize,pageNum)
+        }else{
+            pageNum=$('#page').val();
             condition(sceneName,sceneId,pageSize,pageNum)
         }
     })

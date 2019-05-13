@@ -112,7 +112,7 @@
                                     <span class="m-l-15 m-r-20">共<span class="amount" id="pages" th:inline="text">[[${pageInfo.pages}]]</span>页/
                                          <span class="amount  pageTotal" th:inline="text">[[${pageInfo.total}]]</span>条数据</span>
                                     <span class="m-r-15">
-                                         <input type="number" th:value="${pageInfo.pageNum}" id="page" name="pageNum" style="height: 22px;" value="1">
+                                         <input type="number" th:value="${pageInfo.pageNum}" id="page" name="pageNum" style="height: 22px;" />
                                     </span>
                                     <span class="m-r-35">
                                         <div id="skip" class="pointer moment skipPageBtn" onmousedown="skipBtnMouseDown()" onmouseup="skipBtnMouseUp()">跳转
@@ -121,7 +121,7 @@
                                     <span class="m-r-15r">每页显示：</span>
                                     <span class="m-r-20">
                                         <select id="size" name="pageSize">
-                                            <option value="5" >5</option>
+                                            <option value="2" >2</option>
                                             <option value="10" selected = "selected">10</option>
                                             <option value="30">30</option>
                                             <option value="50">50</option>
