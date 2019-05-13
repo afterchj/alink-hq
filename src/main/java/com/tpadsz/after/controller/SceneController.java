@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -106,29 +105,31 @@ public class SceneController {
         List<MeshInfo> lightList;
         MeshInfo lightInfo = new MeshInfo();
         if (lid == null) {
-            lightList = sceneService.findLightByGid(groupList.get(0).getGid());
+            lightList = sceneService.findLightByGid(groupList.get(0).getGid(),sid);
         } else {
             lightInfo = sceneService.findLightInfoByLid(lid);
-            lightList = sceneService.findLightByGid(lightInfo.getGid());
+            lightList = sceneService.findLightByGid(lightInfo.getGid(),sid);
         }
 
         List<MeshInfo> list1 = sceneService.findXYBySid(sid);
-        List<MeshInfo> list2 = new ArrayList<>();
-        if(list1.size()==1){
+        List<MeshInfo> groupXYList = sceneService.findXYBySid(sid);
+        if (list1.size() == 1) {
             model.addAttribute("px", list1.get(0).getX());
             model.addAttribute("py", list1.get(0).getY());
-        }else {
-            for(int i=0;i<groupList.size();i++){
-                sceneService.findLightByGid(groupList.get(i).getGid());
-
-
+        } else {
+            for (int i = 0; i < groupList.size(); i++) {
+                List<MeshInfo> list2 = sceneService.findXYByGid(groupList.get(i).getGid());
+                if (list2.size() == 1) {
+                    MeshInfo groupXY = new MeshInfo();
+                    groupXY.setX(list2.get(i).getX());
+                    groupXY.setY(list2.get(i).getY());
+                    groupXY.setGid(groupList.get(i).getGid());
+                    groupXYList.add(groupXY);
+                }
             }
-
-            list2 = sceneService.findXYByGid(groupList.get(0).getGid());
-        }
-        if(list2.size()==1){
-            model.addAttribute("gx", list2.get(0).getX());
-            model.addAttribute("gy", list2.get(0).getY());
+            if (groupXYList.size() > 0) {
+                model.addAttribute("groupXYList", groupXYList);
+            }
         }
 
         model.addAttribute("sceneName", sceneName);
@@ -144,6 +145,16 @@ public class SceneController {
         model.addAttribute("lightInfo", lightInfo);
 
         return "sceneManage/sceneDetail";
+    }
+
+
+    @RequestMapping(value = "/groupDetail", method = RequestMethod.POST)
+    @ResponseBody
+    public Map<String, List> groupDetail(Integer gid,Integer sid) {
+        Map<String, List> map = new HashMap<>();
+        List<MeshInfo> lightList = sceneService.findLightByGid(gid,sid);
+        map.put("lightList", lightList);
+        return map;
     }
 
 }

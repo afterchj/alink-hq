@@ -25,7 +25,7 @@ public interface SceneService {
 
     List<MeshInfo> findGroupByPid(Integer pid);
 
-    List<MeshInfo> findLightByGid(Integer gid);
+    List<MeshInfo> findLightByGid(Integer gid,Integer sid);
 
     MeshInfo findLightInfoByLid(Integer lid);
 

@@ -29,7 +29,7 @@ public interface SceneDao {
 
     List<MeshInfo> findGroupByPid(@Param("pid") Integer pid);
 
-    List<MeshInfo> findLightByGid(@Param("gid") Integer gid);
+    List<MeshInfo> findLightByGid(@Param("gid") Integer gid,@Param("sid") Integer sid);
 
     MeshInfo findLightInfoByLid(@Param("lid")Integer lid);
 
