@@ -140,7 +140,7 @@ $(function () {
     })
 })
 $(function () {
-    myBrowser()
+    // myBrowser()
     var tabs = "userList";
     var index = 1;
     left(tabs, index);

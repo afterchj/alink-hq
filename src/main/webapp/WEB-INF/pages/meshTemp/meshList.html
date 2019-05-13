@@ -93,7 +93,7 @@
                         <tr th:each="mesh:${pageInfo.list}">
                             <td class="checkbox">
                                 <input type="checkbox" name="ids" th:value="${mesh.id}" class="">
-                                <input type="hidden" th:value="${mesh.uid}">
+                                <input type="hidden" th:value="${mesh.uid}"  class="uid">
                             </td>
                             <td class="k-link"><a th:href="@{/mesh/info(id=${mesh.id})}" th:text="${mesh.mname}"></a>
                             </td>
@@ -114,7 +114,7 @@
                                      title="重命名">
                                 <a th:href="@{/mesh/move(ids=${mesh.id})}">
                                     <img src="/alink-hq/static/img/exchange.png" alt="" class="center-img pointer"
-                                         title="移交">
+                                         title="移动">
                                 </a>
                                 <!--<a th:href="@{/mesh/delete(ids=${mesh.id})}" onclick="return confirm('您确定要删除所选的网络吗？')">-->
                                 <!--<img src="/alink-hq/static/img/delete.png" alt="" id="singleDel">-->
@@ -141,7 +141,7 @@
                                     <span class="m-r-20">
 
                                 <span class="skipPageBtn pointer moment" onmousedown="exchangeBtnMouseDown()"
-                                      onmouseup="exchangeBtnMouseUp()" id="multiMove">移交</span>
+                                      onmouseup="exchangeBtnMouseUp()" id="multiMove">移动</span>
                             </span>
                                     <span>
 
@@ -214,6 +214,19 @@
     <div class="pop-content">
         <div class="reset-pwd">您确定要删除该所选的网络吗？</div>
         <div class="reset-pwd-hint">（删除后网络中所有信息将无法恢复，请慎重！）</div>
+        <div class="pop-btn">
+            <button class="reduce">取消</button>
+            <button class="yes">确定</button>
+        </div>
+    </div>
+</div>
+<!-- 不可移动不同账号下的网络 -->
+<div class="pop-iframe " openContent="exchange">
+    <div class=" p-r pop-nav">
+        温馨提示
+    </div>
+    <div class="pop-content">
+        <div class="reset-pwd">不同账号下的网络不可进行移动</div>
         <div class="pop-btn">
             <button class="reduce">取消</button>
             <button class="yes">确定</button>
