@@ -13,7 +13,6 @@ laydate.render({
 
 
 $(function () {
-
     var accountNum=0;
     $('tbody .checkbox input').each(function () {
        if($(this).prop('checked')){
