@@ -51,39 +51,26 @@ $(function () {
         }
     });
     $("#size").change(function () {
-//            var page = $("#page").val();
-//            var size = $("#size option:selected").val();
-//            console.log("size=" + size);
-//            location.href = "/alink-hq/mesh/list?pageNum=" + page + "&pageSize=" + size;
         $("form:eq(0)").submit();
     });
     $("#skip").click(function () {
         $("form:eq(0)").submit();
-//            var page = $("#page").val();
-//            var size = $("#size option:selected").val();
-//            console.log("page=" + page + ",size=" + size);
-//            location.href = "/alink-hq/mesh/list?pageNum=" + page + "&pageSize=" + size;
     });
     var page = parseInt($('#pageNum').text());
     var pageTotal = parseInt($('#pages').text());
     if (page == 1) {
-        // $('#prev').attr('src', '/alink-hq/static/img/left-arrow.png');
         $('.prev').removeClass('active');
         $(".prev").addClass('disabled');
     } else {
-        // $('.prev').attr('src', '/alink-hq/static/img/left-arrow-color.png');
         $('.prev').addClass('active');
     }
     if (page == pageTotal) {
-        // $('#next').attr('src', '/alink-hq/static/img/right-arrow.png');
-        // $("#next").addClass('disabled');
         $('.next').removeClass('active');
         $(".next").addClass('disabled');
     } else {
-        // $('#next').attr('src', '/alink-hq/static/img/right-arrow-color.png');
         $(".next").addClass('active');
     }
-});
+})
 
 // //创建点击
 // function createBtnMouseDown(){

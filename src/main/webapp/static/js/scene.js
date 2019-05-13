@@ -2,7 +2,6 @@
  * Created by qian.chen on 2019/5/10.
  */
 $(function () {
-
     var tabs = "meshList";
     var index = 0;
     left(tabs, index);
@@ -30,9 +29,6 @@ $(function () {
     var id;
     $('.reset-name').click(function () {
         id = $(this).attr("alt");
-        // console.log("id="+id);
-        // projectName=$(this).parent().siblings('.project-name').find('a').text();
-        // account=$(this).parent().siblings('.project-account').text();
         $('div[openContent="reset-name"]').addClass('active');
         var width = document.body.scrollWidth;
         var height = document.body.scrollHeight;
@@ -72,7 +68,6 @@ $(function () {
     //取消按钮
     $('div[openContent="reset-name"] .pop-btn .reduce').click(function () {
         $('div[openContent="reset-name"]').removeClass('active');
-        // $('div[openContent="delete-project"]').removeClass('active');
         $('.hide-iframe').removeClass('active');
     });
     //重命名校验
@@ -116,11 +111,6 @@ $(function () {
         }
     }
 });
-
-$(function () {
-    var height = $(document).height();
-    $('.main-left').css('height', height);
-})
 //重命名校验
 function nameKeyUp() {
     var rename = $('#rename').val();
@@ -134,20 +124,77 @@ function nameKeyUp() {
 }
 //条件筛选
 $(function () {
+    //向左向右
+    var page = parseInt($('#pageNum').text());
+    var pageTotal = parseInt($('#pages').text());
+    if (page == 1) {
+        $('.prev').removeClass('active');
+        $(".prev").addClass('disabled');
+    } else {
+        $('.prev').addClass('active');
+    }
+    if (page == pageTotal) {
+        $('.next').removeClass('active');
+        $(".next").addClass('disabled');
+    } else {
+        $(".next").addClass('active');
+    }
+    var sceneName = decodeURIComponent(GetUrlParam("sceneName"));
+    var sceneId  = decodeURIComponent(GetUrlParam("sceneId"));
     var pageSize = GetUrlParam("pageSize");
     var pageNum = GetUrlParam("pageNum");
     if(!pageSize){
-        pageSize='';
+        pageSize=10;
     }
     if(!pageNum){
         pageNum='';
     }
+    $('#sceneName').val(sceneName);
+    $('#sceneId').val(sceneId);
+    $('#page').val(pageNum);
+    $('#size').children('option[value='+pageSize+']').prop('selected','selected');
     //点击查询按钮时
     $('.search-button button').click(function () {
-        var sceneName = $('#sceneName').val();
-        var sceneId = $('#sceneId').val();
-        // console.log(sceneId, sceneName);
+        sceneName = $('#sceneName').val();
+        sceneId = $('#sceneId').val();
         condition(sceneName, sceneId,pageSize,pageNum);
+    })
+    //选择页数变化
+    $('#size').change(function () {
+         pageSize = $(this).children('option:selected').val();
+         pageNum = $('#page').val();
+        if (pageNum == '') {
+            pageNum == 1;
+        } else {
+            pageNum = parseInt(pageNum);
+        }
+        condition(sceneName, sceneId,pageSize, pageNum);
+    })
+    //点击上一页
+    $('#prev').click(function(){
+        if(pageNum==''){
+            pageNum=1;
+        }
+        pageNum=parseInt(pageNum)-1;
+        condition(sceneName,sceneId,pageSize,pageNum)
+    })
+    //点击下一页
+    $('#next').click(function(){
+        if(pageNum==''){
+            pageNum=1;
+        }
+        pageNum=parseInt(pageNum)+1;
+        condition(sceneName,sceneId,pageSize,pageNum)
+    })
+    //点击跳转
+    $('#skip').click(function(){
+        if($('#page').val()!=''&& parseInt($('#page').val())>=parseInt(pageTotal)){
+            pageNum= parseInt(pageTotal);
+            condition(sceneName,sceneId,pageSize,pageNum)
+        }else if($('#page').val()!=''&& parseInt($('#page').val())<=1){
+            pageNum= 1;
+            condition(sceneName,sceneId,pageSize,pageNum)
+        }
     })
 })
 
@@ -162,6 +209,4 @@ function condition(sceneName,sceneId,pageSize,pageNum) {
     }
     var newUrl = url2+'&meshName=测试网络01&meshId=71501234&mid=731'+'&pageSize='+pageSize+'&pageNum='+pageNum + '&sceneName=' + sceneName + '&sceneId=' + sceneId;
     location.href = newUrl;
-    $('#sceneName').val(sceneName);
-    $('#sceneId').val(sceneId);
 }

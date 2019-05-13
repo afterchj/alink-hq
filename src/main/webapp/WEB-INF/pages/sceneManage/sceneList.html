@@ -107,12 +107,12 @@
                                     </span>
                                          <span th:inline="text" id="pageNum" style="width: 20px">[[${pageInfo.pageNum}]]</span>
                                     <span>
-                                         <span class="next" id="next"><span>></span></span>
+                                          <span class="next" id="next"><span>></span></span>
                                     </span>
                                     <span class="m-l-15 m-r-20">共<span class="amount" id="pages" th:inline="text">[[${pageInfo.pages}]]</span>页/
                                          <span class="amount  pageTotal" th:inline="text">[[${pageInfo.total}]]</span>条数据</span>
                                     <span class="m-r-15">
-                                         <input type="number" th:value="${pageInfo.pageNum}" id="page" name="pageNum" style="    height: 22px;">
+                                         <input type="number" th:value="${pageInfo.pageNum}" id="page" name="pageNum" style="height: 22px;" value="1">
                                     </span>
                                     <span class="m-r-35">
                                         <div id="skip" class="pointer moment skipPageBtn" onmousedown="skipBtnMouseDown()" onmouseup="skipBtnMouseUp()">跳转
@@ -121,12 +121,13 @@
                                     <span class="m-r-15r">每页显示：</span>
                                     <span class="m-r-20">
                                         <select id="size" name="pageSize">
-                                            <option value="10" selected>10</option>
+                                            <option value="5" >5</option>
+                                            <option value="10" selected = "selected">10</option>
                                             <option value="30">30</option>
                                             <option value="50">50</option>
                                             <option value="50">100</option>
                                         </select>
-                                </span>
+                                    </span>
                                 </div>
                             </td>
                         </tr>
@@ -196,7 +197,7 @@
 </div>
 <div class="hide-iframe "></div>
 <script type="text/javascript" src="/alink-hq/static/js/left.js"></script>
-<script type="text/javascript" src="/alink-hq/static/js/page.js"></script>
+<!--<script type="text/javascript" src="/alink-hq/static/js/page.js"></script>-->
 <script type="text/javascript" src="/alink-hq/static/js/scene.js"></script>
 <script src="/alink-hq/static/js/moment.js"></script>
 </body>
