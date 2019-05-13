@@ -70,7 +70,7 @@
             AND m.project_id=#{projectId}
         </if>
         GROUP BY m.uid,m.mesh_id
-        ORDER BY scount DESC,m.create_date DESC
+        ORDER BY m.update_date DESC,scount DESC
     </select>
 
     <select id="getMeshInfo" resultType="MeshInfo" parameterType="int">
