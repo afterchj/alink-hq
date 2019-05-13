@@ -5,6 +5,8 @@ $(function () {
     var tabs = "meshList";
     var index = 0;
     left(tabs, index);
+    var deleteArray=[];
+
     $("#multiDel").click(function () {
         var ids = [];
         $('input[name="ids"]:checked').each(function () {
@@ -20,10 +22,6 @@ $(function () {
                 'height': height
             });
         }
-        // $('.pop-btn .yes').click(function () {
-        //     console.log("ids=" + ids);
-        //     deletePlace(ids);
-        // })
     });
     //单选重命名
     var id;
@@ -68,7 +66,7 @@ $(function () {
             })
         }
     });
-    //取消按钮
+    //重命名取消按钮
     $('div[openContent="reset-name"] .pop-btn .reduce').click(function () {
         $('div[openContent="reset-name"]').removeClass('active');
         $('.hide-iframe').removeClass('active');
@@ -85,9 +83,10 @@ $(function () {
         }
     }
     //单选删除
-    var ids;
     $('.singleDel').click(function () {
-        ids = $(this).parent().siblings('.checkbox').find('input').val();
+        // ids = $(this).parent().siblings('.checkbox').find('input').val();
+        var  sid=parseInt($(this).parent().siblings('.sid').find('input').val());
+        var sceneId=parseInt($(this).parent().siblings('.sceneId').text());
         $('div[openContent="delete-place"]').addClass('active');
         var width = document.body.scrollWidth;
         var height = document.body.scrollHeight;
@@ -96,22 +95,48 @@ $(function () {
             'width': width,
             'height': height
         });
+        var msg={
+            id:sid,
+            sceneId:sceneId
+        }
+        deleteArray.push(msg);
+        console.log(deleteArray);
+    })
+    $('div[openContent="delete-place"] .pop-btn .reduce').click(function () {
+        $('div[openContent="delete-place"]').removeClass('active');
+        $('.hide-iframe').removeClass('active');
     });
-    // $('div[openContent="delete-place"] .pop-btn .reduce').click(function () {
-    //     $('div[openContent="delete-place"]').removeClass('active');
-    //     // $('div[openContent="delete-project"]').removeClass('active');
-    //     $('.hide-iframe').removeClass('active');
-    // });
+    $('div[openContent="delete-place"] .pop-btn .yes').click(function () {
+        var newJsonArray=JSON.stringify(deleteArray);
+        console.log(newJsonArray);
+        $('div[openContent="delete-place"]').removeClass('active');
+        $('.hide-iframe').removeClass('active');
+        $.ajax({
+            type: "POST",
+            url: "/alink-hq/scene/delete",
+            data: {sceneInfo: newJsonArray},
+            dataType: "json",
+            success: function (res) {
+                if (res.result == '000') {
+                    location.reload();
+                    $('tbody tr td.checkbox input').prop('checked',false);
+                    $('#all').prop('checked',false);
+                } else if (res.result == '200') {
+                    console.log('系统错误');
+                }
+            }
+        })
+    });
 
     // $('.pop-btn .yes').click(function () {
     //     console.log("ids=" + ids);
     //     deletePlace(ids);
     // })
-    function deletePlace(ids) {
-        if (ids) {
-            location.href = "/alink-hq/place/move?ids=" + ids;
-        }
-    }
+    // function deletePlace(ids) {
+    //     if (ids) {
+    //         location.href = "/alink-hq/place/move?ids=" + ids;
+    //     }
+    // }
 });
 //重命名校验
 function nameKeyUp() {

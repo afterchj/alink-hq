@@ -70,7 +70,7 @@
                         </thead>
                         <tbody>
                         <tr th:each="scene:${pageInfo.list}">
-                            <td class="checkbox"><input type="checkbox" name="ids" th:value="${scene.id}"></td>
+                            <td class="checkbox sid" ><input type="checkbox" name="sid"  th:value="${scene.id}"></td>
                             <td class="k-link sceneName">
                                 <a href="" th:text="${scene.sceneName}"></a>
                             </td>
@@ -81,10 +81,10 @@
                             <td class="p-r">
                                 <img src="/alink-hq/static/img/edit.png" th:alt="${scene.id}" class="reset-name pointer"
                                      title="重命名">
-                                <a href="javascript:void(0);" class="singleDel pointer">
-                                    <img src="/alink-hq/static/img/delete.png" alt="" class="left-img pointer"
+                                <!--<a href="javascript:void(0);" class="singleDel pointer">-->
+                                    <img src="/alink-hq/static/img/delete.png" alt="" class="left-img pointer singleDel"
                                          title="删除">
-                                </a>
+                                <!--</a>-->
                             </td>
                         </tr>
                         </tbody>
