@@ -19,6 +19,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+
 /**
  * Created by chenhao.lu on 2019/5/7.
  */
@@ -102,13 +103,28 @@ public class SceneController {
         MeshInfo meshInfo = sceneService.findProjectByMeshId(meshId);
         List<MeshInfo> placeList = sceneService.findPlaceBySid(sid);
         List<MeshInfo> groupList = sceneService.findGroupByPid(placeList.get(0).getPid());
-        List<MeshInfo> lightList = new ArrayList<>();
+        List<MeshInfo> lightList;
         MeshInfo lightInfo = new MeshInfo();
         if (lid == null) {
             lightList = sceneService.findLightByGid(groupList.get(0).getGid());
         } else {
             lightInfo = sceneService.findLightInfoByLid(lid);
             lightList = sceneService.findLightByGid(lightInfo.getGid());
+        }
+
+        List<MeshInfo> list1 = sceneService.findXYBySid(sid);
+        List<MeshInfo> list2 = new ArrayList<>();
+        if(list1.size()==1){
+            model.addAttribute("px", list1.get(0).getX());
+            model.addAttribute("py", list1.get(0).getY());
+        }else if(lid==null){
+            list2 = sceneService.findXYByGid(groupList.get(0).getGid());
+        }else {
+            list2 = sceneService.findXYByGid(lightInfo.getGid());
+        }
+        if(list2.size()==1){
+            model.addAttribute("gx", list2.get(0).getX());
+            model.addAttribute("gy", list2.get(0).getY());
         }
 
         model.addAttribute("sceneName", sceneName);

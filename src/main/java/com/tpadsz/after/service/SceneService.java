@@ -28,4 +28,8 @@ public interface SceneService {
     List<MeshInfo> findLightByGid(Integer gid);
 
     MeshInfo findLightInfoByLid(Integer lid);
+
+    List<MeshInfo> findXYBySid(Integer sid);
+
+    List<MeshInfo> findXYByGid(Integer gid);
 }

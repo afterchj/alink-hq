@@ -72,5 +72,15 @@ public class SceneServiceImpl implements SceneService {
         return sceneDao.findLightInfoByLid(lid);
     }
 
+    @Override
+    public List<MeshInfo> findXYBySid(Integer sid) {
+        return sceneDao.findXYBySid(sid);
+    }
+
+    @Override
+    public List<MeshInfo> findXYByGid(Integer gid) {
+        return sceneDao.findXYByGid(gid);
+    }
+
 
 }
