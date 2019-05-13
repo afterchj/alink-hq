@@ -117,10 +117,14 @@ public class SceneController {
         if(list1.size()==1){
             model.addAttribute("px", list1.get(0).getX());
             model.addAttribute("py", list1.get(0).getY());
-        }else if(lid==null){
-            list2 = sceneService.findXYByGid(groupList.get(0).getGid());
         }else {
-            list2 = sceneService.findXYByGid(lightInfo.getGid());
+            for(int i=0;i<groupList.size();i++){
+                sceneService.findLightByGid(groupList.get(i).getGid());
+
+
+            }
+
+            list2 = sceneService.findXYByGid(groupList.get(0).getGid());
         }
         if(list2.size()==1){
             model.addAttribute("gx", list2.get(0).getX());

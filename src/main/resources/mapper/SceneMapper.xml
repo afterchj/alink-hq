@@ -12,11 +12,11 @@
     </select>
 
     <select id="findGroupByPid" resultType="com.tpadsz.after.entity.MeshInfo">
-        SELECT id AS gid,gname FROM f_group WHERE pid = #{pid}
+        SELECT id AS gid,gname FROM f_group WHERE pid = #{pid} ORDER BY group_id
     </select>
 
     <select id="findLightByGid" resultType="com.tpadsz.after.entity.MeshInfo">
-        SELECT t1.id,t1.lmac,t1.lname,t2.x,t2.y FROM f_light AS t1 INNER JOIN f_light_setting AS t2 ON t1.id = t2.lid WHERE t1.gid = #{gid} and t2.sid = #{sid}
+        SELECT t1.id,t1.lmac,t1.lname,t2.x,t2.y FROM f_light AS t1 INNER JOIN f_light_setting AS t2 ON t1.id = t2.lid WHERE t1.gid = #{gid} and t2.sid = #{sid} ORDER BY t1.create_date
     </select>
 
     <select id="findLightInfoByLid" resultType="com.tpadsz.after.entity.MeshInfo">
@@ -44,7 +44,7 @@
     </delete>
 
     <update id="saveSceneName">
-        UPDATE f_scene SET sname = #{sceneName},update_date=NOW() WHERE sid =#{sid}
+        UPDATE f_scene SET sname = #{sceneName},update_date=NOW() WHERE id =#{sid}
     </update>
 
     <select id="findProjectByMeshId" resultType="com.tpadsz.after.entity.MeshInfo">
