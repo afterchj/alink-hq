@@ -1,7 +1,6 @@
 package com.tpadsz.after.service;
 
 import com.tpadsz.after.entity.MeshInfo;
-import com.tpadsz.after.entity.ProjectList;
 import com.tpadsz.after.entity.SceneList;
 
 import java.util.List;
@@ -20,11 +19,13 @@ public interface SceneService {
 
     void saveSceneName(String sceneName, Integer sid);
 
-    ProjectList findProjectByMeshId(String meshId);
+    MeshInfo findProjectByMeshId(String meshId);
 
     List<MeshInfo> findPlaceBySid(Integer sid);
 
     List<MeshInfo> findGroupByPid(Integer pid);
 
     List<MeshInfo> findLightByGid(Integer gid);
+
+    MeshInfo findLightInfoByLid(Integer lid);
 }

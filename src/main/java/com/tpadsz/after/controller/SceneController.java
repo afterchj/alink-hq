@@ -4,7 +4,6 @@ import com.alibaba.fastjson.JSONArray;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.tpadsz.after.entity.MeshInfo;
-import com.tpadsz.after.entity.ProjectList;
 import com.tpadsz.after.entity.SceneList;
 import com.tpadsz.after.entity.dd.ResultDict;
 import com.tpadsz.after.service.SceneService;
@@ -15,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -30,7 +30,8 @@ public class SceneController {
     private SceneService sceneService;
 
     @RequestMapping(value = "/list", method = RequestMethod.GET)
-    public String list(Integer pageNum, Integer pageSize, String sceneName, Integer sceneId,Integer lid, String meshName,String meshId,Integer mid,Model model) {
+    public String list(Integer pageNum, Integer pageSize, String sceneName, Integer sceneId, Integer lid, String
+            meshName, String meshId, Integer mid, Model model) {
         if (pageNum == null) {
             pageNum = 1;   //设置默认当前页
         }
@@ -42,7 +43,7 @@ public class SceneController {
         }
         try {
             PageHelper.startPage(pageNum, pageSize);
-            List<SceneList> list = sceneService.searchSceneList(sceneName, sceneId,lid,meshName,meshId,mid);
+            List<SceneList> list = sceneService.searchSceneList(sceneName, sceneId, lid, meshName, meshId, mid);
             PageInfo<SceneList> pageInfo = new PageInfo<>(list, pageSize);
             if (pageInfo.getList().size() > 0) {
                 model.addAttribute("pageInfo", pageInfo);
@@ -83,9 +84,9 @@ public class SceneController {
             for (SceneList scene : sceneList) {
                 if (scene.getSceneId() > 3) {
                     sceneService.delete(scene.getId());
-                }else {
-                    String sceneName = "场景" + (scene.getSceneId()+1);
-                    sceneService.saveSceneName(sceneName,scene.getId());
+                } else {
+                    String sceneName = "场景" + (scene.getSceneId() + 1);
+                    sceneService.saveSceneName(sceneName, scene.getId());
                 }
             }
             map.put("result", ResultDict.SUCCESS.getCode());
@@ -96,23 +97,32 @@ public class SceneController {
     }
 
     @RequestMapping(value = "/detail", method = RequestMethod.GET)
-    public String detail(Integer sid,Integer lid,String sceneName, Integer sceneId, String meshName, String meshId, Model model) {
-        ProjectList projectList = sceneService.findProjectByMeshId(meshId);
-        if(lid==null) {
-            List<MeshInfo> placeList = sceneService.findPlaceBySid(sid);
-            List<MeshInfo> groupList = sceneService.findGroupByPid(placeList.get(0).getPid());
-            List<MeshInfo> lightList = sceneService.findLightByGid(groupList.get(0).getGid());
+    public String detail(Integer sid, Integer lid, String sceneName, Integer sceneId, String meshName, String meshId,
+                         Model model) {
+        MeshInfo meshInfo = sceneService.findProjectByMeshId(meshId);
+        List<MeshInfo> placeList = sceneService.findPlaceBySid(sid);
+        List<MeshInfo> groupList = sceneService.findGroupByPid(placeList.get(0).getPid());
+        List<MeshInfo> lightList = new ArrayList<>();
+        MeshInfo lightInfo = new MeshInfo();
+        if (lid == null) {
+            lightList = sceneService.findLightByGid(groupList.get(0).getGid());
+        } else {
+            lightInfo = sceneService.findLightInfoByLid(lid);
+            lightList = sceneService.findLightByGid(lightInfo.getGid());
         }
-//        if (account != null) {
-//            user = accountService.findByAccount(account);
-//            if (meshNum > 0) {
-//                placeNum = projectService.findPlaceNum(projectId);
-//
-//                groupNum = projectService.findGroupNum(projectId);
-//                lightNum = projectService.findLightNum(projectId);
-//            }
-//        }
-//        model.addAttribute("placeNum", placeNum);
+
+        model.addAttribute("sceneName", sceneName);
+        model.addAttribute("sceneId", sceneId);
+        model.addAttribute("projectName", meshInfo.getName());
+        model.addAttribute("projectId", meshInfo.getProject_id());
+        model.addAttribute("meshName", meshName);
+        model.addAttribute("meshId", meshId);
+        model.addAttribute("mid", meshInfo.getMid());
+        model.addAttribute("placeList", placeList);
+        model.addAttribute("groupList", groupList);
+        model.addAttribute("lightList", lightList);
+        model.addAttribute("lightInfo", lightInfo);
+
         return "sceneManage/sceneDetail";
     }
 

@@ -1,7 +1,6 @@
 package com.tpadsz.after.dao;
 
 import com.tpadsz.after.entity.MeshInfo;
-import com.tpadsz.after.entity.ProjectList;
 import com.tpadsz.after.entity.SceneList;
 import org.apache.ibatis.annotations.Param;
 
@@ -24,11 +23,13 @@ public interface SceneDao {
 
     void saveSceneName(@Param("sceneName")String sceneName, @Param("sid")Integer sid);
 
-    ProjectList findProjectByMeshId(@Param("meshId")String meshId);
+    MeshInfo findProjectByMeshId(@Param("meshId")String meshId);
 
     List<MeshInfo> findPlaceBySid(@Param("sid") Integer sid);
 
     List<MeshInfo> findGroupByPid(@Param("pid") Integer pid);
 
     List<MeshInfo> findLightByGid(@Param("gid") Integer gid);
+
+    MeshInfo findLightInfoByLid(@Param("lid")Integer lid);
 }
