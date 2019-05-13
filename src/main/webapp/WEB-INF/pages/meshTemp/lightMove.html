@@ -89,8 +89,7 @@
         var tabs="lightList";
         var index=0;
         left(tabs,index);
-        console.log("gid=" + $("#gid option:selected").val());
-        $.getJSON("/alink-hq/group/getGroup", {"uid": uid}, function (json) {
+        $.getJSON("/alink-hq/light/getGroup", {"uid": uid}, function (json) {
             if (json != '') {
                 $("#gid option:first").siblings().remove();
             }

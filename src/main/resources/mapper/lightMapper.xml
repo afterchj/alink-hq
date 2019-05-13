@@ -41,7 +41,7 @@
         <include refid="Base_Column_List"/>
         FROM f_light l
         INNER JOIN f_mesh m ON m.id = l.mid
-        LEFT JOIN f_place pl ON pl.id=l.pid
+        INNER JOIN f_place pl ON pl.id=l.pid
         LEFT JOIN f_light_setting ls ON ls.lid=l.id
         WHERE 1=1
         <include refid="common_choose"></include>
@@ -70,6 +70,7 @@
             AND m.project_id=#{projectId}
         </if>
         GROUP BY l.id
+        ORDER BY l.update_date DESC
     </select>
     <select id="getLightInfo" resultType="MeshInfo" parameterType="int">
        SELECT
@@ -117,9 +118,10 @@
         SELECT
             g.id,
             g.gname label
-        FROM WHERE f_group g
+        FROM f_group g
         INNER JOIN f_mesh m ON m.id = g.mid
         WHERE 1=1
+        GROUP BY mid
         <include refid="common_choose"></include>
     </select>
 

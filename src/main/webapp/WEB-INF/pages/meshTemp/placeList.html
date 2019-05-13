@@ -94,7 +94,7 @@
                             </td>
                             <td th:text="${place.mesh_id}"></td>
                             <td class="k-link">
-                                <a th:href="@{/group/list(projectId=${meshInfo.project_id},pid=${meshInfo.id})}" th:text="${place.gcount}"></a>
+                                <a th:href="@{/group/list(projectId=${place.project_id},pid=${place.id})}" th:text="${place.gcount}"></a>
                             </td>
                             <td>未知</td>
                             <td class="p-r">
