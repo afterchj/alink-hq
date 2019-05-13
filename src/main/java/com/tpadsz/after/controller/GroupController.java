@@ -144,12 +144,8 @@ public class GroupController {
     @RequestMapping("/getMesh")
     public List<OptionList> getMesh(Integer uid) {
         Map map = new HashMap();
-        if (uid != null) {
-            String role = roleService.selectById(uid);
-            map.put("role", role);
-            map.put("uid", uid);
-        }
-        List<OptionList> meshMap = groupService.getMesh(map);
+        map.put("uid", uid);
+        List<OptionList> meshMap = meshService.getMesh(map);
         return meshMap;
     }
 }

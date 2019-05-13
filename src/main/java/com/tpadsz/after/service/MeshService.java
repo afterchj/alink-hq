@@ -32,4 +32,5 @@ public interface MeshService {
     void deleteMeshByIds(List list);
 
     List<OptionList> getProjects(Map map);
+    List<OptionList> getMesh(Map map);
 }

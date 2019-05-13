@@ -21,6 +21,8 @@ public interface MeshDao {
 
     int getCount(Map map);
 
+    List<OptionList> getMesh(Map map);
+
     OptionList getProject(int projectId);
 
     List<OptionList> getProjects(Map map);
