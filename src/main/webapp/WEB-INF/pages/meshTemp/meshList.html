@@ -20,13 +20,15 @@
             <div class="f-l main-right-title">网络列表</div>
             <div class="f-r pointer">
                 <a th:href="@{/mesh/create/(id=0)}">
-                    <div class="create" onmousedown="createBtnMouseDown()" onmouseup="createBtnMouseUp()"><span>+</span><span>创建网络</span></div>
+                    <div class="create" onmousedown="createBtnMouseDown()" onmouseup="createBtnMouseUp()"><span>+</span><span>创建网络</span>
+                    </div>
                     <!--<img src="/alink-hq/static/img/create-project.png" alt="" id="newMesh">-->
                 </a>
 
             </div>
             <div class="f-r pointer">
-                <div class="goBack" onClick="javascript :history.back();" onmousedown="backBtnMouseDown()" onmouseup="backBtnMouseUp()">
+                <div class="goBack" onClick="javascript :history.back();" onmousedown="backBtnMouseDown()"
+                     onmouseup="backBtnMouseUp()">
                     <!--<span class="triangle-facing-left"></span>-->
                     <span><</span><span>返回</span>
                 </div>
@@ -89,15 +91,23 @@
                         </thead>
                         <tbody>
                         <tr th:each="mesh:${pageInfo.list}">
-                            <td class="checkbox"><input type="checkbox" name="ids" th:value="${mesh.id}" class="">
+                            <td class="checkbox">
+                                <input type="checkbox" name="ids" th:value="${mesh.id}" class="">
+                                <input type="hidden" th:value="${mesh.uid}">
                             </td>
                             <td class="k-link"><a th:href="@{/mesh/info(id=${mesh.id})}" th:text="${mesh.mname}"></a>
                             </td>
                             <td th:text="${mesh.mesh_id}"></td>
                             <td th:text="${mesh.mesh_type}"></td>
-                            <td th:text="${mesh.name}"></td>
-                            <td th:text="${mesh.pcount}"></td>
-                            <td th:text="${mesh.scount}"></td>
+                            <td class="k-link">
+                                <a th:href="@{/project/detail(projectId=${mesh.project_id})}" th:text="${mesh.name}"></a>
+                            </td>
+                            <td class="k-link">
+                                <a th:href="@{/place/list(projectId=${mesh.project_id},mid=${mesh.id})}" th:text="${mesh.pcount}"></a>
+                            </td>
+                            <td class="k-link">
+                                <a th:href="@{/scene/list(meshName=${mesh.mname},meshId=${mesh.mesh_id},mid=${mesh.id})}" th:text="${mesh.scount}"></a>
+                            </td>
                             <td>未知</td>
                             <td class="p-r">
                                 <img src="/alink-hq/static/img/edit.png" th:alt="${mesh.id}" class="reset-name pointer"
@@ -123,18 +133,20 @@
                                 <span id="amount" class="amount">0</span>条数据
                             </span>
                                     <!--<span class="m-r-20">-->
-                                <!--<img src="/alink-hq/static/img/true-over-un.png" alt="" id="multiMove">-->
-                            <!--</span>-->
+                                    <!--<img src="/alink-hq/static/img/true-over-un.png" alt="" id="multiMove">-->
+                                    <!--</span>-->
                                     <!--<span>-->
-                                <!--<img src="/alink-hq/static/img/delete-btn-un.png" alt="" id="multiDel">-->
-                            <!--</span>-->
+                                    <!--<img src="/alink-hq/static/img/delete-btn-un.png" alt="" id="multiDel">-->
+                                    <!--</span>-->
                                     <span class="m-r-20">
 
-                                <span class="skipPageBtn pointer moment" onmousedown="exchangeBtnMouseDown()" onmouseup="exchangeBtnMouseUp()" id="multiMove">移交</span>
+                                <span class="skipPageBtn pointer moment" onmousedown="exchangeBtnMouseDown()"
+                                      onmouseup="exchangeBtnMouseUp()" id="multiMove">移交</span>
                             </span>
-                            <span>
+                                    <span>
 
-                                <span class="skipPageBtn pointer moment" onmousedown="deleteBtnMouseDown()" onmouseup="deleteBtnMouseUp()" id="multiDel">删除</span>
+                                <span class="skipPageBtn pointer moment" onmousedown="deleteBtnMouseDown()"
+                                      onmouseup="deleteBtnMouseUp()" id="multiDel">删除</span>
                             </span>
 
                                 </div>

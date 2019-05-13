@@ -82,10 +82,12 @@
                         </thead>
                         <tbody>
                         <tr th:each="light:${pageInfo.list}">
-                            <td class="pid"><input type="checkbox" name="ids" th:value="${light.id}"><input type="hidden" name="pid" th:value="${light.pid}"></td>
+                            <td class="pid"><input type="checkbox" name="ids" th:value="${light.id}"><input type="hidden" th:value="${light.pid}"></td>
                             <td class="k-link lname"><a th:href="@{/light/info(id=${light.id})}" th:text="${light.lname}"></a></td>
                             <td th:text="${light.lmac}"></td>
-                            <td th:text="${light.mname}" class="mname"></td>
+                            <td class="k-link">
+                                <a th:href="@{/mesh/info(id=${light.mid})}" th:text="${light.mname}"></a>
+                            </td>
                             <td th:text="${light.mesh_id}"></td>
                             <td><span th:text="${light.x}"></span><span>,&nbsp;&nbsp;</span><span th:text="${light.y}"></span></td>
                             <td th:switch="${light.off}">

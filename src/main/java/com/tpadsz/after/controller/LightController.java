@@ -1,5 +1,6 @@
 package com.tpadsz.after.controller;
 
+import com.alibaba.fastjson.JSON;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.tpadsz.after.entity.MeshInfo;
@@ -35,6 +36,7 @@ public class LightController {
     public String list(SearchDict dict, ModelMap modelMap) {
         String role = roleService.selectById(dict.getUid());
         dict.setRole(role);
+        logger.info(JSON.toJSONString(dict));
         PageHelper.startPage(dict.getPageNum(), dict.getPageSize());
         List<Map> meshList = lightService.getByMap(dict);
         PageInfo<Map> pageInfo = new PageInfo(meshList, dict.getPageSize());

@@ -129,7 +129,10 @@
     </select>
     <select id="getProjects" resultType="OptionList" parameterType="map">
         SELECT id,name label FROM f_project p WHERE 1=1
-        <include refid="common_choose"></include>
+--         <include refid="common_choose"></include>
+        <if test="uid!=null and uid!=''">
+            AND p.uid =#{uid}
+        </if>
     </select>
 
     <select id="getProject" resultType="OptionList" parameterType="int">

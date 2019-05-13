@@ -5,7 +5,6 @@ $(function () {
     var size = $("#pageSize").val();
     var length = $("input[name=ids]:checked").length;
     $("#amount").text(length);
-    console.log("type:" + typeof size + ",value=" + size);
     $("#size").val(size);
     //给全选的复选框添加事件
     $("#all").click(function () {
@@ -48,7 +47,6 @@ $(function () {
         if (page < pages) {
             page++;
             $("#page").val(page);
-            console.log("page=" + page + ",pages=" + pages);
             $("form:eq(0)").submit();
         }
     });
@@ -66,8 +64,6 @@ $(function () {
 //            console.log("page=" + page + ",size=" + size);
 //            location.href = "/alink-hq/mesh/list?pageNum=" + page + "&pageSize=" + size;
     });
-});
-$(function () {
     var page = parseInt($('#pageNum').text());
     var pageTotal = parseInt($('#pages').text());
     if (page == 1) {
@@ -87,7 +83,8 @@ $(function () {
         // $('#next').attr('src', '/alink-hq/static/img/right-arrow-color.png');
         $(".next").addClass('active');
     }
-})
+});
+
 // //创建点击
 // function createBtnMouseDown(){
 //     $('.create').addClass('active');

@@ -80,9 +80,13 @@
                             <td class=""><input type="checkbox" name="ids" th:value="${group.id}"></td>
                             <td class="k-link"><a th:href="@{/group/info(id=${group.id})}" th:text="${group.gname}"></a>
                             </td>
-                            <td th:text="${group.mname}" class="meshName"></td>
+                            <td class="k-link">
+                                <a th:href="@{/mesh/info(id=${group.mid})}" th:text="${group.mname}"></a>
+                            </td>
                             <td th:text="${group.mesh_id}"></td>
-                            <td th:text="${group.lcount}"></td>
+                            <td class="k-link">
+                                <a th:href="@{/light/list(gid=${group.id})}" th:text="${group.lcount}"></a>
+                            </td>
                             <td class="p-r">
                                 <img src="/alink-hq/static/img/edit.png" th:alt="${group.id}" class="rename pointer"
                                      title="重命名">
