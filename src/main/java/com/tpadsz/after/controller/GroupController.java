@@ -1,6 +1,5 @@
 package com.tpadsz.after.controller;
 
-import com.alibaba.fastjson.JSON;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.tpadsz.after.entity.MeshInfo;
@@ -104,12 +103,7 @@ public class GroupController {
     public String delete(String ids) {
         String[] ids1 = ids.split(",");
         List<String> list = new ArrayList(Arrays.asList(ids1));
-        try {
-            groupService.deleteGroupByIds(list);
-        } catch (Exception e) {
-            logger.warn(e);
-            return "authError";
-        }
+        groupService.deleteGroupByIds(list);
         return "redirect:/group/list";
     }
 

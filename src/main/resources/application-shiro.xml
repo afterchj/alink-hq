@@ -76,7 +76,6 @@
                 /restPwd = anon
                 /checkUser = anon
                 /verify = anon
-                /place/move = authc,perms[delete]
                 /mesh/delete = authc,perms[delete]
                 /** = authc
             </value>
