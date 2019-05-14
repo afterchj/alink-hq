@@ -275,7 +275,7 @@ $(function () {
         pageNum=parseInt(pageNum)+1;
         condition(sceneName,sceneId,pageSize,pageNum)
     })
-    
+
     //点击跳转
     $('#skip').click(function(){
         if($('#page').val()!=''&& parseInt($('#page').val())>=parseInt(pageTotal)){
@@ -305,6 +305,7 @@ function condition(sceneName,sceneId,pageSize,pageNum) {
     }
     var meshName = decodeURIComponent(GetUrlParam("meshName"));
     var meshId  = decodeURIComponent(GetUrlParam("meshId"));
-    var newUrl = url2+'&meshName='+meshName+'&meshId='+meshId+'&mid=731'+'&pageSize='+pageSize+'&pageNum='+pageNum + '&sceneName=' + sceneName + '&sceneId=' + sceneId;
+    var mid=decodeURIComponent(GetUrlParam("mid"));
+    var newUrl = url2+'&meshName='+meshName+'&meshId='+meshId+'&mid='+mid+'&pageSize='+pageSize+'&pageNum='+pageNum + '&sceneName=' + sceneName + '&sceneId=' + sceneId;
     location.href = newUrl;
 }
