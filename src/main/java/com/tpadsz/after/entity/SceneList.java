@@ -5,20 +5,20 @@ package com.tpadsz.after.entity;
  * Created by chenhao.lu on 2019/3/8.
  */
 public class SceneList {
-    private int id;
+    private Integer id;
     private String sceneName;
-    private int sceneId;
-    private int lid;
+    private Integer sceneId;
+    private Integer lid;
     private String meshName;
     private String meshId;
     private String status;
     private String other;
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -30,19 +30,19 @@ public class SceneList {
         this.sceneName = sceneName;
     }
 
-    public int getSceneId() {
+    public Integer getSceneId() {
         return sceneId;
     }
 
-    public void setSceneId(int sceneId) {
+    public void setSceneId(Integer sceneId) {
         this.sceneId = sceneId;
     }
 
-    public int getLid() {
+    public Integer getLid() {
         return lid;
     }
 
-    public void setLid(int lid) {
+    public void setLid(Integer lid) {
         this.lid = lid;
     }
 
