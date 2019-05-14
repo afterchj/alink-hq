@@ -97,8 +97,19 @@
             <div class="c-list clearfix">
             </div>
         </div>
-        <a href="">Excel导出</a>
+        <a href="#" onclick="method5('d2')">Excel导出</a>
         <p class="c-hint">注：请牢记/导出新账号密码，关闭后将无法展示。</p>
+        <table id="d2" style="display:none;margin-left: 30px;">
+            <thead>
+            <tr>
+                <th>账号</th>
+                <th>密码</th>
+            </tr>
+            </thead>
+            <tbody id="toExcel">
+            </tbody>
+
+        </table>
     </div>
 </div>
 <div class="hide-iframe active"></div>
@@ -119,7 +130,10 @@
 </div>
 <script src="/alink-hq/static/js/jquery.min.js"></script>
 <script type="text/javascript" src="/alink-hq/static/js/left.js"></script>
+<script type="text/javascript" src="/alink-hq/static/js/excel/excel.js"></script>
+
 <script>
+    var list = [];
     $('button.confirm-create').click(function () {
         var fid = $('#fid option:selected').val();
         if (fid == '') {
@@ -158,19 +172,24 @@
                             'height': height
                         });
                         var accountList = JSON.parse(res.accountList);
-//                        console.log(accountList);
                         var maxLength = accountList.length;
                         if (maxLength > 3) {
                             $('.c-title .c-width.two').css('width', ' 163px');
                             $('.confirm-create-iframe .c-main').css('width', '310px');
                         }
+                        var arr = {};
                         for (var i = 0; i < accountList.length; i++) {
                             var account = accountList[i];
                             var pwd = '00000000';
+                            arr.account = account;
+                            arr.pwd = pwd;
+                            list.push(arr);
+                            arr = {};
                             var content = '<div class="clearfix"><div class="f-l c-width one">' + account + '</div>'
                                     + '<div class="f-l c-width two">' + pwd + '</div></div>';
                             $('.c-list').append(content);
                         }
+                        toExcel(list);
                     } else {
                         $('#preload-anim').addClass('active');
                         $('#preload-anim .title').text('加载失败，请重新尝试');
