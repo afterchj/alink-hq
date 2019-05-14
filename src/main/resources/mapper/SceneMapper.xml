@@ -8,7 +8,7 @@
     </select>
 
     <select id="findPlaceBySid" resultType="com.tpadsz.after.entity.MeshInfo">
-        SELECT id AS pid,place_id,pname FROM f_place WHERE mid = (SELECT mid FROM f_scene WHERE id=#{sid}) ORDER BY place_id
+        SELECT id AS pid,pname FROM f_place WHERE mid = (SELECT mid FROM f_scene WHERE id=#{sid}) ORDER BY place_id
     </select>
 
     <select id="findGroupByPid" resultType="com.tpadsz.after.entity.MeshInfo">
