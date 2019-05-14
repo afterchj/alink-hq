@@ -156,6 +156,7 @@
         })
 
 
+
 //        //选择网络后下一步则是区域选择
 //        $('.select-mesh-step .confirm-create').click(function () {
 //            mid = $("#mid option:selected").val();
@@ -572,6 +573,11 @@
             $('.group-hint').text('请输入（2-16 位汉字、字母、数字）')
         }
     })
+    function step(one,two,three) {
+        $('#one-step').attr('src', '/alink-hq/static/img/fill-1-'+one+'.png');
+        $('#two-step').attr('src', '/alink-hq/static/img/fill-2-'+two+'.png');
+        $('#three-step').attr('src', '/alink-hq/static/img/fill-3-'+three+'.png');
+    }
 </script>
 </body>
 </html>

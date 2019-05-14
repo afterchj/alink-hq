@@ -119,6 +119,8 @@ body{
     margin: 0;
     font-size: 16px;
     color: #3c3c3c;
+    *display:inline;
+    zoom:1;
 }
 
 .content .login-in-box-tab-content button {
