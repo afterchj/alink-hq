@@ -10,7 +10,6 @@
     <link rel="stylesheet" href="/alink-hq/static/css/projectManage.css">
     <title>场景详情</title>
 </head>
-
 <body>
 <div th:replace="common/head::head"></div>
 <div class="c-container">
@@ -202,7 +201,7 @@
                     console.log(key,value);
                     content+='<li class="lid" alt='+value.id+'>'+value.lname+'('+value.lmac+')'+'</li>';
                     if(key==0){
-                        content1+='<li class="lid" alt="'+value.id+'" style="text-align: center;">'+value.x+'((色温)，)'+value.y+'(亮度)</li>';
+                        content1+='<li class="lid" alt="'+value.id+'" style="text-align: center;">'+value.x+'(色温)，'+value.y+'(亮度)</li>';
                     }else{
                         content1+='<li class="lid" alt="'+value.id+'" style="text-align: center;">'+value.x+'，'+value.y+'</li>';
                     }

@@ -24,6 +24,7 @@ $(function () {
     $("input[name=ids]").click(function () {
         //获取选中复选框长度
         var length = $("input[name=ids]:checked").length;
+        
         //未选中的长度
         var len = $("input[name=ids]").length;
         if (length == len) {
