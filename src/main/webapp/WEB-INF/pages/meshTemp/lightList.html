@@ -35,6 +35,10 @@
             <form class="clearfix" th:action="@{/light/list}" method="post">
                 <input type="hidden" name="uid" th:value="${dict.uid}">
                 <input type="hidden" id="pageSize" th:value="${dict.pageSize}">
+                <input type="hidden" name="projectId" th:value="${dict.projectId}">
+                <input type="hidden" name="mid" th:value="${dict.mid}">
+                <input type="hidden" name="pid" th:value="${dict.pid}">
+                <input type="hidden" name="gid" th:value="${dict.gid}">
                 <div class="search-condition temp">
                     <div class="f-l search" style="margin-right:125px;">
                         <div>
