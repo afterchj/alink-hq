@@ -72,8 +72,7 @@ public class GroupServiceImpl implements GroupService {
     }
 
     @Override
-    @RequiresPermissions("delete")
-    public void deleteGroupByIds(List list) throws AuthorizationException {
+    public void deleteGroupByIds(List list) {
         groupDao.deleteGroupByIds(list);
     }
 
