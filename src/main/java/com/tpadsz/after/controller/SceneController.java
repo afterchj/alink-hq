@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -112,7 +113,7 @@ public class SceneController {
         }
 
         List<MeshInfo> list1 = sceneService.findXYBySid(sid);
-        List<MeshInfo> groupXYList = sceneService.findXYBySid(sid);
+        List<MeshInfo> groupXYList = new ArrayList<>();
         if (list1.size() == 1) {
             model.addAttribute("px", list1.get(0).getX());
             model.addAttribute("py", list1.get(0).getY());
