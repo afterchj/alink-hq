@@ -275,6 +275,7 @@ $(function () {
         pageNum=parseInt(pageNum)+1;
         condition(sceneName,sceneId,pageSize,pageNum)
     })
+    
     //点击跳转
     $('#skip').click(function(){
         if($('#page').val()!=''&& parseInt($('#page').val())>=parseInt(pageTotal)){
