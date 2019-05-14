@@ -19,12 +19,16 @@
         <div class="clearfix main-right-nav">
             <div class="f-l main-right-title">场景详情</div>
             <div class="f-r pointer">
-                <div class="goBack" onClick="javascript :history.back(-1);" onmousedown="backBtnMouseDown()" onmouseup="backBtnMouseUp()">
-                    <span ><</span><span>返回</span>
+                <div class="goBack" onClick="javascript :history.back(-1);" onmousedown="backBtnMouseDown()"
+                     onmouseup="backBtnMouseUp()">
+                    <span><</span><span>返回</span>
                 </div>
             </div>
         </div>
         <div id="sceneDetail">
+            <input type="hidden" th:if="${lightInfo}!=null" th:value="${lightInfo.id}" id="lid">
+            <input type="hidden" th:if="${lightInfo}!=null" th:value="${lightInfo.gid}" id="gid">
+            <input type="hidden" th:if="${lightInfo}!=null" th:value="${lightInfo.pid}" id="pid">
             <div class="scene-nav">
                 <div class="clearfix  scene-title">
                     <div class="f-l">
@@ -37,17 +41,17 @@
                     </div>
                     <div class="f-l">
                         <span>当前状态：</span>
-                        <span >应用</span>
+                        <span>应用</span>
                     </div>
                 </div>
-                <div  class="project-title">
+                <div class="project-title">
                     <div class="clearfix">
                         <div class="f-l length">
                             <span>隶属项目：</span>
-                            <span th:text="${projectName}" ></span>
+                            <span th:text="${projectName}"></span>
                         </div>
                         <div class="f-l">
-                            <a th:href="@{/project/detail(projectId=${meshInfo.project_id})}">查看项目详情</a>
+                            <a th:href="@{/project/detail(projectId=${projectId})}">查看项目详情</a>
                         </div>
                     </div>
                     <div class="clearfix">
@@ -60,7 +64,7 @@
                             <span th:text="${meshId}"></span>
                         </div>
                         <div class="f-l">
-                            <a href="">查看网络详情</a>
+                            <a th:href="@{/mesh/info(id=${mid})}">查看网络详情</a>
                         </div>
                     </div>
                 </div>
@@ -81,29 +85,31 @@
                 </div>
                 <div class="scene-msg ">
                     <div class="clearfix  scene-msg-list">
-                        <div class="f-l">
-                            <ul th:each="${placeList}">
-                                <li>区域2（查看详情）</li>
-                                <li>区域2（查看详情）</li>
+                        <div class="f-l" style="border-right: none;">
+                            <ul>
+                                <li th:if="${px}!=${py}" th:each="placeList:${placeList}" th:text="${placeList.pname}+'（查看详情）'" th:alt="${placeList.pid}" class="pid">
+                                </li>
+                                <li th:if="${px}==${py}" th:each="placeList:${placeList}" th:text="${placeList.pname}+'('+${px}+'，'+${py}+')'" th:alt="${placeList.pid}" class="pid">
+                                </li>
                             </ul>
                         </div>
-                        <div class="f-l">
+                        <div class="f-l" style="border-right: none;">
                             <ul>
-                                <li>区域2（查看详情）</li>
-                                <li>区域2（查看详情）</li>
+                                <li th:if="${px}!=${py}" th:each="groupList:${groupList}" th:text="${groupList.gname}+'（查看详情）'" class="gid" th:alt="${groupList.gid}"></li>
+                                <li th:if="${px}==${py}" th:each="groupList:${groupList}" th:text="${groupList.gname}+'('+${px}+'，'+${py}+')'" class="gid" th:alt="${groupList.gid}"></li>
                             </ul>
                         </div>
                         <div class="f-l clearfix">
                             <div class="f-l" style="border-right: 1px solid #bbb;">
                                 <ul>
-                                    <li>区域2（查看详情）</li>
-                                    <li>区域2（查看详情）</li>
+                                    <li  th:each="lightList:${lightList}" th:text="${lightList.lname}+'（'+${lightList.lmac}+')'" class="lid" th:alt="${lightList.id}"></li>
                                 </ul>
                             </div>
                             <div class="f-l">
                                 <ul>
-                                    <li>区域2（查看详情）</li>
-                                    <li>区域2（查看详情）</li>
+                                    <li th:if="${userStat.index}=='0'" th:each="lightList,userStat:${lightList}" th:text="${lightList.x}+'(色温)，'+${lightList.y}+'(亮度)'" class="lid " th:alt="${lightList.id}" style="text-align: center;"></li>
+                                    <li th:if="${userStat.index}!='0'" th:each="lightList,userStat:${lightList}" th:text="${lightList.x}+'，'+${lightList.y}" class="lid " th:alt="${lightList.id}" style="text-align: center;"></li>
+                                    <!--<li th:accept="${lightList.f}"  th:each="lightList:${lightList}" th:text="${lightList.x}+'(色温)，'+${lightList.y}+'(亮度)'" class="lid title" th:alt="${lightList.id}" style="text-align: center;"></li>-->
                                 </ul>
                             </div>
                         </div>
@@ -111,72 +117,6 @@
                 </div>
             </div>
         </div>
-        <!--<div id="projectDetail">-->
-            <!--<div class="p-detail">-->
-                <!--<div class="p-nav" th:text="${projectName}" >-->
-
-                <!--</div>-->
-                <!--<div class="p-content">-->
-                    <!--<div class="clearfix">-->
-                        <!--<div class="f-l">-->
-                            <!--<span>项目中网络的数量：</span>-->
-                            <!--<span th:text="${meshNum}"></span>-->
-                        <!--</div>-->
-                        <!--<div class="f-l">-->
-                            <!--<a th:href="@{/mesh/list(projectId=${projectId})}">查看网络列表</a>-->
-                        <!--</div>-->
-                    <!--</div>-->
-                    <!--<div class="clearfix">-->
-                        <!--<div class="f-l">-->
-                            <!--<span>项目中区域的数量：</span>-->
-                            <!--<span th:text="${placeNum}"></span>-->
-                        <!--</div>-->
-                        <!--<div class="f-l">-->
-                            <!--<a th:href="@{/place/list(projectId=${projectId})}">查看区域列表</a>-->
-                        <!--</div>-->
-                    <!--</div>-->
-                    <!--<div class="clearfix">-->
-                        <!--<div class="f-l">-->
-                            <!--<span>项目中组的数量：</span>-->
-                            <!--<span th:text="${groupNum}"></span>-->
-                        <!--</div>-->
-                        <!--<div class="f-l">-->
-                            <!--<a th:href="@{/group/list(projectId=${projectId})}">查看组列表</a>-->
-                        <!--</div>-->
-                    <!--</div>-->
-                    <!--<div class="clearfix">-->
-                        <!--<div class="f-l">-->
-                            <!--<span>项目中灯的数量：</span>-->
-                            <!--<span th:text="${lightNum}"></span>-->
-                        <!--</div>-->
-                        <!--<div class="f-l">-->
-                            <!--<a th:href="@{/light/list(projectId=${projectId})}">查看灯列表</a>-->
-                        <!--</div>-->
-                    <!--</div>-->
-                <!--</div>-->
-                <!--<div class="c-nav">-->
-                    <!--施工信息-->
-                <!--</div>-->
-                <!--<div class="c-content">-->
-                    <!--<div>-->
-                        <!--<span>用户名：</span>-->
-                        <!--<span th:text="${user.uname}"></span>-->
-                    <!--</div>-->
-                    <!--<div>-->
-                        <!--<span>账号：</span>-->
-                        <!--<span th:text="${user.account}"></span>-->
-                    <!--</div>-->
-                    <!--<div>-->
-                        <!--<span>联系方式：</span>-->
-                        <!--<span th:text="${user.mobile}"></span>-->
-                    <!--</div>-->
-                    <!--<div>-->
-                        <!--<span>隶属公司：</span>-->
-                        <!--<span th:text="${coname}" ></span>-->
-                    <!--</div>-->
-                <!--</div>-->
-            <!--</div>-->
-        <!--</div>-->
     </div>
 </div>
 <script src="/alink-hq/static/js/jquery.min.js"></script>
@@ -184,10 +124,56 @@
 <script src="/alink-hq/static/js/moment.js"></script>
 <script type="text/javascript">
     $(function () {
-        var tabs="meshList";
-        var index=0;
-        left(tabs,index);
+        var tabs = "meshList";
+        var index = 0;
+        left(tabs, index);
+        var lid = $('#lid').val();
+        var gid = $('#gid').val();
+        var pid=$('#pid').val();
+        console.log(lid, gid,pid);
+        if(pid){
+            $('li.gid').each(function(){
+                var gids= $(this).attr('alt');
+                if(gids==gid){
+                    $(this).addClass('active');
+                }else{
+                    $(this).removeClass('active');
+                }
+            })
+        }else{
+            $('li.gid').eq(0).addClass('active');
+        }
+
+        if(lid){
+            $('li.lid').each(function(){
+                var lids= $(this).attr('alt');
+                if(lids==lid){
+                    $(this).addClass('active');
+                }else{
+                    $(this).removeClass('active');
+                }
+            })
+        }
+
+        if(pid){
+            $('li.pid').each(function(){
+                var pids= $(this).attr('alt');
+                console.log(pids);
+                if(pids==pid){
+                    $(this).addClass('active');
+                }else{
+                    $(this).removeClass('active');
+                }
+            })
+        }else{
+            $('li.pid').eq(0).addClass('active');
+        }
+
     })
+    $('.scene-msg-list li').click(function () {
+        $(this).toggleClass('active');
+    })
+
 
 </script>
 </body>
