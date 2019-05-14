@@ -151,121 +151,199 @@
             })
         })
 
+        $('.select-mesh-step .confirm-create').click(function(){
 
-        //选择网络后下一步则是区域选择
-        $('.select-mesh-step .confirm-create').click(function () {
-            mid = $("#mid option:selected").val();
-            console.log('mid', mid, 'pid', pid, 'groupId', groupId)
-//            if(pid){
-//                if (mid == '') {
-//                    $('.project-hint').text('请选择网络')
-//                } else {
-//                    $("#place option:selected").val(pid);
-//                    $('.project-hint').text('')
-//                    $('#one-step').attr('src', '/alink-hq/static/img/fill-1-is.png');
-//                    $('#two-step').attr('src', '/alink-hq/static/img/fill-2-is.png');
-//                    $('#three-step').attr('src', '/alink-hq/static/img/fill-3-no.png');
-//                    $('.select-place-step').addClass('active').siblings('.step').removeClass('active');
-//                }
-//            }else{
-//                if (mid == '') {
-//                    $('.project-hint').text('请选择网络')
-//                } else {
-//                    $('.project-hint').text('')
-//                    $('#one-step').attr('src', '/alink-hq/static/img/fill-1-is.png');
-//                    $('#two-step').attr('src', '/alink-hq/static/img/fill-2-on.png');
-//                    $('#three-step').attr('src', '/alink-hq/static/img/fill-3-no.png');
-//                    $('.select-place-step').addClass('active').siblings('.step').removeClass('active');
-//                    $.getJSON("/alink-hq/group/getPlace", {"uid": uid}, function (json) {
-//                        if (json != '') {
-//                            $("#place option:first").siblings().remove();
+        })
+
+
+//        //选择网络后下一步则是区域选择
+//        $('.select-mesh-step .confirm-create').click(function () {
+//            mid = $("#mid option:selected").val();
+//            console.log('mid', mid, 'pid', pid, 'groupId', groupId)
+////            if(pid){
+////                if (mid == '') {
+////                    $('.project-hint').text('请选择网络')
+////                } else {
+////                    $("#place option:selected").val(pid);
+////                    $('.project-hint').text('')
+////                    $('#one-step').attr('src', '/alink-hq/static/img/fill-1-is.png');
+////                    $('#two-step').attr('src', '/alink-hq/static/img/fill-2-is.png');
+////                    $('#three-step').attr('src', '/alink-hq/static/img/fill-3-no.png');
+////                    $('.select-place-step').addClass('active').siblings('.step').removeClass('active');
+////                }
+////            }else{
+////                if (mid == '') {
+////                    $('.project-hint').text('请选择网络')
+////                } else {
+////                    $('.project-hint').text('')
+////                    $('#one-step').attr('src', '/alink-hq/static/img/fill-1-is.png');
+////                    $('#two-step').attr('src', '/alink-hq/static/img/fill-2-on.png');
+////                    $('#three-step').attr('src', '/alink-hq/static/img/fill-3-no.png');
+////                    $('.select-place-step').addClass('active').siblings('.step').removeClass('active');
+////                    $.getJSON("/alink-hq/group/getPlace", {"uid": uid}, function (json) {
+////                        if (json != '') {
+////                            $("#place option:first").siblings().remove();
+////                        }
+////                        $.each(json, function (i, item) {
+////                            $("#place").append("<option value='" + item.id + "'>" + item.label + "</option>")
+////                        });
+////                        var str = $("#place option:selected").val();
+////                        $("#place").val(str.substr(0, str.indexOf("_")));
+////                        $("#place").change(function () {
+////                            pid = $("#place option:selected").val();
+////                            if (pid == '') {
+////                                $('.place-hint').text('请选择区域');
+////                            } else {
+////                                $('.place-hint').text('');
+////                            }
+////                        })
+////                    })
+////                }
+////            }
+//
+//            if (mid) {
+//                $('.project-hint').text('')
+//                $('.select-place-step').addClass('active').siblings('.step').removeClass('active');
+//                $.getJSON("/alink-hq/group/getPlace", {"uid": uid}, function (json) {
+//                    if (json != '') {
+//                        $("#place option:first").siblings().remove();
+//                    }
+//                    $.each(json, function (i, item) {
+//                        $("#place").append("<option value='" + item.id + "'>" + item.label + "</option>")
+//                    });
+//                    var str = $("#place option:selected").val();
+//                    $("#place").val(str.substr(0, str.indexOf("_")));
+//                    $("#place").change(function () {
+//                        pid = $("#place option:selected").val();
+//                        if (pid == '') {
+//                            $('.place-hint').text('请选择区域');
+//                        } else {
+//                            $('.place-hint').text('');
 //                        }
-//                        $.each(json, function (i, item) {
-//                            $("#place").append("<option value='" + item.id + "'>" + item.label + "</option>")
-//                        });
-//                        var str = $("#place option:selected").val();
-//                        $("#place").val(str.substr(0, str.indexOf("_")));
-//                        $("#place").change(function () {
-//                            pid = $("#place option:selected").val();
-//                            if (pid == '') {
-//                                $('.place-hint').text('请选择区域');
-//                            } else {
-//                                $('.place-hint').text('');
-//                            }
-//                        })
 //                    })
+//                })
+//                if (pid) {
+//                    if (groupId) {
+//                        $('#one-step').attr('src', '/alink-hq/static/img/fill-1-is.png');
+//                        $('#two-step').attr('src', '/alink-hq/static/img/fill-2-is.png');
+//                        $('#three-step').attr('src', '/alink-hq/static/img/fill-3-is.png');
+//
+////                        $("#meshId").val(meshId);
+////                        $("#mid option:selected").val(mid);
+//                    } else {
+//                        $('#one-step').attr('src', '/alink-hq/static/img/fill-1-is.png');
+//                        $('#two-step').attr('src', '/alink-hq/static/img/fill-2-is.png');
+//                        $('#three-step').attr('src', '/alink-hq/static/img/fill-3-no.png');
+////                        $('.select-place-step').addClass('active').siblings('.step').removeClass('active');
+////                        $("#meshId").val(meshId);
+////                        $("#mid option:selected").val(mid);
+//                    }
+//                } else {
+//                    if (groupId) {
+//                        $('#one-step').attr('src', '/alink-hq/static/img/fill-1-is.png');
+//                        $('#two-step').attr('src', '/alink-hq/static/img/fill-2-no.png');
+//                        $('#three-step').attr('src', '/alink-hq/static/img/fill-3-is.png');
+////                        $('.select-place-step').addClass('active').siblings('.step').removeClass('active');
+////                        $("#meshId").val(meshId);
+////                        $("#mid option:selected").val(mid);
+//                    } else {
+//                        $('#one-step').attr('src', '/alink-hq/static/img/fill-1-is.png');
+//                        $('#two-step').attr('src', '/alink-hq/static/img/fill-2-no.png');
+//                        $('#three-step').attr('src', '/alink-hq/static/img/fill-3-no.png');
+////                        $('.select-place-step').addClass('active').siblings('.step').removeClass('active');
+////                        $("#meshId").val(meshId);
+////                        $("#mid option:selected").val(mid);
+//                    }
 //                }
+//            } else {
+//                $('.project-hint').text('请选择网络')
+////                if (pid) {
+////                    if (groupId) {
+////                        $('#one-step').attr('src', '/alink-hq/static/img/fill-1-on.png');
+////                        $('#two-step').attr('src', '/alink-hq/static/img/fill-2-is.png');
+////                        $('#three-step').attr('src', '/alink-hq/static/img/fill-3-is.png');
+////                        $('.select-place-step').addClass('active').siblings('.step').removeClass('active');
+//////                        $("#meshId").val(meshId);
+//////                        $("#mid option:selected").val(mid);
+////                    } else {
+////                        $('#one-step').attr('src', '/alink-hq/static/img/fill-1-on.png');
+////                        $('#two-step').attr('src', '/alink-hq/static/img/fill-2-is.png');
+////                        $('#three-step').attr('src', '/alink-hq/static/img/fill-3-no.png');
+////                        $('.select-place-step').addClass('active').siblings('.step').removeClass('active');
+//////                        $("#meshId").val(meshId);
+//////                        $("#mid option:selected").val(mid);
+////                    }
+////                } else {
+////                    if (groupId) {
+////                        $('#one-step').attr('src', '/alink-hq/static/img/fill-1-on.png');
+////                        $('#two-step').attr('src', '/alink-hq/static/img/fill-2-no.png');
+////                        $('#three-step').attr('src', '/alink-hq/static/img/fill-3-is.png');
+////                        $('.select-place-step').addClass('active').siblings('.step').removeClass('active');
+//////                        $("#meshId").val(meshId);
+//////                        $("#mid option:selected").val(mid);
+////                    } else {
+////                        $('#one-step').attr('src', '/alink-hq/static/img/fill-1-on.png');
+////                        $('#two-step').attr('src', '/alink-hq/static/img/fill-2-no.png');
+////                        $('#three-step').attr('src', '/alink-hq/static/img/fill-3-no.png');
+////                        $('.select-place-step').addClass('active').siblings('.step').removeClass('active');
+//////                        $("#meshId").val(meshId);
+//////                        $("#mid option:selected").val(mid);
+////                    }
+////                }
 //            }
-
-            if (mid) {
-                $('.project-hint').text('')
-                $('.select-place-step').addClass('active').siblings('.step').removeClass('active');
-                $.getJSON("/alink-hq/group/getPlace", {"uid": uid}, function (json) {
-                    if (json != '') {
-                        $("#place option:first").siblings().remove();
-                    }
-                    $.each(json, function (i, item) {
-                        $("#place").append("<option value='" + item.id + "'>" + item.label + "</option>")
-                    });
-                    var str = $("#place option:selected").val();
-                    $("#place").val(str.substr(0, str.indexOf("_")));
-                    $("#place").change(function () {
-                        pid = $("#place option:selected").val();
-                        if (pid == '') {
-                            $('.place-hint').text('请选择区域');
-                        } else {
-                            $('.place-hint').text('');
-                        }
-                    })
-                })
-                if (pid) {
-                    if (groupId) {
-                        $('#one-step').attr('src', '/alink-hq/static/img/fill-1-is.png');
-                        $('#two-step').attr('src', '/alink-hq/static/img/fill-2-is.png');
-                        $('#three-step').attr('src', '/alink-hq/static/img/fill-3-is.png');
-
-//                        $("#meshId").val(meshId);
-//                        $("#mid option:selected").val(mid);
-                    } else {
-                        $('#one-step').attr('src', '/alink-hq/static/img/fill-1-is.png');
-                        $('#two-step').attr('src', '/alink-hq/static/img/fill-2-is.png');
-                        $('#three-step').attr('src', '/alink-hq/static/img/fill-3-no.png');
-//                        $('.select-place-step').addClass('active').siblings('.step').removeClass('active');
-//                        $("#meshId").val(meshId);
-//                        $("#mid option:selected").val(mid);
-                    }
-                } else {
-                    if (groupId) {
-                        $('#one-step').attr('src', '/alink-hq/static/img/fill-1-is.png');
-                        $('#two-step').attr('src', '/alink-hq/static/img/fill-2-no.png');
-                        $('#three-step').attr('src', '/alink-hq/static/img/fill-3-is.png');
-//                        $('.select-place-step').addClass('active').siblings('.step').removeClass('active');
-//                        $("#meshId").val(meshId);
-//                        $("#mid option:selected").val(mid);
-                    } else {
-                        $('#one-step').attr('src', '/alink-hq/static/img/fill-1-is.png');
-                        $('#two-step').attr('src', '/alink-hq/static/img/fill-2-no.png');
-                        $('#three-step').attr('src', '/alink-hq/static/img/fill-3-no.png');
-//                        $('.select-place-step').addClass('active').siblings('.step').removeClass('active');
-//                        $("#meshId").val(meshId);
-//                        $("#mid option:selected").val(mid);
-                    }
-                }
-            } else {
-                $('.project-hint').text('请选择网络')
+//        })
+//        //选择区域后下一步则到组
+//        $('.select-place-step .confirm-create').click(function () {
+//            pid = $("#place option:selected").val();
+//            console.log('mid', mid, 'pid', pid, 'groupId', groupId)
+//            if (mid) {
+//                if (pid) {
+//                    if (groupId || groupId=='') {
+//                        $('#one-step').attr('src', '/alink-hq/static/img/fill-1-is.png');
+//                        $('#two-step').attr('src', '/alink-hq/static/img/fill-2-is.png');
+//                        $('#three-step').attr('src', '/alink-hq/static/img/fill-3-is.png');
+//                        $('.select-group-step').addClass('active').siblings('.step').removeClass('active');
+////                        $("#meshId").val(meshId);
+////                        $("#mid option:selected").val(mid);
+//                    } else {
+//                        $('#one-step').attr('src', '/alink-hq/static/img/fill-1-is.png');
+//                        $('#two-step').attr('src', '/alink-hq/static/img/fill-2-is.png');
+//                        $('#three-step').attr('src', '/alink-hq/static/img/fill-3-no.png');
+//                        $('.select-group-step').addClass('active').siblings('.step').removeClass('active');
+////                        $("#meshId").val(meshId);
+////                        $("#mid option:selected").val(mid);
+//                    }
+//                } else {
+//                    if (groupId || groupId=='') {
+//                        $('#one-step').attr('src', '/alink-hq/static/img/fill-1-is.png');
+//                        $('#two-step').attr('src', '/alink-hq/static/img/fill-2-no.png');
+//                        $('#three-step').attr('src', '/alink-hq/static/img/fill-3-is.png');
+//                        $('.select-group-step').addClass('active').siblings('.step').removeClass('active');
+////                        $("#meshId").val(meshId);
+////                        $("#mid option:selected").val(mid);
+//                    } else {
+//                        $('#one-step').attr('src', '/alink-hq/static/img/fill-1-is.png');
+//                        $('#two-step').attr('src', '/alink-hq/static/img/fill-2-no.png');
+//                        $('#three-step').attr('src', '/alink-hq/static/img/fill-3-no.png');
+//                        $('.select-group-step').addClass('active').siblings('.step').removeClass('active');
+////                        $("#meshId").val(meshId);
+////                        $("#mid option:selected").val(mid);
+//                    }
+//                }
+//            } else {
 //                if (pid) {
 //                    if (groupId) {
 //                        $('#one-step').attr('src', '/alink-hq/static/img/fill-1-on.png');
 //                        $('#two-step').attr('src', '/alink-hq/static/img/fill-2-is.png');
 //                        $('#three-step').attr('src', '/alink-hq/static/img/fill-3-is.png');
-//                        $('.select-place-step').addClass('active').siblings('.step').removeClass('active');
+//                        $('.select-mesh-step').addClass('active').siblings('.step').removeClass('active');
 ////                        $("#meshId").val(meshId);
 ////                        $("#mid option:selected").val(mid);
 //                    } else {
 //                        $('#one-step').attr('src', '/alink-hq/static/img/fill-1-on.png');
 //                        $('#two-step').attr('src', '/alink-hq/static/img/fill-2-is.png');
 //                        $('#three-step').attr('src', '/alink-hq/static/img/fill-3-no.png');
-//                        $('.select-place-step').addClass('active').siblings('.step').removeClass('active');
+//                        $('.select-group-step').addClass('active').siblings('.step').removeClass('active');
 ////                        $("#meshId").val(meshId);
 ////                        $("#mid option:selected").val(mid);
 //                    }
@@ -274,93 +352,19 @@
 //                        $('#one-step').attr('src', '/alink-hq/static/img/fill-1-on.png');
 //                        $('#two-step').attr('src', '/alink-hq/static/img/fill-2-no.png');
 //                        $('#three-step').attr('src', '/alink-hq/static/img/fill-3-is.png');
-//                        $('.select-place-step').addClass('active').siblings('.step').removeClass('active');
+//                        $('.select-group-step').addClass('active').siblings('.step').removeClass('active');
 ////                        $("#meshId").val(meshId);
 ////                        $("#mid option:selected").val(mid);
 //                    } else {
 //                        $('#one-step').attr('src', '/alink-hq/static/img/fill-1-on.png');
 //                        $('#two-step').attr('src', '/alink-hq/static/img/fill-2-no.png');
 //                        $('#three-step').attr('src', '/alink-hq/static/img/fill-3-no.png');
-//                        $('.select-place-step').addClass('active').siblings('.step').removeClass('active');
+//                        $('.select-group-step').addClass('active').siblings('.step').removeClass('active');
 ////                        $("#meshId").val(meshId);
 ////                        $("#mid option:selected").val(mid);
 //                    }
 //                }
-            }
-        })
-        //选择区域后下一步则到组
-        $('.select-place-step .confirm-create').click(function () {
-            pid = $("#place option:selected").val();
-            console.log('mid', mid, 'pid', pid, 'groupId', groupId)
-            if (mid) {
-                if (pid) {
-                    if (groupId || groupId=='') {
-                        $('#one-step').attr('src', '/alink-hq/static/img/fill-1-is.png');
-                        $('#two-step').attr('src', '/alink-hq/static/img/fill-2-is.png');
-                        $('#three-step').attr('src', '/alink-hq/static/img/fill-3-is.png');
-                        $('.select-group-step').addClass('active').siblings('.step').removeClass('active');
-//                        $("#meshId").val(meshId);
-//                        $("#mid option:selected").val(mid);
-                    } else {
-                        $('#one-step').attr('src', '/alink-hq/static/img/fill-1-is.png');
-                        $('#two-step').attr('src', '/alink-hq/static/img/fill-2-is.png');
-                        $('#three-step').attr('src', '/alink-hq/static/img/fill-3-no.png');
-                        $('.select-group-step').addClass('active').siblings('.step').removeClass('active');
-//                        $("#meshId").val(meshId);
-//                        $("#mid option:selected").val(mid);
-                    }
-                } else {
-                    if (groupId || groupId=='') {
-                        $('#one-step').attr('src', '/alink-hq/static/img/fill-1-is.png');
-                        $('#two-step').attr('src', '/alink-hq/static/img/fill-2-no.png');
-                        $('#three-step').attr('src', '/alink-hq/static/img/fill-3-is.png');
-                        $('.select-group-step').addClass('active').siblings('.step').removeClass('active');
-//                        $("#meshId").val(meshId);
-//                        $("#mid option:selected").val(mid);
-                    } else {
-                        $('#one-step').attr('src', '/alink-hq/static/img/fill-1-is.png');
-                        $('#two-step').attr('src', '/alink-hq/static/img/fill-2-no.png');
-                        $('#three-step').attr('src', '/alink-hq/static/img/fill-3-no.png');
-                        $('.select-group-step').addClass('active').siblings('.step').removeClass('active');
-//                        $("#meshId").val(meshId);
-//                        $("#mid option:selected").val(mid);
-                    }
-                }
-            } else {
-                if (pid) {
-                    if (groupId) {
-                        $('#one-step').attr('src', '/alink-hq/static/img/fill-1-on.png');
-                        $('#two-step').attr('src', '/alink-hq/static/img/fill-2-is.png');
-                        $('#three-step').attr('src', '/alink-hq/static/img/fill-3-is.png');
-                        $('.select-mesh-step').addClass('active').siblings('.step').removeClass('active');
-//                        $("#meshId").val(meshId);
-//                        $("#mid option:selected").val(mid);
-                    } else {
-                        $('#one-step').attr('src', '/alink-hq/static/img/fill-1-on.png');
-                        $('#two-step').attr('src', '/alink-hq/static/img/fill-2-is.png');
-                        $('#three-step').attr('src', '/alink-hq/static/img/fill-3-no.png');
-                        $('.select-group-step').addClass('active').siblings('.step').removeClass('active');
-//                        $("#meshId").val(meshId);
-//                        $("#mid option:selected").val(mid);
-                    }
-                } else {
-                    if (groupId) {
-                        $('#one-step').attr('src', '/alink-hq/static/img/fill-1-on.png');
-                        $('#two-step').attr('src', '/alink-hq/static/img/fill-2-no.png');
-                        $('#three-step').attr('src', '/alink-hq/static/img/fill-3-is.png');
-                        $('.select-group-step').addClass('active').siblings('.step').removeClass('active');
-//                        $("#meshId").val(meshId);
-//                        $("#mid option:selected").val(mid);
-                    } else {
-                        $('#one-step').attr('src', '/alink-hq/static/img/fill-1-on.png');
-                        $('#two-step').attr('src', '/alink-hq/static/img/fill-2-no.png');
-                        $('#three-step').attr('src', '/alink-hq/static/img/fill-3-no.png');
-                        $('.select-group-step').addClass('active').siblings('.step').removeClass('active');
-//                        $("#meshId").val(meshId);
-//                        $("#mid option:selected").val(mid);
-                    }
-                }
-            }
+//            }
 //            if(groupId){
 //                if (pid == '') {
 //                    $('.place-hint').text('请选择区域')
@@ -383,179 +387,179 @@
 //
 //                }
 //            }
-        })
+//        })
         //选择区域后上一步,则跳转网络选择
-        $('.select-place-step .back-btn').click(function () {
-            console.log('mid', mid, 'pid', pid, 'groupId', groupId)
-            if (mid) {
-                if (pid) {
-                    if (groupId) {
-                        $('#one-step').attr('src', '/alink-hq/static/img/fill-1-is.png');
-                        $('#two-step').attr('src', '/alink-hq/static/img/fill-2-is.png');
-                        $('#three-step').attr('src', '/alink-hq/static/img/fill-3-is.png');
-                        $('.select-mesh-step').addClass('active').siblings('.step').removeClass('active');
-                    } else {
-                        $('#one-step').attr('src', '/alink-hq/static/img/fill-1-is.png');
-                        $('#two-step').attr('src', '/alink-hq/static/img/fill-2-is.png');
-                        $('#three-step').attr('src', '/alink-hq/static/img/fill-3-no.png');
-                        $('.select-mesh-step').addClass('active').siblings('.step').removeClass('active');
-                    }
-                } else {
-                    if (groupId) {
-                        $('#one-step').attr('src', '/alink-hq/static/img/fill-1-is.png');
-                        $('#two-step').attr('src', '/alink-hq/static/img/fill-2-no.png');
-                        $('#three-step').attr('src', '/alink-hq/static/img/fill-3-is.png');
-                        $('.select-mesh-step').addClass('active').siblings('.step').removeClass('active');
-                    } else {
-                        $('#one-step').attr('src', '/alink-hq/static/img/fill-1-is.png');
-                        $('#two-step').attr('src', '/alink-hq/static/img/fill-2-no.png');
-                        $('#three-step').attr('src', '/alink-hq/static/img/fill-3-no.png');
-                        $('.select-mesh-step').addClass('active').siblings('.step').removeClass('active');
-                    }
-                }
-            } else {
-                if (pid) {
-                    if (groupId) {
-                        $('#one-step').attr('src', '/alink-hq/static/img/fill-1-on.png');
-                        $('#two-step').attr('src', '/alink-hq/static/img/fill-2-is.png');
-                        $('#three-step').attr('src', '/alink-hq/static/img/fill-3-is.png');
-                        $('.select-mesh-step').addClass('active').siblings('.step').removeClass('active');
-
-                    } else {
-                        $('#one-step').attr('src', '/alink-hq/static/img/fill-1-on.png');
-                        $('#two-step').attr('src', '/alink-hq/static/img/fill-2-is.png');
-                        $('#three-step').attr('src', '/alink-hq/static/img/fill-3-no.png');
-                        $('.select-mesh-step').addClass('active').siblings('.step').removeClass('active');
-
-                    }
-                } else {
-                    if (groupId) {
-                        $('#one-step').attr('src', '/alink-hq/static/img/fill-1-on.png');
-                        $('#two-step').attr('src', '/alink-hq/static/img/fill-2-no.png');
-                        $('#three-step').attr('src', '/alink-hq/static/img/fill-3-is.png');
-                        $('.select-mesh-step').addClass('active').siblings('.step').removeClass('active');
-
-                    } else {
-                        $('#one-step').attr('src', '/alink-hq/static/img/fill-1-on.png');
-                        $('#two-step').attr('src', '/alink-hq/static/img/fill-2-no.png');
-                        $('#three-step').attr('src', '/alink-hq/static/img/fill-3-no.png');
-                        $('.select-mesh-step').addClass('active').siblings('.step').removeClass('active');
-                    }
-                }
-            }
-        })
-        //输入组的确定
-        $('.select-group-step .confirm-create').click(function () {
-            groupId = $('#group').val();
-            console.log('mid', mid, 'pid', pid, 'groupId', groupId)
-            var regName = /^[a-zA-Z0-9\u4e00-\u9fa5]{2,16}$/;
-            var groupResult = regName.test(groupId);
-            var mids = mid.substr(0, mid.indexOf("_"));
-            if (groupId != '' && groupResult) {
-                $('.group-hint').text('');
-                $.ajax({
-                    type: "post",
-                    url: "/alink-hq/group/save",
-                    data: {"mid": mids, "pid": pid, "name": groupId},
-                    success: function (res) {
-                        if (res == 'ok') {
-                            $('#preload-anim').addClass('active');
-                            $('#preload-anim .title').text('创建成功！');
-                            setInterval(function () {
-                                $('#preload-anim').removeClass('active');
-                                location.href = '/alink-hq/group/list?uid='+uid;
-                            }, 1000)
-                        } else if (res == 'fail') {
-                            $('.group-hint').text('已存在，请重新输入');
-                        } else {
-                            $('#preload-anim').addClass('active');
-                            $('#preload-anim .title').text('加载失败，请重新尝试');
-                            setInterval(function () {
-                                $('#preload-anim').removeClass('active');
-                            }, 1000)
-                        }
-                    }
-                })
-            } else {
-                $('.group-hint').text('请输入（2-16 位汉字、字母、数字）');
-            }
-        })
-        //输入组的上一步
-        $('.select-group-step .back-btn').click(function () {
-            groupId = $('#group').val();
-            console.log('mid', mid, 'pid', pid, 'groupId', groupId)
-//            if(pid) {
-//                if(groupId){
-//                    $('#one-step').attr('src', '/alink-hq/static/img/fill-1-is.png');
-//                    $('#two-step').attr('src', '/alink-hq/static/img/fill-2-is.png');
-//                    $('#three-step').attr('src', '/alink-hq/static/img/fill-3-is.png');
-//                    $('.select-place-step').addClass('active').siblings('.step').removeClass('active');
-////                    $("#place option:selected").val(pid);
-//                }else{
-//                    $('#one-step').attr('src', '/alink-hq/static/img/fill-1-is.png');
-//                    $('#two-step').attr('src', '/alink-hq/static/img/fill-2-is.png');
-//                    $('#three-step').attr('src', '/alink-hq/static/img/fill-3-no.png');
-//                    $('.select-place-step').addClass('active').siblings('.step').removeClass('active');
-////                    $("#place option:selected").val(pid);
+//        $('.select-place-step .back-btn').click(function () {
+//            console.log('mid', mid, 'pid', pid, 'groupId', groupId)
+//            if (mid) {
+//                if (pid) {
+//                    if (groupId) {
+//                        $('#one-step').attr('src', '/alink-hq/static/img/fill-1-is.png');
+//                        $('#two-step').attr('src', '/alink-hq/static/img/fill-2-is.png');
+//                        $('#three-step').attr('src', '/alink-hq/static/img/fill-3-is.png');
+//                        $('.select-mesh-step').addClass('active').siblings('.step').removeClass('active');
+//                    } else {
+//                        $('#one-step').attr('src', '/alink-hq/static/img/fill-1-is.png');
+//                        $('#two-step').attr('src', '/alink-hq/static/img/fill-2-is.png');
+//                        $('#three-step').attr('src', '/alink-hq/static/img/fill-3-no.png');
+//                        $('.select-mesh-step').addClass('active').siblings('.step').removeClass('active');
+//                    }
+//                } else {
+//                    if (groupId) {
+//                        $('#one-step').attr('src', '/alink-hq/static/img/fill-1-is.png');
+//                        $('#two-step').attr('src', '/alink-hq/static/img/fill-2-no.png');
+//                        $('#three-step').attr('src', '/alink-hq/static/img/fill-3-is.png');
+//                        $('.select-mesh-step').addClass('active').siblings('.step').removeClass('active');
+//                    } else {
+//                        $('#one-step').attr('src', '/alink-hq/static/img/fill-1-is.png');
+//                        $('#two-step').attr('src', '/alink-hq/static/img/fill-2-no.png');
+//                        $('#three-step').attr('src', '/alink-hq/static/img/fill-3-no.png');
+//                        $('.select-mesh-step').addClass('active').siblings('.step').removeClass('active');
+//                    }
+//                }
+//            } else {
+//                if (pid) {
+//                    if (groupId) {
+//                        $('#one-step').attr('src', '/alink-hq/static/img/fill-1-on.png');
+//                        $('#two-step').attr('src', '/alink-hq/static/img/fill-2-is.png');
+//                        $('#three-step').attr('src', '/alink-hq/static/img/fill-3-is.png');
+//                        $('.select-mesh-step').addClass('active').siblings('.step').removeClass('active');
+//
+//                    } else {
+//                        $('#one-step').attr('src', '/alink-hq/static/img/fill-1-on.png');
+//                        $('#two-step').attr('src', '/alink-hq/static/img/fill-2-is.png');
+//                        $('#three-step').attr('src', '/alink-hq/static/img/fill-3-no.png');
+//                        $('.select-mesh-step').addClass('active').siblings('.step').removeClass('active');
+//
+//                    }
+//                } else {
+//                    if (groupId) {
+//                        $('#one-step').attr('src', '/alink-hq/static/img/fill-1-on.png');
+//                        $('#two-step').attr('src', '/alink-hq/static/img/fill-2-no.png');
+//                        $('#three-step').attr('src', '/alink-hq/static/img/fill-3-is.png');
+//                        $('.select-mesh-step').addClass('active').siblings('.step').removeClass('active');
+//
+//                    } else {
+//                        $('#one-step').attr('src', '/alink-hq/static/img/fill-1-on.png');
+//                        $('#two-step').attr('src', '/alink-hq/static/img/fill-2-no.png');
+//                        $('#three-step').attr('src', '/alink-hq/static/img/fill-3-no.png');
+//                        $('.select-mesh-step').addClass('active').siblings('.step').removeClass('active');
+//                    }
 //                }
 //            }
-            if (mid) {
-                if (pid) {
-                    if (groupId) {
-                        $('#one-step').attr('src', '/alink-hq/static/img/fill-1-is.png');
-                        $('#two-step').attr('src', '/alink-hq/static/img/fill-2-is.png');
-                        $('#three-step').attr('src', '/alink-hq/static/img/fill-3-is.png');
-                        $('.select-place-step').addClass('active').siblings('.step').removeClass('active');
-                    } else {
-                        $('#one-step').attr('src', '/alink-hq/static/img/fill-1-is.png');
-                        $('#two-step').attr('src', '/alink-hq/static/img/fill-2-is.png');
-                        $('#three-step').attr('src', '/alink-hq/static/img/fill-3-no.png');
-                        $('.select-place-step').addClass('active').siblings('.step').removeClass('active');
-                    }
-                } else {
-                    if (groupId) {
-                        $('#one-step').attr('src', '/alink-hq/static/img/fill-1-is.png');
-                        $('#two-step').attr('src', '/alink-hq/static/img/fill-2-no.png');
-                        $('#three-step').attr('src', '/alink-hq/static/img/fill-3-is.png');
-                        $('.select-place-step').addClass('active').siblings('.step').removeClass('active');
-                    } else {
-                        $('#one-step').attr('src', '/alink-hq/static/img/fill-1-is.png');
-                        $('#two-step').attr('src', '/alink-hq/static/img/fill-2-no.png');
-                        $('#three-step').attr('src', '/alink-hq/static/img/fill-3-no.png');
-                        $('.select-place-step').addClass('active').siblings('.step').removeClass('active');
-                    }
-                }
-            } else {
-                if (pid) {
-                    if (groupId) {
-                        $('#one-step').attr('src', '/alink-hq/static/img/fill-1-on.png');
-                        $('#two-step').attr('src', '/alink-hq/static/img/fill-2-is.png');
-                        $('#three-step').attr('src', '/alink-hq/static/img/fill-3-is.png');
-                        $('.select-place-step').addClass('active').siblings('.step').removeClass('active');
-
-                    } else {
-                        $('#one-step').attr('src', '/alink-hq/static/img/fill-1-on.png');
-                        $('#two-step').attr('src', '/alink-hq/static/img/fill-2-is.png');
-                        $('#three-step').attr('src', '/alink-hq/static/img/fill-3-no.png');
-                        $('.select-place-step').addClass('active').siblings('.step').removeClass('active');
-
-                    }
-                } else {
-                    if (groupId) {
-                        $('#one-step').attr('src', '/alink-hq/static/img/fill-1-on.png');
-                        $('#two-step').attr('src', '/alink-hq/static/img/fill-2-no.png');
-                        $('#three-step').attr('src', '/alink-hq/static/img/fill-3-is.png');
-                        $('.select-place-step').addClass('active').siblings('.step').removeClass('active');
-
-                    } else {
-                        $('#one-step').attr('src', '/alink-hq/static/img/fill-1-on.png');
-                        $('#two-step').attr('src', '/alink-hq/static/img/fill-2-no.png');
-                        $('#three-step').attr('src', '/alink-hq/static/img/fill-3-no.png');
-                        $('.select-place-step').addClass('active').siblings('.step').removeClass('active');
-                    }
-                }
-            }
-        })
+//        })
+        //输入组的确定
+//        $('.select-group-step .confirm-create').click(function () {
+//            groupId = $('#group').val();
+//            console.log('mid', mid, 'pid', pid, 'groupId', groupId)
+//            var regName = /^[a-zA-Z0-9\u4e00-\u9fa5]{2,16}$/;
+//            var groupResult = regName.test(groupId);
+//            var mids = mid.substr(0, mid.indexOf("_"));
+//            if (groupId != '' && groupResult) {
+//                $('.group-hint').text('');
+//                $.ajax({
+//                    type: "post",
+//                    url: "/alink-hq/group/save",
+//                    data: {"mid": mids, "pid": pid, "name": groupId},
+//                    success: function (res) {
+//                        if (res == 'ok') {
+//                            $('#preload-anim').addClass('active');
+//                            $('#preload-anim .title').text('创建成功！');
+//                            setInterval(function () {
+//                                $('#preload-anim').removeClass('active');
+//                                location.href = '/alink-hq/group/list?uid='+uid;
+//                            }, 1000)
+//                        } else if (res == 'fail') {
+//                            $('.group-hint').text('已存在，请重新输入');
+//                        } else {
+//                            $('#preload-anim').addClass('active');
+//                            $('#preload-anim .title').text('加载失败，请重新尝试');
+//                            setInterval(function () {
+//                                $('#preload-anim').removeClass('active');
+//                            }, 1000)
+//                        }
+//                    }
+//                })
+//            } else {
+//                $('.group-hint').text('请输入（2-16 位汉字、字母、数字）');
+//            }
+//        })
+        //输入组的上一步
+//        $('.select-group-step .back-btn').click(function () {
+//            groupId = $('#group').val();
+//            console.log('mid', mid, 'pid', pid, 'groupId', groupId)
+////            if(pid) {
+////                if(groupId){
+////                    $('#one-step').attr('src', '/alink-hq/static/img/fill-1-is.png');
+////                    $('#two-step').attr('src', '/alink-hq/static/img/fill-2-is.png');
+////                    $('#three-step').attr('src', '/alink-hq/static/img/fill-3-is.png');
+////                    $('.select-place-step').addClass('active').siblings('.step').removeClass('active');
+//////                    $("#place option:selected").val(pid);
+////                }else{
+////                    $('#one-step').attr('src', '/alink-hq/static/img/fill-1-is.png');
+////                    $('#two-step').attr('src', '/alink-hq/static/img/fill-2-is.png');
+////                    $('#three-step').attr('src', '/alink-hq/static/img/fill-3-no.png');
+////                    $('.select-place-step').addClass('active').siblings('.step').removeClass('active');
+//////                    $("#place option:selected").val(pid);
+////                }
+////            }
+//            if (mid) {
+//                if (pid) {
+//                    if (groupId) {
+//                        $('#one-step').attr('src', '/alink-hq/static/img/fill-1-is.png');
+//                        $('#two-step').attr('src', '/alink-hq/static/img/fill-2-is.png');
+//                        $('#three-step').attr('src', '/alink-hq/static/img/fill-3-is.png');
+//                        $('.select-place-step').addClass('active').siblings('.step').removeClass('active');
+//                    } else {
+//                        $('#one-step').attr('src', '/alink-hq/static/img/fill-1-is.png');
+//                        $('#two-step').attr('src', '/alink-hq/static/img/fill-2-is.png');
+//                        $('#three-step').attr('src', '/alink-hq/static/img/fill-3-no.png');
+//                        $('.select-place-step').addClass('active').siblings('.step').removeClass('active');
+//                    }
+//                } else {
+//                    if (groupId) {
+//                        $('#one-step').attr('src', '/alink-hq/static/img/fill-1-is.png');
+//                        $('#two-step').attr('src', '/alink-hq/static/img/fill-2-no.png');
+//                        $('#three-step').attr('src', '/alink-hq/static/img/fill-3-is.png');
+//                        $('.select-place-step').addClass('active').siblings('.step').removeClass('active');
+//                    } else {
+//                        $('#one-step').attr('src', '/alink-hq/static/img/fill-1-is.png');
+//                        $('#two-step').attr('src', '/alink-hq/static/img/fill-2-no.png');
+//                        $('#three-step').attr('src', '/alink-hq/static/img/fill-3-no.png');
+//                        $('.select-place-step').addClass('active').siblings('.step').removeClass('active');
+//                    }
+//                }
+//            } else {
+//                if (pid) {
+//                    if (groupId) {
+//                        $('#one-step').attr('src', '/alink-hq/static/img/fill-1-on.png');
+//                        $('#two-step').attr('src', '/alink-hq/static/img/fill-2-is.png');
+//                        $('#three-step').attr('src', '/alink-hq/static/img/fill-3-is.png');
+//                        $('.select-place-step').addClass('active').siblings('.step').removeClass('active');
+//
+//                    } else {
+//                        $('#one-step').attr('src', '/alink-hq/static/img/fill-1-on.png');
+//                        $('#two-step').attr('src', '/alink-hq/static/img/fill-2-is.png');
+//                        $('#three-step').attr('src', '/alink-hq/static/img/fill-3-no.png');
+//                        $('.select-place-step').addClass('active').siblings('.step').removeClass('active');
+//
+//                    }
+//                } else {
+//                    if (groupId) {
+//                        $('#one-step').attr('src', '/alink-hq/static/img/fill-1-on.png');
+//                        $('#two-step').attr('src', '/alink-hq/static/img/fill-2-no.png');
+//                        $('#three-step').attr('src', '/alink-hq/static/img/fill-3-is.png');
+//                        $('.select-place-step').addClass('active').siblings('.step').removeClass('active');
+//
+//                    } else {
+//                        $('#one-step').attr('src', '/alink-hq/static/img/fill-1-on.png');
+//                        $('#two-step').attr('src', '/alink-hq/static/img/fill-2-no.png');
+//                        $('#three-step').attr('src', '/alink-hq/static/img/fill-3-no.png');
+//                        $('.select-place-step').addClass('active').siblings('.step').removeClass('active');
+//                    }
+//                }
+//            }
+//        })
 
     })
     $("#group").bind("input propertychange", function () {
