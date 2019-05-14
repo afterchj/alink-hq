@@ -100,7 +100,7 @@
                             </ul>
                         </div>
                         <div class="f-l clearfix">
-                            <div class="f-l" style="border-right: 1px solid #bbb;">
+                            <div class="f-l" >
                                 <ul>
                                     <li  th:each="lightList:${lightList}" th:text="${lightList.lname}+'（'+${lightList.lmac}+')'" class="lid" th:alt="${lightList.id}"></li>
                                 </ul>
@@ -127,6 +127,13 @@
         var tabs = "meshList";
         var index = 0;
         left(tabs, index);
+        var length=$('.scene-msg .scene-msg-list>div:nth-child(3)>div:nth-child(1)  ul').height();
+        console.log(length);
+        if(length>380){
+            console.log('大了')
+            $('.scene-msg .scene-msg-list>div:nth-child(3)>div:nth-child(1) ul').addClass('active');
+            $('.scene-msg .scene-msg-list>div:nth-child(3)>div:nth-child(1)').css('border-right','none')
+        }
         var lid = $('#lid').val();
         var gid = $('#gid').val();
         var pid=$('#pid').val();
