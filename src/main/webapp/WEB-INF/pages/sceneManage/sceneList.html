@@ -72,7 +72,7 @@
                         <tr th:each="scene:${pageInfo.list}">
                             <td class="checkbox sid" ><input type="checkbox" name="sid"  th:value="${scene.id}"></td>
                             <td class="k-link sceneName">
-                                <a href="" th:text="${scene.sceneName}"></a>
+                                <a th:href="@{/scene/detail(sid=${scene.id},lid=${scene.lid},sceneName=${scene.sceneName},sceneId=${scene.sceneId},meshName=${scene.meshName},meshId=${scene.meshId})}" th:text="${scene.sceneName}" th:alt="${scene.lid}"></a>
                             </td>
                             <td class="sceneId" th:text="${scene.sceneId}"></td>
                             <td th:text="${scene.meshName}"></td>
