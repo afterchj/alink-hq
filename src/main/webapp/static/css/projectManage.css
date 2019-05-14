@@ -797,22 +797,29 @@ input:-ms-input-placeholder { /* Internet Explorer 10+ */
     text-align: center;
     font-size: 15px;
     color: #3c3c3c;
+    height: 500px;
 }
 .scene-msg .scene-msg-list{
-    width: 830px;
+    width: 900px;
     margin: auto;
 }
 .scene-msg .scene-msg-list>div{
     width: 200px;
     border: 1px solid #bbb;
-    height: 450px;
+    height: 380px;
+    /*height: 150px;*/
     overflow-y: scroll;
 }
 .scene-msg .scene-msg-list>div:nth-child(3){
-    width: 420px;
+    width: 490px;
 }
 .scene-msg .scene-msg-list>div:nth-child(3)>div{
-    width:200px;
+    width: 170px;
+    /*height: 100%;*/
+}
+.scene-msg .scene-msg-list>div:nth-child(3)>div:nth-child(1){
+    width: 300px;
+    border-right: 1px solid #bbb;
     height: 100%;
 }
 .scene-msg-list li{
@@ -820,7 +827,108 @@ input:-ms-input-placeholder { /* Internet Explorer 10+ */
     line-height: 35px;
     text-align: left;
     padding-left: 10px;
+    color: #3c3c3c;
 }
 .scene-msg-list ul{
-    margin-top:10px;
+    padding-top: 10px;
+    /*border-right: 1px solid #bbb;*/
 }
+.scene-msg-list li.active{
+    background-color: #3895DB;
+    color: #fff;
+    cursor: pointer;
+}
+.scene-msg .scene-msg-list>div:nth-child(3)>div:nth-child(1) ul.active{
+     border-right: 1px solid #bbb;
+}
+/*.scene-msg .scene-msg-list>div::-webkit-scrollbar{*/
+    /*width:15px;*/
+    /*border:1px solid #bbb;*/
+    /*border-top:none;*/
+    /*border-right: none;*/
+/*}*/
+/*.scene-msg .scene-msg-list>div::-webkit-scrollbar-button{*/
+    /*!*background-color: #bbb;*!*/
+    /*color: #333;*/
+/*}*/
+/*.scene-msg .scene-msg-list>div::-webkit-scrollbar-track{*/
+    /*width:15px;*/
+    /*background-color: #fff;*/
+    /*border:1px solid #bbb;*/
+    /*border-top:none;*/
+    /*border-right: none;*/
+/*}*/
+/*.scene-msg .scene-msg-list>div::-webkit-scrollbar-track-piece{*/
+
+    /*width:30px;*/
+    /*!*border:1px solid #bbb;*!*/
+/*}*/
+/*::-webkit-scrollbar*/
+/*{*/
+    /*width: 20px;  !*滚动条宽度*!*/
+    /*!*height: 45px;  !*滚动条高度*!*!*/
+/*}*/
+/*::-webkit-scrollbar-button{*/
+    /*!*background-color: #ccc;*!*/
+    /*border:1px solid #ccc;*/
+
+/*}*/
+
+/*::-webkit-scrollbar-thumb*/
+/*{*/
+    /*border-radius: 10px;*/
+    /*-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);*/
+    /*background-color: blue;*/
+/*}*/
+
+/*!*定义滚动条轨道 内阴影+圆角*!*/
+/*::-webkit-scrollbar-track*/
+/*{*/
+    /*border:1px solid #bbb;*/
+    /*border-top:none;*/
+    /*border-right: none;*/
+    /*!*-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);*!*/
+    /*border-radius: 0;  !*滚动条的背景区域的圆角*!*/
+    /*background-color: #fafafa;!*滚动条的背景颜色*!*/
+/*}*/
+
+/*!*定义滑块 内阴影+圆角*!*/
+/*::-webkit-scrollbar-thumb*/
+/*{*/
+    /*width:5px;*/
+    /*height:40px;*/
+    /*border-radius: 5px;  !*滚动条的圆角*!*/
+    /*!*-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);*!*/
+    /*background-color: #bbb;  !*滚动条的背景颜色*!*/
+/*}*/
+/*.scene-msg .scene-msg-list>div::-webkit-scrollbar-thumb{*/
+    /*width:12px;*/
+    /*background-color: #bbb;*/
+    /*height: 45px;*/
+    /*border-radius: 5px;*/
+/*}*/
+/*.scene-msg .scene-msg-list>div::-webkit-scrollbar-track {*/
+    /*background-color: #bbb;*/
+/*}*/
+/*!*定义滚动条高宽及背景 高宽分别对应横竖滚动条的尺寸*!*/
+/*::-webkit-scrollbar*/
+/*{*/
+    /*width: 16px;  !*滚动条宽度*!*/
+    /*height: 16px;  !*滚动条高度*!*/
+/*}*/
+
+/*!*定义滚动条轨道 内阴影+圆角*!*/
+/*::-webkit-scrollbar-track*/
+/*{*/
+    /*-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);*/
+    /*border-radius: 10px;  !*滚动条的背景区域的圆角*!*/
+    /*background-color: red;!*滚动条的背景颜色*!*/
+/*}*/
+
+/*!*定义滑块 内阴影+圆角*!*/
+/*::-webkit-scrollbar-thumb*/
+/*{*/
+    /*border-radius: 10px;  !*滚动条的圆角*!*/
+    /*-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);*/
+    /*background-color: green;  !*滚动条的背景颜色*!*/
+/*}*/
