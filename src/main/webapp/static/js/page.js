@@ -15,7 +15,8 @@ $(function () {
             this.checked = checked;
         });
         if (checked) {
-            $("#amount").text(size);
+            var len = $("input[name=ids]:checked").length;
+            $("#amount").text(len);
         } else {
             $("#amount").text(0);
         }
