@@ -43,7 +43,7 @@
                             <span th:text="${meshInfo.name}"></span>
                         </div>
                         <div class="f-l">
-                            <a th:href="@{/project/detail(projectId=${meshInfo.project_id})}">查看项目详情</a>
+                            <a th:href="@{/project/detail(projectId=${meshInfo.project_id},projectName=${meshInfo.name})}">查看项目详情</a>
                         </div>
                     </div>
                     <div class="clearfix">

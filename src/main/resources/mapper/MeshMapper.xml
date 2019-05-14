@@ -25,18 +25,18 @@
         <if test="uid!=null and uid!=''">
             <choose>
                 <when test="role == 'admin'">
-                    AND p.uid IN (SELECT u.id FROM f_user_account u INNER JOIN f_user_role r ON u.id=r.user_id WHERE
+                    AND m.uid IN (SELECT u.id FROM f_user_account u INNER JOIN f_user_role r ON u.id=r.user_id WHERE
                     r.role_id in (2,3,4))
                 </when>
                 <when test="role == 'manager'">
-                    AND p.uid IN (SELECT c.uid FROM f_user_customer c WHERE fid=(SELECT fid FROM f_user_customer WHERE
+                    AND m.uid IN (SELECT c.uid FROM f_user_customer c WHERE fid=(SELECT fid FROM f_user_customer WHERE
                     uid=#{uid}))
                     <!--
                         AND p.uid IN (SELECT c.uid FROM f_user_customer c INNER JOIN f_user_role r ON c.uid=r.user_id WHERE r.role_id in (4) OR fid=(SELECT fid FROM f_user_customer WHERE uid=#{uid}))
                      -->
                 </when>
                 <when test="role == 'user'">
-                    AND p.uid =#{uid}
+                    AND m.uid =#{uid}
                 </when>
                 <!--<otherwise>-->
                 <!--</otherwise>-->
@@ -76,9 +76,10 @@
     <select id="getMesh" resultType="OptionList" parameterType="map">
         SELECT CONCAT_WS('_',id,mesh_id) id,mesh_id, mname label FROM f_mesh m
         WHERE 1=1
-        <if test="uid!=null and uid!=''">
-            AND m.uid =#{uid}
-        </if>
+        <include refid="common_choose"></include>
+        <!--<if test="uid!=null and uid!=''">-->
+            <!--AND m.uid =#{uid}-->
+        <!--</if>-->
         GROUP BY mesh_id
     </select>
 
