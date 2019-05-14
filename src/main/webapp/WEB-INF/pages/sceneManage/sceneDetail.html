@@ -175,7 +175,7 @@
             $('li.pid').eq(0).addClass('active');
         }
     })
-    $('.scene-msg-list li').click(function () {
+    $('.scene-msg-list ').on('click','li',function () {
         $(this).toggleClass('active').siblings().removeClass('active');
     })
 
