@@ -70,7 +70,6 @@ public class GroupController {
     public String create(Integer projectId, ModelMap modelMap) {
         OptionList project = meshService.getProject(projectId);
         modelMap.put("project", project);
-        logger.info("project=" + JSON.toJSONString(project));
         return "meshTemp/groupCreate";
     }
 
