@@ -200,18 +200,16 @@
                 var lightList=res.lightList;
                 $.each(lightList,function(key,value){
                     console.log(key,value);
-                    content+='<li class="lid" alt='+value.id+'>'+value.lname+'('+value.lmac+')'+'<li>';
-                    content1+='<li class="lid" alt="'+value.id+'" style="text-align: center;">'+value.x+','+value.y+'<li>';
+                    content+='<li class="lid" alt='+value.id+'>'+value.lname+'('+value.lmac+')'+'</li>';
+                    if(key==0){
+                        content1+='<li class="lid" alt="'+value.id+'" style="text-align: center;">'+value.x+'((色温)，)'+value.y+'(亮度)</li>';
+                    }else{
+                        content1+='<li class="lid" alt="'+value.id+'" style="text-align: center;">'+value.x+'，'+value.y+'</li>';
+                    }
                 })
+                console.log('content',content);
                 $('.one').append(content);
                 $('.two').append(content1);
-//                $('.scene-msg .scene-msg-list>div:nth-child(3)>div:nth-child(1) ul').empty();
-//                $('.scene-msg .scene-msg-list>div:nth-child(3)>div:nth-child(1) ul').append(content);
-//                if (res == "success") {
-//                    location.reload();
-//                } else {
-//                    $('p.rename-hint').text('已存在，请重新输入');
-//                }
             }
         })
     })
