@@ -50,7 +50,7 @@ $(function () {
                         console.log("msg: "+msg.success);
                         if (msg.success=="密码修改成功"){
                             var content = msg.success+"!";
-                            loadingSuccess(content, account);
+                            loadingSuccess(content);
                         }else {
                             var content = msg.success;
                             loadingError(content);

@@ -62,7 +62,7 @@ $(function () {
                     var success = new RegExp("成功");
                     if (success.test(msg.success)) {
                         var content = msg.success + "!";
-                        loadingSuccess(content, account);
+                        loadingSuccess(content);
                     } else {
                         var content = msg.success + "!";
                         loadingError(content);
