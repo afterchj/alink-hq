@@ -125,7 +125,7 @@ $(function () {
                             }else {
                                 content = "修改绑定成功！";
                             }
-                            loadingSuccess(content, account);
+                            loadingSuccess(content);
                         }
                     },
                     error: function () {

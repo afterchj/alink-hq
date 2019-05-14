@@ -103,9 +103,11 @@ public class SceneController {
         MeshInfo meshInfo = sceneService.findProjectByMeshId(meshId);
         List<MeshInfo> placeList = sceneService.findPlaceBySid(sid);
         List<MeshInfo> groupList = sceneService.findGroupByPid(placeList.get(0).getPid());
-        List<MeshInfo> lightList;
+        List<MeshInfo> lightList = new ArrayList<>();
         if (lid == null) {
-            lightList = sceneService.findLightByGid(groupList.get(0).getGid(),sid);
+            if(groupList.size()>0) {
+                lightList = sceneService.findLightByGid(groupList.get(0).getGid(), sid);
+            }
         } else {
             MeshInfo lightInfo = sceneService.findLightInfoByLid(lid);
             lightList = sceneService.findLightByGid(lightInfo.getGid(),sid);
