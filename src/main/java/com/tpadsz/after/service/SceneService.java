@@ -31,5 +31,5 @@ public interface SceneService {
 
     List<MeshInfo> findXYBySid(Integer sid);
 
-    List<MeshInfo> findXYByGid(Integer gid);
+    List<MeshInfo> findXYByGid(Integer gid,Integer sid);
 }

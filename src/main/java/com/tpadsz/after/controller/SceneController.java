@@ -103,12 +103,12 @@ public class SceneController {
         List<MeshInfo> placeList = sceneService.findPlaceBySid(sid);
         List<MeshInfo> groupList = sceneService.findGroupByPid(placeList.get(0).getPid());
         List<MeshInfo> lightList;
-        MeshInfo lightInfo = new MeshInfo();
         if (lid == null) {
             lightList = sceneService.findLightByGid(groupList.get(0).getGid(),sid);
         } else {
-            lightInfo = sceneService.findLightInfoByLid(lid);
+            MeshInfo lightInfo = sceneService.findLightInfoByLid(lid);
             lightList = sceneService.findLightByGid(lightInfo.getGid(),sid);
+            model.addAttribute("lightInfo", lightInfo);
         }
 
         List<MeshInfo> list1 = sceneService.findXYBySid(sid);
@@ -118,7 +118,7 @@ public class SceneController {
             model.addAttribute("py", list1.get(0).getY());
         } else {
             for (int i = 0; i < groupList.size(); i++) {
-                List<MeshInfo> list2 = sceneService.findXYByGid(groupList.get(i).getGid());
+                List<MeshInfo> list2 = sceneService.findXYByGid(groupList.get(i).getGid(),sid);
                 if (list2.size() == 1) {
                     MeshInfo groupXY = new MeshInfo();
                     groupXY.setX(list2.get(i).getX());
@@ -142,7 +142,6 @@ public class SceneController {
         model.addAttribute("placeList", placeList);
         model.addAttribute("groupList", groupList);
         model.addAttribute("lightList", lightList);
-        model.addAttribute("lightInfo", lightInfo);
 
         return "sceneManage/sceneDetail";
     }

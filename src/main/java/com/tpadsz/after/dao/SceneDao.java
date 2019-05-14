@@ -35,5 +35,5 @@ public interface SceneDao {
 
     List<MeshInfo> findXYBySid(@Param("sid")Integer sid);
 
-    List<MeshInfo> findXYByGid(@Param("gid")Integer gid);
+    List<MeshInfo> findXYByGid(@Param("gid")Integer gid,@Param("sid")Integer sid);
 }
