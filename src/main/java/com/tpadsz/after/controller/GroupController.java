@@ -77,7 +77,6 @@ public class GroupController {
     @ResponseBody
     @RequestMapping("/save")
     public String saveGroup(SearchDict dict) {
-        logger.info("name=" + dict.getName());
         try {
             groupService.save(dict);
         } catch (RepetitionException e) {
@@ -104,7 +103,6 @@ public class GroupController {
 
     @RequestMapping("/delete")
     public String delete(String ids) {
-        logger.info("ids=" + ids);
         String[] ids1 = ids.split(",");
         List<String> list = new ArrayList(Arrays.asList(ids1));
         try {

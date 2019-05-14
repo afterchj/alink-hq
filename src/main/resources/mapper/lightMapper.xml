@@ -78,9 +78,9 @@
             l.mid,
             IFNULL(l.lname,'null') lname,
             l.lmac,
-            ls.x,
-            ls.y,
-            ls.off,
+            IFNULL(ls.x,'null') x,
+			IFNULL(ls.y,'null') y,
+			IFNULL(ls.off,'null') off,
             s.id sid,
             m.project_id,
             g.id gid,
@@ -92,7 +92,7 @@
             pl.pname,
             IFNULL(s.scount,0) scount
         FROM f_light l
-        INNER JOIN f_light_setting ls ON ls.lid=l.id
+        LEFT JOIN f_light_setting ls ON ls.lid=l.id
         LEFT JOIN f_group g ON g.id=l.gid
         LEFT JOIN f_mesh m ON m.id=l.mid
         LEFT JOIN f_project p ON p.id=m.project_id
