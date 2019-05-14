@@ -66,9 +66,10 @@ public class GroupController {
     }
 
     @RequestMapping("/create")
-    public String create(Integer projectId, ModelMap modelMap) {
-        OptionList project = meshService.getProject(projectId);
+    public String create(SearchDict dict, ModelMap modelMap) {
+        OptionList project = meshService.getProject(dict.getProjectId());
         modelMap.put("project", project);
+        modelMap.put("dict", dict);
         return "meshTemp/groupCreate";
     }
 
