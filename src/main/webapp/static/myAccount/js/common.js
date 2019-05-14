@@ -84,18 +84,18 @@ $(function () {
     $("#clickReturn").click(function () {
         var account = $(".account").val();
         // window.location.href = "http://iotsztp.com/alink-hq/myAccount/myAccount?account="+account;
-        window.location.href = "/alink-hq/myAccount/myAccount?account="+account;
+        window.location.href = "/alink-hq/myAccount/myAccount";
     });
 });
 //账号信息修改成功跳转到我的账号主页面
-function loadingSuccess(content,account){
+function loadingSuccess(content){
     $('#preload-anim').addClass('active');
     $('#preload-anim .title').text(content);
     setTimeout(function(){
         $('#preload-anim').removeClass('active');
         $('#preload-anim .title').text('');
         // window.location.href = "http://iotsztp.com/alink-hq/myAccount/myAccount?account="+account;
-        window.location.href = "/alink-hq/myAccount/myAccount?account="+account;
+        window.location.href = "/alink-hq/myAccount/myAccount";
     },2000)
 }
 //账号信息修改失败提示

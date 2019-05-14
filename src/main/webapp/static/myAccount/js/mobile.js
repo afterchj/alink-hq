@@ -116,7 +116,7 @@ function clickFillSubmit(event) {
                         loadingError(content);
                     }else {
                         var content = event.data.alertText;
-                        loadingSuccess(content, account);
+                        loadingSuccess(content);
                     }
                 },
                 error:function () {
