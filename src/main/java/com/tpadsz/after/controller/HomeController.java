@@ -124,7 +124,6 @@ public class HomeController {
         } else {
             str = "failure";
         }
-        logger.info("user:" + uname + ",count=" + count);
         return str;
     }
 

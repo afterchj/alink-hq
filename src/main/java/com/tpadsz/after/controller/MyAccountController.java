@@ -203,13 +203,13 @@ public class MyAccountController {
     /**
      * 展示我的账号信息
      * 跳转到account.html
-     *
-     * @param account
      * @param model
      * @return
      */
-    @RequestMapping(value = "/myAccount", method = RequestMethod.GET)
-    public String myAccount(String account, Model model) {
+    @RequestMapping(value = "/myAccount",method = RequestMethod.GET)
+    public String myAccount(Model model,HttpSession session) {
+        User loginUser = (User) session.getAttribute("user");
+        String account = loginUser.getAccount();
         MyAccount myAccount = myAccountService.getAllByAccount(account);
         model.addAttribute("myAccount", myAccount);
         return "myAccount/account";
