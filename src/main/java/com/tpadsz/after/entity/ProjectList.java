@@ -9,6 +9,7 @@ public class ProjectList {
     private String name;
     private int meshNum;
     private String account;
+    private String uname;
     private String coname;
     private String mobile;
     private String uid;
@@ -30,6 +31,14 @@ public class ProjectList {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getUname() {
+        return uname;
+    }
+
+    public void setUname(String uname) {
+        this.uname = uname;
     }
 
     public int getMeshNum() {

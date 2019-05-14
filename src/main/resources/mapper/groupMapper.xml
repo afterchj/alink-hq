@@ -87,6 +87,7 @@
             m.project_id,
             m.mname,
             m.mesh_id,
+            p.name,
             pl.pname,
             pl.id pid,
             IFNULL(l.lcount,0) lcount

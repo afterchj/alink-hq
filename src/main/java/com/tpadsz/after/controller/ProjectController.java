@@ -243,6 +243,7 @@ public class ProjectController {
                 ProjectList projectList = projectService.findAccountAndConame(list.get(0).getUid());
                 user.setAccount(projectList.getAccount());
                 user.setMobile(projectList.getMobile());
+                user.setUname(projectList.getUname());
                 coname = projectList.getConame();
                 placeNum = projectService.findPlaceNum(projectId);
                 groupNum = projectService.findGroupNum(projectId);

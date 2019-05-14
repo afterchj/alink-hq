@@ -28,6 +28,24 @@
             <bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter"/>
         </mvc:message-converters>
     </mvc:annotation-driven>
+
+    <mvc:interceptors>
+        <bean class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor"/>
+
+        <mvc:interceptor>
+            <mvc:mapping path="/**"/>
+            <mvc:exclude-mapping path="/"/>
+            <mvc:exclude-mapping path="/static/**"/>
+            <mvc:exclude-mapping path="/style/**"/>
+            <mvc:exclude-mapping path="/login**"/>
+            <mvc:exclude-mapping path="/checkCode**"/>
+            <mvc:exclude-mapping path="/restPwd**"/>
+            <mvc:exclude-mapping path="/checkUser**"/>
+            <mvc:exclude-mapping path="/verify**"/>
+            <mvc:exclude-mapping path="/mesh/delete**"/>
+            <bean class="com.tpadsz.after.realm.UserTokenValidationInterceptor"/>
+        </mvc:interceptor>
+    </mvc:interceptors>
     <!-- 使用thymeleaf解析 -->
     <bean id="templateResolver"
           class="org.thymeleaf.spring4.templateresolver.SpringResourceTemplateResolver">

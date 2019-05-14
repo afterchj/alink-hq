@@ -54,7 +54,7 @@
 
 
     <insert id="createAccount" parameterType="string">
-        insert into f_user_account (account,pwd,salt,create_date) values (#{account},#{pwd},#{salt},NOW())
+        insert into f_user_account (account,pwd,salt,create_date,update_date) values (#{account},#{pwd},#{salt},NOW(),NOW())
         <selectKey keyProperty="id" order="AFTER" resultType="string">
             select LAST_INSERT_ID()
         </selectKey>
