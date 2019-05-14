@@ -95,7 +95,7 @@
              IFNULL(l.lcount,0) lcount
         FROM
              f_mesh m
-        LEFT JOIN f_project p ON m.project_id = p.id
+        INNER JOIN f_project p ON m.project_id = p.id
         LEFT JOIN (SELECT COUNT(1) pcount,mid FROM f_place GROUP BY mid) pl ON pl.mid=m.id
         LEFT JOIN (SELECT COUNT(1) scount,mid FROM f_scene GROUP BY mid) s ON s.mid=m.id
         LEFT JOIN (SELECT COUNT(1) gcount,mid FROM f_group GROUP BY mid) g ON g.mid=m.id
