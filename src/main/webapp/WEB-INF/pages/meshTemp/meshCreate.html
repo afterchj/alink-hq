@@ -115,7 +115,7 @@
                             $('#preload-anim .title').text('创建成功！');
                             setInterval(function () {
                                 $('#preload-anim').removeClass('active');
-                                location.href = '/alink-hq/mesh/list';
+                                location.href = '/alink-hq/mesh/list?uid='+uid;
                             }, 1000)
                         }else if(res=='fail'){
                             $('.mesh-hint').text('已存在，请重新输入');
