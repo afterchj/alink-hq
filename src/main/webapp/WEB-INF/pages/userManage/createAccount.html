@@ -34,7 +34,7 @@
                     新建账号
                 </div>
                 <div class="c-content ">
-                    <form th:action="@{/account/create}" method="GET">
+                    <form>
                         <p class="create-company-hint"></p>
                         <div>
 
@@ -135,6 +135,9 @@
 <script>
     var list = [];
     $('button.confirm-create').click(function () {
+        this.setAttribute("disabled", true);
+        this.style.background = "#A0A0A0";
+        this.style.borderColor = "#A0A0A0";
         var fid = $('#fid option:selected').val();
         if (fid == '') {
             $('p.create-company-hint').text('请选择公司');
