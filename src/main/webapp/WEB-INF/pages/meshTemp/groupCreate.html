@@ -35,7 +35,7 @@
                 </div>
                 <div class="c-content ">
                     <div class="subjection">隶属项目：<span th:inline="text">[[${project.label}]]</span></div>
-                        <form th:action="@{/group/save}" method="POST" style="margin-top: 0;">
+                    <form th:action="@{/group/save}" method="POST" style="margin-top: 0;">
                         <div class="process clearfix">
                             <div class="f-l part">
                                 <img src="/alink-hq/static/img/fill-1-on.png" alt="" id="one-step">
@@ -181,6 +181,7 @@
         //第一步跳转第二步时,第三步返回第二步时,同时显示第二步页面
         $('.select-mesh-step .confirm-create').click(function () {
             mid = $("#mid option:selected").val();
+            var id = mid.substr(0, mid.indexOf("_"));
             var two = 'on';
             if (mid == '' || !mid) {
                 var one = 'no';
@@ -188,14 +189,13 @@
             } else {
                 $('.project-hint').text('');
                 var one = 'is';
-
                 var step = 'place';
                 show(step);
-                console.log(mid, pid, gid);
+                console.log(id, mid, pid, gid);
                 if (pid && pid != '') {
 //                    var two = 'is';
                     $("#place option:selected").val(pid);
-                    $.getJSON("/alink-hq/group/getPlace", {"uid": uid}, function (json) {
+                    $.getJSON("/alink-hq/group/getPlace", {"mid": id}, function (json) {
                         if (json != '') {
                             $("#place option:first").siblings().remove();
                         }
@@ -209,13 +209,12 @@
                     })
                 } else {
 //                    var two = 'on';
-                    $.getJSON("/alink-hq/group/getPlace", {"uid": uid}, function (json) {
+                    $.getJSON("/alink-hq/group/getPlace", {"mid": id}, function (json) {
                         if (json != '') {
                             $("#place option:first").siblings().remove();
                         }
                         $.each(json, function (i, item) {
                             $("#place").append("<option value='" + item.id + "'>" + item.label + "</option>")
-
                         })
                     })
                 }
