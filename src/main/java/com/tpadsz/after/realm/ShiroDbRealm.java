@@ -60,17 +60,17 @@ public class ShiroDbRealm extends AuthorizingRealm {
         String uid = user.getId();
         String key = MemcachedObjectType.CACHE_TOKEN.getPrefix() + uid;
         AuthenticationInfo info = null;
+        if (null != user) {
+            if (user.getStatus() == 0) {
+                throw new DisabledAccountException("该账号已禁用！");
+            } else if (user.isLocked() == 1) {
+                throw new LockedAccountException("该账号在别处登入！");
+            }
+        } else {
+            throw new UnknownAccountException("登录名错误");
+        }
         try {
             memcachedClient.set(key, 0, GenerateUtils.generateToken());
-            if (null != user) {
-                if (user.getStatus() == 0) {
-                    throw new DisabledAccountException("该账号已禁用！");
-                } else if (user.isLocked() == 1) {
-                    throw new LockedAccountException("该账号在别处登入！");
-                }
-            } else {
-                throw new UnknownAccountException("登录名错误");
-            }
             byte[] salt = Encodes.decodeHex(user.getSalt());
             info = new SimpleAuthenticationInfo(username, user.getPwd(), ByteSource.Util.bytes(salt), getName());
         } catch (TimeoutException e) {
