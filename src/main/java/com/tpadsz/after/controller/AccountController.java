@@ -303,8 +303,11 @@ public class AccountController {
     public Map<String, String> delete(String account) {
         Map<String, String> map = new HashMap<>();
         try {
-            int count = accountService.delete(account);
+            User user = accountService.findByAccount(account);
+            int count = accountService.delete(user.getId());
             if (count == 0) {
+                String key = MemcachedObjectType.CACHE_TOKEN.getPrefix() + user.getId();
+                client.delete(key);
                 map.put("result", ResultDict.SUCCESS.getCode());
             } else {
                 map.put("result", ResultDict.PROJECT_EXISTED.getCode());
