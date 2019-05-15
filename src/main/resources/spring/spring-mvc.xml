@@ -42,7 +42,6 @@
             <mvc:exclude-mapping path="/restPwd**"/>
             <mvc:exclude-mapping path="/checkUser**"/>
             <mvc:exclude-mapping path="/verify**"/>
-            <mvc:exclude-mapping path="/mesh/delete**"/>
             <bean class="com.tpadsz.after.realm.UserTokenValidationInterceptor"/>
         </mvc:interceptor>
     </mvc:interceptors>

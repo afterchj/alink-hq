@@ -1,11 +1,14 @@
 package com.tpadsz.after.realm;
 
-import com.alibaba.fastjson.JSON;
+import com.tpadsz.after.constants.MemcachedObjectType;
 import com.tpadsz.after.dao.UserExtendDao;
 import com.tpadsz.after.entity.User;
 import com.tpadsz.after.utils.Digests;
 import com.tpadsz.after.utils.Encodes;
 import com.tpadsz.after.utils.Encryption;
+import com.tpadsz.after.utils.GenerateUtils;
+import net.rubyeye.xmemcached.MemcachedClient;
+import net.rubyeye.xmemcached.exception.MemcachedException;
 import org.apache.log4j.Logger;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
@@ -18,7 +21,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.annotation.PostConstruct;
 import java.util.HashSet;
-import java.util.List;
+import java.util.concurrent.TimeoutException;
 
 
 public class ShiroDbRealm extends AuthorizingRealm {
@@ -29,7 +32,11 @@ public class ShiroDbRealm extends AuthorizingRealm {
 
     @Autowired
     private UserExtendDao userExtendDao;
+    @Autowired
+    private MemcachedClient memcachedClient;
+
     private Logger logger = Logger.getLogger(this.getClass());
+
     /**
      * 登录之后用于授权
      */
@@ -50,19 +57,28 @@ public class ShiroDbRealm extends AuthorizingRealm {
         String username = (String) token.getPrincipal();
         logger.info("username=" + username);
         User user = userExtendDao.selectByUsername(username);
-        AuthenticationInfo info;
-        if (null != user) {
-            if (user.getStatus() == 0) {
-                throw new DisabledAccountException("该账号已禁用！");
-            } else if (user.isLocked() == 1) {
-                throw new LockedAccountException("该账号在别处登入！");
-            }
-        } else {
-            throw new UnknownAccountException("登录名错误");
-        }
+        String uid = user.getId();
+        String key = MemcachedObjectType.CACHE_TOKEN.getPrefix() + uid;
+        AuthenticationInfo info = null;
         try {
+            memcachedClient.set(key, 0, GenerateUtils.generateToken());
+            if (null != user) {
+                if (user.getStatus() == 0) {
+                    throw new DisabledAccountException("该账号已禁用！");
+                } else if (user.isLocked() == 1) {
+                    throw new LockedAccountException("该账号在别处登入！");
+                }
+            } else {
+                throw new UnknownAccountException("登录名错误");
+            }
             byte[] salt = Encodes.decodeHex(user.getSalt());
             info = new SimpleAuthenticationInfo(username, user.getPwd(), ByteSource.Util.bytes(salt), getName());
+        } catch (TimeoutException e) {
+            logger.error(e);
+        } catch (InterruptedException e) {
+            logger.error(e);
+        } catch (MemcachedException e) {
+            logger.error(e);
         } catch (Exception e) {
             throw new IncorrectCredentialsException("账号密码不正确！");
         }

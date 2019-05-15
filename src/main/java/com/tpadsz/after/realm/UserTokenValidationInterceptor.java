@@ -9,8 +9,6 @@ import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.util.HashMap;
-import java.util.Map;
 
 
 public class UserTokenValidationInterceptor extends HandlerInterceptorAdapter {
@@ -20,20 +18,19 @@ public class UserTokenValidationInterceptor extends HandlerInterceptorAdapter {
 
 
     @Override
-    public boolean preHandle(HttpServletRequest request,
-                             HttpServletResponse response, Object handler) throws Exception {
+    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         try {
             HttpSession session = request.getSession();
             User loginUser = (User) session.getAttribute("user");
             String uid = loginUser.getId();
             String key = MemcachedObjectType.CACHE_TOKEN.getPrefix() + uid;
-            String expected = (String) client.get(key);
-            if("disabled".equals(expected)){
-                String url = "/alink-hq/";
+            String expected = client.get(key);
+            if ("disabled".equals(expected)) {
+                String url = "/alink-hq/logOut";
                 response.sendRedirect(url);
                 return false;
             }
-        }catch (Exception e){
+        } catch (Exception e) {
 
         }
         return true;

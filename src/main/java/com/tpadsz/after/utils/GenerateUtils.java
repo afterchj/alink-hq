@@ -2,9 +2,6 @@ package com.tpadsz.after.utils;
 
 import com.tpadsz.after.constants.MemcachedObjectType;
 import com.tpadsz.after.exception.SystemAlgorithmException;
-import net.rubyeye.xmemcached.XMemcachedClient;
-import org.springframework.beans.factory.annotation.Autowired;
-
 import java.util.Random;
 import java.util.UUID;
 
@@ -12,10 +9,6 @@ import java.util.UUID;
  * Created by chenhao.lu on 2019/4/11.
  */
 public class GenerateUtils {
-
-    @Autowired
-    private XMemcachedClient client;
-
 
     public static String getCharAndNumr(int length) {
         String val = "";
@@ -100,12 +93,10 @@ public class GenerateUtils {
     }
 
 
-    public String generateToken(String uid) throws SystemAlgorithmException {
+    public static String generateToken() throws SystemAlgorithmException {
         String token = null;
         try {
             token = UUID.randomUUID().toString().replaceAll("-", "");
-            String key = MemcachedObjectType.CACHE_TOKEN.getPrefix() + uid;
-            client.set(key, 0, token);
         } catch (Exception e) {
             throw new SystemAlgorithmException();
         }
