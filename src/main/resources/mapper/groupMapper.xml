@@ -124,7 +124,9 @@
         FROM f_place p
         INNER JOIN f_mesh m ON p.mid = m.id
         WHERE 1=1
-        <include refid="common_choose"></include>
+        <if test="mid!=null and mid!=''">
+            AND m.id=#{mid}
+        </if>
         LIMIT 1
     </select>
 
