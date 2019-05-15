@@ -6,14 +6,17 @@
 		l.id,
         l.mid,
         l.pid,
-        IFNULL(l.lname,'null') lname,
+        IFNULL(l.lname, 'null') lname,
         l.lmac,
         m.project_id,
         m.mname,
         m.mesh_id,
-        IFNULL(ls.x,'null') x,
-        IFNULL(ls.y,'null') y,
-        IFNULL(ls.off,'null') off
+        g.id gid,
+        g.gname,
+        pl.pname,
+        IFNULL(ls.x, 'null') x,
+        IFNULL(ls.y, 'null') y,
+        IFNULL(ls.off, 'null') off
 	</sql>
 
     <sql id="common_choose">
@@ -41,9 +44,10 @@
         <include refid="Base_Column_List"/>
         FROM f_light l
         INNER JOIN f_mesh m ON m.id = l.mid
-        INNER JOIN f_place pl ON pl.id=l.pid
-        LEFT JOIN f_light_setting ls ON ls.lid=l.id
-        WHERE 1=1
+        INNER JOIN f_place pl ON pl.id = l.pid
+        INNER JOIN f_group g ON g.id=l.gid
+        LEFT JOIN f_light_setting ls ON ls.lid = l.id
+        WHERE 1 = 1
         <include refid="common_choose"></include>
         <if test="mname!=null and mname!=''">
             AND m.mname LIKE CONCAT('%',#{mname},'%')
