@@ -57,7 +57,7 @@
                     <div class="f-l search">
                         <div>
                             <label for="mid" class="font">网络ID</label>
-                            <input type="text" id="mid" name="meshId" th:value="${dict.meshId}" placeholder="请输入网络ID">
+                            <input type="text" id="mid" name="meshId" th:value="${dict.meshId}" placeholder="请输入网络ID" onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')">
                         </div>
                         <div>
                             <label for="pname" class="font">项目名称</label>

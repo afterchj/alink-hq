@@ -587,7 +587,7 @@ th.all-checkbox {
     text-align: center;
 }
 
-#createProject input, #createProject select {
+#createProject input{
     width: 300px;
     font-size: 15px;
     color: #666;
@@ -595,6 +595,15 @@ th.all-checkbox {
     text-indent: 10px;
     height: 30px;
     border-radius: 5px;
+}
+#createProject select{
+    width: 305px;
+    font-size: 15px;
+    color: #666;
+    border: 1px solid #bbb;
+    height: 35px;
+    border-radius: 5px;
+    padding-left: 8px;
 }
 
 #createProject form label {

@@ -319,7 +319,7 @@ $(function () {
                 deleteArray.push(msg);
             }
         })
-        console.log(deleteArray);
+        // console.log(deleteArray);
         if(deleteArray.length!=0){
             $('div[openContent="delete-project"]').addClass('active');
             var width = document.body.scrollWidth;
@@ -390,10 +390,10 @@ $('.meshNum a').click(function(){
         $(this).prop('href','javascript:return false;');
     }
 })
-$(function(){
-    var height=$(document).height();
-    $('.main-left').css('height',height);
-})
+// $(function(){
+//     var height=$(document).height();
+//     $('.main-left').css('height',height);
+// })
 //paraName 等找参数的名称
 function GetUrlParam(paraName) {
     var url = document.location.toString();
