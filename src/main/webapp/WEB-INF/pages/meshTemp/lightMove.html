@@ -19,7 +19,7 @@
         <div class="clearfix main-right-nav">
             <div class="f-l main-right-title">灯移动</div>
             <div class="f-r pointer">
-                <div class="goBack" onClick="javascript :history.back(-1);" >
+                <div class="goBack" onClick="javascript :history.back();" >
                     <!--<span class="triangle-facing-left"></span>-->
                     <span ><</span><span>返回</span>
                 </div>
@@ -33,13 +33,14 @@
                 </div>
                 <div class="f-content scrollbar">
                     <input type="hidden" name="ids" th:value="${ids}">
+                    <input type="hidden" id="mid" th:value="${mid}">
                     <div class="accountMsg clearfix" th:each="light:${lightMap}">
                         <div class="f-l mesh-name">
                             <span th:text="${light.lname}"></span>
                         </div>
                         <div class="f-l  mesh-id">
-                            <label for="mid">MAC地址：</label>
-                            <input type="text" id="mid" th:value="${light.lmac}">
+                            <label for="lmac">MAC地址：</label>
+                            <input type="text" id="lmac" th:value="${light.lmac}">
                         </div>
                         <div class="f-l mesh-project">
                             <label for="project">属于组：</label>
@@ -84,12 +85,13 @@
 <script type="text/javascript" src="/alink-hq/static/js/left.js"></script>
 <script src="/alink-hq/static/js/moment.js"></script>
 <script th:inline="javascript">
-    var uid = [[${session.user.id}]];
+    var id = $("#mid").val();
     $(function () {
         var tabs="lightList";
         var index=0;
         left(tabs,index);
-        $.getJSON("/alink-hq/light/getGroup", {"uid": uid}, function (json) {
+        console.log("id",id);
+        $.getJSON("/alink-hq/light/getGroup", {"id": id}, function (json) {
             if (json != '') {
                 $("#gid option:first").siblings().remove();
             }

@@ -35,7 +35,7 @@
                 </div>
                 <div class="c-content ">
                     <div class="subjection">隶属项目：<span th:inline="text">[[${project.label}]]</span></div>
-                    <form th:action="@{/group/save}" method="GET" style="margin-top: 0;">
+                        <form th:action="@{/group/save}" method="POST" style="margin-top: 0;">
                         <div class="process clearfix">
                             <div class="f-l part">
                                 <img src="/alink-hq/static/img/fill-1-on.png" alt="" id="one-step">
@@ -125,12 +125,13 @@
 <script th:inline="javascript">
     var uid = [[${session.user.id}]];
     var mid = [[${dict.mid}]];
+    var projectId = [[${dict.projectId}]];
     var pid, meshId, gid;
     $(function () {
         var tabs = "groupList";
         var index = 0;
         left(tabs, index);
-        $.getJSON("/alink-hq/group/getMesh", {"uid": uid}, function (json) {
+        $.getJSON("/alink-hq/group/getMesh", {"projectId": projectId}, function (json) {
             $.each(json, function (i, item) {
                 var id = item.id;
                 if (id.substr(0, id.indexOf("_")) == mid) {

@@ -134,9 +134,9 @@ public class GroupController {
 
     @ResponseBody
     @RequestMapping("/getMesh")
-    public List<OptionList> getMesh(Integer uid) {
+    public List<OptionList> getMesh(Integer projectId) {
         Map map = new HashMap();
-        map.put("uid", uid);
+        map.put("projectId", projectId);
         List<OptionList> meshMap = meshService.getMesh(map);
         return meshMap;
     }
