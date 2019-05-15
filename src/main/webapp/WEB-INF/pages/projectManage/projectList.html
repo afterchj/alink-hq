@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <!--<script src="/alink-hq/static/js/browser.js"></script>-->
+    <script src="/alink-hq/static/js/browser.js"></script>
     <link rel="stylesheet" href="/alink-hq/static/css/base.css"/>
     <link rel="stylesheet" href="/alink-hq/static/css/leftNav.css"/>
     <link rel="stylesheet" href="/alink-hq/static/css/projectManage.css"/>
@@ -132,14 +132,14 @@
                             <div class="f-l">
                                 <span class="selected-order">已选择
                                     <span class="amount">0</span>
-                                    条订单
+                                    条数据
                                 </span>
                             <span class="m-r-20">
-                                <span th:if="${role_id==4}" class="skipPageBtn  moment active unclick"  id="transfer-project">移交</span>
+                                <span th:if="${role_id==4}" class="skipPageBtn  moment active unclick1"  id="transfer-project">移交</span>
                                 <span th:if="${role_id!=4}" class="skipPageBtn pointer moment" onmousedown="exchangeBtnMouseDown()" onmouseup="exchangeBtnMouseUp()" id="transfer-project">移交</span>
                             </span>
                             <span>
-                                <span th:if="${role_id==4}" class="skipPageBtn  moment active unclick"  id="delete-project">删除</span>
+                                <span th:if="${role_id==4}" class="skipPageBtn  moment active unclick1"  id="delete-project">删除</span>
                                 <span th:if="${role_id!=4}" class="skipPageBtn pointer moment" onmousedown="deleteBtnMouseDown()" onmouseup="deleteBtnMouseUp()" id="delete-project">删除</span>
                             </span>
                             </div>

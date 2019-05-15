@@ -2,13 +2,16 @@ package com.tpadsz.after.utils;
 
 import com.tpadsz.after.exception.SystemAlgorithmException;
 
-import java.util.Random;
-import java.util.UUID;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 /**
  * Created by chenhao.lu on 2019/4/11.
  */
 public class GenerateUtils {
+
+    static SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 
     public static String getCharAndNumr(int length) {
         String val = "";
@@ -101,6 +104,16 @@ public class GenerateUtils {
             throw new SystemAlgorithmException();
         }
         return token;
+    }
+
+
+    public static String getAfterDate(String time) throws ParseException {
+        Date date = sdf.parse(time);
+        Calendar calendar = new GregorianCalendar();
+        calendar.setTime(date);
+        calendar.add(Calendar.DATE,1);
+        date=calendar.getTime();
+        return (sdf.format(date));
     }
 
 }
