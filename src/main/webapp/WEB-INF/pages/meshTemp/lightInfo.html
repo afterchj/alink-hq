@@ -104,13 +104,16 @@
                                 <th><span>灯-X(色温)Y(亮度)</span></th>
                             </tr>
                             </thead>
-                            <tbody>
-                            <tr th:each="scene:${sceneInfo}">
-                                <td ><span th:text="${scene.sname}"></span></td>
-                                <td ><span th:text="${scene.scene_id}"></span></td>
-                                <td><span th:text="${scene.x}"></span><span>,&nbsp;&nbsp;</span><span th:text="${scene.y}"></span></td>
-                            </tr>
-                            </tbody>
+
+                                <tbody>
+                                <tr th:each="scene:${sceneInfo}">
+                                    <td ><span th:text="${scene.sname}"></span></td>
+                                    <td ><span th:text="${scene.scene_id}"></span></td>
+                                    <td><span th:text="${scene.x}"></span><span>,&nbsp;&nbsp;</span><span th:text="${scene.y}"></span></td>
+                                </tr>
+                                </tbody>
+
+
                         </table>
                     </div>
 
@@ -128,6 +131,11 @@
         var tabs = "lightList";
         var index = 0;
         left(tabs, index);
+        var height=$('#projectDetail .light-detail-table tbody').height();
+        if(height>=172){
+            $('#projectDetail .light-detail-table tbody').css('border-bottom','1px solid #bbb');
+            $('#projectDetail .light-detail-table thead th').css('width','360px');
+        }
     })
 </script>
 </body>
