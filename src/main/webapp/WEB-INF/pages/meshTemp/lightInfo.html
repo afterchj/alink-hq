@@ -20,9 +20,10 @@
         <div class="clearfix main-right-nav">
             <div class="f-l main-right-title">灯详情</div>
             <div class="f-r pointer">
-                <div class="goBack" onClick="javascript :history.back();" onmousedown="backBtnMouseDown()" onmouseup="backBtnMouseUp()">
+                <div class="goBack" onClick="javascript :history.back();" onmousedown="backBtnMouseDown()"
+                     onmouseup="backBtnMouseUp()">
                     <!--<span class="triangle-facing-left"></span>-->
-                    <span ><</span><span>返回</span>
+                    <span><</span><span>返回</span>
                 </div>
                 <!--<img src="/alink-hq/static/img/go-back.png" alt="" onclick="history.back()">-->
             </div>
@@ -95,6 +96,24 @@
                         </div>
                     </div>
                 </div>
+                <div style="width: 80%;margin: 0 auto">
+                    <table border="1">
+                        <thead>
+                        <tr>
+                            <td>场景名称</td>
+                            <td>场景id</td>
+                            <td>灯-X(色温)Y(亮度)</td>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="scene:${sceneInfo}">
+                            <td th:text="${scene.sname}"></td>
+                            <td th:text="${scene.scene_id}"></td>
+                            <td><span th:text="${scene.x}"></span><span>,&nbsp;&nbsp;</span><span th:text="${scene.y}"></span></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>
@@ -104,9 +123,9 @@
 <script src="/alink-hq/static/js/moment.js"></script>
 <script type="text/javascript">
     $(function () {
-        var tabs="lightList";
-        var index=0;
-        left(tabs,index);
+        var tabs = "lightList";
+        var index = 0;
+        left(tabs, index);
     })
 </script>
 </body>

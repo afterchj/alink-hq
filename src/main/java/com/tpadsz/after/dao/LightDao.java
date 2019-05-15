@@ -20,6 +20,8 @@ public interface LightDao {
 
     MeshInfo getLightInfo(int id);
 
+    List<MeshInfo> getSceneInfo(int id);
+
     void saveUpdate(Map map);
 
     void saveRename(Map map);
