@@ -3,9 +3,9 @@
  */
 $(function () {
  
-    var tabs='groupList';
-    var index=0;
-    left(tabs,index);
+    // var tabs='groupList';
+    // var index=0;
+    // left(tabs,index);
     var id;
     var ids=[];
     //重命名弹框
