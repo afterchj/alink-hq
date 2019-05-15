@@ -258,7 +258,7 @@ th.all-checkbox {
 }
 
 #projectDetail .p-content {
-    padding: 70px 250px;
+    padding: 70px 0;
 }
 
 #projectDetail .c-content {
@@ -268,17 +268,35 @@ th.all-checkbox {
 #projectDetail .p-content span {
     font-size: 17px;
     color: #3c3c3c;
+    transform: scale(1,.92);
+    display: inline-block;
 }
 
-#projectDetail .p-content > div > div {
-    margin-bottom: 65px;
-    width: 50%;
+
+#projectDetail .p-content > div > div:nth-child(1){
+    margin-bottom: 40px;
+    width: 80%;
     text-align: left;
+    height: 18px;
 }
-
-#projectDetail .p-content a {
+#projectDetail .p-content>div.clearfix{
+    width:680px;
+    margin:auto;
+}
+#projectDetail .p-content >div>div:nth-child(2){
+    margin-bottom: 40px;
+    width: 20%;
+    text-align: left;
+    height: 18px;
+}
+#projectDetail .p-content  a {
     font-size: 17px;
     color: #3598db;
+    transform: scale(1,.92);
+    display: inline-block;
+}
+#projectDetail .p-content span a{
+    transform: scale(1,1);
 }
 
 #projectDetail .p-content a:hover {
@@ -849,6 +867,47 @@ input:-ms-input-placeholder { /* Internet Explorer 10+ */
 }
 .scene-msg .scene-msg-list>div:nth-child(3)>div:nth-child(1) ul.active{
      border-right: 1px solid #bbb;
+}
+
+/*灯详情*/
+.light-detail-table{
+    border-left: 0;
+    border-bottom: 0;
+    border-spacing: 0;
+    border-collapse: unset;
+    border-top: #bbb 1px solid;
+    border-right: #bbb 1px solid;
+    width:680px;
+    font-size: 16px;
+    color: #3c3c3c;
+    margin: auto;
+}
+.light-detail-table td, .light-detail-table th {
+    border-left: #bbb 1px solid;
+    border-bottom: #bbb 1px solid;
+    height: 42px;
+    text-align: center;
+    line-height: 42px;
+    width: 220px;
+    background-color: #fafafa;
+
+}
+#projectDetail .light-detail-table td span,#projectDetail .light-detail-table th span{
+    display: inline-block;
+    transform: scale(1,.9);
+}
+#projectDetail .light-detail-table th span{
+    color: #fff;
+
+}
+.light-table{
+    margin-top:50px;
+}
+#projectDetail .light-detail-table th{
+    background-color: #3598DB;
+    color: #fff;
+    font-weight: normal;
+
 }
 /*.scene-msg .scene-msg-list>div::-webkit-scrollbar{*/
     /*width:15px;*/
