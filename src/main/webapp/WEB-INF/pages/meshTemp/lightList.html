@@ -17,7 +17,7 @@
     <div th:replace="common/left::left"></div>
     <div class="main-right">
         <div class="clearfix main-right-nav">
-            <div class="f-l main-right-title">灯列表</div>
+            <div class="f-l main-right-title">灯列表<div class="subjection">隶属项目：<span th:inline="text">[[${project.label}]]</span></div></div>
             <!--<div class="f-r pointer">-->
                 <!--<div class="create"  onmousedown="createBtnMouseDown()" onmouseup="createBtnMouseUp()"><span>+</span><span>创建灯</span></div>-->
                 <!--&lt;!&ndash;<div class="create" >+&nbsp;创建灯</div>&ndash;&gt;-->
@@ -79,6 +79,8 @@
                             <th><span>灯MAC地址</span></th>
                             <th><span>属于网络</span></th>
                             <th><span>网络ID</span></th>
+                            <th><span>属于区域</span></th>
+                            <th><span>属于组</span></th>
                             <th><span>X（色温），Y（亮度）</span></th>
                             <th><span>状态</span></th>
                             <th class="operation"><span>操作</span></th>
@@ -93,6 +95,12 @@
                                 <a th:href="@{/mesh/info(id=${light.mid})}" th:text="${light.mname}"></a>
                             </td>
                             <td th:text="${light.mesh_id}"></td>
+                            <td class="k-link">
+                                <a th:href="@{/place/info(id=${light.pid})}" th:text="${light.pname}"></a>
+                            </td>
+                            <td class="k-link">
+                                <a th:href="@{/group/info(id=${light.gid})}" th:text="${light.gname}"></a>
+                            </td>
                             <td><span th:text="${light.x}"></span><span>,&nbsp;&nbsp;</span><span th:text="${light.y}"></span></td>
                             <td th:switch="${light.off}">
                                 <span th:case="1">开</span>
@@ -113,7 +121,7 @@
                         </tbody>
                         <tfoot>
                         <tr>
-                            <td colspan="8" class="clearfix page">
+                            <td colspan="10" class="clearfix page">
                                 <div class="f-l">
                             <span class="selected-order">已选择
                                  <span id="amount" class="amount">0</span>条数据
@@ -141,6 +149,8 @@
                             <th>组名称</th>
                             <th>属于网络</th>
                             <th>网络ID</th>
+                            <th>属于区域</th>
+                            <th>属于组</th>
                             <th>灯数量</th>
                             <th>操作</th>
                         </tr>

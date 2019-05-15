@@ -9,6 +9,8 @@
         m.project_id,
         m.mname,
         m.mesh_id,
+        pl.id pid,
+        pl.pname,
         IFNULL(l.lcount,0) lcount
 	</sql>
 
@@ -39,6 +41,7 @@
         <include refid="Base_Column_List"/>
         FROM f_group g
         INNER JOIN f_mesh m ON m.id = g.mid
+        INNER JOIN f_place pl ON pl.id = g.pid
         LEFT JOIN (SELECT COUNT(1) lcount,gid FROM f_light GROUP BY gid) l ON g.id=l.gid
         WHERE 1=1
         <include refid="common_choose"></include>

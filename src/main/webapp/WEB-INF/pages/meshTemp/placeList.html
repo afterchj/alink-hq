@@ -17,7 +17,7 @@
     <div th:replace="common/left::left"></div>
     <div class="main-right">
         <div class="clearfix main-right-nav">
-            <div class="f-l main-right-title font">区域列表（隶属项目：<span th:text="${dict.pname}"></span>）</div>
+            <div class="f-l main-right-title font">区域列表<div class="subjection">隶属项目：<span th:inline="text">[[${project.label}]]</span></div></div>
             <!--<div class="f-r pointer">-->
                 <!--<a th:href="@{/place/create(projectId=${dict.projectId})}">-->
                     <!--<div class="create" onmousedown="createBtnMouseDown()" onmouseup="createBtnMouseUp()"><span>+</span><span>创建区域</span>-->

@@ -17,7 +17,7 @@
     <div th:replace="common/left::left"></div>
     <div class="main-right">
         <div class="clearfix main-right-nav">
-            <div class="f-l main-right-title">组列表</div>
+            <div class="f-l main-right-title">组列表<div class="subjection">隶属项目：<span th:inline="text">[[${project.label}]]</span></div></div>
             <div class="f-r pointer">
                 <a th:href="@{/group/create(projectId=${dict.projectId},mid=${dict.mid})}">
                     <div class="create" onmousedown="createBtnMouseDown()" onmouseup="createBtnMouseUp()"><span>+</span><span>创建组</span></div>
@@ -71,6 +71,7 @@
                             <th><span>组名称</span></th>
                             <th><span>属于网络</span></th>
                             <th><span>网络ID</span></th>
+                            <th><span>属于区域</span></th>
                             <th><span>灯数量</span></th>
                             <th class="operation"><span>操作</span></th>
                         </tr>
@@ -84,6 +85,9 @@
                                 <a th:href="@{/mesh/info(id=${group.mid})}" th:text="${group.mname}"></a>
                             </td>
                             <td th:text="${group.mesh_id}"></td>
+                            <td class="k-link">
+                                <a th:href="@{/place/info(id=${group.pid})}" th:text="${group.pname}"></a>
+                            </td>
                             <td class="k-link">
                                 <a th:href="@{/light/list(gid=${group.id})}" th:text="${group.lcount}"></a>
                             </td>
@@ -106,7 +110,7 @@
                         </tbody>
                         <tfoot>
                         <tr>
-                            <td colspan="6" class="clearfix page">
+                            <td colspan="9" class="clearfix page">
                                 <div class="f-l">
                             <span class="selected-order">已选择
                                  <span id="amount" class="amount">0</span>条数据
@@ -141,6 +145,7 @@
                             <th>组名称</th>
                             <th>属于网络</th>
                             <th>网络ID</th>
+                            <th>属于区域</th>
                             <th>灯数量</th>
                             <th>操作</th>
                         </tr>

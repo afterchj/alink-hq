@@ -7,6 +7,7 @@ import com.tpadsz.after.entity.MeshInfo;
 import com.tpadsz.after.entity.OptionList;
 import com.tpadsz.after.entity.SearchDict;
 import com.tpadsz.after.service.LightService;
+import com.tpadsz.after.service.MeshService;
 import com.tpadsz.after.service.RoleService;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
@@ -29,6 +30,8 @@ public class LightController {
     private LightService lightService;
     @Resource
     private RoleService roleService;
+    @Resource
+    private MeshService meshService;
 
     private Logger logger = Logger.getLogger(this.getClass());
 
@@ -42,6 +45,8 @@ public class LightController {
         if (pageInfo.getList().size() > 0) {
             modelMap.put("pageInfo", pageInfo);
         }
+        OptionList project = meshService.getProject(dict.getProjectId());
+        modelMap.put("project", project);
         modelMap.put("dict", dict);
         return "meshTemp/lightList";
     }
