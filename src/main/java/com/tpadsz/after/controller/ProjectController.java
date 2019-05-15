@@ -9,6 +9,7 @@ import com.tpadsz.after.entity.User;
 import com.tpadsz.after.entity.dd.ResultDict;
 import com.tpadsz.after.service.AccountService;
 import com.tpadsz.after.service.ProjectService;
+import com.tpadsz.after.utils.GenerateUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,10 +20,7 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Created by chenhao.lu on 2019/4/8.
@@ -36,6 +34,7 @@ public class ProjectController {
 
     @Resource
     private AccountService accountService;
+
 
     @RequestMapping(value = "/list", method = RequestMethod.GET)
     public String list(Integer pageNum, Integer pageSize, String account, String projectName,
@@ -55,6 +54,17 @@ public class ProjectController {
         try {
             Integer role_id = accountService.findRoleIdByUid(uid);
             List<ProjectList> list = new ArrayList<>();
+            if(startCreateDate!=null&&!"".equals(startCreateDate)){
+                if(startCreateDate.equals(endCreateDate)){
+                    endCreateDate = GenerateUtils.getAfterDate(startCreateDate);
+                }
+            }
+            if(startUpdateDate!=null&&!"".equals(startUpdateDate)){
+                if(startUpdateDate.equals(endUpdateDate)){
+                    endUpdateDate = GenerateUtils.getAfterDate(startUpdateDate);
+                }
+            }
+
             if (role_id == 1 || role_id == 2) {
                 PageHelper.startPage(pageNum, pageSize);
                 list = projectService.searchBySuper(account, projectName, startCreateDate, endCreateDate,

@@ -66,6 +66,11 @@ public class AccountController {
             List<Role> roleList = new ArrayList<>();
             List<Firm> firmList = getFirmInfo(role_id, uid);
             List<UserList> userList = new ArrayList<>();
+            if(startDate!=null&&!"".equals(startDate)){
+                if(startDate.equals(endDate)){
+                    endDate = GenerateUtils.getAfterDate(startDate);
+                }
+            }
             if (role_id == 1) {
                 PageHelper.startPage(pageNum, pageSize);
                 userList = accountService.searchBySuper(account, fid, roleId, startDate, endDate);
