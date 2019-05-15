@@ -100,7 +100,7 @@
                             <td th:text="${mesh.mesh_id}"></td>
                             <td th:text="${mesh.mesh_type}"></td>
                             <td class="k-link">
-                                <a th:href="@{/project/detail(projectId=${mesh.project_id})}" th:text="${mesh.name}"></a>
+                                <a th:href="@{/project/detail(projectId=${mesh.project_id},projectName=${mesh.name})}" th:text="${mesh.name}"></a>
                             </td>
                             <td class="k-link">
                                 <a th:href="@{/place/list(projectId=${mesh.project_id},mid=${mesh.id})}" th:text="${mesh.pcount}"></a>

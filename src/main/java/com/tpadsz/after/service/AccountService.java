@@ -36,7 +36,7 @@ public interface AccountService {
 
     void transferAccount(String account, Integer fid, String randomPwd);
 
-    int delete(String account);
+    int delete(String uid);
 
     void enable(User user);
 
