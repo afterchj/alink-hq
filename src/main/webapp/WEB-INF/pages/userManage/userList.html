@@ -112,10 +112,8 @@
                         <td th:if="${user.status=='0'}" style="color: #0B78CE;" th:text="禁用" openTab="start-use" id="start-use"
                             class="status pointer"></td>
                         <td class="p-r">
-                            <img src="/alink-hq/static/img/edit.png" alt="" openTab="reset-pwd" id="reset-pwd"
-                                 class="pointer" th:title="重置密码">
-                            <a th:if="${user.role_id=='4'}" th:href="@{/account/transferPage(account=${user.account},coname=${user.coname})}"><img
-                                    src="/alink-hq/static/img/exchange.png"
+                            <img src="/alink-hq/static/img/newPassword.png" alt="" openTab="reset-pwd" id="reset-pwd" class="pointer" th:title="重置密码">
+                            <a th:if="${user.role_id=='4'}" th:href="@{/account/transferPage(account=${user.account},coname=${user.coname})}"><img src="/alink-hq/static/img/exchange.png"
                                     alt="" class="center-img" th:title="移交账号"></a>
                             <a  th:if="${user.role_id!='4'}" href="javascript:void(0);"  class="unclick"><img
                                     src="/alink-hq/static/img/un-exchange.png"
