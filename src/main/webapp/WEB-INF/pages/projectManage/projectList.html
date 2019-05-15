@@ -135,21 +135,17 @@
                                     条订单
                                 </span>
                             <span class="m-r-20">
-                                    <!--<img src="/alink-hq/static/img/true-over-un.png" alt="" class="pointer moment"-->
-                                <!--id="transfer-project">-->
-                                <span class="skipPageBtn pointer moment" onmousedown="exchangeBtnMouseDown()" onmouseup="exchangeBtnMouseUp()" id="transfer-project">移交</span>
+                                <span th:if="${role_id==4}" class="skipPageBtn  moment active unclick"  id="transfer-project">移交</span>
+                                <span th:if="${role_id!=4}" class="skipPageBtn pointer moment" onmousedown="exchangeBtnMouseDown()" onmouseup="exchangeBtnMouseUp()" id="transfer-project">移交</span>
                             </span>
                             <span>
-                                    <!--<img src="/alink-hq/static/img/delete-btn-un.png" alt="" class="pointer moment"-->
-                                <!--id="delete-project">-->
-                                <span class="skipPageBtn pointer moment" onmousedown="deleteBtnMouseDown()" onmouseup="deleteBtnMouseUp()" id="delete-project">删除</span>
+                                <span th:if="${role_id==4}" class="skipPageBtn  moment active unclick"  id="delete-project">删除</span>
+                                <span th:if="${role_id!=4}" class="skipPageBtn pointer moment" onmousedown="deleteBtnMouseDown()" onmouseup="deleteBtnMouseUp()" id="delete-project">删除</span>
                             </span>
                             </div>
-                            <!--<div th:replace="common/page::page"></div>-->
                             <div class="f-r page-right">
                                 <span class="prev-page">
                                     <a th:href="@{/project/list(pageNum=${pageInfo.prePage},pageSize=${pageInfo.pageSize},account=${account},projectName=${projectName},startCreateDate=${startCreateDate},endCreateDate=${endCreateDate},startUpdateDate=${startUpdateDate},endUpdateDate=${endUpdateDate},sortFlag=${sortFlag})}">
-                                        <!--<img src="/alink-hq/static/img/left-arrow.png" alt="">-->
                                     <span class="prev " ><span><</span></span></a>
                                 </span>
                                 <span th:text="${pageInfo.pageNum}" class="pages"></span>

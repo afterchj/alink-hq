@@ -1,12 +1,6 @@
 /**
  * Created by qian.chen on 2019/5/9.
  */
-// function mouseDown() {
-//     $('.btn-bottom button').addClass('active');
-// }
-// function mouseUp() {
-//     $('.btn-bottom button').removeClass('active');
-// }
 //返回点击
 function backBtnMouseDown(){
     $('.goBack').addClass('active');
