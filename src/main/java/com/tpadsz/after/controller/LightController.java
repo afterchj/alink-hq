@@ -48,7 +48,9 @@ public class LightController {
     @RequestMapping("/info")
     public String info(int id, ModelMap modelMap) {
         MeshInfo meshInfo = lightService.getLightInfo(id);
+        List<MeshInfo> sceneInfo=lightService.getSceneInfo(id);
         modelMap.put("meshInfo", meshInfo);
+        modelMap.put("sceneInfo", sceneInfo);
         return "meshTemp/lightInfo";
     }
 

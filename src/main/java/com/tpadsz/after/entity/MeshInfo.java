@@ -12,6 +12,7 @@ public class MeshInfo {
     private int gid;
     private String name;
     private String mname;
+    private String sname;
     private String pname;
     private String gname;
     private String lname;
@@ -19,6 +20,7 @@ public class MeshInfo {
     private String x;
     private String y;
     private int mesh_id;
+    private int scene_id;
     private int place_id;
     private int project_id;
     private int scount;
@@ -121,6 +123,22 @@ public class MeshInfo {
 
     public void setMesh_id(int mesh_id) {
         this.mesh_id = mesh_id;
+    }
+
+    public String getSname() {
+        return sname;
+    }
+
+    public void setSname(String sname) {
+        this.sname = sname;
+    }
+
+    public int getScene_id() {
+        return scene_id;
+    }
+
+    public void setScene_id(int scene_id) {
+        this.scene_id = scene_id;
     }
 
     public String getPname() {
