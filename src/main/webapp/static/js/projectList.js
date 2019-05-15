@@ -4,10 +4,12 @@
 //日期选择
 laydate.render({
     elem: '#start-time',
+    // type: 'datetime',
     range: true
 });
 laydate.render({
     elem: '#end-time',
+    // type: 'datetime',
     range: true
 });
 
@@ -174,6 +176,25 @@ $(function () {
         if(!pageSize){
             pageSize='';
         }
+        // var startTime = $('#start-time').val();
+        // var startCreateDate = startTime.substring(0, 10);
+        // var endCreateDate = startTime.substring(13, 23);
+        // var endTime = $('#end-time').val();
+        // var startUpdateDate = endTime.substring(0, 10);
+        // var endUpdateDate = endTime.substring(13, 23);
+        // console.log(startCreateDate,endCreateDate);
+        // if(startCreateDate==endCreateDate){
+        //     var newDate=endCreateDate.substring(0,endCreateDate.length-2);
+        //     var addTime=parseInt(endCreateDate.substring(endCreateDate.length,endCreateDate.length-2))+1;
+        //     if(addTime<10){
+        //         addTime='0'+addTime;
+        //     }else if(addTime>31){
+        //
+        //     }
+        //     console.log(newDate,addTime);
+        //     endCreateDate=newDate+addTime;
+        //     console.log(endCreateDate);
+        // }
         condition(pageSize, pageNum, sortFlag);
     })
     //选择页数变化
@@ -395,24 +416,24 @@ $('.meshNum a').click(function(){
 //     $('.main-left').css('height',height);
 // })
 //paraName 等找参数的名称
-function GetUrlParam(paraName) {
-    var url = document.location.toString();
-    var arrObj = url.split("?");
-    if (arrObj.length > 1) {
-        var arrPara = arrObj[1].split("&");
-        var arr;
-        for (var i = 0; i < arrPara.length; i++) {
-            arr = arrPara[i].split("=");
-            if (arr != null && arr[0] == paraName) {
-                return arr[1];
-            }
-        }
-        return "";
-    }
-    else {
-        return "";
-    }
-}
+// function GetUrlParam(paraName) {
+//     var url = document.location.toString();
+//     var arrObj = url.split("?");
+//     if (arrObj.length > 1) {
+//         var arrPara = arrObj[1].split("&");
+//         var arr;
+//         for (var i = 0; i < arrPara.length; i++) {
+//             arr = arrPara[i].split("=");
+//             if (arr != null && arr[0] == paraName) {
+//                 return arr[1];
+//             }
+//         }
+//         return "";
+//     }
+//     else {
+//         return "";
+//     }
+// }
 
 function skipLimit() {
     var skipPage = parseInt($('#skipPage').val());
