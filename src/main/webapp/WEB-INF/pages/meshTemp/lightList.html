@@ -36,7 +36,7 @@
                 <input type="hidden" name="uid" th:value="${dict.uid}">
                 <input type="hidden" id="pageSize" th:value="${dict.pageSize}">
                 <input type="hidden" name="projectId" th:value="${dict.projectId}">
-                <input type="hidden" name="mid" th:value="${dict.mid}">
+                <input type="hidden" id="mid" name="mid" th:value="${dict.mid}">
                 <input type="hidden" name="pid" th:value="${dict.pid}">
                 <input type="hidden" name="gid" th:value="${dict.gid}">
                 <div class="search-condition temp">
@@ -56,8 +56,8 @@
                             <input type="text" id="mname" name="mname" th:value="${dict.mname}" placeholder="请输入网络名称">
                         </div>
                         <div>
-                            <label for="mid" class="font">网络ID</label>
-                            <input type="text" id="mid" name="meshId" th:value="${dict.meshId}" placeholder="请输入网络ID">
+                            <label for="meshId" class="font">网络ID</label>
+                            <input type="text" id="meshId" name="meshId" th:value="${dict.meshId}" placeholder="请输入网络ID">
                         </div>
                     </div>
                     <div class="f-r search-button ">
@@ -101,7 +101,7 @@
                             </td>
                             <td class="p-r">
                                 <img src="/alink-hq/static/img/edit.png" th:alt="${light.id}"  class="rename pointer"  title="重命名">
-                                <a th:href="@{/light/move(ids=${light.id})}">
+                                <a th:href="@{/light/move(mid=${light.mid},ids=${light.id})}">
                                     <img src="/alink-hq/static/img/exchange.png" th:alt="${light.id}" class="center-img pointer" title="移动">
                                 </a>
                                 <!--<a th:href="@{/light/delete(ids=${light.id})}"-->

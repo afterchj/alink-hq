@@ -55,19 +55,15 @@ public class LightController {
     }
 
     @RequestMapping("/move")
-    public String move(String ids, ModelMap modelMap) {
+    public String move(int mid,String ids, ModelMap modelMap) {
         String[] ids1 = ids.split(",");
         List<String> list = new ArrayList(Arrays.asList(ids1));
         List<Map> lightMap = lightService.selectByLid(list);
         modelMap.put("lightMap", lightMap);
+        modelMap.put("mid", mid);
         modelMap.put("ids", ids);
         return "meshTemp/lightMove";
     }
-    @RequestMapping("/create")
-    public String create(Integer id, ModelMap modelMap) {
-        return "meshTemp/groupCreate";
-    }
-
     @RequestMapping("/save")
     public String savePlace(Integer pid) {
         logger.info("pid=" + pid);
@@ -113,13 +109,9 @@ public class LightController {
 
     @ResponseBody
     @RequestMapping("/getGroup")
-    public List<OptionList> getGroups(Integer uid) {
+    public List<OptionList> getGroups(Integer id) {
         Map map = new HashMap();
-        if (uid != null) {
-            String role = roleService.selectById(uid);
-            map.put("role", role);
-            map.put("uid", uid);
-        }
+        map.put("id",id);
         List<OptionList> meshMap = lightService.getGroups(map);
         return meshMap;
     }

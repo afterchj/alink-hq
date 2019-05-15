@@ -101,10 +101,11 @@
         WHERE l.id=#{id} LIMIT 1
     </select>
     <select id="getSceneInfo" resultType="MeshInfo" parameterType="int">
-        SELECT s.id,s.scene_id,s.sname, IFNULL(ls.x,'null') x,IFNULL(ls.y,'null') y FROM f_light l
+        SELECT s.id,s.mid,s.scene_id,s.sname, IFNULL(ls.x,'null') x,IFNULL(ls.y,'null') y FROM f_light l
         LEFT JOIN f_light_setting ls ON ls.lid=l.id
         INNER JOIN f_scene s ON l.mid=s.mid
         WHERE l.id=#{id}
+        GROUP BY mid,sname
     </select>
     <select id="selectByLid" resultType="map" parameterType="list">
         SELECT
@@ -127,8 +128,10 @@
         FROM f_group g
         INNER JOIN f_mesh m ON m.id = g.mid
         WHERE 1=1
+        <if test="id!=null and id!=''">
+            AND m.id =#{id}
+        </if>
         GROUP BY mid
-        <include refid="common_choose"></include>
     </select>
 
     <delete id="deleteLightByIds" parameterType="list">
