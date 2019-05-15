@@ -83,6 +83,7 @@
                 $("#projectId option:first").siblings().remove();
             }
             $.each(json, function (i, item) {
+
                 $("#projectId").append("<option value='" + item.id + "'>" + item.label + "</option>");
             });
         });
