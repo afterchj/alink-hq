@@ -51,9 +51,9 @@ $(function () {
 })
 
 $(function () {
-    var tabs = "meshList";
-    var index = 0;
-    left(tabs, index);
+    // var tabs = "meshList";
+    // var index = 0;
+    // left(tabs, index);
     var deleteArray=[];
     //单选重命名
     var id;

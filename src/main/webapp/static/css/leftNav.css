@@ -157,3 +157,22 @@
     font-size:25px;
     margin-right: 5px;
 }
+.main-left a:active{
+
+    /*color: #bbb;*/
+}
+ /*.one-list li:link{*/
+     /*background-color:#fff;*/
+ /*}*/
+/*.one-list li:hover{*/
+    /*background-color: #eef3f5;*/
+/*}*/
+ /*.one-list li:active{*/
+    /*background-color: #eef3f5;*/
+/*}*/
+.one-list li:focus{
+    background-color: #eef3f5;
+}
+/*.one-list li:visited{*/
+    /*background-color: #eef3f5;*/
+/*}*/

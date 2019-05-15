@@ -64,11 +64,11 @@ $(function () {
 })
 
 
-$(function () {
-    var tabs = "projectList";
-    var index=0;
-    left(tabs,index);
-})
+// $(function () {
+//     var tabs = "projectList";
+//     var index=0;
+//     left(tabs,index);
+// })
 
 
 //条件筛选

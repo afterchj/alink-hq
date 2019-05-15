@@ -3,7 +3,8 @@
 <head>
 </head>
 <body>
-<div th:fragment="left">
+<div th:fragment="left(list)">
+    <!--<div th:text="${list}"></div>-->
     <div class="main p-r">
         <div class="p-a main-left">
             <ul>
@@ -13,8 +14,10 @@
                         <img src="/alink-hq/static/img/left-reduce.png" alt="" class="p-a on-off-triangle">
                     </div>
                     <ul class=" two-list">
-                        <li tab="projectList"><a th:href="@{/project/list}">项目列表</a></li>
-                        <li tab="meshList"><a th:href="@{/mesh/list(uid=${session.user.id})}">网络列表</a></li>
+                        <li th:if="${list}=='projectList'" tab="projectList" class="active"><a th:href="@{/project/list}">项目列表</a></li>
+                        <li th:if="${list}!='projectList'" tab="projectList"><a th:href="@{/project/list}">项目列表</a></li>
+                        <li th:if="${list}=='meshList'" tab="meshList" class="active"><a th:href="@{/mesh/list(uid=${session.user.id})}">网络列表</a></li>
+                        <li th:if="${list}!='meshList'" tab="meshList"><a th:href="@{/mesh/list(uid=${session.user.id})}">网络列表</a></li>
                         <!--<li tab="placeList"><a th:href="@{/place/list(uid=${session.user.id})}">区域列表</a></li>-->
                         <!--<li tab="groupList"><a th:href="@{/group/list(uid=${session.user.id})}">组列表</a></li>-->
                         <!--<li tab="lightList"><a th:href="@{/light/list(uid=${session.user.id})}">灯列表</a></li>-->
@@ -26,8 +29,10 @@
                         <img src="/alink-hq/static/img/left-reduce.png" alt="" class="p-a on-off-triangle">
                     </div>
                     <ul class=" two-list ">
-                        <li tab="userList"><a th:href="@{/account/list}">用户列表</a></li>
-                        <li tab="createAccount"><a th:href="@{/account/createAccount}">创建账号</a></li>
+                        <li th:if="${list}=='userList'" tab="userList" class="active"><a th:href="@{/account/list}">用户列表</a></li>
+                        <li th:if="${list}!='userList'" tab="userList"><a th:href="@{/account/list}">用户列表</a></li>
+                        <li  th:if="${list}=='createAccount'" tab="createAccount" class="active"><a th:href="@{/account/createAccount}">创建账号</a></li>
+                        <li th:if="${list}!='createAccount'" tab="createAccount"><a th:href="@{/account/createAccount}">创建账号</a></li>
                     </ul>
                 </li>
                 <li class="one-list">

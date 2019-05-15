@@ -139,12 +139,12 @@ $(function () {
         location.href = '/alink-hq/project/list';
     })
 })
-$(function () {
-    // myBrowser()
-    var tabs = "userList";
-    var index = 1;
-    left(tabs, index);
-})
+// $(function () {
+//     // myBrowser()
+//     var tabs = "userList";
+//     var index = 1;
+//     left(tabs, index);
+// })
 
 $(function () {
     var page = parseInt($('.pages').text());

@@ -3,9 +3,9 @@
  */
 $(function () {
   
-    var tabs="placeList";
-    var index=0;
-    left(tabs,index);
+    // var tabs="placeList";
+    // var index=0;
+    // left(tabs,index);
     $("#multiDel").click(function () {
         var ids = [];//定义一个数组
         $('input[name="ids"]:checked').each(function () {//遍历每一个名字为interest的复选框，其中选中的执行函数

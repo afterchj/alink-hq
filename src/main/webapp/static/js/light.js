@@ -3,9 +3,9 @@
  */
 $(function () {
     // myBrowser();
-    var tabs = "lightList";
-    var index = 0;
-    left(tabs, index);
+    // var tabs = "lightList";
+    // var index = 0;
+    // left(tabs, index);
     var id;
     var ids = [];
     var lname, mname;
