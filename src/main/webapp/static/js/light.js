@@ -161,3 +161,10 @@ function nameKeyUp() {
         $('p.rename-hint').text('');
     }
 }
+$('#meshId').bind('input propertychange',function(){
+    var val= $(this).val();
+    // console.log(val);
+    if(val!=''&& isNaN(val)){
+        $(this).val('');
+    }
+})

@@ -79,9 +79,6 @@
 <script th:inline="javascript">
     var uid = [[${session.user.id}]];
     $(function () {
-        var tabs = "meshList";
-        var index = 0;
-//        left(tabs, index);
         $.getJSON("/alink-hq/mesh/getProjects", {"uid": uid}, function (json) {
             if (json != '') {
                 $("#projectId option:first").siblings().remove();

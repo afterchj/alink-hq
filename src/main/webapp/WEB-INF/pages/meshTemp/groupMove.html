@@ -13,61 +13,64 @@
 </head>
 
 <body>
-<div th:replace="common/head::head"></div>
+
 <div class="c-container">
-    <div th:replace="common/left::left('meshList')"></div>
-    <div class="main-right">
-        <div class="clearfix main-right-nav">
-            <div class="f-l main-right-title">组移动</div>
-            <div class="f-r pointer">
-                <div class="goBack" onClick="javascript :history.back();" onmousedown="backBtnMouseDown()"
-                     onmouseup="backBtnMouseUp()">
-                    <!--<span class="triangle-facing-left"></span>-->
-                    <span><</span><span>返回</span>
+    <div th:replace="common/head::head"></div>
+    <div class="main clearfix">
+        <div th:replace="common/left::left('meshList')"></div>
+        <div class="main-right f-r">
+            <div class="clearfix main-right-nav">
+                <div class="f-l main-right-title">组移动</div>
+                <div class="f-r pointer">
+                    <div class="goBack" onClick="javascript :history.back();" onmousedown="backBtnMouseDown()"
+                         onmouseup="backBtnMouseUp()">
+                        <!--<span class="triangle-facing-left"></span>-->
+                        <span><</span><span>返回</span>
+                    </div>
+                    <!--<img src="/alink-hq/static/img/go-back.png" alt="" onclick="history.back()">-->
                 </div>
-                <!--<img src="/alink-hq/static/img/go-back.png" alt="" onclick="history.back()">-->
             </div>
-        </div>
-        <form th:action="@{/group/saveUpdate}" class="" method="post">
-            <div id="meshTurnOver">
-                <div class="f-nav">
-                    组移动
-                </div>
-                <div class="f-content scrollbar">
-                    <input type="hidden" name="ids" th:value="${ids}">
-                    <input type="hidden" id="mid" name="mid" th:value="${mid}">
-                    <input type="hidden" id="projectName" name="projectName" th:value="${projectName}">
-                    <div class="accountMsg clearfix" th:each="group:${groupMap}">
-                        <div class="f-l mesh-name">
-                            <span th:text="${group.gname}"></span>
-                        </div>
-                        <div class="f-l  mesh-id">
-                            <label for="mesh_id">网络ID：</label>
-                            <input type="text" id="mesh_id" th:value="${group.mesh_id}" readonly>
-                        </div>
-                        <div class="f-l mesh-project">
-                            <label for="project">属于区域：</label>
-                            <input type="text" id="project" th:value="${group.pname}" readonly>
+            <form th:action="@{/group/saveUpdate}" class="" method="post">
+                <div id="meshTurnOver">
+                    <div class="f-nav">
+                        组移动
+                    </div>
+                    <div class="f-content scrollbar">
+                        <input type="hidden" name="ids" th:value="${ids}">
+                        <input type="hidden" id="mid" name="mid" th:value="${mid}">
+                        <input type="hidden" id="projectName" name="projectName" th:value="${projectName}">
+                        <div class="accountMsg clearfix" th:each="group:${groupMap}">
+                            <div class="f-l mesh-name">
+                                <span th:text="${group.gname}"></span>
+                            </div>
+                            <div class="f-l  mesh-id">
+                                <label for="mesh_id">网络ID：</label>
+                                <input type="text" id="mesh_id" th:value="${group.mesh_id}" readonly>
+                            </div>
+                            <div class="f-l mesh-project">
+                                <label for="project">属于区域：</label>
+                                <input type="text" id="project" th:value="${group.pname}" readonly>
+                            </div>
                         </div>
                     </div>
+                    <div class="" style="text-align: center;margin-bottom: 30px;">
+                        <img src="/alink-hq/static/img/exchange-un.png" alt="">
+                    </div>
+                    <div class="transfer-company">
+                        <p class="trans-hint"></p>
+                        <label for="pid"><span>*</span>选择移动到的区域：</label>
+                        <select name="pid" id="pid">
+                            <option value="">选择移动到的区域</option>
+                            <option value="0">区域1</option>
+                        </select>
+                    </div>
+                    <div class="tranfer-btn">
+                        <button class="confirm-btn" type="button">确定移动</button>
+                        <!--<button class="confirm-btn" type="button">确定移交</button>-->
+                    </div>
                 </div>
-                <div class="" style="text-align: center;margin-bottom: 30px;">
-                    <img src="/alink-hq/static/img/exchange-un.png" alt="">
-                </div>
-                <div class="transfer-company">
-                    <p class="trans-hint"></p>
-                    <label for="pid"><span>*</span>选择移动到的区域：</label>
-                    <select name="pid" id="pid">
-                        <option value="">选择移动到的区域</option>
-                        <option value="0">区域1</option>
-                    </select>
-                </div>
-                <div class="tranfer-btn">
-                    <button class="confirm-btn" type="button">确定移动</button>
-                    <!--<button class="confirm-btn" type="button">确定移交</button>-->
-                </div>
-            </div>
-        </form>
+            </form>
+        </div>
     </div>
 </div>
 <div class="hide-iframe"></div>
