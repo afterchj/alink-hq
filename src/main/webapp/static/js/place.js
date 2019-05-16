@@ -137,7 +137,8 @@ function nameKeyUp() {
         $('p.rename-hint').text('');
     }
 }
-$('#pid,#mid').bind('input propertychange',function(){
+//只能输入
+$('#mid').bind('input propertychange',function(){
     var val= $(this).val();
     // console.log(val);
     if(val!=''&& isNaN(val)){

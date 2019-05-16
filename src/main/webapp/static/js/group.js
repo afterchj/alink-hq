@@ -71,7 +71,7 @@ $(function () {
     $('div[openContent="delete-mesh"] button.yes').click(function () {
         console.log(ids);
         if (ids) {
-            location.href = "/alink-hq/group/delete?mid="+$("#mid").val()+"&ids=" + ids;
+            location.href = "/alink-hq/group/delete?uid="+$("#uid").val()+"&ids=" + ids;
             ids = [];
         }
     })
@@ -151,10 +151,3 @@ function nameKeyUp() {
         $('p.rename-hint').text('');
     }
 }
-$('#meshId').bind('input propertychange',function(){
-    var val= $(this).val();
-    // console.log(val);
-    if(val!=''&& isNaN(val)){
-        $(this).val('');
-    }
-})
