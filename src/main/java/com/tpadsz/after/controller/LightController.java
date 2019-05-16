@@ -1,6 +1,5 @@
 package com.tpadsz.after.controller;
 
-import com.alibaba.fastjson.JSON;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.tpadsz.after.entity.MeshInfo;
@@ -45,35 +44,36 @@ public class LightController {
         if (pageInfo.getList().size() > 0) {
             modelMap.put("pageInfo", pageInfo);
         }
-        OptionList project = meshService.getProject(dict.getProjectId());
-        modelMap.put("project", project);
+//        Integer id = dict.getMid();
+//        int projectId = id == null ? dict.getProjectId() : id;
+//        OptionList project = meshService.getProject(projectId);
+//        dict.setMid(project.getMid());
+//        modelMap.put("project", project);
         modelMap.put("dict", dict);
         return "meshTemp/lightList";
     }
+
     @RequestMapping("/info")
     public String info(int id, ModelMap modelMap) {
         MeshInfo meshInfo = lightService.getLightInfo(id);
-        List<MeshInfo> sceneInfo=lightService.getSceneInfo(id);
+        List<MeshInfo> sceneInfo = lightService.getSceneInfo(id);
         modelMap.put("meshInfo", meshInfo);
         modelMap.put("sceneInfo", sceneInfo);
         return "meshTemp/lightInfo";
     }
 
     @RequestMapping("/move")
-    public String move(int mid,String ids, ModelMap modelMap) {
+    public String move(String projectName, int mid, String ids, ModelMap modelMap) {
         String[] ids1 = ids.split(",");
         List<String> list = new ArrayList(Arrays.asList(ids1));
         List<Map> lightMap = lightService.selectByLid(list);
         modelMap.put("lightMap", lightMap);
+        modelMap.put("projectName", projectName);
         modelMap.put("mid", mid);
         modelMap.put("ids", ids);
         return "meshTemp/lightMove";
     }
-    @RequestMapping("/save")
-    public String savePlace(Integer pid) {
-        logger.info("pid=" + pid);
-        return "redirect:/group/list";
-    }
+
     @ResponseBody
     @RequestMapping("/saveUpdate")
     public String saveUpdate(String ids, String gid) {
@@ -89,7 +89,7 @@ public class LightController {
     }
 
     @RequestMapping("/delete")
-    public String delete(String ids) {
+    public String delete(String projectName,Integer uid,String ids) {
         logger.info("ids=" + ids);
         String[] ids1 = ids.split(",");
         List<String> list = new ArrayList(Arrays.asList(ids1));
@@ -99,7 +99,7 @@ public class LightController {
             logger.warn(e);
             return "authError";
         }
-        return "redirect:/light/list";
+        return "redirect:/light/list?uid="+uid+"&projectName="+projectName;
     }
 
     @ResponseBody
@@ -116,7 +116,7 @@ public class LightController {
     @RequestMapping("/getGroup")
     public List<OptionList> getGroups(Integer id) {
         Map map = new HashMap();
-        map.put("id",id);
+        map.put("id", id);
         List<OptionList> meshMap = lightService.getGroups(map);
         return meshMap;
     }

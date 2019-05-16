@@ -135,7 +135,6 @@
         <if test="id!=null and id!=''">
             AND m.id =#{id}
         </if>
-        GROUP BY mid
     </select>
 
     <delete id="deleteLightByIds" parameterType="list">

@@ -16,6 +16,7 @@ public class SearchDict {
     private String pname;
     private String gname;
     private String lname;
+    private String projectName;
     private String lmac;
     private Integer status;
     private Integer meshId;
@@ -118,6 +119,14 @@ public class SearchDict {
 
     public void setLmac(String lmac) {
         this.lmac = lmac;
+    }
+
+    public String getProjectName() {
+        return projectName;
+    }
+
+    public void setProjectName(String projectName) {
+        this.projectName = projectName;
     }
 
     public Integer getStatus() {
