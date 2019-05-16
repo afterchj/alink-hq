@@ -122,7 +122,7 @@ $(function () {
         // console.log(isTrue);
         if (isTrue) {
             if (idss.length > 0) {
-                location.href = "/alink-hq/group/move?projectName=" + $("#projectName").val() + "&ids=" + idss;
+                location.href = "/alink-hq/group/move?mid=" + $("#mid").val() + "&ids=" + idss;
             }
         } else {
             $('div[openContent="exchange"]').addClass('active');
