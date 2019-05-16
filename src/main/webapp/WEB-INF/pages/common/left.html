@@ -3,10 +3,10 @@
 <head>
 </head>
 <body>
-<div th:fragment="left(list)">
+<!--<div  >-->
     <!--<div th:text="${list}"></div>-->
-    <div class="main p-r">
-        <div class="p-a main-left">
+    <!--<div class="main p-r">-->
+        <div class="f-l main-left" th:fragment="left(list)" style="width: 220px;"  >
             <ul>
                 <li class="one-list active ">
                     <div class="p-r">
@@ -36,14 +36,17 @@
                     </ul>
                 </li>
                 <li class="one-list">
-                    <div class="p-r">
+                    <div class="p-r nav-color " th:if="${list}=='myAccount'">
+                        <a th:href="@{/myAccount/myAccount}">我的账户</a>
+                    </div>
+                    <div class="p-r " th:if="${list}!='myAccount'">
                         <a th:href="@{/myAccount/myAccount}">我的账户</a>
                     </div>
                 </li>
             </ul>
         </div>
-    </div>
-</div>
+<!--</div>-->
+<!--</div>-->
 <script src="/alink-hq/static/js/jquery.min.js"></script>
 </body>
 </html>

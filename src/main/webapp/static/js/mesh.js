@@ -2,9 +2,6 @@
  * Created by hongjian.chen on 2019/4/24.
  */
 $(function () {
-    // var tabs="meshList";
-    // var index=0;
-    // left(tabs,index);
     $("#multiMove").click(function () {
         var ids = [];
         var uid=[];

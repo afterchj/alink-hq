@@ -16,13 +16,3 @@ $(function(){
         }
     })
 });
-function left(tabs,index){
-    // $('.one-list li').each(function () {
-    //     // $('.main-left>ul>li.one-list:eq('+index+')').find('.on-off-triangle').attr('src', '/alink-hq/static/img/left-fewer.png');
-    //     // $('.main-left>ul>li.one-list:eq('+index+')').find('.two-list').addClass('active');
-    //     var tab = $(this).attr('tab');
-    //     if (tab == tabs) {
-    //         $(this).addClass('active').siblings().removeClass('active');
-    //     }
-    // })
-}

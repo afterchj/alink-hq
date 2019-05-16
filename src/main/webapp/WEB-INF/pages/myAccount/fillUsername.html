@@ -20,38 +20,41 @@
 </head>
 
 <body>
-<div th:replace="common/head::head"></div>
+
 <div class="c-container">
-    <div th:replace="common/left::left('createAccount')"></div>
-    <div class="main-right">
-        <div class="clearfix main-right-nav">
-            <div class="f-l main-right-title">填写用户名</div>
-            <div class="f-r pointer">
-                <div class="goBack" onClick="javascript :history.back(-1);" >
-                    <!--<span class="triangle-facing-left"></span>-->
-                    <span ><</span><span>返回</span>
+    <div th:replace="common/head::head"></div>
+    <div class="main  clearfix">
+        <div th:replace="common/left::left('myAccount')"></div>
+        <div class="main-right f-r">
+            <div class="clearfix main-right-nav">
+                <div class="f-l main-right-title">填写用户名</div>
+                <div class="f-r pointer">
+                    <div class="goBack" onClick="javascript :history.back(-1);">
+                        <!--<span class="triangle-facing-left"></span>-->
+                        <span><</span><span>返回</span>
+                    </div>
+                    <!--<img src="/alink-hq/static/img/go-back.png" alt="" id="clickReturn">-->
                 </div>
-                <!--<img src="/alink-hq/static/img/go-back.png" alt="" id="clickReturn">-->
             </div>
-        </div>
-        <div id="fillUsername">
-            <div class="f-fillUsername">
-                <div class="f-nav">
-                    填写用户名
-                </div>
-                <div class="f-content ">
-                    <form id="unameForm" action="#" onsubmit="return false" method="post">
-                        <div style="margin-bottom:10px;">
-                            <p class="use-hint" style="height: 35px;"></p>
-                            <label for="">用户名：</label>
-                            <input type="text" placeholder="请输入用户名（2-6位中文、字母或数字）" id="userName" name="uname">
-                        </div>
-                        <input type="hidden" th:value="${account}" id="account" name="account" class="account"/>
-                        <input type="hidden" th:value="${flag}" id="flag" name="flag"/>
-                        <div class="submit-btn">
-                            <button type="submit" id="submit">确定</button>
-                        </div>
-                    </form>
+            <div id="fillUsername">
+                <div class="f-fillUsername">
+                    <div class="f-nav">
+                        填写用户名
+                    </div>
+                    <div class="f-content ">
+                        <form id="unameForm" action="#" onsubmit="return false" method="post">
+                            <div style="margin-bottom:10px;">
+                                <p class="use-hint" style="height: 35px;"></p>
+                                <label for="">用户名：</label>
+                                <input type="text" placeholder="请输入用户名（2-6位中文、字母或数字）" id="userName" name="uname">
+                            </div>
+                            <input type="hidden" th:value="${account}" id="account" name="account" class="account"/>
+                            <input type="hidden" th:value="${flag}" id="flag" name="flag"/>
+                            <div class="submit-btn">
+                                <button type="submit" id="submit">确定</button>
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
@@ -79,20 +82,20 @@
 <script src="/alink-hq/static/myAccount/js/uname.js"></script>
 <script type="text/javascript" src="/alink-hq/static/js/left.js"></script>
 <script>
-//    $('.on-off-triangle').click(function () {
-//        var imgUrl = $(this).attr('src');
-//        if (imgUrl == '/alink-hq/static/img/bottom-triangle-un.png') {
-//            $(this).attr('src', '/alink-hq/static/img/right-triange-un.png');
-//            $(this).parent().parent('.one-list').find('.two-list').addClass('active');
-//        } else {
-//            $(this).attr('src', '/alink-hq/static/img/bottom-triangle-un.png');
-//            $(this).parent().parent('.one-list').find('.two-list').removeClass('active');
-//        }
-//    })
-//    $(function(){
-//        var height=$(document).height();
-//        $('.main-left').css('height',height);
-//    })
+    //    $('.on-off-triangle').click(function () {
+    //        var imgUrl = $(this).attr('src');
+    //        if (imgUrl == '/alink-hq/static/img/bottom-triangle-un.png') {
+    //            $(this).attr('src', '/alink-hq/static/img/right-triange-un.png');
+    //            $(this).parent().parent('.one-list').find('.two-list').addClass('active');
+    //        } else {
+    //            $(this).attr('src', '/alink-hq/static/img/bottom-triangle-un.png');
+    //            $(this).parent().parent('.one-list').find('.two-list').removeClass('active');
+    //        }
+    //    })
+    //    $(function(){
+    //        var height=$(document).height();
+    //        $('.main-left').css('height',height);
+    //    })
     //验证用户名
     //        function vUserName() {
     //            var userVal = $('#userName').val();

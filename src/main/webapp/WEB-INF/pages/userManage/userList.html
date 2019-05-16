@@ -9,134 +9,143 @@
     <title>用户列表</title>
 </head>
 <body>
-<div th:replace="common/head::head"></div>
+
 <div class="c-container ">
-    <div th:replace="common/left::left('userList')"></div>
-    <div class="main-right">
-        <div class="clearfix main-right-nav">
-            <div class="f-l main-right-title">用户列表</div>
-            <div class="f-r pointer">
-                <a th:href="@{/account/createAccount}">
-                    <div class="create" onmousedown="createBtnMouseDown()" onmouseup="createBtnMouseUp()"><span>+</span><span>创建账号</span></div>
-                </a>
-            </div>
-            <div class="f-r pointer">
-                <div class="goBack" onClick="javascript :history.back(-1);" onmousedown="backBtnMouseDown()" onmouseup="backBtnMouseUp()">
-                    <span ><</span><span>返回</span>
+    <div th:replace="common/head::head"></div>
+    <div class="main clearfix">
+        <div th:replace="common/left::left('userList')"></div>
+        <div class="main-right f-r">
+            <div class="clearfix main-right-nav">
+                <div class="f-l main-right-title">用户列表</div>
+                <div class="f-r pointer">
+                    <a th:href="@{/account/createAccount}">
+                        <div class="create" onmousedown="createBtnMouseDown()" onmouseup="createBtnMouseUp()">
+                            <span>+</span><span>创建账号</span></div>
+                    </a>
                 </div>
-                <!--<img src="/alink-hq/static/img/go-back.png" alt="" onClick="javascript :history.back(-1);">-->
+                <div class="f-r pointer">
+                    <div class="goBack" onClick="javascript :history.back(-1);" onmousedown="backBtnMouseDown()"
+                         onmouseup="backBtnMouseUp()">
+                        <span><</span><span>返回</span>
+                    </div>
+                    <!--<img src="/alink-hq/static/img/go-back.png" alt="" onClick="javascript :history.back(-1);">-->
+                </div>
             </div>
-        </div>
-        <div id="projectList" class="">
-            <div class="search-condition ">
-                <form action="" class="clearfix">
-                    <div class="f-l search" style="margin-right:125px;">
-                        <div>
-                            <label for="account">账号</label>
-                            <input type="text" id="account" placeholder="请输入账号">
-                        </div>
-                        <div class="p-r">
-                            <label for="role" class="font">角色</label>
-                            <select name="role" id="role" style="text-indent: 4px;">
-                                <option>请选择角色</option>
-                                <option th:each="role:${roleList}" th:value="${role.id}"
-                                        th:text="${role.roleName }"></option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="f-l search">
-                        <div>
-                            <label for="company" class="font">隶属公司</label>
-                            <select name="company" id="company" style="text-indent: 4px;">
-                                <option>请选择公司</option>
-                                <option th:each="firm:${firmList}" th:value="${firm.id}"
-                                        th:text="${firm.coname }"></option>
-                            </select>
-                        </div>
-                        <div class="p-r">
-                            <label for="add-time" class="font">添加时间</label>
-                            <input type="text" id="add-time" placeholder="请选择日期" AUTOCOMPLETE="off">
-                            <img src="/alink-hq/static/img/date.png" alt="" class="p-a show-date">
-                        </div>
-                    </div>
-                    <div class="f-r search-button ">
-                        <button type="button" class="pointer">查询</button>
-                        <a th:href="@{getUserListExcel(account=${account},roleId=${roleId},fid=${fid},startDate=${startDate},endDate=${endDate})}"
-                           class="export" >Excel
-                            导出</a>
-                    </div>
-                </form>
-            </div>
-            <div class="search-result">
-                <!-- 有数据时 -->
-                <table border="1" class="hasData active" th:if="${pageInfo!=null}">
-                    <thead>
-                    <tr>
-                        <th style="width: 120px;"><span>账号</span></th>
-                        <th style="width: 120px;"><span>用户名</span></th>
-                        <th style="width: 150px;"><span>绑定手机号</span></th>
-                        <th class="p-r" style="width: 180px;">
-                            <span>绑定邮箱</span>
-                        </th>
-                        <th class="p-r" style="width: 220px;">
-                            <span>隶属公司</span>
-                        </th>
-                        <th class="p-r" style="width: 120px;">
-                            <span>角色</span>
-                        </th>
-                        <th class="p-r" style="width: 180px;">
-                            <span>添加时间</span>
-                        </th>
-                        <th class="p-r" style="width:80px;">
-                            <span>状态</span>
-                        </th>
-                        <th class="operation"><span>操作</span></th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr th:each="user:${pageInfo.list}">
-                        <td class="project-name use-account" th:text="${user.account}"></td>
-                        <td th:text="${user.uname}"></td>
-                        <td th:text="${user.mobile}"></td>
-                        <td th:text="${user.email}"></td>
-                        <td th:text="${user.coname}"></td>
-                        <td th:if="${user.role_id=='1'}" th:text="超级管理员" class="role"></td>
-                        <td th:if="${user.role_id=='2'}" th:text="管理员" class="role"></td>
-                        <td th:if="${user.role_id=='3'}" th:text="乙方管理员" class="role"></td>
-                        <td th:if="${user.role_id=='4'}" th:text="施工人员" class="role"></td>
-                        <td th:text="${user.create_date}"></td>
-                        <!--<td th:text="${user.status}" class="status pointer" openTab="start-use" id="start-use">-->
-                        <!--</td>-->
-                        <td th:if="${user.status=='1'}" style="color: #0B78CE;" th:text="启用" openTab="start-use" id="start-use"
-                            class="status pointer"></td>
-                        <td th:if="${user.status=='0'}" style="color: #0B78CE;" th:text="禁用" openTab="start-use" id="start-use"
-                            class="status pointer"></td>
-                        <td class="p-r">
-                            <img src="/alink-hq/static/img/newPassword.png" alt="" openTab="reset-pwd" id="reset-pwd" class="pointer" th:title="重置密码">
-                            <a th:if="${user.role_id=='4'}" th:href="@{/account/transferPage(account=${user.account},coname=${user.coname})}"><img src="/alink-hq/static/img/exchange.png"
-                                    alt="" class="center-img" th:title="移交账号"></a>
-                            <a  th:if="${user.role_id!='4'}" href="javascript:void(0);"  class="unclick"><img
-                                    src="/alink-hq/static/img/un-exchange.png"
-                                    alt="" class="center-img" th:title="不可移交"></a>
-                            <img src="/alink-hq/static/img/delete.png" alt="" id="delete-account"
-                                 openTab="delete-account" class="pointer" th:title="删除">
-                            <div class="popup p-a">
-                                重命名
+            <div id="projectList" class="">
+                <div class="search-condition ">
+                    <form action="" class="clearfix">
+                        <div class="f-l search" style="margin-right:125px;">
+                            <div>
+                                <label for="account">账号</label>
+                                <input type="text" id="account" placeholder="请输入账号">
                             </div>
-                        </td>
-                    </tr>
-                    </tbody>
-                    <tfoot>
-                    <tr>
-                        <td colspan="11" class="clearfix page">
-                            <div class="f-r page-right">
+                            <div class="p-r">
+                                <label for="role" class="font">角色</label>
+                                <select name="role" id="role" style="text-indent: 4px;">
+                                    <option>请选择角色</option>
+                                    <option th:each="role:${roleList}" th:value="${role.id}"
+                                            th:text="${role.roleName }"></option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="f-l search">
+                            <div>
+                                <label for="company" class="font">隶属公司</label>
+                                <select name="company" id="company" style="text-indent: 4px;">
+                                    <option>请选择公司</option>
+                                    <option th:each="firm:${firmList}" th:value="${firm.id}"
+                                            th:text="${firm.coname }"></option>
+                                </select>
+                            </div>
+                            <div class="p-r">
+                                <label for="add-time" class="font">添加时间</label>
+                                <input type="text" id="add-time" placeholder="请选择日期" AUTOCOMPLETE="off">
+                                <img src="/alink-hq/static/img/date.png" alt="" class="p-a show-date">
+                            </div>
+                        </div>
+                        <div class="f-r search-button ">
+                            <button type="button" class="pointer">查询</button>
+                            <a th:href="@{getUserListExcel(account=${account},roleId=${roleId},fid=${fid},startDate=${startDate},endDate=${endDate})}"
+                               class="export">Excel
+                                导出</a>
+                        </div>
+                    </form>
+                </div>
+                <div class="search-result">
+                    <!-- 有数据时 -->
+                    <table border="1" class="hasData active" th:if="${pageInfo!=null}">
+                        <thead>
+                        <tr>
+                            <th style="width: 120px;"><span>账号</span></th>
+                            <th style="width: 120px;"><span>用户名</span></th>
+                            <th style="width: 150px;"><span>绑定手机号</span></th>
+                            <th class="p-r" style="width: 180px;">
+                                <span>绑定邮箱</span>
+                            </th>
+                            <th class="p-r" style="width: 220px;">
+                                <span>隶属公司</span>
+                            </th>
+                            <th class="p-r" style="width: 120px;">
+                                <span>角色</span>
+                            </th>
+                            <th class="p-r" style="width: 180px;">
+                                <span>添加时间</span>
+                            </th>
+                            <th class="p-r" style="width:80px;">
+                                <span>状态</span>
+                            </th>
+                            <th class="operation"><span>操作</span></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="user:${pageInfo.list}">
+                            <td class="project-name use-account" th:text="${user.account}"></td>
+                            <td th:text="${user.uname}"></td>
+                            <td th:text="${user.mobile}"></td>
+                            <td th:text="${user.email}"></td>
+                            <td th:text="${user.coname}"></td>
+                            <td th:if="${user.role_id=='1'}" th:text="超级管理员" class="role"></td>
+                            <td th:if="${user.role_id=='2'}" th:text="管理员" class="role"></td>
+                            <td th:if="${user.role_id=='3'}" th:text="乙方管理员" class="role"></td>
+                            <td th:if="${user.role_id=='4'}" th:text="施工人员" class="role"></td>
+                            <td th:text="${user.create_date}"></td>
+                            <!--<td th:text="${user.status}" class="status pointer" openTab="start-use" id="start-use">-->
+                            <!--</td>-->
+                            <td th:if="${user.status=='1'}" style="color: #0B78CE;" th:text="启用" openTab="start-use"
+                                id="start-use"
+                                class="status pointer"></td>
+                            <td th:if="${user.status=='0'}" style="color: #0B78CE;" th:text="禁用" openTab="start-use"
+                                id="start-use"
+                                class="status pointer"></td>
+                            <td class="p-r">
+                                <img src="/alink-hq/static/img/newPassword.png" alt="" openTab="reset-pwd"
+                                     id="reset-pwd" class="pointer" th:title="重置密码">
+                                <a th:if="${user.role_id=='4'}"
+                                   th:href="@{/account/transferPage(account=${user.account},coname=${user.coname})}"><img
+                                        src="/alink-hq/static/img/exchange.png"
+                                        alt="" class="center-img" th:title="移交账号"></a>
+                                <a th:if="${user.role_id!='4'}" href="javascript:void(0);" class="unclick"><img
+                                        src="/alink-hq/static/img/un-exchange.png"
+                                        alt="" class="center-img" th:title="不可移交"></a>
+                                <img src="/alink-hq/static/img/delete.png" alt="" id="delete-account"
+                                     openTab="delete-account" class="pointer" th:title="删除">
+                                <div class="popup p-a">
+                                    重命名
+                                </div>
+                            </td>
+                        </tr>
+                        </tbody>
+                        <tfoot>
+                        <tr>
+                            <td colspan="11" class="clearfix page">
+                                <div class="f-r page-right">
                                 <span class="prev-page">
                                     <a th:href="@{/account/list(pageNum=${pageInfo.prePage},pageSize=${pageInfo.pageSize},account=${account},fid=${fid},roleId=${roleId},startDate=${startDate},endDate=${endDate})}">
                                         <!--<img src="/alink-hq/static/img/left-arrow.png" alt="">-->
-                                        <span class="prev " ><span><</span></span></a>
+                                        <span class="prev "><span><</span></span></a>
                                     </a>
                                 </span>
-                                <span th:text="${pageInfo.pageNum}" class="pages"></span>
+                                    <span th:text="${pageInfo.pageNum}" class="pages"></span>
                                 <span class="next-page">
                                    <a th:href="@{/account/list(pageNum=${pageInfo.nextPage},pageSize=${pageInfo.pageSize},account=${account},fid=${fid},roleId=${roleId},startDate=${startDate},endDate=${endDate})}">
                                        <!--<img src="/alink-hq/static/img/right-arrow-color.png" alt="">-->
@@ -154,11 +163,13 @@
                                 </span>
                                 <span class="m-r-35">
                                     <!--<img src="/alink-hq/static/img/skip.png" id="skipPageBtn" class="pointer"-->
-                                         <!--onmousedown="mouseDown()" onmouseup="mouseUp()"-->
-                                         <!--alt="">-->
-                                     <div id="skipPageBtn" class="pointer moment skipPageBtn" onmousedown="skipBtnMouseDown()" onmouseup="skipBtnMouseUp()">跳转</div>
+                                    <!--onmousedown="mouseDown()" onmouseup="mouseUp()"-->
+                                    <!--alt="">-->
+                                     <div id="skipPageBtn" class="pointer moment skipPageBtn"
+                                          onmousedown="skipBtnMouseDown()" onmouseup="skipBtnMouseUp()">跳转
+                                     </div>
                                 </span>
-                                <span class="m-r-15r">每页显示：</span>
+                                    <span class="m-r-15r">每页显示：</span>
                                 <span class="m-r-20">
                                     <select name="page-select" id="page-select">
 
@@ -168,50 +179,52 @@
                                         <option value="100">100</option>
                                     </select>
                                 </span>
-                            </div>
-                        </td>
-                    </tr>
-                    </tfoot>
-                </table>
-                <!-- 无数据时 -->
-                <table border="1" class="noData active" th:if="${pageInfo==null}">
-                    <thead>
-                    <tr>
-                        <th style="width: 120px;">账号</th>
-                        <th style="width: 120px;">用户名</th>
-                        <th style="width: 150px;">绑定手机号</th>
-                        <th class="p-r" style="width: 180px;">
-                            绑定邮箱
-                        </th>
-                        <th class="p-r" style="width: 220px;">
-                            隶属公司
-                        </th>
-                        <th class="p-r" style="width: 120px;">
-                            角色
-                        </th>
-                        <th class="p-r" style="width: 180px;">
-                            添加时间
-                        </th>
-                        <th class="p-r" style="width:80px;">
-                            状态
-                        </th>
-                        <th>操作</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                        <td colspan="9">
-                            <img src="/alink-hq/static/img/no-data.png" id="skipPageBtn" alt="">
+                                </div>
+                            </td>
+                        </tr>
+                        </tfoot>
+                    </table>
+                    <!-- 无数据时 -->
+                    <table border="1" class="noData active" th:if="${pageInfo==null}">
+                        <thead>
+                        <tr>
+                            <th style="width: 120px;">账号</th>
+                            <th style="width: 120px;">用户名</th>
+                            <th style="width: 150px;">绑定手机号</th>
+                            <th class="p-r" style="width: 180px;">
+                                绑定邮箱
+                            </th>
+                            <th class="p-r" style="width: 220px;">
+                                隶属公司
+                            </th>
+                            <th class="p-r" style="width: 120px;">
+                                角色
+                            </th>
+                            <th class="p-r" style="width: 180px;">
+                                添加时间
+                            </th>
+                            <th class="p-r" style="width:80px;">
+                                状态
+                            </th>
+                            <th>操作</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td colspan="9">
+                                <img src="/alink-hq/static/img/no-data.png" id="skipPageBtn" alt="">
 
-                            <p>暂无数据</p>
-                        </td>
-                    </tr>
-                    </tbody>
-                </table>
+                                <p>暂无数据</p>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>
 </div>
+
 <!-- 确定重置密码 -->
 <div class="confirm-on-off pop-iframe " openContent="reset-pwd">
     <div class="confirm-on-off-nav p-r pop-nav">
