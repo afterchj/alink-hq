@@ -3,8 +3,9 @@
 
 <head>
     <title>网络列表</title>
-    <script src="/alink-hq/static/js/browser.js"></script>
+
     <script src="/alink-hq/static/js/jquery.min.js"></script>
+    <script src="/alink-hq/static/js/browser.js"></script>
     <link rel="stylesheet" th:href="@{/static/css/common.css}"/>
     <link rel="stylesheet" th:href="@{/static/css/laydate.css}"/>
     <link rel="stylesheet" th:href="@{/static/css/base.css}"/>
@@ -57,7 +58,7 @@
                     <div class="f-l search">
                         <div>
                             <label for="mid" class="font">网络ID</label>
-                            <input type="text" id="mid" name="meshId" th:value="${dict.meshId}" placeholder="请输入网络ID" onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')">
+                            <input type="text" id="mid" name="meshId" th:value="${dict.meshId}" placeholder="请输入网络ID" class="intInput"  >
                         </div>
                         <div>
                             <label for="pname" class="font">项目名称</label>

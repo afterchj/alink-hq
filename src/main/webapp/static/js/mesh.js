@@ -138,3 +138,11 @@ function deleteMesh(ids) {
         location.href = "/alink-hq/mesh/delete?ids=" + ids;
     }
 }
+//只能输入
+$('#mid').bind('input propertychange',function(){
+    var val= $(this).val();
+    // console.log(val);
+    if(val!=''&& isNaN(val)){
+        $(this).val('');
+    }
+})
