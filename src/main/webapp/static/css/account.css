@@ -160,3 +160,7 @@ p.phone-hint.active,p.use-hint2.active,p.email-hint.active,p.pwd-hint.active,p.u
 #bindEmail,#account,#bindPhone,#changePassword,#fillUsername{
     background-color: #fff;
 }
+#account .icon img{
+    width:26px;
+    height: 26px;
+}
