@@ -3,10 +3,7 @@ package com.tpadsz.after.controller;
 import com.alibaba.fastjson.JSONArray;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import com.tpadsz.after.entity.Firm;
-import com.tpadsz.after.entity.OptionList;
-import com.tpadsz.after.entity.ProjectList;
-import com.tpadsz.after.entity.User;
+import com.tpadsz.after.entity.*;
 import com.tpadsz.after.entity.dd.ResultDict;
 import com.tpadsz.after.service.AccountService;
 import com.tpadsz.after.service.MeshService;
@@ -240,7 +237,9 @@ public class ProjectController {
 
     @RequestMapping(value = "/detail", method = RequestMethod.GET)
     public String detail(String projectName,String account, String coname, Integer meshNum, Integer projectId, Model model) {
-        OptionList project=meshService.getProject(projectId);
+        SearchDict dict=new SearchDict();
+        dict.setProjectId(projectId);
+        OptionList project=meshService.getProject(dict);
         int placeNum = 0;
         int groupNum = 0;
         int lightNum = 0;

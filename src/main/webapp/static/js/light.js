@@ -77,7 +77,7 @@ $(function () {
     $('div[openContent="delete-mesh"] button.yes').click(function () {
         console.log(ids);
         if (ids) {
-            location.href = "/alink-hq/light/delete?uid=" + $("#uid").val() + "&ids=" + ids;
+            location.href = "/alink-hq/light/delete?mid=" + $("#mid").val() + "&ids=" + ids;
             ids = [];
         }
     })

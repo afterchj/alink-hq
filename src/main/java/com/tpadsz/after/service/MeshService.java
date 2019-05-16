@@ -27,7 +27,7 @@ public interface MeshService {
 
     void saveRename(Map map)throws RepetitionException;
 
-    OptionList getProject(int projectId);
+    OptionList getProject(SearchDict dict);
 
     void deleteMeshByIds(List list);
 

@@ -130,8 +130,7 @@
                         $('.hide-iframe').addClass('active');
                         $('#preload-anim .title').text('移交成功，正在跳转组列表');
                         setInterval(function () {
-                            location.href = '/alink-hq/group/list?uid=' + uid + "&mid=" + mid + "&projectName=" + projectName;
-                            ;
+                            location.href = '/alink-hq/group/list?mid=' + mid;
                         }, 1000)
                     } else {
                         $('#preload-anim').addClass('active');
