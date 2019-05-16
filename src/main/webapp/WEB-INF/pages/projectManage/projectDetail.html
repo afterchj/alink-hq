@@ -12,84 +12,88 @@
 </head>
 
 <body>
-<div th:replace="common/head::head"></div>
-<div class="c-container">
-    <div th:replace="common/left::left('projectList')"></div>
-    <div class="main-right">
-        <div class="clearfix main-right-nav">
-            <div class="f-l main-right-title">项目详情</div>
-            <!-- <div class="f-r pointer">
-                <img src="./img/create-project.png" alt="">
-            </div> -->
-            <div class="f-r pointer">
-                <div class="goBack" onClick="javascript :history.back(-1);" onmousedown="backBtnMouseDown()" onmouseup="backBtnMouseUp()">
-                    <span ><</span><span>返回</span>
-                </div>
-                <!--<img src="/alink-hq/static/img/go-back.png" alt="" onclick="history.back()">-->
-            </div>
-        </div>
-        <div id="projectDetail">
-            <div class="p-detail">
-                <div class="p-nav" th:text="${projectName}" >
 
+<div class="c-container">
+    <div th:replace="common/head::head"></div>
+    <div class="main clearfix">
+        <div th:replace="common/left::left('projectList')"></div>
+        <div class="main-right f-r">
+            <div class="clearfix main-right-nav">
+                <div class="f-l main-right-title">项目详情</div>
+                <!-- <div class="f-r pointer">
+                    <img src="./img/create-project.png" alt="">
+                </div> -->
+                <div class="f-r pointer">
+                    <div class="goBack" onClick="javascript :history.back(-1);" onmousedown="backBtnMouseDown()"
+                         onmouseup="backBtnMouseUp()">
+                        <span><</span><span>返回</span>
+                    </div>
+                    <!--<img src="/alink-hq/static/img/go-back.png" alt="" onclick="history.back()">-->
                 </div>
-                <div class="p-content">
-                    <div class="clearfix">
-                        <div class="f-l">
-                            <span>项目中网络的数量：</span>
-                            <span th:text="${meshNum}"></span>
+            </div>
+            <div id="projectDetail">
+                <div class="p-detail">
+                    <div class="p-nav" th:text="${projectName}">
+
+                    </div>
+                    <div class="p-content">
+                        <div class="clearfix">
+                            <div class="f-l">
+                                <span>项目中网络的数量：</span>
+                                <span th:text="${meshNum}"></span>
+                            </div>
+                            <div class="f-l">
+                                <a th:href="@{/mesh/list(projectId=${projectId})}">查看网络列表</a>
+                            </div>
                         </div>
-                        <div class="f-l">
-                            <a th:href="@{/mesh/list(projectId=${projectId})}">查看网络列表</a>
+                        <div class="clearfix">
+                            <div class="f-l">
+                                <span>项目中区域的数量：</span>
+                                <span th:text="${placeNum}"></span>
+                            </div>
+                            <div class="f-l">
+                                <a th:href="@{/place/list(projectId=${projectId})}">查看区域列表</a>
+                            </div>
+                        </div>
+                        <div class="clearfix">
+                            <div class="f-l">
+                                <span>项目中组的数量：</span>
+                                <span th:text="${groupNum}"></span>
+                            </div>
+                            <div class="f-l">
+                                <a th:href="@{/group/list(projectId=${projectId})}">查看组列表</a>
+                            </div>
+                        </div>
+                        <div class="clearfix">
+                            <div class="f-l">
+                                <span>项目中灯的数量：</span>
+                                <span th:text="${lightNum}"></span>
+                            </div>
+                            <div class="f-l">
+                                <a th:href="@{/light/list(projectId=${projectId})}">查看灯列表</a>
+                            </div>
                         </div>
                     </div>
-                    <div class="clearfix">
-                        <div class="f-l">
-                            <span>项目中区域的数量：</span>
-                            <span th:text="${placeNum}"></span>
-                        </div>
-                        <div class="f-l">
-                            <a th:href="@{/place/list(projectId=${projectId})}">查看区域列表</a>
-                        </div>
+                    <div class="c-nav">
+                        施工信息
                     </div>
-                    <div class="clearfix">
-                        <div class="f-l">
-                            <span>项目中组的数量：</span>
-                            <span th:text="${groupNum}"></span>
+                    <div class="c-content">
+                        <div>
+                            <span>用户名：</span>
+                            <span th:text="${user.uname}"></span>
                         </div>
-                        <div class="f-l">
-                            <a th:href="@{/group/list(projectId=${projectId})}">查看组列表</a>
+                        <div>
+                            <span>账号：</span>
+                            <span th:text="${user.account}"></span>
                         </div>
-                    </div>
-                    <div class="clearfix">
-                        <div class="f-l">
-                            <span>项目中灯的数量：</span>
-                            <span th:text="${lightNum}"></span>
+                        <div>
+                            <span>联系方式：</span>
+                            <span th:text="${user.mobile}"></span>
                         </div>
-                        <div class="f-l">
-                            <a th:href="@{/light/list(projectId=${projectId})}">查看灯列表</a>
+                        <div>
+                            <span>隶属公司：</span>
+                            <span th:text="${coname}"></span>
                         </div>
-                    </div>
-                </div>
-                <div class="c-nav">
-                    施工信息
-                </div>
-                <div class="c-content">
-                    <div>
-                        <span>用户名：</span>
-                        <span th:text="${user.uname}"></span>
-                    </div>
-                    <div>
-                        <span>账号：</span>
-                        <span th:text="${user.account}"></span>
-                    </div>
-                    <div>
-                        <span>联系方式：</span>
-                        <span th:text="${user.mobile}"></span>
-                    </div>
-                    <div>
-                        <span>隶属公司：</span>
-                        <span th:text="${coname}" ></span>
                     </div>
                 </div>
             </div>
@@ -101,9 +105,9 @@
 <script src="/alink-hq/static/js/moment.js"></script>
 <script type="text/javascript">
     $(function () {
-        var tabs="projectList";
-        var index=0;
-        left(tabs,index);
+        var tabs = "projectList";
+        var index = 0;
+        left(tabs, index);
     })
 
 </script>

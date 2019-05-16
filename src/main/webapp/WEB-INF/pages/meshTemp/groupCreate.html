@@ -11,96 +11,99 @@
     <title>创建组</title>
 </head>
 <body>
-<div th:replace="common/head::head"></div>
+
 <div class="c-container">
-    <div th:replace="common/left::left('meshList')"></div>
-    <div class="main-right">
-        <div class="clearfix main-right-nav">
-            <div class="f-l main-right-title">创建组</div>
-            <!--<div class="f-r pointer">-->
-            <!--<img src="/alink-hq/static/img/create-project.png" alt="">-->
-            <!--</div>-->
-            <div class="f-r pointer">
-                <div class="goBack" onClick="javascript :history.back();" onmousedown="backBtnMouseDown()"
-                     onmouseup="backBtnMouseUp()">
-                    <span><</span><span>返回</span>
+    <div th:replace="common/head::head"></div>
+    <div class="main clearfix">
+        <div th:replace="common/left::left('meshList')"></div>
+        <div class="main-right f-r">
+            <div class="clearfix main-right-nav">
+                <div class="f-l main-right-title">创建组</div>
+                <!--<div class="f-r pointer">-->
+                <!--<img src="/alink-hq/static/img/create-project.png" alt="">-->
+                <!--</div>-->
+                <div class="f-r pointer">
+                    <div class="goBack" onClick="javascript :history.back();" onmousedown="backBtnMouseDown()"
+                         onmouseup="backBtnMouseUp()">
+                        <span><</span><span>返回</span>
+                    </div>
+                    <!--<img src="/alink-hq/static/img/go-back.png" alt="" onclick="history.back()">-->
                 </div>
-                <!--<img src="/alink-hq/static/img/go-back.png" alt="" onclick="history.back()">-->
             </div>
-        </div>
-        <div id="createProject">
-            <div class="c-createProject">
-                <div class="c-nav">
-                    创建组
-                </div>
-                <div class="c-content ">
-                    <div class="subjection">隶属项目：<span th:inline="text">[[${project.label}]]</span></div>
-                    <form th:action="@{/group/save}" method="POST" style="margin-top: 0;">
-                        <div class="process clearfix">
-                            <div class="f-l part">
-                                <img src="/alink-hq/static/img/fill-1-on.png" alt="" id="one-step">
-                                <span>选择网络</span>
+            <div id="createProject">
+                <div class="c-createProject">
+                    <div class="c-nav">
+                        创建组
+                    </div>
+                    <div class="c-content ">
+                        <div class="subjection">隶属项目：<span th:inline="text">[[${project.label}]]</span></div>
+                        <form th:action="@{/group/save}" method="POST" style="margin-top: 0;">
+                            <div class="process clearfix">
+                                <div class="f-l part">
+                                    <img src="/alink-hq/static/img/fill-1-on.png" alt="" id="one-step">
+                                    <span>选择网络</span>
+                                </div>
+                                <div class="f-l part  line ">……</div>
+                                <div class="f-l part">
+                                    <img src="/alink-hq/static/img/fill-2-no.png" alt="" id="two-step">
+                                    <span>选择区域</span>
+                                </div>
+                                <div class="f-l part  line ">……</div>
+                                <div class="f-l part">
+                                    <img src="/alink-hq/static/img/fill-3-no.png" alt="" id="three-step">
+                                    <span>输入名称</span>
+                                </div>
                             </div>
-                            <div class="f-l part  line ">……</div>
-                            <div class="f-l part">
-                                <img src="/alink-hq/static/img/fill-2-no.png" alt="" id="two-step">
-                                <span>选择区域</span>
-                            </div>
-                            <div class="f-l part  line ">……</div>
-                            <div class="f-l part">
-                                <img src="/alink-hq/static/img/fill-3-no.png" alt="" id="three-step">
-                                <span>输入名称</span>
-                            </div>
-                        </div>
-                        <!--选择网络-->
-                        <div class="select-mesh-step active step">
-                            <div>
-                                <p class="project-hint"></p>
-                                <label for="mid">选择网络：</label>
-                                <select id="mid" name="mid" style="height:35px;">
-                                    <option value="">请选择网络</option>
-                                </select>
-                            </div>
-                            <div>
-                                <p class="" style="height: 35px"></p>
-                                <label for="meshId">网络ID：</label>
-                                <input type="text" id="meshId" readonly>
-                            </div>
-                            <div class="">
-                                <button type="button" class="confirm-create" openTab="confirm-create">下一步</button>
-                            </div>
-                        </div>
-
-                        <!--选择区域-->
-                        <div class="select-place-step step">
-                            <div>
-                                <p class="place-hint"></p>
-                                <label for="place">选择区域：</label>
-                                <select id="place" name="pid" style="height:35px;">
-                                    <option value="">请选择区域</option>
-                                </select>
+                            <!--选择网络-->
+                            <div class="select-mesh-step active step">
+                                <div>
+                                    <p class="project-hint"></p>
+                                    <label for="mid">选择网络：</label>
+                                    <select id="mid" name="mid" style="height:35px;">
+                                        <option value="">请选择网络</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <p class="" style="height: 35px"></p>
+                                    <label for="meshId">网络ID：</label>
+                                    <input type="text" id="meshId" readonly>
+                                </div>
+                                <div class="">
+                                    <button type="button" class="confirm-create" openTab="confirm-create">下一步</button>
+                                </div>
                             </div>
 
-                            <div class="">
-                                <button type="button" class="back-btn">上一步</button>
-                                <button type="button" class="confirm-create" openTab="confirm-create">下一步</button>
-                            </div>
-                        </div>
+                            <!--选择区域-->
+                            <div class="select-place-step step">
+                                <div>
+                                    <p class="place-hint"></p>
+                                    <label for="place">选择区域：</label>
+                                    <select id="place" name="pid" style="height:35px;">
+                                        <option value="">请选择区域</option>
+                                    </select>
+                                </div>
 
-                        <!--输入组名-->
-                        <div class="select-group-step step">
-                            <div>
-                                <p class="group-hint"></p>
-                                <label for="group">组名：</label>
-                                <input type="text" id="group" placeholder="请输入（2-16 位汉字、字母、数字）">
+                                <div class="">
+                                    <button type="button" class="back-btn">上一步</button>
+                                    <button type="button" class="confirm-create" openTab="confirm-create">下一步</button>
+                                </div>
                             </div>
-                            <div class="">
-                                <button type="button" class="back-btn">上一步</button>
-                                <button type="button" class="confirm-create" openTab="confirm-create">完成</button>
-                            </div>
-                        </div>
 
-                    </form>
+                            <!--输入组名-->
+                            <div class="select-group-step step">
+                                <div>
+                                    <p class="group-hint"></p>
+                                    <label for="group">组名：</label>
+                                    <input type="text" id="group" placeholder="请输入（2-16 位汉字、字母、数字）">
+                                </div>
+                                <div class="">
+                                    <button type="button" class="back-btn">上一步</button>
+                                    <button type="button" class="confirm-create" openTab="confirm-create">完成</button>
+                                </div>
+                            </div>
+
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
@@ -298,7 +301,7 @@
                             $('#preload-anim .title').text('创建成功！');
                             setInterval(function () {
                                 $('#preload-anim').removeClass('active');
-                                location.href = '/alink-hq/group/list?uid=' + uid+"&projectId="+projectId;
+                                location.href = '/alink-hq/group/list?uid=' + uid + "&projectId=" + projectId;
                             }, 1000)
                         } else if (res == 'fail') {
                             $('.group-hint').text('已存在，请重新输入');

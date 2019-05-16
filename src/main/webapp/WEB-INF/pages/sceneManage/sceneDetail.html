@@ -11,105 +11,121 @@
     <title>场景详情</title>
 </head>
 <body>
-<div th:replace="common/head::head"></div>
+
 <div class="c-container">
-    <div th:replace="common/left::left('meshList')"></div>
-    <div class="main-right">
-        <div class="clearfix main-right-nav">
-            <div class="f-l main-right-title">场景详情</div>
-            <div class="f-r pointer">
-                <div class="goBack" onClick="javascript :history.back(-1);" onmousedown="backBtnMouseDown()"
-                     onmouseup="backBtnMouseUp()">
-                    <span><</span><span>返回</span>
-                </div>
-            </div>
-        </div>
-        <div id="sceneDetail">
-            <input type="hidden" th:if="${lightInfo}!=null" th:value="${lightInfo.id}" id="lid">
-            <input type="hidden" th:if="${lightInfo}!=null" th:value="${lightInfo.gid}" id="gid">
-            <input type="hidden" th:if="${lightInfo}!=null" th:value="${lightInfo.pid}" id="pid">
-            <div class="scene-nav">
-                <div class="clearfix  scene-title">
-                    <div class="f-l">
-                        <span>场景名：</span>
-                        <span th:text="${sceneName}"></span>
-                    </div>
-                    <div class="f-l">
-                        <span>场景ID：</span>
-                        <span th:text="${sceneId}"></span>
-                    </div>
-                    <div class="f-l">
-                        <span>当前状态：</span>
-                        <span>应用</span>
-                    </div>
-                </div>
-                <div class="project-title">
-                    <div class="clearfix">
-                        <div class="f-l length">
-                            <span>隶属项目：</span>
-                            <span th:text="${projectName}"></span>
-                        </div>
-                        <div class="f-l">
-                            <a th:href="@{/project/detail(projectId=${projectId})}">查看项目详情</a>
-                        </div>
-                    </div>
-                    <div class="clearfix">
-                        <div class="f-l">
-                            <span>应用网络：</span>
-                            <span th:text="${meshName}"></span>
-                        </div>
-                        <div class="f-l">
-                            <span>网络 ID：</span>
-                            <span th:text="${meshId}"></span>
-                        </div>
-                        <div class="f-l">
-                            <a th:href="@{/mesh/info(id=${mid})}">查看网络详情</a>
-                        </div>
+    <div th:replace="common/head::head"></div>
+    <div class="main clearfix">
+        <div th:replace="common/left::left('meshList')"></div>
+        <div class="main-right f-r">
+            <div class="clearfix main-right-nav">
+                <div class="f-l main-right-title">场景详情</div>
+                <div class="f-r pointer">
+                    <div class="goBack" onClick="javascript :history.back(-1);" onmousedown="backBtnMouseDown()"
+                         onmouseup="backBtnMouseUp()">
+                        <span><</span><span>返回</span>
                     </div>
                 </div>
             </div>
-            <div class="scene-content">
-                <div class="scene-list clearfix">
-                    <div class="f-l">
-                        <span>场景下的区域信息</span>
-                        <span>>></span>
-                    </div>
-                    <div class="f-l">
-                        <span>该区域下的组信息</span>
-                        <span>>></span>
-                    </div>
-                    <div class="f-l">
-                        <span>该组下的灯详情</span>
-                    </div>
-                </div>
-                <div class="scene-msg ">
-                    <div class="clearfix  scene-msg-list">
-                        <div class="f-l" style="border-right: none;">
-                            <ul>
-                                <li th:if="${px}!=${py}" th:each="placeList:${placeList}" th:text="${placeList.pname}+'（查看详情）'" th:alt="${placeList.pid}" class="pid">
-                                </li>
-                                <li th:if="${px}==${py}" th:each="placeList:${placeList}" th:text="${placeList.pname}+'('+${px}+'，'+${py}+')'" th:alt="${placeList.pid}" class="pid">
-                                </li>
-                            </ul>
+            <div id="sceneDetail">
+                <input type="hidden" th:if="${lightInfo}!=null" th:value="${lightInfo.id}" id="lid">
+                <input type="hidden" th:if="${lightInfo}!=null" th:value="${lightInfo.gid}" id="gid">
+                <input type="hidden" th:if="${lightInfo}!=null" th:value="${lightInfo.pid}" id="pid">
+                <div class="scene-nav">
+                    <div class="clearfix  scene-title">
+                        <div class="f-l">
+                            <span>场景名：</span>
+                            <span th:text="${sceneName}"></span>
                         </div>
-                        <div class="f-l" style="border-right: none;">
-                            <ul>
-                                <li th:if="${px}!=${py}" th:each="groupList:${groupList}" th:text="${groupList.gname}+'（查看详情）'" class="gid" th:alt="${groupList.gid}"></li>
-                                <li th:if="${px}==${py}" th:each="groupList:${groupList}" th:text="${groupList.gname}+'('+${px}+'，'+${py}+')'" class="gid" th:alt="${groupList.gid}"></li>
-                            </ul>
+                        <div class="f-l">
+                            <span>场景ID：</span>
+                            <span th:text="${sceneId}"></span>
                         </div>
-                        <div class="f-l clearfix">
-                            <div class="f-l" >
-                                <ul class="one">
-                                    <li  th:each="lightList:${lightList}" th:text="${lightList.lname}+'（'+${lightList.lmac}+')'" class="lid " th:alt="${lightList.id}"></li>
-                                </ul>
+                        <div class="f-l">
+                            <span>当前状态：</span>
+                            <span>应用</span>
+                        </div>
+                    </div>
+                    <div class="project-title">
+                        <div class="clearfix">
+                            <div class="f-l length">
+                                <span>隶属项目：</span>
+                                <span th:text="${projectName}"></span>
                             </div>
                             <div class="f-l">
-                                <ul class="two">
-                                    <li th:if="${userStat.index}=='0'" th:each="lightList,userStat:${lightList}" th:text="${lightList.x}+'(色温)，'+${lightList.y}+'(亮度)'" class="lid " th:alt="${lightList.id}" style="text-align: center;"></li>
-                                    <li th:if="${userStat.index}!='0'" th:each="lightList,userStat:${lightList}" th:text="${lightList.x}+'，'+${lightList.y}" class="lid " th:alt="${lightList.id}" style="text-align: center;"></li>
-                                    <!--<li th:accept="${lightList.f}"  th:each="lightList:${lightList}" th:text="${lightList.x}+'(色温)，'+${lightList.y}+'(亮度)'" class="lid title" th:alt="${lightList.id}" style="text-align: center;"></li>-->
+                                <a th:href="@{/project/detail(projectId=${projectId})}">查看项目详情</a>
+                            </div>
+                        </div>
+                        <div class="clearfix">
+                            <div class="f-l">
+                                <span>应用网络：</span>
+                                <span th:text="${meshName}"></span>
+                            </div>
+                            <div class="f-l">
+                                <span>网络 ID：</span>
+                                <span th:text="${meshId}"></span>
+                            </div>
+                            <div class="f-l">
+                                <a th:href="@{/mesh/info(id=${mid})}">查看网络详情</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="scene-content">
+                    <div class="scene-list clearfix">
+                        <div class="f-l">
+                            <span>场景下的区域信息</span>
+                            <span>>></span>
+                        </div>
+                        <div class="f-l">
+                            <span>该区域下的组信息</span>
+                            <span>>></span>
+                        </div>
+                        <div class="f-l">
+                            <span>该组下的灯详情</span>
+                        </div>
+                    </div>
+                    <div class="scene-msg ">
+                        <div class="clearfix  scene-msg-list">
+                            <div class="f-l" style="border-right: none;">
+                                <ul>
+                                    <li th:if="${px}!=${py}" th:each="placeList:${placeList}"
+                                        th:text="${placeList.pname}+'（查看详情）'" th:alt="${placeList.pid}" class="pid">
+                                    </li>
+                                    <li th:if="${px}==${py}" th:each="placeList:${placeList}"
+                                        th:text="${placeList.pname}+'('+${px}+'，'+${py}+')'" th:alt="${placeList.pid}"
+                                        class="pid">
+                                    </li>
                                 </ul>
+                            </div>
+                            <div class="f-l" style="border-right: none;">
+                                <ul>
+                                    <li th:if="${px}!=${py}" th:each="groupList:${groupList}"
+                                        th:text="${groupList.gname}+'（查看详情）'" class="gid"
+                                        th:alt="${groupList.gid}"></li>
+                                    <li th:if="${px}==${py}" th:each="groupList:${groupList}"
+                                        th:text="${groupList.gname}+'('+${px}+'，'+${py}+')'" class="gid"
+                                        th:alt="${groupList.gid}"></li>
+                                </ul>
+                            </div>
+                            <div class="f-l clearfix">
+                                <div class="f-l">
+                                    <ul class="one">
+                                        <li th:each="lightList:${lightList}"
+                                            th:text="${lightList.lname}+'（'+${lightList.lmac}+')'" class="lid "
+                                            th:alt="${lightList.id}"></li>
+                                    </ul>
+                                </div>
+                                <div class="f-l">
+                                    <ul class="two">
+                                        <li th:if="${userStat.index}=='0'" th:each="lightList,userStat:${lightList}"
+                                            th:text="${lightList.x}+'(色温)，'+${lightList.y}+'(亮度)'" class="lid "
+                                            th:alt="${lightList.id}" style="text-align: center;"></li>
+                                        <li th:if="${userStat.index}!='0'" th:each="lightList,userStat:${lightList}"
+                                            th:text="${lightList.x}+'，'+${lightList.y}" class="lid "
+                                            th:alt="${lightList.id}" style="text-align: center;"></li>
+                                        <!--<li th:accept="${lightList.f}"  th:each="lightList:${lightList}" th:text="${lightList.x}+'(色温)，'+${lightList.y}+'(亮度)'" class="lid title" th:alt="${lightList.id}" style="text-align: center;"></li>-->
+                                    </ul>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -126,66 +142,66 @@
         var tabs = "meshList";
         var index = 0;
         left(tabs, index);
-        var length=$('.scene-msg .scene-msg-list>div:nth-child(3)>div:nth-child(1)  ul').height();
+        var length = $('.scene-msg .scene-msg-list>div:nth-child(3)>div:nth-child(1)  ul').height();
         console.log(length);
-        if(length>380){
+        if (length > 380) {
             console.log('大了')
             $('.scene-msg .scene-msg-list>div:nth-child(3)>div:nth-child(1) ul').addClass('active');
-            $('.scene-msg .scene-msg-list>div:nth-child(3)>div:nth-child(1)').css('border-right','none')
+            $('.scene-msg .scene-msg-list>div:nth-child(3)>div:nth-child(1)').css('border-right', 'none')
         }
         var lid = $('#lid').val();
         var gid = $('#gid').val();
-        var pid=$('#pid').val();
-        console.log(lid, gid,pid);
-        if(pid){
-            $('li.gid').each(function(){
-                var gids= $(this).attr('alt');
-                if(gids==gid){
+        var pid = $('#pid').val();
+        console.log(lid, gid, pid);
+        if (pid) {
+            $('li.gid').each(function () {
+                var gids = $(this).attr('alt');
+                if (gids == gid) {
                     $(this).addClass('active');
-                }else{
+                } else {
                     $(this).removeClass('active');
                 }
             })
-        }else{
+        } else {
             $('li.gid').eq(0).addClass('active');
         }
 
-        if(lid){
-            $('li.lid').each(function(){
-                var lids= $(this).attr('alt');
-                if(lids==lid){
+        if (lid) {
+            $('li.lid').each(function () {
+                var lids = $(this).attr('alt');
+                if (lids == lid) {
                     $(this).addClass('active');
-                }else{
+                } else {
                     $(this).removeClass('active');
                 }
             })
         }
 
-        if(pid){
-            $('li.pid').each(function(){
-                var pids= $(this).attr('alt');
+        if (pid) {
+            $('li.pid').each(function () {
+                var pids = $(this).attr('alt');
                 console.log(pids);
-                if(pids==pid){
+                if (pids == pid) {
                     $(this).addClass('active');
-                }else{
+                } else {
                     $(this).removeClass('active');
                 }
             })
-        }else{
+        } else {
             $('li.pid').eq(0).addClass('active');
         }
     })
-    $('.scene-msg-list ').on('click','li',function () {
+    $('.scene-msg-list ').on('click', 'li', function () {
         $(this).toggleClass('active').siblings().removeClass('active');
     })
 
-    $('.gid').click(function(){
-        var gid= $(this).attr('alt');
-        var sid=GetUrlParam('sid');
+    $('.gid').click(function () {
+        var gid = $(this).attr('alt');
+        var sid = GetUrlParam('sid');
         $('.one li').remove();
         $('.two li').remove();
-        var content='';
-        var content1='';
+        var content = '';
+        var content1 = '';
         $.ajax({
             type: "post",
             url: "/alink-hq/scene/groupDetail",
@@ -196,17 +212,17 @@
             async: true,
             success: function (res) {
                 console.log(res);
-                var lightList=res.lightList;
-                $.each(lightList,function(key,value){
-                    console.log(key,value);
-                    content+='<li class="lid" alt='+value.id+'>'+value.lname+'('+value.lmac+')'+'</li>';
-                    if(key==0){
-                        content1+='<li class="lid" alt="'+value.id+'" style="text-align: center;">'+value.x+'(色温)，'+value.y+'(亮度)</li>';
-                    }else{
-                        content1+='<li class="lid" alt="'+value.id+'" style="text-align: center;">'+value.x+'，'+value.y+'</li>';
+                var lightList = res.lightList;
+                $.each(lightList, function (key, value) {
+                    console.log(key, value);
+                    content += '<li class="lid" alt=' + value.id + '>' + value.lname + '(' + value.lmac + ')' + '</li>';
+                    if (key == 0) {
+                        content1 += '<li class="lid" alt="' + value.id + '" style="text-align: center;">' + value.x + '(色温)，' + value.y + '(亮度)</li>';
+                    } else {
+                        content1 += '<li class="lid" alt="' + value.id + '" style="text-align: center;">' + value.x + '，' + value.y + '</li>';
                     }
                 })
-                console.log('content',content);
+                console.log('content', content);
                 $('.one').append(content);
                 $('.two').append(content1);
             }

@@ -18,7 +18,7 @@
     background-color: #3598DB;
 }
 .c-container{
-    width: 1650px;
+    width: 100%;
     margin: auto;
 }
 .one-list>div{
@@ -55,7 +55,7 @@
     display: inline-block;
 }
 .main-right{
-    margin: 0 30px 20px 260px;
+    /*margin: 0 30px 20px 260px;*/
     padding: 20px 0 0 0;
     width:1360px;
 }
@@ -161,6 +161,10 @@
 .main-left a:active{
 
     /*color: #bbb;*/
+}
+.main{
+    width: 1650px;
+    margin: auto;
 }
  /*.one-list li:link{*/
      /*background-color:#fff;*/
