@@ -46,8 +46,9 @@ public class PlaceController {
         if (pageInfo.getList().size() > 0) {
             modelMap.put("pageInfo", pageInfo);
         }
-        OptionList project = meshService.getProject(dict.getProjectId());
-        modelMap.put("project", project);
+//        OptionList project = meshService.getProject(dict.getProjectId());
+//        modelMap.put("project", project);
+//        dict.setMid(project.getMid());
         modelMap.put("dict", dict);
         return "meshTemp/placeList";
     }

@@ -77,7 +77,7 @@ $(function () {
     $('div[openContent="delete-mesh"] button.yes').click(function () {
         console.log(ids);
         if (ids) {
-            location.href = "/alink-hq/light/delete?ids=" + ids;
+            location.href = "/alink-hq/light/delete?uid=" + $("#uid").val() + "&ids=" + ids;
             ids = [];
         }
     })
@@ -132,7 +132,7 @@ $(function () {
         // console.log(isTrue);
         if (isTrue) {
             if (idss.length > 0) {
-                location.href = "/alink-hq/light/move?mid=" + $("#mid").val() + "&ids=" + idss;
+                location.href = "/alink-hq/light/move?projectName=" + $("#projectName").val() + "&ids=" + idss;
             }
         } else {
             $('div[openContent="exchange"]').addClass('active');

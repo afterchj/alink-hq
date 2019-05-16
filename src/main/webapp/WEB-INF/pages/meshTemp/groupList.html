@@ -17,7 +17,7 @@
     <div th:replace="common/left::left('meshList')"></div>
     <div class="main-right">
         <div class="clearfix main-right-nav">
-            <div class="f-l main-right-title">组列表<div class="subjection">隶属项目：<span th:inline="text">[[${project.label}]]</span></div></div>
+            <div class="f-l main-right-title">组列表<div class="subjection">隶属项目：<span th:inline="text">[[${dict.projectName}]]</span></div></div>
             <div class="f-r pointer">
                 <a th:href="@{/group/create(projectId=${dict.projectId},mid=${dict.mid})}">
                     <div class="create" onmousedown="createBtnMouseDown()" onmouseup="createBtnMouseUp()"><span>+</span><span>创建组</span></div>
@@ -34,7 +34,9 @@
         </div>
         <div id="meshList" class="">
             <form class="clearfix" th:action="@{/group/list}" method="post">
-                <input type="hidden" name="uid" th:value="${dict.uid}">
+                <input type="hidden" id="uid" name="uid" th:value="${dict.uid}">
+                <input type="hidden" id="mid" name="mid" th:value="${dict.mid}">
+                <input type="hidden" id="projectName" name="projectName" th:value="${dict.projectName}">
                 <input type="hidden" id="pageSize" th:value="${dict.pageSize}">
                 <div class="search-condition temp">
                     <div class="f-l search" style="margin-right:125px;">
@@ -49,8 +51,8 @@
                     </div>
                     <div class="f-l search">
                         <div>
-                            <label for="mid" class="font">网络ID</label>
-                            <input type="text" id="mid" name="meshId" th:value="${dict.meshId}" placeholder="请输入网络ID">
+                            <label for="meshId" class="font">网络ID</label>
+                            <input type="text" id="meshId" name="meshId" th:value="${dict.meshId}" placeholder="请输入网络ID">
                         </div>
                     </div>
                     <div class="f-r search-button ">
@@ -94,7 +96,7 @@
                             <td class="p-r">
                                 <img src="/alink-hq/static/img/edit.png" th:alt="${group.id}" class="rename pointer"
                                      title="重命名">
-                                <a th:href="@{/group/move(ids=${group.id})}">
+                                <a th:href="@{/group/move(mid=${group.mid},ids=${group.id})}">
                                     <img src="/alink-hq/static/img/exchange.png" th:alt="${group.id}"
                                          class="center-img pointer" title="移动">
                                 </a>

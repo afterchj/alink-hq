@@ -137,7 +137,7 @@
         SELECT CONCAT_WS('_',id,mesh_id) id,mesh_id, mname label FROM f_mesh m
         WHERE 1=1
         <include refid="common_choose"></include>
-        GROUP BY mesh_id
+--         GROUP BY mesh_id
     </select>
     <insert id="save" parameterType="SearchDict">
         <selectKey keyProperty="id" order="BEFORE" resultType="int">

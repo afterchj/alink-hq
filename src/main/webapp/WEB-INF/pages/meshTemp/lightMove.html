@@ -34,6 +34,7 @@
                 <div class="f-content scrollbar">
                     <input type="hidden" name="ids" th:value="${ids}">
                     <input type="hidden" id="mid" th:value="${mid}">
+                    <input type="hidden" id="projectName" name="projectName" th:value="${projectName}">
                     <div class="accountMsg clearfix" th:each="light:${lightMap}">
                         <div class="f-l mesh-name">
                             <span th:text="${light.lname}"></span>
@@ -85,13 +86,15 @@
 <script type="text/javascript" src="/alink-hq/static/js/left.js"></script>
 <script src="/alink-hq/static/js/moment.js"></script>
 <script th:inline="javascript">
-    var id = $("#mid").val();
+    var uid = [[${session.user.id}]];
+    var projectName=$("#projectName").val();
+    var mid=$("#mid").val();
     $(function () {
         var tabs="lightList";
         var index=0;
         left(tabs,index);
-        console.log("id",id);
-        $.getJSON("/alink-hq/light/getGroup", {"id": id}, function (json) {
+        console.log("id",mid);
+        $.getJSON("/alink-hq/light/getGroup", {"id": mid}, function (json) {
             if (json != '') {
                 $("#gid option:first").siblings().remove();
             }
@@ -124,7 +127,7 @@
                         $('.hide-iframe').addClass('active');
                         $('#preload-anim .title').text('移交成功，正在跳转灯列表');
                         setInterval(function () {
-                            location.href = '/alink-hq/light/list';
+                            location.href = '/alink-hq/light/list?uid='+uid+"&projectName="+projectName;
                         }, 1000)
                     }else{
                         $('#preload-anim').addClass('active');
@@ -137,9 +140,8 @@
                     }
                 }
             })
-
         }
-    })
+    });
     //监听区域选择
     $('#gid').change(function(){
         var gid = $('#gid option:selected').val();
