@@ -175,9 +175,12 @@
  /*.one-list li:active{*/
     /*background-color: #eef3f5;*/
 /*}*/
-.one-list li:focus{
-    background-color: #eef3f5;
-}
+/*.one-list li:focus{*/
+    /*background-color: #eef3f5;*/
+/*}*/
 /*.one-list li:visited{*/
     /*background-color: #eef3f5;*/
 /*}*/
+.nav-color{
+    background-color: #eef3f5;
+}
