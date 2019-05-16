@@ -4,6 +4,7 @@
 $(function(){
     var height=$(document).height();
     $('.main-left').css('height',height);
+    $('html').css({'overflow-y':'visible','height':height});
     $('.on-off-triangle').click(function () {
         var imgUrl = $(this).attr('src');
         if(imgUrl == '/alink-hq/static/img/left-reduce.png') {

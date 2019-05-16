@@ -20,6 +20,8 @@
 .c-container{
     width: 100%;
     margin: auto;
+    /*height:800px;*/
+    /*overflow-y: hidden;*/
 }
 .one-list>div{
     height: 62px;
@@ -183,4 +185,7 @@
 /*}*/
 .nav-color{
     background-color: #eef3f5;
+}
+::-webkit-scrollbar{
+    display:none;
 }

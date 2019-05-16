@@ -12,7 +12,9 @@ $(function () {
         console.log('uid',uid);
         var result= isRepeat(uid);
         console.log(result);
-        if(result && ids.length>0){
+        if(ids.length==1){
+            location.href = "/alink-hq/mesh/move?ids=" + ids;
+        }else if(result && ids.length>1  ){
             location.href = "/alink-hq/mesh/move?ids=" + ids;
         }else{
             $('div[openContent="exchange"]').addClass('active');
