@@ -6,6 +6,7 @@ package com.tpadsz.after.entity;
 public class OptionList {
     String id;
     String label;
+    Integer mid;
 
     public String getId() {
         return id;
@@ -13,6 +14,14 @@ public class OptionList {
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public Integer getMid() {
+        return mid;
+    }
+
+    public void setMid(Integer mid) {
+        this.mid = mid;
     }
 
     public String getLabel() {

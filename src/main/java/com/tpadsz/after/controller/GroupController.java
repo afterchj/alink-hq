@@ -44,8 +44,11 @@ public class GroupController {
         if (pageInfo.getList().size() > 0) {
             modelMap.put("pageInfo", pageInfo);
         }
-        OptionList project = meshService.getProject(dict.getProjectId());
-        modelMap.put("project", project);
+//        Integer id = dict.getMid();
+//        int projectId = id == null ? dict.getProjectId() : id;
+//        OptionList project = meshService.getProject(projectId);
+//        dict.setMid(projectId);
+//        modelMap.put("project", project);
         modelMap.put("dict", dict);
         return "meshTemp/groupList";
     }
@@ -58,12 +61,14 @@ public class GroupController {
     }
 
     @RequestMapping("/move")
-    public String move(String ids, ModelMap modelMap) {
+    public String move(String projectName,Integer mid,String ids, ModelMap modelMap) {
         String[] ids1 = ids.split(",");
         List<String> list = new ArrayList(Arrays.asList(ids1));
         List<Map> groupMap = groupService.selectByGid(list);
         modelMap.put("groupMap", groupMap);
+        modelMap.put("mid", mid);
         modelMap.put("ids", ids);
+        modelMap.put("projectName", projectName);
         return "meshTemp/groupMove";
     }
 
@@ -103,11 +108,11 @@ public class GroupController {
     }
 
     @RequestMapping("/delete")
-    public String delete(String ids) {
+    public String delete(String projectName,Integer uid,String ids) {
         String[] ids1 = ids.split(",");
         List<String> list = new ArrayList(Arrays.asList(ids1));
         groupService.deleteGroupByIds(list);
-        return "redirect:/group/list";
+        return "redirect:/group/list?uid="+uid+"&projectName="+projectName;
     }
 
     @ResponseBody

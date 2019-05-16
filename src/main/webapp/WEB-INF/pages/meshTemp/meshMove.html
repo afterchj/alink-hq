@@ -123,7 +123,7 @@
                         $('.hide-iframe').addClass('active');
                         $('#preload-anim .title').text('移交成功，正在跳转网络列表');
                         setInterval(function () {
-                            location.href = '/alink-hq/mesh/list';
+                            location.href = '/alink-hq/mesh/list?uid='+uid;
                         }, 1000)
                     } else {
                         $('#preload-anim').addClass('active');
