@@ -4,10 +4,12 @@ import com.alibaba.fastjson.JSONArray;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.tpadsz.after.entity.Firm;
+import com.tpadsz.after.entity.OptionList;
 import com.tpadsz.after.entity.ProjectList;
 import com.tpadsz.after.entity.User;
 import com.tpadsz.after.entity.dd.ResultDict;
 import com.tpadsz.after.service.AccountService;
+import com.tpadsz.after.service.MeshService;
 import com.tpadsz.after.service.ProjectService;
 import com.tpadsz.after.utils.GenerateUtils;
 import org.springframework.stereotype.Controller;
@@ -34,6 +36,9 @@ public class ProjectController {
 
     @Resource
     private AccountService accountService;
+
+    @Resource
+    private MeshService meshService;
 
 
     @RequestMapping(value = "/list", method = RequestMethod.GET)
@@ -235,6 +240,7 @@ public class ProjectController {
 
     @RequestMapping(value = "/detail", method = RequestMethod.GET)
     public String detail(String projectName,String account, String coname, Integer meshNum, Integer projectId, Model model) {
+        OptionList project=meshService.getProject(projectId);
         int placeNum = 0;
         int groupNum = 0;
         int lightNum = 0;
@@ -261,6 +267,7 @@ public class ProjectController {
             }
         }
         model.addAttribute("projectId", projectId);
+        model.addAttribute("mid", project.getMid());
         model.addAttribute("projectName", projectName);
         model.addAttribute("meshNum", meshNum);
         model.addAttribute("placeNum", placeNum);

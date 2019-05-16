@@ -63,7 +63,7 @@ public class LightController {
     }
 
     @RequestMapping("/move")
-    public String move(String projectName, int mid, String ids, ModelMap modelMap) {
+    public String move(String projectName, Integer mid, String ids, ModelMap modelMap) {
         String[] ids1 = ids.split(",");
         List<String> list = new ArrayList(Arrays.asList(ids1));
         List<Map> lightMap = lightService.selectByLid(list);

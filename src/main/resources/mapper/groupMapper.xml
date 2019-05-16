@@ -127,6 +127,9 @@
         FROM f_place p
         INNER JOIN f_mesh m ON p.mid = m.id
         WHERE 1=1
+        <if test="projectId!=null and projectId!=''">
+            AND m.projectId=#{projectId
+        </if>
         <if test="mid!=null and mid!=''">
             AND m.id=#{mid}
         </if>

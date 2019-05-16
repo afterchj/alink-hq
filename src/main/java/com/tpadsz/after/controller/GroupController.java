@@ -128,8 +128,9 @@ public class GroupController {
 
     @ResponseBody
     @RequestMapping("/getPlace")
-    public List<OptionList> getPlaces(Integer mid) {
+    public List<OptionList> getPlaces(Integer mid,Integer projectId) {
         Map map = new HashMap();
+        map.put("projectId", projectId);
         map.put("mid", mid);
         List<OptionList> meshMap = groupService.getPlaces(map);
         return meshMap;

@@ -52,7 +52,7 @@
                                 <span th:text="${placeNum}"></span>
                             </div>
                             <div class="f-l">
-                                <a th:href="@{/place/list(projectId=${projectId},projectName=${projectName})}">查看区域列表</a>
+                                <a th:href="@{/place/list(projectId=${projectId},projectName=${projectName},mid=${mid})}">查看区域列表</a>
                             </div>
                         </div>
                         <div class="clearfix">
@@ -61,7 +61,7 @@
                                 <span th:text="${groupNum}"></span>
                             </div>
                             <div class="f-l">
-                                <a th:href="@{/group/list(projectId=${projectId},projectName=${projectName})}">查看组列表</a>
+                                <a th:href="@{/group/list(projectId=${projectId},projectName=${projectName},mid=${mid})}">查看组列表</a>
                             </div>
                         </div>
                         <div class="clearfix">
@@ -70,7 +70,7 @@
                                 <span th:text="${lightNum}"></span>
                             </div>
                             <div class="f-l">
-                                <a th:href="@{/light/list(projectId=${projectId},projectName=${projectName})}">查看灯列表</a>
+                                <a th:href="@{/light/list(projectId=${projectId},projectName=${projectName},mid=${mid})}">查看灯列表</a>
                             </div>
                         </div>
                     </div>
