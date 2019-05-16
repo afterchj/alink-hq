@@ -90,9 +90,6 @@
     var uid = [[${session.user.id}]];
     //    console.log("uid=" + uid);
     $(function () {
-        var tabs = "meshList";
-        var index = 0;
-        left(tabs, index);
         $.getJSON("/alink-hq/mesh/getProjects", {"uid": uid}, function (json) {
             $("#pid option:first").siblings().remove();
             // 下面使用each进行遍历
