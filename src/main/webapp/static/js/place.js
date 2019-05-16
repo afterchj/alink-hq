@@ -122,10 +122,10 @@ $(function () {
     }
 });
 
-$(function(){
-    var height=$(document).height();
-    $('.main-left').css('height',height);
-})
+// $(function(){
+//     var height=$(document).height();
+//     $('.main-left').css('height',height);
+// })
 //重命名校验
 function nameKeyUp() {
     var rename = $('#rename').val();

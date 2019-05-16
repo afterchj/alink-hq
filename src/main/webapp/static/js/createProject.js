@@ -1,11 +1,11 @@
 /**
  * Created by qian.chen on 2019/4/28.
  */
-$(function(){
-    var tabs="projectList";
-    var index=0;
-    left(tabs,index);
-})
+// $(function(){
+//     var tabs="projectList";
+//     var index=0;
+//     left(tabs,index);
+// })
 
 $('.confirm-create').click(function () {
     var projectName = $('#projectName').val();
