@@ -96,9 +96,6 @@
     var projectName = $("#projectName").val();
     var mid = $("#mid").val();
     $(function () {
-        var tabs = "groupList";
-        var index = 0;
-        left(tabs, index);
         console.log("mid=" + mid + ",pid=" + $("#pid option:selected").val());
         $.getJSON("/alink-hq/group/getPlace", {"mid": mid}, function (json) {
             if (json != '') {
