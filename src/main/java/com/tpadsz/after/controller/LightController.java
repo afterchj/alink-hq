@@ -73,7 +73,6 @@ public class LightController {
     @ResponseBody
     @RequestMapping("/saveUpdate")
     public String saveUpdate(String ids, String gid) {
-        logger.info("ids=" + ids + ",pid=" + gid);
         String[] ids1 = ids.split(",");
         List<String> list = new ArrayList(Arrays.asList(ids1));
         Map map = new HashMap();
