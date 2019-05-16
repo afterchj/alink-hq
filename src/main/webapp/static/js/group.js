@@ -141,7 +141,7 @@ $(function () {
         $('.hide-iframe').removeClass('active');
         $('div[openContent="exchange"]').removeClass('active');
     })
-})
+});
 function nameKeyUp(){
     var name=$('#rename').val();
     var regUserName = /^[a-zA-Z0-9\u4e00-\u9fa5]{2,6}$/;
