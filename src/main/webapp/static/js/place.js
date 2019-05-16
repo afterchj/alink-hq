@@ -2,7 +2,6 @@
  * Created by hongjian.chen on 2019/4/28.
  */
 $(function () {
-  
     // var tabs="placeList";
     // var index=0;
     // left(tabs,index);
@@ -73,6 +72,14 @@ $(function () {
                 }
             })
         }
+        //只能输入
+        $('#mid').bind('input propertychange',function(){
+            var val= $(this).val();
+            // console.log(val);
+            if(val!=''&& isNaN(val)){
+                $(this).val('');
+            }
+        })
     });
     //取消按钮
     $('div[openContent="reset-name"] .pop-btn .reduce').click(function () {
@@ -80,17 +87,6 @@ $(function () {
         // $('div[openContent="delete-project"]').removeClass('active');
         $('.hide-iframe').removeClass('active');
     });
-    //重命名校验
-    function nameKeyUp() {
-        var rename = $('#rename').val();
-        var regreName = /^[a-zA-Z0-9\u4e00-\u9fa5]{2,16}$/;
-        var renameResult = regreName.test(rename);
-        if (rename != '' && !renameResult) {
-            $('p.rename-hint').text('请输入 2-16 位汉字、字母、数字');
-        } else {
-            $('p.rename-hint').text('');
-        }
-    }
 
     //单选删除
     var ids;
@@ -115,17 +111,17 @@ $(function () {
         console.log("ids=" + ids);
         deletePlace(ids);
     })
-    function deletePlace(ids) {
-        if (ids) {
-            location.href = "/alink-hq/place/move?ids=" + ids;
-        }
-    }
 });
 
 // $(function(){
 //     var height=$(document).height();
 //     $('.main-left').css('height',height);
 // })
+function deletePlace(ids) {
+    if (ids) {
+        location.href = "/alink-hq/place/move?mid="+$("#mid").val()+"&ids=" + ids;
+    }
+}
 //重命名校验
 function nameKeyUp() {
     var rename = $('#rename').val();
@@ -137,11 +133,3 @@ function nameKeyUp() {
         $('p.rename-hint').text('');
     }
 }
-//只能输入
-$('#mid').bind('input propertychange',function(){
-    var val= $(this).val();
-    // console.log(val);
-    if(val!=''&& isNaN(val)){
-        $(this).val('');
-    }
-})
