@@ -298,7 +298,7 @@
                             $('#preload-anim .title').text('创建成功！');
                             setInterval(function () {
                                 $('#preload-anim').removeClass('active');
-                                location.href = '/alink-hq/group/list?uid=' + uid;
+                                location.href = '/alink-hq/group/list?uid=' + uid+"&projectId="+projectId;
                             }, 1000)
                         } else if (res == 'fail') {
                             $('.group-hint').text('已存在，请重新输入');

@@ -77,7 +77,7 @@
     $(function () {
         var tabs = "meshList";
         var index = 0;
-        left(tabs, index);
+//        left(tabs, index);
         $.getJSON("/alink-hq/mesh/getProjects", {"uid": uid}, function (json) {
             if (json != '') {
                 $("#projectId option:first").siblings().remove();
@@ -89,7 +89,7 @@
         });
     });
     $('.confirm-create').click(function(){
-        var mesh=$('#mesh').val()
+        var mesh=$('#mesh').val();
         var projectId = $('#projectId option:selected').val()
         var regName = /^[a-zA-Z0-9\u4e00-\u9fa5]{2,16}$/
         var meshResult = regName.test(mesh)
@@ -130,29 +130,30 @@
                     }
                 })
             }
+        //监听项目选择
+        $('#projectId').change(function(){
+            var projectId = $('#projectId option:selected').val();
+            if(projectId==''){
+                $('.project-hint').text('请选择移动到的项目');
+            }else{
+                $('.project-hint').text('');
+            }
+        });
+        //监听网络名输入
+        $("#mesh").bind("input propertychange",function () {
+            var mesh=$('#mesh').val()
+            var regName = /^[a-zA-Z0-9\u4e00-\u9fa5]{2,16}$/
+            var meshResult = regName.test(mesh)
+            if(mesh==''){
+                $('.mesh-hint').text('请输入网络名')
+            }else if(!meshResult){
+                $('.mesh-hint').text('请输入（2-16 位汉字、字母、数字）')
+            }else{
+                $('.mesh-hint').text('')
+            }
+        })
     })
-    //监听项目选择
-    $('#projectId').change(function(){
-        var projectId = $('#projectId option:selected').val();
-        if(projectId==''){
-            $('.project-hint').text('请选择移动到的项目');
-        }else{
-            $('.project-hint').text('');
-        }
-    })
-    //监听网络名输入
-    $("#mesh").bind("input propertychange",function () {
-        var mesh=$('#mesh').val()
-        var regName = /^[a-zA-Z0-9\u4e00-\u9fa5]{2,16}$/
-        var meshResult = regName.test(mesh)
-        if(mesh==''){
-            $('.mesh-hint').text('请输入网络名')
-        }else if(!meshResult){
-            $('.mesh-hint').text('请输入（2-16 位汉字、字母、数字）')
-        }else{
-            $('.mesh-hint').text('')
-        }
-    })
+
 </script>
 </body>
 </html>
