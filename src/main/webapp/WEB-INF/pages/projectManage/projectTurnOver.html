@@ -9,15 +9,6 @@
     <link rel="stylesheet" th:href="@{/static/css/leftNav.css}">
     <link rel="stylesheet" th:href="@{/static/css/mesh.css}">
     <title>移交账号</title>
-    <!--<style>-->
-    <!--#preload-anim {-->
-    <!--display: none;-->
-    <!--}-->
-
-    <!--#preload-anim.active {-->
-    <!--display: block;-->
-    <!--}-->
-    <!--</style>-->
 </head>
 
 <body>
@@ -75,10 +66,6 @@
                         </div>
                         <p class="account-hint"></p>
                         <label for="account-transfer"><span>*</span>选择移交账号：</label>
-                        <!--<select name="account-transfer" id="account-transfer" class="pointer"  data-live-search="true">-->
-                        <!--<option value="" class="pointer">请选择账号</option>-->
-                        <!--</select>-->
-
                         <input type="text" id="account-transfer" placeholder="请选择账号" uid="" autocomplete="off"
                                class="overflow">
                         <span class="open-list"></span>
@@ -113,8 +100,10 @@
 </div>
 
 <script src="/alink-hq/static/js/jquery.min.js"></script>
-<script type="text/javascript" src="/alink-hq/static/js/left.js"></script>
+<script  src="/alink-hq/static/js/left.js"></script>
 <script src="/alink-hq/static/js/moment.js"></script>
+<script  src="/alink-hq/static/js/selectivizr.js"></script>
+<script  src="/alink-hq/static/js/html5shiv.js"></script>
 <script>
     $(function () {
         var list = [];
@@ -124,23 +113,6 @@
             if (fid != '') {
                 fid = parseInt(fid);
             }
-//            $('#account-transfer>option').not(":eq(0)").remove();
-//            $.ajax({
-//                type: "post",
-//                url: "/alink-hq/project/findAccountByFid",
-//                data: {fid: fid},
-//                dataType: "json",
-//                success: function (data) {
-//                    console.log(data.accounts);
-//                    var content = '';
-//                    for (var i = 0; i < data.accounts.length; i++) {
-//                        var uid = data.accounts[i].id;
-//                        var accountName = data.accounts[i].account;
-//                        content += '<option value="' + uid + '">' + accountName + '</option>';
-//                    }
-//                    $('#account-transfer').append(content);
-//                }
-//            })
             $('#list ul').children().remove();
             $.ajax({
                 type: "post",
@@ -172,21 +144,12 @@
         })
         $('#account-transfer').click(function () {
             $('#list').addClass('active');
-//            $('#account-transfer').addClass('active');
-            console.log($('#list ul').height());
             if ($('#list ul').height() == 0) {
                 $('#list').removeClass('active');
             }
         })
-//        $('#account-transfer').blur(function(){
-//            $('#account-transfer').removeClass('active');
-//        })
-//        $('#account-transfer').blur(function(){
-//            $('#list').removeClass('active');
-//        })
         $('#account-transfer').bind('input propertychange', function () {
 
-            console.log('list', list);
             var keyword = $(this).val();
             if (keyword != '') {
                 $('.account-hint').text('');
@@ -194,11 +157,10 @@
                 $('.account-hint').text('请选择账号');
             }
             var keyArr = [];
-//            $('#list ul').remove();
-//            var content='';
-            console.log('关键词为', keyword)
+
+
             var reg = new RegExp(keyword);
-            console.log(reg);
+
             for (var i = 0; i < list.length; i++) {
                 if (list[i].account != null && list[i].account.match(reg)) {
 
@@ -210,7 +172,7 @@
 
                 }
             }
-            console.log('keyArr', keyArr);
+
             var content = '';
             for (var i = 0; i < keyArr.length; i++) {
                 content += '<li value="' + keyArr[i].uid + '">' + keyArr[i].account + '</li>';
@@ -227,7 +189,6 @@
             var fid = $('#fid option:selected').val();
             var uid = $('#account-transfer').attr('uid');
             var account = $('#account-transfer').val();
-//            var reg=new RegExp(account);
             var hasAccount = true;
             for (var i = 0; i < list.length; i++) {
                 if (list[i].account != null && list[i].account == account) {
@@ -236,7 +197,7 @@
                     console.log('找到了', uid, list[i].account);
                     break;
                 } else {
-                    console.log('请输入完整的账号');
+
                     hasAccount = false;
                 }
             }
@@ -250,7 +211,7 @@
             } else {
                 $('.company-hint').text('');
             }
-            console.log(fid, uid, hasAccount);
+
             if (fid != '' && uid != '' && hasAccount) {
                 $.ajax({
                     type: "post",
@@ -272,11 +233,6 @@
             }
         })
     })
-    $(function () {
-        var tabs = "projectList";
-        var index = 0;
-        left(tabs, index);
-    })
     //监听公司选择
     $('#fid').change(function () {
         var selected = $(this).children('option:selected').val();
@@ -286,16 +242,6 @@
             $('.company-hint').text('');
         }
     })
-
-    //监听账号选择
-    //    $('#account-transfer').change(function(){
-    //        var selected=$(this).children('option:selected').val();
-    //        if(selected==''){
-    //            $('.account-hint').text('请选择账号');
-    //        }else{
-    //            $('.account-hint').text('');
-    //        }
-    //    })
 </script>
 </body>
 </html>

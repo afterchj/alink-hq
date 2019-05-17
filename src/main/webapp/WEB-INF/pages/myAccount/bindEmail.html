@@ -16,7 +16,6 @@
         input[type="text"] {
             background: white;
         }
-
         span.success-hint {
             font-size: 15px;
             color: red;
@@ -24,7 +23,6 @@
             /* display: none; */
             visibility: hidden;
         }
-
         span.success-hint.active {
             /* display: block; */
             visibility: visible;
@@ -81,9 +79,6 @@
     </div>
 </div>
 <div id="preload-anim">
-    <!-- <div style="margin: 20px auto; text-align: center; margin-bottom: 0px;">
-      <a href="http://www.100sucai.com/" target="_blank"><img src="100sucai.png" alt=""></a>
-    </div> -->
     <div id="circularG">
         <div id="circularG_1" class="circularG"></div>
         <div id="circularG_2" class="circularG"></div>
@@ -100,71 +95,9 @@
 <script src="/alink-hq/static/myAccount/js/common.js"></script>
 <script src="/alink-hq/static/myAccount/js/email.js"></script>
 <script type="text/javascript" src="/alink-hq/static/js/left.js"></script>
-<!--<script src="/alink-hq/static/js/jquery.min.js"></script>-->
+<script  src="/alink-hq/static/js/selectivizr.js"></script>
+<script  src="/alink-hq/static/js/html5shiv.js"></script>
 <script>
-    //    $('.on-off-triangle').click(function () {
-    //        var imgUrl = $(this).attr('src');
-    //        if (imgUrl == '/alink-hq/static/img/bottom-triangle-un.png') {
-    //            $(this).attr('src', '/alink-hq/static/img/right-triange-un.png');
-    //            $(this).parent().parent('.one-list').find('.two-list').addClass('active');
-    //        } else {
-    //            $(this).attr('src', '/alink-hq/static/img/bottom-triangle-un.png');
-    //            $(this).parent().parent('.one-list').find('.two-list').removeClass('active');
-    //        }
-    //    })
-    // 验证邮箱号
-    //        function vEamil() {
-    //            var emailVal = $('#email').val();
-    //            var codeVal = $('#code').val();
-    //            var email = /^([a-zA-Z]|[0-9])(\w|\-)+@[a-zA-Z0-9]+\.([a-zA-Z]{2,4})$/;
-    //            var emailResult = email.test(emailVal);
-    //            if (emailVal == '') {
-    //                $('p.email-hint').addClass('active').text('请输入邮箱号');
-    //                return false;
-    //            } else if (!emailResult) {
-    //                $('p.email-hint').removeClass('active').text('');
-    //                $('p.email-hint').addClass('active').text('邮箱号格式不正确');
-    //                return false;
-    //            } else if (codeVal == '') {
-    //                $('p.email-hint').removeClass('active').text('');
-    //                $('p.code-hint').addClass('active').text('请输入验证码');
-    //                return false;
-    //            } else {
-    //                $('p.code-hint').removeClass('active').text('');
-    //                var title = "邮箱";
-    //                var content = "绑定";
-    //                parent.loding(title, content);
-    //            }
-    //        }
-
-    //验证码倒计时
-    $(function () {
-        var height = $(document).height();
-        $('.main-left').css('height', height);
-//            $('.security-code').click(function () {
-//                $(this).addClass('active');
-//                settime(this);
-//            })
-//            var countdown = 60;
-//
-//            function settime(obj) {
-//                if (countdown == 0) {
-//                    obj.removeAttribute("disabled");
-//                    obj.innerHTML = "获取验证码";
-//                    countdown = 60;
-//                    return;
-//                } else {
-//                    obj.setAttribute("disabled", true);
-//                    obj.style.background = "#A0A0A0";
-//                    obj.style.borderColor = "#A0A0A0";
-//                    obj.innerHTML = "已发送(" + countdown + ')';
-//                    countdown--;
-//                }
-//                setTimeout(function () {
-//                    settime(obj)
-//                }, 1000)
-//            }
-    })
 </script>
 </body>
 

@@ -177,6 +177,8 @@
 <script src="/alink-hq/static/js/jquery.min.js"></script>
 <script type="text/javascript" src="/alink-hq/static/js/left.js"></script>
 <script src="/alink-hq/static/js/moment.js"></script>
+<script  src="/alink-hq/static/js/selectivizr.js"></script>
+<script  src="/alink-hq/static/js/html5shiv.js"></script>
 <script type="text/javascript">
     $(function () {
         var length = $('.scene-msg .scene-msg-list>div:nth-child(3)>div:nth-child(1)  ul').height();
@@ -249,10 +251,8 @@
             },
             async: true,
             success: function (res) {
-                console.log(res);
                 var lightList = res.lightList;
                 $.each(lightList, function (key, value) {
-                    console.log(key, value);
                     content += '<li class="lid" alt=' + value.id + '>' + value.lname + '(' + value.lmac + ')' + '</li>';
                     if (key == 0) {
                         content1 += '<li class="lid" alt="' + value.id + '" style="text-align: center;">' + value.x + '(色温)，' + value.y + '(亮度)</li>';
@@ -260,7 +260,6 @@
                         content1 += '<li class="lid" alt="' + value.id + '" style="text-align: center;">' + value.x + '，' + value.y + '</li>';
                     }
                 })
-                console.log('content', content);
                 $('.one').append(content);
                 $('.two').append(content1);
             }

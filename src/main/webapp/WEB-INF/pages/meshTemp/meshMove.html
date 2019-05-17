@@ -86,12 +86,12 @@
 <script src="/alink-hq/static/js/jquery.min.js"></script>
 <script type="text/javascript" src="/alink-hq/static/js/left.js"></script>
 <script src="/alink-hq/static/js/moment.js"></script>
+<script  src="/alink-hq/static/js/selectivizr.js"></script>
+<script  src="/alink-hq/static/js/html5shiv.js"></script>
 <script th:inline="javascript">
     var uid = [[${session.user.id}]];
-    //    console.log("uid=" + uid);
     $(function () {
         $.getJSON("/alink-hq/mesh/getProjects", {"uid": uid}, function (json) {
-            // 下面使用each进行遍历
             $.each(json, function (i, item) {
                 $("#pid").append("<option value='" + item.id + "'>" + item.label + "</option>");
             });
@@ -105,9 +105,6 @@
             $('.trans-hint').text('请选择移动到的项目');
         } else {
             $('.trans-hint').text('');
-//            $('#preload-anim').addClass('active');
-//            $('.hide-iframe').addClass('active');
-//            $('#preload-anim .title').text('移交成功，正在跳转组列表');
             $.ajax({
                 type: "post",
                 url: "/alink-hq/mesh/saveUpdate",
