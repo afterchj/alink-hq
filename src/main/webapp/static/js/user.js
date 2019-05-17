@@ -32,20 +32,20 @@ function shade(open, text) {
         'width': width,
         'height': height
     });
-    $('div[openContent="start-use"] .pop-iframe').each(function () {
+    $('.pop-iframe').each(function () {
         var openContent = $(this).attr('openContent');
-        console.log(openContent, open);
+        // console.log(openContent, open);
         if (openContent == open) {
             $(this).addClass('active');
             if (open == 'start-use') {
-                console.log(text);
+                // console.log(text);
                 $('.pop-content').find('p').remove();
                 if (text == '启用') {
-                    $('div[openContent="start-use"] .off-or-on').text('您确定要禁用该账户吗？');
+                    $(' .off-or-on').text('您确定要禁用该账户吗？');
                     var content = '<p style="  font-size: 15px;color: #fb2a2a;margin-top:30px;">禁用后，该账号将无法登录</p>';
-                    $('div[openContent="start-use"] .pop-content').append(content);
+                    $(' .pop-content').append(content);
                 } else {
-                    $('div[openContent="start-use"] .off-or-on').text('您确定要启用该账户吗？');
+                    $(' .off-or-on').text('您确定要启用该账户吗？');
                 }
             }
         }
@@ -88,14 +88,14 @@ $(function () {
     var account = '';
     $('img[openTab="reset-pwd"]').click(function () {
         var openTab = $(this).attr('openTab');
-        // $('div[openContent="new-pwd"]').addClass('active');
-        // var width = document.body.scrollWidth;
-        // var height = document.body.scrollHeight;
-        // $('.hide-iframe').addClass('active');
-        // $('.hide-iframe').css({
-        //     'width': width,
-        //     'height': height
-        // });
+        $('div[openContent="reset-pwd"]').addClass('active');
+        var width = document.body.scrollWidth;
+        var height = document.body.scrollHeight;
+        $('.hide-iframe').addClass('active');
+        $('.hide-iframe').css({
+            'width': width,
+            'height': height
+        });
         account = $(this).parent().siblings('.use-account').text();
     })
     $('div[openContent="reset-pwd"] button.yes').click(function () {
@@ -147,33 +147,23 @@ $(function () {
         location.href = '/alink-hq/project/list';
     })
 })
-// $(function () {
-//     // myBrowser()
-//     var tabs = "userList";
-//     var index = 1;
-//     left(tabs, index);
-// })
-
 $(function () {
     var page = parseInt($('.pages').text());
     var pageTotal = parseInt($('.pageTotal').text());
     if (page == 1) {
-        // $('.prev-page img').attr('src', '/alink-hq/static/img/left-arrow.png');
-        // $(".prev-page ").addClass('disabled');
         $('.prev').removeClass('active');
         $(".prev-page").addClass('disabled');
 
     } else {
-        // $('.prev-page img').attr('src', '/alink-hq/static/img/left-arrow-color.png');
+
         $('.prev').addClass('active');
     }
     if (page == pageTotal) {
         $('.next').removeClass('active');
         $(".next-page").addClass('disabled');
-        // $('.next-page img').attr('src', '/alink-hq/static/img/right-arrow.png');
-        // $(".next-page ").addClass('disabled');
+
     } else {
-        // $('.next-page img').attr('src', '/alink-hq/static/img/right-arrow-color.png');
+
         $(".next").addClass('active');
     }
 })
