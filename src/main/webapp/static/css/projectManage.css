@@ -108,6 +108,7 @@ th {
     height: 14px;
     outline: none;
     border-radius: 0;
+    appearance:none;
     -webkit-appearance: none;
     cursor: pointer;
     background-color: #eef3f5;
@@ -120,6 +121,7 @@ th {
 .search-result table td a {
     color: #3c3c3c;
 }
+
 
 .center-img {
     margin: 0 30px;
