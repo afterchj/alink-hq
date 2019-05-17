@@ -33,16 +33,18 @@ function shade(open, text) {
         'height': height
     });
     $('.pop-iframe').each(function () {
+
         var openContent = $(this).attr('openContent');
         console.log(openContent, open);
         if (openContent == open) {
             $(this).addClass('active');
             if (open == 'start-use') {
                 console.log(text);
+                $('.pop-content').find('p').remove();
                 if (text == '启用') {
                     $('.off-or-on').text('您确定要禁用该账户吗？');
                     var content = '<p style="  font-size: 15px;color: #fb2a2a;margin-top:30px;">禁用后，该账号将无法登录</p>';
-                    $('.off-or-on').after(content);
+                    $('.pop-content').append(content);
                 } else {
                     $('.off-or-on').text('您确定要启用该账户吗？');
                 }
