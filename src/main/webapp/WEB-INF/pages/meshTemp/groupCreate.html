@@ -126,14 +126,10 @@
 <script type="text/javascript" src="/alink-hq/static/js/left.js"></script>
 <script src="/alink-hq/static/js/moment.js"></script>
 <script th:inline="javascript">
-    var uid = [[${session.user.id}]];
     var mid = [[${dict.mid}]];
     var projectId = [[${dict.projectId}]];
     var pid, meshId, gid;
     $(function () {
-        var tabs = "groupList";
-        var index = 0;
-        left(tabs, index);
         $.getJSON("/alink-hq/group/getMesh", {"projectId": projectId}, function (json) {
             $.each(json, function (i, item) {
                 var id = item.id;
@@ -301,7 +297,7 @@
                             $('#preload-anim .title').text('创建成功！');
                             setInterval(function () {
                                 $('#preload-anim').removeClass('active');
-                                location.href = '/alink-hq/group/list?uid=' + uid + "&projectId=" + projectId;
+                                location.href = '/alink-hq/group/list?mid=' + mids;
                             }, 1000)
                         } else if (res == 'fail') {
                             $('.group-hint').text('已存在，请重新输入');

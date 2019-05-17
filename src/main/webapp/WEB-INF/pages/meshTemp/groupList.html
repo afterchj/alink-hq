@@ -20,10 +20,10 @@
         <div class="main-right f-r">
             <div class="clearfix main-right-nav">
                 <div class="f-l main-right-title">组列表
-                    <span class="subjection">隶属项目：<span th:inline="text">[[${dict.projectName}]]</span></span>
+                    <span class="subjection">隶属项目：<span th:inline="text">[[${project.label}]]</span></span>
                 </div>
                 <div class="f-r pointer">
-                    <a th:href="@{/group/create(projectId=${dict.projectId},mid=${dict.mid})}">
+                    <a th:href="@{/group/create(projectId=${project.id},mid=${dict.mid})}">
                         <div class="create" onmousedown="createBtnMouseDown()" onmouseup="createBtnMouseUp()">
                             <span>+</span><span>创建组</span></div>
                     </a>
@@ -42,7 +42,6 @@
                 <form class="clearfix" th:action="@{/group/list}" method="post">
                     <input type="hidden" id="uid" name="uid" th:value="${dict.uid}">
                     <input type="hidden" id="mid" name="mid" th:value="${dict.mid}">
-                    <input type="hidden" id="projectName" name="projectName" th:value="${dict.projectName}">
                     <input type="hidden" id="pageSize" th:value="${dict.pageSize}">
                     <div class="search-condition temp">
                         <div class="f-l search" style="margin-right:125px;">
@@ -101,7 +100,7 @@
                                     <a th:href="@{/place/info(id=${group.pid})}" th:text="${group.pname}"></a>
                                 </td>
                                 <td class="k-link">
-                                    <a th:href="@{/light/list(gid=${group.id})}" th:text="${group.lcount}"></a>
+                                    <a th:href="@{/light/list(mid=${group.mid},gid=${group.id})}" th:text="${group.lcount}"></a>
                                 </td>
                                 <td class="p-r">
                                     <img src="/alink-hq/static/img/edit.png" th:alt="${group.id}" class="rename pointer"
@@ -114,7 +113,7 @@
                                     <!--<img src="/alink-hq/static/img/delete.png" alt="" id="singleDel" title="删除">-->
                                     <!--</a>-->
                                     <!--<a href="javascript:void(0);" class="singleDel pointer">-->
-                                    <img src="/alink-hq/static/img/delete.png" alt="" th:alt="${group.id}"
+                                    <img src="/alink-hq/static/img/delete.png" th:alt="${group.id}"
                                          class="singleDel pointer" title="删除">
                                     <!--</a>-->
                                 </td>

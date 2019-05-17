@@ -88,12 +88,9 @@
 <script type="text/javascript" src="/alink-hq/static/js/left.js"></script>
 <script src="/alink-hq/static/js/moment.js"></script>
 <script th:inline="javascript">
-    var uid = [[${session.user.id}]];
+    var projectId = [[${dict.projectId}]];
     $(function () {
-        var tabs = "placeList";
-        var index = 0;
-        left(tabs, index);
-        $.getJSON("/alink-hq/group/getMesh", {"uid": uid}, function (json) {
+        $.getJSON("/alink-hq/group/getMesh", {"projectId": projectId}, function (json) {
             if (json != '') {
                 $("#mid option:first").siblings().remove();
             }

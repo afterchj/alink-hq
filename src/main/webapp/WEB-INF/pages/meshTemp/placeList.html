@@ -20,7 +20,7 @@
         <div class="main-right f-r">
             <div class="clearfix main-right-nav">
                 <div class="f-l main-right-title font">区域列表
-                    <div class="subjection">隶属项目：<span th:inline="text">[[${dict.projectName}]]</span></div>
+                    <div class="subjection">隶属项目：<span th:inline="text">[[${project.label}]]</span></div>
                 </div>
                 <!--<div class="f-r pointer">-->
                 <!--<a th:href="@{/place/create(projectId=${dict.projectId})}">-->
@@ -103,7 +103,7 @@
                                 </td>
                                 <td th:text="${place.mesh_id}"></td>
                                 <td class="k-link">
-                                    <a th:href="@{/group/list(projectId=${place.project_id},pid=${place.id})}"
+                                    <a th:href="@{/group/list(mid=${place.mid},pid=${place.id})}"
                                        th:text="${place.gcount}"></a>
                                 </td>
                                 <td>未知</td>

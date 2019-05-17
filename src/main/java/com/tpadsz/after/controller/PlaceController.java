@@ -46,9 +46,8 @@ public class PlaceController {
         if (pageInfo.getList().size() > 0) {
             modelMap.put("pageInfo", pageInfo);
         }
-//        OptionList project = meshService.getProject(dict.getProjectId());
-//        modelMap.put("project", project);
-//        dict.setMid(project.getMid());
+        OptionList project = meshService.getProject(dict);
+        modelMap.put("project", project);
         modelMap.put("dict", dict);
         return "meshTemp/placeList";
     }
@@ -61,8 +60,8 @@ public class PlaceController {
     }
 
     @RequestMapping("/create")
-    public String create(Integer projectId, ModelMap modelMap) {
-        OptionList project = meshService.getProject(projectId);
+    public String create(SearchDict dict, ModelMap modelMap) {
+        OptionList project = meshService.getProject(dict);
         modelMap.put("project", project);
         return "meshTemp/placeCreate";
     }

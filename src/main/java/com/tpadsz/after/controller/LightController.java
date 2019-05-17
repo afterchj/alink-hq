@@ -44,11 +44,8 @@ public class LightController {
         if (pageInfo.getList().size() > 0) {
             modelMap.put("pageInfo", pageInfo);
         }
-//        Integer id = dict.getMid();
-//        int projectId = id == null ? dict.getProjectId() : id;
-//        OptionList project = meshService.getProject(projectId);
-//        dict.setMid(project.getMid());
-//        modelMap.put("project", project);
+        OptionList project = meshService.getProject(dict);
+        modelMap.put("project", project);
         modelMap.put("dict", dict);
         return "meshTemp/lightList";
     }
@@ -63,12 +60,11 @@ public class LightController {
     }
 
     @RequestMapping("/move")
-    public String move(String projectName, int mid, String ids, ModelMap modelMap) {
+    public String move(Integer mid, String ids, ModelMap modelMap) {
         String[] ids1 = ids.split(",");
         List<String> list = new ArrayList(Arrays.asList(ids1));
         List<Map> lightMap = lightService.selectByLid(list);
         modelMap.put("lightMap", lightMap);
-        modelMap.put("projectName", projectName);
         modelMap.put("mid", mid);
         modelMap.put("ids", ids);
         return "meshTemp/lightMove";
@@ -77,7 +73,6 @@ public class LightController {
     @ResponseBody
     @RequestMapping("/saveUpdate")
     public String saveUpdate(String ids, String gid) {
-        logger.info("ids=" + ids + ",pid=" + gid);
         String[] ids1 = ids.split(",");
         List<String> list = new ArrayList(Arrays.asList(ids1));
         Map map = new HashMap();
@@ -89,8 +84,7 @@ public class LightController {
     }
 
     @RequestMapping("/delete")
-    public String delete(String projectName,Integer uid,String ids) {
-        logger.info("ids=" + ids);
+    public String delete(Integer mid,String ids) {
         String[] ids1 = ids.split(",");
         List<String> list = new ArrayList(Arrays.asList(ids1));
         try {
@@ -99,7 +93,7 @@ public class LightController {
             logger.warn(e);
             return "authError";
         }
-        return "redirect:/light/list?uid="+uid+"&projectName="+projectName;
+        return "redirect:/light/list?mid="+mid;
     }
 
     @ResponseBody

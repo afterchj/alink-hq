@@ -42,13 +42,13 @@ public class LightServiceImpl implements LightService {
     }
 
     @Override
-    public  List<MeshInfo> getSceneInfo(int id) {
+    public List<MeshInfo> getSceneInfo(int id) {
         return lightDao.getSceneInfo(id);
     }
 
     @Override
     public void saveUpdate(Map map) {
-
+        lightDao.saveUpdate(map);
     }
 
     @Override

@@ -70,7 +70,7 @@
                                 <span th:text="${meshInfo.gcount}"></span>
                             </div>
                             <div class="f-l">
-                                <a th:href="@{/group/list(projectName=${meshInfo.name},pid=${meshInfo.id})}">查看组列表</a>
+                                <a th:href="@{/group/list(mid=${meshInfo.mid},pid=${meshInfo.id})}">查看组列表</a>
                             </div>
                         </div>
                         <div class="clearfix">
@@ -79,7 +79,7 @@
                                 <span th:text="${meshInfo.lcount}"></span>
                             </div>
                             <div class="f-l">
-                                <a th:href="@{/light/list(projectName=${meshInfo.name},pid=${meshInfo.id})}">查看灯列表</a>
+                                <a th:href="@{/light/list(mid=${meshInfo.mid},pid=${meshInfo.id})}">查看灯列表</a>
                             </div>
                         </div>
                     </div>
@@ -123,13 +123,6 @@
 <script src="/alink-hq/static/js/jquery.min.js"></script>
 <script type="text/javascript" src="/alink-hq/static/js/left.js"></script>
 <script src="/alink-hq/static/js/moment.js"></script>
-<script type="text/javascript">
-    $(function () {
-        var tabs = "placeList";
-        var index = 0;
-        left(tabs, index);
-    });
-</script>
 </body>
 
 </html>

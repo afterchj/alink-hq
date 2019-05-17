@@ -91,7 +91,6 @@
     //    console.log("uid=" + uid);
     $(function () {
         $.getJSON("/alink-hq/mesh/getProjects", {"uid": uid}, function (json) {
-            $("#pid option:first").siblings().remove();
             // 下面使用each进行遍历
             $.each(json, function (i, item) {
                 $("#pid").append("<option value='" + item.id + "'>" + item.label + "</option>");
