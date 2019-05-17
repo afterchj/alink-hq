@@ -19,23 +19,23 @@
     color: #3c3c3c;
 }
 #createAccount form{
-    width: 800px;
+    width: 700px;
     margin: auto;
     font-size: 16px;
     color: #3c3c3c;
     margin-top: 50px;
 }
 #createAccount form>div{
-    margin-bottom: 80px;
+    margin-bottom: 70px;
 }
 #createAccount form>div>label:first-child{
     width: 150px;
     text-align: right;
     display: inline-block;
-    margin-right: 100px;
+    margin-right: 40px;
 }
 #createAccount form>div select,#createAccount form>div input[type='text']{
-    height: 35px;
+    height: 33px;
     border-radius: 5px;
     border: 1px solid #bbb;
    
@@ -45,6 +45,7 @@
     font-size: 15px;
     color: #666;
     text-indent: 5px;
+    height: 37px;
 }
 #createAccount form>div input[type='text']{
     width: 62px;
@@ -63,9 +64,9 @@
 }
 .num>div{
     display: inline-block;
-    width: 37px;
-    height: 37px;
-    line-height: 37px;
+    width: 35px;
+    height: 35px;
+    line-height: 35px;
     text-align: center;
 }
 #createAccount form>div button{
@@ -78,7 +79,7 @@
     background-color: #3598db;
     border-radius: 5px;
     cursor: pointer;
-    margin-left: 255px;
+    margin-left: 196px;
 }
 #createAccount form>div button:active{
     background-color: #0068ae;
@@ -89,8 +90,9 @@
 }
 
 #createAccount .c-content img{
-    margin-right: 30px;
+    margin-right: 10px;
     cursor: pointer;
+    vertical-align: middle;
 }
 #createAccount label.l-radio{
     margin-right: 50px;
@@ -305,9 +307,9 @@
     margin-bottom: 30px;
 }
 .create-account-hint{
-    margin-left: 50px;
+    margin-left: 30px;
     color: #fb2a2a;
-    font-size: 15px;
+    font-size: 14px;
 }
 .pop-nav .close{
     right:20px;
