@@ -35,7 +35,7 @@ html{
     /*火狐下隐藏滚动条*/
     overflow:-moz-scrollbars-none;
 }
-::-webkit-scrollbar{
+html::-webkit-scrollbar{
     display:none;
 }
 a{

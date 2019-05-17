@@ -32,8 +32,7 @@ function shade(open, text) {
         'width': width,
         'height': height
     });
-    $('.pop-iframe').each(function () {
-
+    $('div[openContent="start-use"] .pop-iframe').each(function () {
         var openContent = $(this).attr('openContent');
         console.log(openContent, open);
         if (openContent == open) {
@@ -42,11 +41,11 @@ function shade(open, text) {
                 console.log(text);
                 $('.pop-content').find('p').remove();
                 if (text == '启用') {
-                    $('.off-or-on').text('您确定要禁用该账户吗？');
+                    $('div[openContent="start-use"] .off-or-on').text('您确定要禁用该账户吗？');
                     var content = '<p style="  font-size: 15px;color: #fb2a2a;margin-top:30px;">禁用后，该账号将无法登录</p>';
-                    $('.pop-content').append(content);
+                    $('div[openContent="start-use"] .pop-content').append(content);
                 } else {
-                    $('.off-or-on').text('您确定要启用该账户吗？');
+                    $('div[openContent="start-use"] .off-or-on').text('您确定要启用该账户吗？');
                 }
             }
         }
@@ -89,7 +88,14 @@ $(function () {
     var account = '';
     $('img[openTab="reset-pwd"]').click(function () {
         var openTab = $(this).attr('openTab');
-        shade(openTab);
+        // $('div[openContent="new-pwd"]').addClass('active');
+        // var width = document.body.scrollWidth;
+        // var height = document.body.scrollHeight;
+        // $('.hide-iframe').addClass('active');
+        // $('.hide-iframe').css({
+        //     'width': width,
+        //     'height': height
+        // });
         account = $(this).parent().siblings('.use-account').text();
     })
     $('div[openContent="reset-pwd"] button.yes').click(function () {
@@ -214,16 +220,6 @@ $(function () {
         $('#company').val(company);
     }
 
-    // $('table tr td.role').each(function () {
-    //     var roleId = parseInt($(this).text());
-    //     if (roleId == 4) {
-    //         $(this).text('施工人员');
-    //     } else if (roleId == 3) {
-    //         $(this).text('乙方管理员');
-    //     } else if (roleId == 2) {
-    //         $(this).text('管理员');
-    //     }
-    // })
     $('table tr td.status').each(function () {
         var status = parseInt($(this).text());
         if (status == 1) {
