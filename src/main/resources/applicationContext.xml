@@ -24,7 +24,6 @@
         <property name="locations">
             <list>
                 <value>classpath:setup.development.properties</value>
-                <value>classpath:common.properties</value>
             </list>
         </property>
         <property name="fileEncoding" value="UTF-8"/>
@@ -155,7 +154,6 @@
     <!--<property name="locations">-->
     <!--<list>-->
     <!--<value>classpath:setup.development.properties</value>-->
-    <!--<value>classpath:common.properties</value>-->
     <!--</list>-->
     <!--</property>-->
     <!--<property name="fileEncoding" value="UTF-8"/>-->
@@ -167,7 +165,6 @@
     <!--<property name="locations">-->
     <!--<list>-->
     <!--<value>classpath:setup.demo.properties</value>-->
-    <!--<value>classpath:common.properties</value>-->
     <!--</list>-->
     <!--</property>-->
     <!--<property name="fileEncoding" value="UTF-8"/>-->
@@ -179,7 +176,6 @@
     <!--<property name="locations">-->
     <!--<list>-->
     <!--<value>classpath:setup.production.properties</value>-->
-    <!--<value>classpath:common.properties</value>-->
     <!--</list>-->
     <!--</property>-->
     <!--<property name="fileEncoding" value="UTF-8"/>-->
