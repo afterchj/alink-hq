@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
 
 <head>
     <title>区域列表</title>
@@ -107,16 +107,22 @@
                                        th:text="${place.gcount}"></a>
                                 </td>
                                 <td>未知</td>
-                                <td class="p-r">
+                                <td class="p-r" shiro:hasAnyRoles="super,admin,manager">
                                     <img src="/alink-hq/static/img/edit.png" th:alt="${place.id}"
                                          class="reset-name pointer"
                                          title="重命名">
-                                    <!--<a th:href="@{/place/move(ids=${place.id})}" onclick="return confirm('您确定要删除所选的区域吗？')">-->
-                                    <!--<img src="/alink-hq/static/img/delete.png" alt="" class="left-img pointer">-->
-                                    <!--</a>-->
                                     <a href="javascript:void(0);" class="singleDel pointer">
                                         <img src="/alink-hq/static/img/delete.png" alt="" class="left-img pointer"
                                              title="删除">
+                                    </a>
+                                </td>
+                                <td class="p-r" shiro:hasRole="user">
+                                    <img src="/alink-hq/static/img/un-rename.png" th:alt="${place.id}"
+                                         class=" pointer unclick"
+                                         th:title="无法操作">
+                                    <a href="javascript:void(0);" class=" unclick">
+                                        <img src="/alink-hq/static/img/un-delete.png" alt="" class="left-img  unclick"
+                                             th:title="无法操作">
                                     </a>
                                 </td>
                             </tr>
@@ -128,13 +134,9 @@
                             <span class="selected-order">已选择
                                 <span id="amount" class="amount">0</span>条数据
                             </span>
-                                        <!--<span>-->
-                                        <!--<img src="/alink-hq/static/img/delete-btn-un.png" alt="" id="multiMove" class="pointer">-->
-                                        <!--</span>-->
-                                    <span>
-
-                                <span class="skipPageBtn pointer moment" onmousedown="deleteBtnMouseDown()"
-                                      onmouseup="deleteBtnMouseUp()" id="multiDel">删除</span>
+                             <span>
+                                <span shiro:hasAnyRoles="super,admin,manager" class="skipPageBtn pointer moment" onmousedown="deleteBtnMouseDown()" onmouseup="deleteBtnMouseUp()" id="multiDel">删除</span>
+                                <span shiro:hasRole="user" class="skipPageBtn  moment active unclick1" onmousedown="deleteBtnMouseDown()" onmouseup="deleteBtnMouseUp()" id="multiDel">删除</span>
                             </span>
                                     </div>
                                     <div th:replace="common/page::page"></div>

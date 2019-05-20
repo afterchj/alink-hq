@@ -168,6 +168,12 @@
     width: 1650px;
     margin: auto;
 }
+.no-access{
+    background-color: #bbb;
+    border-color: #bbb;
+    cursor: not-allowed;
+    pointer-events:none;
+}
  /*.one-list li:link{*/
      /*background-color:#fff;*/
  /*}*/

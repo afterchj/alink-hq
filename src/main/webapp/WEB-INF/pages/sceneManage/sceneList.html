@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:th="http://www.thymeleaf.org">
-
+<html xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
 <head>
     <title>场景列表</title>
     <script src="/alink-hq/static/js/browser.js"></script>
@@ -80,14 +79,21 @@
                                 <td th:text="${scene.meshName}"></td>
                                 <td th:text="${scene.meshId}"></td>
                                 <td></td>
-                                <td class="p-r">
+                                <td class="p-r" shiro:hasAnyRoles="super,admin,manager">
                                     <img src="/alink-hq/static/img/edit.png" th:alt="${scene.id}"
                                          class="reset-name pointer"
                                          title="重命名">
-                                    <!--<a href="javascript:void(0);" class="singleDel pointer">-->
                                     <img src="/alink-hq/static/img/delete.png" alt="" class="left-img pointer singleDel"
                                          title="删除">
-                                    <!--</a>-->
+                                </td>
+                                <td shiro:hasRole="user" class="p-r">
+                                    <!--不能重命名-->
+                                    <img src="/alink-hq/static/img/un-rename.png" alt="" class="pointer   unclick"
+                                         th:title="无法操作">
+                                    <!--不能删除-->
+                                    <img src="/alink-hq/static/img/un-delete.png" alt="" class="pointer  left-img  unclick"
+                                         th:title="无法操作">
+                                    <!--重命名-->
                                 </td>
                             </tr>
                             </tbody>
@@ -98,9 +104,9 @@
                             <span class="selected-order">已选择
                                 <span id="amount" class="amount">0</span>条数据
                             </span>
-                                    <span>
-                                <span class="skipPageBtn pointer moment" onmousedown="deleteBtnMouseDown()"
-                                      onmouseup="deleteBtnMouseUp()" id="multiDel">删除</span>
+                            <span>
+                                <span shiro:hasAnyRoles="super,admin,manager" class="skipPageBtn pointer moment" onmousedown="deleteBtnMouseDown()" onmouseup="deleteBtnMouseUp()" id="multiDel">删除</span>
+                                <span shiro:hasRole="user" class="skipPageBtn active moment unclick1"  id="multiDel">删除</span>
                             </span>
                                     </div>
                                     <!--<div th:replace="common/page::page"></div>-->

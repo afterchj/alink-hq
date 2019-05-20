@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
 
 <head>
     <title>灯列表</title>
@@ -118,7 +118,7 @@
                                     <span th:case="0">关</span>
                                     <span th:case="*">未知</span>
                                 </td>
-                                <td class="p-r">
+                                <td class="p-r" shiro:hasAnyRoles="super,admin,manager">
                                     <img src="/alink-hq/static/img/edit.png" th:alt="${light.id}" class="rename pointer"
                                          title="重命名">
                                     <a th:href="@{/light/move(mid=${light.mid},ids=${light.id})}">
@@ -131,6 +131,19 @@
                                          class="singleDel pointer" title="删除">
                                     <!--</a>-->
                                 </td>
+                                <td shiro:hasRole="user" class="p-r">
+                                    <!--不能重命名-->
+                                    <img src="/alink-hq/static/img/un-rename.png" alt="" class="pointer  unclick"
+                                         th:title="无法操作">
+                                    <!--不能移交-->
+                                    <img src="/alink-hq/static/img/un-exchange.png" alt=""
+                                         class="center-img pointer  unclick"
+                                         th:title="无法操作">
+                                    <!--不能删除-->
+                                    <img src="/alink-hq/static/img/un-delete.png" alt="" class="pointer   unclick"
+                                         th:title="无法操作">
+                                    <!--重命名-->
+                                </td>
                             </tr>
                             </tbody>
                             <tfoot>
@@ -141,12 +154,13 @@
                                  <span id="amount" class="amount">0</span>条数据
                             </span>
                              <span class="m-r-20">
-                                <span class="skipPageBtn pointer moment" onmousedown="exchangeBtnMouseDown()"
+                                <span  shiro:hasAnyRoles="super,admin,manager" class="skipPageBtn pointer moment" onmousedown="exchangeBtnMouseDown()"
                                       onmouseup="exchangeBtnMouseUp()" id="multiMove">移动</span>
+                                <span shiro:hasRole="user" class="skipPageBtn pointer moment active unclick1"  >移动</span>
                             </span>
                             <span>
-                                <span class="skipPageBtn pointer moment" onmousedown="deleteBtnMouseDown()"
-                                      onmouseup="deleteBtnMouseUp()" id="multiDel">删除</span>
+                                <span class="skipPageBtn pointer moment" onmousedown="deleteBtnMouseDown()" onmouseup="deleteBtnMouseUp()" id="multiDel">删除</span>
+                                <span shiro:hasRole="user" class="skipPageBtn pointer moment active unclick1"  >删除</span>
                             </span>
                                     </div>
                                     <div th:replace="common/page::page"></div>
