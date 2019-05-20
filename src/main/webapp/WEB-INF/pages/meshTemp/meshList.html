@@ -107,30 +107,37 @@
                                 <td th:text="${mesh.mesh_id}"></td>
                                 <td th:text="${mesh.mesh_type}"></td>
                                 <td class="k-link">
-                                    <a th:href="@{/project/detail(projectId=${mesh.project_id},projectName=${mesh.name})}"
-                                       th:text="${mesh.name}"></a>
+                                    <a th:href="@{/project/detail(projectId=${mesh.project_id},projectName=${mesh.name})}" th:text="${mesh.name}"></a>
                                 </td>
                                 <td class="k-link">
-                                    <a th:href="@{/place/list(mid=${mesh.id})}"
-                                       th:text="${mesh.pcount}"></a>
+                                    <a th:href="@{/place/list(mid=${mesh.id})}" th:text="${mesh.pcount}"></a>
                                 </td>
                                 <td class="k-link">
-                                    <a th:href="@{/scene/list(meshName=${mesh.mname},meshId=${mesh.mesh_id},mid=${mesh.id})}"
-                                       th:text="${mesh.scount}"></a>
+                                    <a th:href="@{/scene/list(meshName=${mesh.mname},meshId=${mesh.mesh_id},mid=${mesh.id})}" th:text="${mesh.scount}"></a>
                                 </td>
                                 <td>未知</td>
                                 <td class="p-r">
-                                    <img src="/alink-hq/static/img/edit.png" th:alt="${mesh.id}"
-                                         class="reset-name pointer"
-                                         title="重命名">
+                                    <img src="/alink-hq/static/img/edit.png" th:alt="${mesh.id}" class="reset-name pointer" title="重命名">
                                     <a th:href="@{/mesh/move(ids=${mesh.id})}">
-                                        <img src="/alink-hq/static/img/exchange.png" alt="" class="center-img pointer"
-                                             title="移动">
+                                        <img src="/alink-hq/static/img/exchange.png" alt="" class="center-img pointer" title="移动">
                                     </a>
                                     <a href="javascript:void(0);" class="singleDel pointer">
                                         <img src="/alink-hq/static/img/delete.png" alt="" title="删除">
                                     </a>
                                 </td>
+                                <!--<td th:if="${role_id==4}" class="p-r">-->
+                                    <!--&lt;!&ndash;不能重命名&ndash;&gt;-->
+                                    <!--<img src="/alink-hq/static/img/un-rename.png" alt="" class="pointer  unclick"-->
+                                         <!--th:title="无法操作">-->
+                                    <!--&lt;!&ndash;不能移交&ndash;&gt;-->
+                                    <!--<img src="/alink-hq/static/img/un-exchange.png" alt=""-->
+                                         <!--class="center-img pointer  unclick"-->
+                                         <!--th:title="无法操作">-->
+                                    <!--&lt;!&ndash;不能删除&ndash;&gt;-->
+                                    <!--<img src="/alink-hq/static/img/un-delete.png" alt="" class="pointer   unclick"-->
+                                         <!--th:title="无法操作">-->
+                                    <!--&lt;!&ndash;重命名&ndash;&gt;-->
+                                <!--</td>-->
                             </tr>
                             </tbody>
                             <tfoot>
@@ -145,7 +152,7 @@
                                 <span class="skipPageBtn pointer moment" onmousedown="exchangeBtnMouseDown()"
                                       onmouseup="exchangeBtnMouseUp()" id="multiMove">移动</span>
                             </span>
-                                    <span>
+                                        <span>
 
                                 <span class="skipPageBtn pointer moment" onmousedown="deleteBtnMouseDown()"
                                       onmouseup="deleteBtnMouseUp()" id="multiDel">删除</span>

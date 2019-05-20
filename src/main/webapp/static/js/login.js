@@ -1111,7 +1111,7 @@ function emailFindPwd() {
             }
         } else if (codeResult == 'expire') {
             // $('.phone-find-password .mobile-add-hint').text('');
-            $('.email-find-password .email-code-hint').text('验证码已超时，请重新获取');
+            $('.email-find-password .email-code-hint').text('验证码不正确');
             // $('.phone-find-password .mobile-password-hint').text('请输入新密码');
         }
     }
