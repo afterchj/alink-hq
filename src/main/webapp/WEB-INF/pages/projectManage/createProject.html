@@ -19,15 +19,11 @@
         <div class="main-right f-r">
             <div class="clearfix main-right-nav">
                 <div class="f-l main-right-title">创建项目</div>
-                <!--<div class="f-r pointer">-->
-                <!--<img src="/alink-hq/static/img/create-project.png" alt="">-->
-                <!--</div>-->
                 <div class="f-r pointer">
                     <div class="goBack" onClick="javascript :history.back(-1);" onmousedown="backBtnMouseDown()"
                          onmouseup="backBtnMouseUp()">
                         <span><</span><span>返回</span>
                     </div>
-                    <!--<img src="/alink-hq/static/img/go-back.png" alt="" onclick="history.back()">-->
                 </div>
             </div>
             <div id="createProject">
@@ -46,11 +42,6 @@
                             <div>
                                 <p class="account-hint"></p>
                                 <label for="account">施工人员：</label>
-                                <!--<select name="" id="account">-->
-                                <!--<option th:each="firm:${firmList}" name="account" th:value="${firm.id}"-->
-                                <!--th:text="${firm.coname}"></option>-->
-                                <!--</select>-->
-
                                 <input type="text" placeholder="请输入施工人员" id="account" th:if="${account}==null"/>
                                 <input type="text" id="account" th:if="${account}!=null" th:value="${account}"
                                        readonly/>
@@ -82,5 +73,7 @@
 <script src="/alink-hq/static/js/createProject.js"></script>
 <script type="text/javascript" src="/alink-hq/static/js/left.js"></script>
 <script src="/alink-hq/static/js/moment.js"></script>
+<script  src="/alink-hq/static/js/selectivizr.js"></script>
+<script  src="/alink-hq/static/js/html5shiv.js"></script>
 </body>
 </html>

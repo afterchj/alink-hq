@@ -303,11 +303,11 @@ p.add-hint.active, p.password-hint.active, p.page-hint.active, p.code-hint.activ
     text-align: center;
     /* margin: 20px auto; */
 }
-.add-hint,.password-hint{
-    height:40px;
-    text-align: left;
-    color: red;
-}
+/*.add-hint,.password-hint{*/
+    /*height:40px;*/
+    /*text-align: left;*/
+    /*color: red;*/
+/*}*/
 .dsp {
     display: block;
 }

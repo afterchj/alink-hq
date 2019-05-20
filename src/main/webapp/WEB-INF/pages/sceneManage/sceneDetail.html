@@ -88,10 +88,17 @@
                         <div class="clearfix  scene-msg-list">
                             <div class="f-l" style="border-right: none;">
                                 <ul>
-                                    <li th:if="${px}!=${py}" th:each="placeList:${placeList}"
+                                    <li th:if="${userStat.index}=='0' and ${px}!=${py}"  th:each="placeList,userStat:${placeList}"
+                                        th:text="${placeList.pname}+'（查看详情）'" th:alt="${placeList.pid}" class="pid active">
+                                    </li>
+                                    <li th:if="${userStat.index}!='0' and ${px}!=${py}"  th:each="placeList,userStat:${placeList}"
                                         th:text="${placeList.pname}+'（查看详情）'" th:alt="${placeList.pid}" class="pid">
                                     </li>
-                                    <li th:if="${px}==${py}" th:each="placeList:${placeList}"
+                                    <li th:if="${userStat.index}=='0' and ${px}==${py}"  th:each="placeList,userStat:${placeList}"
+                                        th:text="${placeList.pname}+'('+${px}+'，'+${py}+')'" th:alt="${placeList.pid}"
+                                        class="pid active">
+                                    </li>
+                                    <li th:if="${userStat.index}!='0' and ${px}==${py}"  th:each="placeList,userStat:${placeList}"
                                         th:text="${placeList.pname}+'('+${px}+'，'+${py}+')'" th:alt="${placeList.pid}"
                                         class="pid">
                                     </li>
@@ -99,10 +106,16 @@
                             </div>
                             <div class="f-l" style="border-right: none;">
                                 <ul>
-                                    <li th:if="${px}!=${py}" th:each="groupList:${groupList}"
+                                    <li  th:if="${userStat.index}=='0' and ${px}!=${py}"  th:each="groupList,userStat:${groupList}"
+                                        th:text="${groupList.gname}+'（查看详情）'" class="gid active"
+                                        th:alt="${groupList.gid}"></li>
+                                    <li  th:if="${userStat.index}!='0' and ${px}!=${py}"  th:each="groupList,userStat:${groupList}"
                                         th:text="${groupList.gname}+'（查看详情）'" class="gid"
                                         th:alt="${groupList.gid}"></li>
-                                    <li th:if="${px}==${py}" th:each="groupList:${groupList}"
+                                    <li th:if="${userStat.index}=='0' and ${px}==${py}"  th:each="groupList,userStat:${groupList}"
+                                        th:text="${groupList.gname}+'('+${px}+'，'+${py}+')'" class="gid active"
+                                        th:alt="${groupList.gid}"></li>
+                                    <li th:if="${userStat.index}!='0' and ${px}==${py}"  th:each="groupList,userStat:${groupList}"
                                         th:text="${groupList.gname}+'('+${px}+'，'+${py}+')'" class="gid"
                                         th:alt="${groupList.gid}"></li>
                                 </ul>
@@ -110,20 +123,47 @@
                             <div class="f-l clearfix">
                                 <div class="f-l">
                                     <ul class="one">
-                                        <li th:each="lightList:${lightList}"
+                                        <li th:if="${userStat.index}=='0' and ${lightInfo}==null" th:each="lightList,userStat:${lightList}"
+                                            th:text="${lightList.lname}+'（'+${lightList.lmac}+')'" class="lid active"
+                                            th:alt="${lightList.id}"></li>
+                                        <li th:if="${userStat.index}!='0' and ${lightInfo}==null " th:each="lightList,userStat:${lightList}"
+                                            th:text="${lightList.lname}+'（'+${lightList.lmac}+')'" class="lid"
+                                            th:alt="${lightList.id}"></li>
+                                        <li th:if="${userStat.index}=='0' and ${lightInfo}!=null and ${lightList.id}==${lightInfo.id}" th:each="lightList,userStat:${lightList}"
+                                            th:text="${lightList.lname}+'（'+${lightList.lmac}+')'" class="lid active"
+                                            th:alt="${lightList.id}"></li>
+                                        <li th:if="${userStat.index}!='0' and ${lightInfo}!=null and ${lightList.id}==${lightInfo.id}" th:each="lightList,userStat:${lightList}"
+                                            th:text="${lightList.lname}+'（'+${lightList.lmac}+')'" class="lid  active"
+                                            th:alt="${lightList.id}"></li>
+                                        <li th:if="${userStat.index}=='0' and ${lightInfo}!=null and ${lightList.id}!=${lightInfo.id}" th:each="lightList,userStat:${lightList}"
+                                            th:text="${lightList.lname}+'（'+${lightList.lmac}+')'" class="lid "
+                                            th:alt="${lightList.id}"></li>
+                                        <li th:if="${userStat.index}!='0' and ${lightInfo}!=null and ${lightList.id}!=${lightInfo.id}" th:each="lightList,userStat:${lightList}"
                                             th:text="${lightList.lname}+'（'+${lightList.lmac}+')'" class="lid "
                                             th:alt="${lightList.id}"></li>
                                     </ul>
                                 </div>
                                 <div class="f-l">
                                     <ul class="two">
-                                        <li th:if="${userStat.index}=='0'" th:each="lightList,userStat:${lightList}"
+                                        <li th:if="${userStat.index}=='0'  and ${lightInfo}==null" th:each="lightList,userStat:${lightList}"
+                                            th:text="${lightList.x}+'(色温)，'+${lightList.y}+'(亮度)'"  class="lid active"
+                                            th:alt="${lightList.id}" style="text-align: center;"></li>
+                                        <li th:if="${userStat.index}=='0' and ${lightInfo}!=null and ${lightList.id}==${lightInfo.id}" th:each="lightList,userStat:${lightList}"
+                                            th:text="${lightList.x}+'(色温)，'+${lightList.y}+'(亮度)'" class="lid active"
+                                            th:alt="${lightList.id}" style="text-align: center;"></li>
+                                        <li th:if="${userStat.index}=='0'  and ${lightInfo}!=null and ${lightList.id}!=${lightInfo.id}" th:each="lightList,userStat:${lightList}"
                                             th:text="${lightList.x}+'(色温)，'+${lightList.y}+'(亮度)'" class="lid "
                                             th:alt="${lightList.id}" style="text-align: center;"></li>
-                                        <li th:if="${userStat.index}!='0'" th:each="lightList,userStat:${lightList}"
+                                        <li th:if="${userStat.index}!='0'  and ${lightInfo}!=null and ${lightList.id}==${lightInfo.id}" th:each="lightList,userStat:${lightList}"
+                                            th:text="${lightList.x}+'，'+${lightList.y}" class="lid  active"
+                                            th:alt="${lightList.id}" style="text-align: center;"></li>
+                                        <li th:if="${userStat.index}!='0'  and ${lightInfo}!=null and ${lightList.id}!=${lightInfo.id}" th:each="lightList,userStat:${lightList}"
                                             th:text="${lightList.x}+'，'+${lightList.y}" class="lid "
                                             th:alt="${lightList.id}" style="text-align: center;"></li>
-                                        <!--<li th:accept="${lightList.f}"  th:each="lightList:${lightList}" th:text="${lightList.x}+'(色温)，'+${lightList.y}+'(亮度)'" class="lid title" th:alt="${lightList.id}" style="text-align: center;"></li>-->
+                                        <li th:if="${userStat.index}!='0'  and ${lightInfo}==null " th:each="lightList,userStat:${lightList}"
+                                            th:text="${lightList.x}+'，'+${lightList.y}" class="lid "
+                                            th:alt="${lightList.id}" style="text-align: center;"></li>
+
                                     </ul>
                                 </div>
                             </div>
@@ -137,59 +177,59 @@
 <script src="/alink-hq/static/js/jquery.min.js"></script>
 <script type="text/javascript" src="/alink-hq/static/js/left.js"></script>
 <script src="/alink-hq/static/js/moment.js"></script>
+<script  src="/alink-hq/static/js/selectivizr.js"></script>
+<script  src="/alink-hq/static/js/html5shiv.js"></script>
 <script type="text/javascript">
     $(function () {
-        var tabs = "meshList";
-        var index = 0;
-        left(tabs, index);
         var length = $('.scene-msg .scene-msg-list>div:nth-child(3)>div:nth-child(1)  ul').height();
-        console.log(length);
         if (length > 380) {
-            console.log('大了')
             $('.scene-msg .scene-msg-list>div:nth-child(3)>div:nth-child(1) ul').addClass('active');
             $('.scene-msg .scene-msg-list>div:nth-child(3)>div:nth-child(1)').css('border-right', 'none')
         }
         var lid = $('#lid').val();
         var gid = $('#gid').val();
         var pid = $('#pid').val();
-        console.log(lid, gid, pid);
-        if (pid) {
-            $('li.gid').each(function () {
-                var gids = $(this).attr('alt');
-                if (gids == gid) {
-                    $(this).addClass('active');
-                } else {
-                    $(this).removeClass('active');
-                }
-            })
-        } else {
-            $('li.gid').eq(0).addClass('active');
-        }
-
-        if (lid) {
-            $('li.lid').each(function () {
-                var lids = $(this).attr('alt');
-                if (lids == lid) {
-                    $(this).addClass('active');
-                } else {
-                    $(this).removeClass('active');
-                }
-            })
-        }
-
-        if (pid) {
-            $('li.pid').each(function () {
-                var pids = $(this).attr('alt');
-                console.log(pids);
-                if (pids == pid) {
-                    $(this).addClass('active');
-                } else {
-                    $(this).removeClass('active');
-                }
-            })
-        } else {
-            $('li.pid').eq(0).addClass('active');
-        }
+        console.log(lid);
+//        if (pid) {
+//            $('li.gid').each(function () {
+//                var gids = $(this).attr('alt');
+//                if (gids == gid) {
+//                    $(this).addClass('active');
+//                } else {
+//                    $(this).removeClass('active');
+//                }
+//            })
+//        } else {
+//            $('li.gid').eq(0).addClass('active');
+//        }
+//
+//        if (lid) {
+//            $('li.lid').each(function () {
+//                var lids = $(this).attr('alt');
+//                if (lids == lid) {
+//                    $(this).addClass('active');
+//                } else {
+//                    $(this).removeClass('active');
+//                }
+//            })
+//        }else {
+//            $('li.lid').eq(0).addClass('active');
+//        }
+//
+//        if (pid) {
+//            $('li.pid').each(function () {
+//                var pids = $(this).attr('alt');
+//                console.log(pids);
+//                if (pids == pid) {
+//                    $(this).addClass('active');
+//                } else {
+//                    $(this).removeClass('active');
+//                }
+//            })
+//        } else {
+//            $('li.pid').eq(0).addClass('active');
+//        }
+//    })
     })
     $('.scene-msg-list ').on('click', 'li', function () {
         $(this).toggleClass('active').siblings().removeClass('active');
@@ -211,10 +251,8 @@
             },
             async: true,
             success: function (res) {
-                console.log(res);
                 var lightList = res.lightList;
                 $.each(lightList, function (key, value) {
-                    console.log(key, value);
                     content += '<li class="lid" alt=' + value.id + '>' + value.lname + '(' + value.lmac + ')' + '</li>';
                     if (key == 0) {
                         content1 += '<li class="lid" alt="' + value.id + '" style="text-align: center;">' + value.x + '(色温)，' + value.y + '(亮度)</li>';
@@ -222,7 +260,6 @@
                         content1 += '<li class="lid" alt="' + value.id + '" style="text-align: center;">' + value.x + '，' + value.y + '</li>';
                     }
                 })
-                console.log('content', content);
                 $('.one').append(content);
                 $('.two').append(content1);
             }

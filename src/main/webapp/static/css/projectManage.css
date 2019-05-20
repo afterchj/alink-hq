@@ -10,15 +10,24 @@
 }
 
 .search input, .search select, .search select option {
+
     width: 275px;
     height: 35px;
     border-radius: 1px;
     border: 1px solid #bbb;
     font-size: 14px;
     color: #999;
-    text-indent: 10px;
-}
+    padding-left: 10px;
 
+    /*text-indent: 10px;*/
+}
+.search input{
+    padding-left: 14px !important;
+}
+.search select, .search select option{
+    width: 290px !important;
+    height: 39px !important;
+}
 .search > div {
     margin-bottom: 26px;
 }
@@ -108,6 +117,7 @@ th {
     height: 14px;
     outline: none;
     border-radius: 0;
+    appearance:none;
     -webkit-appearance: none;
     cursor: pointer;
     background-color: #eef3f5;
@@ -120,6 +130,7 @@ th {
 .search-result table td a {
     color: #3c3c3c;
 }
+
 
 .center-img {
     margin: 0 30px;
@@ -978,94 +989,7 @@ input:-ms-input-placeholder { /* Internet Explorer 10+ */
     overflow-y: auto;
     overflow-x: visible;
 }
-/*.scene-msg .scene-msg-list>div::-webkit-scrollbar{*/
-/*width:15px;*/
-/*border:1px solid #bbb;*/
-/*border-top:none;*/
-/*border-right: none;*/
-/*}*/
-/*.scene-msg .scene-msg-list>div::-webkit-scrollbar-button{*/
-/*!*background-color: #bbb;*!*/
-/*color: #333;*/
-/*}*/
-/*.scene-msg .scene-msg-list>div::-webkit-scrollbar-track{*/
-/*width:15px;*/
-/*background-color: #fff;*/
-/*border:1px solid #bbb;*/
-/*border-top:none;*/
-/*border-right: none;*/
-/*}*/
-/*.scene-msg .scene-msg-list>div::-webkit-scrollbar-track-piece{*/
-
-/*width:30px;*/
-/*!*border:1px solid #bbb;*!*/
-/*}*/
-/*::-webkit-scrollbar*/
-/*{*/
-/*width: 20px;  !*滚动条宽度*!*/
-/*!*height: 45px;  !*滚动条高度*!*!*/
-/*}*/
-/*::-webkit-scrollbar-button{*/
-/*!*background-color: #ccc;*!*/
-/*border:1px solid #ccc;*/
-
-/*}*/
-
-/*::-webkit-scrollbar-thumb*/
-/*{*/
-/*border-radius: 10px;*/
-/*-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);*/
-/*background-color: blue;*/
-/*}*/
-
-/*!*定义滚动条轨道 内阴影+圆角*!*/
-/*::-webkit-scrollbar-track*/
-/*{*/
-/*border:1px solid #bbb;*/
-/*border-top:none;*/
-/*border-right: none;*/
-/*!*-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);*!*/
-/*border-radius: 0;  !*滚动条的背景区域的圆角*!*/
-/*background-color: #fafafa;!*滚动条的背景颜色*!*/
-/*}*/
-
-/*!*定义滑块 内阴影+圆角*!*/
-/*::-webkit-scrollbar-thumb*/
-/*{*/
-/*width:5px;*/
-/*height:40px;*/
-/*border-radius: 5px;  !*滚动条的圆角*!*/
-/*!*-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);*!*/
-/*background-color: #bbb;  !*滚动条的背景颜色*!*/
-/*}*/
-/*.scene-msg .scene-msg-list>div::-webkit-scrollbar-thumb{*/
-/*width:12px;*/
-/*background-color: #bbb;*/
-/*height: 45px;*/
-/*border-radius: 5px;*/
-/*}*/
-/*.scene-msg .scene-msg-list>div::-webkit-scrollbar-track {*/
-/*background-color: #bbb;*/
-/*}*/
-/*!*定义滚动条高宽及背景 高宽分别对应横竖滚动条的尺寸*!*/
-/*::-webkit-scrollbar*/
-/*{*/
-/*width: 16px;  !*滚动条宽度*!*/
-/*height: 16px;  !*滚动条高度*!*/
-/*}*/
-
-/*!*定义滚动条轨道 内阴影+圆角*!*/
-/*::-webkit-scrollbar-track*/
-/*{*/
-/*-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);*/
-/*border-radius: 10px;  !*滚动条的背景区域的圆角*!*/
-/*background-color: red;!*滚动条的背景颜色*!*/
-/*}*/
-
-/*!*定义滑块 内阴影+圆角*!*/
-/*::-webkit-scrollbar-thumb*/
-/*{*/
-/*border-radius: 10px;  !*滚动条的圆角*!*/
-/*-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);*/
-/*background-color: green;  !*滚动条的背景颜色*!*/
+/*.search select, .search select option{*/
+    /*padding-left: 10px;*/
+    /*text-indent: 0;*/
 /*}*/

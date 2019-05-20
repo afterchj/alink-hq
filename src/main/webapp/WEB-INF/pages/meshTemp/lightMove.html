@@ -88,6 +88,8 @@
 <script src="/alink-hq/static/js/jquery.min.js"></script>
 <script type="text/javascript" src="/alink-hq/static/js/left.js"></script>
 <script src="/alink-hq/static/js/moment.js"></script>
+<script  src="/alink-hq/static/js/selectivizr.js"></script>
+<script  src="/alink-hq/static/js/html5shiv.js"></script>
 <script th:inline="javascript">
     var mid = $("#mid").val();
     $(function () {
@@ -96,8 +98,6 @@
             if (json != '') {
                 $("#gid option:first").siblings().remove();
             }
-//            console.log(json)
-            // 下面使用each进行遍历
             $.each(json, function (i, item) {
                 $("#gid").append("<option value='" + item.id + "'>" + item.label + "</option>");
             })
@@ -106,14 +106,10 @@
     $('.confirm-btn').click(function () {
         var gid = $('#gid option:selected').val();
         var ids = $('input[name="ids"]').val();
-        console.log(ids, gid);
         if (gid == '') {
             $('.trans-hint').text('请选择移动到的组');
         } else {
             $('.trans-hint').text('');
-//            $('#preload-anim').addClass('active');
-//            $('.hide-iframe').addClass('active');
-//            $('#preload-anim .title').text('移交成功，正在跳转组列表');
             $.ajax({
                 type: "post",
                 url: "/alink-hq/light/saveUpdate",
