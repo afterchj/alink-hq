@@ -109,9 +109,10 @@
         }
         if (projectId != '' && mesh != '' && meshResult) {
             $.ajax({
-                type: "get",
+                type: "post",
                 url: "/alink-hq/mesh/save",
-                data: {uid: uid, id: projectId, name: decodeURIComponent(mesh)},
+//                data: {uid: uid, id: projectId, name: decodeURIComponent(mesh)},
+                data: {"uid": uid, "id": projectId, "name": mesh},
                 success: function (res) {
                     if (res == 'ok') {
                         $('#preload-anim').addClass('active');
@@ -124,7 +125,7 @@
                         $('.mesh-hint').text('已存在，请重新输入');
                     } else {
                         $('#preload-anim').addClass('active');
-                        $('#preload-anim .title').text('加载失败，请重新尝试');
+                        $('#preload-anim .title').text('创建失败，请重新尝试');
                         setInterval(function () {
                             $('#preload-anim').removeClass('active');
                         }, 1000)

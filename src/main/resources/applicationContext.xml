@@ -24,6 +24,7 @@
         <property name="locations">
             <list>
                 <value>classpath:setup.development.properties</value>
+                <!--<value>classpath:setup.production.properties</value>-->
             </list>
         </property>
         <property name="fileEncoding" value="UTF-8"/>
