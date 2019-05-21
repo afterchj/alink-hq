@@ -14,7 +14,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 import java.io.UnsupportedEncodingException;
@@ -105,9 +104,13 @@ public class ProjectController {
         User loginUser = (User) session.getAttribute("user");
         String uid = loginUser.getId();
         Integer role_id = accountService.findRoleIdByUid(uid);
+        Integer flag;
         if (role_id == 4) {
-            model.addAttribute("account", loginUser.getAccount());
+            flag = 0;
+        }else {
+            flag = 1;
         }
+        model.addAttribute("flag", flag);
         return "projectManage/createProject";
     }
 

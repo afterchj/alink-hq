@@ -11,6 +11,7 @@ public class SceneList {
     private Integer lid;
     private String meshName;
     private String meshId;
+    private Integer mid;
     private String status;
     private String other;
 
@@ -44,6 +45,14 @@ public class SceneList {
 
     public void setLid(Integer lid) {
         this.lid = lid;
+    }
+
+    public Integer getMid() {
+        return mid;
+    }
+
+    public void setMid(Integer mid) {
+        this.mid = mid;
     }
 
     public String getMeshName() {

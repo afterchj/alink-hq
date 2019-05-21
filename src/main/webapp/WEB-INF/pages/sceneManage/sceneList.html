@@ -76,7 +76,7 @@
                                        th:text="${scene.sceneName}" th:alt="${scene.lid}"></a>
                                 </td>
                                 <td class="sceneId" th:text="${scene.sceneId}"></td>
-                                <td th:text="${scene.meshName}"></td>
+                                <td class="k-link"><a th:href="@{/mesh/info(id=${scene.mid})}" th:text="${scene.meshName}"></a></td>
                                 <td th:text="${scene.meshId}"></td>
                                 <td></td>
                                 <td class="p-r" shiro:hasAnyRoles="super,admin,manager">

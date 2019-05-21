@@ -5,7 +5,9 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.tpadsz.after.entity.MeshInfo;
 import com.tpadsz.after.entity.SceneList;
+import com.tpadsz.after.entity.User;
 import com.tpadsz.after.entity.dd.ResultDict;
+import com.tpadsz.after.service.AccountService;
 import com.tpadsz.after.service.SceneService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -30,9 +33,14 @@ public class SceneController {
     @Resource
     private SceneService sceneService;
 
+    @Resource
+    private AccountService accountService;
+
     @RequestMapping(value = "/list", method = RequestMethod.GET)
     public String list(Integer pageNum, Integer pageSize, String sceneName, Integer sceneId, Integer lid, String
-            meshName, String meshId, Integer mid, Model model) {
+            meshName, String meshId, Integer mid, HttpSession session, Model model) {
+        User loginUser = (User) session.getAttribute("user");
+        String uid = loginUser.getId();
         if (pageNum == null) {
             pageNum = 1;   //设置默认当前页
         }
@@ -43,11 +51,15 @@ public class SceneController {
             pageSize = 10;    //设置默认每页显示的数据数
         }
         try {
+            Integer role_id = accountService.findRoleIdByUid(uid);
             PageHelper.startPage(pageNum, pageSize);
             List<SceneList> list = sceneService.searchSceneList(sceneName, sceneId, lid, meshName, meshId, mid);
             PageInfo<SceneList> pageInfo = new PageInfo<>(list, pageSize);
             if (pageInfo.getList().size() > 0) {
                 model.addAttribute("pageInfo", pageInfo);
+            }
+            if(role_id==1){
+                model.addAttribute("flag", 0);
             }
             model.addAttribute("sceneName", sceneName);
             model.addAttribute("sceneId", sceneId);
@@ -124,8 +136,8 @@ public class SceneController {
                 List<MeshInfo> list2 = sceneService.findXYByGid(groupList.get(i).getGid(),sid);
                 if (list2.size() == 1) {
                     MeshInfo groupXY = new MeshInfo();
-                    groupXY.setX(list2.get(i).getX());
-                    groupXY.setY(list2.get(i).getY());
+                    groupXY.setX(list2.get(0).getX());
+                    groupXY.setY(list2.get(0).getY());
                     groupXY.setGid(groupList.get(i).getGid());
                     groupXYList.add(groupXY);
                 }

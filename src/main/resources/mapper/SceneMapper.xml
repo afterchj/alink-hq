@@ -4,7 +4,7 @@
 
 
     <select id="searchSceneList" resultType="com.tpadsz.after.entity.SceneList">
-        SELECT s.id,s.sname AS sceneName,s.scene_id AS sceneId,#{lid} AS lid,#{meshName} AS meshName,#{meshId} AS meshId FROM f_scene s WHERE s.sname LIKE CONCAT('%',IFNULL(#{sceneName},''),'%') and s.scene_id LIKE CONCAT('%',IFNULL(#{sceneId},''),'%') and s.mid=#{mid} ORDER BY s.scene_id
+        SELECT s.id,s.sname AS sceneName,s.scene_id AS sceneId,#{lid} AS lid,#{meshName} AS meshName,#{meshId} AS meshId,#{mid} AS mid FROM f_scene s WHERE s.sname LIKE CONCAT('%',IFNULL(#{sceneName},''),'%') and s.scene_id LIKE CONCAT('%',IFNULL(#{sceneId},''),'%') and s.mid=#{mid} ORDER BY s.scene_id
     </select>
 
     <select id="findPlaceBySid" resultType="com.tpadsz.after.entity.MeshInfo">
