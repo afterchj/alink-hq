@@ -5,7 +5,7 @@ $(function(){
     // var scroll=$('.c-container').height();
     // console.log('scroll',scroll);
     // $('html').css({'height':scroll,'overflow-y':'hidden'})
-    var height=$(document).height();
+    var height=$(window).height();
     $('.main-left').css('height',height);
     // $('html').css({'overflow-y':'visible','height':height});
     $('.on-off-triangle').click(function () {
