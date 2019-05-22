@@ -29,14 +29,33 @@ body {
     font-size: 14px;
 
 }
+/*html{*/
+    /*!*隐藏滚动条，当IE下溢出，仍然可以滚动*!*/
+    /*-ms-overflow-style:none;*/
+    /*!*火狐下隐藏滚动条*!*/
+    /*overflow:-moz-scrollbars-none;*/
+/*}*/
+/*html::-webkit-scrollbar{*/
+    /*display:none;*/
+/*}*/
+
+/*html::-webkit-scrollbar {*/
+    /*width: 0px;*/
+/*}*/
+/*html{*/
+    /*overflow-y: hidden;*/
+/*}*/
+/*.c-container::-webkit-scrollbar{*/
+    /*display: none;*/
+/*}*/
 html{
-    /*隐藏滚动条，当IE下溢出，仍然可以滚动*/
-    -ms-overflow-style:none;
-    /*火狐下隐藏滚动条*/
-    overflow:-moz-scrollbars-none;
+    /*position: relative;*/
+    /*overflow-y: scroll;*/
+    /*overflow-x: auto;*/
 }
-html::-webkit-scrollbar{
-    display:none;
+.body{
+    /*position: absolute; left: 0;*/
+
 }
 a{
     text-decoration:none;

@@ -20,8 +20,6 @@
 .c-container{
     width: 100%;
     margin: auto;
-    /*height:800px;*/
-    /*overflow-y: hidden;*/
 }
 .one-list>div{
     height: 62px;
@@ -33,12 +31,15 @@
 }
 .all-container{
     background-color: #3598DB;
-
+    position: fixed;
+    width: 100%;
+    z-index: 999;
 }
 .main-left{
     background-image: url(/alink-hq/static/img/left-list.png);
     background-size: 100% 100%;
-
+    position: fixed;
+    left:5%;
 }
 .ad-nav img{
     width: 20px;
@@ -60,6 +61,7 @@
     /*margin: 0 30px 20px 260px;*/
     padding: 20px 0 0 0;
     width:1360px;
+
 }
 
 .main-left a{
@@ -85,12 +87,6 @@
 .two-list{
     display: none;
 }
-/*.one-list ul{*/
-    /*display: none;*/
-/*}*/
-/*.one-list ul.active{*/
-   /**/
-/*}*/
 .one-list img{
     top: 45%;
     right: 25px;
@@ -167,6 +163,7 @@
 .main{
     width: 1650px;
     margin: auto;
+    padding-top: 80px;
 }
 .no-access{
     background-color: #bbb;
@@ -174,21 +171,6 @@
     cursor: not-allowed;
     pointer-events:none;
 }
- /*.one-list li:link{*/
-     /*background-color:#fff;*/
- /*}*/
-/*.one-list li:hover{*/
-    /*background-color: #eef3f5;*/
-/*}*/
- /*.one-list li:active{*/
-    /*background-color: #eef3f5;*/
-/*}*/
-/*.one-list li:focus{*/
-    /*background-color: #eef3f5;*/
-/*}*/
-/*.one-list li:visited{*/
-    /*background-color: #eef3f5;*/
-/*}*/
 .nav-color{
     background-color: #eef3f5;
 }
