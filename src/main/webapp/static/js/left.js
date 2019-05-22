@@ -19,4 +19,29 @@ $(function(){
             $(this).parent().parent('.one-list').addClass('active');
         }
     })
+
+    // $(document).scroll(function() {
+    //
+    //         var scroH = $(document).scrollTop();  //滚动高度
+    //         var viewH = $(window).height();  //可见高度
+    //         var contentH = $(document).height();  //内容高度
+    //         var scroW= $(document).scrollLeft();
+    //         var viewW = $(window).width();
+    //         console.log(scroW,viewW);
+    //         if (scroW > 0) {  //距离顶部大于100px时
+    //             $('.main-left').addClass('scroll');
+    //             $('.must').addClass('scroll');
+    //             // console.log(scroW,viewW);
+    //         }else{
+    //             $('.main-left').addClass('scroll');
+    //             $('.must').addClass('scroll');
+    //         }
+    //         // if (contentH - (scroH + viewH) <= 100) {  //距离底部高度小于100px
+    //         //
+    //         // }
+    //         // if (contentH = (scroH + viewH)) {  //滚动条滑到底部啦
+    //         //
+    //         // }
+    //     }
+    //     )
 });
