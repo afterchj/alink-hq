@@ -59,10 +59,15 @@
                                 <input type="text" id="mid" name="meshId" th:value="${dict.meshId}"
                                        placeholder="请输入网络ID">
                             </div>
+                            <!--<div>-->
+                                <!--<label for="pid" class="font">区域ID</label>-->
+                                <!--<input type="text" id="pid" name="placeId" th:value="${dict.placeId}"-->
+                                       <!--placeholder="请输入区域ID">-->
+                            <!--</div>-->
                             <div>
-                                <label for="pid" class="font">区域ID</label>
+                                <label for="pid" class="font">项目名称</label>
                                 <input type="text" id="pid" name="placeId" th:value="${dict.placeId}"
-                                       placeholder="请输入区域ID">
+                                placeholder="请输入项目名称">
                             </div>
                         </div>
                         <div class="f-r search-button ">
@@ -82,6 +87,7 @@
                                 </th>
                                 <th><span>区域名称</span></th>
                                 <th><span>区域ID</span></th>
+                                <th><span>隶属项目</span></th>
                                 <th><span>属于网络</span></th>
                                 <th><span>网络ID</span></th>
                                 <th><span>组数量</span></th>
@@ -96,6 +102,9 @@
                                                       th:text="${place.pname}"></a>
                                 </td>
                                 <td th:text="${place.place_id}"></td>
+                                <td class="k-link">
+                                    <a th:href="@{/mesh/info(id=${place.mid})}" th:text="${place.mname}"></a>
+                                </td>
                                 <td class="k-link">
                                     <a th:href="@{/mesh/info(id=${place.mid})}" th:text="${place.mname}"></a>
                                 </td>
