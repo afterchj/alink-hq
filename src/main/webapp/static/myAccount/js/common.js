@@ -82,7 +82,7 @@ function countDown(obj, second, value) {
 }
 $(function () {
     $("#clickReturn").click(function () {
-        var account = $(".account").val();
+        // var account = $(".account").val();
         // window.location.href = "http://iotsztp.com/alink-hq/myAccount/myAccount?account="+account;
         window.location.href = "/alink-hq/myAccount/myAccount";
     });

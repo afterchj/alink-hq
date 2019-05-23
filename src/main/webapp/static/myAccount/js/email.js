@@ -66,7 +66,7 @@ $(function () {
         var email = $("#email").val();
         var emailFlag = isEmpty(email);
         var code = $("#code").val();//用户输入的验证码
-        var account = $(".account").val();
+        // var account = $(".account").val();
         var codeFlag = isEmpty(code);
         var emailHint = $("p.email-hint").text();
         var hintFlag = isEmpty(emailHint);

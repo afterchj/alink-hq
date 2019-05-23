@@ -39,13 +39,15 @@ public class MyAccountController {
     /**
      * 修改密码
      *
-     * @param account 账号
+//     * @param account 账号
      * @param newPwd  新密码
      * @return
      */
     @RequestMapping(value = "/changePwd", method = RequestMethod.POST)
     @ResponseBody
-    public Map<String, String> confirmChange(String account, String newPwd) {
+    public Map<String, String>confirmChange( String newPwd, HttpSession session) {
+        User loginUser = (User) session.getAttribute("user");
+        String account = loginUser.getAccount();
         boolean success = myAccountService.updatePwd(account, newPwd);
         Map<String, String> map = new HashMap<>();
         String info = "密码修改成功";
@@ -58,7 +60,10 @@ public class MyAccountController {
 
     @RequestMapping(value = "/changeUserName", method = RequestMethod.POST)
     @ResponseBody
-    public Map<String, String> changeUserName(String account, String uname, String flag, HttpSession session) {
+    public Map<String, String> changeUserName( String uname,String flag, HttpSession session) {
+        User loginUser = (User) session.getAttribute("user");
+        String account = loginUser.getAccount();
+//        String uname = loginUser.getUname();
         Map<String, String> map = new HashMap<>();
         boolean success = myAccountService.updateUserName(account, uname);
         String info = new String();
@@ -71,8 +76,8 @@ public class MyAccountController {
                 //修改用户名
                 info = "修改用户名成功";
             }
-            User loginUser = userService.selectByUsername(uname);
-            session.setAttribute("user", loginUser);
+            User loginUser2 = userService.selectByUsername(uname);
+            session.setAttribute("user", loginUser2);
         } else {
             info = "加载失败，请重新尝试";
         }
@@ -158,9 +163,11 @@ public class MyAccountController {
 
     @RequestMapping(value = "/changeMobile", method = RequestMethod.POST)
     @ResponseBody
-    public Map<String, String> changeMobile(String mobile, String code, String account) {
+    public Map<String, String> changeMobile(String mobile, String code, HttpSession session) {
         Map<String, String> map = new HashMap<>();
         boolean success;
+        User loginUser = (User) session.getAttribute("user");
+        String account = loginUser.getAccount();
         try {
             validationService.checkCode(code, mobile);
             success = myAccountService.updateMobile(account, mobile);
@@ -181,9 +188,11 @@ public class MyAccountController {
 
     @RequestMapping(value = "/changeEmail", method = RequestMethod.POST)
     @ResponseBody
-    public Map<String, String> changeEmail(String email, String code, String account) {
+    public Map<String, String> changeEmail(String email, String code, HttpSession session) {
         Map<String, String> map = new HashMap<>();
         boolean success;
+        User loginUser = (User) session.getAttribute("user");
+        String account = loginUser.getAccount();
         try {
             validationService.checkCode(code, email);
             success = myAccountService.updateEmail(account, email);
@@ -218,26 +227,28 @@ public class MyAccountController {
     /**
      * 跳转changePassword.html
      *
-     * @param account
+//     * @param account
      * @param model
      * @return
      */
     @RequestMapping(value = "/pwd", method = RequestMethod.GET)
-    public String pwd(String account, Model model) {
-        model.addAttribute("account", account);
+//    public String pwd(String account, Model model) {
+    public String pwd( Model model) {
+//        model.addAttribute("account", account);
         return "myAccount/changePassword";
     }
 
     /**
      * 跳转fillUsername.html
      *
-     * @param account
+//     * @param account
      * @param model
      * @return
      */
     @RequestMapping(value = "/fillUname", method = RequestMethod.GET)
-    public String fillUname(String account, String flag, Model model) {
-        model.addAttribute("account", account);
+    public String fillUname( String flag, Model model) {
+//        model.addAttribute("account", account);
+
         model.addAttribute("flag", flag);
         return "myAccount/fillUsername";
     }
@@ -245,13 +256,16 @@ public class MyAccountController {
     /**
      * 跳转changeUsername.html
      *
-     * @param account
+//     * @param account
      * @param model
      * @return
      */
     @RequestMapping(value = "/modifiUname", method = RequestMethod.GET)
-    public String modifiUname(String account, String uname, String flag, Model model) {
-        model.addAttribute("account", account);
+    public String modifiUname( String flag, Model model, HttpSession session) {
+//        model.addAttribute("account", account);
+//        model.addAttribute("uname", uname);
+        User loginUser = (User) session.getAttribute("user");
+        String uname = loginUser.getUname();
         model.addAttribute("uname", uname);
         model.addAttribute("flag", flag);
         return "myAccount/changeUsername";
@@ -260,14 +274,14 @@ public class MyAccountController {
     /**
      * 跳转bindPhone.html
      *
-     * @param account
+//     * @param account
      * @param flag
      * @param model
      * @return
      */
     @RequestMapping(value = "/fillMobile", method = RequestMethod.GET)
-    public String fillMobile(String account, String flag, Model model) {
-        model.addAttribute("account", account);
+    public String fillMobile(String flag, Model model) {
+//        model.addAttribute("account", account);
         model.addAttribute("flag", flag);
         return "myAccount/bindPhone";
     }
@@ -275,13 +289,13 @@ public class MyAccountController {
     /**
      * 跳转changePhone.html
      *
-     * @param account
+//     * @param account
      * @param model
      * @return
      */
     @RequestMapping(value = "/modifiMobile", method = RequestMethod.GET)
-    public String modifiMobile(String account, String flag, Model model) {
-        model.addAttribute("account", account);
+    public String modifiMobile( String flag, Model model) {
+//        model.addAttribute("account", account);
         model.addAttribute("flag", flag);
         return "myAccount/changePhone";
     }
@@ -289,14 +303,14 @@ public class MyAccountController {
     /**
      * 跳转bindEmail.html
      *
-     * @param account
+//     * @param account
      * @param flag
      * @param model
      * @return
      */
     @RequestMapping(value = "/fillEmail", method = RequestMethod.GET)
-    public String fillEmail(String account, String flag, Model model) {
-        model.addAttribute("account", account);
+    public String fillEmail( String flag, Model model) {
+//        model.addAttribute("account", account);
         model.addAttribute("flag", flag);
         return "myAccount/bindEmail";
     }
@@ -304,13 +318,13 @@ public class MyAccountController {
     /**
      * 跳转changeEmail.html
      *
-     * @param account
+//     * @param account
      * @param model
      * @return
      */
     @RequestMapping(value = "/modifiEmail", method = RequestMethod.GET)
-    public String modifiEmail(String account, String flag, Model model) {
-        model.addAttribute("account", account);
+    public String modifiEmail( String flag, Model model) {
+//        model.addAttribute("account", account);
         model.addAttribute("flag", flag);
         return "myAccount/changeEmail";
     }

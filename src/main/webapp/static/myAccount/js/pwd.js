@@ -14,7 +14,7 @@ $(function () {
         var context = $("#pwd1").val();
         var confirmPwd = $(".confirmPwd").val();
         var newPwd = $(".newPwd").val();
-        var account = $(".account").val();
+        // var account = $(".account").val();
         var newPwdFlag = isEmpty(newPwd);
         var confirmPwdFlag = isEmpty(confirmPwd);
         var pwdMatch = match.test(context);
