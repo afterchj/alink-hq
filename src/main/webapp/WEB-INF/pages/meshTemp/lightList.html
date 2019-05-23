@@ -44,8 +44,8 @@
                     <input type="hidden" id="mid" name="mid" th:value="${dict.mid}">
                     <input type="hidden" name="pid" th:value="${dict.pid}">
                     <input type="hidden" name="gid" th:value="${dict.gid}">
-                    <div class="search-condition temp">
-                        <div class="f-l search" style="margin-right:125px;">
+                    <div class="search-condition clearfix">
+                        <div class="f-l search" style="margin-right:50px;">
                             <div>
                                 <label for="lname" class="font">灯名称</label>
                                 <input type="text" id="lname" name="lname" th:value="${dict.lname}"
@@ -55,8 +55,12 @@
                                 <label for="lmac" class="font">灯MAC地址</label>
                                 <input type="text" id="lmac" name="lmac" th:value="${dict.lmac}" placeholder="请输入MAC地址">
                             </div>
+                            <div>
+                                <label for="lmac" class="font">项目名称</label>
+                                <input type="text" id="lmac" name="lmac" th:value="${dict.lmac}" placeholder="请输入MAC地址">
+                            </div>
                         </div>
-                        <div class="f-l search">
+                        <div class="f-l search" style="margin-right:50px;">
                             <div>
                                 <label for="mname" class="font">网络名称</label>
                                 <input type="text" id="mname" name="mname" th:value="${dict.mname}"
@@ -68,9 +72,22 @@
                                        placeholder="请输入网络ID">
                             </div>
                         </div>
-                        <div class="f-r search-button ">
-                            <button type="submit" class="pointer">查询</button>
+                        <div class="f-l search">
+                            <div>
+                                <label for="mname" class="font">组名称</label>
+                                <input type="text" id="mname" name="mname" th:value="${dict.mname}"
+                                       placeholder="请输入组名称">
+                            </div>
+                            <div>
+                                <label for="meshId" class="font">区域名称</label>
+                                <input type="text" id="meshId" name="meshId" th:value="${dict.meshId}"
+                                       placeholder="请输入区域名称">
+                            </div>
+                            <div class=" search-button no-top">
+                                <button type="submit" class="pointer">查询</button>
+                            </div>
                         </div>
+
                     </div>
                     <div class="search-result">
                         <!-- 有数据时 -->
@@ -85,6 +102,7 @@
                                 </th>
                                 <th><span>灯名称</span></th>
                                 <th><span>灯MAC地址</span></th>
+                                <th><span>隶属项目</span></th>
                                 <th><span>属于网络</span></th>
                                 <th><span>网络ID</span></th>
                                 <th><span>属于区域</span></th>
@@ -104,6 +122,7 @@
                                 <td class="k-link">
                                     <a th:href="@{/mesh/info(id=${light.mid})}" th:text="${light.mname}"></a>
                                 </td>
+                                <td th:text="${light.mesh_id}"></td>
                                 <td th:text="${light.mesh_id}"></td>
                                 <td class="k-link">
                                     <a th:href="@{/place/info(id=${light.pid})}" th:text="${light.pname}"></a>
@@ -130,6 +149,7 @@
                                     <img src="/alink-hq/static/img/delete.png" th:alt="${light.id}"
                                          class="singleDel pointer" title="删除">
                                     <!--</a>-->
+                                    <a href="">导出</a>
                                 </td>
                                 <td shiro:hasRole="user" class="p-r">
                                     <!--不能重命名-->
@@ -148,7 +168,7 @@
                             </tbody>
                             <tfoot>
                             <tr>
-                                <td colspan="10" class="clearfix page">
+                                <td colspan="11" class="clearfix page">
                                     <div class="f-l">
                             <span class="selected-order">已选择
                                  <span id="amount" class="amount">0</span>条数据
