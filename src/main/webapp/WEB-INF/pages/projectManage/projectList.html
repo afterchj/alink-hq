@@ -43,7 +43,7 @@
             <div id="projectList" class="">
                 <div class="search-condition ">
                     <form action="" class="clearfix">
-                        <div class="f-l search" style="margin-right:125px;">
+                        <div class="f-l search" style="margin-right:50px;">
                             <div>
                                 <label for="projectName">项目名称</label>
                                 <input type="text" id="projectName" placeholder="请输入项目名称">
@@ -54,10 +54,10 @@
                                 <img src="/alink-hq/static/img/date.png" alt="" class="p-a">
                             </div>
                         </div>
-                        <div class="f-l search">
+                        <div class="f-l search" style="margin-right:50px;">
                             <div>
                                 <label for="account">施工人员</label>
-                                <input type="text" placeholder="请输入施工人员账号" id="account">
+                                <input type="text" placeholder="请输入施工人员账号/用户名" id="account">
                             </div>
                             <div class="p-r">
                                 <label for="end-time">更新时间</label>
@@ -65,9 +65,21 @@
                                 <img src="/alink-hq/static/img/date.png" alt="" class="p-a">
                             </div>
                         </div>
-                        <div class="f-r search-button ">
-                            <button type="button" class="pointer">查询</button>
+                        <div class="f-l search">
+                            <div>
+                                <label for="company">隶属公司</label>
+                                <input type="text" placeholder="请输入施工人员账号" id="company">
+                            </div>
+                            <div class=" search-button  no-top">
+                                <button type="button" class="pointer">查询</button>
+                            </div>
+                            <!--<div class="p-r">-->
+                                <!--<label for="end-time">更新时间</label>-->
+                                <!--<input type="text" id="end-time" placeholder="请选择日期" AUTOCOMPLETE="off">-->
+                                <!--<img src="/alink-hq/static/img/date.png" alt="" class="p-a">-->
+                            <!--</div>-->
                         </div>
+
                     </form>
                 </div>
                 <div class="search-result">
@@ -83,7 +95,9 @@
                             <th style="display: none"><span>所属公司</span></th>
                             <th><span>项目名称</span></th>
                             <th><span>项目中网络数量</span></th>
-                            <th><span>施工人员</span></th>
+                            <th><span>施工人员账号</span></th>
+                            <th><span>施工人员用户名</span></th>
+                            <th><span>隶属公司</span></th>
                             <th class="p-r">
                                 <span class="toTime ">创建时间</span>
                                 <img src="/alink-hq/static/img/fewer.png" alt="" class="p-a toTop  sort-t pointer">
@@ -113,6 +127,8 @@
                             <td class="meshNum k-link">
                                 <a th:href="@{/mesh/list(projectId=${project.id})}" th:text="${project.meshNum}"></a>
                             </td>
+                            <td th:text="${project.account}" class="project-account"></td>
+                            <td th:text="${project.account}" class="project-account"></td>
                             <td th:text="${project.account}" class="project-account"></td>
                             <td th:text="${project.create_date}"></td>
                             <td th:text="${project.update_date}"></td>

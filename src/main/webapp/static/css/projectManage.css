@@ -458,6 +458,7 @@ th.all-checkbox {
     opacity: .45;
     filter: alpha(opacity=45);
     display: none;
+    z-index: 999;
 }
 
 .pop-nav {
@@ -467,7 +468,10 @@ th.all-checkbox {
     border-bottom: 1px solid #bbb;
     background-color: #eef2f5;
 }
-
+.no-top{
+    margin-top: 0;
+    text-align: right;
+}
 .pop-content {
     text-align: center;
 }
