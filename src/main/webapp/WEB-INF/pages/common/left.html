@@ -23,6 +23,25 @@
                         <!--<li tab="lightList"><a th:href="@{/light/list(uid=${session.user.id})}">灯列表</a></li>-->
                     </ul>
                 </li>
+                <li class="one-list active">
+                    <div class="p-r">
+                        <a th:href="@{/account/list}"  tab="userManage">合作管理</a>
+                        <img src="/alink-hq/static/img/left-reduce.png" alt="" class="p-a on-off-triangle">
+                    </div>
+                    <ul class=" two-list ">
+                        <li tab="userList" class="active"><a th:href="@{/cooperate/list}">合作列表</a></li>
+                        <li tab="createAccount" class="active"><a th:href="@{/cooperate/info}">合作信息录入</a></li>
+                    </ul>
+                </li>
+                <li class="one-list active">
+                    <div class="p-r">
+                        <a th:href="@{/timer/list}"  tab="userManage">定时列表</a>
+                        <img src="/alink-hq/static/img/left-reduce.png" alt="" class="p-a on-off-triangle">
+                    </div>
+                    <ul class=" two-list ">
+                        <li tab="userList" class="active"><a th:href="@{/timer/detail}">定时详情</a></li>
+                    </ul>
+                </li>
                 <li shiro:hasAnyRoles="super,admin,manager" class="one-list active">
                     <div class="p-r">
                         <a th:href="@{/account/list}"  tab="userManage">用户管理</a>
