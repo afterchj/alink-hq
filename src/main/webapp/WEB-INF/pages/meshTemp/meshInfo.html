@@ -58,6 +58,15 @@
                         </div>
                         <div class="clearfix">
                             <div class="f-l">
+                                <span>网络中定时的数量：</span>
+                                <span th:text="${meshInfo.scount}"></span>
+                            </div>
+                            <div class="f-l">
+                                <a th:href="@{/scene/list(meshName=${meshInfo.mname},meshId=${meshInfo.mesh_id},mid=${meshInfo.id})}">查看定时列表</a>
+                            </div>
+                        </div>
+                        <div class="clearfix">
+                            <div class="f-l">
                                 <span>网络中区域的数量：</span>
                                 <span th:text="${meshInfo.pcount}"></span>
                             </div>
