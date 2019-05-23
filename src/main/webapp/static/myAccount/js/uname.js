@@ -36,7 +36,7 @@ $(function () {
         if (uname == undefined) {
             uname = $("#userName").val();
         }
-        var account = $(".account").val();
+        // var account = $(".account").val();
         var unameFlag = isEmpty(uname);
         var unameHint = $("p.use-hint").text();
         var hintFlag = isEmpty(unameHint);

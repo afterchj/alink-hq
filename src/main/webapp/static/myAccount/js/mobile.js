@@ -64,7 +64,7 @@ function clickFillSubmit(event) {
     var mobile = $("#phone").val();
     var code = $("#code").val();//用户输入的验证码
 //          var sysCode  = $("#sysCode").val();//系统保存的验证码
-    var account = $(".account").val();
+//     var account = $(".account").val();
     var mobileHint = $("p.phone-hint").text();
     var hintFlag = isEmpty(mobileHint);
     var mobileFlag = isEmpty(mobile);

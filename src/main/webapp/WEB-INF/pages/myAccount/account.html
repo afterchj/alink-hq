@@ -43,37 +43,35 @@
                             <span class="title">账号</span>
                             <span th:text="${myAccount.getAccount()}"></span>
                         <span>
-                            <a th:href="@{pwd(account=${myAccount.getAccount()})}" tab="myAccount/pwd">修改密码</a>
+                            <a th:href="@{pwd}" tab="myAccount/pwd">修改密码</a>
                         </span>
                         </div>
                         <div>
-                            <span class="icon" style="width: 63px;"><i style="margin-right: 14px;"
-                                                                       th:class="${myAccount.getUname()==null or #strings.isEmpty(myAccount.getUname())}?'dot':'dot-no'"></i><img
-                                    style="width: 25px;" src="/alink-hq/static/img/account1.png" alt=""/></span>
+                            <span class="icon" style="width: 63px;">
+                                <i style="margin-right: 14px;" th:class="${myAccount.getUname()==null or #strings.isEmpty(myAccount.getUname())}?'dot':'dot-no'"></i>
+                                <img style="width: 25px;" src="/alink-hq/static/img/account1.png" alt=""/>
+                            </span>
                             <span class="title">用户名</span>
                             <span th:text="${myAccount.getUname()==null or #strings.isEmpty(myAccount.getUname())}?'未填写':${myAccount.getUname()}"></span>
                         <span>
-                            <!--<a href="javascript:void(0);" tab="fillUsername" style="display:none;">填写用户名</a>-->
-                            <!--<a href="javascript:void(0);" tab="changeUsername">修改用户名</a>-->
                             <a th:if="${myAccount.getUname()==null or #strings.isEmpty(myAccount.getUname())}"
-                               th:href="@{fillUname(account=${myAccount.getAccount()},flag=0)}">填写用户名</a>
+                               th:href="@{fillUname(flag=0)}">填写用户名</a>
                             <a th:if="${myAccount.getUname()!=null and !#strings.isEmpty(myAccount.getUname())}"
-                               th:href="@{modifiUname(account=${myAccount.getAccount()},uname=${myAccount.getUname()},flag=1)}">修改用户名</a>
+                               th:href="@{modifiUname(flag=1)}">修改用户名</a>
                         </span>
                         </div>
                         <div>
-                            <span class="icon" style="width: 63px;"><i style="margin-right: 14px;"
-                                                                       th:class="${myAccount.getMobile()==null or #strings.isEmpty(myAccount.getMobile())}?'dot':'dot-no'"></i><img
-                                    style="width: 27px;" src="/alink-hq/static/img/phone1.png" alt=""/></span>
+                            <span class="icon" style="width: 63px;">
+                                <i style="margin-right: 14px;" th:class="${myAccount.getMobile()==null or #strings.isEmpty(myAccount.getMobile())}?'dot':'dot-no'"></i>
+                                <img style="width: 27px;" src="/alink-hq/static/img/phone1.png" alt=""/>
+                            </span>
                             <span class="title">手机号</span>
                             <span th:text="${myAccount.getMobile()==null or #strings.isEmpty(myAccount.getMobile())}?'未填写':${myAccount.getMobile()}"></span>
                     <span>
-                        <!--<a href="javascript:void(0);" tab="bindPhone" style="display:none;">绑定手机号</a>-->
-                        <!--<a href="javascript:void(0);" tab="changePhone">修改手机号</a>-->
                         <a th:if="${myAccount.getMobile()==null or #strings.isEmpty(myAccount.getMobile())}"
-                           th:href="@{fillMobile(account=${myAccount.getAccount()},flag=0)}">绑定手机号</a>
+                           th:href="@{fillMobile(flag=0)}">绑定手机号</a>
                         <a th:if="${myAccount.getMobile()!=null and !#strings.isEmpty(myAccount.getMobile())}"
-                           th:href="@{modifiMobile(account=${myAccount.getAccount()},flag=1)}">修改手机号</a>
+                           th:href="@{modifiMobile(flag=1)}">修改手机号</a>
                     </span>
                     <span>
                         <ul>
@@ -91,8 +89,8 @@
                             <span th:text="${myAccount.getEmail()==null or #strings.isEmpty(myAccount.getEmail())}?'未填写':${myAccount.getEmail()}"></span>
                     <span>
                         <a th:if="${myAccount.getEmail()==null or #strings.isEmpty(myAccount.getEmail())}"
-                           th:href="@{fillEmail(account=${myAccount.getAccount()},flag=0)}">绑定邮箱</a>
-                        <a th:href="@{modifiEmail(account=${myAccount.getAccount()},flag=1)}"
+                           th:href="@{fillEmail(flag=0)}">绑定邮箱</a>
+                        <a th:href="@{modifiEmail(flag=1)}"
                            th:if="${myAccount.getEmail()!=null and !#strings.isEmpty(myAccount.getEmail())}">修改邮箱</a>
                     </span>
                     <span>
