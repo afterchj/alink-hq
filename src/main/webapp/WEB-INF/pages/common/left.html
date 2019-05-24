@@ -29,17 +29,20 @@
                         <img src="/alink-hq/static/img/left-reduce.png" alt="" class="p-a on-off-triangle">
                     </div>
                     <ul class=" two-list ">
-                        <li tab="userList" class="active"><a th:href="@{/cooperate/list}">合作列表</a></li>
-                        <li tab="createAccount" class="active"><a th:href="@{/cooperate/info}">合作信息录入</a></li>
+                        <li tab="userList"><a th:href="@{/cooperate/list}">合作列表</a></li>
+                        <li tab="createAccount" ><a th:href="@{/cooperate/info}">合作信息录入</a></li>
                     </ul>
                 </li>
                 <li class="one-list active">
                     <div class="p-r">
-                        <a th:href="@{/timer/list}"  tab="userManage">定时列表</a>
+                        <a th:href="@{/timer/list}"  tab="userManage">定时管理</a>
                         <img src="/alink-hq/static/img/left-reduce.png" alt="" class="p-a on-off-triangle">
                     </div>
                     <ul class=" two-list ">
-                        <li tab="userList" class="active"><a th:href="@{/timer/detail}">定时详情</a></li>
+                        <li th:if="${list}=='timerDetail'" tab="timerDetail" ><a th:href="@{/timer/detail}">定时详情</a></li>
+                        <li th:if="${list}!='timerDetail'" tab="timerDetail" ><a th:href="@{/timer/detail}">定时详情</a></li>
+                        <li th:if="${list}=='timerList'" tab="timerList" class="active" ><a th:href="@{/timer/list}">定时列表</a></li>
+                        <li th:if="${list}!='timerList'" tab="timerList" ><a th:href="@{/timer/list}">定时列表</a></li>
                     </ul>
                 </li>
                 <li shiro:hasAnyRoles="super,admin,manager" class="one-list active">

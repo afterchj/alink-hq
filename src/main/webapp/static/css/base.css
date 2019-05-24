@@ -22,12 +22,10 @@ table{
     border-collapse: unset;
 }
 body {
-    line-height:1;
     zoom: 1;
     background: #eef2f5;
-    font-family: arial,"Hiragino Sans GB","Microsoft Yahei","微软雅黑","宋体",Tahoma,Arial,Helvetica,STHeiti;
-    font-size: 14px;
-
+    line-height: 24px;
+    font: 14px Helvetica Neue,Helvetica,PingFang SC,\5FAE\8F6F\96C5\9ED1,Tahoma,Arial,sans-serif;
 }
 /*html{*/
     /*!*隐藏滚动条，当IE下溢出，仍然可以滚动*!*/

@@ -3,6 +3,7 @@
     padding: 40px 65px 10px 65px;
     border: 1px solid #bbb;
     background-color: #fff;
+    min-width: 1360px;
 }
 
 .temp {
@@ -772,6 +773,7 @@ input:-ms-input-placeholder { /* Internet Explorer 10+ */
     font-size: 15px;
     transform: scale(1, .95);
     margin: 15px 0;
+    margin: 15px 0 15px 15px;
 }
 
 .process {
@@ -989,9 +991,13 @@ input:-ms-input-placeholder { /* Internet Explorer 10+ */
 }
 #projectDetail .light-detail-table tbody{
     display: block;
-    height: 172px;
+    /*height: 172px;*/
+    max-height: 172px;
     overflow-y: auto;
     overflow-x: visible;
+}
+#projectDetail .p-content .a-span{
+    color: #3598DB;
 }
 /*.search select, .search select option{*/
     /*padding-left: 10px;*/

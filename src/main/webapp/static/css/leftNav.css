@@ -23,12 +23,16 @@
     margin: auto;
 }
 .one-list>div{
-    height: 62px;
-    line-height: 62px;
+    /*height: 62px;*/
+    /*line-height: 62px;*/
+    /*padding-left: 40px;*/
+    height: 50px;
+    line-height: 50px;
     padding-left: 40px;
 }
 .one-list>div a{
-    font-size: 25px;
+    /*font-size: 25px;*/
+    font-size: 18px;
 }
 .all-container{
     background-color: #3598DB;
@@ -71,18 +75,28 @@
 }
 
 .main-left a{
-    font-size: 22px;
+    /*font-size: 22px;*/
+    /*color: #111;*/
+    font-size: 16px;
     color: #111;
+    transform: scale(1,.92);
 }
 .one-list{
     width: 220px;
     margin-bottom: 10px;
 }
 .one-list li{
-    font-size: 24px;
+    /*font-size: 24px;*/
+    /*color: #111;*/
+    /*height: 58px;*/
+    /*line-height: 58px;*/
+    /*!* width: 190px; *!*/
+    /*padding-left: 70px;*/
+    /*cursor: pointer;*/
+    font-size: 16px;
     color: #111;
-    height: 58px;
-    line-height: 58px;
+    height: 45px;
+    line-height: 45px;
     /* width: 190px; */
     padding-left: 70px;
     cursor: pointer;

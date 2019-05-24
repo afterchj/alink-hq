@@ -231,8 +231,8 @@ $(function () {
         projectId = parseInt($(this).parent().siblings('.checkbox ').find('input[type=checkbox]').val());
         account = $(this).parent().siblings('.project-account').text();
         $('div[openContent="reset-name"]').addClass('active');
-        var width = document.body.scrollWidth;
-        var height = document.body.scrollHeight;
+        var width = window.screen.width;
+        var height = window.screen.height;
         $('.hide-iframe').addClass('active');
         $('.hide-iframe').css({
             'width': width,
@@ -279,8 +279,8 @@ $(function () {
         deleteArray.push(msg);
         if(deleteArray.length!=0){
             $('div[openContent="delete-project"]').addClass('active');
-            var width = document.body.scrollWidth;
-            var height = document.body.scrollHeight;
+            var width = window.screen.width;
+            var height = window.screen.height;
             $('.hide-iframe').addClass('active');
             $('.hide-iframe').css({
                 'width': width,
@@ -343,8 +343,8 @@ $(function () {
         // console.log(deleteArray);
         if(deleteArray.length!=0){
             $('div[openContent="delete-project"]').addClass('active');
-            var width = document.body.scrollWidth;
-            var height = document.body.scrollHeight;
+            var width = window.screen.width;
+            var height = window.screen.height;
             $('.hide-iframe').addClass('active');
             $('.hide-iframe').css({
                 'width': width,
