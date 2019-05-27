@@ -1131,3 +1131,13 @@ form.company-msg{
 .btn-submit{
     padding: 30px 0 0 182px;
 }
+.img-max{
+    width: 500px;
+    height: auto;
+    right: 80px;
+    bottom: 100px;
+}
+#img-max{
+    width: 100%;
+    height: auto;
+}

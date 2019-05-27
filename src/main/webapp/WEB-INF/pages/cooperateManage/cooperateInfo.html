@@ -36,7 +36,7 @@
             <div id="timerDetail">
                 <div class="p-detail">
                     <div class="p-nav">公司信息录入</div>
-                    <div class="p-content">
+                    <div class="p-content p-r">
                         <form action="" class="company-msg">
                             <div class="edit-company">
                                 <label for="company-name"><span>*</span>公司名称：</label>
@@ -62,11 +62,12 @@
                                 <button type="button">提交</button>
                             </div>
                         </form>
+                        <div class="img-max p-a">
+                            <img src="" alt="" id="img-max">
+                        </div>
                     </div>
                 </div>
-                <div class="img-max">
-                    <img src="" alt="">
-                </div>
+
             </div>
         </div>
     </div>
@@ -81,11 +82,22 @@
             console.log(file.name);
         }
     })
-    $('#drop_area').hover(function(){
-        var imgUrl=$(this).find('img')[0].src;
-        console.log(imgUrl);
-        $('#img-max img').attr('src',imgUrl);
-    })
+//    $('#drop_area').hover(function(){
+//        var imgUrl=$(this).find('img')[0].src;
+//        console.log(imgUrl);
+//        $('#img-max').attr('src',imgUrl);
+//    })
+    $('#drop_area').on({
+
+        mouseover : function(){
+            var imgUrl=$(this).find('img')[0].src;
+            $('#img-max').attr('src',imgUrl);
+        } ,
+        mouseout : function(){
+            var imgUrl=$(this).find('img')[0].src;
+            $('#img-max').attr('src','');
+        }
+    }) ;
 </script>
 </body>
 
