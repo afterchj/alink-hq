@@ -26,8 +26,8 @@
     /*height: 62px;*/
     /*line-height: 62px;*/
     /*padding-left: 40px;*/
-    height: 50px;
-    line-height: 50px;
+    height: 48px;
+    line-height: 48px;
     padding-left: 40px;
 }
 .one-list>div a{
@@ -95,8 +95,8 @@
     /*cursor: pointer;*/
     font-size: 16px;
     color: #111;
-    height: 45px;
-    line-height: 45px;
+    height: 40px;
+    line-height: 40px;
     /* width: 190px; */
     padding-left: 70px;
     cursor: pointer;
@@ -113,13 +113,13 @@
     cursor: pointer;
 }
 .main-right-nav{
-    padding: 10px 0 10px 20px;
+    padding: 0px 0 10px 20px;
     border-left: 5px solid #3598db;
     border-bottom: 1px solid #3598db;
 }
 .main-right-title{
-    font-size: 24px;
-    color: #111;
+    font-size: 22px;
+    color: #323232;
     margin-top: 8px;
 }
 .main-right-nav>div:last-child{
@@ -142,8 +142,8 @@
 .goBack{
     border: 2px solid #3598DB;
     color: #3598DB;
-    height: 32px;
-    line-height: 32px;
+    height: 30px;
+    line-height: 30px;
     width: 70px;
     border-radius: 5px;
     text-align: center;

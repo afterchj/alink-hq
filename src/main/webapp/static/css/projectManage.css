@@ -13,7 +13,7 @@
 .search input, .search select, .search select option {
 
     width: 275px;
-    height: 35px;
+    height: 30px;
     border-radius: 1px;
     border: 1px solid #bbb;
     font-size: 14px;
@@ -27,7 +27,7 @@
 }
 .search select, .search select option{
     width: 290px !important;
-    height: 39px !important;
+    height: 33px !important;
 }
 .search > div {
     margin-bottom: 26px;
@@ -57,9 +57,9 @@
 
 .search label {
     margin-right: 30px;
-    font-size: 16px;
+    font-size: 15px;
     display: inline-block;
-    color: #111;
+    color: #323232;
     width: 110px;
     text-align: right;
 }
@@ -69,7 +69,7 @@
 }
 
 .search img {
-    top: 10px;
+    top: 7px;
     right: 10px;
 }
 
@@ -247,7 +247,7 @@ th.all-checkbox {
     display: none;
 }
 
-#projectDetail .p-detail {
+#projectDetail .p-detail,#timerDetail .p-detail {
     height: 842px;
     margin: 30px 0;
     border: 1px solid #bbb;
@@ -255,12 +255,12 @@ th.all-checkbox {
 }
 
 #projectDetail .p-nav,
-#projectDetail .c-nav {
-    height: 58px;
-    line-height: 58px;
+#projectDetail .c-nav ,#timerDetail .p-nav{
+    height: 50px;
+    line-height: 50px;
     padding-left: 25px;
-    font-size: 22px;
-    color: #111;
+    font-size: 18px;
+    color: #323232;
     border-bottom: 1px solid #bbb;
     background-color: #fafafa;
 }
@@ -277,19 +277,27 @@ th.all-checkbox {
     padding: 50px 400px;
 }
 
-#projectDetail .p-content span {
-    font-size: 17px;
+#projectDetail .p-content span,#timerDetail .p-content span {
+    font-size: 16px;
     color: #3c3c3c;
     transform: scale(1, .92);
     display: inline-block;
 }
-
-#projectDetail .p-content > div > div:nth-child(1) {
-    margin-bottom: 40px;
+#timerDetail .p-content{
+    padding: 50px;
+}
+#projectDetail .p-content > div > div:nth-child(1){
+    margin-bottom: 30px;
     width: 80%;
     text-align: left;
     height: 18px;
 }
+#timerDetail .p-content .clearfix.time{
+     width: 800px;
+     text-align: left;
+     margin-bottom: 30px;
+     height: 18px;
+ }
 
 #projectDetail .p-content > div.clearfix {
     width: 680px;
@@ -321,7 +329,7 @@ th.all-checkbox {
 
 #projectDetail .c-content > div {
     text-align: left;
-    font-size: 17px;
+    font-size: 16px;
     color: #3c3c3c;
     margin-bottom: 30px;
 }
@@ -680,8 +688,8 @@ th.all-checkbox {
     height: 22px;
 }
 
-#projectDetail .p-nav li {
-    font-size: 17px;
+#projectDetail .p-nav li ,#timerDetail .p-nav li{
+    font-size: 16px;
 }
 
 .search-result table td.k-link a {
@@ -958,12 +966,12 @@ input:-ms-input-placeholder { /* Internet Explorer 10+ */
 
 }
 
-#projectDetail .light-detail-table td span, #projectDetail .light-detail-table th span {
+#projectDetail .light-detail-table td span, #projectDetail .light-detail-table th span,#timerDetail .light-detail-table th span  {
     display: inline-block;
     transform: scale(1, .9);
 }
 
-#projectDetail .light-detail-table th span {
+#projectDetail .light-detail-table th span,#timerDetail .light-detail-table th span {
     color: #fff;
 
 }
@@ -972,7 +980,7 @@ input:-ms-input-placeholder { /* Internet Explorer 10+ */
     margin-top: 50px;
 }
 
-#projectDetail .light-detail-table th {
+#projectDetail .light-detail-table th ,#timerDetail .light-detail-table th{
     background-color: #3598DB;
     color: #fff;
     font-weight: normal;
@@ -1003,3 +1011,70 @@ input:-ms-input-placeholder { /* Internet Explorer 10+ */
     /*padding-left: 10px;*/
     /*text-indent: 0;*/
 /*}*/
+
+/*定时详情*/
+.light-table.timer{
+    margin-top: 0;
+}
+.light-table.timer .light-detail-table{
+    width:auto;
+}
+#projectDetail .p-content > div.clearfix.timerDetail{
+    width:100%;
+    margin:20px;
+}
+.scene-msg.timer{
+    margin-left: 50px;
+    padding: 0;
+}
+#timerDetail .scene-content{
+    margin-top:0;
+    border: none;
+}
+#timerDetail .scene-content .scene-list{
+    padding: 10px 20px;
+    border: 1px solid #bbb;
+}
+.timerDetail{
+    margin-top:50px;
+}
+#timerDetail .p-content .clearfix.time>.f-l{
+    width:350px;
+}
+.memo-edit p span{
+    width:30px;
+}
+.memo-edit p{
+    text-align: right;
+    font-size: 14px;
+    padding: 0 40px 0 0;
+}
+.memo-edit-has{
+    width: 200px;
+    position: absolute;
+    right: -10px;
+    top: -10px;
+    background-color: #dceaf3;
+    padding: 10px;
+    display: none;
+}
+.meno-nav{
+    text-align: right;
+}
+.memo-content{
+    text-align: left;
+}
+.search-result table td.active{
+    text-align: left;
+    padding-left: 80px;
+}
+.search-result table td.active .memo-edit-has{
+    display: block;
+}
+.pop-content p.right-font{
+    text-align: right;
+    margin-right: 20px;
+}
+.pop-content p.right-font .wordsNum{
+    font-size: 14px;
+}

@@ -154,7 +154,7 @@ ul li{
 }
 label{
     display: inline-block;
-    transform: scale(1,.95);
+    /*transform: scale(1,.95);*/
 }
 button{
     transform: scale(1,.95);

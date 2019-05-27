@@ -29,8 +29,10 @@
                         <img src="/alink-hq/static/img/left-reduce.png" alt="" class="p-a on-off-triangle">
                     </div>
                     <ul class=" two-list ">
-                        <li tab="userList"><a th:href="@{/cooperate/list}">合作列表</a></li>
-                        <li tab="createAccount" ><a th:href="@{/cooperate/info}">合作信息录入</a></li>
+                        <li tab="cooperateList" th:if="${list}=='cooperateList'"  class="active"><a th:href="@{/cooperate/list}">合作列表</a></li>
+                        <li tab="cooperateList" th:if="${list}!='cooperateList'"><a th:href="@{/cooperate/list}">合作列表</a></li>
+                        <li tab="cooperateInfo" th:if="${list}!='cooperateInfo'"><a th:href="@{/cooperate/info}">合作信息录入</a></li>
+                        <li tab="cooperateInfo" th:if="${list}=='cooperateInfo'" class="active"><a th:href="@{/cooperate/info}">合作信息录入</a></li>
                     </ul>
                 </li>
                 <li class="one-list active">
