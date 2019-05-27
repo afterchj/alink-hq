@@ -36,6 +36,10 @@ $(function(){
         $('.hide-iframe').removeClass('active');
     })
 })
+// $('#license').click(function(){
+//     $('#file-img').tigger('click');
+// })
+
 //封装一个限制字数方法
 var checkStrLengths = function (str, maxLength) {
     var maxLength = maxLength;

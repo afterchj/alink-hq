@@ -34,9 +34,9 @@
 }
 
 .search-button button {
-    width: 100px;
-    height: 42px;
-    font-size: 19px;
+    width: 85px;
+    height: 40px;
+    font-size: 18px;
     letter-spacing: 10px;
     background-color: #ffb500;
     border: 1px solid #ffb500;
@@ -259,7 +259,7 @@ th.all-checkbox {
     height: 50px;
     line-height: 50px;
     padding-left: 25px;
-    font-size: 18px;
+    font-size: 17px;
     color: #323232;
     border-bottom: 1px solid #bbb;
     background-color: #fafafa;
@@ -1077,4 +1077,57 @@ input:-ms-input-placeholder { /* Internet Explorer 10+ */
 }
 .pop-content p.right-font .wordsNum{
     font-size: 14px;
+}
+.edit-company{
+    margin: 35px 0;
+    font-size: 15px;
+}
+.edit-company label{
+    width: 150px;
+    font-size: 15px;
+    text-align: right;
+    margin-right: 25px;
+    color: #3c3c3c;
+}
+.edit-company input{
+    height: 32px;
+    border: 1px solid #bbb;
+    width: 300px;
+    padding-left: 15px;
+}
+form.company-msg{
+    width:800px;
+    margin:auto;
+}
+/*#file-img{*/
+    /*display: none;*/
+/*}*/
+#license{
+    width: 135px;
+    height: 135px;
+    border: 1px solid #Bbb;
+    display: inline-block;
+}
+.company-name span{
+    display: inline-block;
+    width: 25px;
+    height: 20px;
+    text-align: center;
+    vertical-align: sub;
+    color: red;
+}
+.btn-submit button{
+    background-color: #3598DB;
+    color: #fff;
+    border: 1px solid #3598DB;
+    width: 100px;
+    height: 40px;
+    border-radius: 5px;
+    font-size: 18px;
+    letter-spacing: 10px;
+    padding-left: 15px;
+    cursor: pointer;
+}
+.btn-submit{
+    padding: 30px 0 0 182px;
 }
