@@ -123,8 +123,12 @@
                                     <a th:href="@{/scene/list(meshName=${mesh.mname},meshId=${mesh.mesh_id},mid=${mesh.id})}"
                                        th:text="${mesh.scount}"></a>
                                 </td>
-                                <td class="k-link">
+                                <td class="k-link" th:if="${mesh.scount}!='0'">
                                     <a th:href="@{/scene/list(meshName=${mesh.mname},meshId=${mesh.mesh_id},mid=${mesh.id})}"
+                                       th:text="${mesh.scount}"></a>
+                                </td>
+                                <td  th:if="${mesh.scount}=='0'">
+                                    <a href="javascript:void(0);"
                                        th:text="${mesh.scount}"></a>
                                 </td>
                                 <td>未知</td>
