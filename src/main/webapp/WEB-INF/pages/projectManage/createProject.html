@@ -20,8 +20,7 @@
             <div class="clearfix main-right-nav">
                 <div class="f-l main-right-title">创建项目</div>
                 <div class="f-r pointer">
-                    <div class="goBack" onClick="javascript :history.back(-1);" onmousedown="backBtnMouseDown()"
-                         onmouseup="backBtnMouseUp()">
+                    <div class="goBack" onClick="javascript :history.back(-1);" onmousedown="backBtnMouseDown()" onmouseup="backBtnMouseUp()">
                         <span><</span><span>返回</span>
                     </div>
                 </div>
@@ -36,15 +35,13 @@
                             <div>
                                 <p class="project-hint"></p>
                                 <label for="projectName">项目名称：</label>
-                                <input type="text" placeholder="请输入（2-16位汉字、字母、数字）" maxlength="16" id="projectName"
-                                       onkeyup="nameKeyUp()">
+                                <input type="text" placeholder="请输入（2-16位汉字、字母、数字）" maxlength="16" id="projectName" onkeyup="nameKeyUp()">
                             </div>
                             <div>
                                 <p class="account-hint"></p>
                                 <label for="account">施工人员：</label>
                                 <input type="text" placeholder="请输入施工人员" id="account" th:if="${account}==null"/>
-                                <input type="text" id="account" th:if="${account}!=null" th:value="${account}"
-                                       readonly/>
+                                <input type="text" id="account" th:if="${account}!=null" th:value="${account}" readonly/>
                             </div>
                             <div class="">
                                 <button type="button" class="confirm-create" openTab="confirm-create">确定创建</button>
@@ -71,9 +68,7 @@
 </div>
 <script src="/alink-hq/static/js/jquery.min.js"></script>
 <script src="/alink-hq/static/js/createProject.js"></script>
-<script type="text/javascript" src="/alink-hq/static/js/left.js"></script>
+<script src="/alink-hq/static/js/left.js"></script>
 <script src="/alink-hq/static/js/moment.js"></script>
-<script  src="/alink-hq/static/js/selectivizr.js"></script>
-<script  src="/alink-hq/static/js/html5shiv.js"></script>
 </body>
 </html>
