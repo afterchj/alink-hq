@@ -147,9 +147,10 @@
                                     <!--<a th:href="@{/light/delete(ids=${light.id})}"-->
                                     <!--onclick="return confirm('您确定要删除所选的网络吗？')">-->
                                     <img src="/alink-hq/static/img/delete.png" th:alt="${light.id}"
-                                         class="singleDel pointer" title="删除">
+                                         class="singleDel pointer " title="删除" style="margin-right: 20px;">
                                     <!--</a>-->
-                                    <a href="">导出</a>
+                                    <img src="/alink-hq/static/img/export.png" th:alt="${light.id}"
+                                         class=" pointer " title="导出">
                                 </td>
                                 <td shiro:hasRole="user" class="p-r">
                                     <!--不能重命名-->
@@ -157,12 +158,14 @@
                                          th:title="无法操作">
                                     <!--不能移交-->
                                     <img src="/alink-hq/static/img/un-exchange.png" alt=""
-                                         class="center-img pointer  unclick"
+                                         class=" pointer  unclick"
                                          th:title="无法操作">
                                     <!--不能删除-->
                                     <img src="/alink-hq/static/img/un-delete.png" alt="" class="pointer   unclick"
-                                         th:title="无法操作">
+                                         th:title="无法操作"  style="margin-right: 20px;">
                                     <!--重命名-->
+                                    <img src="/alink-hq/static/img/export-un.png" th:alt="${light.id}"
+                                         class=" pointer unclick" title="导出">
                                 </td>
                             </tr>
                             </tbody>
