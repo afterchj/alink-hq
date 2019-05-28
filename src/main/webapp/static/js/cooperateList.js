@@ -88,7 +88,7 @@ $(function () {
            $('.hide-iframe').addClass('active');
            $('.hide-iframe').css({
                'width': width,
-               'height': height
+               'height': height 
            })
            var companyName = $(this).parent().siblings('.coo-name').text();
            console.log(companyName)
