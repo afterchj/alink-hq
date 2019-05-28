@@ -40,36 +40,36 @@
                         <div class="clearfix">
                             <div class="f-l">
                                 <span>项目中网络的数量：</span>
-                                <span th:text="${meshNum}"></span>
+                                <span class="meshNum" th:text="${meshNum}"></span>
                             </div>
-                            <div class="f-l">
+                            <div class="mesh f-l">
                                 <a th:href="@{/mesh/list(projectId=${projectId})}">查看网络列表</a>
                             </div>
                         </div>
                         <div class="clearfix">
                             <div class="f-l">
                                 <span>项目中区域的数量：</span>
-                                <span th:text="${placeNum}"></span>
+                                <span class="placeNum" th:text="${placeNum}"></span>
                             </div>
-                            <div class="f-l">
+                            <div class="place f-l">
                                 <a th:href="@{/place/list(projectId=${projectId},projectName=${projectName},mid=${mid})}">查看区域列表</a>
                             </div>
                         </div>
                         <div class="clearfix">
                             <div class="f-l">
                                 <span>项目中组的数量：</span>
-                                <span th:text="${groupNum}"></span>
+                                <span class="groupNum" th:text="${groupNum}"></span>
                             </div>
-                            <div class="f-l">
+                            <div class="group f-l">
                                 <a th:href="@{/group/list(projectId=${projectId})}">查看组列表</a>
                             </div>
                         </div>
                         <div class="clearfix">
                             <div class="f-l">
                                 <span>项目中灯的数量：</span>
-                                <span th:text="${lightNum}"></span>
+                                <span class="lightNum" th:text="${lightNum}"></span>
                             </div>
-                            <div class="f-l">
+                            <div class="light f-l">
                                 <a th:href="@{/light/list(projectId=${projectId},projectName=${projectName},mid=${mid})}">查看灯列表</a>
                             </div>
                         </div>
@@ -104,7 +104,21 @@
 <script type="text/javascript" src="/alink-hq/static/js/left.js"></script>
 <script src="/alink-hq/static/js/moment.js"></script>
 <script  src="/alink-hq/static/js/selectivizr.js"></script>
-<script  src="/alink-hq/static/js/html5shiv.js"></script>
+<script type="text/javascript">
+    $('.f-l a').click(function(){
+        if($('.meshNum').text()==0){
+            $('.mesh a').prop('href','javascript:return false;');
+        }
+        if($('.placeNum').text()==0){
+            $('.place a').prop('href','javascript:return false;');
+        }
+        if($('.groupNum').text()==0){
+            $('.group a').prop('href','javascript:return false;');
+        }
+        if($('.lightNum').text()==0){
+            $('.light a').prop('href','javascript:return false;');
+        }
+    })
+</script>
 </body>
-
 </html>
