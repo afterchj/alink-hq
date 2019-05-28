@@ -38,7 +38,7 @@ public class ProjectController {
 
 
     @RequestMapping(value = "/list", method = RequestMethod.GET)
-    public String list(Integer pageNum, Integer pageSize, String account, String projectName,
+    public String list(Integer pageNum, Integer pageSize, String account,String uname, String projectName,String coname,
                        String startCreateDate, String endCreateDate, String startUpdateDate, String endUpdateDate,
                        String sortFlag, HttpSession session, Model model) {
         User loginUser = (User) session.getAttribute("user");
@@ -68,18 +68,18 @@ public class ProjectController {
 
             if (role_id == 1 || role_id == 2) {
                 PageHelper.startPage(pageNum, pageSize);
-                list = projectService.searchBySuper(account, projectName, startCreateDate, endCreateDate,
+                list = projectService.searchBySuper(account, uname, projectName, coname, startCreateDate, endCreateDate,
                         startUpdateDate, endUpdateDate, sortFlag);
             } else if (role_id == 3) {
                 List<Integer> ids = projectService.findProjectList(uid);
                 if (ids.size() != 0) {
                     PageHelper.startPage(pageNum, pageSize);
-                    list = projectService.searchByManager(account, projectName, startCreateDate, endCreateDate,
+                    list = projectService.searchByManager(account, uname, projectName,coname, startCreateDate, endCreateDate,
                             startUpdateDate, endUpdateDate, ids, sortFlag);
                 }
             } else if (role_id == 4) {
                 PageHelper.startPage(pageNum, pageSize);
-                list = projectService.searchByUser(account, projectName, startCreateDate, endCreateDate,
+                list = projectService.searchByUser(account, uname, projectName,coname, startCreateDate, endCreateDate,
                         startUpdateDate, endUpdateDate, uid, sortFlag);
             }
             PageInfo<ProjectList> pageInfo = new PageInfo<>(list, pageSize);
@@ -87,7 +87,9 @@ public class ProjectController {
                 model.addAttribute("pageInfo", pageInfo);
             }
             model.addAttribute("account", account);
+            model.addAttribute("uname",uname);
             model.addAttribute("projectName", projectName);
+            model.addAttribute("coname", coname);
             model.addAttribute("role_id", role_id);
             model.addAttribute("startCreateDate", startCreateDate);
             model.addAttribute("endCreateDate", endCreateDate);

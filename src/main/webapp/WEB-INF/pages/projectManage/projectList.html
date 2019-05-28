@@ -182,12 +182,12 @@
                                 </div>
                                 <div class="f-r page-right">
                                 <span class="prev-page">
-                                    <a th:href="@{/project/list(pageNum=${pageInfo.prePage},pageSize=${pageInfo.pageSize},account=${account},projectName=${projectName},startCreateDate=${startCreateDate},endCreateDate=${endCreateDate},startUpdateDate=${startUpdateDate},endUpdateDate=${endUpdateDate},sortFlag=${sortFlag})}">
+                                    <a th:href="@{/project/list(pageNum=${pageInfo.prePage},pageSize=${pageInfo.pageSize},account=${account},uname=${uname},projectName=${projectName},coname=${coname},startCreateDate=${startCreateDate},endCreateDate=${endCreateDate},startUpdateDate=${startUpdateDate},endUpdateDate=${endUpdateDate},sortFlag=${sortFlag})}">
                                         <span class="prev "><span><</span></span></a>
                                 </span>
                                     <span th:text="${pageInfo.pageNum}" class="pages"></span>
                                 <span class="next-page">
-                                   <a th:href="@{/project/list(pageNum=${pageInfo.nextPage},pageSize=${pageInfo.pageSize},account=${account},projectName=${projectName},startCreateDate=${startCreateDate},endCreateDate=${endCreateDate},startUpdateDate=${startUpdateDate},endUpdateDate=${endUpdateDate},sortFlag=${sortFlag})}">
+                                   <a th:href="@{/project/list(pageNum=${pageInfo.nextPage},pageSize=${pageInfo.pageSize},account=${account},uname=${uname},projectName=${projectName},coname=${coname},startCreateDate=${startCreateDate},endCreateDate=${endCreateDate},startUpdateDate=${startUpdateDate},endUpdateDate=${endUpdateDate},sortFlag=${sortFlag})}">
                                        <!--<img src="/alink-hq/static/img/right-arrow-color.png" alt="">-->
                                        <span class="next"><span>></span></span>
                                    </a>
