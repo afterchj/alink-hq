@@ -88,10 +88,10 @@ $(function () {
            $('.hide-iframe').addClass('active');
            $('.hide-iframe').css({
                'width': width,
-               'height': height 
+               'height': height
            })
            var companyName = $(this).parent().siblings('.coo-name').text();
-           console.log(companyName)
+           console.log(companyName) 
            //该公司所有账号下是否有项目,若没有项目
            $('div[openContent="delete-project"] .reset-pwd').text('您确定要删除' + companyName + '信息？');
            //有项目
