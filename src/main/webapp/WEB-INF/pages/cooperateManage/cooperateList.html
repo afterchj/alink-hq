@@ -18,26 +18,18 @@
         <!--<div class="must f-l"></div>-->
         <div class="main-right f-l">
             <div class="clearfix main-right-nav">
-                <div class="f-l main-right-title">合作列表
-                    <!--<span class="subjection">(隶属项目：<span th:inline="text">XXX</span>)</span>-->
+                <div class="f-l main-right-title">合作列表</div>
+                <div class="f-r pointer">
+                    <a th:href="">
+                        <div class="create" onmousedown="createBtnMouseDown()" onmouseup="createBtnMouseUp()">
+                        <span>+</span><span>新增合作信息</span></div>
+                    </a>
                 </div>
-                <!--<div class="f-r pointer">-->
-                <!--<a th:href="@{/project/createProject}" th:if="${role_id!=4}">-->
-                <!--<div class="create" onmousedown="createBtnMouseDown()" onmouseup="createBtnMouseUp()">-->
-                <!--<span>+</span><span>创建项目</span></div>-->
-                <!--</a>-->
-                <!--<a href="javascript:void(0)" class="unclick1" th:if="${role_id==4}">-->
-                <!--<div class="create no-access" onmousedown="createBtnMouseDown()" onmouseup="createBtnMouseUp()">-->
-                <!--<span>+</span><span>创建项目</span></div>-->
-                <!--</a>-->
-                <!--</div>-->
                 <div class="f-r pointer">
                     <div class="goBack" onClick="javascript :history.back(-1);" onmousedown="backBtnMouseDown()"
                          onmouseup="backBtnMouseUp()">
-                        <!--<span class="triangle-facing-left"></span>-->
                         <span><</span><span>返回</span>
                     </div>
-                    <!--<img src="/alink-hq/static/img/go-back.png" alt="" onclick="history.back()">-->
                 </div>
             </div>
             <div id="projectList" class="">
@@ -48,12 +40,6 @@
                                 <label for="projectName">合作公司名称</label>
                                 <input type="text" id="projectName" placeholder="请输入合作公司名称">
                             </div>
-                            <!--<div class="p-r">-->
-                            <!--<label for="create-time">创建时间</label>-->
-                            <!--<input type="text" id="create-time" placeholder="请选择日期" AUTOCOMPLETE="off">-->
-                            <!--<img src="/alink-hq/static/img/date.png" alt="" class="p-a">-->
-                            <!--</div>-->
-
                         </div>
                         <div class="f-l search">
                             <div>
@@ -64,26 +50,8 @@
                                     <option value="2">终止</option>
                                 </select>
                             </div>
-                            <!--<div class="p-r">-->
-                            <!--<label for="end-time">更新时间</label>-->
-                            <!--<input type="text" id="end-time" placeholder="请选择日期" AUTOCOMPLETE="off">-->
-                            <!--<img src="/alink-hq/static/img/date.png" alt="" class="p-a">-->
-                            <!--</div>-->
-
                         </div>
-                        <!--<div class="f-r search-button ">-->
-                        <!--<button type="submit" class="pointer">查询</button>-->
-                        <!--</div>-->
-                        <!--<div class="f-l search">-->
-                        <!--<div class="p-r">-->
-                        <!--<label for="meshName">网络名称</label>-->
-                        <!--<input type="text" id="meshName" placeholder="请输入网络名称" AUTOCOMPLETE="off">-->
-                        <!--</div>-->
-                        <!--<div class="p-r">-->
-                        <!--<label for="meshId">网络ID</label>-->
-                        <!--<input type="text" id="meshId" placeholder="请输入网络ID" AUTOCOMPLETE="off">-->
-                        <!--</div>-->
-                        <!--</div>-->
+
                         <div class="f-r search-button " style="margin-top: 0;">
                             <button type="submit" class="pointer">查询</button>
                         </div>
@@ -98,34 +66,17 @@
                             <th><span>联系方式</span></th>
                             <th><span>录入时间</span></th>
                             <th><span>合作状态</span></th>
-                            <!--<th><span>是否重复</span></th>-->
-                            <!--<th class="p-r">-->
-                            <!--<span class="toTime ">创建时间</span>-->
-                            <!--<img src="/alink-hq/static/img/fewer.png" alt="" class="p-a toTop  sort-t pointer">-->
-                            <!--<img src="/alink-hq/static/img/unfold.png" alt="" class="p-a toBottom sort-b  pointer">-->
-                            <!--</th>-->
-                            <!--<th class="p-r">-->
-                            <!--<span class="toTime">更新时间</span>-->
-                            <!--<img src="/alink-hq/static/img/fewer.png" alt="" class="p-a  toTop1 sort-t pointer">-->
-                            <!--<img src="/alink-hq/static/img/unfold.png" alt=""-->
-                            <!--class="p-a  toBottom1  sort-b pointer">-->
-                            <!--</th>-->
-                            <!--<th><span>定时状态</span></th>-->
                             <th class="operation"><span>操作</span></th>
                             <th class="memo" style="width:320px;"><span>备忘录</span></th>
                         </tr>
                         </thead>
                         <tbody>
                         <tr>
-                            <td><a href="">苏州天平先进数字科技有限公司</a></td>
-                            <td><a href="">13505201123</a></td>
+                            <td class="k-link"><a href="">苏州天平先进数字科技有限公司</a></td>
+                            <td class="k-link"><a href="">13505201123</a></td>
                             <td><p>2019/05/13</p>
                                 <p>14:55:44</p></td>
-                            <!--<td>工作日</td>-->
-                            <!--<td>重复</td>-->
-                            <!--<td><p>2019/05/13</p><p>14:55:44</p></td>-->
-                            <!--<td><p>2019/05/13</p><p>14:55:44</p></td>-->
-                            <td><a href="">启用</a></td>
+                            <td class="off-or-on" style="color: #0B78CE;">启用</td>
                             <td class="p-r">
                                 <img src="/alink-hq/static/img/edit.png" alt="" class="pointer reset-name"
                                      th:title="重命名" style="margin-right: 20px;">
@@ -144,91 +95,18 @@
                                 </div>
                             </td>
                         </tr>
-                        <!--<tr th:each="project:${pageInfo.list}">-->
-
-                        <!--&lt;!&ndash;<td class="checkbox ">&ndash;&gt;-->
-                        <!--&lt;!&ndash;<input type="checkbox" th:value="${project.id}" class="pointer">&ndash;&gt;-->
-                        <!--&lt;!&ndash;</td>&ndash;&gt;-->
-                        <!--<td th:text="${project.id}" style="display: none" class="project-id"></td>-->
-                        <!--<td th:text="${project.coname}" style="display: none" class="project-coname"></td>-->
-                        <!--<td class="project-name k-link">-->
-                        <!--<a th:href="@{/project/detail(account=${project.account},coname=${project.coname},meshNum=${project.meshNum},projectId=${project.id},projectName=${project.name})}"-->
-                        <!--th:text="${project.name}"></a>-->
-                        <!--</td>-->
-                        <!--<td class="meshNum k-link">-->
-                        <!--<a th:href="@{/mesh/list(projectId=${project.id})}" th:text="${project.meshNum}"></a>-->
-                        <!--</td>-->
-                        <!--<td th:text="${project.account}" class="project-account"></td>-->
-                        <!--<td th:text="${project.account}" class="project-account"></td>-->
-                        <!--<td th:text="${project.account}" class="project-account"></td>-->
-                        <!--<td th:text="${project.create_date}"></td>-->
-                        <!--<td th:text="${project.update_date}"></td>-->
-                        <!--<td th:if="${role_id!=4}" class="p-r">-->
-                        <!--<img src="/alink-hq/static/img/edit.png" alt="" class="pointer reset-name"-->
-                        <!--th:title="重命名">-->
-                        <!--<img src="/alink-hq/static/img/exchange.png" alt=""-->
-                        <!--class="center-img pointer exchange-project " th:title="移交项目">-->
-                        <!--<img src="/alink-hq/static/img/delete.png" alt="" class="pointer delete-project"-->
-                        <!--th:title="删除">-->
-                        <!--</td>-->
-
-                        <!--<td th:if="${role_id==4}" class="p-r">-->
-                        <!--&lt;!&ndash;不能重命名&ndash;&gt;-->
-                        <!--<img src="/alink-hq/static/img/un-rename.png" alt="" class="pointer  unclick"-->
-                        <!--th:title="无法操作">-->
-                        <!--&lt;!&ndash;不能移交&ndash;&gt;-->
-                        <!--<img src="/alink-hq/static/img/un-exchange.png" alt=""-->
-                        <!--class="center-img pointer  unclick"-->
-                        <!--th:title="无法操作">-->
-                        <!--&lt;!&ndash;不能删除&ndash;&gt;-->
-                        <!--<img src="/alink-hq/static/img/un-delete.png" alt="" class="pointer   unclick"-->
-                        <!--th:title="无法操作">-->
-                        <!--&lt;!&ndash;重命名&ndash;&gt;-->
-                        <!--</td>-->
-                        <!--</tr>-->
                         </tbody>
                         <tfoot>
                         <tr>
                             <td colspan="9" class="clearfix page">
-                                <!--<div class="f-l">-->
-                                <!--<span class="selected-order">已选择-->
-                                <!--<span class="amount">0</span>-->
-                                <!--条数据-->
-                                <!--</span>-->
-                                <!--<span class="m-r-20">-->
-                                <!--<span th:if="${role_id==4}" class="skipPageBtn  moment active unclick1"-->
-                                <!--id="transfer-project">移交</span>-->
-                                <!--<span th:if="${role_id!=4}" class="skipPageBtn pointer moment"-->
-                                <!--onmousedown="exchangeBtnMouseDown()" onmouseup="exchangeBtnMouseUp()"-->
-                                <!--id="transfer-project">移交</span>-->
-                                <!--</span>-->
-                                <!--<span>-->
-                                <!--<span th:if="${role_id==4}" class="skipPageBtn  moment active unclick1"-->
-                                <!--id="delete-project">删除</span>-->
-                                <!--<span th:if="${role_id!=4}" class="skipPageBtn pointer moment"-->
-                                <!--onmousedown="deleteBtnMouseDown()" onmouseup="deleteBtnMouseUp()"-->
-                                <!--id="delete-project">删除</span>-->
-                                <!--</span>-->
-                                <!--</div>-->
                                 <div class="f-r page-right">
                                 <span class="prev-page">
-                                    <!--<a th:href="@{/project/list(pageNum=${pageInfo.prePage},pageSize=${pageInfo.pageSize},account=${account},projectName=${projectName},startCreateDate=${startCreateDate},endCreateDate=${endCreateDate},startUpdateDate=${startUpdateDate},endUpdateDate=${endUpdateDate},sortFlag=${sortFlag})}">-->
-                                    <!--<span class="prev "><span><</span></span></a>-->
                                     <a href=""><span class="prev "><span><</span></span></a>
                                 </span>
-                                    <!--<span th:text="${pageInfo.pageNum}" class="pages"></span>-->
                                     <span class="pages">22</span>
                                 <span class="next-page">
-                                   <!--<a th:href="@{/project/list(pageNum=${pageInfo.nextPage},pageSize=${pageInfo.pageSize},account=${account},projectName=${projectName},startCreateDate=${startCreateDate},endCreateDate=${endCreateDate},startUpdateDate=${startUpdateDate},endUpdateDate=${endUpdateDate},sortFlag=${sortFlag})}">-->
-                                    <!--&lt;!&ndash;<img src="/alink-hq/static/img/right-arrow-color.png" alt="">&ndash;&gt;-->
-                                    <!--<span class="next"><span>></span></span>-->
-                                    <!--</a>-->
                                     <a href=""><span class="prev "><span>></span></span></a>
                                 </span>
-                                    <!--<span class="m-l-15 m-r-20">共-->
-                                    <!--<span th:text="${pageInfo.pages}" class="pageTotal" id="pageTotal"></span>-->
-                                    <!--页/<span th:text="${pageInfo.total}"></span>条数据-->
-                                    <!--</span>-->
                             <span class="m-l-15 m-r-20">共
                                     <span class="pageTotal" id="pageTotal"></span>
                                     页/<span></span>条数据
@@ -240,7 +118,6 @@
                                 <div id="skipPageBtn" class="pointer moment skipPageBtn"
                                      onmousedown="skipBtnMouseDown()" onmouseup="skipBtnMouseUp()">跳转
                                 </div>
-                                <!--<img src="/alink-hq/static/img/skip.png" alt="" id="skipPageBtn" class="pointer moment"/>-->
                         </span>
                                     <span class="m-r-15r">每页显示：</span>
                             <span class="m-r-20">
@@ -260,27 +137,12 @@
                     <table border="1" class="noData ">
                         <thead>
                         <tr>
-                            <th class="all-checkbox " style="width: 120px;">
-                            <span style="vertical-align: sub;vertical-align: sub;width: 30px; display: inline-block;"><input
-                                    type="checkbox" id="all" class="pointer"></span>
-                                <span class="">全选</span>
-                            </th>
-                            <th style="display: none">所属公司</th>
-                            <th style="width: 200px;">项目名称</th>
-                            <th style="width: 180px;">项目中选中网络数量</th>
-                            <th style="width: 180px;">施工人员</th>
-                            <th class="p-r" style="width: 200px;">
-                                <span class="toTime">创建时间</span>
-                                <img src="/alink-hq/static/img/fewer.png" alt="" class="p-a toTop  sort-t pointer">
-                                <img src="/alink-hq/static/img/unfold.png" alt="" class="p-a toBottom sort-b  pointer">
-                            </th>
-                            <th class="p-r" style="width: 200px;">
-                                <span class="toTime">更新时间</span>
-                                <img src="/alink-hq/static/img/fewer.png" alt="" class="p-a  toTop1 sort-t pointer">
-                                <img src="/alink-hq/static/img/unfold.png" alt=""
-                                     class="p-a  toBottom1  sort-b pointer">
-                            </th>
-                            <th>操作</th>
+                            <th><span>合作公司名称</span></th>
+                            <th><span>联系方式</span></th>
+                            <th><span>录入时间</span></th>
+                            <th><span>合作状态</span></th>
+                            <th class="operation"><span>操作</span></th>
+                            <th class="memo" style="width:320px;"><span>备忘录</span></th>
                         </tr>
                         </thead>
                         <tbody>
@@ -292,41 +154,6 @@
                         </tr>
                         </tbody>
                     </table>
-                    <!--<table border="1" class="noData active" th:if="${pageInfo==null}">-->
-                    <!--<thead>-->
-                    <!--<tr>-->
-                    <!--<th class="all-checkbox " style="width: 120px;">-->
-                    <!--<span style="vertical-align: sub;vertical-align: sub;width: 30px; display: inline-block;"><input-->
-                    <!--type="checkbox" id="all" class="pointer"></span>-->
-                    <!--<span class="">全选</span>-->
-                    <!--</th>-->
-                    <!--<th style="display: none">所属公司</th>-->
-                    <!--<th style="width: 200px;">项目名称</th>-->
-                    <!--<th style="width: 180px;">项目中选中网络数量</th>-->
-                    <!--<th style="width: 180px;">施工人员</th>-->
-                    <!--<th class="p-r" style="width: 200px;">-->
-                    <!--<span class="toTime">创建时间</span>-->
-                    <!--<img src="/alink-hq/static/img/fewer.png" alt="" class="p-a toTop  sort-t pointer">-->
-                    <!--<img src="/alink-hq/static/img/unfold.png" alt="" class="p-a toBottom sort-b  pointer">-->
-                    <!--</th>-->
-                    <!--<th class="p-r" style="width: 200px;">-->
-                    <!--<span class="toTime">更新时间</span>-->
-                    <!--<img src="/alink-hq/static/img/fewer.png" alt="" class="p-a  toTop1 sort-t pointer">-->
-                    <!--<img src="/alink-hq/static/img/unfold.png" alt=""-->
-                    <!--class="p-a  toBottom1  sort-b pointer">-->
-                    <!--</th>-->
-                    <!--<th>操作</th>-->
-                    <!--</tr>-->
-                    <!--</thead>-->
-                    <!--<tbody>-->
-                    <!--<tr>-->
-                    <!--<td colspan="9">-->
-                    <!--<img src="/alink-hq/static/img/no-data.png" alt="">-->
-                    <!--<p>暂无数据</p>-->
-                    <!--</td>-->
-                    <!--</tr>-->
-                    <!--</tbody>-->
-                    <!--</table>-->
                 </div>
             </div>
         </div>
@@ -379,19 +206,20 @@
     </div>
 </div>
 
-<!--<div class="pop-iframe memo-edit-has" openContent="memo-edit-has">-->
-    <!--&lt;!&ndash;<div class=" p-r pop-nav">&ndash;&gt;-->
-        <!--&lt;!&ndash;备忘录&ndash;&gt;-->
-    <!--&lt;!&ndash;</div>&ndash;&gt;-->
-    <!--&lt;!&ndash;<div class="pop-content">&ndash;&gt;-->
-        <!--&lt;!&ndash;<textarea rows="9" maxlength="200"  style="width: 93%;border: none;margin-top: 10px;"  class="wishContent"  placeholder="请输入不超过200个字"></textarea>&ndash;&gt;-->
-        <!--&lt;!&ndash;<p ><span class="wordsNum">0/200</span></p>&ndash;&gt;-->
-        <!--&lt;!&ndash;<div class="pop-btn">&ndash;&gt;-->
-            <!--&lt;!&ndash;<button class="reduce">取消</button>&ndash;&gt;-->
-            <!--&lt;!&ndash;<button class="yes">确定</button>&ndash;&gt;-->
-        <!--&lt;!&ndash;</div>&ndash;&gt;-->
-    <!--</div>-->
-<!--</div>-->
+<!-- 确定启用禁用弹出框 -->
+<div class="confirm-on-off pop-iframe " openContent="start-use">
+    <div class="confirm-on-off-nav p-r pop-nav">
+        温馨提示
+    </div>
+    <div class="pop-content">
+        <div class="off-or-on"></div>
+        <div class="pop-btn">
+            <button class="reduce" type="button">取消</button>
+            <button class="yes" type="button">确定</button>
+        </div>
+    </div>
+</div>
+
 <div class="hide-iframe "></div>
 
 <script src="/alink-hq/static/js/jquery.min.js"></script>

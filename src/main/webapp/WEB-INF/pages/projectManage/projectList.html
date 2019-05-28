@@ -43,7 +43,7 @@
             <div id="projectList" class="">
                 <div class="search-condition ">
                     <form action="" class="clearfix">
-                        <div class="f-l search" style="margin-right:50px;">
+                        <div class="f-l search" >
                             <div>
                                 <label for="projectName">项目名称</label>
                                 <input type="text" id="projectName" placeholder="请输入项目名称">
@@ -54,7 +54,7 @@
                                 <img src="/alink-hq/static/img/date.png" alt="" class="p-a">
                             </div>
                         </div>
-                        <div class="f-l search" style="margin-right:50px;">
+                        <div class="f-l search" >
                             <div>
                                 <label for="account">施工人员</label>
                                 <input type="text" placeholder="请输入施工人员账号/用户名" id="account">
@@ -70,8 +70,9 @@
                                 <label for="company">隶属公司</label>
                                 <input type="text" placeholder="请输入施工人员账号" id="company">
                             </div>
-                            <div class=" search-button  no-top">
-                                <button type="button" class="pointer">查询</button>
+                            <div >
+                                <label for="username">用户名</label>
+                                <input type="text" id="username" placeholder="请输入用户名" AUTOCOMPLETE="off">
                             </div>
                             <!--<div class="p-r">-->
                                 <!--<label for="end-time">更新时间</label>-->
@@ -79,7 +80,9 @@
                                 <!--<img src="/alink-hq/static/img/date.png" alt="" class="p-a">-->
                             <!--</div>-->
                         </div>
-
+                        <div class=" f-r search-button">
+                            <button type="button" class="pointer">查询</button>
+                        </div>
                     </form>
                 </div>
                 <div class="search-result">

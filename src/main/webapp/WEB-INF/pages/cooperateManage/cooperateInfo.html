@@ -8,6 +8,8 @@
     <link rel="stylesheet" href="/alink-hq/static/css/common.css">
     <link rel="stylesheet" href="/alink-hq/static/css/leftNav.css">
     <link rel="stylesheet" href="/alink-hq/static/css/projectManage.css">
+    <script src="/alink-hq/static/js/jquery.min.js"></script>
+    <script  src="/alink-hq/static/js/upload.js"></script>
     <title>公司信息录入</title>
 </head>
 
@@ -34,19 +36,69 @@
             <div id="timerDetail">
                 <div class="p-detail">
                     <div class="p-nav">公司信息录入</div>
-                    <div class="p-content">
-
+                    <div class="p-content p-r">
+                        <form action="" class="company-msg">
+                            <div class="edit-company">
+                                <label for="company-name"><span>*</span>公司名称：</label>
+                                <input type="text" id="company-name" placeholder="请填写公司名称">
+                            </div>
+                            <div class="edit-company">
+                                <label for="company-phone"><span>*</span>公司电话：</label>
+                                <input type="text" id="company-phone" placeholder="请填写公司电话">
+                            </div>
+                            <div class="edit-company">
+                                <label for="address"><span>*</span>通讯地址：</label>
+                                <input type="text" id="address" placeholder="请填写通讯地址">
+                            </div>
+                            <div class="edit-company clearfix">
+                                <label for="drop_area" style="vertical-align: top;"><span>*</span>营业执照：</label>
+                                <div id="drop_area" ></div>
+                            </div>
+                            <div class="edit-company">
+                                <label for="serial"><span>*</span>营业执照编号：</label>
+                                <input type="text" id="serial" placeholder="请填写营业执照编号">
+                            </div>
+                            <div class="btn-submit">
+                                <button type="button">提交</button>
+                            </div>
+                        </form>
+                        <div class="img-max p-a">
+                            <img src="" alt="" id="img-max">
+                        </div>
                     </div>
                 </div>
+
             </div>
         </div>
     </div>
 </div>
-<script src="/alink-hq/static/js/jquery.min.js"></script>
 <script  src="/alink-hq/static/js/left.js"></script>
 <script src="/alink-hq/static/js/moment.js"></script>
-<script  src="/alink-hq/static/js/selectivizr.js"></script>
-<script  src="/alink-hq/static/js/html5shiv.js"></script>
+<script>
+    var dragImgUpload = new DragImgUpload("#drop_area",{
+        callback:function (files) {
+            //回调函数，可以传递给后台等等
+            var file = files[0];
+            console.log(file.name);
+        }
+    })
+//    $('#drop_area').hover(function(){
+//        var imgUrl=$(this).find('img')[0].src;
+//        console.log(imgUrl);
+//        $('#img-max').attr('src',imgUrl);
+//    })
+    $('#drop_area').on({
+
+        mouseover : function(){
+            var imgUrl=$(this).find('img')[0].src;
+            $('#img-max').attr('src',imgUrl);
+        } ,
+        mouseout : function(){
+            var imgUrl=$(this).find('img')[0].src;
+            $('#img-max').attr('src','');
+        }
+    }) ;
+</script>
 </body>
 
 </html>
