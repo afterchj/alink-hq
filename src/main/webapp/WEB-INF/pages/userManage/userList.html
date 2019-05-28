@@ -82,7 +82,7 @@
                             <th class="p-r" style="width: 180px;">
                                 <span>绑定邮箱</span>
                             </th>
-                            <th class="p-r" style="width: 220px;">
+                            <th class="p-r" style="width: 300px;">
                                 <span>隶属公司</span>
                             </th>
                             <th class="p-r" style="width: 120px;">
@@ -95,6 +95,7 @@
                                 <span>状态</span>
                             </th>
                             <th class="operation"><span>操作</span></th>
+                            <th class="memo" style="width:320px;"><span>备忘录</span></th>
                         </tr>
                         </thead>
                         <tbody>
@@ -131,6 +132,17 @@
                                      openTab="delete-account" class="pointer" th:title="删除">
                                 <div class="popup p-a">
                                     重命名
+                                </div>
+                            </td>
+                            <td class="p-r" >
+                                <img src="/alink-hq/static/img/edit.png" alt="" class="pointer memo-edit"
+                                     th:title="备忘录">
+                                <!-- 备忘录不为空 -->
+                                <div class="memo-edit-has">
+                                    <div class="meno-nav"><img src="/alink-hq/static/img/edit.png" alt="" class="pointer"></div>
+                                    <div class="memo-content">
+                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam cupiditate deleniti sint sit voluptate. Aliquam delectus, dolor ex fugiat, hic iste magni maxime officia quod repellat similique veniam vero voluptatibus.
+                                    </div>
                                 </div>
                             </td>
                         </tr>
@@ -310,6 +322,21 @@
         <div class="pop-btn">
             <button class="reduce" type="button">取消</button>
             <button class="yes" type="button" style="width: 130px;letter-spacing: 5px;">移交项目</button>
+        </div>
+    </div>
+</div>
+
+<!-- 备忘录为空 -->
+<div class="pop-iframe" openContent="memo-edit">
+    <div class=" p-r pop-nav">
+        备忘录
+    </div>
+    <div class="pop-content">
+        <textarea rows="9" maxlength="200"  style="width: 93%;border: none;margin-top: 10px;"  class="wishContent"  placeholder="请输入不超过200个字"></textarea>
+        <p class="right-font"><span class="wordsNum">0/200</span></p>
+        <div class="pop-btn">
+            <button class="reduce">取消</button>
+            <button class="yes">确定</button>
         </div>
     </div>
 </div>

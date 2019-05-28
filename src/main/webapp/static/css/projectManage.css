@@ -1141,3 +1141,9 @@ form.company-msg{
     width: 100%;
     height: auto;
 }
+#timerDetail .edit-company span{
+    color: red;
+    width: 20px;
+    text-align: center;
+    vertical-align: sub;
+}
