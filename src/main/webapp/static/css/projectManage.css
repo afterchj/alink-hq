@@ -962,7 +962,7 @@ input:-ms-input-placeholder { /* Internet Explorer 10+ */
     text-align: center;
     line-height: 42px;
     width: 220px;
-    background-color: #fafafa;
+    background-color: #fff;
 
 }
 
