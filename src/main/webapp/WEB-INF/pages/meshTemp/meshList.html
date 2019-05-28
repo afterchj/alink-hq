@@ -93,7 +93,7 @@
                                 <th><span>网络名称</span></th>
                                 <th><span>网络ID</span></th>
                                 <th><span>网络类型</span></th>
-                                <th><span>属于项目</span></th>
+                                <th><span>隶属项目</span></th>
                                 <th><span>区域数量</span></th>
                                 <th><span>场景数量</span></th>
                                 <th><span>定时数量</span></th>
@@ -123,8 +123,12 @@
                                     <a th:href="@{/scene/list(meshName=${mesh.mname},meshId=${mesh.mesh_id},mid=${mesh.id})}"
                                        th:text="${mesh.scount}"></a>
                                 </td>
-                                <td class="k-link">
+                                <td class="k-link" th:if="${mesh.scount}!='0'">
                                     <a th:href="@{/scene/list(meshName=${mesh.mname},meshId=${mesh.mesh_id},mid=${mesh.id})}"
+                                       th:text="${mesh.scount}"></a>
+                                </td>
+                                <td  th:if="${mesh.scount}=='0'">
+                                    <a href="javascript:void(0);"
                                        th:text="${mesh.scount}"></a>
                                 </td>
                                 <td>未知</td>
@@ -191,7 +195,7 @@
                                 <th>网络名称</th>
                                 <th>网络ID</th>
                                 <th>网络类型</th>
-                                <th>属于项目</th>
+                                <th>隶属项目</th>
                                 <th>区域数量</th>
                                 <th>场景数量</th>
                                 <th>状态</th>

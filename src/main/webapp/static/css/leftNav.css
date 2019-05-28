@@ -132,12 +132,13 @@
     background-color: #3598DB;
     color: #fff;
     border: 1px solid #3598DB;
-    height: 34px;
-    width: 95px;
-    line-height: 34px;
+    height: 32px;
+    width: unset;
+    line-height: 32px;
     border-radius: 5px;
     text-align: center;
-    font-size: 16px;
+    font-size: 15px;
+    padding: 0px 5px;
 }
 .goBack{
     border: 2px solid #3598DB;

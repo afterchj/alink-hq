@@ -962,7 +962,7 @@ input:-ms-input-placeholder { /* Internet Explorer 10+ */
     text-align: center;
     line-height: 42px;
     width: 220px;
-    background-color: #fafafa;
+    background-color: #fff;
 
 }
 
@@ -1057,6 +1057,7 @@ input:-ms-input-placeholder { /* Internet Explorer 10+ */
     background-color: #dceaf3;
     padding: 10px;
     display: none;
+    z-index: 999;
 }
 .meno-nav{
     text-align: right;

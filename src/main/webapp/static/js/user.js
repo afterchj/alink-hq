@@ -42,7 +42,7 @@ function shade(open, text) {
                 $('.pop-content').find('p').remove();
                 if (text == '启用') {
                     $(' .off-or-on').text('您确定要禁用该账户吗？');
-                    var content = '<p style="  font-size: 15px;color: #fb2a2a;margin-top:30px;">禁用后，该账号将无法登录</p>';
+                    var content = '<p style="  font-size: 14px;color: #fb2a2a;margin-top:10px;">禁用后，该账号将无法登录</p>';
                     $(' .pop-content').append(content);
                 } else {
                     $(' .off-or-on').text('您确定要启用该账户吗？');
