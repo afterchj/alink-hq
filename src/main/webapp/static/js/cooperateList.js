@@ -35,6 +35,18 @@ $(function(){
         $('div[openContent="memo-edit"]').removeClass('active');
         $('.hide-iframe').removeClass('active');
     })
+    //启用禁用
+    $('.off-or-on').click(function(){
+        //如果已经禁用，则启用
+        $('div[openContent="start-use"]').addClass('active');
+        var width = window.screen.width;
+        var height = window.screen.height;
+        $('.hide-iframe').addClass('active');
+        $('.hide-iframe').css({
+            'width': width,
+            'height': height
+        })
+    })
 })
 
 //封装一个限制字数方法
