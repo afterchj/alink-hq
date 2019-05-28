@@ -63,14 +63,6 @@ $(function () {
     })
 })
 
-
-// $(function () {
-//     var tabs = "projectList";
-//     var index=0;
-//     left(tabs,index);
-// })
-
-
 //条件筛选
 $(function () {
     var url = window.location.href;
@@ -176,25 +168,6 @@ $(function () {
         if(!pageSize){
             pageSize='';
         }
-        // var startTime = $('#start-time').val();
-        // var startCreateDate = startTime.substring(0, 10);
-        // var endCreateDate = startTime.substring(13, 23);
-        // var endTime = $('#end-time').val();
-        // var startUpdateDate = endTime.substring(0, 10);
-        // var endUpdateDate = endTime.substring(13, 23);
-        // console.log(startCreateDate,endCreateDate);
-        // if(startCreateDate==endCreateDate){
-        //     var newDate=endCreateDate.substring(0,endCreateDate.length-2);
-        //     var addTime=parseInt(endCreateDate.substring(endCreateDate.length,endCreateDate.length-2))+1;
-        //     if(addTime<10){
-        //         addTime='0'+addTime;
-        //     }else if(addTime>31){
-        //
-        //     }
-        //     console.log(newDate,addTime);
-        //     endCreateDate=newDate+addTime;
-        //     console.log(endCreateDate);
-        // }
         condition(pageSize, pageNum, sortFlag);
     })
     //选择页数变化
