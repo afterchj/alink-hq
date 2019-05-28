@@ -44,8 +44,8 @@ public class GroupController {
         if (pageInfo.getList().size() > 0) {
             modelMap.put("pageInfo", pageInfo);
         }
-        OptionList project = meshService.getProject(dict);
-        modelMap.put("project", project);
+//        OptionList project = meshService.getProject(dict);
+//        modelMap.put("project", project);
         modelMap.put("dict", dict);
         return "meshTemp/groupList";
     }
@@ -70,7 +70,10 @@ public class GroupController {
 
     @RequestMapping("/create")
     public String create(SearchDict dict, ModelMap modelMap) {
-        OptionList project = meshService.getProject(dict);
+        Map map = new HashMap();
+        map.put("projectId", dict.getProjectId());
+        modelMap.put("mid", dict.getMid());
+        OptionList project = meshService.getProject(map);
         modelMap.put("project", project);
         modelMap.put("dict", dict);
         return "meshTemp/groupCreate";
