@@ -20,11 +20,11 @@ public interface AccountService {
 
     List<Firm> findFirmByUid(String uid);
 
-    List<UserList> searchBySuper(String account,Integer fid,Integer roleId,String startDate,String endDate);
+    List<UserList> searchBySuper(String account,String uname,Integer fid,Integer roleId,String startDate,String endDate);
 
-    List<UserList> searchByAdmin(String account, Integer fid, Integer roleId, String startDate, String endDate);
+    List<UserList> searchByAdmin(String account,String uname, Integer fid, Integer roleId, String startDate, String endDate);
 
-    List<UserList> searchByManager(String account, List<String> uids, String startDate, String endDate);
+    List<UserList> searchByManager(String account,String uname, List<String> uids, String startDate, String endDate);
 
     List<String> findFirmUidOfUser(String uid);
 

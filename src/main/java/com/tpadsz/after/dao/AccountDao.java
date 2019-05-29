@@ -16,11 +16,11 @@ public interface AccountDao {
 
     List<Role> findRoleList();
 
-    List<UserList> searchBySuper(@Param("account")String account,@Param("fid")Integer fid,@Param("roleId")Integer roleId,@Param("startDate")String startDate,@Param("endDate")String endDate);
+    List<UserList> searchBySuper(@Param("account")String account,@Param("uname")String uname,@Param("fid")Integer fid,@Param("roleId")Integer roleId,@Param("startDate")String startDate,@Param("endDate")String endDate);
 
-    List<UserList> searchByAdmin(@Param("account")String account, @Param("fid")Integer fid, @Param("roleId")Integer roleId, @Param("startDate")String startDate, @Param("endDate")String endDate);
+    List<UserList> searchByAdmin(@Param("account")String account, @Param("uname")String uname,@Param("fid")Integer fid, @Param("roleId")Integer roleId, @Param("startDate")String startDate, @Param("endDate")String endDate);
 
-    List<UserList> searchByManager(@Param("account")String account,@Param("list")List<String> uids,@Param("startDate")String startDate,@Param("endDate")String endDate);
+    List<UserList> searchByManager(@Param("account")String account,@Param("uname")String uname, @Param("list")List<String> uids,@Param("startDate")String startDate,@Param("endDate")String endDate);
 
     List<String> findFirmUidOfUser(@Param("uid") String uid);
 

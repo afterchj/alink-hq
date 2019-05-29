@@ -115,6 +115,8 @@ $(function () {
     }
     $('#account').val(account);
     $('#projectName').val(projectName);
+    $('#username').val(uname);
+    $('#company').val(coname);
     $('.toTop').click(function () {
         var sortFlag = '1';
         var pageSize = $('#page-select option:selected').val();
