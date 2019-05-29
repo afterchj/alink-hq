@@ -19,22 +19,18 @@ public class ProjectServiceImpl implements ProjectService {
     private ProjectDao projectDao;
 
     @Override
-    public List<ProjectList> search(String projectName, String account, String create_date, String
-            update_date) {
-        return projectDao.search(projectName);
-    }
-
-    @Override
-    public List<ProjectList> searchBySuper(String account, String projectName, String startCreateDate, String
+    public List<ProjectList> searchBySuper(String account, String uname, String projectName, String coname, String
+            startCreateDate, String
             endCreateDate, String startUpdateDate, String endUpdateDate, String sortFlag) {
-        return projectDao.searchBySuper(account, projectName, startCreateDate, endCreateDate, startUpdateDate,
+        return projectDao.searchBySuper(account, uname, projectName,coname, startCreateDate, endCreateDate, startUpdateDate,
                 endUpdateDate, sortFlag);
     }
 
     @Override
-    public List<ProjectList> searchByManager(String account, String projectName, String startCreateDate, String
+    public List<ProjectList> searchByManager(String account, String uname, String projectName, String coname, String
+            startCreateDate, String
             endCreateDate, String startUpdateDate, String endUpdateDate, List<Integer> ids, String sortFlag) {
-        return projectDao.searchByManager(account, projectName, startCreateDate, endCreateDate, startUpdateDate,
+        return projectDao.searchByManager(account, uname, projectName,coname, startCreateDate, endCreateDate, startUpdateDate,
                 endUpdateDate, ids, sortFlag);
     }
 
@@ -44,9 +40,10 @@ public class ProjectServiceImpl implements ProjectService {
     }
 
     @Override
-    public List<ProjectList> searchByUser(String account, String projectName, String startCreateDate, String
+    public List<ProjectList> searchByUser(String account, String uname, String projectName, String coname, String
+            startCreateDate, String
             endCreateDate, String startUpdateDate, String endUpdateDate, String uid, String sortFlag) {
-        return projectDao.searchByUser(account, projectName, startCreateDate, endCreateDate, startUpdateDate,
+        return projectDao.searchByUser(account, uname, projectName,coname, startCreateDate, endCreateDate, startUpdateDate,
                 endUpdateDate, uid, sortFlag);
     }
 
@@ -54,9 +51,9 @@ public class ProjectServiceImpl implements ProjectService {
     public int createProject(String projectName, User user) {
         int flag;
         int count = projectDao.findRepeatNameByAccount(user.getAccount(), projectName);
-        if(count==1){
+        if (count == 1) {
             flag = 0;
-        }else {
+        } else {
             projectDao.createProject(projectName, user.getId());
             flag = 1;
         }
@@ -67,11 +64,11 @@ public class ProjectServiceImpl implements ProjectService {
     public int renameProject(String account, Integer projectId, String projectName) {
         int flag;
         int count = projectDao.findRepeatNameByAccount(account, projectName);
-        if(count==1){
-            flag =0;
-        }else {
+        if (count == 1) {
+            flag = 0;
+        } else {
             projectDao.renameProject(projectId, projectName);
-            flag =1;
+            flag = 1;
         }
         return flag;
     }
@@ -82,7 +79,7 @@ public class ProjectServiceImpl implements ProjectService {
     }
 
     @Override
-    public void delete(String uid,Integer projectId) {
+    public void delete(String uid, Integer projectId) {
         List<Integer> sids = projectDao.querySidByPid(projectId, uid);
         if (sids.size() != 0) {
             projectDao.deleteSceneByPid(projectId, uid);

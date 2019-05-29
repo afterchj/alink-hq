@@ -48,7 +48,7 @@ public class AccountController {
 
 
     @RequestMapping(value = "/list", method = RequestMethod.GET)
-    public String list(Integer pageNum, Integer pageSize, String account, Integer fid, Integer roleId, String
+    public String list(Integer pageNum, Integer pageSize, String account,String uname, Integer fid, Integer roleId, String
             startDate, String endDate, HttpSession session, Model model) {
         User loginUser = (User) session.getAttribute("user");
         String uid = loginUser.getId();
@@ -73,12 +73,12 @@ public class AccountController {
             }
             if (role_id == 1) {
                 PageHelper.startPage(pageNum, pageSize);
-                userList = accountService.searchBySuper(account, fid, roleId, startDate, endDate);
+                userList = accountService.searchBySuper(account,uname, fid, roleId, startDate, endDate);
                 roleList = accountService.findRoleList();
                 roleList.remove(0);
             } else if (role_id == 2) {
                 PageHelper.startPage(pageNum, pageSize);
-                userList = accountService.searchByAdmin(account, fid, roleId, startDate, endDate);
+                userList = accountService.searchByAdmin(account,uname, fid, roleId, startDate, endDate);
                 roleList = accountService.findRoleList();
                 for (int i = 0; i < role_id; i++) {
                     roleList.remove(0);
@@ -87,7 +87,7 @@ public class AccountController {
                 List<String> uids = accountService.findFirmUidOfUser(uid);
                 if (uids.size() != 0) {
                     PageHelper.startPage(pageNum, pageSize);
-                    userList = accountService.searchByManager(account, uids, startDate, endDate);
+                    userList = accountService.searchByManager(account,uname, uids, startDate, endDate);
                 }
                 roleList = accountService.findRoleList();
                 for (int i = 0; i < role_id; i++) {
@@ -101,6 +101,7 @@ public class AccountController {
             model.addAttribute("firmList", firmList);
             model.addAttribute("roleList", roleList);
             model.addAttribute("account", account);
+            model.addAttribute("uname",uname);
             model.addAttribute("fid", fid);
             model.addAttribute("roleId", roleId);
             model.addAttribute("startDate", startDate);
@@ -122,20 +123,20 @@ public class AccountController {
      */
     @RequestMapping(value = "/getUserListExcel")
     @ResponseBody
-    public void getUserListExcel(String account, Integer fid, Integer roleId, String
+    public void getUserListExcel(String account, String uname,Integer fid, Integer roleId, String
             startDate, String endDate, HttpSession session, HttpServletResponse response) {
         User loginUser = (User) session.getAttribute("user");
         String uid = loginUser.getId();
         Integer role_id = accountService.findRoleIdByUid(uid);
         List<UserList> userList = new ArrayList<>();
         if (role_id == 1) {
-            userList = accountService.searchBySuper(account, fid, roleId, startDate, endDate);
+            userList = accountService.searchBySuper(account, uname,fid, roleId, startDate, endDate);
         } else if (role_id == 2) {
-            userList = accountService.searchByAdmin(account, fid, roleId, startDate, endDate);
+            userList = accountService.searchByAdmin(account, uname,fid, roleId, startDate, endDate);
         } else if (role_id == 3) {
             List<String> uids = accountService.findFirmUidOfUser(uid);
             if (uids.size() != 0) {
-                userList = accountService.searchByManager(account, uids, startDate, endDate);
+                userList = accountService.searchByManager(account, uname,uids, startDate, endDate);
             }
         }
         //excel标题

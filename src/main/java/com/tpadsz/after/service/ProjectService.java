@@ -10,17 +10,15 @@ import java.util.List;
  */
 public interface ProjectService {
 
-    List<ProjectList> search(String projectName, String account, String create_date, String update_date);
-
-    List<ProjectList> searchBySuper(String account, String projectName, String startCreateDate, String endCreateDate, String
+    List<ProjectList> searchBySuper(String account, String uname, String projectName,String coname, String startCreateDate, String endCreateDate, String
             startUpdateDate, String endUpdateDate,String sortFlag);
 
-    List<ProjectList> searchByManager(String account, String projectName, String startCreateDate, String endCreateDate, String
+    List<ProjectList> searchByManager(String account, String uname, String projectName,String coname, String startCreateDate, String endCreateDate, String
             startUpdateDate, String endUpdateDate,List<Integer> ids,String sortFlag);
 
     List<Integer> findProjectList(String uid);
 
-    List<ProjectList> searchByUser(String account, String projectName, String startCreateDate, String endCreateDate, String
+    List<ProjectList> searchByUser(String account, String uname, String projectName,String coname, String startCreateDate, String endCreateDate, String
             startUpdateDate, String endUpdateDate, String uid,String sortFlag);
 
     int createProject(String projectName, User user);

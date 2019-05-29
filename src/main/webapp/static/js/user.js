@@ -181,6 +181,7 @@ function skipLimit() {
 $(function () {
     var url = window.location.href;
     var account = GetUrlParam("account");
+    var uname = GetUrlParam("uname");
     var company = GetUrlParam("fid");
     var role = GetUrlParam("roleId");
     var startDate = GetUrlParam("startDate");
@@ -198,7 +199,7 @@ $(function () {
         $('#add-time').val(addTime);
     }
     $('#account').val(decodeURI(account));
-
+    $('#username').val(decodeURI(uname));
     if (role == '') {
         $('#role option').eq(0).prop('selected', true);
     } else {
@@ -261,6 +262,7 @@ function condition(pageSize, pageNum) {
         var url2 = url + '?';
     }
     var account = $('#account').val();
+    var uname = $('#username').val();
     if ($('#company').val() != '请选择公司') {
         var company = $('#company').val();
     } else {
@@ -274,7 +276,7 @@ function condition(pageSize, pageNum) {
     var addTime = $('#add-time').val();
     var startDate = addTime.substring(0, 10);
     var endDate = addTime.substring(13, 23);
-    var newUrl = url2 + '&pageNum=' + pageNum + '&pageSize=' + pageSize + '&account=' + account + '&fid=' + company + '&roleId=' + role + '&startDate=' + startDate + '&endDate=' + endDate;
+    var newUrl = url2 + '&pageNum=' + pageNum + '&pageSize=' + pageSize + '&account=' + account + '&uname=' + uname + '&fid=' + company + '&roleId=' + role + '&startDate=' + startDate + '&endDate=' + endDate;
     location.href = newUrl;
 }
 
