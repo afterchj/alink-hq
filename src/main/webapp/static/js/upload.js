@@ -52,7 +52,6 @@ DragImgUpload.prototype = {
             alert("您拖的不是图片！");
             return false;
         }
-
         //拖拉图片到浏览器，可以实现预览功能
         var img = window.URL.createObjectURL(fileList[0]);
         var filename = fileList[0].name; //图片名称
@@ -81,7 +80,6 @@ DragImgUpload.prototype = {
             self.onDrop(e);
         });
 
-
     },
     onChangeUploadFile:function () {
         var fileInput = this.fileInput;
@@ -100,11 +98,12 @@ DragImgUpload.prototype = {
         var fileInput = this.fileInput;
         if (!fileInput) {
             //创建临时input元素
-            fileInput = document.createElement('input');
+            fileInput = document.getElementById('file');
+            // fileInput = document.createElement('input');
             //设置input type为文件类型
-            fileInput.type = 'file';
+            // fileInput.type = 'file';
             //设置文件name
-            fileInput.name = 'ime-images';
+            // fileInput.name = 'file';
             //允许上传多个文件
             fileInput.multiple = true;
             fileInput.onchange  = this.onChangeUploadFile.bind(this);

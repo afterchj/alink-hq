@@ -31,13 +31,18 @@ public class TimeLineController {
      * @return
      */
     @RequestMapping("/list")
-    public String timerList(Model model, int id,Integer pageNum,Integer pageSize,String timeFlag) {
+    public String timerList(Model model, int id,Integer pageNum,Integer pageSize,String timeFlag,String tname,String
+            createDate,String endTime,String state) {
         String projectName = timeLineService.getProjectNameByMid(id);
-        PageInfo<TimeLine> pageInfo = timeLineService.getTimeLineByMid(id,pageNum,pageSize,timeFlag);
+        PageInfo<TimeLine> pageInfo = timeLineService.getTimeLineByMid(id,pageNum,pageSize,timeFlag,tname,createDate,
+                endTime, state);
         model.addAttribute("pageInfo",pageInfo);
         model.addAttribute("projectName",projectName);
         model.addAttribute("id",id);
-
+        model.addAttribute("tname",tname);
+        model.addAttribute("createDate",createDate);
+        model.addAttribute("endTime",endTime);
+        model.addAttribute("state",state);
         return "timerManage/timerList";
     }
 

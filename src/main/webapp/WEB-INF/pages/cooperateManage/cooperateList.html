@@ -8,8 +8,8 @@
     <link rel="stylesheet" href="/alink-hq/static/css/base.css"/>
     <link rel="stylesheet" href="/alink-hq/static/css/leftNav.css"/>
     <link rel="stylesheet" href="/alink-hq/static/css/projectManage.css"/>
+    <link rel="stylesheet" th:href="@{/static/css/common.css}"/>
     <link rel="stylesheet" th:href="@{/static/css/laydate.css}"/>
-
     <title>合作列表</title>
 </head>
 <body>
@@ -22,9 +22,9 @@
             <div class="clearfix main-right-nav">
                 <div class="f-l main-right-title">合作列表</div>
                 <div class="f-r pointer">
-                    <a th:href="@{/cooperate/info(id=0)}">
+                    <a th:href="@{/cooperate/create}">
                         <div class="create" onmousedown="createBtnMouseDown()" onmouseup="createBtnMouseUp()">
-                        <span>+</span><span>新增合作信息</span></div>
+                            <span>+</span><span>新增合作信息</span></div>
                     </a>
                 </div>
                 <div class="f-r pointer">
@@ -36,11 +36,11 @@
             </div>
             <div id="projectList" class="">
                 <div class="search-condition ">
-                    <form action="" class="clearfix">
-                        <div class="f-l search" style="margin-right: 200px;">
+                    <form th:action="@{/cooperate/list}" class="clearfix">
+                        <div class="f-l search" style="margin-right: 125px;">
                             <div>
-                                <label for="projectName">合作公司名称</label>
-                                <input type="text" id="projectName" placeholder="请输入合作公司名称">
+                                <label for="name">合作公司名称</label>
+                                <input type="text" id="name" name="coname" placeholder="请输入合作公司名称">
                             </div>
                         </div>
                         <div class="f-l search">
@@ -49,19 +49,19 @@
                                 <select name="status" style=" height: 38px;line-height: 38px;" id="status">
                                     <option value="">全部</option>
                                     <option value="1">合作</option>
-                                    <option value="2">终止</option>
+                                    <option value="0">终止</option>
                                 </select>
                             </div>
                         </div>
 
-                        <div class="f-r search-button " style="padding-top: 0;">
+                        <div class="f-r search-button " style="margin-top: 0;">
                             <button type="submit" class="pointer">查询</button>
                         </div>
                     </form>
                 </div>
                 <div class="search-result">
                     <!-- 有数据时 -->
-                    <table border="1" class="hasData active">
+                    <table border="1" class="hasData active" th:if="${pageInfo!=null}">
                         <thead>
                         <tr>
                             <th><span>合作公司名称</span></th>
@@ -73,26 +73,33 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr>
-                            <td class="k-link"><a th:href="@{/cooperate/info(id=0)}">苏州天平先进数字科技有限公司</a></td>
-                            <td class="k-link"><a href="">13505201123</a></td>
-                            <td><p>2019/05/13</p>
-                                <p>14:55:44</p></td>
-                            <td class="off-or-on" style="color: #0B78CE;">启用</td>
-                            <td class="p-r">
-                                <img src="/alink-hq/static/img/edit.png" alt="" class="pointer reset-name"
-                                     th:title="重命名" style="margin-right: 20px;">
-                                <img src="/alink-hq/static/img/delete.png" alt="" class="pointer delete-project"
-                                     th:title="删除">
+                        <tr th:each="cooperation:${pageInfo.list}">
+                            <td class="k-link"><a th:href="@{/cooperate/info(id=${cooperation.id})}" th:text="${cooperation.coname}"></a>
                             </td>
-                            <td class="p-r" >
-                                <img src="/alink-hq/static/img/edit.png" alt="" class="pointer memo-edit"
-                                     th:title="备忘录">
+                            <td th:text="${cooperation.mobile}"></td>
+                            <td th:text="${cooperation.create_date}">
+                            <td th:switch="${cooperation.status}">
+                                <a th:href="@{/cooperate/saveUpdate(id=${cooperation.id},status=0)}">
+                                    <span th:case="1">合作</span>
+                                </a>
+                                <a th:href="@{/cooperate/saveUpdate(id=${cooperation.id},status=1)}">
+                                    <span th:case="0">终止</span>
+                                </a>
+                            </td>
+                            <td class="p-r">
+                                <img src="/alink-hq/static/img/edit.png" alt="" class="pointer reset-name" title="重命名" style="margin-right: 20px;">
+                                <img src="/alink-hq/static/img/delete.png" alt="" class="pointer delete-project" title="删除">
+                            </td>
+                            <td class="p-r">
+                                <img src="/alink-hq/static/img/edit.png" alt="" class="pointer memo-edit" title="备忘录">
                                 <!-- 备忘录不为空 -->
                                 <div class="memo-edit-has">
-                                    <div class="meno-nav"><img src="/alink-hq/static/img/edit.png" alt="" class="pointer"></div>
+                                    <div class="meno-nav"><img src="/alink-hq/static/img/edit.png" alt=""
+                                                               class="pointer"></div>
                                     <div class="memo-content">
-                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam cupiditate deleniti sint sit voluptate. Aliquam delectus, dolor ex fugiat, hic iste magni maxime officia quod repellat similique veniam vero voluptatibus.
+                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam cupiditate
+                                        deleniti sint sit voluptate. Aliquam delectus, dolor ex fugiat, hic iste magni
+                                        maxime officia quod repellat similique veniam vero voluptatibus.
                                     </div>
                                 </div>
                             </td>
@@ -101,42 +108,43 @@
                         <tfoot>
                         <tr>
                             <td colspan="9" class="clearfix page">
-                                <div class="f-r page-right">
-                                <span class="prev-page">
-                                    <a href=""><span class="prev "><span><</span></span></a>
-                                </span>
-                                    <span class="pages">22</span>
-                                <span class="next-page">
-                                    <a href=""><span class="prev "><span>></span></span></a>
-                                </span>
-                            <span class="m-l-15 m-r-20">共
-                                    <span class="pageTotal" id="pageTotal"></span>
-                                    页/<span></span>条数据
-                            </span>
-                            <span class="m-r-15">
-                        <input type="number" id="skipPage" oninput="skipLimit()"/>
-                        </span>
-                            <span class="m-r-35">
-                                <div id="skipPageBtn" class="pointer moment skipPageBtn"
-                                     onmousedown="skipBtnMouseDown()" onmouseup="skipBtnMouseUp()">跳转
-                                </div>
-                        </span>
-                                    <span class="m-r-15r">每页显示：</span>
-                            <span class="m-r-20">
-                        <select name="" id="page-select">
-                            <option value="10">10</option>
-                            <option value="30">30</option>
-                            <option value="50">50</option>
-                            <option value="100">100</option>
-                        </select>
-                        </span>
-                                </div>
+                                <div th:replace="common/page::page"></div>
+                                <!--<div class="f-r page-right">-->
+                                <!--<span class="prev-page">-->
+                                <!--<a href=""><span class="prev "><span><</span></span></a>-->
+                                <!--</span>-->
+                                <!--<span class="pages">22</span>-->
+                                <!--<span class="next-page">-->
+                                <!--<a href=""><span class="prev "><span>></span></span></a>-->
+                                <!--</span>-->
+                                <!--<span class="m-l-15 m-r-20">共-->
+                                <!--<span class="pageTotal" id="pageTotal"></span>-->
+                                <!--页/<span></span>条数据-->
+                                <!--</span>-->
+                                <!--<span class="m-r-15">-->
+                                <!--<input type="number" id="skipPage" oninput="skipLimit()"/>-->
+                                <!--</span>-->
+                                <!--<span class="m-r-35">-->
+                                <!--<div id="skipPageBtn" class="pointer moment skipPageBtn"-->
+                                <!--onmousedown="skipBtnMouseDown()" onmouseup="skipBtnMouseUp()">跳转-->
+                                <!--</div>-->
+                                <!--</span>-->
+                                <!--<span class="m-r-15r">每页显示：</span>-->
+                                <!--<span class="m-r-20">-->
+                                <!--<select name="" id="page-select">-->
+                                <!--<option value="10">10</option>-->
+                                <!--<option value="30">30</option>-->
+                                <!--<option value="50">50</option>-->
+                                <!--<option value="100">100</option>-->
+                                <!--</select>-->
+                                <!--</span>-->
+                                <!--</div>-->
                             </td>
                         </tr>
                         </tfoot>
                     </table>
                     <!-- 无数据时 -->
-                    <table border="1" class="noData ">
+                    <table th:if="${pageInfo==null}" border="1" class="noData active">
                         <thead>
                         <tr>
                             <th><span>合作公司名称</span></th>
@@ -199,7 +207,8 @@
         备忘录
     </div>
     <div class="pop-content">
-        <textarea rows="9" maxlength="200"  style="width: 93%;border: none;margin-top: 10px;"  class="wishContent"  placeholder="请输入不超过200个字"></textarea>
+        <textarea rows="9" maxlength="200" style="width: 93%;border: none;margin-top: 10px;" class="wishContent"
+                  placeholder="请输入不超过200个字"></textarea>
         <p class="right-font"><span class="wordsNum">0/200</span></p>
         <div class="pop-btn">
             <button class="reduce">取消</button>

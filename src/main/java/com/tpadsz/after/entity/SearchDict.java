@@ -12,6 +12,7 @@ public class SearchDict {
     private Integer pid;
     private Integer gid;
     private String name;
+    private String coname;
     private String mname;
     private String pname;
     private String gname;
@@ -79,6 +80,14 @@ public class SearchDict {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getConame() {
+        return coname;
+    }
+
+    public void setConame(String coname) {
+        this.coname = coname;
     }
 
     public String getMname() {

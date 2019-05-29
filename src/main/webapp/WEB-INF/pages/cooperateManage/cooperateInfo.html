@@ -8,9 +8,8 @@
     <link rel="stylesheet" href="/alink-hq/static/css/common.css">
     <link rel="stylesheet" href="/alink-hq/static/css/leftNav.css">
     <link rel="stylesheet" href="/alink-hq/static/css/projectManage.css">
-    <link rel="stylesheet" th:href="@{/static/css/upload.css}"/>
     <script src="/alink-hq/static/js/jquery.min.js"></script>
-    <script  src="/alink-hq/static/js/upload.js"></script>
+    <script src="/alink-hq/static/js/upload.js"></script>
     <title>公司信息录入</title>
 </head>
 
@@ -38,29 +37,42 @@
                 <div class="p-detail">
                     <div class="p-nav">公司信息录入</div>
                     <div class="p-content p-r">
-                        <form action="" class="company-msg">
+                        <form th:action="@{/cooperate/save}" class="company-msg" method="post"
+                              enctype="multipart/form-data">
+                            <input type="hidden" name="id" th:value="${info.id}">
+                            <input type="hidden" name="status" th:value="${info.status}">
                             <div class="edit-company">
                                 <label for="company-name"><span>*</span>公司名称：</label>
-                                <input type="text" id="company-name" placeholder="请填写公司名称">
+                                <input type="text" id="company-name" name="coname" placeholder="请填写公司名称"
+                                       th:value="${info.coname}">
                             </div>
                             <div class="edit-company">
                                 <label for="company-phone"><span>*</span>公司电话：</label>
-                                <input type="text" id="company-phone" placeholder="请填写公司电话">
+                                <input type="text" id="company-phone" name="mobile" placeholder="请填写公司电话"
+                                       th:value="${info.mobile}">
                             </div>
                             <div class="edit-company">
                                 <label for="address"><span>*</span>通讯地址：</label>
-                                <input type="text" id="address" placeholder="请填写通讯地址">
+                                <input type="text" id="address" name="address" placeholder="请填写通讯地址"
+                                       th:value="${info.address}">
                             </div>
                             <div class="edit-company clearfix">
                                 <label for="drop_area" style="vertical-align: top;"><span>*</span>营业执照：</label>
-                                <div id="drop_area" class="p-r" ></div>
+                                <div style="display: none">
+                                    <input type="file" id="file" name="file">
+                                </div>
+                                <div id="drop_area">
+                                    <!--<img src="http://iotsztp.com/file/imgs/chat_qrcode.jpg" style="width: 100%">-->
+                                    <img th:src="@{'../static/upload/'+${info.photo}}" style="width: 100%" th:alt="${info.photo}">
+                                </div>
                             </div>
                             <div class="edit-company">
                                 <label for="serial"><span>*</span>营业执照编号：</label>
-                                <input type="text" id="serial" placeholder="请填写营业执照编号">
+                                <input type="text" id="serial" name="code" placeholder="请填写营业执照编号"
+                                       th:value="${info.code}">
                             </div>
                             <div class="btn-submit">
-                                <button type="button">提交</button>
+                                <button type="submit">提交</button>
                             </div>
                         </form>
                         <div class="img-max p-a">
@@ -68,37 +80,36 @@
                         </div>
                     </div>
                 </div>
+
             </div>
         </div>
     </div>
 </div>
-<script  src="/alink-hq/static/js/left.js"></script>
+<script src="/alink-hq/static/js/left.js"></script>
 <script src="/alink-hq/static/js/moment.js"></script>
 <script>
-    var dragImgUpload = new DragImgUpload("#drop_area",{
-        callback:function (files) {
+    var dragImgUpload = new DragImgUpload("#drop_area", {
+        callback: function (files) {
             //回调函数，可以传递给后台等等
             var file = files[0];
             console.log(file.name);
         }
-    })
+    });
     $('#drop_area').on({
-        mouseover : function(){
-            var imgUrl=$(this).find('img')[0].src;
-            $('#img-max').attr('src',imgUrl);
-        } ,
-        mouseout : function(){
-            var imgUrl=$(this).find('img')[0].src;
-            $('#img-max').attr('src','');
+        mouseover: function () {
+            var imgUrl = $(this).find('img')[0].src;
+            $('#img-max').attr('src', imgUrl);
+        },
+        mouseout: function () {
+            var imgUrl = $(this).find('img')[0].src;
+            $('#img-max').attr('src', '');
         }
-    })
-    $('#drop_area').on('click','#delete-img',function(event){
-        event.stopPropagation();
-        $('#preview').unbind('click');
-        $('#preview img').unbind('click');
-        $(this).removeClass('active');
-        $(this).siblings('img').attr('src','/alink-hq/static/img/upload.png');
-    })
+    });
+    //    $('#drop_area').hover(function(){
+    //        var imgUrl=$(this).find('img')[0].src;
+    //        console.log(imgUrl);
+    //        $('#img-max').attr('src',imgUrl);
+    //    })
 </script>
 </body>
 
