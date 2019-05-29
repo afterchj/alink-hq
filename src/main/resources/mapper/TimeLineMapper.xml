@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.tpadsz.after.dao.TimeLineDao">
+
+    <sql id="TimeLineList">
+        t.id,
+        t.tname,
+        m.mname,
+        t.mid,
+        IF( t.state = '0', '启用', '停用' ) state,
+        IF( t.repetition = '0', '不重复', '重复' ) repetition,
+        t.WEEK,
+        DATE_FORMAT(t.create_date,'%Y/%m/%d %k:%i:%s') as create_date,
+        DATE_FORMAT(t.update_date,'%Y/%m/%d %k:%i:%s') as update_date
+    </sql>
+
+    <select id="getProjectNameByMid" resultType="string">
+        SELECT NAME
+        FROM
+          f_project
+        WHERE
+          id = ( SELECT project_id FROM f_mesh WHERE id = #{id} )
+    </select>
+
+    <select id="getTimeLineByMid" resultType="com.tpadsz.after.entity.TimeLine">
+        SELECT
+          <include refid="TimeLineList"/>
+        FROM
+        f_time_line t,
+        f_mesh m
+        WHERE
+        t.mid = m.id
+        AND t.mid = #{id}
+        ORDER BY
+        t.update_date DESC
+    </select>
+    <select id="getTimeLineByMidOrderByUpdateDate" resultType="com.tpadsz.after.entity.TimeLine">
+        SELECT
+        <include refid="TimeLineList"/>
+        FROM
+        f_time_line t,
+        f_mesh m
+        WHERE
+        t.mid = m.id
+        AND t.mid = #{id}
+        ORDER BY
+        t.update_date
+    </select>
+    <select id="getTimeLineByMidOrderByCreateDateDesc" resultType="com.tpadsz.after.entity.TimeLine">
+        SELECT
+        <include refid="TimeLineList"/>
+        FROM
+        f_time_line t,
+        f_mesh m
+        WHERE
+        t.mid = m.id
+        AND t.mid = #{id}
+        ORDER BY
+        t.create_date DESC
+    </select>
+    <select id="getTimeLineByMidOrderByCreateDate" resultType="com.tpadsz.after.entity.TimeLine">
+        SELECT
+        <include refid="TimeLineList"/>
+        FROM
+        f_time_line t,
+        f_mesh m
+        WHERE
+        t.mid = m.id
+        AND t.mid = #{id}
+        ORDER BY
+        t.create_date
+    </select>
+
+    <insert id="insertTimeLine" parameterType="com.tpadsz.after.entity.TimeLine">
+        INSERT INTO `alink`.`f_time_line`(`tname`, `tid`, `mid`, `state`, `repetition`, `week`, `create_date`, `update_date`)
+	    VALUES ( #{tname}, #{tid}, 19936, '1', '1', '周日、周一、周二', now(), now())
+    </insert>
+
+    <update id="updateTnameById">
+        update f_time_line set tname=#{tname},update_date=now() where id=#{id}
+    </update>
+
+    <select id="getTnameById" resultType="int">
+        select count(*) from f_time_line where mid=#{mid} and tname=#{tname}
+    </select>
+
+</mapper>

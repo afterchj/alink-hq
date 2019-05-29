@@ -120,15 +120,15 @@ public class HomeController {
         return "cooperateManage/cooperateInfo";
     }
 
-    @RequestMapping("/timer/list")
-    public String timerList() {
-        return "timerManage/timerList";
-    }
-
-    @RequestMapping("/timer/detail")
-    public String timerDetail() {
-        return "timerManage/timerDetail";
-    }
+//    @RequestMapping("/timer/list")
+//    public String timerList() {
+//        return "timerManage/timerList";
+//    }
+//
+//    @RequestMapping("/timer/detail")
+//    public String timerDetail() {
+//        return "timerManage/timerDetail";
+//    }
 
 
 

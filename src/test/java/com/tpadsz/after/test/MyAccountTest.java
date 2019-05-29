@@ -14,11 +14,11 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 public class MyAccountTest {
 
     ApplicationContext ac = new ClassPathXmlApplicationContext("classpath:applicationContext.xml");
-
     MyAccountService myAccountService = ac.getBean("myAccountService", MyAccountService.class);
 
     @Test
     public void reginPwdTest(){
         myAccountService.updatePwd("tpad1d12","123456");
     }
+
 }
