@@ -1,6 +1,7 @@
 package com.tpadsz.after.test;
 
 import com.alibaba.fastjson.JSON;
+import com.tpadsz.after.entity.CooperationInfo;
 import com.tpadsz.after.entity.OptionList;
 import com.tpadsz.after.entity.SearchDict;
 import com.tpadsz.after.entity.User;
@@ -76,18 +77,27 @@ public class MainTest {
 //        map.put("projectId", 248);
 //        map.put("pid", 4);
 //        int count = getSqlSessionTemplate().selectOne("com.tpadsz.after.dao.MeshDao.getCount", map);
-        int count = getSqlSessionTemplate().selectOne("com.tpadsz.after.dao.PlaceDao.getCount", map);
-        logger.info(count);
-        getSqlSessionTemplate().insert("com.tpadsz.after.dao.PlaceDao.save", map);
+        SqlSessionTemplate sqlSessionTemplate=getSqlSessionTemplate();
+//        int count = getSqlSessionTemplate().selectOne("com.tpadsz.after.dao.PlaceDao.getCount", map);
+//        logger.info(count);
+//        getSqlSessionTemplate().insert("com.tpadsz.after.dao.PlaceDao.save", map);
 //        List<Map> list = getSqlSessionTemplate().selectList("com.tpadsz.after.dao.MeshDao.getByMap", map);
 //        String role = getSqlSessionTemplate().selectOne("com.tpadsz.after.dao.RoleDao.selectById", 21);
 //        List<Role> roles = getSqlSessionTemplate().selectList("com.tpadsz.after.dao.RoleDao.getAll");
-        OptionList optionList = getSqlSessionTemplate().selectOne("com.tpadsz.after.dao.MeshDao.getProject", map);
+//        OptionList optionList = sqlSessionTemplate.selectOne("com.tpadsz.after.dao.MeshDao.getProject", map);
+//        CooperationInfo params=new CooperationInfo();
+//        params.setId(8);
+//        params.setStatus(true);
+//        params.setConame("苏州诚彩智能科技有限公司");
+//        sqlSessionTemplate.update("com.tpadsz.after.dao.CooperateDao.saveUpdate",params);
+        CooperationInfo info=sqlSessionTemplate.selectOne("com.tpadsz.after.dao.CooperateDao.getCooperationInfo",8);
+        List<Map> list=sqlSessionTemplate.selectList("com.tpadsz.after.dao.CooperateDao.getByMap");
 //        List<OptionList> lists = getSqlSessionTemplate().selectList("com.tpadsz.after.dao.GroupDao.getPlaces",map);
 //        logger.info("role=" + role);
 //        logger.info("roles=" + roles);
 //        logger.info("lists=" + lists.size());
-        logger.info("lists=" + JSON.toJSONString(optionList));
+        logger.info("lists=" + JSON.toJSONString(info));
+        logger.info("lists=" + JSON.toJSONString(list));
     }
 
     @Test
