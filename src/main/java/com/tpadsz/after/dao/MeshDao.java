@@ -23,7 +23,7 @@ public interface MeshDao {
 
     List<OptionList> getMesh(Map map);
 
-    OptionList getProject(SearchDict dict);
+    OptionList getProject(Map dict);
 
     List<OptionList> getProjects(Map map);
 

@@ -44,8 +44,8 @@ public class LightController {
         if (pageInfo.getList().size() > 0) {
             modelMap.put("pageInfo", pageInfo);
         }
-        OptionList project = meshService.getProject(dict);
-        modelMap.put("project", project);
+//        OptionList project = meshService.getProject(dict);
+//        modelMap.put("project", project);
         modelMap.put("dict", dict);
         return "meshTemp/lightList";
     }

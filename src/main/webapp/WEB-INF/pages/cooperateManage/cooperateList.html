@@ -1,5 +1,6 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!--<html lang="en" xmlns:th="http://www.thymeleaf.org">-->
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
@@ -21,13 +22,13 @@
             <div class="clearfix main-right-nav">
                 <div class="f-l main-right-title">合作列表</div>
                 <div class="f-r pointer">
-                    <a href="#">
+                    <a th:href="@{/cooperate/info(id=0)}">
                         <div class="create" onmousedown="createBtnMouseDown()" onmouseup="createBtnMouseUp()">
                         <span>+</span><span>新增合作信息</span></div>
                     </a>
                 </div>
                 <div class="f-r pointer">
-                    <div class="goBack" onClick="javascript :history.back(-1);" onmousedown="backBtnMouseDown()"
+                    <div class="goBack" onClick="javascript :history.back();" onmousedown="backBtnMouseDown()"
                          onmouseup="backBtnMouseUp()">
                         <span><</span><span>返回</span>
                     </div>
@@ -52,6 +53,7 @@
                                 </select>
                             </div>
                         </div>
+
                         <div class="f-r search-button " style="margin-top: 0;">
                             <button type="submit" class="pointer">查询</button>
                         </div>
@@ -72,26 +74,23 @@
                         </thead>
                         <tbody>
                         <tr>
-                            <td class="k-link coo-name"><a href="">苏州天平先进数字科技有限公司</a></td>
+                            <td class="k-link"><a th:href="@{/cooperate/info(id=0)}">苏州天平先进数字科技有限公司</a></td>
                             <td class="k-link"><a href="">13505201123</a></td>
                             <td><p>2019/05/13</p>
                                 <p>14:55:44</p></td>
-                            <td class="off-or-on-coo pointer" style="color: #0B78CE;">启用</td>
+                            <td class="off-or-on" style="color: #0B78CE;">启用</td>
                             <td class="p-r">
-                                <img src="/alink-hq/static/img/edit.png" alt="" class="pointer reset-name" th:title="重命名" style="margin-right: 20px;">
-                                <img src="/alink-hq/static/img/delete.png" alt="" class="pointer delete-project" th:title="删除">
+                                <img src="/alink-hq/static/img/edit.png" alt="" class="pointer reset-name"
+                                     th:title="重命名" style="margin-right: 20px;">
+                                <img src="/alink-hq/static/img/delete.png" alt="" class="pointer delete-project"
+                                     th:title="删除">
                             </td>
                             <td class="p-r" >
-                                <img src="/alink-hq/static/img/memo.png" alt="" class="pointer memo-edit" th:title="备忘录">
-                                <!--不可点击的备忘录-->
-                                <!--<img src="/alink-hq/static/img/memo-un.png" alt="" class="pointer memo-edit" th:title="备忘录">-->
+                                <img src="/alink-hq/static/img/edit.png" alt="" class="pointer memo-edit"
+                                     th:title="备忘录">
                                 <!-- 备忘录不为空 -->
                                 <div class="memo-edit-has">
-                                    <div class="meno-nav">
-                                        <img src="/alink-hq/static/img/alter.png" alt="" class="pointer">
-                                        <!--不可点击的修改-->
-                                        <!--<img src="/alink-hq/static/img/alter-un.png" alt="" class="pointer">-->
-                                    </div>
+                                    <div class="meno-nav"><img src="/alink-hq/static/img/edit.png" alt="" class="pointer"></div>
                                     <div class="memo-content">
                                         Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam cupiditate deleniti sint sit voluptate. Aliquam delectus, dolor ex fugiat, hic iste magni maxime officia quod repellat similique veniam vero voluptatibus.
                                     </div>
@@ -185,8 +184,8 @@
         温馨提示
     </div>
     <div class="pop-content">
-        <div class="reset-pwd"></div>
-        <div class="reset-pwd-hint"></div>
+        <div class="reset-pwd">您确定要删除 XXX 公司信息？</div>
+        <div class="reset-pwd-hint">（删除后项目中所有信息将无法恢复，请慎重！）</div>
         <div class="pop-btn">
             <button class="reduce">取消</button>
             <button class="yes">确定</button>

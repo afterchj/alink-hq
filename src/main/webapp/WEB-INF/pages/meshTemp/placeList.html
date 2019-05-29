@@ -28,7 +28,7 @@
                 <!--&lt;!&ndash;<div class="create" >+&nbsp;创建灯</div>&ndash;&gt;-->
                 <!--</div>-->
                 <div class="f-r pointer">
-                    <div class="goBack" onClick="javascript :history.back(-1);" onmousedown="backBtnMouseDown()"
+                    <div class="goBack" onClick="javascript :history.back();" onmousedown="backBtnMouseDown()"
                          onmouseup="backBtnMouseUp()">
                         <span><</span><span>返回</span>
                     </div>
@@ -37,38 +37,34 @@
             </div>
 
             <div id="meshList" class="">
-                <form class="clearfix" th:action="@{/place/list}" method="post">
+                <form class="clearfix" th:action="@{/place/list}" method="POST">
                     <input type="hidden" name="uid" th:value="${dict.uid}">
                     <input type="hidden" id="pageSize" th:value="${dict.pageSize}">
                     <div class="search-condition temp">
                         <div class="f-l search" style="margin-right:125px;">
                             <div>
                                 <label for="pname" class="font">区域名称</label>
-                                <input type="text" id="pname" name="pname" th:value="${dict.pname}"
-                                       placeholder="请输入区域名称">
+                                <input type="text" id="pname" name="pname" th:value="${dict.pname}" placeholder="请输入区域名称">
                             </div>
                             <div>
-                                <label for="name" class="font">网络名称</label>
-                                <input type="text" id="name" name="mname" th:value="${dict.mname}"
+                                <label for="mname" class="font">网络名称</label>
+                                <input type="text" id="mname" name="mname" th:value="${dict.mname}"
                                        placeholder="请输入网络名称">
                             </div>
                         </div>
                         <div class="f-l search">
                             <div>
                                 <label for="mid" class="font">网络ID</label>
-                                <input type="text" id="mid" name="meshId" th:value="${dict.meshId}"
-                                       placeholder="请输入网络ID">
+                                <input type="text" id="mid" name="meshId" th:value="${dict.meshId}" placeholder="请输入网络ID">
+                            </div>
+                            <div>
+                                <label for="name" class="font">项目名称</label>
+                                <input type="text" id="name" name="name" th:value="${dict.name}" placeholder="请输入项目名称">
                             </div>
                             <!--<div>-->
-                                <!--<label for="pid" class="font">区域ID</label>-->
-                                <!--<input type="text" id="pid" name="placeId" th:value="${dict.placeId}"-->
-                                       <!--placeholder="请输入区域ID">-->
+                            <!--<label for="pid" class="font">区域ID</label>-->
+                            <!--<input type="text" id="pid" name="placeId" th:value="${dict.placeId}"--><!--placeholder="请输入区域ID">-->
                             <!--</div>-->
-                            <div>
-                                <label for="pid" class="font">项目名称</label>
-                                <input type="text" id="pid" name="placeId" th:value="${dict.placeId}"
-                                placeholder="请输入项目名称">
-                            </div>
                         </div>
                         <div class="f-r search-button ">
                             <button type="submit" class="pointer">查询</button>
@@ -98,12 +94,12 @@
                             <tbody>
                             <tr th:each="place:${pageInfo.list}">
                                 <td class="checkbox"><input type="checkbox" name="ids" th:value="${place.id}"></td>
-                                <td class="k-link"><a th:href="@{/place/info(id=${place.id})}"
-                                                      th:text="${place.pname}"></a>
+                                <td class="k-link">
+                                    <a th:href="@{/place/info(id=${place.id})}" th:text="${place.pname}"></a>
                                 </td>
                                 <td th:text="${place.place_id}"></td>
                                 <td class="k-link">
-                                    <a th:href="@{/mesh/info(id=${place.mid})}" th:text="${place.mname}"></a>
+                                    <a th:href="@{/project/detail(projectId=${place.project_id})}" th:text="${place.name}"></a>
                                 </td>
                                 <td class="k-link">
                                     <a th:href="@{/mesh/info(id=${place.mid})}" th:text="${place.mname}"></a>

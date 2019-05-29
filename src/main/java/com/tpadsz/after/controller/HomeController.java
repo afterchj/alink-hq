@@ -110,16 +110,6 @@ public class HomeController {
         return "account/changePassword";
     }
 
-    @RequestMapping("/cooperate/list")
-    public String cooperateList() {
-        return "cooperateManage/cooperateList";
-    }
-
-    @RequestMapping("/cooperate/info")
-    public String cooperateInfo() {
-        return "cooperateManage/cooperateInfo";
-    }
-
     @RequestMapping("/timer/list")
     public String timerList() {
         return "timerManage/timerList";
