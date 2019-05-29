@@ -6,6 +6,7 @@
 		g.id,
         g.mid,
         g.gname,
+        p.name,
         m.project_id,
         m.mname,
         m.mesh_id,
@@ -41,10 +42,14 @@
         <include refid="Base_Column_List"/>
         FROM f_group g
         INNER JOIN f_mesh m ON m.id = g.mid
+        INNER JOIN f_project p ON p.id=m.project_id
         INNER JOIN f_place pl ON pl.id = g.pid
         LEFT JOIN (SELECT COUNT(1) lcount,gid FROM f_light GROUP BY gid) l ON g.id=l.gid
         WHERE 1=1
         <include refid="common_choose"></include>
+        <if test="name!=null and name!=''">
+            AND p.name LIKE CONCAT('%',#{name},'%')
+        </if>
         <if test="mname!=null and mname!=''">
             AND m.mname LIKE CONCAT('%',#{mname},'%')
         </if>

@@ -56,8 +56,8 @@
                                 <input type="text" id="lmac" name="lmac" th:value="${dict.lmac}" placeholder="请输入MAC地址">
                             </div>
                             <div>
-                                <label for="lmac" class="font">项目名称</label>
-                                <input type="text" id="lmac" name="lmac" th:value="${dict.lmac}" placeholder="请输入项目名称">
+                                <label for="name" class="font">项目名称</label>
+                                <input type="text" id="name" name="name" th:value="${dict.name}" placeholder="请输入项目名称">
                             </div>
                         </div>
                         <div class="f-l search" style="margin-right:50px;">
@@ -74,20 +74,19 @@
                         </div>
                         <div class="f-l search">
                             <div>
-                                <label for="mname" class="font">组名称</label>
-                                <input type="text" id="mname" name="mname" th:value="${dict.mname}"
+                                <label for="gname" class="font">组名称</label>
+                                <input type="text" id="gname" name="gname" th:value="${dict.gname}"
                                        placeholder="请输入组名称">
                             </div>
                             <div>
-                                <label for="meshId" class="font">区域名称</label>
-                                <input type="text" id="meshId" name="meshId" th:value="${dict.meshId}"
+                                <label for="pname" class="font">区域名称</label>
+                                <input type="text" id="pname" name="pname" th:value="${dict.pname}"
                                        placeholder="请输入区域名称">
                             </div>
-                            <div class=" search-button no-top">
-                                <button type="submit" class="pointer">查询</button>
-                            </div>
                         </div>
-
+                        <div class="f-r search-button ">
+                            <button type="submit" class="pointer">查询</button>
+                        </div>
                     </div>
                     <div class="search-result">
                         <!-- 有数据时 -->
@@ -116,13 +115,16 @@
                             <tr th:each="light:${pageInfo.list}">
                                 <td class="pid"><input type="checkbox" name="ids" th:value="${light.id}"><input
                                         type="hidden" th:value="${light.pid}"></td>
-                                <td class="k-link lname"><a th:href="@{/light/info(id=${light.id})}"
-                                                            th:text="${light.lname}"></a></td>
+                                <td class="k-link lname">
+                                    <a th:href="@{/light/info(id=${light.id})}" th:text="${light.lname}"></a>
+                                </td>
                                 <td th:text="${light.lmac}"></td>
+                                <td class="k-link">
+                                    <a th:href="@{/project/detail(projectId=${light.project_id})}" th:text="${light.name}"></a>
+                                </td>
                                 <td class="k-link">
                                     <a th:href="@{/mesh/info(id=${light.mid})}" th:text="${light.mname}"></a>
                                 </td>
-                                <td th:text="${light.mesh_id}"></td>
                                 <td th:text="${light.mesh_id}"></td>
                                 <td class="k-link">
                                     <a th:href="@{/place/info(id=${light.pid})}" th:text="${light.pname}"></a>
@@ -147,9 +149,10 @@
                                     <!--<a th:href="@{/light/delete(ids=${light.id})}"-->
                                     <!--onclick="return confirm('您确定要删除所选的网络吗？')">-->
                                     <img src="/alink-hq/static/img/delete.png" th:alt="${light.id}"
-                                         class="singleDel pointer" title="删除">
+                                         class="singleDel pointer " title="删除" style="margin-right: 20px;">
                                     <!--</a>-->
-                                    <a href="">导出</a>
+                                    <img src="/alink-hq/static/img/export.png" th:alt="${light.id}"
+                                         class=" pointer " title="灯信息导出">
                                 </td>
                                 <td shiro:hasRole="user" class="p-r">
                                     <!--不能重命名-->
@@ -157,12 +160,14 @@
                                          th:title="无法操作">
                                     <!--不能移交-->
                                     <img src="/alink-hq/static/img/un-exchange.png" alt=""
-                                         class="center-img pointer  unclick"
+                                         class=" pointer  unclick"
                                          th:title="无法操作">
                                     <!--不能删除-->
                                     <img src="/alink-hq/static/img/un-delete.png" alt="" class="pointer   unclick"
-                                         th:title="无法操作">
+                                         th:title="无法操作"  style="margin-right: 20px;">
                                     <!--重命名-->
+                                    <img src="/alink-hq/static/img/export-un.png" th:alt="${light.id}"
+                                         class=" pointer unclick" title="灯信息导出">
                                 </td>
                             </tr>
                             </tbody>
@@ -197,10 +202,10 @@
                                     <span class="">全选</span>
                                 </th>
                                 <th>组名称</th>
-                                <th>属于网络</th>
+                                <th>隶属网络</th>
                                 <th>网络ID</th>
-                                <th>属于区域</th>
-                                <th>属于组</th>
+                                <th>隶属区域</th>
+                                <th>隶属组</th>
                                 <th>灯数量</th>
                                 <th>操作</th>
                             </tr>

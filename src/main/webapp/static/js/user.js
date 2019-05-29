@@ -57,10 +57,10 @@ $(function () {
     var intStatus = '';
     $('td[openTab="start-use"]').click(function () {
         var openTab = $(this).attr('openTab');
-        var text = $(this).text();
+        var text=$(this).find('.result').text();
         shade(openTab, text);
         account = $(this).siblings('.use-account').text();
-        status = $(this).text();
+        status = $(this).find('.result').text();
 
         if (status == '启用') {
             intStatus = 1;
@@ -360,3 +360,19 @@ $(".wishContent").on('input propertychange', function () {
     //显示字数
     $(".wordsNum").html(len + '/200');
 });
+
+$('.search-result table td.status').on({
+    mouseover : function(){
+        var text=$(this).find('.result').text();
+        if(text=='禁用'){
+            $(this).find('.end').addClass('active');
+            $(this).find('.result').css('color','#999');
+        }else{
+            $(this).css('color','#0B78CE');
+        }
+    } ,
+    mouseout : function(){
+        $(this).find('.result').css('color','#0B78CE');
+        $(this).find('.end').removeClass('active');
+    }
+})

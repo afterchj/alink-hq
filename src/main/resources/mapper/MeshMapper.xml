@@ -144,7 +144,7 @@
         </if>
     </select>
 
-    <select id="getProject" resultType="OptionList" parameterType="SearchDict">
+    <select id="getProject" resultType="OptionList" parameterType="map">
          SELECT p.id,p.name label,IFNULL(m.id,0) mid
          FROM f_project p
          LEFT  JOIN f_mesh m ON m.project_id=p.id WHERE 1=1
@@ -154,7 +154,7 @@
         <if test="mid!=null and mid!=''">
             AND m.id=#{mid}
         </if>
-        GROUP BY project_id
+        GROUP BY project_id LIMIT 1
     </select>
     <delete id="deleteMeshByIds" parameterType="list">
         DELETE FROM f_mesh
