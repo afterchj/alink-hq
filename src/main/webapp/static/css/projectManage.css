@@ -251,7 +251,7 @@ th.all-checkbox {
 }
 
 #projectDetail .p-content span,#timerDetail .p-content span {
-    font-size:16px;
+    font-size:15px;
     color:#3c3c3c;
     transform:scale(1,.92);
     display:inline-block
