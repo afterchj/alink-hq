@@ -31,7 +31,7 @@ public class TimeLineTest {
     public void getTimeLineByMidTest(){
 //        List<TimeLine> timeLineList =  timeLineService.getTimeLineByMid(id, pageNum, 19936);
 //        timeLineList.stream().forEach(System.out::println);
-        PageInfo pageInfo = timeLineService.getTimeLineByMid(19936,1,10,null);
+        PageInfo pageInfo = timeLineService.getTimeLineByMid(19936,1,10,"", "","2019-05-29","2019-05-28","");
         List<TimeLine> timeLineList = pageInfo.getList();
         timeLineList.stream().forEach(System.out::println);
     }
@@ -51,7 +51,7 @@ public class TimeLineTest {
     }
 
     @Test
-    public void test(){
+    public void getTnameByIdTest(){
         boolean timeline_000 = timeLineService.getTnameById(19936, "timeline_000");
         System.out.println(timeline_000);
     }

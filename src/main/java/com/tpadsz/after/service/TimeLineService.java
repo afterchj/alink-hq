@@ -14,7 +14,7 @@ import java.util.List;
 public interface TimeLineService {
     String getProjectNameByMid(int id);
 
-    PageInfo<TimeLine> getTimeLineByMid(int id, Integer pageNum, Integer pageSize,String timeFlag);
+    PageInfo<TimeLine> getTimeLineByMid(int id, Integer pageNum, Integer pageSize, String timeFlag, String tname, String createDate, String endTime,String state);
 
     void batchInsertTimeLine(List<TimeLine> timeLines);
 

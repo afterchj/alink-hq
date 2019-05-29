@@ -28,11 +28,28 @@
         FROM
         f_time_line t,
         f_mesh m
-        WHERE
-        t.mid = m.id
-        AND t.mid = #{id}
-        ORDER BY
-        t.update_date DESC
+        <where>
+            <if test="id!=null">
+                t.mid = m.id
+            </if>
+            <if test="id!=null">
+                AND t.mid = #{id}
+            </if>
+            <if test="tname!=null and tname!=''">
+                AND t.tname LIKE concat('%',#{tname},'%')
+            </if>
+            <if test="createDate!=null and createDate!=''">
+                AND t.create_date BETWEEN #{createDate} and DATE_ADD(#{createDate},INTERVAL 1 DAY)
+            </if>
+            <if test="endTime!=null and endTime!=''">
+                AND t.update_date BETWEEN #{endTime} and Date_Add(#{endTime},INTERVAL 1 DAY )
+            </if>
+            <if test="state!=null and state!=''">
+                AND t.state=#{state}
+            </if>
+            ORDER BY
+            t.update_date DESC
+        </where>
     </select>
     <select id="getTimeLineByMidOrderByUpdateDate" resultType="com.tpadsz.after.entity.TimeLine">
         SELECT
@@ -40,11 +57,28 @@
         FROM
         f_time_line t,
         f_mesh m
-        WHERE
-        t.mid = m.id
-        AND t.mid = #{id}
-        ORDER BY
-        t.update_date
+        <where>
+            <if test="id!=null">
+                t.mid = m.id
+            </if>
+            <if test="id!=null">
+                AND t.mid = #{id}
+            </if>
+            <if test="tname!=null and tname!=''">
+                AND t.tname LIKE concat('%',#{tname},'%')
+            </if>
+            <if test="createDate!=null and createDate!=''">
+                AND t.create_date BETWEEN #{createDate} and DATE_ADD(#{createDate},INTERVAL 1 DAY)
+            </if>
+            <if test="endTime!=null and endTime!=''">
+                AND t.update_date BETWEEN #{endTime} and Date_Add(#{endTime},INTERVAL 1 DAY )
+            </if>
+            <if test="state!=null and state!=''">
+                AND t.state=#{state}
+            </if>
+            ORDER BY
+            t.update_date
+        </where>
     </select>
     <select id="getTimeLineByMidOrderByCreateDateDesc" resultType="com.tpadsz.after.entity.TimeLine">
         SELECT
@@ -52,11 +86,28 @@
         FROM
         f_time_line t,
         f_mesh m
-        WHERE
-        t.mid = m.id
-        AND t.mid = #{id}
-        ORDER BY
-        t.create_date DESC
+        <where>
+            <if test="id!=null">
+                t.mid = m.id
+            </if>
+            <if test="id!=null">
+                AND t.mid = #{id}
+            </if>
+            <if test="tname!=null and tname!=''">
+                AND t.tname LIKE concat('%',#{tname},'%')
+            </if>
+            <if test="createDate!=null and createDate!=''">
+                AND t.create_date BETWEEN #{createDate} and DATE_ADD(#{createDate},INTERVAL 1 DAY)
+            </if>
+            <if test="endTime!=null and endTime!=''">
+                AND t.update_date BETWEEN #{endTime} and Date_Add(#{endTime},INTERVAL 1 DAY )
+            </if>
+            <if test="state!=null and state!=''">
+                AND t.state=#{state}
+            </if>
+            ORDER BY
+            t.create_date DESC
+        </where>
     </select>
     <select id="getTimeLineByMidOrderByCreateDate" resultType="com.tpadsz.after.entity.TimeLine">
         SELECT
@@ -64,11 +115,28 @@
         FROM
         f_time_line t,
         f_mesh m
-        WHERE
-        t.mid = m.id
-        AND t.mid = #{id}
-        ORDER BY
-        t.create_date
+        <where>
+            <if test="id!=null">
+                t.mid = m.id
+            </if>
+            <if test="id!=null">
+                AND t.mid = #{id}
+            </if>
+            <if test="tname!=null and tname!=''">
+                AND t.tname LIKE concat('%',#{tname},'%')
+            </if>
+            <if test="createDate!=null and createDate!=''">
+                AND t.create_date BETWEEN #{createDate} and DATE_ADD(#{createDate},INTERVAL 1 DAY)
+            </if>
+            <if test="endTime!=null and endTime!=''">
+                AND t.update_date BETWEEN #{endTime} and Date_Add(#{endTime},INTERVAL 1 DAY )
+            </if>
+            <if test="state!=null and state!=''">
+                AND t.state=#{state}
+            </if>
+            ORDER BY
+            t.create_date
+        </where>
     </select>
 
     <insert id="insertTimeLine" parameterType="com.tpadsz.after.entity.TimeLine">
