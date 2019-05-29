@@ -57,10 +57,10 @@ $(function () {
     var intStatus = '';
     $('td[openTab="start-use"]').click(function () {
         var openTab = $(this).attr('openTab');
-        var text = $(this).text();
+        var text=$(this).find('.result').text();
         shade(openTab, text);
         account = $(this).siblings('.use-account').text();
-        status = $(this).text();
+        status = $(this).find('.result').text();
 
         if (status == '启用') {
             intStatus = 1;
