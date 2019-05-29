@@ -246,12 +246,12 @@ $(function () {
 
 })
 
-function mouseDown() {
-    $('#skipPageBtn').attr('src', '/alink-hq/static/img/skip-color.png');
-}
-function mouseUp() {
-    $('#skipPageBtn').attr('src', '/alink-hq/static/img/skip.png');
-}
+// function mouseDown() {
+//     $('#skipPageBtn').attr('src', '/alink-hq/static/img/skip-color.png');
+// }
+// function mouseUp() {
+//     $('#skipPageBtn').attr('src', '/alink-hq/static/img/skip.png');
+// }
 
 function condition(pageSize, pageNum) {
     var url = window.location.href;
