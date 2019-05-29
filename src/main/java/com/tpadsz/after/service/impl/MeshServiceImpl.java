@@ -65,7 +65,7 @@ public class MeshServiceImpl implements MeshService {
     }
 
     @Override
-    public OptionList getProject(SearchDict dict) {
+    public OptionList getProject(Map dict) {
         return meshDao.getProject(dict);
     }
 

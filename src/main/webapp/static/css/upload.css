@@ -1,0 +1,19 @@
+#delete-img {
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 18px;
+    height: 19px;
+    line-height: 19px;
+    background: rgba(3, 3, 3, 0.4);
+    color: #fff;
+    font-size: 25px;
+    text-align: right;
+    border-bottom-left-radius: 90%;
+    padding: 0 5px 5px;
+    display: none;
+    z-index: 999;
+}
+#delete-img.active{
+    display: block;
+}

@@ -42,7 +42,7 @@ function shade(open, text) {
                 $('.pop-content').find('p').remove();
                 if (text == '启用') {
                     $(' .off-or-on').text('您确定要禁用该账户吗？');
-                    var content = '<p style="  font-size: 15px;color: #fb2a2a;margin-top:30px;">禁用后，该账号将无法登录</p>';
+                    var content = '<p style="  font-size: 14px;color: #fb2a2a;margin-top:10px;">禁用后，该账号将无法登录</p>';
                     $(' .pop-content').append(content);
                 } else {
                     $(' .off-or-on').text('您确定要启用该账户吗？');
@@ -57,10 +57,10 @@ $(function () {
     var intStatus = '';
     $('td[openTab="start-use"]').click(function () {
         var openTab = $(this).attr('openTab');
-        var text = $(this).text();
+        var text=$(this).find('.result').text();
         shade(openTab, text);
         account = $(this).siblings('.use-account').text();
-        status = $(this).text();
+        status = $(this).find('.result').text();
 
         if (status == '启用') {
             intStatus = 1;
@@ -360,3 +360,19 @@ $(".wishContent").on('input propertychange', function () {
     //显示字数
     $(".wordsNum").html(len + '/200');
 });
+
+$('.search-result table td.status').on({
+    mouseover : function(){
+        var text=$(this).find('.result').text();
+        if(text=='禁用'){
+            $(this).find('.end').addClass('active');
+            $(this).find('.result').css('color','#999');
+        }else{
+            $(this).css('color','#0B78CE');
+        }
+    } ,
+    mouseout : function(){
+        $(this).find('.result').css('color','#0B78CE');
+        $(this).find('.end').removeClass('active');
+    }
+})

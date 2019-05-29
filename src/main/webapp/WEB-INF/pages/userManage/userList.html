@@ -112,12 +112,13 @@
                             <td th:text="${user.create_date}"></td>
                             <!--<td th:text="${user.status}" class="status pointer" openTab="start-use" id="start-use">-->
                             <!--</td>-->
-                            <td th:if="${user.status=='1'}" style="color: #0B78CE;" th:text="启用" openTab="start-use"
-                                id="start-use"
-                                class="status pointer"></td>
-                            <td th:if="${user.status=='0'}" style="color: #0B78CE;" th:text="禁用" openTab="start-use"
-                                id="start-use"
-                                class="status pointer"></td>
+                            <td th:if="${user.status=='1'}" style="color: #0B78CE;"  openTab="start-use"
+                                id="start-use" class="status pointer"><span class="result" th:text="启用"></span></td>
+                            <td th:if="${user.status=='0'}"   openTab="start-use"
+                                id="start-use" class="status pointer p-r">
+                                <span th:text="禁用" class="result" style="color: #0B78CE;"></span>
+                                <span class="p-a end" ><i class="cricle">\</i>终止合作</span>
+                            </td>
                             <td class="p-r">
                                 <img src="/alink-hq/static/img/newPassword.png" alt="" openTab="reset-pwd"
                                      id="reset-pwd" class="pointer" th:title="重置密码">
@@ -130,16 +131,14 @@
                                         alt="" class="center-img" th:title="不可移交"></a>
                                 <img src="/alink-hq/static/img/delete.png" alt="" id="delete-account"
                                      openTab="delete-account" class="pointer" th:title="删除">
-                                <div class="popup p-a">
-                                    重命名
-                                </div>
+
                             </td>
                             <td class="p-r" >
-                                <img src="/alink-hq/static/img/edit.png" alt="" class="pointer memo-edit"
+                                <img src="/alink-hq/static/img/memo.png" alt="" class="pointer memo-edit"
                                      th:title="备忘录">
                                 <!-- 备忘录不为空 -->
                                 <div class="memo-edit-has">
-                                    <div class="meno-nav"><img src="/alink-hq/static/img/edit.png" alt="" class="pointer"></div>
+                                    <div class="meno-nav"><img src="/alink-hq/static/img/alter.png" alt="" class="pointer"></div>
                                     <div class="memo-content">
                                         Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam cupiditate deleniti sint sit voluptate. Aliquam delectus, dolor ex fugiat, hic iste magni maxime officia quod repellat similique veniam vero voluptatibus.
                                     </div>
@@ -351,8 +350,7 @@
 <script src="/alink-hq/static/js/excel/tableExport.js"></script>
 <!--<script src="/alink-hq/static/js/excel/jquery.base64.js"></script>-->
 <script src="/alink-hq/static/js/excel/base64.js"></script>
-<script  src="/alink-hq/static/js/selectivizr.js"></script>
-<script  src="/alink-hq/static/js/html5shiv.js"></script>
+
 </body>
 
 </html>

@@ -962,7 +962,7 @@ input:-ms-input-placeholder { /* Internet Explorer 10+ */
     text-align: center;
     line-height: 42px;
     width: 220px;
-    background-color: #fafafa;
+    background-color: #fff;
 
 }
 
@@ -1057,6 +1057,7 @@ input:-ms-input-placeholder { /* Internet Explorer 10+ */
     background-color: #dceaf3;
     padding: 10px;
     display: none;
+    z-index: 999;
 }
 .meno-nav{
     text-align: right;
@@ -1066,7 +1067,7 @@ input:-ms-input-placeholder { /* Internet Explorer 10+ */
 }
 .search-result table td.active{
     text-align: left;
-    padding-left: 80px;
+    padding-left: 35px;
 }
 .search-result table td.active .memo-edit-has{
     display: block;
@@ -1146,4 +1147,31 @@ form.company-msg{
     width: 20px;
     text-align: center;
     vertical-align: sub;
+}
+.search-result table td.status.un{
+    color: #777 !important;
+}
+.search-result table tr .end{
+    color: #323232;
+    display: none;
+    background-color: #f9f9f9;
+    width: 80px;
+    z-index: 999;
+    top: -10px;
+}
+.search-result table tr .end.active{
+    display: block;
+}
+i.cricle{
+    display: inline-block;
+    width: 12px;
+    height: 13px;
+    background-color: red;
+    border-radius: 50%;
+    margin-right: 5px;
+    vertical-align: text-top;
+    color: #fff;
+    padding: 1px 2px 2px 2px;
+    transform: rotate(330deg);
+    font-size: 12px;
 }
