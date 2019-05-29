@@ -62,7 +62,8 @@
                                     <input type="file" id="file" name="file">
                                 </div>
                                 <div id="drop_area">
-                                    <img src="http://iotsztp.com/file/imgs/chat_qrcode.jpg" style="width: 100%">
+                                    <!--<img src="http://iotsztp.com/file/imgs/chat_qrcode.jpg" style="width: 100%">-->
+                                    <img th:src="@{'../static/upload/'+${info.photo}}" style="width: 100%" th:alt="${info.photo}">
                                 </div>
                             </div>
                             <div class="edit-company">
