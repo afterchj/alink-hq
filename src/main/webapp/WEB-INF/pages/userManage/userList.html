@@ -33,23 +33,24 @@
             <div id="projectList" class="">
                 <div class="search-condition ">
                     <form action="" class="clearfix">
-                        <div class="f-l search" >
+                        <div class="f-l search">
                             <div>
                                 <label for="account">账号</label>
                                 <input type="text" id="account" placeholder="请输入账号">
                             </div>
                             <div class="p-r">
                                 <label for="role" class="font">角色</label>
-                                <select name="role" id="role" >
+                                <select name="role" id="role">
                                     <option>请选择角色</option>
-                                    <option th:each="role:${roleList}" th:value="${role.id}" th:text="${role.roleName }"></option>
+                                    <option th:each="role:${roleList}" th:value="${role.id}"
+                                            th:text="${role.roleName }"></option>
                                 </select>
                             </div>
                         </div>
                         <div class="f-l search">
                             <div>
                                 <label for="company" class="font">隶属公司</label>
-                                <select name="company" id="company" >
+                                <select name="company" id="company">
                                     <option>请选择公司</option>
                                     <option th:each="firm:${firmList}" th:value="${firm.id}"
                                             th:text="${firm.coname }"></option>
@@ -61,16 +62,17 @@
                                 <img src="/alink-hq/static/img/date.png" alt="" class="p-a show-date">
                             </div>
                         </div>
-                     <div class="f-l search">
-                         <div >
-                             <label for="username">用户名</label>
-                             <input type="text" id="username" placeholder="请输入用户名" AUTOCOMPLETE="off">
-                         </div>
-                         <div class="search-button " style=" padding: 0 0 0 145px;">
-                             <button type="button" class="pointer">查询</button>
-                             <a th:href="@{getUserListExcel(account=${account},roleId=${roleId},fid=${fid},startDate=${startDate},endDate=${endDate})}" class="export">Excel导出</a>
-                         </div>
-                     </div>
+                        <div class="f-l search">
+                            <div>
+                                <label for="username">用户名</label>
+                                <input type="text" id="username" placeholder="请输入用户名" AUTOCOMPLETE="off">
+                            </div>
+                            <div class="search-button " style=" padding: 0 0 0 145px;">
+                                <button type="button" class="pointer">查询</button>
+                                <a th:href="@{getUserListExcel(account=${account},roleId=${roleId},fid=${fid},startDate=${startDate},endDate=${endDate})}"
+                                   class="export">Excel导出</a>
+                            </div>
+                        </div>
                     </form>
                 </div>
                 <div class="search-result">
@@ -114,13 +116,26 @@
                             <td th:text="${user.create_date}"></td>
                             <!--<td th:text="${user.status}" class="status pointer" openTab="start-use" id="start-use">-->
                             <!--</td>-->
-                            <td th:if="${user.status=='1'}" style="color: #0B78CE;"  openTab="start-use"
-                                id="start-use" class="status pointer"><span class="result" th:text="启用"></span></td>
-                            <td th:if="${user.status=='0'}"   openTab="start-use"
-                                id="start-use" class="status pointer p-r">
-                                <span th:text="禁用" class="result" style="color: #0B78CE;"></span>
-                                <span class="p-a end" ><i class="cricle">\</i>终止合作</span>
+                            <td th:if="${user.status=='1' && user.coStatus=='1'}" style="color: #0B78CE;"
+                                openTab="start-use" id="start-use" class="status pointer">
+                                <span class="result" th:text="启用"></span>
                             </td>
+                            <td th:if="${user.status=='1' && user.coStatus=='0'}" style="color: #999;"
+                                class="status1 pointer p-r">
+                                <span class="result" th:text="启用"></span>
+                                <span class="p-a end"><i class="cricle">\</i>终止合作</span>
+                            </td>
+
+                            <td th:if="${user.status=='0' && user.coStatus=='1'}" style="color: #0B78CE;"
+                                openTab="start-use" id="start-use" class="status pointer p-r">
+                                <span th:text="禁用" class="result"></span>
+                            </td>
+                            <td th:if="${user.status=='0' && user.coStatus=='0'}" style="color: #999;"
+                                class="status1 pointer p-r">
+                                <span th:text="禁用" class="result"></span>
+                                <span class="p-a end"><i class="cricle">\</i>终止合作</span>
+                            </td>
+
                             <td class="p-r">
                                 <img src="/alink-hq/static/img/newPassword.png" alt="" openTab="reset-pwd"
                                      id="reset-pwd" class="pointer" th:title="重置密码">
@@ -135,14 +150,17 @@
                                      openTab="delete-account" class="pointer" th:title="删除">
 
                             </td>
-                            <td class="p-r" >
+                            <td class="p-r">
                                 <img src="/alink-hq/static/img/memo.png" alt="" class="pointer memo-edit"
                                      th:title="备忘录">
                                 <!-- 备忘录不为空 -->
                                 <div class="memo-edit-has">
-                                    <div class="meno-nav"><img src="/alink-hq/static/img/alter.png" alt="" class="pointer"></div>
+                                    <div class="meno-nav"><img src="/alink-hq/static/img/alter.png" alt=""
+                                                               class="pointer"></div>
                                     <div class="memo-content">
-                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam cupiditate deleniti sint sit voluptate. Aliquam delectus, dolor ex fugiat, hic iste magni maxime officia quod repellat similique veniam vero voluptatibus.
+                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam cupiditate
+                                        deleniti sint sit voluptate. Aliquam delectus, dolor ex fugiat, hic iste magni
+                                        maxime officia quod repellat similique veniam vero voluptatibus.
                                     </div>
                                 </div>
                             </td>
@@ -159,31 +177,31 @@
                                     </a>
                                 </span>
                                     <span th:text="${pageInfo.pageNum}" class="pages"></span>
-                                <span class="next-page">
+                                    <span class="next-page">
                                    <a th:href="@{/account/list(pageNum=${pageInfo.nextPage},pageSize=${pageInfo.pageSize},account=${account},uname=${uname},fid=${fid},roleId=${roleId},startDate=${startDate},endDate=${endDate})}">
                                        <!--<img src="/alink-hq/static/img/right-arrow-color.png" alt="">-->
                                        <span class="next"><span>></span></span>
                                    </a>
                                 </span>
-                                <span class="m-l-15 m-r-20">
+                                    <span class="m-l-15 m-r-20">
                                     共
                                     <span th:text="${pageInfo.pages}" class="pageTotal" id="pageTotal"></span>
                                     页/<span th:text="${pageInfo.total}"></span>条数据
                                 </span>
-                                <span class="m-r-15">
+                                    <span class="m-r-15">
                                     <input type="number" min="1" id="skipPage" th:max="${pageInfo.pages}"
                                            oninput="skipLimit()"/>
                                 </span>
-                                <span class="m-r-35">
+                                    <span class="m-r-35">
                                     <!--<img src="/alink-hq/static/img/skip.png" id="skipPageBtn" class="pointer"-->
-                                    <!--onmousedown="mouseDown()" onmouseup="mouseUp()"-->
-                                    <!--alt="">-->
+                                        <!--onmousedown="mouseDown()" onmouseup="mouseUp()"-->
+                                        <!--alt="">-->
                                      <div id="skipPageBtn" class="pointer moment skipPageBtn"
                                           onmousedown="skipBtnMouseDown()" onmouseup="skipBtnMouseUp()">跳转
                                      </div>
                                 </span>
                                     <span class="m-r-15r">每页显示：</span>
-                                <span class="m-r-20">
+                                    <span class="m-r-20">
                                     <select name="page-select" id="page-select">
 
                                         <option value="10">10</option>
@@ -333,7 +351,8 @@
         备忘录
     </div>
     <div class="pop-content">
-        <textarea rows="9" maxlength="200"  style="width: 93%;border: none;margin-top: 10px;"  class="wishContent"  placeholder="请输入不超过200个字"></textarea>
+        <textarea rows="9" maxlength="200" style="width: 93%;border: none;margin-top: 10px;" class="wishContent"
+                  placeholder="请输入不超过200个字"></textarea>
         <p class="right-font"><span class="wordsNum">0/200</span></p>
         <div class="pop-btn">
             <button class="reduce">取消</button>

@@ -14,6 +14,7 @@ public class UserList {
     private String role_id;
     private String create_date;
     private String status;
+    private String coStatus;
 
     public Integer getId() {
         return id;
@@ -95,6 +96,14 @@ public class UserList {
         this.status = status;
     }
 
+    public String getCoStatus() {
+        return coStatus;
+    }
+
+    public void setCoStatus(String coStatus) {
+        this.coStatus = coStatus;
+    }
+
     @Override
     public String toString() {
         return "UserList{" +
@@ -108,6 +117,7 @@ public class UserList {
                 ", role_id='" + role_id + '\'' +
                 ", create_date='" + create_date + '\'' +
                 ", status='" + status + '\'' +
+                ", coStatus='" + coStatus + '\'' +
                 '}';
     }
 }
