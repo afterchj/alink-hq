@@ -4,10 +4,12 @@
 //日期选择
 laydate.render({
     elem: '#create-time',
+    // type: 'datetime'
     // range: true
 });
 laydate.render({
     elem: '#end-time',
+    // type: 'datetime'
     // range: true
 });
 $(function () {
