@@ -1,6 +1,6 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <script src="/alink-hq/static/js/browser.js"></script>
@@ -17,7 +17,7 @@
         <div th:replace="common/left::left('timerList')"></div>
         <div class="main-right f-l">
             <div class="clearfix main-right-nav">
-                <div class="f-l main-right-title">项目列表<span class="subjection">(隶属项目：<span th:inline="text">XXX</span>)</span></div>
+                <div class="f-l main-right-title">项目列表<span class="subjection">(隶属项目：<span th:inline="text" th:text="${projectName}"></span>)</span></div>
                 <div class="f-r pointer">
                     <div class="goBack" onClick="javascript :history.back(-1);" onmousedown="backBtnMouseDown()"
                          onmouseup="backBtnMouseUp()">
@@ -44,7 +44,8 @@
                                 <label for="status" class="font">定时状态</label>
                                 <select name="status" style=" height: 38px;line-height: 38px;" id="status">
                                     <option value="0">全部</option>
-                                    <option value="1">未知</option>
+                                    <option value="1">启用</option>
+                                    <option value="2">停用</option>
                                 </select>
                             </div>
                             <div class="p-r">
@@ -80,29 +81,35 @@
                             <th><span>是否重复</span></th>
                             <th class="p-r">
                                 <span class="toTime ">创建时间</span>
-                                <img src="/alink-hq/static/img/fewer.png" alt="" class="p-a toTop  sort-t pointer">
-                                <img src="/alink-hq/static/img/unfold.png" alt="" class="p-a toBottom sort-b  pointer">
+                                <img src="/alink-hq/static/img/fewer.png" alt="" class="p-a toTop  sort-t pointer"
+                                     id="creToTop">
+                                <img src="/alink-hq/static/img/unfold.png" alt=""
+                                     class="p-a toBottom sort-b  pointer" id="creToBottom">
                             </th>
                             <th class="p-r">
                                 <span class="toTime">更新时间</span>
-                                <img src="/alink-hq/static/img/fewer.png" alt="" class="p-a  toTop1 sort-t pointer">
+                                <img src="/alink-hq/static/img/fewer.png" alt="" class="p-a  toTop1 sort-t pointer"
+                                     id="upToTop">
                                 <img src="/alink-hq/static/img/unfold.png" alt=""
-                                     class="p-a  toBottom1  sort-b pointer">
+                                     class="p-a  toBottom1  sort-b pointer" id="upToBottom">
                             </th>
                             <th><span>定时状态</span></th>
                             <th class="operation"><span>操作</span></th>
                         </tr>
                         </thead>
                         <tbody>
-                        <tr >
-                            <td  ><a href="">豆豆</a></td>
-                            <td ><a href="">网络</a></td>
-                            <td>11</td>
-                            <td>工作日</td>
-                            <td>重复</td>
-                            <td><p>2019/05/13</p><p>14:55:44</p></td>
-                            <td><p>2019/05/13</p><p>14:55:44</p></td>
-                            <td><a href="">启用</a></td>
+                        <tr th:each="timeLineList:${pageInfo.getList()}">
+                            <input type="hidden" class="tid" th:value="${timeLineList.id}"/>
+                            <td class="tname"><a href="" th:text="${timeLineList.tname}"></a></td>
+                            <td ><a href="" th:text="${timeLineList.mname}"></a></td>
+                            <td th:text="${timeLineList.mid}" class="mid"></td>
+                            <td th:text="${timeLineList.week}"></td>
+                            <td th:text="${timeLineList.repetition}"></td>
+                            <!--<td><p>2019/05/13</p><p>14:55:44</p></td>-->
+                            <!--<td><p>2019/05/13</p><p>14:55:44</p></td>-->
+                            <td><p th:text="${timeLineList.createDate}"></p></td>
+                            <td><p th:text="${timeLineList.updateDate}"></p></td>
+                            <td><p th:text="${timeLineList.state}"></p></td>
                             <td  class="p-r">
                                 <img src="/alink-hq/static/img/edit.png" alt="" class="pointer reset-name"
                                      th:title="重命名">
@@ -114,31 +121,42 @@
                             <td colspan="9" class="clearfix page">
                                 <div class="f-r page-right">
                                 <span class="prev-page">
-                                    <a href=""><span class="prev "><span><</span></span></a>
+                                    <!--前一页-->
+                                    <a th:if="${pageInfo.getPrePage()}==0" href="#">
+                                        <span class="prev "><span><</span></span>
+                                    </a>
+                                    <a th:if="${pageInfo.getPrePage()}>0"
+                                            th:href="@{/timer/list(id=${id},pageNum=${pageInfo.getPrePage()},pageSize=${pageInfo.getPageSize()})}">
+                                        <span class="prev active"><span><</span></span>
+                                    </a>
                                 </span>
-                                    <span  class="pages">22</span>
+                                    <!--当前页-->
+                                    <span  class="pages" th:text="${pageInfo.getPageNum()}"></span>
                                 <span class="next-page">
-                                    <a href=""><span class="prev "><span>></span></span></a>
+                                    <!--后一页-->
+                                    <a th:if="${pageInfo.getNextPage()}==0" href="#">
+                                        <span class="prev "><span>></span></span>
+                                    </a>
+                                    <a th:if="${pageInfo.getNextPage()}>0" th:href="@{/timer/list(id=${id},pageNum=${pageInfo.getNextPage()},pageSize=${pageInfo.getPageSize()})}"><span class="prev active"><span>></span></span></a>
                                 </span>
                             <span class="m-l-15 m-r-20">共
-                                    <span  class="pageTotal" id="pageTotal"></span>
-                                    页/<span ></span>条数据
+                                    <span  class="pageTotal" id="pageTotal" th:text="${pageInfo.getPages()}"></span>
+                                    页/<span th:text="${pageInfo.getTotal()}"></span>条数据
                             </span>
                             <span class="m-r-15">
                         <input type="number" id="skipPage" oninput="skipLimit()"/>
                         </span>
                             <span class="m-r-35">
-                                <div id="skipPageBtn" class="pointer moment skipPageBtn"
-                                     onmousedown="skipBtnMouseDown()" onmouseup="skipBtnMouseUp()">跳转
+                                <div id="skipPageBtn" class="pointer moment skipPageBtn" onmousedown="skipBtnMouseDown()" onmouseup="skipBtnMouseUp()">跳转
                                 </div>
                         </span>
                                     <span class="m-r-15r">每页显示：</span>
                             <span class="m-r-20">
                         <select name="" id="page-select">
-                            <option value="10">10</option>
-                            <option value="30">30</option>
-                            <option value="50">50</option>
-                            <option value="100">100</option>
+                            <option value="10" data-index="10">10</option>
+                            <option value="30" data-index="30">30</option>
+                            <option value="50" data-index="50">50</option>
+                            <option value="100" data-index="100">100</option>
                         </select>
                         </span>
                                 </div>
@@ -146,6 +164,8 @@
                         </tr>
                         </tfoot>
                     </table>
+                    <input type="hidden" id="mid" th:value="${id}"/>
+                    <input type="hidden" id="pageSize" th:value="${pageInfo.getPageSize()}"/>
                     <!-- 无数据时 -->
                     <table border="1" class="noData " >
                         <thead>

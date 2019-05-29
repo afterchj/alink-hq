@@ -28,13 +28,12 @@
                          onmouseup="backBtnMouseUp()">
                         <span><</span><span>返回</span>
                     </div>
-                    <!--<img src="/alink-hq/static/img/go-back.png" alt="" onClick="javascript :history.back(-1);">-->
                 </div>
             </div>
             <div id="projectList" class="">
                 <div class="search-condition ">
                     <form action="" class="clearfix">
-                        <div class="f-l search" style="margin-right:125px;">
+                        <div class="f-l search" >
                             <div>
                                 <label for="account">账号</label>
                                 <input type="text" id="account" placeholder="请输入账号">
@@ -43,8 +42,7 @@
                                 <label for="role" class="font">角色</label>
                                 <select name="role" id="role" >
                                     <option>请选择角色</option>
-                                    <option th:each="role:${roleList}" th:value="${role.id}"
-                                            th:text="${role.roleName }"></option>
+                                    <option th:each="role:${roleList}" th:value="${role.id}" th:text="${role.roleName }"></option>
                                 </select>
                             </div>
                         </div>
@@ -63,12 +61,16 @@
                                 <img src="/alink-hq/static/img/date.png" alt="" class="p-a show-date">
                             </div>
                         </div>
-                        <div class="f-r search-button ">
-                            <button type="button" class="pointer">查询</button>
-                            <a th:href="@{getUserListExcel(account=${account},roleId=${roleId},fid=${fid},startDate=${startDate},endDate=${endDate})}"
-                               class="export">Excel
-                                导出</a>
-                        </div>
+                     <div class="f-l search">
+                         <div >
+                             <label for="username">用户名</label>
+                             <input type="text" id="username" placeholder="请输入用户名" AUTOCOMPLETE="off">
+                         </div>
+                         <div class="search-button " style=" margin: 0 0 0 145px;">
+                             <button type="button" class="pointer">查询</button>
+                             <a th:href="@{getUserListExcel(account=${account},roleId=${roleId},fid=${fid},startDate=${startDate},endDate=${endDate})}" class="export">Excel导出</a>
+                         </div>
+                     </div>
                     </form>
                 </div>
                 <div class="search-result">

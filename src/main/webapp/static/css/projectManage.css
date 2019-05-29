@@ -1,1177 +1,1160 @@
 .search-condition {
-    margin: 30px 0;
-    padding: 40px 65px 10px 65px;
-    border: 1px solid #bbb;
-    background-color: #fff;
-    min-width: 1360px;
+    margin:30px 0;
+    padding:40px 65px 10px;
+    border:1px solid #bbb;
+    background-color:#fff;
+    min-width:1360px
 }
 
 .temp {
-    height: 130px;
+    height:130px
 }
 
-.search input, .search select, .search select option {
+.search input,.search select,.search select option {
+    width:275px;
+    height:30px;
+    border-radius:1px;
+    border:1px solid #bbb;
+    font-size:14px;
+    color:#999;
+    padding-left:10px
+}
 
-    width: 275px;
-    height: 30px;
-    border-radius: 1px;
-    border: 1px solid #bbb;
-    font-size: 14px;
-    color: #999;
-    padding-left: 10px;
+.search input {
+    padding-left:14px!important
+}
 
-    /*text-indent: 10px;*/
+.search select,.search select option {
+    width:290px!important;
+    height:33px!important
 }
-.search input{
-    padding-left: 14px !important;
-}
-.search select, .search select option{
-    width: 290px !important;
-    height: 33px !important;
-}
+
 .search > div {
-    margin-bottom: 26px;
+    margin-bottom:26px
 }
 
 .search-button button {
-    width: 85px;
-    height: 40px;
-    font-size: 18px;
-    letter-spacing: 10px;
-    background-color: #ffb500;
-    border: 1px solid #ffb500;
-    border-radius: 5px;
-    padding-left: 10px;
-    color: #fff;
-    transform: scale(1, .9);
-    margin-right: 30px;
+    width:85px;
+    height:40px;
+    font-size:18px;
+    letter-spacing:10px;
+    background-color:#ffb500;
+    border:1px solid #ffb500;
+    border-radius:5px;
+    padding-left:10px;
+    color:#fff;
+    transform:scale(1,.9);
+    margin-right:30px
 }
 
 .sort-t {
-    top: 14px;
+    top:14px
 }
 
 .sort-b {
-    bottom: 18px;
+    bottom:18px
 }
 
 .search label {
-    margin-right: 30px;
-    font-size: 15px;
-    display: inline-block;
-    color: #323232;
-    width: 110px;
-    text-align: right;
+    margin-right:30px;
+    font-size:15px;
+    display:inline-block;
+    color:#323232;
+    width:110px;
+    text-align:right
 }
 
 .search-button {
-    margin-top: 59px;
+    margin-top:59px
 }
 
 .search img {
-    top: 7px;
-    right: 10px;
+    top:7px;
+    right:10px
 }
 
 .search-result table {
-    /*border-collapse: collapse;*/
-    /*-moz-border-spacing: 0;*/
-    /*-moz-border-collapse: unset;*/
-    width: 100%;
-    margin-bottom: 35px;
+    width:100%;
+    margin-bottom:35px
 }
 
 .search-result table
-td,
-th {
-
-    border-left: #bbb 1px solid;
-    border-bottom: #bbb 1px solid;
+td,th {
+    border-left:#bbb 1px solid;
+    border-bottom:#bbb 1px solid
 }
 
 .search-result table th {
-    height: 50px;
-    line-height: 50px;
-    font-size: 16px;
-    color: #111;
-    font-weight: normal;
-    background-color: #fafafa;
-
+    height:50px;
+    line-height:50px;
+    font-size:16px;
+    color:#111;
+    font-weight:400;
+    background-color:#fafafa
 }
 
 .search-result table td {
-    height: 48px;
-    /* line-height: 48px; */
-    text-align: center;
-    font-size: 14px;
-    vertical-align: middle;
-    color: #3c3c3c;
-    /* cursor: pointer; */
-    background-color: #fff;
-    /*border-top: 0;*/
-    /*border-right: 0;*/
+    height:48px;
+    text-align:center;
+    font-size:14px;
+    vertical-align:middle;
+    color:#3c3c3c;
+    background-color:#fff
 }
 
 .search-result table input[type=checkbox] {
-    border: 1px solid #bbb;
-    width: 15px;
-    height: 14px;
-    outline: none;
-    border-radius: 0;
+    border:1px solid #bbb;
+    width:15px;
+    height:14px;
+    outline:none;
+    border-radius:0;
     appearance:none;
-    -webkit-appearance: none;
-    cursor: pointer;
-    background-color: #eef3f5;
+    -webkit-appearance:none;
+    cursor:pointer;
+    background-color:#eef3f5
 }
 
 .search-result table input[type=checkbox]:checked {
-    background: url("/alink-hq/static/img/checkbox-gou.png") no-repeat center;
+    background:url(/alink-hq/static/img/checkbox-gou.png) no-repeat center
 }
 
 .search-result table td a {
-    color: #3c3c3c;
+    color:#3c3c3c
 }
 
-
 .center-img {
-    margin: 0 30px;
+    margin:0 30px
 }
 
 .left-img {
-    margin-left: 30px;
+    margin-left:30px
 }
 
-/*img.toTop {*/
-/*top: 14px;*/
-/*!* transform: scale(.9); *!*/
-/*}*/
-
-/*img.toBottom {*/
-/*bottom: 18px;*/
-/*}*/
-
 .toTime {
-    margin-right: 8px;
+    margin-right:8px
 }
 
 .project-name a:hover {
-    border-bottom: 1px solid #3598db;
-    color: #3598db;
+    border-bottom:1px solid #3598db;
+    color:#3598db
 }
 
 .popup {
-    display: block;
-    width: 75px;
-    height: 35px;
-    line-height: 35px;
-    font-size: 18px;
-    color: #3c3c3c;
-    background-color: #eef2f5;
-    border: 1px solid #bbb;
-    left: 30%;
-    top: 35px;
-    display: none;
+    display:block;
+    width:75px;
+    height:35px;
+    line-height:35px;
+    font-size:18px;
+    color:#3c3c3c;
+    background-color:#eef2f5;
+    border:1px solid #bbb;
+    left:30%;
+    top:35px;
+    display:none
 }
 
 .search-result table td.page {
-    height: 80px;
-    line-height: 80px;
-    font-size: 13px;
-    color: #111;
+    height:80px;
+    line-height:80px;
+    font-size:13px;
+    color:#111
 }
 
 .search-result table .selected-order {
-    margin: 0 35px 0 30px;
+    margin:0 35px 0 30px
 }
 
 .search-result table .selected-order .amount {
-    color: red;
-    display: inline-block;
-    width: 20px;
+    color:red;
+    display:inline-block;
+    width:20px
 }
 
 .page img {
-    vertical-align: middle;
-    transform: scale(0.85);
-    cursor: pointer;
+    vertical-align:middle;
+    transform:scale(0.85);
+    cursor:pointer
 }
 
 .page-right > span {
-    display: inline-block;
-
+    display:inline-block
 }
 
-.page-right > span input,
-.page-right > span select {
-    width: 68px;
-    height: 26px;
-    border: 1px solid #bbb;
-    font-size: 13px;
-    color: #3c3c3c;
-    text-align: center;
+.page-right > span input,.page-right > span select {
+    width:68px;
+    height:26px;
+    border:1px solid #bbb;
+    font-size:13px;
+    color:#3c3c3c;
+    text-align:center
 }
 
 th.all-checkbox {
-    cursor: pointer;
-
+    cursor:pointer
 }
 
-.hasData,
-.noData {
-    display: none;
-    border-left: 0;
-    border-bottom: 0;
-    border-spacing: 0;
-    border-collapse: unset;
-    border-top: #bbb 1px solid;
-    border-right: #bbb 1px solid;
+.hasData,.noData {
+    display:none;
+    border-left:0;
+    border-bottom:0;
+    border-spacing:0;
+    border-collapse:unset;
+    border-top:#bbb 1px solid;
+    border-right:#bbb 1px solid
 }
 
-.hasData.active,
-.noData.active {
-    display: table;
-
+.hasData.active,.noData.active {
+    display:table
 }
 
 .search-result table.noData td {
-    height: 469px;
-    padding-top: 171px;
+    height:469px;
+    padding-top:171px
 }
 
 .search-result table.noData td p {
-    font-size: 24px;
-    color: #999;
+    font-size:24px;
+    color:#999
 }
 
 #project-list {
-    display: none;
+    display:none
 }
 
 #projectDetail .p-detail,#timerDetail .p-detail {
-    height: 842px;
-    margin: 30px 0;
-    border: 1px solid #bbb;
-    background-color: #fff;
+    height:842px;
+    margin:30px 0;
+    border:1px solid #bbb;
+    background-color:#fff
 }
 
-#projectDetail .p-nav,
-#projectDetail .c-nav ,#timerDetail .p-nav{
-    height: 50px;
-    line-height: 50px;
-    padding-left: 25px;
-    font-size: 17px;
-    color: #323232;
-    border-bottom: 1px solid #bbb;
-    background-color: #fafafa;
+#projectDetail .p-nav,#projectDetail .c-nav,#timerDetail .p-nav {
+    height:50px;
+    line-height:50px;
+    padding-left:25px;
+    font-size:17px;
+    color:#323232;
+    border-bottom:1px solid #bbb;
+    background-color:#fafafa
 }
 
 #projectDetail .c-nav {
-    border-top: 1px solid #bbb;
+    border-top:1px solid #bbb
 }
 
 #projectDetail .p-content {
-    padding: 70px 0;
+    padding:70px 0
 }
 
 #projectDetail .c-content {
-    padding: 50px 400px;
+    padding:50px 400px
 }
 
 #projectDetail .p-content span,#timerDetail .p-content span {
-    font-size: 16px;
-    color: #3c3c3c;
-    transform: scale(1, .92);
-    display: inline-block;
+    font-size:16px;
+    color:#3c3c3c;
+    transform:scale(1,.92);
+    display:inline-block
 }
-#timerDetail .p-content{
-    padding: 50px;
+
+#timerDetail .p-content {
+    padding:50px
 }
-#projectDetail .p-content > div > div:nth-child(1){
-    margin-bottom: 30px;
-    width: 80%;
-    text-align: left;
-    height: 18px;
+
+#projectDetail .p-content > div > div:nth-child(1) {
+    margin-bottom:30px;
+    width:80%;
+    text-align:left;
+    height:18px
 }
-#timerDetail .p-content .clearfix.time{
-     width: 800px;
-     text-align: left;
-     margin-bottom: 30px;
-     height: 18px;
- }
+
+#timerDetail .p-content .clearfix.time {
+    width:800px;
+    text-align:left;
+    margin-bottom:30px;
+    height:18px
+}
 
 #projectDetail .p-content > div.clearfix {
-    width: 680px;
-    margin: auto;
+    width:680px;
+    margin:auto
 }
 
 #projectDetail .p-content > div > div:nth-child(2) {
-    margin-bottom: 40px;
-    width: 20%;
-    text-align: left;
-    height: 18px;
+    margin-bottom:40px;
+    width:20%;
+    text-align:left;
+    height:18px
 }
 
 #projectDetail .p-content a {
-    font-size: 17px;
-    color: #3598db;
-    transform: scale(1, .92);
-    display: inline-block;
+    font-size:17px;
+    color:#3598db;
+    transform:scale(1,.92);
+    display:inline-block
 }
 
 #projectDetail .p-content span a {
-    transform: scale(1, 1);
+    transform:scale(1,1)
 }
 
 #projectDetail .p-content a:hover {
-    color: #003e68;
-    border-bottom: 1px solid #003e68;
+    color:#003e68;
+    border-bottom:1px solid #003e68
 }
 
 #projectDetail .c-content > div {
-    text-align: left;
-    font-size: 16px;
-    color: #3c3c3c;
-    margin-bottom: 30px;
+    text-align:left;
+    font-size:16px;
+    color:#3c3c3c;
+    margin-bottom:30px
 }
 
 .pop-nav img {
-    right: 20px;
-
+    right:20px
 }
 
 .c-width {
-    width: 163px;
-    height: 38px;
-    line-height: 38px;
-    border-bottom: 1px solid #bbb;
+    width:163px;
+    height:38px;
+    line-height:38px;
+    border-bottom:1px solid #bbb
 }
 
 .c-width.one {
-    border-right: 1px solid #bbb;
+    border-right:1px solid #bbb
 }
 
 .pop-content a {
-    display: inline-block;
-    font-size: 18px;
-    color: #3598db;
-    margin-bottom: 30px;
+    display:inline-block;
+    font-size:18px;
+    color:#3598db;
+    margin-bottom:30px
 }
 
 .pop-content a:hover {
-    border-bottom: 1px solid #003e68;
-    color: #003e68;
+    border-bottom:1px solid #003e68;
+    color:#003e68
 }
 
 .pop-content p {
-    font-size: 17px;
-    color: #666;
+    font-size:17px;
+    color:#666
 }
 
 .pop-content input {
-    height: 30px;
-    width: 249px;
-    margin-bottom: 30px;
-    border: 1px solid #bbb;
-    border-radius: 2px;
-    text-indent: 10px;
+    height:30px;
+    width:249px;
+    margin-bottom:30px;
+    border:1px solid #bbb;
+    border-radius:2px;
+    text-indent:10px
 }
 
 .pop-content label {
-    display: inline-block;
-    width: 70px;
-    margin-right: 30px;
-    font-size: 16px;
-    color: #3c3c3c;
-    text-align: right;
+    display:inline-block;
+    width:70px;
+    margin-right:30px;
+    font-size:16px;
+    color:#3c3c3c;
+    text-align:right
 }
 
 .pop-iframe.active {
-    display: block;
-    z-index: 1000;
+    display:block;
+    z-index:1000
 }
 
 .c-list .c-width {
-    color: #3c3c3c;
+    color:#3c3c3c
 }
 
 .c-list {
-    overflow-y: scroll;
-    overflow-x: hidden;
-    max-height: 116px;
+    overflow-y:scroll;
+    overflow-x:hidden;
+    max-height:116px
 }
 
 .pop-content .reset-pwd {
-    font-size: 18px;
-    color: #3c3c3c;
-    margin-top: 60px;
-    text-align: center;
-    font-weight: bold;
-    transform: scale(1, .95);
+    font-size:18px;
+    color:#3c3c3c;
+    margin-top:60px;
+    text-align:center;
+    font-weight:700;
+    transform:scale(1,.95)
 }
 
 .pop-content .off-or-on {
-    font-size: 18px;
-    color: #3c3c3c;
-    margin-top: 60px;
-    text-align: center;
-    font-weight: bold;
-    transform: scale(1, .95);
+    font-size:18px;
+    color:#3c3c3c;
+    margin-top:60px;
+    text-align:center;
+    font-weight:700;
+    transform:scale(1,.95)
 }
 
 .pop-content .reset-pwd-hint {
-    font-size: 14px;
-    color: red;
-    margin-top: 20px;
-    text-align: center;
+    font-size:14px;
+    color:red;
+    margin-top:20px;
+    text-align:center
 }
 
 #preload-anim {
-    display: none;
+    display:none
 }
 
 #preload-anim.active {
-    display: block;
+    display:block
 }
 
 .pop-iframe.active {
-    display: block;
-    z-index: 1000;
+    display:block;
+    z-index:1000
 }
 
 .pop-iframe {
-    position: absolute;
-    top: 250px;
-    left: 35%;
-    background-color: #fafafa;
-    width: 600px;
-    height: 300px;
-    text-align: center;
-    border: 1px solid #bbb;
-    border-radius: 5px;
-    box-shadow: 1px 1px 10px #333;
-    display: none;
-    z-index: 1000;
+    position:absolute;
+    top:250px;
+    left:35%;
+    background-color:#fafafa;
+    width:600px;
+    height:300px;
+    text-align:center;
+    border:1px solid #bbb;
+    border-radius:5px;
+    box-shadow:1px 1px 10px #333;
+    display:none;
+    z-index:1000
 }
 
 .hide-iframe.active {
-    display: block;
+    display:block
 }
 
 .hide-iframe {
-    position: absolute;
-    left: 0;
-    top: 0;
-    background-color: black;
-    z-index: 10;
-    -moz-opacity: 0.45;
-    opacity: .45;
-    filter: alpha(opacity=45);
-    display: none;
-    z-index: 999;
+    position:absolute;
+    left:0;
+    top:0;
+    background-color:#000;
+    z-index:10;
+    -moz-opacity:.45;
+    opacity:.45;
+    filter:alpha(opacity=45);
+    display:none;
+    z-index:999
 }
 
 .pop-nav {
-    padding: 20px 22px;
-    font-size: 22px;
-    color: #3c3c3c;
-    border-bottom: 1px solid #bbb;
-    background-color: #eef2f5;
+    padding:20px 22px;
+    font-size:22px;
+    color:#3c3c3c;
+    border-bottom:1px solid #bbb;
+    background-color:#eef2f5
 }
-.no-top{
-    margin-top: 0;
-    text-align: right;
+
+.no-top {
+    margin-top:0;
+    text-align:right
 }
+
 .pop-content {
-    text-align: center;
+    text-align:center
 }
 
 .pop-content .pop-btn {
-    text-align: right;
-    position: absolute;
-    right: 0;
-    bottom: 0;
-    width: 540px;
-    padding: 13px 20px 11px 40px;
-    background-color: #eef2f5;
+    text-align:right;
+    position:absolute;
+    right:0;
+    bottom:0;
+    width:540px;
+    padding:13px 20px 11px 40px;
+    background-color:#eef2f5
 }
 
 .pop-content .pop-btn .reduce {
-    border: 1px solid #ccc;
-    font-size: 16px;
-    color: #3c3c3c;
-    border-radius: 5px;
-    height: 35px;
-    width: 80px;
-    line-height: 35px;
-    letter-spacing: 9px;
-    background-color: #fafafa;
-    cursor: pointer;
-    margin-right: 20px;
-    padding-left: 10px;
+    border:1px solid #ccc;
+    font-size:16px;
+    color:#3c3c3c;
+    border-radius:5px;
+    height:35px;
+    width:80px;
+    line-height:35px;
+    letter-spacing:9px;
+    background-color:#fafafa;
+    cursor:pointer;
+    margin-right:20px;
+    padding-left:10px
 }
 
 .pop-content .pop-btn .yes {
-    border: 1px solid #3598DB;
-    font-size: 16px;
-    color: #fff;
-    border-radius: 5px;
-    height: 35px;
-    width: 80px;
-    letter-spacing: 10px;
-    cursor: pointer;
-    background-color: #3598DB;
-    padding-left: 10px;
+    border:1px solid #3598DB;
+    font-size:16px;
+    color:#fff;
+    border-radius:5px;
+    height:35px;
+    width:80px;
+    letter-spacing:10px;
+    cursor:pointer;
+    background-color:#3598DB;
+    padding-left:10px
 }
 
 .pop-hint {
-    font-size: 15px;
-    color: #fb2a2a;
-    margin-top: 10px;
+    font-size:15px;
+    color:#fb2a2a;
+    margin-top:10px
 }
 
-.noProject, .hasProject {
-    display: none;
+.noProject,.hasProject {
+    display:none
 }
 
 .hasProject.active {
-    display: block;
+    display:block
 }
 
 .noProject.active {
-    display: block;
+    display:block
 }
 
 .pop-content .hasProject {
-    margin-top: 50px;
+    margin-top:50px
 }
 
 .pop-content .hasProject > div {
-    margin-bottom: 20px;
-    font-size: 17px;
-    color: #3c3c3c;
+    margin-bottom:20px;
+    font-size:17px;
+    color:#3c3c3c
 }
 
 .pop-content span {
-    display: inline-block;
-    width: 49%;
-    color: #3c3c3c;
+    display:inline-block;
+    width:49%;
+    color:#3c3c3c
 }
 
 .status:hover {
-    color: #14a5e8;
+    color:#14a5e8
 }
 
 .main-part {
-    width: 400px;
-    margin: 30px auto;
+    width:400px;
+    margin:30px auto
 }
 
 .pop-content span.t-title {
-    text-align: right;
+    text-align:right
 }
 
 .pop-content span.t-content {
-    text-align: left;
+    text-align:left
 }
 
 .account-part {
-    margin-bottom: 30px;
+    margin-bottom:30px
 }
 
 .hidden {
-    /*display: none;*/
-    visibility: hidden;
-    width: 0;
+    visibility:hidden;
+    width:0
 }
 
 .pop-content .newName {
-    font-size: 16px;
-    /*height: 177px;*/
-    /*line-height: 136px;*/
-    margin: 50px auto 0;
-    text-align: center;
+    font-size:16px;
+    margin:50px auto 0;
+    text-align:center
 }
 
 .pop-content p.rename-hint {
-    font-size: 14px;
-    color: #fb2a2a;
-    height: 20px;
-    padding-left: 227px;
-    text-align: left;
+    font-size:14px;
+    color:#fb2a2a;
+    height:20px;
+    padding-left:227px;
+    text-align:left
 }
 
 #createProject .c-createProject {
-    height: 834px;
-    margin: 30px 0;
-    border: 1px solid #bbb;
-    background-color: #fff;
+    height:834px;
+    margin:30px 0;
+    border:1px solid #bbb;
+    background-color:#fff
 }
 
 #createProject .c-nav {
-    height: 58px;
-    line-height: 58px;
-    padding-left: 25px;
-    font-size: 22px;
-    color: #111;
-    border-bottom: 1px solid #bbb;
-    background-color: #fafafa;
+    height:58px;
+    line-height:58px;
+    padding-left:25px;
+    font-size:22px;
+    color:#111;
+    border-bottom:1px solid #bbb;
+    background-color:#fafafa
 }
 
 #createProject .c-content {
-    padding: 10px 70px;
-    font-size: 21px;
-    color: #3c3c3c;
+    padding:10px 70px;
+    font-size:21px;
+    color:#3c3c3c
 }
 
 #createProject form {
-    width: 800px;
-    margin: auto;
-    font-size: 16px;
-    color: #3c3c3c;
-    margin-top: 100px;
-    text-align: center;
+    width:800px;
+    margin:auto;
+    font-size:16px;
+    color:#3c3c3c;
+    margin-top:100px;
+    text-align:center
 }
 
 #createProject input {
-    width: 300px;
-    font-size: 15px;
-    color: #666;
-    border: 1px solid #bbb;
-    text-indent: 10px;
-    height: 30px;
-    border-radius: 5px;
+    width:300px;
+    font-size:15px;
+    color:#666;
+    border:1px solid #bbb;
+    text-indent:10px;
+    height:30px;
+    border-radius:5px
 }
 
 #createProject select {
-    width: 305px;
-    font-size: 15px;
-    color: #666;
-    border: 1px solid #bbb;
-    height: 35px;
-    border-radius: 5px;
-    padding-left: 8px;
+    width:305px;
+    font-size:15px;
+    color:#666;
+    border:1px solid #bbb;
+    height:35px;
+    border-radius:5px;
+    padding-left:8px
 }
 
 #createProject form label {
-    display: inline-block;
-    width: 130px;
-    text-align: right;
-    margin-right: 15px;
+    display:inline-block;
+    width:130px;
+    text-align:right;
+    margin-right:15px
 }
 
 #createProject form > div {
-    margin-bottom: 15px;
+    margin-bottom:15px
 }
 
 #createProject form > div button {
-    height: 44px;
-    width: 134px;
-    color: #fff;
-    font-size: 17px;
-    letter-spacing: 5px;
-    border: 1px solid #3598db;
-    background-color: #3598db;
-    border-radius: 5px;
-    cursor: pointer;
-    margin-top: 70px;
+    height:44px;
+    width:134px;
+    color:#fff;
+    font-size:17px;
+    letter-spacing:5px;
+    border:1px solid #3598db;
+    background-color:#3598db;
+    border-radius:5px;
+    cursor:pointer;
+    margin-top:70px
 }
 
-.project-hint, .account-hint, .place-hint, .group-hint, .mesh-hint {
-    font-size: 14px;
-    color: #fb2a2a;
-    height: 20px;
-    margin-left: 325px;
-    text-align: left
+.project-hint,.account-hint,.place-hint,.group-hint,.mesh-hint {
+    font-size:14px;
+    color:#fb2a2a;
+    height:20px;
+    margin-left:325px;
+    text-align:left
 }
 
 #skipPage {
-    height: 22px;
+    height:22px
 }
 
-#projectDetail .p-nav li ,#timerDetail .p-nav li{
-    font-size: 16px;
+#projectDetail .p-nav li,#timerDetail .p-nav li {
+    font-size:16px
 }
 
 .search-result table td.k-link a {
-    color: #0B78CE;
+    color:#0B78CE
 }
 
 .search-result table td.k-link a:hover {
-    color: #17b4f1;
-    border-bottom: 1px solid #17b4f1;
+    color:#17b4f1;
+    border-bottom:1px solid #17b4f1
 }
 
-input::-webkit-input-placeholder { /* WebKit browsers */
-    color: #999;
+input::-webkit-input-placeholder {
+    color:#999
 }
 
-input::-moz-placeholder { /* Mozilla Firefox 4 to 18 */
-    color: #999;
-    opacity: 1;
+input::-moz-placeholder {
+    color:#999;
+    opacity:1;
+    color:#999;
+    opacity:1
 }
 
-input::-moz-placeholder { /* Mozilla Firefox 19+ */
-    color: #999;
-    opacity: 1;
-}
-
-input:-ms-input-placeholder { /* Internet Explorer 10+ */
-    color: #999;
+input:-ms-input-placeholder {
+    color:#999
 }
 
 .disabled {
-    cursor: not-allowed;
-    pointer-events: none;
+    cursor:not-allowed;
+    pointer-events:none
 }
 
 .skipPageBtn {
-    display: inline-block;
-    width: 60px;
-    height: 30px;
-    line-height: 30px;
-    font-size: 15px;
-    border: 1px solid #bbb;
-    border-radius: 5px;
-    color: #000;
-    background-image: linear-gradient(to bottom, #fff 40%, #d2d3d6);
+    display:inline-block;
+    width:60px;
+    height:30px;
+    line-height:30px;
+    font-size:15px;
+    border:1px solid #bbb;
+    border-radius:5px;
+    color:#000;
+    background-image:linear-gradient(to bottom,#fff 40%,#d2d3d6)
 }
 
 .skipPageBtn.active {
-    background: #DFDFDF;
+    background:#DFDFDF
 }
 
-.prev, .next {
-    width: 32px;
-    height: 30px;
-    line-height: 30px;
-    border: 1px solid #ccc;
-    display: inline-block;
-    border-radius: 5px;
-    cursor: pointer;
-    vertical-align: middle;
+.prev,.next {
+    width:32px;
+    height:30px;
+    line-height:30px;
+    border:1px solid #ccc;
+    display:inline-block;
+    border-radius:5px;
+    cursor:pointer;
+    vertical-align:middle
 }
 
-.prev span, .next span {
-    font-size: 24px;
-    color: #999;
-    /*transform: scale(1,.95);*/
+.prev span,.next span {
+    font-size:24px;
+    color:#999
 }
 
-.prev.active span, .next.active span {
-    color: #3598DB;
+.prev.active span,.next.active span {
+    color:#3598DB
 }
 
 .pages {
-    width: 20px;
+    width:20px
 }
 
 .operation {
-    width: 220px;
+    width:220px
 }
 
 .export {
-    font-size: 18px;
-    transform: scale(1, .95);
-    color: #3598db;
-
+    font-size:18px;
+    transform:scale(1,.95);
+    color:#3598db
 }
 
 .subjection {
-    text-align: right;
-    font-size: 15px;
-    transform: scale(1, .95);
-    margin: 15px 0;
-    margin: 15px 0 15px 15px;
+    text-align:right;
+    font-size:15px;
+    transform:scale(1,.95);
+    margin:15px 0;
+    margin:15px 0 15px 15px
 }
 
 .process {
-    color: #555;
-    text-align: center;
-    width: 800px;
-    margin: 100px auto 30px;
-
+    color:#555;
+    text-align:center;
+    width:800px;
+    margin:100px auto 30px
 }
 
 .process span {
-    display: inline-block;
-    font-size: 17px;
-    vertical-align: middle;
-    height: 50px;
-    transform: scale(1, .95);
-    margin: 0 0 0 5px;
-
+    display:inline-block;
+    font-size:17px;
+    vertical-align:middle;
+    height:50px;
+    transform:scale(1,.95);
+    margin:0 0 0 5px
 }
 
 .process .part {
-    height: 50px;
+    height:50px
 }
 
 .process .line {
-    margin: 7px 85px;
+    margin:7px 85px
 }
 
-.select-mesh-step, .select-place-step, .select-group-step {
-    display: none;
+.select-mesh-step,.select-place-step,.select-group-step {
+    display:none
 }
 
-.select-mesh-step.active, .select-place-step.active, .select-group-step.active {
-    display: block;
+.select-mesh-step.active,.select-place-step.active,.select-group-step.active {
+    display:block
 }
 
 .back-btn {
-    margin-right: 60px;
+    margin-right:60px
 }
 
-/*场景*/
 .scene-nav {
-    margin: 30px 0;
-    border: 1px solid #bbb;
-    background-color: #fff;
-    font-size: 16px;
-    color: #3c3c3c;
+    margin:30px 0;
+    border:1px solid #bbb;
+    background-color:#fff;
+    font-size:16px;
+    color:#3c3c3c
 }
 
-.scene-nav .scene-title, .scene-nav .project-title {
-    padding: 30px 25px;
+.scene-nav .scene-title,.scene-nav .project-title {
+    padding:30px 25px
 }
 
 .scene-nav .scene-title {
-    border-bottom: 1px solid #bbb;
+    border-bottom:1px solid #bbb
 }
 
 .scene-nav .scene-title > div {
-    width: 300px;
+    width:300px
 }
 
 .scene-nav .project-title > div > div {
-    width: 300px;
+    width:300px
 }
 
 .scene-nav .project-title > div:nth-child(1) {
-    padding-bottom: 30px;
+    padding-bottom:30px
 }
 
 .scene-nav .project-title .length {
-    width: 600px;
+    width:600px
 }
 
 .scene-nav a {
-    color: #3598DB;
+    color:#3598DB
 }
 
 .scene-nav a:hover {
-    color: #003e68;
-    border-bottom: 1px solid #003e68;
+    color:#003e68;
+    border-bottom:1px solid #003e68
 }
 
 .scene-content {
-    margin-top: 30px;
-    border: 1px solid #Bbb;
-    background-color: #fff;
+    margin-top:30px;
+    border:1px solid #Bbb;
+    background-color:#fff
 }
 
 .scene-content .scene-list {
-    border-bottom: 1px solid #bbb;
-    padding: 20px 25px;
-    font-size: 16px;
-    color: #3c3c3c;
-    background-color: #fafafa;
+    border-bottom:1px solid #bbb;
+    padding:20px 25px;
+    font-size:16px;
+    color:#3c3c3c;
+    background-color:#fafafa
 }
 
 .scene-list span {
-    margin-right: 20px;
+    margin-right:20px
 }
 
 .scene-msg {
-    padding: 45px 0 70px 0;
-    text-align: center;
-    font-size: 15px;
-    color: #3c3c3c;
-    height: 500px;
+    padding:45px 0 70px;
+    text-align:center;
+    font-size:15px;
+    color:#3c3c3c;
+    height:500px
 }
 
 .scene-msg .scene-msg-list {
-    width: 900px;
-    margin: auto;
+    width:900px;
+    margin:auto
 }
 
 .scene-msg .scene-msg-list > div {
-    width: 200px;
-    border: 1px solid #bbb;
-    height: 380px;
-    /*height: 150px;*/
-    overflow-y: scroll;
+    width:200px;
+    border:1px solid #bbb;
+    height:380px;
+    overflow-y:scroll
 }
 
 .scene-msg .scene-msg-list > div:nth-child(3) {
-    width: 490px;
+    width:490px
 }
 
 .scene-msg .scene-msg-list > div:nth-child(3) > div {
-    width: 170px;
-    /*height: 100%;*/
+    width:170px
 }
 
 .scene-msg .scene-msg-list > div:nth-child(3) > div:nth-child(1) {
-    width: 300px;
-    border-right: 1px solid #bbb;
-    height: 100%;
+    width:300px;
+    border-right:1px solid #bbb;
+    height:100%
 }
 
 .scene-msg-list li {
-    height: 35px;
-    line-height: 35px;
-    text-align: left;
-    padding-left: 10px;
-    color: #3c3c3c;
+    height:35px;
+    line-height:35px;
+    text-align:left;
+    padding-left:10px;
+    color:#3c3c3c
 }
 
 .scene-msg-list ul {
-    padding-top: 10px;
-    /*border-right: 1px solid #bbb;*/
+    padding-top:10px
 }
 
 .scene-msg-list li.active {
-    background-color: #3895DB;
-    color: #fff;
-    cursor: pointer;
+    background-color:#3895DB;
+    color:#fff;
+    cursor:pointer
 }
 
 .scene-msg .scene-msg-list > div:nth-child(3) > div:nth-child(1) ul.active {
-    border-right: 1px solid #bbb;
+    border-right:1px solid #bbb
 }
 
-/*灯详情*/
 .light-detail-table {
-    border-left: 0;
-    border-bottom: 0;
-    border-spacing: 0;
-    border-collapse: unset;
-    border-top: #bbb 1px solid;
-    border-right: #bbb 1px solid;
-    width: 680px;
-    font-size: 16px;
-    color: #3c3c3c;
-    margin: auto;
+    border-left:0;
+    border-bottom:0;
+    border-spacing:0;
+    border-collapse:unset;
+    border-top:#bbb 1px solid;
+    border-right:#bbb 1px solid;
+    width:680px;
+    font-size:16px;
+    color:#3c3c3c;
+    margin:auto
 }
 
-.light-detail-table td, .light-detail-table th {
-    border-left: #bbb 1px solid;
-    border-bottom: #bbb 1px solid;
-    height: 42px;
-    text-align: center;
-    line-height: 42px;
-    width: 220px;
-    background-color: #fff;
-
+.light-detail-table td,.light-detail-table th {
+    border-left:#bbb 1px solid;
+    border-bottom:#bbb 1px solid;
+    height:42px;
+    text-align:center;
+    line-height:42px;
+    width:220px;
+    background-color:#fff
 }
 
-#projectDetail .light-detail-table td span, #projectDetail .light-detail-table th span,#timerDetail .light-detail-table th span  {
-    display: inline-block;
-    transform: scale(1, .9);
+#projectDetail .light-detail-table td span,#projectDetail .light-detail-table th span,#timerDetail .light-detail-table th span {
+    display:inline-block;
+    transform:scale(1,.9)
 }
 
 #projectDetail .light-detail-table th span,#timerDetail .light-detail-table th span {
-    color: #fff;
-
+    color:#fff
 }
 
 .light-table {
-    margin-top: 50px;
+    margin-top:50px
 }
 
-#projectDetail .light-detail-table th ,#timerDetail .light-detail-table th{
-    background-color: #3598DB;
-    color: #fff;
-    font-weight: normal;
-    width: 220px;
+#projectDetail .light-detail-table th,#timerDetail .light-detail-table th {
+    background-color:#3598DB;
+    color:#fff;
+    font-weight:400;
+    width:220px
 }
 
 .light-scroll {
-    height: 100px;
-    overflow: auto;
+    height:100px;
+    overflow:auto
 }
 
-#projectDetail .light-detail-table  thead,
-#projectDetail .light-detail-table tbody tr {
-    display: table;
-    width: 100%;
+#projectDetail .light-detail-table thead,#projectDetail .light-detail-table tbody tr {
+    display:table;
+    width:100%
 }
-#projectDetail .light-detail-table tbody{
-    display: block;
-    /*height: 172px;*/
-    max-height: 172px;
-    overflow-y: auto;
-    overflow-x: visible;
-}
-#projectDetail .p-content .a-span{
-    color: #3598DB;
-}
-/*.search select, .search select option{*/
-    /*padding-left: 10px;*/
-    /*text-indent: 0;*/
-/*}*/
 
-/*定时详情*/
-.light-table.timer{
-    margin-top: 0;
+#projectDetail .light-detail-table tbody {
+    display:block;
+    max-height:172px;
+    overflow-y:auto;
+    overflow-x:visible
 }
-.light-table.timer .light-detail-table{
-    width:auto;
+
+#projectDetail .p-content .a-span {
+    color:#3598DB
 }
-#projectDetail .p-content > div.clearfix.timerDetail{
+
+.light-table.timer {
+    margin-top:0
+}
+
+.light-table.timer .light-detail-table {
+    width:auto
+}
+
+#projectDetail .p-content > div.clearfix.timerDetail {
     width:100%;
-    margin:20px;
+    margin:20px
 }
-.scene-msg.timer{
-    margin-left: 50px;
-    padding: 0;
+
+.scene-msg.timer {
+    margin-left:50px;
+    padding:0
 }
-#timerDetail .scene-content{
+
+#timerDetail .scene-content {
     margin-top:0;
-    border: none;
+    border:none
 }
-#timerDetail .scene-content .scene-list{
-    padding: 10px 20px;
-    border: 1px solid #bbb;
+
+#timerDetail .scene-content .scene-list {
+    padding:10px 20px;
+    border:1px solid #bbb
 }
-.timerDetail{
-    margin-top:50px;
+
+.timerDetail {
+    margin-top:50px
 }
-#timerDetail .p-content .clearfix.time>.f-l{
-    width:350px;
+
+#timerDetail .p-content .clearfix.time>.f-l {
+    width:350px
 }
-.memo-edit p span{
-    width:30px;
+
+.memo-edit p span {
+    width:30px
 }
-.memo-edit p{
-    text-align: right;
-    font-size: 14px;
-    padding: 0 40px 0 0;
+
+.memo-edit p {
+    text-align:right;
+    font-size:14px;
+    padding:0 40px 0 0
 }
-.memo-edit-has{
-    width: 200px;
-    position: absolute;
-    right: -10px;
-    top: -10px;
-    background-color: #dceaf3;
-    padding: 10px;
-    display: none;
-    z-index: 999;
+
+.memo-edit-has {
+    width:200px;
+    position:absolute;
+    right:-10px;
+    top:-10px;
+    background-color:#dceaf3;
+    padding:10px;
+    display:none;
+    z-index:999
 }
-.meno-nav{
-    text-align: right;
+
+.meno-nav {
+    text-align:right
 }
-.memo-content{
-    text-align: left;
+
+.memo-content {
+    text-align:left
 }
-.search-result table td.active{
-    text-align: left;
-    padding-left: 35px;
+
+.search-result table td.active {
+    text-align:left;
+    padding-left:35px
 }
-.search-result table td.active .memo-edit-has{
-    display: block;
+
+.search-result table td.active .memo-edit-has {
+    display:block
 }
-.pop-content p.right-font{
-    text-align: right;
-    margin-right: 20px;
+
+.pop-content p.right-font {
+    text-align:right;
+    margin-right:20px
 }
-.pop-content p.right-font .wordsNum{
-    font-size: 14px;
+
+.pop-content p.right-font .wordsNum {
+    font-size:14px
 }
-.edit-company{
-    margin: 35px 0;
-    font-size: 15px;
+
+.edit-company {
+    margin:35px 0;
+    font-size:15px
 }
-.edit-company label{
-    width: 150px;
-    font-size: 15px;
-    text-align: right;
-    margin-right: 25px;
-    color: #3c3c3c;
+
+.edit-company label {
+    width:150px;
+    font-size:15px;
+    text-align:right;
+    margin-right:25px;
+    color:#3c3c3c
 }
-.edit-company input{
-    height: 32px;
-    border: 1px solid #bbb;
-    width: 300px;
-    padding-left: 15px;
+
+.edit-company input {
+    height:32px;
+    border:1px solid #bbb;
+    width:300px;
+    padding-left:15px
 }
-form.company-msg{
+
+form.company-msg {
     width:800px;
-    margin:auto;
+    margin:auto
 }
-/*#file-img{*/
-    /*display: none;*/
-/*}*/
-#license{
-    width: 135px;
-    height: 135px;
-    border: 1px solid #Bbb;
-    display: inline-block;
+
+#license {
+    width:135px;
+    height:135px;
+    border:1px solid #Bbb;
+    display:inline-block
 }
-.company-name span{
-    display: inline-block;
-    width: 25px;
-    height: 20px;
-    text-align: center;
-    vertical-align: sub;
-    color: red;
+
+.company-name span {
+    display:inline-block;
+    width:25px;
+    height:20px;
+    text-align:center;
+    vertical-align:sub;
+    color:red
 }
-.btn-submit button{
-    background-color: #3598DB;
-    color: #fff;
-    border: 1px solid #3598DB;
-    width: 100px;
-    height: 40px;
-    border-radius: 5px;
-    font-size: 18px;
-    letter-spacing: 10px;
-    padding-left: 15px;
-    cursor: pointer;
+
+.btn-submit button {
+    background-color:#3598DB;
+    color:#fff;
+    border:1px solid #3598DB;
+    width:100px;
+    height:40px;
+    border-radius:5px;
+    font-size:18px;
+    letter-spacing:10px;
+    padding-left:15px;
+    cursor:pointer
 }
-.btn-submit{
-    padding: 30px 0 0 182px;
+
+.btn-submit {
+    padding:30px 0 0 182px
 }
-.img-max{
-    width: 500px;
-    height: auto;
-    right: 80px;
-    bottom: 100px;
+
+.img-max {
+    width:500px;
+    height:auto;
+    right:80px;
+    bottom:100px
 }
-#img-max{
-    width: 100%;
-    height: auto;
+
+#img-max {
+    width:100%;
+    height:auto
 }
-#timerDetail .edit-company span{
-    color: red;
-    width: 20px;
-    text-align: center;
-    vertical-align: sub;
+
+#timerDetail .edit-company span {
+    color:red;
+    width:20px;
+    text-align:center;
+    vertical-align:sub
 }
-.search-result table td.status.un{
-    color: #777 !important;
+
+.search-result table td.status.un {
+    color:#777!important
 }
-.search-result table tr .end{
-    color: #323232;
-    display: none;
-    background-color: #f9f9f9;
-    width: 80px;
-    z-index: 999;
-    top: -10px;
+
+.search-result table tr .end {
+    color:#323232;
+    display:none;
+    background-color:#f9f9f9;
+    width:80px;
+    z-index:999;
+    top:-10px
 }
-.search-result table tr .end.active{
-    display: block;
+
+.search-result table tr .end.active {
+    display:block
 }
-i.cricle{
-    display: inline-block;
-    width: 12px;
-    height: 13px;
-    background-color: red;
-    border-radius: 50%;
-    margin-right: 5px;
-    vertical-align: text-top;
-    color: #fff;
-    padding: 1px 2px 2px 2px;
-    transform: rotate(330deg);
-    font-size: 12px;
+
+i.cricle {
+    display:inline-block;
+    width:12px;
+    height:13px;
+    background-color:red;
+    border-radius:50%;
+    margin-right:5px;
+    vertical-align:text-top;
+    color:#fff;
+    padding:1px 2px 2px;
+    transform:rotate(330deg);
+    font-size:12px
 }

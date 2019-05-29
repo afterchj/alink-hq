@@ -110,15 +110,25 @@ public class HomeController {
         return "account/changePassword";
     }
 
-    @RequestMapping("/timer/list")
-    public String timerList() {
-        return "timerManage/timerList";
-    }
+//    @RequestMapping("/cooperate/list")
+//    public String cooperateList() {
+//        return "cooperateManage/cooperateList";
+//    }
+//
+//    @RequestMapping("/cooperate/info")
+//    public String cooperateInfo() {
+//        return "cooperateManage/cooperateInfo";
+//    }
 
-    @RequestMapping("/timer/detail")
-    public String timerDetail() {
-        return "timerManage/timerDetail";
-    }
+//    @RequestMapping("/timer/list")
+//    public String timerList() {
+//        return "timerManage/timerList";
+//    }
+//
+//    @RequestMapping("/timer/detail")
+//    public String timerDetail() {
+//        return "timerManage/timerDetail";
+//    }
 
 
 
