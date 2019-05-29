@@ -4,13 +4,12 @@ function DragImgUpload(id,options) {
         boxWidth:'135px',
         boxHeight:'135px'
     }
-    this.preview = $('<div id="preview"><img src="/alink-hq/static/img/upload.png" class="img-responsive"  style="width: 100%;height:100%;" alt="" title=""> </div>');
+    this.preview = $('<div id="preview"><div id="delete-img" style="">×</div><img src="/alink-hq/static/img/upload.png" class="img-responsive"  style="width: 100%;height:100%;" alt="" title=""> </div>');
     this.opts=$.extend(true, defaultOpt,{
     }, options);
     this.init();
     this.callback = this.opts.callback;
 }
-
 //定义原型方法
 DragImgUpload.prototype = {
     init:function () {
@@ -24,7 +23,7 @@ DragImgUpload.prototype = {
             'width':this.opts.boxWidth,
             'height':this.opts.boxHeight,
             'border':'1px solid #bbb',
-            'padding':'5px',
+            'padding':'2px',
             'display': 'inline-block',
             'cursor':'pointer'
         })
@@ -92,6 +91,7 @@ DragImgUpload.prototype = {
         var filename = file.name;
         this.me.find("img").attr("src",img);
         this.me.find("img").attr("title",filename);
+        this.me.find('#delete-img').addClass('active');
         if(this.callback){
             this.callback(files);
         }
@@ -113,8 +113,4 @@ DragImgUpload.prototype = {
         //触发点击input点击事件，弹出选择文件对话框
         fileInput.click();
     }
-
-
-
-
 }

@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="/alink-hq/static/css/common.css">
     <link rel="stylesheet" href="/alink-hq/static/css/leftNav.css">
     <link rel="stylesheet" href="/alink-hq/static/css/projectManage.css">
+    <link rel="stylesheet" th:href="@{/static/css/upload.css}"/>
     <script src="/alink-hq/static/js/jquery.min.js"></script>
     <script  src="/alink-hq/static/js/upload.js"></script>
     <title>公司信息录入</title>
@@ -52,7 +53,7 @@
                             </div>
                             <div class="edit-company clearfix">
                                 <label for="drop_area" style="vertical-align: top;"><span>*</span>营业执照：</label>
-                                <div id="drop_area" ></div>
+                                <div id="drop_area" class="p-r" ></div>
                             </div>
                             <div class="edit-company">
                                 <label for="serial"><span>*</span>营业执照编号：</label>
@@ -67,7 +68,6 @@
                         </div>
                     </div>
                 </div>
-
             </div>
         </div>
     </div>
@@ -82,13 +82,7 @@
             console.log(file.name);
         }
     })
-//    $('#drop_area').hover(function(){
-//        var imgUrl=$(this).find('img')[0].src;
-//        console.log(imgUrl);
-//        $('#img-max').attr('src',imgUrl);
-//    })
     $('#drop_area').on({
-
         mouseover : function(){
             var imgUrl=$(this).find('img')[0].src;
             $('#img-max').attr('src',imgUrl);
@@ -97,7 +91,14 @@
             var imgUrl=$(this).find('img')[0].src;
             $('#img-max').attr('src','');
         }
-    }) ;
+    })
+    $('#drop_area').on('click','#delete-img',function(event){
+        event.stopPropagation();
+        $('#preview').unbind('click');
+        $('#preview img').unbind('click');
+        $(this).removeClass('active');
+        $(this).siblings('img').attr('src','/alink-hq/static/img/upload.png');
+    })
 </script>
 </body>
 
