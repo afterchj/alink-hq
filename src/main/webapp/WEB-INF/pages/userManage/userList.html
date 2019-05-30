@@ -153,10 +153,9 @@
                             <td class="p-r">
                                 <img th:if="${user.memo!=null}" src="/alink-hq/static/img/memo.png" alt="" class="pointer memo-edit" th:title="备忘录">
                                 <img th:if="${user.memo==null}" src="/alink-hq/static/img/memo.png" alt="" class="pointer memo-edit2" th:title="备忘录">
-                                <!-- 备忘录不为空 -->
                                 <div class="memo-edit-has">
                                     <div class="meno-nav"><img src="/alink-hq/static/img/alter.png" alt=""
-                                                               class="pointer memo-edit2"></div>
+                                                               class="pointer"></div>
                                     <div th:text="${user.memo}" class="memo-content">
                                     </div>
                                 </div>
@@ -351,6 +350,7 @@
         <textarea rows="9" maxlength="200" style="width: 93%;border: none;margin-top: 10px;" class="wishContent"
                   placeholder="请输入不超过200个字"></textarea>
         <p class="right-font"><span class="wordsNum">0/200</span></p>
+        <input type="hidden" id="memo-account" >
         <div class="pop-btn">
             <button class="reduce">取消</button>
             <button class="yes">确定</button>

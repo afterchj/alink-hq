@@ -43,4 +43,6 @@ public interface AccountService {
     Integer findFirmUid(String uid, String userId);
 
     List<User> findAccountByFid(Integer fid);
+
+    void saveMemo(String account, String content);
 }

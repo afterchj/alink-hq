@@ -22,8 +22,24 @@ $('.pop-content  .pop-btn .reduce').click(function () {
 // 点击确定时
 $('.pop-content  .pop-btn .yes').click(function () {
     hide();
+    //获取输入内容
+    var content = $(".wishContent").val();
+    var account = $("#memo-account").val();
+    $.ajax({
+        type: "POST",
+        url: "/alink-hq/account/saveMemo",
+        data: {account: account, content: content},
+        dataType: "json",
+        success: function (res) {
+            console.log(res);
+            if (res.result == '000') {
+                location.reload();
+            }
+        }
+    });
     $(this).parents('.pop-iframe').removeClass('active');
 })
+
 function shade(open, text) {
     var width = document.body.scrollWidth;
     var height = document.body.scrollHeight;
@@ -58,7 +74,7 @@ $(function () {
     //启用禁用按钮
     $('td[openTab="start-use"]').click(function () {
         var openTab = $(this).attr('openTab');
-        var text=$(this).find('.result').text();
+        var text = $(this).find('.result').text();
         shade(openTab, text);
         account = $(this).siblings('.use-account').text();
         status = $(this).find('.result').text();
@@ -225,11 +241,11 @@ $(function () {
     $('.search-button button').click(function () {
         var pageSize = $('#page-select option:selected').val();
         var pageNum = $('#skipPage').val();
-        if(!pageNum){
-            pageNum=1;
+        if (!pageNum) {
+            pageNum = 1;
         }
-        if(!pageSize){
-            pageSize=10;
+        if (!pageSize) {
+            pageSize = 10;
         }
         condition(pageSize, pageNum);
     })
@@ -294,7 +310,7 @@ function GetUrlParam(paraName) {
         return "";
     }
 }
-$(function(){
+$(function () {
     //如果备忘录为空时
     // $('.memo-edit').click(function(){
     //     $('div[openContent="memo-edit"]').addClass('active');
@@ -311,19 +327,27 @@ $(function(){
     //     $('.hide-iframe').removeClass('active');
     // })
     //如果备忘录不为空时
-    $('.memo-edit').click(function(event){
+    $('.memo-edit').click(function (event) {
         event.stopPropagation();
         $(this).parent('td').addClass('active');
         $(this).parent().parent('tr').siblings('tr').children('td').removeClass('active');
 
     })
-    $('body').click(function(){
+    $('body').click(function () {
         $('.memo-edit-has').parent('td').removeClass('active');
     })
-    $('.memo-edit2').click(function(event){
+    $('.meno-nav img,.memo-edit2').click(function (event) {
         event.stopPropagation();
         $('div[openContent="memo-edit"]').addClass('active');
         $('div[openContent="memo-edit"] .pop-content').find('p.unuse').remove();
+        $(".wishContent").text('');
+        var content = $(this).parent().siblings('div').text();
+        var account = $(this).parents('tr').children('td').eq(0).text();
+        if (content != '') {
+            $(".wishContent").val(content);
+        }
+        $("#memo-account").val(account);
+        $(".wordsNum").html(checkStrLengths(content, 200) + '/200');
         var width = window.screen.width;
         var height = window.screen.height;
         $('.hide-iframe').addClass('active');
@@ -332,7 +356,7 @@ $(function(){
             'height': height
         })
     })
-    $('div[openContent="memo-edit"] button.reduce').click(function(event){
+    $('div[openContent="memo-edit"] button.reduce').click(function (event) {
         event.stopPropagation();
         $('div[openContent="memo-edit"]').removeClass('active');
         $('.hide-iframe').removeClass('active');
@@ -368,12 +392,12 @@ $(".wishContent").on('input propertychange', function () {
 });
 
 $('.search-result table td.status1').on({
-    mouseover : function(){
-        var text=$(this).find('.result').text();
-            $(this).find('.end').addClass('active');
-            // $(this).find('.result').css('color','#999');
-    } ,
-    mouseout : function(){
+    mouseover: function () {
+        var text = $(this).find('.result').text();
+        $(this).find('.end').addClass('active');
+        // $(this).find('.result').css('color','#999');
+    },
+    mouseout: function () {
         // $(this).find('.result').css('color','#0B78CE');
         $(this).find('.end').removeClass('active');
     }

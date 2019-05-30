@@ -118,5 +118,10 @@ public class AccountServiceImpl implements AccountService {
         return accountDao.findAccountByFid(fid);
     }
 
+    @Override
+    public void saveMemo(String account, String content) {
+        accountDao.saveMemo(account,content);
+    }
+
 
 }

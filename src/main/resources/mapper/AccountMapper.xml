@@ -130,5 +130,7 @@
         </if>
     </update>
 
-
+    <update id="saveMemo" parameterType="string">
+        update f_user_account set memo = #{memo},update_date = NOW() where account=#{account}
+    </update>
 </mapper>

@@ -55,4 +55,6 @@ public interface AccountDao {
     void createPlace(@Param("uid")String uid, @Param("mid")Integer mid);
 
     int findDefaultNetworkByUid(@Param("uid")String uid);
+
+    void saveMemo(@Param("account") String account, @Param("memo") String content);
 }

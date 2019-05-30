@@ -344,6 +344,19 @@ public class AccountController {
         return map;
     }
 
+    @RequestMapping(value = "/saveMemo", method = RequestMethod.POST)
+    @ResponseBody
+    public Map<String, String> saveMemo(String account, String content) {
+        Map<String, String> map = new HashMap<>();
+        try {
+            accountService.saveMemo(account,content);
+            map.put("result", ResultDict.SUCCESS.getCode());
+        } catch (Exception e) {
+            map.put("result", ResultDict.SYSTEM_ERROR.getCode());
+        }
+        return map;
+    }
+
 
     private List<Firm> getFirmInfo(Integer role_id, String uid) {
         List<Firm> firmList = new ArrayList<>();
