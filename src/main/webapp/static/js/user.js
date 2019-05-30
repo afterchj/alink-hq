@@ -124,6 +124,7 @@ $(function () {
     $('img[openTab="delete-account"]').click(function () {
         var openTab = $(this).attr('openTab');
         shade(openTab);
+        $('div[openContent="delete-account"] .pop-content').find('p.unuse').remove();
         account = $(this).parent().siblings('.use-account').text();
     })
     $('div[openContent="delete-account"] button.yes').click(function () {
