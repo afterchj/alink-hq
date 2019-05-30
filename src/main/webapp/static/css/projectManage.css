@@ -1019,7 +1019,8 @@ input:-ms-input-placeholder {
     position:absolute;
     right:-10px;
     top:-10px;
-    background-color:#dceaf3;
+    background-color:#e6f3fb;
+    /*background:url(/alink-hq/static/img/rectangle.png) no-repeat center;*/
     padding:10px;
     display:none;
     z-index:999
@@ -1030,13 +1031,15 @@ input:-ms-input-placeholder {
 }
 
 .memo-content {
-    text-align:left
+    text-align: left;
+    font-size: 13px;
+    line-height: 1.8;
 }
 
-.search-result table td.active {
-    text-align:left;
-    padding-left:35px
-}
+/*.search-result table td.active {*/
+    /*text-align:left;*/
+    /*padding-left:35px*/
+/*}*/
 
 .search-result table td.active .memo-edit-has {
     display:block

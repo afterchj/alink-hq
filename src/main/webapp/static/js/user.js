@@ -246,13 +246,6 @@ $(function () {
 
 })
 
-// function mouseDown() {
-//     $('#skipPageBtn').attr('src', '/alink-hq/static/img/skip-color.png');
-// }
-// function mouseUp() {
-//     $('#skipPageBtn').attr('src', '/alink-hq/static/img/skip.png');
-// }
-
 function condition(pageSize, pageNum) {
     var url = window.location.href;
     var i = url.indexOf("?");
@@ -316,10 +309,15 @@ $(function(){
     //     $('.hide-iframe').removeClass('active');
     // })
     //如果备忘录不为空时
-    $('.memo-edit').click(function(){
+    $('.memo-edit').click(function(event){
+        event.stopPropagation();
         $(this).parent('td').addClass('active');
     })
-    $('.meno-nav').click(function(){
+    $('body').click(function(){
+        $('.memo-edit-has').parent('td').removeClass('active');
+    })
+    $('.meno-nav img').click(function(event){
+        event.stopPropagation();
         $('div[openContent="memo-edit"]').addClass('active');
         var width = window.screen.width;
         var height = window.screen.height;
@@ -329,7 +327,8 @@ $(function(){
             'height': height
         })
     })
-    $('div[openContent="memo-edit"] button.reduce').click(function(){
+    $('div[openContent="memo-edit"] button.reduce').click(function(event){
+        event.stopPropagation();
         $('div[openContent="memo-edit"]').removeClass('active');
         $('.hide-iframe').removeClass('active');
     })
