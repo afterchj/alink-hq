@@ -317,7 +317,7 @@ $(function(){
     $('body').click(function(){
         $('.memo-edit-has').parent('td').removeClass('active');
     })
-    $('.meno-nav img').click(function(event){
+    $('.memo-edit2').click(function(event){
         event.stopPropagation();
         $('div[openContent="memo-edit"]').addClass('active');
         var width = window.screen.width;
