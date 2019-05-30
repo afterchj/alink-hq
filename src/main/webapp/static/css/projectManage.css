@@ -251,7 +251,7 @@ th.all-checkbox {
 }
 
 #projectDetail .p-content span,#timerDetail .p-content span {
-    font-size:16px;
+    font-size:15px;
     color:#3c3c3c;
     transform:scale(1,.92);
     display:inline-block
@@ -417,8 +417,8 @@ th.all-checkbox {
     position:absolute;
     top:250px;
     left:35%;
-    background-color:#fafafa;
-    width:600px;
+    background-color: #fff;
+    width:550px;
     height:300px;
     text-align:center;
     border:1px solid #bbb;
@@ -459,17 +459,18 @@ th.all-checkbox {
 }
 
 .pop-content {
-    text-align:center
+    text-align: center;
+    background-color: #fff;
 }
 
 .pop-content .pop-btn {
-    text-align:right;
-    position:absolute;
-    right:0;
-    bottom:0;
-    width:540px;
-    padding:13px 20px 11px 40px;
-    background-color:#eef2f5
+    text-align: right;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    width: 490px;
+    padding: 13px 20px 11px 40px;
+    background-color: #eef2f5;
 }
 
 .pop-content .pop-btn .reduce {
@@ -1019,7 +1020,8 @@ input:-ms-input-placeholder {
     position:absolute;
     right:-10px;
     top:-10px;
-    background-color:#dceaf3;
+    background-color:#e6f3fb;
+    /*background:url(/alink-hq/static/img/rectangle.png) no-repeat center;*/
     padding:10px;
     display:none;
     z-index:999
@@ -1030,13 +1032,15 @@ input:-ms-input-placeholder {
 }
 
 .memo-content {
-    text-align:left
+    text-align: left;
+    font-size: 13px;
+    line-height: 1.8;
 }
 
-.search-result table td.active {
-    text-align:left;
-    padding-left:35px
-}
+/*.search-result table td.active {*/
+    /*text-align:left;*/
+    /*padding-left:35px*/
+/*}*/
 
 .search-result table td.active .memo-edit-has {
     display:block

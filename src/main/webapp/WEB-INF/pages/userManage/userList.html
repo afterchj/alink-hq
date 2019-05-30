@@ -151,16 +151,13 @@
 
                             </td>
                             <td class="p-r">
-                                <img src="/alink-hq/static/img/memo.png" alt="" class="pointer memo-edit"
-                                     th:title="备忘录">
+                                <img th:if="${user.memo!=null}" src="/alink-hq/static/img/memo.png" alt="" class="pointer memo-edit" th:title="备忘录">
+                                <img th:if="${user.memo==null}" src="/alink-hq/static/img/memo.png" alt="" class="pointer memo-edit2" th:title="备忘录">
                                 <!-- 备忘录不为空 -->
                                 <div class="memo-edit-has">
                                     <div class="meno-nav"><img src="/alink-hq/static/img/alter.png" alt=""
-                                                               class="pointer"></div>
-                                    <div class="memo-content">
-                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam cupiditate
-                                        deleniti sint sit voluptate. Aliquam delectus, dolor ex fugiat, hic iste magni
-                                        maxime officia quod repellat similique veniam vero voluptatibus.
+                                                               class="pointer memo-edit2"></div>
+                                    <div th:text="${user.memo}" class="memo-content">
                                     </div>
                                 </div>
                             </td>

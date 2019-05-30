@@ -39,10 +39,10 @@ function shade(open, text) {
             $(this).addClass('active');
             if (open == 'start-use') {
                 // console.log(text);
-                $('.pop-content').find('p').remove();
+                $('.pop-content').find('p.unuse').remove();
                 if (text == '启用') {
                     $(' .off-or-on').text('您确定要禁用该账户吗？');
-                    var content = '<p style="  font-size: 14px;color: #fb2a2a;margin-top:10px;">禁用后，该账号将无法登录</p>';
+                    var content = '<p class="unuse" style="  font-size: 14px;color: #fb2a2a;margin-top:10px;">禁用后，该账号将无法登录</p>';
                     $(' .pop-content').append(content);
                 } else {
                     $(' .off-or-on').text('您确定要启用该账户吗？');
@@ -55,13 +55,13 @@ $(function () {
     var account = '';
     var status = '';
     var intStatus = '';
+    //启用禁用按钮
     $('td[openTab="start-use"]').click(function () {
         var openTab = $(this).attr('openTab');
         var text=$(this).find('.result').text();
         shade(openTab, text);
         account = $(this).siblings('.use-account').text();
         status = $(this).find('.result').text();
-
         if (status == '启用') {
             intStatus = 1;
         } else if (status == '禁用') {
@@ -88,6 +88,7 @@ $(function () {
     var account = '';
     $('img[openTab="reset-pwd"]').click(function () {
         var openTab = $(this).attr('openTab');
+        $('div[openContent="reset-pwd"] .pop-content').find('p.unuse').remove();
         $('div[openContent="reset-pwd"]').addClass('active');
         var width = document.body.scrollWidth;
         var height = document.body.scrollHeight;
@@ -123,6 +124,7 @@ $(function () {
     $('img[openTab="delete-account"]').click(function () {
         var openTab = $(this).attr('openTab');
         shade(openTab);
+        $('div[openContent="delete-account"] .pop-content').find('p.unuse').remove();
         account = $(this).parent().siblings('.use-account').text();
     })
     $('div[openContent="delete-account"] button.yes').click(function () {
@@ -246,13 +248,6 @@ $(function () {
 
 })
 
-function mouseDown() {
-    $('#skipPageBtn').attr('src', '/alink-hq/static/img/skip-color.png');
-}
-function mouseUp() {
-    $('#skipPageBtn').attr('src', '/alink-hq/static/img/skip.png');
-}
-
 function condition(pageSize, pageNum) {
     var url = window.location.href;
     var i = url.indexOf("?");
@@ -316,11 +311,19 @@ $(function(){
     //     $('.hide-iframe').removeClass('active');
     // })
     //如果备忘录不为空时
-    $('.memo-edit').click(function(){
+    $('.memo-edit').click(function(event){
+        event.stopPropagation();
         $(this).parent('td').addClass('active');
+        $(this).parent().parent('tr').siblings('tr').children('td').removeClass('active');
+
     })
-    $('.meno-nav').click(function(){
+    $('body').click(function(){
+        $('.memo-edit-has').parent('td').removeClass('active');
+    })
+    $('.memo-edit2').click(function(event){
+        event.stopPropagation();
         $('div[openContent="memo-edit"]').addClass('active');
+        $('div[openContent="memo-edit"] .pop-content').find('p.unuse').remove();
         var width = window.screen.width;
         var height = window.screen.height;
         $('.hide-iframe').addClass('active');
@@ -329,7 +332,8 @@ $(function(){
             'height': height
         })
     })
-    $('div[openContent="memo-edit"] button.reduce').click(function(){
+    $('div[openContent="memo-edit"] button.reduce').click(function(event){
+        event.stopPropagation();
         $('div[openContent="memo-edit"]').removeClass('active');
         $('.hide-iframe').removeClass('active');
     })
@@ -358,7 +362,7 @@ $(".wishContent").on('input propertychange', function () {
     } else {
         len = 0
     }
-    console.log(len);
+    // console.log(len);
     //显示字数
     $(".wordsNum").html(len + '/200');
 });

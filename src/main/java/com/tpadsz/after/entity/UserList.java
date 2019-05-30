@@ -15,6 +15,7 @@ public class UserList {
     private String create_date;
     private String status;
     private String coStatus;
+    private String memo;
 
     public Integer getId() {
         return id;
@@ -104,6 +105,14 @@ public class UserList {
         this.coStatus = coStatus;
     }
 
+    public String getMemo() {
+        return memo;
+    }
+
+    public void setMemo(String memo) {
+        this.memo = memo;
+    }
+
     @Override
     public String toString() {
         return "UserList{" +
@@ -118,6 +127,7 @@ public class UserList {
                 ", create_date='" + create_date + '\'' +
                 ", status='" + status + '\'' +
                 ", coStatus='" + coStatus + '\'' +
+                ", memo='" + memo + '\'' +
                 '}';
     }
 }
