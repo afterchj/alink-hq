@@ -30,7 +30,7 @@ $(function () {
 //跳转页数变化
     $('#skipPageBtn').click(function () {
         var pageSize = $('#page-select option:selected').val();
-        var pageNum = $('#skipPage').text();
+        var pageNum = $('#skipPage').val();
         condition(pageSize, pageNum);
     })
     var tid;
@@ -83,21 +83,32 @@ $(function () {
         "input propertychange change",
         {hint:"rename-hint",context:"#rename",text:text,match:match},
         matchInput);
-
+    //时间排序
     $("th .p-a").click(function () {
-        // alert($(this).attr("id"));
         var timeFlag = $(this).attr("id");
-        window.location.href="/alink-hq/timer/list?id="+$("#mid").val()+ '&pageNum=' + $(".pages").text() + '&pageSize=' + $("#pageSize").val()+'&timeFlag='+timeFlag;
+        window.location.href="/alink-hq/timer/list?id="+$("#mid").val()+ '&pageNum=' + $(".pages").text() + '&pageSize=' + $("#pageSize").val()+'&timeFlag='+timeFlag+'&tname='+$("#tname").val()+'&createDate='+$("#createDate").val()+'&endTime='+$("#endTime").val()+'&state='+$("#state").val();
     });
 })
 
 $(function () {
-    var tname = $("#projectName").val();//定时名称
-    var stated = $("#status").val();//定时状态
-    var meshName;//网络名称
-    var createTime = $("#create-time").val();//创建时间
-    var endTime = $("#end-time").val();//结束时间
-    var meshId;//网络id
+
+    //点击查询
+    $(".search-button button").click(function () {
+        var tname = $("#projectName").val();//定时名称
+        var state = $("#status").val();//定时状态
+        var createTime = $("#create-time").val();//创建时间
+        var endTime = $("#end-time").val();//结束时间
+        if (isEmpty(tname)){
+            tname="";
+        }
+        if (isEmpty(createTime)){
+            createTime="";
+        }
+        if (isEmpty(endTime)){
+            endTime="";
+        }
+        window.location.href="/alink-hq/timer/list?id="+$("#mid").val()+ '&pageNum=' + $(".pages").text() + '&pageSize=' + $("#pageSize").val()+'&tname='+tname+'&createDate='+createTime+'&endTime='+endTime+'&state='+state;
+    });
 })
 
 function isEmpty(value){
@@ -140,6 +151,6 @@ function condition(pageSize, pageNum) {
     if (test.test(url)){
         url = url.substring(0,url.lastIndexOf("?"));
     }
-    var newUrl = url +'?id='+$("#mid").val()+ '&pageNum=' + pageNum + '&pageSize=' + pageSize;
+    var newUrl = url +'?id='+$("#mid").val()+ '&pageNum=' + pageNum + '&pageSize=' + pageSize+'&tname='+$("#tname").val()+'&createDate='+$("#createDate").val()+'&endTime='+$("#endTime").val()+'&state='+$("#state").val();
     location.href = newUrl;
 }

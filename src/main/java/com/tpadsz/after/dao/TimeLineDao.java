@@ -14,7 +14,7 @@ import java.util.List;
 public interface TimeLineDao {
     String getProjectNameByMid(@Param("id") int id);
 
-    List<TimeLine> getTimeLineByMid(@Param("id") int id);
+    List<TimeLine> getTimeLineByMid(@Param("id") int id, @Param("tname") String tname, @Param("createDate") String createDate, @Param("endTime") String endTime,@Param("state") String state);
 
     void insertTimeLine(TimeLine timeLine);
 
@@ -22,11 +22,9 @@ public interface TimeLineDao {
 
     int getTnameById(@Param("mid") int mid, @Param("tname") String tname);
 
-    List<TimeLine> getTimeLineByMidOrderByCreateDateDesc(@Param("id")int id);
+    List<TimeLine> getTimeLineByMidOrderByCreateDateDesc(@Param("id") int id, @Param("tname") String tname, @Param("createDate") String createDate, @Param("endTime") String endTime,@Param("state") String state);
 
-    List<TimeLine> getTimeLineByMidOrderByCreateDate(@Param("id")int id);
+    List<TimeLine> getTimeLineByMidOrderByCreateDate(@Param("id") int id, @Param("tname") String tname, @Param("createDate") String createDate, @Param("endTime") String endTime,@Param("state") String state);
 
-//    List<TimeLine> getTimeLineByMidOrderByUpdateDateDesc(@Param("id")int id);
-
-    List<TimeLine> getTimeLineByMidOrderByUpdateDate(@Param("id")int id);
+    List<TimeLine> getTimeLineByMidOrderByUpdateDate(@Param("id") int id, @Param("tname") String tname, @Param("createDate") String createDate, @Param("endTime") String endTime,@Param("state") String state);
 }

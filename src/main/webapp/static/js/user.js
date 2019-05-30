@@ -363,18 +363,14 @@ $(".wishContent").on('input propertychange', function () {
     $(".wordsNum").html(len + '/200');
 });
 
-$('.search-result table td.status').on({
+$('.search-result table td.status1').on({
     mouseover : function(){
         var text=$(this).find('.result').text();
-        if(text=='禁用'){
             $(this).find('.end').addClass('active');
-            $(this).find('.result').css('color','#999');
-        }else{
-            $(this).css('color','#0B78CE');
-        }
+            // $(this).find('.result').css('color','#999');
     } ,
     mouseout : function(){
-        $(this).find('.result').css('color','#0B78CE');
+        // $(this).find('.result').css('color','#0B78CE');
         $(this).find('.end').removeClass('active');
     }
 })

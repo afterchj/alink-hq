@@ -27,7 +27,7 @@
             </div>
             <div id="projectList" class="">
                 <div class="search-condition ">
-                    <form action="" class="clearfix">
+                    <form action="" class="clearfix" method="get" onsubmit="return false">
                         <div class="f-l search" style="margin-right: 200px;">
                             <div>
                                 <label for="projectName">定时名称</label>
@@ -107,8 +107,8 @@
                             <td th:text="${timeLineList.repetition}"></td>
                             <!--<td><p>2019/05/13</p><p>14:55:44</p></td>-->
                             <!--<td><p>2019/05/13</p><p>14:55:44</p></td>-->
-                            <td><p th:text="${timeLineList.createDate}"></p></td>
-                            <td><p th:text="${timeLineList.updateDate}"></p></td>
+                            <td><p th:text="${timeLineList.create_date}"></p></td>
+                            <td><p th:text="${timeLineList.update_date}"></p></td>
                             <td><p th:text="${timeLineList.state}"></p></td>
                             <td  class="p-r">
                                 <img src="/alink-hq/static/img/edit.png" alt="" class="pointer reset-name"
@@ -126,7 +126,7 @@
                                         <span class="prev "><span><</span></span>
                                     </a>
                                     <a th:if="${pageInfo.getPrePage()}>0"
-                                            th:href="@{/timer/list(id=${id},pageNum=${pageInfo.getPrePage()},pageSize=${pageInfo.getPageSize()})}">
+                                            th:href="@{/timer/list(id=${id},pageNum=${pageInfo.getPrePage()},pageSize=${pageInfo.getPageSize()},tname=${tname},createDate=${createDate},updateDate=${updateDate},state=${state})}">
                                         <span class="prev active"><span><</span></span>
                                     </a>
                                 </span>
@@ -137,14 +137,14 @@
                                     <a th:if="${pageInfo.getNextPage()}==0" href="#">
                                         <span class="prev "><span>></span></span>
                                     </a>
-                                    <a th:if="${pageInfo.getNextPage()}>0" th:href="@{/timer/list(id=${id},pageNum=${pageInfo.getNextPage()},pageSize=${pageInfo.getPageSize()})}"><span class="prev active"><span>></span></span></a>
+                                    <a th:if="${pageInfo.getNextPage()}>0" th:href="@{/timer/list(id=${id},pageNum=${pageInfo.getNextPage()},pageSize=${pageInfo.getPageSize()},tname=${tname},createDate=${createDate},updateDate=${updateDate},state=${state})}"><span class="prev active"><span>></span></span></a>
                                 </span>
                             <span class="m-l-15 m-r-20">共
                                     <span  class="pageTotal" id="pageTotal" th:text="${pageInfo.getPages()}"></span>
                                     页/<span th:text="${pageInfo.getTotal()}"></span>条数据
                             </span>
                             <span class="m-r-15">
-                        <input type="number" id="skipPage" oninput="skipLimit()"/>
+                            <input type="number" id="skipPage" />
                         </span>
                             <span class="m-r-35">
                                 <div id="skipPageBtn" class="pointer moment skipPageBtn" onmousedown="skipBtnMouseDown()" onmouseup="skipBtnMouseUp()">跳转
@@ -165,6 +165,10 @@
                         </tfoot>
                     </table>
                     <input type="hidden" id="mid" th:value="${id}"/>
+                    <input type="hidden" id="tname" th:value="${tname}"/>
+                    <input type="hidden" id="createDate" th:value="${createDate}"/>
+                    <input type="hidden" id="endTime" th:value="${endTime}"/>
+                    <input type="hidden" id="state" th:value="${state}"/>
                     <input type="hidden" id="pageSize" th:value="${pageInfo.getPageSize()}"/>
                     <!-- 无数据时 -->
                     <table border="1" class="noData " >

@@ -5,6 +5,7 @@ import com.github.pagehelper.PageInfo;
 import com.tpadsz.after.dao.TimeLineDao;
 import com.tpadsz.after.entity.TimeLine;
 import com.tpadsz.after.service.TimeLineService;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.ibatis.session.ExecutorType;
 import org.apache.ibatis.session.SqlSession;
 import org.mybatis.spring.SqlSessionTemplate;
@@ -36,7 +37,7 @@ public class TimeLineServiceImpl implements TimeLineService {
     }
 
     @Override
-    public PageInfo<TimeLine> getTimeLineByMid(int id, Integer pageNum, Integer pageSize,String timeFlag) {
+    public PageInfo<TimeLine> getTimeLineByMid(int id, Integer pageNum, Integer pageSize, String timeFlag, String tname, String createDate, String endTime,String state) {
         if (pageNum==null){
             pageNum = 1;//默认第一页
         }
@@ -48,16 +49,25 @@ public class TimeLineServiceImpl implements TimeLineService {
         }
         PageHelper.startPage(pageNum,pageSize);
         List<TimeLine> timeLineList = new ArrayList<>();
+        if (StringUtils.isNotBlank(state)){
+            if (state.equals("0")){
+                state="";//全部
+            }else if (state.equals("1")){
+                state="0";//启用
+            }else if (state.equals("2")){
+                state="1";//停用
+            }
+        }
         if (timeFlag==null||timeFlag.length()<1){
-            timeLineList = timeLineDao.getTimeLineByMid(id);
+            timeLineList = timeLineDao.getTimeLineByMid(id,tname,createDate,endTime,state);
         }else if (timeFlag.equals("creToTop")){
-            timeLineList = timeLineDao.getTimeLineByMidOrderByCreateDate(id);
+            timeLineList = timeLineDao.getTimeLineByMidOrderByCreateDate(id,tname,createDate,endTime,state);
         }else if (timeFlag.equals("creToBottom")){
-            timeLineList = timeLineDao.getTimeLineByMidOrderByCreateDateDesc(id);
+            timeLineList = timeLineDao.getTimeLineByMidOrderByCreateDateDesc(id,tname,createDate,endTime,state);
         }else if (timeFlag.equals("upToTop")){
-            timeLineList = timeLineDao.getTimeLineByMidOrderByUpdateDate(id);
+            timeLineList = timeLineDao.getTimeLineByMidOrderByUpdateDate(id,tname,createDate,endTime,state);
         }else if (timeFlag.equals("upToBottom")){
-            timeLineList = timeLineDao.getTimeLineByMid(id);
+            timeLineList = timeLineDao.getTimeLineByMid(id,tname,createDate,endTime,state);
         }
         PageInfo<TimeLine> pageInfo = new PageInfo<>(timeLineList);
         return pageInfo;
