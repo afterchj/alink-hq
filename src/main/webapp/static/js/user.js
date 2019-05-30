@@ -88,6 +88,7 @@ $(function () {
     var account = '';
     $('img[openTab="reset-pwd"]').click(function () {
         var openTab = $(this).attr('openTab');
+        $('.pop-content').find('p').remove();
         $('div[openContent="reset-pwd"]').addClass('active');
         var width = document.body.scrollWidth;
         var height = document.body.scrollHeight;
