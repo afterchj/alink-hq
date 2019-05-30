@@ -15,8 +15,8 @@ public class TimeLine {
     private String state;
     private String repetition;
     private String week;
-    private String createDate;
-    private String updateDate;
+    private String create_date;
+    private String update_date;
     private Integer tid;
 
     public int getId() {
@@ -35,21 +35,20 @@ public class TimeLine {
         this.tid = tid;
     }
 
-    public String getCreateDate() {
-        return createDate;
+    public String getCreate_date() {
+        return create_date;
     }
 
-    public void setCreateDate(String createDate) {
-        this.createDate = createDate;
+    public void setCreate_date(String create_date) {
+        this.create_date = create_date;
     }
 
-    public String getUpdateDate() {
-
-        return updateDate;
+    public String getUpdate_date() {
+        return update_date;
     }
 
-    public void setUpdateDate(String updateDate) {
-        this.updateDate = updateDate;
+    public void setUpdate_date(String update_date) {
+        this.update_date = update_date;
     }
 
     public String getTname() {
@@ -100,4 +99,19 @@ public class TimeLine {
         this.week = week;
     }
 
+    @Override
+    public String toString() {
+        return "TimeLine{" +
+                "id=" + id +
+                ", tname='" + tname + '\'' +
+                ", mname='" + mname + '\'' +
+                ", mid=" + mid +
+                ", state='" + state + '\'' +
+                ", repetition='" + repetition + '\'' +
+                ", week='" + week + '\'' +
+                ", create_date='" + create_date + '\'' +
+                ", update_date='" + update_date + '\'' +
+                ", tid=" + tid +
+                '}';
+    }
 }

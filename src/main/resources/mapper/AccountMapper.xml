@@ -35,7 +35,7 @@
     </select>
 
     <select id="searchBySuper" resultType="com.tpadsz.after.entity.UserList">
-        SELECT t1.id,t1.account,t1.uname,t1.mobile,t1.email,t3.coname,t4.role_id,DATE_FORMAT(t1.create_date,'%Y-%m-%d %H:%i:%s') AS create_date,t1.status FROM (SELECT * FROM f_user_account WHERE account LIKE CONCAT('%',IFNULL(#{account},''),'%') and create_date BETWEEN IFNULL(NULLIF(#{startDate},''),create_date) and IFNULL(NULLIF(#{endDate},''),create_date)) AS t1 INNER JOIN f_user_customer AS t2 ON t1.id = t2.uid INNER JOIN f_firm AS t3 ON t2.fid = t3.id INNER JOIN f_user_role AS t4 ON t1.id = t4.user_id WHERE t2.fid = IFNULL(NULLIF(#{fid},''),fid) and t4.role_id &lt;&gt;1 and t4.role_id = IFNULL(NULLIF(#{roleId},''),t4.role_id)
+        SELECT t1.id,t1.account,t1.uname,t1.mobile,t1.email,t3.coname,t4.role_id,DATE_FORMAT(t1.create_date,'%Y-%m-%d %H:%i:%s') AS create_date,t1.status,t3.status AS coStatus FROM (SELECT * FROM f_user_account WHERE account LIKE CONCAT('%',IFNULL(#{account},''),'%') and create_date BETWEEN IFNULL(NULLIF(#{startDate},''),create_date) and IFNULL(NULLIF(#{endDate},''),create_date)) AS t1 INNER JOIN f_user_customer AS t2 ON t1.id = t2.uid INNER JOIN f_firm AS t3 ON t2.fid = t3.id INNER JOIN f_user_role AS t4 ON t1.id = t4.user_id WHERE t2.fid = IFNULL(NULLIF(#{fid},''),fid) and t4.role_id &lt;&gt;1 and t4.role_id = IFNULL(NULLIF(#{roleId},''),t4.role_id)
         <if test="uname!=null and uname!=''">
             and t1.uname LIKE CONCAT('%',#{uname},'%')
         </if>
@@ -43,7 +43,7 @@
     </select>
 
     <select id="searchByAdmin" resultType="com.tpadsz.after.entity.UserList">
-        SELECT t1.id,t1.account,t1.uname,t1.mobile,t1.email,t3.coname,t4.role_id,DATE_FORMAT(t1.create_date,'%Y-%m-%d %H:%i:%s') AS create_date,t1.status FROM (SELECT * FROM f_user_account WHERE account LIKE CONCAT('%',IFNULL(#{account},''),'%') and create_date BETWEEN IFNULL(NULLIF(#{startDate},''),create_date) and IFNULL(NULLIF(#{endDate},''),create_date)) AS t1 INNER JOIN f_user_customer AS t2 ON t1.id = t2.uid INNER JOIN f_firm AS t3 ON t2.fid = t3.id INNER JOIN f_user_role AS t4 ON t1.id = t4.user_id WHERE t2.fid = IFNULL(NULLIF(#{fid},''),fid) and t4.role_id IN(3,4) and t4.role_id = IFNULL(NULLIF(#{roleId},''),t4.role_id)
+        SELECT t1.id,t1.account,t1.uname,t1.mobile,t1.email,t3.coname,t4.role_id,DATE_FORMAT(t1.create_date,'%Y-%m-%d %H:%i:%s') AS create_date,t1.status,t3.status AS coStatus FROM (SELECT * FROM f_user_account WHERE account LIKE CONCAT('%',IFNULL(#{account},''),'%') and create_date BETWEEN IFNULL(NULLIF(#{startDate},''),create_date) and IFNULL(NULLIF(#{endDate},''),create_date)) AS t1 INNER JOIN f_user_customer AS t2 ON t1.id = t2.uid INNER JOIN f_firm AS t3 ON t2.fid = t3.id INNER JOIN f_user_role AS t4 ON t1.id = t4.user_id WHERE t2.fid = IFNULL(NULLIF(#{fid},''),fid) and t4.role_id IN(3,4) and t4.role_id = IFNULL(NULLIF(#{roleId},''),t4.role_id)
         <if test="uname!=null and uname!=''">
             and t1.uname LIKE CONCAT('%',#{uname},'%')
         </if>
@@ -52,7 +52,7 @@
 
     <select id="searchByManager" resultType="com.tpadsz.after.entity.UserList">
         SELECT t1.id,t1.account,t1.uname,t1.mobile,t1.email,t3.coname,t4.role_id,DATE_FORMAT(t1.create_date,'%Y-%m-%d
-        %H:%i:%s') AS create_date,t1.status FROM (SELECT * FROM f_user_account WHERE
+        %H:%i:%s') AS create_date,t1.status,t3.status AS coStatus FROM (SELECT * FROM f_user_account WHERE
         account LIKE CONCAT('%',IFNULL(#{account},''),'%') and create_date BETWEEN
         IFNULL(NULLIF(#{startDate},''),create_date) and IFNULL(NULLIF(#{endDate},''),create_date) and id IN
         <foreach item="item" collection="list" open="(" separator="," close=")">#{item}
