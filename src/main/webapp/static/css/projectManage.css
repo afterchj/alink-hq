@@ -459,7 +459,8 @@ th.all-checkbox {
 }
 
 .pop-content {
-    text-align:center
+    text-align: center;
+    background-color: #fff;
 }
 
 .pop-content .pop-btn {
