@@ -312,6 +312,7 @@ $(function(){
     $('.memo-edit').click(function(event){
         event.stopPropagation();
         $(this).parent('td').addClass('active');
+        $(this).parent().parent('tr').siblings('tr').children('td').removeClass('active');
     })
     $('body').click(function(){
         $('.memo-edit-has').parent('td').removeClass('active');
