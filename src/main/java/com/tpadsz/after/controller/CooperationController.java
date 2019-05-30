@@ -5,6 +5,7 @@ import com.github.pagehelper.PageInfo;
 import com.tpadsz.after.entity.CooperationInfo;
 import com.tpadsz.after.entity.SearchDict;
 import com.tpadsz.after.service.CooperateService;
+import com.tpadsz.after.utils.PropertiesUtil;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -53,17 +54,16 @@ public class CooperationController {
     }
 
     @RequestMapping("/save")
-    public String save(HttpServletRequest request, CooperationInfo info, @RequestParam(value = "file") MultipartFile file) {
-        String path = request.getServletContext().getRealPath("/static/upload");
+    public String save( CooperationInfo info, @RequestParam(value = "file") MultipartFile file) {
+        String path = PropertiesUtil.getPath();
         String fileName = file.getOriginalFilename();
-        info.setPhoto(fileName);
         File targetFile = new File(path, fileName);
         if (!targetFile.getParentFile().exists()) {
             targetFile.getParentFile().mkdirs();
         }
-        //保存
         try {
             file.transferTo(targetFile);
+            info.setPhoto(fileName);
             if (info.getId() == 0) {
                 cooperateService.save(info);
             } else {
