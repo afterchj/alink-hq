@@ -4,7 +4,8 @@ function DragImgUpload(id,options) {
         boxWidth:'135px',
         boxHeight:'135px'
     }
-    this.preview = $('<div id="preview"><div id="delete-img" style="">×</div><img src="/alink-hq/static/img/upload.png" class="img-responsive"  style="width: 100%;height:100%;" alt="" title=""> </div>');
+    // this.preview = $('<div id="preview"><div id="delete-img" style="">×</div><img src="/alink-hq/static/img/upload.png" class="img-responsive"  style="width: 100%;height:100%;" alt="" title=""> </div>');
+    this.preview = $('#preview');
     this.opts=$.extend(true, defaultOpt,{
     }, options);
     this.init();

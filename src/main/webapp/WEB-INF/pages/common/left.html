@@ -26,7 +26,7 @@
                         <li th:if="${list}!='lightList'" tab="lightList"><a th:href="@{/light/list(mid=0)}">灯列表</a></li>
                     </ul>
                 </li>
-                <li class="one-list active">
+                <li shiro:hasAnyRoles="super,admin" class="one-list active">
                     <div class="p-r">
                         <a th:href="@{/account/list}"  tab="userManage">合作管理</a>
                         <img src="/alink-hq/static/img/left-reduce.png" alt="" class="p-a on-off-triangle">
