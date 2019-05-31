@@ -100,6 +100,8 @@ $(function () {
         var endTime = $("#end-time").val();//结束时间
         if (isEmpty(tname)){
             tname="";
+        }else {
+            tname = String(tname);
         }
         if (isEmpty(createTime)){
             createTime="";

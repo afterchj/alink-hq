@@ -44,7 +44,7 @@
                         <img src="/alink-hq/static/img/left-reduce.png" alt="" class="p-a on-off-triangle">
                     </div>
                     <ul class=" two-list ">
-                        <li th:if="${list}=='timerList'" tab="timerList" class="active" ><a th:href="@{/timer/list}">定时列表</a></li>
+                        <li th:if="${list}=='timerList'" tab="timerList" class="active" ><a th:href="@{/timer/list(id=19936)}">定时列表</a></li>
                         <li th:if="${list}!='timerList'" tab="timerList"><a th:href="@{/timer/list(id=19936)}">定时列表</a></li>
                         <li th:if="${list}=='timerDetail'" tab="timerDetail" class="active"><a th:href="@{/timer/detail}">定时详情</a></li>
                         <li th:if="${list}!='timerDetail'" tab="timerDetail" ><a th:href="@{/timer/detail}">定时详情</a></li>

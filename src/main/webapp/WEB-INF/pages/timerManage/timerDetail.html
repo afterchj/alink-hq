@@ -31,34 +31,35 @@
                     <!--<img src="/alink-hq/static/img/go-back.png" alt="" onclick="history.back()">-->
                 </div>
             </div>
+            <input type="hidden" class="ssid">
             <div id="timerDetail">
                 <div class="p-detail">
                     <div class="p-nav">
                         <ul>
-                            <li>定时名称：<label >XXX</label></li>
-                            <li>周期：<label >周一，周二，周三</label></li>
-                            <li>定时状态：<label>启用</label></li>
+                            <li>定时名称：<label th:text="${timeLine.tname}"></label></li>
+                            <li>周期：<label th:text="${timeLine.week}"></label></li>
+                            <li>定时状态：<label th:text="${timeLine.state}"></label></li>
                         </ul>
                     </div>
                     <div class="p-content">
                         <div class="clearfix time">
                             <div class="f-l ">
                                 <span>隶属项目：</span>
-                                <span >XXX</span>
+                                <span th:text="${projectName}"></span>
                             </div>
                             <div class="f-l">
-                                <span><a href="">查看项目详情</a></span>
+                                <span><a th:href="@{/project/detail(projectId=${projectId})}">查看项目详情</a></span>
                             </div>
                         </div>
                         <div class="clearfix time">
                             <div class="f-l">
                                 <span>隶属网络：</span>
-                                <span >XXX</span>&nbsp;&nbsp;&nbsp;
+                                <span th:text="${timeLine.mname}" id="mname"></span>&nbsp;&nbsp;&nbsp;
                                 <span>网络ID：</span>
-                                <span >XXX</span>
+                                <span th:text="${timeLine.mesh_id}" id="mid"></span>
                             </div>
                             <div class="f-l">
-                                <span><a href="">查看网络详情</a></span>
+                                <span><a th:href="@{/mesh/info(id=${timeLine.mid})}">查看网络详情</a></span>
                             </div>
                         </div>
                         <div class="clearfix timerDetail">
@@ -72,113 +73,125 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <tr >
-                                        <td><span >01：00</span></td>
-                                        <td><span class="a-span">场景1</span><span><span  class="a-span" style="margin: 0 10px;height: 30px;font-size: 20px;">|</span></span><span  class="a-span">查看详情</span></td>
+                                    <tr th:each="timePoint:${timePointList}">
+                                        <td><span th:text="${timePoint.time}"></span></td>
+                                        <td th:if="${timePoint.sname!=null}">
+                                            <span class="a-span" >
+                                                <a th:text="${timePoint.sname}" class="sname-a" style="cursor:pointer";></a>
+                                                <input type="hidden" class="sid" th:value="${timePoint.sid}">
+                                                <input type="hidden" class="sceneName" th:value="${timePoint.scene_id}">
+                                            </span>
+                                            <span>
+                                                <span  class="a-span" style="margin: 0 10px;height: 30px;font-size: 20px;">|</span>
+                                            </span><span  class="a-span"><a th:href="@{/scene/detail(sid=${timePoint.sid},sceneName=${timePoint.sname},sceneId=${timePoint.scene_id},meshName=${timeLine.mname},meshId=${timeLine.mesh_id})}">查看详情</a></span>
+                                        </td>
+                                        <td th:if="${timePoint.sname==null}">
+                                            <span class="a-span"  th:text="${timePoint.state}"></span>
+                                        </td>
                                     </tr>
                                     </tbody>
                                 </table>
                             </div>
-                            <div class="scene-msg timer f-l">
-                                <div class="scene-content">
-                                    <div class="scene-list clearfix">
-                                        <div class="f-l">
-                                            <span>场景下的区域信息</span>
-                                            <span>>></span>
-                                        </div>
-                                        <div class="f-l">
-                                            <span>该区域下的组信息</span>
-                                            <span>>></span>
-                                        </div>
-                                        <div class="f-l">
-                                            <span>该组下的灯详情</span>
-                                        </div>
-                                    </div>
-                                <div class="clearfix  scene-msg-list">
-                                    <div class="f-l" style="border-right: none;">
-                                        <ul>
-                                            <li th:if="${userStat.index}=='0' and ${px}!=${py}"  th:each="placeList,userStat:${placeList}"
-                                                th:text="${placeList.pname}+'（查看详情）'" th:alt="${placeList.pid}" class="pid active">
-                                            </li>
-                                            <li th:if="${userStat.index}!='0' and ${px}!=${py}"  th:each="placeList,userStat:${placeList}"
-                                                th:text="${placeList.pname}+'（查看详情）'" th:alt="${placeList.pid}" class="pid">
-                                            </li>
-                                            <li th:if="${userStat.index}=='0' and ${px}==${py}"  th:each="placeList,userStat:${placeList}"
-                                                th:text="${placeList.pname}+'('+${px}+'，'+${py}+')'" th:alt="${placeList.pid}"
-                                                class="pid active">
-                                            </li>
-                                            <li th:if="${userStat.index}!='0' and ${px}==${py}"  th:each="placeList,userStat:${placeList}"
-                                                th:text="${placeList.pname}+'('+${px}+'，'+${py}+')'" th:alt="${placeList.pid}"
-                                                class="pid">
-                                            </li>
-                                        </ul>
-                                    </div>
-                                    <div class="f-l" style="border-right: none;  ">
-                                        <ul>
-                                            <li  th:if="${userStat.index}=='0' and ${px}!=${py}"  th:each="groupList,userStat:${groupList}"
-                                                 th:text="${groupList.gname}+'（查看详情）'" class="gid active"
-                                                 th:alt="${groupList.gid}"></li>
-                                            <li  th:if="${userStat.index}!='0' and ${px}!=${py}"  th:each="groupList,userStat:${groupList}"
-                                                 th:text="${groupList.gname}+'（查看详情）'" class="gid"
-                                                 th:alt="${groupList.gid}"></li>
-                                            <li th:if="${userStat.index}=='0' and ${px}==${py}"  th:each="groupList,userStat:${groupList}"
-                                                th:text="${groupList.gname}+'('+${px}+'，'+${py}+')'" class="gid active"
-                                                th:alt="${groupList.gid}"></li>
-                                            <li th:if="${userStat.index}!='0' and ${px}==${py}"  th:each="groupList,userStat:${groupList}"
-                                                th:text="${groupList.gname}+'('+${px}+'，'+${py}+')'" class="gid"
-                                                th:alt="${groupList.gid}"></li>
-                                        </ul>
-                                    </div>
-                                    <div class="f-l clearfix "style="width: 496px;">
-                                        <div class="f-l">
-                                            <ul class="one">
-                                                <li th:if="${userStat.index}=='0' and ${lightInfo}==null" th:each="lightList,userStat:${lightList}"
-                                                    th:text="${lightList.lname}+'（'+${lightList.lmac}+')'" class="lid active"
-                                                    th:alt="${lightList.id}"></li>
-                                                <li th:if="${userStat.index}!='0' and ${lightInfo}==null " th:each="lightList,userStat:${lightList}"
-                                                    th:text="${lightList.lname}+'（'+${lightList.lmac}+')'" class="lid"
-                                                    th:alt="${lightList.id}"></li>
-                                                <li th:if="${userStat.index}=='0' and ${lightInfo}!=null and ${lightList.id}==${lightInfo.id}" th:each="lightList,userStat:${lightList}"
-                                                    th:text="${lightList.lname}+'（'+${lightList.lmac}+')'" class="lid active"
-                                                    th:alt="${lightList.id}"></li>
-                                                <li th:if="${userStat.index}!='0' and ${lightInfo}!=null and ${lightList.id}==${lightInfo.id}" th:each="lightList,userStat:${lightList}"
-                                                    th:text="${lightList.lname}+'（'+${lightList.lmac}+')'" class="lid  active"
-                                                    th:alt="${lightList.id}"></li>
-                                                <li th:if="${userStat.index}=='0' and ${lightInfo}!=null and ${lightList.id}!=${lightInfo.id}" th:each="lightList,userStat:${lightList}"
-                                                    th:text="${lightList.lname}+'（'+${lightList.lmac}+')'" class="lid "
-                                                    th:alt="${lightList.id}"></li>
-                                                <li th:if="${userStat.index}!='0' and ${lightInfo}!=null and ${lightList.id}!=${lightInfo.id}" th:each="lightList,userStat:${lightList}"
-                                                    th:text="${lightList.lname}+'（'+${lightList.lmac}+')'" class="lid "
-                                                    th:alt="${lightList.id}"></li>
-                                            </ul>
-                                        </div>
-                                        <div class="f-l">
-                                            <ul class="two">
-                                                <li th:if="${userStat.index}=='0'  and ${lightInfo}==null" th:each="lightList,userStat:${lightList}"
-                                                    th:text="${lightList.x}+'(色温)，'+${lightList.y}+'(亮度)'"  class="lid active"
-                                                    th:alt="${lightList.id}" style="text-align: center;"></li>
-                                                <li th:if="${userStat.index}=='0' and ${lightInfo}!=null and ${lightList.id}==${lightInfo.id}" th:each="lightList,userStat:${lightList}"
-                                                    th:text="${lightList.x}+'(色温)，'+${lightList.y}+'(亮度)'" class="lid active"
-                                                    th:alt="${lightList.id}" style="text-align: center;"></li>
-                                                <li th:if="${userStat.index}=='0'  and ${lightInfo}!=null and ${lightList.id}!=${lightInfo.id}" th:each="lightList,userStat:${lightList}"
-                                                    th:text="${lightList.x}+'(色温)，'+${lightList.y}+'(亮度)'" class="lid "
-                                                    th:alt="${lightList.id}" style="text-align: center;"></li>
-                                                <li th:if="${userStat.index}!='0'  and ${lightInfo}!=null and ${lightList.id}==${lightInfo.id}" th:each="lightList,userStat:${lightList}"
-                                                    th:text="${lightList.x}+'，'+${lightList.y}" class="lid  active"
-                                                    th:alt="${lightList.id}" style="text-align: center;"></li>
-                                                <li th:if="${userStat.index}!='0'  and ${lightInfo}!=null and ${lightList.id}!=${lightInfo.id}" th:each="lightList,userStat:${lightList}"
-                                                    th:text="${lightList.x}+'，'+${lightList.y}" class="lid "
-                                                    th:alt="${lightList.id}" style="text-align: center;"></li>
-                                                <li th:if="${userStat.index}!='0'  and ${lightInfo}==null " th:each="lightList,userStat:${lightList}"
-                                                    th:text="${lightList.x}+'，'+${lightList.y}" class="lid "
-                                                    th:alt="${lightList.id}" style="text-align: center;"></li>
+                            <!--<div class="scene-msg timer f-l">-->
+                                <!--<div class="scene-content">-->
+                                    <!--<div class="scene-list clearfix">-->
+                                        <!--<div class="f-l">-->
+                                            <!--<span>场景下的区域信息</span>-->
+                                            <!--<span>>></span>-->
+                                        <!--</div>-->
+                                        <!--<div class="f-l">-->
+                                            <!--<span>该区域下的组信息</span>-->
+                                            <!--<span>>></span>-->
+                                        <!--</div>-->
+                                        <!--<div class="f-l">-->
+                                            <!--<span>该组下的灯详情</span>-->
+                                        <!--</div>-->
+                                    <!--</div>-->
+                                <!--<div class="clearfix  scene-msg-list">-->
+                                    <!--<div class="f-l" style="border-right: none;">-->
+                                        <!--<ul>-->
+                                            <!--<li th:if="${userStat.index}=='0' and ${px}!=${py}"  th:each="placeList,userStat:${placeList}"-->
+                                                <!--th:text="${placeList.pname}+'（查看详情）'" th:alt="${placeList.pid}" class="pid active">-->
+                                            <!--</li>-->
+                                            <!--<li th:if="${userStat.index}!='0' and ${px}!=${py}"  th:each="placeList,userStat:${placeList}"-->
+                                                <!--th:text="${placeList.pname}+'（查看详情）'" th:alt="${placeList.pid}" class="pid">-->
+                                            <!--</li>-->
+                                            <!--<li th:if="${userStat.index}=='0' and ${px}==${py}"  th:each="placeList,userStat:${placeList}"-->
+                                                <!--th:text="${placeList.pname}+'('+${px}+'，'+${py}+')'" th:alt="${placeList.pid}"-->
+                                                <!--class="pid active">-->
+                                            <!--</li>-->
+                                            <!--<li th:if="${userStat.index}!='0' and ${px}==${py}"  th:each="placeList,userStat:${placeList}"-->
+                                                <!--th:text="${placeList.pname}+'('+${px}+'，'+${py}+')'" th:alt="${placeList.pid}"-->
+                                                <!--class="pid">-->
+                                            <!--</li>-->
+                                        <!--</ul>-->
+                                    <!--</div>-->
+                                    <!--<div class="f-l" style="border-right: none;  ">-->
+                                        <!--<ul>-->
+                                            <!--<li  th:if="${userStat.index}=='0' and ${px}!=${py}"  th:each="groupList,userStat:${groupList}"-->
+                                                 <!--th:text="${groupList.gname}+'（查看详情）'" class="gid active"-->
+                                                 <!--th:alt="${groupList.gid}"></li>-->
+                                            <!--<li  th:if="${userStat.index}!='0' and ${px}!=${py}"  th:each="groupList,userStat:${groupList}"-->
+                                                 <!--th:text="${groupList.gname}+'（查看详情）'" class="gid"-->
+                                                 <!--th:alt="${groupList.gid}"></li>-->
+                                            <!--<li th:if="${userStat.index}=='0' and ${px}==${py}"  th:each="groupList,userStat:${groupList}"-->
+                                                <!--th:text="${groupList.gname}+'('+${px}+'，'+${py}+')'" class="gid active"-->
+                                                <!--th:alt="${groupList.gid}"></li>-->
+                                            <!--<li th:if="${userStat.index}!='0' and ${px}==${py}"  th:each="groupList,userStat:${groupList}"-->
+                                                <!--th:text="${groupList.gname}+'('+${px}+'，'+${py}+')'" class="gid"-->
+                                                <!--th:alt="${groupList.gid}"></li>-->
+                                        <!--</ul>-->
+                                    <!--</div>-->
+                                    <!--<div class="f-l clearfix "style="width: 496px;">-->
+                                        <!--<div class="f-l">-->
+                                            <!--<ul class="one">-->
+                                                <!--<li th:if="${userStat.index}=='0' and ${lightInfo}==null" th:each="lightList,userStat:${lightList}"-->
+                                                    <!--th:text="${lightList.lname}+'（'+${lightList.lmac}+')'" class="lid active"-->
+                                                    <!--th:alt="${lightList.id}"></li>-->
+                                                <!--<li th:if="${userStat.index}!='0' and ${lightInfo}==null " th:each="lightList,userStat:${lightList}"-->
+                                                    <!--th:text="${lightList.lname}+'（'+${lightList.lmac}+')'" class="lid"-->
+                                                    <!--th:alt="${lightList.id}"></li>-->
+                                                <!--<li th:if="${userStat.index}=='0' and ${lightInfo}!=null and ${lightList.id}==${lightInfo.id}" th:each="lightList,userStat:${lightList}"-->
+                                                    <!--th:text="${lightList.lname}+'（'+${lightList.lmac}+')'" class="lid active"-->
+                                                    <!--th:alt="${lightList.id}"></li>-->
+                                                <!--<li th:if="${userStat.index}!='0' and ${lightInfo}!=null and ${lightList.id}==${lightInfo.id}" th:each="lightList,userStat:${lightList}"-->
+                                                    <!--th:text="${lightList.lname}+'（'+${lightList.lmac}+')'" class="lid  active"-->
+                                                    <!--th:alt="${lightList.id}"></li>-->
+                                                <!--<li th:if="${userStat.index}=='0' and ${lightInfo}!=null and ${lightList.id}!=${lightInfo.id}" th:each="lightList,userStat:${lightList}"-->
+                                                    <!--th:text="${lightList.lname}+'（'+${lightList.lmac}+')'" class="lid "-->
+                                                    <!--th:alt="${lightList.id}"></li>-->
+                                                <!--<li th:if="${userStat.index}!='0' and ${lightInfo}!=null and ${lightList.id}!=${lightInfo.id}" th:each="lightList,userStat:${lightList}"-->
+                                                    <!--th:text="${lightList.lname}+'（'+${lightList.lmac}+')'" class="lid "-->
+                                                    <!--th:alt="${lightList.id}"></li>-->
+                                            <!--</ul>-->
+                                        <!--</div>-->
+                                        <!--<div class="f-l">-->
+                                            <!--<ul class="two">-->
+                                                <!--<li th:if="${userStat.index}=='0'  and ${lightInfo}==null" th:each="lightList,userStat:${lightList}"-->
+                                                    <!--th:text="${lightList.x}+'(色温)，'+${lightList.y}+'(亮度)'"  class="lid active"-->
+                                                    <!--th:alt="${lightList.id}" style="text-align: center;"></li>-->
+                                                <!--<li th:if="${userStat.index}=='0' and ${lightInfo}!=null and ${lightList.id}==${lightInfo.id}" th:each="lightList,userStat:${lightList}"-->
+                                                    <!--th:text="${lightList.x}+'(色温)，'+${lightList.y}+'(亮度)'" class="lid active"-->
+                                                    <!--th:alt="${lightList.id}" style="text-align: center;"></li>-->
+                                                <!--<li th:if="${userStat.index}=='0'  and ${lightInfo}!=null and ${lightList.id}!=${lightInfo.id}" th:each="lightList,userStat:${lightList}"-->
+                                                    <!--th:text="${lightList.x}+'(色温)，'+${lightList.y}+'(亮度)'" class="lid "-->
+                                                    <!--th:alt="${lightList.id}" style="text-align: center;"></li>-->
+                                                <!--<li th:if="${userStat.index}!='0'  and ${lightInfo}!=null and ${lightList.id}==${lightInfo.id}" th:each="lightList,userStat:${lightList}"-->
+                                                    <!--th:text="${lightList.x}+'，'+${lightList.y}" class="lid  active"-->
+                                                    <!--th:alt="${lightList.id}" style="text-align: center;"></li>-->
+                                                <!--<li th:if="${userStat.index}!='0'  and ${lightInfo}!=null and ${lightList.id}!=${lightInfo.id}" th:each="lightList,userStat:${lightList}"-->
+                                                    <!--th:text="${lightList.x}+'，'+${lightList.y}" class="lid "-->
+                                                    <!--th:alt="${lightList.id}" style="text-align: center;"></li>-->
+                                                <!--<li th:if="${userStat.index}!='0'  and ${lightInfo}==null " th:each="lightList,userStat:${lightList}"-->
+                                                    <!--th:text="${lightList.x}+'，'+${lightList.y}" class="lid "-->
+                                                    <!--th:alt="${lightList.id}" style="text-align: center;"></li>-->
 
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                                            <!--</ul>-->
+                                        <!--</div>-->
+                                    <!--</div>-->
+                                <!--</div>-->
+                            <!--</div>-->
+                        <!--</div>-->
                         </div>
                     </div>
                 </div>
@@ -189,6 +202,7 @@
 <script src="/alink-hq/static/js/jquery.min.js"></script>
 <script  src="/alink-hq/static/js/left.js"></script>
 <script src="/alink-hq/static/js/moment.js"></script>
+<script src="/alink-hq/static/js/timerDetail.js"></script>
 </body>
 
 </html>

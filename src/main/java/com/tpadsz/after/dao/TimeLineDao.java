@@ -1,6 +1,8 @@
 package com.tpadsz.after.dao;
 
+import com.tpadsz.after.entity.ProjectList;
 import com.tpadsz.after.entity.TimeLine;
+import com.tpadsz.after.entity.TimePoint;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -12,7 +14,7 @@ import java.util.List;
  * @create: 2019-05-28 10:46
  **/
 public interface TimeLineDao {
-    String getProjectNameByMid(@Param("id") int id);
+    ProjectList getProjectNameByMid(@Param("id") int id);
 
     List<TimeLine> getTimeLineByMid(@Param("id") int id, @Param("tname") String tname, @Param("createDate") String createDate, @Param("endTime") String endTime,@Param("state") String state);
 
@@ -27,4 +29,10 @@ public interface TimeLineDao {
     List<TimeLine> getTimeLineByMidOrderByCreateDate(@Param("id") int id, @Param("tname") String tname, @Param("createDate") String createDate, @Param("endTime") String endTime,@Param("state") String state);
 
     List<TimeLine> getTimeLineByMidOrderByUpdateDate(@Param("id") int id, @Param("tname") String tname, @Param("createDate") String createDate, @Param("endTime") String endTime,@Param("state") String state);
+
+    TimeLine getTimeLineById(@Param("id") int id);
+
+    ProjectList getProjectByProjectId(@Param("projectId") int projectId);
+
+    List<TimePoint> getTimePointByTsid(@Param("id") int id);
 }

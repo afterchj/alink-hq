@@ -14,8 +14,44 @@
         DATE_FORMAT(t.update_date,'%Y/%m/%d %k:%i:%s') as update_date
     </sql>
 
-    <select id="getProjectNameByMid" resultType="string">
-        SELECT NAME
+    <sql id="TimeLineListById">
+        t.id,
+        t.tname,
+        m.mname,
+        t.mid,
+        m.mesh_id,
+        IF( t.state = '0', '启用', '停用' ) state,
+        t.WEEK
+    </sql>
+
+    <sql id="TimeLineWhere">
+        <where>
+            <if test="id!=null">
+                t.mid = m.id
+            </if>
+            <if test="id!=null">
+                AND t.mid = #{id}
+            </if>
+            <if test="tname!=null and tname!='' and tname!='_'.toString()">
+                AND t.tname LIKE concat('%',#{tname},'%')
+            </if>
+            <if test="tname=='_'.toString()">
+                and  t.tname LIKE '%/_%' escape '/'
+            </if>
+            <if test="createDate!=null and createDate!=''">
+                AND t.create_date BETWEEN #{createDate} and DATE_ADD(#{createDate},INTERVAL 1 DAY)
+            </if>
+            <if test="endTime!=null and endTime!=''">
+                AND t.update_date BETWEEN #{endTime} and Date_Add(#{endTime},INTERVAL 1 DAY )
+            </if>
+            <if test="state!=null and state!=''">
+                AND t.state=#{state}
+            </if>
+        </where>
+    </sql>
+
+    <select id="getProjectNameByMid" resultType="com.tpadsz.after.entity.ProjectList">
+        SELECT NAME,id
         FROM
           f_project
         WHERE
@@ -28,28 +64,9 @@
         FROM
         f_time_line t,
         f_mesh m
-        <where>
-            <if test="id!=null">
-                t.mid = m.id
-            </if>
-            <if test="id!=null">
-                AND t.mid = #{id}
-            </if>
-            <if test="tname!=null and tname!=''">
-                AND t.tname LIKE concat('%',#{tname},'%')
-            </if>
-            <if test="createDate!=null and createDate!=''">
-                AND t.create_date BETWEEN #{createDate} and DATE_ADD(#{createDate},INTERVAL 1 DAY)
-            </if>
-            <if test="endTime!=null and endTime!=''">
-                AND t.update_date BETWEEN #{endTime} and Date_Add(#{endTime},INTERVAL 1 DAY )
-            </if>
-            <if test="state!=null and state!=''">
-                AND t.state=#{state}
-            </if>
-            ORDER BY
-            t.update_date DESC
-        </where>
+        <include refid="TimeLineWhere"/>
+        ORDER BY
+        t.update_date desc
     </select>
     <select id="getTimeLineByMidOrderByUpdateDate" resultType="com.tpadsz.after.entity.TimeLine">
         SELECT
@@ -57,28 +74,9 @@
         FROM
         f_time_line t,
         f_mesh m
-        <where>
-            <if test="id!=null">
-                t.mid = m.id
-            </if>
-            <if test="id!=null">
-                AND t.mid = #{id}
-            </if>
-            <if test="tname!=null and tname!=''">
-                AND t.tname LIKE concat('%',#{tname},'%')
-            </if>
-            <if test="createDate!=null and createDate!=''">
-                AND t.create_date BETWEEN #{createDate} and DATE_ADD(#{createDate},INTERVAL 1 DAY)
-            </if>
-            <if test="endTime!=null and endTime!=''">
-                AND t.update_date BETWEEN #{endTime} and Date_Add(#{endTime},INTERVAL 1 DAY )
-            </if>
-            <if test="state!=null and state!=''">
-                AND t.state=#{state}
-            </if>
-            ORDER BY
-            t.update_date
-        </where>
+        <include refid="TimeLineWhere"/>
+        ORDER BY
+        t.update_date
     </select>
     <select id="getTimeLineByMidOrderByCreateDateDesc" resultType="com.tpadsz.after.entity.TimeLine">
         SELECT
@@ -86,28 +84,9 @@
         FROM
         f_time_line t,
         f_mesh m
-        <where>
-            <if test="id!=null">
-                t.mid = m.id
-            </if>
-            <if test="id!=null">
-                AND t.mid = #{id}
-            </if>
-            <if test="tname!=null and tname!=''">
-                AND t.tname LIKE concat('%',#{tname},'%')
-            </if>
-            <if test="createDate!=null and createDate!=''">
-                AND t.create_date BETWEEN #{createDate} and DATE_ADD(#{createDate},INTERVAL 1 DAY)
-            </if>
-            <if test="endTime!=null and endTime!=''">
-                AND t.update_date BETWEEN #{endTime} and Date_Add(#{endTime},INTERVAL 1 DAY )
-            </if>
-            <if test="state!=null and state!=''">
-                AND t.state=#{state}
-            </if>
-            ORDER BY
-            t.create_date DESC
-        </where>
+        <include refid="TimeLineWhere"/>
+        ORDER BY
+        t.create_date DESC
     </select>
     <select id="getTimeLineByMidOrderByCreateDate" resultType="com.tpadsz.after.entity.TimeLine">
         SELECT
@@ -115,28 +94,9 @@
         FROM
         f_time_line t,
         f_mesh m
-        <where>
-            <if test="id!=null">
-                t.mid = m.id
-            </if>
-            <if test="id!=null">
-                AND t.mid = #{id}
-            </if>
-            <if test="tname!=null and tname!=''">
-                AND t.tname LIKE concat('%',#{tname},'%')
-            </if>
-            <if test="createDate!=null and createDate!=''">
-                AND t.create_date BETWEEN #{createDate} and DATE_ADD(#{createDate},INTERVAL 1 DAY)
-            </if>
-            <if test="endTime!=null and endTime!=''">
-                AND t.update_date BETWEEN #{endTime} and Date_Add(#{endTime},INTERVAL 1 DAY )
-            </if>
-            <if test="state!=null and state!=''">
-                AND t.state=#{state}
-            </if>
-            ORDER BY
-            t.create_date
-        </where>
+        <include refid="TimeLineWhere"/>
+        ORDER BY
+        t.create_date
     </select>
 
     <insert id="insertTimeLine" parameterType="com.tpadsz.after.entity.TimeLine">
@@ -150,6 +110,49 @@
 
     <select id="getTnameById" resultType="int">
         select count(*) from f_time_line where mid=#{mid} and tname=#{tname}
+    </select>
+
+    <select id="getTimeLineById" resultType="com.tpadsz.after.entity.TimeLine">
+        select
+          <include refid="TimeLineListById"/>
+		from f_time_line t,f_mesh m where t.mid=m.id and t.id=#{id}
+    </select>
+
+    <select id="getProjectByProjectId" resultType="com.tpadsz.after.entity.ProjectList">
+        SELECT NAME,id FROM f_project WHERE id = #{projectId}
+    </select>
+
+    <select id="getTimePointByTsid" resultType="com.tpadsz.after.entity.TimePoint">
+        SELECT
+  	      p.tsid,p.sid,p.time,
+          CASE
+        	p.state
+        	WHEN '0' THEN 'ON'
+        	WHEN '1' THEN 'OFF'
+        	WHEN '2' THEN 'ALl OFF'
+        	WHEN '3' THEN 'ALL ON'
+        	END AS state,
+        	s.sname,
+        	s.scene_id
+        FROM
+        	( SELECT tsid, sid, time, state FROM f_time_point WHERE state IN ( '0', '1' ) AND tsid = #{id} ) p,
+        	f_scene s
+        WHERE p.sid = s.id UNION
+        SELECT
+        	tsid,sid,time,
+        CASE
+        	state
+        	WHEN '0' THEN 'ON'
+        	WHEN '1' THEN 'OFF'
+        	WHEN '2' THEN 'ALl OFF'
+        	WHEN '3' THEN 'ALL ON'
+        	END AS state,
+        	NULL AS sname,
+        	NULL as scene_id
+        FROM f_time_point
+        WHERE state IN ( '2', '3' ) AND tsid = #{id}
+        ORDER BY time
+
     </select>
 
 </mapper>
