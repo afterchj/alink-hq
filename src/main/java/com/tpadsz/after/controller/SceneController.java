@@ -161,7 +161,6 @@ public class SceneController {
         model.addAttribute("placeList", placeList);
         model.addAttribute("groupList", groupList);
         model.addAttribute("lightList", lightList);
-
         return "sceneManage/sceneDetail";
     }
 

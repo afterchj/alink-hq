@@ -3,7 +3,9 @@ package com.tpadsz.after.service.impl;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.tpadsz.after.dao.TimeLineDao;
+import com.tpadsz.after.entity.ProjectList;
 import com.tpadsz.after.entity.TimeLine;
+import com.tpadsz.after.entity.TimePoint;
 import com.tpadsz.after.service.TimeLineService;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.ibatis.session.ExecutorType;
@@ -32,7 +34,7 @@ public class TimeLineServiceImpl implements TimeLineService {
     private SqlSessionTemplate sqlSessionTemplate;
 
     @Override
-    public String getProjectNameByMid(int id) {
+    public ProjectList getProjectNameByMid(int id) {
         return timeLineDao.getProjectNameByMid(id);
     }
 
@@ -105,5 +107,20 @@ public class TimeLineServiceImpl implements TimeLineService {
             flag = true;
         }
         return flag;
+    }
+
+    @Override
+    public TimeLine getTimeLineById(int id) {
+        return timeLineDao.getTimeLineById(id);
+    }
+
+    @Override
+    public List<TimePoint> getTimePointByTsid(int id) {
+        return timeLineDao.getTimePointByTsid(id);
+    }
+
+    @Override
+    public ProjectList getProjectByProjectId(int projectId) {
+        return timeLineDao.getProjectByProjectId(projectId);
     }
 }

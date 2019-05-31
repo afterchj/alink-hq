@@ -12,12 +12,21 @@ public class TimeLine {
     private String tname;
     private String mname;
     private Integer mid;
+    private String mesh_id;
     private String state;
     private String repetition;
     private String week;
     private String create_date;
     private String update_date;
     private Integer tid;
+
+    public String getMesh_id() {
+        return mesh_id;
+    }
+
+    public void setMesh_id(String mesh_id) {
+        this.mesh_id = mesh_id;
+    }
 
     public int getId() {
         return id;
