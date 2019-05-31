@@ -89,28 +89,29 @@
                         <div class="clearfix  scene-msg-list">
                             <div class="f-l" style="border-right: none;">
                                 <ul>
-                                    <li th:if="${userStat.index}=='0' and ${px}==null"  th:each="placeList,userStat:${placeList}"
-                                        th:text="${placeList.pname}+'（查看详情）'" th:alt="${placeList.pid}" class="pid active">
+                                    <li th:if="${userStat.index}=='0'"  th:each="placeList,userStat:${placeList}"
+                                        th:alt="${placeList.pid}" class="pid active">
+                                        <span th:if="${placeList.x}==null" th:text="${placeList.pname}+'（查看详情）'"></span>
+                                        <span th:if="${placeList.x}!=null" th:text="${placeList.pname}+'('+${placeList.x}+'，'+${placeList.y}+')'"></span>
                                     </li>
-                                    <li th:if="${userStat.index}!='0' and ${px}==null"  th:each="placeList,userStat:${placeList}"
-                                        th:text="${placeList.pname}+'（查看详情）'" th:alt="${placeList.pid}" class="pid">
-                                    </li>
-                                    <li th:if="${userStat.index}=='0' and ${px}!=null"  th:each="placeList,userStat:${placeList}"
-                                        th:text="${placeList.pname}+'('+${px}+'，'+${py}+')'" th:alt="${placeList.pid}"
-                                        class="pid active">
-                                    </li>
-                                    <li th:if="${userStat.index}!='0' and ${px}!=null"  th:each="placeList,userStat:${placeList}"
-                                        th:text="${placeList.pname}+'('+${px}+'，'+${py}+')'" th:alt="${placeList.pid}"
-                                        class="pid">
+                                    <li th:if="${userStat.index}!='0'"  th:each="placeList,userStat:${placeList}"
+                                         th:alt="${placeList.pid}" class="pid">
+                                        <span th:if="${placeList.x}==null" th:text="${placeList.pname}+'（查看详情）'"></span>
+                                        <span th:if="${placeList.x}!=null" th:text="${placeList.pname}+'('+${placeList.x}+'，'+${placeList.y}+')'"></span>
                                     </li>
                                 </ul>
                             </div>
-                            <div class="f-l" style="border-right: none;" id="groupXYList">
+                            <div class="f-l" style="border-right: none;">
                                 <ul>
-                                    <li  th:if="${userStat.index}=='0' and  ${groupXYList}==null"  th:each="groupList,userStat:${groupList}" class="gid active" th:alt="${groupList.gid}"><span th:text="${groupList.gname}"></span>(<span class="groupXy">查看详情</span>)</li>
-                                    <li  th:if="${userStat.index}!='0' and  ${groupXYList}==null"  th:each="groupList,userStat:${groupList}" class="gid" th:alt="${groupList.gid}"><span th:text="${groupList.gname}"></span>(<span class="groupXy">查看详情</span>)</li>
-                                    <li th:if="${userStat.index}=='0' and  ${groupXYList}!=null"  th:each="groupList,userStat:${groupList}" class="gid active" th:alt="${groupList.gid}"><span th:text="${groupList.gname}"></span>(<span class="groupXy"></span>)</li>
-                                    <li th:if="${userStat.index}!='0' and  ${groupXYList}!=null"  th:each="groupList,userStat:${groupList}" class="gid" th:alt="${groupList.gid}"><span th:text="${groupList.gname}"></span>(<span class="groupXy"></span>)</li>
+                                    <li th:if="${userStat.index}=='0'" th:each="groupList,userStat:${groupList}" class="gid active" th:alt="${groupList.gid}">
+                                        <span th:if="${groupList.x}==null" th:text="${groupList.gname}+'（查看详情）'"></span>
+                                        <span th:if="${groupList.x}!=null" th:text="${groupList.gname}+'('+${groupList.x}+'，'+${groupList.y}+')'"></span>
+                                    </li>
+                                    <li  th:if="${userStat.index}!='0'"  th:each="groupList,userStat:${groupList}" class="gid" th:alt="${groupList.gid}">
+                                        <span th:if="${groupList.x}==null" th:text="${groupList.gname}+'（查看详情）'"></span>
+                                        <span th:if="${groupList.x}!=null" th:text="${groupList.gname}+'('+${groupList.x}+'，'+${groupList.y}+')'"></span>
+
+                                    </li>
                                 </ul>
                             </div>
                             <div class="f-l clearfix">
@@ -179,28 +180,28 @@
 //        var lid = $('#lid').val();
 //        var gid = $('#gid').val();
 //        var pid = $('#pid').val();
-        var grouXYList=[[${groupXYList}]];
-        console.log(grouXYList);
-        var groupArray=[];
-        for(var i=0;i<grouXYList.length;i++) {
-//            var x = grouXYList[i].x;
-//            var y = grouXYList[i].y;
-            var gids = grouXYList[i].gid;
-            groupArray.push(gids);
-//            console.log(x, y, gids);
-        }
-        console.log('groupArray',groupArray);
-        $('#groupXYList li').each(function(){
-            var gidss=parseInt($(this).attr('alt'));
-            console.log(gidss);
-            var a = groupArray.indexOf(gidss);
-            console.log('a',a);
-            if(a==-1){
-                $(this).find('.groupXy').text('查看详情');
-            }else{
-                $(this).find('.groupXy').text(grouXYList[a].x+','+grouXYList[a].y);
-            }
-        })
+//        var grouXYList=[[${groupXYList}]];
+//        console.log(grouXYList);
+//        var groupArray=[];
+//        for(var i=0;i<grouXYList.length;i++) {
+////            var x = grouXYList[i].x;
+////            var y = grouXYList[i].y;
+//            var gids = grouXYList[i].gid;
+//            groupArray.push(gids);
+////            console.log(x, y, gids);
+//        }
+//        console.log('groupArray',groupArray);
+//        $('#groupXYList li').each(function(){
+//            var gidss=parseInt($(this).attr('alt'));
+//            console.log(gidss);
+//            var a = groupArray.indexOf(gidss);
+//            console.log('a',a);
+//            if(a==-1){
+//                $(this).find('.groupXy').text('查看详情');
+//            }else{
+//                $(this).find('.groupXy').text(grouXYList[a].x+','+grouXYList[a].y);
+//            }
+//        })
     })
     $('.scene-msg-list ').on('click', 'li', function () {
         $(this).toggleClass('active').siblings().removeClass('active');

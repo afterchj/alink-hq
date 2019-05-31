@@ -127,24 +127,28 @@ public class SceneController {
         }
 
         List<MeshInfo> list1 = sceneService.findXYBySid(sid);
-        List<MeshInfo> groupXYList = new ArrayList<>();
+//        List<MeshInfo> groupXYList = new ArrayList<>();
         if (list1.size() == 1) {
-            model.addAttribute("px", list1.get(0).getX());
-            model.addAttribute("py", list1.get(0).getY());
+            placeList.get(0).setX(list1.get(0).getX());
+            placeList.get(0).setX(list1.get(0).getY());
+//            model.addAttribute("px", list1.get(0).getX());
+//            model.addAttribute("py", list1.get(0).getY());
         } else {
             for (int i = 0; i < groupList.size(); i++) {
                 List<MeshInfo> list2 = sceneService.findXYByGid(groupList.get(i).getGid(),sid);
                 if (list2.size() == 1) {
-                    MeshInfo groupXY = new MeshInfo();
-                    groupXY.setX(list2.get(0).getX());
-                    groupXY.setY(list2.get(0).getY());
-                    groupXY.setGid(groupList.get(i).getGid());
-                    groupXYList.add(groupXY);
+//                    MeshInfo groupXY = new MeshInfo();
+//                    groupXY.setX(list2.get(0).getX());
+//                    groupXY.setY(list2.get(0).getY());
+//                    groupXY.setGid(groupList.get(i).getGid());
+//                    groupXYList.add(groupXY);
+                    groupList.get(i).setX(list2.get(0).getX());
+                    groupList.get(i).setY(list2.get(0).getY());
                 }
             }
-            if (groupXYList.size() > 0) {
-                model.addAttribute("groupXYList", groupXYList);
-            }
+//            if (groupXYList.size() > 0) {
+//                model.addAttribute("groupXYList", groupXYList);
+//            }
         }
 
         model.addAttribute("sceneName", sceneName);
