@@ -209,10 +209,9 @@
     $('.gid').click(function () {
         var gid = $(this).attr('alt');
         var sid = GetUrlParam('sid');
-        $('.one li').remove();
-        $('.two li').remove();
         var content = '';
         var content1 = '';
+
         $.ajax({
             type: "post",
             url: "/alink-hq/scene/groupDetail",
@@ -222,8 +221,12 @@
             },
             async: true,
             success: function (res) {
+                $('.one li').remove();
+                $('.two li').remove();
+
                 var lightList = res.lightList;
                 $.each(lightList, function (key, value) {
+
                     content += '<li class="lid" alt=' + value.id + '>' + value.lname + '(' + value.lmac + ')' + '</li>';
                     if (key == 0) {
                         content1 += '<li class="lid" alt="' + value.id + '" style="text-align: center;">' + value.x + '(色温)，' + value.y + '(亮度)</li>';
