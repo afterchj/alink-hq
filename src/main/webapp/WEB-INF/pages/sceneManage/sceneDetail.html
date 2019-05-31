@@ -107,16 +107,10 @@
                             </div>
                             <div class="f-l" style="border-right: none;" id="groupXYList">
                                 <ul>
-                                    <li  th:if="${userStat.index}=='0' and  ${groupXYList}==null"  th:each="groupList,userStat:${groupList}"
-                                         class="gid active"
-                                        th:alt="${groupList.gid}"><span th:text="${groupList.gname}"></span>(<span class="groupXy">查看详情</span>)</li>
-                                    <li  th:if="${userStat.index}!='0' and  ${groupXYList}==null"  th:each="groupList,userStat:${groupList}"
-                                       class="gid"
-                                        th:alt="${groupList.gid}"><span th:text="${groupList.gname}"></span>(<span class="groupXy">查看详情</span>)</li>
-                                    <li th:if="${userStat.index}=='0' and  ${groupXYList}!=null"  th:each="groupList,userStat:${groupList}"
-                                        class="gid active" th:alt="${groupList.gid}"><span th:text="${groupList.gname}"></span>(<span class="groupXy"></span>)</li>
-                                    <li th:if="${userStat.index}!='0' and  ${groupXYList}!=null"  th:each="groupList,userStat:${groupList}"
-                                         class="gid" th:alt="${groupList.gid}"><span th:text="${groupList.gname}"></span>(<span class="groupXy"></span>)</li>
+                                    <li  th:if="${userStat.index}=='0' and  ${groupXYList}==null"  th:each="groupList,userStat:${groupList}" class="gid active" th:alt="${groupList.gid}"><span th:text="${groupList.gname}"></span>(<span class="groupXy">查看详情</span>)</li>
+                                    <li  th:if="${userStat.index}!='0' and  ${groupXYList}==null"  th:each="groupList,userStat:${groupList}" class="gid" th:alt="${groupList.gid}"><span th:text="${groupList.gname}"></span>(<span class="groupXy">查看详情</span>)</li>
+                                    <li th:if="${userStat.index}=='0' and  ${groupXYList}!=null"  th:each="groupList,userStat:${groupList}" class="gid active" th:alt="${groupList.gid}"><span th:text="${groupList.gname}"></span>(<span class="groupXy"></span>)</li>
+                                    <li th:if="${userStat.index}!='0' and  ${groupXYList}!=null"  th:each="groupList,userStat:${groupList}" class="gid" th:alt="${groupList.gid}"><span th:text="${groupList.gname}"></span>(<span class="groupXy"></span>)</li>
                                 </ul>
                             </div>
                             <div class="f-l clearfix">
@@ -182,18 +176,18 @@
             $('.scene-msg .scene-msg-list>div:nth-child(3)>div:nth-child(1) ul').addClass('active');
             $('.scene-msg .scene-msg-list>div:nth-child(3)>div:nth-child(1)').css('border-right', 'none')
         }
-        var lid = $('#lid').val();
-        var gid = $('#gid').val();
-        var pid = $('#pid').val();
+//        var lid = $('#lid').val();
+//        var gid = $('#gid').val();
+//        var pid = $('#pid').val();
         var grouXYList=[[${groupXYList}]];
         console.log(grouXYList);
         var groupArray=[];
         for(var i=0;i<grouXYList.length;i++) {
-            var x = grouXYList[i].x;
-            var y = grouXYList[i].y;
+//            var x = grouXYList[i].x;
+//            var y = grouXYList[i].y;
             var gids = grouXYList[i].gid;
             groupArray.push(gids);
-            console.log(x, y, gids);
+//            console.log(x, y, gids);
         }
         console.log('groupArray',groupArray);
         $('#groupXYList li').each(function(){
