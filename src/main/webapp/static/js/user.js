@@ -340,7 +340,7 @@ $(function () {
         event.stopPropagation();
         $('div[openContent="memo-edit"]').addClass('active');
         $('div[openContent="memo-edit"] .pop-content').find('p.unuse').remove();
-        $(".wishContent").text('');
+        $(".wishContent").val('');
         var content = $(this).parent().siblings('div').text();
         var account = $(this).parents('tr').children('td').eq(0).text();
         if (content != '') {
