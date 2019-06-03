@@ -32,30 +32,30 @@
                          onmouseup="backBtnMouseUp()">
                         <span><</span><span>返回</span>
                     </div>
-                    <!--<img src="/alink-hq/static/img/go-back.png" alt="" onclick="history.back()">-->
                 </div>
             </div>
 
-            <div id="meshList" class="">
+            <div id="meshList" class="table-content-list">
                 <form class="clearfix" th:action="@{/place/list}" method="POST">
                     <input type="hidden" name="uid" th:value="${dict.uid}">
                     <input type="hidden" id="pageSize" th:value="${dict.pageSize}">
-                    <div class="search-condition temp">
-                        <div class="f-l search" style="margin-right:200px;">
+                    <div class="search-condition clearfix">
+                        <div class="f-l search" style="margin-right: 150px;margin-left: 100px;">
                             <div>
                                 <label for="pname" class="font">区域名称</label>
                                 <input type="text" id="pname" name="pname" th:value="${dict.pname}" placeholder="请输入区域名称">
                             </div>
+
                             <div>
-                                <label for="mname" class="font">网络名称</label>
-                                <input type="text" id="mname" name="mname" th:value="${dict.mname}"
-                                       placeholder="请输入网络名称">
+                                <label for="mid" class="font">网络ID</label>
+                                <input type="text" id="mid" name="meshId" th:value="${dict.meshId}" placeholder="请输入网络ID">
                             </div>
                         </div>
                         <div class="f-l search">
                             <div>
-                                <label for="mid" class="font">网络ID</label>
-                                <input type="text" id="mid" name="meshId" th:value="${dict.meshId}" placeholder="请输入网络ID">
+                                <label for="mname" class="font">网络名称</label>
+                                <input type="text" id="mname" name="mname" th:value="${dict.mname}"
+                                       placeholder="请输入网络名称">
                             </div>
                             <div>
                                 <label for="name" class="font">项目名称</label>

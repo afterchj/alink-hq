@@ -30,7 +30,7 @@
                         <!--<img src="/alink-hq/static/img/go-back.png" alt="" onclick="history.back()">-->
                     </div>
                 </div>
-                <div id="projectDetail">
+                <div id="projectDetail"class="table-content-list">
                     <div class="p-detail">
                         <div class="p-nav">
                             <ul>
@@ -132,7 +132,7 @@
         if (length > 4) {
             $('#projectDetail .light-detail-table tbody').css('border-bottom', '1px solid #bbb');
             $('#projectDetail .light-detail-table thead th').css('width', '360px');
-        } else if (height <= 4) {
+        } else if (length <= 4) {
             $('#projectDetail .light-detail-table thead th').css('width', '220px');
         }
     })

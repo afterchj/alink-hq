@@ -2,6 +2,8 @@
  * Created by hongjian.chen on 2019/4/24.
  */
 $(function () {
+    var width = window.screen.width;
+    var height = window.screen.height;
     $("#multiMove").click(function () {
         var ids = [];
         var uid=[];
@@ -9,17 +11,17 @@ $(function () {
             ids.push($(this).val());
             uid.push($(this).next('.uid').val());
         });
-        console.log('uid',uid);
+        // console.log('uid',uid);
         var result= isRepeat(uid);
-        console.log(result);
+        // console.log(result);
         if(ids.length==1){
             location.href = "/alink-hq/mesh/move?ids=" + ids;
         }else if(result && ids.length>1  ){
             location.href = "/alink-hq/mesh/move?ids=" + ids;
         }else{
             $('div[openContent="exchange"]').addClass('active');
-            var width = window.screen.scrollWidth;
-            var height = window.screen.scrollHeight;
+            // var width = window.screen.width;
+            // var height = window.screen.height;
             $('.hide-iframe').addClass('active');
             $('.hide-iframe').css({
                 'width': width,
@@ -34,8 +36,8 @@ $(function () {
         });
         if(ids.length>0){
             $('div[openContent="delete-mesh"]').addClass('active');
-            var width = window.screen.scrollWidth;
-            var height = window.screen.scrollHeight;
+            // var width = window.screen.width;
+            // var height = window.screen.height;
             $('.hide-iframe').addClass('active');
             $('.hide-iframe').css({
                 'width': width,
@@ -49,8 +51,8 @@ $(function () {
     $('.singleDel').click(function () {
         ids = $(this).parent().siblings('.checkbox').find('input').val();
         $('div[openContent="delete-mesh"]').addClass('active');
-        var width = window.screen.scrollWidth;
-        var height = window.screen.scrollHeight;
+        // var width = window.screen.width;
+        // var height = window.screen.height;
         $('.hide-iframe').addClass('active');
         $('.hide-iframe').css({
             'width': width,
@@ -77,8 +79,8 @@ $(function () {
     $('.reset-name').click(function () {
         id = $(this).attr("alt");
         $('div[openContent="reset-name"]').addClass('active');
-        var width = window.screen.scrollWidth;
-        var height = window.screen.scrollHeight;
+        // var width = window.screen.width;
+        // var height = window.screen.height;
         $('.hide-iframe').addClass('active');
         $('.hide-iframe').css({
             'width': width,

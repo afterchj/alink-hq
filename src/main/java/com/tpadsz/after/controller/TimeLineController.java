@@ -104,16 +104,33 @@ public class TimeLineController {
             map.put("lightInfo",lightInfo);
         }
 
-        List<MeshInfo> list1 = sceneService.findXYBySid(sid);
-        List<MeshInfo> groupXYList;
-        if (list1.size() == 1) {
-            map.put("px", list1.get(0).getX());
-            map.put("py", list1.get(0).getY());
-        } else {
-            groupXYList = addGroupXYList(groupList,sid);
-            if (groupXYList.size() > 0) {
-                map.put("groupXYList", groupXYList);
+        int samePlaceXY = 1;
+        String groupX = "";
+        String groupY = "";
+        for (int i = 0; i < groupList.size(); i++) {
+            List<MeshInfo> list2 = sceneService.findXYByGid(groupList.get(i).getGid(), sid);
+            if (list2.size() == 1) {
+                if (!"".equals(groupX) && groupX != null && groupY != null) {
+                    if (!groupX.equals(list2.get(0).getX()) || !groupY.equals(list2.get(0).getY())) {
+                        samePlaceXY = 0;
+                    }
+                }
+                groupY = list2.get(0).getY();
+                groupX = list2.get(0).getX();
+
+                if (groupX == null || groupY == null) {
+                    samePlaceXY = 0;
+                }
+                groupList.get(i).setX(groupX);
+                groupList.get(i).setY(groupY);
+            } else {
+                samePlaceXY = 0;
             }
+        }
+
+        if (samePlaceXY == 1) {
+            placeList.get(0).setX(groupList.get(0).getX());
+            placeList.get(0).setY(groupList.get(0).getY());
         }
         map.put("sceneName", sceneName);
         map.put("sceneId", sceneId);
@@ -127,21 +144,5 @@ public class TimeLineController {
         map.put("lightList", lightList);
         return map;
     }
-
-    public List<MeshInfo> addGroupXYList(List<MeshInfo> groupList,Integer sid){
-        List<MeshInfo> groupXYList = new ArrayList<>();
-        for (int i = 0; i < groupList.size(); i++) {
-            List<MeshInfo> list2 = sceneService.findXYByGid(groupList.get(i).getGid(),sid);
-            if (list2.size() == 1) {
-                MeshInfo groupXY = new MeshInfo();
-                groupXY.setY(list2.get(0).getY());
-                groupXY.setX(list2.get(0).getX());
-                groupXY.setGid(groupList.get(i).getGid());
-                groupXYList.add(groupXY);
-            }
-        }
-        return groupXYList;
-    }
-
 
 }

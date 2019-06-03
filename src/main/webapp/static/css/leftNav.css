@@ -89,7 +89,7 @@
 
 .one-list li {
     font-size:16px;
-    color:#111;
+    /*color:#323232;*/
     height:40px;
     line-height:40px;
     padding-left:70px;
@@ -113,7 +113,8 @@
 .main-right-nav {
     padding:0 0 10px 20px;
     border-left:5px solid #3598db;
-    border-bottom:1px solid #3598db
+    border-bottom:1px solid #3598db;
+    min-width: 1465px;
 }
 
 .main-right-title {
@@ -121,15 +122,16 @@
     color:#323232;
     margin-top:8px
 }
-
-.main-right-nav>div:last-child {
-    margin-right:15px
+.last-nav{
+    margin-left:15px
 }
 
 .one-list li.active {
     background-color:#eef2f5
 }
-
+.main-left a:hover,.main-left a:focus{
+    border:none;
+}
 .create {
     background-color:#3598DB;
     color:#fff;
@@ -212,4 +214,7 @@
 
 .must.scroll {
     width:130px
+}
+.table-content-list{
+    min-width: 1490px;
 }

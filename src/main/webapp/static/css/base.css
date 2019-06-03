@@ -26,12 +26,15 @@ a {
     padding:0;
     border:0;
     font-size:100%;
-    vertical-align:baseline
+    vertical-align:baseline;
+    color: #3598db;
 }
 
 a:hover,a:focus {
     text-decoration:none;
-    outline-style:none
+    outline-style:none;
+    color: #003e68;
+    border-bottom: 1px solid #003e68;
 }
 
 .p-r {

@@ -21,7 +21,7 @@
         <div class="main-right f-l">
             <div class="clearfix main-right-nav">
                 <div class="f-l main-right-title">项目列表</div>
-                <div class="f-r pointer">
+                <div class="f-r pointer last-nav">
                     <a th:href="@{/project/createProject}" th:if="${role_id!=4}">
                         <div class="create" onmousedown="createBtnMouseDown()" onmouseup="createBtnMouseUp()">
                             <span>+</span><span>创建项目</span></div>
@@ -38,7 +38,7 @@
                     </div>
                 </div>
             </div>
-            <div id="projectList" class="">
+            <div id="projectList" class="table-content-list">
                 <div class="search-condition ">
                     <form action="" class="clearfix">
                         <div class="f-l search" >
@@ -46,37 +46,34 @@
                                 <label for="projectName">项目名称</label>
                                 <input type="text" id="projectName" placeholder="请输入项目名称">
                             </div>
+                            <div>
+                                <label for="company">隶属公司</label>
+                                <input type="text" placeholder="请输入隶属公司" id="company">
+                            </div>
+
+                        </div>
+                        <div class="f-l search"  style="margin-right: 15px;">
+                            <div>
+                                <label for="account">施工人员</label>
+                                <input type="text" placeholder="请输入施工人员账号" id="account">
+                            </div>
                             <div class="p-r">
                                 <label for="start-time">创建时间</label>
                                 <input type="text" id="start-time" placeholder="请选择日期" AUTOCOMPLETE="off">
                                 <img src="/alink-hq/static/img/date.png" alt="" class="p-a">
                             </div>
+
                         </div>
-                        <div class="f-l search" >
-                            <div>
-                                <label for="account">施工人员</label>
-                                <input type="text" placeholder="请输入施工人员账号/用户名" id="account">
+                        <div class="f-l search">
+                            <div >
+                                <label for="username">施工人员用户名</label>
+                                <input type="text" id="username" placeholder="请输入施工人员用户名" AUTOCOMPLETE="off">
                             </div>
                             <div class="p-r">
                                 <label for="end-time">更新时间</label>
                                 <input type="text" id="end-time" placeholder="请选择日期" AUTOCOMPLETE="off">
                                 <img src="/alink-hq/static/img/date.png" alt="" class="p-a">
                             </div>
-                        </div>
-                        <div class="f-l search">
-                            <div>
-                                <label for="company">隶属公司</label>
-                                <input type="text" placeholder="请输入隶属公司" id="company">
-                            </div>
-                            <div >
-                                <label for="username">用户名</label>
-                                <input type="text" id="username" placeholder="请输入用户名" AUTOCOMPLETE="off">
-                            </div>
-                            <!--<div class="p-r">-->
-                                <!--<label for="end-time">更新时间</label>-->
-                                <!--<input type="text" id="end-time" placeholder="请选择日期" AUTOCOMPLETE="off">-->
-                                <!--<img src="/alink-hq/static/img/date.png" alt="" class="p-a">-->
-                            <!--</div>-->
                         </div>
                         <div class=" f-r search-button">
                             <button type="button" class="pointer">查询</button>
