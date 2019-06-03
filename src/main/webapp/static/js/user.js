@@ -41,8 +41,8 @@ $('.pop-content  .pop-btn .yes').click(function () {
 })
 
 function shade(open, text) {
-    var width = document.body.scrollWidth;
-    var height = document.body.scrollHeight;
+    var width = window.screen.width;
+    var height=window.screen.height;
     $('.hide-iframe').addClass('active');
     $('.hide-iframe').css({
         'width': width,
@@ -106,8 +106,8 @@ $(function () {
         var openTab = $(this).attr('openTab');
         $('div[openContent="reset-pwd"] .pop-content').find('p.unuse').remove();
         $('div[openContent="reset-pwd"]').addClass('active');
-        var width = document.body.scrollWidth;
-        var height = document.body.scrollHeight;
+        var width = window.screen.width;
+        var height = window.screen.height;
         $('.hide-iframe').addClass('active');
         $('.hide-iframe').css({
             'width': width,
