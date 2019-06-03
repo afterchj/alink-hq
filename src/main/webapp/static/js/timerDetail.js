@@ -13,25 +13,21 @@ $(function () {
             data: {"sid": sid, "sceneName": sceneName, "sceneId": sceneId, "meshName": meshName, "meshId": meshId},
             type: "POST",
             success: function (msg) {
-                var px = msg.px;
-                var py = msg.py;
                 var placeList = msg.placeList;
                 var groupList = msg.groupList;
                 var lightList = msg.lightList;
                 var lightInfo = msg.lightInfo;
-                var groupXYList = msg.groupXYList;
                 var scene = '';
                 var place = '';
                 var group = '';
                 var light = '';
                 var lightXY = '';
                 $(".scene-msg").remove();
-                // scene += '<div class="scene-msg timer f-l"><div class="scene-content" ><div class="scene-list clearfix"><div class="f-l"><span>场景下的区域信息</span><span>>></span></div><div class="f-l"><span>该区域下的组信息</span><span>>></span></div><div class="f-l"> <span>该组下的灯详情</span></div></div><div class="clearfix  scene-msg-list">';
 
                 place += '<div class="f-l" style="border-right: none;"><ul>';
                 $.each(placeList, function (key, value) {
 
-                    if (isEmpty(px)) {
+                    if (isEmpty(value.x)) {
                         //xy值不统一
                         if (key == 0) {
                             //默认第一个选中
@@ -41,9 +37,9 @@ $(function () {
                         }
                     } else {
                         if (key == 0) {
-                            place += '<li class="pid active">' + value.pname + '(' + px + ',' + py + ')</li>';
+                            place += '<li class="pid active">' + value.pname + '(' + value.x + ',' + value.y + ')</li>';
                         } else {
-                            place += '<li class="pid">' + value.pname + '(' + px + ',' + py + ')</li>';
+                            place += '<li class="pid">' + value.pname + '(' + value.x + ',' + value.y + ')</li>';
                         }
                     }
                 });
@@ -51,33 +47,17 @@ $(function () {
                 group += '<div class="f-l" style="border-right: none;" id="groupXYList"><ul>';
 
                 $.each(groupList, function (key, value) {
-                    // console.log("key1:"+key1+", value1: "+value1.gid);
-                    if (isEmpty(groupXYList[0].x)) {
+                    if (isEmpty(value.x)) {
                         if (key == 0) {
                             group += '<li class="gid active" alt="' + value.gid + '"><span >' + value.gname + '</span>(<span class="groupXy">查看详情</span>)</li>';
                         } else {
                             group += '<li class="gid" alt="' + value.gid + '"><span >' + value.gname + '</span>(<span class="groupXy">查看详情</span>)</li>';
                         }
                     } else {
-                        var count = 0;
-                        $.each(groupXYList, function (key2, value2) {
-                            // console.log("key2:" + key2 + ", value2: " + value2.gid);
-                            if (value.gid == value2.gid) {
-                                count++;
-                                if (key == 0) {
-                                    group += '<li class="gid active" alt="' + value.gid + '"><span >' + value.gname + '</span>(<span class="groupXy">' + value2.x + ',' + value2.y + '</span>)</li>';
-                                } else {
-                                    group += '<li class="gid" alt="' + value.gid + '"><span >' + value.gname + '</span>(<span class="groupXy">' + value2.x + ',' + value2.y + '</span>)</li>';
-                                }
-                            }
-                        });
-                        //没有找到xy值
-                        if (count == 0) {
-                            if (key == 0) {
-                                group += '<li class="gid active" alt="' + value.gid + '"><span >' + value.gname + '</span>(<span class="groupXy">查看详情</span>)</li>';
-                            } else {
-                                group += '<li class="gid" alt="' + value.gid + '"><span >' + value.gname + '</span>(<span class="groupXy">查看详情</span>)</li>';
-                            }
+                        if (key == 0) {
+                            group += '<li class="gid active" alt="' + value.gid + '"><span >' + value.gname + '</span>(<span class="groupXy">' + value.x + ',' + value.y + '</span>)</li>';
+                        } else {
+                            group += '<li class="gid" alt="' + value.gid + '"><span >' + value.gname + '</span>(<span class="groupXy">' + value.x + ',' + value.y + '</span>)</li>';
                         }
                     }
                 });

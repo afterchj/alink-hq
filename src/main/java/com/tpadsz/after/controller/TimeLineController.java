@@ -105,15 +105,11 @@ public class TimeLineController {
         }
 
         List<MeshInfo> list1 = sceneService.findXYBySid(sid);
-        List<MeshInfo> groupXYList;
         if (list1.size() == 1) {
-            map.put("px", list1.get(0).getX());
-            map.put("py", list1.get(0).getY());
+            placeList.get(0).setX(list1.get(0).getX());
+            placeList.get(0).setX(list1.get(0).getY());
         } else {
-            groupXYList = addGroupXYList(groupList,sid);
-            if (groupXYList.size() > 0) {
-                map.put("groupXYList", groupXYList);
-            }
+            groupList = addGroupXYList(groupList,sid);
         }
         map.put("sceneName", sceneName);
         map.put("sceneId", sceneId);
@@ -129,18 +125,14 @@ public class TimeLineController {
     }
 
     public List<MeshInfo> addGroupXYList(List<MeshInfo> groupList,Integer sid){
-        List<MeshInfo> groupXYList = new ArrayList<>();
         for (int i = 0; i < groupList.size(); i++) {
             List<MeshInfo> list2 = sceneService.findXYByGid(groupList.get(i).getGid(),sid);
             if (list2.size() == 1) {
-                MeshInfo groupXY = new MeshInfo();
-                groupXY.setY(list2.get(0).getY());
-                groupXY.setX(list2.get(0).getX());
-                groupXY.setGid(groupList.get(i).getGid());
-                groupXYList.add(groupXY);
+                groupList.get(i).setY(list2.get(0).getY());
+                groupList.get(i).setX(list2.get(0).getX());
             }
         }
-        return groupXYList;
+        return groupList;
     }
 
 
