@@ -97,6 +97,7 @@
 			IFNULL(ls.y,'null') y,
 			IFNULL(ls.off,'null') off,
             s.id sid,
+            s.sname,
             m.project_id,
             g.id gid,
             IFNULL(g.gname,'null') gname,
@@ -112,8 +113,10 @@
         LEFT JOIN f_mesh m ON m.id=l.mid
         LEFT JOIN f_project p ON p.id=m.project_id
         LEFT JOIN f_place pl ON pl.id=l.pid
-        LEFT JOIN (SELECT COUNT(1) scount,id,mid FROM f_scene GROUP BY mid) s ON s.mid=m.id
-        WHERE l.id=#{id} LIMIT 1
+        LEFT JOIN (SELECT COUNT(1) scount,id,sname,mid FROM f_scene GROUP BY mid) s ON s.mid=m.id
+        WHERE l.id=#{id}
+        GROUP BY l.id
+        ORDER BY ls.update_date DESC
     </select>
     <select id="getSceneInfo" resultType="MeshInfo" parameterType="int">
         SELECT s.id,s.mid,s.scene_id,s.sname, IFNULL(ls.x,'null') x,IFNULL(ls.y,'null') y FROM f_light l
