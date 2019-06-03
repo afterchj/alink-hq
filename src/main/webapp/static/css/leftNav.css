@@ -89,7 +89,7 @@
 
 .one-list li {
     font-size:16px;
-    color:#111;
+    /*color:#323232;*/
     height:40px;
     line-height:40px;
     padding-left:70px;
@@ -122,10 +122,6 @@
     color:#323232;
     margin-top:8px
 }
-
-/*.main-right-nav>div:first-child {*/
-    /**/
-/*}*/
 .last-nav{
     margin-left:15px
 }
@@ -133,7 +129,9 @@
 .one-list li.active {
     background-color:#eef2f5
 }
-
+.main-left a:hover,.main-left a:focus{
+    border:none;
+}
 .create {
     background-color:#3598DB;
     color:#fff;
