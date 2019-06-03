@@ -100,8 +100,8 @@
                         <tbody>
                         <tr th:each="timeLineList:${pageInfo.getList()}" class="timerLineTr">
                             <input type="hidden" class="tid" th:value="${timeLineList.id}"/>
-                            <td class="tname"><a th:href="@{/timer/detail(id=${timeLineList.id},projectId=${projectId})}" th:text="${timeLineList.tname}"></a></td>
-                            <td ><a th:href="@{/mesh/info(id=${timeLineList.mid})}" th:text="${timeLineList.mname}"></a></td>
+                            <td class="tname k-link"><a th:href="@{/timer/detail(id=${timeLineList.id},projectId=${projectId})}" th:text="${timeLineList.tname}"></a></td>
+                            <td class=" k-link"><a th:href="@{/mesh/info(id=${timeLineList.mid})}" th:text="${timeLineList.mname}"></a></td>
                             <td th:text="${timeLineList.mid}" class="mid"></td>
                             <td th:text="${timeLineList.week}"></td>
                             <td th:text="${timeLineList.repetition}"></td>
