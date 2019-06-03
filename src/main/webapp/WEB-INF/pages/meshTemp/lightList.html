@@ -289,10 +289,10 @@
         var id = $(this).attr("alt");
         console.log("id", id);
         //要导出的json数据
-        var str;
-        var mac;
-        var status;
         $.get("/alink-hq/light/getLightInfo?id=" + id, function (data) {
+            var str='';
+            var mac;
+            var status;
             mac = data.lmac;
             status = data.off;
             if (status == '1') {
