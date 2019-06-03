@@ -52,8 +52,9 @@
                                        placeholder="请输入灯名称">
                             </div>
                             <div>
-                                <label for="lmac" class="font">灯MAC地址</label>
-                                <input type="text" id="lmac" name="lmac" th:value="${dict.lmac}" placeholder="请输入MAC地址">
+                                <label for="pname" class="font">区域名称</label>
+                                <input type="text" id="pname" name="pname" th:value="${dict.pname}"
+                                       placeholder="请输入区域名称">
                             </div>
                             <div>
                                 <label for="name" class="font">项目名称</label>
@@ -62,15 +63,15 @@
                         </div>
                         <div class="f-l search" style="margin-right:0">
                             <div>
+                                <label for="lmac" class="font">灯MAC地址</label>
+                                <input type="text" id="lmac" name="lmac" th:value="${dict.lmac}" placeholder="请输入MAC地址">
+                            </div>
+                            <div>
                                 <label for="mname" class="font">网络名称</label>
                                 <input type="text" id="mname" name="mname" th:value="${dict.mname}"
                                        placeholder="请输入网络名称">
                             </div>
-                            <div>
-                                <label for="meshId" class="font">网络ID</label>
-                                <input type="text" id="meshId" name="meshId" th:value="${dict.meshId}"
-                                       placeholder="请输入网络ID">
-                            </div>
+
                         </div>
                         <div class="f-l search">
                             <div>
@@ -79,9 +80,9 @@
                                        placeholder="请输入组名称">
                             </div>
                             <div>
-                                <label for="pname" class="font">区域名称</label>
-                                <input type="text" id="pname" name="pname" th:value="${dict.pname}"
-                                       placeholder="请输入区域名称">
+                                <label for="meshId" class="font">网络ID</label>
+                                <input type="text" id="meshId" name="meshId" th:value="${dict.meshId}"
+                                       placeholder="请输入网络ID">
                             </div>
                         </div>
                         <div class="f-r search-button " style="">
