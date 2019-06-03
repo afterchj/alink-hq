@@ -104,17 +104,17 @@ public class TimeLineController {
             map.put("lightInfo",lightInfo);
         }
 
-        List<MeshInfo> list1 = sceneService.findXYBySid(sid);
-        List<MeshInfo> groupXYList;
-        if (list1.size() == 1) {
-            map.put("px", list1.get(0).getX());
-            map.put("py", list1.get(0).getY());
-        } else {
-            groupXYList = addGroupXYList(groupList,sid);
-            if (groupXYList.size() > 0) {
-                map.put("groupXYList", groupXYList);
-            }
-        }
+//        List<MeshInfo> list1 = sceneService.findXYBySid(sid);
+//        List<MeshInfo> groupXYList;
+//        if (list1.size() == 1) {
+//            map.put("px", list1.get(0).getX());
+//            map.put("py", list1.get(0).getY());
+//        } else {
+//            groupXYList = addGroupXYList(groupList,sid);
+//            if (groupXYList.size() > 0) {
+//                map.put("groupXYList", groupXYList);
+//            }
+//        }
         map.put("sceneName", sceneName);
         map.put("sceneId", sceneId);
         map.put("projectName", meshInfo.getName());
