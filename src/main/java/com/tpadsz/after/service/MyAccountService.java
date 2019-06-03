@@ -2,6 +2,8 @@ package com.tpadsz.after.service;
 
 import com.tpadsz.after.entity.MyAccount;
 
+import java.util.Map;
+
 /**
  * @program: blt-hq
  * @description:
@@ -24,4 +26,6 @@ public interface MyAccountService {
     boolean updateEmail(String account, String email);
 
     boolean getUserName(String uname);
+
+    Map<String,Object> getComputeInfoByUid(String id);
 }

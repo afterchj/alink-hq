@@ -219,8 +219,11 @@ public class MyAccountController {
     public String myAccount(Model model,HttpSession session) {
         User loginUser = (User) session.getAttribute("user");
         String account = loginUser.getAccount();
+        String id = loginUser.getId();
         MyAccount myAccount = myAccountService.getAllByAccount(account);
+        Map<String,Object> map = myAccountService.getComputeInfoByUid(id);
         model.addAttribute("myAccount", myAccount);
+        model.addAttribute("computeInfo",map);
         return "myAccount/account";
     }
 

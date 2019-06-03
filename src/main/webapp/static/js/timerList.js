@@ -13,6 +13,8 @@ laydate.render({
     // range: true
 });
 $(function () {
+
+
     //  2-12 位中文、字母、数字
     var match = /^[0-9A-Za-z_\u4e00-\u9fa5]{2,12}$/;
     var text = "请输入2-12 位中文、字母、数字包括下划线";
@@ -32,16 +34,15 @@ $(function () {
         var pageSize = $('#page-select option:selected').val();
         var pageNum = $('#skipPage').val();
         condition(pageSize, pageNum);
-    })
+    });
+
     var tid;
     var mid;
-    // var tname;
-    //点击重命名
-    $(".p-r .reset-name").click(function () {
+    // 点击重命名
+    $("tr[class='timerLineTr']").on('click','.p-r .reset-name',function () {
         $(".confirm-on-off").addClass("active");
         tid = $(this).parent().siblings("input").val();
         mid = $(this).parent().siblings().eq(3).text();
-        // tname = $(this).parent().siblings("td").eq(0).children();
     });
     //点击取消
     $(".pop-btn .reduce").click(function () {
@@ -84,12 +85,11 @@ $(function () {
         {hint:"rename-hint",context:"#rename",text:text,match:match},
         matchInput);
     //时间排序
-    $("th .p-a").click(function () {
+    $("th[class='p-r'] .p-a").click(function () {
         var timeFlag = $(this).attr("id");
         window.location.href="/alink-hq/timer/list?id="+$("#mid").val()+ '&pageNum=' + $(".pages").text() + '&pageSize=' + $("#pageSize").val()+'&timeFlag='+timeFlag+'&tname='+$("#tname").val()+'&createDate='+$("#createDate").val()+'&endTime='+$("#endTime").val()+'&state='+$("#state").val();
     });
 })
-
 $(function () {
 
     //点击查询

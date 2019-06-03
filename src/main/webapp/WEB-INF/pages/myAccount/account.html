@@ -106,7 +106,9 @@
                                 <img style="width: 28px;height: 27px" src="/alink-hq/static/img/password1.png" alt=""/>
                             </span>
                             <span class="title">隶属公司</span>
-                            <span >苏州天平先进科技有限公司</span>
+                            <span
+                            ><a style="cursor: pointer; text-decoration:none" th:text="${computeInfo.coname}"
+                                th:href="@{/cooperate/info(id=${computeInfo.id})}"></a></span>
                             <!--<span>-->
                                 <!--<a th:href="@{pwd}" tab="myAccount/pwd">修改密码</a>-->
                             <!--</span>-->

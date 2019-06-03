@@ -7,6 +7,7 @@ import com.tpadsz.after.utils.Encryption;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.Map;
 
 /**
  * @program: blt-hq
@@ -90,5 +91,10 @@ public class MyAccountServiceImpl implements MyAccountService {
             return false;
         }
         return true;
+    }
+
+    @Override
+    public Map<String, Object> getComputeInfoByUid(String id) {
+        return myAccountDao.getComputeInfoByUid(id);
     }
 }
