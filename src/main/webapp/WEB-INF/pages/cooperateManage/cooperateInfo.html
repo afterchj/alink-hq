@@ -64,10 +64,9 @@
                                 <div id="drop_area">
                                     <div id="preview" th:switch="${info.photo}">
                                         <!--<div id="delete-img" style="">×</div>-->
-                                        <img th:case="null" src="/alink-hq/static/img/upload.png"
-                                             class="img-responsive" style="width: 100%;height:100%;" alt="" title="">
-                                        <!--<img th:case="*" th:src="@{'http://iotsztp.com/file/imgs/'+${info.photo}}" class="img-responsive" style="width: 100%;height:100%;" alt="" title="">-->
-                                        <img th:case="*" th:src="@{'../static/upload/'+${info.photo}}" class="img-responsive" style="width: 100%;height:100%;" alt="" title="">
+                                        <img th:case="null" src="/alink-hq/static/img/upload.png" class="img-responsive" style="width: 100%;height:100%;" alt="" title="">
+                                        <img th:case="*" th:src="@{'http://iotsztp.com/file/imgs/'+${info.photo}}" class="img-responsive" style="width: 100%;height:100%;" alt="" title="">
+                                        <!--<img th:case="*" th:src="@{'../static/upload/'+${info.photo}}" class="img-responsive" style="width: 100%;height:100%;" alt="" title="">-->
                                         <!--<img src="http://iotsztp.com/file/imgs/chat_qrcode.jpg" style="width: 100%">-->
                                         <!--<img th:src="@{'../static/upload/'+${info.photo}}" style="width: 100%" th:alt="${info.photo}">-->
                                     </div>

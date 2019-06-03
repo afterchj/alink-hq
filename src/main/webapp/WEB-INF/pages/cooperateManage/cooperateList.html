@@ -1,7 +1,5 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<!--<html lang="en" xmlns:th="http://www.thymeleaf.org">-->
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <script src="/alink-hq/static/js/browser.js"></script>
@@ -74,21 +72,27 @@
                         </thead>
                         <tbody>
                         <tr th:each="cooperation:${pageInfo.list}">
-                            <td class="k-link"><a th:href="@{/cooperate/info(id=${cooperation.id})}" th:text="${cooperation.coname}"></a>
+                            <td class="k-link">
+                                <a th:href="@{/cooperate/info(id=${cooperation.id})}" th:text="${cooperation.coname}"></a>
                             </td>
                             <td th:text="${cooperation.mobile}"></td>
                             <td th:text="${cooperation.create_date}">
-                            <td th:switch="${cooperation.status}">
-                                <a th:href="@{/cooperate/saveUpdate(id=${cooperation.id},status=0)}">
-                                    <span th:case="1">合作</span>
+                            <td th:switch="${cooperation.status}" class="k-link">
+                                <a th:case="1" th:href="@{/cooperate/saveUpdate(id=${cooperation.id},status=0)}">
+                                    <span>合作</span>
                                 </a>
-                                <a th:href="@{/cooperate/saveUpdate(id=${cooperation.id},status=1)}">
-                                    <span th:case="0">终止</span>
+                                <a th:case="0" th:href="@{/cooperate/saveUpdate(id=${cooperation.id},status=1)}">
+                                    <span>终止</span>
+                                </a>
+                                <a th:case='*' th:href="@{/cooperate/saveUpdate(id=${cooperation.id},status=1)}">
+                                    <span>合作</span>
                                 </a>
                             </td>
                             <td class="p-r">
-                                <img src="/alink-hq/static/img/edit.png" alt="" class="pointer reset-name" title="重命名" style="margin-right: 20px;">
-                                <img src="/alink-hq/static/img/delete.png" alt="" class="pointer delete-project" title="删除">
+                                <img src="/alink-hq/static/img/edit.png" alt="" class="pointer reset-name" title="重命名"
+                                     style="margin-right: 20px;">
+                                <img src="/alink-hq/static/img/delete.png" alt="" class="pointer delete-project"
+                                     title="删除">
                             </td>
                             <td class="p-r">
                                 <img src="/alink-hq/static/img/edit.png" alt="" class="pointer memo-edit" title="备忘录">
@@ -96,7 +100,7 @@
                                 <div class="memo-edit-has">
                                     <div class="meno-nav"><img src="/alink-hq/static/img/edit.png" alt=""
                                                                class="pointer"></div>
-                                    <div class="memo-content">
+                                    <div class="memo-content" th:text="${cooperation.other}">
                                         Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam cupiditate
                                         deleniti sint sit voluptate. Aliquam delectus, dolor ex fugiat, hic iste magni
                                         maxime officia quod repellat similique veniam vero voluptatibus.
@@ -109,36 +113,6 @@
                         <tr>
                             <td colspan="9" class="clearfix page">
                                 <div th:replace="common/page::page"></div>
-                                <!--<div class="f-r page-right">-->
-                                <!--<span class="prev-page">-->
-                                <!--<a href=""><span class="prev "><span><</span></span></a>-->
-                                <!--</span>-->
-                                <!--<span class="pages">22</span>-->
-                                <!--<span class="next-page">-->
-                                <!--<a href=""><span class="prev "><span>></span></span></a>-->
-                                <!--</span>-->
-                                <!--<span class="m-l-15 m-r-20">共-->
-                                <!--<span class="pageTotal" id="pageTotal"></span>-->
-                                <!--页/<span></span>条数据-->
-                                <!--</span>-->
-                                <!--<span class="m-r-15">-->
-                                <!--<input type="number" id="skipPage" oninput="skipLimit()"/>-->
-                                <!--</span>-->
-                                <!--<span class="m-r-35">-->
-                                <!--<div id="skipPageBtn" class="pointer moment skipPageBtn"-->
-                                <!--onmousedown="skipBtnMouseDown()" onmouseup="skipBtnMouseUp()">跳转-->
-                                <!--</div>-->
-                                <!--</span>-->
-                                <!--<span class="m-r-15r">每页显示：</span>-->
-                                <!--<span class="m-r-20">-->
-                                <!--<select name="" id="page-select">-->
-                                <!--<option value="10">10</option>-->
-                                <!--<option value="30">30</option>-->
-                                <!--<option value="50">50</option>-->
-                                <!--<option value="100">100</option>-->
-                                <!--</select>-->
-                                <!--</span>-->
-                                <!--</div>-->
                             </td>
                         </tr>
                         </tfoot>
