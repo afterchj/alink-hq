@@ -282,12 +282,10 @@
 <script type="text/javascript" src="/alink-hq/static/js/page.js"></script>
 <script type="text/javascript" src="/alink-hq/static/js/light.js"></script>
 <script src="/alink-hq/static/js/moment.js"></script>
-
 <script type="text/javascript">
-
+    //备份灯信息到csv文件
     $(".backup").click(function () {
         var id = $(this).attr("alt");
-        console.log("id", id);
         //要导出的json数据
         $.get("/alink-hq/light/getLightInfo?id=" + id, function (data) {
             var str='';
@@ -308,7 +306,6 @@
                 '隶属网络,' + data.mname + '\n' + '网络ID,' + data.mesh_id + '\n' +
                 '隶属区域,' + data.pname + '\n' + '隶属组,' + data.gname + '\n' +
                 '所在场景名称,' + data.sname + '\n' + '场景中对应的X（色温），Y（亮度）,' + data.x + '，' + data.y + '\n';
-            console.log("str", str);
             //encodeURIComponent解决中文乱码
             let uri = 'data:text/csv;charset=utf-8,\ufeff' + encodeURIComponent(str);
             //通过创建a标签实现
@@ -321,7 +318,6 @@
             document.body.removeChild(link);
         });
     });
-
 </script>
 </body>
 </html>
