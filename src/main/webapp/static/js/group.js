@@ -2,17 +2,16 @@
  * Created by hongjian.chen on 2019/4/24.
  */
 $(function () {
-    // var tabs='groupList';
-    // var index=0;
-    // left(tabs,index);
+    var width = window.screen.width;
+    var height = window.screen.height;
     var id;
     var ids = [];
     //重命名弹框
     $('.rename').click(function () {
         id = $(this).attr("alt");
         $('div[openContent="reset-name"]').addClass('active');
-        var width = window.screen.scrollWidth;
-        var height = window.screen.scrollHeight;
+        // var width = window.screen.scrollWidth;
+        // var height = window.screen.scrollHeight;
         $('.hide-iframe').addClass('active');
         $('.hide-iframe').css({
             'width': width,
@@ -59,8 +58,8 @@ $(function () {
         id = $(this).attr("alt");
         ids.push(id);
         $('div[openContent="delete-mesh"]').addClass('active');
-        var width = window.screen.scrollWidth;
-        var height = window.screen.scrollHeight;
+        // var width = window.screen.scrollWidth;
+        // var height = window.screen.scrollHeight;
         $('.hide-iframe').addClass('active');
         $('.hide-iframe').css({
             'width': width,
@@ -69,7 +68,7 @@ $(function () {
     })
     //删除确定--单选或复选框
     $('div[openContent="delete-mesh"] button.yes').click(function () {
-        console.log(ids);
+        // console.log(ids);
         if (ids) {
             location.href = "/alink-hq/group/delete?mid="+$("#mid").val()+"&ids=" + ids;
             ids = [];
@@ -88,10 +87,10 @@ $(function () {
         });
         ids = idss;
         if (ids.length > 0) {
-            console.log(ids);
+            // console.log(ids);
             $('div[openContent="delete-mesh"]').addClass('active');
-            var width = window.screen.scrollWidth;
-            var height = window.screen.scrollHeight;
+            // var width = window.screen.scrollWidth;
+            // var height = window.screen.scrollHeight;
             $('.hide-iframe').addClass('active');
             $('.hide-iframe').css({
                 'width': width,
@@ -126,8 +125,8 @@ $(function () {
             }
         } else {
             $('div[openContent="exchange"]').addClass('active');
-            var width = window.screen.scrollWidth;
-            var height = window.screen.scrollHeight;
+            // var width = window.screen.scrollWidth;
+            // var height = window.screen.scrollHeight;
             $('.hide-iframe').addClass('active');
             $('.hide-iframe').css({
                 'width': width,

@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -33,7 +33,7 @@
                     <!--<img src="/alink-hq/static/img/go-back.png" alt="" onclick="history.back()">-->
                 </div>
             </div>
-            <div id="timerDetail">
+            <div id="timerDetail" class="table-content-list">
                 <div class="p-detail">
                     <div class="p-nav">公司信息录入</div>
                     <div class="p-content p-r">
@@ -79,7 +79,8 @@
                                        th:value="${info.code}">
                             </div>
                             <div class="btn-submit">
-                                <button type="submit">提交</button>
+                                <button shiro:hasAnyRoles="super,admin" type="submit">提交</button>
+                                <!--<button shiro:hasAnyRoles="manager,user" type="submit" disabled="disabled">提交</button>-->
                             </div>
                         </form>
                         <div class="img-max p-a">

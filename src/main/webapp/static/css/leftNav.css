@@ -113,7 +113,8 @@
 .main-right-nav {
     padding:0 0 10px 20px;
     border-left:5px solid #3598db;
-    border-bottom:1px solid #3598db
+    border-bottom:1px solid #3598db;
+    min-width: 1465px;
 }
 
 .main-right-title {
@@ -122,8 +123,11 @@
     margin-top:8px
 }
 
-.main-right-nav>div:last-child {
-    margin-right:15px
+/*.main-right-nav>div:first-child {*/
+    /**/
+/*}*/
+.last-nav{
+    margin-left:15px
 }
 
 .one-list li.active {
@@ -212,4 +216,7 @@
 
 .must.scroll {
     width:130px
+}
+.table-content-list{
+    min-width: 1490px;
 }

@@ -1,10 +1,7 @@
 package com.tpadsz.after.test;
 
 import com.alibaba.fastjson.JSON;
-import com.tpadsz.after.entity.CooperationInfo;
-import com.tpadsz.after.entity.OptionList;
-import com.tpadsz.after.entity.SearchDict;
-import com.tpadsz.after.entity.User;
+import com.tpadsz.after.entity.*;
 import com.tpadsz.after.service.GroupService;
 import com.tpadsz.after.service.MeshService;
 import net.rubyeye.xmemcached.XMemcachedClient;
@@ -90,14 +87,22 @@ public class MainTest {
 //        params.setStatus(true);
 //        params.setConame("苏州诚彩智能科技有限公司");
 //        sqlSessionTemplate.update("com.tpadsz.after.dao.CooperateDao.saveUpdate",params);
-        CooperationInfo info=sqlSessionTemplate.selectOne("com.tpadsz.after.dao.CooperateDao.getCooperationInfo",8);
-        List<Map> list=sqlSessionTemplate.selectList("com.tpadsz.after.dao.CooperateDao.getByMap");
+        MeshInfo meshInfo = sqlSessionTemplate.selectOne("com.tpadsz.after.dao.LightDao.getLightInfo",1598);
+        List<MeshInfo> list = sqlSessionTemplate.selectList("com.tpadsz.after.dao.LightDao.getSceneInfo",1598);
+        List<String> name = new ArrayList<>();
+        for (MeshInfo info:list) {
+            name.add(info.getSname());
+        }
+        meshInfo.setSname(name.toString());
+//        logger.info("name=" + meshInfo.getSname());
+//        CooperationInfo info=sqlSessionTemplate.selectOne("com.tpadsz.after.dao.CooperateDao.getCooperationInfo",8);
+//        List<Map> list=sqlSessionTemplate.selectList("com.tpadsz.after.dao.CooperateDao.getByMap");
 //        List<OptionList> lists = getSqlSessionTemplate().selectList("com.tpadsz.after.dao.GroupDao.getPlaces",map);
 //        logger.info("role=" + role);
 //        logger.info("roles=" + roles);
 //        logger.info("lists=" + lists.size());
-        logger.info("lists=" + JSON.toJSONString(info));
-        logger.info("lists=" + JSON.toJSONString(list));
+//        logger.info("lists=" + JSON.toJSONString(info));
+        logger.info("lists=" + JSON.toJSONString(meshInfo));
     }
 
     @Test
