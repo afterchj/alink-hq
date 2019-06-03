@@ -4,6 +4,8 @@ import com.tpadsz.after.entity.MyAccount;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
+import java.util.Map;
+
 /**
  * @program: blt-hq
  * @description:
@@ -28,4 +30,6 @@ public interface MyAccountDao {
     int updateEmail(@Param("account") String account, @Param("email") String email);
 
     int getUserName(@Param("uname") String uname);//查询用户名
+
+    Map<String,Object> getComputeInfoByUid(@Param("id") String id);
 }

@@ -33,4 +33,9 @@
     <select id="getUserName" resultType="int">
         select count(*) FROM alink.f_user_account WHERE uname=#{uname}
     </select>
+
+    <select id="getComputeInfoByUid" resultType="map">
+        select id,coname from f_firm where id=(select c.fid as fid from f_user_account a, f_user_customer c where
+        a.id=c.uid and a.id=#{id})
+    </select>
 </mapper>

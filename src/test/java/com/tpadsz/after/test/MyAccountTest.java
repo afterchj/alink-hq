@@ -5,6 +5,8 @@ import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+import java.util.Map;
+
 /**
  * @program: alink-hq
  * @description:
@@ -19,6 +21,12 @@ public class MyAccountTest {
     @Test
     public void reginPwdTest(){
         myAccountService.updatePwd("tpad1d12","123456");
+    }
+
+    @Test
+    public void test(){
+        Map<String, Object> computeInfoByUid = myAccountService.getComputeInfoByUid("1");
+        System.out.println(computeInfoByUid.get("coname"));
     }
 
 }
