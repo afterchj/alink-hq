@@ -48,13 +48,10 @@
                             </div>
                         </div>
                         <div class="f-l search">
+
                             <div>
-                                <label for="company" class="font">隶属公司</label>
-                                <select name="company" id="company">
-                                    <option>请选择公司</option>
-                                    <option th:each="firm:${firmList}" th:value="${firm.id}"
-                                            th:text="${firm.coname }"></option>
-                                </select>
+                                <label for="username">用户名</label>
+                                <input type="text" id="username" placeholder="请输入用户名" AUTOCOMPLETE="off">
                             </div>
                             <div class="p-r">
                                 <label for="add-time" class="font">添加时间</label>
@@ -64,8 +61,12 @@
                         </div>
                         <div class="f-l search">
                             <div>
-                                <label for="username">用户名</label>
-                                <input type="text" id="username" placeholder="请输入用户名" AUTOCOMPLETE="off">
+                                <label for="company" class="font">隶属公司</label>
+                                <select name="company" id="company">
+                                    <option>请选择公司</option>
+                                    <option th:each="firm:${firmList}" th:value="${firm.id}"
+                                            th:text="${firm.coname }"></option>
+                                </select>
                             </div>
                             <div class="search-button " style=" padding: 0 0 0 145px;">
                                 <button type="button" class="pointer">查询</button>
