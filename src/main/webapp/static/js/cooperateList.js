@@ -20,7 +20,11 @@ $(function () {
     //如果备忘录不为空时
     $('.memo-edit').click(function () {
         $(this).parent('td').addClass('active');
-    })
+    });
+    // $('.meno-nav').mouseout(function () {
+    //     console.log("show",false);
+    //     $(this).parent("div").css("display","none");
+    // });
     $('.meno-nav').click(function () {
         $('div[openContent="memo-edit"]').addClass('active');
         var width = window.screen.width;
@@ -59,7 +63,7 @@ $(function () {
         $('.hide-iframe').removeClass('active');
     })
 
-    //重命名
+        //重命名
         $('.reset-name').click(function () {
             $('div[openContent="reset-name"]').addClass('active');
             var width = window.screen.width;

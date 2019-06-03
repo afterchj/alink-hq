@@ -289,19 +289,19 @@
         var id = $(this).attr("alt");
         //要导出的json数据
         $.get("/alink-hq/light/getLightInfo?id=" + id, function (data) {
-            var str='';
-            var mac;
-            var status;
-            mac = data.lmac;
-            status = data.off;
-            if (status == '1') {
+            var status = '';
+            var str = '';
+            var mac = data.lmac;
+            var flag = data.off;
+            console.log("flag", flag);
+            if (flag == '1') {
                 status = '开';
-            }
-            if (status == '0') {
+            } else if (flag == '0') {
                 status = '关';
             } else {
                 status = '未知';
             }
+            console.log("status", status);
             str += '灯名称,' + data.lname + '\n' + '灯MAC地址,' + mac + '\n' +
                 '当前状态,' + status + '\n' + '隶属项目,' + data.name + '\n' +
                 '隶属网络,' + data.mname + '\n' + '网络ID,' + data.mesh_id + '\n' +

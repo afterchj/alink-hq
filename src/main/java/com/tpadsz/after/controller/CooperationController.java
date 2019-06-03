@@ -53,7 +53,7 @@ public class CooperationController {
     }
 
     @RequestMapping("/save")
-    public String save( CooperationInfo info, @RequestParam(value = "file") MultipartFile file) {
+    public String save(CooperationInfo info, @RequestParam(value = "file") MultipartFile file) {
         String path = PropertiesUtil.getPath();
         String fileName = file.getOriginalFilename();
         File targetFile = new File(path, fileName);
@@ -74,12 +74,11 @@ public class CooperationController {
         return "redirect:/cooperate/list";
     }
 
-    @ResponseBody
     @RequestMapping("/saveUpdate")
     public String saveUpdate(CooperationInfo info) {
         cooperateService.saveUpdate(info);
-//        return "redirect:/mesh/list";
-        return "ok";
+        return "redirect:/cooperate/list";
+//        return "ok";
     }
 
     @RequestMapping("/create")
@@ -87,5 +86,19 @@ public class CooperationController {
         return "cooperateManage/cooperateCreate";
     }
 
+    @RequestMapping
+    public String delete(int id) {
+        cooperateService.deleteCooperationById(id);
+        return "redirect:/cooperate/list";
+    }
 
+    @ResponseBody
+    @RequestMapping("/getCount")
+    public String confirmDelete(int id) {
+        int count = cooperateService.getCount(id);
+        if (count == 0) {
+            return "ok";
+        }
+        return "fail";
+    }
 }

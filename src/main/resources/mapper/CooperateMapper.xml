@@ -10,6 +10,7 @@
         create_date,
         photo,
         code,
+        other,
         status
 	</sql>
 
@@ -68,6 +69,9 @@
             </if>
             <if test="code!=null and code!=''">
                 code=#{code},
+            </if>
+            <if test="other!=null and other!=''">
+                other=#{other},
             </if>
             <if test="status!=null">
                status=#{status}
