@@ -115,10 +115,23 @@
                             <div class="f-l clearfix">
                                 <div class="f-l" id="lightMsg">
                                     <ul class="one">
-                                        <li th:if="${userStat.index}=='0'" th:each="lightList,userStat:${lightList}"  class="lid active" th:alt="${lightList.id}">
-                                            <span th:text="${lightList.lname}+'（'+${lightList.lmac}+')'"></span><span th:text="${lightList.x}+'(色温)，'+${lightList.y}+'(亮度)'"></span>
+                                        <li th:if="${userStat.index}=='0' and ${lightInfo}==null" th:each="lightList,userStat:${lightList}"  class="lid active" th:alt="${lightList.id}" >
+                                            <span  th:text="${lightList.lname}+'（'+${lightList.lmac}+')'"></span><span th:text="${lightList.x}+'(色温)，'+${lightList.y}+'(亮度)'"></span>
                                         </li>
-                                        <li th:if="${userStat.index}!='0'" th:each="lightList,userStat:${lightList}"  class="lid" th:alt="${lightList.id}">
+                                        <li th:if="${userStat.index}=='0' and ${lightInfo}!=null and ${lightInfo.id}==${lightList.id}" th:each="lightList,userStat:${lightList}"  class="lid active" th:alt="${lightList.id}">
+                                            <span  th:text="${lightList.lname}+'（'+${lightList.lmac}+')'"></span><span th:text="${lightList.x}+'(色温)，'+${lightList.y}+'(亮度)'"></span>
+                                        </li>
+                                        <li th:if="${userStat.index}=='0' and ${lightInfo}!=null and ${lightInfo.id}!=${lightList.id}" th:each="lightList,userStat:${lightList}"  class="lid" th:alt="${lightList.id}">
+                                            <span  th:text="${lightList.lname}+'（'+${lightList.lmac}+')'"></span><span th:text="${lightList.x}+'(色温)，'+${lightList.y}+'(亮度)'"></span>
+                                        </li>
+                                        <li th:if="${userStat.index}!='0' and ${lightInfo}==null" th:each="lightList,userStat:${lightList}"  class="lid" th:alt="${lightList.id}" >
+                                            <span th:text="${lightList.lname}+'（'+${lightList.lmac}+')'"></span><span th:text="${lightList.x}+'，'+${lightList.y}"></span>
+                                        </li>
+                                        <li th:if="${userStat.index}!='0' and ${lightInfo}!=null and ${lightInfo.id}==${lightList.id}" th:each="lightList,userStat:${lightList}"  class="lid active" th:alt="${lightList.id}" >
+                                            <span th:text="${lightList.lname}+'（'+${lightList.lmac}+')'"></span><span th:text="${lightList.x}+'，'+${lightList.y}"></span>
+                                        </li>
+
+                                        <li th:if="${userStat.index}!='0' and ${lightInfo}!=null and ${lightInfo.id}!=${lightList.id}" th:each="lightList,userStat:${lightList}"  class="lid" th:alt="${lightList.id}" >
                                             <span th:text="${lightList.lname}+'（'+${lightList.lmac}+')'"></span><span th:text="${lightList.x}+'，'+${lightList.y}"></span>
                                         </li>
                                     </ul>
@@ -164,6 +177,7 @@
         var gid = $(this).attr('alt');
         var sid = GetUrlParam('sid');
         var lightInfo=[[${lightInfo}]];
+        console.log('lightInfoId',lightInfo.id);
         var content = '';
         $.ajax({
             type: "post",
@@ -177,23 +191,42 @@
                 $('.one li').remove();
                 var lightList = res.lightList;
                 $.each(lightList, function (key, value) {
+//                        if (key == 0) {
+//                            if(lightInfo==null) {
+//                                content += '<li class="lid active" alt="' + value.id + '" ><span>' + value.lname + '(' + value.lmac + ')' + '</span><span>' + value.x + '(色温)，' + value.y + '(亮度)</span></li>';
+//                            }else if(lightInfo.id==value.id){
+//                                content += '<li class="lid active" alt="' + value.id + '" ><span>' + value.lname + '(' + value.lmac + ')' + '</span><span>' + value.x + '(色温)，' + value.y + '(亮度)</span></li>';
+//                            }else{
+//                                content += '<li class="lid" alt="' + value.id + '" ><span>' + value.lname + '(' + value.lmac + ')' + '</span><span>' + value.x + '(色温)，' + value.y + '(亮度)</span></li>';
+//                            }
+//                        } else {
+//                            if(lightInfo==null) {
+//                                content += '<li class="lid" alt="' + value.id + '" ><span>' + value.lname + '(' + value.lmac + ')' + '</span><span>' + value.x + '，' + value.y + '</span></li>';
+//                            }else if(lightInfo.id==value.id){
+//                                content += '<li class="lid active" alt="' + value.id + '" ><span>' + value.lname + '(' + value.lmac + ')' + '</span><span>' + value.x + '，' + value.y + '</span></li>';
+//                            }else{
+//                                content += '<li class="lid" alt="' + value.id + '" ><span>' + value.lname + '(' + value.lmac + ')' + '</span><span>' + value.x + '，' + value.y + '</span></li>';
+//                            }
+//                        }
+                    if(lightInfo==null){
                         if (key == 0) {
-                            if(lightInfo==null) {
-                                content += '<li class="lid active" alt="' + value.id + '" ><span>' + value.lname + '(' + value.lmac + ')' + '</span><span>' + value.x + '(色温)，' + value.y + '(亮度)</span></li>';
-                            }else if(lightInfo.id==value.id){
-                                content += '<li class="lid active" alt="' + value.id + '" ><span>' + value.lname + '(' + value.lmac + ')' + '</span><span>' + value.x + '(色温)，' + value.y + '(亮度)</span></li>';
-                            }else{
-                                content += '<li class="lid" alt="' + value.id + '" ><span>' + value.lname + '(' + value.lmac + ')' + '</span><span>' + value.x + '(色温)，' + value.y + '(亮度)</span></li>';
-                            }
-                        } else {
-                            if(lightInfo==null) {
-                                content += '<li class="lid" alt="' + value.id + '" ><span>' + value.lname + '(' + value.lmac + ')' + '</span><span>' + value.x + '，' + value.y + '</span></li>';
-                            }else if(lightInfo.id==value.id){
-                                content += '<li class="lid active" alt="' + value.id + '" ><span>' + value.lname + '(' + value.lmac + ')' + '</span><span>' + value.x + '，' + value.y + '</span></li>';
-                            }else{
-                                content += '<li class="lid" alt="' + value.id + '" ><span>' + value.lname + '(' + value.lmac + ')' + '</span><span>' + value.x + '，' + value.y + '</span></li>';
-                            }
+                            content += '<li class="lid" alt="' + value.id + '" ><span>' + value.lname + '(' + value.lmac + ')' + '</span><span>' + value.x + '(色温)，' + value.y + '(亮度)</span></li>';
+                        }else{
+                            content += '<li class="lid" alt="' + value.id + '" ><span>' + value.lname + '(' + value.lmac + ')' + '</span><span>' + value.x + '，' + value.y + '</span></li>';
                         }
+                    }else if(lightInfo!=null && lightInfo.id==value.id){
+                        if (key == 0) {
+                            content += '<li class="lid active" alt="' + value.id + '" ><span>' + value.lname + '(' + value.lmac + ')' + '</span><span>' + value.x + '(色温)，' + value.y + '(亮度)</span></li>';
+                        }else{
+                            content += '<li class="lid active" alt="' + value.id + '" ><span>' + value.lname + '(' + value.lmac + ')' + '</span><span>' + value.x + '，' + value.y + '</span></li>';
+                        }
+                    }else{
+                        if (key == 0) {
+                            content += '<li class="lid " alt="' + value.id + '" ><span>' + value.lname + '(' + value.lmac + ')' + '</span><span>' + value.x + '(色温)，' + value.y + '(亮度)</span></li>';
+                        }else{
+                            content += '<li class="lid " alt="' + value.id + '" ><span>' + value.lname + '(' + value.lmac + ')' + '</span><span>' + value.x + '，' + value.y + '</span></li>';
+                        }
+                    }
                 })
                 $('.one').append(content);
             }

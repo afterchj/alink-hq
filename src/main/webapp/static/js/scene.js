@@ -60,8 +60,8 @@ $(function () {
     $('.reset-name').click(function () {
         id = $(this).attr("alt");
         $('div[openContent="reset-name"]').addClass('active');
-        var width = document.body.scrollWidth;
-        var height = document.body.scrollHeight;
+        var width = window.screen.scrollWidth;
+        var height =window.screen.scrollHeight;
         $('.hide-iframe').addClass('active');
         $('.hide-iframe').css({
             'width': width,
@@ -121,8 +121,8 @@ $(function () {
         var  sid=parseInt($(this).parent().siblings('.sid').find('input').val());
         var sceneId=parseInt($(this).parent().siblings('.sceneId').text());
         $('div[openContent="delete-place"]').addClass('active');
-        var width = document.body.scrollWidth;
-        var height = document.body.scrollHeight;
+        var width = window.screen.scrollWidth;
+        var height = window.screen.scrollHeight;
         $('.hide-iframe').addClass('active');
         $('.hide-iframe').css({
             'width': width,
@@ -161,8 +161,8 @@ $(function () {
         });
         if (deleteArray.length > 0) {
             $('div[openContent="delete-place"]').addClass('active');
-            var width = document.body.scrollWidth;
-            var height = document.body.scrollHeight;
+            var width = window.screen.scrollWidth;
+            var height = window.screen.scrollHeight;
             $('.hide-iframe').addClass('active');
             $('.hide-iframe').css({
                 'width': width,

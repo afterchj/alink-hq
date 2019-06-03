@@ -18,8 +18,8 @@ $(function () {
             location.href = "/alink-hq/mesh/move?ids=" + ids;
         }else{
             $('div[openContent="exchange"]').addClass('active');
-            var width = document.body.scrollWidth;
-            var height = document.body.scrollHeight;
+            var width = window.screen.scrollWidth;
+            var height = window.screen.scrollHeight;
             $('.hide-iframe').addClass('active');
             $('.hide-iframe').css({
                 'width': width,
@@ -34,8 +34,8 @@ $(function () {
         });
         if(ids.length>0){
             $('div[openContent="delete-mesh"]').addClass('active');
-            var width = document.body.scrollWidth;
-            var height = document.body.scrollHeight;
+            var width = window.screen.scrollWidth;
+            var height = window.screen.scrollHeight;
             $('.hide-iframe').addClass('active');
             $('.hide-iframe').css({
                 'width': width,
@@ -49,8 +49,8 @@ $(function () {
     $('.singleDel').click(function () {
         ids = $(this).parent().siblings('.checkbox').find('input').val();
         $('div[openContent="delete-mesh"]').addClass('active');
-        var width = document.body.scrollWidth;
-        var height = document.body.scrollHeight;
+        var width = window.screen.scrollWidth;
+        var height = window.screen.scrollHeight;
         $('.hide-iframe').addClass('active');
         $('.hide-iframe').css({
             'width': width,
@@ -77,8 +77,8 @@ $(function () {
     $('.reset-name').click(function () {
         id = $(this).attr("alt");
         $('div[openContent="reset-name"]').addClass('active');
-        var width = document.body.scrollWidth;
-        var height = document.body.scrollHeight;
+        var width = window.screen.scrollWidth;
+        var height = window.screen.scrollHeight;
         $('.hide-iframe').addClass('active');
         $('.hide-iframe').css({
             'width': width,

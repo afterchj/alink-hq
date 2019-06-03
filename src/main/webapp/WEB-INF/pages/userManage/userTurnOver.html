@@ -108,7 +108,6 @@
 <div class="success ">
     <div style="margin-bottom: 20px;"><img src="/alink-hq/static/img/success.png" alt=""></div>
     <div><img src="/alink-hq/static/img/sucessfont.png" alt=""></div>
-
 </div>
 <div class="hide-iframe "></div>
 <script src="/alink-hq/static/js/jquery.min.js"></script>
@@ -130,8 +129,8 @@
                     console.log(res);
                     if (res.result == '000') {
                         $('.pop-iframe').addClass('active');
-                        var width = document.body.scrollWidth;
-                        var height = document.body.scrollHeight;
+                        var width = window.screen.scrollWidth;
+                        var height = window.screen.scrollHeight;
                         $('.hide-iframe').addClass('active');
                         $('.hide-iframe').css({
                             'width': width,

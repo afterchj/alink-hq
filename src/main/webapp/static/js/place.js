@@ -12,8 +12,8 @@ $(function () {
         });
         if(ids.length>0){
             $('div[openContent="delete-place"]').addClass('active');
-            var width = document.body.scrollWidth;
-            var height = document.body.scrollHeight;
+            var width = window.screen.scrollWidth;
+            var height = window.screen.scrollHeight;
             $('.hide-iframe').addClass('active');
             $('.hide-iframe').css({
                 'width': width,
@@ -38,8 +38,8 @@ $(function () {
         // projectName=$(this).parent().siblings('.project-name').find('a').text();
         // account=$(this).parent().siblings('.project-account').text();
         $('div[openContent="reset-name"]').addClass('active');
-        var width = document.body.scrollWidth;
-        var height = document.body.scrollHeight;
+        var width = window.screen.scrollWidth;
+        var height= window.screen.scrollHeight;
         $('.hide-iframe').addClass('active');
         $('.hide-iframe').css({
             'width': width,
@@ -93,8 +93,8 @@ $(function () {
     $('.singleDel').click(function () {
         ids = $(this).parent().siblings('.checkbox').find('input').val();
         $('div[openContent="delete-place"]').addClass('active');
-        var width = document.body.scrollWidth;
-        var height = document.body.scrollHeight;
+        var width = window.screen.scrollWidth;
+        var height= window.screen.scrollHeight;
         $('.hide-iframe').addClass('active');
         $('.hide-iframe').css({
             'width': width,

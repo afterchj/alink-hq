@@ -11,8 +11,8 @@ $(function () {
     $('.rename').click(function () {
         id = $(this).attr("alt");
         $('div[openContent="reset-name"]').addClass('active');
-        var width = document.body.scrollWidth;
-        var height = document.body.scrollHeight;
+        var width = window.screen.scrollWidth;
+        var height = window.screen.scrollHeight;
         $('.hide-iframe').addClass('active');
         $('.hide-iframe').css({
             'width': width,
@@ -59,8 +59,8 @@ $(function () {
         id = $(this).attr("alt");
         ids.push(id);
         $('div[openContent="delete-mesh"]').addClass('active');
-        var width = document.body.scrollWidth;
-        var height = document.body.scrollHeight;
+        var width = window.screen.scrollWidth;
+        var height = window.screen.scrollHeight;
         $('.hide-iframe').addClass('active');
         $('.hide-iframe').css({
             'width': width,
@@ -90,8 +90,8 @@ $(function () {
         if (ids.length > 0) {
             console.log(ids);
             $('div[openContent="delete-mesh"]').addClass('active');
-            var width = document.body.scrollWidth;
-            var height = document.body.scrollHeight;
+            var width = window.screen.scrollWidth;
+            var height = window.screen.scrollHeight;
             $('.hide-iframe').addClass('active');
             $('.hide-iframe').css({
                 'width': width,
@@ -126,8 +126,8 @@ $(function () {
             }
         } else {
             $('div[openContent="exchange"]').addClass('active');
-            var width = document.body.scrollWidth;
-            var height = document.body.scrollHeight;
+            var width = window.screen.scrollWidth;
+            var height = window.screen.scrollHeight;
             $('.hide-iframe').addClass('active');
             $('.hide-iframe').css({
                 'width': width,
