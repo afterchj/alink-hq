@@ -12,6 +12,9 @@ laydate.render({
     // type: 'datetime'
     // range: true
 });
+var width = window.screen.width;
+var height = window.screen.height;
+
 $(function () {
 
 
@@ -41,6 +44,12 @@ $(function () {
     // 点击重命名
     $("tr[class='timerLineTr']").on('click','.p-r .reset-name',function () {
         $(".confirm-on-off").addClass("active");
+        $('.hide-iframe').addClass('active');
+        $('.hide-iframe').css({
+            'width': width,
+            'height': height
+        });
+
         tid = $(this).parent().siblings("input").val();
         mid = $(this).parent().siblings().eq(3).text();
     });
@@ -49,6 +58,7 @@ $(function () {
         $(".confirm-on-off").removeClass("active");
         $(".rename-hint").removeClass("active").text("");
         $("#rename").val("");
+        $('.hide-iframe').removeClass('active');
     });
     //点击确定
     $(".pop-btn .yes").click(function () {
