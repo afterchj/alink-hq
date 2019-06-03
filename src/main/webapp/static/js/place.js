@@ -5,6 +5,8 @@ $(function () {
     // var tabs="placeList";
     // var index=0;
     // left(tabs,index);
+    var width = window.screen.width;
+    var height = window.screen.height;
     $("#multiDel").click(function () {
         var ids = [];//定义一个数组
         $('input[name="ids"]:checked').each(function () {//遍历每一个名字为interest的复选框，其中选中的执行函数
@@ -12,8 +14,8 @@ $(function () {
         });
         if(ids.length>0){
             $('div[openContent="delete-place"]').addClass('active');
-            var width = window.screen.scrollWidth;
-            var height = window.screen.scrollHeight;
+            // var width = window.screen.scrollWidth;
+            // var height = window.screen.scrollHeight;
             $('.hide-iframe').addClass('active');
             $('.hide-iframe').css({
                 'width': width,
@@ -38,8 +40,8 @@ $(function () {
         // projectName=$(this).parent().siblings('.project-name').find('a').text();
         // account=$(this).parent().siblings('.project-account').text();
         $('div[openContent="reset-name"]').addClass('active');
-        var width = window.screen.scrollWidth;
-        var height= window.screen.scrollHeight;
+        // var width = window.screen.scrollWidth;
+        // var height= window.screen.scrollHeight;
         $('.hide-iframe').addClass('active');
         $('.hide-iframe').css({
             'width': width,
@@ -93,8 +95,8 @@ $(function () {
     $('.singleDel').click(function () {
         ids = $(this).parent().siblings('.checkbox').find('input').val();
         $('div[openContent="delete-place"]').addClass('active');
-        var width = window.screen.scrollWidth;
-        var height= window.screen.scrollHeight;
+        // var width = window.screen.scrollWidth;
+        // var height= window.screen.scrollHeight;
         $('.hide-iframe').addClass('active');
         $('.hide-iframe').css({
             'width': width,

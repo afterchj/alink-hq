@@ -2,10 +2,8 @@
  * Created by hongjian.chen on 2019/4/24.
  */
 $(function () {
-    // myBrowser();
-    // var tabs = "lightList";
-    // var index = 0;
-    // left(tabs, index);
+    var width = window.screen.width;
+    var height = window.screen.height;
     var id;
     var ids = [];
     var lname, mname;
@@ -13,8 +11,8 @@ $(function () {
     $('.rename').click(function () {
         id = $(this).attr("alt");
         $('div[openContent="reset-name"]').addClass('active');
-        var width = window.screen.scrollWidth;
-        var height = window.screen.scrollHeight;
+        // var width = window.screen.scrollWidth;
+        // var height = window.screen.scrollHeight;
         $('.hide-iframe').addClass('active');
         $('.hide-iframe').css({
             'width': width,
@@ -63,8 +61,8 @@ $(function () {
         lname = $(this).parent().siblings('td.lname').find('a').text();
         mname = $(this).parent().siblings('td.mname').text();
         $('div[openContent="delete-mesh"]').addClass('active');
-        var width = window.screen.scrollWidth;
-        var height = window.screen.scrollHeight;
+        // var width = window.screen.scrollWidth;
+        // var height = window.screen.scrollHeight;
         $('.hide-iframe').addClass('active');
         $('.hide-iframe').css({
             'width': width,
@@ -94,10 +92,10 @@ $(function () {
         });
         ids = idss;
         if (ids.length > 0) {
-            console.log(ids);
+            // console.log(ids);
             $('div[openContent="delete-mesh"]').addClass('active');
-            var width = window.screen.scrollWidth;
-            var height = window.screen.scrollHeight;
+            // var width = window.screen.scrollWidth;
+            // var height = window.screen.scrollHeight;
             $('.hide-iframe').addClass('active');
             $('.hide-iframe').css({
                 'width': width,
@@ -117,7 +115,7 @@ $(function () {
             idss.push($(this).val());
             pidArr.push(pid);
         });
-        console.log(idss);
+        // console.log(idss);
         // if(idss.length>0){
         // location.href = "/alink-hq/light/move?mid=" + $("#mid").val() + "&ids=" + idss;
         // }
@@ -136,8 +134,8 @@ $(function () {
             }
         } else {
             $('div[openContent="exchange"]').addClass('active');
-            var width = window.screen.scrollWidth;
-            var height = window.screen.scrollHeight;
+            // var width = window.screen.scrollWidth;
+            // var height = window.screen.scrollHeight;
             $('.hide-iframe').addClass('active');
             $('.hide-iframe').css({
                 'width': width,

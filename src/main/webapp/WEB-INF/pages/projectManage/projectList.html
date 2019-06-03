@@ -21,7 +21,7 @@
         <div class="main-right f-l">
             <div class="clearfix main-right-nav">
                 <div class="f-l main-right-title">项目列表</div>
-                <div class="f-r pointer">
+                <div class="f-r pointer last-nav">
                     <a th:href="@{/project/createProject}" th:if="${role_id!=4}">
                         <div class="create" onmousedown="createBtnMouseDown()" onmouseup="createBtnMouseUp()">
                             <span>+</span><span>创建项目</span></div>
@@ -38,7 +38,7 @@
                     </div>
                 </div>
             </div>
-            <div id="projectList" class="">
+            <div id="projectList" class="table-content-list">
                 <div class="search-condition ">
                     <form action="" class="clearfix">
                         <div class="f-l search" >

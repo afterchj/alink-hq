@@ -23,7 +23,7 @@
                 <div class="f-l main-right-title">组列表
                     <!--<span class="subjection">隶属项目：<span th:inline="text">[[${project.label}]]</span></span>-->
                 </div>
-                <div class="f-r pointer">
+                <div class="f-r pointer last-nav">
                     <a th:href="@{/group/create(mid=${dict.mid})}" shiro:hasAnyRoles="super,admin,manager">
                         <div class="create" onmousedown="createBtnMouseDown()" onmouseup="createBtnMouseUp()">
                             <span>+</span><span>创建组</span></div>
@@ -42,7 +42,7 @@
                     <!--<img src="/alink-hq/static/img/go-back.png" alt="" onclick="history.back()">-->
                 </div>
             </div>
-            <div id="meshList" class="">
+            <div id="meshList" class="table-content-list">
                 <form class="clearfix" th:action="@{/group/list}" method="post">
                     <input type="hidden" id="uid" name="uid" th:value="${dict.uid}">
                     <input type="hidden" id="mid" name="mid" th:value="${dict.mid}">

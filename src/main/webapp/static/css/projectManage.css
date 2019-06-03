@@ -1,9 +1,9 @@
 .search-condition {
-    margin:30px 0;
-    padding:40px 65px 10px;
-    border:1px solid #bbb;
-    background-color:#fff;
-    min-width:1360px
+    margin: 30px 0;
+    /*padding: 40px 5px 10px;*/
+    border: 1px solid #bbb;
+    background-color: #fff;
+    padding: 40px 20px 10px 30px;
 }
 
 .temp {
@@ -482,7 +482,7 @@ th.all-checkbox {
     width:80px;
     line-height:35px;
     letter-spacing:9px;
-    background-color:#fafafa;
+    background-color: #fff;
     cursor:pointer;
     margin-right:20px;
     padding-left:10px
