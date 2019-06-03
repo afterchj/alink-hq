@@ -120,7 +120,8 @@
                                 </td>
                                 <td th:text="${light.lmac}"></td>
                                 <td class="k-link">
-                                    <a th:href="@{/project/detail(projectId=${light.project_id})}" th:text="${light.name}"></a>
+                                    <a th:href="@{/project/detail(projectId=${light.project_id})}"
+                                       th:text="${light.name}"></a>
                                 </td>
                                 <td class="k-link">
                                     <a th:href="@{/mesh/info(id=${light.mid})}" th:text="${light.mname}"></a>
@@ -152,7 +153,7 @@
                                          class="singleDel pointer " title="删除" style="margin-right: 20px;">
                                     <!--</a>-->
                                     <img src="/alink-hq/static/img/export.png" th:alt="${light.id}"
-                                         class=" pointer " title="灯信息导出">
+                                         class="pointer backup" title="灯信息导出">
                                 </td>
                                 <td shiro:hasRole="user" class="p-r">
                                     <!--不能重命名-->
@@ -164,7 +165,7 @@
                                          th:title="无法操作">
                                     <!--不能删除-->
                                     <img src="/alink-hq/static/img/un-delete.png" alt="" class="pointer   unclick"
-                                         th:title="无法操作"  style="margin-right: 20px;">
+                                         th:title="无法操作" style="margin-right: 20px;">
                                     <!--重命名-->
                                     <img src="/alink-hq/static/img/export-un.png" th:alt="${light.id}"
                                          class=" pointer unclick" title="灯信息导出">
@@ -178,14 +179,16 @@
                             <span class="selected-order">已选择
                                  <span id="amount" class="amount">0</span>条数据
                             </span>
-                             <span class="m-r-20">
-                                <span  shiro:hasAnyRoles="super,admin,manager" class="skipPageBtn pointer moment" onmousedown="exchangeBtnMouseDown()"
+                                        <span class="m-r-20">
+                                <span shiro:hasAnyRoles="super,admin,manager" class="skipPageBtn pointer moment"
+                                      onmousedown="exchangeBtnMouseDown()"
                                       onmouseup="exchangeBtnMouseUp()" id="multiMove">移动</span>
-                                <span shiro:hasRole="user" class="skipPageBtn pointer moment active unclick1"  >移动</span>
+                                <span shiro:hasRole="user" class="skipPageBtn pointer moment active unclick1">移动</span>
                             </span>
-                            <span>
-                                <span class="skipPageBtn pointer moment" onmousedown="deleteBtnMouseDown()" onmouseup="deleteBtnMouseUp()" id="multiDel">删除</span>
-                                <span shiro:hasRole="user" class="skipPageBtn pointer moment active unclick1"  >删除</span>
+                                        <span>
+                                <span class="skipPageBtn pointer moment" onmousedown="deleteBtnMouseDown()"
+                                      onmouseup="deleteBtnMouseUp()" id="multiDel">删除</span>
+                                <span shiro:hasRole="user" class="skipPageBtn pointer moment active unclick1">删除</span>
                             </span>
                                     </div>
                                     <div th:replace="common/page::page"></div>
@@ -279,5 +282,46 @@
 <script type="text/javascript" src="/alink-hq/static/js/page.js"></script>
 <script type="text/javascript" src="/alink-hq/static/js/light.js"></script>
 <script src="/alink-hq/static/js/moment.js"></script>
+
+<script type="text/javascript">
+
+    $(".backup").click(function () {
+        var id = $(this).attr("alt");
+        console.log("id", id);
+        //要导出的json数据
+        var str;
+        var mac;
+        var status;
+        $.get("/alink-hq/light/getLightInfo?id=" + id, function (data) {
+            mac = data.lmac;
+            status = data.off;
+            if (status == '1') {
+                status = '开';
+            }
+            if (status == '0') {
+                status = '关';
+            } else {
+                status = '未知';
+            }
+            str += '灯名称,' + data.lname + '\n' + '灯MAC地址,' + mac + '\n' +
+                '当前状态,' + status + '\n' + '隶属项目,' + data.name + '\n' +
+                '隶属网络,' + data.mname + '\n' + '网络ID,' + data.mesh_id + '\n' +
+                '隶属区域,' + data.pname + '\n' + '隶属组,' + data.gname + '\n' +
+                '所在场景名称,' + data.sname + '\n' + '场景中对应的X（色温），Y（亮度）,' + data.x + '，' + data.y + '\n';
+            console.log("str", str);
+            //encodeURIComponent解决中文乱码
+            let uri = 'data:text/csv;charset=utf-8,\ufeff' + encodeURIComponent(str);
+            //通过创建a标签实现
+            let link = document.createElement("a");
+            link.href = uri;
+            //对下载的文件命名
+            link.download = mac + ".csv";
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        });
+    });
+
+</script>
 </body>
 </html>
