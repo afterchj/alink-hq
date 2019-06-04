@@ -28,7 +28,8 @@ $(function () {
     //     console.log("show",false);
     //     $(this).parent("div").css("display","none");
     // });
-    $('.memo-edit').click(function () {
+    $('.memo-edit').click(function (event) {
+        event.stopPropagation();
         var contentText=$(this).find('.memo-content').text();
         console.log('contentText',contentText);
         if(contentText==''){
@@ -46,11 +47,19 @@ $(function () {
         }
 
     })
-    $('div[openContent="memo-edit"] button.reduce').click(function () {
+    $('div[openContent="memo-edit"] button.reduce').click(function (event) {
+        event.stopPropagation();
         $('div[openContent="memo-edit"]').removeClass('active');
         $('.hide-iframe').removeClass('active');
     })
-
+    $('div[openContent="memo-edit"] button.yes').click(function (event) {
+        event.stopPropagation();
+        $('div[openContent="memo-edit"]').removeClass('active');
+        $('.hide-iframe').removeClass('active');
+    })
+    $('body').click(function () {
+        $('.memo-edit-has').parent('td').removeClass('active');
+    })
     //启用禁用
     $('.off-or-on-coo').click(function () {
         $('div[openContent="start-use"]').addClass('active');
