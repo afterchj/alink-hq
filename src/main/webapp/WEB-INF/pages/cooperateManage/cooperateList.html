@@ -72,19 +72,28 @@
                         </thead>
                         <tbody>
                         <tr th:each="cooperation:${pageInfo.list}">
-                            <td class="k-link">
-                                <a th:href="@{/cooperate/info(id=${cooperation.id})}" th:text="${cooperation.coname}"></a>
+                            <td class="k-link coo-name">
+                                <a th:href="@{/cooperate/info(id=${cooperation.id})}" th:text="${cooperation.coname}" th:alt="${cooperation.id}"></a>
                             </td>
                             <td th:text="${cooperation.mobile}"></td>
                             <td th:text="${cooperation.create_date}">
                             <td th:switch="${cooperation.status}" class="k-link">
-                                <a th:case="1" th:href="@{/cooperate/saveUpdate(id=${cooperation.id},status=0)}">
+                                <!--<a th:case="1" th:href="@{/cooperate/saveUpdate(id=${cooperation.id},status=0)}" class="off-or-on-coo" alt="0">-->
+                                    <!--<span>合作</span>-->
+                                <!--</a>-->
+                                <!--<a th:case="0" th:href="@{/cooperate/saveUpdate(id=${cooperation.id},status=1)}" class="off-or-on-coo" alt="1">-->
+                                    <!--<span>终止</span>-->
+                                <!--</a>-->
+                                <!--<a th:case='*' th:href="@{/cooperate/saveUpdate(id=${cooperation.id},status=1)}" class="off-or-on-coo" alt="1">-->
+                                    <!--<span>合作</span>-->
+                                <!--</a>-->
+                                <a th:case="1" href="javascript:void(0);" class="off-or-on-coo" alt="0">
                                     <span>合作</span>
                                 </a>
-                                <a th:case="0" th:href="@{/cooperate/saveUpdate(id=${cooperation.id},status=1)}">
+                                <a th:case="0" href="javascript:void(0);" class="off-or-on-coo" alt="1">
                                     <span>终止</span>
                                 </a>
-                                <a th:case='*' th:href="@{/cooperate/saveUpdate(id=${cooperation.id},status=1)}">
+                                <a th:case='*' href="javascript:void(0);" class="off-or-on-coo" alt="1">
                                     <span>合作</span>
                                 </a>
                             </td>
@@ -101,9 +110,6 @@
                                     <div class="meno-nav"><img src="/alink-hq/static/img/edit.png" alt=""
                                                                class="pointer"></div>
                                     <div class="memo-content" th:text="${cooperation.other}">
-                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam cupiditate
-                                        deleniti sint sit voluptate. Aliquam delectus, dolor ex fugiat, hic iste magni
-                                        maxime officia quod repellat similique veniam vero voluptatibus.
                                     </div>
                                 </div>
                             </td>
