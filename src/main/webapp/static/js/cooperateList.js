@@ -30,7 +30,7 @@ $(function () {
     // });
     $('.memo-edit').click(function (event) {
         event.stopPropagation();
-        var contentText=$(this).find('.memo-content').text();
+        var contentText=$(this).siblings('.memo-edit-has').find('.memo-content').text();
         console.log('contentText',contentText);
         if(contentText==''){
             //如果备忘录为空时
@@ -43,8 +43,17 @@ $(function () {
         }else{
             //如果备忘录不为空时
             $(this).parent('td').addClass('active');
-            $(this).parent('td').siblings('td').removeClass('active');
+            $(this).parent('td').parent('tr').siblings('tr').find('td').removeClass('active');
         }
+    })
+    $('.meno-nav').click(function(event){
+        event.stopPropagation();
+        $('div[openContent="memo-edit"]').addClass('active');
+        $('.hide-iframe').addClass('active');
+        $('.hide-iframe').css({
+            'width': width,
+            'height': height
+        })
     })
     $('div[openContent="memo-edit"] button.reduce').click(function (event) {
         event.stopPropagation();
