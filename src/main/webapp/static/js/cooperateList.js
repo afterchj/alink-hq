@@ -45,7 +45,6 @@ $(function () {
             $(this).parent('td').addClass('active');
             $(this).parent('td').siblings('td').removeClass('active');
         }
-
     })
     $('div[openContent="memo-edit"] button.reduce').click(function (event) {
         event.stopPropagation();
@@ -63,8 +62,8 @@ $(function () {
     //启用禁用
     $('.off-or-on-coo').click(function () {
         $('div[openContent="start-use"]').addClass('active');
-        var width = window.screen.width;
-        var height = window.screen.height;
+        // var width = window.screen.width;
+        // var height = window.screen.height;
         $('.hide-iframe').addClass('active');
         $('.hide-iframe').css({
             'width': width,
