@@ -86,7 +86,7 @@ public class CooperationController {
         return "cooperateManage/cooperateCreate";
     }
 
-    @RequestMapping
+    @RequestMapping("/delete")
     public String delete(int id) {
         cooperateService.deleteCooperationById(id);
         return "redirect:/cooperate/list";
