@@ -4,8 +4,9 @@ function DragImgUpload(id,options) {
         boxWidth:'135px',
         boxHeight:'135px'
     }
-    // this.preview = $('<div id="preview"><div id="delete-img" style="">×</div><img src="/alink-hq/static/img/upload.png" class="img-responsive"  style="width: 100%;height:100%;" alt="" title=""> </div>');
     this.preview = $('#preview');
+    this.reset=$('<div id="delete-img" style="">×</div>')
+    this.preview.append(this.reset);
     this.opts=$.extend(true, defaultOpt,{
     }, options);
     this.init();
@@ -16,21 +17,37 @@ DragImgUpload.prototype = {
     init:function () {
         this.me.append(this.preview);
         this.me.append(this.fileupload);
-        this.cssInit();
         this.eventClickInit();
+        this.resetImage();
+        this.cssInit();
     },
     cssInit:function () {
         this.me.css({
             'width':this.opts.boxWidth,
             'height':this.opts.boxHeight,
             'border':'1px solid #bbb',
-            'padding':'2px',
             'display': 'inline-block',
-            'cursor':'pointer'
+            'cursor':'pointer',
+            'position': 'relative'
         })
         this.preview.css({
             'height':'100%',
-            'overflow':'hidden'
+            'overflow':'hidden',
+        })
+        this.reset.css({
+            'line-height': '20px',
+            'z-index': '999',
+            'background': 'rgba(0,0,0,.4)',
+            'color': '#fff',
+            'position': 'absolute',
+            'top': '0',
+            'right': '0',
+            'height': '25px',
+            'width': '30px',
+            'border-bottom-left-radius':'92%',
+            'text-align': 'center',
+            'font-size':'20px',
+            'display':'none'
         })
 
     },
@@ -43,8 +60,7 @@ DragImgUpload.prototype = {
         var self = this;
         e.stopPropagation();
         e.preventDefault();
-        var fileList = e.dataTransfer.files; //获取文件对象
-        // do something upload
+        var fileList = e.dataTransfer.files;
         if(fileList.length == 0){
             return false;
         }
@@ -67,9 +83,13 @@ DragImgUpload.prototype = {
         if(this.callback){
             this.callback(fileList);
         }
+
     },
     eventClickInit:function () {
         var self = this;
+        self.reset.css({
+            'display':'block'
+        })
         this.me.unbind().click(function () {
             self.createImageUploadDialog();
         })
@@ -83,6 +103,7 @@ DragImgUpload.prototype = {
 
     },
     onChangeUploadFile:function () {
+        var self = this;
         var fileInput = this.fileInput;
         var files = fileInput.files;
         var file = files[0];
@@ -90,12 +111,15 @@ DragImgUpload.prototype = {
         var filename = file.name;
         this.me.find("img").attr("src",img);
         this.me.find("img").attr("title",filename);
-        this.me.find('#delete-img').addClass('active');
+        self.reset.css({
+            'display':'block'
+        })
         if(this.callback){
             this.callback(files);
         }
     },
     createImageUploadDialog:function () {
+        var self = this;
         var fileInput = this.fileInput;
         if (!fileInput) {
             //创建临时input元素
@@ -109,8 +133,23 @@ DragImgUpload.prototype = {
             fileInput.multiple = true;
             fileInput.onchange  = this.onChangeUploadFile.bind(this);
             this.fileInput = fileInput;
+            self.reset.css({
+                'display':'block'
+            })
         }
         //触发点击input点击事件，弹出选择文件对话框
         fileInput.click();
+    },
+    resetImage:function(){
+        var self = this;
+        this.reset.click(function(e){
+            e.stopPropagation();
+            var imgReset=self.me.find("img")[0];
+            console.log('图片',imgReset.src);
+            imgReset.src='/alink-hq/static/img/upload.png';
+            self.reset.css({
+                'display':'none'
+            })
+        })
     }
 }
