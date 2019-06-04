@@ -15,7 +15,7 @@ public class CooperationInfo {
     private Date update_date;
     private String photo;
     private String code;
-    private boolean status;
+    private int status;
     private String other;
     private int parent_id;
 
@@ -83,11 +83,11 @@ public class CooperationInfo {
         this.code = code;
     }
 
-    public boolean isStatus() {
+    public int getStatus() {
         return status;
     }
 
-    public void setStatus(boolean status) {
+    public void setStatus(int status) {
         this.status = status;
     }
 

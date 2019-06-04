@@ -46,37 +46,33 @@
                                 <label for="projectName">项目名称</label>
                                 <input type="text" id="projectName" placeholder="请输入项目名称">
                             </div>
+                            <div>
+                                <label for="company">隶属公司</label>
+                                <input type="text" placeholder="请输入隶属公司" id="company">
+                            </div>
+
+                        </div>
+                        <div class="f-l search"  style="margin-right: 15px;">
+                            <div>
+                                <label for="account">施工人员</label>
+                                <input type="text" placeholder="请输入施工人员账号" id="account">
+                            </div>
                             <div class="p-r">
                                 <label for="start-time">创建时间</label>
                                 <input type="text" id="start-time" placeholder="请选择日期" AUTOCOMPLETE="off">
                                 <img src="/alink-hq/static/img/date.png" alt="" class="p-a">
                             </div>
                         </div>
-                        <div class="f-l search" >
-                            <div>
-                                <label for="account">施工人员</label>
-                                <input type="text" placeholder="请输入施工人员账号/用户名" id="account">
+                        <div class="f-l search">
+                            <div >
+                                <label for="username">施工人员用户名</label>
+                                <input type="text" id="username" placeholder="请输入施工人员用户名" AUTOCOMPLETE="off">
                             </div>
                             <div class="p-r">
                                 <label for="end-time">更新时间</label>
                                 <input type="text" id="end-time" placeholder="请选择日期" AUTOCOMPLETE="off">
                                 <img src="/alink-hq/static/img/date.png" alt="" class="p-a">
                             </div>
-                        </div>
-                        <div class="f-l search">
-                            <div>
-                                <label for="company">隶属公司</label>
-                                <input type="text" placeholder="请输入隶属公司" id="company">
-                            </div>
-                            <div >
-                                <label for="username">用户名</label>
-                                <input type="text" id="username" placeholder="请输入用户名" AUTOCOMPLETE="off">
-                            </div>
-                            <!--<div class="p-r">-->
-                                <!--<label for="end-time">更新时间</label>-->
-                                <!--<input type="text" id="end-time" placeholder="请选择日期" AUTOCOMPLETE="off">-->
-                                <!--<img src="/alink-hq/static/img/date.png" alt="" class="p-a">-->
-                            <!--</div>-->
                         </div>
                         <div class=" f-r search-button">
                             <button type="button" class="pointer">查询</button>
@@ -114,17 +110,16 @@
                         </thead>
                         <tbody>
                         <tr th:each="project:${pageInfo.list}">
-
                             <td class="checkbox ">
                                 <input type="checkbox" th:value="${project.id}" class="pointer">
                             </td>
                             <td th:text="${project.id}" style="display: none" class="project-id"></td>
                             <td class="project-name k-link">
-                                <a th:href="@{/project/detail(account=${project.account},coname=${project.coname},meshNum=${project.meshNum},projectId=${project.id},projectName=${project.name})}"
-                                   th:text="${project.name}"></a>
+                                <a  th:href="@{/project/detail(account=${project.account},coname=${project.coname},meshNum=${project.meshNum},projectId=${project.id},projectName=${project.name})}" th:text="${project.name}"></a>
                             </td>
                             <td class="meshNum k-link">
-                                <a th:href="@{/mesh/list(projectId=${project.id})}" th:text="${project.meshNum}"></a>
+                                <a th:if="${project.meshNum}=='0'" class="a-un" th:href="@{/mesh/list(projectId=${project.id})}" th:text="${project.meshNum}"></a>
+                                <a th:if="${project.meshNum}!='0'"  th:href="@{/mesh/list(projectId=${project.id})}" th:text="${project.meshNum}"></a>
                             </td>
                             <td th:text="${project.account}" class="project-account"></td>
                             <td th:text="${project.uname}" class="project-uname"></td>
@@ -132,25 +127,17 @@
                             <td th:text="${project.create_date}"></td>
                             <td th:text="${project.update_date}"></td>
                             <td th:if="${role_id!=4}" class="p-r">
-                                <img src="/alink-hq/static/img/edit.png" alt="" class="pointer reset-name"
-                                     th:title="重命名">
-                                <img src="/alink-hq/static/img/exchange.png" alt=""
-                                     class="center-img pointer exchange-project " th:title="移交项目">
-                                <img src="/alink-hq/static/img/delete.png" alt="" class="pointer delete-project"
-                                     th:title="删除">
+                                <img src="/alink-hq/static/img/edit.png" alt="" class="pointer reset-name" th:title="重命名">
+                                <img src="/alink-hq/static/img/exchange.png" alt="" class="center-img pointer exchange-project " th:title="移交项目">
+                                <img src="/alink-hq/static/img/delete.png" alt="" class="pointer delete-project" th:title="删除">
                             </td>
-
                             <td th:if="${role_id==4}" class="p-r">
                                 <!--不能重命名-->
-                                <img src="/alink-hq/static/img/un-rename.png" alt="" class="pointer  unclick"
-                                     th:title="无法操作">
+                                <img src="/alink-hq/static/img/un-rename.png" alt="" class="pointer  unclick" th:title="无法操作">
                                 <!--不能移交-->
-                                <img src="/alink-hq/static/img/un-exchange.png" alt=""
-                                     class="center-img pointer  unclick"
-                                     th:title="无法操作">
+                                <img src="/alink-hq/static/img/un-exchange.png" alt="" class="center-img pointer  unclick" th:title="无法操作">
                                 <!--不能删除-->
-                                <img src="/alink-hq/static/img/un-delete.png" alt="" class="pointer   unclick"
-                                     th:title="无法操作">
+                                <img src="/alink-hq/static/img/un-delete.png" alt="" class="pointer   unclick" th:title="无法操作">
                                 <!--重命名-->
                             </td>
                         </tr>
@@ -171,11 +158,8 @@
                                       id="transfer-project">移交</span>
                             </span>
                             <span>
-                                <span th:if="${role_id==4}" class="skipPageBtn  moment active unclick1"
-                                      id="delete-project">删除</span>
-                                <span th:if="${role_id!=4}" class="skipPageBtn pointer moment"
-                                      onmousedown="deleteBtnMouseDown()" onmouseup="deleteBtnMouseUp()"
-                                      id="delete-project">删除</span>
+                                <span th:if="${role_id==4}" class="skipPageBtn  moment active unclick1" id="delete-project">删除</span>
+                                <span th:if="${role_id!=4}" class="skipPageBtn pointer moment" onmousedown="deleteBtnMouseDown()" onmouseup="deleteBtnMouseUp()" id="delete-project">删除</span>
                             </span>
                                 </div>
                                 <div class="f-r page-right">

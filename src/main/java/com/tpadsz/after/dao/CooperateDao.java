@@ -15,6 +15,8 @@ public interface CooperateDao {
 
     CooperationInfo getCooperationInfo(int id);
 
+    int getCount(int id);
+
     void save(CooperationInfo info);
 
     void saveUpdate(CooperationInfo info);

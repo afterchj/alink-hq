@@ -48,7 +48,7 @@
                     <input type="hidden" name="uid" th:value="${dict.uid}">
                     <input type="hidden" id="pageSize" th:value="${dict.pageSize}">
                     <div class="search-condition temp">
-                        <div class="f-l search" style="margin-right:200px;">
+                        <div class="f-l search" style="margin-right: 150px;margin-left: 100px;">
                             <div>
                                 <label for="name" class="font">网络名称</label>
                                 <input type="text" id="name" name="mname" th:value="${dict.mname}"
@@ -116,20 +116,20 @@
                                        th:text="${mesh.name}"></a>
                                 </td>
                                 <td class="k-link">
-                                    <a th:href="@{/place/list(mid=${mesh.id})}" th:text="${mesh.pcount}"></a>
+                                    <a th:if="${mesh.pcount}=='0'" class="a-un" th:href="@{/place/list(mid=${mesh.id})}" th:text="${mesh.pcount}"></a>
+                                    <a th:if="${mesh.pcount}!='0'" th:href="@{/place/list(mid=${mesh.id})}" th:text="${mesh.pcount}"></a>
                                 </td>
                                 <td class="k-link">
-                                    <a th:href="@{/scene/list(meshName=${mesh.mname},meshId=${mesh.mesh_id},mid=${mesh.id})}"
-                                       th:text="${mesh.scount}"></a>
+                                    <a th:if="${mesh.scount}=='0'" class="a-un" th:href="@{/scene/list(meshName=${mesh.mname},meshId=${mesh.mesh_id},mid=${mesh.id})}" th:text="${mesh.scount}"></a>
+                                    <a th:if="${mesh.scount}!='0'" th:href="@{/scene/list(meshName=${mesh.mname},meshId=${mesh.mesh_id},mid=${mesh.id})}" th:text="${mesh.scount}"></a>
                                 </td>
-                                <td class="k-link" th:if="${mesh.scount}!='0'">
-                                    <a th:href="@{/scene/list(meshName=${mesh.mname},meshId=${mesh.mesh_id},mid=${mesh.id})}"
-                                       th:text="${mesh.scount}"></a>
+                                <td class="k-link" >
+                                    <a th:if="${mesh.scount}=='0'" class="a-un" th:href="@{/scene/list(meshName=${mesh.mname},meshId=${mesh.mesh_id},mid=${mesh.id})}" th:text="${mesh.scount}"></a>
+                                    <a th:if="${mesh.scount}!='0'" th:href="@{/scene/list(meshName=${mesh.mname},meshId=${mesh.mesh_id},mid=${mesh.id})}" th:text="${mesh.scount}"></a>
                                 </td>
-                                <td  th:if="${mesh.scount}=='0'">
-                                    <a href="javascript:void(0);"
-                                       th:text="${mesh.scount}"></a>
-                                </td>
+                                <!--<td  th:if="${mesh.scount}=='0'">-->
+                                    <!--<a href="javascript:void(0);" th:text="${mesh.scount}"></a>-->
+                                <!--</td>-->
                                 <td>未知</td>
                                 <td shiro:hasAnyRoles="super,admin,manager" class="p-r">
                                     <img src="/alink-hq/static/img/edit.png" th:alt="${mesh.id}"

@@ -3,6 +3,7 @@ package com.tpadsz.after.service.impl;
 import com.tpadsz.after.dao.CooperateDao;
 import com.tpadsz.after.entity.CooperationInfo;
 import com.tpadsz.after.entity.SearchDict;
+import com.tpadsz.after.exception.RepetitionException;
 import com.tpadsz.after.service.CooperateService;
 import org.springframework.stereotype.Service;
 
@@ -28,6 +29,11 @@ public class CooperateServiceImpl implements CooperateService {
     @Override
     public CooperationInfo getCooperationInfo(int id) {
         return cooperateDao.getCooperationInfo(id);
+    }
+
+    @Override
+    public int getCount(int id) {
+        return cooperateDao.getCount(id);
     }
 
     @Override

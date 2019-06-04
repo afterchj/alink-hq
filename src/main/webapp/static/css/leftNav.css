@@ -75,7 +75,22 @@
     width:96%;
     margin:0 1%
 }
-
+.search-result table td.k-link .a-un{
+    color: #323232;
+}
+.search-result table td.k-link .a-un:hover,.search-result table td.k-link .a-un:focus{
+    border: none;
+    color: #323232;
+    cursor: not-allowed;
+}
+#projectDetail .p-content a.a-un{
+    color: #323232;
+}
+#projectDetail .p-content a.a-un:hover,#projectDetail .p-content a.a-un:focus{
+    border: none;
+    color: #323232;
+    cursor: not-allowed;
+}
 .main-left a {
     font-size:16px;
     color:#323232;
@@ -89,7 +104,7 @@
 
 .one-list li {
     font-size:16px;
-    color:#111;
+    /*color:#323232;*/
     height:40px;
     line-height:40px;
     padding-left:70px;
@@ -122,10 +137,6 @@
     color:#323232;
     margin-top:8px
 }
-
-/*.main-right-nav>div:first-child {*/
-    /**/
-/*}*/
 .last-nav{
     margin-left:15px
 }
@@ -133,7 +144,9 @@
 .one-list li.active {
     background-color:#eef2f5
 }
-
+.main-left a:hover,.main-left a:focus{
+    border:none;
+}
 .create {
     background-color:#3598DB;
     color:#fff;

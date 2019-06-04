@@ -48,7 +48,7 @@
                     <input type="hidden" id="mid" name="mid" th:value="${dict.mid}">
                     <input type="hidden" id="pageSize" th:value="${dict.pageSize}">
                     <div class="search-condition temp">
-                        <div class="f-l search" style="margin-right:200px;">
+                        <div class="f-l search" style="margin-right: 150px;margin-left: 100px;">
                             <div>
                                 <label for="gname" class="font">组名称</label>
                                 <input type="text" id="gname" name="gname" th:value="${dict.gname}"
@@ -111,7 +111,8 @@
                                     <a th:href="@{/place/info(id=${group.pid})}" th:text="${group.pname}"></a>
                                 </td>
                                 <td class="k-link">
-                                    <a th:href="@{/light/list(mid=${group.mid},gid=${group.id})}" th:text="${group.lcount}"></a>
+                                    <a th:if="${group.lcount}=='0'" class="a-un" th:href="@{/light/list(mid=${group.mid},gid=${group.id})}" th:text="${group.lcount}"></a>
+                                    <a th:if="${group.lcount}!='0'"  th:href="@{/light/list(mid=${group.mid},gid=${group.id})}" th:text="${group.lcount}"></a>
                                 </td>
                                 <td class="p-r" shiro:hasAnyRoles="super,admin,manager">
                                     <img src="/alink-hq/static/img/edit.png" th:alt="${group.id}" class="rename pointer"

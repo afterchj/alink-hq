@@ -43,7 +43,8 @@
                                 <span class="meshNum" th:text="${meshNum}"></span>
                             </div>
                             <div class="mesh f-l">
-                                <a th:href="@{/mesh/list(projectId=${projectId})}">查看网络列表</a>
+                                <a th:if="${meshNum}=='0'" class="a-un"  th:href="@{/mesh/list(projectId=${projectId})}">查看网络列表</a>
+                                <a th:if="${meshNum}!='0'"  th:href="@{/mesh/list(projectId=${projectId})}">查看网络列表</a>
                             </div>
                         </div>
                         <div class="clearfix">
@@ -52,7 +53,8 @@
                                 <span class="placeNum" th:text="${placeNum}"></span>
                             </div>
                             <div class="place f-l">
-                                <a th:href="@{/place/list(projectId=${projectId},projectName=${projectName})}">查看区域列表</a>
+                                <a th:if="${placeNum}=='0'" class="a-un" th:href="@{/place/list(projectId=${projectId},projectName=${projectName})}">查看区域列表</a>
+                                <a th:if="${placeNum}!='0'"  th:href="@{/place/list(projectId=${projectId},projectName=${projectName})}">查看区域列表</a>
                             </div>
                         </div>
                         <div class="clearfix">
@@ -61,7 +63,8 @@
                                 <span class="groupNum" th:text="${groupNum}"></span>
                             </div>
                             <div class="group f-l">
-                                <a th:href="@{/group/list(projectId=${projectId})}">查看组列表</a>
+                                <a th:if="${groupNum}=='0'" class="a-un"  th:href="@{/group/list(projectId=${projectId})}">查看组列表</a>
+                                <a th:if="${groupNum}!='0'" th:href="@{/group/list(projectId=${projectId})}">查看组列表</a>
                             </div>
                         </div>
                         <div class="clearfix">
@@ -70,7 +73,8 @@
                                 <span class="lightNum" th:text="${lightNum}"></span>
                             </div>
                             <div class="light f-l">
-                                <a th:href="@{/light/list(projectId=${projectId},projectName=${projectName})}">查看灯列表</a>
+                                <a th:if="${lightNum}=='0'" class="a-un"  th:href="@{/light/list(projectId=${projectId},projectName=${projectName})}">查看灯列表</a>
+                                <a th:if="${lightNum}!='0'" th:href="@{/light/list(projectId=${projectId},projectName=${projectName})}">查看灯列表</a>
                             </div>
                         </div>
                     </div>
@@ -79,19 +83,19 @@
                     </div>
                     <div class="c-content">
                         <div>
-                            <span>用户名：</span>
+                            <span  class="msg-use">用户名：</span>
                             <span th:text="${user.uname}"></span>
                         </div>
                         <div>
-                            <span>账号：</span>
+                            <span class="msg-use">账号：</span>
                             <span th:text="${user.account}"></span>
                         </div>
                         <div>
-                            <span>联系方式：</span>
+                            <span class="msg-use">联系方式：</span>
                             <span th:text="${user.mobile}"></span>
                         </div>
                         <div>
-                            <span>隶属公司：</span>
+                            <span class="msg-use">隶属公司：</span>
                             <span th:text="${coname}"></span>
                         </div>
                     </div>

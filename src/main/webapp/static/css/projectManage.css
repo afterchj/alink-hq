@@ -247,14 +247,14 @@ th.all-checkbox {
 }
 
 #projectDetail .c-content {
-    padding:50px 400px
+    padding: 60px 440px;
 }
 
 #projectDetail .p-content span,#timerDetail .p-content span {
-    font-size:15px;
-    color:#3c3c3c;
-    transform:scale(1,.92);
-    display:inline-block
+    font-size: 16px;
+    color: #3c3c3c;
+    transform: scale(1,.92);
+    display: inline-block;
 }
 
 #timerDetail .p-content {
@@ -288,10 +288,10 @@ th.all-checkbox {
 }
 
 #projectDetail .p-content a {
-    font-size:17px;
-    color:#3598db;
-    transform:scale(1,.92);
-    display:inline-block
+    font-size: 16px;
+    color: #3598db;
+    transform: scale(1,.92);
+    display: inline-block;
 }
 
 #projectDetail .p-content span a {
@@ -305,11 +305,16 @@ th.all-checkbox {
 
 #projectDetail .c-content > div {
     text-align:left;
-    font-size:16px;
+    font-size:15px;
     color:#3c3c3c;
     margin-bottom:30px
 }
-
+span.msg-use{
+    width: 100px;
+    display: inline-block;
+    text-align: right;
+    margin-right: 20px;
+}
 .pop-nav img {
     right:20px
 }
