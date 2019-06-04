@@ -28,8 +28,9 @@ $(function () {
     //     console.log("show",false);
     //     $(this).parent("div").css("display","none");
     // });
-    $('.memo-edit').click(function () {
-        var contentText=$('.memo-content').text();
+    $('.memo-edit').click(function (event) {
+        event.stopPropagation();
+        var contentText=$(this).find('.memo-content').text();
         console.log('contentText',contentText);
         if(contentText==''){
             //如果备忘录为空时
@@ -44,27 +45,30 @@ $(function () {
             $(this).parent('td').addClass('active');
             $(this).parent('td').siblings('td').removeClass('active');
         }
-
-    });
-    $('div[openContent="memo-edit"] button.reduce').click(function () {
+    })
+    $('div[openContent="memo-edit"] button.reduce').click(function (event) {
+        event.stopPropagation();
         $('div[openContent="memo-edit"]').removeClass('active');
         $('.hide-iframe').removeClass('active');
-    });
-    $('div[openContent="memo-edit"] button.yes').click(function () {
+    })
+    $('div[openContent="memo-edit"] button.yes').click(function (event) {
+        event.stopPropagation();
         $('div[openContent="memo-edit"]').removeClass('active');
         $('.hide-iframe').removeClass('active');
-
-    });
+    })
+    $('body').click(function () {
+        $('.memo-edit-has').parent('td').removeClass('active');
+    })
     //启用禁用
     $('.off-or-on-coo').click(function () {
         $('div[openContent="start-use"]').addClass('active');
-        var width = window.screen.width;
-        var height = window.screen.height;
+        // var width = window.screen.width;
+        // var height = window.screen.height;
         $('.hide-iframe').addClass('active');
         $('.hide-iframe').css({
             'width': width,
             'height': height
-        });
+        })
         var companyName = $(this).parent().siblings('.coo-name').text();
          status=parseInt($(this).attr('alt'));
          companyId = parseInt($(this).parent().siblings('.coo-name').find('a').attr('alt'));
@@ -77,16 +81,16 @@ $(function () {
             //如果已经禁用，则启用
             $('div[openContent="start-use"] .off-or-on').text('您确定要启用' + companyName + '？')
         }
-    });
+    })
     $('div[openContent="start-use"] button.reduce').click(function () {
         $('div[openContent="start-use"]').removeClass('active');
         $('.hide-iframe').removeClass('active');
-    });
+    })
     $('div[openContent="start-use"] button.yes').click(function () {
         $('div[openContent="start-use"]').removeClass('active');
         $('.hide-iframe').removeClass('active');
         location.href = "/alink-hq//cooperate/saveUpdate?id=" + companyId+'&status='+status;
-    });
+    })
 
         //重命名
         $('.reset-name').click(function () {
@@ -98,17 +102,17 @@ $(function () {
                 'width': width,
                 'height': height
             })
-        });
+        })
         $('div[openContent="reset-name"] button.reduce').click(function () {
             $('div[openContent="reset-name"]').removeClass('active');
             $('.hide-iframe').removeClass('active');
-        });
+        })
         //重命名判断
        $('div[openContent="reset-name"] button.yes').click(function(){
            var rename = $('#rename').val();
            var regName = /^[a-zA-Z0-9\u4e00-\u9fa5]{2,16}$/;
            var renameResult = regName.test(rename);
-       });
+       })
        //删除公司信息
        $('.delete-project').click(function(){
            $('div[openContent="delete-project"]').addClass('active');
@@ -118,7 +122,7 @@ $(function () {
            $('.hide-iframe').css({
                'width': width,
                'height': height
-           });
+           })
            var companyName = $(this).parent().siblings('.coo-name').text();
            console.log(companyName)   
            //该公司所有账号下是否有项目,若没有项目
@@ -126,12 +130,12 @@ $(function () {
            //有项目
            $('div[openContent="delete-project"] .reset-pwd').text('您无法删除' + companyName + '信息');
            $('div[openContent="delete-project"] .reset-pwd-hint').text('请将其名下所有项目进行移交');
-       });
+       })
     $('div[openContent="delete-project"] button.reduce').click(function () {
         $('div[openContent="delete-project"]').removeClass('active');
         $('.hide-iframe').removeClass('active');
     })
-});
+})
 
 
 //封装一个限制字数方法
