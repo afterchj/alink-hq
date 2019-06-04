@@ -313,7 +313,9 @@ public class AccountController {
             int count = accountService.delete(user.getId());
             if (count == 0) {
                 String key = MemcachedObjectType.CACHE_TOKEN.getPrefix() + user.getId();
+                String key2 = MemcachedObjectType.CACHE_HQ_TOKEN.getPrefix() + user.getId();
                 client.delete(key);
+                client.delete(key2);
                 map.put("result", ResultDict.SUCCESS.getCode());
             } else {
                 map.put("result", ResultDict.PROJECT_EXISTED.getCode());

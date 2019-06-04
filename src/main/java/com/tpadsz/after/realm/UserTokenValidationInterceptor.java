@@ -22,8 +22,10 @@ public class UserTokenValidationInterceptor extends HandlerInterceptorAdapter {
             HttpSession session = request.getSession();
             User loginUser = (User) session.getAttribute("user");
             String key = MemcachedObjectType.CACHE_TOKEN.getPrefix() + loginUser.getId();
+            String key2 = MemcachedObjectType.CACHE_HQ_TOKEN.getPrefix() + loginUser.getId();
             String expected = client.get(key);
-            if (expected==null || "disabled".equals(expected)) {
+            String expected2 = client.get(key2);
+            if (expected2==null || "disabled".equals(expected)) {
                 String url = "/alink-hq/";
                 session.removeAttribute("user");
                 response.sendRedirect(url);
