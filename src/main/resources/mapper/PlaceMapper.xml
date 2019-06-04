@@ -83,7 +83,7 @@
              pl.id,
              pl.mid,
              pl.pname,
-             p.id place_id,
+             pl.place_id,
              p.name,
              m.mname,
              m.mesh_id,

@@ -28,10 +28,11 @@ $(function () {
     //     console.log("show",false);
     //     $(this).parent("div").css("display","none");
     // });
+    var str;
     $('.memo-edit').click(function (event) {
         event.stopPropagation();
         var contentText=$(this).siblings('.memo-edit-has').find('.memo-content').text();
-        console.log('contentText',contentText);
+        str=contentText;
         if(contentText==''){
             //如果备忘录为空时
             $('div[openContent="memo-edit"]').addClass('active');
@@ -44,6 +45,7 @@ $(function () {
             //如果备忘录不为空时
             $(this).parent('td').addClass('active');
             $(this).parent('td').parent('tr').siblings('tr').find('td').removeClass('active');
+            $(this).children('.pop-content').find(".wishContent").text(str);
         }
     })
     $('.meno-nav').click(function(event){
@@ -64,6 +66,7 @@ $(function () {
         event.stopPropagation();
         $('div[openContent="memo-edit"]').removeClass('active');
         $('.hide-iframe').removeClass('active');
+        console.log('contentText',str);
     })
     $('body').click(function () {
         $('.memo-edit-has').parent('td').removeClass('active');
@@ -170,7 +173,6 @@ $(".wishContent").on('input propertychange', function () {
     } else {
         len = 0
     }
-    console.log(len);
     //显示字数
     $(".wordsNum").html(len + '/200');
 });
