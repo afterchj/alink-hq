@@ -22,7 +22,7 @@
         <if test="coname!=null and coname!=''">
             AND coname LIKE CONCAT('%',#{coname},'%')
         </if>
-        <if test="status!=null and status!=''">
+        <if test="status!=null">
             AND status=#{status}
         </if>
         ORDER BY update_date DESC

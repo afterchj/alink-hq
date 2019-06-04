@@ -5,29 +5,8 @@ $(function () {
     var width = window.screen.width;
     var height = window.screen.height;
     var companyId, status, str;
-    //如果备忘录为空时
-    // $('.memo-edit').click(function(){
-    //     $('div[openContent="memo-edit"]').addClass('active');
-    //     var width = window.screen.width;
-    //     var height = window.screen.height;
-    //     $('.hide-iframe').addClass('active');
-    //     $('.hide-iframe').css({
-    //         'width': width,
-    //         'height': height
-    //     })
-    // })
-    // $('div[openContent="memo-edit"] button.reduce').click(function(){
-    //     $('div[openContent="memo-edit"]').removeClass('active');
-    //     $('.hide-iframe').removeClass('active');
-    // })
-    //如果备忘录不为空时
-    // $('.memo-edit').click(function () {
-    //
-    // });
-    // $('.meno-nav').mouseout(function () {
-    //     console.log("show",false);
-    //     $(this).parent("div").css("display","none");
-    // }
+    var status = $("#relation").val();
+    $("#status").val(status);
     $('.memo-edit').click(function (event) {
         event.stopPropagation();
         companyId = $(this).attr("alt");
@@ -146,7 +125,7 @@ $(function () {
         console.log(companyName);
         //该公司所有账号下是否有项目,若没有项目
         $.get("/alink-hq/cooperate/getCount?id=" + companyId, function (result) {
-            str=result;
+            str = result;
             if (result == 'ok') {
                 //无项目
                 $('div[openContent="delete-project"] .reset-pwd').text('您确定要删除' + companyName + '信息？');
@@ -166,7 +145,7 @@ $(function () {
         $('div[openContent="delete-project"]').removeClass('active');
         $('.hide-iframe').removeClass('active');
         console.log("result", str);
-        if (str=='ok'){
+        if (str == 'ok') {
             location.href = "/alink-hq/cooperate/delete?id=" + companyId
         }
     })

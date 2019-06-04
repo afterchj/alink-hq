@@ -35,10 +35,11 @@
             <div id="projectList" class="table-content-list">
                 <div class="search-condition ">
                     <form th:action="@{/cooperate/list}" class="clearfix">
+                        <input type="hidden" id="relation" th:value="${info.status}">
                         <div class="f-l search" style="margin-right: 150px;margin-left: 100px;">
                             <div>
                                 <label for="name">合作公司名称</label>
-                                <input type="text" id="name" name="coname" placeholder="请输入合作公司名称">
+                                <input type="text" id="name" name="coname" placeholder="请输入合作公司名称" th:value="${info.coname}">
                             </div>
                         </div>
                         <div class="f-l search">

@@ -40,7 +40,6 @@
                         <form th:action="@{/cooperate/save}" class="company-msg" method="post"
                               enctype="multipart/form-data">
                             <input type="hidden" name="id" th:value="${info.id}">
-                            <input type="hidden" name="status" th:value="${info.status}">
                             <div class="edit-company">
                                 <label for="company-name"><span>*</span>公司名称：</label>
                                 <input type="text" id="company-name" name="coname" placeholder="请填写公司名称"
