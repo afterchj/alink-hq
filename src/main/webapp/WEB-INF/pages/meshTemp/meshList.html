@@ -123,9 +123,9 @@
                                     <a th:if="${mesh.scount}=='0'" class="a-un" th:href="@{/scene/list(meshName=${mesh.mname},meshId=${mesh.mesh_id},mid=${mesh.id})}" th:text="${mesh.scount}"></a>
                                     <a th:if="${mesh.scount}!='0'" th:href="@{/scene/list(meshName=${mesh.mname},meshId=${mesh.mesh_id},mid=${mesh.id})}" th:text="${mesh.scount}"></a>
                                 </td>
-                                <td class="k-link" >
-                                    <a th:if="${mesh.scount}=='0'" class="a-un" th:href="@{/scene/list(meshName=${mesh.mname},meshId=${mesh.mesh_id},mid=${mesh.id})}" th:text="${mesh.scount}"></a>
-                                    <a th:if="${mesh.scount}!='0'" th:href="@{/scene/list(meshName=${mesh.mname},meshId=${mesh.mesh_id},mid=${mesh.id})}" th:text="${mesh.scount}"></a>
+                                <td class="k-link">
+                                    <a th:if="${mesh.tcount}=='0'" class="a-un" th:href="@{/timer/list(id=${mesh.id})}" th:text="${mesh.tcount}"></a>
+                                    <a th:if="${mesh.tcount}!='0'" th:href="@{/timer/list(id=${mesh.id})}" th:text="${mesh.tcount}"></a>
                                 </td>
                                 <!--<td  th:if="${mesh.scount}=='0'">-->
                                     <!--<a href="javascript:void(0);" th:text="${mesh.scount}"></a>-->

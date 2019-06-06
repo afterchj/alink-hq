@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="/alink-hq/static/css/projectManage.css">
     <script src="/alink-hq/static/js/jquery.min.js"></script>
     <script src="/alink-hq/static/js/upload.js"></script>
-    <title>公司信息录入</title>
+    <title>公司信息详情</title>
 </head>
 
 <body>
@@ -21,7 +21,7 @@
         <div th:replace="common/left::left('cooperateInfo')"></div>
         <div class="main-right f-l">
             <div class="clearfix main-right-nav">
-                <div class="f-l main-right-title">公司信息录入</div>
+                <div class="f-l main-right-title">公司信息详情</div>
                 <!-- <div class="f-r pointer">
                     <img src="./img/create-project.png" alt="">
                 </div> -->
@@ -35,36 +35,33 @@
             </div>
             <div id="timerDetail" class="table-content-list">
                 <div class="p-detail">
-                    <div class="p-nav">公司信息录入</div>
+                    <div class="p-nav">公司信息详情</div>
                     <div class="p-content p-r">
-                        <form th:action="@{/cooperate/save}" class="company-msg" method="post"
-                              enctype="multipart/form-data">
+                        <form th:action="@{/cooperate/save}" class="company-msg" method="post" enctype="multipart/form-data">
                             <input type="hidden" name="id" th:value="${info.id}">
                             <div class="edit-company">
-                                <label for="company-name"><span>*</span>公司名称：</label>
-                                <input type="text" id="company-name" name="coname" placeholder="请填写公司名称"
-                                       th:value="${info.coname}">
+                                <label for="company-name">公司名称：</label>
+                                <input type="text" id="company-name" name="coname" placeholder="请填写公司名称" th:value="${info.coname}">
                             </div>
                             <div class="edit-company">
-                                <label for="company-phone"><span>*</span>公司电话：</label>
+                                <label for="company-phone">公司电话：</label>
                                 <input type="text" id="company-phone" name="mobile" placeholder="请填写公司电话"
                                        th:value="${info.mobile}">
                             </div>
                             <div class="edit-company">
-                                <label for="address"><span>*</span>通讯地址：</label>
+                                <label for="address">通讯地址：</label>
                                 <input type="text" id="address" name="address" placeholder="请填写通讯地址"
                                        th:value="${info.address}">
                             </div>
                             <div class="edit-company clearfix">
-                                <label for="drop_area" style="vertical-align: top;"><span>*</span>营业执照：</label>
+                                <label for="drop_area" style="vertical-align: top;">营业执照：</label>
                                 <div style="display: none">
                                     <input type="file" id="file" name="file">
                                 </div>
                                 <div id="drop_area">
                                     <div id="preview" th:switch="${info.photo}" class="p-r">
                                         <img th:case="null" src="/alink-hq/static/img/upload.png" class="img-responsive" style="width: 100%;height:100%;" alt="" title="">
-                                        <!--<img th:case="*" th:src="@{'http://iotsztp.com/file/imgs/'+${info.photo}}" class="img-responsive" style="width: 100%;height:100%;" alt="" title="">-->
-                                        <img th:case="*" th:src="@{'http://uichange.com/file/imgs/'+${info.photo}}" class="img-responsive" style="width: 100%;height:100%;" alt="" title="">
+                                        <img th:case="*" th:src="@{'http://iotsztp.com/file/imgs/'+${info.photo}}" class="img-responsive" style="width: 100%;height:100%;" alt="" title="">
                                         <!--<img th:case="*" th:src="@{'../static/upload/'+${info.photo}}" class="img-responsive" style="width: 100%;height:100%;" alt="" title="">-->
                                         <!--<img src="http://iotsztp.com/file/imgs/chat_qrcode.jpg" style="width: 100%">-->
                                         <!--<img th:src="@{'../static/upload/'+${info.photo}}" style="width: 100%" th:alt="${info.photo}">-->
@@ -73,9 +70,8 @@
                                 </div>
                             </div>
                             <div class="edit-company">
-                                <label for="serial"><span>*</span>营业执照编号：</label>
-                                <input type="text" id="serial" name="code" placeholder="请填写营业执照编号"
-                                       th:value="${info.code}">
+                                <label for="serial">营业执照编号：</label>
+                                <input type="text" id="serial" name="code" placeholder="请填写营业执照编号" th:value="${info.code}">
                             </div>
                             <div class="btn-submit">
                                 <button shiro:hasAnyRoles="super,admin" type="submit">提交</button>
@@ -87,15 +83,12 @@
                         </div>
                     </div>
                 </div>
-
             </div>
         </div>
     </div>
 </div>
-
 <script src="/alink-hq/static/js/left.js"></script>
 <script src="/alink-hq/static/js/moment.js"></script>
-
 <script>
     $(function(){
         var dragImgUpload = new DragImgUpload("#drop_area", {
@@ -119,5 +112,4 @@
     })
 </script>
 </body>
-
 </html>

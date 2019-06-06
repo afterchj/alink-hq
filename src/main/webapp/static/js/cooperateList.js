@@ -176,3 +176,7 @@ $(".wishContent").on('input propertychange', function () {
     //显示字数
     $(".wordsNum").html(len + '/200');
 });
+function validateInput(id) {
+    var name=$();
+    
+}

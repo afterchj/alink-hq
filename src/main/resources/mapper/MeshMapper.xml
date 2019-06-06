@@ -18,7 +18,8 @@
         m.mesh_type,
         p.name,
        	IFNULL(pl.pcount,0) pcount,
-	    IFNULL(s.scount,0) scount
+        IFNULL(s.scount,0) scount,
+        IFNULL(t.tcount,0) tcount
 	</sql>
 
     <sql id="common_choose">
@@ -55,6 +56,7 @@
         INNER JOIN f_project p ON m.project_id = p.id
         LEFT JOIN (SELECT COUNT(1) pcount,mid FROM f_place GROUP BY mid) pl ON pl.mid=m.id
         LEFT JOIN (SELECT COUNT(1) scount,mid FROM f_scene GROUP BY mid) s ON s.mid=m.id
+        LEFT JOIN (SELECT COUNT(1) tcount,mid FROM f_time_line GROUP BY mid) t ON t.mid=m.id
         WHERE 1=1
         <include refid="common_choose"></include>
         <if test="mname!=null and mname!=''">
@@ -70,7 +72,7 @@
             AND m.project_id=#{projectId}
         </if>
         GROUP BY m.uid,m.mesh_id
-        ORDER BY m.update_date DESC,scount DESC
+        ORDER BY m.update_date DESC,tcount DESC
     </select>
 
     <select id="getMesh" resultType="OptionList" parameterType="map">
