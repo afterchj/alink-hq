@@ -39,7 +39,8 @@
                         <div class="f-l search" style="margin-right: 150px;margin-left: 100px;">
                             <div>
                                 <label for="name">合作公司名称</label>
-                                <input type="text" id="name" name="coname" placeholder="请输入合作公司名称" th:value="${info.coname}">
+                                <input type="text" id="name" name="coname" placeholder="请输入合作公司名称"
+                                       th:value="${info.coname}">
                             </div>
                         </div>
                         <div class="f-l search">
@@ -74,7 +75,8 @@
                         <tbody>
                         <tr th:each="cooperation:${pageInfo.list}">
                             <td class="k-link coo-name">
-                                <a th:href="@{/cooperate/info(id=${cooperation.id})}" th:text="${cooperation.coname}" th:alt="${cooperation.id}"></a>
+                                <a th:href="@{/cooperate/info(id=${cooperation.id})}" th:text="${cooperation.coname}"
+                                   th:alt="${cooperation.id}"></a>
                             </td>
                             <td th:text="${cooperation.mobile}"></td>
                             <td th:text="${cooperation.create_date}">
@@ -89,24 +91,30 @@
                                     <!--<span>合作</span>-->
                                 <!--</a>-->
                                 <a th:case="1" href="javascript:void(0);" class="off-or-on-coo" alt="0">
-                                    <span>合作</span>
+                                <span>合作</span>
                                 </a>
                                 <a th:case="0" href="javascript:void(0);" class="off-or-on-coo" alt="1">
-                                    <span>终止</span>
+                                <span>终止</span>
                                 </a>
                                 <a th:case='*' href="javascript:void(0);" class="off-or-on-coo" alt="1">
-                                    <span>合作</span>
+                                <span>合作</span>
                                 </a>
                             </td>
                             <td class="p-r">
-                                <img src="/alink-hq/static/img/edit.png" th:alt="${cooperation.id}" class="pointer reset-name" title="重命名" style="margin-right: 20px;">
-                                <img src="/alink-hq/static/img/delete.png" th:alt="${cooperation.id}" class="pointer delete-project" title="删除">
+                                <a th:href="@{/cooperate/edit(id=${cooperation.id})}">
+                                    <img src="/alink-hq/static/img/edit.png" th:alt="${cooperation.id}"
+                                         class="pointer reset-name" title="编辑" style="margin-right: 20px;">
+                                </a>
+                                <img src="/alink-hq/static/img/delete.png" th:alt="${cooperation.id}"
+                                     class="pointer delete-project" title="删除">
                             </td>
                             <td class="p-r">
-                                <img src="/alink-hq/static/img/edit.png" th:alt="${cooperation.id}" class="pointer memo-edit" title="备忘录">
+                                <img src="/alink-hq/static/img/edit.png" th:alt="${cooperation.id}"
+                                     class="pointer memo-edit" title="备忘录">
                                 <!-- 备忘录不为空 -->
                                 <div class="memo-edit-has">
-                                    <div class="meno-nav"><img src="/alink-hq/static/img/edit.png" alt="" class="pointer"></div>
+                                    <div class="meno-nav"><img src="/alink-hq/static/img/edit.png" alt=""
+                                                               class="pointer"></div>
                                     <div class="memo-content" th:text="${cooperation.other}"></div>
                                 </div>
                             </td>
@@ -169,8 +177,8 @@
         温馨提示
     </div>
     <div class="pop-content">
-        <div class="reset-pwd">您确定要删除 XXX 公司信息？</div>
-        <div class="reset-pwd-hint">（删除后项目中所有信息将无法恢复，请慎重！）</div>
+        <div class="reset-pwd"></div>
+        <div class="reset-pwd-hint"></div>
         <div class="pop-btn">
             <button class="reduce">取消</button>
             <button class="yes">确定</button>
@@ -184,7 +192,8 @@
         备忘录
     </div>
     <div class="pop-content">
-        <textarea rows="8" id="backup" maxlength="200" style="width: 93%;border: none;margin-top: 10px; resize:none;" class="wishContent" placeholder="请输入不超过200个字"></textarea>
+        <textarea rows="8" id="backup" maxlength="200" style="width: 93%;border: none;margin-top: 10px; resize:none;"
+                  class="wishContent" placeholder="请输入不超过200个字"></textarea>
         <p class="right-font"><span class="wordsNum">0/200</span></p>
         <div class="pop-btn">
             <button class="reduce">取消</button>

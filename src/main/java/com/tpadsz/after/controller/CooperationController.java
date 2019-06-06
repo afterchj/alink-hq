@@ -45,16 +45,20 @@ public class CooperationController {
 
     @RequestMapping("/info")
     public String cooperationInfo(int id, ModelMap modelMap) {
-        if (id != 0) {
-            CooperationInfo info = cooperateService.getCooperationInfo(id);
-            modelMap.put("info", info);
-        }
+        CooperationInfo info = cooperateService.getCooperationInfo(id);
+        modelMap.put("info", info);
         return "cooperateManage/cooperateInfo";
+    }
+
+    @RequestMapping("/edit")
+    public String cooperationEdit(int id, ModelMap modelMap) {
+        CooperationInfo info = cooperateService.getCooperationInfo(id);
+        modelMap.put("info", info);
+        return "cooperateManage/cooperateEdit";
     }
 
     @RequestMapping("/save")
     public String save(CooperationInfo info, @RequestParam(value = "file") MultipartFile file) {
-        logger.info("info="+info.getConame());
         String path = PropertiesUtil.getPath();
         String fileName = file.getOriginalFilename();
         File targetFile = new File(path, fileName);

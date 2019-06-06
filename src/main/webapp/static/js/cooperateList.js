@@ -86,30 +86,30 @@ $(function () {
     })
 
     //重命名
-    $('.reset-name').click(function () {
-        companyId = $(this).attr("alt");
-        $('div[openContent="reset-name"]').addClass('active');
-        // var width = window.screen.width;
-        // var height = window.screen.height;
-        $('.hide-iframe').addClass('active');
-        $('.hide-iframe').css({
-            'width': width,
-            'height': height
-        })
-    })
-    $('div[openContent="reset-name"] button.reduce').click(function () {
-        $('div[openContent="reset-name"]').removeClass('active');
-        $('.hide-iframe').removeClass('active');
-    })
-    //重命名判断
-    $('div[openContent="reset-name"] button.yes').click(function () {
-        var rename = $('#rename').val();
-        var regName = /^[a-zA-Z0-9\u4e00-\u9fa5]{2,16}$/;
-        var renameResult = regName.test(rename);
-        if (rename != '' && renameResult) {
-            location.href = "/alink-hq/cooperate/saveUpdate?id=" + companyId + '&coname=' + rename;
-        }
-    });
+    // $('.reset-name').click(function () {
+    //     companyId = $(this).attr("alt");
+    //     $('div[openContent="reset-name"]').addClass('active');
+    //     // var width = window.screen.width;
+    //     // var height = window.screen.height;
+    //     $('.hide-iframe').addClass('active');
+    //     $('.hide-iframe').css({
+    //         'width': width,
+    //         'height': height
+    //     })
+    // })
+    // $('div[openContent="reset-name"] button.reduce').click(function () {
+    //     $('div[openContent="reset-name"]').removeClass('active');
+    //     $('.hide-iframe').removeClass('active');
+    // })
+    // //重命名判断
+    // $('div[openContent="reset-name"] button.yes').click(function () {
+    //     var rename = $('#rename').val();
+    //     var regName = /^[a-zA-Z0-9\u4e00-\u9fa5]{2,16}$/;
+    //     var renameResult = regName.test(rename);
+    //     if (rename != '' && renameResult) {
+    //         location.href = "/alink-hq/cooperate/saveUpdate?id=" + companyId + '&coname=' + rename;
+    //     }
+    // });
     //删除公司信息
     $('.delete-project').click(function () {
         companyId = $(this).attr("alt");
