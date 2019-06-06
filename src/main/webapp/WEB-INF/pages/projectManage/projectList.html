@@ -118,7 +118,7 @@
                                 <a  th:href="@{/project/detail(account=${project.account},coname=${project.coname},meshNum=${project.meshNum},projectId=${project.id},projectName=${project.name})}" th:text="${project.name}"></a>
                             </td>
                             <td class="meshNum k-link">
-                                <a th:if="${project.meshNum}=='0'" class="a-un" th:href="@{/mesh/list(projectId=${project.id})}" th:text="${project.meshNum}"></a>
+                                <a th:if="${project.meshNum}=='0'" class="a-un" href="javascript:void(0);" th:text="${project.meshNum}"></a>
                                 <a th:if="${project.meshNum}!='0'"  th:href="@{/mesh/list(projectId=${project.id})}" th:text="${project.meshNum}"></a>
                             </td>
                             <td th:text="${project.account}" class="project-account"></td>

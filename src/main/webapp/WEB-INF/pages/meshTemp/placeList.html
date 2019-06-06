@@ -106,7 +106,7 @@
                                 </td>
                                 <td th:text="${place.mesh_id}"></td>
                                 <td class="k-link">
-                                    <a th:if="${place.gcount}=='0'" class="a-un" th:href="@{/group/list(mid=${place.mid},pid=${place.id})}"
+                                    <a th:if="${place.gcount}=='0'" class="a-un" href="javascript:void(0);"
                                        th:text="${place.gcount}"></a>
                                     <a th:if="${place.gcount}!='0'"  th:href="@{/group/list(mid=${place.mid},pid=${place.id})}"
                                        th:text="${place.gcount}"></a>
