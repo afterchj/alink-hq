@@ -1067,8 +1067,8 @@ input:-ms-input-placeholder {
 }
 
 .edit-company {
-    margin:35px 0;
-    font-size:15px
+    margin: 20px 0;
+    font-size: 15px;
 }
 
 .edit-company label {
@@ -1173,3 +1173,12 @@ i.cricle {
     transform:rotate(330deg);
     font-size:12px
 }
+.company-name-hint,.company-phone-hint,.address-hint,.license-hint,.license-number-hint{
+    color: red;
+    font-size: 14px;
+    padding-left: 180px;
+    height: 20px;
+}
+/*.company-name-hint.active,.company-phone-hint.active,.address-hint.active,.license-hint.active,.license-number-hint.active{*/
+    /*display: block;*/
+/*}*/

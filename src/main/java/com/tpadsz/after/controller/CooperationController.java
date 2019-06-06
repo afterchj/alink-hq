@@ -54,6 +54,7 @@ public class CooperationController {
 
     @RequestMapping("/save")
     public String save(CooperationInfo info, @RequestParam(value = "file") MultipartFile file) {
+        logger.info("info="+info.getConame());
         String path = PropertiesUtil.getPath();
         String fileName = file.getOriginalFilename();
         File targetFile = new File(path, fileName);
