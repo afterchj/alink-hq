@@ -70,7 +70,7 @@
                                 <span th:text="${meshInfo.gcount}"></span>
                             </div>
                             <div class="f-l">
-                                <a th:if="${meshInfo.gcount}=='0'" class="a-un"  th:href="@{/group/list(mid=${meshInfo.mid},pid=${meshInfo.id})}">查看组列表</a>
+                                <a th:if="${meshInfo.gcount}=='0'" class="a-un"  href="javascript:void(0);">查看组列表</a>
                                 <a th:if="${meshInfo.gcount}!='0'"   th:href="@{/group/list(mid=${meshInfo.mid},pid=${meshInfo.id})}">查看组列表</a>
                             </div>
                         </div>
@@ -80,7 +80,7 @@
                                 <span th:text="${meshInfo.lcount}"></span>
                             </div>
                             <div class="f-l">
-                                <a th:if="${meshInfo.lcount}=='0'" class="a-un" th:href="@{/light/list(mid=${meshInfo.mid},pid=${meshInfo.id})}">查看灯列表</a>
+                                <a th:if="${meshInfo.lcount}=='0'" class="a-un" href="javascript:void(0);">查看灯列表</a>
                                 <a th:if="${meshInfo.lcount}!='0'"  th:href="@{/light/list(mid=${meshInfo.mid},pid=${meshInfo.id})}">查看灯列表</a>
                             </div>
                         </div>

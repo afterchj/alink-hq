@@ -81,7 +81,7 @@
 .search-result table td.k-link .a-un:hover,.search-result table td.k-link .a-un:focus{
     border: none;
     color: #323232;
-    cursor: not-allowed;
+    /*cursor: not-allowed;*/
 }
 #projectDetail .p-content a.a-un{
     color: #323232;
@@ -89,7 +89,7 @@
 #projectDetail .p-content a.a-un:hover,#projectDetail .p-content a.a-un:focus{
     border: none;
     color: #323232;
-    cursor: not-allowed;
+    /*cursor: not-allowed;*/
 }
 .main-left a {
     font-size:16px;

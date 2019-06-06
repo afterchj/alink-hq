@@ -53,7 +53,7 @@
                                 <span th:text="${meshInfo.scount}"></span>
                             </div>
                             <div class="f-l">
-                                <a th:if="${meshInfo.scount}=='0'" class="a-un" th:href="@{/scene/list(meshName=${meshInfo.mname},meshId=${meshInfo.mesh_id},mid=${meshInfo.id})}">查看场景列表</a>
+                                <a th:if="${meshInfo.scount}=='0'" class="a-un" href="javascript:void(0);">查看场景列表</a>
                                 <a th:if="${meshInfo.scount}!='0'"  th:href="@{/scene/list(meshName=${meshInfo.mname},meshId=${meshInfo.mesh_id},mid=${meshInfo.id})}">查看场景列表</a>
                             </div>
                         </div>
@@ -63,7 +63,7 @@
                                 <span th:text="${meshInfo.scount}"></span>
                             </div>
                             <div class="f-l">
-                                <a th:if="${meshInfo.scount}=='0'" class="a-un" th:href="@{/scene/list(meshName=${meshInfo.mname},meshId=${meshInfo.mesh_id},mid=${meshInfo.id})}">查看定时列表</a>
+                                <a th:if="${meshInfo.scount}=='0'" class="a-un" href="javascript:void(0);">查看定时列表</a>
                                 <a th:if="${meshInfo.scount}!='0'"  th:href="@{/scene/list(meshName=${meshInfo.mname},meshId=${meshInfo.mesh_id},mid=${meshInfo.id})}">查看定时列表</a>
                             </div>
                         </div>
@@ -73,7 +73,7 @@
                                 <span th:text="${meshInfo.pcount}"></span>
                             </div>
                             <div class="f-l">
-                                <a th:if="${meshInfo.pcount}=='0'" class="a-un" th:href="@{/place/list(uid=${session.user.id},mid=${meshInfo.id})}">查看区域列表</a>
+                                <a th:if="${meshInfo.pcount}=='0'" class="a-un" href="javascript:void(0);">查看区域列表</a>
                                 <a th:if="${meshInfo.pcount}!='0'"  th:href="@{/place/list(uid=${session.user.id},mid=${meshInfo.id})}">查看区域列表</a>
                             </div>
                         </div>
@@ -83,7 +83,7 @@
                                 <span th:text="${meshInfo.gcount}"></span>
                             </div>
                             <div class="f-l">
-                                <a  th:if="${meshInfo.pcount}=='0'" class="a-un" th:href="@{/group/list(uid=${session.user.id},mid=${meshInfo.id})}">查看组列表</a>
+                                <a  th:if="${meshInfo.pcount}=='0'" class="a-un" href="javascript:void(0);">查看组列表</a>
                                 <a  th:if="${meshInfo.pcount}!='0'" th:href="@{/group/list(uid=${session.user.id},mid=${meshInfo.id})}">查看组列表</a>
                             </div>
                         </div>
@@ -93,7 +93,7 @@
                                 <span th:text="${meshInfo.lcount}"></span>
                             </div>
                             <div class="f-l">
-                                <a th:if="${meshInfo.lcount}=='0'" class="a-un" th:href="@{/light/list(uid=${session.user.id},mid=${meshInfo.id})}">查看灯列表</a>
+                                <a th:if="${meshInfo.lcount}=='0'" class="a-un" href="javascript:void(0);">查看灯列表</a>
                                 <a th:if="${meshInfo.lcount}!='0'"  th:href="@{/light/list(uid=${session.user.id},mid=${meshInfo.id})}">查看灯列表</a>
                             </div>
                         </div>

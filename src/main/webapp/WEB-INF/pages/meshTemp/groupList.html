@@ -111,7 +111,7 @@
                                     <a th:href="@{/place/info(id=${group.pid})}" th:text="${group.pname}"></a>
                                 </td>
                                 <td class="k-link">
-                                    <a th:if="${group.lcount}=='0'" class="a-un" th:href="@{/light/list(mid=${group.mid},gid=${group.id})}" th:text="${group.lcount}"></a>
+                                    <a th:if="${group.lcount}=='0'" class="a-un" href="javascript:void(0);" th:text="${group.lcount}"></a>
                                     <a th:if="${group.lcount}!='0'"  th:href="@{/light/list(mid=${group.mid},gid=${group.id})}" th:text="${group.lcount}"></a>
                                 </td>
                                 <td class="p-r" shiro:hasAnyRoles="super,admin,manager">
