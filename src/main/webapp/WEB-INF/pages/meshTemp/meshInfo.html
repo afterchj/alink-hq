@@ -20,7 +20,7 @@
             <div class="clearfix main-right-nav">
                 <div class="f-l main-right-title">网络详情</div>
                 <div class="f-r pointer">
-                    <div class="goBack" onClick="javascript :history.back(-1);" onmousedown="backBtnMouseDown()"
+                    <div class="goBack" onClick="javascript :history.back();" onmousedown="backBtnMouseDown()"
                          onmouseup="backBtnMouseUp()">
                         <!--<span class="triangle-facing-left"></span>-->
                         <span><</span><span>返回</span>
@@ -60,11 +60,11 @@
                         <div class="clearfix">
                             <div class="f-l">
                                 <span>网络中定时的数量：</span>
-                                <span th:text="${meshInfo.scount}"></span>
+                                <span th:text="${meshInfo.tcount}"></span>
                             </div>
                             <div class="f-l">
-                                <a th:if="${meshInfo.scount}=='0'" class="a-un" href="javascript:void(0);">查看定时列表</a>
-                                <a th:if="${meshInfo.scount}!='0'"  th:href="@{/scene/list(meshName=${meshInfo.mname},meshId=${meshInfo.mesh_id},mid=${meshInfo.id})}">查看定时列表</a>
+                                <a th:if="${meshInfo.tcount}=='0'" class="a-un" href="javascript:void(0);">查看定时列表</a>
+                                <a th:if="${meshInfo.tcount}!='0'"  th:href="@{/timer/list(id=${meshInfo.id})}">查看定时列表</a>
                             </div>
                         </div>
                         <div class="clearfix">
