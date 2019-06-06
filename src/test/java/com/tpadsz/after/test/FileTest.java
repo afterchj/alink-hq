@@ -13,17 +13,17 @@ import java.util.Properties;
 public class FileTest {
 
     public static void main(String[] args) {
-        File file = new File("/mydata/alink/imgs", "test.txt");
+        File file = new File("/mydata/alink/imgs");
         if (!file.getParentFile().exists()) {
             file.getParentFile().mkdirs();
         }
-        if (!file.exists()) {
-            try {
-                file.createNewFile();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
+//        if (!file.exists()) {
+//            try {
+//                file.createNewFile();
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
+//        }
         System.out.println(file.getAbsolutePath());
     }
 

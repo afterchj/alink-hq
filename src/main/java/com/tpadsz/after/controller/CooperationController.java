@@ -6,6 +6,7 @@ import com.tpadsz.after.entity.CooperationInfo;
 import com.tpadsz.after.entity.SearchDict;
 import com.tpadsz.after.service.CooperateService;
 import com.tpadsz.after.utils.PropertiesUtil;
+import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -66,8 +67,10 @@ public class CooperationController {
             targetFile.getParentFile().mkdirs();
         }
         try {
-            file.transferTo(targetFile);
-            info.setPhoto(fileName);
+            if (StringUtils.isNotEmpty(fileName)) {
+                file.transferTo(targetFile);
+                info.setPhoto(fileName);
+            }
             if (info.getId() == 0) {
                 cooperateService.save(info);
             } else {
