@@ -102,7 +102,7 @@
                             <input type="hidden" class="tid" th:value="${timeLineList.id}"/>
                             <td class="tname k-link"><a th:href="@{/timer/detail(id=${timeLineList.id},projectId=${projectId})}" th:text="${timeLineList.tname}"></a></td>
                             <td class=" k-link"><a th:href="@{/mesh/info(id=${timeLineList.mid})}" th:text="${timeLineList.mname}"></a></td>
-                            <td th:text="${timeLineList.mid}" class="mid"></td>
+                            <td th:text="${timeLineList.mesh_id}" class="mid"></td>
                             <td th:text="${timeLineList.week}"></td>
                             <td th:text="${timeLineList.repetition}"></td>
                             <!--<td><p>2019/05/13</p><p>14:55:44</p></td>-->
