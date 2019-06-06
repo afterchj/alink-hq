@@ -7,6 +7,7 @@
         t.tname,
         m.mname,
         t.mid,
+        m.mesh_id,
         IF( t.state = '0', '启用', '停用' ) state,
         IF( t.repetition = '0', '不重复', '重复' ) repetition,
         t.WEEK,
