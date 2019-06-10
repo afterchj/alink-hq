@@ -251,11 +251,18 @@ th.all-checkbox {
 }
 
 #projectDetail .p-content span,#timerDetail .p-content span {
-    font-size: 16px;
+
     color: #3c3c3c;
     transform: scale(1,.92);
     display: inline-block;
 }
+#projectDetail .p-content .timerDetail span,#timerDetail .p-content .timerDetail span  {
+    font-size: 15px;
+}
+#projectDetail .p-content .time span,#timerDetail .p-content .time span  {
+    font-size: 16px;
+}
+
 
 #timerDetail .p-content {
     padding:50px
@@ -905,6 +912,9 @@ input:-ms-input-placeholder {
     color:#fff;
     cursor:pointer
 }
+.scene-msg-list li.active span{
+    color:#fff !important;
+}
 
 .scene-msg .scene-msg-list > div:nth-child(3) > div:nth-child(1) ul.active {
     border-right:1px solid #bbb
@@ -933,13 +943,16 @@ input:-ms-input-placeholder {
     background-color:#fff
 }
 
+
 #projectDetail .light-detail-table td span,#projectDetail .light-detail-table th span,#timerDetail .light-detail-table th span {
     display:inline-block;
-    transform:scale(1,.9)
+    transform:scale(1,.9);
+    font-size: 15px;
 }
 
 #projectDetail .light-detail-table th span,#timerDetail .light-detail-table th span {
-    color:#fff
+    color:#fff;
+    font-size: 15px;
 }
 
 .light-table {
@@ -1179,6 +1192,9 @@ i.cricle {
     padding-left: 180px;
     height: 20px;
 }
-/*.company-name-hint.active,.company-phone-hint.active,.address-hint.active,.license-hint.active,.license-number-hint.active{*/
-    /*display: block;*/
-/*}*/
+#timerDetail .p-content .timerDetail .a-span.active{
+    background-color: #3598DB;
+}
+#timerDetail .p-content .timerDetail  .a-span.active a{
+    color: #fff;
+}

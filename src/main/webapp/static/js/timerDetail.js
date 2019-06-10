@@ -1,7 +1,17 @@
 $(function () {
     var header = '<div class="scene-msg timer f-l"><div class="scene-content" ><div class="scene-list clearfix"><div class="f-l"><span>场景下的区域信息</span><span>>></span></div><div class="f-l"><span>该区域下的组信息</span><span>>></span></div><div class="f-l"> <span>该组下的灯详情</span></div></div><div class="clearfix  scene-msg-list">';
     $(".sname-a").click(function () {
-
+        $(this).css({
+            'background':'#3598db',
+            'color':'#fff',
+            'padding':'5px',
+            'cursor':'pointer'
+        })
+        $(this).parent().parent().parent().siblings().find('.sname-a').css({
+            'background':'#fff',
+            'color':'#3598db',
+            'cursor':'pointer'
+        })
         var sid = $(this).next().val();
         var sceneName = $(this).text();
         var sceneId = $(this).siblings("input").eq(1).val();
@@ -129,8 +139,6 @@ $('.p-content ').on('click', '.gid', function () {
             $('.two').append(content1);
         }
     })
-
-
 })
 
 function isEmpty(value) {
