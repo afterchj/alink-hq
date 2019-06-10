@@ -77,7 +77,7 @@
                                         <td><span th:text="${timePoint.time}"></span></td>
                                         <td th:if="${timePoint.sname!=null}">
                                             <span class="a-span" >
-                                                <a th:text="${timePoint.sname}" href="javascript:void(0);" class="sname-a" style="cursor:pointer;"></a>
+                                                <a th:text="${timePoint.sname}" href="javascript:void(0);" class="sname-a" style="cursor:pointer; padding: 5px;"></a>
                                                 <input type="hidden" class="sid" th:value="${timePoint.sid}">
                                                 <input type="hidden" class="sceneName" th:value="${timePoint.scene_id}">
                                             </span>

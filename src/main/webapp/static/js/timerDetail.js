@@ -4,7 +4,7 @@ $(function () {
         $(this).css({
             'background':'#3598db',
             'color':'#fff',
-            'padding':'5px',
+            // 'padding':'5px',
             'cursor':'pointer'
         })
         $(this).parent().parent().parent().siblings().find('.sname-a').css({
