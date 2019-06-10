@@ -46,10 +46,12 @@
 .main-left {
     background-image:url(/alink-hq/static/img/left-list.png);
     background-size:100% 100%;
-    position:fixed;
+    /*position:fixed;*/
     left:0;
-    z-index:999;
+    /*z-index:999;*/
+    /*height: 100%;*/
     height: 100%;
+    position: absolute;
 }
 
 .ad-nav img {
@@ -205,7 +207,8 @@
     min-width:1400px;
     padding-left:250px;
     margin:auto;
-    padding-top:80px
+    padding-top:80px;
+    position: relative;
 }
 
 .no-access {
