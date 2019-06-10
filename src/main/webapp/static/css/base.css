@@ -115,7 +115,9 @@ ul li {
 .p-f {
     position:fixed
 }
-
+.main-right{
+    height: 100%;
+}
 .overflow {
     overflow:hidden;
     text-overflow:ellipsis;
