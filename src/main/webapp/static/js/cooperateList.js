@@ -34,7 +34,12 @@ $(function () {
             'width': width,
             'height': height
         })
+
         $(".wishContent").text(str);
+        // var userDesc = $('.wishContent').val();
+        // var len=userDesc.length;
+        // console.log('开始len',len);
+        $(".wordsNum").html(str.length + '/200');
     })
     $('div[openContent="memo-edit"] button.reduce').click(function (event) {
         event.stopPropagation();
@@ -166,8 +171,8 @@ var checkStrLengths = function (str, maxLength) {
 $(".wishContent").on('input propertychange', function () {
     //获取输入内容
     var userDesc = $(this).val();
+    var len=userDesc.length;
     //判断字数
-    var len;
     if (userDesc) {
         len = checkStrLengths(userDesc, 200);
     } else {
@@ -176,7 +181,7 @@ $(".wishContent").on('input propertychange', function () {
     //显示字数
     $(".wordsNum").html(len + '/200');
 });
-function validateInput(id) {
-    var name=$();
-    
-}
+// function validateInput(id) {
+//     var name=$();
+//
+// }
