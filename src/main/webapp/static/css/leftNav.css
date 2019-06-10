@@ -76,7 +76,8 @@
     padding:20px 0 0;
     min-width:1360px;
     width:96%;
-    margin:0 1%
+    margin:0 1%;
+    min-height: 760px;
 }
 .search-result table td.k-link .a-un{
     color: #323232;
