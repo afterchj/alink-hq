@@ -34,7 +34,7 @@
             </div>
             <div id="projectList" class="table-content-list">
                 <form th:action="@{/cooperate/list}" class="clearfix" method="post">
-                    <div class="search-condition temp">
+                    <div class="search-condition clearfix">
                         <input type="hidden" id="relation" th:value="${info.status}">
                         <input type="hidden" id="pageSize" th:value="${info.pageSize}">
                         <div class="f-l search" style="margin-right: 150px;margin-left: 100px;">
