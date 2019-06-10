@@ -27,6 +27,7 @@ public class MeshInfo {
     private int pcount;
     private int gcount;
     private int lcount;
+    private int tcount;
     private String off;
 
     public int getId() {
@@ -203,6 +204,14 @@ public class MeshInfo {
 
     public void setLcount(int lcount) {
         this.lcount = lcount;
+    }
+
+    public int getTcount() {
+        return tcount;
+    }
+
+    public void setTcount(int tcount) {
+        this.tcount = tcount;
     }
 
     public String getOff() {
