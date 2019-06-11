@@ -11,23 +11,31 @@ $(function () {
         event.stopPropagation();
         companyId = $(this).attr("alt");
         str = $(this).siblings('.memo-edit-has').find('.memo-content').text();
+        console.log('str',str,'companyId',companyId);
         if (str == '') {
             //如果备忘录为空时
-            $(this).siblings('.memo-edit-has').find('.memo-content').text('')
+            $(this).siblings('.memo-edit-has').find('.memo-content').text('');
+            $('table tr>td:last-child').removeClass('active');
             $('div[openContent="memo-edit"]').addClass('active');
             $('.hide-iframe').addClass('active');
             $('.hide-iframe').css({
                 'width': width,
                 'height': height
             })
+
+            $(".wishContent").val(str);
+            $(".wordsNum").html(str.length + '/200');
         } else {
             //如果备忘录不为空时
             $(this).parent('td').addClass('active');
             $(this).parent('td').parent('tr').siblings('tr').find('td').removeClass('active');
         }
+
     })
-    $('.meno-nav').click(function (event) {
+    $('.meno-nav img').click(function (event) {
         event.stopPropagation();
+        str=$(this).parent().siblings('.memo-content').text();
+        console.log('现在的str',str);
         $('div[openContent="memo-edit"]').addClass('active');
         $('.hide-iframe').addClass('active');
         $('.hide-iframe').css({
@@ -35,7 +43,7 @@ $(function () {
             'height': height
         })
 
-        $(".wishContent").text(str);
+        $(".wishContent").val(str);
         // var userDesc = $('.wishContent').val();
         // var len=userDesc.length;
         // console.log('开始len',len);

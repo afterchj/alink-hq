@@ -71,7 +71,7 @@
                 </div>
                 <div class="search-result">
                     <!-- 有数据时 -->
-                    <table border="1" class="hasData active" >
+                    <table border="1" class="hasData active" th:if="${pageInfo.getTotal()}!='0'">
                         <thead>
                         <tr>
                             <th><span>定时名称</span></th>
@@ -171,7 +171,7 @@
                     <input type="hidden" id="state" th:value="${state}"/>
                     <input type="hidden" id="pageSize" th:value="${pageInfo.getPageSize()}"/>
                     <!-- 无数据时 -->
-                    <table border="1" class="noData " >
+                    <table border="1" class="noData active" th:if="${pageInfo.getTotal()}=='0'">
                         <thead>
                         <tr>
                             <th><span>定时名称</span></th>

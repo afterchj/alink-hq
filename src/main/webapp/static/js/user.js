@@ -338,6 +338,7 @@ $(function () {
     })
     $('.meno-nav img,.memo-edit2').click(function (event) {
         event.stopPropagation();
+
         $('div[openContent="memo-edit"]').addClass('active');
         $('div[openContent="memo-edit"] .pop-content').find('p.unuse').remove();
         $(".wishContent").val('');
@@ -345,6 +346,8 @@ $(function () {
         var account = $(this).parents('tr').children('td').eq(0).text();
         if (content != '') {
             $(".wishContent").val(content);
+        }else{
+            $('table tr>td:last-child').removeClass('active');
         }
         $("#memo-account").val(account);
         $(".wordsNum").html(checkStrLengths(content, 200) + '/200');
