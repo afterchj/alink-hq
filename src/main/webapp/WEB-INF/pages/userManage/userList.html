@@ -68,7 +68,7 @@
                                             th:text="${firm.coname }"></option>
                                 </select>
                             </div>
-                            <div class="search-button " style=" padding: 0 0 0 145px;">
+                            <div class="search-button " style=" padding: 0 0 0 235px;">
                                 <button type="button" class="pointer">查询</button>
                                 <a th:href="@{getUserListExcel(account=${account},roleId=${roleId},fid=${fid},startDate=${startDate},endDate=${endDate})}"
                                    class="export">Excel导出</a>
@@ -100,7 +100,7 @@
                                 <span>状态</span>
                             </th>
                             <th class="operation"><span>操作</span></th>
-                            <th class="memo" style="width:320px;"><span>备忘录</span></th>
+                            <th class="memo" style="width:270px;"><span>备忘录</span></th>
                         </tr>
                         </thead>
                         <tbody>
@@ -115,8 +115,6 @@
                             <td th:if="${user.role_id=='3'}" th:text="乙方管理员" class="role"></td>
                             <td th:if="${user.role_id=='4'}" th:text="施工人员" class="role"></td>
                             <td th:text="${user.create_date}"></td>
-                            <!--<td th:text="${user.status}" class="status pointer" openTab="start-use" id="start-use">-->
-                            <!--</td>-->
                             <td th:if="${user.status=='1' && user.coStatus=='1'}" style="color: #0B78CE;"
                                 openTab="start-use" id="start-use" class="status pointer">
                                 <span class="result" th:text="启用"></span>
@@ -149,7 +147,6 @@
                                         alt="" class="center-img" th:title="不可移交"></a>
                                 <img src="/alink-hq/static/img/delete.png" alt="" id="delete-account"
                                      openTab="delete-account" class="pointer" th:title="删除">
-
                             </td>
                             <td class="p-r">
                                 <img th:if="${user.memo!=null&&user.memo!=''}" src="/alink-hq/static/img/memo.png" alt="" class="pointer memo-edit" th:title="备忘录">
@@ -169,14 +166,14 @@
                                 <div class="f-r page-right">
                                 <span class="prev-page">
                                     <a th:href="@{/account/list(pageNum=${pageInfo.prePage},pageSize=${pageInfo.pageSize},account=${account},uname=${uname},fid=${fid},roleId=${roleId},startDate=${startDate},endDate=${endDate})}">
-                                        <!--<img src="/alink-hq/static/img/left-arrow.png" alt="">-->
+
                                         <span class="prev "><span><</span></span></a>
                                     </a>
                                 </span>
                                     <span th:text="${pageInfo.pageNum}" class="pages"></span>
                                     <span class="next-page">
                                    <a th:href="@{/account/list(pageNum=${pageInfo.nextPage},pageSize=${pageInfo.pageSize},account=${account},uname=${uname},fid=${fid},roleId=${roleId},startDate=${startDate},endDate=${endDate})}">
-                                       <!--<img src="/alink-hq/static/img/right-arrow-color.png" alt="">-->
+
                                        <span class="next"><span>></span></span>
                                    </a>
                                 </span>
@@ -190,9 +187,6 @@
                                            oninput="skipLimit()"/>
                                 </span>
                                     <span class="m-r-35">
-                                    <!--<img src="/alink-hq/static/img/skip.png" id="skipPageBtn" class="pointer"-->
-                                        <!--onmousedown="mouseDown()" onmouseup="mouseUp()"-->
-                                        <!--alt="">-->
                                      <div id="skipPageBtn" class="pointer moment skipPageBtn"
                                           onmousedown="skipBtnMouseDown()" onmouseup="skipBtnMouseUp()">跳转
                                      </div>
@@ -302,6 +296,7 @@
     </div>
     <div class="pop-content">
         <div class="off-or-on"></div>
+        <p class="unuse" style="font-size: 14px;color: #fb2a2a;margin-top:20px;"></p>
         <div class="pop-btn">
             <button class="reduce" type="button">取消</button>
             <button class="yes" type="button">确定</button>

@@ -537,9 +537,10 @@ span.msg-use{
 }
 
 .pop-content .hasProject > div {
-    margin-bottom:20px;
-    font-size:17px;
-    color:#3c3c3c
+    font-size: 16px;
+    color: #3c3c3c;
+    font-weight: 600;
+    line-height: 2;
 }
 
 .pop-content span {
