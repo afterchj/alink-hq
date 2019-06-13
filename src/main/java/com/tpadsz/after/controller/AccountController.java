@@ -335,9 +335,11 @@ public class AccountController {
         user.setStatus(status);
         try {
             accountService.enable(user);
+            String key = MemcachedObjectType.CACHE_TOKEN.getPrefix() + user.getId();
             if (status == 1) {
-                String key = MemcachedObjectType.CACHE_TOKEN.getPrefix() + user.getId();
                 client.set(key, 0, "disabled");
+            }else {
+                client.delete(key);
             }
             map.put("result", ResultDict.SUCCESS.getCode());
         } catch (Exception e) {
