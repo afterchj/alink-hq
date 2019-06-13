@@ -184,7 +184,7 @@
                                 <span shiro:hasRole="user" class="skipPageBtn pointer moment active unclick1">移动</span>
                             </span>
                              <span>
-                                <span class="skipPageBtn pointer moment" onmousedown="deleteBtnMouseDown()"
+                                <span class="skipPageBtn pointer moment" shiro:hasAnyRoles="super,admin,manager"  onmousedown="deleteBtnMouseDown()"
                                       onmouseup="deleteBtnMouseUp()" id="multiDel">删除</span>
                                 <span shiro:hasRole="user" class="skipPageBtn pointer moment active unclick1">删除</span>
                             </span>
