@@ -144,15 +144,12 @@
                                 <td class="p-r" shiro:hasAnyRoles="super,admin,manager">
                                     <img src="/alink-hq/static/img/edit.png" th:alt="${light.id}" class="rename pointer"
                                          title="重命名">
-                                    <a th:href="@{/light/move(mid=${light.mid},ids=${light.id})}">
+                                    <a th:href="@{/light/move(mid=${light.mid},ids=${light.id})} ">
                                         <img src="/alink-hq/static/img/exchange.png" th:alt="${light.id}"
                                              class="center-img pointer" title="移动">
                                     </a>
-                                    <!--<a th:href="@{/light/delete(ids=${light.id})}"-->
-                                    <!--onclick="return confirm('您确定要删除所选的网络吗？')">-->
                                     <img src="/alink-hq/static/img/delete.png" th:alt="${light.id}"
                                          class="singleDel pointer " title="删除" style="margin-right: 20px;">
-                                    <!--</a>-->
                                     <img src="/alink-hq/static/img/export.png" th:alt="${light.id}"
                                          class="pointer backup" title="灯信息导出">
                                 </td>
@@ -162,7 +159,7 @@
                                          th:title="无法操作">
                                     <!--不能移交-->
                                     <img src="/alink-hq/static/img/un-exchange.png" alt=""
-                                         class=" pointer  unclick"
+                                         class=" pointer  unclick center-img"
                                          th:title="无法操作">
                                     <!--不能删除-->
                                     <img src="/alink-hq/static/img/un-delete.png" alt="" class="pointer   unclick"
