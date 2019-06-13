@@ -114,15 +114,14 @@
                                     <span>
                                         <span class="prev active" id="prev"><span><</span></span>
                                     </span>
-                                        <span th:inline="text" id="pageNum"
-                                              style="width: 20px">[[${pageInfo.pageNum}]]</span>
+                                        <span th:text="${pageInfo.pageNum}" id="pageNum" style="width: 20px"></span>
                                     <span>
                                           <span class="next" id="next"><span>></span></span>
                                     </span>
-                                    <span class="m-l-15 m-r-20">共<span class="amount" id="pages" th:inline="text">[[${pageInfo.pages}]]</span>页/
-                                         <span class="amount  pageTotal" th:inline="text">[[${pageInfo.total}]]</span>条数据</span>
+                                    <span class="m-l-15 m-r-20">共<span class="amount" id="pages"  th:text="${pageInfo.pages}"></span>页/
+                                         <span class="amount  pageTotal" th:text="${pageInfo.total}"></span>条数据</span>
                                     <span class="m-r-15">
-                                         <input type="number" th:value="${pageInfo.pageNum}" id="page" name="pageNum"
+                                         <input type="number"  id="page" name="pageNum" th:max="${pageInfo.pages}"
                                                 style="height: 22px;"/>
                                     </span>
                                     <span class="m-r-35">
@@ -133,7 +132,6 @@
                                         <span class="m-r-15r">每页显示：</span>
                                     <span class="m-r-20">
                                         <select id="size" name="pageSize">
-                                            <option value="2">2</option>
                                             <option value="10" selected="selected">10</option>
                                             <option value="30">30</option>
                                             <option value="50">50</option>

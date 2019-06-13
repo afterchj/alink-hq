@@ -273,7 +273,10 @@ th.all-checkbox {
     margin-bottom:30px;
     width:80%;
     text-align:left;
-    height:18px
+    height:18px;
+    font-size: 16px;
+    color: #3c3c3c;
+    transform: scale(1,.92);
 }
 
 #timerDetail .p-content .clearfix.time {

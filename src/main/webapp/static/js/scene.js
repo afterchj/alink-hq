@@ -8,7 +8,7 @@ $(function () {
             accountNum++;
         }
     })
-    $('.amount').text(accountNum);
+    $('#amount').text(accountNum);
     //复选框监听--监听全选
     $('#all').click(function () {
         var checked = $(this).prop('checked');
@@ -24,7 +24,7 @@ $(function () {
                 $(this).prop('checked', false);
             })
         }
-        $('.amount').text(accountNum);
+        $('#amount').text(accountNum);
     })
     //复选框监听--监听单选
     $('tbody .checkbox input').click(function () {
@@ -41,7 +41,7 @@ $(function () {
                 allChecked = false;
             }
         })
-        $('.amount').text(accountNum);
+        $('#amount').text(accountNum);
         if (!allChecked) {
             $('#all').prop('checked', false);
         } else {
