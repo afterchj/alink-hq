@@ -585,11 +585,11 @@ span.msg-use{
 }
 
 .pop-content p.rename-hint {
-    font-size:14px;
-    color:#fb2a2a;
-    height:20px;
-    padding-left:227px;
-    text-align:left
+    font-size: 14px;
+    color: #fb2a2a;
+    height: 20px;
+    padding-left: 203px;
+    text-align: left;
 }
 
 #createProject .c-createProject {

@@ -78,7 +78,8 @@
                 <img src="/alink-hq/static/img/left-reduce.png" alt="" class="p-a on-off-triangle">
             </div>
             <ul class=" two-list ">
-                <li  tab="roleList" class="active"><a th:href="@{/role/list}">角色列表</a>
+                <li th:if="${list}=='roleList'" tab="roleList" class="active"><a th:href="@{/role/list}">角色列表</a>
+                <li th:if="${list}!='roleList'" tab="roleList"><a th:href="@{/role/list}">角色列表</a></li>
                 </li>
             </ul>
         </li>
