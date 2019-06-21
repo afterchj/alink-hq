@@ -2,9 +2,89 @@
  * Created by yuanjie.fang on 2019/6/20.
  */
 $(function () {
-    // var projectId;
-    // var account;
-    // var deleteArray=[];
+    //向左向右
+    var page = parseInt($('#pageNum').text());
+    var pageTotal = parseInt($('#pages').text());
+    if (page == 1) {
+        $('.prev').removeClass('active');
+        $(".prev").addClass('disabled');
+    } else {
+        $('.prev').addClass('active');
+    }
+    if (page == pageTotal) {
+        $('.next').removeClass('active');
+        $(".next").addClass('disabled');
+    } else {
+        $(".next").addClass('active');
+    }
+    var roleName = decodeURIComponent(GetUrlParam("roleName"));
+    var pageSize = GetUrlParam("pageSize");
+    var pageNum = GetUrlParam("pageNum");
+    if(!pageSize){
+        pageSize=10;
+    }
+    if(!pageNum){
+        pageNum='';
+    }
+    $('#roleName').val(roleName);
+    if(pageNum==''){
+        $('#page').val('1');
+    }else{
+        $('#page').val(pageNum);
+    }
+    $('#size').children('option[value='+pageSize+']').prop('selected','selected');
+
+    //点击查询按钮时
+    $('.search-button button').click(function () {
+        condition(pageSize,pageNum);
+    })
+    //选择页数变化
+    $('#size').change(function () {
+        pageSize = $(this).children('option:selected').val();
+        pageNum = $('#page').val();
+        if (pageNum == '') {
+            pageNum == 1;
+        } else {
+            pageNum = parseInt(pageNum);
+        }
+        condition(pageSize, pageNum);
+    })
+    //点击上一页
+    $('#prev').click(function(){
+        if(pageNum==''){
+            pageNum=1;
+        }
+        pageNum=parseInt(pageNum)-1;
+        condition(pageSize,pageNum)
+    })
+    //点击下一页
+    $('#next').click(function(){
+        if(pageNum==''){
+            pageNum=1;
+        }
+        pageNum=parseInt(pageNum)+1;
+        condition(pageSize,pageNum)
+    })
+
+    //点击跳转
+    $('#skip').click(function(){
+        if($('#page').val()!=''&& parseInt($('#page').val())>=parseInt(pageTotal)){
+            pageNum= parseInt(pageTotal);
+            condition(pageSize,pageNum)
+        }else if($('#page').val()!=''&& parseInt($('#page').val())<=1){
+            pageNum= 1;
+            condition(pageSize,pageNum)
+        }else if($('#page').val()==''){
+            pageNum= 1;
+            condition(pageSize,pageNum)
+        }else{
+            pageNum=$('#page').val();
+            condition(pageSize,pageNum)
+        }
+    })
+
+
+
     var width = window.screen.width;
     var height = window.screen.height;
     //重命名弹框
@@ -103,6 +183,9 @@ $(function () {
         $('div[openContent="delete-role"]').removeClass('active');
         $('.hide-iframe').removeClass('active');
     })
+
+
+
     })
 
 //重命名校验
@@ -115,4 +198,18 @@ function nameKeyUp() {
     } else {
         $('p.rename-hint').text('');
     }
+}
+
+//查询条件
+function condition(pageSize, pageNum) {
+    var url = window.location.href;
+    var i = url.indexOf("?");
+    if (i != -1) {
+        var url2 = url.substring(0, i + 1);
+    } else {
+        var url2 = url + '?';
+    }
+    var roleName = $('#roleName').val();
+    var newUrl = url2 + '&pageNum=' + pageNum + '&pageSize=' + pageSize + '&roleName=' + roleName;
+    location.href = newUrl;
 }
