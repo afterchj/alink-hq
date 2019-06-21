@@ -18,11 +18,19 @@ public class RoleController {
     @RequestMapping(value = "/list", method = RequestMethod.GET)
     public String list() {
 
+
         return "roleManage/roleList";
     }
 
+    @RequestMapping(value = "/createRole", method = RequestMethod.GET)
+    public String createProject() {
+        return "roleManage/createRole";
+    }
 
-
+    @RequestMapping(value = "/detail", method = RequestMethod.GET)
+    public String detail() {
+        return "roleManage/roleDetail";
+    }
 
 
 }
