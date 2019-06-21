@@ -19,7 +19,20 @@ body {
     line-height:24px;
     font:14px Helvetica Neue,Helvetica,PingFang SC,\5FAE\8F6F\96C5\9ED1,Tahoma,Arial,sans-serif
 }
-
+input[type=checkbox] {
+    border:1px solid #bbb;
+    width:15px;
+    height:14px;
+    outline:none;
+    border-radius:0;
+    appearance:none;
+    -webkit-appearance:none;
+    cursor:pointer;
+    background-color:#eef3f5
+}
+input[type=checkbox]:checked {
+    background:url(/alink-hq/static/img/checkbox-gou.png) no-repeat center
+}
 a {
     text-decoration:none;
     margin:0;

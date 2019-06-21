@@ -1,0 +1,147 @@
+#tab {
+    width: 1300px;
+    margin: 0 auto;
+}
+
+.tab-nav {
+    border: 1px solid #bbb;
+}
+
+.tab-nav>div {
+    width: calc((100% - 264px)/4);
+    height: 58px;
+    line-height: 58px;
+    border-right: 1px solid #bbb;
+    text-align: center;
+    cursor: pointer;
+    font-size: 15px;
+}
+
+.tab-nav>div.data-scope {
+    width: 260px;
+    background-color: #3598db;
+    color: #fff;
+}
+
+.tab-nav>div.active {
+    background-color: #3598db;
+    color: #fff;
+    border-color: #3598db;
+    cursor: pointer;
+}
+
+.tab-nav>div:last-child {
+    border-right: none;
+}
+
+.tab-content {
+    border: 1px solid #bbb;
+    border-top: none;
+    height: 455px;
+}
+
+
+.fix-left-nav {
+    width: 260px;
+    height: 100%;
+}
+.fix-left-nav.gray{
+    background-color: #bbb;
+}
+
+.fix-right-nav {
+    width: calc(100% - 261px);
+    border-left: 1px solid #bbb;
+    height: 100%;
+}
+
+.tab-content label,
+.tab-content input {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.tab-content-part>div.list {
+    border-bottom: 1px solid #bbb;
+    line-height: 55px;
+}
+
+.limit,
+.company {
+    border-bottom: 1px solid #bbb;
+    padding: 0 20px;
+    background-color: #eee;
+    line-height: 55px;
+}
+
+.list-title {
+    width: calc(10%);
+
+    padding: 0 20px;
+}
+
+.list-content>div.one>div.f-l.zero {
+    width: 15%;
+}
+
+.list-content {
+    width: calc(90% - 81px);
+    border-left: 1px solid #bbb;
+    padding: 0 20px;
+}
+
+.tab-content-part>div.list:last-child {
+    border-bottom: none;
+}
+
+.company-select>div {
+    margin-top: 50px;
+    padding-left: 15px;
+}
+
+.alter {
+    text-align: center;
+}
+
+.tab-content-part {
+    display: none;
+}
+
+.tab-content-part.active {
+    display: block;
+}
+
+.alter button {
+    height: 44px;
+    width: 134px;
+    color: #fff;
+    font-size: 17px;
+    background-color: #3598db;
+    border: 1px solid #3598db;
+    letter-spacing: 5px;
+    padding-left: 5px;
+    margin-top: 30px;
+    text-align: center;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.list-content>div.one {
+    width: 77%;
+}
+
+.list-content>div.one>div.f-l {
+    width: 33%;
+}
+
+.tab-content-part>div.list.one {
+    border-bottom: 1px solid #bbb;
+}
+
+.tab-content-part>div.list.one .list-title {
+    /*line-height: 98px;*/
+}
+
+.tab-content-part>div.list.one .list-content {
+    line-height: 49px;
+}

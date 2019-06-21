@@ -221,14 +221,14 @@ th.all-checkbox {
     display:none
 }
 
-#projectDetail .p-detail,#timerDetail .p-detail {
+.table-content-list .p-detail {
     height:842px;
     margin:30px 0;
     border:1px solid #bbb;
     background-color:#fff
 }
 
-#projectDetail .p-nav,#projectDetail .c-nav,#timerDetail .p-nav {
+.table-content-list .p-nav,.table-content-list .c-nav,.table-content-list .p-nav {
     height:50px;
     line-height:50px;
     padding-left:25px;
@@ -238,15 +238,15 @@ th.all-checkbox {
     background-color:#fafafa
 }
 
-#projectDetail .c-nav {
+.table-content-list .c-nav {
     border-top:1px solid #bbb
 }
 
-#projectDetail .p-content {
+.table-content-list .p-content {
     padding:70px 0
 }
 
-#projectDetail .c-content {
+.table-content-list .c-content {
     padding: 60px 440px;
 }
 
