@@ -1,10 +1,8 @@
 package com.tpadsz.after.controller;
 
 import com.github.pagehelper.PageInfo;
-import com.tpadsz.after.entity.MeshInfo;
-import com.tpadsz.after.entity.ProjectList;
-import com.tpadsz.after.entity.TimeLine;
-import com.tpadsz.after.entity.TimePoint;
+import com.tpadsz.after.entity.*;
+import com.tpadsz.after.service.RolePermissionInfoService;
 import com.tpadsz.after.service.SceneService;
 import com.tpadsz.after.service.TimeLineService;
 import org.springframework.stereotype.Controller;
@@ -14,7 +12,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
-import java.util.*;
+import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * @program: alink-hq
@@ -29,17 +31,24 @@ public class TimeLineController {
     @Resource
     private TimeLineService timeLineService;
 
+    @Resource
+    private RolePermissionInfoService rolePermissionInfoService;
+
     /**
      * 跳转到timerList.html
      * @param model
      * @return
      */
     @RequestMapping("/list")
-    public String timerList(Model model, int id,Integer pageNum,Integer pageSize,String timeFlag,String tname,String
-            createDate,String endTime,String state) {
+    public String timerList(Model model, int id, Integer pageNum, Integer pageSize, String timeFlag, String tname, String
+            createDate, String endTime, String state, HttpSession session) {
         ProjectList projectList= timeLineService.getProjectNameByMid(id);
         PageInfo<TimeLine> pageInfo = timeLineService.getTimeLineByMid(id,pageNum,pageSize,timeFlag,tname,createDate,
                 endTime, state);
+        User loginUser = (User) session.getAttribute("user");
+        String account = loginUser.getAccount();
+        List<String> permissions = rolePermissionInfoService.getPermissions(account);
+        model.addAttribute("permissions",permissions);
         model.addAttribute("pageInfo",pageInfo);
         model.addAttribute("projectName",projectList.getName());
         model.addAttribute("projectId",projectList.getId());

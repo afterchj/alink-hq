@@ -31,8 +31,8 @@
                     <div class="search-condition  clearfix">
                         <div class="f-l search" style="margin-right:125px;margin-left: 100px;">
                             <div>
-                                <label for="sceneName" class="font">角色名称</label>
-                                <input type="text" id="sceneName" name="sceneName" placeholder="请输入角色名称">
+                                <label for="roleName" class="font">角色名称</label>
+                                <input type="text" id="roleName" name="roleName" placeholder="请输入角色名称">
                             </div>
                         </div>
                         <div class="f-r search search-button " style="padding-top: 0">
@@ -41,11 +41,10 @@
                     </div>
                     <div class="search-result">
                         <!-- 有数据时 -->
-                        <table border="1" class="hasData active" >
+                        <table border="1" class="hasData active" th:if="${pageInfo!=null}">
                             <thead>
                             <tr>
                                 <th><span>角色名称</span></th>
-                                <th class="p-r" style="width: 200px;"><span>角色等级</span><img class="p-a" th:src="@{/static/img/alter.png}" alt="" style="right: 5px;top: 25%;"></th>
                                 <th><span>使用该角色账号数量</span></th>
                                 <th><span>创建时间</span></th>
                                 <th><span>更新时间</span></th>
@@ -53,12 +52,11 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <tr >
-                                <td class="k-link"><a th:href="@{/role/detail}" >施工人员</a></td>
-                                <td >4</td>
-                                <td class="k-link">0</td>
-                                <td>2019/02/05 15:47:44</td>
-                                <td>2019/02/05 15:47:44</td>
+                            <tr th:each="role:${pageInfo.list}">
+                                <td class="k-link"><a th:href="@{/role/detail}" th:text="${role.roleName}">施工人员</a></td>
+                                <td class="k-link" th:text="${role.accountNum}"></td>
+                                <td th:text="${role.createTime}"></td>
+                                <td th:text="${role.updateTime}"></td>
                                 <td class="p-r" style="display: none">
                                     <!--不能重命名-->
                                     <img th:src="@{/static/img/un-rename.png}" alt="" class="pointer   unclick"
@@ -82,61 +80,23 @@
                                          th:title="删除">
                                 </td>
                             </tr>
-                            <tr >
-                                <td class="k-link"><a href="#" >管理员</a></td>
-                                <td >2</td>
-                                <td class="k-link"><a href="#">8</a></td>
-                                <td>2019/02/05 15:47:44</td>
-                                <td>2019/02/05 15:47:44</td>
-                                <td class="p-r" >
-                                    <!--不能重命名-->
-                                    <img th:src="@{/static/img/un-rename.png}" alt="" class="pointer   unclick"
-                                         th:title="无法操作">
-                                    <!--不能编辑-->
-                                    <img th:src="@{/static/img/alter-un.png}" alt="" class="pointer  left-img  unclick"
-                                         th:title="无法操作">
-                                    <!--不能删除-->
-                                    <img th:src="@{/static/img/un-delete.png}" alt="" class="pointer  left-img  unclick"
-                                         th:title="无法操作">
-                                </td>
-                                <td class="p-r" style="display: none">
-                                    <!--重命名-->
-                                    <img th:src="@{/static/img/edit.png}" alt="" class="pointer   reset-name"
-                                         th:title="重命名">
-                                    <!--编辑-->
-                                    <img th:src="@{/static/img/alter.png}" alt="" class="pointer left-img"
-                                         th:title="编辑">
-                                    <!--删除-->
-                                    <img th:src="@{/static/img/delete.png}" alt="" class="pointer left-img delete-role"
-                                         th:title="删除">
-                                </td>
-                            </tr>
                             </tbody>
                             <tfoot>
                             <tr>
                                 <td colspan="9" class="clearfix page">
-                                    <div class="f-l">
-                            <span class="selected-order">已选择
-                                <span id="amount" class="amount">0</span>条数据
-                            </span>
-                            <span>
-                                <span shiro:hasAnyRoles="super,admin,manager" class="skipPageBtn pointer moment" onmousedown="deleteBtnMouseDown()" onmouseup="deleteBtnMouseUp()" id="multiDel">删除</span>
-                                <span shiro:hasRole="user" class="skipPageBtn active moment unclick1"  id="multiDel">删除</span>
-                            </span>
-                                    </div>
                                     <!--<div th:replace="common/page::page"></div>-->
                                     <div class="f-r page-right">
                                     <span>
                                         <span class="prev active" id="prev"><span><</span></span>
                                     </span>
-                                        <span  id="pageNum" style="width: 20px"></span>
+                                        <span th:text="${pageInfo.pageNum}" id="pageNum" style="width: 20px"></span>
                                     <span>
                                           <span class="next" id="next"><span>></span></span>
                                     </span>
-                                    <span class="m-l-15 m-r-20">共<span class="amount" id="pages" ></span>页/
-                                         <span class="amount  pageTotal" ></span>条数据</span>
+                                    <span class="m-l-15 m-r-20">共<span class="amount" id="pages" th:text="${pageInfo.pages}"></span>页/
+                                         <span class="amount  pageTotal" th:text="${pageInfo.total}"></span>条数据</span>
                                     <span class="m-r-15">
-                                         <input type="number"  id="page" name="pageNum"
+                                         <input type="number"  id="page" name="pageNum" th:max="${pageInfo.pages}"
                                                 style="height: 22px;"/>
                                     </span>
                                     <span class="m-r-35">
@@ -159,7 +119,7 @@
                             </tfoot>
                         </table>
                          <!--无数据时-->
-                        <table  border="1" class="noData ">
+                        <table th:if="${pageInfo==null}" border="1" class="noData ">
                             <thead>
                             <tr>
                                 <th>角色名称</th>

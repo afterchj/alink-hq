@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -48,7 +48,7 @@
                                 <span th:text="${projectName}"></span>
                             </div>
                             <div class="f-l">
-                                <span><a th:href="@{/project/detail(projectId=${projectId})}">查看项目详情</a></span>
+                                <span><a th:href="@{/project/detail(projectId=${projectId})}" shiro:hasPermission="viewProject">查看项目详情</a></span>
                             </div>
                         </div>
                         <div class="clearfix time">
@@ -59,7 +59,7 @@
                                 <span th:text="${timeLine.mesh_id}" id="mid"></span>
                             </div>
                             <div class="f-l">
-                                <span><a th:href="@{/mesh/info(id=${timeLine.mid})}">查看网络详情</a></span>
+                                <span><a th:href="@{/mesh/info(id=${timeLine.mid})}" >查看网络详情</a></span>
                             </div>
                         </div>
                         <div class="clearfix timerDetail">
@@ -82,9 +82,10 @@
                                                 <input type="hidden" class="sceneName" th:value="${timePoint.scene_id}">
                                             </span>
                                             <span>
-                                                <span  class="a-span" style="margin: 0 10px;height: 30px;font-size: 20px;">|</span>
+                                                <span  class="a-span" style="margin: 0 10px;height: 30px;font-size:
+                                                20px;" shiro:hasPermission="viewScene">|</span>
                                             </span>
-                                            <span  class="a-span"><a th:href="@{/scene/detail(sid=${timePoint.sid},sceneName=${timePoint.sname},sceneId=${timePoint.scene_id},meshName=${timeLine.mname},meshId=${timeLine.mesh_id})}">查看详情</a></span>
+                                            <span  class="a-span"><a th:href="@{/scene/detail(sid=${timePoint.sid},sceneName=${timePoint.sname},sceneId=${timePoint.scene_id},meshName=${timeLine.mname},meshId=${timeLine.mesh_id})}" shiro:hasPermission="viewScene">查看详情</a></span>
                                         </td>
                                         <td th:if="${timePoint.sname==null}">
                                             <span class="a-span"  th:text="${timePoint.state}"></span>

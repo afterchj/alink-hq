@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.tpadsz.after.dao.RolePermissionInfoDao">
+
+    <insert id="authorization" >
+        INSERT INTO f_role_permission( create_date,role_id, permission_id) VALUES
+            ( now(),#{role_id}, (select id from f_permission where permission_name=#{permission}))
+    </insert>
+
+    <delete id="deleteRolePermission">
+        delete from f_role_permission where role_id=#{role_id}
+    </delete>
+</mapper>

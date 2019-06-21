@@ -111,6 +111,14 @@ $(function () {
 })
 $(function () {
     //页面初始化
+    //没有重命名权限
+    if ($(".p-r>.reset-name").length<=0){
+        $(".timerLineTr .p-r").each(function () {
+            $(this).append("<img src='/alink-hq/static/img/edit.png' class='pointer reset-name'" +
+                " style='pointer-events: none'/>");
+        });
+        // $(".timerLineTr .p-r").append('<img src="/alink-hq/static/img/edit.png" class="pointer reset-name"' + 'style="pointer-events: none"');
+    }
 
     //点击查询
     $(".search-button button").click(function () {

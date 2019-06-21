@@ -25,6 +25,14 @@
         WHERE u.id = #{uid}
     </select>
 
+    <select id="selectRoleList" resultType="com.tpadsz.after.entity.RoleList" parameterType="string">
+        SELECT
+        r.id ,r.role_name AS roleName,IFNULL(ur.accountNum,0) as accountNum,DATE_FORMAT(r.create_time,'%Y-%m-%d %H:%i:%s') AS createTime,DATE_FORMAT(r.update_time,'%Y-%m-%d %H:%i:%s') AS updateTime
+        FROM f_role r
+        LEFT JOIN (SELECT count(id) AS accountNum,role_id FROM f_user_role GROUP BY role_id) AS ur ON ur.role_id = r.id WHERE r.role_name LIKE CONCAT('%',IFNULL(#{roleName},''),'%') ORDER BY r.id
+    </select>
+
+
     <select id="selectIdByName" resultType="java.lang.Integer">
 		select id from role
 		where role_name=#{roleName,jdbcType=VARCHAR}
