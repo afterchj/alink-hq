@@ -153,3 +153,9 @@ function isEmpty(value) {
         return false;
     }
 }
+$(function () {
+    if ($(".time .f-l:eq(1) a").length<=0){
+        // console.log("null")
+        $(".time .f-l:eq(1)>span").append('<a style="pointer-events: none">查看项目详情</a>')
+    }
+})

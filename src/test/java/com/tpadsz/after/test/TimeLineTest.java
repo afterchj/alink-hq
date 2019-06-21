@@ -1,7 +1,6 @@
 package com.tpadsz.after.test;
 
 import com.github.pagehelper.PageInfo;
-import com.tpadsz.after.dao.UserExtendDao;
 import com.tpadsz.after.entity.ProjectList;
 import com.tpadsz.after.entity.TimeLine;
 import com.tpadsz.after.entity.TimePoint;
@@ -80,11 +79,5 @@ public class TimeLineTest {
     public void getTimePointByTsidTest() {
         List<TimePoint> timePointByTsid = timeLineService.getTimePointByTsid(54);
         System.out.println(timePointByTsid.toString());
-    }
-
-    @Test
-    public void test() {
-        List<String> permissionList = getSession().getMapper(UserExtendDao.class).getPermissionList("1122");
-        permissionList.stream().forEach(System.out::println);
     }
 }
