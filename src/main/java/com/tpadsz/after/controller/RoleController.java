@@ -3,6 +3,8 @@ package com.tpadsz.after.controller;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.tpadsz.after.entity.RoleList;
+import com.tpadsz.after.entity.User;
+import com.tpadsz.after.service.AccountService;
 import com.tpadsz.after.service.RoleService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 /**
@@ -22,9 +25,13 @@ public class RoleController {
     @Resource
     private RoleService roleService;
 
+    @Resource
+    private AccountService accountService;
 
     @RequestMapping(value = "/list", method = RequestMethod.GET)
-    public String list(Integer pageNum,Integer pageSize,String roleName,Model model) {
+    public String list(Integer pageNum, Integer pageSize, String roleName, HttpSession session, Model model) {
+        User loginUser = (User) session.getAttribute("user");
+        String uid = loginUser.getId();
         if (pageNum == null) {
             pageNum = 1;   //设置默认当前页
         }
@@ -35,13 +42,16 @@ public class RoleController {
             pageSize = 10;    //设置默认每页显示的数据数
         }
         try {
-            PageHelper.startPage(pageNum, pageSize);
-            List<RoleList> roleList = roleService.selectRoleList(roleName);
-            PageInfo<RoleList> pageInfo = new PageInfo<>(roleList, pageSize);
-            if (pageInfo.getList().size() > 0) {
-                model.addAttribute("pageInfo", pageInfo);
+            Integer role_id = accountService.findRoleIdByUid(uid);
+            if (role_id < 4) {
+                PageHelper.startPage(pageNum, pageSize);
+                List<RoleList> roleList = roleService.selectRoleList(role_id, roleName);
+                PageInfo<RoleList> pageInfo = new PageInfo<>(roleList, pageSize);
+                if (pageInfo.getList().size() > 0) {
+                    model.addAttribute("pageInfo", pageInfo);
+                }
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return "roleManage/roleList";

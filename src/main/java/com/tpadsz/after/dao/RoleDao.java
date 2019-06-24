@@ -26,5 +26,5 @@ public interface RoleDao {
     int updateById(Role record);
 
 
-    List<RoleList> selectRoleList(@Param("roleName")String roleName);
+    List<RoleList> selectRoleList(@Param("roleId")Integer roleId,@Param("roleName")String roleName);
 }

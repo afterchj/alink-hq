@@ -30,8 +30,8 @@ public class RoleServiceImpl implements RoleService {
 	}
 
 	@Override
-	public List<RoleList> selectRoleList(String roleName) {
-		return roleDao.selectRoleList(roleName);
+	public List<RoleList> selectRoleList(Integer roleId,String roleName) {
+		return roleDao.selectRoleList(roleId,roleName);
 	}
 
 }

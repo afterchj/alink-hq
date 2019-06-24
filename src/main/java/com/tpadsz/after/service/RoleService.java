@@ -13,6 +13,6 @@ public interface RoleService {
 
 	String selectById(Integer uid);
 
-	List<RoleList> selectRoleList(String roleName);
+	List<RoleList> selectRoleList(Integer roleId,String roleName);
 
 }

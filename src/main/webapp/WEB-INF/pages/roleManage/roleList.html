@@ -53,7 +53,7 @@
                             </thead>
                             <tbody>
                             <tr th:each="role:${pageInfo.list}">
-                                <td class="k-link"><a th:href="@{/role/detail}" th:text="${role.roleName}">施工人员</a></td>
+                                <td class="k-link"><a th:href="@{/rolePer/detail}" th:text="${role.roleName}">施工人员</a></td>
                                 <td class="k-link" th:text="${role.accountNum}"></td>
                                 <td th:text="${role.createTime}"></td>
                                 <td th:text="${role.updateTime}"></td>
@@ -119,11 +119,10 @@
                             </tfoot>
                         </table>
                          <!--无数据时-->
-                        <table th:if="${pageInfo==null}" border="1" class="noData ">
+                        <table th:if="${pageInfo==null}" border="1" class="noData active">
                             <thead>
                             <tr>
                                 <th>角色名称</th>
-                                <th>角色等级</th>
                                 <th>使用该角色账号数量</th>
                                 <th>创建时间</th>
                                 <th>更新时间</th>
