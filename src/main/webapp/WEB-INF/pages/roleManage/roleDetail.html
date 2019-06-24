@@ -31,10 +31,10 @@
                     <div class="p-nav">角色名称 ： <span class="roleName"></span></div>
                     <div class="p-content ">
                         <!--<div class="clearfix" style="border: 1px solid #bbb;margin:20px auto; width:400px;">-->
-                            <!--<div alt="default" class="f-l ad" style="border-right: 1px solid #bbb; width: 24%;text-align: center;padding: 3px;">默认</div>-->
-                            <!--<div alt="Admin"  class="f-l ad" style="border-right: 1px solid #bbb; width: 24%;text-align: center;padding: 3px;">管理员</div>-->
-                            <!--<div alt="yi-Admin"  class="f-l ad" style="border-right: 1px solid #bbb; width: 24%;text-align: center;padding: 3px;">乙方管理员</div>-->
-                            <!--<div alt="builders"  class="f-l ad" style="width: 21%; ;text-align: center;padding: 3px;">施工人员</div>-->
+                        <!--<div alt="default" class="f-l ad" style="border-right: 1px solid #bbb; width: 24%;text-align: center;padding: 3px;">默认</div>-->
+                        <!--<div alt="Admin"  class="f-l ad" style="border-right: 1px solid #bbb; width: 24%;text-align: center;padding: 3px;">管理员</div>-->
+                        <!--<div alt="yi-Admin"  class="f-l ad" style="border-right: 1px solid #bbb; width: 24%;text-align: center;padding: 3px;">乙方管理员</div>-->
+                        <!--<div alt="builders"  class="f-l ad" style="width: 21%; ;text-align: center;padding: 3px;">施工人员</div>-->
                         <!--</div>-->
                         <div id="tab">
                             <div class="tab-nav clearfix">
@@ -364,22 +364,26 @@
                                                         <input type="checkbox" class="singleListChecked">
                                                         <label for="">账号删除</label>
                                                     </div>
-                                                    <div class="f-l" style="width: 50%;">
+                                                    <div class="f-l" style="width: 100%;">
                                                         <input type="checkbox" class="singleListChecked">
                                                         <label for="">创建账号（创建账号时的角色选择）</label>
                                                     </div>
-                                                    <div class="f-l">
-                                                        <input type="checkbox" class="singleListChecked" class="admin-role">
-                                                        <label for="">管理员</label>
+                                                    <div class="f-l clearfix create-account">
+                                                        <div class="f-l">
+                                                            <input type="checkbox" class="singleListChecked"
+                                                                   class="admin-role">
+                                                            <label for="">管理员</label>
+                                                        </div>
+                                                        <div class="f-l">
+                                                            <input type="checkbox" class="singleListChecked">
+                                                            <label for="">乙方管理员</label>
+                                                        </div>
+                                                        <div class="f-l">
+                                                            <input type="checkbox" class="singleListChecked builders">
+                                                            <label for="">施工人员</label>
+                                                        </div>
                                                     </div>
-                                                    <div class="f-l">
-                                                        <input type="checkbox" class="singleListChecked">
-                                                        <label for="">乙方管理员</label>
-                                                    </div>
-                                                    <div class="f-l">
-                                                        <input type="checkbox" class="singleListChecked builders">
-                                                        <label for="">施工人员</label>
-                                                    </div>
+
                                                 </div>
                                                 <div class="f-r clearfix " style="line-height: calc(49px * 3);">
                                                     <div class="f-l">
@@ -402,7 +406,7 @@
                                         <div class="list clearfix one">
                                             <div class="f-l list-title" style="line-height: calc(49px * 3);">
                                                 <div>
-                                                    <input type="checkbox"  class="singleChecked allListChecked">
+                                                    <input type="checkbox" class="singleChecked allListChecked">
                                                     <label for="">角色列表</label>
                                                 </div>
                                             </div>
@@ -424,21 +428,24 @@
                                                         <input type="checkbox" class="singleListChecked">
                                                         <label for="">修改角色权限</label>
                                                     </div>
-                                                    <div class="f-l" style="width: 50%;" >
+                                                    <div class="f-l" style="width: 100%;">
                                                         <input type="checkbox" class="singleListChecked lookRole">
                                                         <label for="">查看角色权限（可查看的角色）</label>
                                                     </div>
-                                                    <div class="f-l">
-                                                        <input type="checkbox" class="singleListChecked admin-role" >
-                                                        <label for="">管理员</label>
-                                                    </div>
-                                                    <div class="f-l">
-                                                        <input type="checkbox" class="singleListChecked yi-admin-role">
-                                                        <label for="">乙方管理员</label>
-                                                    </div>
-                                                    <div class="f-l">
-                                                        <input type="checkbox" class="singleListChecked builders">
-                                                        <label for="">施工人员</label>
+                                                    <div class="f-l clearfix create-account">
+                                                        <div class="f-l">
+                                                            <input type="checkbox" class="singleListChecked admin-role">
+                                                            <label for="">管理员</label>
+                                                        </div>
+                                                        <div class="f-l">
+                                                            <input type="checkbox"
+                                                                   class="singleListChecked yi-admin-role">
+                                                            <label for="">乙方管理员</label>
+                                                        </div>
+                                                        <div class="f-l">
+                                                            <input type="checkbox" class="singleListChecked builders">
+                                                            <label for="">施工人员</label>
+                                                        </div>
                                                     </div>
                                                 </div>
                                                 <div class="f-r clearfix " style="line-height: calc(49px * 3);">
@@ -461,7 +468,7 @@
                                         <div class="list clearfix one">
                                             <div class="f-l list-title" style="line-height: calc(49px * 2);">
                                                 <div>
-                                                    <input type="checkbox"  class="singleChecked allListChecked">
+                                                    <input type="checkbox" class="singleChecked allListChecked">
                                                     <label for="">合作列表</label>
                                                 </div>
                                             </div>

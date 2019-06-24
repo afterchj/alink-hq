@@ -131,7 +131,7 @@
 }
 
 .list-content>div.one>div.f-l {
-    width: 33%;
+    width: 24%;
 }
 
 .tab-content-part>div.list.one {
@@ -144,4 +144,11 @@
 
 .tab-content-part>div.list.one .list-content {
     line-height: 49px;
+}
+.list-content>div.one>div.f-l.create-account{
+    width:calc(100% - 20px);
+    margin-left: 20px;
+}
+.list-content>div.one>div.f-l.create-account>div{
+    width:21.5%;
 }
