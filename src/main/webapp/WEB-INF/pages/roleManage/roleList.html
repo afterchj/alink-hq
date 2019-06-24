@@ -53,7 +53,9 @@
                             </thead>
                             <tbody>
                             <tr th:each="role:${pageInfo.list}">
-                                <td class="k-link"><a th:href="@{/rolePer/detail}" th:text="${role.roleName}">施工人员</a></td>
+                                <td class="k-link"><a th:href="@{/rolePer/detail(rid=${role.id})}"
+                                                      th:text="${role.roleName}">施工人员
+                                </a></td>
                                 <td class="k-link" th:text="${role.accountNum}"></td>
                                 <td th:text="${role.createTime}"></td>
                                 <td th:text="${role.updateTime}"></td>

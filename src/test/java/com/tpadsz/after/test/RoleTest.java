@@ -9,6 +9,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @program: alink-hq
@@ -38,12 +39,26 @@ public class RoleTest {
     }
 
     @Test
-    public void test(){
+    public void authorizationTest(){
         List<String> permissions = new ArrayList<>();
         permissions.add("viewProject");
         permissions.add("createProject");
         permissions.add("11");
         roleManageService.authorization(permissions);
+    }
+
+    @Test
+    public void getRolePermissionsTest(){
+        List<Map<String, String>> tpad1d12 = roleManageService.getUsers("tpad1d12");
+        List<Map<String, String>> tpad1d121 = roleManageService.getRolePermissions("tpad1d12");
+        tpad1d12.stream().forEach(System.out::println);
+        tpad1d121.stream().forEach(System.out::println);
+    }
+
+    @Test
+    public void test(){
+        List<String> permissionsByRid = roleManageService.getPermissionsByRid("2");
+        permissionsByRid.stream().forEach(System.out::println);
     }
 
 

@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @program: alink-hq
@@ -37,5 +38,25 @@ public class RolePermissionInfoServiceImpl implements RolePermissionInfoService 
             roleManageDao.authorization(permissions.get(i),roleId);
         }
 
+    }
+
+    @Override
+    public String getRoleName(String rid) {
+        return roleManageDao.getRoleName(rid);
+    }
+
+    @Override
+    public List<Map<String,String>> getUsers(String account) {
+        return roleManageDao.getUsers(account);
+    }
+
+    @Override
+    public List<Map<String,String>> getRolePermissions(String account) {
+        return roleManageDao.getRolePermissions(account);
+    }
+
+    @Override
+    public List<String> getPermissionsByRid(String rid) {
+        return roleManageDao.getPermissionsByRid(rid);
     }
 }

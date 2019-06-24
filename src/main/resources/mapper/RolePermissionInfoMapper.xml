@@ -10,4 +10,38 @@
     <delete id="deleteRolePermission">
         delete from f_role_permission where role_id=#{role_id}
     </delete>
+
+    <select id="getRoleName" resultType="string">
+        select role_name from f_role where id=${rid}
+    </select>
+
+    <select id="getUsers" resultType="map">
+        select distinct
+		p.permission_name,p.role_descr
+		from f_user_account u
+		left join f_user_role ur on u.id = ur.user_id
+		left join f_role r on ur.role_id = r.id
+		left join f_role_permission rp on rp.role_id = r.id
+		left join f_permission p on rp.permission_id = p.id
+		where account = 'tpad1d12' and p.permission_name like concat('createUser','%')
+    </select>
+
+    <select id="getRolePermissions" resultType="map">
+        select distinct
+		p.permission_name,p.role_descr
+		from f_user_account u
+		left join f_user_role ur on u.id = ur.user_id
+		left join f_role r on ur.role_id = r.id
+		left join f_role_permission rp on rp.role_id = r.id
+		left join f_permission p on rp.permission_id = p.id
+		where account = #{account} and p.permission_name like concat('viewRP','%')
+    </select>
+
+    <select id="getPermissionsByRid" resultType="string">
+        select distinct
+		p.permission_name
+		from  (select * from f_role where id=#{rid}) r
+		left join f_role_permission rp on rp.role_id = r.id
+		left join f_permission p on rp.permission_id = p.id
+    </select>
 </mapper>

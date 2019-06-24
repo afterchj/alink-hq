@@ -197,4 +197,38 @@ $(function () {
         $('input#noAllRadio:radio').prop('checked', singleNoRadioLength == singleNoRadioCheckedLength);
         $('input#isAllRadio:radio').prop('checked', false);
     })
+
+
+
+})
+
+$(function () {
+    var permissions = $("#rolePermissionList").val();
+    permissions = permissions.substring(1,permissions.length-1);
+    var permissionsArr = permissions.split(", ");
+    $.each(permissionsArr,function (key,value) {
+       // console.log(key,value);
+        if (value=='createProject'){
+            $("#projectManage").find('div[class="f-l zero"]').eq(0).find('input').prop("checked",true);
+        }
+        if (value=='renameProject'){
+            $("#projectManage").find('div[class="f-l zero"]').eq(1).find('input').prop("checked",true);
+        }
+        if (value=='moveProject'){
+            $("#projectManage").find('div[class="f-l zero"]').eq(2).find('input').prop("checked",true);
+        }
+        if (value=='deleteProject'){
+            $("#projectManage").find('div[class="f-l zero"]').eq(3).find('input').prop("checked",true);
+        }
+    });
+
+
+})
+
+$(function () {
+    var project = $("#projectManage").find('div[class="f-l zero"]').find('input:checkbox:checked').length;
+    // console.log(project);
+    if (project==4){
+        $("#projectManage").find('input.allListChecked:checkbox').prop("checked",true);
+    }
 })
