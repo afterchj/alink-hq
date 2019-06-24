@@ -152,3 +152,46 @@
 .list-content>div.one>div.f-l.create-account>div{
     width:21.5%;
 }
+.createRole{
+    width:500px;
+    margin:50px auto;
+}
+.createRole label{
+    width: 100px;
+    text-align: right;
+    display: inline-block;
+    margin-right: 30px;
+    font-size: 16px;
+    color: #3c3c3c;
+
+}
+.createRole input{
+    width: 300px;
+    font-size: 15px;
+    color: #666;
+    text-indent: 10px;
+    height: 30px;
+    border-radius: 5px;
+    border: 1px solid #bbb;
+}
+.createRole>div{
+    text-align: center;
+    margin-bottom: 70px;
+}
+.createRole button{
+    height: 40px;
+    width: 134px;
+    color: #fff;
+    font-size: 17px;
+    letter-spacing: 5px;
+    border: 1px solid #3598db;
+    background-color: #3598db;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.role-hint{
+    height: 25px;
+    color: red;
+    font-size: 14px;
+    margin-left: 168px;
+}

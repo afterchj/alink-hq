@@ -72,11 +72,11 @@
 }
 
 .num>div {
-    display:inline-block;
-    width:35px;
-    height:35px;
-    line-height:35px;
-    text-align:center
+    display: inline-block;
+    width: 35px;
+    height: 33px;
+    line-height: 33px;
+    text-align: center;
 }
 
 #createAccount form>div button {
