@@ -20,7 +20,7 @@ import java.util.List;
  * @create: 2019-06-19 15:03
  **/
 @Controller()
-@RequestMapping("role")
+@RequestMapping("rolePer")
 public class RolePermissionInfoController {
 
     @Resource
@@ -29,13 +29,13 @@ public class RolePermissionInfoController {
     /**
      * 跳转到角色权限详情
      */
-    @RequestMapping(value = "/showRolePermissionManage", method = RequestMethod.GET)
-    public String showRolePermissionManage(HttpSession session, Model model){
+    @RequestMapping(value = "/detail", method = RequestMethod.GET)
+    public String roleDetail(HttpSession session, Model model){
         User loginUser = (User) session.getAttribute("user");
         String account = loginUser.getAccount();
         List<String> permissions = roleManageService.getPermissions(account);
         model.addAttribute("permissions",permissions);
-        return "showPermissionManage";
+        return "roleManage/roleDetail";
     }
 
 
