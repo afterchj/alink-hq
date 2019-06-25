@@ -5,6 +5,7 @@
     <parameterMap id="createMapper" type="map">
         <parameter property="id" mode="IN"/>
         <parameter property="uid" mode="IN"/>
+        <parameter property="type" mode="IN"/>
         <parameter property="name" mode="IN"/>
         <parameter property="mid" mode="OUT" jdbcType="INTEGER"/>
     </parameterMap>
@@ -15,7 +16,7 @@
         m.project_id,
         m.mname,
         m.mesh_id,
-        m.mesh_type,
+        IFNULL(m.mesh_type,'家庭照明') mesh_type,
         p.name,
        	IFNULL(pl.pcount,0) pcount,
         IFNULL(s.scount,0) scount,
@@ -46,7 +47,7 @@
     </sql>
 
     <select id="save" parameterMap="createMapper" statementType="CALLABLE">
-        CALL create_mesh (?,?,?,?)
+        CALL create_mesh (?,?,?,?,?)
     </select>
 
     <select id="getByMap" resultType="map" parameterType="SearchDict">

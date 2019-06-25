@@ -84,7 +84,7 @@ public class TimeLineTest {
 
     @Test
     public void test() {
-        List<String> permissionList = getSession().getMapper(UserExtendDao.class).getPermissionList("1122");
+        List<String> permissionList = getSession().getMapper(UserExtendDao.class).getPermissions("1122");
         permissionList.stream().forEach(System.out::println);
     }
 }

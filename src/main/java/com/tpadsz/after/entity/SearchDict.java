@@ -12,8 +12,10 @@ public class SearchDict {
     private Integer pid;
     private Integer gid;
     private String name;
+    private String mesh_id;
     private String coname;
     private String mname;
+    private String mtype;
     private String pname;
     private String gname;
     private String lname;
@@ -98,6 +100,14 @@ public class SearchDict {
         this.mname = mname;
     }
 
+    public String getMtype() {
+        return mtype;
+    }
+
+    public void setMtype(String mtype) {
+        this.mtype = mtype;
+    }
+
     public String getPname() {
         return pname;
     }
@@ -128,6 +138,14 @@ public class SearchDict {
 
     public void setLmac(String lmac) {
         this.lmac = lmac;
+    }
+
+    public String getMesh_id() {
+        return mesh_id;
+    }
+
+    public void setMesh_id(String mesh_id) {
+        this.mesh_id = mesh_id;
     }
 
     public String getProjectName() {
