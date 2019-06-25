@@ -41,7 +41,7 @@
         <selectKey keyProperty="id" order="BEFORE" resultType="int">
             SELECT IFNULL(max(place_id)+1,1) FROM f_place WHERE mid=#{mid}
         </selectKey>
-        INSERT INTO f_place(place_id,pname,uid,mid,create_date) VALUES(#{id},#{name},#{uid},#{mid},now())
+        INSERT INTO f_place(place_id,pname,uid,mid,create_date,update_date ) VALUES(#{id},#{name},#{uid},#{mid},now(),now())
     </insert>
 
     <select id="getByMap" resultType="map" parameterType="SearchDict">
@@ -63,7 +63,7 @@
             AND m.mesh_id LIKE CONCAT('%',#{meshId},'%')
         </if>
         <if test="pname!=null and pname!=''">
-            AND p.pname LIKE CONCAT('%',#{pname},'%')
+            AND pl.pname LIKE CONCAT('%',#{pname},'%')
         </if>
         <if test="placeId!=null and placeId!=''">
             AND pl.place_id LIKE CONCAT('%',#{placeId},'%')
@@ -74,8 +74,8 @@
         <if test="projectId!=null and projectId!=''">
             AND m.project_id=#{projectId}
         </if>
-        GROUP BY m.uid,m.mesh_id
-        ORDER BY pl.update_date DESC,g.gcount DESC
+--         GROUP BY m.uid,m.mesh_id
+        ORDER BY pl.update_date DESC
     </select>
 
     <select id="getPlaceInfo" resultType="MeshInfo" parameterType="int">
