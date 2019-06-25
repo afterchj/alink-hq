@@ -104,12 +104,12 @@ $(function () {
     //弹框重命名里操作
     $('div[openContent="reset-name"] .yes').click(function () {
         var rename = $('#rename').val();
-        var regName = /^[a-zA-Z0-9\u4e00-\u9fa5]{2,6}$/;
+        var regName = /^[a-zA-Z0-9_\u4e00-\u9fa5]{2,6}$/;
         var renameResult = regName.test(rename);
         if (rename == '') {
             $('p.rename-hint').text('请输入新名称');
         } else if (rename != '' && !renameResult) {
-            $('p.rename-hint').text('请输入 2-16 位汉字、字母、数字');
+            $('p.rename-hint').text('请输入 2-6 位汉字、字母、数字');
         } else {
             $('p.rename-hint').text('');
             $.ajax({
@@ -192,10 +192,10 @@ $(function () {
 //重命名校验
 function nameKeyUp() {
     var rename = $('#rename').val();
-    var regreName = /^[a-zA-Z0-9\u4e00-\u9fa5]{2,6}$/;
+    var regreName = /^[a-zA-Z0-9_\u4e00-\u9fa5]{2,6}$/;
     var renameResult = regreName.test(rename);
     if (rename != '' && !renameResult) {
-        $('p.rename-hint').text('请输入 2-16 位汉字、字母、数字');
+        $('p.rename-hint').text('请输入 2-6 位汉字、字母、数字');
     } else {
         $('p.rename-hint').text('');
     }
