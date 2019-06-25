@@ -53,23 +53,11 @@
                             </thead>
                             <tbody>
                             <tr th:each="role:${pageInfo.list}">
-                                <td class="k-link"><a th:href="@{/rolePer/detail(rid=${role.id})}"
-                                                      th:text="${role.roleName}">施工人员
-                                </a></td>
+                                <input type="hidden" th:value="${role.id}">
+                                <td class="k-link"><a th:href="@{/rolePer/detail(rid=${role.id})}" th:text="${role.roleName}"></a></td>
                                 <td class="k-link" th:text="${role.accountNum}"></td>
                                 <td th:text="${role.createTime}"></td>
                                 <td th:text="${role.updateTime}"></td>
-                                <td class="p-r" style="display: none">
-                                    <!--不能重命名-->
-                                    <img th:src="@{/static/img/un-rename.png}" alt="" class="pointer   unclick"
-                                         th:title="无法操作">
-                                    <!--不能编辑-->
-                                    <img th:src="@{/static/img/alter-un.png}" alt="" class="pointer  left-img  unclick"
-                                         th:title="无法操作">
-                                    <!--不能删除-->
-                                    <img th:src="@{/static/img/un-delete.png}" alt="" class="pointer  left-img  unclick"
-                                         th:title="无法操作">
-                                </td>
                                 <td class="p-r" >
                                     <!--重命名-->
                                     <img th:src="@{/static/img/edit.png}" alt="" class="pointer reset-name "
@@ -78,8 +66,11 @@
                                     <img th:src="@{/static/img/alter.png}" alt="" class="pointer left-img"
                                          th:title="编辑">
                                     <!--删除-->
-                                    <img th:src="@{/static/img/delete.png}" alt="" class="pointer delete-role left-img"
+                                    <img th:if="${role.accountNum==0}" th:src="@{/static/img/delete.png}" alt="" class="pointer delete-role left-img"
                                          th:title="删除">
+                                    <!--不能删除-->
+                                    <img th:if="${role.accountNum!=0}" th:src="@{/static/img/un-delete.png}" alt="" class="pointer  left-img  unclick"
+                                         th:title="无法操作">
                                 </td>
                             </tr>
                             </tbody>
@@ -112,7 +103,7 @@
                                             <option value="10" selected="selected">10</option>
                                             <option value="30">30</option>
                                             <option value="50">50</option>
-                                            <option value="50">100</option>
+                                            <option value="100">100</option>
                                         </select>
                                     </span>
                                     </div>

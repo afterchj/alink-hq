@@ -34,4 +34,22 @@ public class RoleServiceImpl implements RoleService {
 		return roleDao.selectRoleList(roleId,roleName);
 	}
 
+	@Override
+	public int rename(String roleName, Integer roleId) {
+		int flag;
+		int count = roleDao.findRepeatName(roleName);
+		if (count == 1) {
+			flag = 0;
+		} else {
+			roleDao.rename(roleId, roleName);
+			flag = 1;
+		}
+		return flag;
+	}
+
+	@Override
+	public void delete(Integer roleId) {
+		roleDao.delete(roleId);
+	}
+
 }

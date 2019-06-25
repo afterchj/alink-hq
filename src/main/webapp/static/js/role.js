@@ -87,12 +87,13 @@ $(function () {
 
     var width = window.screen.width;
     var height = window.screen.height;
+    var roleId;
     //重命名弹框
     $('.reset-name').click(function () {
         // projectId = parseInt($(this).parent().siblings('.checkbox ').find('input[type=checkbox]').val());
         // account = $(this).parent().siblings('.project-account').text();
         $('div[openContent="reset-name"]').addClass('active');
-
+        roleId = $(this).parent().siblings("input").val();
         $('.hide-iframe').addClass('active');
         $('.hide-iframe').css({
             'width': width,
@@ -103,7 +104,7 @@ $(function () {
     //弹框重命名里操作
     $('div[openContent="reset-name"] .yes').click(function () {
         var rename = $('#rename').val();
-        var regName = /^[a-zA-Z0-9\u4e00-\u9fa5]{2,16}$/;
+        var regName = /^[a-zA-Z0-9\u4e00-\u9fa5]{2,6}$/;
         var renameResult = regName.test(rename);
         if (rename == '') {
             $('p.rename-hint').text('请输入新名称');
@@ -111,21 +112,21 @@ $(function () {
             $('p.rename-hint').text('请输入 2-16 位汉字、字母、数字');
         } else {
             $('p.rename-hint').text('');
-            // $.ajax({
-            //     type: "POST",
-            //     url: "/alink-hq/project/rename",
-            //     data: {projectId: projectId, projectName: rename, account: account},
-            //     dataType: "json",
-            //     success: function (res) {
-            //         console.log(res);
-            //         if (res.result == '000') {
-            //             $('p.rename-hint').text('');
-            //             location.reload();
-            //         } else if (res.result == '306') {
-            //             $('p.rename-hint').text('已存在，请重新输入');
-            //         }
-            //     }
-            // });
+            $.ajax({
+                type: "POST",
+                url: "/alink-hq/role/rename",
+                data: {roleId: roleId, roleName: rename},
+                dataType: "json",
+                success: function (res) {
+                    console.log(res);
+                    if (res.result == '000') {
+                        $('p.rename-hint').text('');
+                        location.reload();
+                    } else if (res.result == '308') {
+                        $('p.rename-hint').text('已存在，请重新输入');
+                    }
+                }
+            });
         }
     })
     //取消删除按钮
@@ -143,7 +144,8 @@ $(function () {
         // }
         // deleteArray.push(msg);
         // if(deleteArray.length!=0){
-            $('div[openContent="delete-role"]').addClass('active');
+        roleId = $(this).parent().siblings("input").val();
+        $('div[openContent="delete-role"]').addClass('active');
             $('.hide-iframe').addClass('active');
             $('.hide-iframe').css({
                 'width': width,
@@ -159,23 +161,22 @@ $(function () {
             'width': width,
             'height': height
         })
-        // var newJsonArray = JSON.stringify(deleteArray);
-        // $.ajax({
-        //     type: "POST",
-        //     url: "/alink-hq/project/delete",
-        //     data: {projectInfo: newJsonArray},
-        //     dataType: "json",
-        //     success: function (res) {
-        //         // console.log(res);
-        //         if (res.result == '000') {
-        //             location.reload();
-        //             $('tbody tr td.checkbox input').prop('checked',false);
-        //             $('#all').prop('checked',false);
-        //         } else if (res.result == '200') {
-        //             console.log('系统错误');
-        //         }
-        //     }
-        // })
+        $.ajax({
+            type: "POST",
+            url: "/alink-hq/role/delete",
+            data: {roleId: roleId},
+            dataType: "json",
+            success: function (res) {
+                // console.log(res);
+                if (res.result == '000') {
+                    location.reload();
+                    // $('tbody tr td.checkbox input').prop('checked',false);
+                    // $('#all').prop('checked',false);
+                } else if (res.result == '200') {
+                    console.log('系统错误');
+                }
+            }
+        })
     })
     //取消删除按钮
     $('div[openContent="delete-role"] .reduce').click(function () {
@@ -191,7 +192,7 @@ $(function () {
 //重命名校验
 function nameKeyUp() {
     var rename = $('#rename').val();
-    var regreName = /^[a-zA-Z0-9\u4e00-\u9fa5]{2,16}$/;
+    var regreName = /^[a-zA-Z0-9\u4e00-\u9fa5]{2,6}$/;
     var renameResult = regreName.test(rename);
     if (rename != '' && !renameResult) {
         $('p.rename-hint').text('请输入 2-16 位汉字、字母、数字');

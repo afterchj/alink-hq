@@ -4,16 +4,20 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.tpadsz.after.entity.RoleList;
 import com.tpadsz.after.entity.User;
+import com.tpadsz.after.entity.dd.ResultDict;
 import com.tpadsz.after.service.AccountService;
 import com.tpadsz.after.service.RoleService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by chenhao.lu on 2019/6/20.
@@ -57,15 +61,40 @@ public class RoleController {
         return "roleManage/roleList";
     }
 
+    @RequestMapping(value = "/rename", method = RequestMethod.POST)
+    @ResponseBody
+    public Map<String, String> rename(String roleName, Integer roleId) {
+        Map<String, String> map = new HashMap<>();
+        try {
+            int flag = roleService.rename(roleName, roleId);
+            if (flag == 0) {
+                map.put("result", ResultDict.REPEAT_ROLE_NAME.getCode());
+            } else if (flag == 1) {
+                map.put("result", ResultDict.SUCCESS.getCode());
+            }
+        } catch (Exception e) {
+            map.put("result", ResultDict.SYSTEM_ERROR.getCode());
+        }
+        return map;
+    }
+
     @RequestMapping(value = "/createRole", method = RequestMethod.GET)
     public String createProject() {
         return "roleManage/createRole";
     }
 
-    @RequestMapping(value = "/detail", method = RequestMethod.GET)
-    public String detail() {
-        return "roleManage/roleDetail";
-    }
 
+    @RequestMapping(value = "/delete", method = RequestMethod.POST)
+    @ResponseBody
+    public Map<String, String> delete(Integer roleId) {
+        Map<String, String> map = new HashMap<>();
+        try {
+            roleService.delete(roleId);
+            map.put("result", ResultDict.SUCCESS.getCode());
+        }catch (Exception e){
+            map.put("result", ResultDict.SYSTEM_ERROR.getCode());
+        }
+        return map;
+    }
 
 }

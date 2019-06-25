@@ -15,4 +15,7 @@ public interface RoleService {
 
 	List<RoleList> selectRoleList(Integer roleId,String roleName);
 
+    int rename(String roleName, Integer roleId);
+
+    void delete(Integer roleId);
 }
