@@ -77,7 +77,6 @@ public class MainTest {
 //        map.put("pid", 4);
         SqlSessionTemplate sqlSessionTemplate = getSqlSessionTemplate();
         int count = sqlSessionTemplate.selectOne("com.tpadsz.after.dao.MeshDao.getCount", map);
-
 //        sqlSessionTemplate.selectOne("com.tpadsz.after.dao.MeshDao.save", map);
 //        logger.info("result=" + map.get("mid"));
         logger.info("count=" + count);
