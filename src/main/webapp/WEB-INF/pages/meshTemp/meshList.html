@@ -106,8 +106,8 @@
                                     <input type="checkbox" name="ids" th:value="${mesh.id}" class="">
                                     <input type="hidden" th:value="${mesh.uid}" class="uid">
                                 </td>
-                                <td class="k-link"><a th:href="@{/mesh/info(id=${mesh.id})}"
-                                                      th:text="${mesh.mname}"></a>
+                                <td class="k-link">
+                                    <a th:href="@{/mesh/info(id=${mesh.id})}" th:text="${mesh.mname}"></a>
                                 </td>
                                 <td th:text="${mesh.mesh_id}"></td>
                                 <td th:text="${mesh.mesh_type}"></td>
@@ -132,11 +132,9 @@
                                 <!--</td>-->
                                 <td>未知</td>
                                 <td shiro:hasAnyRoles="super,admin,manager" class="p-r">
-                                    <img src="/alink-hq/static/img/edit.png" th:alt="${mesh.id}"
-                                         class="reset-name pointer" title="重命名">
+                                    <img src="/alink-hq/static/img/edit.png" th:alt="${mesh.id}" class="reset-name pointer" title="重命名">
                                     <a th:href="@{/mesh/move(ids=${mesh.id})}">
-                                        <img src="/alink-hq/static/img/exchange.png" alt="" class="center-img pointer"
-                                             title="移动">
+                                        <img src="/alink-hq/static/img/exchange.png" alt="" class="center-img pointer" title="移动">
                                     </a>
                                     <a href="javascript:void(0);" class="singleDel pointer">
                                         <img src="/alink-hq/static/img/delete.png" alt="" title="删除">
