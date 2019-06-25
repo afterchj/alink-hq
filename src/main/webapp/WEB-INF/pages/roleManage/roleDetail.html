@@ -82,7 +82,7 @@
                                     <div class="tab-content-part active" id="projectManage" tabContent="0">
                                         <div class="clearfix limit">
                                             <div class="f-l ">
-                                                <input type="checkbox" id="allChecked">
+                                                <input type="checkbox" class="allChecked">
                                                 <label for="">全选</label>
                                             </div>
                                             <div class="f-r clearfix">
@@ -381,7 +381,7 @@
                                     <div class="tab-content-part" tabContent="1">
                                         <div class="clearfix limit">
                                             <div class="f-l ">
-                                                <input type="checkbox" id="allChecked">
+                                                <input type="checkbox" class="allChecked">
                                                 <label for="">全选</label>
                                             </div>
                                             <div class="f-r clearfix">
@@ -430,19 +430,20 @@
                                                         <label for="">创建账号（创建账号时的角色选择）</label>
                                                     </div>
                                                     <div class="f-l clearfix create-account">
-                                                        <div class="f-l" th:each="user:${users}">
-                                                            <input type="checkbox" class="singleListChecked"
+                                                        <div class="f-l zero" th:if="${#lists.contains(permissions,'createUserAdmin')}">
+                                                            <input type="checkbox"
+                                                                   class="singleListChecked singleRoleChecked"
                                                                    class="admin-role">
-                                                            <label for="" th:text="${user.role_descr}">管理员</label>
+                                                            <label for="">管理员</label>
                                                         </div>
-                                                        <!--<div class="f-l">-->
-                                                        <!--<input type="checkbox" class="singleListChecked">-->
-                                                        <!--<label for="">乙方管理员</label>-->
-                                                        <!--</div>-->
-                                                        <!--<div class="f-l">-->
-                                                        <!--<input type="checkbox" class="singleListChecked builders">-->
-                                                        <!--<label for="">施工人员</label>-->
-                                                        <!--</div>-->
+                                                        <div class="f-l zero" th:if="${#lists.contains(permissions,'createUserManager')}">
+                                                        <input type="checkbox" class="singleListChecked singleRoleChecked">
+                                                        <label for="">乙方管理员</label>
+                                                        </div>
+                                                        <div class="f-l zero" th:if="${#lists.contains(permissions,'createUserUser')}">
+                                                        <input type="checkbox" class="singleListChecked builders singleRoleChecked">
+                                                        <label for="">施工人员</label>
+                                                        </div>
                                                     </div>
 
                                                 </div>
@@ -466,7 +467,7 @@
                                     <div class="tab-content-part " tabContent="2">
                                         <div class="clearfix limit">
                                             <div class="f-l ">
-                                                <input type="checkbox" id="allChecked">
+                                                <input type="checkbox" class="allChecked">
                                                 <label for="">全选</label>
                                             </div>
                                             <div class="f-r clearfix">
@@ -514,20 +515,19 @@
                                                         <label for="">查看角色权限（可查看的角色）</label>
                                                     </div>
                                                     <div class="f-l clearfix create-account">
-                                                        <div class="f-l" th:each="rolePermission:${rolePermissions}">
+                                                        <div class="f-l zero" th:if="${#lists.contains(permissions,'viewRPAdmin')}">
                                                             <input type="checkbox" class="singleListChecked admin-role">
-                                                            <label for=""
-                                                                   th:text="${rolePermission.role_descr}">管理员</label>
+                                                            <label for="">管理员</label>
                                                         </div>
-                                                        <!--<div class="f-l">-->
-                                                        <!--<input type="checkbox"-->
-                                                        <!--class="singleListChecked yi-admin-role">-->
-                                                        <!--<label for="">乙方管理员</label>-->
-                                                        <!--</div>-->
-                                                        <!--<div class="f-l">-->
-                                                        <!--<input type="checkbox" class="singleListChecked builders">-->
-                                                        <!--<label for="">施工人员</label>-->
-                                                        <!--</div>-->
+                                                        <div class="f-l zero" th:if="${#lists.contains(permissions,'viewRPManager')}">
+                                                        <input type="checkbox"
+                                                        class="singleListChecked yi-admin-role">
+                                                        <label for="">乙方管理员</label>
+                                                        </div>
+                                                        <div class="f-l zero" th:if="${#lists.contains(permissions,'viewRPUser')}">
+                                                        <input type="checkbox" class="singleListChecked builders">
+                                                        <label for="">施工人员</label>
+                                                        </div>
                                                     </div>
                                                 </div>
                                                 <div class="f-r clearfix " style="line-height: calc(49px * 3);">
@@ -549,7 +549,7 @@
                                     <div class="tab-content-part" tabContent="3">
                                         <div class="clearfix limit">
                                             <div class="f-l ">
-                                                <input type="checkbox" id="allChecked">
+                                                <input type="checkbox" class="allChecked">
                                                 <label for="">全选</label>
                                             </div>
                                             <div class="f-r clearfix">
@@ -635,8 +635,9 @@
         var permissionList = [[${rolePermissionList}]];
         var alreadyExistPermissions = $("div[class='f-l zero']>label");
         $.each(permissionList, function (key, value) {
-            console.log(key, value.permission_name);
+//            console.log(key, value.permission_name);
             var rolePermission = value.descr;
+            var permissionName = value.permission_name;
             if (rolePermission == 'viewProject'){
 
             }
@@ -646,7 +647,15 @@
                 if (rolePermission == alreadyExistPermission) {
                     $(this).prev('input').prop("checked", true);
                 }
-
+                if (permissionName=='createUserAdmin' && alreadyExistPermission=='管理员'){
+                    $(this).prev('input').prop("checked", true);
+                }
+                if (permissionName=='createUserManager' && alreadyExistPermission=='乙方管理员'){
+                    $(this).prev('input').prop("checked", true);
+                }
+                if (permissionName=='createUserUser' && alreadyExistPermission=='施工人员'){
+                    $(this).prev('input').prop("checked", true);
+                }
             });
         });
     })
