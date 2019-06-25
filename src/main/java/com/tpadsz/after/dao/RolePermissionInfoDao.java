@@ -24,5 +24,5 @@ public interface RolePermissionInfoDao {
 
     List<Map<String,String>> getRolePermissions(@Param("account") String account);
 
-    List<String> getPermissionsByRid(@Param("rid") String rid);
+    List<Map<String, String>> getPermissionsByRid(@Param("rid") String rid);
 }

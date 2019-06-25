@@ -56,7 +56,7 @@ public class RolePermissionInfoServiceImpl implements RolePermissionInfoService 
     }
 
     @Override
-    public List<String> getPermissionsByRid(String rid) {
+    public List<Map<String, String>> getPermissionsByRid(String rid) {
         return roleManageDao.getPermissionsByRid(rid);
     }
 }

@@ -21,5 +21,5 @@ public interface RolePermissionInfoService {
 
     List<Map<String,String>> getRolePermissions(String account);
 
-    List<String> getPermissionsByRid(String rid);
+    List<Map<String, String>> getPermissionsByRid(String rid);
 }
