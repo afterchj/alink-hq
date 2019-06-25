@@ -87,11 +87,11 @@
                                             </div>
                                             <div class="f-r clearfix">
                                                 <div class="f-l">
-                                                    <input type="radio" value="viewProjectAll" id="isAllRadio" name="isRead">
+                                                    <input type="radio" value="0" class="isAllRadio" name="isRead">
                                                     <label for="">查看数据</label>
                                                 </div>
                                                 <div class="f-l">
-                                                    <input type="radio" value="noViewProjectAll" id="noAllRadio" name="isRead">
+                                                    <input type="radio" value="1" class="noAllRadio" name="isRead">
                                                     <label for="">不可查看数据</label>
                                                 </div>
                                             </div>
@@ -129,12 +129,12 @@
                                                 </div>
                                                 <div class="f-r clearfix">
                                                     <div class="f-l">
-                                                        <input type="radio" value="viewProject" name="isRead1"
+                                                        <input type="radio" value="0" name="isRead1"
                                                                class="singleIsRadio">
                                                         <label for="">查看数据</label>
                                                     </div>
                                                     <div class="f-l">
-                                                        <input type="radio" value="noViewProject" name="isRead1"
+                                                        <input type="radio" value="1" name="isRead1"
                                                                class="singleNoRadio">
                                                         <label for="">不可查看数据</label>
                                                     </div>
@@ -386,11 +386,11 @@
                                             </div>
                                             <div class="f-r clearfix">
                                                 <div class="f-l">
-                                                    <input type="radio" value="viewProjectAll" id="isAllRadio" name="isRead">
+                                                    <input type="radio" value="0" class="isAllRadio" name="isRead">
                                                     <label for="">查看数据</label>
                                                 </div>
                                                 <div class="f-l">
-                                                    <input type="radio" value="noViewProjectAll" id="noAllRadio" name="isRead">
+                                                    <input type="radio" value="1" class="noAllRadio" name="isRead">
                                                     <label for="">不可查看数据</label>
                                                 </div>
                                             </div>
@@ -471,11 +471,11 @@
                                             </div>
                                             <div class="f-r clearfix">
                                                 <div class="f-l">
-                                                    <input type="radio" value="viewProjectAll" id="isAllRadio" name="isRead">
+                                                    <input type="radio" value="0" class="isAllRadio" name="isRead">
                                                     <label for="">查看数据</label>
                                                 </div>
                                                 <div class="f-l">
-                                                    <input type="radio" value="noViewProjectAll" id="noAllRadio" name="isRead">
+                                                    <input type="radio" value="1" class="noAllRadio" name="isRead">
                                                     <label for="">不可查看数据</label>
                                                 </div>
                                             </div>
@@ -554,11 +554,11 @@
                                             </div>
                                             <div class="f-r clearfix">
                                                 <div class="f-l">
-                                                    <input type="radio" value="viewProjectAll" id="isAllRadio" name="isRead">
+                                                    <input type="radio" value="0" class="isAllRadio" name="isRead">
                                                     <label for="">查看数据</label>
                                                 </div>
                                                 <div class="f-l">
-                                                    <input type="radio" value="noViewProjectAll" id="noAllRadio" name="isRead">
+                                                    <input type="radio" value="1" class="noAllRadio" name="isRead">
                                                     <label for="">不可查看数据</label>
                                                 </div>
                                             </div>
@@ -651,44 +651,44 @@
         });
     })
     $(function () {
-        var checkAll = [];
+        var checkProjectAll = [];
         var projectCheckedNum = $("#projectManage").find('.list:eq(0) .zero input:checkbox:checked').length;
         if (projectCheckedNum == 4) {
             $("#projectManage").find('.list:eq(0) input:eq(0)').prop("checked", true);
-            checkAll.push(projectCheckedNum);
+            checkProjectAll.push(projectCheckedNum);
         }
         var meshCheckedNum = $("#projectManage").find('.list:eq(1) .zero input:checked').length;
         if (meshCheckedNum == 4) {
             $("#projectManage").find('.list:eq(1) input:eq(0)').prop("checked", true);
-            checkAll.push(meshCheckedNum);
+            checkProjectAll.push(meshCheckedNum);
         }
         var placeCheckedNum = $("#projectManage").find('.list:eq(2) .zero input:checked').length;
         if (placeCheckedNum == 3) {
             $("#projectManage").find('.list:eq(2) input:eq(0)').prop("checked", true);
-            checkAll.push(placeCheckedNum);
+            checkProjectAll.push(placeCheckedNum);
         }
         var groupCheckedNum = $("#projectManage").find('.list:eq(3) .zero input:checked').length;
         if (groupCheckedNum = 4){
             $("#projectManage").find('.list:eq(3) input:eq(0)').prop("checked", true);
-            checkAll.push(groupCheckedNum);
+            checkProjectAll.push(groupCheckedNum);
         }
         var lightCheckedNum = $("#projectManage").find('.list:eq(4) .zero input:checked').length;
         if (lightCheckedNum ==4){
             $("#projectManage").find('.list:eq(4) input:eq(0)').prop("checked", true);
-            checkAll.push(lightCheckedNum);
+            checkProjectAll.push(lightCheckedNum);
         }
         var sceneCheckedNum = $("#projectManage").find('.list:eq(5) .zero input:checked').length;
         if (sceneCheckedNum ==2){
             $("#projectManage").find('.list:eq(5) input:eq(0)').prop("checked", true);
-            checkAll.push(sceneCheckedNum);
+            checkProjectAll.push(sceneCheckedNum);
         }
         var timeCheckedNum = $("#projectManage").find('.list:eq(6) .zero input:checked').length;
         if (timeCheckedNum ==1){
             $("#projectManage").find('.list:eq(6) input:eq(0)').prop("checked", true);
-            checkAll.push(timeCheckedNum);
+            checkProjectAll.push(timeCheckedNum);
         }
-        if (checkAll.length== 7){
-
+        if (checkProjectAll.length== 7){
+            $("#projectManage .limit input:checkbox").prop("checked",true);
         }
 
     })

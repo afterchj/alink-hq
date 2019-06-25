@@ -172,15 +172,15 @@ $(function () {
 
 //单选纵向
 //可查看数据
-    $('input#isAllRadio:radio').click(function () {
-        var selector = $(this).parent().parent().parent().siblings('.tab-content-part').find('input.singleIsRadio:radio[value=0]');
+    $('input.isAllRadio:radio').click(function () {
+        var selector = $(this).parent().parent().parent().siblings('.list').find('input.singleIsRadio:radio[value=0]');
         selector.each(function () {
             $(this).prop('checked', true);
         })
     })
 //不可查看数据
-    $('input#noAllRadio:radio').click(function () {
-        var selector = $(this).parent().parent().parent().siblings('.tab-content-part').find('input.singleNoRadio:radio[value=1]');
+    $('input.noAllRadio:radio').click(function () {
+        var selector = $(this).parent().parent().parent().siblings('.list').find('input.singleNoRadio:radio[value=1]');
         selector.each(function () {
             $(this).prop('checked', true);
         })
@@ -188,14 +188,14 @@ $(function () {
     $('.list input.singleIsRadio:radio[value=0]').click(function () {
         var singleIsRadioLength = $(this).parent().parent().parent().parent().parent('.tab-content-part').find('input.singleIsRadio:radio[value=0]').length;
         var singleIsRadioCheckedLength = $(this).parent().parent().parent().parent().parent('.tab-content-part').find('input.singleIsRadio:radio[value=0]:checked').length;
-        $('input#isAllRadio:radio').prop('checked', singleIsRadioLength == singleIsRadioCheckedLength);
-        $('input#noAllRadio:radio').prop('checked', false);
+        $(this).parent().parent().parent().parent().parent('.tab-content-part').find('input.isAllRadio:radio').prop('checked', singleIsRadioLength == singleIsRadioCheckedLength);
+        $(this).parent().parent().parent().parent().parent('.tab-content-part').find('input.noAllRadio:radio').prop('checked', false);
     })
     $('.list input.singleNoRadio:radio[value=1]').click(function () {
         var singleNoRadioLength = $(this).parent().parent().parent().parent().parent('.tab-content-part').find('input.singleNoRadio:radio[value=1]').length;
         var singleNoRadioCheckedLength = $(this).parent().parent().parent().parent().parent('.tab-content-part').find('input.singleNoRadio:radio[value=1]:checked').length;
-        $('input#noAllRadio:radio').prop('checked', singleNoRadioLength == singleNoRadioCheckedLength);
-        $('input#isAllRadio:radio').prop('checked', false);
+        $('input.noAllRadio:radio').prop('checked', singleNoRadioLength == singleNoRadioCheckedLength);
+        $('input.isAllRadio:radio').prop('checked', false);
     })
 
 
