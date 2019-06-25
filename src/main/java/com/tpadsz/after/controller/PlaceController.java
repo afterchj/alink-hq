@@ -1,6 +1,5 @@
 package com.tpadsz.after.controller;
 
-import com.alibaba.fastjson.JSON;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.tpadsz.after.entity.MeshInfo;
@@ -60,17 +59,19 @@ public class PlaceController {
     }
 
     @RequestMapping("/create")
-    public String create(SearchDict dict, ModelMap modelMap) {
-        Map map = new HashMap();
-        map.put("projectId", dict.getProjectId());
-        modelMap.put("mid", dict.getMid());
+    public String create() {
         return "meshTemp/placeCreate";
     }
 
-    @ResponseBody
+    //    @ResponseBody
     @RequestMapping("/save")
     public String savePlace(SearchDict dict) {
-        Map map = JSON.parseObject(JSON.toJSONString(dict));
+        String str = dict.getMesh_id();
+        int mid = Integer.parseInt(str.substring(0, str.indexOf("_")));
+        Map map = new HashMap();
+        map.put("uid", dict.getUid());
+        map.put("name", dict.getPname());
+        map.put("mid", mid);
         try {
             placeService.save(map);
         } catch (RepetitionException e) {
@@ -78,8 +79,9 @@ public class PlaceController {
         } catch (Exception e) {
             return "netFail";
         }
-        return "ok";
-//        return "redirect:/place/list";
+//        return "ok";
+        return "redirect:/place/list";
+//        return "redirect:/place/list?uid="+dict.getUid();
     }
 
     @RequestMapping("/move")
@@ -103,6 +105,20 @@ public class PlaceController {
             return "fail";
         }
         return "success";
+    }
+
+    @ResponseBody
+    @RequestMapping("/checkName")
+    public String chek(String name, Integer mid) {
+        Map map = new HashMap();
+        map.put("mid", mid);
+        map.put("name", name);
+        int count = placeService.getCount(map);
+        if (count == 0) {
+            return "success";
+        } else {
+            return "fail";
+        }
     }
 
     @ResponseBody

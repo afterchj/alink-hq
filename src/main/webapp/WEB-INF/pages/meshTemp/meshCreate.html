@@ -50,6 +50,10 @@
                                     <option value="">请选择项目</option>
                                 </select>
                             </div>
+                            <div style="margin:30px 0 0 55px;">
+                                <input type="radio" name="mtype" value="商业照明" checked style="width: 15px;vertical-align: middle;margin-right: 10px;">商业照明 &nbsp; &nbsp; &nbsp;
+                                <input type="radio" name="mtype" value="家庭照明" style="width: 15px;vertical-align: middle;margin-right: 10px;">家庭照明
+                            </div>
                             <div class="">
                                 <button type="button" class="confirm-create" openTab="confirm-create">确定创建</button>
                             </div>
@@ -90,6 +94,7 @@
     });
     $('.confirm-create').click(function () {
         var mesh = $('#mesh').val();
+        var type = $("input[type='radio']:checked").val();
         var projectId = $('#projectId option:selected').val()
         var regName = /^[a-zA-Z0-9\u4e00-\u9fa5]{2,16}$/
         var meshResult = regName.test(mesh)
@@ -110,8 +115,9 @@
                 type: "post",
                 url: "/alink-hq/mesh/save",
 //                data: {uid: uid, id: projectId, name: decodeURIComponent(mesh)},
-                data: {"uid": uid, "id": projectId, "name": mesh},
+                data: {"uid": uid, "id": projectId, "mtype": type, "name": mesh},
                 success: function (res) {
+//                    console.log("res",res);
                     if (res == 'ok') {
                         $('#preload-anim').addClass('active');
                         $('#preload-anim .title').text('创建成功！');

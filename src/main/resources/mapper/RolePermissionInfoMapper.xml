@@ -37,9 +37,9 @@
 		where account = #{account} and p.permission_name like concat('viewRP','%')
     </select>
 
-    <select id="getPermissionsByRid" resultType="string">
+    <select id="getPermissionsByRid" resultType="map">
         select distinct
-		p.permission_name
+		p.permission_name,p.descr
 		from  (select * from f_role where id=#{rid}) r
 		left join f_role_permission rp on rp.role_id = r.id
 		left join f_permission p on rp.permission_id = p.id

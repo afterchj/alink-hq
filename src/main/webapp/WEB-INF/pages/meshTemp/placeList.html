@@ -20,13 +20,14 @@
                 <div class="f-l main-right-title font">区域列表
                     <!--<span class="subjection">隶属项目：<span th:inline="text">[[${project.label}]]</span></span>-->
                 </div>
-                <!--<div class="f-r pointer">-->
-                <!--<a th:href="@{/place/create(projectId=${dict.projectId})}">-->
-                <!--<div class="create" onmousedown="createBtnMouseDown()" onmouseup="createBtnMouseUp()"><span>+</span><span>创建区域</span>-->
-                <!--</div>-->
-                <!--</a>-->
-                <!--&lt;!&ndash;<div class="create" >+&nbsp;创建灯</div>&ndash;&gt;-->
-                <!--</div>-->
+                <div class="f-r pointer">
+                    <a th:href="@{/place/create}">
+                        <div class="create" onmousedown="createBtnMouseDown()" onmouseup="createBtnMouseUp()">
+                            <span>+</span><span>创建区域</span>
+                        </div>
+                    </a>
+                    <!--<div class="create" >+&nbsp;创建灯</div>-->
+                </div>
                 <div class="f-r pointer">
                     <div class="goBack" onClick="javascript :history.back();" onmousedown="backBtnMouseDown()"
                          onmouseup="backBtnMouseUp()">

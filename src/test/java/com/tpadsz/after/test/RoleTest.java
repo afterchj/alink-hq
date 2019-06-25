@@ -57,7 +57,7 @@ public class RoleTest {
 
     @Test
     public void test(){
-        List<String> permissionsByRid = roleManageService.getPermissionsByRid("2");
+        List<Map<String, String>> permissionsByRid = roleManageService.getPermissionsByRid("2");
         permissionsByRid.stream().forEach(System.out::println);
     }
 
