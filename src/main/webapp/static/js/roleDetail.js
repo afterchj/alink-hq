@@ -167,7 +167,17 @@ $(function () {
             'input.singleListChecked:checkbox:checked').length
         $(this).parent().parent().parent().siblings('.list-title').find('input.allListChecked:checkbox').prop(
             'checked', singleListLength == singleListCheckedLength)
-        $('#allChecked').prop('checked', $('.singleChecked').length == $('.singleChecked:checked').length)
+        $(this).parent().parent().parent().parent().parent('.tab-content-part.active').find('#llChecked').prop('checked', $('.singleChecked').length == $('.singleChecked:checked').length)
+    })
+
+    $('input.singleRoleChecked:checkbox').click(function () {
+        var singleListLength = $(this).parent().parent().parent().parent('.list-content').find(
+            'input.singleListChecked:checkbox').length
+        var singleListCheckedLength = $(this).parent().parent().parent().parent('.list-content').find(
+            'input.singleListChecked:checkbox:checked').length
+        $(this).parent().parent().parent().parent().siblings('.list-title').find('input.allListChecked:checkbox').prop(
+            'checked', singleListLength == singleListCheckedLength)
+        $(this).parent().parent().parent().parent().parent().parent('.tab-content-part.active').find('#allChecked').prop('checked', $('.singleChecked').length == $('.singleChecked:checked').length)
     })
 
 //单选纵向
@@ -186,18 +196,15 @@ $(function () {
         })
     })
     $('.list input.singleIsRadio:radio[value=0]').click(function () {
-        var singleIsRadioLength = $(this).parent().parent().parent().parent().parent('.tab-content-part').find('input.singleIsRadio:radio[value=0]').length;
-        var singleIsRadioCheckedLength = $(this).parent().parent().parent().parent().parent('.tab-content-part').find('input.singleIsRadio:radio[value=0]:checked').length;
-        $(this).parent().parent().parent().parent().parent('.tab-content-part').find('input.isAllRadio:radio').prop('checked', singleIsRadioLength == singleIsRadioCheckedLength);
-        $(this).parent().parent().parent().parent().parent('.tab-content-part').find('input.noAllRadio:radio').prop('checked', false);
+        var singleIsRadioLength = $(this).parent().parent().parent().parent().parent('.tab-content-part.active').find('input.singleIsRadio:radio[value=0]').length;
+        var singleIsRadioCheckedLength = $(this).parent().parent().parent().parent().parent('.tab-content-part.active').find('input.singleIsRadio:radio[value=0]:checked').length;
+        $(this).parent().parent().parent().parent().parent('.tab-content-part.active').find('input.isAllRadio:radio').prop('checked', singleIsRadioLength == singleIsRadioCheckedLength);
+        $(this).parent().parent().parent().parent().parent('.tab-content-part.active').find('input.noAllRadio:radio').prop('checked', false);
     })
     $('.list input.singleNoRadio:radio[value=1]').click(function () {
-        var singleNoRadioLength = $(this).parent().parent().parent().parent().parent('.tab-content-part').find('input.singleNoRadio:radio[value=1]').length;
-        var singleNoRadioCheckedLength = $(this).parent().parent().parent().parent().parent('.tab-content-part').find('input.singleNoRadio:radio[value=1]:checked').length;
-        $('input.noAllRadio:radio').prop('checked', singleNoRadioLength == singleNoRadioCheckedLength);
-        $('input.isAllRadio:radio').prop('checked', false);
+        var singleNoRadioLength = $(this).parent().parent().parent().parent().parent('.tab-content-part.active').find('input.singleNoRadio:radio[value=1]').length;
+        var singleNoRadioCheckedLength = $(this).parent().parent().parent().parent().parent('.tab-content-part.active').find('input.singleNoRadio:radio[value=1]:checked').length;
+        $(this).parent().parent().parent().parent().parent('.tab-content-part.active').find('input.noAllRadio:radio').prop('checked', singleNoRadioLength == singleNoRadioCheckedLength);
+        $(this).parent().parent().parent().parent().parent('.tab-content-part.active').find('input.isAllRadio:radio').prop('checked', false);
     })
-
-
-
 })
