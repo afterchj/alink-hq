@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -21,7 +22,7 @@ import java.util.Map;
  * @create: 2019-06-19 15:03
  **/
 @Controller()
-@RequestMapping("rolePer")
+@RequestMapping("/rolePer")
 public class RolePermissionInfoController {
 
     @Resource
@@ -56,10 +57,24 @@ public class RolePermissionInfoController {
      */
     @RequestMapping(value = "/updateRolePermission" ,method = RequestMethod.POST)
     @ResponseBody
-    public void updateRolePermission(@RequestBody List<String> permissions){
+    public Map<String,String> updateRolePermission(@RequestBody List<String> permissions){
 //        permissions.stream().forEach(System.out::println);
         roleManageService.authorization(permissions);
+        Map<String,String>  map = new HashMap<>();
+        map.put("result","success");
+        return map;
+    }
 
+    @RequestMapping(value = "/show", method = RequestMethod.GET)
+    public String show(){
+        return "showPermissionManage";
+    }
+
+    @RequestMapping(value = "/showPermissionManage", method = RequestMethod.POST)
+    @ResponseBody
+    public String showPermissionManage(@RequestBody List<String> permissions){
+        permissions.stream().forEach(System.out::println);
+        return "showPermissionManage";
     }
 
 }
