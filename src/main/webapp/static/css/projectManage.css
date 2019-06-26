@@ -1208,3 +1208,9 @@ i.cricle {
 #timerDetail .p-content .timerDetail  .a-span.active a{
     color: #fff;
 }
+.init-content{
+    display: none;
+}
+.init-content.active{
+    display: block;
+}
