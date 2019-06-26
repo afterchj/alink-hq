@@ -16,10 +16,9 @@ $(function () {
         })
         $('#projectId').append(content);
     })
-    
+
     //监听项目选择
     $('#projectId').change(function () {
-
         pid=pid1(pid);
         mesh_id=mesh_id1(mesh_id);
         pname=pname1(pname);
@@ -118,10 +117,11 @@ $(function () {
                         $('.place-hint').text('')
                         $('#preload-anim').addClass('active');
                         $('#preload-anim .title').text('创建成功！');
-                        setTimeout(function () {
-                            $('#preload-anim').removeClass('active');
-                            $("form").submit();
-                        }, 1000)
+                        $("form").submit();
+                        // setTimeout(function () {
+                        //     $('#preload-anim').removeClass('active');
+                        //     $("form").submit();
+                        // }, 1000)
                     } else {
                         $('.place-hint').text('已存在，请重新输入')
                     }

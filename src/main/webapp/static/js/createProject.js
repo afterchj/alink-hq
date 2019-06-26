@@ -59,16 +59,17 @@ $('.confirm-create').click(function () {
                     $('.project-hint').text('该项目名已存在');
                 } else if (res.result == '000') {
                     console.log('创建成功!');
+                    location.href = '/alink-hq/project/list';
                     $('#preload-anim').addClass('active');
                     $('#preload-anim .title').text('创建成功！');
-                    setInterval(function () {
-                        $('#preload-anim').removeClass('active');
-                        location.href = '/alink-hq/project/list';
-                    }, 1000)
+                    // setTimeout(function () {
+                    //     $('#preload-anim').removeClass('active');
+                    //     location.href = '/alink-hq/project/list';
+                    // }, 1000)
                 } else {
                     $('#preload-anim').addClass('active');
                     $('#preload-anim .title').text('加载失败，请重新尝试');
-                    setInterval(function () {
+                    setTimeout(function () {
                         $('#preload-anim').removeClass('active');
                     }, 1000)
                 }
