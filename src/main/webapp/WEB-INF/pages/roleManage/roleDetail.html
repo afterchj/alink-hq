@@ -650,7 +650,8 @@
             var permissionName = value.permission_name;
             $.each(alreadyExistViewInfo,function () {
 //                console.log($(this).attr('alt'));
-                if (permissionName==$(this).attr('alt')){
+                var radioAlt = $(this).attr('alt');
+                if (permissionName==radioAlt){
                     $(this).prev().prop('checked',true);
                 }
             })
@@ -735,7 +736,7 @@
         }
 
         //全选
-        $("#userManage").find('input.singleChecked.allListChecked.userList:checkbox').prop("checked",$("#userManage").find('.list:eq(0) .zero input:checked').length==$("#userManage").find('.list:eq(0) .zero input').length)
+        $("#userManage").find('input.singleChecked.allListChecked.userList:checkbox').prop("checked",$("#userManage").find('.list:eq(0) .zero input:checked').length==$("#userManage").find('.list:eq(0) .zero input').length);
         $("#userManage .limit input:checkbox").prop("checked",$("#userManage").find('.list:eq(0) input:eq(0):checked').length==1);
         $("#roleManage").find('input.singleChecked.allListChecked:checkbox').prop("checked",$("#roleManage").find('.f-l.clearfix.one .zero input:checked').length==$("#roleManage").find('.f-l.clearfix.one .zero input').length);
         $("#roleManage .limit input:checkbox").prop("checked",$("#roleManage").find('.list:eq(0) input:eq(0):checked').length==1);
@@ -745,6 +746,8 @@
         //查看数据全选
         $("#projectManage input.isAllRadio:radio").prop("checked",$("#projectManage input.singleIsRadio:radio").length==$("#projectManage input.singleIsRadio:radio:checked").length);
         $("#projectManage input.noAllRadio:radio").prop("checked",$("#projectManage input.singleNoRadio:radio").length==$("#projectManage input.singleNoRadio:radio:checked").length);
+//        console.log($("#userManage input.singleIsRadio:radio").length)
+//        console.log($("#userManage input.singleIsRadio:radio:checked").length)
         $("#userManage input.isAllRadio:radio").prop("checked",$("#userManage input.singleIsRadio:radio").length==$("#userManage input.singleIsRadio:radio:checked").length);
         $("#userManage input.isAllRadio:radio").prop("checked",$("#userManage input.singleIsRadio:radio").length==$("#userManage input.singleIsRadio:radio:checked").length);
         $("#roleManage input.isAllRadio:radio").prop("checked",$("#roleManage input.singleIsRadio:radio").length==$("#roleManage input.singleIsRadio:radio:checked").length);
@@ -754,55 +757,5 @@
     })
 </script>
 <script th:src="@{/static/js/roleDetail2.js}"></script>
-<script th:inline="javascript">
-    $("button").click(function () {
-        var permissions = $("input:checked");
-        var permissionsArr = [];
-        var count=0;
-        var roleId = $("#roleId").val();
-        $.each(permissions,function () {
-            var inputAlt = $(this).attr('alt');
-            if (inputAlt!=undefined ){
-                permissionsArr[count]=inputAlt;
-                count++;
-            }
-        });
-        permissionsArr.push(roleId);
-        $.ajax({
-            type:"POST",
-            url:"/alink-hq/rolePer/updateRolePermission",
-            dataType:"json",
-            data:JSON.stringify(permissionsArr),
-            contentType:"application/json",
-            success:function (msg) {
-                loadingSuccess("保存成功")
-            },
-            error:function () {
-                loadingError("保存失败，请重新尝试")
-            }
-        });
-    })
-
-    //账号信息修改成功跳转到我的账号主页面
-    function loadingSuccess(content){
-        $('#preload-anim').addClass('active');
-        $('#preload-anim .title').text(content);
-        setTimeout(function(){
-            $('#preload-anim').removeClass('active');
-            $('#preload-anim .title').text('');
-            window.location.href = "/alink-hq/role/list";
-        },2000)
-    }
-    //账号信息修改失败提示
-    function loadingError(content){
-        $('#preload-anim').addClass('active');
-        $('#preload-anim .title').text(content);
-        setTimeout(function(){
-            $('#preload-anim').removeClass('active');
-            $('#preload-anim .title').text('');
-        },2000)
-    }
-
-</script>
 </body>
 </html>
