@@ -40,10 +40,12 @@ public class RoleTest {
 
     @Test
     public void authorizationTest(){
+        String[] str = {"company", "createProject", "renameProject", "moveProject", "deleteProject", "viewProject", "createMesh", "renameMesh", "moveMesh", "deleteMesh", "viewMesh", "createPlace", "renamePlace", "deletePlace","viewPlace","createGroup","renameGroup","moveGroup","deleteGroup","viewGroup",
+                "renameLight","moveLight","deleteLight","outLight","viewLight","renameScene","deleteScene","viewScene","renameTime","viewTime","moveUser","updateUser","replaceUser","deleteUser","createUserUser","viewUser","createRole","deleteRole","renameRole","updateRolePermission","viewRPUser","viewRole","createCooperation","updateCooperation","deleteCooperation","updateCooperationState","CooperationMemo","viewCooperation","3"};
         List<String> permissions = new ArrayList<>();
-        permissions.add("viewProject");
-        permissions.add("createProject");
-        permissions.add("11");
+        for (int i=0;i<str.length;i++){
+            permissions.add(str[i]);
+        }
         roleManageService.authorization(permissions);
     }
 
