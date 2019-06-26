@@ -72,13 +72,7 @@ public class PlaceController {
         map.put("uid", dict.getUid());
         map.put("name", dict.getPname());
         map.put("mid", mid);
-        try {
-            placeService.save(map);
-        } catch (RepetitionException e) {
-            return "fail";
-        } catch (Exception e) {
-            return "netFail";
-        }
+        placeService.save(map);
 //        return "ok";
         return "redirect:/place/list";
 //        return "redirect:/place/list?uid="+dict.getUid();
