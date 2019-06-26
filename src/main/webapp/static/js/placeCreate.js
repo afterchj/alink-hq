@@ -73,7 +73,7 @@ $(function () {
         }
     })
 
-//监听区域名称输入
+    //监听区域名称输入
     $('#pname').bind('input propertychange', function () {
         pid=pid1(pid);
         mesh_id=mesh_id1(mesh_id);
