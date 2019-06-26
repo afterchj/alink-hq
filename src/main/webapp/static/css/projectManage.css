@@ -102,21 +102,21 @@ td,th {
     background-color:#fff
 }
 
-.search-result table input[type=checkbox] {
-    border:1px solid #bbb;
-    width:15px;
-    height:14px;
-    outline:none;
-    border-radius:0;
-    appearance:none;
-    -webkit-appearance:none;
-    cursor:pointer;
-    background-color:#eef3f5
-}
+/*.search-result table input[type=checkbox] {*/
+    /*border:1px solid #bbb;*/
+    /*width:15px;*/
+    /*height:14px;*/
+    /*outline:none;*/
+    /*border-radius:0;*/
+    /*appearance:none;*/
+    /*-webkit-appearance:none;*/
+    /*cursor:pointer;*/
+    /*background-color:#eef3f5*/
+/*}*/
 
-.search-result table input[type=checkbox]:checked {
-    background:url(/alink-hq/static/img/checkbox-gou.png) no-repeat center
-}
+/*.search-result table input[type=checkbox]:checked {*/
+    /*background:url(/alink-hq/static/img/checkbox-gou.png) no-repeat center*/
+/*}*/
 
 .search-result table td a {
     color:#3c3c3c
@@ -741,7 +741,7 @@ input:-ms-input-placeholder {
 }
 
 .prev span,.next span {
-    font-size:24px;
+    font-size:26px;
     color:#999
 }
 

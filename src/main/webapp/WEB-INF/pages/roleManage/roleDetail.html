@@ -10,6 +10,7 @@
     <link rel="stylesheet" th:href="@{/static/css/leftNav.css}"/>
     <link rel="stylesheet" th:href="@{/static/css/projectManage.css}"/>
     <link rel="stylesheet" th:href="@{/static/css/role.css}"/>
+
 </head>
 <body>
 <div class="c-container">
@@ -50,15 +51,15 @@
                                 <div class="clearfix f-l  fix-left-nav">
                                     <div class="company-select">
                                         <div>
-                                            <input type="radio" name="data-scope-content" value="0" alt="oneself">
+                                            <input type="radio" name="data-scope-content" value="0" alt="oneself" >
                                             <label for="">所在账号相关内容</label>
                                         </div>
                                         <div>
-                                            <input type="radio" name="data-scope-content" value="1" alt="company">
+                                            <input type="radio" name="data-scope-content" value="1" alt="company" >
                                             <label for="">隶属公司名下所有账号相关内容</label>
                                         </div>
                                         <div th:if="${rid} le 2">
-                                            <input type="radio" name="data-scope-content" value="2" alt="all">
+                                            <input type="radio" name="data-scope-content" value="2" alt="all" >
                                             <label for="">所有公司名下所有账号相关内容</label>
                                         </div>
                                     </div>

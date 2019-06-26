@@ -2,6 +2,14 @@
  * Created by yuanjie.fang on 2019/6/25.
  */
 $(function () {
+    var $myselect = $("#projectId");
+    /**
+     * 初始化插件
+     */
+    // $myselect.goSelectInput({
+    //     // height: 30,
+    //     // width: 250
+    // });
     var uid = $("#uid").val();
     var pname = '';
     var pid = '';
