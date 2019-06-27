@@ -22,7 +22,15 @@
 
         <div class="main-right f-l">
             <div class="clearfix main-right-nav">
-                <div class="f-l main-right-title">创建账号</div>
+                <div class="f-l main-right-title">
+                    <nav class="bread">
+                        <ol class="clearfix">
+                            <li class="f-l"><a href="javascript:;" onClick="javascript :history.back(-1);">用户列表</a></li>
+                            <li class="f-l">创建账号</li>
+                        </ol>
+                    </nav>
+
+                </div>
                 <div class="f-r pointer">
                     <div class="goBack" onClick="javascript :history.back(-1);">
                         <span><</span><span>返回</span>
@@ -158,7 +166,6 @@
         if (num != '') {
             num = parseInt(num);
         }
-        console.log(fid, roleId, num);
         if (fid != '' && roleId != '') {
             this.setAttribute("disabled", true);
             this.style.background = "#A0A0A0";

@@ -25,7 +25,7 @@
 }
 
 .search select,.search select option {
-    width:290px!important;
+    width:314px!important;
     height:33px!important
 }
 
@@ -43,7 +43,7 @@
     border-radius:5px;
     padding-left:10px;
     color:#fff;
-    transform:scale(1,.9);
+
     margin-right:30px
 }
 
@@ -102,7 +102,8 @@ td,th {
     background-color:#fff
 }
 
-/*.search-result table input[type=checkbox] {*/
+
+    /*.search-result table input[type=checkbox] {*/
     /*border:1px solid #bbb;*/
     /*width:15px;*/
     /*height:14px;*/
@@ -172,7 +173,7 @@ td,th {
 
 .page img {
     vertical-align:middle;
-    transform:scale(0.85);
+
     cursor:pointer
 }
 
@@ -232,15 +233,15 @@ th.all-checkbox {
     height:50px;
     line-height:50px;
     padding-left:25px;
-    font-size:17px;
+    font-size:16px;
     color:#323232;
     border-bottom:1px solid #bbb;
     background-color:#fafafa
 }
 
-.table-content-list .c-nav {
-    border-top:1px solid #bbb
-}
+/*.table-content-list .c-nav {*/
+    /*border-top:1px solid #bbb*/
+/*}*/
 
 .table-content-list .p-content {
     padding:70px 0
@@ -274,9 +275,8 @@ th.all-checkbox {
     width:80%;
     text-align:left;
     height:18px;
-    font-size: 16px;
+    font-size: 15px;
     color: #3c3c3c;
-    transform: scale(1,.92);
 }
 
 #timerDetail .p-content .clearfix.time {
@@ -299,14 +299,14 @@ th.all-checkbox {
 }
 
 #projectDetail .p-content a {
-    font-size: 16px;
+    font-size: 15px;
     color: #3598db;
-    transform: scale(1,.92);
+
     display: inline-block;
 }
 
 #projectDetail .p-content span a {
-    transform:scale(1,1)
+
 }
 
 #projectDetail .p-content a:hover {
@@ -397,7 +397,7 @@ span.msg-use{
     margin-top:60px;
     text-align:center;
     font-weight:700;
-    transform:scale(1,.95)
+
 }
 
 .pop-content .off-or-on {
@@ -406,7 +406,7 @@ span.msg-use{
     margin-top:60px;
     text-align:center;
     font-weight:700;
-    transform:scale(1,.95)
+
 }
 
 .pop-content .reset-pwd-hint {
@@ -624,20 +624,21 @@ span.msg-use{
     text-align:center
 }
 
-#createProject input {
+/*#createProject input {*/
+   /**/
+/*}*/
+.table-content-list input[type=text]{
     width:300px;
-    font-size:15px;
-    color:#666;
+    font-size:14px;
     border:1px solid #bbb;
-    text-indent:10px;
+    padding-left: 14px;
     height:30px;
     border-radius:5px
 }
-
-#createProject select {
-    width:305px;
-    font-size:15px;
-    color:#666;
+.table-content-list select {
+    width:300px;
+    font-size:14px;
+    color:#888;
     border:1px solid #bbb;
     height:35px;
     border-radius:5px;
@@ -759,14 +760,14 @@ input:-ms-input-placeholder {
 
 .export {
     font-size:18px;
-    transform:scale(1,.95);
+
     color:#3598db
 }
 
 .subjection {
     text-align:right;
     font-size:15px;
-    transform:scale(1,.95);
+
     margin:15px 0;
     margin:15px 0 15px 15px;
 }
@@ -783,7 +784,7 @@ input:-ms-input-placeholder {
     font-size:17px;
     vertical-align:middle;
     height:50px;
-    transform:scale(1,.95);
+
     margin:0 0 0 5px
 }
 
@@ -953,7 +954,7 @@ input:-ms-input-placeholder {
 
 #projectDetail .light-detail-table td span,#projectDetail .light-detail-table th span,#timerDetail .light-detail-table th span {
     display:inline-block;
-    transform:scale(1,.9);
+
     font-size: 15px;
 }
 
@@ -1213,4 +1214,7 @@ i.cricle {
 }
 .init-content.active{
     display: block;
+}
+.table-content-list .search-condition input[type=checkbox]{
+    text-indent: 0;
 }

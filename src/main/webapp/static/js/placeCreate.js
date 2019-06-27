@@ -2,7 +2,7 @@
  * Created by yuanjie.fang on 2019/6/25.
  */
 $(function () {
-    var $myselect = $("#projectId");
+
     /**
      * 初始化插件
      */
@@ -24,7 +24,6 @@ $(function () {
         })
         $('#projectId').append(content);
     })
-
     //监听项目选择
     $('#projectId').change(function () {
         pid=pid1(pid);
@@ -204,7 +203,6 @@ function mesh(pid, mesh_id, pname) {
             $('#mesh_id ').append(content);
         })
     }
-
 }
 
 function pid1(pid) {

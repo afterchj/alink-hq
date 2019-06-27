@@ -98,7 +98,6 @@
 .main-left a {
     font-size:16px;
     color:#323232;
-    transform:scale(1,.92)
 }
 
 .one-list {
@@ -152,28 +151,29 @@
     border:none;
 }
 .create {
-    background-color:#3598DB;
-    color:#fff;
-    border:1px solid #3598DB;
-    height:32px;
-    width:unset;
-    line-height:32px;
-    border-radius:5px;
-    text-align:center;
-    font-size:15px;
-    padding:0 5px
+    background-color: #3598DB;
+    color: #fff;
+    border: 2px solid #3598DB;
+    height: 31px;
+    width: unset;
+    line-height: 28px;
+    border-radius: 5px;
+    text-align: center;
+    font-size: 16px;
+    padding: 0 5px;
 }
 
 .goBack {
-    border:2px solid #3598DB;
-    color:#3598DB;
-    height:30px;
-    line-height:30px;
-    width:70px;
-    border-radius:5px;
-    text-align:center;
-    font-size:16px;
-    background-color:#fff
+    border: 2px solid #3598DB;
+    color: #3598DB;
+    height: 31px;
+    line-height: 28px;
+    /* width: 70px; */
+    border-radius: 5px;
+    text-align: center;
+    font-size: 16px;
+    background-color: #fff;
+    padding: 0 7px;
 }
 
 .goBack.active {
@@ -200,7 +200,6 @@
 }
 
 .goBack span:nth-child(1),.create span:nth-child(1) {
-    font-size:25px;
     margin-right:5px
 }
 
