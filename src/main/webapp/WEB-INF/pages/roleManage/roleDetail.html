@@ -645,6 +645,7 @@
         var alreadyExistPermissions = $("div[class='f-l zero']>label");
         var alreadyExistViewInfo = $("label[alt^='view']");
 
+        //单选查看数据
         $.each(permissionList, function (key, value) {
 //            console.log(value.descr, value.permission_name);
             var rolePermission = value.descr;
@@ -654,6 +655,7 @@
                 var radioAlt = $(this).attr('alt');
                 if (permissionName==radioAlt){
                     $(this).prev().prop('checked',true);
+//                    console.log('info',$(this).attr('alt'));
                 }
             })
 
@@ -693,68 +695,102 @@
                 }
             });
         });
+        //不可查看数据勾选
+        var singleNoRadio = $("input:radio.singleIsRadio");
+        singleNoRadio.each(function () {
+            if (!$(this).prop('checked')){
+//                console.log($(this).attr('alt'))
+                $(this).parent().next().find('input:radio.singleNoRadio').prop('checked',true);
+            }
 
-        var checkProjectAll = [];
-        //左侧全选
-        var projectCheckedNum = $("#projectManage").find('.list:eq(0) .zero input:checkbox:checked').length;
-        if (projectCheckedNum == 4) {
-            $("#projectManage").find('.list:eq(0) input:eq(0)').prop("checked", true);
-            checkProjectAll.push(projectCheckedNum);
-        }
-        var meshCheckedNum = $("#projectManage").find('.list:eq(1) .zero input:checked').length;
-        if (meshCheckedNum == 4) {
-            $("#projectManage").find('.list:eq(1) input:eq(0)').prop("checked", true);
-            checkProjectAll.push(meshCheckedNum);
-        }
-        var placeCheckedNum = $("#projectManage").find('.list:eq(2) .zero input:checked').length;
-        if (placeCheckedNum == 3) {
-            $("#projectManage").find('.list:eq(2) input:eq(0)').prop("checked", true);
-            checkProjectAll.push(placeCheckedNum);
-        }
-        var groupCheckedNum = $("#projectManage").find('.list:eq(3) .zero input:checked').length;
-        if (groupCheckedNum == 4){
-            $("#projectManage").find('.list:eq(3) input:eq(0)').prop("checked", true);
-            checkProjectAll.push(groupCheckedNum);
-        }
-        var lightCheckedNum = $("#projectManage").find('.list:eq(4) .zero input:checked').length;
-        if (lightCheckedNum ==4){
-            $("#projectManage").find('.list:eq(4) input:eq(0)').prop("checked", true);
-            checkProjectAll.push(lightCheckedNum);
-        }
-        var sceneCheckedNum = $("#projectManage").find('.list:eq(5) .zero input:checked').length;
-        if (sceneCheckedNum ==2){
-            $("#projectManage").find('.list:eq(5) input:eq(0)').prop("checked", true);
-            checkProjectAll.push(sceneCheckedNum);
-        }
-        var timeCheckedNum = $("#projectManage").find('.list:eq(6) .zero input:checked').length;
-        if (timeCheckedNum ==1){
-            $("#projectManage").find('.list:eq(6) input:eq(0)').prop("checked", true);
-            checkProjectAll.push(timeCheckedNum);
-        }
-        //项目管理全选
-        if (checkProjectAll.length== 7){
-            $("#projectManage .limit input:checkbox").prop("checked",true);
-        }
-
+        })
+//        //横向全选
+        var allListChecked = $("input:checkbox.allListChecked");
+        allListChecked.each(function () {
+//            console.log($(this).next().text());
+            $(this).prop('checked',$(this).parent().parent().parent().find('input.singleListChecked:checkbox').length==$(this).parent().parent().parent().find('input.singleListChecked:checkbox:checked').length);
+        });
         //全选
-        $("#userManage").find('input.singleChecked.allListChecked.userList:checkbox').prop("checked",$("#userManage").find('.list:eq(0) .zero input:checked').length==$("#userManage").find('.list:eq(0) .zero input').length);
-        $("#userManage .limit input:checkbox").prop("checked",$("#userManage").find('.list:eq(0) input:eq(0):checked').length==1);
-        $("#roleManage").find('input.singleChecked.allListChecked:checkbox').prop("checked",$("#roleManage").find('.f-l.clearfix.one .zero input:checked').length==$("#roleManage").find('.f-l.clearfix.one .zero input').length);
-        $("#roleManage .limit input:checkbox").prop("checked",$("#roleManage").find('.list:eq(0) input:eq(0):checked').length==1);
-        $("#coorManage").find('input.singleChecked.allListChecked:checkbox').prop("checked",$("#coorManage").find('.f-l.clearfix.one .zero input:checked').length==$("#coorManage").find('.f-l.clearfix.one .zero input').length);
-        $("#coorManage .limit input:checkbox").prop("checked",$("#coorManage").find('.list:eq(0) input:eq(0):checked').length==1);
-
+        var allChecked = $("input.allChecked:checkbox");
+        allChecked.each(function () {
+//            console.log($(this).next().text());
+            $(this).prop('checked',$(this).parent().parent().parent().find('input:checkbox.allListChecked').length==$(this).parent().parent().parent().find('input:checkbox.allListChecked:checked').length)
+        })
         //查看数据全选
-        $("#projectManage input.isAllRadio:radio").prop("checked",$("#projectManage input.singleIsRadio:radio").length==$("#projectManage input.singleIsRadio:radio:checked").length);
-        $("#projectManage input.noAllRadio:radio").prop("checked",$("#projectManage input.singleNoRadio:radio").length==$("#projectManage input.singleNoRadio:radio:checked").length);
-//        console.log($("#userManage input.singleIsRadio:radio").length)
-//        console.log($("#userManage input.singleIsRadio:radio:checked").length)
-        $("#userManage input.isAllRadio:radio").prop("checked",$("#userManage input.singleIsRadio:radio").length==$("#userManage input.singleIsRadio:radio:checked").length);
-        $("#userManage input.isAllRadio:radio").prop("checked",$("#userManage input.singleIsRadio:radio").length==$("#userManage input.singleIsRadio:radio:checked").length);
-        $("#roleManage input.isAllRadio:radio").prop("checked",$("#roleManage input.singleIsRadio:radio").length==$("#roleManage input.singleIsRadio:radio:checked").length);
-        $("#roleManage input.isAllRadio:radio").prop("checked",$("#roleManage input.singleIsRadio:radio").length==$("#roleManage input.singleIsRadio:radio:checked").length);
-        $("#coorManage input.isAllRadio:radio").prop("checked",$("#coorManage input.singleIsRadio:radio").length==$("#coorManage input.singleIsRadio:radio:checked").length);
-        $("#coorManage input.isAllRadio:radio").prop("checked",$("#coorManage input.singleIsRadio:radio").length==$("#coorManage input.singleIsRadio:radio:checked").length);
+        var isAllRadio = $("input:radio.isAllRadio");
+        isAllRadio.each(function () {
+//            console.log($(this).next().text());
+            $(this).prop('checked',$(this).parent().parent().parent().parent().find('input:radio.singleIsRadio').length==$(this).parent().parent().parent().parent().find('input:radio.singleIsRadio:checked').length);
+        });
+        //不可查看数据全选
+        var noAllRadio = $("input:radio.noAllRadio");
+        noAllRadio.each(function () {
+            $(this).prop('checked',$(this).parent().parent().parent().parent().find('input:radio.singleNoRadio').length==$(this).parent().parent().parent().parent().find('input:radio.singleNoRadio:checked').length)
+        })
+
+//        var checkProjectAll = [];
+//        //左侧全选
+//        var projectCheckedNum = $("#projectManage").find('.list:eq(0) .zero input:checkbox:checked').length;
+//        if (projectCheckedNum == 4) {
+//            $("#projectManage").find('.list:eq(0) input:eq(0)').prop("checked", true);
+//            checkProjectAll.push(projectCheckedNum);
+//        }
+//        var meshCheckedNum = $("#projectManage").find('.list:eq(1) .zero input:checked').length;
+//        if (meshCheckedNum == 4) {
+//            $("#projectManage").find('.list:eq(1) input:eq(0)').prop("checked", true);
+//            checkProjectAll.push(meshCheckedNum);
+//        }
+//        var placeCheckedNum = $("#projectManage").find('.list:eq(2) .zero input:checked').length;
+//        if (placeCheckedNum == 3) {
+//            $("#projectManage").find('.list:eq(2) input:eq(0)').prop("checked", true);
+//            checkProjectAll.push(placeCheckedNum);
+//        }
+//        var groupCheckedNum = $("#projectManage").find('.list:eq(3) .zero input:checked').length;
+//        if (groupCheckedNum == 4){
+//            $("#projectManage").find('.list:eq(3) input:eq(0)').prop("checked", true);
+//            checkProjectAll.push(groupCheckedNum);
+//        }
+//        var lightCheckedNum = $("#projectManage").find('.list:eq(4) .zero input:checked').length;
+//        if (lightCheckedNum ==4){
+//            $("#projectManage").find('.list:eq(4) input:eq(0)').prop("checked", true);
+//            checkProjectAll.push(lightCheckedNum);
+//        }
+//        var sceneCheckedNum = $("#projectManage").find('.list:eq(5) .zero input:checked').length;
+//        if (sceneCheckedNum ==2){
+//            $("#projectManage").find('.list:eq(5) input:eq(0)').prop("checked", true);
+//            checkProjectAll.push(sceneCheckedNum);
+//        }
+//        var timeCheckedNum = $("#projectManage").find('.list:eq(6) .zero input:checked').length;
+//        if (timeCheckedNum ==1){
+//            $("#projectManage").find('.list:eq(6) input:eq(0)').prop("checked", true);
+//            checkProjectAll.push(timeCheckedNum);
+//        }
+//        //项目管理全选
+//        if (checkProjectAll.length== 7){
+//            $("#projectManage .limit input:checkbox").prop("checked",true);
+//        }
+//
+//        //横向复选
+//        $("#userManage").find('input.singleChecked.allListChecked.userList:checkbox').prop("checked",$("#userManage").find('.list:eq(0) .zero input:checked').length==$("#userManage").find('.list:eq(0) .zero input').length);
+//        $("#roleManage").find('input.singleChecked.allListChecked:checkbox').prop("checked",$("#roleManage").find('.f-l.clearfix.one .zero input:checked').length==$("#roleManage").find('.f-l.clearfix.one .zero input').length);
+//        $("#coorManage").find('input.singleChecked.allListChecked:checkbox').prop("checked",$("#coorManage").find('.f-l.clearfix.one .zero input:checked').length==$("#coorManage").find('.f-l.clearfix.one .zero input').length);
+//        //全选
+//
+//        $("#userManage .limit input:checkbox").prop("checked",$("#userManage").find('.list:eq(0) input:eq(0):checked').length==1);
+//        $("#roleManage .limit input:checkbox").prop("checked",$("#roleManage").find('.list:eq(0) input:eq(0):checked').length==1);
+//        $("#coorManage .limit input:checkbox").prop("checked",$("#coorManage").find('.list:eq(0) input:eq(0):checked').length==1);
+//
+//        //查看数据全选
+//        $("#projectManage input.isAllRadio:radio").prop("checked",$("#projectManage input.singleIsRadio:radio").length==$("#projectManage input.singleIsRadio:radio:checked").length);
+//        $("#projectManage input.noAllRadio:radio").prop("checked",$("#projectManage input.singleNoRadio:radio").length==$("#projectManage input.singleNoRadio:radio:checked").length);
+////        console.log($("#userManage input.singleIsRadio:radio").length)
+////        console.log($("#userManage input.singleIsRadio:radio:checked").length)
+//        $("#userManage input.isAllRadio:radio").prop("checked",$("#userManage input.singleIsRadio:radio").length==$("#userManage input.singleIsRadio:radio:checked").length);
+//        $("#userManage input.isAllRadio:radio").prop("checked",$("#userManage input.singleIsRadio:radio").length==$("#userManage input.singleIsRadio:radio:checked").length);
+//        $("#roleManage input.isAllRadio:radio").prop("checked",$("#roleManage input.singleIsRadio:radio").length==$("#roleManage input.singleIsRadio:radio:checked").length);
+//        $("#roleManage input.isAllRadio:radio").prop("checked",$("#roleManage input.singleIsRadio:radio").length==$("#roleManage input.singleIsRadio:radio:checked").length);
+//        $("#coorManage input.isAllRadio:radio").prop("checked",$("#coorManage input.singleIsRadio:radio").length==$("#coorManage input.singleIsRadio:radio:checked").length);
+//        $("#coorManage input.isAllRadio:radio").prop("checked",$("#coorManage input.singleIsRadio:radio").length==$("#coorManage input.singleIsRadio:radio:checked").length);
     })
 </script>
 <script th:src="@{/static/js/roleDetail2.js}"></script>

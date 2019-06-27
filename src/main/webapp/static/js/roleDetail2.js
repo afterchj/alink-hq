@@ -27,7 +27,7 @@ $(function () {
         });
     })
 
-    //账号信息修改成功跳转到我的账号主页面
+    //保存成功跳转到角色列表
     function loadingSuccess(content){
         $('#preload-anim').addClass('active');
         $('#preload-anim .title').text(content);
@@ -37,7 +37,7 @@ $(function () {
             window.location.href = "/alink-hq/role/list";
         },2000)
     }
-    //账号信息修改失败提示
+    //保存失败提示失败信息
     function loadingError(content){
         $('#preload-anim').addClass('active');
         $('#preload-anim .title').text(content);
