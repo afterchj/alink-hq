@@ -768,7 +768,7 @@ input:-ms-input-placeholder {
     font-size:15px;
     transform:scale(1,.95);
     margin:15px 0;
-    margin:15px 0 15px 15px
+    margin:15px 0 15px 15px;
 }
 
 .process {
@@ -796,11 +796,11 @@ input:-ms-input-placeholder {
 }
 
 .select-mesh-step,.select-place-step,.select-group-step {
-    display:none
+    display:none;
 }
 
 .select-mesh-step.active,.select-place-step.active,.select-group-step.active {
-    display:block
+    display:block;
 }
 
 .back-btn {
