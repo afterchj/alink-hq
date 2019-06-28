@@ -102,21 +102,21 @@ td,th {
     background-color:#fff
 }
 
-.search-result table input[type=checkbox] {
-    border:1px solid #bbb;
-    width:15px;
-    height:14px;
-    outline:none;
-    border-radius:0;
-    appearance:none;
-    -webkit-appearance:none;
-    cursor:pointer;
-    background-color:#eef3f5
-}
+/*.search-result table input[type=checkbox] {*/
+    /*border:1px solid #bbb;*/
+    /*width:15px;*/
+    /*height:14px;*/
+    /*outline:none;*/
+    /*border-radius:0;*/
+    /*appearance:none;*/
+    /*-webkit-appearance:none;*/
+    /*cursor:pointer;*/
+    /*background-color:#eef3f5*/
+/*}*/
 
-.search-result table input[type=checkbox]:checked {
-    background:url(/alink-hq/static/img/checkbox-gou.png) no-repeat center
-}
+/*.search-result table input[type=checkbox]:checked {*/
+    /*background:url(/alink-hq/static/img/checkbox-gou.png) no-repeat center*/
+/*}*/
 
 .search-result table td a {
     color:#3c3c3c
@@ -741,7 +741,7 @@ input:-ms-input-placeholder {
 }
 
 .prev span,.next span {
-    font-size:24px;
+    font-size:26px;
     color:#999
 }
 
@@ -768,7 +768,7 @@ input:-ms-input-placeholder {
     font-size:15px;
     transform:scale(1,.95);
     margin:15px 0;
-    margin:15px 0 15px 15px
+    margin:15px 0 15px 15px;
 }
 
 .process {
@@ -796,11 +796,11 @@ input:-ms-input-placeholder {
 }
 
 .select-mesh-step,.select-place-step,.select-group-step {
-    display:none
+    display:none;
 }
 
 .select-mesh-step.active,.select-place-step.active,.select-group-step.active {
-    display:block
+    display:block;
 }
 
 .back-btn {
@@ -1207,4 +1207,10 @@ i.cricle {
 }
 #timerDetail .p-content .timerDetail  .a-span.active a{
     color: #fff;
+}
+.init-content{
+    display: none;
+}
+.init-content.active{
+    display: block;
 }

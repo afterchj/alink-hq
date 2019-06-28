@@ -9,6 +9,7 @@
     <link rel="stylesheet" th:href="@{/static/css/base.css}"/>
     <link rel="stylesheet" th:href="@{/static/css/leftNav.css}"/>
     <link rel="stylesheet" th:href="@{/static/css/projectManage.css}"/>
+
 </head>
 <body>
 <div class="c-container">
@@ -20,7 +21,7 @@
                 <div class="f-l main-right-title font">区域列表
                     <!--<span class="subjection">隶属项目：<span th:inline="text">[[${project.label}]]</span></span>-->
                 </div>
-                <div class="f-r pointer">
+                <div class="f-r pointer last-nav" >
                     <a th:href="@{/place/create}">
                         <div class="create" onmousedown="createBtnMouseDown()" onmouseup="createBtnMouseUp()">
                             <span>+</span><span>创建区域</span>
@@ -77,9 +78,9 @@
                             <thead>
                             <tr>
                                 <th class="all-checkbox">
-                                <span style="vertical-align: sub;">
-                                    <input type="checkbox" id="all" class="pointer">
-                                </span>
+                                <!--<span style="vertical-align: sub;">-->
+                                    <input type="checkbox" id="all" class="pointer ">
+                                <!--</span>-->
                                     <span class="">全选</span>
                                 </th>
                                 <th><span>区域名称</span></th>
@@ -94,7 +95,7 @@
                             </thead>
                             <tbody>
                             <tr th:each="place:${pageInfo.list}">
-                                <td class="checkbox"><input type="checkbox" name="ids" th:value="${place.id}"></td>
+                                <td class="checkbox"><input type="checkbox" name="ids"  th:value="${place.id}"></td>
                                 <td class="k-link">
                                     <a  th:href="@{/place/info(id=${place.id})}" th:text="${place.pname}"></a>
                                 </td>

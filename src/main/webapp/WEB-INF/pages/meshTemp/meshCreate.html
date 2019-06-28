@@ -121,7 +121,7 @@
                     if (res == 'ok') {
                         $('#preload-anim').addClass('active');
                         $('#preload-anim .title').text('创建成功！');
-                        setInterval(function () {
+                        setTimeout(function () {
                             $('#preload-anim').removeClass('active');
                             location.href = '/alink-hq/mesh/list?uid=' + uid;
                         }, 1000)
@@ -130,7 +130,7 @@
                     } else {
                         $('#preload-anim').addClass('active');
                         $('#preload-anim .title').text('创建失败，请重新尝试');
-                        setInterval(function () {
+                        setTimeout(function () {
                             $('#preload-anim').removeClass('active');
                         }, 1000)
                     }

@@ -42,12 +42,12 @@ public class TimeLineController {
     @RequestMapping("/list")
     public String timerList(Model model, int id, Integer pageNum, Integer pageSize, String timeFlag, String tname, String
             createDate, String endTime, String state, HttpSession session) {
-        ProjectList projectList= timeLineService.getProjectNameByMid(id);
-        PageInfo<TimeLine> pageInfo = timeLineService.getTimeLineByMid(id,pageNum,pageSize,timeFlag,tname,createDate,
-                endTime, state);
         User loginUser = (User) session.getAttribute("user");
         String account = loginUser.getAccount();
+        ProjectList projectList= timeLineService.getProjectNameByMid(id);
         List<String> permissions = rolePermissionInfoService.getPermissions(account);
+        PageInfo<TimeLine> pageInfo = timeLineService.getTimeLineByMid(id,pageNum,pageSize,timeFlag,tname,createDate,
+                endTime, state);
         model.addAttribute("permissions",permissions);
         model.addAttribute("pageInfo",pageInfo);
         model.addAttribute("projectName",projectList.getName());
