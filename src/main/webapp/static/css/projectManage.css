@@ -368,12 +368,13 @@ span.msg-use{
 }
 
 .pop-content label {
-    display:inline-block;
-    width:70px;
-    margin-right:30px;
-    font-size:16px;
-    color:#3c3c3c;
-    text-align:right
+    width: 314px;
+    font-size: 14px;
+    color: #888;
+    border: 1px solid #bbb;
+    height: 35px;
+    border-radius: 5px;
+    padding-left: 8px;
 }
 
 .pop-iframe.active {
@@ -633,10 +634,11 @@ span.msg-use{
     border:1px solid #bbb;
     padding-left: 14px;
     height:30px;
-    border-radius:5px
+    border-radius:5px;
+    color: #888;
 }
 .table-content-list select {
-    width:300px;
+    width:314px;
     font-size:14px;
     color:#888;
     border:1px solid #bbb;
