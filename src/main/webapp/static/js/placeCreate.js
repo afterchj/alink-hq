@@ -3,7 +3,6 @@
  */
 $(function () {
     var uid = $("#uid").val();
-    var projectId = $("#project_id").val();
     var pname = '';
     var pid = '';
     var mesh_id = '';
@@ -11,27 +10,34 @@ $(function () {
     mesh_id = mesh_id1(mesh_id);
     pname = pname1(pname);
     $.getJSON('/alink-hq/mesh/getProjects', {"uid": uid}, function (data) {
-        $.each(data, function (i, item) {
-            if (projectId == item.id) {
-                $("#projectId").append("<option value='" + item.id + "' selected>" + item.label + "</option>");
-                $("#projectId").attr("disabled","true").css("background-color","#EEEEEE");
-            }
-            else {
-                $("#projectId").append("<option value='" + item.id + "'>" + item.label + "</option>");
+        var content = '<option value="">请选择项目</option>';
+        if (data.length == 1) {
+            content = '<option value="' + data[0].id + '">' + data[0].label + '</option>'
+        } else {
+            $.each(data, function (i, val) {
+                content += '<option value="' + val.id + '">' + val.label + '</option>';
+            })
+        }
+        $('#projectId').append(content);
+    })
+    //监听项目选择
+        $('#projectId').change(function () {
+                pid = pid1(pid);
+                mesh_id = mesh_id1(mesh_id);
+                pname = pname1(pname);
+                if (pid == '') {
+                    $('.project-hint').text('请选择项目');
+                } else {
+                    $('.project-hint').text('')
+                }
+
+        })
+        $("#projectId").focus(function(){
+            if($(this).children().length==1){
+                $(this).attr('defaultIndex',$(this).attr('selectedIndex'));
             }
         });
-    });
-    //监听项目选择
-    $('#projectId').change(function () {
-        pid = pid1(pid);
-        mesh_id = mesh_id1(mesh_id);
-        pname = pname1(pname);
-        if (pid == '') {
-            $('.project-hint').text('请选择项目');
-        } else {
-            $('.project-hint').text('')
-        }
-    })
+
     $('div[step="one-content"] .next-step').click(function () {
         pid = pid1(pid);
         mesh_id = mesh_id1(mesh_id);
@@ -46,19 +52,29 @@ $(function () {
     })
 
     //监听网络选择
-    $('#mesh_id').change(function () {
-        pid = pid1(pid);
-        mesh_id = mesh_id1(mesh_id);
-        pname = pname1(pname);
-        if (mesh_id == '') {
-            $('.mesh-hint').text('请选择网络');
-            $('#meshId').val('');
-        } else {
-            $('.mesh-hint').text('')
-            var meshId = mesh_id.substr(mesh_id.indexOf("_") + 1);
-            $('#meshId').val(meshId);
-        }
-    })
+    if($('#mesh_id option').length==1){
+        $("#mesh_id").focus(function(){
+            $(this).attr('defaultIndex',$(this).attr('selectedIndex'));
+        });
+        $("#mesh_id").change(function(){
+            $(this).attr('selectedIndex',$(this).attr('defaultIndex'));
+        });
+    }else{
+        $('#mesh_id').change(function () {
+            pid = pid1(pid);
+            mesh_id = mesh_id1(mesh_id);
+            pname = pname1(pname);
+            if (mesh_id == '') {
+                $('.mesh-hint').text('请选择网络');
+                $('#meshId').val('');
+            } else {
+                $('.mesh-hint').text('')
+                var meshId = mesh_id.substr(mesh_id.indexOf("_") + 1);
+                $('#meshId').val(meshId);
+            }
+        })
+    }
+
     $('div[step="two-content"] .prev-step').click(function () {
         pid = pid1(pid);
         mesh_id = mesh_id1(mesh_id);
@@ -121,7 +137,6 @@ $(function () {
                         $('.place-hint').text('')
                         $('#preload-anim').addClass('active');
                         $('#preload-anim .title').text('创建成功！');
-                        $("#mesh_id").removeAttr("disabled");
                         $("form").submit();
                         // setTimeout(function () {
                         //     $('#preload-anim').removeClass('active');
@@ -135,7 +150,6 @@ $(function () {
         }
     })
 })
-
 function step1(pid, mesh_id, pname) {
     $('div[step="one-content"]').addClass('active').siblings().removeClass('active');
     $('div[stepIcon="one"] img').attr('src', '/alink-hq/static/img/fill-1-on.png');
@@ -153,7 +167,6 @@ function step1(pid, mesh_id, pname) {
         $('div[stepIcon="three"] img').attr('src', '/alink-hq/static/img/fill-3-no.png');
     }
 }
-
 function step2(pid, mesh_id, pname) {
     $('div[step="two-content"]').addClass('active').siblings().removeClass('active');
     $('div[stepIcon="two"] img').attr('src', '/alink-hq/static/img/fill-2-on.png');
@@ -171,7 +184,6 @@ function step2(pid, mesh_id, pname) {
         $('div[stepIcon="three"] img').attr('src', '/alink-hq/static/img/fill-3-no.png');
     }
 }
-
 function step3(pid, mesh_id, pname) {
     $('div[step="three-content"]').addClass('active').siblings().removeClass('active');
     $('div[stepIcon="three"] img').attr('src', '/alink-hq/static/img/fill-3-on.png');
@@ -194,19 +206,24 @@ function mesh(pid, mesh_id, pname) {
     pid = pid1(pid);
     mesh_id = mesh_id1(mesh_id);
     pname = pname1(pname);
-    var mid = $("#mid").val();
-    $.getJSON('/alink-hq/group/getMesh', {"projectId": pid}, function (data) {
-        $.each(data, function (i, item) {
-            var id = item.id;
-            if (id.substr(0, id.indexOf("_")) == mid) {
-                $("#mesh_id").append("<option value='" + item.id + "' selected>" + item.label + "</option>");
-                $("#mesh_id").attr("disabled","disabled").css("background-color","#EEEEEE");
-                $("#meshId").val(id.substr(id.indexOf("_")+1));
-            } else {
-                $("#mesh_id").append("<option value='" + item.id + "'>" + item.label + "</option>");
+    if ($('#mesh_id option').length == 0) {
+        $('#mesh_id ').empty();
+        $.getJSON('/alink-hq/group/getMesh', {"projectId": pid}, function (data) {
+            var content = '<option value="" selected>请选择网络</option>';
+            if(data.length==1){
+                content = '<option value="' + data[0].id + '" >' + data[0].label + '</option>';
+                var meshId = data[0].id.substr(data[0].id.indexOf("_") + 1);
+                $('#meshId').val(meshId);
+
+
+            }else{
+                $.each(data, function (i, val) {
+                    content += '<option value="' + val.id + '"  class="new">' + val.label + '</option>';
+                })
             }
-        });
-    })
+            $('#mesh_id ').append(content);
+        })
+    }
 }
 
 function pid1(pid) {
@@ -217,7 +234,6 @@ function pid1(pid) {
     }
     return pid;
 }
-
 function mesh_id1(mesh_id) {
     if ($('#mesh_id option:selected').length > 0) {
         mesh_id = $('#mesh_id option:selected').val();
@@ -226,7 +242,6 @@ function mesh_id1(mesh_id) {
     }
     return mesh_id;
 }
-
 function pname1(pname) {
     if ($('#pname').val().length > 0) {
         pname = $('#pname').val();
