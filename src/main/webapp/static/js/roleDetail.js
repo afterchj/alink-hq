@@ -192,10 +192,14 @@ $(function () {
         //查看数据选项
         if (singleListCheckedLength>=1){
             if ($(".tab-content-part.active").attr('id')=='projectManage'){
-                $(this).parent().parent().next().find('input[value=0]').prop('checked',true)
+                $(this).parent().parent().next().find('input[value=0]').prop('checked',true);
+                //取消全选不可查看数据
+                $(".tab-content-part.active").find('input.noAllRadio').prop('checked',false);
                 //全选可查看数据
                 var allRadio = $(".tab-content-part.active").find('input:radio.singleIsRadio').length;
                 var allCheckedRadio = $(".tab-content-part.active").find('input:radio.singleIsRadio:checked').length;
+                // console.log(allRadio)
+                // console.log(allCheckedRadio)
                 $(".tab-content-part.active").find('.isAllRadio').prop('checked',allRadio==allCheckedRadio);
             }else {
                 var allRadio = $(".tab-content-part.active").find('input[value=0]');
