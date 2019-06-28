@@ -140,7 +140,7 @@
             $.each(json, function (i, item) {
                 var id = item.id;
                 if (id.substr(0, id.indexOf("_")) == mid) {
-                    $("#mid").append("<option value='" + item.id + "' selected readonly>" + item.label + "</option>");
+                    $("#mid").append("<option value='" + item.id + "' selected>" + item.label + "</option>");
                 }
                 else {
                     $("#mid").append("<option value='" + item.id + "'>" + item.label + "</option>");

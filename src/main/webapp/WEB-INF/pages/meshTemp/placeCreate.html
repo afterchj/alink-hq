@@ -47,6 +47,8 @@
                         <!--<div class="subjection">隶属项目：<span th:inline="text">[[${project.label}]]</span></div>-->
                         <form th:action="@{/place/save}" method="get" style="margin-top: 0;">
                             <input type="hidden" name="uid" id="uid" th:value="${session.user.id}">
+                            <input type="hidden" name="mid" id="mid" th:value="${dict.mid}">
+                            <input type="hidden" id="project_id" th:value="${dict.projectId}">
                             <div class="process clearfix">
                                 <div class="f-l part " stepIcon="one">
                                     <img src="/alink-hq/static/img/fill-1-on.png" alt="">
@@ -69,9 +71,8 @@
                                 <div>
                                     <p class="project-hint"></p>
                                     <label for="projectId">项目名称：</label>
-                                    <select id="projectId" name="projectId" style="height:35px;" data-live-search="true"
-                                            class="selectpicker">
-
+                                    <select id="projectId" name="projectId" style="height:35px;" data-live-search="true" class="selectpicker">
+                                        <option value="">请选择项目</option>
                                     </select>
                                 </div>
                                 <div class="">
@@ -88,12 +89,13 @@
                                     <p class="mesh-hint"></p>
                                     <label for="mesh_id">选择网络：</label>
                                     <select id="mesh_id" name="mesh_id" style="height:35px;">
+                                        <option value="">请选择网络</option>
                                     </select>
                                 </div>
                                 <div>
                                     <p class="" style="height: 20px"></p>
                                     <label for="meshId">网络ID：</label>
-                                    <input type="text" id="meshId" name="meshId" readonly>
+                                    <input type="text" id="meshId" name="" readonly>
                                 </div>
                                 <div class="">
                                     <button type="button" class="confirm-create prev-step" openTab="confirm-create"

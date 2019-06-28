@@ -8,7 +8,7 @@ public class SearchDict {
     private Integer id;
     private Integer uid;
     private String role;
-    private Integer mid;
+    private Integer mid=0;
     private Integer pid;
     private Integer gid;
     private String name;

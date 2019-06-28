@@ -21,7 +21,6 @@
                 <div class="f-l main-right-title">
                     <nav class="bread">
                         <ol class="clearfix">
-                            <li class="f-l"><a href="javascript:;" onClick="javascript :history.back(-1);">网络列表</a></li>
                             <li class="f-l">网络详情</li>
                         </ol>
                     </nav></div>
@@ -80,7 +79,7 @@
                             </div>
                             <div class="f-l">
                                 <a th:if="${meshInfo.pcount}=='0'" class="a-un" href="javascript:void(0);">查看区域列表</a>
-                                <a th:if="${meshInfo.pcount}!='0'"  th:href="@{/place/list(uid=${session.user.id},mid=${meshInfo.id})}">查看区域列表</a>
+                                <a th:if="${meshInfo.pcount}!='0'" th:href="@{/place/list(uid=${session.user.id},projectId=${meshInfo.project_id},mid=${meshInfo.id})}">查看区域列表</a>
                             </div>
                         </div>
                         <div class="clearfix">
@@ -90,7 +89,7 @@
                             </div>
                             <div class="f-l">
                                 <a  th:if="${meshInfo.pcount}=='0'" class="a-un" href="javascript:void(0);">查看组列表</a>
-                                <a  th:if="${meshInfo.pcount}!='0'" th:href="@{/group/list(uid=${session.user.id},mid=${meshInfo.id})}">查看组列表</a>
+                                <a  th:if="${meshInfo.pcount}!='0'" th:href="@{/group/list(uid=${session.user.id},projectId=${meshInfo.project_id},mid=${meshInfo.id})}">查看组列表</a>
                             </div>
                         </div>
                         <div class="clearfix">
@@ -100,7 +99,7 @@
                             </div>
                             <div class="f-l">
                                 <a th:if="${meshInfo.lcount}=='0'" class="a-un" href="javascript:void(0);">查看灯列表</a>
-                                <a th:if="${meshInfo.lcount}!='0'"  th:href="@{/light/list(uid=${session.user.id},mid=${meshInfo.id})}">查看灯列表</a>
+                                <a th:if="${meshInfo.lcount}!='0'"  th:href="@{/light/list(uid=${session.user.id},projectId=${meshInfo.project_id},mid=${meshInfo.id})}">查看灯列表</a>
                             </div>
                         </div>
                     </div>

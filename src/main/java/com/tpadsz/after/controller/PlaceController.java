@@ -59,7 +59,8 @@ public class PlaceController {
     }
 
     @RequestMapping("/create")
-    public String create() {
+    public String create(SearchDict dict, ModelMap modelMap) {
+        modelMap.put("dict", dict);
         return "meshTemp/placeCreate";
     }
 
@@ -68,13 +69,14 @@ public class PlaceController {
     public String savePlace(SearchDict dict) {
         String str = dict.getMesh_id();
         int mid = Integer.parseInt(str.substring(0, str.indexOf("_")));
+        int projectId = dict.getProjectId();
         Map map = new HashMap();
         map.put("uid", dict.getUid());
         map.put("name", dict.getPname());
         map.put("mid", mid);
         placeService.save(map);
 //        return "ok";
-        return "redirect:/place/list";
+        return "redirect:/place/list?projectId=" + projectId + "&mid=" + mid;
 //        return "redirect:/place/list?uid="+dict.getUid();
     }
 
