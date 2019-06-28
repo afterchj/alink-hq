@@ -18,9 +18,17 @@
         <div th:replace="common/left::left('projectList')"></div>
         <div class="main-right f-l">
             <div class="clearfix main-right-nav">
-                <div class="f-l main-right-title">创建项目</div>
+                <div class="f-l main-right-title">
+                    <nav class="bread">
+                        <ol class="clearfix">
+                            <li class="f-l"><a href="javascript:;" onClick="javascript :history.back(-1);">项目列表</a></li>
+                            <li class="f-l">创建项目</li>
+                        </ol>
+                    </nav>
+                </div>
                 <div class="f-r pointer">
-                    <div class="goBack" onClick="javascript :history.back(-1);" onmousedown="backBtnMouseDown()" onmouseup="backBtnMouseUp()">
+                    <div class="goBack" onClick="javascript :history.back(-1);" onmousedown="backBtnMouseDown()"
+                         onmouseup="backBtnMouseUp()">
                         <span><</span><span>返回</span>
                     </div>
                 </div>
@@ -35,13 +43,15 @@
                             <div>
                                 <p class="project-hint"></p>
                                 <label for="projectName">项目名称：</label>
-                                <input type="text" placeholder="请输入（2-16位汉字、字母、数字）" maxlength="16" id="projectName" onkeyup="nameKeyUp()">
+                                <input type="text" placeholder="请输入（2-16位汉字、字母、数字）" maxlength="16" id="projectName"
+                                       onkeyup="nameKeyUp()">
                             </div>
                             <div>
                                 <p class="account-hint"></p>
                                 <label for="account">施工人员：</label>
                                 <input type="text" placeholder="请输入施工人员" id="account" th:if="${account}==null"/>
-                                <input type="text" id="account" th:if="${account}!=null" th:value="${account}" readonly/>
+                                <input type="text" id="account" th:if="${account}!=null" th:value="${account}"
+                                       readonly/>
                             </div>
                             <div class="">
                                 <button type="button" class="confirm-create" openTab="confirm-create">确定创建</button>

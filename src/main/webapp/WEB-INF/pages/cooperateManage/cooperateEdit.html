@@ -21,7 +21,14 @@
         <div th:replace="common/left::left('cooperateInfo')"></div>
         <div class="main-right f-l">
             <div class="clearfix main-right-nav">
-                <div class="f-l main-right-title">公司信息编辑</div>
+                <div class="f-l main-right-title">
+                    <nav class="bread">
+                        <ol class="clearfix">
+                            <li class="f-l"><a href="javascript:;" onClick="javascript :history.back(-1);">合作列表</a></li>
+                            <li class="f-l">公司信息编辑</li>
+                        </ol>
+                    </nav>
+                </div>
                 <!-- <div class="f-r pointer">
                     <img src="./img/create-project.png" alt="">
                 </div> -->
@@ -36,7 +43,8 @@
                 <div class="p-detail">
                     <div class="p-nav">公司信息编辑</div>
                     <div class="p-content p-r">
-                        <form th:action="@{/cooperate/save}" class="company-msg" method="post" enctype="multipart/form-data">
+                        <form th:action="@{/cooperate/save}" class="company-msg" method="post"
+                              enctype="multipart/form-data">
                             <input type="hidden" name="id" th:value="${info.id}">
                             <input type="hidden" name="status" th:value="${info.status}">
                             <div class="edit-company">
@@ -65,14 +73,17 @@
                                 </div>
                                 <div id="drop_area">
                                     <div id="preview" th:switch="${info.photo}" class="p-r">
-                                        <img th:case="null" src="/alink-hq/static/img/upload.png" class="img-responsive" style="width: 100%;height:100%;" alt="" title="">
+                                        <img th:case="null" src="/alink-hq/static/img/upload.png" class="img-responsive"
+                                             style="width: 100%;height:100%;" alt="" title="">
                                         <!--<img th:case="*" th:src="@{'http://iotsztp.com/file/imgs/'+${info.photo}}" class="img-responsive" style="width: 100%;height:100%;" alt="" title="">-->
-                                        <img th:case="*" th:src="@{'http://uichange.com/file/imgs/'+${info.photo}}" class="img-responsive" style="width: 100%;height:100%;" alt="" title="">
+                                        <img th:case="*" th:src="@{'http://uichange.com/file/imgs/'+${info.photo}}"
+                                             class="img-responsive" style="width: 100%;height:100%;" alt="" title="">
                                         <!--<img th:case="*" th:src="@{'../static/upload/'+${info.photo}}" class="img-responsive" style="width: 100%;height:100%;" alt="" title="">-->
                                         <!--<img src="http://iotsztp.com/file/imgs/chat_qrcode.jpg" style="width: 100%">-->
                                         <!--<img th:src="@{'../static/upload/'+${info.photo}}" style="width: 100%" th:alt="${info.photo}">-->
                                     </div>
-                                    <div id="delete-img" class="active" style="line-height: 20px;z-index: 999;background: rgba(0,0,0,.4);color: #fff;position: absolute;top: 0;right: 0;height: 25px;width: 30px;border-bottom-left-radius: 92%;text-align: center;font-size: 20px;">
+                                    <div id="delete-img" class="active"
+                                         style="line-height: 20px;z-index: 999;background: rgba(0,0,0,.4);color: #fff;position: absolute;top: 0;right: 0;height: 25px;width: 30px;border-bottom-left-radius: 92%;text-align: center;font-size: 20px;">
                                         ×
                                     </div>
                                 </div>
@@ -122,60 +133,60 @@
         dragImgUpload.resetImage();
     })
     //表单提交
-    $('.btn-submit button').click(function(){
-        var companyName=$('#company-name').val().trim();
-        var companyPhone=$('#company-phone').val().trim();
-        var address=$('#address').val().trim();
-        var licenseNumber=$('#serial').val().trim();
+    $('.btn-submit button').click(function () {
+        var companyName = $('#company-name').val().trim();
+        var companyPhone = $('#company-phone').val().trim();
+        var address = $('#address').val().trim();
+        var licenseNumber = $('#serial').val().trim();
 //        console.log(companyName,companyPhone,isNaN(companyPhone),address)
-        var iscompanyName=true;
-        var iscompanyPhone=true;
-        var isaddress=true;
-        var islicenseNumber=true;
-        if(companyName==''){
+        var iscompanyName = true;
+        var iscompanyPhone = true;
+        var isaddress = true;
+        var islicenseNumber = true;
+        if (companyName == '') {
             $('.company-name-hint').text('请输入公司名称')
-            iscompanyName=false;
-        }else{
+            iscompanyName = false;
+        } else {
             $('.company-name-hint').text('')
-            iscompanyName=true;
+            iscompanyName = true;
         }
-        if(companyPhone==''){
+        if (companyPhone == '') {
             $('.company-phone-hint').text('请输入公司联系方式')
-            iscompanyPhone=false;
-        }else if(!CheckPhone(companyPhone)){
+            iscompanyPhone = false;
+        } else if (!CheckPhone(companyPhone)) {
             $('.company-phone-hint').text('输入格式不正确')
-            iscompanyPhone=false;
-        }else{
+            iscompanyPhone = false;
+        } else {
             $('.company-phone-hint').text('')
-            iscompanyPhone=true;
+            iscompanyPhone = true;
         }
-        if(address==''){
+        if (address == '') {
             $('.address-hint').text('请输入公司通讯地址')
-            isaddress=false;
-        }else{
+            isaddress = false;
+        } else {
             $('.address-hint').text('')
-            isaddress=true;
+            isaddress = true;
         }
-        if(isNaN(licenseNumber)){
+        if (isNaN(licenseNumber)) {
             $('.license-number-hint').text('请输入纯数字的编号')
-            islicenseNumber=false;
-        }else{
+            islicenseNumber = false;
+        } else {
             $('.license-number-hint').text('')
-            islicenseNumber=true;
+            islicenseNumber = true;
         }
 
 //      console.log('iscompanyName',iscompanyName,'iscompanyPhone',iscompanyPhone,'isaddress',isaddress,'islicenseNumber',islicenseNumber);
-        if(iscompanyName && iscompanyPhone && isaddress && islicenseNumber) {
+        if (iscompanyName && iscompanyPhone && isaddress && islicenseNumber) {
             $('form.company-msg').submit();
         }
     })
     //验证手机号或座机
-    function CheckPhone(number){
-        var reg1 =/^((0\d{2,3}-\d{7,8})|(1[3584]\d{9}))$/;
-        var reg2=/^1[3456789]\d{9}$/;
-        if(reg1.test(number) || reg2.test(number)){
+    function CheckPhone(number) {
+        var reg1 = /^((0\d{2,3}-\d{7,8})|(1[3584]\d{9}))$/;
+        var reg2 = /^1[3456789]\d{9}$/;
+        if (reg1.test(number) || reg2.test(number)) {
             return true;
-        }else{
+        } else {
             return false;
         }
     }

@@ -16,8 +16,11 @@ table {
 body {
     zoom:1;
     background:#eef2f5;
-    line-height:24px;
-    font:14px Helvetica Neue,Helvetica,PingFang SC,\5FAE\8F6F\96C5\9ED1,Tahoma,Arial,sans-serif
+    font-family: "Segoe UI", "Lucida Grande", Helvetica, Arial, "Microsoft YaHei", FreeSans, Arimo, "Droid Sans", "wenquanyi micro hei", "Hiragino Sans GB", "Hiragino Sans GB W3", "FontAwesome", sans-serif;
+    display: block;
+    font-size: 90%;
+    font-weight: 400;
+    color: #333;
 }
 /*input[type=checkbox] {*/
     /*border:1px solid #bbb;*/
@@ -35,11 +38,11 @@ body {
 /*}*/
 a {
     text-decoration:none;
-    margin:0;
-    padding:0;
-    border:0;
-    font-size:100%;
-    vertical-align:baseline;
+    /*margin:0;*/
+    /*padding:0;*/
+    /*border:0;*/
+    /*font-size:100%;*/
+    /*vertical-align:baseline;*/
     color: #3598db;
 }
 
@@ -162,7 +165,9 @@ button {
 .all-checkbox {
     width:120px
 }
-
+ol, ul {
+    list-style: none;
+}
 
 input[type=checkbox],input[type=radio] {
     -webkit-appearance: none;
@@ -283,4 +288,26 @@ input[type=checkbox]:checked,input[type=checkbox]:indeterminate,input[type=radio
 }
 input[type=checkbox]:checked,input[type=checkbox]:indeterminate{
     background: #fafafa;
+}
+.bread li{
+    font-size: 17px;
+}
+.bread li a{
+    color: #323232;
+}
+.bread li a:hover{
+    color: #3598db;
+}
+.bread li::after{
+    display: inline-block;
+    content: '\203A';
+    margin: 0 .8em;
+    color: #959fa5;
+}
+.bread li:last-of-type::after {
+    /* hide separator after the last item */
+    display: none;
+}
+.bread li:last-of-type{
+    color: #323232;
 }
