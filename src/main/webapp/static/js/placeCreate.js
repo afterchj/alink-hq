@@ -14,13 +14,13 @@ $(function () {
         $.each(data, function (i, item) {
             if (projectId == item.id) {
                 $("#projectId").append("<option value='" + item.id + "' selected>" + item.label + "</option>");
-                $("#projectId").attr("readonly","true").css("background-color","#EEEEEE");
+                $("#projectId").attr("disabled","true").css("background-color","#EEEEEE");
             }
             else {
                 $("#projectId").append("<option value='" + item.id + "'>" + item.label + "</option>");
             }
         });
-    })
+    });
     //监听项目选择
     $('#projectId').change(function () {
         pid = pid1(pid);
@@ -121,6 +121,7 @@ $(function () {
                         $('.place-hint').text('')
                         $('#preload-anim').addClass('active');
                         $('#preload-anim .title').text('创建成功！');
+                        $("#mesh_id").removeAttr("disabled");
                         $("form").submit();
                         // setTimeout(function () {
                         //     $('#preload-anim').removeClass('active');
@@ -199,7 +200,7 @@ function mesh(pid, mesh_id, pname) {
             var id = item.id;
             if (id.substr(0, id.indexOf("_")) == mid) {
                 $("#mesh_id").append("<option value='" + item.id + "' selected>" + item.label + "</option>");
-                $("#mesh_id").attr("readonly","true").css("background-color","#EEEEEE");
+                $("#mesh_id").attr("disabled","disabled").css("background-color","#EEEEEE");
                 $("#meshId").val(id.substr(id.indexOf("_")+1));
             } else {
                 $("#mesh_id").append("<option value='" + item.id + "'>" + item.label + "</option>");

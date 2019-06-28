@@ -56,7 +56,8 @@ public class MeshController {
     }
 
     @RequestMapping("/create")
-    public String create() {
+    public String create(SearchDict dict, ModelMap modelMap) {
+        modelMap.put("dict", dict);
         return "meshTemp/meshCreate";
     }
 

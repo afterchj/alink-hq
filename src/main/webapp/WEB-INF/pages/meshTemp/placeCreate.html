@@ -45,7 +45,7 @@
                     </div>
                     <div class="c-content ">
                         <!--<div class="subjection">隶属项目：<span th:inline="text">[[${project.label}]]</span></div>-->
-                        <form th:action="@{/place/save}" method="get" style="margin-top: 0;">
+                        <form th:action="@{/place/save}" method="post" style="margin-top: 0;">
                             <input type="hidden" name="uid" id="uid" th:value="${session.user.id}">
                             <input type="hidden" name="mid" id="mid" th:value="${dict.mid}">
                             <input type="hidden" id="project_id" th:value="${dict.projectId}">

@@ -36,8 +36,9 @@
                         创建网络
                     </div>
                     <div class="c-content ">
-                        <form th:action="@{/mesh/save}" method="POST">
+                        <form th:action="@{/mesh/save}" method="post">
                             <input type="hidden" id="uid" name="uid" th:value="${session.user.id}">
+                            <input type="hidden" id="project_id" th:value="${dict.projectId}">
                             <div>
                                 <p class="mesh-hint"></p>
                                 <label for="mesh">网络名：</label>
@@ -51,8 +52,10 @@
                                 </select>
                             </div>
                             <div style="margin:30px 0 0 55px;">
-                                <input type="radio" name="mtype" value="商业照明" checked style="vertical-align: middle;margin-right: 10px;">商业照明 &nbsp; &nbsp; &nbsp;
-                                <input type="radio" name="mtype" value="家庭照明" style="vertical-align: middle;margin-right: 10px;">家庭照明
+                                <input type="radio" name="mtype" value="商业照明" checked
+                                       style="vertical-align: middle;margin-right: 10px;">商业照明 &nbsp; &nbsp; &nbsp;
+                                <input type="radio" name="mtype" value="家庭照明"
+                                       style="vertical-align: middle;margin-right: 10px;">家庭照明
                             </div>
                             <div class="">
                                 <button type="button" class="confirm-create" openTab="confirm-create">确定创建</button>
@@ -81,14 +84,17 @@
 <script type="text/javascript" src="/alink-hq/static/js/left.js"></script>
 <script src="/alink-hq/static/js/moment.js"></script>
 <script th:inline="javascript">
-    var uid = [[${session.user.id}]];
+    var uid = $("#uid").val();
+    var projectId = $("#project_id").val();
     $(function () {
         $.getJSON("/alink-hq/mesh/getProjects", {"uid": uid}, function (json) {
-            if (json != '') {
-                $("#projectId option:first").siblings().remove();
-            }
             $.each(json, function (i, item) {
-                $("#projectId").append("<option value='" + item.id + "'>" + item.label + "</option>");
+                if (projectId == item.id) {
+                    $("#projectId").append("<option value='" + item.id + "' selected>" + item.label + "</option>");
+                    $("#projectId").attr("disabled", "true").css("background-color", "#EEEEEE");
+                } else {
+                    $("#projectId").append("<option value='" + item.id + "'>" + item.label + "</option>");
+                }
             });
         });
     });
@@ -123,7 +129,7 @@
                         $('#preload-anim .title').text('创建成功！');
                         setTimeout(function () {
                             $('#preload-anim').removeClass('active');
-                            location.href = '/alink-hq/mesh/list?uid=' + uid;
+                            location.href = '/alink-hq/mesh/list?uid=' + uid + "&projectId=" + projectId;
                         }, 1000)
                     } else if (res == 'fail') {
                         $('.mesh-hint').text('已存在，请重新输入');
