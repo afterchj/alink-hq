@@ -19,6 +19,15 @@ public class TimeLine {
     private String create_date;
     private String update_date;
     private Integer tid;
+    private String dayObj;
+
+    public String getDayObj() {
+        return dayObj;
+    }
+
+    public void setDayObj(String dayObj) {
+        this.dayObj = dayObj;
+    }
 
     public String getMesh_id() {
         return mesh_id;

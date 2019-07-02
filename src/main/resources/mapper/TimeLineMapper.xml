@@ -11,6 +11,7 @@
         IF( t.item_set = '1', '启用', '停用' ) state,
         IF( t.repetition = '0', '不重复', '重复' ) repetition,
         t.WEEK,
+        t.dayObj,
         DATE_FORMAT(t.create_date,'%Y/%m/%d %k:%i:%s') as create_date,
         DATE_FORMAT(t.update_date,'%Y/%m/%d %k:%i:%s') as update_date
     </sql>
@@ -22,7 +23,8 @@
         t.mid,
         m.mesh_id,
         IF( t.item_set = '1', '启用', '停用' ) state,
-        t.WEEK
+        t.WEEK,
+        t.dayObj,
     </sql>
 
     <sql id="TimeLineWhere">

@@ -1,5 +1,6 @@
 package com.tpadsz.after.service.impl;
 
+import com.alibaba.fastjson.JSONObject;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.tpadsz.after.dao.TimeLineDao;
@@ -70,6 +71,36 @@ public class TimeLineServiceImpl implements TimeLineService {
             timeLineList = timeLineDao.getTimeLineByMidOrderByUpdateDate(id,tname,createDate,endTime,state);
         }else if (timeFlag.equals("upToBottom")){
             timeLineList = timeLineDao.getTimeLineByMid(id,tname,createDate,endTime,state);
+        }
+        StringBuffer sb;
+        for (TimeLine timeLine:timeLineList){
+            sb = new StringBuffer();
+            String dayObj = timeLine.getDayObj();
+//            System.out.println(dayObj);
+            JSONObject jsonObject = JSONObject.parseObject(dayObj);
+            if (jsonObject.getInteger("mon").equals(1)){
+                sb.append("周一、");
+            }
+            if (jsonObject.getInteger("tus").equals(1)){
+                sb.append("周二、");
+            }
+            if (jsonObject.getInteger("wed").equals(1)){
+                sb.append("周三、");
+            }
+            if (jsonObject.getInteger("thr").equals(1)){
+                sb.append("周四、");
+            }
+            if (jsonObject.getInteger("fri").equals(1)){
+                sb.append("周五、");
+            }
+            if (jsonObject.getInteger("sat").equals(1)){
+                sb.append("周六、");
+            }
+            if (jsonObject.getInteger("sun").equals(1)){
+                sb.append("周日、");
+            }
+            String sbStr = sb.toString().substring(0,sb.toString().lastIndexOf("、"));
+            timeLine.setWeek(sbStr);
         }
         PageInfo<TimeLine> pageInfo = new PageInfo<>(timeLineList);
         return pageInfo;
