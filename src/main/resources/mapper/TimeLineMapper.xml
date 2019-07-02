@@ -101,8 +101,8 @@
     </select>
 
     <insert id="insertTimeLine" parameterType="com.tpadsz.after.entity.TimeLine">
-        INSERT INTO `alink`.`f_time_line`(`tname`, `tid`, `mid`, `state`, `repetition`, `week`, `create_date`, `update_date`)
-	    VALUES ( #{tname}, #{tid}, 19936, '1', '1', '周日、周一、周二', now(), now())
+        INSERT INTO `alink`.`f_time_line`(`tname`, `tid`, `mid`,  `repetition`, `week`, `create_date`, `update_date`)
+	    VALUES ( #{tname}, #{tid}, 19936, '1', '周日、周一、周二', now(), now())
     </insert>
 
     <update id="updateTnameById">
@@ -126,7 +126,7 @@
     <select id="getTimePointByTsid" resultType="com.tpadsz.after.entity.TimePoint">
         SELECT
   	      p.tsid,p.sid,concat(hour,":",minute) as time,
-          'NO' AS state,
+          'ON' AS state,
         	s.sname,
         	s.scene_id
         FROM
