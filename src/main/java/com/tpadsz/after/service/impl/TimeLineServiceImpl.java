@@ -55,9 +55,9 @@ public class TimeLineServiceImpl implements TimeLineService {
             if (state.equals("0")){
                 state="";//全部
             }else if (state.equals("1")){
-                state="0";//启用
+                state="1";//启用
             }else if (state.equals("2")){
-                state="1";//停用
+                state="0";//停用
             }
         }
         if (timeFlag==null||timeFlag.length()<1){

@@ -8,7 +8,7 @@
         m.mname,
         t.mid,
         m.mesh_id,
-        IF( t.state = '0', '启用', '停用' ) state,
+        IF( t.item_set = '1', '启用', '停用' ) state,
         IF( t.repetition = '0', '不重复', '重复' ) repetition,
         t.WEEK,
         DATE_FORMAT(t.create_date,'%Y/%m/%d %k:%i:%s') as create_date,
@@ -21,7 +21,7 @@
         m.mname,
         t.mid,
         m.mesh_id,
-        IF( t.state = '0', '启用', '停用' ) state,
+        IF( t.item_set = '1', '启用', '停用' ) state,
         t.WEEK
     </sql>
 
@@ -46,7 +46,7 @@
                 AND t.update_date BETWEEN #{endTime} and Date_Add(#{endTime},INTERVAL 1 DAY )
             </if>
             <if test="state!=null and state!=''">
-                AND t.state=#{state}
+                AND t.item_set=#{state}
             </if>
         </where>
     </sql>
@@ -125,33 +125,27 @@
 
     <select id="getTimePointByTsid" resultType="com.tpadsz.after.entity.TimePoint">
         SELECT
-  	      p.tsid,p.sid,p.time,
-          CASE
-        	p.state
-        	WHEN '0' THEN 'ON'
-        	WHEN '1' THEN 'OFF'
-        	WHEN '2' THEN 'ALl OFF'
-        	WHEN '3' THEN 'ALL ON'
-        	END AS state,
+  	      p.tsid,p.sid,concat(hour,":",minute) as time,
+          'NO' AS state,
         	s.sname,
         	s.scene_id
         FROM
-        	( SELECT tsid, sid, time, state FROM f_time_point WHERE state IN ( '0', '1' ) AND tsid = #{id} ) p,
+        	( SELECT tsid, sid, hour,minute FROM f_time_point WHERE sid not IN ( 21, 22 ) AND tsid = #{id} ) p,
         	f_scene s
-        WHERE p.sid = s.id UNION
+        WHERE p.sid = s.id UNION all
         SELECT
-        	tsid,sid,time,
+        	tsid,sid,concat(hour,":",minute) as time,
         CASE
-        	state
-        	WHEN '0' THEN 'ON'
-        	WHEN '1' THEN 'OFF'
-        	WHEN '2' THEN 'ALl OFF'
-        	WHEN '3' THEN 'ALL ON'
+        	sid
+--         	WHEN '0' THEN 'ON'
+--         	WHEN '1' THEN 'OFF'
+        	WHEN '21' THEN 'ALl OFF'
+        	WHEN '22' THEN 'ALL ON'
         	END AS state,
         	NULL AS sname,
         	NULL as scene_id
         FROM f_time_point
-        WHERE state IN ( '2', '3' ) AND tsid = #{id}
+        WHERE sid IN ( 21, 22 ) AND tsid = #{id}
         ORDER BY time
 
     </select>
