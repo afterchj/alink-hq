@@ -167,7 +167,14 @@
     padding: 0 10px;
     box-shadow: 0px 1px 2px 0 rgba(0, 0, 0, 0.2);
 }
-
+.create:hover{
+    background-color: #36A9E1;
+    border-color: #36A9E1;
+}
+.goBack:hover{
+    color: #36A9E1;
+    border-color: #36A9E1;
+}
 .goBack {
     border: 2px solid #3598DB;
     color: #3598DB;
