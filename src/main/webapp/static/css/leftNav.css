@@ -40,7 +40,9 @@
     background-color:#3598DB;
     position:fixed;
     width:100%;
-    z-index:999
+    z-index:999;
+    transition: all 0.3s ease-in-out;
+    box-shadow: 1px 2px 3px rgba(0, 0, 0, 0.1);
 }
 
 .main-left {
@@ -108,12 +110,14 @@
 .one-list li {
     font-size:16px;
     /*color:#323232;*/
-    height:40px;
-    line-height:40px;
+    height: 50px;
+    line-height: 50px;
     padding-left:70px;
     cursor:pointer
 }
-
+.one-list li:hover{
+    background-color: #F3F5F8;
+}
 .one-list.active .two-list {
     display:block
 }
@@ -145,7 +149,7 @@
 }
 
 .one-list li.active {
-    background-color:#eef2f5
+    background-color:#F3F5F8;
 }
 .main-left a:hover,.main-left a:focus{
     border:none;
@@ -160,7 +164,8 @@
     border-radius: 5px;
     text-align: center;
     font-size: 16px;
-    padding: 0 5px;
+    padding: 0 10px;
+    box-shadow: 0px 1px 2px 0 rgba(0, 0, 0, 0.2);
 }
 
 .goBack {
@@ -174,6 +179,7 @@
     font-size: 16px;
     background-color: #fff;
     padding: 0 7px;
+    box-shadow: 0px 1px 2px 0 rgba(0, 0, 0, 0.2);
 }
 
 .goBack.active {
@@ -219,9 +225,11 @@
 }
 
 .nav-color {
-    background-color:#eef3f5
+    background-color:#F3F5F8
 }
-
+.one-list>div:hover{
+    background-color:#F3F5F8
+}
 .must {
     width:280px;
     height:800px
@@ -236,4 +244,17 @@
 }
 .table-content-list{
     min-width: 1490px;
+}
+.hide-iframe{
+    background: #000;
+    filter: alpha(opacity=50); /* IE的透明度 */
+    opacity: 0.5;  /* 透明度 */
+    display: none;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    z-index: 999; /* 此处的图层要大于页面 */
+    display:none;
 }

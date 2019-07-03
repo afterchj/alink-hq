@@ -59,14 +59,18 @@ $(function () {
     var id;
     $('.reset-name').click(function () {
         id = $(this).attr("alt");
-        $('div[openContent="reset-name"]').addClass('active');
-        var width = window.screen.scrollWidth;
-        var height =window.screen.scrollHeight;
-        $('.hide-iframe').addClass('active');
-        $('.hide-iframe').css({
-            'width': width,
-            'height': height
-        });
+        // $('div[openContent="reset-name"]').addClass('active');
+        // var width = window.screen.scrollWidth;
+        // var height =window.screen.scrollHeight;
+        // $('.hide-iframe').addClass('active');
+        // $('.hide-iframe').css({
+        //     'width': width,
+        //     'height': height
+        // });
+        var selector= $('div[openContent="reset-name"]');
+        selector.addClass('active');
+        adjust(selector)
+        showOverlay()
     });
     $('div[openContent="reset-name"]  .pop-btn .yes').click(function () {
         var name = $('#rename').val();
@@ -100,8 +104,11 @@ $(function () {
     });
     //重命名取消按钮
     $('div[openContent="reset-name"] .pop-btn .reduce').click(function () {
-        $('div[openContent="reset-name"]').removeClass('active');
-        $('.hide-iframe').removeClass('active');
+        // $('div[openContent="reset-name"]').removeClass('active');
+        // $('.hide-iframe').removeClass('active');
+        var selector= $('div[openContent="reset-name"]');
+        selector.removeClass('active')
+        hideOverlay()
     })
     //重命名校验
     function nameKeyUp() {
@@ -120,30 +127,40 @@ $(function () {
         // ids = $(this).parent().siblings('.checkbox').find('input').val();
         var  sid=parseInt($(this).parent().siblings('.sid').find('input').val());
         var sceneId=parseInt($(this).parent().siblings('.sceneId').text());
-        $('div[openContent="delete-place"]').addClass('active');
-        var width = window.screen.scrollWidth;
-        var height = window.screen.scrollHeight;
-        $('.hide-iframe').addClass('active');
-        $('.hide-iframe').css({
-            'width': width,
-            'height': height
-        });
+        // $('div[openContent="delete-place"]').addClass('active');
+        // var width = window.screen.scrollWidth;
+        // var height = window.screen.scrollHeight;
+        // $('.hide-iframe').addClass('active');
+        // $('.hide-iframe').css({
+        //     'width': width,
+        //     'height': height
+        // });
+        var selector= $('div[openContent="delete-place"]');
+        selector.addClass('active');
+        adjust(selector)
+        showOverlay()
         var msg={
             id:sid,
             sceneId:sceneId
         }
         deleteArray.push(msg);
-        console.log(deleteArray);
+        // console.log(deleteArray);
     })
     $('div[openContent="delete-place"] .pop-btn .reduce').click(function () {
-        $('div[openContent="delete-place"]').removeClass('active');
-        $('.hide-iframe').removeClass('active');
+        // $('div[openContent="delete-place"]').removeClass('active');
+        // $('.hide-iframe').removeClass('active');
+        var selector=   $('div[openContent="delete-place"]');
+        selector.removeClass('active')
+        hideOverlay()
     });
     $('div[openContent="delete-place"] .pop-btn .yes').click(function () {
         var newJsonArray=JSON.stringify(deleteArray);
-        console.log(newJsonArray);
-        $('div[openContent="delete-place"]').removeClass('active');
-        $('.hide-iframe').removeClass('active');
+        // console.log(newJsonArray);
+        // $('div[openContent="delete-place"]').removeClass('active');
+        // $('.hide-iframe').removeClass('active');
+        var selector=   $('div[openContent="delete-place"]');
+        selector.removeClass('active')
+        hideOverlay()
         deleteScene(newJsonArray);
     })
     //多选删除
@@ -160,14 +177,18 @@ $(function () {
             console.log(deleteArray);
         });
         if (deleteArray.length > 0) {
-            $('div[openContent="delete-place"]').addClass('active');
-            var width = window.screen.scrollWidth;
-            var height = window.screen.scrollHeight;
-            $('.hide-iframe').addClass('active');
-            $('.hide-iframe').css({
-                'width': width,
-                'height': height
-            })
+            // $('div[openContent="delete-place"]').addClass('active');
+            // var width = window.screen.scrollWidth;
+            // var height = window.screen.scrollHeight;
+            // $('.hide-iframe').addClass('active');
+            // $('.hide-iframe').css({
+            //     'width': width,
+            //     'height': height
+            // })
+            var selector= $('div[openContent="delete-place"]');
+            selector.addClass('active');
+            adjust(selector)
+            showOverlay()
         }
     })
 })

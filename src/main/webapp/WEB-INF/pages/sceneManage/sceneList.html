@@ -79,21 +79,16 @@
                                 <td class="k-link"><a th:href="@{/mesh/info(id=${scene.mid})}" th:text="${scene.meshName}"></a></td>
                                 <td th:text="${scene.meshId}"></td>
                                 <td></td>
-                                <td class="p-r" shiro:hasAnyRoles="super,admin,manager">
+                                <td class="p-r" >
                                     <img src="/alink-hq/static/img/edit.png" th:alt="${scene.id}"
-                                         class="reset-name pointer"
+                                         class="reset-name pointer" shiro:hasAnyPermission ="renameScene"
                                          title="重命名">
-                                    <img src="/alink-hq/static/img/delete.png" alt="" class="left-img pointer singleDel"
+                                    <img src="/alink-hq/static/img/un-rename.png" alt="" shiro:lacksPermission ="renameScene" class="pointer   unclick"
+                                         th:title="无法操作">
+                                    <img src="/alink-hq/static/img/delete.png" alt="" shiro:hasAnyPermission ="deleteScene"  class="left-img pointer singleDel"
                                          title="删除">
-                                </td>
-                                <td shiro:hasRole="user" class="p-r">
-                                    <!--不能重命名-->
-                                    <img src="/alink-hq/static/img/un-rename.png" alt="" class="pointer   unclick"
+                                    <img src="/alink-hq/static/img/un-delete.png"  shiro:lacksPermission ="deleteScene" alt="" class="pointer  left-img  unclick"
                                          th:title="无法操作">
-                                    <!--不能删除-->
-                                    <img src="/alink-hq/static/img/un-delete.png" alt="" class="pointer  left-img  unclick"
-                                         th:title="无法操作">
-                                    <!--重命名-->
                                 </td>
                             </tr>
                             </tbody>
@@ -105,8 +100,8 @@
                                 <span id="amount" class="amount">0</span>条数据
                             </span>
                             <span>
-                                <span shiro:hasAnyRoles="super,admin,manager" class="skipPageBtn pointer moment" onmousedown="deleteBtnMouseDown()" onmouseup="deleteBtnMouseUp()" id="multiDel">删除</span>
-                                <span shiro:hasRole="user" class="skipPageBtn active moment unclick1"  id="multiDel">删除</span>
+                                <span shiro:hasAnyPermission ="deleteScene" class="skipPageBtn pointer moment" onmousedown="deleteBtnMouseDown()" onmouseup="deleteBtnMouseUp()" id="multiDel">删除</span>
+                                <span shiro:lacksPermission ="deleteScene" class="skipPageBtn active moment unclick1"  id="multiDel">删除</span>
                             </span>
                                     </div>
                                     <!--<div th:replace="common/page::page"></div>-->

@@ -15,8 +15,9 @@ table {
 
 body {
     zoom:1;
-    background:#eef2f5;
+    background:#F3F5F8;
     font-family: "Segoe UI", "Lucida Grande", Helvetica, Arial, "Microsoft YaHei", FreeSans, Arimo, "Droid Sans", "wenquanyi micro hei", "Hiragino Sans GB", "Hiragino Sans GB W3", "FontAwesome", sans-serif;
+    /*font-family: Cambria, "Hoefler Text", Utopia, "Liberation Serif", "Nimbus Roman No9 L Regular", Times, "Times New Roman", serif;*/
     display: block;
     font-size: 90%;
     font-weight: 400;
@@ -151,15 +152,10 @@ ul li {
 
 .search-result table th span {
     display:inline-block;
-    transform:scale(1,.95)
 }
 
 label {
     display:inline-block
-}
-
-button {
-    /*transform:scale(1,.95)*/
 }
 
 .all-checkbox {
@@ -274,7 +270,7 @@ input[type=radio]:before {
 
 /* Colors */
 input[type=checkbox],input[type=radio] {
-    border: 1px solid #aaa;
+    border: 1px solid #ccc;
     /* transform: scale(.85); */
     background-color: #fff;
 }
@@ -310,4 +306,10 @@ input[type=checkbox]:checked,input[type=checkbox]:indeterminate{
 }
 .bread li:last-of-type{
     color: #323232;
+}
+table tbody tr{
+    background-color: #fff;
+}
+table tbody tr:hover{
+    background-color: #eee;
 }

@@ -1,9 +1,10 @@
 .search-condition {
     margin: 30px 0;
     /*padding: 40px 5px 10px;*/
-    border: 1px solid #bbb;
+    border: 1px solid #dee2e6;
     background-color: #fff;
     padding: 40px 20px 10px 30px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
 }
 
 .temp {
@@ -13,11 +14,12 @@
 .search input,.search select,.search select option {
     width:275px;
     height:30px;
-    border-radius:1px;
-    border:1px solid #bbb;
     font-size:14px;
-    color:#999;
-    padding-left:10px
+    padding-left:10px;
+    color: #888;
+    border: 1px solid #ced4da;
+    border-radius: .25rem;
+    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
 }
 
 .search input {
@@ -34,19 +36,21 @@
 }
 
 .search-button button {
-    width:85px;
-    height:40px;
-    font-size:18px;
-    letter-spacing:10px;
-    background-color:#ffb500;
-    border:1px solid #ffb500;
-    border-radius:5px;
-    padding-left:10px;
-    color:#fff;
-
-    margin-right:30px
+    width: 85px;
+    height: 35px;
+    font-size: 16px;
+    letter-spacing: 10px;
+    background-color: #ffb500;
+    border: 1px solid #ffb500;
+    border-radius: 5px;
+    padding-left: 10px;
+    color: #fff;
+    margin-right: 30px;
+    box-shadow: 0px 1px 2px 0 rgba(0, 0, 0, 0.2);
 }
-
+.search-button button:hover{
+    background-color: #fabb3d;
+}
 .sort-t {
     top:14px
 }
@@ -75,22 +79,22 @@
 
 .search-result table {
     width:100%;
-    margin-bottom:35px
+    margin-bottom:35px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
 }
 
 .search-result table
 td,th {
-    border-left:#bbb 1px solid;
-    border-bottom:#bbb 1px solid
+    border-left:#dee2e6 1px solid;
+    border-bottom:#dee2e6 1px solid
 }
 
 .search-result table th {
-    height:50px;
-    line-height:50px;
-    font-size:16px;
-    color:#111;
-    font-weight:400;
-    background-color:#fafafa
+    height: 50px;
+    line-height: 50px;
+    font-size: 15px;
+    color: #3c3c3c;
+    background-color: #f6f6f6;
 }
 
 .search-result table td {
@@ -98,8 +102,8 @@ td,th {
     text-align:center;
     font-size:14px;
     vertical-align:middle;
-    color:#3c3c3c;
-    background-color:#fff
+    color:#333;
+    /*background-color:#fff*/
 }
 
 
@@ -120,7 +124,7 @@ td,th {
 /*}*/
 
 .search-result table td a {
-    color:#3c3c3c
+    color:#333;
 }
 
 .center-img {
@@ -146,7 +150,7 @@ td,th {
     height:35px;
     line-height:35px;
     font-size:18px;
-    color:#3c3c3c;
+    color:#333;
     background-color:#eef2f5;
     border:1px solid #bbb;
     left:30%;
@@ -158,7 +162,8 @@ td,th {
     height:80px;
     line-height:80px;
     font-size:13px;
-    color:#111
+    color:#222;
+    background: #fff;
 }
 
 .search-result table .selected-order {
@@ -186,7 +191,7 @@ td,th {
     height:26px;
     border:1px solid #bbb;
     font-size:13px;
-    color:#3c3c3c;
+    color:#333;
     text-align:center
 }
 
@@ -200,8 +205,8 @@ th.all-checkbox {
     border-bottom:0;
     border-spacing:0;
     border-collapse:unset;
-    border-top:#bbb 1px solid;
-    border-right:#bbb 1px solid
+    border-top:#dee2e6 1px solid;
+    border-right:#dee2e6 1px solid
 }
 
 .hasData.active,.noData.active {
@@ -223,10 +228,11 @@ th.all-checkbox {
 }
 
 .table-content-list .p-detail {
-    height:842px;
-    margin:30px 0;
-    border:1px solid #bbb;
-    background-color:#fff
+    height: 842px;
+    margin: 30px 0;
+    border: 1px solid #dee2e6;
+    background-color: #fff;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
 }
 
 .table-content-list .p-nav,.table-content-list .c-nav,.table-content-list .p-nav {
@@ -235,8 +241,8 @@ th.all-checkbox {
     padding-left:25px;
     font-size:16px;
     color:#323232;
-    border-bottom:1px solid #bbb;
-    background-color:#fafafa
+    background-color: rgba(0,0,0,.03);
+    border-bottom: 1px solid rgba(0,0,0,.125);
 }
 
 /*.table-content-list .c-nav {*/
@@ -262,7 +268,7 @@ th.all-checkbox {
 /*}*/
 #projectDetail .p-content .time span,#timerDetail .p-content .time span  {
     font-size: 16px;
-    color: #323232;
+    color: #333;
 }
 
 
@@ -276,7 +282,7 @@ th.all-checkbox {
     text-align:left;
     height:18px;
     font-size: 15px;
-    color: #3c3c3c;
+    color: #333;
 }
 
 #timerDetail .p-content .clearfix.time {
@@ -317,7 +323,7 @@ th.all-checkbox {
 #projectDetail .c-content > div {
     text-align:left;
     font-size:15px;
-    color:#3c3c3c;
+    color:#333;
     margin-bottom:30px
 }
 span.msg-use{
@@ -362,19 +368,21 @@ span.msg-use{
     height:30px;
     width:249px;
     margin-bottom:30px;
-    border:1px solid #bbb;
+    border: 1px solid #ddd;
     border-radius:2px;
     text-indent:10px
 }
 
 .pop-content label {
-    width: 314px;
-    font-size: 14px;
+    /*width: 314px;*/
+    font-size: 15px;
     color: #888;
-    border: 1px solid #bbb;
+    /*border: 1px solid #bbb;*/
     height: 35px;
     border-radius: 5px;
     padding-left: 8px;
+    color: #323232;
+    margin-right: 18px;
 }
 
 .pop-iframe.active {
@@ -383,7 +391,7 @@ span.msg-use{
 }
 
 .c-list .c-width {
-    color:#3c3c3c
+    color:#333;
 }
 
 .c-list {
@@ -393,26 +401,24 @@ span.msg-use{
 }
 
 .pop-content .reset-pwd {
-    font-size:18px;
-    color:#3c3c3c;
-    margin-top:60px;
-    text-align:center;
-    font-weight:700;
+    font-size: 17px;
+    color: #333;
+    margin-top: 60px;
+    text-align: center;
 
 }
 
 .pop-content .off-or-on {
-    font-size:18px;
-    color:#3c3c3c;
-    margin-top:60px;
-    text-align:center;
-    font-weight:700;
+    font-size: 16px;
+    color: #333;
+    margin-top: 60px;
+    text-align: center;
 
 }
 
 .pop-content .reset-pwd-hint {
-    font-size:14px;
-    color:red;
+    font-size:15px;
+    color:#f71f1f;
     margin-top:20px;
     text-align:center
 }
@@ -438,36 +444,22 @@ span.msg-use{
     width:550px;
     height:300px;
     text-align:center;
-    border:1px solid #bbb;
-    border-radius:5px;
-    box-shadow:1px 1px 10px #333;
     display:none;
-    z-index:1000
+    z-index:1000;
+    border-radius: 2px;
+    box-shadow: 1px 1px 50px rgba(0,0,0,.3);
 }
 
-.hide-iframe.active {
-    display:block
-}
-
-.hide-iframe {
-    position:absolute;
-    left:0;
-    top:0;
-    background-color:#000;
-    z-index:10;
-    -moz-opacity:.45;
-    opacity:.45;
-    filter:alpha(opacity=45);
-    display:none;
-    z-index:999
-}
+/*.hide-iframe.active {*/
+    /*display:block*/
+/*}*/
 
 .pop-nav {
-    padding:20px 22px;
-    font-size:22px;
-    color:#3c3c3c;
-    border-bottom:1px solid #bbb;
-    background-color:#eef2f5
+    padding: 15px 0;
+    font-size: 18px;
+    color: #222 !important;
+    border-bottom: 1px solid #eee;
+    background-color: #eeeeee;
 }
 
 .no-top {
@@ -487,13 +479,13 @@ span.msg-use{
     bottom: 0;
     width: 490px;
     padding: 13px 20px 11px 40px;
-    background-color: #eef2f5;
+    background-color: #f8f8f8;;
 }
 
 .pop-content .pop-btn .reduce {
     border:1px solid #ccc;
     font-size:16px;
-    color:#3c3c3c;
+    color:#333;
     border-radius:5px;
     height:35px;
     width:80px;
@@ -506,7 +498,7 @@ span.msg-use{
 }
 
 .pop-content .pop-btn .yes {
-    border:1px solid #3598DB;
+    border:1px solid #36a9e1;
     font-size:16px;
     color:#fff;
     border-radius:5px;
@@ -514,7 +506,7 @@ span.msg-use{
     width:80px;
     letter-spacing:10px;
     cursor:pointer;
-    background-color:#3598DB;
+    background-color:#36a9e1;
     padding-left:10px
 }
 
@@ -542,7 +534,7 @@ span.msg-use{
 
 .pop-content .hasProject > div {
     font-size: 16px;
-    color: #3c3c3c;
+    color: #333;
     font-weight: 600;
     line-height: 2;
 }
@@ -550,7 +542,7 @@ span.msg-use{
 .pop-content span {
     display:inline-block;
     width:49%;
-    color:#3c3c3c
+    color:#333
 }
 
 .status:hover {
@@ -594,64 +586,64 @@ span.msg-use{
 }
 
 #createProject .c-createProject {
-    height:834px;
-    margin:30px 0;
-    border:1px solid #bbb;
-    background-color:#fff
+    height: 842px;
+    margin: 30px 0;
+    border: 1px solid #dee2e6;
+    background-color: #fff;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
 }
 
 #createProject .c-nav {
-    height:58px;
-    line-height:58px;
-    padding-left:25px;
-    font-size:22px;
-    color:#111;
-    border-bottom:1px solid #bbb;
-    background-color:#fafafa
+    height: 50px;
+    line-height: 50px;
+    padding-left: 25px;
+    font-size: 16px;
+    color: #323232;
+    background-color: rgba(0,0,0,.03);
+    border-bottom: 1px solid rgba(0,0,0,.125);
 }
 
 #createProject .c-content {
     padding:10px 70px;
     font-size:21px;
-    color:#3c3c3c
+    color:#333
 }
 
 #createProject form {
     width:800px;
     margin:auto;
     font-size:16px;
-    color:#3c3c3c;
+    color:#333;
     margin-top:100px;
     text-align:center
 }
-
-/*#createProject input {*/
-   /**/
-/*}*/
 .table-content-list input[type=text]{
     width:300px;
     font-size:14px;
-    border:1px solid #bbb;
     padding-left: 14px;
     height:30px;
-    border-radius:5px;
-    color: #888;
+    color: #555;
+    border: 1px solid #e1e1e1;
+    border-radius: .25rem;
+    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
 }
 .table-content-list select {
     width:314px;
     font-size:14px;
     color:#888;
-    border:1px solid #bbb;
     height:35px;
-    border-radius:5px;
-    padding-left:8px
+    padding-left:8px;
+    border: 1px solid #e1e1e1;
+    border-radius: .25rem;
+    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
 }
 
 #createProject form label {
     display:inline-block;
     width:130px;
     text-align:right;
-    margin-right:15px
+    margin-right:15px;
+    font-size: 15px;
 }
 
 #createProject form > div {
@@ -666,9 +658,10 @@ span.msg-use{
     letter-spacing:5px;
     border:1px solid #3598db;
     background-color:#3598db;
-    border-radius:5px;
+    border-radius:3px;
     cursor:pointer;
-    margin-top:70px
+    margin-top:70px;
+    box-shadow: 0px 1px 2px 0 rgba(0, 0, 0, 0.2);
 }
 
 .project-hint,.account-hint,.place-hint,.group-hint,.mesh-hint {
@@ -725,7 +718,8 @@ input:-ms-input-placeholder {
     border:1px solid #bbb;
     border-radius:5px;
     color:#000;
-    background-image:linear-gradient(to bottom,#fff 40%,#d2d3d6)
+    background-image:linear-gradient(to bottom,#fff 40%,#d2d3d6);
+    box-shadow: 0px 1px 2px 0 rgba(0, 0, 0, 0.2);;
 }
 
 .skipPageBtn.active {
@@ -733,14 +727,15 @@ input:-ms-input-placeholder {
 }
 
 .prev,.next {
-    width:32px;
-    height:30px;
-    line-height:30px;
-    border:1px solid #ccc;
-    display:inline-block;
-    border-radius:5px;
-    cursor:pointer;
-    vertical-align:middle
+    width: 32px;
+    /* height: 30px; */
+    line-height: 25px;
+    border: 1px solid #ccc;
+    display: inline-block;
+    border-radius: 5px;
+    cursor: pointer;
+    vertical-align: middle;
+    box-shadow: 0px 1px 2px 0 rgba(0, 0, 0, 0.2);
 }
 
 .prev span,.next span {
@@ -782,12 +777,12 @@ input:-ms-input-placeholder {
 }
 
 .process span {
-    display:inline-block;
-    font-size:17px;
-    vertical-align:middle;
-    height:50px;
-
-    margin:0 0 0 5px
+    display: inline-block;
+    vertical-align: middle;
+    height: 55px;
+    margin: 0 0 0 5px;
+    color: #333;
+    font-size: 15px;
 }
 
 .process .part {
@@ -798,11 +793,11 @@ input:-ms-input-placeholder {
     margin:7px 85px
 }
 
-.select-mesh-step,.select-place-step,.select-group-step {
+.select-project-step,.select-mesh-step,.select-place-step,.select-group-step {
     display:none;
 }
 
-.select-mesh-step.active,.select-place-step.active,.select-group-step.active {
+.select-project-step.active,.select-mesh-step.active,.select-place-step.active,.select-group-step.active {
     display:block;
 }
 
@@ -815,7 +810,7 @@ input:-ms-input-placeholder {
     border:1px solid #bbb;
     background-color:#fff;
     font-size:16px;
-    color:#3c3c3c
+    color:#333
 }
 
 .scene-nav .scene-title,.scene-nav .project-title {
@@ -861,7 +856,7 @@ input:-ms-input-placeholder {
     border-bottom:1px solid #bbb;
     padding:20px 25px;
     font-size:16px;
-    color:#3c3c3c;
+    color:#333;
     background-color:#fafafa
 }
 
@@ -874,7 +869,7 @@ input:-ms-input-placeholder {
     padding:45px 0 70px;
     text-align:center;
     font-size:15px;
-    color:#3c3c3c;
+    color:#333;
     height:500px
 }
 
@@ -912,7 +907,7 @@ input:-ms-input-placeholder {
     line-height: 37px;
     text-align: left;
     padding-left: 10px;
-    color: #3c3c3c;
+    color: #333;
     font-size: 14px;
 }
 
@@ -939,7 +934,7 @@ input:-ms-input-placeholder {
     border-right: #bbb 1px solid;
     width: 680px;
     font-size: 14px;
-    color: #3c3c3c;
+    color: #333;
     margin: auto;
 }
 
@@ -1101,7 +1096,7 @@ input:-ms-input-placeholder {
     font-size:15px;
     text-align:right;
     margin-right:25px;
-    color:#3c3c3c
+    color:#333
 }
 
 .edit-company input {

@@ -20,7 +20,7 @@
             <div class="clearfix main-right-nav">
                 <div class="f-l main-right-title">合作列表</div>
                 <div class="f-r pointer last-nav">
-                    <a th:href="@{/cooperate/create}">
+                    <a th:href="@{/cooperate/create}"    shiro:hasAnyPermission ="createCooperation">
                         <div class="create" onmousedown="createBtnMouseDown()" onmouseup="createBtnMouseUp()">
                             <span>+</span><span>新增合作信息</span></div>
                     </a>
@@ -102,15 +102,19 @@
                                     </a>
                                 </td>
                                 <td class="p-r">
-                                    <a th:href="@{/cooperate/edit(id=${cooperation.id})}">
+                                    <a th:href="@{/cooperate/edit(id=${cooperation.id})}"  shiro:hasPermission ="updateCooperation">
                                         <img src="/alink-hq/static/img/alter.png" th:alt="${cooperation.id}"
                                              class="pointer reset-name" title="编辑" style="margin-right: 30px;">
                                     </a>
-                                    <img src="/alink-hq/static/img/delete.png" th:alt="${cooperation.id}"
+                                    <img shiro:lacksPermission ="updateCooperation" src="/alink-hq/static/img/alter-un.png" th:alt="${cooperation.id}"
+                                         class="pointer reset-name unclick" th:title="无法操作" style="margin-right: 30px;">
+                                    <img shiro:hasPermission ="deleteCooperation"  src="/alink-hq/static/img/delete.png" th:alt="${cooperation.id}"
                                          class="pointer delete-project" title="删除">
+                                    <img  shiro:lacksPermission ="deleteCooperation"  src="/alink-hq/static/img/un-delete.png" th:alt="${cooperation.id}"
+                                         class="pointer delete-project unclick" th:title="无法操作">
                                 </td>
-                                <td class="p-r">
-                                    <img src="/alink-hq/static/img/memo.png" th:alt="${cooperation.id}"
+                                <td class="p-r" shiro:hasPermission ="CooperationMemo">
+                                    <img  src="/alink-hq/static/img/memo.png" th:alt="${cooperation.id}"
                                          class="pointer memo-edit" title="备忘录">
                                     <!-- 备忘录不为空 -->
                                     <div class="memo-edit-has">
@@ -118,6 +122,10 @@
                                                                    class="pointer"></div>
                                         <div class="memo-content" th:text="${cooperation.other}"></div>
                                     </div>
+                                </td>
+                                <td class="p-r" shiro:lacksPermission ="CooperationMemo">
+                                    <img  src="/alink-hq/static/img/memo-un.png" th:alt="${cooperation.id}"
+                                          class="pointer memo-edit unclick" title="备忘录">
                                 </td>
                             </tr>
                             </tbody>

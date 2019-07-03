@@ -114,20 +114,18 @@
                                        th:text="${place.gcount}"></a>
                                 </td>
                                 <td>未知</td>
-                                <td class="p-r" shiro:hasAnyRoles="super,admin,manager">
+                                <td class="p-r" >
                                     <img src="/alink-hq/static/img/edit.png" th:alt="${place.id}"
                                          class="reset-name pointer"
-                                         title="重命名">
-                                    <a href="javascript:void(0);" class="singleDel pointer">
+                                         title="重命名" shiro:hasAnyPermission ="renamePlace">
+                                    <img src="/alink-hq/static/img/un-rename.png" th:alt="${place.id}"
+                                         class=" pointer unclick"
+                                         th:title="无法操作" shiro:lacksPermission ="renamePlace">
+                                    <a href="javascript:void(0);" class="singleDel pointer" shiro:hasAnyPermission ="deletePlace">
                                         <img src="/alink-hq/static/img/delete.png" alt="" class="left-img pointer"
                                              title="删除">
                                     </a>
-                                </td>
-                                <td class="p-r" shiro:hasRole="user">
-                                    <img src="/alink-hq/static/img/un-rename.png" th:alt="${place.id}"
-                                         class=" pointer unclick"
-                                         th:title="无法操作">
-                                    <a href="javascript:void(0);" class=" unclick">
+                                    <a href="javascript:void(0);" class=" unclick" shiro:lacksPermission ="deletePlace">
                                         <img src="/alink-hq/static/img/un-delete.png" alt="" class="left-img  unclick"
                                              th:title="无法操作">
                                     </a>
@@ -142,8 +140,8 @@
                                 <span id="amount" class="amount">0</span>条数据
                             </span>
                              <span>
-                                <span shiro:hasAnyRoles="super,admin,manager" class="skipPageBtn pointer moment" onmousedown="deleteBtnMouseDown()" onmouseup="deleteBtnMouseUp()" id="multiDel">删除</span>
-                                <span shiro:hasRole="user" class="skipPageBtn  moment active unclick1" onmousedown="deleteBtnMouseDown()" onmouseup="deleteBtnMouseUp()" id="multiDel">删除</span>
+                                <span shiro:hasAnyPermission ="deletePlace"  class="skipPageBtn pointer moment" onmousedown="deleteBtnMouseDown()" onmouseup="deleteBtnMouseUp()" id="multiDel">删除</span>
+                                <span shiro:lacksPermission ="deletePlace" class="skipPageBtn  moment active unclick1" onmousedown="deleteBtnMouseDown()" onmouseup="deleteBtnMouseUp()" id="multiDel">删除</span>
                             </span>
                                     </div>
                                     <div th:replace="common/page::page"></div>

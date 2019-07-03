@@ -1,18 +1,19 @@
 #createAccount .c-nav {
-    height:58px;
-    line-height:58px;
-    padding-left:25px;
-    font-size:22px;
-    color:#111;
-    border-bottom:1px solid #bbb;
-    background-color:#fafafa
+    height: 50px;
+    line-height: 50px;
+    padding-left: 25px;
+    font-size: 16px;
+    color: #323232;
+    background-color: rgba(0,0,0,.03);
+    border-bottom: 1px solid rgba(0,0,0,.125);
 }
 
 #createAccount .c-createAccount {
-    height:842px;
-    margin:30px 0;
-    border:1px solid #bbb;
-    background-color:#fff
+    height: 842px;
+    margin: 30px 0;
+    border: 1px solid #dee2e6;
+    background-color: #fff;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
 }
 
 #createAccount .c-content {
@@ -34,24 +35,29 @@
 }
 
 #createAccount form>div>label:first-child {
-    width:150px;
-    text-align:right;
-    display:inline-block;
-    margin-right:40px
+    margin-right: 30px;
+    font-size: 15px;
+    display: inline-block;
+    color: #323232;
+    width: 110px;
+    text-align: right;
 }
 
 #createAccount form>div select,#createAccount form>div input[type='text'] {
     height:33px;
     border-radius:5px;
-    border:1px solid #bbb
+    border:1px solid #e1e1e1
 }
 
 #createAccount form>div select {
-    width:300px;
-    font-size:15px;
-    color:#666;
-    text-indent:5px;
-    height:37px
+    width: 314px;
+    font-size: 14px;
+    color: #888;
+    height: 35px;
+    padding-left: 8px;
+    border: 1px solid #e1e1e1;
+    border-radius: .25rem;
+    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
 }
 
 #createAccount form>div input[type='text'] {
@@ -66,7 +72,7 @@
 }
 
 .num {
-    border:1px solid #bbb;
+    border:1px solid #e1e1e1;
     display:inline-block;
     border-radius:5px
 }
@@ -89,7 +95,8 @@
     background-color:#3598db;
     border-radius:5px;
     cursor:pointer;
-    margin-left:196px
+    margin-left:196px;
+    box-shadow: 0px 1px 2px 0 rgba(0, 0, 0, 0.2);
 }
 
 #createAccount form>div button:active {
@@ -112,20 +119,25 @@
 
 #userTurnOver {
     margin:20px 0;
-    border:1px solid #bbb;
     background-color:#fff
 }
 
 #userTurnOver .f-nav {
-    height:58px;
-    line-height:58px;
-    padding-left:25px;
-    font-size:22px;
-    color:#111;
-    background-color:#fafafa;
-    border-bottom:1px solid #bbb
+    height: 50px;
+    line-height: 50px;
+    padding-left: 25px;
+    font-size: 16px;
+    color: #323232;
+    background-color: rgba(0,0,0,.03);
+    border-bottom: 1px solid rgba(0,0,0,.125);
 }
-
+#userTurnOver .f-userTurnOver{
+    height: 842px;
+    margin: 30px 0;
+    border: 1px solid #dee2e6;
+    background-color: #fff;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+}
 #userTurnOver .accountMsg {
     margin:40px 120px;
     border:1px solid #bbb;
@@ -133,23 +145,23 @@
 }
 
 #userTurnOver .accountMsg label {
-    display:inline-block;
-    width:100px;
-    font-size:16px;
-    color:#3c3c3c;
-    text-align:right;
-    margin-right:20px
+    display: inline-block;
+    width: 100px;
+    font-size: 15px;
+    color: #3c3c3c;
+    text-align: right;
+    margin-right: 20px;
 }
 
 #userTurnOver .accountMsg input {
-    height:32px;
-    font-size:14px;
-    width:220px;
-    text-indent:10px;
-    border:1px solid #bbb;
-    color:#3c3c3c;
-    background-color:#f3f3f3;
-    border-radius:5px
+    height: 32px;
+    font-size: 14px;
+    width: 220px;
+    text-indent: 10px;
+    border: 1px solid #e6e6e6;
+    color: #3c3c3c;
+    background-color: #f3f3f3;
+    border-radius: 2px;
 }
 
 .transfer-company label span {
@@ -179,14 +191,15 @@
 }
 
 #userTurnOver .transfer-company select {
-    border:1px solid #bbb;
-    width:230px;
-    text-indent:10px;
-    font-size:14px;
-    color:#3c3c3c;
-    height:35px;
     background-color:#f3f3f3;
-    border-radius:5px
+    width: 314px;
+    font-size: 14px;
+    color: #888;
+    height: 35px;
+    padding-left: 8px;
+    border: 1px solid #e1e1e1;
+    border-radius: .25rem;
+    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
 }
 
 .img-exchange {
@@ -228,7 +241,8 @@
     cursor:pointer;
     color:#fff;
     font-size:17px;
-    letter-spacing:5px
+    letter-spacing:5px;
+    box-shadow: 0px 1px 2px 0 rgba(0, 0, 0, 0.2);
 }
 
 .pop-iframe.active {
@@ -237,42 +251,25 @@
 }
 
 .pop-iframe {
-    position:absolute;
-    top:250px;
-    left:35%;
-    background-color:#fafafa;
-    width:600px;
-    height:300px;
-    text-align:center;
-    border:1px solid #bbb;
-    border-radius:5px;
-    box-shadow:1px 1px 10px #333;
-    display:none;
-    z-index:1000
-}
-
-.hide-iframe.active {
-    display:block
-}
-
-.hide-iframe {
-    position:absolute;
-    left:0;
-    top:0;
-    background-color:#000;
-    z-index:10;
-    -moz-opacity:.45;
-    opacity:.45;
-    filter:alpha(opacity=45);
-    display:none
+    position: absolute;
+    top: 250px;
+    left: 35%;
+    background-color: #fff;
+    width: 550px;
+    height: 300px;
+    text-align: center;
+    display: none;
+    z-index: 1000;
+    border-radius: 2px;
+    box-shadow: 1px 1px 50px rgba(0,0,0,.3);
 }
 
 .pop-nav {
-    padding:20px 22px;
-    font-size:22px;
-    color:#3c3c3c;
-    border-bottom:1px solid #bbb;
-    background-color:#eef2f5
+    padding: 12px 0;
+    font-size: 22px;
+    color: #333;
+    border-bottom: 1px solid #eee;
+    background-color: #f8f8f8;
 }
 
 .pop-content {

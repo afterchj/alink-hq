@@ -141,31 +141,29 @@
                                     <span th:case="0">关</span>
                                     <span th:case="*">未知</span>
                                 </td>
-                                <td class="p-r" shiro:hasAnyRoles="super,admin,manager">
-                                    <img src="/alink-hq/static/img/edit.png" th:alt="${light.id}" class="rename pointer"
+                                <td class="p-r" >
+                                    <img shiro:hasAnyPermission ="renameLight" src="/alink-hq/static/img/edit.png" th:alt="${light.id}" class="rename pointer"
                                          title="重命名">
-                                    <a th:href="@{/light/move(mid=${light.mid},ids=${light.id})} ">
+                                    <img shiro:lacksPermission ="renameLight"  src="/alink-hq/static/img/un-rename.png" alt="" class="pointer  unclick"
+                                         th:title="无法操作">
+
+                                    <a shiro:hasAnyPermission ="moveLight" th:href="@{/light/move(mid=${light.mid},ids=${light.id})} ">
                                         <img src="/alink-hq/static/img/exchange.png" th:alt="${light.id}"
                                              class="center-img pointer" title="移动">
                                     </a>
-                                    <img src="/alink-hq/static/img/delete.png" th:alt="${light.id}"
-                                         class="singleDel pointer " title="删除" style="margin-right: 20px;">
-                                    <img src="/alink-hq/static/img/export.png" th:alt="${light.id}"
-                                         class="pointer backup" title="灯信息导出">
-                                </td>
-                                <td shiro:hasRole="user" class="p-r">
-                                    <!--不能重命名-->
-                                    <img src="/alink-hq/static/img/un-rename.png" alt="" class="pointer  unclick"
-                                         th:title="无法操作">
-                                    <!--不能移交-->
-                                    <img src="/alink-hq/static/img/un-exchange.png" alt=""
+                                    <img shiro:lacksPermission ="moveLight" src="/alink-hq/static/img/un-exchange.png" alt=""
                                          class=" pointer  unclick center-img"
                                          th:title="无法操作">
-                                    <!--不能删除-->
-                                    <img src="/alink-hq/static/img/un-delete.png" alt="" class="pointer   unclick"
+
+                                    <img shiro:hasAnyPermission ="deleteLight" src="/alink-hq/static/img/delete.png" th:alt="${light.id}"
+                                         class="singleDel pointer " title="删除" style="margin-right: 20px;">
+                                    <img  shiro:lacksPermission ="deleteLight" src="/alink-hq/static/img/un-delete.png" alt="" class="pointer   unclick"
                                          th:title="无法操作" style="margin-right: 20px;">
-                                    <!--重命名-->
-                                    <img src="/alink-hq/static/img/export-un.png" th:alt="${light.id}"
+
+
+                                    <img shiro:hasAnyPermission ="outLight"  src="/alink-hq/static/img/export.png" th:alt="${light.id}"
+                                         class="pointer backup" title="灯信息导出">
+                                    <img shiro:lacksPermission ="outLight" src="/alink-hq/static/img/export-un.png" th:alt="${light.id}"
                                          class=" pointer unclick" title="灯信息导出">
                                 </td>
                             </tr>
@@ -178,15 +176,15 @@
                                  <span id="amount" class="amount">0</span>条数据
                             </span>
                             <span class="m-r-20">
-                                <span shiro:hasAnyRoles="super,admin,manager" class="skipPageBtn pointer moment"
+                                <span shiro:hasAnyPermission ="moveLight" class="skipPageBtn pointer moment"
                                       onmousedown="exchangeBtnMouseDown()"
                                       onmouseup="exchangeBtnMouseUp()" id="multiMove">移动</span>
-                                <span shiro:hasRole="user" class="skipPageBtn pointer moment active unclick1">移动</span>
+                                <span shiro:lacksPermission ="moveLight" class="skipPageBtn pointer moment active unclick1">移动</span>
                             </span>
                              <span>
-                                <span class="skipPageBtn pointer moment" shiro:hasAnyRoles="super,admin,manager"  onmousedown="deleteBtnMouseDown()"
+                                <span class="skipPageBtn pointer moment" shiro:hasAnyPermission ="deleteLight" onmousedown="deleteBtnMouseDown()"
                                       onmouseup="deleteBtnMouseUp()" id="multiDel">删除</span>
-                                <span shiro:hasRole="user" class="skipPageBtn pointer moment active unclick1">删除</span>
+                                <span shiro:lacksPermission ="deleteLight" class="skipPageBtn pointer moment active unclick1">删除</span>
                             </span>
                                     </div>
                                     <div th:replace="common/page::page"></div>

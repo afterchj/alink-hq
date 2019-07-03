@@ -207,14 +207,18 @@ $(function () {
     $('.reset-name').click(function () {
         projectId = parseInt($(this).parent().siblings('.checkbox ').find('input[type=checkbox]').val());
         account = $(this).parent().siblings('.project-account').text();
-        $('div[openContent="reset-name"]').addClass('active');
-        var width = window.screen.width;
-        var height = window.screen.height;
-        $('.hide-iframe').addClass('active');
-        $('.hide-iframe').css({
-            'width': width,
-            'height': height
-        })
+        // $('div[openContent="reset-name"]').addClass('active');
+        // var width = window.screen.width;
+        // var height = window.screen.height;
+        // $('.hide-iframe').addClass('active');
+        // $('.hide-iframe').css({
+        //     'width': width,
+        //     'height': height
+        // })
+        var selector= $('div[openContent="reset-name"]');
+        selector.addClass('active');
+        adjust(selector)
+        showOverlay()
     })
 
     //弹框重命名里操作
@@ -255,14 +259,18 @@ $(function () {
         }
         deleteArray.push(msg);
         if(deleteArray.length!=0){
-            $('div[openContent="delete-project"]').addClass('active');
-            var width = window.screen.width;
-            var height = window.screen.height;
-            $('.hide-iframe').addClass('active');
-            $('.hide-iframe').css({
-                'width': width,
-                'height': height
-            })
+            // $('div[openContent="delete-project"]').addClass('active');
+            // var width = window.screen.width;
+            // var height = window.screen.height;
+            // $('.hide-iframe').addClass('active');
+            // $('.hide-iframe').css({
+            //     'width': width,
+            //     'height': height
+            // })
+            var selector=$('div[openContent="delete-project"]');
+            selector.addClass('active');
+            adjust(selector)
+            showOverlay()
         }
     })
     //确定删除
@@ -319,14 +327,18 @@ $(function () {
         })
         // console.log(deleteArray);
         if(deleteArray.length!=0){
-            $('div[openContent="delete-project"]').addClass('active');
-            var width = window.screen.width;
-            var height = window.screen.height;
-            $('.hide-iframe').addClass('active');
-            $('.hide-iframe').css({
-                'width': width,
-                'height': height
-            })
+            // $('div[openContent="delete-project"]').addClass('active');
+            // var width = window.screen.width;
+            // var height = window.screen.height;
+            // $('.hide-iframe').addClass('active');
+            // $('.hide-iframe').css({
+            //     'width': width,
+            //     'height': height
+            // })
+            var selector=$('div[openContent="delete-project"]');
+            selector.addClass('active');
+            adjust(selector)
+            showOverlay()
         }
     })
 
@@ -363,7 +375,10 @@ $(function () {
     $('.pop-btn .reduce').click(function () {
         $('div[openContent="reset-name"]').removeClass('active');
         $('div[openContent="delete-project"]').removeClass('active');
-        $('.hide-iframe').removeClass('active');
+        // $('.hide-iframe').removeClass('active');
+        // var selector= $('div[openContent="reset-name"]');
+        // selector.removeClass('active')
+        hideOverlay()
         deleteArray= [];
     })
 })

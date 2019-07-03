@@ -37,13 +37,14 @@
 .tab-content {
     border: 1px solid #bbb;
     border-top: none;
-    height: 455px;
+    min-height: 458px;
 }
 
 
 .fix-left-nav {
     width: 260px;
-    height: 100%;
+    min-height: 462px;
+    border-right: 1px solid #bbb;
 }
 .fix-left-nav.gray{
     background-color: #bbb;
@@ -51,7 +52,7 @@
 
 .fix-right-nav {
     width: calc(100% - 261px);
-    border-left: 1px solid #bbb;
+
     height: 100%;
 }
 

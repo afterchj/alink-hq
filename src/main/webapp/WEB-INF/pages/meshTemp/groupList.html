@@ -24,11 +24,11 @@
                     <!--<span class="subjection">隶属项目：<span th:inline="text">[[${project.label}]]</span></span>-->
                 </div>
                 <div class="f-r pointer last-nav">
-                    <a th:href="@{/group/create(mid=${dict.mid})}" shiro:hasAnyRoles="super,admin,manager">
+                    <a th:href="@{/group/create(mid=${dict.mid})}" shiro:hasAnyPermission ="createGroup">
                         <div class="create" onmousedown="createBtnMouseDown()" onmouseup="createBtnMouseUp()">
                             <span>+</span><span>创建组</span></div>
                     </a>
-                    <a href="javascript:void(0)"  shiro:hasRole="user" class="unclick1">
+                    <a href="javascript:void(0)"   shiro:lacksPermission ="createGroup" class="unclick1">
                         <div class="create no-access" onmousedown="createBtnMouseDown()" onmouseup="createBtnMouseUp()">
                             <span>+</span><span>创建组</span></div>
                     </a>
@@ -114,27 +114,25 @@
                                     <a th:if="${group.lcount}=='0'" class="a-un" href="javascript:void(0);" th:text="${group.lcount}"></a>
                                     <a th:if="${group.lcount}!='0'"  th:href="@{/light/list(mid=${group.mid},gid=${group.id})}" th:text="${group.lcount}"></a>
                                 </td>
-                                <td class="p-r" shiro:hasAnyRoles="super,admin,manager">
+                                <td class="p-r" >
                                     <img src="/alink-hq/static/img/edit.png" th:alt="${group.id}" class="rename pointer"
-                                         title="重命名">
+                                         title="重命名" shiro:hasAnyPermission ="renameGroup">
                                     <a th:href="@{/group/move(mid=${group.mid},ids=${group.id})}">
                                         <img src="/alink-hq/static/img/exchange.png" th:alt="${group.id}"
-                                             class="center-img pointer" title="移动">
+                                             class="center-img pointer" title="移动" shiro:hasAnyPermission ="moveGroup">
                                     </a>
                                     <img src="/alink-hq/static/img/delete.png" th:alt="${group.id}"
-                                         class="singleDel pointer" title="删除">
-                                </td>
-                                <td shiro:hasRole="user" class="p-r">
+                                         class="singleDel pointer" title="删除" shiro:hasAnyPermission ="deleteGroup">
                                     <!--不能重命名-->
                                     <img src="/alink-hq/static/img/un-rename.png" alt="" class="pointer  unclick"
-                                         th:title="无法操作">
+                                         th:title="无法操作" shiro:lacksPermission ="renameGroup">
                                     <!--不能移交-->
                                     <img src="/alink-hq/static/img/un-exchange.png" alt=""
-                                         class="center-img pointer  unclick"
+                                         class="center-img pointer  unclick" shiro:lacksPermission ="moveGroup"
                                          th:title="无法操作">
                                     <!--不能删除-->
                                     <img src="/alink-hq/static/img/un-delete.png" alt="" class="pointer   unclick"
-                                         th:title="无法操作">
+                                         th:title="无法操作" shiro:lacksPermission ="deleteGroup">
                                     <!--重命名-->
                                 </td>
                             </tr>
@@ -147,12 +145,12 @@
                                  <span id="amount" class="amount">0</span>条数据
                             </span>
                              <span class="m-r-20">
-                                <span shiro:hasRole="user" class="skipPageBtn pointer moment active unclick1"  id="multiMove">移动</span>
-                                <span shiro:hasAnyRoles="super,admin,manager" class="skipPageBtn pointer moment" onmousedown="exchangeBtnMouseDown()" onmouseup="exchangeBtnMouseUp()" id="multiMove">移动</span>
+                                <span  class="skipPageBtn pointer moment active unclick1"  shiro:lacksPermission ="moveGroup"  id="multiMove">移动</span>
+                                <span  class="skipPageBtn pointer moment" shiro:hasAnyPermission ="moveGroup"  onmousedown="exchangeBtnMouseDown()" onmouseup="exchangeBtnMouseUp()" id="multiMove">移动</span>
                             </span>
                              <span>
-                                 <span shiro:hasRole="user" class="skipPageBtn pointer moment active unclick1"  id="multiDel">删除</span>
-                                <span shiro:hasAnyRoles="super,admin,manager" class="skipPageBtn pointer moment" onmousedown="deleteBtnMouseDown()" onmouseup="deleteBtnMouseUp()" id="multiDel">删除</span>
+                                 <span shiro:lacksPermission ="deleteGroup" class="skipPageBtn pointer moment active unclick1"  id="multiDel">删除</span>
+                                <span shiro:hasAnyPermission ="deleteGroup" class="skipPageBtn pointer moment" onmousedown="deleteBtnMouseDown()" onmouseup="deleteBtnMouseUp()" id="multiDel">删除</span>
                             </span>
                              </div>
                              <div th:replace="common/page::page"></div>

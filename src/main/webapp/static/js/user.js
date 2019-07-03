@@ -12,17 +12,21 @@ $(function () {
     var account = '';
     var status = '';
     var intStatus = '';
-    var width = window.screen.width;
-    var height=window.screen.height;
+    // var width = window.screen.width;
+    // var height=window.screen.height;
 
     //启用禁用按钮
     $('td[openTab="start-use"]').click(function () {
-        $('.hide-iframe').addClass('active');
-        $('.hide-iframe').css({
-            'width': width,
-            'height': height
-        })
-        $('div[openContent="start-use"]').addClass('active');
+        // $('.hide-iframe').addClass('active');
+        // $('.hide-iframe').css({
+        //     'width': width,
+        //     'height': height
+        // })
+        var selector=$('div[openContent="start-use"]');
+        selector.addClass('active');
+        adjust(selector)
+        showOverlay()
+        // $('div[openContent="start-use"]').addClass('active');
         account = $(this).siblings('.use-account').text();
         status = $(this).find('.result').text();
         if (status == '启用') {
@@ -50,30 +54,40 @@ $(function () {
         })
     })
     $('div[openContent="start-use"] button.reduce').click(function () {
-        $('div[openContent="start-use"]').removeClass('active');
-        $('.hide-iframe').removeClass('active');
+        // $('div[openContent="start-use"]').removeClass('active');
+        // $('.hide-iframe').removeClass('active');
+        var selector= $('div[openContent="start-use"]');
+        selector.removeClass('active')
+        hideOverlay()
     })
 })
 
 //重置密码
 $(function () {
     var account = '';
-    var width = window.screen.width;
-    var height = window.screen.height;
+    // var width = window.screen.width;
+    // var height = window.screen.height;
     $('img[openTab="reset-pwd"]').click(function () {
         var openTab = $(this).attr('openTab');
         $('div[openContent="reset-pwd"] .pop-content').find('p.unuse').remove();
-        $('div[openContent="reset-pwd"]').addClass('active');
-        $('.hide-iframe').addClass('active');
-        $('.hide-iframe').css({
-            'width': width,
-            'height': height
-        });
+        // $('div[openContent="reset-pwd"]').addClass('active');
+        // $('.hide-iframe').addClass('active');
+        // $('.hide-iframe').css({
+        //     'width': width,
+        //     'height': height
+        // });
+        var selector=$('div[openContent="reset-pwd"]');
+        selector.addClass('active');
+        adjust(selector)
+        showOverlay()
         account = $(this).parent().siblings('.use-account').text();
     })
     $('div[openContent="reset-pwd"] button.yes').click(function () {
-        $('div[openContent="new-pwd"]').addClass('active');
-        $('.hide-iframe').addClass('active');
+        // $('div[openContent="new-pwd"]').addClass('active');
+        // $('.hide-iframe').addClass('active');
+        var selector= $('div[openContent="reset-pwd"]');
+        selector.removeClass('active')
+        hideOverlay()
         $.ajax({
             type: "POST",
             url: "/alink-hq/account/resetPwd",
@@ -91,28 +105,33 @@ $(function () {
         })
     })
     $('div[openContent="reset-pwd"] button.reduce').click(function () {
-        $('div[openContent="reset-pwd"]').removeClass('active');
-        $('.hide-iframe').removeClass('active');
+        // $('div[openContent="reset-pwd"]').removeClass('active');
+        // $('.hide-iframe').removeClass('active');
+        var selector= $('div[openContent="reset-pwd"]');
+        selector.removeClass('active')
+        hideOverlay()
     })
     $('div[openContent="new-pwd"] button.yes,div[openContent="new-pwd"] button.reduce').click(function () {
         $('div[openContent="new-pwd"]').removeClass('active');
         $('div[openContent="reset-pwd"]').removeClass('active');
-        $('.hide-iframe').removeClass('active');
+        hideOverlay()
     })
 })
 //删除账户
 $(function () {
     var account;
-    var width = window.screen.width;
-    var height = window.screen.height;
     $('img[openTab="delete-account"]').click(function () {
         var openTab = $(this).attr('openTab');
-        $('div[openContent="delete-account"]').addClass('active');
-        $('.hide-iframe').addClass('active');
-        $('.hide-iframe').css({
-            'width': width,
-            'height': height
-        });
+        // $('div[openContent="delete-account"]').addClass('active');
+        // $('.hide-iframe').addClass('active');
+        // $('.hide-iframe').css({
+        //     'width': width,
+        //     'height': height
+        // });
+        var selector=$('div[openContent="delete-account"]');
+        selector.addClass('active');
+        adjust(selector)
+        showOverlay()
         $('div[openContent="delete-account"] .pop-content').find('p.unuse').remove();
         account = $(this).parent().siblings('.use-account').text();
     })
@@ -138,8 +157,11 @@ $(function () {
         location.href = '/alink-hq/project/list';
     })
     $('div[openContent="delete-account"] button.reduce').click(function () {
-        $('div[openContent="delete-account"]').removeClass('active');
-        $('.hide-iframe').removeClass('active');
+        // $('div[openContent="delete-account"]').removeClass('active');
+        // $('.hide-iframe').removeClass('active');
+        var selector= $('div[openContent="delete-account"]');
+        selector.removeClass('active')
+        hideOverlay()
     })
 })
 $(function () {
@@ -268,8 +290,8 @@ function condition(pageSize, pageNum) {
 
 //备忘录
 $(function () {
-    var width = window.screen.width;
-    var height = window.screen.height;
+    // var width = window.screen.width;
+    // var height = window.screen.height;
     $('body').click(function () {
         $('.memo-edit-has').parent('td').removeClass('active');
     })
@@ -281,7 +303,7 @@ $(function () {
     })
     $('.meno-nav img,.memo-edit2').click(function (event) {
         event.stopPropagation();
-        $('div[openContent="memo-edit"]').addClass('active');
+        // $('div[openContent="memo-edit"]').addClass('active');
         $('div[openContent="memo-edit"] .pop-content').find('p.unuse').remove();
         $(".wishContent").val('');
         var content = $(this).parent().siblings('div').text();
@@ -293,23 +315,33 @@ $(function () {
         }
         $("#memo-account").val(account);
         $(".wordsNum").html(checkStrLengths(content, 200) + '/200');
-        $('.hide-iframe').addClass('active');
-        $('.hide-iframe').css({
-            'width': width,
-            'height': height
-        })
+        // $('.hide-iframe').addClass('active');
+        // $('.hide-iframe').css({
+        //     'width': width,
+        //     'height': height
+        // })
+        var selector=$('div[openContent="memo-edit"]');
+        selector.addClass('active');
+        adjust(selector)
+        showOverlay()
     })
     //点击取消时
     $('div[openContent="memo-edit"] button.reduce').click(function (event) {
         event.stopPropagation();
-        $('div[openContent="memo-edit"]').removeClass('active');
-        $('.hide-iframe').removeClass('active');
+        // $('div[openContent="memo-edit"]').removeClass('active');
+        // $('.hide-iframe').removeClass('active');
+        var selector=$('div[openContent="memo-edit"]');
+        selector.removeClass('active')
+        hideOverlay()
     })
     //点击确定时
     $('div[openContent="memo-edit"] button.yes').click(function (event) {
         event.stopPropagation();
-        $('div[openContent="memo-edit"]').removeClass('active');
-        $('.hide-iframe').removeClass('active');
+        // $('div[openContent="memo-edit"]').removeClass('active');
+        // $('.hide-iframe').removeClass('active');
+        var selector=$('div[openContent="memo-edit"]');
+        selector.removeClass('active')
+        hideOverlay()
         //获取输入内容
         var content = $(".wishContent").val();
         var account = $("#memo-account").val();

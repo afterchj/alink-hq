@@ -22,12 +22,12 @@
             <div class="clearfix main-right-nav">
                 <div class="f-l main-right-title">网络列表</div>
                 <div class="f-r pointer last-nav">
-                    <a th:href="@{/mesh/create(projectId=${dict.projectId})}"  shiro:hasAnyRoles="super,admin,manager" >
+                    <a th:href="@{/mesh/create(projectId=${dict.projectId})}"  shiro:hasAnyPermission ="createMesh" >
                         <div   class="create " onmousedown="createBtnMouseDown()" onmouseup="createBtnMouseUp()">
                             <span>+</span><span>创建网络</span>
                         </div>
                     </a>
-                    <a href="javascript:void(0)"  shiro:hasRole="user" class="unclick1">
+                    <a href="javascript:void(0)"  shiro:lacksPermission ="createMesh" class="unclick1">
                         <div  class="create no-access" onmousedown="createBtnMouseDown()" onmouseup="createBtnMouseUp()">
                             <span>+</span><span>创建网络</span>
                         </div>
@@ -131,27 +131,26 @@
                                     <!--<a href="javascript:void(0);" th:text="${mesh.scount}"></a>-->
                                 <!--</td>-->
                                 <td>未知</td>
-                                <td shiro:hasAnyRoles="super,admin,manager" class="p-r">
-                                    <img src="/alink-hq/static/img/edit.png" th:alt="${mesh.id}" class="reset-name pointer" title="重命名">
-                                    <a th:href="@{/mesh/move(ids=${mesh.id})}">
+                                <td   class="p-r">
+                                    <img  shiro:hasAnyPermission ="renameMesh"  src="/alink-hq/static/img/edit.png" th:alt="${mesh.id}" class="reset-name pointer" title="重命名">
+                                    <!--不能重命名-->
+                                    <img shiro:lacksPermission ="renameMesh" src="/alink-hq/static/img/un-rename.png" alt="" class="pointer  unclick"
+                                         th:title="无法操作">
+
+                                    <a th:href="@{/mesh/move(ids=${mesh.id})}" shiro:hasAnyPermission ="moveMesh" >
                                         <img src="/alink-hq/static/img/exchange.png" alt="" class="center-img pointer" title="移动">
                                     </a>
-                                    <a href="javascript:void(0);" class="singleDel pointer">
-                                        <img src="/alink-hq/static/img/delete.png" alt="" title="删除">
-                                    </a>
-                                </td>
-                                <td shiro:hasRole="user" class="p-r">
-                                    <!--不能重命名-->
-                                    <img src="/alink-hq/static/img/un-rename.png" alt="" class="pointer  unclick"
-                                         th:title="无法操作">
                                     <!--不能移交-->
                                     <img src="/alink-hq/static/img/un-exchange.png" alt=""
-                                         class="center-img pointer  unclick"
+                                         class="center-img pointer  unclick"  shiro:lacksPermission ="moveMesh"
                                          th:title="无法操作">
+
+                                    <a href="javascript:void(0);" class="singleDel pointer" shiro:hasAnyPermission ="deleteMesh">
+                                        <img src="/alink-hq/static/img/delete.png" alt="" title="删除">
+                                    </a>
                                     <!--不能删除-->
-                                    <img src="/alink-hq/static/img/un-delete.png" alt="" class="pointer   unclick"
+                                    <img src="/alink-hq/static/img/un-delete.png" alt="" shiro:lacksPermission ="deleteMesh"  class="pointer   unclick"
                                          th:title="无法操作">
-                                    <!--重命名-->
                                 </td>
                             </tr>
                             </tbody>
@@ -163,14 +162,14 @@
                                 <span id="amount" class="amount">0</span>条数据
                             </span>
                                         <span class="m-r-20">
-                                <span shiro:hasRole="user" class="skipPageBtn  moment active unclick1"
-                                        id="multiMove">移交</span>
-                                <span shiro:hasAnyRoles="super,admin,manager" class="skipPageBtn pointer moment" onmousedown="exchangeBtnMouseDown()"
+                                <span  class="skipPageBtn  moment active unclick1"
+                                        id="multiMove"  shiro:lacksPermission ="moveMesh">移动</span>
+                                <span shiro:hasAnyPermission ="moveMesh" class="skipPageBtn pointer moment" onmousedown="exchangeBtnMouseDown()"
                                       onmouseup="exchangeBtnMouseUp()" id="multiMove">移动</span>
                             </span>
                                         <span>
-                            <span shiro:hasRole="user" class="skipPageBtn moment active unclick1"  id="multiDel">删除</span>
-                                <span shiro:hasAnyRoles="super,admin,manager" class="skipPageBtn pointer moment" onmousedown="deleteBtnMouseDown()"
+                            <span shiro:lacksPermission ="deleteMesh"  class="skipPageBtn moment active unclick1"  id="multiDel">删除</span>
+                                <span shiro:hasAnyPermission ="deleteMesh" class="skipPageBtn pointer moment" onmousedown="deleteBtnMouseDown()"
                                       onmouseup="deleteBtnMouseUp()" id="multiDel">删除</span>
                             </span>
                                     </div>

@@ -85,20 +85,24 @@ $(function () {
 
 
 
-    var width = window.screen.width;
-    var height = window.screen.height;
+    // var width = window.screen.width;
+    // var height = window.screen.height;
     var roleId;
     //重命名弹框
     $('.reset-name').click(function () {
         // projectId = parseInt($(this).parent().siblings('.checkbox ').find('input[type=checkbox]').val());
         // account = $(this).parent().siblings('.project-account').text();
-        $('div[openContent="reset-name"]').addClass('active');
+        // $('div[openContent="reset-name"]').addClass('active');
         roleId = $(this).parent().siblings("input").val();
-        $('.hide-iframe').addClass('active');
-        $('.hide-iframe').css({
-            'width': width,
-            'height': height
-        })
+        // $('.hide-iframe').addClass('active');
+        // $('.hide-iframe').css({
+        //     'width': width,
+        //     'height': height
+        // })
+        var selector= $('div[openContent="reset-name"]');
+        selector.addClass('active');
+        adjust(selector)
+        showOverlay()
     })
 
     //弹框重命名里操作
@@ -131,8 +135,11 @@ $(function () {
     })
     //取消删除按钮
     $('div[openContent="reset-name"] .reduce').click(function () {
-        $('div[openContent="reset-name"]').removeClass('active');
-        $('.hide-iframe').removeClass('active');
+        // $('div[openContent="reset-name"]').removeClass('active');
+        // $('.hide-iframe').removeClass('active');
+        var selector= $('div[openContent="reset-name"]');
+        selector.removeClass('active')
+        hideOverlay()
     })
     //删除角色弹框
     $('.delete-role').click(function () {
@@ -145,22 +152,29 @@ $(function () {
         // deleteArray.push(msg);
         // if(deleteArray.length!=0){
         roleId = $(this).parent().siblings("input").val();
-        $('div[openContent="delete-role"]').addClass('active');
-            $('.hide-iframe').addClass('active');
-            $('.hide-iframe').css({
-                'width': width,
-                'height': height
-            })
+        // $('div[openContent="delete-role"]').addClass('active');
+        //     $('.hide-iframe').addClass('active');
+        //     $('.hide-iframe').css({
+        //         'width': width,
+        //         'height': height
+        //     })
+        var selector= $('div[openContent="delete-role"]');
+        selector.addClass('active');
+        adjust(selector)
+        showOverlay()
         // }
     })
     //确定删除
     $('div[openContent="delete-role"] .yes').click(function () {
-        $('div[openContent="delete-role"]').removeClass('active');
-        $('.hide-iframe').removeClass('active');
-        $('.hide-iframe').css({
-            'width': width,
-            'height': height
-        })
+        // $('div[openContent="delete-role"]').removeClass('active');
+        // $('.hide-iframe').removeClass('active');
+        // $('.hide-iframe').css({
+        //     'width': width,
+        //     'height': height
+        // })
+        var selector= $('div[openContent="delete-role"]');
+        selector.removeClass('active')
+        hideOverlay()
         $.ajax({
             type: "POST",
             url: "/alink-hq/role/delete",
@@ -181,8 +195,11 @@ $(function () {
     //取消删除按钮
     $('div[openContent="delete-role"] .reduce').click(function () {
         // $('div[openContent="reset-name"]').removeClass('active');
-        $('div[openContent="delete-role"]').removeClass('active');
-        $('.hide-iframe').removeClass('active');
+        // $('div[openContent="delete-role"]').removeClass('active');
+        // $('.hide-iframe').removeClass('active');
+        var selector= $('div[openContent="delete-role"]');
+        selector.removeClass('active')
+        hideOverlay()
     })
 
 
