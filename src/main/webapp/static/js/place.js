@@ -5,20 +5,19 @@ $(function () {
     // var tabs="placeList";
     // var index=0;
     // left(tabs,index);
+    // var width = window.screen.width;
+    // var height = window.screen.height;
     $("#multiDel").click(function () {
         var ids = [];//定义一个数组
         $('input[name="ids"]:checked').each(function () {//遍历每一个名字为interest的复选框，其中选中的执行函数
             ids.push($(this).val());//将选中的值添加到数组chk_value中
         });
         if(ids.length>0){
-            $('div[openContent="delete-place"]').addClass('active');
-            var width = document.body.scrollWidth;
-            var height = document.body.scrollHeight;
-            $('.hide-iframe').addClass('active');
-            $('.hide-iframe').css({
-                'width': width,
-                'height': height
-            });
+            var selector=$('div[openContent="delete-place"]');
+            // $('div[openContent="delete-place"]').addClass('active');
+            selector.addClass('active');
+            adjust(selector)
+            showOverlay()
         }
 
         // var flag = confirm("您确定要删除所选的区域吗？");
@@ -34,17 +33,21 @@ $(function () {
     var id;
     $('.reset-name').click(function () {
         id = $(this).attr("alt");
-        console.log("id="+id);
+        // console.log("id="+id);
         // projectName=$(this).parent().siblings('.project-name').find('a').text();
         // account=$(this).parent().siblings('.project-account').text();
-        $('div[openContent="reset-name"]').addClass('active');
-        var width = document.body.scrollWidth;
-        var height = document.body.scrollHeight;
-        $('.hide-iframe').addClass('active');
-        $('.hide-iframe').css({
-            'width': width,
-            'height': height
-        });
+        // $('div[openContent="reset-name"]').addClass('active');
+        // var width = window.screen.scrollWidth;
+        // var height= window.screen.scrollHeight;
+        var selector=$('div[openContent="reset-name"]');
+        selector.addClass('active');
+        adjust(selector)
+        showOverlay()
+        // $('.hide-iframe').addClass('active');
+        // $('.hide-iframe').css({
+        //     'width': width,
+        //     'height': height
+        // });
     });
     $('div[openContent="reset-name"]  .pop-btn .yes').click(function () {
         var name = $('#rename').val();
@@ -83,28 +86,38 @@ $(function () {
     });
     //取消按钮
     $('div[openContent="reset-name"] .pop-btn .reduce').click(function () {
-        $('div[openContent="reset-name"]').removeClass('active');
+        // $('div[openContent="reset-name"]').removeClass('active');
         // $('div[openContent="delete-project"]').removeClass('active');
-        $('.hide-iframe').removeClass('active');
+        // $('.hide-iframe').removeClass('active');
+        var selector= $('div[openContent="reset-name"]');
+        selector.removeClass('active')
+        hideOverlay()
     });
 
     //单选删除
     var ids;
     $('.singleDel').click(function () {
         ids = $(this).parent().siblings('.checkbox').find('input').val();
-        $('div[openContent="delete-place"]').addClass('active');
-        var width = document.body.scrollWidth;
-        var height = document.body.scrollHeight;
-        $('.hide-iframe').addClass('active');
-        $('.hide-iframe').css({
-            'width': width,
-            'height': height
-        });
+        // $('div[openContent="delete-place"]').addClass('active');
+        // var width = window.screen.scrollWidth;
+        // var height= window.screen.scrollHeight;
+        // $('.hide-iframe').addClass('active');
+        // $('.hide-iframe').css({
+        //     'width': width,
+        //     'height': height
+        // });
+        var selector=$('div[openContent="delete-place"]');
+        selector.addClass('active');
+        adjust(selector)
+        showOverlay()
     });
     $('.pop-btn .reduce').click(function () {
-        $('div[openContent="delete-place"]').removeClass('active');
+        // $('div[openContent="delete-place"]').removeClass('active');
         // $('div[openContent="delete-project"]').removeClass('active');
-        $('.hide-iframe').removeClass('active');
+        // $('.hide-iframe').removeClass('active');
+        var selector= $('div[openContent="delete-place"]');
+        selector.removeClass('active')
+        hideOverlay()
     });
 
     $('.pop-btn .yes').click(function () {

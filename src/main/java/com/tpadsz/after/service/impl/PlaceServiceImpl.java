@@ -48,11 +48,7 @@ public class PlaceServiceImpl implements PlaceService {
     }
 
     @Override
-    public void save(Map map) throws RepetitionException {
-        int count = placeDao.getCount(map);
-        if (count > 0) {
-            throw new RepetitionException(301, "名字已存在！");
-        }
+    public void save(Map map){
         placeDao.save(map);
     }
 

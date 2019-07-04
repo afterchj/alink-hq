@@ -25,6 +25,22 @@
         WHERE u.id = #{uid}
     </select>
 
+    <select id="selectRoleList" resultType="com.tpadsz.after.entity.RoleList">
+        SELECT
+        r.id ,r.role_name AS roleName,IFNULL(ur.accountNum,0) as accountNum,DATE_FORMAT(r.create_time,'%Y-%m-%d %H:%i:%s') AS createTime,DATE_FORMAT(r.update_time,'%Y-%m-%d %H:%i:%s') AS updateTime
+        FROM f_role r
+        LEFT JOIN (SELECT count(id) AS accountNum,role_id FROM f_user_role GROUP BY role_id) AS ur ON ur.role_id = r.id WHERE r.role_name LIKE CONCAT('%',IFNULL(#{roleName},''),'%') and r.id > #{roleId} ORDER BY r.id
+    </select>
+
+    <select id="findRepeatName" resultType="int">
+        SELECT count(1) from f_role r where r.role_name = #{roleName}
+    </select>
+
+    <update id="rename">
+        update f_role r set r.role_name = #{roleName},r.update_time = NOW() where r.id=#{roleId}
+    </update>
+
+
     <select id="selectIdByName" resultType="java.lang.Integer">
 		select id from role
 		where role_name=#{roleName,jdbcType=VARCHAR}
@@ -76,5 +92,9 @@
 		set role_name = #{roleName,jdbcType=VARCHAR}
 		where id = #{id,jdbcType=INTEGER}
 	</update>
+
+    <delete id="delete" parameterType="integer">
+        DELETE FROM f_role WHERE id=#{roleId};
+    </delete>
 
 </mapper>

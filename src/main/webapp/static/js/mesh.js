@@ -2,6 +2,8 @@
  * Created by hongjian.chen on 2019/4/24.
  */
 $(function () {
+    // var width = window.screen.width;
+    // var height = window.screen.height;
     $("#multiMove").click(function () {
         var ids = [];
         var uid=[];
@@ -9,22 +11,26 @@ $(function () {
             ids.push($(this).val());
             uid.push($(this).next('.uid').val());
         });
-        console.log('uid',uid);
+        // console.log('uid',uid);
         var result= isRepeat(uid);
-        console.log(result);
+        // console.log(result);
         if(ids.length==1){
             location.href = "/alink-hq/mesh/move?ids=" + ids;
         }else if(result && ids.length>1  ){
             location.href = "/alink-hq/mesh/move?ids=" + ids;
         }else{
-            $('div[openContent="exchange"]').addClass('active');
-            var width = document.body.scrollWidth;
-            var height = document.body.scrollHeight;
-            $('.hide-iframe').addClass('active');
-            $('.hide-iframe').css({
-                'width': width,
-                'height': height
-            });
+            // $('div[openContent="exchange"]').addClass('active');
+            // var width = window.screen.width;
+            // var height = window.screen.height;
+            // $('.hide-iframe').addClass('active');
+            // $('.hide-iframe').css({
+            //     'width': width,
+            //     'height': height
+            // });
+            var selector=$('div[openContent="exchange"]');
+            selector.addClass('active');
+            adjust(selector)
+            showOverlay()
         }
     });
     var ids = [];
@@ -33,14 +39,18 @@ $(function () {
             ids.push($(this).val());
         });
         if(ids.length>0){
-            $('div[openContent="delete-mesh"]').addClass('active');
-            var width = document.body.scrollWidth;
-            var height = document.body.scrollHeight;
-            $('.hide-iframe').addClass('active');
-            $('.hide-iframe').css({
-                'width': width,
-                'height': height
-            });
+            // $('div[openContent="delete-mesh"]').addClass('active');
+            // var width = window.screen.width;
+            // var height = window.screen.height;
+            // $('.hide-iframe').addClass('active');
+            // $('.hide-iframe').css({
+            //     'width': width,
+            //     'height': height
+            // });
+            var selector=$('div[openContent="delete-mesh"]');
+            selector.addClass('active');
+            adjust(selector)
+            showOverlay()
         }
 
     });
@@ -48,26 +58,39 @@ $(function () {
     var ids;
     $('.singleDel').click(function () {
         ids = $(this).parent().siblings('.checkbox').find('input').val();
-        $('div[openContent="delete-mesh"]').addClass('active');
-        var width = document.body.scrollWidth;
-        var height = document.body.scrollHeight;
-        $('.hide-iframe').addClass('active');
-        $('.hide-iframe').css({
-            'width': width,
-            'height': height
-        });
+        // $('div[openContent="delete-mesh"]').addClass('active');
+        // var width = window.screen.width;
+        // var height = window.screen.height;
+        // $('.hide-iframe').addClass('active');
+        // $('.hide-iframe').css({
+        //     'width': width,
+        //     'height': height
+        // });
+        var selector=$('div[openContent="delete-mesh"]');
+        selector.addClass('active');
+        adjust(selector)
+        showOverlay()
     });
     $('div[openContent="delete-mesh"] .pop-btn .reduce').click(function () {
-        $('div[openContent="delete-mesh"]').removeClass('active');
-        $('.hide-iframe').removeClass('active');
+        // $('div[openContent="delete-mesh"]').removeClass('active');
+        // $('.hide-iframe').removeClass('active');
+        var selector=    $('div[openContent="delete-mesh"]');
+        selector.removeClass('active')
+        hideOverlay()
     });
     $('div[openContent="exchange"]  .pop-btn .reduce').click(function(){
-        $('div[openContent="exchange"]').removeClass('active');
-        $('.hide-iframe').removeClass('active');
+        // $('div[openContent="exchange"]').removeClass('active');
+        // $('.hide-iframe').removeClass('active');
+        var selector=   $('div[openContent="exchange"]');
+        selector.removeClass('active')
+        hideOverlay()
     })
     $('div[openContent="exchange"]  .pop-btn .yes').click(function(){
-        $('div[openContent="exchange"]').removeClass('active');
-        $('.hide-iframe').removeClass('active');
+        // $('div[openContent="exchange"]').removeClass('active');
+        // $('.hide-iframe').removeClass('active');
+        var selector=   $('div[openContent="exchange"]');
+        selector.removeClass('active')
+        hideOverlay()
     })
     $('div[openContent="delete-mesh"] .pop-btn .yes').click(function () {
         deleteMesh(ids);
@@ -76,14 +99,18 @@ $(function () {
     var id;
     $('.reset-name').click(function () {
         id = $(this).attr("alt");
-        $('div[openContent="reset-name"]').addClass('active');
-        var width = document.body.scrollWidth;
-        var height = document.body.scrollHeight;
-        $('.hide-iframe').addClass('active');
-        $('.hide-iframe').css({
-            'width': width,
-            'height': height
-        });
+        // $('div[openContent="reset-name"]').addClass('active');
+        // var width = window.screen.width;
+        // var height = window.screen.height;
+        // $('.hide-iframe').addClass('active');
+        // $('.hide-iframe').css({
+        //     'width': width,
+        //     'height': height
+        // });
+        var selector=$('div[openContent="reset-name"]');
+        selector.addClass('active');
+        adjust(selector)
+        showOverlay()
     });
     $('div[openContent="reset-name"] .pop-btn .yes').click(function () {
         var name=$('#rename').val();
@@ -114,9 +141,12 @@ $(function () {
     })
     //取消按钮
     $('div[openContent="reset-name"] .pop-btn .reduce').click(function () {
-        $('div[openContent="reset-name"]').removeClass('active');
+        // $('div[openContent="reset-name"]').removeClass('active');
         // $('div[openContent="delete-project"]').removeClass('active');
-        $('.hide-iframe').removeClass('active');
+        // $('.hide-iframe').removeClass('active');
+        var selector= $('div[openContent="reset-name"]');
+        selector.removeClass('active')
+        hideOverlay()
     });
 
 })

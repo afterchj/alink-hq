@@ -58,7 +58,7 @@ public class ShiroDbRealm extends AuthorizingRealm {
         logger.info("username=" + username);
         User user = userExtendDao.selectByUsername(username);
         String uid = user.getId();
-        String key = MemcachedObjectType.CACHE_TOKEN.getPrefix() + uid;
+        String key = MemcachedObjectType.CACHE_HQ_TOKEN.getPrefix() + uid;
         AuthenticationInfo info = null;
         if (null != user) {
             if (user.getStatus() == 0) {

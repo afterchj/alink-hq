@@ -3,7 +3,10 @@ package com.tpadsz.after.controller;
 import com.alibaba.fastjson.JSONArray;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import com.tpadsz.after.entity.*;
+import com.tpadsz.after.entity.Firm;
+import com.tpadsz.after.entity.OptionList;
+import com.tpadsz.after.entity.ProjectList;
+import com.tpadsz.after.entity.User;
 import com.tpadsz.after.entity.dd.ResultDict;
 import com.tpadsz.after.service.AccountService;
 import com.tpadsz.after.service.MeshService;
@@ -14,11 +17,15 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Created by chenhao.lu on 2019/4/8.
@@ -38,7 +45,7 @@ public class ProjectController {
 
 
     @RequestMapping(value = "/list", method = RequestMethod.GET)
-    public String list(Integer pageNum, Integer pageSize, String account, String projectName,
+    public String list(Integer pageNum, Integer pageSize, String account,String uname, String projectName,String coname,
                        String startCreateDate, String endCreateDate, String startUpdateDate, String endUpdateDate,
                        String sortFlag, HttpSession session, Model model) {
         User loginUser = (User) session.getAttribute("user");
@@ -55,31 +62,31 @@ public class ProjectController {
         try {
             Integer role_id = accountService.findRoleIdByUid(uid);
             List<ProjectList> list = new ArrayList<>();
-            if(startCreateDate!=null&&!"".equals(startCreateDate)){
-                if(startCreateDate.equals(endCreateDate)){
+            if (startCreateDate != null && !"".equals(startCreateDate)) {
+                if (startCreateDate.equals(endCreateDate)) {
                     endCreateDate = GenerateUtils.getAfterDate(startCreateDate);
                 }
             }
-            if(startUpdateDate!=null&&!"".equals(startUpdateDate)){
-                if(startUpdateDate.equals(endUpdateDate)){
+            if (startUpdateDate != null && !"".equals(startUpdateDate)) {
+                if (startUpdateDate.equals(endUpdateDate)) {
                     endUpdateDate = GenerateUtils.getAfterDate(startUpdateDate);
                 }
             }
 
             if (role_id == 1 || role_id == 2) {
                 PageHelper.startPage(pageNum, pageSize);
-                list = projectService.searchBySuper(account, projectName, startCreateDate, endCreateDate,
+                list = projectService.searchBySuper(account, uname, projectName, coname, startCreateDate, endCreateDate,
                         startUpdateDate, endUpdateDate, sortFlag);
             } else if (role_id == 3) {
                 List<Integer> ids = projectService.findProjectList(uid);
                 if (ids.size() != 0) {
                     PageHelper.startPage(pageNum, pageSize);
-                    list = projectService.searchByManager(account, projectName, startCreateDate, endCreateDate,
+                    list = projectService.searchByManager(account, uname, projectName,coname, startCreateDate, endCreateDate,
                             startUpdateDate, endUpdateDate, ids, sortFlag);
                 }
             } else if (role_id == 4) {
                 PageHelper.startPage(pageNum, pageSize);
-                list = projectService.searchByUser(account, projectName, startCreateDate, endCreateDate,
+                list = projectService.searchByUser(account, uname, projectName,coname, startCreateDate, endCreateDate,
                         startUpdateDate, endUpdateDate, uid, sortFlag);
             }
             PageInfo<ProjectList> pageInfo = new PageInfo<>(list, pageSize);
@@ -87,7 +94,9 @@ public class ProjectController {
                 model.addAttribute("pageInfo", pageInfo);
             }
             model.addAttribute("account", account);
+            model.addAttribute("uname",uname);
             model.addAttribute("projectName", projectName);
+            model.addAttribute("coname", coname);
             model.addAttribute("role_id", role_id);
             model.addAttribute("startCreateDate", startCreateDate);
             model.addAttribute("endCreateDate", endCreateDate);
@@ -107,7 +116,7 @@ public class ProjectController {
         Integer flag;
         if (role_id == 4) {
             flag = 0;
-        }else {
+        } else {
             flag = 1;
         }
         model.addAttribute("flag", flag);
@@ -192,7 +201,7 @@ public class ProjectController {
 
     @RequestMapping(value = "/transfer", method = RequestMethod.POST)
     @ResponseBody
-    public Map<String, String> transfer(HttpSession session,String projectInfo, String uid) {
+    public Map<String, String> transfer(HttpSession session, String projectInfo, String uid) {
         Map<String, String> map = new HashMap<>();
         List<ProjectList> projectList = JSONArray.parseArray(projectInfo, ProjectList.class);
         User loginUser = (User) session.getAttribute("user");
@@ -201,15 +210,15 @@ public class ProjectController {
         try {
             Integer role_id = accountService.findRoleIdByUid(userId);
             for (ProjectList project : projectList) {
-                if(role_id == 1 || role_id == 2){
+                if (role_id == 1 || role_id == 2) {
                     count = projectService.findProjectByProjectId(project.getId());
-                }else if(role_id == 3){
+                } else if (role_id == 3) {
                     List<Integer> ids = projectService.findProjectList(userId);
-                    if(ids.contains(project.getId())){
+                    if (ids.contains(project.getId())) {
                         count = 1;
                     }
                 }
-                if(count!=0){
+                if (count != 0) {
                     projectService.transferProject(project.getId(), uid);
                 }
             }
@@ -239,10 +248,10 @@ public class ProjectController {
     }
 
     @RequestMapping(value = "/detail", method = RequestMethod.GET)
-    public String detail(String projectName,String account, String coname, Integer meshNum, Integer projectId, Model model) {
-        SearchDict dict=new SearchDict();
-        dict.setProjectId(projectId);
-        OptionList project=meshService.getProject(dict);
+    public String detail(String projectName, String account, String coname, Integer meshNum, Integer projectId, Model model) {
+        Map dict = new HashMap();
+        dict.put("projectId", projectId);
+        OptionList project = meshService.getProject(dict);
         int placeNum = 0;
         int groupNum = 0;
         int lightNum = 0;

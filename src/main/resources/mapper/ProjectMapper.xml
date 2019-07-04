@@ -8,8 +8,12 @@
     </select>
 
     <select id="searchBySuper" resultType="com.tpadsz.after.entity.ProjectList">
-        SELECT t1.id,t1.name,IFNULL(t5.meshNum,0) as meshNum,t2.account as account,t4.coname as coname,DATE_FORMAT(t1.create_date,'%Y-%m-%d %H:%i:%s') AS create_date,DATE_FORMAT(t1.update_date,'%Y-%m-%d %H:%i:%s') AS update_date FROM
-        (SELECT * FROM  f_project p WHERE p.name LIKE CONCAT('%',IFNULL(#{name},''),'%') and p.create_date BETWEEN IFNULL(NULLIF(#{startCreateDate},''),p.create_date) and IFNULL(NULLIF(#{endCreateDate},''),p.create_date) and p.update_date BETWEEN IFNULL(NULLIF(#{startUpdateDate},''),p.update_date) and IFNULL(NULLIF(#{endUpdateDate},''),p.update_date)) AS t1 INNER JOIN f_user_account AS t2 ON t1.uid = t2.id INNER JOIN f_user_customer AS t3 ON t2.id = t3.uid INNER JOIN f_firm AS t4 ON t3.fid = t4.id LEFT JOIN (SELECT count(id) AS meshNum,project_id FROM f_mesh GROUP BY project_id) AS t5 ON t1.id = t5.project_id WHERE t2.account LIKE CONCAT('%',IFNULL(#{account},''),'%') ORDER BY
+        SELECT t1.id,t1.name,IFNULL(t5.meshNum,0) as meshNum,t2.account as account,t2.uname,t4.coname as coname,DATE_FORMAT(t1.create_date,'%Y-%m-%d %H:%i:%s') AS create_date,DATE_FORMAT(t1.update_date,'%Y-%m-%d %H:%i:%s') AS update_date FROM
+        (SELECT * FROM  f_project p WHERE p.name LIKE CONCAT('%',IFNULL(#{name},''),'%') and p.create_date BETWEEN IFNULL(NULLIF(#{startCreateDate},''),p.create_date) and IFNULL(NULLIF(#{endCreateDate},''),p.create_date) and p.update_date BETWEEN IFNULL(NULLIF(#{startUpdateDate},''),p.update_date) and IFNULL(NULLIF(#{endUpdateDate},''),p.update_date)) AS t1 INNER JOIN f_user_account AS t2 ON t1.uid = t2.id INNER JOIN f_user_customer AS t3 ON t2.id = t3.uid INNER JOIN f_firm AS t4 ON t3.fid = t4.id LEFT JOIN (SELECT count(id) AS meshNum,project_id FROM f_mesh GROUP BY project_id) AS t5 ON t1.id = t5.project_id WHERE t2.account LIKE CONCAT('%',IFNULL(#{account},''),'%') and t4.coname LIKE CONCAT('%',IFNULL(#{coname},''),'%')
+        <if test="uname!=null and uname!=''">
+            and t2.uname LIKE CONCAT('%',#{uname},'%')
+        </if>
+        ORDER BY
         <if test="sortFlag==null">
         t1.create_date DESC,t1.update_date DESC
         </if>
@@ -28,11 +32,15 @@
     </select>
 
     <select id="searchByManager" resultType="com.tpadsz.after.entity.ProjectList">
-        SELECT t1.id,t1.name,IFNULL(t5.meshNum,0) as meshNum,t2.account as account,t4.coname as coname,DATE_FORMAT(t1.create_date,'%Y-%m-%d %H:%i:%s') AS create_date,DATE_FORMAT(t1.update_date,'%Y-%m-%d %H:%i:%s') AS update_date FROM
+        SELECT t1.id,t1.name,IFNULL(t5.meshNum,0) as meshNum,t2.account as account,t2.uname,t4.coname as coname,DATE_FORMAT(t1.create_date,'%Y-%m-%d %H:%i:%s') AS create_date,DATE_FORMAT(t1.update_date,'%Y-%m-%d %H:%i:%s') AS update_date FROM
         (SELECT * FROM f_project p WHERE p.name LIKE CONCAT('%',IFNULL(#{name},''),'%') and p.create_date BETWEEN IFNULL(NULLIF(#{startCreateDate},''),p.create_date) and IFNULL(NULLIF(#{endCreateDate},''),p.create_date) and p.update_date BETWEEN IFNULL(NULLIF(#{startUpdateDate},''),p.update_date) and IFNULL(NULLIF(#{endUpdateDate},''),p.update_date) and id IN
         <foreach item="item" collection="list" open="(" separator="," close=")">#{item}
         </foreach>) AS t1
-        INNER JOIN f_user_account AS t2 ON t1.uid = t2.id INNER JOIN f_user_customer AS t3 ON t2.id = t3.uid INNER JOIN f_firm AS t4 ON t3.fid = t4.id LEFT JOIN (SELECT count(id) AS meshNum,project_id FROM f_mesh GROUP BY project_id) AS t5 ON t1.id = t5.project_id WHERE t2.account LIKE CONCAT('%',IFNULL(#{account},''),'%') ORDER BY
+        INNER JOIN f_user_account AS t2 ON t1.uid = t2.id INNER JOIN f_user_customer AS t3 ON t2.id = t3.uid INNER JOIN f_firm AS t4 ON t3.fid = t4.id LEFT JOIN (SELECT count(id) AS meshNum,project_id FROM f_mesh GROUP BY project_id) AS t5 ON t1.id = t5.project_id WHERE t2.account LIKE CONCAT('%',IFNULL(#{account},''),'%') and t4.coname LIKE CONCAT('%',IFNULL(#{coname},''),'%')
+        <if test="uname!=null and uname!=''">
+            and t2.uname LIKE CONCAT('%',#{uname},'%')
+        </if>
+        ORDER BY
         <if test="sortFlag==null">
             t1.create_date DESC,t1.update_date DESC
         </if>
@@ -51,8 +59,12 @@
     </select>
 
     <select id="searchByUser" resultType="com.tpadsz.after.entity.ProjectList">
-        SELECT t1.id,t1.name,IFNULL(t5.meshNum,0) as meshNum,t2.account as account,t4.coname as coname,DATE_FORMAT(t1.create_date,'%Y-%m-%d %H:%i:%s') AS create_date,DATE_FORMAT(t1.update_date,'%Y-%m-%d %H:%i:%s') AS update_date FROM
-        (SELECT * FROM f_project p WHERE p.name LIKE CONCAT('%',IFNULL(#{name},''),'%') and p.create_date BETWEEN IFNULL(NULLIF(#{startCreateDate},''),p.create_date) and IFNULL(NULLIF(#{endCreateDate},''),p.create_date) and p.update_date BETWEEN IFNULL(NULLIF(#{startUpdateDate},''),p.update_date) and IFNULL(NULLIF(#{endUpdateDate},''),p.update_date) and p.uid=#{uid}) AS t1 INNER JOIN f_user_account AS t2 ON t1.uid = t2.id INNER JOIN f_user_customer AS t3 ON t2.id = t3.uid INNER JOIN f_firm AS t4 ON t3.fid = t4.id LEFT JOIN (SELECT count(id) AS meshNum,project_id FROM f_mesh GROUP BY project_id) AS t5 ON t1.id = t5.project_id ORDER BY
+        SELECT t1.id,t1.name,IFNULL(t5.meshNum,0) as meshNum,t2.account as account,t2.uname,t4.coname as coname,DATE_FORMAT(t1.create_date,'%Y-%m-%d %H:%i:%s') AS create_date,DATE_FORMAT(t1.update_date,'%Y-%m-%d %H:%i:%s') AS update_date FROM
+        (SELECT * FROM f_project p WHERE p.name LIKE CONCAT('%',IFNULL(#{name},''),'%') and p.create_date BETWEEN IFNULL(NULLIF(#{startCreateDate},''),p.create_date) and IFNULL(NULLIF(#{endCreateDate},''),p.create_date) and p.update_date BETWEEN IFNULL(NULLIF(#{startUpdateDate},''),p.update_date) and IFNULL(NULLIF(#{endUpdateDate},''),p.update_date) and p.uid=#{uid}) AS t1 INNER JOIN f_user_account AS t2 ON t1.uid = t2.id INNER JOIN f_user_customer AS t3 ON t2.id = t3.uid INNER JOIN f_firm AS t4 ON t3.fid = t4.id LEFT JOIN (SELECT count(id) AS meshNum,project_id FROM f_mesh GROUP BY project_id) AS t5 ON t1.id = t5.project_id WHERE t4.coname LIKE CONCAT('%',IFNULL(#{coname},''),'%')
+        <if test="uname!=null and uname!=''">
+            and t2.uname LIKE CONCAT('%',#{uname},'%')
+        </if>
+        ORDER BY
         <if test="sortFlag==null">
             t1.create_date DESC,t1.update_date DESC
         </if>

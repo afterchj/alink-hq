@@ -2,22 +2,25 @@
  * Created by hongjian.chen on 2019/4/24.
  */
 $(function () {
-    // var tabs='groupList';
-    // var index=0;
-    // left(tabs,index);
+    // var width = window.screen.width;
+    // var height = window.screen.height;
     var id;
     var ids = [];
     //重命名弹框
     $('.rename').click(function () {
         id = $(this).attr("alt");
-        $('div[openContent="reset-name"]').addClass('active');
-        var width = document.body.scrollWidth;
-        var height = document.body.scrollHeight;
-        $('.hide-iframe').addClass('active');
-        $('.hide-iframe').css({
-            'width': width,
-            'height': height
-        })
+        // $('div[openContent="reset-name"]').addClass('active');
+        // var width = window.screen.scrollWidth;
+        // var height = window.screen.scrollHeight;
+        // $('.hide-iframe').addClass('active');
+        // $('.hide-iframe').css({
+        //     'width': width,
+        //     'height': height
+        // })
+        var selector= $('div[openContent="reset-name"]');
+        selector.addClass('active');
+        adjust(selector)
+        showOverlay()
     })
     //重命名确定
     $('div[openContent="reset-name"] button.yes').click(function () {
@@ -50,26 +53,33 @@ $(function () {
     })
     //重命名取消
     $('div[openContent="reset-name"] button.reduce').click(function () {
-        $('.hide-iframe').removeClass('active');
-        $('div[openContent="reset-name"]').removeClass('active');
+        // $('.hide-iframe').removeClass('active');
+        // $('div[openContent="reset-name"]').removeClass('active');
+        var selector= $('div[openContent="reset-name"]');
+        selector.removeClass('active')
+        hideOverlay()
     })
 
     //删除弹框出现--单选
     $('.singleDel').click(function () {
         id = $(this).attr("alt");
         ids.push(id);
-        $('div[openContent="delete-mesh"]').addClass('active');
-        var width = document.body.scrollWidth;
-        var height = document.body.scrollHeight;
-        $('.hide-iframe').addClass('active');
-        $('.hide-iframe').css({
-            'width': width,
-            'height': height
-        })
+        // $('div[openContent="delete-mesh"]').addClass('active');
+        // var width = window.screen.scrollWidth;
+        // var height = window.screen.scrollHeight;
+        // $('.hide-iframe').addClass('active');
+        // $('.hide-iframe').css({
+        //     'width': width,
+        //     'height': height
+        // })
+        var selector=  $('div[openContent="delete-mesh"]');
+        selector.addClass('active');
+        adjust(selector)
+        showOverlay()
     })
     //删除确定--单选或复选框
     $('div[openContent="delete-mesh"] button.yes').click(function () {
-        console.log(ids);
+        // console.log(ids);
         if (ids) {
             location.href = "/alink-hq/group/delete?mid="+$("#mid").val()+"&ids=" + ids;
             ids = [];
@@ -77,8 +87,11 @@ $(function () {
     })
     //删除取消--单选或复选框
     $('div[openContent="delete-mesh"] button.reduce').click(function () {
-        $('.hide-iframe').removeClass('active');
-        $('div[openContent="delete-mesh"]').removeClass('active');
+        // $('.hide-iframe').removeClass('active');
+        // $('div[openContent="delete-mesh"]').removeClass('active');
+        var selector=  $('div[openContent="delete-mesh"]');
+        selector.removeClass('active')
+        hideOverlay()
     })
     //删除多选
     $("#multiDel").click(function () {
@@ -88,15 +101,19 @@ $(function () {
         });
         ids = idss;
         if (ids.length > 0) {
-            console.log(ids);
-            $('div[openContent="delete-mesh"]').addClass('active');
-            var width = document.body.scrollWidth;
-            var height = document.body.scrollHeight;
-            $('.hide-iframe').addClass('active');
-            $('.hide-iframe').css({
-                'width': width,
-                'height': height
-            })
+            // console.log(ids);
+            // $('div[openContent="delete-mesh"]').addClass('active');
+            // var width = window.screen.scrollWidth;
+            // var height = window.screen.scrollHeight;
+            // $('.hide-iframe').addClass('active');
+            // $('.hide-iframe').css({
+            //     'width': width,
+            //     'height': height
+            // })
+            var selector= $('div[openContent="delete-mesh"]');
+            selector.addClass('active');
+            adjust(selector)
+            showOverlay()
         }
     })
     //移交多选
@@ -125,20 +142,27 @@ $(function () {
                 location.href = "/alink-hq/group/move?mid=" + $("#mid").val() + "&ids=" + idss;
             }
         } else {
-            $('div[openContent="exchange"]').addClass('active');
-            var width = document.body.scrollWidth;
-            var height = document.body.scrollHeight;
-            $('.hide-iframe').addClass('active');
-            $('.hide-iframe').css({
-                'width': width,
-                'height': height
-            })
+            // $('div[openContent="exchange"]').addClass('active');
+            // var width = window.screen.scrollWidth;
+            // var height = window.screen.scrollHeight;
+            // $('.hide-iframe').addClass('active');
+            // $('.hide-iframe').css({
+            //     'width': width,
+            //     'height': height
+            // })
+            var selector= $('div[openContent="exchange"]');
+            selector.addClass('active');
+            adjust(selector)
+            showOverlay()
         }
     })
     //无法移动的确定以及取消
     $('div[openContent="exchange"] .yes,div[openContent="exchange"] .reduce').click(function () {
-        $('.hide-iframe').removeClass('active');
-        $('div[openContent="exchange"]').removeClass('active');
+        // $('.hide-iframe').removeClass('active');
+        // $('div[openContent="exchange"]').removeClass('active');
+        var selector=   $('div[openContent="exchange"]');
+        selector.removeClass('active')
+        hideOverlay()
     })
 })
 function nameKeyUp() {

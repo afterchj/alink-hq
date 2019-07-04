@@ -19,7 +19,14 @@
         <div th:replace="common/left::left('meshList')"></div>
         <div class="main-right f-l">
             <div class="clearfix main-right-nav">
-                <div class="f-l main-right-title">网络移动</div>
+                <div class="f-l main-right-title">
+                    <nav class="bread">
+                        <ol class="clearfix">
+                            <li class="f-l"><a th:href="@{/mesh/list}">网络列表</a></li>
+                            <li class="f-l">网络移动</li>
+                        </ol>
+                    </nav>
+                </div>
                 <div class="f-r pointer">
                     <div class="goBack" onClick="javascript :history.back(-1);" onmousedown="backBtnMouseDown()"
                          onmouseup="backBtnMouseUp()">
@@ -30,7 +37,7 @@
                 </div>
             </div>
             <form th:action="@{/mesh/saveUpdate}" class="" method="post">
-                <div id="meshTurnOver">
+                <div id="meshTurnOver" class="table-content-list">
                     <div class="f-nav">
                         网络移动
                     </div>
@@ -86,8 +93,6 @@
 <script src="/alink-hq/static/js/jquery.min.js"></script>
 <script type="text/javascript" src="/alink-hq/static/js/left.js"></script>
 <script src="/alink-hq/static/js/moment.js"></script>
-<script  src="/alink-hq/static/js/selectivizr.js"></script>
-<script  src="/alink-hq/static/js/html5shiv.js"></script>
 <script th:inline="javascript">
     var uid = [[${session.user.id}]];
     $(function () {
@@ -116,7 +121,7 @@
                         $('.hide-iframe').addClass('active');
                         $('#preload-anim .title').text('移交成功，正在跳转网络列表');
                         setInterval(function () {
-                            location.href = '/alink-hq/mesh/list?uid='+uid;
+                            location.href = '/alink-hq/mesh/list?uid=' + uid;
                         }, 1000)
                     } else {
                         $('#preload-anim').addClass('active');

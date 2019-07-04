@@ -1,0 +1,237 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <script src="/alink-hq/static/js/browser.js"></script>
+    <link rel="stylesheet" href="/alink-hq/static/css/base.css"/>
+    <link rel="stylesheet" href="/alink-hq/static/css/leftNav.css"/>
+    <link rel="stylesheet" href="/alink-hq/static/css/projectManage.css"/>
+    <link rel="stylesheet" th:href="@{/static/css/common.css}"/>
+    <link rel="stylesheet" th:href="@{/static/css/laydate.css}"/>
+    <title>合作列表</title>
+</head>
+<body>
+<div class="c-container">
+    <div th:replace="common/head::head"></div>
+    <div class="main clearfix">
+        <div th:replace="common/left::left('cooperateList')"></div>
+        <!--<div class="must f-l"></div>-->
+        <div class="main-right f-l">
+            <div class="clearfix main-right-nav">
+                <div class="f-l main-right-title">合作列表</div>
+                <div class="f-r pointer last-nav">
+                    <a th:href="@{/cooperate/create}"    shiro:hasAnyPermission ="createCooperation">
+                        <div class="create" onmousedown="createBtnMouseDown()" onmouseup="createBtnMouseUp()">
+                            <span>+</span><span>新增合作信息</span></div>
+                    </a>
+                </div>
+                <div class="f-r pointer">
+                    <div class="goBack" onClick="javascript :history.back();" onmousedown="backBtnMouseDown()"
+                         onmouseup="backBtnMouseUp()">
+                        <span><</span><span>返回</span>
+                    </div>
+                </div>
+            </div>
+            <div id="projectList" class="table-content-list">
+                <form th:action="@{/cooperate/list}" class="clearfix" method="post">
+                    <div class="search-condition clearfix">
+                        <input type="hidden" id="relation" th:value="${info.status}">
+                        <input type="hidden" id="pageSize" th:value="${info.pageSize}">
+                        <div class="f-l search" style="margin-right: 150px;margin-left: 100px;">
+                            <div>
+                                <label for="name">合作公司名称</label>
+                                <input type="text" id="name" name="coname" placeholder="请输入合作公司名称"
+                                       th:value="${info.coname}">
+                            </div>
+                        </div>
+                        <div class="f-l search">
+                            <div>
+                                <label for="status" class="font">合作状态</label>
+                                <select name="status" style=" height: 38px;line-height: 38px;" id="status">
+                                    <option value="">全部</option>
+                                    <option value="1">合作</option>
+                                    <option value="0">终止</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="f-r search-button " style="padding-top: 0;">
+                            <button type="submit" class="pointer">查询</button>
+                        </div>
+                    </div>
+                    <div class="search-result">
+                        <!-- 有数据时 -->
+                        <table border="1" class="hasData active" th:if="${pageInfo!=null}">
+                            <thead>
+                            <tr>
+                                <th><span>合作公司名称</span></th>
+                                <th><span>联系方式</span></th>
+                                <th><span>录入时间</span></th>
+                                <th><span>合作状态</span></th>
+                                <th class="operation"><span>操作</span></th>
+                                <th class="memo" style="width:270px;"><span>备忘录</span></th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr th:each="cooperation:${pageInfo.list}">
+                                <td class="k-link coo-name">
+                                    <a th:href="@{/cooperate/info(id=${cooperation.id})}"
+                                       th:text="${cooperation.coname}"
+                                       th:alt="${cooperation.id}"></a>
+                                </td>
+                                <td th:text="${cooperation.mobile}"></td>
+                                <td th:text="${cooperation.create_date}">
+                                <td th:switch="${cooperation.status}" class="k-link">
+                                    <!--<a th:case="1" th:href="@{/cooperate/saveUpdate(id=${cooperation.id},status=0)}" class="off-or-on-coo" alt="0">-->
+                                    <!--<span>合作</span>-->
+                                    <!--</a>-->
+                                    <!--<a th:case="0" th:href="@{/cooperate/saveUpdate(id=${cooperation.id},status=1)}" class="off-or-on-coo" alt="1">-->
+                                    <!--<span>终止</span>-->
+                                    <!--</a>-->
+                                    <!--<a th:case='*' th:href="@{/cooperate/saveUpdate(id=${cooperation.id},status=1)}" class="off-or-on-coo" alt="1">-->
+                                    <!--<span>合作</span>-->
+                                    <!--</a>-->
+                                    <a th:case="1" href="javascript:void(0);" class="off-or-on-coo" alt="0">
+                                        <span>合作</span>
+                                    </a>
+                                    <a th:case="0" href="javascript:void(0);" class="off-or-on-coo" alt="1">
+                                        <span>终止</span>
+                                    </a>
+                                    <a th:case='*' href="javascript:void(0);" class="off-or-on-coo" alt="1">
+                                        <span>合作</span>
+                                    </a>
+                                </td>
+                                <td class="p-r">
+                                    <a th:href="@{/cooperate/edit(id=${cooperation.id})}"  shiro:hasPermission ="updateCooperation">
+                                        <img src="/alink-hq/static/img/alter.png" th:alt="${cooperation.id}"
+                                             class="pointer reset-name" title="编辑" style="margin-right: 30px;">
+                                    </a>
+                                    <img shiro:lacksPermission ="updateCooperation" src="/alink-hq/static/img/alter-un.png" th:alt="${cooperation.id}"
+                                         class="pointer reset-name unclick" th:title="无法操作" style="margin-right: 30px;">
+                                    <img shiro:hasPermission ="deleteCooperation"  src="/alink-hq/static/img/delete.png" th:alt="${cooperation.id}"
+                                         class="pointer delete-project" title="删除">
+                                    <img  shiro:lacksPermission ="deleteCooperation"  src="/alink-hq/static/img/un-delete.png" th:alt="${cooperation.id}"
+                                         class="pointer delete-project unclick" th:title="无法操作">
+                                </td>
+                                <td class="p-r" shiro:hasPermission ="CooperationMemo">
+                                    <img  src="/alink-hq/static/img/memo.png" th:alt="${cooperation.id}"
+                                         class="pointer memo-edit" title="备忘录">
+                                    <!-- 备忘录不为空 -->
+                                    <div class="memo-edit-has">
+                                        <div class="meno-nav"><img src="/alink-hq/static/img/alter.png" alt=""
+                                                                   class="pointer"></div>
+                                        <div class="memo-content" th:text="${cooperation.other}"></div>
+                                    </div>
+                                </td>
+                                <td class="p-r" shiro:lacksPermission ="CooperationMemo">
+                                    <img  src="/alink-hq/static/img/memo-un.png" th:alt="${cooperation.id}"
+                                          class="pointer memo-edit unclick" title="备忘录">
+                                </td>
+                            </tr>
+                            </tbody>
+                            <tfoot>
+                            <tr>
+                                <td colspan="9" class="clearfix page">
+                                    <div th:replace="common/page::page"></div>
+                                </td>
+                            </tr>
+                            </tfoot>
+                        </table>
+                        <!-- 无数据时 -->
+                        <table th:if="${pageInfo==null}" border="1" class="noData active">
+                            <thead>
+                            <tr>
+                                <th><span>合作公司名称</span></th>
+                                <th><span>联系方式</span></th>
+                                <th><span>录入时间</span></th>
+                                <th><span>合作状态</span></th>
+                                <th class="operation"><span>操作</span></th>
+                                <th class="memo" style="width:320px;"><span>备忘录</span></th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td colspan="9">
+                                    <img src="/alink-hq/static/img/no-data.png" alt="">
+                                    <p>暂无数据</p>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- 重命名弹框 -->
+<div class="confirm-on-off pop-iframe  " openContent="reset-name">
+    <div class="confirm-on-off-nav p-r pop-nav">
+        重命名
+    </div>
+    <div class="pop-content">
+        <div class="newName">
+            <p class="rename-hint"></p>
+            <label for="rename">新名称</label>
+            <input type="text" placeholder="请输入（2-16位汉字、字母、数字）" id="rename" onkeyup="nameKeyUp()" maxlength="16"/>
+        </div>
+        <div class="pop-btn">
+            <button class="reduce">取消</button>
+            <button class="yes">确定</button>
+        </div>
+    </div>
+</div>
+<!-- 删除账户 -->
+<div class="pop-iframe" openContent="delete-project">
+    <div class=" p-r pop-nav">
+        温馨提示
+    </div>
+    <div class="pop-content">
+        <div class="reset-pwd"></div>
+        <div class="reset-pwd-hint"></div>
+        <div class="pop-btn">
+            <button class="reduce">取消</button>
+            <button class="yes">确定</button>
+        </div>
+    </div>
+</div>
+
+<!-- 备忘录为空 -->
+<div class="pop-iframe" openContent="memo-edit">
+    <div class=" p-r pop-nav">
+        备忘录
+    </div>
+    <div class="pop-content">
+        <textarea   maxlength="200" style="width: 93%;border: none;margin-top: 10px;resize: none;height: 130px;font-size: 13.5px;line-height: 1.6;color: #323232;font-family: inherit;" class="wishContent" placeholder="请输入不超过200个字"></textarea>
+        <p class="right-font"><span class="wordsNum">0/200</span></p>
+        <div class="pop-btn">
+            <button class="reduce">取消</button>
+            <button class="yes">确定</button>
+        </div>
+    </div>
+</div>
+
+<!-- 确定启用禁用弹出框 -->
+<div class="confirm-on-off pop-iframe " openContent="start-use">
+    <div class="confirm-on-off-nav p-r pop-nav">
+        温馨提示
+    </div>
+    <div class="pop-content">
+        <div class="off-or-on"></div>
+        <div class="pop-btn">
+            <button class="reduce" type="button">取消</button>
+            <button class="yes" type="button">确定</button>
+        </div>
+    </div>
+</div>
+
+<div class="hide-iframe "></div>
+
+<script src="/alink-hq/static/js/jquery.min.js"></script>
+<script type="text/javascript" src="/alink-hq/static/js/page.js"></script>
+<script src="/alink-hq/static/js/left.js"></script>
+<script src="/alink-hq/static/laydate/laydate.js"></script>
+<script src="/alink-hq/static/js/cooperateList.js"></script>
+<script src="/alink-hq/static/js/moment.js"></script>
+</body>
+</html>

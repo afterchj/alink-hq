@@ -9,66 +9,64 @@
     <link rel="stylesheet" th:href="@{/static/css/base.css}"/>
     <link rel="stylesheet" th:href="@{/static/css/leftNav.css}"/>
     <link rel="stylesheet" th:href="@{/static/css/projectManage.css}"/>
+
 </head>
 <body>
 <div class="c-container">
     <div th:replace="common/head::head"></div>
     <div class="main clearfix">
-        <div th:replace="common/left::left('meshList')"></div>
+        <div th:replace="common/left::left('placeList')"></div>
         <div class="main-right f-l">
             <div class="clearfix main-right-nav">
                 <div class="f-l main-right-title font">区域列表
                     <!--<span class="subjection">隶属项目：<span th:inline="text">[[${project.label}]]</span></span>-->
                 </div>
-                <!--<div class="f-r pointer">-->
-                <!--<a th:href="@{/place/create(projectId=${dict.projectId})}">-->
-                <!--<div class="create" onmousedown="createBtnMouseDown()" onmouseup="createBtnMouseUp()"><span>+</span><span>创建区域</span>-->
-                <!--</div>-->
-                <!--</a>-->
-                <!--&lt;!&ndash;<div class="create" >+&nbsp;创建灯</div>&ndash;&gt;-->
-                <!--</div>-->
+                <div class="f-r pointer last-nav" >
+                    <a th:href="@{/place/create(mid=${dict.mid},projectId=${dict.projectId})}">
+                        <div class="create" onmousedown="createBtnMouseDown()" onmouseup="createBtnMouseUp()">
+                            <span>+</span><span>创建区域</span>
+                        </div>
+                    </a>
+                    <!--<div class="create" >+&nbsp;创建灯</div>-->
+                </div>
                 <div class="f-r pointer">
-                    <div class="goBack" onClick="javascript :history.back(-1);" onmousedown="backBtnMouseDown()"
+                    <div class="goBack" onClick="javascript :history.back();" onmousedown="backBtnMouseDown()"
                          onmouseup="backBtnMouseUp()">
                         <span><</span><span>返回</span>
                     </div>
-                    <!--<img src="/alink-hq/static/img/go-back.png" alt="" onclick="history.back()">-->
                 </div>
             </div>
 
-            <div id="meshList" class="">
-                <form class="clearfix" th:action="@{/place/list}" method="post">
+            <div id="meshList" class="table-content-list">
+                <form class="clearfix" th:action="@{/place/list}" method="POST">
                     <input type="hidden" name="uid" th:value="${dict.uid}">
                     <input type="hidden" id="pageSize" th:value="${dict.pageSize}">
-                    <div class="search-condition temp">
-                        <div class="f-l search" style="margin-right:125px;">
+                    <div class="search-condition clearfix">
+                        <div class="f-l search" style="margin-right: 150px;margin-left: 100px;">
                             <div>
                                 <label for="pname" class="font">区域名称</label>
-                                <input type="text" id="pname" name="pname" th:value="${dict.pname}"
-                                       placeholder="请输入区域名称">
+                                <input type="text" id="pname" name="pname" th:value="${dict.pname}" placeholder="请输入区域名称">
                             </div>
+
                             <div>
-                                <label for="name" class="font">网络名称</label>
-                                <input type="text" id="name" name="mname" th:value="${dict.mname}"
-                                       placeholder="请输入网络名称">
+                                <label for="mid" class="font">网络ID</label>
+                                <input type="text" id="mid" name="meshId" th:value="${dict.meshId}" placeholder="请输入网络ID">
                             </div>
                         </div>
                         <div class="f-l search">
                             <div>
-                                <label for="mid" class="font">网络ID</label>
-                                <input type="text" id="mid" name="meshId" th:value="${dict.meshId}"
-                                       placeholder="请输入网络ID">
+                                <label for="mname" class="font">网络名称</label>
+                                <input type="text" id="mname" name="mname" th:value="${dict.mname}"
+                                       placeholder="请输入网络名称">
+                            </div>
+                            <div>
+                                <label for="name" class="font">项目名称</label>
+                                <input type="text" id="name" name="name" th:value="${dict.name}" placeholder="请输入项目名称">
                             </div>
                             <!--<div>-->
-                                <!--<label for="pid" class="font">区域ID</label>-->
-                                <!--<input type="text" id="pid" name="placeId" th:value="${dict.placeId}"-->
-                                       <!--placeholder="请输入区域ID">-->
+                            <!--<label for="pid" class="font">区域ID</label>-->
+                            <!--<input type="text" id="pid" name="placeId" th:value="${dict.placeId}"--><!--placeholder="请输入区域ID">-->
                             <!--</div>-->
-                            <div>
-                                <label for="pid" class="font">项目名称</label>
-                                <input type="text" id="pid" name="placeId" th:value="${dict.placeId}"
-                                placeholder="请输入项目名称">
-                            </div>
                         </div>
                         <div class="f-r search-button ">
                             <button type="submit" class="pointer">查询</button>
@@ -80,15 +78,15 @@
                             <thead>
                             <tr>
                                 <th class="all-checkbox">
-                                <span style="vertical-align: sub;">
-                                    <input type="checkbox" id="all" class="pointer">
-                                </span>
+                                <!--<span style="vertical-align: sub;">-->
+                                    <input type="checkbox" id="all" class="pointer ">
+                                <!--</span>-->
                                     <span class="">全选</span>
                                 </th>
                                 <th><span>区域名称</span></th>
                                 <th><span>区域ID</span></th>
                                 <th><span>隶属项目</span></th>
-                                <th><span>属于网络</span></th>
+                                <th><span>隶属网络</span></th>
                                 <th><span>网络ID</span></th>
                                 <th><span>组数量</span></th>
                                 <th><span>状态</span></th>
@@ -97,37 +95,37 @@
                             </thead>
                             <tbody>
                             <tr th:each="place:${pageInfo.list}">
-                                <td class="checkbox"><input type="checkbox" name="ids" th:value="${place.id}"></td>
-                                <td class="k-link"><a th:href="@{/place/info(id=${place.id})}"
-                                                      th:text="${place.pname}"></a>
+                                <td class="checkbox"><input type="checkbox" name="ids"  th:value="${place.id}"></td>
+                                <td class="k-link">
+                                    <a  th:href="@{/place/info(id=${place.id})}" th:text="${place.pname}"></a>
                                 </td>
                                 <td th:text="${place.place_id}"></td>
                                 <td class="k-link">
-                                    <a th:href="@{/mesh/info(id=${place.mid})}" th:text="${place.mname}"></a>
+                                    <a th:href="@{/project/detail(projectId=${place.project_id})}" th:text="${place.name}"></a>
                                 </td>
                                 <td class="k-link">
                                     <a th:href="@{/mesh/info(id=${place.mid})}" th:text="${place.mname}"></a>
                                 </td>
                                 <td th:text="${place.mesh_id}"></td>
                                 <td class="k-link">
-                                    <a th:href="@{/group/list(mid=${place.mid},pid=${place.id})}"
+                                    <a th:if="${place.gcount}=='0'" class="a-un" href="javascript:void(0);"
+                                       th:text="${place.gcount}"></a>
+                                    <a th:if="${place.gcount}!='0'"  th:href="@{/group/list(mid=${place.mid},pid=${place.id})}"
                                        th:text="${place.gcount}"></a>
                                 </td>
                                 <td>未知</td>
-                                <td class="p-r" shiro:hasAnyRoles="super,admin,manager">
+                                <td class="p-r" >
                                     <img src="/alink-hq/static/img/edit.png" th:alt="${place.id}"
                                          class="reset-name pointer"
-                                         title="重命名">
-                                    <a href="javascript:void(0);" class="singleDel pointer">
+                                         title="重命名" shiro:hasAnyPermission ="renamePlace">
+                                    <img src="/alink-hq/static/img/un-rename.png" th:alt="${place.id}"
+                                         class=" pointer unclick"
+                                         th:title="无法操作" shiro:lacksPermission ="renamePlace">
+                                    <a href="javascript:void(0);" class="singleDel pointer" shiro:hasAnyPermission ="deletePlace">
                                         <img src="/alink-hq/static/img/delete.png" alt="" class="left-img pointer"
                                              title="删除">
                                     </a>
-                                </td>
-                                <td class="p-r" shiro:hasRole="user">
-                                    <img src="/alink-hq/static/img/un-rename.png" th:alt="${place.id}"
-                                         class=" pointer unclick"
-                                         th:title="无法操作">
-                                    <a href="javascript:void(0);" class=" unclick">
+                                    <a href="javascript:void(0);" class=" unclick" shiro:lacksPermission ="deletePlace">
                                         <img src="/alink-hq/static/img/un-delete.png" alt="" class="left-img  unclick"
                                              th:title="无法操作">
                                     </a>
@@ -142,8 +140,8 @@
                                 <span id="amount" class="amount">0</span>条数据
                             </span>
                              <span>
-                                <span shiro:hasAnyRoles="super,admin,manager" class="skipPageBtn pointer moment" onmousedown="deleteBtnMouseDown()" onmouseup="deleteBtnMouseUp()" id="multiDel">删除</span>
-                                <span shiro:hasRole="user" class="skipPageBtn  moment active unclick1" onmousedown="deleteBtnMouseDown()" onmouseup="deleteBtnMouseUp()" id="multiDel">删除</span>
+                                <span shiro:hasAnyPermission ="deletePlace"  class="skipPageBtn pointer moment" onmousedown="deleteBtnMouseDown()" onmouseup="deleteBtnMouseUp()" id="multiDel">删除</span>
+                                <span shiro:lacksPermission ="deletePlace" class="skipPageBtn  moment active unclick1" onmousedown="deleteBtnMouseDown()" onmouseup="deleteBtnMouseUp()" id="multiDel">删除</span>
                             </span>
                                     </div>
                                     <div th:replace="common/page::page"></div>
@@ -161,7 +159,7 @@
                                 </th>
                                 <th>区域名称</th>
                                 <th>区域ID</th>
-                                <th>属于网络</th>
+                                <th>隶属网络</th>
                                 <th>网络ID</th>
                                 <th>组数量</th>
                                 <th>状态</th>
@@ -218,9 +216,8 @@
 <div class="hide-iframe "></div>
 <script type="text/javascript" src="/alink-hq/static/js/left.js"></script>
 <script type="text/javascript" src="/alink-hq/static/js/page.js"></script>
-<script type="text/javascript" src="/alink-hq/static/js/place.js"></script>
+<script type="text/javascript" th:src="@{/static/js/place.js}"></script>
 <script src="/alink-hq/static/js/moment.js"></script>
-<script  src="/alink-hq/static/js/selectivizr.js"></script>
-<script  src="/alink-hq/static/js/html5shiv.js"></script>
+
 </body>
 </html>

@@ -1,388 +1,440 @@
-#createAccount .c-nav{
-    height: 58px;
-    line-height: 58px;
+#createAccount .c-nav {
+    height: 50px;
+    line-height: 50px;
     padding-left: 25px;
-    font-size: 22px;
-    color: #111;
-    border-bottom: 1px solid #bbb;
-    background-color: #fafafa;
+    font-size: 16px;
+    color: #323232;
+    background-color: rgba(0,0,0,.03);
+    border-bottom: 1px solid rgba(0,0,0,.125);
 }
-#createAccount .c-createAccount{
+
+#createAccount .c-createAccount {
     height: 842px;
     margin: 30px 0;
-    border: 1px solid #bbb;
+    border: 1px solid #dee2e6;
     background-color: #fff;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
 }
-#createAccount .c-content{
-    padding: 10px 70px;
-    font-size: 21px;
-    color: #3c3c3c;
+
+#createAccount .c-content {
+    padding:10px 70px;
+    font-size:21px;
+    color:#3c3c3c
 }
-#createAccount form{
-    width: 700px;
-    margin: auto;
-    font-size: 16px;
-    color: #3c3c3c;
-    margin-top: 50px;
+
+#createAccount form {
+    width:700px;
+    margin:auto;
+    font-size:16px;
+    color:#3c3c3c;
+    margin-top:50px
 }
-#createAccount form>div{
-    margin-bottom: 70px;
+
+#createAccount form>div {
+    margin-bottom:70px
 }
-#createAccount form>div>label:first-child{
-    width: 150px;
+
+#createAccount form>div>label:first-child {
+    margin-right: 30px;
+    font-size: 15px;
+    display: inline-block;
+    color: #323232;
+    width: 110px;
     text-align: right;
-    display: inline-block;
-    margin-right: 40px;
 }
-#createAccount form>div select,#createAccount form>div input[type='text']{
-    height: 33px;
-    border-radius: 5px;
-    border: 1px solid #bbb;
-   
+
+#createAccount form>div select,#createAccount form>div input[type='text'] {
+    height:33px;
+    border-radius:5px;
+    border:1px solid #e1e1e1
 }
-#createAccount form>div select{
-    width: 300px;
-    font-size: 15px;
-    color: #666;
-    text-indent: 5px;
-    height: 37px;
+
+#createAccount form>div select {
+    width: 314px;
+    font-size: 14px;
+    color: #888;
+    height: 35px;
+    padding-left: 8px;
+    border: 1px solid #e1e1e1;
+    border-radius: .25rem;
+    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
 }
-#createAccount form>div input[type='text']{
-    width: 62px;
-    border-radius: 0;
-    border-top: none;
-    border-bottom: none;
-    font-size: 15px;
-    color: #3c3c3c;
-    text-align: center;
-    background-color: #fff;
+
+#createAccount form>div input[type='text'] {
+    width:62px;
+    border-radius:0;
+    border-top:none;
+    border-bottom:none;
+    font-size:15px;
+    color:#3c3c3c;
+    text-align:center;
+    background-color:#fff
 }
-.num{
-    border: 1px solid #bbb;
-    display: inline-block;
-    border-radius: 5px;
+
+.num {
+    border:1px solid #e1e1e1;
+    display:inline-block;
+    border-radius:5px
 }
-.num>div{
+
+.num>div {
     display: inline-block;
     width: 35px;
-    height: 35px;
-    line-height: 35px;
+    height: 33px;
+    line-height: 33px;
     text-align: center;
 }
-#createAccount form>div button{
-    height: 44px;
-    width: 134px;
-    color: #fff;
-    font-size: 17px;
-    letter-spacing: 5px;
-    border: 1px solid #3598db;
-    background-color: #3598db;
-    border-radius: 5px;
-    cursor: pointer;
-    margin-left: 196px;
-}
-#createAccount form>div button:active{
-    background-color: #0068ae;
-}
-#createAccount input[type="radio"]{
-    display: none;
 
+#createAccount form>div button {
+    height:44px;
+    width:134px;
+    color:#fff;
+    font-size:17px;
+    letter-spacing:5px;
+    border:1px solid #3598db;
+    background-color:#3598db;
+    border-radius:5px;
+    cursor:pointer;
+    margin-left:196px;
+    box-shadow: 0px 1px 2px 0 rgba(0, 0, 0, 0.2);
 }
 
-#createAccount .c-content img{
-    margin-right: 10px;
-    cursor: pointer;
-    vertical-align: middle;
-}
-#createAccount label.l-radio{
-    margin-right: 50px;
+#createAccount form>div button:active {
+    background-color:#0068ae
 }
 
-#userTurnOver{
-    margin: 20px 0;
-    border: 1px solid #bbb;
-    background-color: #fff;
+#createAccount input[type="radio"] {
+    display:none
 }
-#userTurnOver .f-nav{
-    height: 58px;
-    line-height: 58px;
+
+#createAccount .c-content img {
+    margin-right:10px;
+    cursor:pointer;
+    vertical-align:middle
+}
+
+#createAccount label.l-radio {
+    margin-right:50px
+}
+
+#userTurnOver {
+    margin:20px 0;
+    background-color:#fff
+}
+
+#userTurnOver .f-nav {
+    height: 50px;
+    line-height: 50px;
     padding-left: 25px;
-    font-size: 22px;
-    color: #111;
-    background-color: #fafafa;
-    border-bottom: 1px solid #bbb;
+    font-size: 16px;
+    color: #323232;
+    background-color: rgba(0,0,0,.03);
+    border-bottom: 1px solid rgba(0,0,0,.125);
 }
-#userTurnOver .accountMsg{
-    margin: 40px 120px;
-    border: 1px solid #bbb;
-    padding: 35px;
+#userTurnOver .f-userTurnOver{
+    height: 842px;
+    margin: 30px 0;
+    border: 1px solid #dee2e6;
+    background-color: #fff;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
 }
-#userTurnOver .accountMsg label{
+#userTurnOver .accountMsg {
+    margin:40px 120px;
+    border:1px solid #bbb;
+    padding:35px
+}
+
+#userTurnOver .accountMsg label {
     display: inline-block;
     width: 100px;
-    font-size: 16px;
+    font-size: 15px;
     color: #3c3c3c;
     text-align: right;
     margin-right: 20px;
 }
-#userTurnOver .accountMsg input{
+
+#userTurnOver .accountMsg input {
     height: 32px;
     font-size: 14px;
     width: 220px;
     text-indent: 10px;
-    border: 1px solid #bbb;
+    border: 1px solid #e6e6e6;
     color: #3c3c3c;
     background-color: #f3f3f3;
-    border-radius: 5px;
+    border-radius: 2px;
 }
-.transfer-company label span{
-    color: red;font-size: 20px;display: inline-block;
-    width: 20px;
-    height: 20px;
-    margin: auto;
-    vertical-align: middle;
+
+.transfer-company label span {
+    color:red;
+    font-size:20px;
+    display:inline-block;
+    width:20px;
+    height:20px;
+    margin:auto;
+    vertical-align:middle
 }
-#userTurnOver .accountMsg div{
-    width:50%;
+
+#userTurnOver .accountMsg div {
+    width:50%
 }
-#userTurnOver .transfer-company{
-    text-align: center;
+
+#userTurnOver .transfer-company {
+    text-align:center
 }
-#userTurnOver .transfer-company label{
-    display: inline-block;
-    width: 180px;
-    font-size: 16px;
-    color: #3c3c3c;
-    text-align: left;
+
+#userTurnOver .transfer-company label {
+    display:inline-block;
+    width:180px;
+    font-size:16px;
+    color:#3c3c3c;
+    text-align:left
 }
-#userTurnOver .transfer-company select{
-    border: 1px solid #bbb;
-    width: 230px;
-    text-indent: 10px;
+
+#userTurnOver .transfer-company select {
+    background-color:#f3f3f3;
+    width: 314px;
     font-size: 14px;
-    color: #3c3c3c;
+    color: #888;
     height: 35px;
-    background-color: #f3f3f3;
-    border-radius: 5px;
+    padding-left: 8px;
+    border: 1px solid #e1e1e1;
+    border-radius: .25rem;
+    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
 }
-.img-exchange{
-    text-align: center;
-    margin: 30px 0;
+
+.img-exchange {
+    text-align:center;
+    margin:30px 0
 }
-.transfer{
-    border: 1px solid #bbb;
-    width: 650px;
-    margin: 30px auto;
-    padding: 50px;
+
+.transfer {
+    border:1px solid #bbb;
+    width:650px;
+    margin:30px auto;
+    padding:50px
 }
-.attention{
-    margin: 60px 0 0 190px;
-    font-size: 15px;
+
+.attention {
+    margin:60px 0 0 190px;
+    font-size:15px
 }
-.attention ul li,.attention p{
-    line-height: 1.7;
+
+.attention ul li,.attention p {
+    line-height:1.7
 }
-.attention span{
-    font-weight: bold;
+
+.attention span {
+    font-weight:700
 }
-.btn-transfer{
-    text-align: center;
-    padding: 35px 0  50px 0;
+
+.btn-transfer {
+    text-align:center;
+    padding:35px 0 50px
 }
-.btn-transfer button{
-    width: 140px;
-    height: 42px;
-    border: 1px solid #3598db;
-    background-color: #3598db;
-    border-radius: 5px;
-    cursor: pointer;
-    color: #fff;
-    font-size: 17px;
-    letter-spacing: 5px;
+
+.btn-transfer button {
+    width:140px;
+    height:42px;
+    border:1px solid #3598db;
+    background-color:#3598db;
+    border-radius:5px;
+    cursor:pointer;
+    color:#fff;
+    font-size:17px;
+    letter-spacing:5px;
+    box-shadow: 0px 1px 2px 0 rgba(0, 0, 0, 0.2);
 }
+
 .pop-iframe.active {
-    display: block;
-    z-index: 1000;
+    display:block;
+    z-index:1000
 }
 
 .pop-iframe {
     position: absolute;
     top: 250px;
     left: 35%;
-    background-color: #fafafa;
-    width: 600px;
+    background-color: #fff;
+    width: 550px;
     height: 300px;
     text-align: center;
-    border: 1px solid #bbb;
-    border-radius: 5px;
-    box-shadow: 1px 1px 10px #333;
     display: none;
     z-index: 1000;
+    border-radius: 2px;
+    box-shadow: 1px 1px 50px rgba(0,0,0,.3);
 }
-.hide-iframe.active {
-    display: block;
-}
-.hide-iframe {
-    position: absolute;
-    left: 0;
-    top: 0;
-    background-color: black;
-    z-index: 10;
-    -moz-opacity: 0.45;
-    opacity: .45;
-    filter: alpha(opacity=45);
-    display: none;
-}
+
 .pop-nav {
-    padding: 20px 22px;
+    padding: 12px 0;
     font-size: 22px;
-    color: #3c3c3c;
-    border-bottom: 1px solid #bbb;
-    background-color: #eef2f5;
+    color: #333;
+    border-bottom: 1px solid #eee;
+    background-color: #f8f8f8;
 }
+
 .pop-content {
-    text-align: center;
+    text-align:center
 }
+
 .pop-content .pop-btn {
-    text-align: right;
-    position: absolute;
-    right: 0;
-    bottom: 0;
-    width: 540px;
-    padding: 13px 20px 11px 40px;
-    background-color: #eef2f5;
+    text-align:right;
+    position:absolute;
+    right:0;
+    bottom:0;
+    width:540px;
+    padding:13px 20px 11px 40px;
+    background-color:#eef2f5
 }
+
 .pop-content .pop-btn .reduce {
-    border: 1px solid #ccc;
-    font-size: 16px;
-    color: #3c3c3c;
-    border-radius: 5px;
-    height: 35px;
-    width: 90px;
-    line-height: 35px;
-    letter-spacing: 10px;
-    background-color: #fafafa;
-    cursor: pointer;
-    margin-right: 20px;
+    border:1px solid #ccc;
+    font-size:16px;
+    color:#3c3c3c;
+    border-radius:5px;
+    height:35px;
+    width:90px;
+    line-height:35px;
+    letter-spacing:10px;
+    background-color:#fafafa;
+    cursor:pointer;
+    margin-right:20px
 }
+
 .pop-content .pop-btn .yes {
-    border: 1px solid #3598DB;
-    font-size: 16px;
-    color: #fff;
-    border-radius: 5px;
-    height: 35px;
-    width: 90px;
-    letter-spacing: 10px;
-    cursor: pointer;
-    background-color: #3598DB;
+    border:1px solid #3598DB;
+    font-size:16px;
+    color:#fff;
+    border-radius:5px;
+    height:35px;
+    width:90px;
+    letter-spacing:10px;
+    cursor:pointer;
+    background-color:#3598DB
 }
-.pop-hint{
-    font-size: 15px;
-    color: #fb2a2a;
-    margin-top: 10px;
 
+.pop-hint {
+    font-size:15px;
+    color:#fb2a2a;
+    margin-top:10px
 }
-/*.pop-content .t-title.t-account {*/
 
-    /*font-size:16px;*/
-    /*color: #3c3c3c;*/
-/*}*/
-.pop-content span{
-     display: inline-block;
-     width:49%;
-     color: #3c3c3c;
- }
+.pop-content span {
+    display:inline-block;
+    width:49%;
+    color:#3c3c3c
+}
 
-.main-part{
+.main-part {
     width:400px;
-    margin:30px auto;
+    margin:30px auto
 }
-.pop-content span.t-title{
-    text-align: right;
+
+.pop-content span.t-title {
+    text-align:right
 }
-.pop-content span.t-content{
-    text-align: left;
+
+.pop-content span.t-content {
+    text-align:left
 }
-.account-part{
-    margin-bottom: 30px;
+
+.account-part {
+    margin-bottom:30px
 }
-.create-account-hint{
-    margin-left: 30px;
-    color: #fb2a2a;
-    font-size: 14px;
+
+.create-account-hint {
+    margin-left:30px;
+    color:#fb2a2a;
+    font-size:14px
 }
-.pop-nav .close{
-    right:20px;
+
+.pop-nav .close {
+    right:20px
 }
-.c-width{
-    width: 146px;
-    height: 34px;
-    line-height: 34px;
-    border-bottom: 1px solid #bbb;
-    font-size: 14px;
+
+.c-width {
+    width:146px;
+    height:34px;
+    line-height:34px;
+    border-bottom:1px solid #bbb;
+    font-size:14px
 }
-.c-width.one{
-    border-right: 1px solid #bbb;
+
+.c-width.one {
+    border-right:1px solid #bbb
 }
-.c-list .c-width{
-    color: #3c3c3c;
+
+.c-list .c-width {
+    color:#3c3c3c
 }
-.c-list{
-    overflow-y: auto;
-    overflow-x: hidden;
-    max-height: 105px;
-    background-color: #fff;
+
+.c-list {
+    overflow-y:auto;
+    overflow-x:hidden;
+    max-height:105px;
+    background-color:#fff
 }
-.confirm-create-iframe .c-main{
-    width: 293px;
-    border: 1px solid #bbb;
-    margin: 20px auto 15px;
+
+.confirm-create-iframe .c-main {
+    width:293px;
+    border:1px solid #bbb;
+    margin:20px auto 15px
 }
+
 .c-title {
-    background-color: #fafafa;
+    background-color:#fafafa
 }
-.create-content a{
-    color: #3598db;
-    cursor: pointer;
+
+.create-content a {
+    color:#3598db;
+    cursor:pointer
 }
-.create-content a:hover{
-    color: #003e68;
+
+.create-content a:hover {
+    color:#003e68
 }
-.create-content .c-hint{
-    color: #666;
-    margin-top: 11px;
-    font-size: 14px;
+
+.create-content .c-hint {
+    color:#666;
+    margin-top:11px;
+    font-size:14px
 }
-#preload-anim{
-    display: none;
+
+#preload-anim {
+    display:none
 }
-#preload-anim.active{
-    display: block;
+
+#preload-anim.active {
+    display:block
 }
-.success{
-    display: none;
-    position: absolute;
-    top: 400px;
-    left: 50%;
-    z-index: 1000;
+
+.success {
+    display:none;
+    position:absolute;
+    top:400px;
+    left:50%;
+    z-index:1000
 }
-.success.active{
-    display: block;
+
+.success.active {
+    display:block
 }
-p.off-hint{
-    font-size: 14px;
-    color: #fb2a2a;
-    margin-top:20px;
+
+p.off-hint {
+    font-size:14px;
+    color:#fb2a2a;
+    margin-top:20px
 }
-p.tranfer-company-hint{
-    font-size: 14px;
-    color: #fb2a2a;
-    margin-left: 30px;
-    height: 20px;
+
+p.tranfer-company-hint {
+    font-size:14px;
+    color:#fb2a2a;
+    margin-left:30px;
+    height:20px
 }
-p.create-company-hint,p.create-num-hint{
-    font-size: 14px;
-    color: #fb2a2a;
-    margin-left: 255px;
-    height: 20px;
+
+p.create-company-hint,p.create-num-hint {
+    font-size:14px;
+    color:#fb2a2a;
+    margin-left:255px;
+    height:20px
 }

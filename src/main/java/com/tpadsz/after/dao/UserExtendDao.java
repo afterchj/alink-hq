@@ -15,5 +15,4 @@ public interface UserExtendDao {
     List<String> getRoles(String uname);
 
     List<String> getPermissions(String uname);
-
 }

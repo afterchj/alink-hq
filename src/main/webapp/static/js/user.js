@@ -6,66 +6,37 @@ laydate.render({
     elem: '#add-time',
     range: true
 });
-function hide() {
-    $('.hide-iframe').removeClass('active');
-    $('.confirm-create-iframe').removeClass('active');
-}
 
-$('.close').click(function () {
-    hide();
-})
-// 点击取消时
-$('.pop-content  .pop-btn .reduce').click(function () {
-    hide();
-    $(this).parents('.pop-iframe').removeClass('active');
-})
-// 点击确定时
-$('.pop-content  .pop-btn .yes').click(function () {
-    hide();
-    $(this).parents('.pop-iframe').removeClass('active');
-})
-function shade(open, text) {
-    var width = document.body.scrollWidth;
-    var height = document.body.scrollHeight;
-    $('.hide-iframe').addClass('active');
-    $('.hide-iframe').css({
-        'width': width,
-        'height': height
-    });
-    $('.pop-iframe').each(function () {
-        var openContent = $(this).attr('openContent');
-        // console.log(openContent, open);
-        if (openContent == open) {
-            $(this).addClass('active');
-            if (open == 'start-use') {
-                // console.log(text);
-                $('.pop-content').find('p').remove();
-                if (text == '启用') {
-                    $(' .off-or-on').text('您确定要禁用该账户吗？');
-                    var content = '<p style="  font-size: 15px;color: #fb2a2a;margin-top:30px;">禁用后，该账号将无法登录</p>';
-                    $(' .pop-content').append(content);
-                } else {
-                    $(' .off-or-on').text('您确定要启用该账户吗？');
-                }
-            }
-        }
-    })
-}
+//启用禁用
 $(function () {
     var account = '';
     var status = '';
     var intStatus = '';
-    $('td[openTab="start-use"]').click(function () {
-        var openTab = $(this).attr('openTab');
-        var text = $(this).text();
-        shade(openTab, text);
-        account = $(this).siblings('.use-account').text();
-        status = $(this).text();
+    // var width = window.screen.width;
+    // var height=window.screen.height;
 
+    //启用禁用按钮
+    $('td[openTab="start-use"]').click(function () {
+        // $('.hide-iframe').addClass('active');
+        // $('.hide-iframe').css({
+        //     'width': width,
+        //     'height': height
+        // })
+        var selector=$('div[openContent="start-use"]');
+        selector.addClass('active');
+        adjust(selector)
+        showOverlay()
+        // $('div[openContent="start-use"]').addClass('active');
+        account = $(this).siblings('.use-account').text();
+        status = $(this).find('.result').text();
         if (status == '启用') {
             intStatus = 1;
+            $('div[openContent="start-use"] .off-or-on').text('您确定要禁用 '+account+' 账号吗？');
+            $('div[openContent="start-use"] .unuse').text('禁用后，该账号将无法登录')
         } else if (status == '禁用') {
             intStatus = 0;
+            $('div[openContent="start-use"] .off-or-on').text('您确定要启用 '+account+' 账号吗？');
+            $('div[openContent="start-use"] .unuse').text('');
         }
     })
     $('div[openContent="start-use"] button.yes').click(function () {
@@ -80,27 +51,43 @@ $(function () {
                     location.reload();
                 }
             }
-        });
+        })
+    })
+    $('div[openContent="start-use"] button.reduce').click(function () {
+        // $('div[openContent="start-use"]').removeClass('active');
+        // $('.hide-iframe').removeClass('active');
+        var selector= $('div[openContent="start-use"]');
+        selector.removeClass('active')
+        hideOverlay()
     })
 })
 
+//重置密码
 $(function () {
     var account = '';
+    // var width = window.screen.width;
+    // var height = window.screen.height;
     $('img[openTab="reset-pwd"]').click(function () {
         var openTab = $(this).attr('openTab');
-        $('div[openContent="reset-pwd"]').addClass('active');
-        var width = document.body.scrollWidth;
-        var height = document.body.scrollHeight;
-        $('.hide-iframe').addClass('active');
-        $('.hide-iframe').css({
-            'width': width,
-            'height': height
-        });
+        $('div[openContent="reset-pwd"] .pop-content').find('p.unuse').remove();
+        // $('div[openContent="reset-pwd"]').addClass('active');
+        // $('.hide-iframe').addClass('active');
+        // $('.hide-iframe').css({
+        //     'width': width,
+        //     'height': height
+        // });
+        var selector=$('div[openContent="reset-pwd"]');
+        selector.addClass('active');
+        adjust(selector)
+        showOverlay()
         account = $(this).parent().siblings('.use-account').text();
     })
     $('div[openContent="reset-pwd"] button.yes').click(function () {
-        $('div[openContent="new-pwd"]').addClass('active');
-        $('.hide-iframe').addClass('active');
+        // $('div[openContent="new-pwd"]').addClass('active');
+        // $('.hide-iframe').addClass('active');
+        var selector= $('div[openContent="reset-pwd"]');
+        selector.removeClass('active')
+        hideOverlay()
         $.ajax({
             type: "POST",
             url: "/alink-hq/account/resetPwd",
@@ -115,14 +102,37 @@ $(function () {
                     $('.t-pwd-result').text(pwd);
                 }
             }
-        });
+        })
+    })
+    $('div[openContent="reset-pwd"] button.reduce').click(function () {
+        // $('div[openContent="reset-pwd"]').removeClass('active');
+        // $('.hide-iframe').removeClass('active');
+        var selector= $('div[openContent="reset-pwd"]');
+        selector.removeClass('active')
+        hideOverlay()
+    })
+    $('div[openContent="new-pwd"] button.yes,div[openContent="new-pwd"] button.reduce').click(function () {
+        $('div[openContent="new-pwd"]').removeClass('active');
+        $('div[openContent="reset-pwd"]').removeClass('active');
+        hideOverlay()
     })
 })
+//删除账户
 $(function () {
     var account;
     $('img[openTab="delete-account"]').click(function () {
         var openTab = $(this).attr('openTab');
-        shade(openTab);
+        // $('div[openContent="delete-account"]').addClass('active');
+        // $('.hide-iframe').addClass('active');
+        // $('.hide-iframe').css({
+        //     'width': width,
+        //     'height': height
+        // });
+        var selector=$('div[openContent="delete-account"]');
+        selector.addClass('active');
+        adjust(selector)
+        showOverlay()
+        $('div[openContent="delete-account"] .pop-content').find('p.unuse').remove();
         account = $(this).parent().siblings('.use-account').text();
     })
     $('div[openContent="delete-account"] button.yes').click(function () {
@@ -146,6 +156,13 @@ $(function () {
     $('div[openContent="delete-account-hasProject"] button.yes').click(function () {
         location.href = '/alink-hq/project/list';
     })
+    $('div[openContent="delete-account"] button.reduce').click(function () {
+        // $('div[openContent="delete-account"]').removeClass('active');
+        // $('.hide-iframe').removeClass('active');
+        var selector= $('div[openContent="delete-account"]');
+        selector.removeClass('active')
+        hideOverlay()
+    })
 })
 $(function () {
     var page = parseInt($('.pages').text());
@@ -155,7 +172,6 @@ $(function () {
         $(".prev-page").addClass('disabled');
 
     } else {
-
         $('.prev').addClass('active');
     }
     if (page == pageTotal) {
@@ -163,7 +179,6 @@ $(function () {
         $(".next-page").addClass('disabled');
 
     } else {
-
         $(".next").addClass('active');
     }
 })
@@ -181,6 +196,7 @@ function skipLimit() {
 $(function () {
     var url = window.location.href;
     var account = GetUrlParam("account");
+    var uname = GetUrlParam("uname");
     var company = GetUrlParam("fid");
     var role = GetUrlParam("roleId");
     var startDate = GetUrlParam("startDate");
@@ -198,7 +214,7 @@ $(function () {
         $('#add-time').val(addTime);
     }
     $('#account').val(decodeURI(account));
-
+    $('#username').val(decodeURI(uname));
     if (role == '') {
         $('#role option').eq(0).prop('selected', true);
     } else {
@@ -222,11 +238,11 @@ $(function () {
     $('.search-button button').click(function () {
         var pageSize = $('#page-select option:selected').val();
         var pageNum = $('#skipPage').val();
-        if(!pageNum){
-            pageNum=1;
+        if (!pageNum) {
+            pageNum = 1;
         }
-        if(!pageSize){
-            pageSize=10;
+        if (!pageSize) {
+            pageSize = 10;
         }
         condition(pageSize, pageNum);
     })
@@ -245,13 +261,6 @@ $(function () {
 
 })
 
-function mouseDown() {
-    $('#skipPageBtn').attr('src', '/alink-hq/static/img/skip-color.png');
-}
-function mouseUp() {
-    $('#skipPageBtn').attr('src', '/alink-hq/static/img/skip.png');
-}
-
 function condition(pageSize, pageNum) {
     var url = window.location.href;
     var i = url.indexOf("?");
@@ -261,6 +270,7 @@ function condition(pageSize, pageNum) {
         var url2 = url + '?';
     }
     var account = $('#account').val();
+    var uname = $('#username').val();
     if ($('#company').val() != '请选择公司') {
         var company = $('#company').val();
     } else {
@@ -274,10 +284,119 @@ function condition(pageSize, pageNum) {
     var addTime = $('#add-time').val();
     var startDate = addTime.substring(0, 10);
     var endDate = addTime.substring(13, 23);
-    var newUrl = url2 + '&pageNum=' + pageNum + '&pageSize=' + pageSize + '&account=' + account + '&fid=' + company + '&roleId=' + role + '&startDate=' + startDate + '&endDate=' + endDate;
+    var newUrl = url2 + '&pageNum=' + pageNum + '&pageSize=' + pageSize + '&account=' + account + '&uname=' + uname + '&fid=' + company + '&roleId=' + role + '&startDate=' + startDate + '&endDate=' + endDate;
     location.href = newUrl;
 }
 
+//备忘录
+$(function () {
+    // var width = window.screen.width;
+    // var height = window.screen.height;
+    $('body').click(function () {
+        $('.memo-edit-has').parent('td').removeClass('active');
+    })
+    //如果备忘录不为空时
+    $('.memo-edit').click(function (event) {
+        event.stopPropagation();
+        $(this).parent('td').addClass('active');
+        $(this).parent().parent('tr').siblings('tr').children('td').removeClass('active');
+    })
+    $('.meno-nav img,.memo-edit2').click(function (event) {
+        event.stopPropagation();
+        // $('div[openContent="memo-edit"]').addClass('active');
+        $('div[openContent="memo-edit"] .pop-content').find('p.unuse').remove();
+        $(".wishContent").val('');
+        var content = $(this).parent().siblings('div').text();
+        var account = $(this).parents('tr').children('td').eq(0).text();
+        if (content != '') {
+            $(".wishContent").val(content);
+        }else{
+            $('table tr>td:last-child').removeClass('active');
+        }
+        $("#memo-account").val(account);
+        $(".wordsNum").html(checkStrLengths(content, 200) + '/200');
+        // $('.hide-iframe').addClass('active');
+        // $('.hide-iframe').css({
+        //     'width': width,
+        //     'height': height
+        // })
+        var selector=$('div[openContent="memo-edit"]');
+        selector.addClass('active');
+        adjust(selector)
+        showOverlay()
+    })
+    //点击取消时
+    $('div[openContent="memo-edit"] button.reduce').click(function (event) {
+        event.stopPropagation();
+        // $('div[openContent="memo-edit"]').removeClass('active');
+        // $('.hide-iframe').removeClass('active');
+        var selector=$('div[openContent="memo-edit"]');
+        selector.removeClass('active')
+        hideOverlay()
+    })
+    //点击确定时
+    $('div[openContent="memo-edit"] button.yes').click(function (event) {
+        event.stopPropagation();
+        // $('div[openContent="memo-edit"]').removeClass('active');
+        // $('.hide-iframe').removeClass('active');
+        var selector=$('div[openContent="memo-edit"]');
+        selector.removeClass('active')
+        hideOverlay()
+        //获取输入内容
+        var content = $(".wishContent").val();
+        var account = $("#memo-account").val();
+        $.ajax({
+            type: "POST",
+            url: "/alink-hq/account/saveMemo",
+            data: {account: account, content: content},
+            dataType: "json",
+            success: function (res) {
+                // console.log(res);
+                if (res.result == '000') {
+                    location.reload();
+                }
+            }
+        });
+        $(this).parents('.pop-iframe').removeClass('active');
+    })
+})
+
+//封装一个限制字数方法
+var checkStrLengths = function (str, maxLength) {
+    var maxLength = maxLength;
+    var result = 0;
+    if (str && str.length > maxLength) {
+        result = maxLength;
+    } else {
+        result = str.length;
+    }
+    return result;
+}
+
+//监听输入
+$(".wishContent").on('input propertychange', function () {
+    //获取输入内容
+    var userDesc = $(this).val();
+    //判断字数
+    var len;
+    if (userDesc) {
+        len = checkStrLengths(userDesc, 200);
+    } else {
+        len = 0
+    }
+    //显示字数
+    $(".wordsNum").html(len + '/200');
+});
+
+$('.search-result table td.status1').on({
+    mouseover: function () {
+        var text = $(this).find('.result').text();
+        $(this).find('.end').addClass('active');
+    },
+    mouseout: function () {
+        $(this).find('.end').removeClass('active');
+    }
+})
 //paraName 等找参数的名称
 function GetUrlParam(paraName) {
     var url = document.location.toString();

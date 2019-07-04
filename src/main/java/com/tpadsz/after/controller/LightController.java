@@ -1,5 +1,7 @@
 package com.tpadsz.after.controller;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.tpadsz.after.entity.MeshInfo;
@@ -44,8 +46,8 @@ public class LightController {
         if (pageInfo.getList().size() > 0) {
             modelMap.put("pageInfo", pageInfo);
         }
-        OptionList project = meshService.getProject(dict);
-        modelMap.put("project", project);
+//        OptionList project = meshService.getProject(dict);
+//        modelMap.put("project", project);
         modelMap.put("dict", dict);
         return "meshTemp/lightList";
     }
@@ -57,6 +59,13 @@ public class LightController {
         modelMap.put("meshInfo", meshInfo);
         modelMap.put("sceneInfo", sceneInfo);
         return "meshTemp/lightInfo";
+    }
+
+    @ResponseBody
+    @RequestMapping("/getLightInfo")
+    public MeshInfo getLight(int id) {
+        MeshInfo meshInfo = lightService.getLightInfo(id);
+        return meshInfo;
     }
 
     @RequestMapping("/move")
@@ -84,7 +93,7 @@ public class LightController {
     }
 
     @RequestMapping("/delete")
-    public String delete(Integer mid,String ids) {
+    public String delete(Integer mid, String ids) {
         String[] ids1 = ids.split(",");
         List<String> list = new ArrayList(Arrays.asList(ids1));
         try {
@@ -93,7 +102,7 @@ public class LightController {
             logger.warn(e);
             return "authError";
         }
-        return "redirect:/light/list?mid="+mid;
+        return "redirect:/light/list?mid=" + mid;
     }
 
     @ResponseBody

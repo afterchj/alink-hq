@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.tpadsz.after.dao.CooperateDao">
+
+    <sql id="Base_Column_List">
+		id,
+        coname,
+        address,
+        IFNULL(mobile,'') mobile,
+        create_date,
+        photo,
+        code,
+        other,
+        status
+	</sql>
+
+    <select id="getByMap" resultType="map" parameterType="SearchDict">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM f_firm
+        WHERE 1=1
+        <if test="coname!=null and coname!=''">
+            AND coname LIKE CONCAT('%',#{coname},'%')
+        </if>
+        <if test="status!=null">
+            AND status=#{status}
+        </if>
+        ORDER BY update_date DESC
+    </select>
+
+    <select id="getCooperationInfo" resultType="CooperationInfo" parameterType="int">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM f_firm WHERE id=#{id}
+    </select>
+
+    <insert id="save" parameterType="CooperationInfo">
+       INSERT INTO f_firm(coname,address,mobile,create_date,update_date,photo,code,status) VALUES(#{coname},#{address},#{mobile},now(),now(),#{photo},#{code},#{status});
+   </insert>
+
+
+    <select id="getCount" resultType="int" parameterType="int">
+        SELECT COUNT(0)
+        FROM f_firm f
+        INNER JOIN f_user_customer c ON c.fid = f.id
+        INNER JOIN f_project p ON p.uid=c.uid
+        WHERE f.id=#{id}
+    </select>
+
+    <delete id="deleteCooperationById" parameterType="int">
+        DELETE FROM f_firm WHERE id=#{id}
+    </delete>
+
+    <update id="saveUpdate" parameterType="CooperationInfo">
+        UPDATE f_firm
+        <set>
+            update_date=now(),
+            <if test="coname!=null and coname!=''">
+               coname=#{coname},
+            </if>
+            <if test="mobile!=null and mobile!=''">
+                mobile=#{mobile},
+            </if>
+            <if test="address!=null and address!=''">
+                address=#{address},
+            </if>
+            <if test="photo!=null and photo!=''">
+                photo=#{photo},
+            </if>
+            <if test="code!=null and code!=''">
+                code=#{code},
+            </if>
+            <if test="other!=null and other!=''">
+                other=#{other},
+            </if>
+            <if test="status!=null">
+               status=#{status}
+            </if>
+        </set>
+        WHERE id=#{id}
+    </update>
+</mapper>

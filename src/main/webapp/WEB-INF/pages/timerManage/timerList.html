@@ -1,0 +1,237 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:shiro="http://www.pollix.at/thymeleaf/shiro" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <meta charset="UTF-8">
+    <script src="/alink-hq/static/js/browser.js"></script>
+    <link rel="stylesheet" href="/alink-hq/static/css/base.css"/>
+    <link rel="stylesheet" href="/alink-hq/static/css/leftNav.css"/>
+    <link rel="stylesheet" href="/alink-hq/static/css/projectManage.css"/>
+    <link rel="stylesheet" th:href="@{/static/css/laydate.css}"/>
+    <title>定时列表</title>
+</head>
+<body>
+<div class="c-container">
+    <div th:replace="common/head::head"></div>
+    <div class="main clearfix">
+        <div th:replace="common/left::left('timerList')"></div>
+        <div class="main-right f-l">
+            <div class="clearfix main-right-nav">
+                <div class="f-l main-right-title">定时列表<span class="subjection">(隶属项目：<span th:inline="text" th:text="${projectName}"></span>)</span></div>
+                <div class="f-r pointer">
+                    <div class="goBack" onClick="javascript :history.back(-1);" onmousedown="backBtnMouseDown()"
+                         onmouseup="backBtnMouseUp()">
+                        <span><</span><span>返回</span>
+                    </div>
+                </div>
+            </div>
+            <div id="projectList" class="table-content-list">
+                <div class="search-condition ">
+                    <form action="" class="clearfix" method="get" onsubmit="return false">
+                        <div class="f-l search" style="margin-right: 150px;margin-left: 100px;">
+                            <div>
+                                <label for="projectName">定时名称</label>
+                                <input type="text" id="projectName" placeholder="请输入定时名称">
+                            </div>
+                            <div class="p-r">
+                                <label for="create-time">创建时间</label>
+                                <input type="text" id="create-time" placeholder="请选择日期" AUTOCOMPLETE="off">
+                                <img src="/alink-hq/static/img/date.png" alt="" class="p-a">
+                            </div>
+                        </div>
+                        <div class="f-l search" >
+                            <div>
+                                <label for="status" class="font">定时状态</label>
+                                <select name="status" style=" height: 38px;line-height: 38px;" id="status">
+                                    <option value="0">全部</option>
+                                    <option value="1">启用</option>
+                                    <option value="2">停用</option>
+                                </select>
+                            </div>
+                            <div class="p-r">
+                                <label for="end-time">更新时间</label>
+                                <input type="text" id="end-time" placeholder="请选择日期" AUTOCOMPLETE="off">
+                                <img src="/alink-hq/static/img/date.png" alt="" class="p-a">
+                            </div>
+                        </div>
+                        <!--<div class="f-l search">-->
+                            <!--<div class="p-r">-->
+                                <!--<label for="meshName">网络名称</label>-->
+                                <!--<input type="text" id="meshName" placeholder="请输入网络名称" AUTOCOMPLETE="off">-->
+                            <!--</div>-->
+                            <!--<div class="p-r">-->
+                                <!--<label for="meshId">网络ID</label>-->
+                                <!--<input type="text" id="meshId" placeholder="请输入网络ID" AUTOCOMPLETE="off">-->
+                            <!--</div>-->
+                        <!--</div>-->
+                        <div class="f-r search-button ">
+                            <button type="submit" class="pointer">查询</button>
+                        </div>
+                    </form>
+                </div>
+                <div class="search-result">
+                    <!-- 有数据时 -->
+                    <table border="1" class="hasData active" th:if="${pageInfo.getTotal()}!='0'">
+                        <thead>
+                        <tr>
+                            <th><span>定时名称</span></th>
+                            <th><span>隶属网络</span></th>
+                            <th><span>网络ID</span></th>
+                            <th><span>周期</span></th>
+                            <th><span>是否重复</span></th>
+                            <th class="p-r">
+                                <span class="toTime ">创建时间</span>
+                                <img src="/alink-hq/static/img/fewer.png" alt="" class="p-a toTop  sort-t pointer"
+                                     id="creToTop">
+                                <img src="/alink-hq/static/img/unfold.png" alt=""
+                                     class="p-a toBottom sort-b  pointer" id="creToBottom">
+                            </th>
+                            <th class="p-r">
+                                <span class="toTime">更新时间</span>
+                                <img src="/alink-hq/static/img/fewer.png" alt="" class="p-a  toTop1 sort-t pointer"
+                                     id="upToTop">
+                                <img src="/alink-hq/static/img/unfold.png" alt=""
+                                     class="p-a  toBottom1  sort-b pointer" id="upToBottom">
+                            </th>
+                            <th><span>定时状态</span></th>
+                            <th class="operation"><span>操作</span></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="timeLineList:${pageInfo.getList()}" class="timerLineTr">
+                            <input type="hidden" class="tid" th:value="${timeLineList.id}"/>
+                            <td class="tname k-link"><a th:href="@{/timer/detail(id=${timeLineList.id},projectId=${projectId})}" th:text="${timeLineList.tname}"></a></td>
+                            <td class=" k-link"><a th:href="@{/mesh/info(id=${timeLineList.mid})}" th:text="${timeLineList.mname}"></a></td>
+                            <td th:text="${timeLineList.mesh_id}" class="mid"></td>
+                            <td th:text="${timeLineList.week}"></td>
+                            <td th:text="${timeLineList.repetition}"></td>
+                            <!--<td><p>2019/05/13</p><p>14:55:44</p></td>-->
+                            <!--<td><p>2019/05/13</p><p>14:55:44</p></td>-->
+                            <td><p th:text="${timeLineList.create_date}"></p></td>
+                            <td><p th:text="${timeLineList.update_date}"></p></td>
+                            <td><p th:text="${timeLineList.state}"></p></td>
+                            <td  class="p-r">
+                                <img src="/alink-hq/static/img/edit.png" alt="" class="pointer reset-name"
+                                     th:title="重命名" th:each="permission:${permissions}" th:if="${permission=='renameTime'}">
+                            </td>
+                        </tr>
+                        </tbody>
+                        <tfoot>
+                        <tr>
+                            <td colspan="9" class="clearfix page">
+                                <div class="f-r page-right">
+                                <span class="prev-page">
+                                    <!--前一页-->
+                                    <a th:if="${pageInfo.getPrePage()}==0" href="#">
+                                        <span class="prev "><span><</span></span>
+                                    </a>
+                                    <a th:if="${pageInfo.getPrePage()}>0"
+                                            th:href="@{/timer/list(id=${id},pageNum=${pageInfo.getPrePage()},pageSize=${pageInfo.getPageSize()},tname=${tname},createDate=${createDate},updateDate=${updateDate},state=${state})}">
+                                        <span class="prev active"><span><</span></span>
+                                    </a>
+                                </span>
+                                    <!--当前页-->
+                                    <span  class="pages" th:text="${pageInfo.getPageNum()}"></span>
+                                <span class="next-page">
+                                    <!--后一页-->
+                                    <a th:if="${pageInfo.getNextPage()}==0" href="#">
+                                        <span class="prev "><span>></span></span>
+                                    </a>
+                                    <a th:if="${pageInfo.getNextPage()}>0" th:href="@{/timer/list(id=${id},pageNum=${pageInfo.getNextPage()},pageSize=${pageInfo.getPageSize()},tname=${tname},createDate=${createDate},updateDate=${updateDate},state=${state})}"><span class="prev active"><span>></span></span></a>
+                                </span>
+                            <span class="m-l-15 m-r-20">共
+                                    <span  class="pageTotal" id="pageTotal" th:text="${pageInfo.getPages()}"></span>
+                                    页/<span th:text="${pageInfo.getTotal()}"></span>条数据
+                            </span>
+                            <span class="m-r-15">
+                            <input type="number" id="skipPage" />
+                        </span>
+                            <span class="m-r-35">
+                                <div id="skipPageBtn" class="pointer moment skipPageBtn" onmousedown="skipBtnMouseDown()" onmouseup="skipBtnMouseUp()">跳转
+                                </div>
+                        </span>
+                                    <span class="m-r-15r">每页显示：</span>
+                            <span class="m-r-20">
+                        <select name="" id="page-select">
+                            <option value="10" data-index="10">10</option>
+                            <option value="30" data-index="30">30</option>
+                            <option value="50" data-index="50">50</option>
+                            <option value="100" data-index="100">100</option>
+                        </select>
+                        </span>
+                                </div>
+                            </td>
+                        </tr>
+                        </tfoot>
+                    </table>
+                    <input type="hidden" id="mid" th:value="${id}"/>
+                    <input type="hidden" id="tname" th:value="${tname}"/>
+                    <input type="hidden" id="createDate" th:value="${createDate}"/>
+                    <input type="hidden" id="endTime" th:value="${endTime}"/>
+                    <input type="hidden" id="state" th:value="${state}"/>
+                    <input type="hidden" id="pageSize" th:value="${pageInfo.getPageSize()}"/>
+                    <!-- 无数据时 -->
+                    <table border="1" class="noData active" th:if="${pageInfo.getTotal()}=='0'">
+                        <thead>
+                        <tr>
+                            <th><span>定时名称</span></th>
+                            <th><span>隶属网络</span></th>
+                            <th><span>网络ID</span></th>
+                            <th><span>周期</span></th>
+                            <th><span>是否重复</span></th>
+                            <th class="p-r">
+                                <span class="toTime ">创建时间</span>
+                                <img src="/alink-hq/static/img/fewer.png" alt="" class="p-a toTop  sort-t pointer">
+                                <img src="/alink-hq/static/img/unfold.png" alt="" class="p-a toBottom sort-b  pointer">
+                            </th>
+                            <th class="p-r">
+                                <span class="toTime">更新时间</span>
+                                <img src="/alink-hq/static/img/fewer.png" alt="" class="p-a  toTop1 sort-t pointer">
+                                <img src="/alink-hq/static/img/unfold.png" alt=""
+                                     class="p-a  toBottom1  sort-b pointer">
+                            </th>
+                            <th><span>定时状态</span></th>
+                            <th class="operation"><span>操作</span></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td colspan="9">
+                                <img src="/alink-hq/static/img/no-data.png" alt="">
+                                <p>暂无数据</p>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- 重命名弹框 -->
+<div class="confirm-on-off pop-iframe  " openContent="reset-name">
+    <div class="confirm-on-off-nav p-r pop-nav">
+        重命名
+    </div>
+    <div class="pop-content">
+        <div class="newName">
+            <p class="rename-hint"></p>
+            <label for="rename">新名称</label>
+            <input type="text" placeholder="请输入（2-16位汉字、字母、数字）" id="rename" onkeyup="nameKeyUp()" maxlength="16"/>
+        </div>
+        <div class="pop-btn">
+            <button class="reduce">取消</button>
+            <button class="yes">确定</button>
+        </div>
+    </div>
+</div>
+<div class="hide-iframe "></div>
+
+<script src="/alink-hq/static/js/jquery.min.js"></script>
+<script  src="/alink-hq/static/js/left.js"></script>
+<script src="/alink-hq/static/laydate/laydate.js"></script>
+<script src="/alink-hq/static/js/timerList.js"></script>
+<script src="/alink-hq/static/js/moment.js"></script>
+</body>
+</html>

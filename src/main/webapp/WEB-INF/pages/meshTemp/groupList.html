@@ -16,18 +16,19 @@
 <div class="c-container">
     <div th:replace="common/head::head"></div>
     <div class="main clearfix">
-        <div th:replace="common/left::left('meshList')"></div>
+        <div th:replace="common/left::left('groupList')"></div>
+        <!--<div th:replace="common/left::left('grooupList')"></div>-->
         <div class="main-right f-l">
             <div class="clearfix main-right-nav">
                 <div class="f-l main-right-title">组列表
                     <!--<span class="subjection">隶属项目：<span th:inline="text">[[${project.label}]]</span></span>-->
                 </div>
-                <div class="f-r pointer">
-                    <a th:href="@{/group/create(projectId=${project.id},mid=${dict.mid})}" shiro:hasAnyRoles="super,admin,manager">
+                <div class="f-r pointer last-nav">
+                    <a th:href="@{/group/create(mid=${dict.mid})}" shiro:hasAnyPermission ="createGroup">
                         <div class="create" onmousedown="createBtnMouseDown()" onmouseup="createBtnMouseUp()">
                             <span>+</span><span>创建组</span></div>
                     </a>
-                    <a href="javascript:void(0)"  shiro:hasRole="user" class="unclick1">
+                    <a href="javascript:void(0)"   shiro:lacksPermission ="createGroup" class="unclick1">
                         <div class="create no-access" onmousedown="createBtnMouseDown()" onmouseup="createBtnMouseUp()">
                             <span>+</span><span>创建组</span></div>
                     </a>
@@ -41,13 +42,13 @@
                     <!--<img src="/alink-hq/static/img/go-back.png" alt="" onclick="history.back()">-->
                 </div>
             </div>
-            <div id="meshList" class="">
+            <div id="meshList" class="table-content-list">
                 <form class="clearfix" th:action="@{/group/list}" method="post">
                     <input type="hidden" id="uid" name="uid" th:value="${dict.uid}">
                     <input type="hidden" id="mid" name="mid" th:value="${dict.mid}">
                     <input type="hidden" id="pageSize" th:value="${dict.pageSize}">
                     <div class="search-condition temp">
-                        <div class="f-l search" style="margin-right:125px;">
+                        <div class="f-l search" style="margin-right: 150px;margin-left: 100px;">
                             <div>
                                 <label for="gname" class="font">组名称</label>
                                 <input type="text" id="gname" name="gname" th:value="${dict.gname}"
@@ -62,21 +63,17 @@
                         <div class="f-l search">
                             <div>
                                 <label for="meshId" class="font">网络ID</label>
-                                <input type="text" id="meshId" name="meshId" th:value="${dict.meshId}"
-                                       placeholder="请输入网络ID">
+                                <input type="text" id="meshId" name="meshId" th:value="${dict.meshId}" placeholder="请输入网络ID">
                             </div>
-                        </div>
-                        <div class="f-l search">
                             <div>
                                 <label for="meshId" class="font">项目名称</label>
-                                <input type="text" id="meshId" name="meshId" th:value="${dict.meshId}"
+                                <input type="text" id="name" name="name" th:value="${dict.name}"
                                        placeholder="请输入项目名称">
                             </div>
-                            <div class=" search-button no-top">
-                                <button type="submit" class="pointer">查询</button>
-                            </div>
                         </div>
-
+                        <div class="f-r search-button ">
+                            <button type="submit" class="pointer">查询</button>
+                        </div>
                     </div>
                     <div class="search-result">
                         <!-- 有数据时 -->
@@ -84,16 +81,16 @@
                             <thead>
                             <tr>
                                 <th class="all-checkbox">
-                                <span style="vertical-align: sub;">
+                                <!--<span style="vertical-align: sub;">-->
                                     <input type="checkbox" id="all" class="pointer">
-                                </span>
+                                <!--</span>-->
                                     <span class="">全选</span>
                                 </th>
                                 <th><span>组名称</span></th>
                                 <th><span>隶属项目</span></th>
-                                <th><span>属于网络</span></th>
+                                <th><span>隶属网络</span></th>
                                 <th><span>网络ID</span></th>
-                                <th><span>属于区域</span></th>
+                                <th><span>隶属区域</span></th>
                                 <th><span>灯数量</span></th>
                                 <th class="operation"><span>操作</span></th>
                             </tr>
@@ -104,7 +101,7 @@
                                 <td class="k-link"><a th:href="@{/group/info(id=${group.id})}" th:text="${group.gname}"></a>
                                 </td>
                                 <td class="k-link">
-                                    <a th:href="@{/mesh/info(id=${group.mid})}" th:text="${group.mname}"></a>
+                                    <a th:href="@{/project/detail(projectId=${group.project_id})}" th:text="${group.name}"></a>
                                 </td>
                                 <td class="k-link">
                                     <a th:href="@{/mesh/info(id=${group.mid})}" th:text="${group.mname}"></a>
@@ -114,29 +111,28 @@
                                     <a th:href="@{/place/info(id=${group.pid})}" th:text="${group.pname}"></a>
                                 </td>
                                 <td class="k-link">
-                                    <a th:href="@{/light/list(mid=${group.mid},gid=${group.id})}" th:text="${group.lcount}"></a>
+                                    <a th:if="${group.lcount}=='0'" class="a-un" href="javascript:void(0);" th:text="${group.lcount}"></a>
+                                    <a th:if="${group.lcount}!='0'"  th:href="@{/light/list(mid=${group.mid},gid=${group.id})}" th:text="${group.lcount}"></a>
                                 </td>
-                                <td class="p-r" shiro:hasAnyRoles="super,admin,manager">
+                                <td class="p-r" >
                                     <img src="/alink-hq/static/img/edit.png" th:alt="${group.id}" class="rename pointer"
-                                         title="重命名">
+                                         title="重命名" shiro:hasAnyPermission ="renameGroup">
                                     <a th:href="@{/group/move(mid=${group.mid},ids=${group.id})}">
                                         <img src="/alink-hq/static/img/exchange.png" th:alt="${group.id}"
-                                             class="center-img pointer" title="移动">
+                                             class="center-img pointer" title="移动" shiro:hasAnyPermission ="moveGroup">
                                     </a>
                                     <img src="/alink-hq/static/img/delete.png" th:alt="${group.id}"
-                                         class="singleDel pointer" title="删除">
-                                </td>
-                                <td shiro:hasRole="user" class="p-r">
+                                         class="singleDel pointer" title="删除" shiro:hasAnyPermission ="deleteGroup">
                                     <!--不能重命名-->
                                     <img src="/alink-hq/static/img/un-rename.png" alt="" class="pointer  unclick"
-                                         th:title="无法操作">
+                                         th:title="无法操作" shiro:lacksPermission ="renameGroup">
                                     <!--不能移交-->
                                     <img src="/alink-hq/static/img/un-exchange.png" alt=""
-                                         class="center-img pointer  unclick"
+                                         class="center-img pointer  unclick" shiro:lacksPermission ="moveGroup"
                                          th:title="无法操作">
                                     <!--不能删除-->
                                     <img src="/alink-hq/static/img/un-delete.png" alt="" class="pointer   unclick"
-                                         th:title="无法操作">
+                                         th:title="无法操作" shiro:lacksPermission ="deleteGroup">
                                     <!--重命名-->
                                 </td>
                             </tr>
@@ -149,12 +145,12 @@
                                  <span id="amount" class="amount">0</span>条数据
                             </span>
                              <span class="m-r-20">
-                                <span shiro:hasRole="user" class="skipPageBtn pointer moment active unclick1"  id="multiMove">移动</span>
-                                <span shiro:hasAnyRoles="super,admin,manager" class="skipPageBtn pointer moment" onmousedown="exchangeBtnMouseDown()" onmouseup="exchangeBtnMouseUp()" id="multiMove">移动</span>
+                                <span  class="skipPageBtn pointer moment active unclick1"  shiro:lacksPermission ="moveGroup"  id="multiMove">移动</span>
+                                <span  class="skipPageBtn pointer moment" shiro:hasAnyPermission ="moveGroup"  onmousedown="exchangeBtnMouseDown()" onmouseup="exchangeBtnMouseUp()" id="multiMove">移动</span>
                             </span>
                              <span>
-                                 <span shiro:hasRole="user" class="skipPageBtn pointer moment active unclick1"  id="multiDel">删除</span>
-                                <span shiro:hasAnyRoles="super,admin,manager" class="skipPageBtn pointer moment" onmousedown="deleteBtnMouseDown()" onmouseup="deleteBtnMouseUp()" id="multiDel">删除</span>
+                                 <span shiro:lacksPermission ="deleteGroup" class="skipPageBtn pointer moment active unclick1"  id="multiDel">删除</span>
+                                <span shiro:hasAnyPermission ="deleteGroup" class="skipPageBtn pointer moment" onmousedown="deleteBtnMouseDown()" onmouseup="deleteBtnMouseUp()" id="multiDel">删除</span>
                             </span>
                              </div>
                              <div th:replace="common/page::page"></div>
@@ -171,9 +167,9 @@
                                     <span class="">全选</span>
                                 </th>
                                 <th>组名称</th>
-                                <th>属于网络</th>
+                                <th>隶属网络</th>
                                 <th>网络ID</th>
-                                <th>属于区域</th>
+                                <th>隶属区域</th>
                                 <th>灯数量</th>
                                 <th>操作</th>
                             </tr>
@@ -247,7 +243,5 @@
 <script type="text/javascript" src="/alink-hq/static/js/page.js"></script>
 <script type="text/javascript" src="/alink-hq/static/js/group.js"></script>
 <script src="/alink-hq/static/js/moment.js"></script>
-<script  src="/alink-hq/static/js/selectivizr.js"></script>
-<script  src="/alink-hq/static/js/html5shiv.js"></script>
 </body>
 </html>

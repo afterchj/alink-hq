@@ -23,7 +23,7 @@ public interface PlaceService {
 
     MeshInfo getPlaceInfo(int id);
 
-    void save(Map map) throws RepetitionException;
+    void save(Map map);
 
     int getCount(Map map);
 

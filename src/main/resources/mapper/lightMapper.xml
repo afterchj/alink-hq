@@ -8,6 +8,7 @@
         l.pid,
         IFNULL(l.lname, 'null') lname,
         l.lmac,
+        p.name,
         m.project_id,
         m.mname,
         m.mesh_id,
@@ -44,13 +45,23 @@
         <include refid="Base_Column_List"/>
         FROM f_light l
         INNER JOIN f_mesh m ON m.id = l.mid
+        INNER JOIN f_project p ON p.id=m.project_id
         INNER JOIN f_place pl ON pl.id = l.pid
         INNER JOIN f_group g ON g.id=l.gid
         LEFT JOIN f_light_setting ls ON ls.lid = l.id
         WHERE 1 = 1
         <include refid="common_choose"></include>
+        <if test="name!=null and name!=''">
+            AND p.name LIKE CONCAT('%',#{name},'%')
+        </if>
         <if test="mname!=null and mname!=''">
             AND m.mname LIKE CONCAT('%',#{mname},'%')
+        </if>
+        <if test="pname!=null and pname!=''">
+            AND pl.pname LIKE CONCAT('%',#{pname},'%')
+        </if>
+        <if test="gname!=null and gname!=''">
+            AND g.gname LIKE CONCAT('%',#{gname},'%')
         </if>
         <if test="meshId!=null and meshId!=''">
             AND m.mesh_id LIKE CONCAT('%',#{meshId},'%')
@@ -86,6 +97,7 @@
 			IFNULL(ls.y,'null') y,
 			IFNULL(ls.off,'null') off,
             s.id sid,
+            s.sname,
             m.project_id,
             g.id gid,
             IFNULL(g.gname,'null') gname,
@@ -101,8 +113,10 @@
         LEFT JOIN f_mesh m ON m.id=l.mid
         LEFT JOIN f_project p ON p.id=m.project_id
         LEFT JOIN f_place pl ON pl.id=l.pid
-        LEFT JOIN (SELECT COUNT(1) scount,id,mid FROM f_scene GROUP BY mid) s ON s.mid=m.id
-        WHERE l.id=#{id} LIMIT 1
+        LEFT JOIN (SELECT COUNT(1) scount,id,sname,mid FROM f_scene GROUP BY mid) s ON s.mid=m.id
+        WHERE l.id=#{id}
+        GROUP BY l.id
+        ORDER BY ls.update_date DESC
     </select>
     <select id="getSceneInfo" resultType="MeshInfo" parameterType="int">
         SELECT s.id,s.mid,s.scene_id,s.sname, IFNULL(ls.x,'null') x,IFNULL(ls.y,'null') y FROM f_light l

@@ -1,6 +1,5 @@
 package com.tpadsz.after.controller;
 
-import com.alibaba.fastjson.JSON;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.tpadsz.after.entity.MeshInfo;
@@ -46,8 +45,8 @@ public class PlaceController {
         if (pageInfo.getList().size() > 0) {
             modelMap.put("pageInfo", pageInfo);
         }
-        OptionList project = meshService.getProject(dict);
-        modelMap.put("project", project);
+//        OptionList project = meshService.getProject(dict);
+//        modelMap.put("project", project);
         modelMap.put("dict", dict);
         return "meshTemp/placeList";
     }
@@ -61,24 +60,24 @@ public class PlaceController {
 
     @RequestMapping("/create")
     public String create(SearchDict dict, ModelMap modelMap) {
-        OptionList project = meshService.getProject(dict);
-        modelMap.put("project", project);
+        modelMap.put("dict", dict);
         return "meshTemp/placeCreate";
     }
 
-    @ResponseBody
+    //    @ResponseBody
     @RequestMapping("/save")
     public String savePlace(SearchDict dict) {
-        Map map = JSON.parseObject(JSON.toJSONString(dict));
-        try {
-            placeService.save(map);
-        } catch (RepetitionException e) {
-            return "fail";
-        } catch (Exception e) {
-            return "netFail";
-        }
-        return "ok";
-//        return "redirect:/place/list";
+        String str = dict.getMesh_id();
+        int mid = Integer.parseInt(str.substring(0, str.indexOf("_")));
+        int projectId = dict.getProjectId();
+        Map map = new HashMap();
+        map.put("uid", dict.getUid());
+        map.put("name", dict.getPname());
+        map.put("mid", mid);
+        placeService.save(map);
+//        return "ok";
+        return "redirect:/place/list?projectId=" + projectId + "&mid=" + mid;
+//        return "redirect:/place/list?uid="+dict.getUid();
     }
 
     @RequestMapping("/move")
@@ -102,6 +101,20 @@ public class PlaceController {
             return "fail";
         }
         return "success";
+    }
+
+    @ResponseBody
+    @RequestMapping("/checkName")
+    public String chek(String name, Integer mid) {
+        Map map = new HashMap();
+        map.put("mid", mid);
+        map.put("name", name);
+        int count = placeService.getCount(map);
+        if (count == 0) {
+            return "success";
+        } else {
+            return "fail";
+        }
     }
 
     @ResponseBody

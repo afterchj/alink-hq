@@ -58,7 +58,7 @@ public class SceneController {
             if (pageInfo.getList().size() > 0) {
                 model.addAttribute("pageInfo", pageInfo);
             }
-            if(role_id==1){
+            if (role_id == 1) {
                 model.addAttribute("flag", 0);
             }
             model.addAttribute("sceneName", sceneName);
@@ -110,41 +110,47 @@ public class SceneController {
     }
 
     @RequestMapping(value = "/detail", method = RequestMethod.GET)
-    public String detail(Integer sid, Integer lid, String sceneName, Integer sceneId, String meshName, String meshId,
-                         Model model) {
+    public String detail(Integer sid, Integer lid, String sceneName, Integer sceneId, String meshName, String meshId,Model model) {
         MeshInfo meshInfo = sceneService.findProjectByMeshId(meshId);
         List<MeshInfo> placeList = sceneService.findPlaceBySid(sid);
         List<MeshInfo> groupList = sceneService.findGroupByPid(placeList.get(0).getPid());
         List<MeshInfo> lightList = new ArrayList<>();
         if (lid == null) {
-            if(groupList.size()>0) {
+            if (groupList.size() > 0) {
                 lightList = sceneService.findLightByGid(groupList.get(0).getGid(), sid);
             }
         } else {
             MeshInfo lightInfo = sceneService.findLightInfoByLid(lid);
-            lightList = sceneService.findLightByGid(lightInfo.getGid(),sid);
+            lightList = sceneService.findLightByGid(lightInfo.getGid(), sid);
             model.addAttribute("lightInfo", lightInfo);
         }
 
-        List<MeshInfo> list1 = sceneService.findXYBySid(sid);
-        List<MeshInfo> groupXYList = new ArrayList<>();
-        if (list1.size() == 1) {
-            model.addAttribute("px", list1.get(0).getX());
-            model.addAttribute("py", list1.get(0).getY());
-        } else {
-            for (int i = 0; i < groupList.size(); i++) {
-                List<MeshInfo> list2 = sceneService.findXYByGid(groupList.get(i).getGid(),sid);
-                if (list2.size() == 1) {
-                    MeshInfo groupXY = new MeshInfo();
-                    groupXY.setX(list2.get(0).getX());
-                    groupXY.setY(list2.get(0).getY());
-                    groupXY.setGid(groupList.get(i).getGid());
-                    groupXYList.add(groupXY);
+        int samePlaceXY = 1;
+        String groupX = "";
+        String groupY = "";
+        for (int i = 0; i < groupList.size(); i++) {
+            List<MeshInfo> list2 = sceneService.findXYByGid(groupList.get(i).getGid(), sid);
+            if (list2.size() == 1) {
+                if (!"".equals(groupX) && groupX != null && groupY != null) {
+                    if (!groupX.equals(list2.get(0).getX()) || !groupY.equals(list2.get(0).getY())) {
+                        samePlaceXY = 0;
+                    }
                 }
+                groupX = list2.get(0).getX();
+                groupY = list2.get(0).getY();
+                if (groupX == null || groupY == null) {
+                    samePlaceXY = 0;
+                }
+                groupList.get(i).setX(groupX);
+                groupList.get(i).setY(groupY);
+            } else {
+                samePlaceXY = 0;
             }
-            if (groupXYList.size() > 0) {
-                model.addAttribute("groupXYList", groupXYList);
-            }
+        }
+
+        if (samePlaceXY == 1) {
+            placeList.get(0).setX(groupList.get(0).getX());
+            placeList.get(0).setY(groupList.get(0).getY());
         }
 
         model.addAttribute("sceneName", sceneName);
@@ -157,16 +163,15 @@ public class SceneController {
         model.addAttribute("placeList", placeList);
         model.addAttribute("groupList", groupList);
         model.addAttribute("lightList", lightList);
-
         return "sceneManage/sceneDetail";
     }
 
 
     @RequestMapping(value = "/groupDetail", method = RequestMethod.POST)
     @ResponseBody
-    public Map<String, List> groupDetail(Integer gid,Integer sid) {
+    public Map<String, List> groupDetail(Integer gid, Integer sid) {
         Map<String, List> map = new HashMap<>();
-        List<MeshInfo> lightList = sceneService.findLightByGid(gid,sid);
+        List<MeshInfo> lightList = sceneService.findLightByGid(gid, sid);
         map.put("lightList", lightList);
         return map;
     }

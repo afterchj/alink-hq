@@ -3,13 +3,14 @@
 <mapper namespace="com.tpadsz.after.dao.PlaceDao">
 
     <sql id="Base_Column_List">
-        p.id,
-        p.mid,
-        p.pname,
-        p.place_id,
+        pl.id,
+        pl.mid,
+        pl.pname,
+        pl.place_id,
         m.mname,
         m.mesh_id,
         m.project_id,
+        p.name,
         IFNULL(g.gcount,0) gcount
 	</sql>
 
@@ -40,19 +41,21 @@
         <selectKey keyProperty="id" order="BEFORE" resultType="int">
             SELECT IFNULL(max(place_id)+1,1) FROM f_place WHERE mid=#{mid}
         </selectKey>
-        INSERT INTO f_place(place_id,pname,uid,mid,create_date) VALUES(#{id},#{name},#{uid},#{mid},now())
+        INSERT INTO f_place(place_id,pname,uid,mid,create_date,update_date ) VALUES(#{id},#{name},#{uid},#{mid},now(),now())
     </insert>
 
     <select id="getByMap" resultType="map" parameterType="SearchDict">
         SELECT
         <include refid="Base_Column_List"/>
-        FROM
-        f_place p
-        INNER JOIN f_mesh m ON m.id = p.mid
-        INNER JOIN f_project pt ON pt.id=m.project_id
-        LEFT JOIN (SELECT COUNT(1) gcount,pid FROM f_group GROUP BY pid) g ON g.pid=p.id
+        FROM f_place pl
+        INNER JOIN f_mesh m ON m.id = pl.mid
+        INNER JOIN f_project p ON p.id=m.project_id
+        LEFT JOIN (SELECT COUNT(1) gcount,pid FROM f_group GROUP BY pid) g ON g.pid=pl.id
         WHERE 1=1
         <include refid="common_choose"/>
+        <if test="name!=null and name!=''">
+            AND p.name LIKE CONCAT('%',#{name},'%')
+        </if>
         <if test="mname!=null and mname!=''">
             AND m.mname LIKE CONCAT('%',#{mname},'%')
         </if>
@@ -60,19 +63,19 @@
             AND m.mesh_id LIKE CONCAT('%',#{meshId},'%')
         </if>
         <if test="pname!=null and pname!=''">
-            AND p.pname LIKE CONCAT('%',#{pname},'%')
+            AND pl.pname LIKE CONCAT('%',#{pname},'%')
         </if>
         <if test="placeId!=null and placeId!=''">
-            AND p.place_id LIKE CONCAT('%',#{placeId},'%')
+            AND pl.place_id LIKE CONCAT('%',#{placeId},'%')
         </if>
         <if test="mid!=null and mid!=''">
-            AND p.mid=#{mid}
+            AND pl.mid=#{mid}
         </if>
         <if test="projectId!=null and projectId!=''">
             AND m.project_id=#{projectId}
         </if>
-        GROUP BY m.uid,m.mesh_id
-        ORDER BY p.update_date DESC,g.gcount DESC
+--         GROUP BY m.uid,m.mesh_id
+        ORDER BY pl.update_date DESC
     </select>
 
     <select id="getPlaceInfo" resultType="MeshInfo" parameterType="int">
@@ -80,7 +83,7 @@
              pl.id,
              pl.mid,
              pl.pname,
-             p.id place_id,
+             pl.place_id,
              p.name,
              m.mname,
              m.mesh_id,

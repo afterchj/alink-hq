@@ -18,7 +18,14 @@
         <div th:replace="common/left::left('meshList')"></div>
         <div class="main-right f-l">
             <div class="clearfix main-right-nav">
-                <div class="f-l main-right-title">创建网络</div>
+                <div class="f-l main-right-title">
+                    <nav class="bread">
+                        <ol class="clearfix">
+                            <li class="f-l"><a th:href="@{/mesh/list}">网络列表</a></li>
+                            <li class="f-l">创建网络</li>
+                        </ol>
+                    </nav>
+                </div>
                 <!--<div class="f-r pointer">-->
                 <!--<img src="/alink-hq/static/img/create-project.png" alt="">-->
                 <!--</div>-->
@@ -30,14 +37,15 @@
                     <!--<img src="/alink-hq/static/img/go-back.png" alt="" onclick="history.back()">-->
                 </div>
             </div>
-            <div id="createProject">
+            <div id="createProject" class="table-content-list">
                 <div class="c-createProject">
                     <div class="c-nav">
                         创建网络
                     </div>
                     <div class="c-content ">
-                        <form th:action="@{/mesh/save}" method="POST">
+                        <form th:action="@{/mesh/save}" method="post">
                             <input type="hidden" id="uid" name="uid" th:value="${session.user.id}">
+                            <input type="hidden" id="project_id" th:value="${dict.projectId}">
                             <div>
                                 <p class="mesh-hint"></p>
                                 <label for="mesh">网络名：</label>
@@ -49,6 +57,12 @@
                                 <select id="projectId" name="projectId" style="height: 33px;">
                                     <option value="">请选择项目</option>
                                 </select>
+                            </div>
+                            <div style="margin:30px 0 0 55px;">
+                                <input type="radio" name="mtype" value="商业照明" checked
+                                       style="vertical-align: middle;margin-right: 10px;">商业照明 &nbsp; &nbsp; &nbsp;
+                                <input type="radio" name="mtype" value="家庭照明"
+                                       style="vertical-align: middle;margin-right: 10px;">家庭照明
                             </div>
                             <div class="">
                                 <button type="button" class="confirm-create" openTab="confirm-create">确定创建</button>
@@ -76,22 +90,24 @@
 <script type="text/javascript" src="/alink-hq/static/js/jquery.min.js"></script>
 <script type="text/javascript" src="/alink-hq/static/js/left.js"></script>
 <script src="/alink-hq/static/js/moment.js"></script>
-<script  src="/alink-hq/static/js/selectivizr.js"></script>
-<script  src="/alink-hq/static/js/html5shiv.js"></script>
 <script th:inline="javascript">
-    var uid = [[${session.user.id}]];
+    var uid = $("#uid").val();
+    var projectId = $("#project_id").val();
     $(function () {
         $.getJSON("/alink-hq/mesh/getProjects", {"uid": uid}, function (json) {
-            if (json != '') {
-                $("#projectId option:first").siblings().remove();
-            }
             $.each(json, function (i, item) {
-                $("#projectId").append("<option value='" + item.id + "'>" + item.label + "</option>");
+                if (projectId == item.id) {
+                    $("#projectId").append("<option value='" + item.id + "' selected>" + item.label + "</option>");
+                    $("#projectId").attr("disabled", "true").css("background-color", "#EEEEEE");
+                } else {
+                    $("#projectId").append("<option value='" + item.id + "'>" + item.label + "</option>");
+                }
             });
         });
     });
     $('.confirm-create').click(function () {
         var mesh = $('#mesh').val();
+        var type = $("input[type='radio']:checked").val();
         var projectId = $('#projectId option:selected').val()
         var regName = /^[a-zA-Z0-9\u4e00-\u9fa5]{2,16}$/
         var meshResult = regName.test(mesh)
@@ -112,21 +128,22 @@
                 type: "post",
                 url: "/alink-hq/mesh/save",
 //                data: {uid: uid, id: projectId, name: decodeURIComponent(mesh)},
-                data: {"uid": uid, "id": projectId, "name": mesh},
+                data: {"uid": uid, "id": projectId, "mtype": type, "name": mesh},
                 success: function (res) {
+//                    console.log("res",res);
                     if (res == 'ok') {
                         $('#preload-anim').addClass('active');
                         $('#preload-anim .title').text('创建成功！');
-                        setInterval(function () {
+                        setTimeout(function () {
                             $('#preload-anim').removeClass('active');
-                            location.href = '/alink-hq/mesh/list?uid=' + uid;
+                            location.href = '/alink-hq/mesh/list?uid=' + uid + "&projectId=" + projectId;
                         }, 1000)
                     } else if (res == 'fail') {
                         $('.mesh-hint').text('已存在，请重新输入');
                     } else {
                         $('#preload-anim').addClass('active');
                         $('#preload-anim .title').text('创建失败，请重新尝试');
-                        setInterval(function () {
+                        setTimeout(function () {
                             $('#preload-anim').removeClass('active');
                         }, 1000)
                     }

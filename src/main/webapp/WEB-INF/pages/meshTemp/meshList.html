@@ -21,18 +21,17 @@
         <div class="main-right f-l">
             <div class="clearfix main-right-nav">
                 <div class="f-l main-right-title">网络列表</div>
-                <div class="f-r pointer">
-                    <a th:href="@{/mesh/create}"  shiro:hasAnyRoles="super,admin,manager" >
+                <div class="f-r pointer last-nav">
+                    <a th:href="@{/mesh/create(projectId=${dict.projectId})}"  shiro:hasAnyPermission ="createMesh" >
                         <div   class="create " onmousedown="createBtnMouseDown()" onmouseup="createBtnMouseUp()">
                             <span>+</span><span>创建网络</span>
                         </div>
                     </a>
-                    <a href="javascript:void(0)"  shiro:hasRole="user" class="unclick1">
+                    <a href="javascript:void(0)"  shiro:lacksPermission ="createMesh" class="unclick1">
                         <div  class="create no-access" onmousedown="createBtnMouseDown()" onmouseup="createBtnMouseUp()">
                             <span>+</span><span>创建网络</span>
                         </div>
                     </a>
-
                 </div>
                 <div class="f-r pointer">
                     <div class="goBack" onClick="javascript :history.back();" onmousedown="backBtnMouseDown()"
@@ -44,12 +43,12 @@
                 </div>
             </div>
 
-            <div id="meshList" class="">
+            <div id="meshList" class="table-content-list">
                 <form class="clearfix" th:action="@{/mesh/list}" method="post">
                     <input type="hidden" name="uid" th:value="${dict.uid}">
                     <input type="hidden" id="pageSize" th:value="${dict.pageSize}">
                     <div class="search-condition temp">
-                        <div class="f-l search" style="margin-right:125px;">
+                        <div class="f-l search" style="margin-right: 150px;margin-left: 100px;">
                             <div>
                                 <label for="name" class="font">网络名称</label>
                                 <input type="text" id="name" name="mname" th:value="${dict.mname}"
@@ -85,15 +84,15 @@
                             <thead>
                             <tr>
                                 <th class="all-checkbox">
-                                <span style="vertical-align: sub;">
+                                <!--<span style="vertical-align: sub;">-->
                                     <input type="checkbox" id="all" class="pointer">
-                                </span>
+                                <!--</span>-->
                                     <span class="">全选</span>
                                 </th>
                                 <th><span>网络名称</span></th>
                                 <th><span>网络ID</span></th>
                                 <th><span>网络类型</span></th>
-                                <th><span>属于项目</span></th>
+                                <th><span>隶属项目</span></th>
                                 <th><span>区域数量</span></th>
                                 <th><span>场景数量</span></th>
                                 <th><span>定时数量</span></th>
@@ -107,8 +106,8 @@
                                     <input type="checkbox" name="ids" th:value="${mesh.id}" class="">
                                     <input type="hidden" th:value="${mesh.uid}" class="uid">
                                 </td>
-                                <td class="k-link"><a th:href="@{/mesh/info(id=${mesh.id})}"
-                                                      th:text="${mesh.mname}"></a>
+                                <td class="k-link">
+                                    <a th:href="@{/mesh/info(id=${mesh.id})}" th:text="${mesh.mname}"></a>
                                 </td>
                                 <td th:text="${mesh.mesh_id}"></td>
                                 <td th:text="${mesh.mesh_type}"></td>
@@ -117,40 +116,41 @@
                                        th:text="${mesh.name}"></a>
                                 </td>
                                 <td class="k-link">
-                                    <a th:href="@{/place/list(mid=${mesh.id})}" th:text="${mesh.pcount}"></a>
+                                    <a th:if="${mesh.pcount}=='0'" class="a-un"  href="javascript:void(0);" th:text="${mesh.pcount}"></a>
+                                    <a th:if="${mesh.pcount}!='0'" th:href="@{/place/list(projectId=${mesh.project_id},mid=${mesh.id})}" th:text="${mesh.pcount}"></a>
                                 </td>
                                 <td class="k-link">
-                                    <a th:href="@{/scene/list(meshName=${mesh.mname},meshId=${mesh.mesh_id},mid=${mesh.id})}"
-                                       th:text="${mesh.scount}"></a>
+                                    <a th:if="${mesh.scount}=='0'" class="a-un" href="javascript:void(0);" th:text="${mesh.scount}"></a>
+                                    <a th:if="${mesh.scount}!='0'" th:href="@{/scene/list(meshName=${mesh.mname},meshId=${mesh.mesh_id},mid=${mesh.id})}" th:text="${mesh.scount}"></a>
                                 </td>
                                 <td class="k-link">
-                                    <a th:href="@{/scene/list(meshName=${mesh.mname},meshId=${mesh.mesh_id},mid=${mesh.id})}"
-                                       th:text="${mesh.scount}"></a>
+                                    <a th:if="${mesh.tcount}=='0'" class="a-un" href="javascript:void(0);" th:text="${mesh.tcount}"></a>
+                                    <a th:if="${mesh.tcount}!='0'" th:href="@{/timer/list(id=${mesh.id})}" th:text="${mesh.tcount}"></a>
                                 </td>
+                                <!--<td  th:if="${mesh.scount}=='0'">-->
+                                    <!--<a href="javascript:void(0);" th:text="${mesh.scount}"></a>-->
+                                <!--</td>-->
                                 <td>未知</td>
-                                <td shiro:hasAnyRoles="super,admin,manager" class="p-r">
-                                    <img src="/alink-hq/static/img/edit.png" th:alt="${mesh.id}"
-                                         class="reset-name pointer" title="重命名">
-                                    <a th:href="@{/mesh/move(ids=${mesh.id})}">
-                                        <img src="/alink-hq/static/img/exchange.png" alt="" class="center-img pointer"
-                                             title="移动">
-                                    </a>
-                                    <a href="javascript:void(0);" class="singleDel pointer">
-                                        <img src="/alink-hq/static/img/delete.png" alt="" title="删除">
-                                    </a>
-                                </td>
-                                <td shiro:hasRole="user" class="p-r">
+                                <td   class="p-r">
+                                    <img  shiro:hasAnyPermission ="renameMesh"  src="/alink-hq/static/img/edit.png" th:alt="${mesh.id}" class="reset-name pointer" title="重命名">
                                     <!--不能重命名-->
-                                    <img src="/alink-hq/static/img/un-rename.png" alt="" class="pointer  unclick"
+                                    <img shiro:lacksPermission ="renameMesh" src="/alink-hq/static/img/un-rename.png" alt="" class="pointer  unclick"
                                          th:title="无法操作">
+
+                                    <a th:href="@{/mesh/move(ids=${mesh.id})}" shiro:hasAnyPermission ="moveMesh" >
+                                        <img src="/alink-hq/static/img/exchange.png" alt="" class="center-img pointer" title="移动">
+                                    </a>
                                     <!--不能移交-->
                                     <img src="/alink-hq/static/img/un-exchange.png" alt=""
-                                         class="center-img pointer  unclick"
+                                         class="center-img pointer  unclick"  shiro:lacksPermission ="moveMesh"
                                          th:title="无法操作">
+
+                                    <a href="javascript:void(0);" class="singleDel pointer" shiro:hasAnyPermission ="deleteMesh">
+                                        <img src="/alink-hq/static/img/delete.png" alt="" title="删除">
+                                    </a>
                                     <!--不能删除-->
-                                    <img src="/alink-hq/static/img/un-delete.png" alt="" class="pointer   unclick"
+                                    <img src="/alink-hq/static/img/un-delete.png" alt="" shiro:lacksPermission ="deleteMesh"  class="pointer   unclick"
                                          th:title="无法操作">
-                                    <!--重命名-->
                                 </td>
                             </tr>
                             </tbody>
@@ -162,14 +162,14 @@
                                 <span id="amount" class="amount">0</span>条数据
                             </span>
                                         <span class="m-r-20">
-                                <span shiro:hasRole="user" class="skipPageBtn  moment active unclick1"
-                                        id="multiMove">移交</span>
-                                <span shiro:hasAnyRoles="super,admin,manager" class="skipPageBtn pointer moment" onmousedown="exchangeBtnMouseDown()"
+                                <span  class="skipPageBtn  moment active unclick1"
+                                        id="multiMove"  shiro:lacksPermission ="moveMesh">移动</span>
+                                <span shiro:hasAnyPermission ="moveMesh" class="skipPageBtn pointer moment" onmousedown="exchangeBtnMouseDown()"
                                       onmouseup="exchangeBtnMouseUp()" id="multiMove">移动</span>
                             </span>
                                         <span>
-                            <span shiro:hasRole="user" class="skipPageBtn moment active unclick1"  id="multiDel">删除</span>
-                                <span shiro:hasAnyRoles="super,admin,manager" class="skipPageBtn pointer moment" onmousedown="deleteBtnMouseDown()"
+                            <span shiro:lacksPermission ="deleteMesh"  class="skipPageBtn moment active unclick1"  id="multiDel">删除</span>
+                                <span shiro:hasAnyPermission ="deleteMesh" class="skipPageBtn pointer moment" onmousedown="deleteBtnMouseDown()"
                                       onmouseup="deleteBtnMouseUp()" id="multiDel">删除</span>
                             </span>
                                     </div>
@@ -191,7 +191,7 @@
                                 <th>网络名称</th>
                                 <th>网络ID</th>
                                 <th>网络类型</th>
-                                <th>属于项目</th>
+                                <th>隶属项目</th>
                                 <th>区域数量</th>
                                 <th>场景数量</th>
                                 <th>状态</th>
@@ -258,12 +258,10 @@
     </div>
 </div>
 
-<div class="hide-iframe "></div>
+<div class="hide-iframe"></div>
 <script type="text/javascript" src="/alink-hq/static/js/left.js"></script>
 <script type="text/javascript" src="/alink-hq/static/js/page.js"></script>
 <script type="text/javascript" src="/alink-hq/static/js/mesh.js"></script>
 <script src="/alink-hq/static/js/moment.js"></script>
-<script src="/alink-hq/static/js/selectivizr.js"></script>
-<script src="/alink-hq/static/js/html5shiv.js"></script>
 </body>
 </html>

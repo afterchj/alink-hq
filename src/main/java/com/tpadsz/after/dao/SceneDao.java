@@ -33,7 +33,5 @@ public interface SceneDao {
 
     MeshInfo findLightInfoByLid(@Param("lid")Integer lid);
 
-    List<MeshInfo> findXYBySid(@Param("sid")Integer sid);
-
     List<MeshInfo> findXYByGid(@Param("gid")Integer gid,@Param("sid")Integer sid);
 }

@@ -19,10 +19,16 @@
     <div th:replace="common/head::head"></div>
     <div class="main clearfix">
         <div th:replace="common/left::left('createAccount')"></div>
-
         <div class="main-right f-l">
             <div class="clearfix main-right-nav">
-                <div class="f-l main-right-title">创建账号</div>
+                <div class="f-l main-right-title">
+                    <nav class="bread">
+                        <ol class="clearfix">
+                            <li class="f-l"><a th:href="@{/account/list}">用户列表</a></li>
+                            <li class="f-l">创建账号</li>
+                        </ol>
+                    </nav>
+                </div>
                 <div class="f-r pointer">
                     <div class="goBack" onClick="javascript :history.back(-1);">
                         <span><</span><span>返回</span>
@@ -30,7 +36,7 @@
                     <!--<img src="/alink-hq/static/img/go-back.png" onClick="javascript :history.back(-1);" alt=""/>-->
                 </div>
             </div>
-            <div id="createAccount">
+            <div id="createAccount" class="table-content-list">
                 <div class="c-createAccount">
                     <div class="c-nav">
                         新建账号
@@ -135,8 +141,6 @@
 <script src="/alink-hq/static/js/jquery.min.js"></script>
 <script type="text/javascript" src="/alink-hq/static/js/left.js"></script>
 <script type="text/javascript" src="/alink-hq/static/js/excel/excel.js"></script>
-<script  src="/alink-hq/static/js/selectivizr.js"></script>
-<script  src="/alink-hq/static/js/html5shiv.js"></script>
 
 <script>
     var list = [];
@@ -160,7 +164,6 @@
         if (num != '') {
             num = parseInt(num);
         }
-        console.log(fid, roleId, num);
         if (fid != '' && roleId != '') {
             this.setAttribute("disabled", true);
             this.style.background = "#A0A0A0";

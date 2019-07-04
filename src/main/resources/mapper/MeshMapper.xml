@@ -5,6 +5,7 @@
     <parameterMap id="createMapper" type="map">
         <parameter property="id" mode="IN"/>
         <parameter property="uid" mode="IN"/>
+        <parameter property="type" mode="IN"/>
         <parameter property="name" mode="IN"/>
         <parameter property="mid" mode="OUT" jdbcType="INTEGER"/>
     </parameterMap>
@@ -18,7 +19,8 @@
         IFNULL(m.mesh_type,'家庭照明') mesh_type,
         p.name,
        	IFNULL(pl.pcount,0) pcount,
-	    IFNULL(s.scount,0) scount
+        IFNULL(s.scount,0) scount,
+        IFNULL(t.tcount,0) tcount
 	</sql>
 
     <sql id="common_choose">
@@ -45,7 +47,7 @@
     </sql>
 
     <select id="save" parameterMap="createMapper" statementType="CALLABLE">
-        CALL create_mesh (?,?,?,?)
+        CALL create_mesh (?,?,?,?,?)
     </select>
 
     <select id="getByMap" resultType="map" parameterType="SearchDict">
@@ -55,6 +57,7 @@
         INNER JOIN f_project p ON m.project_id = p.id
         LEFT JOIN (SELECT COUNT(1) pcount,mid FROM f_place GROUP BY mid) pl ON pl.mid=m.id
         LEFT JOIN (SELECT COUNT(1) scount,mid FROM f_scene GROUP BY mid) s ON s.mid=m.id
+        LEFT JOIN (SELECT COUNT(1) tcount,mid FROM f_time_line GROUP BY mid) t ON t.mid=m.id
         WHERE 1=1
         <include refid="common_choose"></include>
         <if test="mname!=null and mname!=''">
@@ -70,7 +73,7 @@
             AND m.project_id=#{projectId}
         </if>
         GROUP BY m.uid,m.mesh_id
-        ORDER BY m.update_date DESC,scount DESC
+        ORDER BY m.update_date DESC,tcount DESC
     </select>
 
     <select id="getMesh" resultType="OptionList" parameterType="map">
@@ -92,7 +95,8 @@
              IFNULL(s.scount,0) scount,
              IFNULL(pl.pcount,0) pcount,
              IFNULL(g.gcount,0) gcount,
-             IFNULL(l.lcount,0) lcount
+             IFNULL(l.lcount,0) lcount,
+             IFNULL(t.tcount,0) tcount
         FROM
              f_mesh m
         INNER JOIN f_project p ON m.project_id = p.id
@@ -100,6 +104,7 @@
         LEFT JOIN (SELECT COUNT(1) scount,mid FROM f_scene GROUP BY mid) s ON s.mid=m.id
         LEFT JOIN (SELECT COUNT(1) gcount,mid FROM f_group GROUP BY mid) g ON g.mid=m.id
         LEFT JOIN (SELECT COUNT(1) lcount,mid FROM f_light GROUP BY mid) l ON l.mid=m.id
+        LEFT JOIN (SELECT COUNT(1) tcount,mid FROM f_time_line GROUP BY mid) t ON t.mid=m.id
         WHERE m.id=#{id}
     </select>
 
@@ -144,7 +149,7 @@
         </if>
     </select>
 
-    <select id="getProject" resultType="OptionList" parameterType="SearchDict">
+    <select id="getProject" resultType="OptionList" parameterType="map">
          SELECT p.id,p.name label,IFNULL(m.id,0) mid
          FROM f_project p
          LEFT  JOIN f_mesh m ON m.project_id=p.id WHERE 1=1
@@ -154,7 +159,7 @@
         <if test="mid!=null and mid!=''">
             AND m.id=#{mid}
         </if>
-        GROUP BY project_id
+        GROUP BY project_id LIMIT 1
     </select>
     <delete id="deleteMeshByIds" parameterType="list">
         DELETE FROM f_mesh

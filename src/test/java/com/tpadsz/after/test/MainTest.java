@@ -1,5 +1,6 @@
 package com.tpadsz.after.test;
 
+import com.alibaba.fastjson.JSON;
 import com.tpadsz.after.entity.OptionList;
 import com.tpadsz.after.entity.User;
 import com.tpadsz.after.service.GroupService;
@@ -68,24 +69,46 @@ public class MainTest {
         Map map = new HashMap();
         map.put("role", "manager");
         map.put("uid", 18);
-        map.put("id", 1);
-        map.put("mid", 1);
-        map.put("name", "区域1");
+        map.put("id", 307);
+//        map.put("mid", 0);
+        map.put("name", "testNewType");
+        map.put("type", "家庭照明");
 //        map.put("projectId", 248);
 //        map.put("pid", 4);
-//        int count = getSqlSessionTemplate().selectOne("com.tpadsz.after.dao.MeshDao.getCount", map);
-        int count = getSqlSessionTemplate().selectOne("com.tpadsz.after.dao.PlaceDao.getCount", map);
-        logger.info(count);
-        getSqlSessionTemplate().insert("com.tpadsz.after.dao.PlaceDao.save",map);
+        SqlSessionTemplate sqlSessionTemplate = getSqlSessionTemplate();
+        int count = sqlSessionTemplate.selectOne("com.tpadsz.after.dao.MeshDao.getCount", map);
+//        sqlSessionTemplate.selectOne("com.tpadsz.after.dao.MeshDao.save", map);
+//        logger.info("result=" + map.get("mid"));
+        logger.info("count=" + count);
 
+//        int count = getSqlSessionTemplate().selectOne("com.tpadsz.after.dao.PlaceDao.getCount", map);
+//        logger.info(count);
+//        getSqlSessionTemplate().insert("com.tpadsz.after.dao.PlaceDao.save", map);
 //        List<Map> list = getSqlSessionTemplate().selectList("com.tpadsz.after.dao.MeshDao.getByMap", map);
 //        String role = getSqlSessionTemplate().selectOne("com.tpadsz.after.dao.RoleDao.selectById", 21);
 //        List<Role> roles = getSqlSessionTemplate().selectList("com.tpadsz.after.dao.RoleDao.getAll");
-//        List<OptionList> lists = getSqlSessionTemplate().selectList("com.tpadsz.after.dao.MeshDao.getProjects",map);
+//        OptionList optionList = sqlSessionTemplate.selectOne("com.tpadsz.after.dao.MeshDao.getProject", map);
+//        CooperationInfo params=new CooperationInfo();
+//        params.setId(8);
+//        params.setStatus(true);
+//        params.setConame("苏州诚彩智能科技有限公司");
+//        sqlSessionTemplate.update("com.tpadsz.after.dao.CooperateDao.saveUpdate",params);
+//        MeshInfo meshInfo = sqlSessionTemplate.selectOne("com.tpadsz.after.dao.LightDao.getLightInfo",1598);
+//        List<MeshInfo> list = sqlSessionTemplate.selectList("com.tpadsz.after.dao.LightDao.getSceneInfo",1598);
+//        List<String> name = new ArrayList<>();
+//        for (MeshInfo info:list) {
+//            name.add(info.getSname());
+//        }
+//        meshInfo.setSname(name.toString());
+//        logger.info("name=" + meshInfo.getSname());
+//        CooperationInfo info=sqlSessionTemplate.selectOne("com.tpadsz.after.dao.CooperateDao.getCooperationInfo",8);
+//        List<Map> list=sqlSessionTemplate.selectList("com.tpadsz.after.dao.CooperateDao.getByMap");
 //        List<OptionList> lists = getSqlSessionTemplate().selectList("com.tpadsz.after.dao.GroupDao.getPlaces",map);
 //        logger.info("role=" + role);
 //        logger.info("roles=" + roles);
 //        logger.info("lists=" + lists.size());
+//        logger.info("lists=" + JSON.toJSONString(info));
+//        logger.info("lists=" + JSON.toJSONString(meshInfo));
     }
 
     @Test
@@ -93,12 +116,15 @@ public class MainTest {
         ApplicationContext ctx = new ClassPathXmlApplicationContext("classpath:applicationContext.xml");
         Map map = new HashMap();
 //        map.put("role", "manager");
-        map.put("uid", 18);
+//        map.put("uid", 18);
+        map.put("mid", 0);
         MeshService meshService = (MeshService) ctx.getBean("meshServiceImpl");
         GroupService groupService = (GroupService) ctx.getBean("groupServiceImpl");
-//        List<OptionList> lists = meshService.getProjects(null);
-        List<OptionList> lists = groupService.getPlaces(map);
-        logger.info("lists=" + lists);
+        List<OptionList> lists = meshService.getProjects(map);
+        OptionList optionList = meshService.getProject(map);
+//        List<OptionList> lists = groupService.getPlaces(map);
+//        logger.info("lists=" + JSON.toJSONString(lists));
+        logger.info("lists=" + JSON.toJSONString(optionList));
     }
 
     @Test

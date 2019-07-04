@@ -17,9 +17,9 @@ laydate.render({
 $(function () {
     var accountNum=0;
     $('tbody .checkbox input').each(function () {
-       if($(this).prop('checked')){
-           accountNum++;
-       }
+        if($(this).prop('checked')){
+            accountNum++;
+        }
     })
     $('.amount').text(accountNum);
     //复选框监听--监听全选
@@ -63,19 +63,13 @@ $(function () {
     })
 })
 
-
-// $(function () {
-//     var tabs = "projectList";
-//     var index=0;
-//     left(tabs,index);
-// })
-
-
 //条件筛选
 $(function () {
     var url = window.location.href;
     var account = decodeURIComponent(GetUrlParam("account"));
+    var uname = decodeURIComponent(GetUrlParam("uname"));
     var projectName = decodeURIComponent(GetUrlParam("projectName"));
+    var coname = decodeURIComponent(GetUrlParam("coname"));
     var startCreateDate = GetUrlParam("startCreateDate");
     var endCreateDate = GetUrlParam("endCreateDate");
     var startUpdateDate = GetUrlParam("startUpdateDate");
@@ -121,6 +115,8 @@ $(function () {
     }
     $('#account').val(account);
     $('#projectName').val(projectName);
+    $('#username').val(uname);
+    $('#company').val(coname);
     $('.toTop').click(function () {
         var sortFlag = '1';
         var pageSize = $('#page-select option:selected').val();
@@ -176,25 +172,6 @@ $(function () {
         if(!pageSize){
             pageSize='';
         }
-        // var startTime = $('#start-time').val();
-        // var startCreateDate = startTime.substring(0, 10);
-        // var endCreateDate = startTime.substring(13, 23);
-        // var endTime = $('#end-time').val();
-        // var startUpdateDate = endTime.substring(0, 10);
-        // var endUpdateDate = endTime.substring(13, 23);
-        // console.log(startCreateDate,endCreateDate);
-        // if(startCreateDate==endCreateDate){
-        //     var newDate=endCreateDate.substring(0,endCreateDate.length-2);
-        //     var addTime=parseInt(endCreateDate.substring(endCreateDate.length,endCreateDate.length-2))+1;
-        //     if(addTime<10){
-        //         addTime='0'+addTime;
-        //     }else if(addTime>31){
-        //
-        //     }
-        //     console.log(newDate,addTime);
-        //     endCreateDate=newDate+addTime;
-        //     console.log(endCreateDate);
-        // }
         condition(pageSize, pageNum, sortFlag);
     })
     //选择页数变化
@@ -230,14 +207,18 @@ $(function () {
     $('.reset-name').click(function () {
         projectId = parseInt($(this).parent().siblings('.checkbox ').find('input[type=checkbox]').val());
         account = $(this).parent().siblings('.project-account').text();
-        $('div[openContent="reset-name"]').addClass('active');
-        var width = document.body.scrollWidth;
-        var height = document.body.scrollHeight;
-        $('.hide-iframe').addClass('active');
-        $('.hide-iframe').css({
-            'width': width,
-            'height': height
-        })
+        // $('div[openContent="reset-name"]').addClass('active');
+        // var width = window.screen.width;
+        // var height = window.screen.height;
+        // $('.hide-iframe').addClass('active');
+        // $('.hide-iframe').css({
+        //     'width': width,
+        //     'height': height
+        // })
+        var selector= $('div[openContent="reset-name"]');
+        selector.addClass('active');
+        adjust(selector)
+        showOverlay()
     })
 
     //弹框重命名里操作
@@ -278,14 +259,18 @@ $(function () {
         }
         deleteArray.push(msg);
         if(deleteArray.length!=0){
-            $('div[openContent="delete-project"]').addClass('active');
-            var width = document.body.scrollWidth;
-            var height = document.body.scrollHeight;
-            $('.hide-iframe').addClass('active');
-            $('.hide-iframe').css({
-                'width': width,
-                'height': height
-            })
+            // $('div[openContent="delete-project"]').addClass('active');
+            // var width = window.screen.width;
+            // var height = window.screen.height;
+            // $('.hide-iframe').addClass('active');
+            // $('.hide-iframe').css({
+            //     'width': width,
+            //     'height': height
+            // })
+            var selector=$('div[openContent="delete-project"]');
+            selector.addClass('active');
+            adjust(selector)
+            showOverlay()
         }
     })
     //确定删除
@@ -303,7 +288,7 @@ $(function () {
                     $('tbody tr td.checkbox input').prop('checked',false);
                     $('#all').prop('checked',false);
                 } else if (res.result == '200') {
-                     console.log('系统错误');
+                    console.log('系统错误');
                 }
             }
         })
@@ -342,14 +327,18 @@ $(function () {
         })
         // console.log(deleteArray);
         if(deleteArray.length!=0){
-            $('div[openContent="delete-project"]').addClass('active');
-            var width = document.body.scrollWidth;
-            var height = document.body.scrollHeight;
-            $('.hide-iframe').addClass('active');
-            $('.hide-iframe').css({
-                'width': width,
-                'height': height
-            })
+            // $('div[openContent="delete-project"]').addClass('active');
+            // var width = window.screen.width;
+            // var height = window.screen.height;
+            // $('.hide-iframe').addClass('active');
+            // $('.hide-iframe').css({
+            //     'width': width,
+            //     'height': height
+            // })
+            var selector=$('div[openContent="delete-project"]');
+            selector.addClass('active');
+            adjust(selector)
+            showOverlay()
         }
     })
 
@@ -386,7 +375,10 @@ $(function () {
     $('.pop-btn .reduce').click(function () {
         $('div[openContent="reset-name"]').removeClass('active');
         $('div[openContent="delete-project"]').removeClass('active');
-        $('.hide-iframe').removeClass('active');
+        // $('.hide-iframe').removeClass('active');
+        // var selector= $('div[openContent="reset-name"]');
+        // selector.removeClass('active')
+        hideOverlay()
         deleteArray= [];
     })
 })
@@ -464,13 +456,15 @@ function condition(pageSize, pageNum, sortFlag) {
         var url2 = url + '?';
     }
     var account = $('#account').val();
+    var uname = $('#username').val();
     var projectName = $('#projectName').val();
+    var coname = $('#company').val();
     var startTime = $('#start-time').val();
     var startCreateDate = startTime.substring(0, 10);
     var endCreateDate = startTime.substring(13, 23);
     var endTime = $('#end-time').val();
     var startUpdateDate = endTime.substring(0, 10);
     var endUpdateDate = endTime.substring(13, 23);
-    var newUrl = url2 + '&pageNum=' + pageNum + '&sortFlag=' + sortFlag + '&pageSize=' + pageSize + '&projectName=' + projectName + '&account=' + account + '&startCreateDate=' + startCreateDate + '&endCreateDate=' + endCreateDate + '&startUpdateDate=' + startUpdateDate + '&endUpdateDate=' + endUpdateDate;
+    var newUrl = url2 + '&pageNum=' + pageNum + '&sortFlag=' + sortFlag + '&pageSize=' + pageSize + '&projectName=' + projectName + '&account=' + account + '&uname=' + uname + '&coname=' + coname + '&startCreateDate=' + startCreateDate + '&endCreateDate=' + endCreateDate + '&startUpdateDate=' + startUpdateDate + '&endUpdateDate=' + endUpdateDate;
     location.href = newUrl;
 }

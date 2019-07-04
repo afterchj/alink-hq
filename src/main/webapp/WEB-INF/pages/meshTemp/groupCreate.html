@@ -4,10 +4,11 @@
     <meta charset="UTF-8">
     <script src="/alink-hq/static/js/browser.js"></script>
     <link rel="stylesheet" href="/alink-hq/static/css/base.css"/>
+
     <link rel="stylesheet" href="/alink-hq/static/css/leftNav.css"/>
     <link rel="stylesheet" href="/alink-hq/static/css/loding.css"/>
     <link rel="stylesheet" href="/alink-hq/static/css/projectManage.css"/>
-    <link rel="stylesheet" th:href="@{/static/css/laydate.css}"/>
+    <link rel="stylesheet" href="/alink-hq/static/css/ystep.css"/>
     <title>创建组</title>
 </head>
 <body>
@@ -15,52 +16,77 @@
 <div class="c-container">
     <div th:replace="common/head::head"></div>
     <div class="main clearfix">
-        <div th:replace="common/left::left('meshList')"></div>
+        <div th:replace="common/left::left('groupList')"></div>
         <div class="main-right f-l">
             <div class="clearfix main-right-nav">
-                <div class="f-l main-right-title">创建组</div>
-                <!--<div class="f-r pointer">-->
-                <!--<img src="/alink-hq/static/img/create-project.png" alt="">-->
-                <!--</div>-->
+                <div class="f-l main-right-title">
+                    <nav class="bread">
+                        <ol class="clearfix">
+                            <li class="f-l"><a th:href="@{/group/list(mid=0)}">组列表</a></li>
+                            <li class="f-l">创建组</li>
+                        </ol>
+                    </nav>
+                </div>
                 <div class="f-r pointer">
                     <div class="goBack" onClick="javascript :history.back();" onmousedown="backBtnMouseDown()"
                          onmouseup="backBtnMouseUp()">
                         <span><</span><span>返回</span>
                     </div>
-                    <!--<img src="/alink-hq/static/img/go-back.png" alt="" onclick="history.back()">-->
                 </div>
             </div>
-            <div id="createProject">
+            <div id="createProject" class="table-content-list">
                 <div class="c-createProject">
                     <div class="c-nav">
                         创建组
                     </div>
                     <div class="c-content ">
                         <div class="subjection">隶属项目：<span th:inline="text">[[${project.label}]]</span></div>
-                        <form th:action="@{/group/save}" method="POST" style="margin-top: 0;">
-                            <div class="process clearfix">
-                                <div class="f-l part">
+                        <form th:action="@{/group/save}" method="POST" style="margin-top: 0;width: 1100px;">
+                            <input type="hidden" name="uid" id="uid" th:value="${session.user.id}">
+                            <div class="process clearfix" style="width: 1100px;">
+                                <div class="f-l part project">
                                     <img src="/alink-hq/static/img/fill-1-on.png" alt="" id="one-step">
+                                    <span>选择项目</span>
+                                </div>
+                                <div class="f-l part  line ">……</div>
+                                <div class="f-l part mesh">
+                                    <img src="/alink-hq/static/img/fill-2-no.png" alt="" id="two-step">
                                     <span>选择网络</span>
                                 </div>
                                 <div class="f-l part  line ">……</div>
-                                <div class="f-l part">
-                                    <img src="/alink-hq/static/img/fill-2-no.png" alt="" id="two-step">
+                                <div class="f-l part place">
+                                    <img src="/alink-hq/static/img/fill-3-no.png" alt="" id="three-step">
                                     <span>选择区域</span>
                                 </div>
                                 <div class="f-l part  line ">……</div>
-                                <div class="f-l part">
-                                    <img src="/alink-hq/static/img/fill-3-no.png" alt="" id="three-step">
+                                <div class="f-l part group">
+                                    <img src="/alink-hq/static/img/fill-4-no.png" alt="" id="four-step">
                                     <span>输入名称</span>
                                 </div>
                             </div>
-                            <!--选择网络-->
-                            <div class="select-mesh-step active step">
+
+                            <!--输入项目名-->
+                            <div class="select-project-step active step">
                                 <div>
-                                    <p class="project-hint"></p>
+                                    <p class="project-hint" style="margin-left: 470px;"></p>
+                                    <label for="projectId">选择项目：</label>
+                                    <select id="projectId" name="projectId" style="height:35px;">
+                                    </select>
+                                </div>
+                                <div class="">
+                                    <button type="button" class="confirm-create next-step" openTab="confirm-create">
+                                        下一步
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!--选择网络-->
+                            <div class="select-mesh-step  step">
+                                <div>
+                                    <p class="project-hint" style="margin-left: 470px;"></p>
                                     <label for="mid">选择网络：</label>
                                     <select id="mid" name="mid" style="height:35px;">
-                                        <option value="">请选择网络</option>
+                                        <!--<option value="">请选择网络</option>-->
                                     </select>
                                 </div>
                                 <div>
@@ -69,6 +95,7 @@
                                     <input type="text" id="meshId" readonly>
                                 </div>
                                 <div class="">
+                                    <button type="button" class="back-btn">上一步</button>
                                     <button type="button" class="confirm-create" openTab="confirm-create">下一步</button>
                                 </div>
                             </div>
@@ -76,10 +103,10 @@
                             <!--选择区域-->
                             <div class="select-place-step step">
                                 <div>
-                                    <p class="place-hint"></p>
+                                    <p class="place-hint" style="margin-left: 470px;"></p>
                                     <label for="place">选择区域：</label>
                                     <select id="place" name="pid" style="height:35px;">
-                                        <option value="">请选择区域</option>
+                                        <!--<option value="">请选择区域</option>-->
                                     </select>
                                 </div>
 
@@ -92,7 +119,7 @@
                             <!--输入组名-->
                             <div class="select-group-step step">
                                 <div>
-                                    <p class="group-hint"></p>
+                                    <p class="group-hint" style="margin-left: 470px;"></p>
                                     <label for="group">组名：</label>
                                     <input type="text" id="group" placeholder="请输入（2-16 位汉字、字母、数字）">
                                 </div>
@@ -101,7 +128,6 @@
                                     <button type="button" class="confirm-create" openTab="confirm-create">完成</button>
                                 </div>
                             </div>
-
                         </form>
                     </div>
                 </div>
@@ -125,188 +151,125 @@
 <script type="text/javascript" src="/alink-hq/static/js/jquery.min.js"></script>
 <script type="text/javascript" src="/alink-hq/static/js/left.js"></script>
 <script src="/alink-hq/static/js/moment.js"></script>
-<script  src="/alink-hq/static/js/selectivizr.js"></script>
-<script  src="/alink-hq/static/js/html5shiv.js"></script>
+
 <script th:inline="javascript">
-    var mid = [[${dict.mid}]];
-    var projectId = [[${dict.projectId}]];
-    var pid, meshId, gid;
+
     $(function () {
-        $.getJSON("/alink-hq/group/getMesh", {"projectId": projectId}, function (json) {
-            $.each(json, function (i, item) {
-                var id = item.id;
-                if (id.substr(0, id.indexOf("_")) == mid) {
-                    $("#mid").append("<option value='" + item.id + "' selected readonly>" + item.label + "</option>");
-                }
-                else {
-                    $("#mid").append("<option value='" + item.id + "'>" + item.label + "</option>");
-                }
-            });
-            var str = $("#mid option:selected").val();
-            $("#meshId").val(str.substr(0, str.indexOf("_")));
-            $("#mid").change(function () {
-                mid = $("#mid option:selected").val();
-                if (mid == '') {
-                    $('.project-hint').text('请选择网络');
-                } else {
-                    $('.project-hint').text('');
-                }
-                meshId = mid.substr(mid.indexOf("_") + 1);
-                $("#meshId").val(meshId);
-            })
-        })
-        //第二步跳转到第一步，返回第一个页面
-        $('.select-place-step .back-btn').click(function () {
-            pid = $("#place option:selected").val();
-            console.log(mid, pid, gid);
-            if (!pid || pid == '') {
-                var two = 'no';
+        var uid = [[${session.user.id}]];
+        var mid = [[${dict.mid}]];
+        var projectId = [[${dict.projectId}]];
+        var gname = '';
+        var pid = '';
+        mid = mid1(mid);
+        projectId = projectId1(projectId);
+        pid = pid1(pid);
+        gname = gname1(gname);
+        $.getJSON('/alink-hq/mesh/getProjects', {"uid": uid}, function (data) {
+            var content = '<option value="">请选择项目</option>';
+            if (data.length == 1) {
+                content = '<option value="' + data[0].id + '">' + data[0].label + '</option>'
             } else {
-                var two = 'is';
+                $.each(data, function (i, val) {
+                    content += '<option value="' + val.id + '">' + val.label + '</option>';
+                })
             }
-            if (gid) {
-                var three = 'is';
-            } else {
-                var three = 'no';
-            }
-            var one = 'on';
-//            if (mid) {
-//                var one = 'is';
-//            } else {
-//                var one = 'on';
-//            }
-            var step = 'mesh';
-            show(step);
-            stepSkip(one, two, three);
+            $('#projectId').append(content);
         })
+
+
         //第一步跳转第二步时,第三步返回第二步时,同时显示第二步页面
         $('.select-mesh-step .confirm-create').click(function () {
             mid = $("#mid option:selected").val();
             var id = mid.substr(0, mid.indexOf("_"));
-            var two = 'on';
             if (mid == '' || !mid) {
-                var one = 'no';
                 $('.project-hint').text('请选择网络');
             } else {
                 $('.project-hint').text('');
-                var one = 'is';
                 var step = 'place';
-                show(step);
-                console.log(id, mid, pid, gid);
-                if (pid && pid != '') {
-//                    var two = 'is';
-                    $("#place option:selected").val(pid);
-                    $.getJSON("/alink-hq/group/getPlace", {"mid": id}, function (json) {
-                        if (json != '') {
-                            $("#place option:first").siblings().remove();
-                        }
+                step1(step, projectId, mid, pid, gname)
+                $('#place ').empty();
+                $.getJSON("/alink-hq/group/getPlace", {"mid": id}, function (json) {
+                    var content = '<option value="">请选择区域</option>';
+                    if (json.length == 1) {
+                        content = '<option value="' + json[0].id + '">' + json[0].label + '</option>';
+                    } else {
                         $.each(json, function (i, item) {
                             if (item.id == pid) {
-                                $("#place").append("<option value='" + item.id + "' selected>" + item.label + "</option>")
+                                content += "<option value='" + item.id + "' selected>" + item.label + "</option>";
                             } else {
-                                $("#place").append("<option value='" + item.id + "'>" + item.label + "</option>")
+                                content += "<option value='" + item.id + "'>" + item.label + "</option>";
                             }
                         })
-                    })
-                } else {
-//                    var two = 'on';
-                    $.getJSON("/alink-hq/group/getPlace", {"mid": id}, function (json) {
-                        if (json != '') {
-                            $("#place option:first").siblings().remove();
-                        }
-                        $.each(json, function (i, item) {
-                            $("#place").append("<option value='" + item.id + "'>" + item.label + "</option>")
-                        })
-                    })
-                }
-                if (gid && gid != '') {
-                    var three = 'is';
-                } else {
-                    var three = 'no';
-                }
-                console.log(one, two, three)
-                stepSkip(one, two, three);
+                    }
+                    $("#place").append(content)
+                })
             }
-        })
-        //第三步跳转第二步时，同时显示第二步页面
-        $('.select-group-step .back-btn').click(function () {
-            gid = $('#group').val();
-            console.log(mid, pid, gid);
-            if (!gid || gid == '') {
-                var three = 'no';
-            } else {
-                var three = 'is';
-            }
-            var step = 'place';
-            show(step);
-//            if (pid && pid != '') {
-//                var two = 'is';
-//            } else {
-//                var two = 'on';
-//            }
-            var two = 'on';
-            if (mid && mid != '') {
-                var one = 'is';
-            } else {
-                var one = 'no';
-            }
-            stepSkip(one, two, three);
-        })
 
-        //第二步跳转第三步时,同时显示第三步页面
-        $('.select-place-step .confirm-create').click(function () {
-            pid = $("#place option:selected").val();
-            console.log(mid, pid, gid);
-            if (!pid || pid == '') {
-                var two = 'no';
-                $('.place-hint').text('请选择区域');
-            } else {
-                $('.place-hint').text('');
-                var two = 'is';
-                var step = 'group';
-                show(step);
-                if (mid && mid != '') {
-                    var one = 'is';
-                } else {
-                    var one = 'on';
-                }
-//                if (gid && gid != '') {
-//                    var three = 'is';
-//                } else {
-//                    var three = 'on';
-//                }
-                var three = 'on';
-                console.log(one, two, three)
-                stepSkip(one, two, three);
-            }
         })
+        $('.select-project-step .confirm-create').click(function () {
+                    projectId = $('#projectId option:selected').val();
+                    if (projectId == '' || !projectId) {
+                        $('.project-hint').text('请选择项目');
+                    } else {
+                        $('.project-hint').text('');
+                        var step = 'mesh';
+                        step1(step, projectId, mid, pid, gname)
+                        $('#mid ').empty();
+                        $.getJSON("/alink-hq/group/getMesh", {"projectId": projectId}, function (json) {
+                            var content = '<option value="">请选择网络</option>';
+                            if (json.length == 1) {
+                                content = '<option value="' + json[0].id + '">' + json[0].label + '</option>';
+                            } else {
+                                $.each(json, function (i, item) {
+                                    var id = item.id;
+                                    if (id.substr(0, id.indexOf("_")) == mid) {
+                                        content += "<option value='" + item.id + "' selected>" + item.label + "</option>";
+                                    } else {
+                                        content += "<option value='" + item.id + "'>" + item.label + "</option>";
+
+                                    }
+                                });
+                            }
+                            $("#mid").append(content);
+                            var str = $("#mid option:selected").val();
+                            $("#meshId").val(str.substr(0, str.indexOf("_")));
+                            $("#mid").change(function () {
+                                mid = $("#mid option:selected").val();
+                                if (mid == '') {
+                                    $('.project-hint').text('请选择网络');
+                                } else {
+                                    $('.project-hint').text('');
+                                }
+                                meshId = mid.substr(mid.indexOf("_") + 1);
+                                $("#meshId").val(meshId);
+                            })
+                        })
+                    }
+                }
+        )
         //输入组的确定
         $('.select-group-step .confirm-create').click(function () {
-            gid = $('#group').val();
-            console.log(mid, pid, gid);
+            gname = $('#group').val();
             var regName = /^[a-zA-Z0-9\u4e00-\u9fa5]{2,16}$/;
-            var groupResult = regName.test(gid);
+            var groupResult = regName.test(gname);
             var mids = mid.substr(0, mid.indexOf("_"));
-            if (gid && gid != '' && groupResult) {
+            if (gname && gname != '' && groupResult) {
                 $('.group-hint').text('');
                 $.ajax({
                     type: "post",
                     url: "/alink-hq/group/save",
-                    data: {"mid": mids, "pid": pid, "name": gid},
+                    data: {"mid": mids, "pid": pid, "name": gname},
                     success: function (res) {
                         if (res == 'ok') {
                             $('#preload-anim').addClass('active');
                             $('#preload-anim .title').text('创建成功！');
-                            setInterval(function () {
-                                $('#preload-anim').removeClass('active');
-                                location.href = '/alink-hq/group/list?mid=' + mids;
-                            }, 1000)
+                            location.href = '/alink-hq/group/list?mid=' + mids;
                         } else if (res == 'fail') {
                             $('.group-hint').text('已存在，请重新输入');
                         } else {
                             $('#preload-anim').addClass('active');
                             $('#preload-anim .title').text('加载失败，请重新尝试');
-                            setInterval(function () {
+                            setTimeout(function () {
                                 $('#preload-anim').removeClass('active');
                             }, 1000)
                         }
@@ -316,17 +279,32 @@
                 $('.group-hint').text('请输入（2-16 位汉字、字母、数字）');
             }
         })
+        //第二步跳转到第一步，返回第一个页面
+        $('.select-mesh-step .back-btn').click(function () {
+            var step = 'project';
+            step1(step, projectId, mid, pid, gname)
+        })
+        //第三步跳转第二步时，同时显示第二步页面
+        $('.select-group-step .back-btn').click(function () {
+            var step = 'place';
+            step1(step, projectId, mid, pid, gname)
+        })
+        $('.select-place-step .back-btn').click(function () {
+            var step = 'mesh';
+            step1(step, projectId, mid, pid, gname)
+        })
+        //第二步跳转第三步时,同时显示第三步页面
+        $('.select-place-step .confirm-create').click(function () {
+            pid = $("#place option:selected").val();
+            if (pid == '') {
+                $('.place-hint').text('请选择区域');
+            } else {
+                $('.place-hint').text('');
+                var step = 'group';
+                step1(step, projectId, mid, pid, gname)
+            }
+        })
     })
-    //步骤背景色改变
-    function stepSkip(one, two, three) {
-        $('#one-step').attr('src', '/alink-hq/static/img/fill-1-' + one + '.png');
-        $('#two-step').attr('src', '/alink-hq/static/img/fill-2-' + two + '.png');
-        $('#three-step').attr('src', '/alink-hq/static/img/fill-3-' + three + '.png');
-    }
-    //步骤显示
-    function show(step) {
-        $('.select-' + step + '-step').addClass('active').siblings('.step').removeClass('active');
-    }
 
     $("#group").bind("input propertychange", function () {
         var groupId = $('#group').val();
@@ -338,14 +316,81 @@
             $('.group-hint').text('请输入（2-16 位汉字、字母、数字）')
         }
     })
-    $("#place").change(function () {
-        var pid = $("#place option:selected").val();
-        if (pid == '') {
-            $('.place-hint').text('请选择区域');
-        } else {
-            $('.place-hint').text('');
+
+    function step1(step, projectId, mid, pid, gname) {
+        $('.select-' + step + '-step').addClass('active').siblings('.step').removeClass('active');
+        var img = $('.' + step).find('img').attr('src');
+        var img1 = img.substr(-6, 2);
+        var img2 = img.replace(img1, 'on');
+        $('.' + step).find('img').attr('src', img2);
+        mid = mid1(mid);
+        projectId = projectId1(projectId);
+        pid = pid1(pid);
+        gname = gname1(gname);
+        if (step != 'project') {
+            if (projectId && projectId != '') {
+                $('#one-step').attr('src', '/alink-hq/static/img/fill-1-is.png');
+            } else {
+                $('#one-step').attr('src', '/alink-hq/static/img/fill-1-no.png');
+            }
         }
-    })
+        if (step != 'mesh') {
+            if (mid && mid != '') {
+                $('#two-step').attr('src', '/alink-hq/static/img/fill-2-is.png');
+            } else {
+                $('#two-step').attr('src', '/alink-hq/static/img/fill-2-no.png');
+            }
+        }
+        if (step != 'place') {
+            if (pid && pid != '') {
+                $('#three-step').attr('src', '/alink-hq/static/img/fill-3-is.png');
+            } else {
+                $('#three-step').attr('src', '/alink-hq/static/img/fill-3-no.png');
+            }
+        }
+        if (step != 'group') {
+            if (gname && gname != '') {
+                $('#four-step').attr('src', '/alink-hq/static/img/fill-4-is.png');
+            } else {
+                $('#four-step').attr('src', '/alink-hq/static/img/fill-4-no.png');
+            }
+        }
+    }
+
+    function projectId1(projectId) {
+        if ($('#projectId option:selected').length > 0) {
+            projectId = $('#projectId option:selected').val();
+        } else {
+            projectId = '';
+        }
+        return projectId;
+    }
+
+    function mid1(mid) {
+        if ($('#mid option:selected').length > 0) {
+            mid = $('#mid option:selected').val();
+        } else {
+            mid = '';
+        }
+        return mid;
+    }
+    function pid1(pid) {
+        if ($('#place option:selected').length > 0) {
+            pid = $('#place option:selected').val();
+        } else {
+            pid = '';
+        }
+        return pid;
+    }
+
+    function gname1(gname) {
+        if ($('#group').val().length > 0) {
+            gname = $('#group').val();
+        } else {
+            gname = '';
+        }
+        return gname;
+    }
 </script>
 </body>
 </html>

@@ -36,15 +36,15 @@
                     </div>
                     <div class="a-content">
                         <div>
-                        <span class="icon" style="width: 63px;">
-                            <i class="dot-no"></i>
-                            <img style="width: 28px;height: 27px" src="/alink-hq/static/img/password1.png" alt=""/>
-                        </span>
-                            <span class="title">账号</span>
-                            <span th:text="${myAccount.getAccount()}"></span>
-                        <span>
-                            <a th:href="@{pwd}" tab="myAccount/pwd">修改密码</a>
-                        </span>
+                            <span class="icon" style="width: 63px;">
+                                <i class="dot-no"></i>
+                                <img style="width: 28px;height: 27px" src="/alink-hq/static/img/password1.png" alt=""/>
+                            </span>
+                                <span class="title">账号</span>
+                                <span th:text="${myAccount.getAccount()}"></span>
+                            <span>
+                                <a th:href="@{pwd}" tab="myAccount/pwd">修改密码</a>
+                            </span>
                         </div>
                         <div>
                             <span class="icon" style="width: 63px;">
@@ -81,24 +81,37 @@
                     </span>
                         </div>
                         <div>
-                    <span class="icon" style="width: 63px;"><i
-                            th:class="${myAccount.getEmail()==null or #strings.isEmpty(myAccount.getEmail())}?'dot':'dot-no'"
-                            style="margin-right: 13px;"></i><img
-                            src="/alink-hq/static/img/email1.png" alt=""/></span>
-                            <span class="title">邮箱</span>
-                            <span th:text="${myAccount.getEmail()==null or #strings.isEmpty(myAccount.getEmail())}?'未填写':${myAccount.getEmail()}"></span>
-                    <span>
-                        <a th:if="${myAccount.getEmail()==null or #strings.isEmpty(myAccount.getEmail())}"
-                           th:href="@{fillEmail(flag=0)}">绑定邮箱</a>
-                        <a th:href="@{modifiEmail(flag=1)}"
-                           th:if="${myAccount.getEmail()!=null and !#strings.isEmpty(myAccount.getEmail())}">修改邮箱</a>
-                    </span>
-                    <span>
-                        <ul>
-                            <li>绑定邮箱可以进行账号登录</li>
-                            <li>密码丢失时可以通过绑定的邮箱轻松找回</li>
-                        </ul>
-                    </span>
+                            <span class="icon" style="width: 63px;"><i
+                                    th:class="${myAccount.getEmail()==null or #strings.isEmpty(myAccount.getEmail())}?'dot':'dot-no'"
+                                    style="margin-right: 13px;"></i><img
+                                    src="/alink-hq/static/img/email1.png" alt=""/></span>
+                                    <span class="title">邮箱</span>
+                                    <span th:text="${myAccount.getEmail()==null or #strings.isEmpty(myAccount.getEmail())}?'未填写':${myAccount.getEmail()}"></span>
+                            <span>
+                                <a th:if="${myAccount.getEmail()==null or #strings.isEmpty(myAccount.getEmail())}"
+                                   th:href="@{fillEmail(flag=0)}">绑定邮箱</a>
+                                <a th:href="@{modifiEmail(flag=1)}"
+                                   th:if="${myAccount.getEmail()!=null and !#strings.isEmpty(myAccount.getEmail())}">修改邮箱</a>
+                            </span>
+                            <span>
+                                <ul>
+                                    <li>绑定邮箱可以进行账号登录</li>
+                                    <li>密码丢失时可以通过绑定的邮箱轻松找回</li>
+                                </ul>
+                            </span>
+                        </div>
+                        <div>
+                            <span class="icon" style="width: 63px;">
+                                <i class="dot-no"></i>
+                                <img style="width: 28px;height: 27px" src="/alink-hq/static/img/password1.png" alt=""/>
+                            </span>
+                            <span class="title">隶属公司</span>
+                            <span
+                            ><a style="cursor: pointer; text-decoration:none" th:text="${computeInfo.coname}"
+                                th:href="@{/cooperate/info(id=${computeInfo.id})}"></a></span>
+                            <!--<span>-->
+                                <!--<a th:href="@{pwd}" tab="myAccount/pwd">修改密码</a>-->
+                            <!--</span>-->
                         </div>
                     </div>
                 </div>
@@ -110,8 +123,7 @@
 <script src="/alink-hq/static/myAccount/js/jquery-3.3.1.min.js"></script>
 <script type="text/javascript" src="/alink-hq/static/js/left.js"></script>
 <script src="/alink-hq/static/myAccount/js/common.js"></script>
-<script  src="/alink-hq/static/js/selectivizr.js"></script>
-<script  src="/alink-hq/static/js/html5shiv.js"></script>
+
 </body>
 
 </html>
