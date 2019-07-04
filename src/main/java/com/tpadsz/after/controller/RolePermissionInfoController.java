@@ -47,7 +47,6 @@ public class RolePermissionInfoController {
 //        model.addAttribute("users",users);
 //        model.addAttribute("rolePermissions",rolePermissions);
         model.addAttribute("rolePermissionList",rolePermissionList);
-        model.addAttribute("test","test2");
         return "roleManage/roleDetail";
     }
 
