@@ -686,7 +686,7 @@
             }
             //创建账号
             if (permissionName == 'createUserAdmin'){
-                $(".singleListChecked singleRoleChecked admin-role").prop('checked',true);
+                $(".singleListChecked.singleRoleChecked.admin-role").prop('checked',true);
             }
             if (permissionName == 'createUserManager'){
                 $("input.singleListChecked.singleRoleChecked.manage-role").prop('checked',true);
@@ -810,6 +810,6 @@
 //        $("#coorManage input.isAllRadio:radio").prop("checked",$("#coorManage input.singleIsRadio:radio").length==$("#coorManage input.singleIsRadio:radio:checked").length);
     })
 </script>
-<script th:src="@{/static/js/roleDetail2.js}"></script>
+<script th:src="@{/static/js/roleDetail2.js}" th:inline="javascript"></script>
 </body>
 </html>

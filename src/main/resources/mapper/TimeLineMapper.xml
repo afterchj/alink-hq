@@ -132,7 +132,7 @@
         	s.sname,
         	s.scene_id
         FROM
-        	( SELECT tsid, sid, hour,minute FROM f_time_point WHERE sid not IN ( 21, 22 ) AND tsid = #{id} ) p,
+        	( SELECT tsid, sid, hour,minute FROM f_time_point WHERE sid not IN ( -1, -2 ) AND tsid = #{id} ) p,
         	f_scene s
         WHERE p.sid = s.id UNION all
         SELECT
@@ -141,13 +141,13 @@
         	sid
 --         	WHEN '0' THEN 'ON'
 --         	WHEN '1' THEN 'OFF'
-        	WHEN '21' THEN 'ALl OFF'
-        	WHEN '22' THEN 'ALL ON'
+        	WHEN -1 THEN 'ALl OFF'
+        	WHEN -2 THEN 'ALL ON'
         	END AS state,
         	NULL AS sname,
         	NULL as scene_id
         FROM f_time_point
-        WHERE sid IN ( 21, 22 ) AND tsid = #{id}
+        WHERE sid IN ( -1, -2 ) AND tsid = #{id}
         ORDER BY time
 
     </select>
