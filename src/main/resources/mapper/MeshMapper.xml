@@ -15,7 +15,7 @@
         m.project_id,
         m.mname,
         m.mesh_id,
-        m.mesh_type,
+        IFNULL(m.mesh_type,'家庭照明') mesh_type,
         p.name,
        	IFNULL(pl.pcount,0) pcount,
 	    IFNULL(s.scount,0) scount
