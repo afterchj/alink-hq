@@ -9,37 +9,46 @@
 <div class="f-l main-left" th:fragment="left(list)" style="width: 220px;">
     <ul>
         <li class="one-list active ">
-            <div class="p-r">
-                <a th:href="@{/project/list}" tab="projectManage">项目管理</a>
+            <div shiro:hasPermission="viewProject" class="p-r">
+                <a  th:href="@{/project/list}" tab="projectManage">项目管理</a>
                 <img src="/alink-hq/static/img/left-reduce.png" alt="" class="p-a on-off-triangle">
             </div>
             <ul class=" two-list">
-                <li th:if="${list}=='projectList'" tab="projectList" class="active"><a
+                <li shiro:hasPermission="viewProject" th:if="${list}=='projectList'" tab="projectList" class="active"><a
                         th:href="@{/project/list}">项目列表</a></li>
-                <li th:if="${list}!='projectList'" tab="projectList"><a th:href="@{/project/list}">项目列表</a></li>
-                <li th:if="${list}=='meshList'" tab="meshList" class="active"><a th:href="@{/mesh/list}">网络列表</a></li>
-                <li th:if="${list}!='meshList'" tab="meshList"><a th:href="@{/mesh/list}">网络列表</a></li>
-                <li th:if="${list}=='placeList'" tab="placeList" class="active"><a
+                <li shiro:hasPermission="viewProject" th:if="${list}!='projectList'" tab="projectList"><a
+                        th:href="@{/project/list}">项目列表</a></li>
+                <li shiro:hasPermission="viewMesh" th:if="${list}=='meshList'" tab="meshList" class="active"><a
+                        th:href="@{/mesh/list}">网络列表</a></li>
+                <li shiro:hasPermission="viewMesh" th:if="${list}!='meshList'" tab="meshList"><a
+                        th:href="@{/mesh/list}">网络列表</a></li>
+                <li shiro:hasPermission="viewPlace" th:if="${list}=='placeList'" tab="placeList" class="active"><a
                         th:href="@{/place/list(mid=0)}">区域列表</a></li>
-                <li th:if="${list}!='placeList'" tab="placeList"><a th:href="@{/place/list(mid=0)}">区域列表</a></li>
-                <li th:if="${list}=='groupList'" tab="groupList" class="active"><a
+                <li shiro:hasPermission="viewPlace" th:if="${list}!='placeList'" tab="placeList"><a
+                        th:href="@{/place/list(mid=0)}">区域列表</a></li>
+                <li shiro:hasPermission="viewGroup" th:if="${list}=='groupList'" tab="groupList" class="active"><a
                         th:href="@{/group/list(mid=0)}">组列表</a></li>
-                <li th:if="${list}!='groupList'" tab="groupList"><a th:href="@{/group/list(mid=0)}">组列表</a></li>
-                <li th:if="${list}=='lightList'" tab="lightList" class="active"><a
+                <li shiro:hasPermission="viewGroup" th:if="${list}!='groupList'" tab="groupList"><a
+                        th:href="@{/group/list(mid=0)}">组列表</a></li>
+                <li shiro:hasPermission="viewLight" th:if="${list}=='lightList'" tab="lightList" class="active"><a
                         th:href="@{/light/list(mid=0)}">灯列表</a></li>
-                <li th:if="${list}!='lightList'" tab="lightList"><a th:href="@{/light/list(mid=0)}">灯列表</a></li>
+                <li shiro:hasPermission="viewLight" th:if="${list}!='lightList'" tab="lightList"><a
+                        th:href="@{/light/list(mid=0)}">灯列表</a></li>
             </ul>
         </li>
-        <li shiro:hasAnyRoles="super,admin" class="one-list active">
+        <li shiro:hasPermission="viewCooperation" class="one-list active">
             <div class="p-r">
                 <a th:href="@{/account/list}" tab="userManage">合作管理</a>
                 <img src="/alink-hq/static/img/left-reduce.png" alt="" class="p-a on-off-triangle">
             </div>
             <ul class=" two-list ">
-                <li tab="cooperateList" th:if="${list}=='cooperateList'" class="active"><a th:href="@{/cooperate/list}">合作列表</a></li>
-                <li tab="cooperateList" th:if="${list}!='cooperateList'"><a th:href="@{/cooperate/list}">合作列表</a></li>
-                <li tab="cooperateInfo" th:if="${list}!='cooperateInfo'"><a th:href="@{/cooperate/create}">公司信息录入</a></li>
-                <li tab="cooperateInfo" th:if="${list}=='cooperateInfo'" class="active"><a th:href="@{/cooperate/create}">公司信息录入</a></li>
+                <li shiro:hasPermission="viewCooperation" tab="cooperateList" th:if="${list}=='cooperateList'" class="active"><a th:href="@{/cooperate/list}">合作列表</a></li>
+                <li shiro:hasPermission="viewCooperation" tab="cooperateList" th:if="${list}!='cooperateList'"><a
+                        th:href="@{/cooperate/list}">合作列表</a></li>
+                <li shiro:hasPermission="createCooperation" tab="cooperateInfo" th:if="${list}!='cooperateInfo'"><a th:href="@{/cooperate/create}">公司信息录入
+                </a></li>
+                <li shiro:hasPermission="createCooperation" tab="cooperateInfo" th:if="${list}=='cooperateInfo'" class="active"><a
+                        th:href="@{/cooperate/create}">公司信息录入</a></li>
                 <!--<li tab="cooperateInfo" th:if="${list}!='cooperateInfo'"><a th:href="@{/cooperate/create}">公司信息详情</a></li>-->
                 <!--<li tab="cooperateInfo" th:if="${list}=='cooperateInfo'" class="active"><a th:href="@{/cooperate/create}">公司信息详情</a></li>-->
             </ul>
@@ -56,30 +65,36 @@
         <!--<li th:if="${list}!='timerDetail'" tab="timerDetail" ><a th:href="@{/timer/detail}">定时详情</a></li>-->
         <!--</ul>-->
         <!--</li>-->
-        <li shiro:hasAnyRoles="super,admin,manager" class="one-list active">
+        <li shiro:hasPermission="viewUser" class="one-list active">
             <div class="p-r">
                 <a th:href="@{/account/list}" tab="userManage">用户管理</a>
                 <img src="/alink-hq/static/img/left-reduce.png" alt="" class="p-a on-off-triangle">
             </div>
             <ul class=" two-list ">
-                <li th:if="${list}=='userList'" tab="userList" class="active"><a th:href="@{/account/list}">用户列表</a>
+                <li shiro:hasPermission="viewUser" th:if="${list}=='userList'" tab="userList"
+                    class="active"><a th:href="@{/account/list}">用户列表</a>
                 </li>
-                <li th:if="${list}!='userList'" tab="userList"><a th:href="@{/account/list}">用户列表</a></li>
-                <li th:if="${list}=='createAccount'" tab="createAccount" class="active"><a
+                <li shiro:hasPermission="viewUser" th:if="${list}!='userList'" tab="userList"><a
+                        th:href="@{/account/list}">用户列表</a></li>
+                <li shiro:hasPermission="createUser" th:if="${list}=='createAccount'" tab="createAccount"
+                    class="active"><a
                         th:href="@{/account/createAccount}">创建账号</a></li>
-                <li th:if="${list}!='createAccount'" tab="createAccount"><a th:href="@{/account/createAccount}">创建账号</a>
+                <li shiro:hasPermission="createUser" th:if="${list}!='createAccount'" tab="createAccount"><a
+                        th:href="@{/account/createAccount}">创建账号</a>
                 </li>
             </ul>
         </li>
 
-        <li shiro:hasAnyRoles="super,admin,manager" class="one-list active">
+        <li shiro:hasPermission="viewRole" class="one-list active">
             <div class="p-r">
                 <a th:href="@{/role/list}" tab="userManage">角色管理</a>
                 <img src="/alink-hq/static/img/left-reduce.png" alt="" class="p-a on-off-triangle">
             </div>
             <ul class=" two-list ">
-                <li th:if="${list}=='roleList'" tab="roleList" class="active"><a th:href="@{/role/list}">角色列表</a>
-                <li th:if="${list}!='roleList'" tab="roleList"><a th:href="@{/role/list}">角色列表</a></li>
+                <li shiro:hasPermission="viewRole" th:if="${list}=='roleList'" tab="roleList" class="active"><a
+                        th:href="@{/role/list}">角色列表</a>
+                <li shiro:hasPermission="viewRole" th:if="${list}!='roleList'" tab="roleList"><a
+                    th:href="@{/role/list}">角色列表</a></li>
                 <!--<li th:if="${list}=='createRole'" tab="createRole" class="active"><a th:href="@{/role/createRole}">创建角色</a>-->
                 <!--<li th:if="${list}!='createRole'" tab="createRole"><a th:href="@{/role/createRole}">创建角色</a></li></li>-->
                 <!--<li tab="createRole" class="active"><a th:href="@{/role/createRole}">创建角色</a></li>-->

@@ -1,6 +1,6 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <script src="/alink-hq/static/js/browser.js"></script>
@@ -22,7 +22,7 @@
             <div class="clearfix main-right-nav">
                 <div class="f-l main-right-title">项目列表</div>
                 <div class="f-r pointer last-nav">
-                    <a th:href="@{/project/createProject}"   shiro:hasAnyPermission ="createProject">
+                    <a th:href="@{/project/createProject}" shiro:hasAnyPermission ="createProject">
                         <div class="create" onmousedown="createBtnMouseDown()" onmouseup="createBtnMouseUp()">
                             <span>+</span><span>创建项目</span></div>
                     </a>
