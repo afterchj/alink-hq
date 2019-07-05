@@ -24,7 +24,7 @@
         m.mesh_id,
         IF( t.item_set = '1', '启用', '停用' ) state,
         t.WEEK,
-        t.dayObj,
+        t.dayObj
     </sql>
 
     <sql id="TimeLineWhere">
