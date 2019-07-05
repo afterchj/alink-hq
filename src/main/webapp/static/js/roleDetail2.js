@@ -46,6 +46,4 @@ $(function () {
             $('#preload-anim .title').text('');
         },2000)
     }
-
-
 })
