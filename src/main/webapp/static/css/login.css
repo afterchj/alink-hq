@@ -71,7 +71,7 @@ body,html {
     height: 50%;
     text-align: center;
     white-space: nowrap;
-    font-size: 23px
+    font-size: 22px
 }
 
 .content .login-in-box-l,.content .login-in-box-r {
@@ -84,8 +84,8 @@ body,html {
 }
 
 .content .login-in-box-l.active,.content .login-in-box-r.active {
-    border-bottom: 4px solid #0066b6;
-    color: #005293
+    border-bottom: 4px solid #107bd0;
+    color: #107bd0
 }
 
 .content .login-in-box-tab-content input {
