@@ -4,12 +4,10 @@
 //日期选择
 laydate.render({
     elem: '#start-time',
-    // type: 'datetime',
     range: true
 });
 laydate.render({
     elem: '#end-time',
-    // type: 'datetime',
     range: true
 });
 
@@ -205,16 +203,9 @@ $(function () {
     var deleteArray=[];
     //重命名弹框
     $('.reset-name').click(function () {
+        $('#rename').val('');
         projectId = parseInt($(this).parent().siblings('.checkbox ').find('input[type=checkbox]').val());
         account = $(this).parent().siblings('.project-account').text();
-        // $('div[openContent="reset-name"]').addClass('active');
-        // var width = window.screen.width;
-        // var height = window.screen.height;
-        // $('.hide-iframe').addClass('active');
-        // $('.hide-iframe').css({
-        //     'width': width,
-        //     'height': height
-        // })
         var selector= $('div[openContent="reset-name"]');
         selector.addClass('active');
         adjust(selector)
@@ -259,14 +250,6 @@ $(function () {
         }
         deleteArray.push(msg);
         if(deleteArray.length!=0){
-            // $('div[openContent="delete-project"]').addClass('active');
-            // var width = window.screen.width;
-            // var height = window.screen.height;
-            // $('.hide-iframe').addClass('active');
-            // $('.hide-iframe').css({
-            //     'width': width,
-            //     'height': height
-            // })
             var selector=$('div[openContent="delete-project"]');
             selector.addClass('active');
             adjust(selector)
@@ -282,7 +265,6 @@ $(function () {
             data: {projectInfo: newJsonArray},
             dataType: "json",
             success: function (res) {
-                // console.log(res);
                 if (res.result == '000') {
                     location.reload();
                     $('tbody tr td.checkbox input').prop('checked',false);
@@ -325,16 +307,7 @@ $(function () {
                 deleteArray.push(msg);
             }
         })
-        // console.log(deleteArray);
         if(deleteArray.length!=0){
-            // $('div[openContent="delete-project"]').addClass('active');
-            // var width = window.screen.width;
-            // var height = window.screen.height;
-            // $('.hide-iframe').addClass('active');
-            // $('.hide-iframe').css({
-            //     'width': width,
-            //     'height': height
-            // })
             var selector=$('div[openContent="delete-project"]');
             selector.addClass('active');
             adjust(selector)
@@ -354,7 +327,6 @@ $(function () {
                 var account = $(this).parent('td').siblings('.project-account').text();
                 var coname = $(this).parent('td').siblings('.project-coname').text();
                 var id = $(this).parent('td').siblings('.project-id').text();
-                // console.log(projectName, account, coname);
                 var msg = {
                     name: projectName,
                     account: account,
@@ -364,7 +336,6 @@ $(function () {
                 jsonArray.push(msg);
             }
         })
-        console.log(jsonArray);
         var newJsonArray = JSON.stringify(jsonArray);
         var projectInfo = encodeURIComponent(newJsonArray);
         if(jsonArray.length!=0){
@@ -375,9 +346,6 @@ $(function () {
     $('.pop-btn .reduce').click(function () {
         $('div[openContent="reset-name"]').removeClass('active');
         $('div[openContent="delete-project"]').removeClass('active');
-        // $('.hide-iframe').removeClass('active');
-        // var selector= $('div[openContent="reset-name"]');
-        // selector.removeClass('active')
         hideOverlay()
         deleteArray= [];
     })
@@ -403,29 +371,6 @@ $('.meshNum a').click(function(){
         $(this).prop('href','javascript:return false;');
     }
 })
-// $(function(){
-//     var height=$(document).height();
-//     $('.main-left').css('height',height);
-// })
-//paraName 等找参数的名称
-// function GetUrlParam(paraName) {
-//     var url = document.location.toString();
-//     var arrObj = url.split("?");
-//     if (arrObj.length > 1) {
-//         var arrPara = arrObj[1].split("&");
-//         var arr;
-//         for (var i = 0; i < arrPara.length; i++) {
-//             arr = arrPara[i].split("=");
-//             if (arr != null && arr[0] == paraName) {
-//                 return arr[1];
-//             }
-//         }
-//         return "";
-//     }
-//     else {
-//         return "";
-//     }
-// }
 
 function skipLimit() {
     var skipPage = parseInt($('#skipPage').val());

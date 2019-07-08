@@ -81,11 +81,11 @@
                                 <td></td>
                                 <td class="p-r" >
                                     <img src="/alink-hq/static/img/edit.png" th:alt="${scene.id}"
-                                         class="reset-name pointer" shiro:hasAnyPermission ="renameScene"
+                                         class="reset-name pointer" shiro:hasPermission ="renameScene"
                                          title="重命名">
                                     <img src="/alink-hq/static/img/un-rename.png" alt="" shiro:lacksPermission ="renameScene" class="pointer   unclick"
                                          th:title="无法操作">
-                                    <img src="/alink-hq/static/img/delete.png" alt="" shiro:hasAnyPermission ="deleteScene"  class="left-img pointer singleDel"
+                                    <img src="/alink-hq/static/img/delete.png" alt="" shiro:hasPermission ="deleteScene"  class="left-img pointer singleDel"
                                          title="删除">
                                     <img src="/alink-hq/static/img/un-delete.png"  shiro:lacksPermission ="deleteScene" alt="" class="pointer  left-img  unclick"
                                          th:title="无法操作">
@@ -100,7 +100,7 @@
                                 <span id="amount" class="amount">0</span>条数据
                             </span>
                             <span>
-                                <span shiro:hasAnyPermission ="deleteScene" class="skipPageBtn pointer moment" onmousedown="deleteBtnMouseDown()" onmouseup="deleteBtnMouseUp()" id="multiDel">删除</span>
+                                <span shiro:hasPermission ="deleteScene" class="skipPageBtn pointer moment" onmousedown="deleteBtnMouseDown()" onmouseup="deleteBtnMouseUp()" id="multiDel">删除</span>
                                 <span shiro:lacksPermission ="deleteScene" class="skipPageBtn active moment unclick1"  id="multiDel">删除</span>
                             </span>
                                     </div>
