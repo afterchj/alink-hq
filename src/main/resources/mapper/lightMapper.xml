@@ -119,7 +119,7 @@
         ORDER BY ls.update_date DESC
     </select>
     <select id="getSceneInfo" resultType="MeshInfo" parameterType="int">
-       SELECT
+        SELECT
             s.id,
             s.mid,
             s.scene_id,
