@@ -116,10 +116,13 @@ body,html {
     font-size: 18px;
     cursor: pointer
 }
-
+.content .login-in-box-tab-content button:hover{
+    border: 1px solid #1187CE;
+    background-color: #1187CE
+}
 .content .login-in-box-tab-content button.active {
-    border: 1px solid #005aa0;
-    background-color: #005aa0
+    border: 1px solid #1187CE;
+    background-color: #1187CE
 }
 
 .icon {
