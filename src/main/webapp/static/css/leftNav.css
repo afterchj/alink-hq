@@ -170,10 +170,12 @@
 .create:hover{
     background-color: #36A9E1;
     border-color: #36A9E1;
+    transition: all 0.2s ease-in-out;
 }
 .goBack:hover{
     color: #36A9E1;
     border-color: #36A9E1;
+    transition: all 0.2s ease-in-out;
 }
 .goBack {
     border: 2px solid #3598DB;
