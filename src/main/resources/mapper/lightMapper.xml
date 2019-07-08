@@ -119,11 +119,18 @@
         ORDER BY ls.update_date DESC
     </select>
     <select id="getSceneInfo" resultType="MeshInfo" parameterType="int">
-        SELECT s.id,s.mid,s.scene_id,s.sname, IFNULL(ls.x,'null') x,IFNULL(ls.y,'null') y FROM f_light l
-        LEFT JOIN f_light_setting ls ON ls.lid=l.id
-        INNER JOIN f_scene s ON l.mid=s.mid
-        WHERE l.id=#{id}
-        GROUP BY mid,sname
+       SELECT
+            s.id,
+            s.mid,
+            s.scene_id,
+            s.sname,
+            IFNULL(ls.x, 'null') x,
+            IFNULL(ls.y, 'null') y
+        FROM f_light l
+        INNER JOIN f_light_setting ls ON ls.lid = l.id
+        INNER JOIN f_scene s ON ls.sid = s.id
+        WHERE ls.lid = #{id}
+        GROUP BY l.id,sname
     </select>
     <select id="selectByLid" resultType="map" parameterType="list">
         SELECT
