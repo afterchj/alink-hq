@@ -41,12 +41,15 @@ public class RolePermissionInfoController {
 //        List<Map<String,String>> rolePermissions = roleManageService.getRolePermissions(account);
 //        List<String> rolePermissionList = roleManageService.getPermissionsByRid(rid);//点击角色的权限
         List<Map<String,String>> rolePermissionList = roleManageService.getPermissionsByRid(rid);//点击角色的权限
+//        List<String> permissionList = new ArrayList<>();
+//        rolePermissionList.stream().forEach(a->permissionList.add(a.get("permission_name")));
         model.addAttribute("permissions",permissions);
         model.addAttribute("rid",rid);
         model.addAttribute("roleName",roleName);
 //        model.addAttribute("users",users);
 //        model.addAttribute("rolePermissions",rolePermissions);
         model.addAttribute("rolePermissionList",rolePermissionList);
+//        model.addAttribute("permissionList",permissionList);
         return "roleManage/roleDetail";
     }
 

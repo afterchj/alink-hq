@@ -1,6 +1,6 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <script src="/alink-hq/static/js/browser.js"></script>
@@ -22,7 +22,7 @@
             <div class="clearfix main-right-nav">
                 <div class="f-l main-right-title">项目列表</div>
                 <div class="f-r pointer last-nav">
-                    <a th:href="@{/project/createProject}"   shiro:hasAnyPermission ="createProject">
+                    <a th:href="@{/project/createProject}" shiro:hasPermission ="createProject">
                         <div class="create" onmousedown="createBtnMouseDown()" onmouseup="createBtnMouseUp()">
                             <span>+</span><span>创建项目</span></div>
                     </a>
@@ -128,11 +128,11 @@
                             <td th:text="${project.create_date}"></td>
                             <td th:text="${project.update_date}"></td>
                             <td  class="p-r">
-                                <img shiro:hasAnyPermission ="renameProject" src="/alink-hq/static/img/edit.png" alt="" class="pointer reset-name" th:title="重命名">
+                                <img shiro:hasPermission ="renameProject" src="/alink-hq/static/img/edit.png" alt="" class="pointer reset-name" th:title="重命名">
                                 <img  shiro:lacksPermission ="renameProject" src="/alink-hq/static/img/un-rename.png" alt="" class="pointer  unclick" th:title="无法操作">
-                                <img shiro:hasAnyPermission ="moveProject" src="/alink-hq/static/img/exchange.png" alt="" class="center-img pointer exchange-project " th:title="移交项目">
+                                <img shiro:hasPermission ="moveProject" src="/alink-hq/static/img/exchange.png" alt="" class="center-img pointer exchange-project " th:title="移交项目">
                                 <img  shiro:lacksPermission ="moveProject" src="/alink-hq/static/img/un-exchange.png" alt="" class="center-img pointer  unclick" th:title="无法操作">
-                                <img  shiro:hasAnyPermission ="deleteProject" src="/alink-hq/static/img/delete.png" alt="" class="pointer delete-project" th:title="删除">
+                                <img  shiro:hasPermission ="deleteProject" src="/alink-hq/static/img/delete.png" alt="" class="pointer delete-project" th:title="删除">
                                 <img shiro:lacksPermission ="deleteProject" src="/alink-hq/static/img/un-delete.png" alt="" class="pointer   unclick" th:title="无法操作">
                             </td>
                         </tr>
@@ -148,13 +148,13 @@
                             <span class="m-r-20">
                                 <span shiro:lacksPermission ="moveProject" class="skipPageBtn  moment active unclick1"
                                       id="transfer-project">移交</span>
-                                <span shiro:hasAnyPermission ="moveProject" class="skipPageBtn pointer moment"
+                                <span shiro:hasPermission ="moveProject" class="skipPageBtn pointer moment"
                                       onmousedown="exchangeBtnMouseDown()" onmouseup="exchangeBtnMouseUp()"
                                       id="transfer-project">移交</span>
                             </span>
                             <span>
                                 <span  shiro:lacksPermission ="deleteProject" class="skipPageBtn  moment active unclick1" id="delete-project">删除</span>
-                                <span shiro:hasAnyPermission ="deleteProject" class="skipPageBtn pointer moment" onmousedown="deleteBtnMouseDown()" onmouseup="deleteBtnMouseUp()" id="delete-project">删除</span>
+                                <span shiro:hasPermission ="deleteProject" class="skipPageBtn pointer moment" onmousedown="deleteBtnMouseDown()" onmouseup="deleteBtnMouseUp()" id="delete-project">删除</span>
                             </span>
                                 </div>
                                 <div class="f-r page-right">

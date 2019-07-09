@@ -19,7 +19,7 @@ public interface RoleDao {
 
     int insertSelective(Role record);
 
-    String selectById(Integer uid);
+    String selectById(String uid);
 
     int updateByIdSelective(Role record);
 

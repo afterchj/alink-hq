@@ -208,6 +208,20 @@ $(function () {
                 })
             }
         }
+        if ($(this).attr('alt')=='createUser'){
+            //创建账号
+            if (!($(this).prop('checked'))){
+                //取消勾选
+                $(this).parent().next().find('input:checkbox').each(function () {
+                    //取消创建账号时的角色选择
+                    $(this).prop('checked',false);
+                })
+            }else {
+                //勾选
+                $(this).parent().next().find('input:checkbox:last').prop('checked',true);
+            }
+        }
+
 
     })
     //创建账号 查看角色权限
@@ -229,6 +243,8 @@ $(function () {
                 })
             }
         }
+        $("input.singleListChecked:checkbox[alt='createUser']").prop('checked',$("input[alt^='createUser'].singleRoleChecked:checked").length>0);
+
     })
 
 // //单选纵向

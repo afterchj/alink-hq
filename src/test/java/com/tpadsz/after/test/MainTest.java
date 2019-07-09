@@ -1,7 +1,10 @@
 package com.tpadsz.after.test;
 
 import com.alibaba.fastjson.JSON;
+import com.tpadsz.after.dao.MeshDao;
+import com.tpadsz.after.dao.RoleDao;
 import com.tpadsz.after.entity.OptionList;
+import com.tpadsz.after.entity.SearchDict;
 import com.tpadsz.after.entity.User;
 import com.tpadsz.after.service.GroupService;
 import com.tpadsz.after.service.MeshService;
@@ -66,25 +69,30 @@ public class MainTest {
 
     @Test
     public void testMesh() {
+        SqlSessionTemplate sqlSessionTemplate = getSqlSessionTemplate();
+        String role = sqlSessionTemplate.getMapper(RoleDao.class).selectById("1488");
+        logger.info("role=" + role);
+        SearchDict dict = new SearchDict();
+        dict.setUid("1488");
+        dict.setRole(role);
         Map map = new HashMap();
-        map.put("role", "manager");
-        map.put("uid", 18);
-        map.put("id", 307);
+        map.put("role", "user");
+        map.put("uid", 1488);
+//        map.put("id", 307);
 //        map.put("mid", 0);
-        map.put("name", "testNewType");
-        map.put("type", "家庭照明");
+//        map.put("name", "testNewType");
+//        map.put("type", "家庭照明");
 //        map.put("projectId", 248);
 //        map.put("pid", 4);
-        SqlSessionTemplate sqlSessionTemplate = getSqlSessionTemplate();
-        int count = sqlSessionTemplate.selectOne("com.tpadsz.after.dao.MeshDao.getCount", map);
+//        int count = sqlSessionTemplate.selectOne("com.tpadsz.after.dao.MeshDao.getCount", map);
 //        sqlSessionTemplate.selectOne("com.tpadsz.after.dao.MeshDao.save", map);
 //        logger.info("result=" + map.get("mid"));
-        logger.info("count=" + count);
+//        logger.info("count=" + count);
 
 //        int count = getSqlSessionTemplate().selectOne("com.tpadsz.after.dao.PlaceDao.getCount", map);
 //        logger.info(count);
 //        getSqlSessionTemplate().insert("com.tpadsz.after.dao.PlaceDao.save", map);
-//        List<Map> list = getSqlSessionTemplate().selectList("com.tpadsz.after.dao.MeshDao.getByMap", map);
+        List<Map> list = sqlSessionTemplate.getMapper(MeshDao.class).getByMap(dict);
 //        String role = getSqlSessionTemplate().selectOne("com.tpadsz.after.dao.RoleDao.selectById", 21);
 //        List<Role> roles = getSqlSessionTemplate().selectList("com.tpadsz.after.dao.RoleDao.getAll");
 //        OptionList optionList = sqlSessionTemplate.selectOne("com.tpadsz.after.dao.MeshDao.getProject", map);
@@ -106,7 +114,7 @@ public class MainTest {
 //        List<OptionList> lists = getSqlSessionTemplate().selectList("com.tpadsz.after.dao.GroupDao.getPlaces",map);
 //        logger.info("role=" + role);
 //        logger.info("roles=" + roles);
-//        logger.info("lists=" + lists.size());
+        logger.info("lists=" + list.size());
 //        logger.info("lists=" + JSON.toJSONString(info));
 //        logger.info("lists=" + JSON.toJSONString(meshInfo));
     }

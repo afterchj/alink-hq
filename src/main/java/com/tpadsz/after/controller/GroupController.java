@@ -9,6 +9,7 @@ import com.tpadsz.after.exception.RepetitionException;
 import com.tpadsz.after.service.GroupService;
 import com.tpadsz.after.service.MeshService;
 import com.tpadsz.after.service.RoleService;
+import com.tpadsz.after.utils.AppUtils;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -36,7 +37,9 @@ public class GroupController {
 
     @RequestMapping("/list")
     public String list(SearchDict dict, ModelMap modelMap) {
-        String role = roleService.selectById(dict.getUid());
+        String uid = AppUtils.getUserID();
+        String role = roleService.selectById(uid);
+        dict.setUid(uid);
         dict.setRole(role);
         PageHelper.startPage(dict.getPageNum(), dict.getPageSize());
         List<Map> meshList = groupService.getByMap(dict);

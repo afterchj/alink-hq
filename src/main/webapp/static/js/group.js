@@ -1,36 +1,22 @@
-/**
- * Created by hongjian.chen on 2019/4/24.
- */
-$(function () {
-    // var width = window.screen.width;
-    // var height = window.screen.height;
+$(function() {
     var id;
     var ids = [];
-    //重命名弹框
-    $('.rename').click(function () {
+    $('.rename').click(function() {
+        $('#rename').val('');
         id = $(this).attr("alt");
-        // $('div[openContent="reset-name"]').addClass('active');
-        // var width = window.screen.scrollWidth;
-        // var height = window.screen.scrollHeight;
-        // $('.hide-iframe').addClass('active');
-        // $('.hide-iframe').css({
-        //     'width': width,
-        //     'height': height
-        // })
-        var selector= $('div[openContent="reset-name"]');
+        var selector = $('div[openContent="reset-name"]');
         selector.addClass('active');
         adjust(selector)
         showOverlay()
     })
-    //重命名确定
-    $('div[openContent="reset-name"] button.yes').click(function () {
+    $('div[openContent="reset-name"] button.yes').click(function() {
         var name = $('#rename').val();
         var regUserName = /^[a-zA-Z0-9\u4e00-\u9fa5]{2,6}$/;
         var userNameResult = regUserName.test(name);
         if (name == '') {
-            $('p.rename-hint').text('请输入新名称');
+            $('p.rename-hint').text('请输入新名称')
         } else if (!userNameResult) {
-            $('p.rename-hint').text('请输入 2-6 位汉字、字母、数字');
+            $('p.rename-hint').text('请输入 2-6 位汉字、字母、数字')
         } else {
             $.ajax({
                 type: "post",
@@ -40,127 +26,83 @@ $(function () {
                     "id": id
                 },
                 async: true,
-                success: function (res) {
-                    console.log(res);
+                success: function(res) {
                     if (res == "ok") {
-                        location.reload();
+                        location.reload()
                     } else {
-                        $('p.rename-hint').text('已存在，请重新输入');
+                        $('p.rename-hint').text('已存在，请重新输入')
                     }
                 }
             })
         }
     })
-    //重命名取消
-    $('div[openContent="reset-name"] button.reduce').click(function () {
-        // $('.hide-iframe').removeClass('active');
-        // $('div[openContent="reset-name"]').removeClass('active');
-        var selector= $('div[openContent="reset-name"]');
+    $('div[openContent="reset-name"] button.reduce').click(function() {
+        var selector = $('div[openContent="reset-name"]');
         selector.removeClass('active')
         hideOverlay()
     })
-
-    //删除弹框出现--单选
-    $('.singleDel').click(function () {
+    $('.singleDel').click(function() {
         id = $(this).attr("alt");
         ids.push(id);
-        // $('div[openContent="delete-mesh"]').addClass('active');
-        // var width = window.screen.scrollWidth;
-        // var height = window.screen.scrollHeight;
-        // $('.hide-iframe').addClass('active');
-        // $('.hide-iframe').css({
-        //     'width': width,
-        //     'height': height
-        // })
-        var selector=  $('div[openContent="delete-mesh"]');
+        var selector = $('div[openContent="delete-mesh"]');
         selector.addClass('active');
         adjust(selector)
         showOverlay()
     })
-    //删除确定--单选或复选框
-    $('div[openContent="delete-mesh"] button.yes').click(function () {
-        // console.log(ids);
+    $('div[openContent="delete-mesh"] button.yes').click(function() {
         if (ids) {
-            location.href = "/alink-hq/group/delete?mid="+$("#mid").val()+"&ids=" + ids;
-            ids = [];
+            location.href = "/alink-hq/group/delete?mid=" + $("#mid").val() + "&ids=" + ids;
+            ids = []
         }
     })
-    //删除取消--单选或复选框
-    $('div[openContent="delete-mesh"] button.reduce').click(function () {
-        // $('.hide-iframe').removeClass('active');
-        // $('div[openContent="delete-mesh"]').removeClass('active');
-        var selector=  $('div[openContent="delete-mesh"]');
+    $('div[openContent="delete-mesh"] button.reduce').click(function() {
+        var selector = $('div[openContent="delete-mesh"]');
         selector.removeClass('active')
         hideOverlay()
     })
-    //删除多选
-    $("#multiDel").click(function () {
+    $("#multiDel").click(function() {
         var idss = [];
-        $('input[name="ids"]:checked').each(function () {
-            idss.push($(this).val());
+        $('input[name="ids"]:checked').each(function() {
+            idss.push($(this).val())
         });
         ids = idss;
         if (ids.length > 0) {
-            // console.log(ids);
-            // $('div[openContent="delete-mesh"]').addClass('active');
-            // var width = window.screen.scrollWidth;
-            // var height = window.screen.scrollHeight;
-            // $('.hide-iframe').addClass('active');
-            // $('.hide-iframe').css({
-            //     'width': width,
-            //     'height': height
-            // })
-            var selector= $('div[openContent="delete-mesh"]');
+            var selector = $('div[openContent="delete-mesh"]');
             selector.addClass('active');
             adjust(selector)
             showOverlay()
         }
     })
-    //移交多选
-    $("#multiMove").click(function () {
+    $("#multiMove").click(function() {
         var idss = [];
         var meshArr = [];
         var isTrue = true;
-        $('input[name="ids"]:checked').each(function () {
+        $('input[name="ids"]:checked').each(function() {
             var meshName = $(this).parent().siblings('.meshName').text();
             idss.push($(this).val());
-            meshArr.push(meshName);
+            meshArr.push(meshName)
         });
-        // console.log(idss);
-        // console.log(meshArr);
         if (meshArr.length > 0) {
             for (var i = 0; i < meshArr.length; i++) {
                 if (meshArr.indexOf(meshArr[i]) != 0) {
                     isTrue = false;
-                    break;
+                    break
                 }
             }
         }
-        // console.log(isTrue);
         if (isTrue) {
             if (idss.length > 0) {
-                location.href = "/alink-hq/group/move?mid=" + $("#mid").val() + "&ids=" + idss;
+                location.href = "/alink-hq/group/move?mid=" + $("#mid").val() + "&ids=" + idss
             }
         } else {
-            // $('div[openContent="exchange"]').addClass('active');
-            // var width = window.screen.scrollWidth;
-            // var height = window.screen.scrollHeight;
-            // $('.hide-iframe').addClass('active');
-            // $('.hide-iframe').css({
-            //     'width': width,
-            //     'height': height
-            // })
-            var selector= $('div[openContent="exchange"]');
+            var selector = $('div[openContent="exchange"]');
             selector.addClass('active');
             adjust(selector)
             showOverlay()
         }
     })
-    //无法移动的确定以及取消
-    $('div[openContent="exchange"] .yes,div[openContent="exchange"] .reduce').click(function () {
-        // $('.hide-iframe').removeClass('active');
-        // $('div[openContent="exchange"]').removeClass('active');
-        var selector=   $('div[openContent="exchange"]');
+    $('div[openContent="exchange"] .yes,div[openContent="exchange"] .reduce').click(function() {
+        var selector = $('div[openContent="exchange"]');
         selector.removeClass('active')
         hideOverlay()
     })
@@ -170,15 +112,14 @@ function nameKeyUp() {
     var regUserName = /^[a-zA-Z0-9\u4e00-\u9fa5]{2,6}$/;
     var userNameResult = regUserName.test(name);
     if (name != '' && !userNameResult) {
-        $('p.rename-hint').text('请输入 2-6 位汉字、字母、数字');
+        $('p.rename-hint').text('请输入 2-6 位汉字、字母、数字')
     } else {
-        $('p.rename-hint').text('');
+        $('p.rename-hint').text('')
     }
 }
-$('#meshId').bind('input propertychange',function(){
-    var val= $(this).val();
-    // console.log(val);
-    if(val!=''&& isNaN(val)){
-        $(this).val('');
+$('#meshId').bind('input propertychange', function() {
+    var val = $(this).val();
+    if (val != '' && isNaN(val)) {
+        $(this).val('')
     }
 })

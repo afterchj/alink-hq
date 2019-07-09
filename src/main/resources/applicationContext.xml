@@ -119,13 +119,8 @@
         <constructor-arg ref="sqlSessionFactory"/>
     </bean>
 
-    <bean
-            id="memcachedClientBuilder"
-            class="net.rubyeye.xmemcached.XMemcachedClientBuilder"
-            p:connectionPoolSize="${memcached.connectionPoolSize}"
-            p:failureMode="${memcached.failureMode}">
-        <!-- XMemcachedClientBuilder have two arguments.First is server list,and
-            second is weights array. -->
+    <bean id="memcachedClientBuilder" class="net.rubyeye.xmemcached.XMemcachedClientBuilder" p:connectionPoolSize="${memcached.connectionPoolSize}" p:failureMode="${memcached.failureMode}">
+        <!-- XMemcachedClientBuilder have two arguments.First is server list,and second is weights array. -->
         <constructor-arg>
             <list>
                 <bean class="java.net.InetSocketAddress">

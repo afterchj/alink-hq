@@ -16,7 +16,7 @@
         <include refid="Base_Column_List"/>
         from f_role
     </select>
-    <select id="selectById" resultType="string" parameterType="java.lang.Integer">
+    <select id="selectById" resultType="string" parameterType="java.lang.String">
         SELECT
         r.role_type
         FROM f_role r

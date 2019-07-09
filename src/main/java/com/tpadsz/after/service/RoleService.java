@@ -11,7 +11,7 @@ public interface RoleService {
 	//根据角色名获取id
 	Integer getIdByRoleName(String roleName);
 
-	String selectById(Integer uid);
+	String selectById(String uid);
 
 	List<RoleList> selectRoleList(Integer roleId,String roleName);
 

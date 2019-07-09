@@ -22,8 +22,13 @@
                     <!--<span class="subjection">隶属项目：<span th:inline="text">[[${project.label}]]</span></span>-->
                 </div>
                 <div class="f-r pointer last-nav" >
-                    <a th:href="@{/place/create(mid=${dict.mid},projectId=${dict.projectId})}">
+                    <a th:href="@{/place/create(mid=${dict.mid},projectId=${dict.projectId})}" shiro:hasPermission ="createPlace">
                         <div class="create" onmousedown="createBtnMouseDown()" onmouseup="createBtnMouseUp()">
+                            <span>+</span><span>创建区域</span>
+                        </div>
+                    </a>
+                    <a href="javascript:void(0)"   shiro:lacksPermission ="createPlace" class="unclick1">
+                        <div class="create no-access" onmousedown="createBtnMouseDown()" onmouseup="createBtnMouseUp()">
                             <span>+</span><span>创建区域</span>
                         </div>
                     </a>
@@ -117,11 +122,11 @@
                                 <td class="p-r" >
                                     <img src="/alink-hq/static/img/edit.png" th:alt="${place.id}"
                                          class="reset-name pointer"
-                                         title="重命名" shiro:hasAnyPermission ="renamePlace">
+                                         title="重命名" shiro:hasPermission ="renamePlace">
                                     <img src="/alink-hq/static/img/un-rename.png" th:alt="${place.id}"
                                          class=" pointer unclick"
                                          th:title="无法操作" shiro:lacksPermission ="renamePlace">
-                                    <a href="javascript:void(0);" class="singleDel pointer" shiro:hasAnyPermission ="deletePlace">
+                                    <a href="javascript:void(0);" class="singleDel pointer" shiro:hasPermission ="deletePlace">
                                         <img src="/alink-hq/static/img/delete.png" alt="" class="left-img pointer"
                                              title="删除">
                                     </a>
@@ -140,7 +145,7 @@
                                 <span id="amount" class="amount">0</span>条数据
                             </span>
                              <span>
-                                <span shiro:hasAnyPermission ="deletePlace"  class="skipPageBtn pointer moment" onmousedown="deleteBtnMouseDown()" onmouseup="deleteBtnMouseUp()" id="multiDel">删除</span>
+                                <span shiro:hasPermission ="deletePlace"  class="skipPageBtn pointer moment" onmousedown="deleteBtnMouseDown()" onmouseup="deleteBtnMouseUp()" id="multiDel">删除</span>
                                 <span shiro:lacksPermission ="deletePlace" class="skipPageBtn  moment active unclick1" onmousedown="deleteBtnMouseDown()" onmouseup="deleteBtnMouseUp()" id="multiDel">删除</span>
                             </span>
                                     </div>

@@ -1,5 +1,5 @@
 <!doctype html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
 <head>
     <meta charset="UTF-8">
     <script src="/alink-hq/static/js/browser.js"></script>
@@ -20,7 +20,7 @@
             <div class="clearfix main-right-nav">
                 <div class="f-l main-right-title">合作列表</div>
                 <div class="f-r pointer last-nav">
-                    <a th:href="@{/cooperate/create}"    shiro:hasAnyPermission ="createCooperation">
+                    <a th:href="@{/cooperate/create}" shiro:hasPermission ="createCooperation">
                         <div class="create" onmousedown="createBtnMouseDown()" onmouseup="createBtnMouseUp()">
                             <span>+</span><span>新增合作信息</span></div>
                     </a>

@@ -25,7 +25,7 @@ public class RoleServiceImpl implements RoleService {
 	}
 
 	@Override
-	public String selectById(Integer uid) {
+	public String selectById(String uid) {
 		return roleDao.selectById(uid);
 	}
 

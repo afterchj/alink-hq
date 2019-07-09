@@ -9,6 +9,7 @@ import com.tpadsz.after.entity.SearchDict;
 import com.tpadsz.after.exception.RepetitionException;
 import com.tpadsz.after.service.MeshService;
 import com.tpadsz.after.service.RoleService;
+import com.tpadsz.after.utils.AppUtils;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -35,7 +36,9 @@ public class MeshController {
 
     @RequestMapping("/list")
     public String list(SearchDict dict, ModelMap modelMap) {
-        String role = roleService.selectById(dict.getUid());
+        String uid = AppUtils.getUserID();
+        String role = roleService.selectById(uid);
+        dict.setUid(uid);
         dict.setRole(role);
         PageHelper.startPage(dict.getPageNum(), dict.getPageSize());
         List<Map> meshList = meshService.getByMap(dict);
@@ -70,7 +73,7 @@ public class MeshController {
         map.put("uid", dict.getUid());
         map.put("name", dict.getName());
         map.put("type", dict.getMtype());
-        map.put("projectId",dict.getId());
+        map.put("projectId", dict.getId());
         try {
             meshService.save(map);
         } catch (RepetitionException e) {
@@ -109,12 +112,12 @@ public class MeshController {
     }
 
     @RequestMapping("/delete")
-    public String delete(Integer uid,String ids) {
+    public String delete(Integer uid, String ids) {
         logger.info("ids=" + ids);
         String[] idArray = ids.split(",");
         List<String> list = new ArrayList(Arrays.asList(idArray));
         meshService.deleteMeshByIds(list);
-        return "redirect:/mesh/list?uid"+uid;
+        return "redirect:/mesh/list?uid" + uid;
     }
 
 
@@ -135,7 +138,7 @@ public class MeshController {
 
     @ResponseBody
     @RequestMapping("/getProjects")
-    public List<OptionList> show(Integer uid) {
+    public List<OptionList> show(String uid) {
         Map map = new HashMap();
         if (uid != null) {
             String role = roleService.selectById(uid);
