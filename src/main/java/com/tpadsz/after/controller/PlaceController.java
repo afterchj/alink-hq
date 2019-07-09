@@ -5,10 +5,12 @@ import com.github.pagehelper.PageInfo;
 import com.tpadsz.after.entity.MeshInfo;
 import com.tpadsz.after.entity.OptionList;
 import com.tpadsz.after.entity.SearchDict;
+import com.tpadsz.after.entity.User;
 import com.tpadsz.after.exception.RepetitionException;
 import com.tpadsz.after.service.MeshService;
 import com.tpadsz.after.service.PlaceService;
 import com.tpadsz.after.service.RoleService;
+import com.tpadsz.after.utils.AppUtils;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -16,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpSession;
 import java.util.*;
 
 /**
@@ -36,8 +39,10 @@ public class PlaceController {
     private Logger logger = Logger.getLogger(this.getClass());
 
     @RequestMapping("/list")
-    public String list(SearchDict dict, ModelMap modelMap) {
-        String role = roleService.selectById(dict.getUid());
+    public String list(SearchDict dict, ModelMap modelMap ) {
+        String uid = AppUtils.getUserID();
+        String role = roleService.selectById(uid);
+        dict.setUid(uid);
         dict.setRole(role);
         PageHelper.startPage(dict.getPageNum(), dict.getPageSize());
         List<Map> placeList = placeService.getByMap(dict);
