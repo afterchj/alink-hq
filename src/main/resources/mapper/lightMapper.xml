@@ -48,7 +48,7 @@
         INNER JOIN f_project p ON p.id=m.project_id
         INNER JOIN f_place pl ON pl.id = l.pid
         INNER JOIN f_group g ON g.id=l.gid
-        LEFT JOIN (SELECT lid,x,y,off FROM f_light_setting ORDER BY id DESC) ls ON ls.lid=l.id
+        INNER JOIN (SELECT * FROM f_light_setting ORDER BY update_date DESC) ls ON ls.lid=l.id
         WHERE 1 = 1
         <include refid="common_choose"></include>
         <if test="name!=null and name!=''">
