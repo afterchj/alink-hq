@@ -86,16 +86,16 @@
 }
 
 #createAccount form>div button {
-    height:44px;
-    width:134px;
-    color:#fff;
-    font-size:17px;
-    letter-spacing:5px;
-    border:1px solid #3598db;
-    background-color:#3598db;
-    border-radius:5px;
-    cursor:pointer;
-    margin-left:196px;
+    height: 44px;
+    width: 134px;
+    color: #fff;
+    font-size: 17px;
+    letter-spacing: 5px;
+    border: 1px solid #47A6E6;
+    background-color: #47A6E6;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-left: 150px;
     box-shadow: 0px 1px 2px 0 rgba(0, 0, 0, 0.2);
 }
 
@@ -235,8 +235,8 @@
 .btn-transfer button {
     width:140px;
     height:42px;
-    border:1px solid #3598db;
-    background-color:#3598db;
+    border:1px solid #47A6E6;
+    background-color:#47A6E6;
     border-radius:5px;
     cursor:pointer;
     color:#fff;
@@ -301,7 +301,7 @@
 }
 
 .pop-content .pop-btn .yes {
-    border:1px solid #3598DB;
+    border:1px solid #47A6E6;
     font-size:16px;
     color:#fff;
     border-radius:5px;
@@ -309,7 +309,7 @@
     width:90px;
     letter-spacing:10px;
     cursor:pointer;
-    background-color:#3598DB
+    background-color:#47A6E6
 }
 
 .pop-hint {
@@ -385,7 +385,7 @@
 }
 
 .create-content a {
-    color:#3598db;
+    color:#47A6E6;
     cursor:pointer
 }
 
