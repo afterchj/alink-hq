@@ -48,46 +48,51 @@ $(function () {
             success: function (res) {
                 console.log(res);
                 if (res.result == '000') {
-                    location.reload();
+                    var result='';
+                    if($('.off-or-on').text().indexOf('禁用')!=-1){
+                        result='禁用';
+                    }else if($('.off-or-on').text().indexOf('启用')!=-1){
+                        result='启用';
+                    }
+                    $('#preload-anim').addClass('active');
+                    $('#preload-anim .title').text(result+'成功！');
+                    setTimeout(function () {
+                        $('#preload-anim').removeClass('active');
+                        var selector= $('div[openContent="start-use"]');
+                        selector.removeClass('active');
+                        hideOverlay();
+                        location.reload();
+                    }, 1000);
                 }
             }
         })
     })
     $('div[openContent="start-use"] button.reduce').click(function () {
-        // $('div[openContent="start-use"]').removeClass('active');
-        // $('.hide-iframe').removeClass('active');
         var selector= $('div[openContent="start-use"]');
-        selector.removeClass('active')
-        hideOverlay()
+        selector.removeClass('active');
+        hideOverlay();
     })
 })
 
 //重置密码
 $(function () {
     var account = '';
-    // var width = window.screen.width;
-    // var height = window.screen.height;
     $('img[openTab="reset-pwd"]').click(function () {
         var openTab = $(this).attr('openTab');
         $('div[openContent="reset-pwd"] .pop-content').find('p.unuse').remove();
-        // $('div[openContent="reset-pwd"]').addClass('active');
-        // $('.hide-iframe').addClass('active');
-        // $('.hide-iframe').css({
-        //     'width': width,
-        //     'height': height
-        // });
         var selector=$('div[openContent="reset-pwd"]');
         selector.addClass('active');
-        adjust(selector)
-        showOverlay()
+        adjust(selector);
+        showOverlay();
         account = $(this).parent().siblings('.use-account').text();
     })
     $('div[openContent="reset-pwd"] button.yes').click(function () {
-        // $('div[openContent="new-pwd"]').addClass('active');
-        // $('.hide-iframe').addClass('active');
         var selector= $('div[openContent="reset-pwd"]');
-        selector.removeClass('active')
-        hideOverlay()
+        selector.removeClass('active');
+        var selectorNew=$('div[openContent="new-pwd"]');
+        selectorNew.addClass('active');
+        adjust(selectorNew);
+        showOverlay();
         $.ajax({
             type: "POST",
             url: "/alink-hq/account/resetPwd",
@@ -105,29 +110,32 @@ $(function () {
         })
     })
     $('div[openContent="reset-pwd"] button.reduce').click(function () {
-        // $('div[openContent="reset-pwd"]').removeClass('active');
-        // $('.hide-iframe').removeClass('active');
         var selector= $('div[openContent="reset-pwd"]');
         selector.removeClass('active')
         hideOverlay()
     })
-    $('div[openContent="new-pwd"] button.yes,div[openContent="new-pwd"] button.reduce').click(function () {
+    $('div[openContent="new-pwd"] button.reduce').click(function () {
         $('div[openContent="new-pwd"]').removeClass('active');
         $('div[openContent="reset-pwd"]').removeClass('active');
-        hideOverlay()
+        hideOverlay();
     })
+    $('div[openContent="new-pwd"] button.yes').click(function () {
+        $('div[openContent="new-pwd"]').removeClass('active');
+        $('div[openContent="reset-pwd"]').removeClass('active');
+        $('#preload-anim').addClass('active');
+        $('#preload-anim .title').text('密码重置成功！');
+        setTimeout(function () {
+            $('#preload-anim').removeClass('active');
+        }, 1500);
+        hideOverlay();
+    })
+
 })
 //删除账户
 $(function () {
     var account;
     $('img[openTab="delete-account"]').click(function () {
         var openTab = $(this).attr('openTab');
-        // $('div[openContent="delete-account"]').addClass('active');
-        // $('.hide-iframe').addClass('active');
-        // $('.hide-iframe').css({
-        //     'width': width,
-        //     'height': height
-        // });
         var selector=$('div[openContent="delete-account"]');
         selector.addClass('active');
         adjust(selector)
@@ -157,8 +165,6 @@ $(function () {
         location.href = '/alink-hq/project/list';
     })
     $('div[openContent="delete-account"] button.reduce').click(function () {
-        // $('div[openContent="delete-account"]').removeClass('active');
-        // $('.hide-iframe').removeClass('active');
         var selector= $('div[openContent="delete-account"]');
         selector.removeClass('active')
         hideOverlay()

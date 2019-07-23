@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <script src="/alink-hq/static/js/browser.js"></script>
+    <link rel="stylesheet" href="/alink-hq/static/css/loding.css"/>
     <link rel="stylesheet" href="/alink-hq/static/css/base.css"/>
     <link rel="stylesheet" href="/alink-hq/static/css/leftNav.css"/>
     <link rel="stylesheet" href="/alink-hq/static/css/projectManage.css"/>
@@ -234,7 +235,6 @@
                         <tr>
                             <td colspan="9">
                                 <img src="/alink-hq/static/img/no-data.png" id="skipPageBtn" alt="">
-
                                 <p>暂无数据</p>
                             </td>
                         </tr>
@@ -352,10 +352,26 @@
         </div>
     </div>
 </div>
-<div class="hide-iframe "></div>
+<div class="hide-iframe"></div>
+
+<div id="preload-anim">
+    <div id="circularG">
+        <div id="circularG_1" class="circularG"></div>
+        <div id="circularG_2" class="circularG"></div>
+        <div id="circularG_3" class="circularG"></div>
+        <div id="circularG_4" class="circularG"></div>
+        <div id="circularG_5" class="circularG"></div>
+        <div id="circularG_6" class="circularG"></div>
+        <div id="circularG_7" class="circularG"></div>
+        <div id="circularG_8" class="circularG"></div>
+    </div>
+    <p class="title">
+    </p>
+</div>
+
 <script src="/alink-hq/static/js/jquery.min.js"></script>
 <script src="/alink-hq/static/laydate/laydate.js"></script>
-<script type="text/javascript" src="/alink-hq/static/js/left.js"></script>
+<script src="/alink-hq/static/js/left.js"></script>
 <script src="/alink-hq/static/js/user.js"></script>
 <script src="/alink-hq/static/js/moment.js"></script>
 <!--<script src="/alink-hq/static/js/excel/Blob.js"></script>-->
@@ -363,7 +379,5 @@
 <script src="/alink-hq/static/js/excel/tableExport.js"></script>
 <!--<script src="/alink-hq/static/js/excel/jquery.base64.js"></script>-->
 <script src="/alink-hq/static/js/excel/base64.js"></script>
-
 </body>
-
 </html>

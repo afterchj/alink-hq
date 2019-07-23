@@ -116,7 +116,6 @@
     $(function () {
         var dragImgUpload = new DragImgUpload("#drop_area", {
             callback: function (files) {
-                //回调函数，可以传递给后台等等
                 var file = files[0];
                 console.log(file.name);
             }
@@ -132,7 +131,6 @@
                 $('#img-max').attr('src', '');
             }
         });
-//        dragImgUpload.resetImage();
     })
 </script>
 </body>

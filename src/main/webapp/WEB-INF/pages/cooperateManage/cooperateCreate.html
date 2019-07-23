@@ -99,7 +99,6 @@
 <script>
     var dragImgUpload = new DragImgUpload("#drop_area", {
         callback: function (files) {
-            //回调函数，可以传递给后台等等
             var file = files[0];
             console.log(file.name);
         }
@@ -121,44 +120,41 @@
         var companyPhone = $('#company-phone').val().trim();
         var address = $('#address').val().trim();
         var licenseNumber = $('#serial').val().trim();
-//        console.log(companyName,companyPhone,isNaN(companyPhone),address)
         var iscompanyName = true;
         var iscompanyPhone = true;
         var isaddress = true;
         var islicenseNumber = true;
         if (companyName == '') {
-            $('.company-name-hint').text('请输入公司名称')
+            $('.company-name-hint').text('请输入公司名称');
             iscompanyName = false;
         } else {
-            $('.company-name-hint').text('')
+            $('.company-name-hint').text('');
             iscompanyName = true;
         }
         if (companyPhone == '') {
-            $('.company-phone-hint').text('请输入公司联系方式')
+            $('.company-phone-hint').text('请输入公司联系方式');
             iscompanyPhone = false;
         } else if (!CheckPhone(companyPhone)) {
-            $('.company-phone-hint').text('输入格式不正确')
+            $('.company-phone-hint').text('输入格式不正确');
             iscompanyPhone = false;
         } else {
-            $('.company-phone-hint').text('')
+            $('.company-phone-hint').text('');
             iscompanyPhone = true;
         }
         if (address == '') {
-            $('.address-hint').text('请输入公司通讯地址')
+            $('.address-hint').text('请输入公司通讯地址');
             isaddress = false;
         } else {
-            $('.address-hint').text('')
+            $('.address-hint').text('');
             isaddress = true;
         }
-        if (isNaN(licenseNumber)) {
-            $('.license-number-hint').text('请输入纯数字的编号')
+        if (checkLicense(licenseNumber)) {
+            $('.license-number-hint').text('请输入正确的编号')
             islicenseNumber = false;
         } else {
-            $('.license-number-hint').text('')
+            $('.license-number-hint').text('');
             islicenseNumber = true;
         }
-
-//        console.log('iscompanyName',iscompanyName,'iscompanyPhone',iscompanyPhone,'isaddress',isaddress,'islicenseNumber',islicenseNumber);
         if (iscompanyName && iscompanyPhone && isaddress && islicenseNumber) {
             $('form.company-msg').submit();
         }
@@ -173,7 +169,15 @@
             return false;
         }
     }
-
+    //验证营业执照编号
+    function checkLicense(str) {
+        reg = /(^(?:(?![IOZSV])[\dA-Z]){2}\d{6}(?:(?![IOZSV])[\dA-Z]){10}$)|(^\d{15}$)/;
+        if (reg.test(str)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 
 </script>
 </body>

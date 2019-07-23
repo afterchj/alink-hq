@@ -11,7 +11,7 @@
     width: calc((100% - 264px)/4);
     height: 58px;
     line-height: 58px;
-    border-right: 1px solid #bbb;
+    border-right: 1px solid #ddd;
     text-align: center;
     cursor: pointer;
     font-size: 15px;
@@ -35,7 +35,7 @@
 }
 
 .tab-content {
-    border: 1px solid #bbb;
+    border: 1px solid #ddd;
     border-top: none;
     min-height: 458px;
 }
@@ -44,10 +44,10 @@
 .fix-left-nav {
     width: 260px;
     min-height: 462px;
-    border-right: 1px solid #bbb;
+    border-right: 1px solid #ddd;
 }
 .fix-left-nav.gray{
-    background-color: #bbb;
+    background-color: #ddd;
 }
 
 .fix-right-nav {
@@ -63,13 +63,13 @@
 }
 
 .tab-content-part>div.list {
-    border-bottom: 1px solid #bbb;
+    border-bottom: 1px solid #ddd;
     line-height: 55px;
 }
 
 .limit,
 .company {
-    border-bottom: 1px solid #bbb;
+    border-bottom: 1px solid #ddd;
     padding: 0 20px;
     background-color: #eee;
     line-height: 55px;
@@ -87,7 +87,7 @@
 
 .list-content {
     width: calc(90% - 81px);
-    border-left: 1px solid #bbb;
+    border-left: 1px solid #ddd;
     padding: 0 20px;
 }
 
@@ -136,7 +136,7 @@
 }
 
 .tab-content-part>div.list.one {
-    border-bottom: 1px solid #bbb;
+    border-bottom: 1px solid #ddd;
 }
 
 .tab-content-part>div.list.one .list-title {
@@ -173,7 +173,7 @@
     text-indent: 10px;
     height: 30px;
     border-radius: 5px;
-    border: 1px solid #bbb;
+    border: 1px solid #ddd;
 }
 .createRole>div{
     text-align: center;

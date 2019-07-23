@@ -4,10 +4,12 @@
 
 body {
     /* Pattern made by Atle Mo. */
-    background-image: url('/alink-hq/static/img/bcg.png');
-    font-family: 'Helvetica', 'Arial', sans-serif;
-    text-align: center;
-    color: #ffffff;
+    font-family: "Hiragino Sans GB","Microsoft Yahei",SimSun,Arial,"Helvetica Neue",Helvetica;
+    vertical-align: baseline;
+    font-size: 14px;
+    word-wrap: break-word;
+    -webkit-font-smoothing: antialiased;
+    color: #383e4b;
 }
 
 .main {
