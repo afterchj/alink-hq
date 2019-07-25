@@ -1,9 +1,9 @@
 
 .nav-top {
-    height: 80px;
-    line-height: 80px;
+    height: 75px;
+    line-height: 75px;
     padding: 0 50px;
-    color: #fff
+    color: #fff;
 }
 
 .nav-title {
@@ -145,6 +145,7 @@
     border-left: 4px solid #47a6e6;
     border-bottom: 2px solid #47a6e6;
     min-width: 1465px;
+    margin-bottom: 30px;
 }
 
 .main-right-title {
@@ -168,15 +169,15 @@
 }
 
 .create {
-    background-color: #00A0E9;
+    background-color: #47A6E6;
     color: #fff;
-    border: 2px solid #00A0E9;
-    height: 33px;
+    border: 2px solid #47A6E6;
+    height: 30px;
     width: unset;
-    line-height: 29px;
+    line-height: 27px;
     border-radius: 5px;
     text-align: center;
-    font-size: 16px;
+    font-size: 15px;
     padding: 0 10px;
     box-shadow: 0 1px 2px 0 rgba(0,0,0,.2);
 }
@@ -194,16 +195,16 @@
 }
 
 .goBack {
-    border: 2px solid #00A0E9;
-    color: #00A0E9;
-    height: 30px;
+    border: 2px solid #47A6E6;
+    color: #47A6E6;
+    height: 31px;
     line-height: 26.5px;
     border-radius: 5px;
     text-align: center;
     font-size: 15px;
     background-color: #fff;
-    padding: 0 7px;
-    box-shadow: 0 1px 2px 0 rgba(0,0,0,.2);
+    padding: 0 10px;
+    box-shadow: 0 1px 1px 0 rgba(0,0,0,.2);
 }
 
 .goBack.active {
@@ -237,8 +238,8 @@
     min-width: 1400px;
     padding-left: 250px;
     margin: auto;
-    padding-top: 80px;
-    position: relative
+    padding-top: 75px;
+    position: relative;
 }
 
 .no-access {
@@ -270,5 +271,8 @@
 }
 
 .table-content-list {
-    min-width: 1490px
+    min-width: 1490px;
+    height: 700px;
+    box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.1), -1px 0 2px rgba(0, 0, 0, 0.05);
+    /*background-color: #fff;*/
 }

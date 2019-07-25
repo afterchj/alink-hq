@@ -80,3 +80,8 @@ function scrollX() {
 
     return self.pageXOffset || (de && de.scrollLeft) || document.body.scrollLeft;
 }
+$('.showList').hide();
+$('.openList').click(function () {
+    $(this).siblings('.showList').toggle();
+    $(this).parent().parent('tr').siblings('tr').find('.showList').hide();
+})

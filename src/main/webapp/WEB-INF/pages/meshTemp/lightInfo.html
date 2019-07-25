@@ -37,7 +37,7 @@
                     <!--<img src="/alink-hq/static/img/go-back.png" alt="" onclick="history.back()">-->
                 </div>
             </div>
-            <div id="projectDetail" class="table-content-list">
+            <div id="projectDetail" class="table-content-list" style="height: auto;">
                 <div class="p-detail">
                     <div class="p-nav">
                         <ul>
@@ -45,14 +45,19 @@
                             <li>灯MAC地址：<label th:text="${meshInfo.lmac}"></label></li>
                             <li>X（色温），Y（亮度）：
                                 <span th:if="${meshInfo.x}=='null' or ${meshInfo.x} < 0" th:text="${meshInfo.x}"></span>
-                                <span th:if="${meshInfo.x}!='null' and ${meshInfo.x} >= 0 and ${meshInfo.x} <= 20" th:text="${meshInfo.x}+'(CCT调光)'"></span>
-                                <span th:if="${meshInfo.x}!='null' and ${meshInfo.x} >= 235 and ${meshInfo.x} <= 273" th:text="${meshInfo.x}-235+'(RGB调光)'"></span>
-                                <span th:if="${meshInfo.x}!='null' and ${meshInfo.x} >= 571 and ${meshInfo.x} <= 630" th:text="${meshInfo.x}-532+'(RGB调光)'"></span>
-                                <span th:if="${meshInfo.x}!='null' and ${meshInfo.x} >= 1786 and ${meshInfo.x} <= 1899" th:text="${meshInfo.x}-1687+'(RGB调光)'"></span>
+                                <span th:if="${meshInfo.x}!='null' and ${meshInfo.x} >= 0 and ${meshInfo.x} <= 20"
+                                      th:text="${meshInfo.x}+'(CCT调光)'"></span>
+                                <span th:if="${meshInfo.x}!='null' and ${meshInfo.x} >= 235 and ${meshInfo.x} <= 273"
+                                      th:text="${meshInfo.x}-235+'(RGB调光)'"></span>
+                                <span th:if="${meshInfo.x}!='null' and ${meshInfo.x} >= 571 and ${meshInfo.x} <= 630"
+                                      th:text="${meshInfo.x}-532+'(RGB调光)'"></span>
+                                <span th:if="${meshInfo.x}!='null' and ${meshInfo.x} >= 1786 and ${meshInfo.x} <= 1899"
+                                      th:text="${meshInfo.x}-1687+'(RGB调光)'"></span>
                                 <span th:if="${meshInfo.x}==50" th:text="50"></span>
                                 <span>,&nbsp;&nbsp;</span>
                                 <span th:if="${meshInfo.y}=='null' or ${meshInfo.y}<0" th:text="${meshInfo.y}"></span>
-                                <span th:if="${meshInfo.y}!='null' and ${meshInfo.y}!=50 and ${meshInfo.y}>=0" th:text="100-${meshInfo.y}*5+'%'"></span>
+                                <span th:if="${meshInfo.y}!='null' and ${meshInfo.y}!=50 and ${meshInfo.y}>=0"
+                                      th:text="100-${meshInfo.y}*5+'%'"></span>
                                 <span th:if="${meshInfo.y==50}" th:text="50"></span>
                             </li>
                             <li>当前状态：
@@ -62,6 +67,8 @@
                                 <span th:case="*">未知</span>
                             </span>
                             </li>
+                            <li>灯类型：<label th:text="XXX"></label></li>
+                            <li>灯版本信息：<label th:text="XXXX"></label></li>
                         </ul>
                     </div>
                     <div class="p-content">
@@ -112,36 +119,52 @@
                                 <a th:href="@{/scene/list(meshName=${meshInfo.mname},meshId=${meshInfo.mesh_id},mid=${meshInfo.mid},lid=${meshInfo.id})}">查看场景列表</a>
                             </div>
                         </div>
-                        <div class="light-table">
-                            <table border="1" class="light-detail-table">
-                                <thead>
-                                <tr>
-                                    <th><span>场景名称</span></th>
-                                    <th><span>场景id</span></th>
-                                    <th><span>灯-X(色温)Y(亮度)</span></th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <tr th:each="scene:${sceneInfo}">
-                                    <td><span th:text="${scene.sname}"></span></td>
-                                    <td><span th:text="${scene.scene_id}"></span></td>
-                                    <td>
-                                        <span th:if="${scene.x}=='null' or ${scene.x} < 0" th:text="${scene.x}"></span>
-                                        <span th:if="${scene.x} != 'null' and ${scene.x} >= 0 and ${scene.x} <= 20" th:text="${scene.x}+'(CCT调光)'"></span>
-                                        <span th:if="${scene.x} != 'null' and ${scene.x} >= 235 and ${scene.x} <= 273" th:text="${scene.x}-235+'(RGB调光)'"></span>
-                                        <span th:if="${scene.x} != 'null' and ${scene.x} >= 571 and ${scene.x} <= 630" th:text="${scene.x}-532+'(RGB调光)'"></span>
-                                        <span th:if="${scene.x} != 'null' and ${scene.x} >= 1786 and ${scene.x} <= 1899" th:text="${scene.x}-1687+'(RGB调光)'"></span>
-                                        <span th:if="${scene.x==50}" th:text="50"></span>
-                                        <span>,&nbsp;&nbsp;</span>
-                                        <span th:if="${scene.y}=='null' or ${scene.y}<0" th:text="${scene.y}"></span>
-                                        <span th:if="${scene.y}!='null' and ${scene.y}!=50 and ${scene.y}>=0" th:text="100-${scene.y}*5+'%'"></span>
-                                        <span th:if="${scene.y==50}" th:text="50"></span>
+
+                    </div>
+                    <div class="p-detail two">
+                        <div class="p-nav">
+                            XXX灯所在场景详情
+                        </div>
+                        <div class="p-content">
+                            <div class="light-table">
+                                <table border="1" class="light-detail-table">
+                                    <thead>
+                                    <tr>
+                                        <th><span>场景名称</span></th>
+                                        <th><span>场景id</span></th>
+                                        <th><span>灯-X(色温)Y(亮度)</span></th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr th:each="scene:${sceneInfo}">
+                                        <td><span th:text="${scene.sname}"></span></td>
+                                        <td><span th:text="${scene.scene_id}"></span></td>
+                                        <td>
+                                            <span th:if="${scene.x}=='null' or ${scene.x} < 0"
+                                                  th:text="${scene.x}"></span>
+                                            <span th:if="${scene.x} != 'null' and ${scene.x} >= 0 and ${scene.x} <= 20"
+                                                  th:text="${scene.x}+'(CCT调光)'"></span>
+                                            <span th:if="${scene.x} != 'null' and ${scene.x} >= 235 and ${scene.x} <= 273"
+                                                  th:text="${scene.x}-235+'(RGB调光)'"></span>
+                                            <span th:if="${scene.x} != 'null' and ${scene.x} >= 571 and ${scene.x} <= 630"
+                                                  th:text="${scene.x}-532+'(RGB调光)'"></span>
+                                            <span th:if="${scene.x} != 'null' and ${scene.x} >= 1786 and ${scene.x} <= 1899"
+                                                  th:text="${scene.x}-1687+'(RGB调光)'"></span>
+                                            <span th:if="${scene.x==50}" th:text="50"></span>
+                                            <span>,&nbsp;&nbsp;</span>
+                                            <span th:if="${scene.y}=='null' or ${scene.y}<0"
+                                                  th:text="${scene.y}"></span>
+                                            <span th:if="${scene.y}!='null' and ${scene.y}!=50 and ${scene.y}>=0"
+                                                  th:text="100-${scene.y}*5+'%'"></span>
+                                            <span th:if="${scene.y==50}" th:text="50"></span>
                                         </td>
-                                </tr>
-                                </tbody>
-                            </table>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                     </div>
+
                 </div>
             </div>
         </div>
@@ -153,13 +176,13 @@
 
 <script type="text/javascript">
     $(function () {
-        var length = $('#projectDetail .light-detail-table tbody>tr').length;
-        if (length > 4) {
-            $('#projectDetail .light-detail-table tbody').css('border-bottom', '1px solid #bbb');
-            $('#projectDetail .light-detail-table thead th').css('width', '360px');
-        } else if (length <= 4) {
-            $('#projectDetail .light-detail-table thead th').css('width', '220px');
-        }
+//        var length = $('#projectDetail .light-detail-table tbody>tr').length;
+//        if (length > 4) {
+//            $('#projectDetail .light-detail-table tbody').css('border-bottom', '1px solid #bbb');
+//            $('#projectDetail .light-detail-table thead th').css('width', '360px');
+//        } else if (length <= 4) {
+//            $('#projectDetail .light-detail-table thead th').css('width', '220px');
+//        }
     })
 </script>
 </body>

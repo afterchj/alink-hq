@@ -86,7 +86,9 @@ ul li {
     height: 0;
     border: 10px solid #eef2f5;
 }
-
+.fa{
+    color: #47A6E6;
+}
 .pointer {
     cursor: pointer;
 }
@@ -155,7 +157,7 @@ label {
 }
 
 .all-checkbox {
-    width: 120px;
+    width: 90px;
 }
 
 ol,ul {
@@ -289,7 +291,7 @@ input[type=checkbox]:checked,input[type=checkbox]:indeterminate {
 }
 
 .bread li {
-    font-size: 17px;
+    font-size: 16px;
 }
 
 .bread li a {
@@ -312,7 +314,7 @@ input[type=checkbox]:checked,input[type=checkbox]:indeterminate {
 }
 
 .bread li:last-of-type {
-    color: #323232;
+    color: #3c3c3c;
 }
 
 table tbody tr {

@@ -7,8 +7,10 @@ $(function () {
     $("#amount").text(length);
     $("#size").val(size);
     //给全选的复选框添加事件
-    $("#all").click(function () {
+    $("#all,#addAll").click(function () {
         // this 全选的复选框
+
+        $("#all,#addAll").prop('checked',$(this).prop('checked'));
         var checked = this.checked;
         //获取name=mids的复选框 遍历输出复选框
         $("input[name=ids]").each(function () {
@@ -29,9 +31,10 @@ $(function () {
         //未选中的长度
         var len = $("input[name=ids]").length;
         if (length == len) {
-            $("#all")[0].checked = true;
+            $("#all,#addAll").prop('checked',true);
+            // [0].checked = true;
         } else {
-            $("#all")[0].checked = false;
+            $("#all,#addAll").prop('checked',false);
         }
         $("#amount").text(length);
     });

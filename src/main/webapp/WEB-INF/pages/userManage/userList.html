@@ -116,7 +116,7 @@
                             <td th:if="${user.role_id=='3'}" th:text="乙方管理员" class="role"></td>
                             <td th:if="${user.role_id=='4'}" th:text="施工人员" class="role"></td>
                             <td th:text="${user.create_date}"></td>
-                            <td th:if="${user.status=='1' && user.coStatus=='1'}" style="color: #0B78CE;"
+                            <td th:if="${user.status=='1' && user.coStatus=='1'}" style="color: #47a6e6;"
                                 openTab="start-use" id="start-use" class="status pointer">
                                 <span class="result" th:text="启用"></span>
                             </td>
@@ -126,7 +126,7 @@
                                 <span class="p-a end"><i class="cricle">\</i>终止合作</span>
                             </td>
 
-                            <td th:if="${user.status=='0' && user.coStatus=='1'}" style="color: #0B78CE;"
+                            <td th:if="${user.status=='0' && user.coStatus=='1'}" style="color: #47a6e6;"
                                 openTab="start-use" id="start-use" class="status pointer p-r">
                                 <span th:text="禁用" class="result"></span>
                             </td>
