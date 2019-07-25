@@ -123,6 +123,9 @@
     color: #555;
     /*background-color:#fff*/
 }
+.search-result table td i{
+    font-size: 17px;
+}
 .search-result table td img{
     width:16px;
     height: 16px;
@@ -1094,7 +1097,8 @@ table.light-detail-table thead,
     /*background:url(/alink-hq/static/img/rectangle.png) no-repeat center;*/
     padding:10px;
     display:none;
-    z-index:999
+    z-index:999;
+    text-align: left;
 }
 
 .meno-nav {
