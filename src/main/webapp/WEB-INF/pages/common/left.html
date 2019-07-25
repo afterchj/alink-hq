@@ -107,14 +107,12 @@
                 <img src="/alink-hq/static/img/left-reduce.png" alt="" class="p-a on-off-triangle">
             </div>
             <ul class=" two-list ">
-                <li shiro:hasPermission="viewRole" th:if="${list}=='OTAFile'" tab="OTAFile" class="active"><a
+                <li  tab="OTAFile" class="active"><a
                         th:href="@{/OTAFile}">OTA文件</a>
-                <li shiro:hasPermission="viewRole" th:if="${list}!='OTAFile'" tab="OTAFile"><a
-                        th:href="@{/OTAFile}">OTA文件</a></li>
-                <li shiro:hasPermission="viewRole" th:if="${list}=='PCFile'" tab="PCFile" class="active"><a
+
+                <li  tab="PCFile" class="active"><a
                         th:href="@{/PCFile}">PC文件</a>
-                <li shiro:hasPermission="viewRole" th:if="${list}!='PCFile'" tab="PCFile"><a
-                        th:href="@{/PCFile}">PC文件</a></li>
+
                 <!--<li th:if="${list}=='createRole'" tab="createRole" class="active"><a th:href="@{/role/createRole}">创建角色</a>-->
                 <!--<li th:if="${list}!='createRole'" tab="createRole"><a th:href="@{/role/createRole}">创建角色</a></li></li>-->
                 <!--<li tab="createRole" class="active"><a th:href="@{/role/createRole}">创建角色</a></li>-->
