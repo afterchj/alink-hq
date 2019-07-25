@@ -1,7 +1,23 @@
 /**
  * Created by yuanjie.fang on 2019/7/25.
  */
-
+$('.singleDel').click(function() {
+    ids = $(this).parent().siblings('.checkbox').find('input').val();
+    var selector = $('div[openContent="delete-firmware"]');
+    selector.addClass('active');
+    adjust(selector);
+    showOverlay();
+});
+$('div[openContent="delete-firmware"] .pop-btn .reduce').click(function() {
+    var selector = $('div[openContent="delete-firmware"]');
+    selector.removeClass('active')
+    hideOverlay()
+});
+$('div[openContent="delete-firmware"] .pop-btn .yes').click(function() {
+    var selector = $('div[openContent="delete-firmware"]');
+    selector.removeClass('active')
+    hideOverlay()
+});
 //备忘录
 $(function () {
     // var width = window.screen.width;
