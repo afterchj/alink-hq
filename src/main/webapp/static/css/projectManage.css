@@ -288,8 +288,8 @@ th.all-checkbox {
 }
 
 .p-content > div > div:nth-child(1) {
-    width:80%;
-    text-align:left;
+    width: 100%;
+    text-align: left;
     font-size: 15px;
     color: #383e4b;
 }

@@ -103,16 +103,14 @@
 
         <li  class="one-list active">
             <div class="p-r">
-                <a th:href="@{/role/list}" tab="userManage">文件管理</a>
+                <a th:href="@{/role/list}" tab="fileManage">文件管理</a>
                 <img src="/alink-hq/static/img/left-reduce.png" alt="" class="p-a on-off-triangle">
             </div>
             <ul class=" two-list ">
-                <li  tab="OTAFile" class="active"><a
-                        th:href="@{/OTAFile}">OTA文件</a>
-
-                <li  tab="PCFile" class="active"><a
-                        th:href="@{/PCFile}">PC文件</a>
-
+                <li  tab="OTAFile"  th:if="${list}!='OTAFile'"><a th:href="@{/OTAFile}">OTA文件</a></li>
+                <li  tab="OTAFile" class="active" th:if="${list}=='OTAFile'"><a th:href="@{/OTAFile}">OTA文件</a></li>
+                <li  tab="PCFile"   th:if="${list}!='PCfile'"><a th:href="@{/PCfile}">PC文件</a></li>
+                <li  tab="PCFile" class="active" th:if="${list}=='PCfile'"><a th:href="@{/PCfile}">PC文件</a></li>
                 <!--<li th:if="${list}=='createRole'" tab="createRole" class="active"><a th:href="@{/role/createRole}">创建角色</a>-->
                 <!--<li th:if="${list}!='createRole'" tab="createRole"><a th:href="@{/role/createRole}">创建角色</a></li></li>-->
                 <!--<li tab="createRole" class="active"><a th:href="@{/role/createRole}">创建角色</a></li>-->
