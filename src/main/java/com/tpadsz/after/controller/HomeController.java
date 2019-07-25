@@ -57,12 +57,12 @@ public class HomeController {
 
     @RequestMapping("/OTAFile")
     public String OTAFile() {
-        return "/fileManage/OTAfile";
+        return "fileManage/OTAFile";
     }
 
     @RequestMapping("/PCFile")
     public String PCFile() {
-        return "/fileManage/PCfile";
+        return "fileManage/PCFile";
     }
 
     @ResponseBody
