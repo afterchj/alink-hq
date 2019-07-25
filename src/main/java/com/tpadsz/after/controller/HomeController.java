@@ -55,6 +55,16 @@ public class HomeController {
         return "authError";
     }
 
+    @RequestMapping("/OTAFile")
+    public String OTAFile() {
+        return "/fileManage/OTAfile";
+    }
+
+    @RequestMapping("/PCFile")
+    public String PCFile() {
+        return "/fileManage/PCfile";
+    }
+
     @ResponseBody
     @RequestMapping("/checkUser")
     public String checkUser(String uname) {
