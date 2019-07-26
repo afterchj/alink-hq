@@ -140,6 +140,57 @@ fieldset .form-row {
     float: left;
     padding: 5px 5px 5px 5px;
     margin: 13px 0;
+    width: 100%;
+}
+fieldset input[type=file] {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    border: 0;
+    padding: 0;
+    margin: 0;
+    height: 100%;
+    cursor: pointer;
+    width: 400px;
+    filter: alpha(opacity=0);
+    -moz-opacity: 0;
+    -khtml-opacity: 0;
+    opacity: 0;
+}
+.upload{
+    position: absolute;
+    left: 310px;
+    border-radius: 3px;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    line-height: 35px;
+    padding: 0 15px;
+    background-color: #fafafa;
+    color: #555;
+    border: 1px solid #ccc;
+    white-space: nowrap;
+    text-align: center;
+    /* border: none; */
+    /* border-radius: 5px; */
+    cursor: pointer;
+    height: 35px;
+    margin: 0;
+    vertical-align: middle;
+    /* border: 0; */
+    font-size: 16px;
+    font-weight: 300;
+    /* margin-left: 140px; */
+    text-shadow: none;
+    letter-spacing: 4px;
+    -moz-box-shadow: none;
+    -webkit-box-shadow: none;
+    -o-transition: all .3s;
+    -moz-transition: all .3s;
+    -webkit-transition: all .3s;
+    -ms-transition: all .3s;
+    transition: all .3s;
+    /* box-shadow: 0px 1px 2px 0 rgba(0, 0, 0, 0.2); */
 }
 fieldset .field-label {
     width: 110px;
@@ -243,6 +294,9 @@ fieldset span{
     color: #FF5722;
     vertical-align: middle;
     margin: 0 5px;
+}
+.fieldset input[type=file]{
+    width:400px;
 }
 /*button{*/
     /*display: inline-block;*/

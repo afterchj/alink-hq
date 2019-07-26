@@ -23,7 +23,7 @@
             <div class="clearfix main-right-nav">
                 <div class="f-l main-right-title">GY_USB_Dongle_RSSI历史版本（固件ID：XXXXX）</div>
                 <div class="f-r pointer last-nav">
-                    <a th:href="@{/file/addOta}"  >
+                    <a th:href="@{/file/uploadNewVersionOTA}"  >
                         <div   class="create " onmousedown="createBtnMouseDown()" onmouseup="createBtnMouseUp()">
                             <span>+</span><span>上传新版本</span>
                         </div>
@@ -44,7 +44,7 @@
                 </div>
             </div>
 
-            <div id="meshList" class="table-content-list">
+            <div  class="table-content-list">
                 <form class="clearfix"  method="post">
                     <!--<input type="hidden" name="uid" th:value="${dict.uid}">-->
                     <!--<input type="hidden" id="pageSize" th:value="${dict.pageSize}">-->
