@@ -25,4 +25,9 @@ public class FileController {
         return "fileManage/pcFile";
     }
 
+    @RequestMapping("/addOta")
+    public String addOta() {
+        return "fileManage/addOta";
+    }
+
 }
