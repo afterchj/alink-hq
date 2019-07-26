@@ -160,7 +160,7 @@ $(function () {
                 $(this).find('input.singleListChecked:checkbox').prop('checked', true)
             });
             //勾选查看数据
-            if ($(".tab-content-part.active").attr('id')=='projectManage'){
+            if ($(".tab-content-part.active").attr('id')=='projectManage' ||$(".tab-content-part.active").attr('id')=='fileManage'){
                 //取消全选不可查看数据
                 $(".tab-content-part.active").find('input.noAllRadio').prop('checked',false);
                 $(this).parent().parent().siblings('.list-content').find('input.singleIsRadio').prop('checked',true);
