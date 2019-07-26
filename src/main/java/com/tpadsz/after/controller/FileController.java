@@ -30,4 +30,8 @@ public class FileController {
         return "fileManage/addOta";
     }
 
+    @RequestMapping("/editOta")
+    public String editOta() {
+        return "fileManage/editOta";
+    }
 }
