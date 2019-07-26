@@ -55,16 +55,6 @@ public class HomeController {
         return "authError";
     }
 
-    @RequestMapping("/OTAFile")
-    public String OTAFile() {
-        return "fileManage/OTAFile";
-    }
-
-    @RequestMapping("/PCFile")
-    public String PCFile() {
-        return "fileManage/PCFile";
-    }
-
     @ResponseBody
     @RequestMapping("/checkUser")
     public String checkUser(String uname) {
@@ -107,7 +97,7 @@ public class HomeController {
     @ResponseBody
     @RequestMapping("/verify")
     public String sendCode(String mobile, String email) {
-        logger.info("mobile="+mobile+",email="+email);
+        logger.info("mobile=" + mobile + ",email=" + email);
         String str = "";
         try {
             if (StringUtils.isNotEmpty(mobile)) {
