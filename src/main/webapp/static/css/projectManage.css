@@ -120,7 +120,7 @@
 .search-result table td {
     height: 48px;
     text-align: center;
-    font-size: 13.5px;
+    font-size: 13px;
     vertical-align: middle;
     color: #555;
     /*background-color:#fff*/
@@ -393,7 +393,6 @@ span.msg-use{
     margin-bottom:30px;
     border: 1px solid #ddd;
     border-radius:2px;
-    text-indent:10px
 }
 
 .pop-content label {
@@ -604,9 +603,10 @@ span.msg-use{
 .pop-content p.rename-hint {
     font-size: 14px;
     color: #fb2a2a;
-    height: 20px;
-    padding-left: 203px;
+    height: 25px;
+    padding-left: 190px;
     text-align: left;
+    display: inherit;
 }
 
 #createProject .c-createProject {
@@ -1124,12 +1124,14 @@ table.light-detail-table thead,
 }
 
 .pop-content p.right-font {
-    text-align:right;
-    margin-right:20px
+    text-align: right;
+    margin-right: 20px;
+    display: inherit;
 }
 
 .pop-content p.right-font .wordsNum {
-    font-size:14px
+    font-size: 13px;
+    display: inline;
 }
 
 .edit-company {

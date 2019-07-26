@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+
+<head>
+    <title>历史版本</title>
+
+    <script src="/alink-hq/static/js/jquery.min.js"></script>
+    <script src="/alink-hq/static/js/browser.js"></script>
+    <link rel="stylesheet" th:href="@{/static/font-awesome-4.7.0/css/font-awesome.min.css}"/>
+    <!--<link rel="stylesheet" th:href="@{/static/css/common.css}"/>-->
+    <link rel="stylesheet" th:href="@{/static/css/laydate.css}"/>
+    <link rel="stylesheet" th:href="@{/static/css/base.css}"/>
+    <link rel="stylesheet" th:href="@{/static/css/leftNav.css}"/>
+    <link rel="stylesheet" th:href="@{/static/css/projectManage.css}"/>
+</head>
+<body>
+
+<div class="c-container">
+    <div th:replace="common/head::head"></div>
+    <div class="main clearfix">
+        <div th:replace="common/left::left('OTAFile')"></div>
+        <div class="main-right f-l">
+            <div class="clearfix main-right-nav">
+                <div class="f-l main-right-title">GY_USB_Dongle_RSSI历史版本（固件ID：XXXXX）</div>
+                <div class="f-r pointer last-nav">
+                    <a th:href="@{/file/addOta}"  >
+                        <div   class="create " onmousedown="createBtnMouseDown()" onmouseup="createBtnMouseUp()">
+                            <span>+</span><span>上传新版本</span>
+                        </div>
+                    </a>
+                    <!--<a href="javascript:void(0)"   class="unclick1">-->
+                    <!--<div  class="create no-access" onmousedown="createBtnMouseDown()" onmouseup="createBtnMouseUp()">-->
+                    <!--<span>+</span><span>创建网络</span>-->
+                    <!--</div>-->
+                    <!--</a>-->
+                </div>
+                <div class="f-r pointer">
+                    <div class="goBack" onClick="javascript :history.back();" onmousedown="backBtnMouseDown()"
+                         onmouseup="backBtnMouseUp()">
+                        <!--<span class="triangle-facing-left"></span>-->
+                        <span><</span><span>返回</span>
+                    </div>
+                    <!--<img src="/alink-hq/static/img/go-back.png" alt="" onclick="history.back()">-->
+                </div>
+            </div>
+
+            <div id="meshList" class="table-content-list">
+                <form class="clearfix"  method="post">
+                    <!--<input type="hidden" name="uid" th:value="${dict.uid}">-->
+                    <!--<input type="hidden" id="pageSize" th:value="${dict.pageSize}">-->
+                    <div class="search-condition clearfix">
+                        <div class="f-l search" style="margin-right: 150px;margin-left: 100px;">
+                            <div>
+                                <label for="name" class="font">固件版本</label>
+                                <input type="text" id="name" name="mname" placeholder="请输入固件版本">
+                            </div>
+                        </div>
+                        <div class="f-l search">
+                            <div class="p-r">
+                                <label for="update-time">更新时间</label>
+                                <input type="text" id="update-time" placeholder="请选择日期" AUTOCOMPLETE="off">
+                                <img src="/alink-hq/static/img/date.png" alt="" class="p-a">
+                            </div>
+                        </div>
+                        <div class="f-r search-button " style="padding-top: 0;">
+                            <button type="submit" class="pointer">查询</button>
+                        </div>
+                    </div>
+                    <div class="search-result">
+                        <!-- 有数据时 -->
+                        <table border="1" class="hasData active" >
+                            <thead>
+                            <tr>
+                                <th style="width: 270px;"><span>固件版本</span></th>
+                                <th style="width: 650px;"><span>更新日志</span></th>
+                                <th style="width: 270px;"><span>更新时间</span></th>
+                                <th class="operation"><span>操作</span></th>
+                                <th><span>下载</span></th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr >
+                                <td >V1.2.6</td>
+                                <td  class="p-r show-lorem">
+                                    <p class="lorem-limit">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus aliquam aperiam, autem consectetur dolor eaque esse, et eveniet harum inventore ipsa minus molestias nostrum perspiciatis quia quibusdam, ratione tenetur voluptatum!</p>
+                                    <div class="memo-edit-has p-a">
+                                        <div  class="memo-content">
+                                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci assumenda delectus, enim in nesciunt quod ratione. Commodi eaque harum, id impedit libero nam nisi quos repellendus saepe sed ullam, voluptate.
+                                        </div>
+                                    </div>
+                                </td>
+                                <td >2019/02/05 15:47:44</td>
+                                <td   class="p-r ">
+                                    <a href="javascript:void(0);" class="singleEdit" style="margin:0 30px 0 0;">
+                                        <img src="/alink-hq/static/img/edit.png" alt=""  title="编辑" style="width: 18px;height: 18px;">
+                                    </a>
+                                    <a href="javascript:void(0);" class="singleDel pointer">
+                                        <img src="/alink-hq/static/img/delete.png" alt="" title="删除" style="width: 17px; height: 17px;">
+                                    </a>
+                                </td>
+                                <td class="k-link">
+                                    <img th:src="@{/static/img/updown.png}" alt="" class="pointer" style="width: 20px;height: 20px;">
+                                    <!--<a th:if="${mesh.pcount}=='0'" class="a-un"  href="javascript:void(0);" th:text="${mesh.pcount}"></a>-->
+                                    <!--<a th:if="${mesh.pcount}!='0'" th:href="@{/place/list(projectId=${mesh.project_id},mid=${mesh.id})}" th:text="${mesh.pcount}"></a>-->
+                                </td>
+
+                            </tr>
+                            <tr >
+                                <td >V1.2.6</td>
+                                <td  class="p-r show-lorem">
+                                    <p class="lorem-limit">新华社酒泉7月25日电（记者 盖博铭 谢昊 胡喆）25日，北京星际荣耀空间科技有限公司研制的双曲线一号遥一长安欧尚号运载火箭在中国酒泉卫星发射中心成功发射，这是我国民营商业运载火箭首次入轨发射成功，并实现了“一箭双星”。</p>
+                                    <div class="memo-edit-has p-a">
+                                        <div  class="memo-content">
+                                            新华社酒泉7月25日电（记者 盖博铭 谢昊 胡喆）25日，北京星际荣耀空间科技有限公司研制的双曲线一号遥一长安欧尚号运载火箭在中国酒泉卫星发射中心成功发射，这是我国民营商业运载火箭首次入轨发射成功，并实现了“一箭双星”。
+                                        </div>
+                                    </div>
+                                </td>
+                                <td >2019/02/05 15:47:44</td>
+                                <td   class="p-r ">
+                                    <a href="javascript:void(0);" class="singleEdit" style="margin:0 30px 0 0;">
+                                        <img src="/alink-hq/static/img/edit.png" alt=""  title="编辑" style="width: 18px;height: 18px;">
+                                    </a>
+                                    <a href="javascript:void(0);" class="singleDel pointer">
+                                        <img src="/alink-hq/static/img/delete.png" alt="" title="删除" style="width: 17px; height: 17px;">
+                                    </a>
+                                </td>
+                                <td class="k-link">
+                                    <img th:src="@{/static/img/updown.png}" alt="" class="pointer" style="width: 20px;height: 20px;">
+                                    <!--<a th:if="${mesh.pcount}=='0'" class="a-un"  href="javascript:void(0);" th:text="${mesh.pcount}"></a>-->
+                                    <!--<a th:if="${mesh.pcount}!='0'" th:href="@{/place/list(projectId=${mesh.project_id},mid=${mesh.id})}" th:text="${mesh.pcount}"></a>-->
+                                </td>
+
+                            </tr>
+                            </tbody>
+                            <tfoot>
+                            <tr>
+                                <!--<td colspan="12" class="clearfix page">-->
+                                <!--&lt;!&ndash;<div class="f-l" style="padding-left: 20px;">&ndash;&gt;-->
+                                <!--&lt;!&ndash;<input type="checkbox" id="addAll" class="pointer">&ndash;&gt;-->
+                                <!--&lt;!&ndash;&lt;!&ndash;</span>&ndash;&gt;&ndash;&gt;-->
+                                <!--&lt;!&ndash;<span class="">全选</span>&ndash;&gt;-->
+                                <!--&lt;!&ndash;</div>&ndash;&gt;-->
+                                <!--<div class="f-l">-->
+                                <!--<span class="selected-order">已选择-->
+                                <!--<span id="amount" class="amount">0</span>条数据-->
+                                <!--</span>-->
+                                <!--<span class="m-r-20">-->
+                                <!--&lt;!&ndash;<span  class="skipPageBtn  moment active unclick1"&ndash;&gt;-->
+                                <!--&lt;!&ndash;id="multiMove"  >移动</span>&ndash;&gt;-->
+                                <!--<span  class="skipPageBtn pointer moment" onmousedown="exchangeBtnMouseDown()"-->
+                                <!--onmouseup="exchangeBtnMouseUp()" id="multiMove">移动</span>-->
+                                <!--</span>-->
+                                <!--<span>-->
+                                <!--&lt;!&ndash;<span   class="skipPageBtn moment active unclick1"  id="multiDel">删除</span>&ndash;&gt;-->
+                                <!--<span  class="skipPageBtn pointer moment" onmousedown="deleteBtnMouseDown()"-->
+                                <!--onmouseup="deleteBtnMouseUp()" id="multiDel">删除</span>-->
+                                <!--</span>-->
+                                <!--</div>-->
+                                <!--&lt;!&ndash;<div th:replace="common/page::page"></div>&ndash;&gt;-->
+                                <!--</td>-->
+                                <td colspan="12" class="clearfix page">
+                                    <!--<div th:replace="common/page::page"></div>-->
+                                </td>
+                            </tr>
+                            </tfoot>
+                        </table>
+                        <!-- 无数据时 -->
+                        <table  border="1" class="noData ">
+                            <thead>
+                            <tr>
+                                <th><span>固件版本</span></th>
+                                <th><span>更新日志</span></th>
+                                <th><span>更新时间</span></th>
+                                <th class="operation"><span>操作</span></th>
+                                <th><span>下载</span></th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td colspan="10">
+                                    <img src="/alink-hq/static/img/no-data.png" alt="">
+                                    <p>暂无数据</p>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- 重命名弹框 -->
+<div class="confirm-on-off pop-iframe  " openContent="reset-name">
+    <div class="confirm-on-off-nav p-r pop-nav">
+        重命名
+    </div>
+    <div class="pop-content">
+        <div class="newName">
+            <p class="rename-hint"></p>
+            <label for="rename">固件版本</label>
+            <input type="text" placeholder="请输入固件版本" id="rename" onkeyup="nameKeyUp()" maxlength="16"/>
+        </div>
+        <div class="pop-btn">
+            <button class="reduce">取消</button>
+            <button class="yes">确定</button>
+        </div>
+    </div>
+</div>
+<!-- 删除账户 -->
+<div class="pop-iframe" openContent="delete-revision">
+    <div class=" p-r pop-nav">
+        温馨提示
+    </div>
+    <div class="pop-content">
+        <div class="reset-pwd">
+            <i class="fa fa-exclamation-circle fa-3x" aria-hidden="true" style="display: block;color:#00A0E9;"></i>
+            <p>您确定要删除XXX？</p>
+        </div>
+        <!--<div class="reset-pwd-hint">（删除后，XXX固件所有历史版本将均被删除）</div>-->
+        <div class="pop-btn">
+            <button class="reduce">取消</button>
+            <button class="yes">确定</button>
+        </div>
+    </div>
+</div>
+<!-- 更新日志-->
+<div class="pop-iframe" openContent="memo-edit">
+    <div class=" p-r pop-nav">
+        更新日志
+    </div>
+    <div class="pop-content">
+        <textarea maxlength="200" style="width: 93%;border: none;margin-top: 10px;resize: none;height: 130px;font-size: 13.5px;line-height: 1.8;color: #454545;font-family: inherit;"  class="wishContent" placeholder="请输入不超过200个字"></textarea>
+        <p class="right-font"><span class="wordsNum">0/200</span></p>
+        <input type="hidden" id="memo-account" >
+        <div class="pop-btn">
+            <button class="reduce">取消</button>
+            <button class="yes">确定</button>
+        </div>
+    </div>
+</div>
+
+<div class="hide-iframe"></div>
+<script type="text/javascript" th:src="@{/static/js/left.js}"></script>
+<script type="text/javascript" th:src="@{/static/js/page.js}"></script>
+<script th:src="@{/static/js/moment.js}"></script>
+<script th:src="@{/static/laydate/laydate.js}"></script>
+<script th:src="@{/static/js/otaRevisionHistory.js}"></script>
+</body>
+</html>

@@ -34,4 +34,9 @@ public class FileController {
     public String editOta() {
         return "fileManage/editOta";
     }
+
+    @RequestMapping("/otaRevisionHistory")
+    public String otaRevisionHistory() {
+        return "fileManage/otaRevisionHistory";
+    }
 }
