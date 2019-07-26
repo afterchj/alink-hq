@@ -85,19 +85,21 @@
     right:10px
 }
 .search-result{
-    -webkit-border-radius: 2px;
-    -moz-border-radius: 2px;
-    border-radius: 2px;
+    min-height: 545px;
+    /*-webkit-border-radius: 2px;*/
+    /*-moz-border-radius: 2px;*/
+    /*border-radius: 2px;*/
     /*-webkit-box-shadow: 0 1px 0 1px #e4e6eb;*/
     /*-moz-box-shadow: 0 1px 0 1px #e4e6eb;*/
     /*box-shadow: 0 1px 0 1px #e4e6eb;*/
-    box-shadow: 0 2px 1px rgba(0, 0, 0, 0.2);
+    /*box-shadow: 0 2px 1px rgba(0, 0, 0, 0.2);*/
 }
 .search-result table {
     width:100%;
     margin-bottom:35px;
     border-top: 1px solid rgba(0, 0, 0, 0.1);
-    border-right:  1px solid rgba(0, 0, 0, 0.1);
+    /*border-right:  1px solid rgba(0, 0, 0, 0.1);*/
+    box-shadow: 0 2px 1px rgba(0, 0, 0, 0.2)
     /*-webkit-box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.1), -1px 0 2px rgba(0, 0, 0, 0.05);*/
     /*box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.1), -1px 0 2px rgba(0, 0, 0, 0.05);*/
 }
@@ -254,7 +256,10 @@ th.all-checkbox {
 #project-list {
     display:none
 }
-
+.table-content-list.detail{
+    box-shadow: 0 2px 1px rgba(0, 0, 0, 0.2);
+    height: 760px;
+}
 .table-content-list .p-detail {
     border-top: 1px solid rgba(0, 0, 0, 0.1);
     height: 100%;
@@ -291,7 +296,7 @@ th.all-checkbox {
 }
 
 .p-content > div > div:nth-child(1) {
-    width: 100%;
+    width: 50%;
     text-align: left;
     font-size: 15px;
     color: #383e4b;
@@ -299,11 +304,11 @@ th.all-checkbox {
 
 
  .p-content>div.clearfix {
-    width: 800px;
-    margin: auto;
-    height: 55px;
-    line-height: 55px;
-    padding: 0 15px;
+     width: 800px;
+     margin: auto;
+     height: 50px;
+     line-height: 50px;
+     padding: 0 15px;
 }
 
  .p-content> div.clearfix:nth-child(odd){
@@ -311,7 +316,7 @@ th.all-checkbox {
 }
 
  .p-content > div > div:nth-child(2) {
-    width: 20%;
+    width: 50%;
     text-align: right;
 }
 .p-content>div.clearfix.table{
@@ -373,8 +378,13 @@ span.msg-use{
 }
 
 .pop-content p {
-    font-size:17px;
-    color:#666
+    /*font-size:17px;*/
+    /*color:#666;*/
+    font-size: 16px;
+    display: inline-block;
+    color: #555;
+    height: 30px;
+    line-height: 30px;
 }
 
 .pop-content input {
@@ -415,7 +425,7 @@ span.msg-use{
 
 .pop-content .reset-pwd {
     font-size: 16px;
-    color: #555;
+    color: #333;
     margin-top: 60px;
     text-align: center;
 
@@ -631,17 +641,8 @@ span.msg-use{
     margin-top:100px;
     text-align:center
 }
-.table-content-list input[type=text]{
-    width: 300px;
-    font-size: 14px;
-    padding-left: 14px;
-    height: 31px;
-    color: #555;
-    border: 1px solid #ddd;
-    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
-    border-radius: 2px;
-    box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
-}
+/*.table-content-list*/
+
 .table-content-list select {
     width:314px;
     font-size:14px;
@@ -1053,10 +1054,10 @@ table.light-detail-table thead,
     /*width:auto*/
 /*}*/
 
-#projectDetail .p-content > div.clearfix.timerDetail {
-    width:100%;
-    margin:20px
-}
+/*#projectDetail .p-content > div.clearfix.timerDetail {*/
+    /*width:100%;*/
+    /*margin:20px*/
+/*}*/
 
 .scene-msg.timer {
     margin-left: 50px;
@@ -1073,10 +1074,6 @@ table.light-detail-table thead,
     border: 1px solid #ddd;
     border-bottom: none;
 }
-
-
-
-
 
 .memo-edit p span {
     width:30px

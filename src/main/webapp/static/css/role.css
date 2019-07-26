@@ -3,8 +3,9 @@
     margin: 0 auto;
 }
 
-.tab-nav {
+#tab .tab-nav {
     border: 1px solid #ddd;
+    width:100%;
 }
 
 .tab-nav>div {
