@@ -100,6 +100,7 @@ $(function () {
     $("#rename").bind(
         "input propertychange change",
         {hint: "rename-hint", context: "#rename", text: text, match: match},
+
         matchInput);
     //时间排序
     $("th[class='p-r'] .p-a").click(function () {
