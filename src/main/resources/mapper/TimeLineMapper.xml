@@ -152,4 +152,14 @@
 
     </select>
 
+    <select id="getTimeJson" resultType="com.tpadsz.after.entity.TimeBean">
+        select tid,mid,json from f_time_json  where tid=(select tid from f_time_line where id=#{tid} and mid=#{mid})
+        and
+        mid=#{mid}
+    </select>
+
+    <update id="updateTimeJson">
+        update f_time_json set json=#{json} where tid=(select tid from f_time_line where id=#{tid}) and mid=#{mid}
+    </update>
+
 </mapper>

@@ -79,7 +79,7 @@ $(function () {
             $(".rename-hint").removeClass("active").text("");
             $(".rename-hint").addClass("active").text(text);
         } else {
-            $.post("/alink-hq/timer/updateTname", {mid: mid, id: tid, tname: renameValue},
+            $.post("/alink-hq/timer/updateTname", {mid: $('#mid').val(), id: tid, tname: renameValue},
                 function (data) {
                     var flag = data.flag;
                     if (flag == "true") {
@@ -91,7 +91,7 @@ $(function () {
                         // tname.text(renameValue);
                         // $(".rename-hint").removeClass("active").text("");
                         // $("#rename").val("");
-                        window.location.href = "/alink-hq/timer/list?id=" + mid + '&pageNum=' + $(".pages").text() + '&pageSize=' + $("#pageSize").val();
+                        window.location.href = "/alink-hq/timer/list?id=" + $('#mid').val() + '&pageNum=' + $(".pages").text() + '&pageSize=' + $("#pageSize").val();
                     }
                 })
         }
