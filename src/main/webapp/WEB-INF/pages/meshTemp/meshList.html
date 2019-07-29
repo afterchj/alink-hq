@@ -6,7 +6,8 @@
 
     <script src="/alink-hq/static/js/jquery.min.js"></script>
     <script src="/alink-hq/static/js/browser.js"></script>
-    <link rel="stylesheet" th:href="@{/static/css/common.css}"/>
+    <link rel="stylesheet" th:href="@{/static/font-awesome-4.7.0/css/font-awesome.min.css}"/>
+    <!--<link rel="stylesheet" th:href="@{/static/css/common.css}"/>-->
     <link rel="stylesheet" th:href="@{/static/css/laydate.css}"/>
     <link rel="stylesheet" th:href="@{/static/css/base.css}"/>
     <link rel="stylesheet" th:href="@{/static/css/leftNav.css}"/>
@@ -94,10 +95,12 @@
                                 <th><span>网络类型</span></th>
                                 <th><span>隶属项目</span></th>
                                 <th><span>区域数量</span></th>
+                                <!--<th><span>组数量</span></th>-->
+                                <!--<th><span>灯数量</span></th>-->
                                 <th><span>场景数量</span></th>
                                 <th><span>定时数量</span></th>
                                 <th><span>状态</span></th>
-                                <th class="operation"><span>操作</span></th>
+                                <th class="brief"><span>操作</span></th>
                             </tr>
                             </thead>
                             <tbody>
@@ -123,6 +126,16 @@
                                     <a th:if="${mesh.scount}=='0'" class="a-un" href="javascript:void(0);" th:text="${mesh.scount}"></a>
                                     <a th:if="${mesh.scount}!='0'" th:href="@{/scene/list(meshName=${mesh.mname},meshId=${mesh.mesh_id},mid=${mesh.id})}" th:text="${mesh.scount}"></a>
                                 </td>
+                                <!--组数量-->
+                                <!--<td class="k-link">-->
+                                    <!--<a th:if="${mesh.pcount}=='0'" class="a-un"  href="javascript:void(0);" th:text="${mesh.pcount}"></a>-->
+                                    <!--<a th:if="${mesh.pcount}!='0'" th:href="@{/place/list(projectId=${mesh.project_id},mid=${mesh.id})}" th:text="${mesh.pcount}"></a>-->
+                                <!--</td>-->
+                                <!--&lt;!&ndash;灯数量&ndash;&gt;-->
+                                <!--<td class="k-link">-->
+                                    <!--<a th:if="${mesh.scount}=='0'" class="a-un" href="javascript:void(0);" th:text="${mesh.scount}"></a>-->
+                                    <!--<a th:if="${mesh.scount}!='0'" th:href="@{/scene/list(meshName=${mesh.mname},meshId=${mesh.mesh_id},mid=${mesh.id})}" th:text="${mesh.scount}"></a>-->
+                                <!--</td>-->
                                 <td class="k-link">
                                     <a th:if="${mesh.tcount}=='0'" class="a-un" href="javascript:void(0);" th:text="${mesh.tcount}"></a>
                                     <a th:if="${mesh.tcount}!='0'" th:href="@{/timer/list(id=${mesh.id})}" th:text="${mesh.tcount}"></a>
@@ -130,33 +143,49 @@
                                 <!--<td  th:if="${mesh.scount}=='0'">-->
                                     <!--<a href="javascript:void(0);" th:text="${mesh.scount}"></a>-->
                                 <!--</td>-->
-                                <td>未知</td>
-                                <td   class="p-r">
-                                    <img  shiro:hasPermission ="renameMesh"  src="/alink-hq/static/img/edit.png" th:alt="${mesh.id}" class="reset-name pointer" title="重命名">
-                                    <!--不能重命名-->
-                                    <img shiro:lacksPermission ="renameMesh" src="/alink-hq/static/img/un-rename.png" alt="" class="pointer  unclick"
-                                         th:title="无法操作">
-
-                                    <a th:href="@{/mesh/move(ids=${mesh.id})}" shiro:hasPermission ="moveMesh" >
-                                        <img src="/alink-hq/static/img/exchange.png" alt="" class="center-img pointer" title="移动">
-                                    </a>
-                                    <!--不能移交-->
-                                    <img src="/alink-hq/static/img/un-exchange.png" alt=""
-                                         class="center-img pointer  unclick"  shiro:lacksPermission ="moveMesh"
-                                         th:title="无法操作">
-
-                                    <a href="javascript:void(0);" class="singleDel pointer" shiro:hasPermission ="deleteMesh">
-                                        <img src="/alink-hq/static/img/delete.png" alt="" title="删除">
-                                    </a>
-                                    <!--不能删除-->
-                                    <img src="/alink-hq/static/img/un-delete.png" alt="" shiro:lacksPermission ="deleteMesh"  class="pointer   unclick"
-                                         th:title="无法操作">
+                                <td class="unknown">未知</td>
+                                <td   class="p-r " >
+                                    <i class="fa  fa-ellipsis-v  fa-lg openList pointer"></i>
+                                    <ul class="showList p-a">
+                                        <li>
+                                            <!--重命名-->
+                                            <img  shiro:hasPermission ="renameMesh"  src="/alink-hq/static/img/edit.png" th:alt="${mesh.id}" class="reset-name pointer"title="重命名">
+                                            <!--不能重命名-->
+                                            <img shiro:lacksPermission ="renameMesh" src="/alink-hq/static/img/un-rename.png" alt="" class="pointer  unclick"
+                                                 th:title="无法操作">
+                                        </li>
+                                        <li>
+                                            <!--移交-->
+                                            <a th:href="@{/mesh/move(ids=${mesh.id})}" shiro:hasPermission ="moveMesh" >
+                                                <img src="/alink-hq/static/img/exchange.png" alt="" class="center-img pointer" title="移动">
+                                            </a>
+                                            <!--不能移交-->
+                                            <img src="/alink-hq/static/img/un-exchange.png" alt=""
+                                                 class="center-img pointer  unclick"  shiro:lacksPermission ="moveMesh"
+                                                 th:title="无法操作">
+                                        </li>
+                                        <li>
+                                            <!--删除-->
+                                            <a href="javascript:void(0);" class="singleDel pointer" shiro:hasPermission ="deleteMesh">
+                                                <img src="/alink-hq/static/img/delete.png" alt="" title="删除" style="width: 14px; height: 14px;">
+                                            </a>
+                                            <!--不能删除-->
+                                            <img src="/alink-hq/static/img/un-delete.png" alt="" shiro:lacksPermission ="deleteMesh"  class="pointer   unclick"
+                                                 th:title="无法操作" style="width: 14px; height: 14px;">
+                                        </li>
+                                    </ul>
                                 </td>
                             </tr>
                             </tbody>
                             <tfoot>
                             <tr>
-                                <td colspan="10" class="clearfix page">
+
+                                <td colspan="12" class="clearfix page">
+                                    <div class="f-l" style="padding-left: 20px;">
+                                        <input type="checkbox" id="addAll" class="pointer">
+                                        <!--</span>-->
+                                        <span class="">全选</span>
+                                    </div>
                                     <div class="f-l">
                             <span class="selected-order">已选择
                                 <span id="amount" class="amount">0</span>条数据

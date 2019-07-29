@@ -15,11 +15,18 @@ table {
 
 body {
     background: #eef5f9;
-    color: #292b2c;
-    font-weight: 400;
+    /*color: #292b2c;*/
+    /*font-weight: 400;*/
+    /*font-size: 14px;*/
+    /*font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";*/
+    /*zoom: 1;*/
+
+    font-family: "Hiragino Sans GB","Microsoft Yahei",SimSun,Arial,"Helvetica Neue",Helvetica;
+    vertical-align: baseline;
     font-size: 14px;
-    font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
-    zoom: 1;
+    word-wrap: break-word;
+    -webkit-font-smoothing: antialiased;
+    color: #383e4b;
 }
 
 button,input,optgroup,select,textarea {
@@ -30,7 +37,7 @@ button,input,optgroup,select,textarea {
 }
 
 a {
-    color: #3598db;
+    color: #00A0E9;
     text-decoration: none;
 }
 
@@ -79,7 +86,9 @@ ul li {
     height: 0;
     border: 10px solid #eef2f5;
 }
-
+.fa{
+    color: #47A6E6;
+}
 .pointer {
     cursor: pointer;
 }
@@ -148,7 +157,7 @@ label {
 }
 
 .all-checkbox {
-    width: 120px;
+    width: 90px;
 }
 
 ol,ul {
@@ -282,15 +291,15 @@ input[type=checkbox]:checked,input[type=checkbox]:indeterminate {
 }
 
 .bread li {
-    font-size: 17px;
+    font-size: 16px;
 }
 
 .bread li a {
-    color: #323232;
+    color: #00A0E9;
 }
 
 .bread li a:hover {
-    color: #3598db;
+    color: #00A0E9;
 }
 
 .bread li::after {
@@ -305,7 +314,7 @@ input[type=checkbox]:checked,input[type=checkbox]:indeterminate {
 }
 
 .bread li:last-of-type {
-    color: #323232;
+    color: #3c3c3c;
 }
 
 table tbody tr {

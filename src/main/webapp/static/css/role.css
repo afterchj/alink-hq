@@ -4,29 +4,31 @@
 }
 
 .tab-nav {
-    border: 1px solid #bbb;
+    border: 1px solid #ddd;
 }
 
 .tab-nav>div {
-    width: calc((100% - 264px)/4);
-    height: 58px;
-    line-height: 58px;
-    border-right: 1px solid #bbb;
+    width: calc((100% - 306px)/6);
+    height: 50px;
+    line-height: 50px;
+    border-right: 1px solid #ddd;
     text-align: center;
     cursor: pointer;
     font-size: 15px;
+    color: #3c3c3c;
+    font-weight: bold;
 }
 
 .tab-nav>div.data-scope {
-    width: 260px;
-    background-color: #3598db;
+    width: 300px;
+    background-color: #47A6E6;
     color: #fff;
 }
 
 .tab-nav>div.active {
-    background-color: #3598db;
+    background-color: #47A6E6;
     color: #fff;
-    border-color: #3598db;
+    border-color: #47A6E6;
     cursor: pointer;
 }
 
@@ -34,25 +36,26 @@
     border-right: none;
 }
 
-.tab-content {
-    border: 1px solid #bbb;
+#tab .tab-content {
+    border: 1px solid #ddd;
     border-top: none;
-    min-height: 458px;
+    min-height: 410px;
+    width: 100%;
 }
 
 
 .fix-left-nav {
-    width: 260px;
-    min-height: 462px;
-    border-right: 1px solid #bbb;
+    width: 300px;
+    min-height: 412px;
+    border-right: 1px solid #ddd;
+    color: #2c2c2c;
 }
 .fix-left-nav.gray{
-    background-color: #bbb;
+    background-color: #ddd;
 }
 
 .fix-right-nav {
-    width: calc(100% - 261px);
-
+    width: calc(100% - 301px);
     height: 100%;
 }
 
@@ -63,16 +66,17 @@
 }
 
 .tab-content-part>div.list {
-    border-bottom: 1px solid #bbb;
-    line-height: 55px;
+    border-bottom: 1px solid #ddd;
+    line-height: 50px;
+    text-align: left;
 }
 
 .limit,
 .company {
-    border-bottom: 1px solid #bbb;
+    border-bottom: 1px solid #ddd;
     padding: 0 20px;
     background-color: #eee;
-    line-height: 55px;
+    line-height: 50px;
 }
 
 .list-title {
@@ -83,11 +87,12 @@
 
 .list-content>div.one>div.f-l.zero {
     width: 23%;
+    line-height: 49px;
 }
 
 .list-content {
     width: calc(90% - 81px);
-    border-left: 1px solid #bbb;
+    border-left: 1px solid #ddd;
     padding: 0 20px;
 }
 
@@ -96,10 +101,18 @@
 }
 
 .company-select>div {
-    margin-top: 50px;
-    padding-left: 15px;
+    padding: 0 7%;
+    /* padding-left: 10%; */
+    text-align: left;
+    width: 86%;
+    /* line-height: 4; */
+    height: 50px;
+    vertical-align: text-bottom;
+    line-height: 50px;
 }
-
+.company-select>div:first-child{
+    margin-top:50px;
+}
 .alter {
     text-align: center;
 }
@@ -113,12 +126,12 @@
 }
 
 .alter button {
-    height: 44px;
-    width: 134px;
+    height: 40px;
+    width: 115px;
     color: #fff;
-    font-size: 17px;
-    background-color: #3598db;
-    border: 1px solid #3598db;
+    font-size: 16px;
+    background-color: #47A6E6;
+    border: 1px solid #47A6E6;
     letter-spacing: 5px;
     padding-left: 5px;
     margin-top: 30px;
@@ -136,7 +149,7 @@
 }
 
 .tab-content-part>div.list.one {
-    border-bottom: 1px solid #bbb;
+    border-bottom: 1px solid #ddd;
 }
 
 .tab-content-part>div.list.one .list-title {
@@ -144,7 +157,7 @@
 }
 
 .tab-content-part>div.list.one .list-content {
-    line-height: 49px;
+    /*line-height: 49px;*/
 }
 .list-content>div.one>div.f-l.create-account{
     width:calc(100% - 20px);
@@ -173,7 +186,7 @@
     text-indent: 10px;
     height: 30px;
     border-radius: 5px;
-    border: 1px solid #bbb;
+    border: 1px solid #ddd;
 }
 .createRole>div{
     text-align: center;
@@ -185,8 +198,8 @@
     color: #fff;
     font-size: 17px;
     letter-spacing: 5px;
-    border: 1px solid #3598db;
-    background-color: #3598db;
+    border: 1px solid #47A6E6;
+    background-color: #47A6E6;
     border-radius: 5px;
     cursor: pointer;
 }

@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="/alink-hq/static/css/base.css">
     <link rel="stylesheet" href="/alink-hq/static/css/common.css">
+    <link rel="stylesheet" th:href="@{/static/font-awesome-4.7.0/css/font-awesome.min.css}"/>
     <link rel="stylesheet" href="/alink-hq/static/css/leftNav.css">
     <link rel="stylesheet" href="/alink-hq/static/css/projectManage.css">
     <script src="/alink-hq/static/js/jquery.min.js"></script>
@@ -73,11 +74,9 @@
                                 </div>
                                 <div id="drop_area">
                                     <div id="preview" th:switch="${info.photo}" class="p-r">
-                                        <img th:case="null" src="/alink-hq/static/img/upload.png" class="img-responsive"
-                                             style="width: 100%;height:100%;" alt="" title="">
-                                        <!--<img th:case="*" th:src="@{'http://iotsztp.com/file/imgs/'+${info.photo}}" class="img-responsive" style="width: 100%;height:100%;" alt="" title="">-->
-                                        <img th:case="*" th:src="@{'http://uichange.com/file/imgs/'+${info.photo}}"
-                                             class="img-responsive" style="width: 100%;height:100%;" alt="" title="">
+                                        <img th:case="null" src="/alink-hq/static/img/upload.png" class="img-responsive" style="width: 100%;height:100%;" alt="" title="">
+<!--                                        <img th:case="*" th:src="@{'http://iotsztp.com/file/imgs/'+${info.photo}}" class="img-responsive" style="width: 100%;height:100%;" alt="" title="">-->
+                                        <img th:case="*" th:src="@{'http://uichange.com/file/imgs/'+${info.photo}}" class="img-responsive" style="width: 100%;height:100%;" alt="" title="">
                                         <!--<img th:case="*" th:src="@{'../static/upload/'+${info.photo}}" class="img-responsive" style="width: 100%;height:100%;" alt="" title="">-->
                                         <!--<img src="http://iotsztp.com/file/imgs/chat_qrcode.jpg" style="width: 100%">-->
                                         <!--<img th:src="@{'../static/upload/'+${info.photo}}" style="width: 100%" th:alt="${info.photo}">-->
@@ -138,7 +137,6 @@
         var companyPhone = $('#company-phone').val().trim();
         var address = $('#address').val().trim();
         var licenseNumber = $('#serial').val().trim();
-//        console.log(companyName,companyPhone,isNaN(companyPhone),address)
         var iscompanyName = true;
         var iscompanyPhone = true;
         var isaddress = true;
@@ -167,15 +165,13 @@
             $('.address-hint').text('')
             isaddress = true;
         }
-        if (isNaN(licenseNumber)) {
-            $('.license-number-hint').text('请输入纯数字的编号')
+        if (checkLicense(licenseNumber)) {
+            $('.license-number-hint').text('请输入正确的编号')
             islicenseNumber = false;
         } else {
             $('.license-number-hint').text('')
             islicenseNumber = true;
         }
-
-//      console.log('iscompanyName',iscompanyName,'iscompanyPhone',iscompanyPhone,'isaddress',isaddress,'islicenseNumber',islicenseNumber);
         if (iscompanyName && iscompanyPhone && isaddress && islicenseNumber) {
             $('form.company-msg').submit();
         }
@@ -185,6 +181,15 @@
         var reg1 = /^((0\d{2,3}-\d{7,8})|(1[3584]\d{9}))$/;
         var reg2 = /^1[3456789]\d{9}$/;
         if (reg1.test(number) || reg2.test(number)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    //验证营业执照编号
+    function checkLicense(str) {
+        reg = /(^(?:(?![IOZSV])[\dA-Z]){2}\d{6}(?:(?![IOZSV])[\dA-Z]){10}$)|(^\d{15}$)/;
+        if (reg.test(str)) {
             return true;
         } else {
             return false;

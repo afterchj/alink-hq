@@ -127,7 +127,7 @@
 
     <select id="getTimePointByTsid" resultType="com.tpadsz.after.entity.TimePoint">
         SELECT
-  	      p.tsid,p.sid,concat(hour,":",minute) as time,
+  	      p.tsid,p.sid,concat(IF(LENGTH(hour)=1,CONCAT("0",hour),hour),":",if(LENGTH(minute)=1,concat("0",minute),minute)) as time,
           'ON' AS state,
         	s.sname,
         	s.scene_id
@@ -136,7 +136,7 @@
         	f_scene s
         WHERE p.sid = s.id UNION all
         SELECT
-        	tsid,sid,concat(hour,":",minute) as time,
+        	tsid,sid,concat(IF(LENGTH(hour)=1,CONCAT("0",hour),hour),":",if(LENGTH(minute)=1,concat("0",minute),minute)) as time,
         CASE
         	sid
 --         	WHEN '0' THEN 'ON'

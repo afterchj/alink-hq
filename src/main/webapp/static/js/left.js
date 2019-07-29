@@ -18,7 +18,7 @@ $(function(){
 function showOverlay() {
     $(".hide-iframe").height(pageHeight());
     $(".hide-iframe").width(pageWidth());
-
+    $(".hide-iframe").css('background','#333');
     // fadeTo第一个参数为速度，第二个为透明度
     // 多重方式控制透明度，保证兼容性，但也带来修改麻烦的问题
     $(".hide-iframe").fadeTo(200, 0.5);
@@ -80,3 +80,8 @@ function scrollX() {
 
     return self.pageXOffset || (de && de.scrollLeft) || document.body.scrollLeft;
 }
+$('.showList').hide();
+$('.openList').click(function () {
+    $(this).siblings('.showList').toggle();
+    $(this).parent().parent('tr').siblings('tr').find('.showList').hide();
+})

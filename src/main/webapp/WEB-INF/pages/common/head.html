@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
+
     <!--<title>导航栏</title>-->
     <!--<link rel="stylesheet" href="/alink-hq/static/css/base.css"/>-->
     <!--<link rel="stylesheet" href="/alink-hq/static/css/leftNav.css"/>-->
@@ -20,13 +21,15 @@
             </div>
             <div class="f-r ad-nav">
             <span class="nav-img">
-                <img src="/alink-hq/static/img/off-unclick .png" alt=""/>
+                <!--<img src="/alink-hq/static/img/off-unclick .png" alt=""/>-->
+                <i class="fa fa-power-off" aria-hidden="true" style="color: #fff;font-size: 18px;"></i>
             </span>
                 <span class="font"><a style="color: white" th:href="@{/logOut}">退出</a></span>
             </div>
             <div class="f-r ad-nav">
             <span class="nav-img">
-                <img src="/alink-hq/static/img/admin.png" alt="" style="margin-top: -17px;"/>
+                <i class="fa fa-user" aria-hidden="true" style="color: #fff;font-size: 18px;"></i>
+                <!--<img src="/alink-hq/static/img/admin.png" alt="" style="margin-top: -17px;"/>-->
             </span>
             <span th:if="${session.user}!=null">
                 <span th:text="${session.user.uname}" class="font"></span>
