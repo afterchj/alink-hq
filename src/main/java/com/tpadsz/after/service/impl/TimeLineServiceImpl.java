@@ -5,6 +5,7 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.tpadsz.after.dao.TimeLineDao;
 import com.tpadsz.after.entity.ProjectList;
+import com.tpadsz.after.entity.TimeBean;
 import com.tpadsz.after.entity.TimeLine;
 import com.tpadsz.after.entity.TimePoint;
 import com.tpadsz.after.service.TimeLineService;
@@ -126,8 +127,17 @@ public class TimeLineServiceImpl implements TimeLineService {
     }
 
     @Override
-    public void updateTnameById(int id, String tname) {
+    public void updateTnameById(int id, String tname, int mid) {
         timeLineDao.updateTnameById(id,tname);
+        TimeBean timeBean = timeLineDao.getTimeJson(id,mid);
+        String json = timeBean.getJson();
+        JSONObject jsonObject = JSONObject.parseObject(json);
+        jsonObject.remove("tname");
+        jsonObject.put("tname", tname);
+        jsonObject.remove("item_title");
+        jsonObject.put("item_title", tname);
+        json = jsonObject.toJSONString();
+        timeLineDao.updateTimeJson(id,mid, json);
     }
 
     @Override

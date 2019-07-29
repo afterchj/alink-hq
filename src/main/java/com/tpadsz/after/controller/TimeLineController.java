@@ -69,7 +69,7 @@ public class TimeLineController {
         if (!flag){
             //名称不唯一
             map.put("flag","false");
-            timeLineService.updateTnameById(id,tname);
+            timeLineService.updateTnameById(id,tname,mid);
             map.put("success","success");
         }
         return map;
