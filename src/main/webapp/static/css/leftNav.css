@@ -28,9 +28,9 @@
 }
 
 .one-list>div {
-    height: 50px;
-    line-height: 50px;
-    padding-left: 23%;
+    height: 45px;
+    line-height: 45px;
+    padding-left: 20%;
 }
 
 .one-list>div a {
@@ -99,8 +99,8 @@
 }
 
 .main-left a {
-    font-size: 16px;
-    color: #383e4b
+    font-size: 15px;
+    color: #454545;
 }
 
 .one-list {
@@ -109,10 +109,9 @@
 }
 
 .one-list li {
-    font-size: 15px;
-    height: 45px;
-    line-height: 45px;
-    padding-left: 35%;
+    height: 40px;
+    line-height: 40px;
+    padding-left: 30%;
     cursor: pointer;
 }
 .hide-iframe{
@@ -120,6 +119,7 @@
     opacity: 0.6;
     z-index: 999;
     position: absolute;
+    /*display: none;*/
     top: 0;
 }
 .one-list li:hover {

@@ -20,7 +20,7 @@ public interface TimeLineService {
 
     void batchInsertTimeLine(List<TimeLine> timeLines);
 
-    void updateTnameById(int id, String tname);
+    void updateTnameById(int id, String tname, int mid);
 
     boolean getTnameById(int mid, String tname);
 

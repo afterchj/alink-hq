@@ -160,7 +160,7 @@ $(function () {
                 $(this).find('input.singleListChecked:checkbox').prop('checked', true)
             });
             //勾选查看数据
-            if ($(".tab-content-part.active").attr('id')=='projectManage'){
+            if ($(".tab-content-part.active").attr('id')=='projectManage' ||$(".tab-content-part.active").attr('id')=='fileManage'){
                 //取消全选不可查看数据
                 $(".tab-content-part.active").find('input.noAllRadio').prop('checked',false);
                 $(this).parent().parent().siblings('.list-content').find('input.singleIsRadio').prop('checked',true);
@@ -191,7 +191,7 @@ $(function () {
         $(this).parent().parent().parent().parent().parent('.tab-content-part.active').find('.allChecked').prop('checked', $(this).parents(".tab-content-part.active").find('.singleChecked').length == $(this).parents(".tab-content-part.active").find('.singleChecked:checked').length);
         //查看数据选项
         if (singleListCheckedLength>=1){
-            if ($(".tab-content-part.active").attr('id')=='projectManage'){
+            if ($(".tab-content-part.active").attr('id')=='projectManage' || $(".tab-content-part.active").attr('id')=='fileManage'){
                 $(this).parent().parent().next().find('input[value=0]').prop('checked',true);
                 //取消全选不可查看数据
                 $(".tab-content-part.active").find('input.noAllRadio').prop('checked',false);
@@ -221,6 +221,14 @@ $(function () {
                 $(this).parent().next().find('input:checkbox:last').prop('checked',true);
             }
         }
+        // 固件历史版本查看勾选
+        if (!$(this).prop("checked") && $(this).attr('alt')=='viewHistoryOTA'){
+            var viewHistoryOTA = $(this).parent().next().find('input:checkbox');
+            //固件历史版本子层全部取消勾选
+            viewHistoryOTA.each(function () {
+                $(this).prop('checked',false);
+            })
+        }
 
 
     })
@@ -234,7 +242,7 @@ $(function () {
             'checked', singleListLength == singleListCheckedLength)
         $(this).parents('.tab-content-part.active').find('.allChecked').prop('checked', $(this).parents(".tab-content-part.active").find('.singleChecked').length == $(this).parents(".tab-content-part.active").find('.singleChecked:checked').length);
         if (singleListCheckedLength>=1){
-            if ($(".tab-content-part.active").attr('id')=='projectManage'){
+            if ($(".tab-content-part.active").attr('id')=='projectManage'|| $(".tab-content-part.active").attr('id')=='fileManage'){
                 $(this).parent().parent().next().find('input[value=0]').prop('checked',true)
             }else {
                 var allRadio = $(".tab-content-part.active").find('input[value=0]');
@@ -244,36 +252,12 @@ $(function () {
             }
         }
         $("input.singleListChecked:checkbox[alt='createUser']").prop('checked',$("input[alt^='createUser'].singleRoleChecked:checked").length>0);
+        if ($(this).prev("checked")&&$(".tab-content-part.active").attr('id')=='fileManage'){
+            $("input.singleListChecked:checkbox[alt='viewHistoryOTA']").prop('checked',true);
+        }
+
 
     })
-
-// //单选纵向
-// //可查看数据
-//     $('input.isAllRadio:radio').click(function () {
-//         var selector = $(this).parent().parent().parent().siblings('.list').find('input.singleIsRadio:radio[value=0]');
-//         selector.each(function () {
-//             $(this).prop('checked', true);
-//         })
-//     })
-// //不可查看数据
-//     $('input.noAllRadio:radio').click(function () {
-//         var selector = $(this).parent().parent().parent().siblings('.list').find('input.singleNoRadio:radio[value=1]');
-//         selector.each(function () {
-//             $(this).prop('checked', true);
-//         })
-//     })
-//     $('.list input.singleIsRadio:radio[value=0]').click(function () {
-//         var singleIsRadioLength = $(this).parent().parent().parent().parent().parent('.tab-content-part.active').find('input.singleIsRadio:radio[value=0]').length;
-//         var singleIsRadioCheckedLength = $(this).parent().parent().parent().parent().parent('.tab-content-part.active').find('input.singleIsRadio:radio[value=0]:checked').length;
-//         $(this).parent().parent().parent().parent().parent('.tab-content-part.active').find('input.isAllRadio:radio').prop('checked', singleIsRadioLength == singleIsRadioCheckedLength);
-//         $(this).parent().parent().parent().parent().parent('.tab-content-part.active').find('input.noAllRadio:radio').prop('checked', false);
-//     })
-//     $('.list input.singleNoRadio:radio[value=1]').click(function () {
-//         var singleNoRadioLength = $(this).parent().parent().parent().parent().parent('.tab-content-part.active').find('input.singleNoRadio:radio[value=1]').length;
-//         var singleNoRadioCheckedLength = $(this).parent().parent().parent().parent().parent('.tab-content-part.active').find('input.singleNoRadio:radio[value=1]:checked').length;
-//         $(this).parent().parent().parent().parent().parent('.tab-content-part.active').find('input.noAllRadio:radio').prop('checked', singleNoRadioLength == singleNoRadioCheckedLength);
-//         $(this).parent().parent().parent().parent().parent('.tab-content-part.active').find('input.isAllRadio:radio').prop('checked', false);
-//     })
 
     //单选纵向
     //全选可查看数据

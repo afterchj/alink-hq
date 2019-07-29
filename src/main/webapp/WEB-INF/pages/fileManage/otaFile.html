@@ -23,7 +23,7 @@
             <div class="clearfix main-right-nav">
                 <div class="f-l main-right-title">OTA文件</div>
                 <div class="f-r pointer last-nav">
-                    <a href=""  >
+                    <a th:href="@{/file/addOta}"  >
                         <div   class="create " onmousedown="createBtnMouseDown()" onmouseup="createBtnMouseUp()">
                             <span>+</span><span>新增固件</span>
                         </div>
@@ -52,8 +52,7 @@
                         <div class="f-l search" style="margin-right: 150px;margin-left: 100px;">
                             <div>
                                 <label for="name" class="font">固件名称</label>
-                                <input type="text" id="name" name="mname"
-                                       placeholder="请输入固件名称">
+                                <input type="text" id="name" name="mname" placeholder="请输入固件名称">
                             </div>
 
                         </div>
@@ -96,7 +95,7 @@
                                     <!--&lt;!&ndash;<input type="hidden" th:value="${mesh.uid}" class="uid">&ndash;&gt;-->
                                 <!--</td>-->
                                 <td class="k-link">
-                                    <a href="" th:text="GY_USB_Dongle_RSSI"></a>
+                                    <a th:href="@{/file/otaRevisionHistory}"  th:text="GY_USB_Dongle_RSSI"></a>
                                 </td>
                                 <td th:text="6001"></td>
                                 <td >2019/02/05 15:47:44</td>
@@ -110,13 +109,14 @@
                                 </td>
                                 <td class="k-link">
                                     <!--<i class="fa fa-download" aria-hidden="true"></i>-->
-                                    <img th:src="@{/alink-hq/static/img/updown.png}" alt="">
+                                    <img th:src="@{/static/img/updown.png}" alt="" class="pointer">
                                     <!--<a th:if="${mesh.pcount}=='0'" class="a-un"  href="javascript:void(0);" th:text="${mesh.pcount}"></a>-->
                                     <!--<a th:if="${mesh.pcount}!='0'" th:href="@{/place/list(projectId=${mesh.project_id},mid=${mesh.id})}" th:text="${mesh.pcount}"></a>-->
                                 </td>
                                 <!--组数量-->
                                 <td class="k-link">
-                                    <i class="fa fa-upload" aria-hidden="true"></i>
+                                    <!--<i class="fa fa-upload" aria-hidden="true"></i>-->
+                                    <img th:src="@{/static/img/upload.png}" alt="" class="pointer" th>
                                     <!--<a th:if="${mesh.pcount}=='0'" class="a-un"  href="javascript:void(0);" th:text="${mesh.pcount}"></a>-->
                                     <!--<a th:if="${mesh.pcount}!='0'" th:href="@{/place/list(projectId=${mesh.project_id},mid=${mesh.id})}" th:text="${mesh.pcount}"></a>-->
                                 </td>
@@ -142,7 +142,7 @@
                                             </div>
                                         </div>
                                     </a>
-                                    <a href="javascript:void(0);" style="margin:0 30px;">
+                                    <a th:href="@{/file/editOta}" style="margin:0 30px;">
                                         <img src="/alink-hq/static/img/alter.png" alt=""  title="编辑" style="width: 20px;height: 20px;">
                                     </a>
                                     <a href="javascript:void(0);" class="singleDel pointer">

@@ -1,6 +1,7 @@
 package com.tpadsz.after.dao;
 
 import com.tpadsz.after.entity.ProjectList;
+import com.tpadsz.after.entity.TimeBean;
 import com.tpadsz.after.entity.TimeLine;
 import com.tpadsz.after.entity.TimePoint;
 import org.apache.ibatis.annotations.Param;
@@ -35,4 +36,8 @@ public interface TimeLineDao {
     ProjectList getProjectByProjectId(@Param("projectId") int projectId);
 
     List<TimePoint> getTimePointByTsid(@Param("id") int id);
+
+    TimeBean getTimeJson(@Param("tid") int id, @Param("mid") int mid);
+
+    void updateTimeJson(@Param("tid")int id, @Param("mid")int mid, @Param("json") String json);
 }
