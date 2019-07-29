@@ -40,7 +40,7 @@ $('.confirm-create').click(function() {
                     $('#preload-anim .title').text('加载失败，请重新尝试');
                     setTimeout(function() {
                         $('#preload-anim').removeClass('active')
-                    }, 1000)
+                    }, 500)
                 }
             }
         })

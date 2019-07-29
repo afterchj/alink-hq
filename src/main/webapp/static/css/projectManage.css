@@ -129,8 +129,8 @@
     font-size: 17px;
 }
 .search-result table td img{
-    width:16px;
-    height: 16px;
+    width: 18px;
+    height: 18px;
 }
 .version{
     left: 0;
@@ -355,14 +355,14 @@ span.msg-use{
 }
 
 .c-width {
-    width:163px;
-    height:38px;
-    line-height:38px;
-    border-bottom:1px solid #ddd
+    width: calc((100% - 3px)/2);
+    height: 38px;
+    line-height: 38px;
 }
 
 .c-width.one {
-    border-right:1px solid #ddd
+    border-right:1px solid #ddd;
+    max-width: 210px;
 }
 
 .pop-content a {
@@ -413,13 +413,15 @@ span.msg-use{
 }
 
 .c-list .c-width {
-    color:#383e4b;
+    /*color:#383e4b;*/
 }
 
 .c-list {
-    overflow-y:scroll;
-    overflow-x:hidden;
-    max-height:116px
+    overflow-y: auto;
+    overflow-x: hidden;
+    max-height: 116px;
+    font-size: 13px;
+    color: #898989;
 }
 
 .pop-content .reset-pwd {
@@ -429,7 +431,33 @@ span.msg-use{
     text-align: center;
 
 }
-
+.excel-main{
+    width:80%;
+    margin-left:10%;
+    border:1px solid #ddd;
+    margin-top:25px;
+}
+.pop-content a.excel-a{
+    display: block;
+    /* margin-top: 25px; */
+    /* margin-bottom: 0; */
+    position: absolute;
+    bottom: 15px;
+    height: 30px;
+    left: 42%;
+    line-height: 30px;
+    font-size: 17px;
+}
+.pop-content a.excel-a:hover{
+    text-decoration: none;
+    text-decoration-line: none;
+}
+.pop-content .excel-p{
+    font-size: 13px;
+    position: absolute;
+    bottom: 10px;
+    left: 27%;
+}
 .pop-content .off-or-on {
     font-size: 16px;
     color: #555;
@@ -644,12 +672,12 @@ span.msg-use{
 /*.table-content-list*/
 
 .table-content-list select {
-    width:314px;
-    font-size:14px;
-    color:#888;
-    height:33px;
-    padding-left:8px;
-    border: 1px solid  #ddd;
+    width: 314px;
+    font-size: 14px;
+    color: #888;
+    height: 35px;
+    padding-left: 8px;
+    border: 1px solid #ddd;
     border-radius: 2px;
     transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
     box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
@@ -1294,4 +1322,113 @@ i.cricle {
 }
 .brief{
     width:100px;
+}
+.reduce-num,.add-num{
+    width: 33px;
+    height: 33px;
+    line-height: 33px;
+    border: 1px solid #ddd;
+    text-align: center;
+    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+}
+.reduce-num{
+    border-right: 0;
+    border-top-left-radius: 2px;
+    border-bottom-left-radius: 2px;
+}
+.add-num{
+    border-left: 0;
+    border-top-right-radius: 2px;
+    border-bottom-right-radius: 2px;
+}
+.create-account-hint{
+    margin-left: 30px;
+    top: 25%;
+}
+.l-radio{
+    margin-right: 20px;
+}
+.c-title.excel-up{
+    border-bottom: 1px solid #ddd;
+    color: #454545;
+    font-size: 15px;
+    font-weight: bold;
+}
+
+.p-content div.clearfix.accountMsg{
+    width: 1000px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    padding: 40px;
+    margin: auto;
+}
+.p-content div.clearfix.accountMsg>div:nth-child(1){
+    width: 10%;
+    height: 35px;
+    line-height: 35px;
+}
+.p-content div.clearfix.accountMsg>div:nth-child(2){
+    width: 45%;
+}
+.p-content div.clearfix.accountMsg>div:nth-child(3){
+    width: 45%;
+    text-align: right;
+}
+.p-content div.clearfix.accountMsg>div label{
+    font-size: 15px;
+    color: #333;
+    margin-right: 20px;
+}
+.transfer-company{
+    width: 650px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    padding: 40px;
+    margin: auto;
+}
+.transfer-company label{
+    width: 125px;
+    text-align: right;
+    margin-right: 20px;
+    font-size: 15px;
+}
+.transfer-company  input[type=text]{
+    width:385px;
+}
+.transfer-company select{
+    width:400px;
+}
+.transfer-company #list{
+    max-height: 170px;
+    border: 1px solid #ddd;
+    width: 400px;
+    font-size: 14px;
+    line-height: 2;
+    color: #666;
+    /* text-indent: 15px; */
+
+    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+}
+.transfer-company #list li{
+    padding-left: 15px;
+    cursor: pointer;
+}
+.transfer-company #list li:hover{
+    background-color: #f2f2f2;
+}
+i.open-list{
+    position: absolute;
+    top: 12px;
+    right: 5px;
+    color: #888;
+    transform: scaleX(.65) scaleY(1.3);
+    cursor: pointer;
+}
+.tranfer-btn button{
+    margin-left: 0;
+}
+.tranfer-btn{
+    text-align: center;
 }
