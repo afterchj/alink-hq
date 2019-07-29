@@ -11,11 +11,9 @@
     <link rel="stylesheet" href="/alink-hq/static/css/projectManage.css">
     <script th:src="@{/static/js/jquery.min.js}"></script>
     <script th:src="@{/static/js/upload.js}"></script>
-    <title>新建固件</title>
+    <title>上传新版本</title>
 </head>
-
 <body>
-
 <div class="c-container">
     <div th:replace="common/head::head"></div>
     <div class="main clearfix">
@@ -26,7 +24,7 @@
                     <nav class="bread">
                         <ol class="clearfix">
                             <li class="f-l"><a th:href="@{/file/OTAFile}">OTA文件</a></li>
-                            <li class="f-l">新建固件</li>
+                            <li class="f-l">上传新版本</li>
                         </ol>
                     </nav>
                 </div>
@@ -41,41 +39,84 @@
                     <!--<img src="/alink-hq/static/img/go-back.png" alt="" onclick="history.back()">-->
                 </div>
             </div>
-            <div id="timerDetail" class="table-content-list detail">
+            <div  class="table-content-list detail">
                 <div class="p-detail">
-                    <div class="p-nav">新建固件</div>
+                    <div class="p-nav">上传新版本</div>
                     <div class="p-content p-r">
-                        <form action="" method="post">
+                        <!--未上传-->
+                        <form action="" method="post" style="display: none;">
                             <fieldset>
-                                <div class="form-row">
+                                <div class="form-row clearfix">
                                     <div class="field-label">
                                         <label><span>*</span>固件名称</label>：
                                     </div>
+                                    <div class="field-widget p-r" style="width: calc(100% - 150px);">
+                                        <p class="p-a verify"></p>
+                                        <input type="text" class="filename falseFile" readonly="" style="width: 300px;" >
+                                        <input type="button" name="file" class="button upload" value="浏览" >
+                                        <input type="file" size="30" class="trueFile">
+                                    </div>
+                                </div>
+                                <div class="form-row submit">
+                                    <button type="button" style="    margin:50px 0  0 235px;">上传文件</button>
+                                    <p style="margin: 30px 30px 30px 155px;font-size: 15px;color: #999;">文件上传服务器耗时较长，请耐心等待…</p>
+                                </div>
+
+                            </fieldset>
+                        </form>
+                        <!--已上传-->
+                        <form action="" method="post"  >
+                            <fieldset>
+                                <div class="form-row clearfix">
+                                    <div class="field-label">
+                                        <label>选择文件</label>：
+                                    </div>
+                                    <div class="field-widget p-r" >
+                                        <p class="p-a verify"></p>
+                                        <input type="text" class="filename falseFile" readonly="" >
+                                        <input type="button" name="file" class="button upload" value="重新上传" style="right: 0;left: auto;top: 0;">
+                                        <input type="file" size="30"   class="trueFile">
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="field-label">
+                                        <label>固件名称</label>：
+                                    </div>
                                     <div class="field-widget p-r">
                                         <p class="p-a verify"></p>
-                                        <input type="text" name="otaName" id="otaName"  placeholder="请输入固件名称">
+                                        <input type="text" name="otaName " class="readonly" id="otaName"  placeholder="请输入固件名称" value="固件1" readonly>
                                     </div>
                                 </div>
                                 <div class="form-row">
                                     <div class="field-label ">
-                                        <label><span>*</span>固件ID</label>：
+                                        <label style="letter-spacing: 3.6px;">固件ID</label>：
                                     </div>
                                     <div class="field-widget p-r">
                                         <p class="p-a verify"></p>
-                                        <input type="text" name="otaID" id="otaID"  placeholder="请输入固件ID">
+                                        <input type="text" class="readonly" name="otaID" id="otaID"  placeholder="请输入固件ID" value="XXX" readonly>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="field-label ">
+                                        <label><span>*</span>固件版本</label>：
+                                    </div>
+                                    <div class="field-widget p-r">
+                                        <p class="p-a verify"></p>
+                                        <input type="text" name="otaID" id="otaVersion"  placeholder="请输入固件版本" value="XXX">
                                     </div>
                                 </div>
                                 <div class="form-row">
                                     <div class="field-label">
-                                        <label >固件描述</label>：
+                                        <label >更新日志</label>：
                                     </div>
                                     <div class="field-widget p-r">
                                         <p class="p-a verify"></p>
-                                        <textarea id="otaDescribe" placeholder="请输入固件描述"></textarea>
+                                        <textarea id="otaDescribe" placeholder="请输入更新日志">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam assumenda doloribus dolorum, explicabo, inventore nostrum omnis quaerat quam qui quis sapiente similique suscipit tempore totam velit? Impedit tempore tenetur voluptatem.
+                                        </textarea>
                                     </div>
                                 </div>
                                 <div class="form-row submit">
-                                    <button type="button">确定新增</button>
+                                    <button type="button" id="submitNewVersion">确定</button>
                                 </div>
                             </fieldset>
                         </form>
@@ -93,7 +134,7 @@
     <div class="pop-content">
         <div class="reset-pwd">
             <i class="fa fa-check-circle fa-3x" aria-hidden="true" style="display: block;color:#00A0E9;"></i>
-            <p>新增成功！</p>
+            <p>保存成功！</p>
         </div>
         <!--<div class="reset-pwd-hint">（删除后项目中所有信息将无法恢复，请慎重！）</div>-->
         <div class="pop-btn">
@@ -105,91 +146,6 @@
 <div class="hide-iframe "></div>
 <script th:src="@{/static/js/left.js}"></script>
 <script th:src="@{/static/js/moment.js}"></script>
-<script th:src="@{/static/js/addOta.js}"></script>
-<!--<script>-->
-    <!--var dragImgUpload = new DragImgUpload("#drop_area", {-->
-        <!--callback: function (files) {-->
-            <!--var file = files[0];-->
-            <!--console.log(file.name);-->
-        <!--}-->
-    <!--});-->
-    <!--$('#drop_area').on({-->
-        <!--mouseover: function () {-->
-            <!--var imgUrl = $(this).find('img')[0].src;-->
-            <!--$('#img-max').attr('src', imgUrl);-->
-        <!--},-->
-        <!--mouseout: function () {-->
-            <!--var imgUrl = $(this).find('img')[0].src;-->
-            <!--$('#img-max').attr('src', '');-->
-        <!--}-->
-    <!--});-->
-
-    <!--//表单提交-->
-    <!--$('.btn-submit button').click(function () {-->
-        <!--var companyName = $('#company-name').val().trim();-->
-        <!--var companyPhone = $('#company-phone').val().trim();-->
-        <!--var address = $('#address').val().trim();-->
-        <!--var licenseNumber = $('#serial').val().trim();-->
-        <!--var iscompanyName = true;-->
-        <!--var iscompanyPhone = true;-->
-        <!--var isaddress = true;-->
-        <!--var islicenseNumber = true;-->
-        <!--if (companyName == '') {-->
-            <!--$('.company-name-hint').text('请输入公司名称');-->
-            <!--iscompanyName = false;-->
-        <!--} else {-->
-            <!--$('.company-name-hint').text('');-->
-            <!--iscompanyName = true;-->
-        <!--}-->
-        <!--if (companyPhone == '') {-->
-            <!--$('.company-phone-hint').text('请输入公司联系方式');-->
-            <!--iscompanyPhone = false;-->
-        <!--} else if (!CheckPhone(companyPhone)) {-->
-            <!--$('.company-phone-hint').text('输入格式不正确');-->
-            <!--iscompanyPhone = false;-->
-        <!--} else {-->
-            <!--$('.company-phone-hint').text('');-->
-            <!--iscompanyPhone = true;-->
-        <!--}-->
-        <!--if (address == '') {-->
-            <!--$('.address-hint').text('请输入公司通讯地址');-->
-            <!--isaddress = false;-->
-        <!--} else {-->
-            <!--$('.address-hint').text('');-->
-            <!--isaddress = true;-->
-        <!--}-->
-        <!--if (checkLicense(licenseNumber)) {-->
-            <!--$('.license-number-hint').text('请输入正确的编号')-->
-            <!--islicenseNumber = false;-->
-        <!--} else {-->
-            <!--$('.license-number-hint').text('');-->
-            <!--islicenseNumber = true;-->
-        <!--}-->
-        <!--if (iscompanyName && iscompanyPhone && isaddress && islicenseNumber) {-->
-            <!--$('form.company-msg').submit();-->
-        <!--}-->
-    <!--})-->
-    <!--//验证手机号或座机-->
-    <!--function CheckPhone(number) {-->
-        <!--var reg1 = /^((0\d{2,3}-\d{7,8})|(1[3584]\d{9}))$/;-->
-        <!--var reg2 = /^1[3456789]\d{9}$/;-->
-        <!--if (reg1.test(number) || reg2.test(number)) {-->
-            <!--return true;-->
-        <!--} else {-->
-            <!--return false;-->
-        <!--}-->
-    <!--}-->
-    <!--//验证营业执照编号-->
-    <!--function checkLicense(str) {-->
-        <!--reg = /(^(?:(?![IOZSV])[\dA-Z]){2}\d{6}(?:(?![IOZSV])[\dA-Z]){10}$)|(^\d{15}$)/;-->
-        <!--if (reg.test(str)) {-->
-            <!--return true;-->
-        <!--} else {-->
-            <!--return false;-->
-        <!--}-->
-    <!--}-->
-
-<!--</script>-->
+<script th:src="@{/static/js/uploadNewVersionOTA.js}"></script>
 </body>
-
 </html>

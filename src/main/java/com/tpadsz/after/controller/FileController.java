@@ -30,4 +30,18 @@ public class FileController {
         return "fileManage/addOta";
     }
 
+    @RequestMapping("/editOta")
+    public String editOta() {
+        return "fileManage/editOta";
+    }
+
+    @RequestMapping("/otaRevisionHistory")
+    public String otaRevisionHistory() {
+        return "fileManage/otaRevisionHistory";
+    }
+
+    @RequestMapping("/uploadNewVersionOTA")
+    public String uploadNewVersionOTA() {
+        return "fileManage/uploadNewVersionOTA";
+    }
 }
