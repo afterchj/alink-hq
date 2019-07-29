@@ -43,3 +43,12 @@ function skipBtnMouseUp(){
     $('#skipPageBtn').removeClass('active');
     $('#skip').removeClass('active');
 }
+function isAllEqual(array) {
+    if (array.length > 0) {
+        return !array.some(function (value, index) {
+            return value !== array[0];
+        });
+    } else {
+        return true;
+    }
+}

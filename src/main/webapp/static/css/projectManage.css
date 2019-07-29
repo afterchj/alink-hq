@@ -200,9 +200,9 @@
 }
 
 .search-result table .selected-order .amount {
-    color:red;
-    display:inline-block;
-    width:20px
+    color: #f53b0f;
+    display: inline-block;
+    width: 25px;
 }
 
 .page img {
@@ -467,10 +467,10 @@ span.msg-use{
 }
 
 .pop-content .reset-pwd-hint {
-    font-size:15px;
-    color:#f9220a;
-    margin-top:20px;
-    text-align:center
+    font-size: 13px;
+    color: #f9220a;
+    margin-top: 0px;
+    text-align: center;
 }
 
 #preload-anim {
@@ -1357,16 +1357,36 @@ i.cricle {
 }
 
 .p-content div.clearfix.accountMsg{
+    /*width: 1000px;*/
+    /*background-color: #fff;*/
+    /*border: 1px solid #ddd;*/
+    /*padding: 40px;*/
+    /*margin: auto;*/
+    width: 100%;
+    text-align: left;
+    padding: 10px 0px;
+}
+.table-content-list.detail.transfer{
+    height: auto;
+    min-height: 760px;
+    background-color: #fff;
+}
+.p-content .scrollbar{
+    max-height: 375px;
     width: 1000px;
+    width: 1200px;
     background-color: #fff;
     border: 1px solid #ddd;
-    padding: 40px;
+    padding: 20px;
     margin: auto;
+    z-index: 999;
+    overflow: auto;
 }
 .p-content div.clearfix.accountMsg>div:nth-child(1){
     width: 10%;
     height: 35px;
     line-height: 35px;
+    text-align: left;
 }
 .p-content div.clearfix.accountMsg>div:nth-child(2){
     width: 45%;
@@ -1380,6 +1400,9 @@ i.cricle {
     color: #333;
     margin-right: 20px;
 }
+.p-content div.clearfix.accountMsg input{
+    background-color: #fafafa;
+}
 .transfer-company{
     width: 650px;
     background-color: #fff;
@@ -1388,7 +1411,7 @@ i.cricle {
     margin: auto;
 }
 .transfer-company label{
-    width: 125px;
+    width: 150px;
     text-align: right;
     margin-right: 20px;
     font-size: 15px;
@@ -1414,6 +1437,40 @@ i.cricle {
 .transfer-company #list li{
     padding-left: 15px;
     cursor: pointer;
+}
+.star{
+    color: red;
+    vertical-align: middle;
+    margin: 3px;
+}
+.table-content-list.detail.transfer button{
+    display: inline-block;
+    line-height: 40px;
+    padding: 0 15px;
+    background-color: #00A0E9;
+    color: #fff;
+    white-space: nowrap;
+    text-align: center;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    height: 40px;
+    margin: 0;
+    vertical-align: middle;
+    border: 0;
+    font-size: 16px;
+    font-weight: 300;
+    text-shadow: none;
+    letter-spacing: 4px;
+    -moz-box-shadow: none;
+    -webkit-box-shadow: none;
+    -o-transition: all .3s;
+    -moz-transition: all .3s;
+    -webkit-transition: all .3s;
+    -ms-transition: all .3s;
+    transition: all .3s;
+    box-shadow: 0px 1px 2px 0 rgba(0, 0, 0, 0.2);
+    margin-top:30px;
 }
 .transfer-company #list li:hover{
     background-color: #f2f2f2;

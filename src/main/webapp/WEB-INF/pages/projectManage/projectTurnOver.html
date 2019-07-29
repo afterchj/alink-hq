@@ -37,7 +37,7 @@
                     </div>
                 </div>
             </div>
-            <div class="table-content-list detail">
+            <div class="table-content-list detail transfer">
                 <form class="" method="post">
                     <div id="meshTurnOver" class="p-detail">
                         <div class="f-nav p-nav">
@@ -69,10 +69,10 @@
                             <fieldset>
                                 <div class="transfer-company p-r clearfix">
                                     <div class="form-row">
-                                        <div class="field-label">
+                                        <div class="field-label" style="width: 135px;">
                                             <label for="fid"><span>*</span>隶属公司：</label>
                                         </div>
-                                        <div class="field-widget p-r">
+                                        <div class="field-widget p-r" >
                                             <p class="p-a verify "></p>
                                             <select name="fid" id="fid" class="pointer overflow">
                                                 <option value="" class="pointer overflow">请选择公司</option>
@@ -83,7 +83,7 @@
                                         </div>
                                     </div>
                                     <div class="form-row">
-                                        <div class="field-label">
+                                        <div class="field-label" style="width: 135px;">
                                             <label for="account-transfer"><span>*</span>选择移交账号：</label>
                                         </div>
                                         <div class="field-widget p-r">
@@ -100,7 +100,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="tranfer-btn form-row">
+                                <div class="tranfer-btn ">
                                     <button class="confirm-btn" type="button">确定移交</button>
                                 </div>
                             </fieldset>
@@ -227,7 +227,6 @@
                     console.log('找到了', uid, list[i].account);
                     break;
                 } else {
-
                     hasAccount = false;
                 }
             }
@@ -249,7 +248,7 @@
                     data: {projectInfo: projectInfo, uid: uid},
                     dataType: "json",
                     success: function (data) {
-                        console.log(data);
+//                        console.log(data);
                         if (data.result == '000') {
                             $('#preload-anim').addClass('active');
 //                            $('.hide-iframe').addClass('active');

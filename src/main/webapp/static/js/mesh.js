@@ -6,16 +6,20 @@ $(function() {
             ids.push($(this).val());
             uid.push($(this).next('.uid').val())
         });
-        var result = isRepeat(uid);
-        if (ids.length == 1) {
-            location.href = "/alink-hq/mesh/move?ids=" + ids
-        } else if (result && ids.length > 1) {
-            location.href = "/alink-hq/mesh/move?ids=" + ids
-        } else {
+        var result = isAllEqual(uid);
+        console.log('uid',uid,'result',result);
+        if(result){
+            if (ids.length == 1) {
+                location.href = "/alink-hq/mesh/move?ids=" + ids
+            } else if (result && ids.length > 1) {
+                location.href = "/alink-hq/mesh/move?ids=" + ids
+            }
+        }else{
             var selector = $('div[openContent="exchange"]');
             selector.addClass('active');
-            adjust(selector) 
-            showOverlay()
+            adjust(selector);
+            showOverlay();
+            $('.showList').hide();
         }
     });
     var ids = [];
@@ -26,17 +30,19 @@ $(function() {
         if (ids.length > 0) {
             var selector = $('div[openContent="delete-mesh"]');
             selector.addClass('active');
-            adjust(selector) 
-            showOverlay()
+            adjust(selector) ;
+            showOverlay();
+            $('.showList').hide();
         }
     });
     var ids;
     $('.singleDel').click(function() {
-        ids = $(this).parent().siblings('.checkbox').find('input').val();
+        ids = $(this).parent().parent().parent().siblings('.checkbox').find('input[name=ids]').val();
         var selector = $('div[openContent="delete-mesh"]');
         selector.addClass('active');
-        adjust(selector) 
-        showOverlay()
+        adjust(selector) ;
+        showOverlay();
+        $('.showList').hide();
     });
     $('div[openContent="delete-mesh"] .pop-btn .reduce').click(function() {
         var selector = $('div[openContent="delete-mesh"]');
@@ -54,6 +60,7 @@ $(function() {
         hideOverlay()
     }) 
     $('div[openContent="delete-mesh"] .pop-btn .yes').click(function() {
+        console.log('ids',ids);
         deleteMesh(ids)
     });
     var id;
@@ -62,8 +69,9 @@ $(function() {
         id = $(this).attr("alt");
         var selector = $('div[openContent="reset-name"]');
         selector.addClass('active');
-        adjust(selector) 
-        showOverlay()
+        adjust(selector) ;
+        showOverlay();
+        $('.showList').hide();
     });
     $('div[openContent="reset-name"] .pop-btn .yes').click(function() {
         var name = $('#rename').val();
