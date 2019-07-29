@@ -244,8 +244,7 @@ th.all-checkbox {
 }
 
 .search-result table.noData td {
-    height:469px;
-    padding-top:171px
+    height: 600px;
 }
 
 .search-result table.noData td p {
