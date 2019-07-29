@@ -115,7 +115,7 @@ $(function() {
                         $('.place-hint').text('');
                         $('#preload-anim').addClass('active');
                         $('#preload-anim .title').text('创建成功！');
-                        $("form").submit()
+                        $("form").submit();
                     } else {
                         $('.place-hint').text('已存在，请重新输入')
                     }
