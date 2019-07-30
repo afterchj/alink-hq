@@ -28,19 +28,23 @@ $(function () {
                     if (tabindex == 0) {
                         // $('.roleName').text('XXX')
                         $('.fix-left-nav').removeClass('gray');
+                        $('.company-select>div').removeClass('gray');
                         // $('input#isAllRadio:radio').prop('checked', true);
                         // $('.company-select input[value=0]:radio').prop('checked', true);
                         // $('[tabContent=0].active input.singleIsRadio:radio[value=0]').prop('checked', true);
                     } else if (tabindex == 1) {
                         $('.fix-left-nav').removeClass('gray');
+                        $('.company-select>div').removeClass('gray');
                         // $('input#noAllRadio:radio').prop('checked', true);
                         // $('[tabContent=1].active input.singleNoRadio:radio[value=1]').prop('checked', true);
                     } else if (tabindex == 2) {
                         $('.fix-left-nav').addClass('gray');
+                        $('.company-select>div').removeClass('gray');
                         // $('input#noAllRadio:radio').prop('checked', true);
                         // $('[tabContent=2].active input.singleNoRadio:radio[value=1]').prop('checked', true);
                     } else if (tabindex == 3) {
-                        $('.fix-left-nav').addClass('gray');
+                        $('.fix-left-nav').removeClass('gray');
+                        $('.account-related').addClass('gray');
                         // $('input#noAllRadio:radio').prop('checked', true);
                         // $('[tabContent=3].active input.singleNoRadio:radio[value=1]').prop('checked', true);
                     }

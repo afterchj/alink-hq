@@ -7,8 +7,9 @@ $(function() {
         id = $(this).attr("alt");
         var selector = $('div[openContent="reset-name"]');
         selector.addClass('active');
-        adjust(selector)
-        showOverlay()
+        adjust(selector);
+        showOverlay();
+        $('.showList').hide();
     });
     $('div[openContent="reset-name"] button.yes').click(function() {
         var name = $('#rename').val();
@@ -29,7 +30,7 @@ $(function() {
                 async: true,
                 success: function(res) {
                     if (res == "success") {
-                        location.reload()
+                        location.reload();
                     }
                 }
             })
@@ -37,20 +38,21 @@ $(function() {
     });
     $('div[openContent="reset-name"] button.reduce').click(function() {
         var selector = $('div[openContent="reset-name"]');
-        selector.removeClass('active') 
-        hideOverlay()
+        selector.removeClass('active') ;
+        hideOverlay();
     });
     $('.singleDel').click(function() {
         id = $(this).attr("alt");
         ids.push(id);
-        lname = $(this).parent().siblings('td.lname').find('a').text();
-        mname = $(this).parent().siblings('td.mname').text();
+        lname = $(this).parent().parent().parent().siblings('td.lname').find('a').text();
+        mname = $(this).parent().parent().parent().siblings('td.mname').text();
         var selector = $('div[openContent="delete-mesh"]');
         selector.addClass('active');
-        adjust(selector) 
-        showOverlay() 
-        $('div[openContent="delete-mesh"] .reset-pwd').text('您确定要删除' + lname + '吗？');
-        $('div[openContent="delete-mesh"] .reset-pwd-hint').text('删除该灯将会退出' + mname + '网络，请慎重！')
+        adjust(selector) ;
+        showOverlay() ;
+        $('.showList').hide();
+        $('div[openContent="delete-mesh"] .reset-pwd p').text('您确定要删除' + lname + '吗？');
+        $('div[openContent="delete-mesh"] .reset-pwd-hint').text('删除该灯将会退出' + mname + '网络，请慎重！');
     });
     $('div[openContent="delete-mesh"] button.yes').click(function() {
         if (ids) {
@@ -60,21 +62,22 @@ $(function() {
     });
     $('div[openContent="delete-mesh"] button.reduce').click(function() {
         var selector = $('div[openContent="delete-mesh"]');
-        selector.removeClass('active') 
-        hideOverlay()
+        selector.removeClass('active') ;
+        hideOverlay();
     });
     $("#multiDel").click(function() {
         var idss = [];
         $('input[name="ids"]:checked').each(function() {
-            idss.push($(this).val())
+            idss.push($(this).val());
         });
         ids = idss;
         if (ids.length > 0) {
             var selector = $('div[openContent="delete-mesh"]');
             selector.addClass('active');
-            adjust(selector) 
-            showOverlay()
-        } else {}
+            adjust(selector) ;
+            showOverlay();
+            $('.showList').hide();
+        }
     });
     $("#multiMove").click(function() {
         var idss = [];
@@ -100,14 +103,15 @@ $(function() {
         } else {
             var selector = $('div[openContent="exchange"]');
             selector.addClass('active');
-            adjust(selector) 
-            showOverlay()
+            adjust(selector) ;
+            showOverlay();
+            $('.showList').hide();
         }
     });
     $('div[openContent="exchange"] .yes,div[openContent="exchange"] .reduce').click(function() {
         var selector = $('div[openContent="exchange"]');
-        selector.removeClass('active')
-        hideOverlay()
+        selector.removeClass('active');
+        hideOverlay();
     })
 });
 
@@ -124,6 +128,6 @@ function nameKeyUp() {
 $('#meshId').bind('input propertychange', function() {
     var val = $(this).val();
     if (val != '' && isNaN(val)) {
-        $(this).val('')
+        $(this).val('');
     }
 });
