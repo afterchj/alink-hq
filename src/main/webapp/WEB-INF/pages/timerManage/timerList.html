@@ -193,14 +193,17 @@
                             <th><span>是否重复</span></th>
                             <th class="p-r">
                                 <span class="toTime ">创建时间</span>
-                                <img src="/alink-hq/static/img/fewer.png" alt="" class="p-a toTop  sort-t pointer">
-                                <img src="/alink-hq/static/img/unfold.png" alt="" class="p-a toBottom sort-b  pointer">
+                                <img src="/alink-hq/static/img/fewer.png" alt="" class="p-a toTop  sort-t pointer"
+                                     id="creToTop">
+                                <img src="/alink-hq/static/img/unfold.png" alt=""
+                                     class="p-a toBottom sort-b  pointer" id="creToBottom">
                             </th>
                             <th class="p-r">
                                 <span class="toTime">更新时间</span>
-                                <img src="/alink-hq/static/img/fewer.png" alt="" class="p-a  toTop1 sort-t pointer">
+                                <img src="/alink-hq/static/img/fewer.png" alt="" class="p-a  toTop1 sort-t pointer"
+                                     id="upToTop">
                                 <img src="/alink-hq/static/img/unfold.png" alt=""
-                                     class="p-a  toBottom1  sort-b pointer">
+                                     class="p-a  toBottom1  sort-b pointer" id="upToBottom">
                             </th>
                             <th><span>定时状态</span></th>
                             <th class="operation"><span>操作</span></th>
@@ -209,7 +212,7 @@
                         <tbody>
                         <tr>
                             <td colspan="9">
-                                <img src="/alink-hq/static/img/no-data.png" alt="">
+                                <img th:src="@{/static/img/no-data.png}" style="width: auto;height: auto;" alt="">
                                 <p>暂无数据</p>
                             </td>
                         </tr>
