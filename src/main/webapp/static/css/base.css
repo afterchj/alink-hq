@@ -161,6 +161,9 @@ fieldset input[type=file] {
     -khtml-opacity: 0;
     opacity: 0;
 }
+.noData tr:hover{
+    background-color: #fff;
+}
 .upload{
     position: absolute;
     left: 310px;

@@ -1,5 +1,6 @@
 <!doctype html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
 <head>
     <meta charset="UTF-8">
     <script src="/alink-hq/static/js/browser.js"></script>
@@ -139,7 +140,7 @@
 
                             <td class="p-r">
                                 <img src="/alink-hq/static/img/newPassword.png" alt="" openTab="reset-pwd"
-                                     id="reset-pwd" class="pointer" th:title="重置密码">
+                                     id="reset-pwd" class="pointer" th:title="重置密码" style="width: 18px;height: 18px;">
                                 <a th:if="${user.role_id=='4'}"
                                    th:href="@{/account/transferPage(account=${user.account},coname=${user.coname})}"><img
                                         src="/alink-hq/static/img/exchange.png"
@@ -147,12 +148,14 @@
                                 <a th:if="${user.role_id!='4'}" href="javascript:void(0);" class="unclick"><img
                                         src="/alink-hq/static/img/un-exchange.png"
                                         alt="" class="center-img" th:title="不可移交"></a>
-                                <img src="/alink-hq/static/img/delete.png" alt="" id="delete-account"
+                                <img src="/alink-hq/static/img/delete.png" style="width: 16px;height: 16px;" alt="" id="delete-account"
                                      openTab="delete-account" class="pointer" th:title="删除">
                             </td>
                             <td class="p-r">
-                                <img th:if="${user.memo!=null&&user.memo!=''}" src="/alink-hq/static/img/memo.png" alt="" class="pointer memo-edit" th:title="备忘录">
-                                <img th:if="${user.memo==null||user.memo==''}" src="/alink-hq/static/img/memo.png" alt="" class="pointer memo-edit2" th:title="备忘录">
+                                <img th:if="${user.memo!=null&&user.memo!=''}" src="/alink-hq/static/img/memo.png"
+                                     alt="" class="pointer memo-edit" th:title="备忘录">
+                                <img th:if="${user.memo==null||user.memo==''}" src="/alink-hq/static/img/memo.png"
+                                     alt="" class="pointer memo-edit2" th:title="备忘录">
                                 <div class="memo-edit-has">
                                     <div class="meno-nav"><img src="/alink-hq/static/img/alter.png" alt=""
                                                                class="pointer"></div>
@@ -343,10 +346,12 @@
         备忘录
     </div>
     <div class="pop-content">
-        <textarea maxlength="200" style="width: 93%;border: none;margin-top: 10px;resize: none;height: 130px;font-size: 13.5px;line-height: 1.6;color: #323232;font-family: inherit;"  class="wishContent"
+        <textarea maxlength="200"
+                  style="width: 93%;border: none;margin-top: 10px;resize: none;height: 130px;font-size: 13.5px;line-height: 1.6;color: #323232;font-family: inherit;"
+                  class="wishContent"
                   placeholder="请输入不超过200个字"></textarea>
         <p class="right-font"><span class="wordsNum">0/200</span></p>
-        <input type="hidden" id="memo-account" >
+        <input type="hidden" id="memo-account">
         <div class="pop-btn">
             <button class="reduce">取消</button>
             <button class="yes">确定</button>

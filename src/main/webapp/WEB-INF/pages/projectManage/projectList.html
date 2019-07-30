@@ -55,7 +55,7 @@
                         </div>
                         <div class="f-l search"  style="margin-right: 15px;">
                             <div>
-                                <label for="account">施工人员</label>
+                                <label for="account">施工人员账号</label>
                                 <input type="text" placeholder="请输入施工人员账号" id="account">
                             </div>
                             <div class="p-r">
@@ -92,7 +92,7 @@
                                 <span class="">全选</span>
                             </th>
                             <th><span>项目名称</span></th>
-                            <th><span>项目中网络数量</span></th>
+                            <th><span>网络数量</span></th>
                             <th><span>施工人员账号</span></th>
                             <th><span>施工人员用户名</span></th>
                             <th><span>隶属公司</span></th>
@@ -201,36 +201,38 @@
                     <table border="1" class="noData active" th:if="${pageInfo==null}">
                         <thead>
                         <tr>
-                            <th class="all-checkbox " style="width: 120px;">
-                            <span style="vertical-align: sub;vertical-align: sub;width: 30px; display: inline-block;"><input
-                                    type="checkbox" id="all" class="pointer"></span>
+                            <th class="all-checkbox ">
+                                <!--<span style="vertical-align: sub;">-->
+                                <input type="checkbox" id="all" class="pointer">
+                                <!--</span>-->
                                 <span class="">全选</span>
                             </th>
-                            <th style="display: none">所属公司</th>
-                            <th style="width: 200px;">项目名称</th>
-                            <th style="width: 180px;">项目中选中网络数量</th>
-                            <th style="width: 180px;">施工人员</th>
-                            <th class="p-r" style="width: 200px;">
-                                <span class="toTime">创建时间</span>
+                            <th><span>项目名称</span></th>
+                            <th><span>网络数量</span></th>
+                            <th><span>施工人员账号</span></th>
+                            <th><span>施工人员用户名</span></th>
+                            <th><span>隶属公司</span></th>
+                            <th class="p-r">
+                                <span class="toTime ">创建时间</span>
                                 <img src="/alink-hq/static/img/fewer.png" alt="" class="p-a toTop  sort-t pointer">
                                 <img src="/alink-hq/static/img/unfold.png" alt="" class="p-a toBottom sort-b  pointer">
                             </th>
-                            <th class="p-r" style="width: 200px;">
+                            <th class="p-r">
                                 <span class="toTime">更新时间</span>
                                 <img src="/alink-hq/static/img/fewer.png" alt="" class="p-a  toTop1 sort-t pointer">
                                 <img src="/alink-hq/static/img/unfold.png" alt=""
                                      class="p-a  toBottom1  sort-b pointer">
                             </th>
-                            <th>操作</th>
+                            <th class="operation"><span>操作</span></th>
                         </tr>
                         </thead>
                         <tbody>
-                        <tr>
-                            <td colspan="9">
-                                <img src="/alink-hq/static/img/no-data.png" alt="">
-                                <p>暂无数据</p>
-                            </td>
-                        </tr>
+                            <tr>
+                                <td colspan="9">
+                                    <img th:src="@{/static/img/no-data.png}" style="width: auto;height: auto;" alt="">
+                                    <p>暂无数据</p>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>
@@ -261,7 +263,11 @@
         温馨提示
     </div>
     <div class="pop-content">
-        <div class="reset-pwd">您确定要删除所选的项目吗？</div>
+
+        <div class="reset-pwd">
+            <i class="fa fa-exclamation-circle fa-3x" aria-hidden="true" style="display: block;color:#00A0E9;"></i>
+            <p>您确定要删除所选的项目吗？</p>
+        </div>
         <div class="reset-pwd-hint">（删除后项目中所有信息将无法恢复，请慎重！）</div>
         <div class="pop-btn">
             <button class="reduce">取消</button>
