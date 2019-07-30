@@ -46,7 +46,8 @@
 
             <div id="meshList" class="table-content-list">
                 <form class="clearfix" th:action="@{/mesh/list}" method="post">
-                    <input type="hidden" name="uid" th:value="${dict.uid}">
+                    <input type="hidden" name="uid" id="uid" th:value="${dict.uid}">
+                    <input type="hidden" name="uid" id="pid" th:value="${dict.projectId}">
                     <input type="hidden" id="pageSize" th:value="${dict.pageSize}">
                     <div class="search-condition temp">
                         <div class="f-l search" style="margin-right: 150px;margin-left: 100px;">
@@ -95,8 +96,8 @@
                                 <th><span>网络类型</span></th>
                                 <th><span>隶属项目</span></th>
                                 <th><span>区域数量</span></th>
-                                <!--<th><span>组数量</span></th>-->
-                                <!--<th><span>灯数量</span></th>-->
+                                <th><span>组数量</span></th>
+                                <th><span>灯数量</span></th>
                                 <th><span>场景数量</span></th>
                                 <th><span>定时数量</span></th>
                                 <th><span>状态</span></th>
@@ -125,6 +126,22 @@
                                        th:href="@{/place/list(projectId=${mesh.project_id},mid=${mesh.id})}"
                                        th:text="${mesh.pcount}"></a>
                                 </td>
+                                <!--组数量-->
+                                <td class="k-link">
+                                    <a th:if="${mesh.gcount}=='0'" class="a-un" href="javascript:void(0);"
+                                       th:text="${mesh.gcount}"></a>
+                                    <a th:if="${mesh.gcount}!='0'"
+                                       th:href="@{/group/list(projectId=${mesh.project_id},mid=${mesh.id})}"
+                                       th:text="${mesh.gcount}"></a>
+                                </td>
+                                <!--灯数量-->
+                                <td class="k-link">
+                                    <a th:if="${mesh.lcount}=='0'" class="a-un" href="javascript:void(0);"
+                                       th:text="${mesh.lcount}"></a>
+                                    <a th:if="${mesh.lcount}!='0'"
+                                       th:href="@{/light/list(projectId=${mesh.project_id},mid=${mesh.id})}"
+                                       th:text="${mesh.lcount}"></a>
+                                </td>
                                 <td class="k-link">
                                     <a th:if="${mesh.scount}=='0'" class="a-un" href="javascript:void(0);"
                                        th:text="${mesh.scount}"></a>
@@ -132,16 +149,6 @@
                                        th:href="@{/scene/list(meshName=${mesh.mname},meshId=${mesh.mesh_id},mid=${mesh.id})}"
                                        th:text="${mesh.scount}"></a>
                                 </td>
-                                <!--组数量-->
-                                <!--<td class="k-link">-->
-                                <!--<a th:if="${mesh.pcount}=='0'" class="a-un"  href="javascript:void(0);" th:text="${mesh.pcount}"></a>-->
-                                <!--<a th:if="${mesh.pcount}!='0'" th:href="@{/place/list(projectId=${mesh.project_id},mid=${mesh.id})}" th:text="${mesh.pcount}"></a>-->
-                                <!--</td>-->
-                                <!--&lt;!&ndash;灯数量&ndash;&gt;-->
-                                <!--<td class="k-link">-->
-                                <!--<a th:if="${mesh.scount}=='0'" class="a-un" href="javascript:void(0);" th:text="${mesh.scount}"></a>-->
-                                <!--<a th:if="${mesh.scount}!='0'" th:href="@{/scene/list(meshName=${mesh.mname},meshId=${mesh.mesh_id},mid=${mesh.id})}" th:text="${mesh.scount}"></a>-->
-                                <!--</td>-->
                                 <td class="k-link">
                                     <a th:if="${mesh.tcount}=='0'" class="a-un" href="javascript:void(0);"
                                        th:text="${mesh.tcount}"></a>
@@ -175,9 +182,9 @@
                                         </li>
                                         <li>
                                             <!--删除-->
-                                            <a href="javascript:void(0);" class="singleDel pointer"
+                                            <a href="javascript:void(0);" class="singleDel pointer" th:alt="${mesh.id}"
                                                shiro:hasPermission="deleteMesh">
-                                                <img src="/alink-hq/static/img/delete.png" alt="" title="删除"
+                                                <img src="/alink-hq/static/img/delete.png" title="删除"
                                                      style="width: 14px; height: 14px;">
                                             </a>
                                             <!--不能删除-->
@@ -191,7 +198,6 @@
                             </tbody>
                             <tfoot>
                             <tr>
-
                                 <td colspan="12" class="clearfix page">
                                     <div class="f-l" style="padding-left: 20px;">
                                         <input type="checkbox" id="addAll" class="pointer">
@@ -201,15 +207,13 @@
                                     <div class="f-l">
                             <span class="selected-order">已选择
                                 <span id="amount" class="amount">0</span>条数据
-                            </span>
-                                        <span class="m-r-20">
+                            </span><span class="m-r-20">
                                 <span class="skipPageBtn  moment active unclick1"
                                       id="multiMove" shiro:lacksPermission="moveMesh">移动</span>
                                 <span shiro:hasPermission="moveMesh" class="skipPageBtn pointer moment"
                                       onmousedown="exchangeBtnMouseDown()"
                                       onmouseup="exchangeBtnMouseUp()" id="multiMove">移动</span>
-                            </span>
-                                        <span>
+                            </span><span>
                             <span shiro:lacksPermission="deleteMesh" class="skipPageBtn moment active unclick1"
                                   id="multiDel">删除</span>
                                 <span shiro:hasPermission="deleteMesh" class="skipPageBtn pointer moment"
@@ -237,8 +241,8 @@
                                 <th><span>网络类型</span></th>
                                 <th><span>隶属项目</span></th>
                                 <th><span>区域数量</span></th>
-                                <!--<th><span>组数量</span></th>-->
-                                <!--<th><span>灯数量</span></th>-->
+                                <th><span>组数量</span></th>
+                                <th><span>灯数量</span></th>
                                 <th><span>场景数量</span></th>
                                 <th><span>定时数量</span></th>
                                 <th><span>状态</span></th>
@@ -246,12 +250,12 @@
                             </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td colspan="10">
-                                        <img th:src="@{/static/img/no-data.png}" style="width: auto;height: auto;" alt="">
-                                        <p>暂无数据</p>
-                                    </td>
-                                </tr>
+                            <tr>
+                                <td colspan="12">
+                                    <img th:src="@{/static/img/no-data.png}" style="width: auto;height: auto;" alt="">
+                                    <p>暂无数据</p>
+                                </td>
+                            </tr>
                             </tbody>
                         </table>
                     </div>
@@ -283,10 +287,7 @@
         温馨提示
     </div>
     <div class="pop-content">
-        <div class="reset-pwd">
-            <i class="fa fa-exclamation-circle fa-3x" aria-hidden="true" style="display: block;color:#00A0E9;"></i>
-            <p> 您确定要删除该所选的网络吗？</p>
-        </div>
+        <div class="reset-pwd">您确定要删除该所选的网络吗？</div>
         <div class="reset-pwd-hint">（删除后网络中所有信息将无法恢复，请慎重！）</div>
         <div class="pop-btn">
             <button class="reduce">取消</button>
@@ -300,11 +301,7 @@
         温馨提示
     </div>
     <div class="pop-content">
-
-        <div class="reset-pwd">
-            <i class="fa fa-exclamation-circle fa-3x" aria-hidden="true" style="display: block;color:#00A0E9;"></i>
-            <p>不同账号下的网络不可进行移动！</p>
-        </div>
+        <div class="reset-pwd">不同账号下的网络不可进行移动</div>
         <div class="pop-btn">
             <button class="reduce">取消</button>
             <button class="yes">确定</button>
@@ -313,10 +310,9 @@
 </div>
 
 <div class="hide-iframe"></div>
-<script src="/alink-hq/static/js/moment.js"></script>
 <script type="text/javascript" src="/alink-hq/static/js/left.js"></script>
 <script type="text/javascript" src="/alink-hq/static/js/page.js"></script>
 <script type="text/javascript" src="/alink-hq/static/js/mesh.js"></script>
-
+<script src="/alink-hq/static/js/moment.js"></script>
 </body>
 </html>

@@ -50,22 +50,30 @@ $(function () {
     var mid;
     // 点击重命名
     $("tr[class='timerLineTr']").on('click', '.p-r .reset-name', function () {
-        $(".confirm-on-off").addClass("active");
-        $('.hide-iframe').addClass('active');
-        $('.hide-iframe').css({
-            'width': width,
-            'height': height
-        });
-
+        // $(".confirm-on-off").addClass("active");
+        // $('.hide-iframe').addClass('active');
+        // $('.hide-iframe').css({
+        //     'width': width,
+        //     'height': height
+        // });
         tid = $(this).parent().siblings("input").val();
         mid = $(this).parent().siblings().eq(3).text();
+        var selector = $('div[openContent="reset-name"]');
+        selector.addClass('active');
+        adjust(selector);
+        showOverlay();
+
     });
     //点击取消
     $(".pop-btn .reduce").click(function () {
-        $(".confirm-on-off").removeClass("active");
-        $(".rename-hint").removeClass("active").text("");
+        // $(".confirm-on-off").removeClass("active");
+        // $(".rename-hint").removeClass("active").text("");
+        //
+        // $('.hide-iframe').removeClass('active');
         $("#rename").val("");
-        $('.hide-iframe').removeClass('active');
+        var selector = $('div[openContent="reset-name"]');
+        selector.removeClass('active');
+        hideOverlay();
     });
     //点击确定
     $(".pop-btn .yes").click(function () {
@@ -87,11 +95,14 @@ $(function () {
                         $(".rename-hint").removeClass("active").text("");
                         $(".rename-hint").addClass("active").text("已存在，请重新输入");
                     } else {
-                        $(".confirm-on-off").removeClass("active");
+                        window.location.href = "/alink-hq/timer/list?id=" + $('#mid').val() + '&pageNum=' + $(".pages").text() + '&pageSize=' + $("#pageSize").val();
+                        var selector = $('div[openContent="reset-name"]');
+                        selector.removeClass('active');
+                        hideOverlay();
                         // tname.text(renameValue);
                         // $(".rename-hint").removeClass("active").text("");
                         // $("#rename").val("");
-                        window.location.href = "/alink-hq/timer/list?id=" + $('#mid').val() + '&pageNum=' + $(".pages").text() + '&pageSize=' + $("#pageSize").val();
+
                     }
                 })
         }

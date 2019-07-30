@@ -61,6 +61,7 @@ public class SceneController {
             if (role_id == 1) {
                 model.addAttribute("flag", 0);
             }
+            model.addAttribute("meshName", meshName);
             model.addAttribute("sceneName", sceneName);
             model.addAttribute("sceneId", sceneId);
 

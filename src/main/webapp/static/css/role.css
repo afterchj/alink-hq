@@ -51,8 +51,9 @@
     border-right: 1px solid #ddd;
     color: #2c2c2c;
 }
-.fix-left-nav.gray{
+.gray{
     background-color: #ddd;
+    pointer-events: none;
 }
 
 .fix-right-nav {
