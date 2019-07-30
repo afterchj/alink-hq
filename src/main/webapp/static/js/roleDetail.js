@@ -4,12 +4,12 @@
 $(function () {
 
     var role = 'default';
-    $('.ad').click(function () {
-        role = $(this).attr('alt');
-        $(this).css('background','pink').siblings().css('background','#fff')
-        console.log(role);
-        $('[tabindex=0]').trigger("click");
-    })
+    // $('.ad').click(function () {
+    //     role = $(this).attr('alt');
+        // $(this).css('background','pink').siblings().css('background','#fff')
+        // console.log(role);
+        // $('[tabindex=0]').trigger("click");
+    // })
 
     // $('#default.ad').trigger("click");
     // $('[tabindex=0]').trigger("click");
@@ -22,7 +22,7 @@ $(function () {
             var tabContent = $(this).attr('tabContent')
             if (tabContent == tabindex) {
                 $(this).addClass('active').siblings().removeClass('active')
-                console.log('role1',role)
+                // console.log('role1',role);
                 //权限;创建时默认
                 if (role == 'default') {
                     if (tabindex == 0) {
@@ -44,84 +44,83 @@ $(function () {
                         // $('input#noAllRadio:radio').prop('checked', true);
                         // $('[tabContent=3].active input.singleNoRadio:radio[value=1]').prop('checked', true);
                     }
-                } else if (role == 'Admin') {
-                    //权限：管理员
-                    if (tabindex == 0) {
-                        $('.roleName').text('管理员')
-                        $('.fix-left-nav').removeClass('gray');
-                        // $('input#isAllRadio:radio').prop('checked', true);
-                        // $('.company-select input[value=2]:radio').prop('checked', true);
-                        // $('input#allChecked').trigger('click')
-                        // $('[tabContent=0].active input.singleIsRadio:radio[value=0]').prop('checked', true);
-                        // $('[tabContent=0].active input.singleIsRadio:radio[value=0]').prop('checked', true);
-                    } else if (tabindex == 1) {
-                        $('.fix-left-nav').removeClass('gray');
-                        // $('input#allChecked').prop('checked', false);
-                        // $('input#isAllRadio:radio').prop('checked', true);
-                        // $('.company-select input[value=2]:radio').prop('checked', true);
-                        // $('input#allChecked').trigger('click')
-                        // $('[tabContent=1].active input.admin-role:checkbox').prop('checked', false).parent().siblings().find('input:checkbox').prop('checked', true);
-                        // $('[tabContent=1].active input.singleIsRadio:radio[value=0]').prop('checked', true);
-                    } else if (tabindex == 2) {
-                        $('.fix-left-nav').addClass('gray');
-                        // $('input#isAllRadio:radio').prop('checked', true);
-                        // $('input#allChecked').prop('checked', false);
-                        // $('[tabContent=2].active input:checkbox').prop('checked', false);
-                        // $('[tabContent=2].active input.lookRole:checkbox').prop('checked', true);
-                        // $('[tabContent=2].active input.yi-admin-role:checkbox').prop('checked', true);
-                        // $('[tabContent=2].active input.builders:checkbox').prop('checked', true);
-                        // $('[tabContent=2].active input.singleIsRadio:radio[value=0]').prop('checked', true);
-                    } else if (tabindex == 3) {
-                        $('.fix-left-nav').addClass('gray');
-                        // $('input#isAllRadio:radio').prop('checked', true);
-                        // $('input#allChecked').trigger('click')
-                        // $('[tabContent=3].active input.singleIsRadio:radio[value=0]').prop('checked', true);
-                    }
-                }else if (role == 'yi-Admin') {
-                    //权限：乙方管理员
-                    if (tabindex == 0) {
-                        // $('.roleName').text('乙方管理员')
-                        $('.fix-left-nav').removeClass('gray');
-                        // $('input#isAllRadio:radio').prop('checked', true);
-                        // $('.company-select input[value=0]:radio').prop('checked', true);
-                        // $('[tabContent=0].active input.singleIsRadio:radio[value=0]').prop('checked', true);
-                    } else if (tabindex == 1) {
-                        $('.fix-left-nav').removeClass('gray');
-                        // $('input#noAllRadio:radio').prop('checked', true);
-                        // $('[tabContent=1].active input.singleNoRadio:radio[value=1]').prop('checked', true);
-                    } else if (tabindex == 2) {
-                        $('.fix-left-nav').addClass('gray');
-                        // $('input#noAllRadio:radio').prop('checked', true);
-                        // $('[tabContent=2].active input.singleNoRadio:radio[value=1]').prop('checked', true);
-                    } else if (tabindex == 3) {
-                        $('.fix-left-nav').addClass('gray');
-                        // $('input#noAllRadio:radio').prop('checked', true);
-                        // $('[tabContent=3].active input.singleNoRadio:radio[value=1]').prop('checked', true);
-                    }
-                }else if(role=='builders'){
-                    //权限：施工人员
-                    if (tabindex == 0) {
-                        // $('.roleName').text('施工人员')
-                        // $('.fix-left-nav').removeClass('gray');
-                        // $('input#isAllRadio:radio').prop('checked', true);
-                        // $('.company-select input[value=0]:radio').prop('checked', true);
-                        // $('[tabContent=0].active input.singleIsRadio:radio[value=0]').prop('checked', true);
-                    } else if (tabindex == 1) {
-                        $('.fix-left-nav').removeClass('gray');
-                        // $('input#noAllRadio:radio').prop('checked', true);
-                        // $('[tabContent=1].active input.singleNoRadio:radio[value=1]').prop('checked', true);
-                    } else if (tabindex == 2) {
-                        $('.fix-left-nav').addClass('gray');
-                        // $('input#noAllRadio:radio').prop('checked', true);
-                        // $('[tabContent=2].active input.singleNoRadio:radio[value=1]').prop('checked', true);
-                    } else if (tabindex == 3) {
-                        $('.fix-left-nav').addClass('gray');
-                        // $('input#noAllRadio:radio').prop('checked', true);
-                        // $('[tabContent=3].active input.singleNoRadio:radio[value=1]').prop('checked', true);
-                    }
                 }
-
-
+            //     } else if (role == 'Admin') {
+            //         //权限：管理员
+            //         if (tabindex == 0) {
+            //             $('.roleName').text('管理员')
+            //             $('.fix-left-nav').removeClass('gray');
+            //             // $('input#isAllRadio:radio').prop('checked', true);
+            //             // $('.company-select input[value=2]:radio').prop('checked', true);
+            //             // $('input#allChecked').trigger('click')
+            //             // $('[tabContent=0].active input.singleIsRadio:radio[value=0]').prop('checked', true);
+            //             // $('[tabContent=0].active input.singleIsRadio:radio[value=0]').prop('checked', true);
+            //         } else if (tabindex == 1) {
+            //             $('.fix-left-nav').removeClass('gray');
+            //             // $('input#allChecked').prop('checked', false);
+            //             // $('input#isAllRadio:radio').prop('checked', true);
+            //             // $('.company-select input[value=2]:radio').prop('checked', true);
+            //             // $('input#allChecked').trigger('click')
+            //             // $('[tabContent=1].active input.admin-role:checkbox').prop('checked', false).parent().siblings().find('input:checkbox').prop('checked', true);
+            //             // $('[tabContent=1].active input.singleIsRadio:radio[value=0]').prop('checked', true);
+            //         } else if (tabindex == 2) {
+            //             $('.fix-left-nav').addClass('gray');
+            //             // $('input#isAllRadio:radio').prop('checked', true);
+            //             // $('input#allChecked').prop('checked', false);
+            //             // $('[tabContent=2].active input:checkbox').prop('checked', false);
+            //             // $('[tabContent=2].active input.lookRole:checkbox').prop('checked', true);
+            //             // $('[tabContent=2].active input.yi-admin-role:checkbox').prop('checked', true);
+            //             // $('[tabContent=2].active input.builders:checkbox').prop('checked', true);
+            //             // $('[tabContent=2].active input.singleIsRadio:radio[value=0]').prop('checked', true);
+            //         } else if (tabindex == 3) {
+            //             $('.fix-left-nav').addClass('gray');
+            //             // $('input#isAllRadio:radio').prop('checked', true);
+            //             // $('input#allChecked').trigger('click')
+            //             // $('[tabContent=3].active input.singleIsRadio:radio[value=0]').prop('checked', true);
+            //         }
+            //     }else if (role == 'yi-Admin') {
+            //         //权限：乙方管理员
+            //         if (tabindex == 0) {
+            //             // $('.roleName').text('乙方管理员')
+            //             $('.fix-left-nav').removeClass('gray');
+            //             // $('input#isAllRadio:radio').prop('checked', true);
+            //             // $('.company-select input[value=0]:radio').prop('checked', true);
+            //             // $('[tabContent=0].active input.singleIsRadio:radio[value=0]').prop('checked', true);
+            //         } else if (tabindex == 1) {
+            //             $('.fix-left-nav').removeClass('gray');
+            //             // $('input#noAllRadio:radio').prop('checked', true);
+            //             // $('[tabContent=1].active input.singleNoRadio:radio[value=1]').prop('checked', true);
+            //         } else if (tabindex == 2) {
+            //             $('.fix-left-nav').addClass('gray');
+            //             // $('input#noAllRadio:radio').prop('checked', true);
+            //             // $('[tabContent=2].active input.singleNoRadio:radio[value=1]').prop('checked', true);
+            //         } else if (tabindex == 3) {
+            //             $('.fix-left-nav').addClass('gray');
+            //             // $('input#noAllRadio:radio').prop('checked', true);
+            //             // $('[tabContent=3].active input.singleNoRadio:radio[value=1]').prop('checked', true);
+            //         }
+            //     }else if(role=='builders'){
+            //         //权限：施工人员
+            //         if (tabindex == 0) {
+            //             // $('.roleName').text('施工人员')
+            //             // $('.fix-left-nav').removeClass('gray');
+            //             // $('input#isAllRadio:radio').prop('checked', true);
+            //             // $('.company-select input[value=0]:radio').prop('checked', true);
+            //             // $('[tabContent=0].active input.singleIsRadio:radio[value=0]').prop('checked', true);
+            //         } else if (tabindex == 1) {
+            //             $('.fix-left-nav').removeClass('gray');
+            //             // $('input#noAllRadio:radio').prop('checked', true);
+            //             // $('[tabContent=1].active input.singleNoRadio:radio[value=1]').prop('checked', true);
+            //         } else if (tabindex == 2) {
+            //             $('.fix-left-nav').addClass('gray');
+            //             // $('input#noAllRadio:radio').prop('checked', true);
+            //             // $('[tabContent=2].active input.singleNoRadio:radio[value=1]').prop('checked', true);
+            //         } else if (tabindex == 3) {
+            //             $('.fix-left-nav').addClass('gray');
+            //             // $('input#noAllRadio:radio').prop('checked', true);
+            //             // $('[tabContent=3].active input.singleNoRadio:radio[value=1]').prop('checked', true);
+            //         }
+            //     }
             }
         })
     })
