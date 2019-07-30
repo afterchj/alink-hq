@@ -438,9 +438,8 @@ span.msg-use{
 .pop-content .reset-pwd {
     font-size: 15px;
     color: #555;
-    margin-top: 60px;
-    text-align: center;
-
+    margin-top: 5px;
+    text-align: left;
 }
 .excel-main{
     width:80%;
@@ -478,10 +477,10 @@ span.msg-use{
 }
 
 .pop-content .reset-pwd-hint {
-    font-size: 13px;
+    font-size: 14px;
     color: #f9220a;
-    margin-top: 0px;
-    text-align: center;
+    margin-top: 5px;
+    text-align: left;
 }
 
 #preload-anim {
@@ -496,7 +495,17 @@ span.msg-use{
     display:block;
     z-index:1000
 }
-
+ .table-content-list input[type=text]{
+    width: 300px;
+    font-size: 14px;
+    color: #888;
+    height: 31px;
+    padding-left: 8px;
+    border: 1px solid #ddd;
+    border-radius: 2px;
+    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+}
 .pop-iframe {
     position:absolute;
     top:250px;
@@ -531,8 +540,16 @@ span.msg-use{
 .pop-content {
     text-align: center;
     background-color: #fff;
+    height: calc(100% - 55px);
 }
-
+.pop-content .pop-msg{
+    height: calc(100% - 60px);
+    /* line-height: calc(100% - 60px); */
+    width: 60%;
+    margin-left: 20%;
+    /* bottom: 5%; */
+    top: 15%;
+}
 .pop-content .pop-btn {
     text-align: right;
     position: absolute;
@@ -1436,7 +1453,7 @@ i.cricle {
     font-size: 15px;
 }
 .transfer-company  input[type=text]{
-    width:385px;
+    width: 392px;
 }
 .transfer-company select{
     width:400px;

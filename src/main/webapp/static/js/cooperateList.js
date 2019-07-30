@@ -101,15 +101,15 @@ $(function() {
         hideOverlay();
         location.href = "/alink-hq/cooperate/saveUpdate?id=" + companyId + '&status=' + status
     }) 
-    $('.delete-project').click(function() {
+    $('.delete-pop').click(function() {
         companyId = $(this).attr("alt");
-        // $('div[openContent="delete-project"]').addClass('active');
+        // $('div[openContent="delete-pop"]').addClass('active');
         // $('.hide-iframe').addClass('active');
         // $('.hide-iframe').css({
         //     'width': width,
         //     'height': height
         // })
-        var selector = $('div[openContent="delete-project"]');
+        var selector = $('div[openContent="delete-pop"]');
         selector.addClass('active');
         adjust(selector);
         showOverlay();
@@ -117,24 +117,24 @@ $(function() {
         $.get("/alink-hq/cooperate/getCount?id=" + companyId, function(result) {
             str = result;
             if (result == 'ok') {
-                $('div[openContent="delete-project"] .reset-pwd p').text('您确定要删除' + companyName + '信息？')
+                $('div[openContent="delete-pop"] .reset-pwd p').text('您确定要删除' + companyName + '信息？')
             } else {
-                $('div[openContent="delete-project"] .reset-pwd').text('您无法删除' + companyName + '信息');
-                $('div[openContent="delete-project"] .reset-pwd-hint').text('请将其名下所有项目进行移交')
+                $('div[openContent="delete-pop"] .reset-pwd').text('您无法删除' + companyName + '信息');
+                $('div[openContent="delete-pop"] .reset-pwd-hint').text('请将其名下所有项目进行移交')
             }
         })
     });
-    $('div[openContent="delete-project"] button.reduce').click(function() {
-        // $('div[openContent="delete-project"]').removeClass('active');
+    $('div[openContent="delete-pop"] button.reduce').click(function() {
+        // $('div[openContent="delete-pop"]').removeClass('active');
         // $('.hide-iframe').removeClass('active');
-        var selector = $('div[openContent="delete-project"]');
+        var selector = $('div[openContent="delete-pop"]');
         selector.removeClass('active');
         hideOverlay();
     });
-    $('div[openContent="delete-project"] button.yes').click(function() {
-        // $('div[openContent="delete-project"]').removeClass('active');
+    $('div[openContent="delete-pop"] button.yes').click(function() {
+        // $('div[openContent="delete-pop"]').removeClass('active');
         // $('.hide-iframe').removeClass('active');
-        var selector = $('div[openContent="delete-project"]');
+        var selector = $('div[openContent="delete-pop"]');
         selector.removeClass('active');
         hideOverlay();
         if (str == 'ok') {
