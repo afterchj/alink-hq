@@ -46,6 +46,8 @@
             <div id="meshList" class="table-content-list">
                 <form class="clearfix" th:action="@{/place/list}" method="POST">
                     <input type="hidden" name="uid" th:value="${dict.uid}">
+                    <input type="hidden" name="mid" id="mid" th:value="${dict.mid}">
+                    <input type="hidden" id="pid" th:value="${dict.projectId}">
                     <input type="hidden" id="pageSize" th:value="${dict.pageSize}">
                     <div class="search-condition clearfix">
                         <div class="f-l search" style="margin-right: 150px;margin-left: 100px;">
@@ -55,8 +57,8 @@
                             </div>
 
                             <div>
-                                <label for="mid" class="font">网络ID</label>
-                                <input type="text" id="mid" name="meshId" th:value="${dict.meshId}" placeholder="请输入网络ID">
+                                <label for="meshId" class="font">网络ID</label>
+                                <input type="text" id="meshId" name="meshId" th:value="${dict.meshId}" placeholder="请输入网络ID">
                             </div>
                         </div>
                         <div class="f-l search">

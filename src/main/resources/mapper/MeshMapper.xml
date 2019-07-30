@@ -20,6 +20,8 @@
         p.name,
        	IFNULL(pl.pcount,0) pcount,
         IFNULL(s.scount,0) scount,
+        IFNULL(g.gcount,0) gcount,
+        IFNULL(l.lcount,0) lcount,
         IFNULL(t.tcount,0) tcount
 	</sql>
 
@@ -57,6 +59,8 @@
         INNER JOIN f_project p ON m.project_id = p.id
         LEFT JOIN (SELECT COUNT(1) pcount,mid FROM f_place GROUP BY mid) pl ON pl.mid=m.id
         LEFT JOIN (SELECT COUNT(1) scount,mid FROM f_scene GROUP BY mid) s ON s.mid=m.id
+        LEFT JOIN (SELECT COUNT(1) gcount,mid FROM f_group GROUP BY mid) g ON g.mid=m.id
+        LEFT JOIN (SELECT COUNT(1) lcount,mid FROM f_light GROUP BY mid) l ON l.mid=m.id
         LEFT JOIN (SELECT COUNT(1) tcount,mid FROM f_time_line GROUP BY mid) t ON t.mid=m.id
         WHERE 1=1
         <include refid="common_choose"></include>
