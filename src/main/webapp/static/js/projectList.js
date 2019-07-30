@@ -246,7 +246,7 @@ $(function () {
         account = $(this).parent().siblings('.project-account').text();
         var msg = {
             id: projectId,
-            account: account,
+            account: account
         }
         deleteArray.push(msg);
         if(deleteArray.length!=0){
@@ -278,20 +278,10 @@ $(function () {
     //移交单个
     $('.exchange-project').click(function () {
         var jsonArray = [];
-        var projectName = $(this).parent('td').siblings('.project-name').find('a').text();
-        var account = $(this).parent('td').siblings('.project-account').text();
-        var coname = $(this).parent('td').siblings('.project-coname').text();
+        var ids = [];
         var id = $(this).parent('td').siblings('.project-id').text();
-        var msg = {
-            name: projectName,
-            account: account,
-            coname: coname,
-            id: id
-        }
-        jsonArray.push(msg);
-        var newJsonArray = JSON.stringify(jsonArray);
-        var projectInfo = encodeURIComponent(newJsonArray);
-        location.href = '/alink-hq/project/transferPage?projectInfo=' + projectInfo;
+        ids.push(id);
+        location.href = '/alink-hq/project/transferPage?ids=' + ids;
     })
     //删除多个弹框
     $('#delete-project').click(function () {
@@ -318,28 +308,18 @@ $(function () {
     //移交项目多个
     $('#transfer-project').click(function () {
         var num = 0;
-        var jsonArray = [];
+        var ids = [];
+        // var jsonArray = [];
         $('tbody tr td.checkbox input').each(function () {
             var checked = $(this).prop('checked');
             if (checked) {
                 num++;
-                var projectName = $(this).parent('td').siblings('.project-name').find('a').text();
-                var account = $(this).parent('td').siblings('.project-account').text();
-                var coname = $(this).parent('td').siblings('.project-coname').text();
                 var id = $(this).parent('td').siblings('.project-id').text();
-                var msg = {
-                    name: projectName,
-                    account: account,
-                    coname: coname,
-                    id: id
-                }
-                jsonArray.push(msg);
+                ids.push(id);
             }
         })
-        var newJsonArray = JSON.stringify(jsonArray);
-        var projectInfo = encodeURIComponent(newJsonArray);
-        if(jsonArray.length!=0){
-            location.href = '/alink-hq/project/transferPage?projectInfo=' + projectInfo;
+        if(ids.length!=0){
+            location.href = '/alink-hq/project/transferPage?ids=' + ids;
         }
     })
     //取消按钮

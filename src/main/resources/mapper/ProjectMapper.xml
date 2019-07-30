@@ -94,6 +94,23 @@
             update f_project p set p.name = #{name},p.update_date = NOW() where p.id=#{projectId}
     </update>
 
+    <select id="selectByPid" resultType="map" parameterType="list">
+        SELECT
+        t1.id,
+        t1.name,
+        t2.account,
+        t4.coname
+        FROM f_project t1
+        INNER JOIN f_user_account t2 ON t1.uid=t2.id
+        INNER JOIN f_user_customer t3 ON t1.uid=t3.uid
+        INNER JOIN f_firm t4 ON t4.id=t3.fid
+        WHERE t1.id IN
+        <foreach collection="list" item="id" index="index" open="(" close=")" separator=",">
+            #{id}
+        </foreach> ORDER BY t1.create_date DESC,t1.update_date DESC
+    </select>
+
+
     <update id="transferProject">
         update f_project set uid = #{uid},update_date = NOW() where id=#{id};
         update f_place set uid = #{uid},update_date = NOW() where mid IN ( SELECT id FROM f_mesh WHERE project_id=#{id});

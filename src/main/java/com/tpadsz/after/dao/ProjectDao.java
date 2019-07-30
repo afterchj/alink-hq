@@ -4,6 +4,7 @@ import com.tpadsz.after.entity.ProjectList;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by chenhao.lu on 2019/4/8.
@@ -63,4 +64,5 @@ public interface ProjectDao {
 
     int findProjectByProjectId(@Param("id") int id);
 
+    List<Map> selectByPid(List<String> list);
 }
