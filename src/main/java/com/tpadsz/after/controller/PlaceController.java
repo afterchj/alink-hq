@@ -5,7 +5,6 @@ import com.github.pagehelper.PageInfo;
 import com.tpadsz.after.entity.MeshInfo;
 import com.tpadsz.after.entity.OptionList;
 import com.tpadsz.after.entity.SearchDict;
-import com.tpadsz.after.entity.User;
 import com.tpadsz.after.exception.RepetitionException;
 import com.tpadsz.after.service.MeshService;
 import com.tpadsz.after.service.PlaceService;
@@ -18,7 +17,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
-import javax.servlet.http.HttpSession;
 import java.util.*;
 
 /**
@@ -39,7 +37,7 @@ public class PlaceController {
     private Logger logger = Logger.getLogger(this.getClass());
 
     @RequestMapping("/list")
-    public String list(SearchDict dict, ModelMap modelMap ) {
+    public String list(SearchDict dict, ModelMap modelMap) {
         String uid = AppUtils.getUserID();
         String role = roleService.selectById(uid);
         dict.setUid(uid);
@@ -86,12 +84,11 @@ public class PlaceController {
     }
 
     @RequestMapping("/move")
-    public String delete(String ids) {
-        logger.info("ids=" + ids);
+    public String delete(Integer pid,Integer mid, String ids) {
         String[] ids1 = ids.split(",");
         List<String> list = new ArrayList(Arrays.asList(ids1));
         placeService.deleteByIds(list);
-        return "redirect:/place/list";
+        return "redirect:/place/list?projectId=" + pid + "&mid=" + mid;
     }
 
     @ResponseBody
