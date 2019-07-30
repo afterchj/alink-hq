@@ -44,19 +44,21 @@ $(function() {
     $('.singleDel').click(function() {
         id = $(this).attr("alt");
         ids.push(id);
-        var selector = $('div[openContent="delete-mesh"]');
+        var selector = $('div[openContent="delete-pop"]');
         selector.addClass('active');
-        adjust(selector)
-        showOverlay()
+        $('div[openContent="delete-pop"] .reset-pwd p').text('您确定要删除所选的组吗？');
+        $('div[openContent="delete-pop"] .reset-pwd-hint').text('删除后所选组所有的灯将会进入所属网络未分组中请慎重！');
+        adjust(selector);
+        showOverlay();
     })
-    $('div[openContent="delete-mesh"] button.yes').click(function() {
+    $('div[openContent="delete-pop"] button.yes').click(function() {
         if (ids) {
             location.href = "/alink-hq/group/delete?mid=" + $("#mid").val() + "&ids=" + ids;
             ids = []
         }
     })
-    $('div[openContent="delete-mesh"] button.reduce').click(function() {
-        var selector = $('div[openContent="delete-mesh"]');
+    $('div[openContent="delete-pop"] button.reduce').click(function() {
+        var selector = $('div[openContent="delete-pop"]');
         selector.removeClass('active')
         hideOverlay()
     })
@@ -67,10 +69,12 @@ $(function() {
         });
         ids = idss;
         if (ids.length > 0) {
-            var selector = $('div[openContent="delete-mesh"]');
+            var selector = $('div[openContent="delete-pop"]');
             selector.addClass('active');
-            adjust(selector)
-            showOverlay()
+            $('div[openContent="delete-pop"] .reset-pwd p').text('您确定要删除所选的组吗？');
+            $('div[openContent="delete-pop"] .reset-pwd-hint').text('删除后所选组所有的灯将会进入所属网络未分组中请慎重！');
+            adjust(selector);
+            showOverlay();
         }
     })
     $("#multiMove").click(function() {

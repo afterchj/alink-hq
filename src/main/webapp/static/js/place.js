@@ -5,8 +5,10 @@ $(function () {
             ids.push($(this).val())
         });
         if (ids.length > 0) {
-            var selector = $('div[openContent="delete-place"]');
+            var selector = $('div[openContent="delete-pop"]');
             selector.addClass('active');
+            $('div[openContent="delete-pop"] .reset-pwd p').text('您确定要删除所选的区域吗？');
+            $('div[openContent="delete-pop"] .reset-pwd-hint').text('删除后将无法恢复，请慎重！');
             adjust(selector)
             showOverlay()
         }
@@ -52,30 +54,32 @@ $(function () {
         $('#mid').bind('input propertychange', function () {
             var val = $(this).val();
             if (val != '' && isNaN(val)) {
-                $(this).val('')
+                $(this).val('');
             }
         })
     });
     $('div[openContent="reset-name"] .pop-btn .reduce').click(function () {
         var selector = $('div[openContent="reset-name"]');
-        selector.removeClass('active')
-        hideOverlay()
+        selector.removeClass('active');
+        hideOverlay();
     });
     var ids;
     $('.singleDel').click(function () {
         ids = $(this).parent().siblings('.checkbox').find('input').val();
-        var selector = $('div[openContent="delete-place"]');
+        var selector = $('div[openContent="delete-pop"]');
         selector.addClass('active');
-        adjust(selector)
-        showOverlay()
+        $('div[openContent="delete-pop"] .reset-pwd p').text('您确定要删除所选的区域吗？');
+        $('div[openContent="delete-pop"] .reset-pwd-hint').text('删除后将无法恢复，请慎重！');
+        adjust(selector);
+        showOverlay();
     });
     $('.pop-btn .reduce').click(function () {
-        var selector = $('div[openContent="delete-place"]');
-        selector.removeClass('active')
-        hideOverlay()
+        var selector = $('div[openContent="delete-pop"]');
+        selector.removeClass('active');
+        hideOverlay();
     });
     $('.pop-btn .yes').click(function () {
-        deletePlace(ids)
+        deletePlace(ids);
     })
 });
 

@@ -148,7 +148,8 @@
                                 <a th:if="${user.role_id!='4'}" href="javascript:void(0);" class="unclick"><img
                                         src="/alink-hq/static/img/un-exchange.png"
                                         alt="" class="center-img" th:title="不可移交"></a>
-                                <img src="/alink-hq/static/img/delete.png" style="width: 16px;height: 16px;" alt="" id="delete-account"
+                                <img src="/alink-hq/static/img/delete.png" style="width: 16px;height: 16px;" alt=""
+                                     id="delete-account"
                                      openTab="delete-account" class="pointer" th:title="删除">
                             </td>
                             <td class="p-r">
@@ -214,31 +215,32 @@
                     <table border="1" class="noData active" th:if="${pageInfo==null}">
                         <thead>
                         <tr>
-                            <th style="width: 120px;">账号</th>
-                            <th style="width: 120px;">用户名</th>
-                            <th style="width: 150px;">绑定手机号</th>
+                            <th style="width: 120px;"><span>账号</span></th>
+                            <th style="width: 120px;"><span>用户名</span></th>
+                            <th style="width: 150px;"><span>绑定手机号</span></th>
                             <th class="p-r" style="width: 180px;">
-                                绑定邮箱
+                                <span>绑定邮箱</span>
                             </th>
-                            <th class="p-r" style="width: 220px;">
-                                隶属公司
+                            <th class="p-r" style="width: 300px;">
+                                <span>隶属公司</span>
                             </th>
                             <th class="p-r" style="width: 120px;">
-                                角色
+                                <span>角色</span>
                             </th>
                             <th class="p-r" style="width: 180px;">
-                                添加时间
+                                <span>添加时间</span>
                             </th>
                             <th class="p-r" style="width:80px;">
-                                状态
+                                <span>状态</span>
                             </th>
-                            <th>操作</th>
+                            <th class="operation"><span>操作</span></th>
+                            <th class="memo" style="width:270px;"><span>备忘录</span></th>
                         </tr>
                         </thead>
                         <tbody>
                         <tr>
-                            <td colspan="9">
-                                <img src="/alink-hq/static/img/no-data.png" id="skipPageBtn" alt="">
+                            <td colspan="10">
+                                <img th:src="@{/static/img/no-data.png}" style="width: auto;height: auto;" alt="">
                                 <p>暂无数据</p>
                             </td>
                         </tr>
@@ -249,141 +251,153 @@
         </div>
     </div>
 </div>
-
 <!-- 确定重置密码 -->
-<div class="confirm-on-off pop-iframe " openContent="reset-pwd">
-    <div class="confirm-on-off-nav p-r pop-nav">
-        温馨提示
-    </div>
-    <div class="pop-content">
-        <div class="reset-pwd">您确定要重置该账号密码吗？</div>
-        <div class="reset-pwd-hint">（重置后将无法恢复，请慎重！）</div>
-        <div class="pop-btn">
-            <button class="reduce" type="button">取消</button>
-            <button class="yes" type="button">确定</button>
-        </div>
-    </div>
-</div>
+<div th:replace="pop/resetPwd::reset-pwd"></div>
+<!--<div class="confirm-on-off pop-iframe " openContent="reset-pwd">-->
+<!--<div class="confirm-on-off-nav p-r pop-nav">-->
+<!--温馨提示-->
+<!--</div>-->
+<!--<div class="pop-content">-->
+<!--<div class="reset-pwd">您确定要重置该账号密码吗？</div>-->
+<!--<div class="reset-pwd-hint">（重置后将无法恢复，请慎重！）</div>-->
+<!--<div class="pop-btn">-->
+<!--<button class="reduce" type="button">取消</button>-->
+<!--<button class="yes" type="button">确定</button>-->
+<!--</div>-->
+<!--</div>-->
+<!--</div>-->
 <!--新密码-->
-<div class="reset-passwords pop-iframe" openContent="new-pwd">
-    <div class="reset-passwords-nav p-r pop-nav">
-        新密码
-    </div>
-    <div class="reset-passwords-content pop-content">
-        <form action="">
-            <div class="main-part">
-                <div class="account-part">
-                    <span class="t-title t-account">账&nbsp;&nbsp;&nbsp;号：</span>
-                    <span class="t-content t-account-result"></span>
-                </div>
-                <div class="pwd-part">
-                    <span class="t-title t-pwd">新密码：</span>
-                    <span class="t-content t-pwd-result"></span>
-                </div>
-            </div>
+<div th:replace="pop/newPwd::new-pwd"></div>
+<!--<div class="reset-passwords pop-iframe" openContent="new-pwd">-->
+<!--<div class="reset-passwords-nav p-r pop-nav">-->
+<!--新密码-->
+<!--</div>-->
+<!--<div class="reset-passwords-content pop-content">-->
+<!--<form action="">-->
+<!--<div class="main-part">-->
+<!--<div class="account-part">-->
+<!--<span class="t-title t-account">账&nbsp;&nbsp;&nbsp;号：</span>-->
+<!--<span class="t-content t-account-result"></span>-->
+<!--</div>-->
+<!--<div class="pwd-part">-->
+<!--<span class="t-title t-pwd">新密码：</span>-->
+<!--<span class="t-content t-pwd-result"></span>-->
+<!--</div>-->
+<!--</div>-->
 
-            <div class="pop-btn clearfix">
-                <div class="f-l pop-hint">请牢记新密码，关闭后将无法展示</div>
-                <div class="f-r">
-                    <button class="reduce" type="button">取消</button>
-                    <button class="yes" type="button">确定</button>
-                </div>
-            </div>
-        </form>
-    </div>
-</div>
+<!--<div class="pop-btn clearfix">-->
+<!--<div class="f-l pop-hint">请牢记新密码，关闭后将无法展示</div>-->
+<!--<div class="f-r">-->
+<!--<button class="reduce" type="button">取消</button>-->
+<!--<button class="yes" type="button">确定</button>-->
+<!--</div>-->
+<!--</div>-->
+<!--</form>-->
+<!--</div>-->
+<!--</div>-->
 <!-- 确定启用禁用弹出框 -->
-<div class="confirm-on-off pop-iframe " openContent="start-use">
-    <div class="confirm-on-off-nav p-r pop-nav">
-        温馨提示
-    </div>
-    <div class="pop-content">
-        <div class="off-or-on"></div>
-        <p class="unuse" style="font-size: 15px;color: #f71f1f;margin-top:20px;"></p>
-        <div class="pop-btn">
-            <button class="reduce" type="button">取消</button>
-            <button class="yes" type="button">确定</button>
-        </div>
-    </div>
-</div>
+<div th:replace="pop/startUse::start-use"></div>
+<!--<div class="confirm-on-off pop-iframe " openContent="start-use">-->
+<!--<div class="confirm-on-off-nav p-r pop-nav">-->
+<!--温馨提示-->
+<!--</div>-->
+<!--<div class="pop-content">-->
+<!--<div class="off-or-on"></div>-->
+<!--<p class="unuse" style="font-size: 15px;color: #f71f1f;margin-top:20px;"></p>-->
+<!--<div class="pop-btn">-->
+<!--<button class="reduce" type="button">取消</button>-->
+<!--<button class="yes" type="button">确定</button>-->
+<!--</div>-->
+<!--</div>-->
+<!--</div>-->
 
 <!-- 删除账户 -->
 <div class="pop-iframe" openContent="delete-account">
     <div class=" p-r pop-nav">
         温馨提示
     </div>
-    <div class="pop-content">
-        <div class="noProject active">
-            <div class="reset-pwd">您确定要删除该账号信息吗？</div>
-            <div class="reset-pwd-hint">（删除后将无法恢复，请慎重！）</div>
+    <div class="pop-content p-r">
+        <div class="pop-msg p-a clearfix">
+            <div class="f-l img-msg"><img th:src="@{/static/img/hint.png}" alt=""></div>
+            <div class="f-l text-msg">
+                <div class="noProject active">
+                    <div class="reset-pwd">您确定要删除该账号信息吗？</div>
+                    <div class="reset-pwd-hint">删除后将无法恢复，请慎重！</div>
+                </div>
+            </div>
         </div>
-        <div class="pop-btn">
+        <div class="pop-btn p-a">
             <button class="reduce" type="button">取消</button>
             <button class="yes" type="button">确定</button>
         </div>
     </div>
 </div>
 <!-- 删除账户-名下有项目 -->
+<!--<div th:replace="pop/delete::delete-pop"></div>-->
 <div class="pop-iframe" openContent="delete-account-hasProject">
     <div class=" p-r pop-nav">
         温馨提示
     </div>
-    <div class="pop-content">
-        <div class="hasProject active">
-            <div>当前账号名下有项目</div>
-            <div>请移交后再进行删除！</div>
+    <div class="pop-content p-r">
+        <div class="pop-msg p-a clearfix">
+            <div class="f-l img-msg"><img th:src="@{/static/img/hint.png}" alt=""></div>
+            <div class="f-l text-msg">
+                <div class="hasProject active">
+                    <div>当前账号名下有项目</div>
+                    <div>请移交后再进行删除！</div>
+                </div>
+            </div>
         </div>
-        <div class="pop-btn">
+        <div class="pop-btn p-a">
             <button class="reduce" type="button">取消</button>
             <button class="yes" type="button" style="width: 130px;letter-spacing: 5px;">移交项目</button>
         </div>
     </div>
 </div>
-
-<!-- 备忘录为空 -->
-<div class="pop-iframe" openContent="memo-edit">
-    <div class=" p-r pop-nav">
-        备忘录
-    </div>
-    <div class="pop-content">
+    <!-- 备忘录为空 -->
+    <div class="pop-iframe" openContent="memo-edit">
+        <div class=" p-r pop-nav">
+            备忘录
+        </div>
+        <div class="pop-content">
         <textarea maxlength="200"
                   style="width: 93%;border: none;margin-top: 10px;resize: none;height: 130px;font-size: 13.5px;line-height: 1.6;color: #323232;font-family: inherit;"
                   class="wishContent"
                   placeholder="请输入不超过200个字"></textarea>
-        <p class="right-font"><span class="wordsNum">0/200</span></p>
-        <input type="hidden" id="memo-account">
-        <div class="pop-btn">
-            <button class="reduce">取消</button>
-            <button class="yes">确定</button>
+            <p class="right-font"><span class="wordsNum">0/200</span></p>
+            <input type="hidden" id="memo-account">
+            <div class="pop-btn">
+                <button class="reduce">取消</button>
+                <button class="yes">确定</button>
+            </div>
         </div>
     </div>
-</div>
-<div class="hide-iframe"></div>
+    <div class="hide-iframe"></div>
 
-<div id="preload-anim">
-    <div id="circularG">
-        <div id="circularG_1" class="circularG"></div>
-        <div id="circularG_2" class="circularG"></div>
-        <div id="circularG_3" class="circularG"></div>
-        <div id="circularG_4" class="circularG"></div>
-        <div id="circularG_5" class="circularG"></div>
-        <div id="circularG_6" class="circularG"></div>
-        <div id="circularG_7" class="circularG"></div>
-        <div id="circularG_8" class="circularG"></div>
+    <div id="preload-anim">
+        <div id="circularG">
+            <div id="circularG_1" class="circularG"></div>
+            <div id="circularG_2" class="circularG"></div>
+            <div id="circularG_3" class="circularG"></div>
+            <div id="circularG_4" class="circularG"></div>
+            <div id="circularG_5" class="circularG"></div>
+            <div id="circularG_6" class="circularG"></div>
+            <div id="circularG_7" class="circularG"></div>
+            <div id="circularG_8" class="circularG"></div>
+        </div>
+        <p class="title">
+        </p>
     </div>
-    <p class="title">
-    </p>
-</div>
 
-<script src="/alink-hq/static/js/jquery.min.js"></script>
-<script src="/alink-hq/static/laydate/laydate.js"></script>
-<script src="/alink-hq/static/js/left.js"></script>
-<script src="/alink-hq/static/js/user.js"></script>
-<script src="/alink-hq/static/js/moment.js"></script>
-<!--<script src="/alink-hq/static/js/excel/Blob.js"></script>-->
-<!--<script src="/alink-hq/static/js/excel/FileSaver.js"></script>-->
-<script src="/alink-hq/static/js/excel/tableExport.js"></script>
-<!--<script src="/alink-hq/static/js/excel/jquery.base64.js"></script>-->
-<script src="/alink-hq/static/js/excel/base64.js"></script>
+    <script src="/alink-hq/static/js/jquery.min.js"></script>
+    <script src="/alink-hq/static/laydate/laydate.js"></script>
+    <script src="/alink-hq/static/js/left.js"></script>
+    <script src="/alink-hq/static/js/user.js"></script>
+    <script src="/alink-hq/static/js/moment.js"></script>
+    <!--<script src="/alink-hq/static/js/excel/Blob.js"></script>-->
+    <!--<script src="/alink-hq/static/js/excel/FileSaver.js"></script>-->
+    <script src="/alink-hq/static/js/excel/tableExport.js"></script>
+    <!--<script src="/alink-hq/static/js/excel/jquery.base64.js"></script>-->
+    <script src="/alink-hq/static/js/excel/base64.js"></script>
 </body>
 </html>

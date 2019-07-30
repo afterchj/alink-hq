@@ -219,6 +219,44 @@ fieldset .field-widget {
 .main-right {
     height: 100%;
 }
+.pop-content .newName {
+    font-size: 16px;
+    margin: 50px auto 0;
+    text-align: center;
+    width: 100%;
+}
+.img-msg{
+    height: 57px;
+/* line-height: 57px; */
+    width: 57px;
+}
+.img-msg img{
+    margin: 5px 0px;
+}
+.text-msg{
+    width: calc(100% - 80px);
+    margin-left: 20px;
+    line-height: normal;
+    text-align: left;
+}
+.pop-content .unuse{
+    font-size: 14px;
+    color: #f9220a;
+    margin-top: 5px;
+    text-align: left;
+}
+.pop-content .off-or-on {
+    font-size: 16px;
+    color: #555;
+}
+.pop-content .pop-msg {
+    /* height: calc(100% - 60px); */
+    /* line-height: calc(100% - 60px); */
+    width: 75%;
+    margin-left: calc(25%/2);
+    /* bottom: 5%; */
+    top: 27%;
+}
 /*input[type=text]{*/
     /*width: 300px;*/
     /*font-size: 14px;*/
@@ -345,6 +383,7 @@ button:hover{
 
 .unclick {
     cursor: not-allowed;
+    pointer-events: none;
 }
 
 .unclick1 {
@@ -540,4 +579,13 @@ input::-moz-placeholder, textarea::-moz-placeholder {
 }
 input:-ms-input-placeholder, textarea:-ms-input-placeholder {
     color:    #999;
+}
+
+.pop-content input {
+    height: 30px;
+    width: 249px;
+    margin-bottom: 30px;
+    border: 1px solid #ddd;
+    border-radius: 2px;
+    padding: 0 0 0 10px;
 }

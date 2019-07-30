@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+
+    <!--<title>导航栏</title>-->
+    <!--<link rel="stylesheet" href="/alink-hq/static/css/base.css"/>-->
+    <!--<link rel="stylesheet" href="/alink-hq/static/css/leftNav.css"/>-->
+    <!--<link rel="stylesheet" href="/alink-hq/static/css/projectManage.css"/>-->
+
+    <!--[if lt IE 9]>
+    <script type="text/javascript" src="/alink-hq/static/js/html5shiv.js"></script>
+    <![endif]-->
+</head>
+<body>
+<!-- 重命名弹框 -->
+<div class="confirm-on-off pop-iframe  " openContent="reset-name" th:fragment="reset-name">
+    <div class="confirm-on-off-nav p-r pop-nav">
+        重命名
+    </div>
+    <div class="pop-content p-r">
+        <div class="newName p-a">
+            <p class="rename-hint"></p>
+            <label for="rename">新名称</label>
+            <input type="text" placeholder="请输入（2-16位汉字、字母、数字）" id="rename" onkeyup="nameKeyUp()" maxlength="16"/>
+        </div>
+        <div class="pop-btn p-a">
+            <button class="reduce">取消</button>
+            <button class="yes">确定</button>
+        </div>
+    </div>
+</div>
+</body>
+</html>

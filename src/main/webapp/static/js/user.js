@@ -32,7 +32,7 @@ $(function () {
         if (status == '启用') {
             intStatus = 1;
             $('div[openContent="start-use"] .off-or-on').text('您确定要禁用 '+account+' 账号吗？');
-            $('div[openContent="start-use"] .unuse').text('禁用后，该账号将无法登录')
+            $('div[openContent="start-use"] .unuse').text('禁用后，该账号将无法登录！')
         } else if (status == '禁用') {
             intStatus = 0;
             $('div[openContent="start-use"] .off-or-on').text('您确定要启用 '+account+' 账号吗？');
@@ -138,8 +138,8 @@ $(function () {
         var openTab = $(this).attr('openTab');
         var selector=$('div[openContent="delete-account"]');
         selector.addClass('active');
-        adjust(selector)
-        showOverlay()
+        adjust(selector);
+        showOverlay();
         $('div[openContent="delete-account"] .pop-content').find('p.unuse').remove();
         account = $(this).parent().siblings('.use-account').text();
     })

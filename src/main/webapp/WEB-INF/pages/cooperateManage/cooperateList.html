@@ -110,9 +110,9 @@
                                     <img shiro:lacksPermission ="updateCooperation" src="/alink-hq/static/img/alter-un.png" th:alt="${cooperation.id}"
                                          class="pointer reset-name unclick" th:title="无法操作" style="margin-right: 30px;">
                                     <img shiro:hasPermission ="deleteCooperation"  src="/alink-hq/static/img/delete.png" th:alt="${cooperation.id}"
-                                         class="pointer delete-pop" title="删除">
+                                         class="pointer delete-pop" title="删除" style="width: 16px; height: 16px;">
                                     <img  shiro:lacksPermission ="deleteCooperation"  src="/alink-hq/static/img/un-delete.png" th:alt="${cooperation.id}"
-                                         class="pointer delete-pop unclick" th:title="无法操作">
+                                         class="pointer delete-pop unclick" th:title="无法操作" style="width: 16px; height: 16px;">
                                 </td>
                                 <td class="p-r" shiro:hasPermission ="CooperationMemo">
                                     <img  src="/alink-hq/static/img/memo.png" th:alt="${cooperation.id}"
@@ -220,18 +220,20 @@
 </div>
 
 <!-- 确定启用禁用弹出框 -->
-<div class="confirm-on-off pop-iframe " openContent="start-use">
-    <div class="confirm-on-off-nav p-r pop-nav">
-        温馨提示
-    </div>
-    <div class="pop-content">
-        <div class="off-or-on"></div>
-        <div class="pop-btn">
-            <button class="reduce" type="button">取消</button>
-            <button class="yes" type="button">确定</button>
-        </div>
-    </div>
-</div>
+<!-- 确定启用禁用弹出框 -->
+<div th:replace="pop/startUse::start-use"></div>
+<!--<div class="confirm-on-off pop-iframe " openContent="start-use">-->
+    <!--<div class="confirm-on-off-nav p-r pop-nav">-->
+        <!--温馨提示-->
+    <!--</div>-->
+    <!--<div class="pop-content">-->
+        <!--<div class="off-or-on"></div>-->
+        <!--<div class="pop-btn">-->
+            <!--<button class="reduce" type="button">取消</button>-->
+            <!--<button class="yes" type="button">确定</button>-->
+        <!--</div>-->
+    <!--</div>-->
+<!--</div>-->
 
 <div class="hide-iframe "></div>
 

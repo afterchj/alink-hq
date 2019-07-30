@@ -398,13 +398,7 @@ span.msg-use{
     line-height: 30px;
 }
 
-.pop-content input {
-    height:30px;
-    width:249px;
-    margin-bottom:30px;
-    border: 1px solid #ddd;
-    border-radius:2px;
-}
+
 
 .pop-content label {
     /*width: 314px;*/
@@ -468,13 +462,7 @@ span.msg-use{
     bottom: 10px;
     left: 27%;
 }
-.pop-content .off-or-on {
-    font-size: 16px;
-    color: #555;
-    margin-top: 70px;
-    text-align: center;
 
-}
 
 .pop-content .reset-pwd-hint {
     font-size: 14px;
@@ -542,14 +530,14 @@ span.msg-use{
     background-color: #fff;
     height: calc(100% - 55px);
 }
-.pop-content .pop-msg{
-    height: calc(100% - 60px);
-    /* line-height: calc(100% - 60px); */
-    width: 60%;
-    margin-left: 20%;
-    /* bottom: 5%; */
-    top: 15%;
-}
+/*.pop-content .pop-msg{*/
+    /*height: calc(100% - 60px);*/
+    /*!* line-height: calc(100% - 60px); *!*/
+    /*width: 60%;*/
+    /*margin-left: 20%;*/
+    /*!* bottom: 5%; *!*/
+    /*top: 15%;*/
+/*}*/
 .pop-content .pop-btn {
     text-align: right;
     position: absolute;
@@ -649,13 +637,6 @@ span.msg-use{
     visibility:hidden;
     width:0
 }
-
-.pop-content .newName {
-    font-size:16px;
-    margin:50px auto 0;
-    text-align:center
-}
-
 .pop-content p.rename-hint {
     font-size: 14px;
     color: #fb2a2a;

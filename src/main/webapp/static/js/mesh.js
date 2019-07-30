@@ -24,46 +24,53 @@ $(function () {
             ids.push($(this).val())
         });
         if (ids.length > 0) {
-            var selector = $('div[openContent="delete-mesh"]');
+            $('.showList').hide();
+            var selector = $('div[openContent="delete-pop"]');
             selector.addClass('active');
-            adjust(selector)
-            showOverlay()
+            $('div[openContent="delete-pop"] .reset-pwd p').text('您确定要删除该所选的网络吗？');
+            $('div[openContent="delete-pop"] .reset-pwd-hint').text('删除后网络中所有信息将无法恢复，请慎重！');
+            adjust(selector);
+            showOverlay();
         }
     });
     var ids;
     $('.singleDel').click(function () {
         ids =  $(this).attr("alt");
-        var selector = $('div[openContent="delete-mesh"]');
+        $('.showList').hide();
+        var selector = $('div[openContent="delete-pop"]');
+        $('div[openContent="delete-pop"] .reset-pwd p').text('您确定要删除该所选的网络吗？');
+        $('div[openContent="delete-pop"] .reset-pwd-hint').text('删除后网络中所有信息将无法恢复，请慎重！');
         selector.addClass('active');
-        adjust(selector)
-        showOverlay()
+        adjust(selector);
+        showOverlay();
     });
-    $('div[openContent="delete-mesh"] .pop-btn .reduce').click(function () {
-        var selector = $('div[openContent="delete-mesh"]');
-        selector.removeClass('active')
-        hideOverlay()
+    $('div[openContent="delete-pop"] .pop-btn .reduce').click(function () {
+        var selector = $('div[openContent="delete-pop"]');
+        selector.removeClass('active');
+        hideOverlay();
     });
     $('div[openContent="exchange"]  .pop-btn .reduce').click(function () {
         var selector = $('div[openContent="exchange"]');
-        selector.removeClass('active')
-        hideOverlay()
+        selector.removeClass('active');
+        hideOverlay();
     })
     $('div[openContent="exchange"]  .pop-btn .yes').click(function () {
         var selector = $('div[openContent="exchange"]');
-        selector.removeClass('active')
-        hideOverlay()
+        selector.removeClass('active');
+        hideOverlay();
     })
-    $('div[openContent="delete-mesh"] .pop-btn .yes').click(function () {
-        deleteMesh(ids)
+    $('div[openContent="delete-pop"] .pop-btn .yes').click(function () {
+        deleteMesh(ids);
     });
     var id;
     $('.reset-name').click(function () {
         $('#rename').val('');
+        $('.showList').hide();
         id = $(this).attr("alt");
         var selector = $('div[openContent="reset-name"]');
         selector.addClass('active');
-        adjust(selector)
-        showOverlay()
+        adjust(selector);
+        showOverlay();
     });
     $('div[openContent="reset-name"] .pop-btn .yes').click(function () {
         var name = $('#rename').val();
@@ -111,7 +118,7 @@ function nameKeyUp() {
 }
 
 function deleteMesh(ids) {
-    let pid=$("#pid").val();
+    var pid=$("#pid").val();
     if (ids) {
         location.href = "/alink-hq/mesh/delete?pid=" + pid + "&ids=" + ids
     }

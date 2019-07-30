@@ -241,23 +241,25 @@ $(function () {
         }
     })
     //删除项目弹框
-    $('.delete-project').click(function () {
+    $('.delete-pop').click(function () {
         projectId = parseInt($(this).parent().siblings('.checkbox ').find('input[type=checkbox]').val());
         account = $(this).parent().siblings('.project-account').text();
+        $('div[openContent="delete-pop"] .reset-pwd p').text('您确定要删除所选的项目吗？');
+        $('div[openContent="delete-pop"] .reset-pwd-hint').text('删除后项目中所有信息将无法恢复，请慎重！')
         var msg = {
             id: projectId,
             account: account
         }
         deleteArray.push(msg);
         if(deleteArray.length!=0){
-            var selector=$('div[openContent="delete-project"]');
+            var selector=$('div[openContent="delete-pop"]');
             selector.addClass('active');
             adjust(selector)
             showOverlay()
         }
     })
     //确定删除
-    $('div[openContent="delete-project"] .yes').click(function () {
+    $('div[openContent="delete-pop"] .yes').click(function () {
         var newJsonArray = JSON.stringify(deleteArray);
         $.ajax({
             type: "POST",
@@ -284,7 +286,7 @@ $(function () {
         location.href = '/alink-hq/project/transferPage?ids=' + ids;
     })
     //删除多个弹框
-    $('#delete-project').click(function () {
+    $('#delete-pop').click(function () {
         $('tbody tr td.checkbox input').each(function () {
             var checked = $(this).prop('checked');
             if (checked) {
@@ -298,7 +300,7 @@ $(function () {
             }
         })
         if(deleteArray.length!=0){
-            var selector=$('div[openContent="delete-project"]');
+            var selector=$('div[openContent="delete-pop"]');
             selector.addClass('active');
             adjust(selector)
             showOverlay()
@@ -325,7 +327,7 @@ $(function () {
     //取消按钮
     $('.pop-btn .reduce').click(function () {
         $('div[openContent="reset-name"]').removeClass('active');
-        $('div[openContent="delete-project"]').removeClass('active');
+        $('div[openContent="delete-pop"]').removeClass('active');
         hideOverlay()
         deleteArray= [];
     })

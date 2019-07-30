@@ -46,22 +46,22 @@ $(function() {
         ids.push(id);
         lname = $(this).parent().parent().parent().siblings('td.lname').find('a').text();
         mname = $(this).parent().parent().parent().siblings('td.mname').text();
-        var selector = $('div[openContent="delete-mesh"]');
+        var selector = $('div[openContent="delete-pop"]');
         selector.addClass('active');
         adjust(selector) ;
         showOverlay() ;
         $('.showList').hide();
-        $('div[openContent="delete-mesh"] .reset-pwd p').text('您确定要删除' + lname + '吗？');
-        $('div[openContent="delete-mesh"] .reset-pwd-hint').text('删除该灯将会退出' + mname + '网络，请慎重！');
+        $('div[openContent="delete-pop"] .reset-pwd p').text('您确定要删除' + lname + '吗？');
+        $('div[openContent="delete-pop"] .reset-pwd-hint').text('删除该灯将会退出' + mname + '网络，请慎重！');
     });
-    $('div[openContent="delete-mesh"] button.yes').click(function() {
+    $('div[openContent="delete-pop"] button.yes').click(function() {
         if (ids) {
             location.href = "/alink-hq/light/delete?mid=" + $("#mid").val() + "&ids=" + ids;
             ids = []
         }
     });
-    $('div[openContent="delete-mesh"] button.reduce').click(function() {
-        var selector = $('div[openContent="delete-mesh"]');
+    $('div[openContent="delete-pop"] button.reduce').click(function() {
+        var selector = $('div[openContent="delete-pop"]');
         selector.removeClass('active') ;
         hideOverlay();
     });
@@ -72,7 +72,7 @@ $(function() {
         });
         ids = idss;
         if (ids.length > 0) {
-            var selector = $('div[openContent="delete-mesh"]');
+            var selector = $('div[openContent="delete-pop"]');
             selector.addClass('active');
             adjust(selector) ;
             showOverlay();

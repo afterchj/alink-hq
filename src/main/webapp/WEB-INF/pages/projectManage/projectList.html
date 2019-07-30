@@ -132,7 +132,7 @@
                                 <img  shiro:lacksPermission ="renameProject" src="/alink-hq/static/img/un-rename.png" alt="" class="pointer  unclick" th:title="无法操作">
                                 <img shiro:hasPermission ="moveProject" src="/alink-hq/static/img/exchange.png" alt="" class="center-img pointer exchange-project " th:title="移交项目">
                                 <img  shiro:lacksPermission ="moveProject" src="/alink-hq/static/img/un-exchange.png" alt="" class="center-img pointer  unclick" th:title="无法操作">
-                                <img  shiro:hasPermission ="deleteProject" src="/alink-hq/static/img/delete.png" alt="" class="pointer delete-project" th:title="删除">
+                                <img  shiro:hasPermission ="deleteProject" src="/alink-hq/static/img/delete.png" alt="" class="pointer delete-pop" th:title="删除">
                                 <img shiro:lacksPermission ="deleteProject" src="/alink-hq/static/img/un-delete.png" alt="" class="pointer   unclick" th:title="无法操作">
                             </td>
                         </tr>
@@ -153,8 +153,10 @@
                                       id="transfer-project">移交</span>
                             </span>
                             <span>
-                                <span  shiro:lacksPermission ="deleteProject" class="skipPageBtn  moment active unclick1" id="delete-project">删除</span>
-                                <span shiro:hasPermission ="deleteProject" class="skipPageBtn pointer moment" onmousedown="deleteBtnMouseDown()" onmouseup="deleteBtnMouseUp()" id="delete-project">删除</span>
+                                <span  shiro:lacksPermission ="deleteProject" class="skipPageBtn  moment active unclick1" id="delete-pop" style="    width: 16px;
+    height: 16px;">删除</span>
+                                <span shiro:hasPermission ="deleteProject" class="skipPageBtn pointer moment" onmousedown="deleteBtnMouseDown()" onmouseup="deleteBtnMouseUp()" id="delete-pop"style="    width: 16px;
+    height: 16px;" >删除</span>
                             </span>
                                 </div>
                                 <div class="f-r page-right">
@@ -240,40 +242,42 @@
     </div>
 </div>
 <!-- 重命名弹框 -->
-<div class="confirm-on-off pop-iframe  " openContent="reset-name">
-    <div class="confirm-on-off-nav p-r pop-nav">
-        重命名
-    </div>
-    <div class="pop-content">
-        <div class="newName">
-            <p class="rename-hint"></p>
-            <label for="rename">新名称</label>
-            <input type="text" placeholder="请输入（2-16位汉字、字母、数字）" id="rename" onkeyup="nameKeyUp()" maxlength="16"/>
-        </div>
-        <div class="pop-btn">
-            <button class="reduce">取消</button>
-            <button class="yes">确定</button>
-        </div>
-    </div>
-</div>
+<div th:replace="pop/reset::reset-name"></div>
+<!--<div class="confirm-on-off pop-iframe  " openContent="reset-name">-->
+    <!--<div class="confirm-on-off-nav p-r pop-nav">-->
+        <!--重命名-->
+    <!--</div>-->
+    <!--<div class="pop-content">-->
+        <!--<div class="newName">-->
+            <!--<p class="rename-hint"></p>-->
+            <!--<label for="rename">新名称</label>-->
+            <!--<input type="text" placeholder="请输入（2-16位汉字、字母、数字）" id="rename" onkeyup="nameKeyUp()" maxlength="16"/>-->
+        <!--</div>-->
+        <!--<div class="pop-btn">-->
+            <!--<button class="reduce">取消</button>-->
+            <!--<button class="yes">确定</button>-->
+        <!--</div>-->
+    <!--</div>-->
+<!--</div>-->
 <!-- 删除账户 -->
-<div class="pop-iframe" openContent="delete-project">
-    <div class=" p-r pop-nav">
-        温馨提示
-    </div>
-    <div class="pop-content">
+<div th:replace="pop/delete::delete-pop"></div>
+<!--<div class="pop-iframe" openContent="delete-pop">-->
+    <!--<div class=" p-r pop-nav">-->
+        <!--温馨提示-->
+    <!--</div>-->
+    <!--<div class="pop-content">-->
 
-        <div class="reset-pwd">
-            <i class="fa fa-exclamation-circle fa-3x" aria-hidden="true" style="display: block;color:#00A0E9;"></i>
-            <p>您确定要删除所选的项目吗？</p>
-        </div>
-        <div class="reset-pwd-hint">（删除后项目中所有信息将无法恢复，请慎重！）</div>
-        <div class="pop-btn">
-            <button class="reduce">取消</button>
-            <button class="yes">确定</button>
-        </div>
-    </div>
-</div>
+        <!--<div class="reset-pwd">-->
+            <!--<i class="fa fa-exclamation-circle fa-3x" aria-hidden="true" style="display: block;color:#00A0E9;"></i>-->
+            <!--<p>您确定要删除所选的项目吗？</p>-->
+        <!--</div>-->
+        <!--<div class="reset-pwd-hint">（删除后项目中所有信息将无法恢复，请慎重！）</div>-->
+        <!--<div class="pop-btn">-->
+            <!--<button class="reduce">取消</button>-->
+            <!--<button class="yes">确定</button>-->
+        <!--</div>-->
+    <!--</div>-->
+<!--</div>-->
 <div class="hide-iframe "></div>
 
 <script src="/alink-hq/static/js/jquery.min.js"></script>
