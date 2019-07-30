@@ -32,7 +32,7 @@ $(function () {
     });
     var ids;
     $('.singleDel').click(function () {
-        ids = $(this).parent().siblings('.checkbox').find('input').val();
+        ids =  $(this).attr("alt");
         var selector = $('div[openContent="delete-mesh"]');
         selector.addClass('active');
         adjust(selector)
