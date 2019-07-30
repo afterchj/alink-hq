@@ -11,12 +11,16 @@ $(function() {
         if (str == '') {
             $(this).siblings('.memo-edit-has').find('.memo-content').text('');
             $('table tr>td:last-child').removeClass('active');
-            $('div[openContent="memo-edit"]').addClass('active');
-            $('.hide-iframe').addClass('active');
-            $('.hide-iframe').css({
-                'width': width,
-                'height': height
-            }) 
+            // $('div[openContent="memo-edit"]').addClass('active');
+            // $('.hide-iframe').addClass('active');
+            // $('.hide-iframe').css({
+            //     'width': width,
+            //     'height': height
+            // })
+            var selector = $('div[openContent="memo-edit"]');
+            selector.addClass('active');
+            adjust(selector);
+            showOverlay();
             $(".wishContent").val(str);
             $(".wordsNum").html(str.length + '/200')
         } else {
@@ -27,24 +31,34 @@ $(function() {
     $('.meno-nav img').click(function(event) {
         event.stopPropagation();
         str = $(this).parent().siblings('.memo-content').text();
-        $('div[openContent="memo-edit"]').addClass('active');
-        $('.hide-iframe').addClass('active');
-        $('.hide-iframe').css({
-            'width': width,
-            'height': height
-        }) 
+        // $('div[openContent="memo-edit"]').addClass('active');
+        // $('.hide-iframe').addClass('active');
+        // $('.hide-iframe').css({
+        //     'width': width,
+        //     'height': height
+        // })
+        var selector = $('div[openContent="memo-edit"]');
+        selector.addClass('active');
+        adjust(selector);
+        showOverlay();
         $(".wishContent").val(str);
         $(".wordsNum").html(str.length + '/200')
     }) 
     $('div[openContent="memo-edit"] button.reduce').click(function(event) {
         event.stopPropagation();
-        $('div[openContent="memo-edit"]').removeClass('active');
-        $('.hide-iframe').removeClass('active')
+        var selector = $('div[openContent="memo-edit"]');
+        selector.removeClass('active');
+        hideOverlay();
+        // $('div[openContent="memo-edit"]').removeClass('active');
+        // $('.hide-iframe').removeClass('active');
     }) 
     $('div[openContent="memo-edit"] button.yes').click(function(event) {
         event.stopPropagation();
-        $('div[openContent="memo-edit"]').removeClass('active');
-        $('.hide-iframe').removeClass('active');
+        // $('div[openContent="memo-edit"]').removeClass('active');
+        // $('.hide-iframe').removeClass('active');
+        var selector = $('div[openContent="memo-edit"]');
+        selector.removeClass('active');
+        hideOverlay();
         str = $(".wishContent").val();
         location.href = "/alink-hq/cooperate/saveUpdate?id=" + companyId + '&other=' + str
     }) 
@@ -52,12 +66,16 @@ $(function() {
         $('.memo-edit-has').parent('td').removeClass('active')
     }) 
     $('.off-or-on-coo').click(function() {
-        $('div[openContent="start-use"]').addClass('active');
-        $('.hide-iframe').addClass('active');
-        $('.hide-iframe').css({
-            'width': width,
-            'height': height
-        })
+        // $('div[openContent="start-use"]').addClass('active');
+        // $('.hide-iframe').addClass('active');
+        // $('.hide-iframe').css({
+        //     'width': width,
+        //     'height': height
+        // })
+        var selector = $('div[openContent="start-use"]');
+        selector.addClass('active');
+        adjust(selector);
+        showOverlay();
         var companyName = $(this).parent().siblings('.coo-name').text();
         status = parseInt($(this).attr('alt'));
         companyId = parseInt($(this).parent().siblings('.coo-name').find('a').attr('alt'));
@@ -69,27 +87,37 @@ $(function() {
         }
     }) 
     $('div[openContent="start-use"] button.reduce').click(function() {
-        $('div[openContent="start-use"]').removeClass('active');
-        $('.hide-iframe').removeClass('active')
+        // $('div[openContent="start-use"]').removeClass('active');
+        // $('.hide-iframe').removeClass('active')
+        var selector = $('div[openContent="start-use"]');
+        selector.removeClass('active');
+        hideOverlay();
     }) 
     $('div[openContent="start-use"] button.yes').click(function() {
-        $('div[openContent="start-use"]').removeClass('active');
-        $('.hide-iframe').removeClass('active');
+        // $('div[openContent="start-use"]').removeClass('active');
+        // $('.hide-iframe').removeClass('active');
+        var selector = $('div[openContent="start-use"]');
+        selector.removeClass('active');
+        hideOverlay();
         location.href = "/alink-hq/cooperate/saveUpdate?id=" + companyId + '&status=' + status
     }) 
     $('.delete-project').click(function() {
         companyId = $(this).attr("alt");
-        $('div[openContent="delete-project"]').addClass('active');
-        $('.hide-iframe').addClass('active');
-        $('.hide-iframe').css({
-            'width': width,
-            'height': height
-        }) 
+        // $('div[openContent="delete-project"]').addClass('active');
+        // $('.hide-iframe').addClass('active');
+        // $('.hide-iframe').css({
+        //     'width': width,
+        //     'height': height
+        // })
+        var selector = $('div[openContent="delete-project"]');
+        selector.addClass('active');
+        adjust(selector);
+        showOverlay();
         var companyName = $(this).parent().siblings('.coo-name').text();
         $.get("/alink-hq/cooperate/getCount?id=" + companyId, function(result) {
             str = result;
             if (result == 'ok') {
-                $('div[openContent="delete-project"] .reset-pwd').text('您确定要删除' + companyName + '信息？')
+                $('div[openContent="delete-project"] .reset-pwd p').text('您确定要删除' + companyName + '信息？')
             } else {
                 $('div[openContent="delete-project"] .reset-pwd').text('您无法删除' + companyName + '信息');
                 $('div[openContent="delete-project"] .reset-pwd-hint').text('请将其名下所有项目进行移交')
@@ -97,12 +125,18 @@ $(function() {
         })
     });
     $('div[openContent="delete-project"] button.reduce').click(function() {
-        $('div[openContent="delete-project"]').removeClass('active');
-        $('.hide-iframe').removeClass('active')
+        // $('div[openContent="delete-project"]').removeClass('active');
+        // $('.hide-iframe').removeClass('active');
+        var selector = $('div[openContent="delete-project"]');
+        selector.removeClass('active');
+        hideOverlay();
     });
     $('div[openContent="delete-project"] button.yes').click(function() {
-        $('div[openContent="delete-project"]').removeClass('active');
-        $('.hide-iframe').removeClass('active');
+        // $('div[openContent="delete-project"]').removeClass('active');
+        // $('.hide-iframe').removeClass('active');
+        var selector = $('div[openContent="delete-project"]');
+        selector.removeClass('active');
+        hideOverlay();
         if (str == 'ok') {
             location.href = "/alink-hq/cooperate/delete?id=" + companyId
         }
