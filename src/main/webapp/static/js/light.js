@@ -96,13 +96,17 @@ $(function() {
                 }
             }
         }
-        if (isTrue) {
+        console.log('pidArr',pidArr);
+        var result=isAllEqual(pidArr);
+        console.log('result',result);
+        if (isTrue && result) {
             if (idss.length > 0) {
                 location.href = "/alink-hq/light/move?mid=" + $("#mid").val() + "&ids=" + idss
             }
         } else {
             var selector = $('div[openContent="exchange"]');
             selector.addClass('active');
+            $('div[openContent="exchange"] .reset-pwd p').text('不同区域下的组不可进行移动!');
             adjust(selector) ;
             showOverlay();
             $('.showList').hide();

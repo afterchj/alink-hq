@@ -2,7 +2,7 @@
 .nav-top {
     height: 75px;
     line-height: 75px;
-    padding: 0 50px;
+    padding: 0 20px;
     color: #fff;
 }
 
@@ -63,7 +63,7 @@
 
 .ad-nav span {
     display: inline-block;
-    font-size: 15px;
+
 }
 
 .ad-nav span.nav-img {

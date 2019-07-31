@@ -90,17 +90,21 @@ $(function() {
             for (var i = 0; i < meshArr.length; i++) {
                 if (meshArr.indexOf(meshArr[i]) != 0) {
                     isTrue = false;
-                    break
+                    break;
                 }
             }
         }
-        if (isTrue) {
+        console.log('idss',idss);
+        var result=isAllEqual(idss);
+        console.log('result',result);
+        if (result && isTrue) {
             if (idss.length > 0) {
                 location.href = "/alink-hq/group/move?mid=" + $("#mid").val() + "&ids=" + idss
             }
         } else {
             var selector = $('div[openContent="exchange"]');
             selector.addClass('active');
+            $('div[openContent="exchange"] .reset-pwd p').text('不同账号下的组不可进行移动!');
             adjust(selector)
             showOverlay()
         }

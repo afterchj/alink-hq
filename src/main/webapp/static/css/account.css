@@ -18,7 +18,7 @@
 }
 #account .a-content>div{
     padding: 40px 0;
-    border-bottom: 1px solid #bbb;
+    border-bottom: 1px solid #ddd;
     white-space: nowrap;
 }
 #account .a-content>div:nth-child(3),#account .a-content>div:nth-child(4){
@@ -45,26 +45,31 @@
 #account .a-content>div>span {
     display: inline-block;
     vertical-align: middle;
-    transform: scale(1,.95);
+    color: #696969;
+    /* transform: scale(1,.95); */
+    font-size: 15px;
+}
+#account .a-content>div>span a{
+    font-size: 15px;
 }
 #account .a-content>div>span ul {
     display: inline-block;
     list-style:disc;
 }
-#account .a-content>div>span a{
-    color: #3598db;
-}
-#account .a-content>div>span a:hover{
-    color: #003e68;
-    border-bottom: 1px solid #003e68;
-}
+
+/*#account .a-content>div>span a:hover{*/
+    /*color: #003e68;*/
+    /*border-bottom: 1px solid #003e68;*/
+/*}*/
 #account .a-content>div>span ul li{
     font-size: 14px;
-    color: #666;
+    color: #999;
     list-style-type: disc;
     /* line-height: 1; */
     margin: 10px 0;
-    transform: scale(1,.95);
+}
+#account .a-content>div>span:first-child{
+    box-sizing: content-box;
 }
 i.dot{
     display: inline-block;
@@ -129,9 +134,7 @@ p.phone-hint.active,p.use-hint2.active,p.email-hint.active,p.pwd-hint.active,p.u
     text-align: right;
     margin-right: 20px;
 }
-#changePassword form>div,#bindPhone form>div,#fillUsername form>div,#bindEmail form>div{
-    /* margin-bottom: 35px; */
-}
+
 #changePassword form button,#bindPhone form button,#fillUsername form button,#bindEmail form button{
     height: 38px;
     font-size: 17px;
@@ -163,4 +166,28 @@ p.phone-hint.active,p.use-hint2.active,p.email-hint.active,p.pwd-hint.active,p.u
 #account .icon img{
     width:26px;
     height: 26px;
+}
+.account-list>.f-l{
+    width: 20%;
+    height: 80px;
+    line-height: 80px;
+    font-size: 15px;
+    color: #555;
+}
+.account-list{
+    border-bottom: 1px solid #ccc;
+}
+.account-list>.f-l a{
+    font-size: 15px;
+}
+.account-list>.f-l:first-child{
+    padding-left: 30px;
+}
+.account-ul{
+    margin: 0 80px;
+}
+.account-list img{
+    vertical-align: middle;
+    width: 23px;
+    height: 23px;
 }
