@@ -112,7 +112,7 @@ $(function () {
     $('div[openContent="reset-pwd"] button.reduce').click(function () {
         var selector= $('div[openContent="reset-pwd"]');
         selector.removeClass('active')
-        hideOverlay()
+        hideOverlay();
     })
     $('div[openContent="new-pwd"] button.reduce').click(function () {
         $('div[openContent="new-pwd"]').removeClass('active');
@@ -126,7 +126,7 @@ $(function () {
         $('#preload-anim .title').text('密码重置成功！');
         setTimeout(function () {
             $('#preload-anim').removeClass('active');
-        }, 1500);
+        }, 500);
         hideOverlay();
     })
 
