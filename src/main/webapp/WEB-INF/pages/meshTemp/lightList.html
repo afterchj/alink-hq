@@ -155,12 +155,12 @@
                                           th:text="${light.x}-532+'(RGB调光)'"></span>
                                     <span th:if="${light.x} != 'null' and ${light.x} >= 1786 and ${light.x} <= 1899"
                                           th:text="${light.x}-1687+'(RGB调光)'"></span>
-                                    <span th:if="${light.x==50}" th:text="50"></span>
+                                    <span th:if="${light.x}==50" th:text="50"></span>
                                     <span>,&nbsp;&nbsp;</span>
                                     <span th:if="${light.y}=='null' or ${light.y}<0" th:text="${light.y}"></span>
                                     <span th:if="${light.y}!='null' and ${light.y}!=50 and ${light.y}>=0"
                                           th:text="100-${light.y}*5+'%'"></span>
-                                    <span th:if="${light.y==50}" th:text="50"></span>
+                                    <span th:if="${light.y}==50" th:text="50"></span>
                                 </td>
                                 <td th:switch="${light.off}">
                                     <span th:case="1">开</span>
