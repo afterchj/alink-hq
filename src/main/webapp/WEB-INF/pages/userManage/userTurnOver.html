@@ -60,8 +60,7 @@
                                     <label for=""><span style="">*</span>选择移交到的公司：</label>
                                     <select name="transfer-company" id="transfer-company" class="pointer">
                                         <option value="">请选择公司</option>
-                                        <option th:each="firm:${firmList}" th:value="${firm.id}"
-                                                th:text="${firm.coname }"></option>
+                                        <option th:each="firm:${firmList}" th:value="${firm.id}" th:text="${firm.coname }"></option>
                                     </select>
                                 </div>
                                 <div class="attention">
@@ -84,36 +83,35 @@
         </div>
     </div>
     <!--重置密码 -->
+    <!--<div class="reset-passwords pop-iframe" openContent="reset-passwords">-->
+        <!--<div class="reset-passwords-nav p-r pop-nav">-->
+            <!--新密码-->
+        <!--</div>-->
+        <!--<div class="reset-passwords-content pop-content">-->
+            <!--<form action="">-->
+                <!--<div class="main-part">-->
+                    <!--<div class="account-part">-->
+                        <!--<span class="t-title t-account">账&nbsp;&nbsp;&nbsp;号：</span>-->
+                        <!--<span class="t-content t-account-result"></span>-->
+                    <!--</div>-->
+                    <!--<div class="pwd-part">-->
+                        <!--<span class="t-title t-pwd">新密码：</span>-->
+                        <!--<span class="t-content t-pwd-result"></span>-->
+                    <!--</div>-->
+                <!--</div>-->
 
-    <div class="reset-passwords pop-iframe" openContent="">
-        <div class="reset-passwords-nav p-r pop-nav">
-            新密码
-        </div>
-        <div class="reset-passwords-content pop-content">
-            <form action="">
-                <div class="main-part">
-                    <div class="account-part">
-                        <span class="t-title t-account">账&nbsp;&nbsp;&nbsp;号：</span>
-                        <span class="t-content t-account-result"></span>
-                    </div>
-                    <div class="pwd-part">
-                        <span class="t-title t-pwd">新密码：</span>
-                        <span class="t-content t-pwd-result"></span>
-                    </div>
-                </div>
-
-                <div class="pop-btn clearfix">
-                    <div class="f-l pop-hint">请牢记新密码，关闭后将无法展示</div>
-                    <div class="f-r">
-                        <button class="reduce" type="button">取消</button>
-                        <button class="yes" type="button">确定</button>
-                    </div>
-                </div>
-            </form>
-        </div>
-    </div>
+                <!--<div class="pop-btn clearfix">-->
+                    <!--<div class="f-l pop-hint">请牢记新密码，关闭后将无法展示</div>-->
+                    <!--<div class="f-r">-->
+                        <!--<button class="reduce" type="button">取消</button>-->
+                        <!--<button class="yes" type="button">确定</button>-->
+                    <!--</div>-->
+                <!--</div>-->
+            <!--</form>-->
+        <!--</div>-->
+    <!--</div>-->
 </div>
-<div class="success ">
+<div class="success " openContent="success">
     <div style="margin-bottom: 20px;"><img src="/alink-hq/static/img/success.png" alt=""></div>
     <div><img src="/alink-hq/static/img/sucessfont.png" alt=""></div>
 </div>
@@ -136,32 +134,46 @@
                 success: function (res) {
                     console.log(res);
                     if (res.result == '000') {
-                        $('.pop-iframe').addClass('active');
-                        var width = window.screen.scrollWidth;
-                        var height = window.screen.scrollHeight;
-                        $('.hide-iframe').addClass('active');
-                        $('.hide-iframe').css({
-                            'width': width,
-                            'height': height
-                        })
-                        var pwd = res.pwd;
-                        var account = res.account;
-                        $('.t-account-result').text(account);
-                        $('.t-pwd-result').text(pwd);
+//                        $('.pop-iframe').addClass('active');
+//                        var width = window.screen.scrollWidth;
+//                        var height = window.screen.scrollHeight;
+//                        $('.hide-iframe').addClass('active');
+//                        $('.hide-iframe').css({
+//                            'width': width,
+//                            'height': height
+//                        })
+//                        var selector = $('div[openContent="reset-passwords"]');
+//                        selector.addClass('active');
+//                        adjust(selector);
+//                        showOverlay();
+                        setTimeout(function () {
+                            var selector = $('div[openContent="success"]');
+                            selector.addClass('active');
+                            adjust(selector);
+                            showOverlay();
+                            window.location.href = '/alink-hq/account/list';
+                        }, 1000)
+//                        var pwd = res.pwd;
+//                        var account = res.account;
+//                        $('.t-account-result').text(account);
+//                        $('.t-pwd-result').text(pwd);
                     }
                 }
             });
         }
 
     })
-    $('.reset-passwords-content button.yes').click(function () {
-        $('.hide-iframe').addClass('active');
-        $('.pop-iframe').removeClass('active');
-        $('.success').addClass('active');
-        setInterval(function () {
-            window.location.href = '/alink-hq/account/list';
-        }, 1000)
-    })
+//    $('.reset-passwords-content button.yes').click(function () {
+//        var selector = $('div[openContent="reset-passwords"]');
+//        selector.removeClass('active');
+//        hideOverlay();
+//        window.location.href = '/alink-hq/account/list';
+//        setTimeout(function () {
+//            var selector = $('div[openContent="success"]');
+//            selector.addClass('active');
+//            window.location.href = '/alink-hq/account/list';
+//        }, 1000)
+//    })
 
     //监听公司选择
     $('#transfer-company').change(function () {
@@ -173,23 +185,28 @@
         }
     })
 
-    function hide() {
-        $('.hide-iframe').removeClass('active');
-        $('.pop-iframe').removeClass('active');
-    }
+//    function hide() {
+//        $('.hide-iframe').removeClass('active');
+//        $('.pop-iframe').removeClass('active');
+//    }
 
-    $('.close').click(function () {
-        hide();
-    })
-    // 点击取消时
-    $('.pop-content  .pop-btn .reduce').click(function () {
-        hide();
-        $(this).parents('.pop-iframe').removeClass('active');
-    })
-    $(function () {
-        var height = $(document).height();
-        $('.main-left').css('height', height);
-    })
+//    $('.close').click(function () {
+//        var selector = $('div[openContent="reset-passwords]');
+//        selector.removeClass('active');
+//        hideOverlay();
+//    })
+//    // 点击取消时
+//    $('.pop-content  .pop-btn .reduce').click(function () {
+////        hide();
+////        $(this).parents('.pop-iframe').removeClass('active');
+//        var selector = $('div[openContent="reset-passwords"]');
+//        selector.removeClass('active');
+//        hideOverlay();
+//    })
+//    $(function () {
+//        var height = $(document).height();
+//        $('.main-left').css('height', height);
+//    })
 </script>
 </body>
 

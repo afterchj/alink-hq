@@ -72,7 +72,7 @@ $(function() {
             var selector = $('div[openContent="delete-pop"]');
             selector.addClass('active');
             $('div[openContent="delete-pop"] .reset-pwd p').text('您确定要删除所选的组吗？');
-            $('div[openContent="delete-pop"] .reset-pwd-hint').text('删除后所选组所有的灯将会进入所属网络未分组中请慎重！');
+            $('div[openContent="delete-pop"] .reset-pwd-hint').text('删除后，所选组中所有信息将会被删除，请慎重！');
             adjust(selector);
             showOverlay();
         }
