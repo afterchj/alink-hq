@@ -37,30 +37,42 @@
                     <!--<img src="/alink-hq/static/img/go-back.png" alt="" id="clickReturn">-->
                 </div>
             </div>
-            <div id="bindPhone">
-                <div class="b-bindPhone">
-                    <div class="b-nav">
+            <div id="bindPhone" class=" table-content-list detail transfer">
+                <div class="p-detail">
+                    <div class="p-nav">
                         绑定手机号
                     </div>
-                    <div class="b-content ">
+                    <div class="p-content p-r ">
                         <form id="mobileForm" action="#" onsubmit="return false" method="post">
-                            <div style="margin-bottom:10px;">
-                                <p class="phone-hint" style="height: 35px;"></p>
-                                <label for="">手机号：</label>
-                                <input type="text" placeholder="请输入手机号" id="phone" name="mobile">
-                            </div>
-                            <div class="verification-code">
-                                <p class="code-hint" style="height: 35px;"></p>
-                                <label for="">验证码：</label>
-                                <input type="text" placeholder="请输入验证码" id="code" name="code">
-                                <button type="button" class="security-code" id="codeSubmit">获取验证码</button>
-                            </div>
-                            <!--<input type="hidden" th:value="${account}" id="account" name="account" id="account_hidden"-->
-                                   <!--class="account"/>-->
-                            <input type="hidden" th:value="${flag}" id="flag" name="flag"/>
-                            <div class="submit-btn">
-                                <button type="submit" id="fillSubmit">立即绑定</button>
-                            </div>
+                            <fieldset>
+                                <div class="form-row">
+                                    <div class="field-label">
+                                        <!--<p class="phone-hint" style="height: 35px;"></p>-->
+                                        <label for="">手机号：</label>
+                                    </div>
+                                    <div class="field-widget p-r">
+                                        <p class="p-a verify "></p>
+                                        <input type="text" placeholder="请输入手机号" id="phone" name="mobile">
+                                    </div>
+                                </div>
+                                <div class="verification-code form-row">
+                                    <div class="field-label">
+                                        <!--<p class="code-hint" style="height: 35px;"></p>-->
+                                        <label for="">验证码：</label>
+                                    </div>
+                                    <div class="field-widget p-r" style="    width: calc(100% - 320px);">
+                                        <p class="p-a verify "></p>
+                                        <input type="text" placeholder="请输入验证码" id="code" name="code" style="width: 60%;">
+                                        <button type="button" class="security-code" id="codeSubmit">获取验证码</button>
+                                    </div>
+                                </div>
+                                <!--<input type="hidden" th:value="${account}" id="account" name="account" id="account_hidden"-->
+                                <!--class="account"/>-->
+                                <input type="hidden" th:value="${flag}" id="flag" name="flag"/>
+                                <div class="submit-btn form-row">
+                                    <button type="submit" id="fillSubmit">立即绑定</button>
+                                </div>
+                            </fieldset>
                         </form>
                     </div>
                 </div>
