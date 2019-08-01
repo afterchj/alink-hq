@@ -137,6 +137,7 @@ public class MainTest {
 
     @Test
     public void test() {
+        System.out.println("http://uichange.com/file/ota/GY_USB_Dongle_v1.4.6.ota.bin".length());
     }
 
     public static void main(String[] args) {

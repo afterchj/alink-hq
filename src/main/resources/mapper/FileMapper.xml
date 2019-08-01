@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.tpadsz.after.dao.FileDao">
+
+    <parameterMap id="fileMapper" type="map">
+        <parameter property="id" mode="IN"/>
+        <parameter property="otaId" mode="IN"/>
+        <parameter property="otaVersion" mode="IN"/>
+        <parameter property="otaName" mode="IN"/>
+        <parameter property="otaDesc" mode="IN"/>
+        <parameter property="otaPath" mode="IN"/>
+        <parameter property="result" mode="OUT" jdbcType="INTEGER"/>
+    </parameterMap>
+
+    <sql id="Base_Column_List">
+		id,
+        ota_id otaId,
+        ota_name otaName,
+        ota_desc otaDesc,
+        IFNULL(ota_version,'') otaVersion,
+        IFNULL(ota_path,'') otaPath,
+        create_date createDate,
+        update_date updateDate
+	</sql>
+
+    <select id="getByMap" resultType="map" parameterType="SearchDict">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM f_ota_file
+        WHERE 1=1
+        <if test="otaId!=null and otaId!=''">
+            AND ota_id LIKE CONCAT('%',#{otaId},'%')
+        </if>
+        <if test="otaName!=null">
+            AND ota_name LIKE CONCAT('%',#{otaName},'%')
+        </if>
+        ORDER BY update_date DESC
+    </select>
+
+    <select id="getFileInfo" resultType="FileDTO" parameterType="int">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM f_ota_file WHERE id=#{id}
+    </select>
+
+    <insert id="save" parameterType="FileDTO">
+       INSERT INTO f_ota_file(ota_name,ota_id,ota_desc,create_date,update_date) VALUES(#{otaName},#{otaId},#{otaDesc},now(),now());
+   </insert>
+
+
+    <select id="getCount" resultType="int" parameterType="int">
+        SELECT COUNT(0)
+        FROM f_firm f
+        INNER JOIN f_user_customer c ON c.fid = f.id
+        INNER JOIN f_project p ON p.uid=c.uid
+        WHERE f.id=#{id}
+    </select>
+
+    <delete id="deleteCooperationById" parameterType="int">
+        DELETE FROM f_firm WHERE id=#{id}
+    </delete>
+
+    <update id="saveUpdate" parameterType="FileDTO">
+        UPDATE f_ota_file
+        <set>
+            <if test="otaId!=null and otaId!=''">
+                ota_id=#{otaId},
+            </if>
+            <if test="otaName!=null and otaName!=''">
+                ota_name=#{otaName},
+            </if>
+            <if test="otaPath!=null and otaPath!=''">
+                ota_path=#{otaPath},
+            </if>
+            <if test="otaDesc!=null and otaDesc!=''">
+                ota_desc=#{otaDesc},
+            </if>
+            update_date=now()
+        </set>
+        WHERE id=#{id}
+    </update>
+
+    <select id="saveFile" parameterMap="fileMapper" resultType="map" statementType="CALLABLE">
+        CALL record_file_history(?,?,?,?,?,?,?)
+    </select>
+</mapper>

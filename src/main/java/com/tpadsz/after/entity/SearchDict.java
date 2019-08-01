@@ -25,6 +25,8 @@ public class SearchDict {
     private Integer meshId;
     private Integer projectId=0;
     private Integer placeId;
+    private String otaId;
+    private String otaName;
     private Integer pageNum = 1;
     private Integer pageSize = 10;
 
@@ -186,6 +188,22 @@ public class SearchDict {
 
     public void setPlaceId(Integer placeId) {
         this.placeId = placeId;
+    }
+
+    public String getOtaId() {
+        return otaId;
+    }
+
+    public void setOtaId(String otaId) {
+        this.otaId = otaId;
+    }
+
+    public String getOtaName() {
+        return otaName;
+    }
+
+    public void setOtaName(String otaName) {
+        this.otaName = otaName;
     }
 
     public Integer getPageNum() {

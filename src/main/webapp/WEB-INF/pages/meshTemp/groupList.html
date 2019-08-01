@@ -46,6 +46,7 @@
             <div id="meshList" class="table-content-list">
                 <form class="clearfix" th:action="@{/group/list}" method="post">
                     <input type="hidden" id="uid" name="uid" th:value="${dict.uid}">
+                    <input type="hidden" id="projectId" name="projectId" th:value="${dict.projectId}">
                     <input type="hidden" id="mid" name="mid" th:value="${dict.mid}">
                     <input type="hidden" id="pageSize" th:value="${dict.pageSize}">
                     <div class="search-condition temp">
