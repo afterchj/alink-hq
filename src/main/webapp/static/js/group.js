@@ -72,7 +72,7 @@ $(function() {
             var selector = $('div[openContent="delete-pop"]');
             selector.addClass('active');
             $('div[openContent="delete-pop"] .reset-pwd p').text('您确定要删除所选的组吗？');
-            $('div[openContent="delete-pop"] .reset-pwd-hint').text('删除后所选组所有的灯将会进入所属网络未分组中请慎重！');
+            $('div[openContent="delete-pop"] .reset-pwd-hint').text('删除后，所选组中所有信息将会被删除，请慎重！');
             adjust(selector);
             showOverlay();
         }
@@ -90,17 +90,21 @@ $(function() {
             for (var i = 0; i < meshArr.length; i++) {
                 if (meshArr.indexOf(meshArr[i]) != 0) {
                     isTrue = false;
-                    break
+                    break;
                 }
             }
         }
-        if (isTrue) {
+        console.log('idss',idss);
+        var result=isAllEqual(idss);
+        console.log('result',result);
+        if (result && isTrue) {
             if (idss.length > 0) {
                 location.href = "/alink-hq/group/move?mid=" + $("#mid").val() + "&ids=" + idss
             }
         } else {
             var selector = $('div[openContent="exchange"]');
             selector.addClass('active');
+            $('div[openContent="exchange"] .reset-pwd p').text('不同账号下的组不可进行移动!');
             adjust(selector)
             showOverlay()
         }

@@ -1,16 +1,21 @@
 $(function () {
-    var header = '<div class="scene-msg timer f-l"><div class="scene-content" ><div class="scene-list clearfix"><div class="f-l"><span>场景下的区域信息</span><span>>></span></div><div class="f-l"><span>该区域下的组信息</span><span>>></span></div><div class="f-l"> <span>该组下的灯详情</span></div></div><div class="clearfix  scene-msg-list">';
+    var header = '<div class="scene-msg  timer f-l" id="time-scene"><div class="scene-content" ><div class="scene-list clearfix"><div class="f-l"><span>场景下的区域信息</span><span style="color:#999;font-weight: 300;">>></span></div><div class="f-l"><span>该区域下的组信息</span><span style="color:#999;font-weight: 300;">>></span></div><div class="f-l"> <span>该组下的灯详情</span></div></div><div class="clearfix  time-scene-msg  scene-msg-list">';
     $(".sname-a").click(function () {
         $(this).css({
-            'background':'#3598db',
-            'color':'#fff',
-            // 'padding':'5px',
-            'cursor':'pointer'
+            'cursor': 'pointer',
+            'padding': '3px 5px',
+            'background': '#45b8fd',
+            'color': '#fff',
+            'border-radius': '2px',
+            'box-shadow': '0 1px 1px 0 rgba(0,0,0,.2)',
         })
         $(this).parent().parent().parent().siblings().find('.sname-a').css({
-            'background':'#fff',
-            'color':'#3598db',
-            'cursor':'pointer'
+            'cursor': 'pointer',
+        'padding': '3px 5px',
+        'background': '#4db9ef',
+         'color': '#fff',
+        'border-radius': '2px',
+        'box-shadow': '0 1px 1px 0 rgba(0,0,0,.2)',
         })
         var sid = $(this).next().val();
         var sceneName = $(this).text();
@@ -154,6 +159,8 @@ function isEmpty(value) {
     }
 }
 $(function () {
+    // $("#timeTitle").freezeHeader({ 'height': '300px' });
+
     if ($(".time .f-l:eq(1) a").length<=0){
         // console.log("null")
         $(".time .f-l:eq(1)>span").append('<a style="pointer-events: none">查看项目详情</a>')

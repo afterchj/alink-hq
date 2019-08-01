@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="/alink-hq/static/css/leftNav.css"/>
     <link rel="stylesheet" href="/alink-hq/static/css/account.css"/>
     <link rel="stylesheet" href="/alink-hq/static/css/loding.css"/>
-    <!--<link rel="stylesheet" href="/alink-hq/static/css/projectManage.css"/>-->
+    <link rel="stylesheet" href="/alink-hq/static/css/projectManage.css"/>
     <title>我的账户</title>
 </head>
 
@@ -30,12 +30,12 @@
                     </div>
                 </div>
             </div>
-            <div id="account">
-                <div class="m-account">
-                    <div class="a-nav">
+            <div id="account" class="table-content-list detail">
+                <div class=" p-detail">
+                    <div class="p-nav">
                         我的账号
                     </div>
-                    <div class="a-content">
+                    <div class="a-content p-content">
                         <div>
                             <span class="icon" style="width: 63px;">
                                 <i class="dot-no"></i>
@@ -115,6 +115,34 @@
                             <!--</span>-->
                         </div>
                     </div>
+                    <!--<div class="p-content">-->
+                        <!--<ul class="account-ul">-->
+                            <!--<li class="clearfix account-list">-->
+                                <!--<div class="f-l">-->
+                                    <!--<img  src="/alink-hq/static/img/password1.png" alt=""/>-->
+                                <!--</div>-->
+                                <!--<div class="f-l">-->
+                                    <!--账号-->
+                                <!--</div>-->
+                                <!--<div class="f-l" th:text="${myAccount.getAccount()}"></div>-->
+                                <!--<div class="f-l"><a th:href="@{pwd}" tab="myAccount/pwd">修改密码</a></div>-->
+                            <!--</li>-->
+                            <!--<li class="clearfix account-list">-->
+                                <!--<div class="f-l">-->
+                                    <!--&lt;!&ndash;<i style="margin-right: 14px;" th:class="${myAccount.getUname()==null or #strings.isEmpty(myAccount.getUname()}? 'dot':'dot-no'"></i>&ndash;&gt;-->
+                                    <!--<img style="width: 25px;" src="/alink-hq/static/img/account1.png" alt=""/>-->
+                                <!--</div>-->
+                                <!--<div class="f-l">-->
+                                    <!--用户名-->
+                                <!--</div>-->
+                                <!--<div class="f-l" th:text="${myAccount.getUname()==null or #strings.isEmpty(myAccount.getUname())}?'未填写':${myAccount.getUname()}"></div>-->
+                                <!--<div class="f-l">-->
+                                    <!--&lt;!&ndash;<a th:if="${myAccount.getUname()==null or #strings.isEmpty(myAccount.getUname())}" th:href="@{fillUname(flag=0)}">填写用户名</a>&ndash;&gt;-->
+                                    <!--&lt;!&ndash;<a th:if="${myAccount.getUname()!=null and !#strings.isEmpty(myAccount.getUname())}" th:href="@{modifiUname(flag=1)}">修改用户名</a>&ndash;&gt;-->
+                                <!--</div>-->
+                            <!--</li>-->
+                        <!--</ul>-->
+                    <!--</div>-->
                 </div>
             </div>
         </div>
