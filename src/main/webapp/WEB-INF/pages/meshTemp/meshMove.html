@@ -8,7 +8,7 @@
     <link rel="stylesheet" th:href="@{/static/font-awesome-4.7.0/css/font-awesome.min.css}"/>
     <link rel="stylesheet" th:href="@{/static/css/base.css}">
     <link rel="stylesheet" th:href="@{/static/css/leftNav.css}">
-    <link rel="stylesheet" th:href="@{/static/css/mesh.css}">
+    <link rel="stylesheet" th:href="@{/static/css/projectManage.css}">
     <title>移交账号</title>
 </head>
 
@@ -38,38 +38,51 @@
                 </div>
             </div>
             <form th:action="@{/mesh/saveUpdate}" class="" method="post">
-                <div id="meshTurnOver" class="table-content-list">
-                    <div class="f-nav">
-                        网络移动
-                    </div>
-                    <div class="f-content scrollbar">
-                        <input type="hidden" name="ids" th:value="${ids}">
-                        <div class="accountMsg clearfix" th:each="mesh:${meshMap}">
-                            <div class="f-l mesh-name">
-                                <span th:text="${mesh.mname}"></span>
-                            </div>
-                            <div class="f-l  mesh-id">
-                                <label for="mid">网络ID：</label>
-                                <input type="text" id="mid" th:value="${mesh.mesh_id}" readonly>
-                            </div>
-                            <div class="f-l mesh-project">
-                                <label for="project">属于项目：</label>
-                                <input type="text" id="project" th:value="${mesh.name}" readonly>
-                            </div>
+                <div id="meshTurnOver" class="table-content-list detail transfer">
+                    <div class="p-detail">
+                        <div class=" p-nav">
+                            网络移动
                         </div>
-                    </div>
-                    <div class="" style="text-align: center;    margin-bottom: 30px;">
-                        <img src="/alink-hq/static/img/exchange-un.png" alt="">
-                    </div>
-                    <div class="transfer-company">
-                        <p class="trans-hint" style="margin-left:55px;"></p>
-                        <label for="pid"><span>*</span>选择移动到的项目：</label>
-                        <select name="pid" id="pid">
-                            <option value="">请选择移动到的项目</option>
-                        </select>
-                    </div>
-                    <div class="tranfer-btn">
-                        <button class="confirm-btn" type="button">确定移动</button>
+                        <div class="p-content p-r">
+                            <div class="scrollbar">
+                                <input type="hidden" name="ids" th:value="${ids}">
+                                <div class="accountMsg clearfix" th:each="mesh:${meshMap}">
+                                    <div class="f-l mesh-name">
+                                        <span th:text="${mesh.mname}"></span>
+                                    </div>
+                                    <div class="f-l  mesh-id">
+                                        <label for="mid">网络ID：</label>
+                                        <input type="text" id="mid" th:value="${mesh.mesh_id}" readonly>
+                                    </div>
+                                    <div class="f-l mesh-project">
+                                        <label for="project">属于项目：</label>
+                                        <input type="text" id="project" th:value="${mesh.name}" readonly>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="" style="    margin: 30px 0 0 10px;    text-align: center;">
+                                <img src="/alink-hq/static/img/exchange-un.png" alt="">
+                            </div>
+                            <fieldset>
+                                <div class="transfer-company  clearfix">
+                                    <div class="form-row">
+                                        <div class="field-label" style="width: 135px;">
+                                            <label for="pid"><span class="star">*</span>选择移动到的项目：</label>
+                                        </div>
+                                        <div class="field-widget p-r">
+                                            <p class="p-a verify "></p>
+                                            <select name="pid" id="pid">
+                                                <option value="">请选择移动到的项目</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tranfer-btn ">
+                                    <button class="confirm-btn" type="button">确定移动</button>
+                                </div>
+                            </fieldset>
+                        </div>
+
                     </div>
                 </div>
             </form>
@@ -108,30 +121,26 @@
         var ids = $('input[name="ids"]').val();
         console.log(ids, pid);
         if (pid == '') {
-            $('.trans-hint').text('请选择移动到的项目');
+            $('#pid').prev('p.verify').text('请选择移动到的项目');
         } else {
-            $('.trans-hint').text('');
+            $('#pid').prev('p.verify').text('');
             $.ajax({
                 type: "post",
                 url: "/alink-hq/mesh/saveUpdate",
                 data: {ids: ids, pid: pid},
                 success: function (res) {
-                    console.log(res);
                     if (res == 'ok') {
                         $('#preload-anim').addClass('active');
-                        $('.hide-iframe').addClass('active');
-                        $('#preload-anim .title').text('移交成功，正在跳转网络列表');
-                        setInterval(function () {
+                        $('#preload-anim .title').text('移动成功，正在跳转网络列表');
+                        setTimeout(function () {
                             location.href = '/alink-hq/mesh/list?uid=' + uid;
-                        }, 1000)
+                        }, 500)
                     } else {
                         $('#preload-anim').addClass('active');
-                        $('.hide-iframe').addClass('active');
                         $('#preload-anim .title').text('加载失败，请重新尝试');
-                        setInterval(function () {
+                        setTimeout(function () {
                             $('#preload-anim').removeClass('active');
-                            $('.hide-iframe').removeClass('active');
-                        }, 1000)
+                        }, 500)
                     }
                 }
             })
@@ -142,9 +151,9 @@
     $('#pid').change(function () {
         var pid = $('#pid option:selected').val();
         if (pid == '') {
-            $('.trans-hint').text('请选择移动到的项目');
+            $('#pid').prev('p.verify').text('请选择移动到的项目');
         } else {
-            $('.trans-hint').text('');
+            $('#pid').prev('p.verify').text('');
         }
     })
 </script>

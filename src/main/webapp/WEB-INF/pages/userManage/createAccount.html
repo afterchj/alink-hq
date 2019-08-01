@@ -1,16 +1,14 @@
-<!DOCTYPE html>
-<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
-
+<!doctype html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="/alink-hq/static/js/browser.js"></script>
     <link rel="stylesheet" th:href="@{/static/font-awesome-4.7.0/css/font-awesome.min.css}"/>
     <link rel="stylesheet" href="/alink-hq/static/css/loding.css"/>
     <link rel="stylesheet" href="/alink-hq/static/css/base.css"/>
     <link rel="stylesheet" href="/alink-hq/static/css/leftNav.css"/>
-    <link rel="stylesheet" href="/alink-hq/static/css/userManage.css"/>
+    <link rel="stylesheet" href="/alink-hq/static/css/projectManage.css"/>
     <title>创建账号</title>
 </head>
 
@@ -37,51 +35,66 @@
                     <!--<img src="/alink-hq/static/img/go-back.png" onClick="javascript :history.back(-1);" alt=""/>-->
                 </div>
             </div>
-            <div id="createAccount" class="table-content-list">
-                <div class="c-createAccount">
-                    <div class="c-nav">
+            <div class="table-content-list detail">
+                <div class="c-createAccount p-detail">
+                    <div class="c-nav p-nav">
                         新建账号
                     </div>
-                    <div class="c-content ">
+                    <div class="c-content p-content p-r">
                         <form>
-                            <p class="create-company-hint"></p>
-                            <div>
+                            <fieldset>
+                                <div class="form-row">
+                                    <div class="field-label">
+                                        <label for="fid">隶属公司：</label>
+                                    </div>
+                                    <div class="field-widget p-r">
+                                        <p class="create-company-hint"></p>
+                                        <p class="p-a verify"></p>
+                                        <select name="fid" id="fid" class="pointer">
+                                            <option value="">请选择公司</option>
+                                            <option th:each="firm:${firmList}" name="fid" th:value="${firm.id}"
+                                                    th:text="${firm.coname}"></option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="role-radio form-row">
+                                    <div class="field-label">
+                                        <label for="">角色：</label>
+                                    </div>
+                                    <div class="field-widget p-r">
+                                        <label shiro:hasAnyRoles="super" for="" class="l-radio" >
+                                            <!--<img src="/alink-hq/static/img/select-un.png" alt=""/>-->
+                                            <input type="radio" name="role" value="2"/>管理员
+                                        </label>
+                                        <label shiro:hasAnyRoles="super,admin" for="" class="l-radio">
+                                            <!--<img src="/alink-hq/static/img/select-un.png" alt=""/>-->
+                                            <input type="radio" name="role" value="3"/>乙方管理员
+                                        </label>
+                                        <label shiro:hasAnyRoles="super,admin,manager" for="" class="l-radio">
+                                            <!--<img src="/alink-hq/static/img/select-on.png" alt=""/>-->
+                                            <input type="radio" name="role" checked value="4"/>施工人员
+                                        </label>
+                                    </div>
+                                </div>
 
-                                <label for="fid">隶属公司：</label>
-                                <select name="fid" id="fid" class="pointer">
-                                    <option value="">请选择公司</option>
-                                    <option th:each="firm:${firmList}" name="fid" th:value="${firm.id}"
-                                            th:text="${firm.coname}"></option>
-                                </select>
-                            </div>
-                            <div class="role-radio">
-                                <label for="">角色：</label>
-                                <label shiro:hasAnyRoles="super" for="" class="l-radio">
-                                    <img src="/alink-hq/static/img/select-un.png" alt=""/>
-                                    <input type="radio" value="2"/>管理员
-                                </label>
-                                <label shiro:hasAnyRoles="super,admin" for="" class="l-radio">
-                                    <img src="/alink-hq/static/img/select-un.png" alt=""/>
-                                    <input type="radio" value="3"/>乙方管理员
-                                </label>
-                                <label shiro:hasAnyRoles="super,admin,manager" for="" class="l-radio">
-                                    <img src="/alink-hq/static/img/select-on.png" alt=""/>
-                                    <input type="radio" value="4"/>施工人员
-                                </label>
-                            </div>
-                            <p class="create-num-hint"></p>
-                            <div>
-                                <label for="">创建账号数量：</label>
-                        <span class="num clearfix">
-                            <div class="f-l reduce-num pointer">-</div>
-                            <input type="text" name="num" value="1" class="create-num">
-                            <div class="f-r add-num pointer">+</div>
-                        </span>
-                                <span class="create-account-hint">最多一次可添加100个账号</span>
-                            </div>
-                            <div class="">
-                                <button type="button" class="confirm-create" openTab="confirm-create">确定创建</button>
-                            </div>
+                                <div class="form-row p-r">
+                                    <div class="field-label">
+                                        <label for="">创建账号数量：</label>
+                                    </div>
+                                    <div class="field-widget p-r">
+                                        <p class="create-num-hint"></p>
+                                        <div class="num clearfix">
+                                            <div class="f-l reduce-num pointer">-</div>
+                                            <input type="text" name="num" value="1" class="create-num f-l" style="width: 25px;">
+                                            <div class="f-l add-num pointer">+</div>
+                                        </div>
+                                    </div>
+                                    <span class="create-account-hint p-a">最多一次可添加100个账号</span>
+                                </div>
+                                <div class="form-row">
+                                    <button type="button" class="confirm-create" openTab="confirm-create">确定创建</button>
+                                </div>
+                            </fieldset>
                         </form>
                     </div>
                 </div>
@@ -96,20 +109,20 @@
         <img src="/alink-hq/static/img/close.png" alt="" class="p-a pointer close">
     </div>
     <div class="create-content pop-content">
-        <div class="c-main">
-            <div class="c-title ">
+        <div class="c-main excel-main">
+            <div class="c-title excel-up">
                 <div class="clearfix">
                     <div class="f-l c-width one">账号</div>
                     <div class="f-l c-width two">密码</div>
                 </div>
 
             </div>
-            <div class="c-list clearfix">
+            <div class="c-list">
             </div>
         </div>
-        <a href="#" onclick="method5('d2')">Excel导出</a>
+        <a href="#" class="excel-a"  onclick="method5('d2')">EXCEL导出</a>
         <!--<a href="#" id="excel">Excel导出</a>-->
-        <p class="c-hint">注：请牢记/导出新账号密码，关闭后将无法展示。</p>
+        <p class="c-hint excel-p">注：请牢记/导出新账号密码，关闭后将无法展示。</p>
         <table id="d2" style="display:none;margin-left: 30px;">
             <thead>
             <tr>
@@ -147,18 +160,26 @@
     $('button.confirm-create').click(function () {
         var fid = $('#fid option:selected').val();
         if (fid == '') {
-            $('p.create-company-hint').text('请选择公司');
+            $('#fid').prev('.verify').text('请选择公司');
+//            $('p.create-company-hint').text('请选择公司');
         } else {
             fid = parseInt(fid);
-            $('p.create-company-hint').text();
+//            $('p.create-company-hint').text();
+            $('#fid').prev('.verify').text('');
         }
         var roleId;
         $('.role-radio .l-radio').each(function () {
-            var imgUrl = $(this).find('img').attr('src');
-            if (imgUrl == '/alink-hq/static/img/select-on.png') {
-                roleId = parseInt($(this).find('input').val());
+            var role=$(this).children('input[type=radio]');
+            console.log('role',role);
+//            var imgUrl = $(this).find('img').attr('src');
+//            if (imgUrl == '/alink-hq/static/img/select-on.png') {
+//                roleId = parseInt($(this).find('input').val());
+//            }
+            if(role.prop('checked')){
+                roleId=role.val();
             }
         })
+        console.log('roleId',roleId);
         var num = $('.create-num').val();
         if (num != '') {
             num = parseInt(num);
@@ -174,16 +195,16 @@
                 dataType: "json",
                 success: function (res) {
                     if (res.result == '000') {
-                        var selector=$('div[openContent="confirm-create"]');
+                        var selector = $('div[openContent="confirm-create"]');
                         selector.addClass('active');
                         adjust(selector);
                         showOverlay();
                         var accountList = JSON.parse(res.accountList);
-                        var maxLength = accountList.length;
-                        if (maxLength > 3) {
-                            $('.c-title .c-width.two').css('width', ' 163px');
-                            $('.confirm-create-iframe .c-main').css('width', '310px');
-                        }
+//                        var maxLength = accountList.length;
+//                        if (maxLength > 3) {
+//                            $('.c-title .c-width.two').css('width', ' 163px');
+//                            $('.confirm-create-iframe .c-main').css('width', '310px');
+//                        }
                         var arr = {};
                         for (var i = 0; i < accountList.length; i++) {
                             var account = accountList[i];
@@ -209,7 +230,7 @@
         }
     })
     $('.pop-nav .close').click(function () {
-        var selector= $('div[openContent="confirm-create"]');
+        var selector = $('div[openContent="confirm-create"]');
         selector.removeClass('active');
         hideOverlay();
         $('#preload-anim').addClass('active');
@@ -219,15 +240,15 @@
         }, 500)
     })
 
-    $('#createAccount .c-content img').click(function () {
-        var imgUrl = $(this).attr('src');
-        var isRadio = '/alink-hq/static/img/select-on.png';
-        var noRadio = '/alink-hq/static/img/select-un.png';
-        if (imgUrl == noRadio) {
-            $(this).attr('src', isRadio);
-            $(this).parent('label').siblings().find('img').attr('src', noRadio);
-        }
-    })
+//    $('#createAccount .c-content img').click(function () {
+//        var imgUrl = $(this).attr('src');
+//        var isRadio = '/alink-hq/static/img/select-on.png';
+//        var noRadio = '/alink-hq/static/img/select-un.png';
+//        if (imgUrl == noRadio) {
+//            $(this).attr('src', isRadio);
+//            $(this).parent('label').siblings().find('img').attr('src', noRadio);
+//        }
+//    })
     $(function () {
         var num = 1;
         $('.add-num').click(function () {

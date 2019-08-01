@@ -164,21 +164,24 @@
                             <thead>
                             <tr>
                                 <th class="all-checkbox">
-                                    <span style="vertical-align: sub;"><input type="checkbox" class="pointer"></span>
+                                    <!--<span style="vertical-align: sub;">-->
+                                    <input type="checkbox" id="all" class="pointer">
+                                    <!--</span>-->
                                     <span class="">全选</span>
                                 </th>
-                                <th>组名称</th>
-                                <th>隶属网络</th>
-                                <th>网络ID</th>
-                                <th>隶属区域</th>
-                                <th>灯数量</th>
-                                <th>操作</th>
+                                <th><span>组名称</span></th>
+                                <th><span>隶属项目</span></th>
+                                <th><span>隶属网络</span></th>
+                                <th><span>网络ID</span></th>
+                                <th><span>隶属区域</span></th>
+                                <th><span>灯数量</span></th>
+                                <th class="operation"><span>操作</span></th>
                             </tr>
                             </thead>
                             <tbody>
                             <tr>
                                 <td colspan="9">
-                                    <img src="/alink-hq/static/img/no-data.png" alt="">
+                                    <img th:src="@{/static/img/no-data.png}" style="width: auto;height: auto;" alt="">
                                     <p>暂无数据</p>
                                 </td>
                             </tr>
@@ -191,38 +194,40 @@
     </div>
 </div>
 <!-- 重命名弹框 -->
-<div class="confirm-on-off pop-iframe  " openContent="reset-name">
-    <div class="confirm-on-off-nav p-r pop-nav">
-        重命名
-    </div>
-    <div class="pop-content">
-        <div class="newName">
-            <p class="rename-hint"></p>
-            <label for="rename">新名称</label>
-            <input type="text" placeholder="请输入（2-16位汉字、字母、数字）" id="rename" onkeyup="nameKeyUp()" maxlength="16"/>
-        </div>
-        <div class="pop-btn">
-            <button class="reduce">取消</button>
-            <button class="yes">确定</button>
-        </div>
-    </div>
-</div>
+<div th:replace="pop/reset::reset-name"></div>
+<!--<div class="confirm-on-off pop-iframe  " openContent="reset-name">-->
+    <!--<div class="confirm-on-off-nav p-r pop-nav">-->
+        <!--重命名-->
+    <!--</div>-->
+    <!--<div class="pop-content">-->
+        <!--<div class="newName">-->
+            <!--<p class="rename-hint"></p>-->
+            <!--<label for="rename">新名称</label>-->
+            <!--<input type="text" placeholder="请输入（2-16位汉字、字母、数字）" id="rename" onkeyup="nameKeyUp()" maxlength="16"/>-->
+        <!--</div>-->
+        <!--<div class="pop-btn">-->
+            <!--<button class="reduce">取消</button>-->
+            <!--<button class="yes">确定</button>-->
+        <!--</div>-->
+    <!--</div>-->
+<!--</div>-->
 <!-- 删除账户 -->
-<div class="pop-iframe" openContent="delete-mesh">
-    <div class=" p-r pop-nav">
-        温馨提示
-    </div>
-    <div class="pop-content">
-        <div class="reset-pwd">您确定要删除所选的组吗？</div>
-        <div class="reset-pwd-hint">
-            删除后所选组所有的灯将会进入所属网络未分组中请慎重！
-        </div>
-        <div class="pop-btn">
-            <button class="reduce">取消</button>
-            <button class="yes">确定</button>
-        </div>
-    </div>
-</div>
+<div th:replace="pop/delete::delete-pop"></div>
+<!--<div class="pop-iframe" openContent="delete-pop">-->
+    <!--<div class=" p-r pop-nav">-->
+        <!--温馨提示-->
+    <!--</div>-->
+    <!--<div class="pop-content">-->
+        <!--<div class="reset-pwd">您确定要删除所选的组吗？</div>-->
+        <!--<div class="reset-pwd-hint">-->
+            <!--删除后所选组所有的灯将会进入所属网络未分组中请慎重！-->
+        <!--</div>-->
+        <!--<div class="pop-btn">-->
+            <!--<button class="reduce">取消</button>-->
+            <!--<button class="yes">确定</button>-->
+        <!--</div>-->
+    <!--</div>-->
+<!--</div>-->
 <!-- 不可移动不同网络下的组 -->
 <div class="pop-iframe " openContent="exchange">
     <div class=" p-r pop-nav">

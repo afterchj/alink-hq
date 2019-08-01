@@ -22,10 +22,7 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Created by chenhao.lu on 2019/4/8.
@@ -173,18 +170,19 @@ public class ProjectController {
     }
 
     @RequestMapping(value = "/transferPage", method = RequestMethod.GET)
-    public String transferPage(HttpSession session, String projectInfo, Model model) {
+    public String transferPage(HttpSession session, String ids, Model model) {
         User loginUser = (User) session.getAttribute("user");
         String uid = loginUser.getId();
         try {
-            String str = URLDecoder.decode(projectInfo, "utf-8");
-            List<ProjectList> projectList = JSONArray.parseArray(str, ProjectList.class);
+            String[] ids1 = ids.split(",");
+            List<String> list = new ArrayList(Arrays.asList(ids1));
+            List<Map> projectMap = projectService.selectByPid(list);
             Integer role_id = accountService.findRoleIdByUid(uid);
             List<Firm> firmList = getFirmInfo(role_id, uid);
-            model.addAttribute("projectInfo", projectInfo);
-            model.addAttribute("projectList", projectList);
+            model.addAttribute("ids", ids);
+            model.addAttribute("projectMap", projectMap);
             model.addAttribute("firmList", firmList);
-        } catch (UnsupportedEncodingException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return "projectManage/projectTurnOver";
@@ -201,25 +199,26 @@ public class ProjectController {
 
     @RequestMapping(value = "/transfer", method = RequestMethod.POST)
     @ResponseBody
-    public Map<String, String> transfer(HttpSession session, String projectInfo, String uid) {
+    public Map<String, String> transfer(HttpSession session, String idss, String uid) {
         Map<String, String> map = new HashMap<>();
-        List<ProjectList> projectList = JSONArray.parseArray(projectInfo, ProjectList.class);
+        String[] ids1 = idss.split(",");
+        List<String> list = new ArrayList(Arrays.asList(ids1));
         User loginUser = (User) session.getAttribute("user");
         String userId = loginUser.getId();
         int count = 0;
         try {
             Integer role_id = accountService.findRoleIdByUid(userId);
-            for (ProjectList project : projectList) {
+            for (String id : list) {
                 if (role_id == 1 || role_id == 2) {
-                    count = projectService.findProjectByProjectId(project.getId());
+                    count = projectService.findProjectByProjectId(Integer.parseInt(id));
                 } else if (role_id == 3) {
                     List<Integer> ids = projectService.findProjectList(userId);
-                    if (ids.contains(project.getId())) {
+                    if (ids.contains(Integer.parseInt(id))) {
                         count = 1;
                     }
                 }
                 if (count != 0) {
-                    projectService.transferProject(project.getId(), uid);
+                    projectService.transferProject(Integer.parseInt(id), uid);
                 }
             }
             map.put("result", ResultDict.SUCCESS.getCode());

@@ -8,12 +8,12 @@
     <link rel="stylesheet" href="/alink-hq/static/css/loding.css"/>
     <link rel="stylesheet" th:href="@{/static/css/base.css}">
     <link rel="stylesheet" th:href="@{/static/css/leftNav.css}">
-    <link rel="stylesheet" th:href="@{/static/css/mesh.css}">
+    <link rel="stylesheet" th:href="@{/static/css/projectManage.css}">
     <title>移交账号</title>
 </head>
 
 <body>
-<input type="hidden" th:value="${projectInfo}" id="projectInfo">
+<input type="hidden" th:value="${ids}" id="ids">
 
 <div class="c-container">
     <div th:replace="common/head::head"></div>
@@ -37,57 +37,77 @@
                     </div>
                 </div>
             </div>
-            <form class="" method="post">
-                <div id="meshTurnOver">
-                    <div class="f-nav">
-                        项目移交
-                    </div>
-                    <div class="f-content scrollbar">
-                        <div class="accountMsg clearfix" th:each="projectList:${projectList}">
-                            <div class="f-l mesh-name">
-                                <span th:text="${projectList.name}"></span>
-                            </div>
-                            <div class="f-l  mesh-id">
-                                <label for="account">施工负责人：</label>
-                                <input type="text" id="account" th:value="${projectList.account}" class="overflow"
-                                       th:title="${projectList.account}" readonly/>
-                            </div>
-                            <div class="f-l mesh-project">
-                                <label for="coname">隶属公司：</label>
-                                <input type="text" id="coname" th:value="${projectList.coname}" class="overflow"
-                                       th:title="${projectList.coname}" readonly/>
-                            </div>
+            <div class="table-content-list detail transfer">
+                <form class="" method="post">
+                    <div id="meshTurnOver" class="p-detail">
+                        <div class="f-nav p-nav">
+                            项目移交
                         </div>
-                    </div>
-                    <div class="" style="text-align: center;margin-bottom: 30px;">
-                        <img src="/alink-hq/static/img/exchange-un.png" alt="">
-                    </div>
-                    <div class="transfer-company p-r">
-                        <p class="company-hint"></p>
-                        <div style="margin-bottom: 30px;">
-                            <label for="fid"><span>*</span>隶属公司：</label>
-                            <select name="fid" id="fid" class="pointer overflow">
-                                <option value="" class="pointer overflow">请选择公司</option>
-                                <option th:each="firm:${firmList}" th:value="${firm.id}" th:text="${firm.coname }"
-                                        class="pointer overflow"></option>
-                            </select>
-                        </div>
-                        <p class="account-hint"></p>
-                        <label for="account-transfer"><span>*</span>选择移交账号：</label>
-                        <input type="text" id="account-transfer" placeholder="请选择账号" uid="" autocomplete="off"
-                               class="overflow">
-                        <span class="open-list"></span>
-                        <div id="list" class="overflow">
-                            <ul>
-                            </ul>
-                        </div>
-                    </div>
+                        <div class="p-content p-r">
+                            <div class="f-content scrollbar ">
+                                <div class="accountMsg clearfix" th:each="project:${projectMap}">
+                                    <div class="f-l mesh-name">
+                                        <span th:text="${project.name}"></span>
+                                    </div>
+                                    <div class="f-l  mesh-id">
+                                        <label for="account">施工负责人：</label>
+                                        <input type="text" id="account" th:value="${project.account}"
+                                               class="overflow"
+                                               th:title="${project.account}" readonly/>
+                                    </div>
+                                    <div class="f-l mesh-project">
+                                        <label for="coname">隶属公司：</label>
+                                        <input type="text" id="coname" th:value="${project.coname}" class="overflow"
+                                               th:title="${project.coname}" readonly/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="" style="text-align: center;margin: 40px 0 18px 0;">
+                                <img src="/alink-hq/static/img/exchange-un.png" alt="">
+                            </div>
 
-                    <div class="tranfer-btn">
-                        <button class="confirm-btn" type="button">确定移交</button>
+                            <fieldset>
+                                <div class="transfer-company p-r clearfix">
+                                    <div class="form-row">
+                                        <div class="field-label" style="width: 135px;">
+                                            <label for="fid"><span>*</span>隶属公司：</label>
+                                        </div>
+                                        <div class="field-widget p-r" >
+                                            <p class="p-a verify "></p>
+                                            <select name="fid" id="fid" class="pointer overflow">
+                                                <option value="" class="pointer overflow">请选择公司</option>
+                                                <option th:each="firm:${firmList}" th:value="${firm.id}"
+                                                        th:text="${firm.coname }"
+                                                        class="pointer overflow"></option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="field-label" style="width: 135px;">
+                                            <label for="account-transfer"><span>*</span>选择移交账号：</label>
+                                        </div>
+                                        <div class="field-widget p-r">
+                                            <p class=" p-a verify "></p>
+                                            <input type="text" id="account-transfer" placeholder="请选择账号" uid=""
+                                                   autocomplete="off"
+                                                   class="overflow">
+                                            <i class="fa fa-caret-down open-list" aria-hidden="true"></i>
+                                            <!--<span class="open-list"></span>-->
+                                            <div id="list" class="overflow">
+                                                <ul>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tranfer-btn ">
+                                    <button class="confirm-btn" type="button">确定移交</button>
+                                </div>
+                            </fieldset>
+                        </div>
                     </div>
-                </div>
-            </form>
+                </form>
+            </div>
         </div>
     </div>
 </div>
@@ -108,7 +128,7 @@
 </div>
 
 <script src="/alink-hq/static/js/jquery.min.js"></script>
-<script  src="/alink-hq/static/js/left.js"></script>
+<script src="/alink-hq/static/js/left.js"></script>
 <script src="/alink-hq/static/js/moment.js"></script>
 
 <script>
@@ -142,26 +162,29 @@
         })
         $("#list ul").on("click", 'li', function () {
             console.log($(this).text());
+            $('#list').hide();
             $('#account-transfer').val($(this).text());
             $('#account-transfer').attr('uid', $(this).attr('value'))
-            $('#list').removeClass('active');
+//            $('#list').removeClass('active');
         });
+        $('#list').hide();
         $('.open-list').click(function () {
-            $('#list').toggleClass('active');
+            $('#list').toggle();
         })
-        $('#account-transfer').click(function () {
-            $('#list').addClass('active');
-            if ($('#list ul').height() == 0) {
-                $('#list').removeClass('active');
-            }
-        })
+//        $('#account-transfer').click(function () {
+//            $('#list').addClass('active');
+//            if ($('#list ul').height() == 0) {
+//                $('#list').removeClass('active');
+//            }
+//        })
         $('#account-transfer').bind('input propertychange', function () {
 
             var keyword = $(this).val();
             if (keyword != '') {
-                $('.account-hint').text('');
+                $(this).prev('.verify').text('');
             } else {
-                $('.account-hint').text('请选择账号');
+                $(this).prev('.verify').text('请选择账号');
+//                $('.account-hint').text('请选择账号');
             }
             var keyArr = [];
 
@@ -192,7 +215,7 @@
             }
         });
         $('.confirm-btn').click(function () {
-            var projectInfo = $('#projectInfo').val();
+            var ids = $('#ids').val();
             var fid = $('#fid option:selected').val();
             var uid = $('#account-transfer').attr('uid');
             var account = $('#account-transfer').val();
@@ -204,36 +227,35 @@
                     console.log('找到了', uid, list[i].account);
                     break;
                 } else {
-
                     hasAccount = false;
                 }
             }
             if (uid == '') {
-                $('.account-hint').text('请选择账号');
+                $('#account-transfer').prev('.verify').text('请选择账号');
             } else {
-                $('.account-hint').text('');
+                $('#account-transfer').prev('.verify').text('');
             }
             if (fid == '') {
-                $('.company-hint').text('请选择公司')
+                $('#fid').prev('.verify').text('请选择公司')
             } else {
-                $('.company-hint').text('');
+                $('#fid').prev('.verify').text('');
             }
 
             if (fid != '' && uid != '' && hasAccount) {
                 $.ajax({
                     type: "post",
                     url: "/alink-hq/project/transfer",
-                    data: {projectInfo: projectInfo, uid: uid},
+                    data: {idss: ids, uid: uid},
                     dataType: "json",
                     success: function (data) {
-                        console.log(data);
+//                        console.log(data);
                         if (data.result == '000') {
                             $('#preload-anim').addClass('active');
-                            $('.hide-iframe').addClass('active');
+//                            $('.hide-iframe').addClass('active');
                             $('#preload-anim .title').text('移交成功，正在跳转项目列表');
-                            setInterval(function () {
+                            setTimeout(function () {
                                 window.location.href = '/alink-hq/project/list';
-                            }, 1000)
+                            }, 500)
                         }
                     }
                 })
@@ -244,9 +266,9 @@
     $('#fid').change(function () {
         var selected = $(this).children('option:selected').val();
         if (selected == '') {
-            $('.company-hint').text('请选择公司');
+            $(this).prev('.verify').text('请选择公司');
         } else {
-            $('.company-hint').text('');
+            $(this).prev('.verify').text('');
         }
     })
 </script>

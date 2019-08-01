@@ -18,7 +18,7 @@
         <div th:replace="common/left::left('meshList')"></div>
         <div class="main-right f-l">
             <div class="clearfix main-right-nav">
-                <div class="f-l main-right-title font">场景列表</div>
+                <div class="f-l main-right-title font">场景列表<span class="subjection">(隶属项目：<span th:inline="text" th:text="${meshName}"></span>)</span></div>
                 <div class="f-r pointer">
                     <div class="goBack" onClick="javascript :history.back(-1);" onmousedown="backBtnMouseDown()"
                          onmouseup="backBtnMouseUp()">
@@ -83,13 +83,15 @@
                                 <td class="p-r" >
                                     <img src="/alink-hq/static/img/edit.png" th:alt="${scene.id}"
                                          class="reset-name pointer" shiro:hasPermission ="renameScene"
-                                         title="重命名">
+                                         title="重命名" style="width: 17px;height: 17px;">
                                     <img src="/alink-hq/static/img/un-rename.png" alt="" shiro:lacksPermission ="renameScene" class="pointer   unclick"
-                                         th:title="无法操作">
+                                         th:title="无法操作" style="width: 17px;height: 17px;">
                                     <img src="/alink-hq/static/img/delete.png" alt="" shiro:hasPermission ="deleteScene"  class="left-img pointer singleDel"
-                                         title="删除">
+                                         title="删除" style="    width: 16px;
+    height: 16px;">
                                     <img src="/alink-hq/static/img/un-delete.png"  shiro:lacksPermission ="deleteScene" alt="" class="pointer  left-img  unclick"
-                                         th:title="无法操作">
+                                         th:title="无法操作" style="    width: 16px;
+    height: 16px;">
                                 </td>
                             </tr>
                             </tbody>
@@ -144,22 +146,23 @@
                             <thead>
                             <tr>
                                 <th class="all-checkbox">
-                                    <span style="vertical-align: sub;"><input type="checkbox" class="pointer"></span>
+                                    <!--<span style="vertical-align: sub;">-->
+                                    <input type="checkbox" id="all" class="pointer">
+                                    <!--</span>-->
                                     <span class="">全选</span>
                                 </th>
-                                <th>区域名称</th>
-                                <th>区域ID</th>
-                                <th>隶属网络</th>
-                                <th>网络ID</th>
-                                <th>组数量</th>
-                                <th>状态</th>
-                                <th>操作</th>
+                                <th><span>场景名称</span></th>
+                                <th><span>场景ID</span></th>
+                                <th><span>隶属网络</span></th>
+                                <th><span>网络ID</span></th>
+                                <th><span>状态</span></th>
+                                <th class="operation"><span>操作</span></th>
                             </tr>
                             </thead>
                             <tbody>
                             <tr>
                                 <td colspan="8">
-                                    <img src="/alink-hq/static/img/no-data.png" alt="">
+                                    <img th:src="@{/static/img/no-data.png}" style="width: auto;height: auto;" alt="">
                                     <p>暂无数据</p>
                                 </td>
                             </tr>
@@ -172,36 +175,38 @@
     </div>
 </div>
 <!-- 重命名弹框 -->
-<div class="confirm-on-off pop-iframe  " openContent="reset-name">
-    <div class="confirm-on-off-nav p-r pop-nav">
-        重命名
-    </div>
-    <div class="pop-content">
-        <div class="newName">
-            <p class="rename-hint"></p>
-            <label for="rename">新名称</label>
-            <input type="text" placeholder="请输入（2-16位汉字、字母、数字）" id="rename" onkeyup="nameKeyUp()" maxlength="16"/>
-        </div>
-        <div class="pop-btn">
-            <button class="reduce">取消</button>
-            <button class="yes">确定</button>
-        </div>
-    </div>
-</div>
+<div th:replace="pop/reset::reset-name"></div>
+<!--<div class="confirm-on-off pop-iframe  " openContent="reset-name">-->
+    <!--<div class="confirm-on-off-nav p-r pop-nav">-->
+        <!--重命名-->
+    <!--</div>-->
+    <!--<div class="pop-content">-->
+        <!--<div class="newName">-->
+            <!--<p class="rename-hint"></p>-->
+            <!--<label for="rename">新名称</label>-->
+            <!--<input type="text" placeholder="请输入（2-16位汉字、字母、数字）" id="rename" onkeyup="nameKeyUp()" maxlength="16"/>-->
+        <!--</div>-->
+        <!--<div class="pop-btn">-->
+            <!--<button class="reduce">取消</button>-->
+            <!--<button class="yes">确定</button>-->
+        <!--</div>-->
+    <!--</div>-->
+<!--</div>-->
 <!-- 删除账户 -->
-<div class="pop-iframe" openContent="delete-place">
-    <div class=" p-r pop-nav">
-        温馨提示
-    </div>
-    <div class="pop-content">
-        <div class="reset-pwd">您确定要删除所选的场景吗？</div>
-        <div class="reset-pwd-hint">删除后该场景将无法应用，请慎重！</div>
-        <div class="pop-btn">
-            <button class="reduce">取消</button>
-            <button class="yes">确定</button>
-        </div>
-    </div>
-</div>
+<div th:replace="pop/delete::delete-pop"></div>
+<!--<div class="pop-iframe" openContent="delete-pop">-->
+    <!--<div class=" p-r pop-nav">-->
+        <!--温馨提示-->
+    <!--</div>-->
+    <!--<div class="pop-content">-->
+        <!--<div class="reset-pwd">您确定要删除所选的场景吗？</div>-->
+        <!--<div class="reset-pwd-hint">删除后该场景将无法应用，请慎重！</div>-->
+        <!--<div class="pop-btn">-->
+            <!--<button class="reduce">取消</button>-->
+            <!--<button class="yes">确定</button>-->
+        <!--</div>-->
+    <!--</div>-->
+<!--</div>-->
 <div class="hide-iframe "></div>
 <script type="text/javascript" src="/alink-hq/static/js/left.js"></script>
 <script type="text/javascript" src="/alink-hq/static/js/scene.js"></script>

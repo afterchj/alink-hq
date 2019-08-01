@@ -48,7 +48,7 @@
         INNER JOIN f_project p ON p.id=m.project_id
         INNER JOIN f_place pl ON pl.id = l.pid
         INNER JOIN f_group g ON g.id=l.gid
-        LEFT JOIN (SELECT * FROM f_light_setting ORDER BY update_date DESC) ls ON ls.lid=l.id
+        LEFT JOIN (SELECT * FROM f_light_adjust ORDER BY update_date DESC) ls ON ls.lid=l.id
         WHERE 1 = 1
         <include refid="common_choose"></include>
         <if test="name!=null and name!=''">
@@ -108,7 +108,7 @@
             pl.pname,
             IFNULL(s.scount,0) scount
         FROM f_light l
-        LEFT JOIN f_light_setting ls ON ls.lid=l.id
+        LEFT JOIN f_light_adjust ls ON ls.lid=l.id
         LEFT JOIN f_group g ON g.id=l.gid
         LEFT JOIN f_mesh m ON m.id=l.mid
         LEFT JOIN f_project p ON p.id=m.project_id

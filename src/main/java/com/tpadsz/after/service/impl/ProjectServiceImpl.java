@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by chenhao.lu on 2019/4/8.
@@ -119,6 +120,11 @@ public class ProjectServiceImpl implements ProjectService {
     @Override
     public int findProjectByProjectId(int id) {
         return projectDao.findProjectByProjectId(id);
+    }
+
+    @Override
+    public List<Map> selectByPid(List<String> list) {
+        return projectDao.selectByPid(list);
     }
 
 

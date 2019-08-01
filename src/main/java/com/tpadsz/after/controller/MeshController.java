@@ -112,12 +112,12 @@ public class MeshController {
     }
 
     @RequestMapping("/delete")
-    public String delete(Integer uid, String ids) {
+    public String delete(Integer pid, String ids) {
         logger.info("ids=" + ids);
         String[] idArray = ids.split(",");
         List<String> list = new ArrayList(Arrays.asList(idArray));
         meshService.deleteMeshByIds(list);
-        return "redirect:/mesh/list?uid" + uid;
+        return "redirect:/mesh/list?projectId=" + pid;
     }
 
 

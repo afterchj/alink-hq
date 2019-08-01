@@ -5,7 +5,6 @@ abbr,address,article,aside,audio,b,blockquote,body,canvas,caption,cite,code,dd,d
     outline-style: none;
     border: 0;
     vertical-align: baseline;
-    font-size: 100%;
 }
 
 table {
@@ -120,7 +119,9 @@ ul li {
 .ui-widget-header {
     background: #fff;
 }
-
+.admin-main {
+    background: #fff;
+}
 .a-center {
     text-align: center;
 }
@@ -160,6 +161,9 @@ fieldset input[type=file] {
     -moz-opacity: 0;
     -khtml-opacity: 0;
     opacity: 0;
+}
+.noData tr:hover{
+    background-color: #fff;
 }
 .upload{
     position: absolute;
@@ -216,17 +220,55 @@ fieldset .field-widget {
 .main-right {
     height: 100%;
 }
-input[type=text]{
-    width: 300px;
-    font-size: 14px;
-    padding-left: 14px;
-    height: 31px;
-    color: #666;
-    border: 1px solid #ddd;
-    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
-    border-radius: 2px;
-    box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+.pop-content .newName {
+    font-size: 16px;
+    margin: 50px auto 0;
+    text-align: center;
+    width: 100%;
 }
+.img-msg{
+    height: 57px;
+/* line-height: 57px; */
+    width: 57px;
+}
+.img-msg img{
+    margin: 5px 0px;
+}
+.text-msg{
+    width: calc(100% - 80px);
+    margin-left: 20px;
+    line-height: normal;
+    text-align: left;
+}
+.pop-content .unuse{
+    font-size: 14px;
+    color: #f9220a;
+    margin-top: 5px;
+    text-align: left;
+}
+.pop-content .off-or-on {
+    font-size: 16px;
+    color: #555;
+}
+.pop-content .pop-msg {
+    /* height: calc(100% - 60px); */
+    /* line-height: calc(100% - 60px); */
+    width: 75%;
+    margin-left: calc(25%/2);
+    /* bottom: 5%; */
+    top: 27%;
+}
+/*input[type=text]{*/
+    /*width: 300px;*/
+    /*font-size: 14px;*/
+    /*padding-left: 14px;*/
+    /*height: 31px;*/
+    /*color: #666;*/
+    /*border: 1px solid #ddd;*/
+    /*transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;*/
+    /*border-radius: 2px;*/
+    /*box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);*/
+/*}*/
 fieldset textarea{
     width: 450px;
     font-size: 14px;
@@ -240,6 +282,8 @@ fieldset textarea{
     border-radius: 2px;
     padding-left: 14px;
 }
+
+
 fieldset button{
     display: inline-block;
     line-height: 40px;
@@ -283,6 +327,13 @@ fieldset .verify{
     -webkit-line-clamp: 2;
     margin: 5px;
     line-height: 1.9;
+}
+.admin-sidebar-sub {
+    margin-top: 0;
+    margin-bottom: 0;
+    box-shadow: 0 16px 8px -15px #e2e2e2 inset;
+    background: #fff;
+    padding-left: 0;
 }
 .show-lorem:hover .memo-edit-has{
     top:-10px;
@@ -340,6 +391,7 @@ button:hover{
 
 .unclick {
     cursor: not-allowed;
+    pointer-events: none;
 }
 
 .unclick1 {
@@ -535,4 +587,51 @@ input::-moz-placeholder, textarea::-moz-placeholder {
 }
 input:-ms-input-placeholder, textarea:-ms-input-placeholder {
     color:    #999;
+}
+
+.pop-content input {
+    height: 30px;
+    width: 249px;
+    margin-bottom: 30px;
+    border: 1px solid #ddd;
+    border-radius: 2px;
+    padding: 0 0 0 10px;
+}
+
+
+/**/
+.am-topbar-brand {
+    padding: 0 10px;
+    float: left;
+    font-size: 1.8rem;
+    height: 60px;
+    line-height: 60px;
+}
+.am-topbar-nav>li>a {
+   line-height: 60px;
+}
+.am-form select, .am-form textarea, .am-form input[type=text], .am-form input[type=password], .am-form input[type=datetime], .am-form input[type=datetime-local], .am-form input[type=date], .am-form input[type=month], .am-form input[type=time], .am-form input[type=week], .am-form input[type=number], .am-form input[type=email], .am-form input[type=url], .am-form input[type=search], .am-form input[type=tel], .am-form input[type=color], .am-form-field{
+    font-size: 14px;
+}
+
+.main-right-nav {
+    /* padding: 0 0 10px 20px; */
+    height: 45px;
+    /* line-height: 45px; */
+    border-left: 4px solid #47a6e6;
+    border-bottom: 2px solid #47a6e6;
+    width: calc(100% - 10px);
+    /* margin-bottom: 30px; */
+    /*margin: 10px 0 30px 0;*/
+    padding-left: 10px;
+}
+/*.table-content-list {*/
+    /*!*width: calc(100% - 10px);*!*/
+/*}*/
+.admin-content {
+    width: auto;
+    overflow: hidden;
+    height: 100%;
+    background: #eef5f9;
+    padding-left: 30px;
 }

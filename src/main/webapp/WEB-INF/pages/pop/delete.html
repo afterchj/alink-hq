@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+
+    <!--<title>导航栏</title>-->
+    <!--<link rel="stylesheet" href="/alink-hq/static/css/base.css"/>-->
+    <!--<link rel="stylesheet" href="/alink-hq/static/css/leftNav.css"/>-->
+    <!--<link rel="stylesheet" href="/alink-hq/static/css/projectManage.css"/>-->
+
+    <!--[if lt IE 9]>
+    <script type="text/javascript" src="/alink-hq/static/js/html5shiv.js"></script>
+    <![endif]-->
+</head>
+<body>
+<!-- 删除 -->
+    <div class="pop-iframe" openContent="delete-pop" th:fragment="delete-pop">
+        <div class=" p-r pop-nav">
+            温馨提示
+        </div>
+        <div class="pop-content p-r">
+            <div class="pop-msg p-a clearfix">
+                <div class="f-l img-msg"><img th:src="@{/static/img/hint.png}" alt=""></div>
+                <div class="f-l text-msg">
+                    <div class="reset-pwd">
+                        <p></p>
+                    </div>
+                    <div class="reset-pwd-hint"></div>
+                </div>
+
+            </div>
+            <div class="pop-btn p-a">
+                <button class="reduce">取消</button>
+                <button class="yes">确定</button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -105,8 +105,10 @@ $(function() {
         var deleteArray = [];
         var sid = parseInt($(this).parent().siblings('.sid').find('input').val());
         var sceneId = parseInt($(this).parent().siblings('.sceneId').text());
-        var selector = $('div[openContent="delete-place"]');
+        var selector = $('div[openContent="delete-pop"]');
         selector.addClass('active');
+        $('div[openContent="delete-pop"] .reset-pwd p').text('您确定要删除所选的场景吗？');
+        $('div[openContent="delete-pop"] .reset-pwd-hint').text('删除后该场景将无法应用，请慎重！');
         adjust(selector);
         showOverlay();
         var msg = {
@@ -115,14 +117,14 @@ $(function() {
         }
         deleteArray.push(msg)
     })
-    $('div[openContent="delete-place"] .pop-btn .reduce').click(function() {
-        var selector = $('div[openContent="delete-place"]');
+    $('div[openContent="delete-pop"] .pop-btn .reduce').click(function() {
+        var selector = $('div[openContent="delete-pop"]');
         selector.removeClass('active');
         hideOverlay()
     });
-    $('div[openContent="delete-place"] .pop-btn .yes').click(function() {
+    $('div[openContent="delete-pop"] .pop-btn .yes').click(function() {
         var newJsonArray = JSON.stringify(deleteArray);
-        var selector = $('div[openContent="delete-place"]');
+        var selector = $('div[openContent="delete-pop"]');
         selector.removeClass('active') ;
         hideOverlay();
         deleteScene(newJsonArray)
@@ -139,10 +141,12 @@ $(function() {
             deleteArray.push(msg);
         });
         if (deleteArray.length > 0) {
-            var selector = $('div[openContent="delete-place"]');
+            var selector = $('div[openContent="delete-pop"]');
             selector.addClass('active');
+            $('div[openContent="delete-pop"] .reset-pwd p').text('您确定要删除所选的场景吗？');
+            $('div[openContent="delete-pop"] .reset-pwd-hint').text('删除后该场景将无法应用，请慎重！');
             adjust(selector);
-            showOverlay()
+            showOverlay();
         }
     })
 })

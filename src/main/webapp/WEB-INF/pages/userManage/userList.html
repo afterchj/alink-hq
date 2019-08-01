@@ -1,22 +1,36 @@
 <!doctype html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="keywords" content="log">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="Cache-Control" content="no-siteapp"/>
+    <meta http-equiv="Cache-Control" content="no-siteapp"/>
+    <!--<link rel="icon" type="image/png" th:href="@{/static/AmazeUI/i/favicon.png}">-->
+    <!--&lt;!&ndash;<link rel="apple-touch-icon-precomposed"  th:href="@{/static/assets/i/app-icon72x72@2x.png}">&ndash;&gt;-->
+    <!--<meta name="apple-mobile-web-app-title" content="Amaze UI"/>-->
+    <!--<link rel="stylesheet" th:href="@{/static/AmazeUI/css/amazeui.min.css}"/>-->
+    <!--<link rel="stylesheet" th:href="@{/static/AmazeUI/css/admin.css}"/>-->
     <script src="/alink-hq/static/js/browser.js"></script>
     <link rel="stylesheet" th:href="@{/static/font-awesome-4.7.0/css/font-awesome.min.css}"/>
-    <link rel="stylesheet" href="/alink-hq/static/css/loding.css"/>
-    <link rel="stylesheet" href="/alink-hq/static/css/base.css"/>
-    <link rel="stylesheet" href="/alink-hq/static/css/leftNav.css"/>
-    <link rel="stylesheet" href="/alink-hq/static/css/projectManage.css"/>
+    <link rel="stylesheet" th:href="@{/static/css/loding.css}"/>
+    <link rel="stylesheet" th:href="@{/static/css/base.css}"/>
+    <link rel="stylesheet" th:href="@{/static/css/leftNav.css}"/>
+    <link rel="stylesheet" th:href="@{/static/css/projectManage.css}"/>
     <title>用户列表</title>
 </head>
 <body>
 
-<div class="c-container ">
+<!--<div class="c-container ">-->
     <div th:replace="common/head::head"></div>
-    <div class="main clearfix">
+    <div class="main clearfix ">
+        <!--<div class="am-cf admin-main">-->
         <div th:replace="common/left::left('userList')"></div>
-        <div class="main-right f-l">
+        <div class="main-right f-l ">
+         <!--<div class="admin-content">-->
             <div class="clearfix main-right-nav">
                 <div class="f-l main-right-title">用户列表</div>
                 <div class="f-r pointer last-nav">
@@ -139,7 +153,7 @@
 
                             <td class="p-r">
                                 <img src="/alink-hq/static/img/newPassword.png" alt="" openTab="reset-pwd"
-                                     id="reset-pwd" class="pointer" th:title="重置密码">
+                                     id="reset-pwd" class="pointer" th:title="重置密码" style="width: 18px;height: 18px;">
                                 <a th:if="${user.role_id=='4'}"
                                    th:href="@{/account/transferPage(account=${user.account},coname=${user.coname})}"><img
                                         src="/alink-hq/static/img/exchange.png"
@@ -147,95 +161,99 @@
                                 <a th:if="${user.role_id!='4'}" href="javascript:void(0);" class="unclick"><img
                                         src="/alink-hq/static/img/un-exchange.png"
                                         alt="" class="center-img" th:title="不可移交"></a>
-                                <img src="/alink-hq/static/img/delete.png" alt="" id="delete-account"
+                                <img src="/alink-hq/static/img/delete.png" style="width: 16px;height: 16px;" alt=""
+                                     id="delete-account"
                                      openTab="delete-account" class="pointer" th:title="删除">
-                            </td>
-                            <td class="p-r">
-                                <img th:if="${user.memo!=null&&user.memo!=''}" src="/alink-hq/static/img/memo.png" alt="" class="pointer memo-edit" th:title="备忘录">
-                                <img th:if="${user.memo==null||user.memo==''}" src="/alink-hq/static/img/memo.png" alt="" class="pointer memo-edit2" th:title="备忘录">
-                                <div class="memo-edit-has">
-                                    <div class="meno-nav"><img src="/alink-hq/static/img/alter.png" alt=""
-                                                               class="pointer"></div>
-                                    <div th:text="${user.memo}" class="memo-content">
-                                    </div>
-                                </div>
-                            </td>
-                        </tr>
-                        </tbody>
-                        <tfoot>
-                        <tr>
-                            <td colspan="11" class="clearfix page">
-                                <div class="f-r page-right">
-                                <span class="prev-page">
-                                    <a th:href="@{/account/list(pageNum=${pageInfo.prePage},pageSize=${pageInfo.pageSize},account=${account},uname=${uname},fid=${fid},roleId=${roleId},startDate=${startDate},endDate=${endDate})}">
-                                        <span class="prev "><span><</span></span></a>
-                                    </a>
-                                </span>
-                                    <span th:text="${pageInfo.pageNum}" class="pages"></span>
-                                    <span class="next-page">
-                                   <a th:href="@{/account/list(pageNum=${pageInfo.nextPage},pageSize=${pageInfo.pageSize},account=${account},uname=${uname},fid=${fid},roleId=${roleId},startDate=${startDate},endDate=${endDate})}">
+                                            </td>
+                                            <td class="p-r">
+                                                <img th:if="${user.memo!=null&&user.memo!=''}" src="/alink-hq/static/img/memo.png"
+                                                     alt="" class="pointer memo-edit" th:title="备忘录">
+                                                <img th:if="${user.memo==null||user.memo==''}" src="/alink-hq/static/img/memo.png"
+                                                     alt="" class="pointer memo-edit2" th:title="备忘录">
+                                                <div class="memo-edit-has">
+                                                    <div class="meno-nav"><img src="/alink-hq/static/img/alter.png" alt=""
+                                                                               class="pointer"></div>
+                                                    <div th:text="${user.memo}" class="memo-content">
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                        <tfoot>
+                                        <tr>
+                                            <td colspan="11" class="clearfix page">
+                                                <div class="f-r page-right">
+                        <span class="prev-page">
+                        <a th:href="@{/account/list(pageNum=${pageInfo.prePage},pageSize=${pageInfo.pageSize},account=${account},uname=${uname},fid=${fid},roleId=${roleId},startDate=${startDate},endDate=${endDate})}">
+                            <span class="prev "><span><</span></span></a>
+                            </a>
+                        </span>
+                                                            <span th:text="${pageInfo.pageNum}" class="pages"></span>
+                        <span class="next-page">
+                        <a th:href="@{/account/list(pageNum=${pageInfo.nextPage},pageSize=${pageInfo.pageSize},account=${account},uname=${uname},fid=${fid},roleId=${roleId},startDate=${startDate},endDate=${endDate})}">
 
-                                       <span class="next"><span>></span></span>
-                                   </a>
-                                </span>
-                                    <span class="m-l-15 m-r-20">
-                                    共
-                                    <span th:text="${pageInfo.pages}" class="pageTotal" id="pageTotal"></span>
-                                    页/<span th:text="${pageInfo.total}"></span>条数据
-                                </span>
-                                    <span class="m-r-15">
-                                    <input type="number" min="1" id="skipPage" th:max="${pageInfo.pages}"
-                                           oninput="skipLimit()"/>
-                                </span>
-                                    <span class="m-r-35">
-                                     <div id="skipPageBtn" class="pointer moment skipPageBtn"
-                                          onmousedown="skipBtnMouseDown()" onmouseup="skipBtnMouseUp()">跳转
-                                     </div>
-                                </span>
-                                    <span class="m-r-15r">每页显示：</span>
-                                    <span class="m-r-20">
-                                    <select name="page-select" id="page-select">
+                            <span class="next"><span>></span></span>
+                        </a>
+                        </span>
+                        <span class="m-l-15 m-r-20">
+                        共
+                        <span th:text="${pageInfo.pages}" class="pageTotal" id="pageTotal"></span>
+                        页/<span th:text="${pageInfo.total}"></span>条数据
+                        </span>
+                        <span class="m-r-15">
+                        <input type="number" min="1" id="skipPage" th:max="${pageInfo.pages}"
+                               oninput="skipLimit()"/>
+                        </span>
+                        <span class="m-r-35">
+                        <div id="skipPageBtn" class="pointer moment skipPageBtn"
+                             onmousedown="skipBtnMouseDown()" onmouseup="skipBtnMouseUp()">跳转
+                        </div>
+                        </span>
+                                                            <span class="m-r-15r">每页显示：</span>
+                        <span class="m-r-20">
+                        <select name="page-select" id="page-select">
 
-                                        <option value="10">10</option>
-                                        <option value="30">30</option>
-                                        <option value="50">50</option>
-                                        <option value="100">100</option>
-                                    </select>
-                                </span>
-                                </div>
-                            </td>
-                        </tr>
+                            <option value="10">10</option>
+                            <option value="30">30</option>
+                            <option value="50">50</option>
+                            <option value="100">100</option>
+                        </select>
+                        </span>
+                                        </div>
+                                    </td>
+                                </tr>
                         </tfoot>
                     </table>
                     <!-- 无数据时 -->
                     <table border="1" class="noData active" th:if="${pageInfo==null}">
                         <thead>
                         <tr>
-                            <th style="width: 120px;">账号</th>
-                            <th style="width: 120px;">用户名</th>
-                            <th style="width: 150px;">绑定手机号</th>
+                            <th style="width: 120px;"><span>账号</span></th>
+                            <th style="width: 120px;"><span>用户名</span></th>
+                            <th style="width: 150px;"><span>绑定手机号</span></th>
                             <th class="p-r" style="width: 180px;">
-                                绑定邮箱
+                                <span>绑定邮箱</span>
                             </th>
-                            <th class="p-r" style="width: 220px;">
-                                隶属公司
+                            <th class="p-r" style="width: 300px;">
+                                <span>隶属公司</span>
                             </th>
                             <th class="p-r" style="width: 120px;">
-                                角色
+                                <span>角色</span>
                             </th>
                             <th class="p-r" style="width: 180px;">
-                                添加时间
+                                <span>添加时间</span>
                             </th>
                             <th class="p-r" style="width:80px;">
-                                状态
+                                <span>状态</span>
                             </th>
-                            <th>操作</th>
+                            <th class="operation"><span>操作</span></th>
+                            <th class="memo" style="width:270px;"><span>备忘录</span></th>
                         </tr>
                         </thead>
                         <tbody>
                         <tr>
-                            <td colspan="9">
-                                <img src="/alink-hq/static/img/no-data.png" id="skipPageBtn" alt="">
+                            <td colspan="10">
+                                <img th:src="@{/static/img/no-data.png}" style="width: auto;height: auto;" alt="">
                                 <p>暂无数据</p>
                             </td>
                         </tr>
@@ -245,108 +263,448 @@
             </div>
         </div>
     </div>
-</div>
+<!--</div>-->
+<!--<div th:replace="common/head::head"></div>-->
+<!--&lt;!&ndash;<div class="main clearfix ">&ndash;&gt;-->
+<!--<div class="am-cf admin-main">-->
+<!--<div th:replace="common/left::left('userList')"></div>-->
+<!--&lt;!&ndash;<div class="main-right f-l ">&ndash;&gt;-->
+<!--<div class="admin-content">-->
+<!--<div class="clearfix main-right-nav">-->
+<!--<div class="f-l main-right-title">用户列表</div>-->
+<!--<div class="f-r pointer last-nav">-->
+<!--<a th:href="@{/account/createAccount}">-->
+<!--<div class="create" onmousedown="createBtnMouseDown()" onmouseup="createBtnMouseUp()">-->
+<!--<span>+</span><span>创建账号</span></div>-->
+<!--</a>-->
+<!--</div>-->
+<!--<div class="f-r pointer">-->
+<!--<div class="goBack" onClick="javascript :history.back(-1);" onmousedown="backBtnMouseDown()"-->
+<!--onmouseup="backBtnMouseUp()">-->
+<!--<span><</span><span>返回</span>-->
+<!--</div>-->
+<!--</div>-->
+<!--</div>-->
+<!--<div class=" am-g">-->
+<!--<form class="am-form">-->
+<!--&lt;!&ndash;<div class=" am-g">&ndash;&gt;-->
 
+<!--&lt;!&ndash;<div class=" col-lg-4 ">&ndash;&gt;-->
+<!--&lt;!&ndash;<div class="am-g">&ndash;&gt;-->
+<!--&lt;!&ndash;<div class="col-sm-4 am-text-right">&ndash;&gt;-->
+<!--&lt;!&ndash;账号&ndash;&gt;-->
+<!--&lt;!&ndash;</div>&ndash;&gt;-->
+<!--&lt;!&ndash;<div class="col-sm-8">&ndash;&gt;-->
+<!--&lt;!&ndash;<input type="text" id="account" placeholder="请输入账号">&ndash;&gt;-->
+<!--&lt;!&ndash;</div>&ndash;&gt;-->
+<!--&lt;!&ndash;</div>&ndash;&gt;-->
+<!--&lt;!&ndash;</div>&ndash;&gt;-->
+<!--<div class="col-lg-4 ">-->
+<!--<div class="am-g">-->
+<!--<div class="col-sm-4 am-text-right">-->
+<!--账号-->
+<!--</div>-->
+<!--<div class="col-sm-8">-->
+<!--<input type="text" id="account" placeholder="请输入账号">-->
+<!--</div>-->
+<!--</div>-->
+<!--</div>-->
+<!--<div class="col-lg-4   ">-->
+<!--<div class="am-g am-form-select">-->
+<!--<div class="col-sm-4 am-text-right">-->
+<!--角色-->
+<!--</div>-->
+<!--<div class="col-sm-8 ">-->
+<!--<select name="role" id="role">-->
+<!--<option value="">请选择角色</option>-->
+<!--<option th:each="role:${roleList}" th:value="${role.id}"-->
+<!--th:text="${role.roleName }"></option>-->
+<!--</select>-->
+<!--</div>-->
+<!--</div>-->
+<!--</div>-->
+
+<!--<div class="col-lg-4 ">-->
+<!--<div class="am-g">-->
+<!--<div class="col-sm-4 am-text-right">-->
+<!--用户名-->
+<!--</div>-->
+<!--<div class="col-sm-8">-->
+<!--<input type="text" id="username" placeholder="请输入用户名">-->
+<!--</div>-->
+<!--</div>-->
+<!--</div>-->
+
+<!--<div class="col-lg-4 am-form-select ">-->
+<!--<div class="am-g">-->
+<!--<div class="col-sm-4 am-text-right">-->
+<!--隶属公司-->
+<!--</div>-->
+<!--<div class="col-sm-8">-->
+<!--<select name="company" id="company">-->
+<!--<option value="">请选择公司</option>-->
+<!--<option th:each="firm:${firmList}" th:value="${firm.id}"-->
+<!--th:text="${firm.coname }"></option>-->
+<!--</select>-->
+<!--</div>-->
+<!--</div>-->
+<!--</div>-->
+<!--&lt;!&ndash;</div>&ndash;&gt;-->
+<!--&lt;!&ndash;<div class="am-g am-margin-top">&ndash;&gt;-->
+<!--&lt;!&ndash;<div class="col-sm-2 am-text-right">&ndash;&gt;-->
+<!--&lt;!&ndash;角色&ndash;&gt;-->
+<!--&lt;!&ndash;</div>&ndash;&gt;-->
+<!--&lt;!&ndash;<div class="col-sm-4">&ndash;&gt;-->
+<!--&lt;!&ndash;<input type="text" class="am-input-sm">&ndash;&gt;-->
+<!--&lt;!&ndash;</div>&ndash;&gt;-->
+<!--&lt;!&ndash;<div class="col-sm-6">选填</div>&ndash;&gt;-->
+<!--&lt;!&ndash;</div>&ndash;&gt;-->
+
+<!--&lt;!&ndash;<div class="am-g am-margin-top">&ndash;&gt;-->
+<!--&lt;!&ndash;<div class="col-sm-2 am-text-right">&ndash;&gt;-->
+<!--&lt;!&ndash;内容摘要&ndash;&gt;-->
+<!--&lt;!&ndash;</div>&ndash;&gt;-->
+<!--&lt;!&ndash;<div class="col-sm-4">&ndash;&gt;-->
+<!--&lt;!&ndash;<input type="text" class="am-input-sm">&ndash;&gt;-->
+<!--&lt;!&ndash;</div>&ndash;&gt;-->
+<!--&lt;!&ndash;<div class="col-sm-6">不填写则自动截取内容前255字符</div>&ndash;&gt;-->
+<!--&lt;!&ndash;</div>&ndash;&gt;-->
+
+
+<!--</form>-->
+<!--&lt;!&ndash;<div class="search-condition ">&ndash;&gt;-->
+<!--&lt;!&ndash;<form action="" class="clearfix">&ndash;&gt;-->
+<!--&lt;!&ndash;<div class="f-l search">&ndash;&gt;-->
+<!--&lt;!&ndash;<div>&ndash;&gt;-->
+<!--&lt;!&ndash;<label for="account">账号</label>&ndash;&gt;-->
+<!--&lt;!&ndash;<input type="text" id="account" placeholder="请输入账号">&ndash;&gt;-->
+<!--&lt;!&ndash;</div>&ndash;&gt;-->
+<!--&lt;!&ndash;<div class="p-r">&ndash;&gt;-->
+<!--&lt;!&ndash;<label for="role" class="font">角色</label>&ndash;&gt;-->
+<!--&lt;!&ndash;<select name="role" id="role">&ndash;&gt;-->
+<!--&lt;!&ndash;<option>请选择角色</option>&ndash;&gt;-->
+<!--&lt;!&ndash;<option th:each="role:${roleList}" th:value="${role.id}"&ndash;&gt;-->
+<!--&lt;!&ndash;th:text="${role.roleName }"></option>&ndash;&gt;-->
+<!--&lt;!&ndash;</select>&ndash;&gt;-->
+<!--&lt;!&ndash;</div>&ndash;&gt;-->
+<!--&lt;!&ndash;</div>&ndash;&gt;-->
+<!--&lt;!&ndash;<div class="f-l search">&ndash;&gt;-->
+
+<!--&lt;!&ndash;<div>&ndash;&gt;-->
+<!--&lt;!&ndash;<label for="username">用户名</label>&ndash;&gt;-->
+<!--&lt;!&ndash;<input type="text" id="username" placeholder="请输入用户名" AUTOCOMPLETE="off">&ndash;&gt;-->
+<!--&lt;!&ndash;</div>&ndash;&gt;-->
+<!--&lt;!&ndash;<div class="p-r">&ndash;&gt;-->
+<!--&lt;!&ndash;<label for="add-time" class="font">添加时间</label>&ndash;&gt;-->
+<!--&lt;!&ndash;<input type="text" id="add-time" placeholder="请选择日期" AUTOCOMPLETE="off">&ndash;&gt;-->
+<!--&lt;!&ndash;<img src="/alink-hq/static/img/date.png" alt="" class="p-a show-date">&ndash;&gt;-->
+<!--&lt;!&ndash;</div>&ndash;&gt;-->
+<!--&lt;!&ndash;</div>&ndash;&gt;-->
+<!--&lt;!&ndash;<div class="f-l search">&ndash;&gt;-->
+<!--&lt;!&ndash;<div>&ndash;&gt;-->
+<!--&lt;!&ndash;<label for="company" class="font">隶属公司</label>&ndash;&gt;-->
+<!--&lt;!&ndash;<select name="company" id="company">&ndash;&gt;-->
+<!--&lt;!&ndash;<option>请选择公司</option>&ndash;&gt;-->
+<!--&lt;!&ndash;<option th:each="firm:${firmList}" th:value="${firm.id}"&ndash;&gt;-->
+<!--&lt;!&ndash;th:text="${firm.coname }"></option>&ndash;&gt;-->
+<!--&lt;!&ndash;</select>&ndash;&gt;-->
+<!--&lt;!&ndash;</div>&ndash;&gt;-->
+<!--&lt;!&ndash;<div class="search-button " style=" padding: 0 0 0 235px;">&ndash;&gt;-->
+<!--&lt;!&ndash;<button type="button" class="pointer">查询</button>&ndash;&gt;-->
+<!--&lt;!&ndash;<a th:href="@{getUserListExcel(account=${account},roleId=${roleId},fid=${fid},startDate=${startDate},endDate=${endDate})}"&ndash;&gt;-->
+<!--&lt;!&ndash;class="export">Excel导出</a>&ndash;&gt;-->
+<!--&lt;!&ndash;</div>&ndash;&gt;-->
+<!--&lt;!&ndash;</div>&ndash;&gt;-->
+<!--&lt;!&ndash;</form>&ndash;&gt;-->
+<!--&lt;!&ndash;</div>&ndash;&gt;-->
+<!--<div class="col-sm-12">-->
+<!--&lt;!&ndash; 有数据时 &ndash;&gt;-->
+<!--<table class="am-table am-table-bd am-table-striped admin-content-table hasData active"-->
+<!--th:if="${pageInfo!=null}">-->
+<!--<thead>-->
+<!--<tr>-->
+<!--<th style="width: 120px;"><span>账号</span></th>-->
+<!--<th style="width: 120px;"><span>用户名</span></th>-->
+<!--<th style="width: 150px;"><span>绑定手机号</span></th>-->
+<!--<th class="p-r" style="width: 180px;">-->
+<!--<span>绑定邮箱</span>-->
+<!--</th>-->
+<!--<th class="p-r" style="width: 300px;">-->
+<!--<span>隶属公司</span>-->
+<!--</th>-->
+<!--<th class="p-r" style="width: 120px;">-->
+<!--<span>角色</span>-->
+<!--</th>-->
+<!--<th class="p-r" style="width: 180px;">-->
+<!--<span>添加时间</span>-->
+<!--</th>-->
+<!--<th class="p-r" style="width:80px;">-->
+<!--<span>状态</span>-->
+<!--</th>-->
+<!--<th class="operation"><span>操作</span></th>-->
+<!--<th class="memo" style="width:270px;"><span>备忘录</span></th>-->
+<!--</tr>-->
+<!--</thead>-->
+<!--<tbody>-->
+<!--<tr th:each="user:${pageInfo.list}">-->
+<!--<td class="project-name use-account" th:text="${user.account}"></td>-->
+<!--<td th:text="${user.uname}"></td>-->
+<!--<td th:text="${user.mobile}"></td>-->
+<!--<td th:text="${user.email}"></td>-->
+<!--<td th:text="${user.coname}"></td>-->
+<!--<td th:if="${user.role_id=='1'}" th:text="超级管理员" class="role"></td>-->
+<!--<td th:if="${user.role_id=='2'}" th:text="管理员" class="role"></td>-->
+<!--<td th:if="${user.role_id=='3'}" th:text="乙方管理员" class="role"></td>-->
+<!--<td th:if="${user.role_id=='4'}" th:text="施工人员" class="role"></td>-->
+<!--<td th:text="${user.create_date}"></td>-->
+<!--<td th:if="${user.status=='1' && user.coStatus=='1'}" style="color: #47a6e6;"-->
+<!--openTab="start-use" id="start-use" class="status pointer">-->
+<!--<span class="result" th:text="启用"></span>-->
+<!--</td>-->
+<!--<td th:if="${user.status=='1' && user.coStatus=='0'}" style="color: #999;"-->
+<!--class="status1 pointer p-r">-->
+<!--<span class="result" th:text="启用"></span>-->
+<!--<span class="p-a end"><i class="cricle">\</i>终止合作</span>-->
+<!--</td>-->
+
+<!--<td th:if="${user.status=='0' && user.coStatus=='1'}" style="color: #47a6e6;"-->
+<!--openTab="start-use" id="start-use" class="status pointer p-r">-->
+<!--<span th:text="禁用" class="result"></span>-->
+<!--</td>-->
+<!--<td th:if="${user.status=='0' && user.coStatus=='0'}" style="color: #999;"-->
+<!--class="status1 pointer p-r">-->
+<!--<span th:text="禁用" class="result"></span>-->
+<!--<span class="p-a end"><i class="cricle">\</i>终止合作</span>-->
+<!--</td>-->
+
+<!--<td class="p-r">-->
+<!--<img src="/alink-hq/static/img/newPassword.png" alt="" openTab="reset-pwd"-->
+<!--id="reset-pwd" class="pointer" th:title="重置密码" style="width: 18px;height: 18px;">-->
+<!--<a th:if="${user.role_id=='4'}"-->
+<!--th:href="@{/account/transferPage(account=${user.account},coname=${user.coname})}"><img-->
+<!--src="/alink-hq/static/img/exchange.png"-->
+<!--alt="" class="center-img" th:title="移交账号"></a>-->
+<!--<a th:if="${user.role_id!='4'}" href="javascript:void(0);" class="unclick"><img-->
+<!--src="/alink-hq/static/img/un-exchange.png"-->
+<!--alt="" class="center-img" th:title="不可移交"></a>-->
+<!--<img src="/alink-hq/static/img/delete.png" style="width: 16px;height: 16px;" alt=""-->
+<!--id="delete-account"-->
+<!--openTab="delete-account" class="pointer" th:title="删除">-->
+<!--</td>-->
+<!--<td class="p-r">-->
+<!--<img th:if="${user.memo!=null&&user.memo!=''}" src="/alink-hq/static/img/memo.png"-->
+<!--alt="" class="pointer memo-edit" th:title="备忘录">-->
+<!--<img th:if="${user.memo==null||user.memo==''}" src="/alink-hq/static/img/memo.png"-->
+<!--alt="" class="pointer memo-edit2" th:title="备忘录">-->
+<!--<div class="memo-edit-has">-->
+<!--<div class="meno-nav"><img src="/alink-hq/static/img/alter.png" alt=""-->
+<!--class="pointer"></div>-->
+<!--<div th:text="${user.memo}" class="memo-content">-->
+<!--</div>-->
+<!--</div>-->
+<!--</td>-->
+<!--</tr>-->
+<!--</tbody>-->
+<!--<tfoot>-->
+<!--<tr>-->
+<!--<td colspan="11" class="clearfix page">-->
+<!--<div class="f-r page-right">-->
+<!--<span class="prev-page">-->
+<!--<a th:href="@{/account/list(pageNum=${pageInfo.prePage},pageSize=${pageInfo.pageSize},account=${account},uname=${uname},fid=${fid},roleId=${roleId},startDate=${startDate},endDate=${endDate})}">-->
+<!--<span class="prev "><span><</span></span></a>-->
+<!--</a>-->
+<!--</span>-->
+<!--<span th:text="${pageInfo.pageNum}" class="pages"></span>-->
+<!--<span class="next-page">-->
+<!--<a th:href="@{/account/list(pageNum=${pageInfo.nextPage},pageSize=${pageInfo.pageSize},account=${account},uname=${uname},fid=${fid},roleId=${roleId},startDate=${startDate},endDate=${endDate})}">-->
+
+<!--<span class="next"><span>></span></span>-->
+<!--</a>-->
+<!--</span>-->
+<!--<span class="m-l-15 m-r-20">-->
+<!--共-->
+<!--<span th:text="${pageInfo.pages}" class="pageTotal" id="pageTotal"></span>-->
+<!--页/<span th:text="${pageInfo.total}"></span>条数据-->
+<!--</span>-->
+<!--<span class="m-r-15">-->
+<!--<input type="number" min="1" id="skipPage" th:max="${pageInfo.pages}"-->
+<!--oninput="skipLimit()"/>-->
+<!--</span>-->
+<!--<span class="m-r-35">-->
+<!--<div id="skipPageBtn" class="pointer moment skipPageBtn"-->
+<!--onmousedown="skipBtnMouseDown()" onmouseup="skipBtnMouseUp()">跳转-->
+<!--</div>-->
+<!--</span>-->
+<!--<span class="m-r-15r">每页显示：</span>-->
+<!--<span class="m-r-20">-->
+<!--<select name="page-select" id="page-select">-->
+
+<!--<option value="10">10</option>-->
+<!--<option value="30">30</option>-->
+<!--<option value="50">50</option>-->
+<!--<option value="100">100</option>-->
+<!--</select>-->
+<!--</span>-->
+<!--</div>-->
+<!--</td>-->
+<!--</tr>-->
+<!--</tfoot>-->
+<!--</table>-->
+<!--&lt;!&ndash; 无数据时 &ndash;&gt;-->
+<!--<table class="am-table am-table-bd am-table-striped admin-content-table noData active"-->
+<!--th:if="${pageInfo==null}">-->
+<!--<thead>-->
+<!--<tr>-->
+<!--<th style="width: 120px;"><span>账号</span></th>-->
+<!--<th style="width: 120px;"><span>用户名</span></th>-->
+<!--<th style="width: 150px;"><span>绑定手机号</span></th>-->
+<!--<th class="p-r" style="width: 180px;">-->
+<!--<span>绑定邮箱</span>-->
+<!--</th>-->
+<!--<th class="p-r" style="width: 300px;">-->
+<!--<span>隶属公司</span>-->
+<!--</th>-->
+<!--<th class="p-r" style="width: 120px;">-->
+<!--<span>角色</span>-->
+<!--</th>-->
+<!--<th class="p-r" style="width: 180px;">-->
+<!--<span>添加时间</span>-->
+<!--</th>-->
+<!--<th class="p-r" style="width:80px;">-->
+<!--<span>状态</span>-->
+<!--</th>-->
+<!--<th class="operation"><span>操作</span></th>-->
+<!--<th class="memo" style="width:270px;"><span>备忘录</span></th>-->
+<!--</tr>-->
+<!--</thead>-->
+<!--<tbody>-->
+<!--<tr>-->
+<!--<td colspan="10">-->
+<!--<img th:src="@{/static/img/no-data.png}" style="width: auto;height: auto;" alt="">-->
+<!--<p>暂无数据</p>-->
+<!--</td>-->
+<!--</tr>-->
+<!--</tbody>-->
+<!--</table>-->
+<!--</div>-->
+<!--</div>-->
+<!--</div>-->
+<!--</div>-->
 <!-- 确定重置密码 -->
-<div class="confirm-on-off pop-iframe " openContent="reset-pwd">
-    <div class="confirm-on-off-nav p-r pop-nav">
-        温馨提示
-    </div>
-    <div class="pop-content">
-        <div class="reset-pwd">您确定要重置该账号密码吗？</div>
-        <div class="reset-pwd-hint">（重置后将无法恢复，请慎重！）</div>
-        <div class="pop-btn">
-            <button class="reduce" type="button">取消</button>
-            <button class="yes" type="button">确定</button>
-        </div>
-    </div>
-</div>
+<div th:replace="pop/resetPwd::reset-pwd"></div>
+<!--<div class="confirm-on-off pop-iframe " openContent="reset-pwd">-->
+<!--<div class="confirm-on-off-nav p-r pop-nav">-->
+<!--温馨提示-->
+<!--</div>-->
+<!--<div class="pop-content">-->
+<!--<div class="reset-pwd">您确定要重置该账号密码吗？</div>-->
+<!--<div class="reset-pwd-hint">（重置后将无法恢复，请慎重！）</div>-->
+<!--<div class="pop-btn">-->
+<!--<button class="reduce" type="button">取消</button>-->
+<!--<button class="yes" type="button">确定</button>-->
+<!--</div>-->
+<!--</div>-->
+<!--</div>-->
 <!--新密码-->
-<div class="reset-passwords pop-iframe" openContent="new-pwd">
-    <div class="reset-passwords-nav p-r pop-nav">
-        新密码
-    </div>
-    <div class="reset-passwords-content pop-content">
-        <form action="">
-            <div class="main-part">
-                <div class="account-part">
-                    <span class="t-title t-account">账&nbsp;&nbsp;&nbsp;号：</span>
-                    <span class="t-content t-account-result"></span>
-                </div>
-                <div class="pwd-part">
-                    <span class="t-title t-pwd">新密码：</span>
-                    <span class="t-content t-pwd-result"></span>
-                </div>
-            </div>
+<div th:replace="pop/newPwd::new-pwd"></div>
+<!--<div class="reset-passwords pop-iframe" openContent="new-pwd">-->
+<!--<div class="reset-passwords-nav p-r pop-nav">-->
+<!--新密码-->
+<!--</div>-->
+<!--<div class="reset-passwords-content pop-content">-->
+<!--<form action="">-->
+<!--<div class="main-part">-->
+<!--<div class="account-part">-->
+<!--<span class="t-title t-account">账&nbsp;&nbsp;&nbsp;号：</span>-->
+<!--<span class="t-content t-account-result"></span>-->
+<!--</div>-->
+<!--<div class="pwd-part">-->
+<!--<span class="t-title t-pwd">新密码：</span>-->
+<!--<span class="t-content t-pwd-result"></span>-->
+<!--</div>-->
+<!--</div>-->
 
-            <div class="pop-btn clearfix">
-                <div class="f-l pop-hint">请牢记新密码，关闭后将无法展示</div>
-                <div class="f-r">
-                    <button class="reduce" type="button">取消</button>
-                    <button class="yes" type="button">确定</button>
-                </div>
-            </div>
-        </form>
-    </div>
-</div>
+<!--<div class="pop-btn clearfix">-->
+<!--<div class="f-l pop-hint">请牢记新密码，关闭后将无法展示</div>-->
+<!--<div class="f-r">-->
+<!--<button class="reduce" type="button">取消</button>-->
+<!--<button class="yes" type="button">确定</button>-->
+<!--</div>-->
+<!--</div>-->
+<!--</form>-->
+<!--</div>-->
+<!--</div>-->
 <!-- 确定启用禁用弹出框 -->
-<div class="confirm-on-off pop-iframe " openContent="start-use">
-    <div class="confirm-on-off-nav p-r pop-nav">
-        温馨提示
-    </div>
-    <div class="pop-content">
-        <div class="off-or-on"></div>
-        <p class="unuse" style="font-size: 15px;color: #f71f1f;margin-top:20px;"></p>
-        <div class="pop-btn">
-            <button class="reduce" type="button">取消</button>
-            <button class="yes" type="button">确定</button>
-        </div>
-    </div>
-</div>
+<div th:replace="pop/startUse::start-use"></div>
+<!--<div class="confirm-on-off pop-iframe " openContent="start-use">-->
+<!--<div class="confirm-on-off-nav p-r pop-nav">-->
+<!--温馨提示-->
+<!--</div>-->
+<!--<div class="pop-content">-->
+<!--<div class="off-or-on"></div>-->
+<!--<p class="unuse" style="font-size: 15px;color: #f71f1f;margin-top:20px;"></p>-->
+<!--<div class="pop-btn">-->
+<!--<button class="reduce" type="button">取消</button>-->
+<!--<button class="yes" type="button">确定</button>-->
+<!--</div>-->
+<!--</div>-->
+<!--</div>-->
 
 <!-- 删除账户 -->
 <div class="pop-iframe" openContent="delete-account">
     <div class=" p-r pop-nav">
         温馨提示
     </div>
-    <div class="pop-content">
-        <div class="noProject active">
-            <div class="reset-pwd">您确定要删除该账号信息吗？</div>
-            <div class="reset-pwd-hint">（删除后将无法恢复，请慎重！）</div>
+    <div class="pop-content p-r">
+        <div class="pop-msg p-a clearfix">
+            <div class="f-l img-msg"><img th:src="@{/static/img/hint.png}" alt=""></div>
+            <div class="f-l text-msg">
+                <div class="noProject active">
+                    <div class="reset-pwd">您确定要删除该账号信息吗？</div>
+                    <div class="reset-pwd-hint">删除后将无法恢复，请慎重！</div>
+                </div>
+            </div>
         </div>
-        <div class="pop-btn">
+        <div class="pop-btn p-a">
             <button class="reduce" type="button">取消</button>
             <button class="yes" type="button">确定</button>
         </div>
     </div>
 </div>
 <!-- 删除账户-名下有项目 -->
+<!--<div th:replace="pop/delete::delete-pop"></div>-->
 <div class="pop-iframe" openContent="delete-account-hasProject">
     <div class=" p-r pop-nav">
         温馨提示
     </div>
-    <div class="pop-content">
-        <div class="hasProject active">
-            <div>当前账号名下有项目</div>
-            <div>请移交后再进行删除！</div>
+    <div class="pop-content p-r">
+        <div class="pop-msg p-a clearfix">
+            <div class="f-l img-msg"><img th:src="@{/static/img/hint.png}" alt=""></div>
+            <div class="f-l text-msg">
+                <div class="hasProject active">
+                    <div>当前账号名下有项目</div>
+                    <div>请移交后再进行删除！</div>
+                </div>
+            </div>
         </div>
-        <div class="pop-btn">
+        <div class="pop-btn p-a">
             <button class="reduce" type="button">取消</button>
             <button class="yes" type="button" style="width: 130px;letter-spacing: 5px;">移交项目</button>
         </div>
     </div>
 </div>
-
 <!-- 备忘录为空 -->
 <div class="pop-iframe" openContent="memo-edit">
     <div class=" p-r pop-nav">
         备忘录
     </div>
     <div class="pop-content">
-        <textarea maxlength="200" style="width: 93%;border: none;margin-top: 10px;resize: none;height: 130px;font-size: 13.5px;line-height: 1.6;color: #323232;font-family: inherit;"  class="wishContent"
+        <textarea maxlength="200"
+                  style="width: 93%;border: none;margin-top: 10px;resize: none;height: 130px;font-size: 13.5px;line-height: 1.6;color: #323232;font-family: inherit;"
+                  class="wishContent"
                   placeholder="请输入不超过200个字"></textarea>
         <p class="right-font"><span class="wordsNum">0/200</span></p>
-        <input type="hidden" id="memo-account" >
+        <input type="hidden" id="memo-account">
         <div class="pop-btn">
             <button class="reduce">取消</button>
             <button class="yes">确定</button>
@@ -370,11 +728,15 @@
     </p>
 </div>
 
-<script src="/alink-hq/static/js/jquery.min.js"></script>
-<script src="/alink-hq/static/laydate/laydate.js"></script>
-<script src="/alink-hq/static/js/left.js"></script>
-<script src="/alink-hq/static/js/user.js"></script>
-<script src="/alink-hq/static/js/moment.js"></script>
+<script th:src="@{/static/js/jquery.min.js}"></script>
+<script th:src="@{/static/AmazeUI/js/zepto.min.js}"></script>
+<script th:src="@{/static/AmazeUI/js/amazeui.min.js}"></script>
+<script th:src="@{/static/AmazeUI/js/app.js}"></script>
+<script th:src="@{/static/js/moment.js}"></script>
+<script th:src="@{/static/laydate/laydate.js}"></script>
+<script th:src="@{/static/js/left.js}"></script>
+<script th:src="@{/static/js/user.js}"></script>
+
 <!--<script src="/alink-hq/static/js/excel/Blob.js"></script>-->
 <!--<script src="/alink-hq/static/js/excel/FileSaver.js"></script>-->
 <script src="/alink-hq/static/js/excel/tableExport.js"></script>
