@@ -60,8 +60,7 @@
                                     <label for=""><span style="">*</span>选择移交到的公司：</label>
                                     <select name="transfer-company" id="transfer-company" class="pointer">
                                         <option value="">请选择公司</option>
-                                        <option th:each="firm:${firmList}" th:value="${firm.id}"
-                                                th:text="${firm.coname }"></option>
+                                        <option th:each="firm:${firmList}" th:value="${firm.id}" th:text="${firm.coname }"></option>
                                     </select>
                                 </div>
                                 <div class="attention">
@@ -84,7 +83,6 @@
         </div>
     </div>
     <!--重置密码 -->
-
     <!--<div class="reset-passwords pop-iframe" openContent="reset-passwords">-->
         <!--<div class="reset-passwords-nav p-r pop-nav">-->
             <!--新密码-->
