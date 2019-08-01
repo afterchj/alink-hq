@@ -74,6 +74,8 @@ $(function() {
         if (ids.length > 0) {
             var selector = $('div[openContent="delete-pop"]');
             selector.addClass('active');
+            $('div[openContent="delete-pop"] .reset-pwd p').text('您确定要删除吗？');
+            $('div[openContent="delete-pop"] .reset-pwd-hint').text('删除该灯将会退出网络，请慎重！');
             adjust(selector) ;
             showOverlay();
             $('.showList').hide();
