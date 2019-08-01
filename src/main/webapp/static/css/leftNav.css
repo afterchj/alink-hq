@@ -115,7 +115,7 @@
     font-size: 15px;
 }
 .hide-iframe{
-    background-color: #000;
+    background-color: #333;
     opacity: 0.6;
     z-index: 999;
     position: absolute;

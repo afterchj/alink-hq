@@ -186,7 +186,7 @@
     text-align: center;
     font-size: 13px;
     vertical-align: middle;
-    color: #666;
+    color: #4F576E;
     /* background-color: #fff; */
 }
 .search-result table td i{
@@ -421,6 +421,7 @@ span.msg-use{
     width: calc((100% - 3px)/2);
     height: 38px;
     line-height: 38px;
+    color: #13223F;;
 }
 
 .c-width.one {
@@ -443,9 +444,9 @@ span.msg-use{
 .pop-content p {
     /*font-size:17px;*/
     /*color:#666;*/
-    font-size: 16px;
+    font-size: 15px;
     display: inline-block;
-    color: #555;
+    color: #13223F;
     height: 30px;
     line-height: 30px;
 }
@@ -471,6 +472,7 @@ span.msg-use{
 
 .c-list .c-width {
     /*color:#383e4b;*/
+    color: #898989;
 }
 
 .c-list {
@@ -536,15 +538,15 @@ span.msg-use{
     z-index:1000
 }
  .table-content-list input[type=text]{
-    width: 300px;
-    font-size: 14px;
-    color: #888;
-    height: 31px;
-    padding-left: 8px;
-    border: 1px solid #ddd;
-    border-radius: 2px;
-    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
-    box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+     width: 300px;
+     font-size: 14px;
+     color: #898989;
+     height: 31px;
+     padding-left: 8px;
+     border: 1px solid #dbdbdb;
+     border-radius: 2px;
+     transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+     /* box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075); */
 }
 .pop-iframe {
     position:absolute;
@@ -733,15 +735,15 @@ span.msg-use{
 /*.table-content-list*/
 
 .table-content-list select {
-    width: 314px;
+    /*width: 314px;*/
     font-size: 14px;
-    color: #888;
+    color: #898989;
     height: 35px;
     padding-left: 8px;
-    border: 1px solid #ddd;
+    border: 1px solid #dbdbdb;
     border-radius: 2px;
     transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
-    box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+    /* box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075); */
 }
 
 #createProject form label {

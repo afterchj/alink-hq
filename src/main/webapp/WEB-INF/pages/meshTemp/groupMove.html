@@ -8,7 +8,7 @@
     <link rel="stylesheet" th:href="@{/static/font-awesome-4.7.0/css/font-awesome.min.css}"/>
     <link rel="stylesheet" th:href="@{/static/css/base.css}">
     <link rel="stylesheet" th:href="@{/static/css/leftNav.css}">
-    <link rel="stylesheet" th:href="@{/static/css/mesh.css}">
+    <link rel="stylesheet" th:href="@{/static/css/projectManage.css}">
 
     <title>组移动</title>
 </head>
@@ -24,7 +24,7 @@
                 <div class="f-l main-right-title">
                     <nav class="bread">
                         <ol class="clearfix">
-                            <li class="f-l"><a  th:href="@{/group/list(mid=0)}">组列表</a></li>
+                            <li class="f-l"><a th:href="@{/group/list(mid=0)}">组列表</a></li>
                             <li class="f-l">组移动</li>
                         </ol>
                     </nav>
@@ -39,42 +39,55 @@
                 </div>
             </div>
             <form th:action="@{/group/saveUpdate}" class="" method="post">
-                <div id="meshTurnOver" class="table-content-list">
-                    <div class="f-nav">
-                        组移动
-                    </div>
-                    <div class="f-content scrollbar">
-                        <input type="hidden" name="ids" th:value="${ids}">
-                        <input type="hidden" id="mid" name="mid" th:value="${mid}">
-                        <input type="hidden" id="projectName" name="projectName" th:value="${projectName}">
-                        <div class="accountMsg clearfix" th:each="group:${groupMap}">
-                            <div class="f-l mesh-name">
-                                <span th:text="${group.gname}"></span>
-                            </div>
-                            <div class="f-l  mesh-id">
-                                <label for="mesh_id">网络ID：</label>
-                                <input type="text" id="mesh_id" th:value="${group.mesh_id}" readonly>
-                            </div>
-                            <div class="f-l mesh-project">
-                                <label for="project">属于区域：</label>
-                                <input type="text" id="project" th:value="${group.pname}" readonly>
+                <div id="meshTurnOver" class="table-content-list detail transfer">
+                    <div class="p-detail">
+                        <div class="p-nav">
+                            组移动
+                        </div>
+                        <div class="p-content p-r ">
+                            <div class="scrollbar">
+                                <input type="hidden" name="ids" th:value="${ids}">
+                                <input type="hidden" id="mid" name="mid" th:value="${mid}">
+                                <input type="hidden" id="projectName" name="projectName" th:value="${projectName}">
+                                <div class="accountMsg clearfix" th:each="group:${groupMap}">
+                                    <div class="f-l mesh-name">
+                                        <span th:text="${group.gname}"></span>
+                                    </div>
+                                    <div class="f-l  mesh-id">
+                                        <label for="mesh_id">网络ID：</label>
+                                        <input type="text" id="mesh_id" th:value="${group.mesh_id}" readonly>
+                                    </div>
+                                    <div class="f-l mesh-project">
+                                        <label for="project">属于区域：</label>
+                                        <input type="text" id="project" th:value="${group.pname}" readonly>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="" style="text-align: center;margin-bottom: 30px;">
-                        <img src="/alink-hq/static/img/exchange-un.png" alt="">
-                    </div>
-                    <div class="transfer-company">
-                        <p class="trans-hint"></p>
-                        <label for="pid"><span>*</span>选择移动到的区域：</label>
-                        <select name="pid" id="pid">
-                            <option value="">选择移动到的区域</option>
-                            <option value="0">区域1</option>
-                        </select>
-                    </div>
-                    <div class="tranfer-btn">
-                        <button class="confirm-btn" type="button">确定移动</button>
-                        <!--<button class="confirm-btn" type="button">确定移交</button>-->
+                        <div class="" style="text-align: center;margin-bottom: 30px;">
+                            <img src="/alink-hq/static/img/exchange-un.png" alt="">
+                        </div>
+                        <fieldset>
+                            <div class="transfer-company clearfix">
+                                <div class="form-row">
+                                    <!--<p class="trans-hint"></p>-->
+                                    <div class="field-label" style="width: 150px;">
+                                        <label for="pid" style="width: 160px;"><span style="color: #FF5722;">*</span>选择移动到的区域：</label>
+                                    </div>
+                                    <div class="field-widget p-r">
+                                        <p class="p-a verify "></p>
+                                        <select name="pid" id="pid">
+                                            <option value="">选择移动到的区域</option>
+                                            <option value="0">区域1</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tranfer-btn">
+                                <button class="confirm-btn" type="button">确定移动</button>
+                                <!--<button class="confirm-btn" type="button">确定移交</button>-->
+                            </div>
+                        </fieldset>
                     </div>
                 </div>
             </form>
@@ -120,9 +133,9 @@
         var pid = $('#pid option:selected').val();
         var ids = $('input[name="ids"]').val();
         if (pid == '') {
-            $('.trans-hint').text('请选择移动的区域');
+            $('#pid').prev('.verify').text('请选择移动的区域');
         } else {
-            $('.trans-hint').text('');
+            $('#pid').prev('.verify').text('');
             $.ajax({
                 type: "post",
                 url: "/alink-hq/group/saveUpdate",
@@ -131,14 +144,14 @@
                     console.log(res);
                     if (res == 'ok') {
                         $('#preload-anim').addClass('active');
-                        $('.hide-iframe').addClass('active');
+                        showOverlay();
                         $('#preload-anim .title').text('移动成功，正在跳转组列表');
-                        setInterval(function () {
+                        setTimeout(function () {
                             location.href = '/alink-hq/group/list?mid=' + mid;
                         }, 1000)
                     } else {
                         $('#preload-anim').addClass('active');
-                        $('.hide-iframe').addClass('active');
+                        showOverlay();
                         $('#preload-anim .title').text('加载失败，请重新尝试');
                         setInterval(function () {
                             $('#preload-anim').removeClass('active');
@@ -154,9 +167,9 @@
     $('#pid').change(function () {
         var pid = $('#pid option:selected').val();
         if (pid == '') {
-            $('.trans-hint').text('请选择移交的区域');
+            $('#pid').prev('.verify').text('请选择移交的区域');
         } else {
-            $('.trans-hint').text('');
+            $('#pid').prev('.verify').text('');
         }
     })
 </script>
