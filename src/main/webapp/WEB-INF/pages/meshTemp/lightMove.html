@@ -143,13 +143,13 @@
                         $('#preload-anim .title').text('移动成功，正在跳转灯列表');
                         setTimeout(function () {
                             location.href = '/alink-hq/light/list?mid=' + mid;
-                        }, 500);
+                        }, 800);
                     } else {
                         $('#preload-anim').addClass('active');
                         $('#preload-anim .title').text('加载失败，请重新尝试');
                         setTimeout(function () {
                             $('#preload-anim').removeClass('active');
-                        }, 500);
+                        }, 800);
                     }
                 }
             })
