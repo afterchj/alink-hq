@@ -9,8 +9,8 @@ $(function () {
         matchInput);
 
     $(".submitConfirm").click(function () {
-        $('p.pwd-hint').removeClass('active').text('');
-        $('p.inconsistent-hint').removeClass('active').text('');
+        $('#pwd1').prev('.verify').removeClass('active').text('');
+        $('#pwd2').prev('.verify').removeClass('active').text('');
         var context = $("#pwd1").val();
         var confirmPwd = $(".confirmPwd").val();
         var newPwd = $(".newPwd").val();
@@ -21,25 +21,25 @@ $(function () {
         if (newPwdFlag){
             //新密码为空
             // $(".newPwdHint").text("请输入新密码");
-            $('p.pwd-hint').addClass('active').text('请输入新密码');
+            $('#pwd1').prev('.verify').addClass('active').text('请输入新密码');
         }else {
             //新密码不为空
             if (!pwdMatch){
                 //新密码不匹配
-                $('p.pwd-hint').addClass('active').text(text);
+                $('#pwd1').prev('.verify').addClass('active').text(text);
             }
         }
         if (confirmPwdFlag){
             //确认密码为空
             // $(".confirmPwdHint").text("请再次输入新密码");
-            $('p.inconsistent-hint').addClass('active').text('请再次输入新密码');
+            $('#pwd2').prev('.verify').addClass('active').text('请再次输入新密码');
         }
         //新密码和确认密码不为空以及新密码匹配规则
         if (!newPwdFlag&&!confirmPwdFlag&&pwdMatch){
             //新密码和确认密码不一致
             if ($.trim(newPwd)!=$.trim(confirmPwd)){
                 // $(".confirmPwdHint").text("密码不一致");
-                $('p.inconsistent-hint').addClass('active').text('密码不一致');
+                $('#pwd2').prev('.verify').addClass('active').text('密码不一致');
             }else {
                 $.ajax({
                     type:"POST",
