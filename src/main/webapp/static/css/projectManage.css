@@ -483,7 +483,19 @@ span.msg-use{
     border-radius: 2px;
     box-shadow: 1px 1px 50px rgba(0,0,0,.3);
 }
-
+#codeSubmit{
+    width: 31%;
+    margin-left: 0;
+    letter-spacing: 2px;
+    line-height: 35px;
+    height: 35px;
+    font-size: 14px;
+    border-radius: 2px;
+    margin-top: -4px;
+    margin-left: -5px;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+}
 /*.hide-iframe.active {*/
     /*display:block*/
 /*}*/
