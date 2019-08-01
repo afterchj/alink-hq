@@ -20,7 +20,7 @@
 }
 
 .search input,.search select,.search select option {
-    width:275px;
+    width: 275px !important;
     height:30px;
     font-size:14px;
     padding-left:10px;
@@ -68,12 +68,12 @@
 }
 
 .search label {
-    margin-right:30px;
-    font-size:15px;
-    display:inline-block;
-    color:#323232;
-    width:110px;
-    text-align:right
+    margin-right: 30px;
+    font-size: 14px;
+    display: inline-block;
+    color: #2F4056;
+    width: 110px;
+    text-align: right;
 }
 
 .search-button {
@@ -113,8 +113,8 @@
     height: 50px;
     line-height: 50px;
     font-size: 15px;
-    color: #454545;
-    background-color: #f5f5f5;
+    color: #13223F;
+    background-color: #F5F7FD;
 }
 
 .search-result table td {
@@ -122,7 +122,7 @@
     text-align: center;
     font-size: 13px;
     vertical-align: middle;
-    color: #555;
+    color: #606060;
     /*background-color:#fff*/
 }
 .search-result table td i{
@@ -380,9 +380,9 @@ span.msg-use{
 .pop-content p {
     /*font-size:17px;*/
     /*color:#666;*/
-    font-size: 16px;
+    font-size: 15px;
     display: inline-block;
-    color: #555;
+    color: #2F4056;
     height: 30px;
     line-height: 30px;
 }
@@ -425,24 +425,24 @@ span.msg-use{
 .pop-content .reset-pwd {
     font-size: 16px;
     color: #333;
-    margin-top: 60px;
-    text-align: center;
+    /* margin-top: 60px; */
+    text-align: left;
 
 }
 
 .pop-content .off-or-on {
     font-size: 16px;
-    color: #555;
+    color: #2F4056;
     margin-top: 70px;
     text-align: center;
 
 }
 
 .pop-content .reset-pwd-hint {
-    font-size:15px;
-    color:#f9220a;
-    margin-top:20px;
-    text-align:center
+    font-size: 14px;
+    color: #FF5722;
+    /* margin-top: 20px; */
+    text-align: left;
 }
 
 #preload-anim {
@@ -516,6 +516,7 @@ span.msg-use{
 .pop-content {
     text-align: center;
     background-color: #fff;
+    height: calc(300px - 55px);
 }
 
 .pop-content .pop-btn {
