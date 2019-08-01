@@ -45,7 +45,7 @@
 #account .a-content>div>span {
     display: inline-block;
     vertical-align: middle;
-    color: #696969;
+    color: #606060;
     /* transform: scale(1,.95); */
     font-size: 15px;
 }
@@ -63,7 +63,7 @@
 /*}*/
 #account .a-content>div>span ul li{
     font-size: 14px;
-    color: #999;
+    color: gray;
     list-style-type: disc;
     /* line-height: 1; */
     margin: 10px 0;

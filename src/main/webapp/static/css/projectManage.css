@@ -81,7 +81,7 @@
     margin-right: 10px;
     font-size: 14px;
     display: inline-block;
-    color: #333;
+    color: #13223F;
     width: 30%;
     text-align: right;
 }
@@ -120,7 +120,7 @@
 .search-result table {
     width:100%;
     margin-bottom:35px;
-    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    border-top: 1px solid #dbdbdb;
     /*border-right:  1px solid rgba(0, 0, 0, 0.1);*/
     box-shadow: 0 2px 1px rgba(0, 0, 0, 0.2)
     /*-webkit-box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.1), -1px 0 2px rgba(0, 0, 0, 0.05);*/
@@ -128,26 +128,65 @@
 }
 
 .search-result table td, .search-result table th {
-    border-left:rgba(0, 0, 0, 0.1) 1px solid;
-    border-bottom:rgba(0, 0, 0, 0.1) 1px solid
+    border-left: #dbdbdb 1px solid;
+    border-bottom: #dbdbdb 1px solid;
 }
-
+.p-content > div > div:nth-child(1).time-table{
+    width: 25%;
+}
+.time-detail-table{
+    width: 100%;
+    max-height: 300px;
+    overflow-y: auto;
+    border: 1px solid #dbdbdb;
+    background: #F5F7FD;
+}
+.time-detail-table thead{
+    background: #F5F7FD;
+}
+.time-detail-table th,.time-detail-table td{
+    text-align: center;
+    width: 50%;
+    /*border-right: 1px solid #dbdbdb;*/
+    border-bottom: 1px solid #dbdbdb;
+}
+.time-detail-table td a{
+    font-size: 13px;
+}
+.time-detail-table td span{
+    display: inline-block;
+}
+.time-detail-table th:first-child,.time-detail-table td:first-child{
+    /*border-left: 1px solid #dbdbdb;*/
+    border-right: 1px solid #dbdbdb;
+    width: 170px;
+}
+.time-detail-table th{
+   /*border-top: 1px solid #dbdbdb;*/
+    border-bottom: 0;
+}
+#time-scene{
+    width:70%;
+}
 .search-result table th {
     height: 47px;
     line-height: 47px;
     font-size: 14px;
-    color: #454545;
-    background-color: #eee;
+    color: #13223F;
+    background-color: #f6f7fa;
     text-align: center;
 
 }
-
+.time-detail-table td{
+    color: #606060;
+    font-size: 13px;
+}
 .search-result table td {
     height: 47px;
     text-align: center;
     font-size: 13px;
     vertical-align: middle;
-    color: #565656;
+    color: #666;
     /* background-color: #fff; */
 }
 .search-result table td i{
@@ -300,7 +339,7 @@ th.all-checkbox {
     font-size: 15px;
     color: #3c3c3c;
     font-weight: 600;
-    background-color: #f5f5f5;
+    background-color: #F6F7FA;
     border-bottom: 1px solid #dbdbdb;
     border-top: 1px solid #dbdbdb;
 }
@@ -311,10 +350,7 @@ th.all-checkbox {
 .table-content-list .c-content {
     padding: 60px 440px;
 }
-.p-content .time span  {
-    font-size: 14px;
-    color: #383e4b;
-}
+
 
 .p-content {
     padding:50px
@@ -324,7 +360,7 @@ th.all-checkbox {
     width: 50%;
     text-align: left;
     font-size: 14px;
-    color: #383e4b;
+    color: #13223F;
 }
 
 
@@ -338,7 +374,7 @@ th.all-checkbox {
 }
 
  .p-content> div.clearfix:nth-child(odd){
-    background-color: #f5f5f5;
+    background-color: #F5F7FD;
 }
 
  .p-content > div > div:nth-child(2) {
@@ -929,11 +965,11 @@ input:-ms-input-placeholder {
 
 .scene-content .scene-list {
     border-bottom: 1px solid #dbdbdb;
-    padding: 15px 20px;
-    border-top: 1px solid #dbdbdb;
-    font-size: 16px;
-    color: #383e4b;
-    background-color: #f5f5f5;
+    padding: 0 15px;
+    font-size: 15px;
+    color: #13223F;
+    font-weight: bold;
+    background-color: #F5F7FD;
 }
 
 .scene-list span {
@@ -992,12 +1028,12 @@ input:-ms-input-placeholder {
 
 
 .scene-msg-list li.active {
-    background-color: rgba(71,166,230,.95);
+    background-color:rgb(69, 184, 253);
     color: #fff;
     cursor: pointer;
 }
 .scene-msg-list li:hover{
-    background-color: rgba(71,166,230,.95);
+    background-color: rgb(69, 184, 253);
     color: #fff;
     cursor: pointer;
 }
@@ -1107,7 +1143,6 @@ table.light-detail-table thead,
 
 .p-content .a-span {
     color: #47a6e6;
-    width: 45%;
 }
 
 .light-table.timer {
@@ -1341,7 +1376,7 @@ i.cricle {
     line-height: 42px;
 }
 .showList li:hover{
-    background-color: #f5f5f5;
+    background-color: #F6F7FA;
 }
 .showList li:last-child{
     border-bottom: none;
@@ -1521,4 +1556,55 @@ i.open-list{
 }
 .tranfer-btn{
     text-align: center;
+}
+#timerDetail{
+    height: auto;
+    min-height: 760px;
+    background: #fff;
+}
+.scene-msg .scene-msg-list.time-scene-msg{
+    width:100%;
+    min-width:inherit;
+    margin: 0;
+    border: 0;
+}
+.scene-msg .scene-msg-list.time-scene-msg > div:nth-child(3){
+    width: calc(100%/2 );
+}
+.scene-msg .scene-msg-list.time-scene-msg > div{
+    width:calc(100%/4);
+    border:none;
+}
+.scene-msg .scene-msg-list.time-scene-msg > div:nth-child(3) > div:nth-child(1){
+    width:calc(100%/2);
+}
+.scene-msg .scene-msg-list.time-scene-msg > div:nth-child(3) > div:nth-child(2){
+    width:calc(100%/2);
+}
+#time-scene　.scene-content .scene-list{
+    font-size: 14px;
+}
+#time-scene .scene-list span{
+    font-size: 14px;
+}
+#time-scene .scene-content{
+    box-shadow: none;
+    border: 1px solid #dbdbdb;
+}
+table#timeTitle  thead, table#timeTitle tbody tr {
+    display: table;
+    width: 100%;
+    table-layout: fixed;
+}
+table#timeTitle  tbody{
+    border-top: 1px solid #dbdbdb;
+    display: block;
+    width:100%;
+    height:300px;
+    overflow: auto;
+
+}
+table#timeTitle  thead{
+    width: calc( 100% - 16px)
+
 }
