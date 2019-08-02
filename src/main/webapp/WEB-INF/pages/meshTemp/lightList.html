@@ -119,7 +119,7 @@
                                 <td class="pid">
                                     <input type="checkbox" name="ids" th:value="${light.id}">
                                     <input type="hidden" name="p_id" th:value="${light.pid}">
-                                    <input type="hidden" id="u_id" th:value="${light.uid}">
+                                    <input type="hidden" name="u_id" th:value="${light.uid}">
                                 </td>
                                 <td class="k-link lname">
                                     <a th:href="@{/light/info(id=${light.id})}" th:text="${light.lname}"></a>
@@ -134,15 +134,15 @@
                                     <!--</span>-->
                                     <!--XXX-->
                                 <!--</td>-->
-                                <td class="k-link">
+                                <td class="k-link project_id">
                                     <a th:href="@{/project/detail(projectId=${light.project_id})}"
-                                       th:text="${light.name}"></a>
+                                       th:text="${light.name}" th:alt="${light.project_id}"></a>
                                 </td>
 
                                 <td class="k-link">
                                     <a th:href="@{/mesh/info(id=${light.mid})}" th:text="${light.mname}"></a>
                                 </td>
-                                <td th:text="${light.mesh_id}"></td>
+                                <td th:text="${light.mesh_id}" class="mesh_id"></td>
                                 <td class="k-link">
                                     <a th:href="@{/place/info(id=${light.pid})}" th:text="${light.pname}"></a>
                                 </td>

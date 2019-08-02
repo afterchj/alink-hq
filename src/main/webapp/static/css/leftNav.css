@@ -19,7 +19,7 @@
 .container {
     width: 98%;
     margin: auto;
-    background-color: #45B8FD;
+    background-color:#00A0E9;
 }
 
 .c-container {
@@ -38,7 +38,7 @@
 }
 
 .all-container {
-    background-color: #45B8FD;
+    background-color: #00A0E9;
     position: fixed;
     width: 100%;
     z-index: 999;
