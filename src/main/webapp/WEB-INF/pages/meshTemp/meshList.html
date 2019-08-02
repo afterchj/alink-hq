@@ -108,7 +108,7 @@
                             <tr th:each="mesh:${pageInfo.list}">
                                 <td class="checkbox">
                                     <input type="checkbox" name="ids" th:value="${mesh.id}" class="">
-                                    <input type="hidden" th:value="${mesh.uid}" class="uid">
+                                    <input type="hidden" th:value="${mesh.uid}" class="uid" name="uid">
                                 </td>
                                 <td class="k-link">
                                     <a th:href="@{/mesh/info(id=${mesh.id})}" th:text="${mesh.mname}"></a>

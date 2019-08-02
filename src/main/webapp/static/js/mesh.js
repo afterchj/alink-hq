@@ -6,8 +6,8 @@ $(function () {
             ids.push($(this).val());
             uid.push($(this).next('.uid').val())
         });
-        console.log('ids',ids);
-        var result=isAllEqual(ids);
+        // console.log('ids',ids);
+        var result=isAllEqual(uid);
         console.log('result',result);
         if (ids.length == 1) {
             location.href = "/alink-hq/mesh/move?ids=" + ids
