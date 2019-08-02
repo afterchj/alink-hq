@@ -43,9 +43,11 @@
             </div>
             <div id="timerDetail" class="table-content-list detail">
                 <div class="p-detail">
-                    <div class="p-nav">XX固件信息编辑</div>
+                    <div class="p-nav"><span th:inline="text">[[${file.otaName}]]</span>固件信息编辑</div>
                     <div class="p-content p-r">
-                        <form action="" method="post">
+                        <form th:action="@{/file/save}" method="post">
+                            <input type="hidden" name="id" th:value="${file.id}">
+                            <input type="hidden" name="otaVersion" th:value="${file.otaVersion}">
                             <fieldset>
                                 <div class="form-row">
                                     <div class="field-label">
@@ -53,7 +55,7 @@
                                     </div>
                                     <div class="field-widget p-r">
                                         <p class="p-a verify"></p>
-                                        <input type="text" name="otaName" id="otaName"  placeholder="请输入固件名称" value="固件1">
+                                        <input type="text" name="otaName" id="otaName"  placeholder="请输入固件名称" th:value="${file.otaName}">
                                     </div>
                                 </div>
                                 <div class="form-row">
@@ -62,7 +64,7 @@
                                     </div>
                                     <div class="field-widget p-r">
                                         <p class="p-a verify"></p>
-                                        <input type="text" name="otaID" id="otaID"  placeholder="请输入固件ID" value="1234">
+                                        <input type="text" name="otaId" id="otaID"  placeholder="请输入固件ID" th:value="${file.otaId}">
                                     </div>
                                 </div>
                                 <div class="form-row">
@@ -71,11 +73,11 @@
                                     </div>
                                     <div class="field-widget p-r">
                                         <p class="p-a verify"></p>
-                                        <textarea id="otaDescribe" placeholder="请输入固件描述">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus alias assumenda dolor enim laudantium porro possimus, quidem quisquam saepe sed? Consequatur dolorem ea earum eveniet nemo nobis pariatur quod sapiente.</textarea>
+                                        <textarea id="otaDescribe" name="otaDesc" placeholder="请输入固件描述" th:text="${file.otaDesc}"></textarea>
                                     </div>
                                 </div>
                                 <div class="form-row submit">
-                                    <button type="button">保存</button>
+                                    <button type="submit">保存</button>
                                 </div>
                             </fieldset>
                         </form>

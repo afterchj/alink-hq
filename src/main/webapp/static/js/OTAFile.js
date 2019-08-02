@@ -20,6 +20,7 @@ $('div[openContent="delete-firmware"] .pop-btn .yes').click(function () {
 });
 //备忘录
 $(function () {
+    let id;
     // var width = window.screen.width;
     // var height = window.screen.height;
     $('body').click(function () {
@@ -34,15 +35,15 @@ $(function () {
     $('.meno-nav img,.memo-edit2').click(function (event) {
         event.stopPropagation();
         // $('div[openContent="memo-edit"]').addClass('active');
-        var content = $(this).parent().siblings('div').text();
-        console.log("description" + content);
+        var content = $(this).siblings('div').text();
+        id = $(this).attr("alt");
         if (content != '') {
             $(".wishContent").val(content);
         } else {
             $('table tr>td:last-child').removeClass('active');
         }
         $('div[openContent="memo-edit"] .pop-content').find('p.unuse').remove();
-        $(".wishContent").val('');
+        // $(".wishContent").val('');
         $(".wordsNum").html(checkStrLengths(content, 200) + '/200');
         // $('.hide-iframe').addClass('active');
         // $('.hide-iframe').css({
@@ -77,8 +78,7 @@ $(function () {
         $.ajax({
             type: "POST",
             url: "/alink-hq/file/saveUpdate",
-            data: {"otaDesc": content},
-            dataType: "json",
+            data: {"id":id,"otaDesc": content},
             success: function (res) {
                 if (res == 'ok') {
                     location.reload();

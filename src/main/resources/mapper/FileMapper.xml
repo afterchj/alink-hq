@@ -16,7 +16,7 @@
 		id,
         ota_id otaId,
         ota_name otaName,
-        ota_desc otaDesc,
+        IFNULL(ota_desc,'') otaDesc,
         IFNULL(ota_version,'') otaVersion,
         IFNULL(ota_path,'') otaPath,
         create_date createDate,

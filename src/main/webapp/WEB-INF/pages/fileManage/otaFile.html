@@ -107,11 +107,10 @@
                                         <img  src="/alink-hq/static/img/memo.png" th:alt="${file.id}" class="pointer memo-edit2" th:title="备忘录" style="width: 18px;height: 18px;">
                                         <div class="memo-edit-has" th:text="${file.otaDesc}">
                                             <div class="meno-nav"><img src="/alink-hq/static/img/alter.png" alt="" class="pointer"></div>
-                                            <div  class="memo-content"></div>
+                                            <div class="memo-content"></div>
                                         </div>
-
                                     </a>
-                                    <a th:href="@{/file/editOta}" style="margin:0 30px;">
+                                    <a th:href="@{/file/editOta(id=${file.id})}" style="margin:0 30px;">
                                         <img src="/alink-hq/static/img/alter.png" alt="" title="编辑" style="width: 20px;height: 20px;">
                                     </a>
                                     <a href="javascript:void(0);" class="singleDel pointer">
