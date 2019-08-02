@@ -14,7 +14,11 @@
     /*box-shadow: 0 1px 0 1px #e4e6eb;*/
     box-shadow: 0 2px 1px rgba(0, 0, 0, 0.2);
 }
-
+.excel-main{
+    width: 400px;
+    margin: 20px auto;
+    border: 1px solid #dbdbdb;
+}
 
 .search input,.search select,.search select option {
     width: 275px !important;
@@ -347,14 +351,20 @@ span.msg-use{
 }
 
 .c-width {
-    width:163px;
+
     height:38px;
     line-height:38px;
-    border-bottom:1px solid #ddd
 }
 
 .c-width.one {
-    border-right:1px solid #ddd
+    border-right:1px solid #dbdbdb;
+    width:200px;
+}
+.c-title .c-width.two{
+    width: calc(100% - 202px);
+}
+.c-list .c-width.two{
+    width: calc(100% - 202px);
 }
 
 .pop-content a {
@@ -405,18 +415,19 @@ span.msg-use{
 }
 
 .c-list .c-width {
-    color:#383e4b;
+    color:#888;
 }
 
 .c-list {
-    overflow-y:scroll;
-    overflow-x:hidden;
-    max-height:116px
+    overflow-y: scroll;
+    overflow-x: hidden;
+    max-height: 116px;
+    font-size: 13px;
 }
 
 .pop-content .reset-pwd {
-    font-size: 16px;
-    color: #333;
+    font-size: 15px;
+    color: #13223F;
     /* margin-top: 60px; */
     text-align: left;
 
@@ -909,7 +920,10 @@ input:-ms-input-placeholder {
     color:#383e4b;
     height:500px
 }
-
+.sceneData.scene-msg{
+    width: 900px;
+    margin: auto;
+}
 .scene-msg .scene-msg-list {
     width: auto;
     margin: auto;
@@ -1394,14 +1408,28 @@ i.cricle {
 .brief{
     width:100px;
 }
+.pop-content a.excel-a{
+    display: block;
+    margin-bottom: 0;
+    font-size: 17px;
+}
 .reduce-num,.add-num{
     width: 33px;
     height: 33px;
     line-height: 33px;
     border: 1px solid #ddd;
     text-align: center;
-    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
-    box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+    /*transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;*/
+    /*box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);*/
+}
+.pop-content p.excel-p{
+    font-size: 13px;
+    color: #FF5722;
+}
+.c-bottom{
+    bottom: 15px;
+    left: 50%;
+    margin-left: -25%;
 }
 .reduce-num{
     border-right: 0;
@@ -1421,9 +1449,9 @@ i.cricle {
     margin-right: 20px;
 }
 .c-title.excel-up{
-    border-bottom: 1px solid #ddd;
-    color: #454545;
-    font-size: 15px;
+    border-bottom: 1px solid #dbdbdb;
+    color: #13223F;
+    font-size: 14px;
     font-weight: bold;
 }
 
