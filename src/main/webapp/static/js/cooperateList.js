@@ -69,7 +69,7 @@ $(function() {
             var content = '<div class="off-or-on">您确定要禁用' + companyName + '？</div><p style="color: #f9220a; font-size: 14px; font-weight: normal;margin-top:0;">禁用后，其名下所有账户将无法使用，请慎重！</p>'
             $('div[openContent="start-use"] .text-msg').html(content);
         } else if (status == 1) {
-            var content='<div class="off-or-on p-a" style="top: 15px;">您确定要启用'+ companyName + '？'+'</div>';
+            var content='<div class="off-or-on p-a" style="top: 20px;">您确定要启用'+ companyName + '？'+'</div>';
             $('div[openContent="start-use"] .text-msg').html(content);
         }
     }) 

@@ -85,7 +85,7 @@
                                         <p class="create-num-hint"></p>
                                         <div class="num clearfix">
                                             <div class="f-l reduce-num pointer">-</div>
-                                            <input type="text" name="num" value="1" class="create-num f-l" style="width: 25px;">
+                                            <input type="text" name="num" value="1" class="create-num f-l" style="width: 30px;padding-left: 0;text-align: center;">
                                             <div class="f-l add-num pointer">+</div>
                                         </div>
                                     </div>
@@ -108,21 +108,23 @@
         导出账号
         <img src="/alink-hq/static/img/close.png" alt="" class="p-a pointer close">
     </div>
-    <div class="create-content pop-content">
+    <div class="create-content pop-content p-r">
         <div class="c-main excel-main">
             <div class="c-title excel-up">
                 <div class="clearfix">
                     <div class="f-l c-width one">账号</div>
                     <div class="f-l c-width two">密码</div>
                 </div>
-
             </div>
             <div class="c-list">
             </div>
         </div>
-        <a href="#" class="excel-a"  onclick="method5('d2')">EXCEL导出</a>
-        <!--<a href="#" id="excel">Excel导出</a>-->
-        <p class="c-hint excel-p">注：请牢记/导出新账号密码，关闭后将无法展示。</p>
+        <div class="p-a c-bottom">
+            <a href="#" class="excel-a"  onclick="method5('d2')">EXCEL导出</a>
+            <!--<a href="#" id="excel">Excel导出</a>-->
+            <p class="c-hint excel-p">注：请牢记/导出新账号密码，关闭后将无法展示。</p>
+        </div>
+
         <table id="d2" style="display:none;margin-left: 30px;">
             <thead>
             <tr>
