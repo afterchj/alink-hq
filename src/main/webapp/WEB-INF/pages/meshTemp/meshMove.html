@@ -111,6 +111,7 @@
     var uid = [[${session.user.id}]];
     $(function () {
         $.getJSON("/alink-hq/mesh/getProjects", {"uid": uid}, function (json) {
+            console.log('json',json);
             $.each(json, function (i, item) {
                 $("#pid").append("<option value='" + item.id + "'>" + item.label + "</option>");
             });
