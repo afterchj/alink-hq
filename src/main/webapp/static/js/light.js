@@ -84,7 +84,7 @@ $(function () {
         var pidArr = [];
         var isTrue = true;
         $('input[name="ids"]:checked').each(function () {
-            var pid = $(this).parent().siblings('.pid').find('input[name="pid"]').val();
+            var pid = $(this).parent().siblings('.pid').find('input[name="p_id"]').val();
             idss.push($(this).val());
             pidArr.push(pid)
         });
