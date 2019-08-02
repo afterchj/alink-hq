@@ -45,7 +45,7 @@
                 <div class="p-detail">
                     <div class="p-nav">新建固件</div>
                     <div class="p-content p-r">
-                        <form action="" method="post">
+                        <form th:action="@{/file/save}"  method="post">
                             <fieldset>
                                 <div class="form-row">
                                     <div class="field-label">
@@ -62,7 +62,7 @@
                                     </div>
                                     <div class="field-widget p-r">
                                         <p class="p-a verify"></p>
-                                        <input type="text" name="otaID" id="otaID"  placeholder="请输入固件ID">
+                                        <input type="text" name="otaId" id="otaID"  placeholder="请输入固件ID">
                                     </div>
                                 </div>
                                 <div class="form-row">
@@ -71,11 +71,11 @@
                                     </div>
                                     <div class="field-widget p-r">
                                         <p class="p-a verify"></p>
-                                        <textarea id="otaDescribe" placeholder="请输入固件描述"></textarea>
+                                        <textarea id="otaDescribe" name="otaDesc" placeholder="请输入固件描述"></textarea>
                                     </div>
                                 </div>
                                 <div class="form-row submit">
-                                    <button type="button">确定新增</button>
+                                    <button type="submit">确定新增</button>
                                 </div>
                             </fieldset>
                         </form>

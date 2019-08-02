@@ -96,7 +96,7 @@ public class LightController {
     }
 
     @RequestMapping("/delete")
-    public String delete(Integer mid, String ids) {
+    public String delete(Integer pid,Integer mid, String ids) {
         String[] ids1 = ids.split(",");
         List<String> list = new ArrayList(Arrays.asList(ids1));
         try {
@@ -105,7 +105,7 @@ public class LightController {
             logger.warn(e);
             return "authError";
         }
-        return "redirect:/light/list?mid=" + mid;
+        return "redirect:/light/list?projectId=" + pid + "&mid=" + mid;
     }
 
     @ResponseBody

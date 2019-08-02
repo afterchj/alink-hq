@@ -60,7 +60,7 @@ public class CooperationController {
 
     @RequestMapping("/save")
     public String save(CooperationInfo info, @RequestParam(value = "file") MultipartFile file) {
-        String path = PropertiesUtil.getPath();
+        String path = PropertiesUtil.getPath("img");
         String fileName = file.getOriginalFilename();
         File targetFile = new File(path, fileName);
         if (!targetFile.getParentFile().exists()) {

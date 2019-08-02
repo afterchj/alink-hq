@@ -1,19 +1,19 @@
 /**
  * Created by yuanjie.fang on 2019/7/25.
  */
-$('.singleDel').click(function() {
+$('.singleDel').click(function () {
     ids = $(this).parent().siblings('.checkbox').find('input').val();
     var selector = $('div[openContent="delete-firmware"]');
     selector.addClass('active');
     adjust(selector);
     showOverlay();
 });
-$('div[openContent="delete-firmware"] .pop-btn .reduce').click(function() {
+$('div[openContent="delete-firmware"] .pop-btn .reduce').click(function () {
     var selector = $('div[openContent="delete-firmware"]');
     selector.removeClass('active')
     hideOverlay()
 });
-$('div[openContent="delete-firmware"] .pop-btn .yes').click(function() {
+$('div[openContent="delete-firmware"] .pop-btn .yes').click(function () {
     var selector = $('div[openContent="delete-firmware"]');
     selector.removeClass('active')
     hideOverlay()
@@ -34,23 +34,22 @@ $(function () {
     $('.meno-nav img,.memo-edit2').click(function (event) {
         event.stopPropagation();
         // $('div[openContent="memo-edit"]').addClass('active');
-        $('div[openContent="memo-edit"] .pop-content').find('p.unuse').remove();
-        $(".wishContent").val('');
         var content = $(this).parent().siblings('div').text();
-        var account = $(this).parents('tr').children('td').eq(0).text();
+        console.log("description" + content);
         if (content != '') {
             $(".wishContent").val(content);
-        }else{
+        } else {
             $('table tr>td:last-child').removeClass('active');
         }
-        $("#memo-account").val(account);
+        $('div[openContent="memo-edit"] .pop-content').find('p.unuse').remove();
+        $(".wishContent").val('');
         $(".wordsNum").html(checkStrLengths(content, 200) + '/200');
         // $('.hide-iframe').addClass('active');
         // $('.hide-iframe').css({
         //     'width': width,
         //     'height': height
         // })
-        var selector=$('div[openContent="memo-edit"]');
+        var selector = $('div[openContent="memo-edit"]');
         selector.addClass('active');
         adjust(selector)
         showOverlay()
@@ -60,7 +59,7 @@ $(function () {
         event.stopPropagation();
         // $('div[openContent="memo-edit"]').removeClass('active');
         // $('.hide-iframe').removeClass('active');
-        var selector=$('div[openContent="memo-edit"]');
+        var selector = $('div[openContent="memo-edit"]');
         selector.removeClass('active')
         hideOverlay()
     })
@@ -69,20 +68,19 @@ $(function () {
         event.stopPropagation();
         // $('div[openContent="memo-edit"]').removeClass('active');
         // $('.hide-iframe').removeClass('active');
-        var selector=$('div[openContent="memo-edit"]');
+        var selector = $('div[openContent="memo-edit"]');
         selector.removeClass('active')
         hideOverlay()
         //获取输入内容
         var content = $(".wishContent").val();
-        var account = $("#memo-account").val();
+        console.log("desc", content);
         $.ajax({
             type: "POST",
-            url: "/alink-hq/account/saveMemo",
-            data: {account: account, content: content},
+            url: "/alink-hq/file/saveUpdate",
+            data: {"otaDesc": content},
             dataType: "json",
             success: function (res) {
-                // console.log(res);
-                if (res.result == '000') {
+                if (res == 'ok') {
                     location.reload();
                 }
             }
