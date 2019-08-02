@@ -4,7 +4,7 @@ $(function () {
         $(this).css({
             'cursor': 'pointer',
             'padding': '3px 5px',
-            'background': '#45b8fd',
+            'background': '#39b6ef',
             'color': '#fff',
             'border-radius': '2px',
             'box-shadow': '0 1px 1px 0 rgba(0,0,0,.2)',
@@ -12,7 +12,7 @@ $(function () {
         $(this).parent().parent().parent().siblings().find('.sname-a').css({
             'cursor': 'pointer',
         'padding': '3px 5px',
-        'background': '#4db9ef',
+        'background': '#39b6ef',
          'color': '#fff',
         'border-radius': '2px',
         'box-shadow': '0 1px 1px 0 rgba(0,0,0,.2)',

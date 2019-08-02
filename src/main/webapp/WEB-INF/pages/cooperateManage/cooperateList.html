@@ -105,7 +105,7 @@
                                 <td class="p-r">
                                     <a th:href="@{/cooperate/edit(id=${cooperation.id})}"  shiro:hasPermission ="updateCooperation">
                                         <img src="/alink-hq/static/img/alter.png" th:alt="${cooperation.id}"
-                                             class="pointer reset-name" title="编辑" style="margin-right: 30px;">
+                                             class="pointer reset-name" title="编辑" style="margin-right: 30px;width: 18px;height: 18px;">
                                     </a>
                                     <img shiro:lacksPermission ="updateCooperation" src="/alink-hq/static/img/alter-un.png" th:alt="${cooperation.id}"
                                          class="pointer reset-name unclick" th:title="无法操作" style="margin-right: 30px;">
