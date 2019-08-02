@@ -35,7 +35,7 @@
             </div>
             <div id="projectList" class="table-content-list">
                 <form th:action="@{/cooperate/list}" class="clearfix" method="post">
-                    <div class="search-condition clearfix">
+                    <div class="search-condition clearfix p-r">
                         <input type="hidden" id="relation" th:value="${info.status}">
                         <input type="hidden" id="pageSize" th:value="${info.pageSize}">
                         <div class="f-l search" >
@@ -56,7 +56,7 @@
                             </div>
                         </div>
 
-                        <div class="f-r search-button ">
+                        <div class="f-r search-button p-a ">
                             <button type="submit" class="pointer">查询</button>
                         </div>
                     </div>
