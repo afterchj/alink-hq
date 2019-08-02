@@ -99,7 +99,10 @@
                             </thead>
                             <tbody>
                             <tr th:each="group:${pageInfo.list}">
-                                <td class=""><input type="checkbox" name="ids" th:value="${group.id}"></td>
+                                <td class="">
+                                    <input type="checkbox" name="ids" th:value="${group.id}">
+                                    <input type="hidden" id="u_id" th:value="${group.uid}">
+                                </td>
                                 <td class="k-link"><a th:href="@{/group/info(id=${group.id})}" th:text="${group.gname}"></a>
                                 </td>
                                 <td class="k-link">

@@ -6,6 +6,7 @@
 		l.id,
         l.mid,
         l.pid,
+        m.uid,
         IFNULL(l.lname, 'null') lname,
         l.lmac,
         p.name,

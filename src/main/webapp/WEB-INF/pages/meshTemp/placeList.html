@@ -103,7 +103,10 @@
                             </thead>
                             <tbody>
                             <tr th:each="place:${pageInfo.list}">
-                                <td class="checkbox"><input type="checkbox" name="ids"  th:value="${place.id}"></td>
+                                <td class="checkbox">
+                                    <input type="checkbox" name="ids"  th:value="${place.id}">
+                                    <input type="hidden" id="u_id" th:value="${place.uid}">
+                                </td>
                                 <td class="k-link">
                                     <a  th:href="@{/place/info(id=${place.id})}" th:text="${place.pname}"></a>
                                 </td>

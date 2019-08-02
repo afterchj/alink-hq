@@ -116,8 +116,11 @@
                             </thead>
                             <tbody>
                             <tr th:each="light:${pageInfo.list}">
-                                <td class="pid"><input type="checkbox" name="ids" th:value="${light.id}"><input
-                                        type="hidden" th:value="${light.pid}"></td>
+                                <td class="pid">
+                                    <input type="checkbox" name="ids" th:value="${light.id}">
+                                    <input type="hidden" th:value="${light.pid}">
+                                    <input type="hidden" id="u_id" th:value="${light.uid}">
+                                </td>
                                 <td class="k-link lname">
                                     <a th:href="@{/light/info(id=${light.id})}" th:text="${light.lname}"></a>
                                 </td>
