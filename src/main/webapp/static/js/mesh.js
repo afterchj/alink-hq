@@ -19,7 +19,7 @@ $(function () {
             $('div[openContent="exchange"] .reset-pwd p').text('不同账号下的网络不可进行移动!');
             // $('div[openContent="delete-pop"] .reset-pwd-hint').text('删除后网络中所有信息将无法恢复，请慎重！');
             adjust(selector);
-            showOverlay();
+            showOverlay();  
         }
     });
     var ids = [];
