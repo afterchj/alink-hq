@@ -226,18 +226,18 @@ fieldset .field-widget {
     text-align: center;
     width: 100%;
 }
-.img-msg{
-    height: 57px;
-/* line-height: 57px; */
-    width: 57px;
-}
+/*.img-msg{*/
+    /*height: 57px;*/
+/*!* line-height: 57px; *!*/
+    /*width: 57px;*/
+/*}*/
 .img-msg img{
-    margin: 5px 0px;
+    /*margin: 5px 0px;*/
 }
 .text-msg{
     width: calc(100% - 80px);
     margin-left: 20px;
-    line-height: normal;
+    line-height: 1.8;
     text-align: left;
 }
 .pop-content .unuse{
@@ -251,12 +251,10 @@ fieldset .field-widget {
     color: #555;
 }
 .pop-content .pop-msg {
-    /* height: calc(100% - 60px); */
-    /* line-height: calc(100% - 60px); */
-    width: 75%;
-    margin-left: calc(25%/2);
-    /* bottom: 5%; */
-    top: 23%;
+    width: 70%;
+    margin-left: calc(30%/2);
+    top: 50%;
+    margin-top: -50.5px;
 }
 /*input[type=text]{*/
     /*width: 300px;*/

@@ -82,11 +82,20 @@ $(function () {
     $("#multiMove").click(function () {
         var idss = [];
         var pidArr = [];
+        var meshIdArr=[];
+        var projectIdArr=[];
+        var uidArr=[];
         var isTrue = true;
         $('input[name="ids"]:checked').each(function () {
-            var pid = $(this).parent().siblings('.pid').find('input[name="pid"]').val();
+            var pid = $(this).siblings('input[name="p_id"]').val();
+            var uid = $(this).siblings('input[name="u_id"]').val();
+            var meshId=$(this).parent().siblings('.mesh_id').text();
+            var projectId=$(this).parent().siblings('.project_id').find('a').attr('alt');
             idss.push($(this).val());
-            pidArr.push(pid)
+            pidArr.push(pid);
+            uidArr.push(uid);
+            meshIdArr.push(meshId);
+            projectIdArr.push(projectId);
         });
         if (pidArr.length > 0) {
             for (var i = 0; i < pidArr.length; i++) {
@@ -96,17 +105,25 @@ $(function () {
                 }
             }
         }
+        console.log('idss',idss);
+        console.log('meshIdArr',meshIdArr);
+        console.log('projectIdArr',projectIdArr);
         console.log('pidArr', pidArr);
-        var result = isAllEqual(pidArr);
-        console.log('result', result);
-        if (isTrue && result) {
+        console.log('uidArr', uidArr);
+        console.log('isTrue', isTrue);
+        // var result1 = isAllEqual(idss);
+        var result1 = isAllEqual(projectIdArr);
+        var result2 = isAllEqual(meshIdArr);
+        var result3 = isAllEqual(pidArr);
+        var result4 = isAllEqual(uidArr);
+        if (isTrue && result1 && result2 && result3 && result4 ) {
             if (idss.length > 0) {
                 location.href = "/alink-hq/light/move?mid=" + $("#mid").val() + "&ids=" + idss
             }
         } else {
             var selector = $('div[openContent="exchange"]');
             selector.addClass('active');
-            $('div[openContent="exchange"] .reset-pwd p').text('不同区域下的组不可进行移动!');
+            $('div[openContent="exchange"] .reset-pwd p').text('不同区域下的灯不可进行移动!');
             adjust(selector);
             showOverlay();
             $('.showList').hide();

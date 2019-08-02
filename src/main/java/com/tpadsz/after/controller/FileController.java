@@ -66,14 +66,11 @@ public class FileController {
 
     @RequestMapping("/save")
     public String save(FileDTO info) {
+        String version = info.getOtaVersion();
+        String otaVer = StringUtils.isEmpty(version) ? "v1.0.0" : version;
+        info.setOtaVersion(otaVer);
         Map map = JSON.parseObject(JSON.toJSONString(info));
-        logger.warn("map =" + JSON.toJSONString(map));
         fileService.saveFile(map);
-//        if (info.getId() == 0) {
-//            fileService.save(info);
-//        } else {
-//            fileService.saveUpdate(info);
-//        }
         return "redirect:/file/OTAFile";
     }
 
@@ -92,7 +89,6 @@ public class FileController {
                 info.setOtaPath(prefix + fileName);
             }
             Map map = JSON.parseObject(JSON.toJSONString(info));
-            logger.warn("map =" + JSON.toJSONString(map));
             fileService.saveFile(map);
         } catch (Exception e) {
             logger.error("error:" + e.getMessage());
@@ -102,14 +98,18 @@ public class FileController {
 
     @ResponseBody
     @RequestMapping("/saveUpdate")
-    public String saveUpdate(FileDTO info) {
-        FileDTO file = fileService.getFileInfo(info.getId());
-        fileService.saveUpdate(info);
+    public String saveUpdate(int id, String otaDesc) {
+        FileDTO info = fileService.getFileInfo(id);
+        info.setOtaDesc(otaDesc);
+        Map map = JSON.parseObject(JSON.toJSONString(info));
+        fileService.saveFile(map);
         return "ok";
     }
 
     @RequestMapping("/editOta")
-    public String editOta() {
+    public String editOta(Integer id, ModelMap modelMap) {
+        FileDTO info = fileService.getFileInfo(id);
+        modelMap.put("file", info);
         return "fileManage/editOta";
     }
 

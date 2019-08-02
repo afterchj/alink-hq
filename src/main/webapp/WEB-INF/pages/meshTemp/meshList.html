@@ -49,7 +49,7 @@
                     <input type="hidden" name="uid" id="uid" th:value="${dict.uid}">
                     <input type="hidden" name="uid" id="pid" th:value="${dict.projectId}">
                     <input type="hidden" id="pageSize" th:value="${dict.pageSize}">
-                    <div class="search-condition temp">
+                    <div class="search-condition clearfix p-r">
                         <div class="f-l search" >
                             <div>
                                 <label for="name" class="font">网络名称</label>
@@ -76,7 +76,7 @@
                                        placeholder="请输入项目名称">
                             </div>
                         </div>
-                        <div class="f-r search-button ">
+                        <div class="f-r search-button p-a">
                             <button type="submit" class="pointer">查询</button>
                         </div>
                     </div>
@@ -108,7 +108,7 @@
                             <tr th:each="mesh:${pageInfo.list}">
                                 <td class="checkbox">
                                     <input type="checkbox" name="ids" th:value="${mesh.id}" class="">
-                                    <input type="hidden" th:value="${mesh.uid}" class="uid">
+                                    <input type="hidden" th:value="${mesh.uid}" class="uid" name="uid">
                                 </td>
                                 <td class="k-link">
                                     <a th:href="@{/mesh/info(id=${mesh.id})}" th:text="${mesh.mname}"></a>

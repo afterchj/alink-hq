@@ -7,6 +7,7 @@
         g.mid,
         g.gname,
         p.name,
+        m.uid,
         m.project_id,
         m.mname,
         m.mesh_id,
