@@ -1,8 +1,9 @@
 /**
  * Created by yuanjie.fang on 2019/7/25.
  */
+let id;
 $('.singleDel').click(function () {
-    ids = $(this).parent().siblings('.checkbox').find('input').val();
+    id = $(this).attr("alt");
     var selector = $('div[openContent="delete-firmware"]');
     selector.addClass('active');
     adjust(selector);
@@ -14,6 +15,10 @@ $('div[openContent="delete-firmware"] .pop-btn .reduce').click(function () {
     hideOverlay()
 });
 $('div[openContent="delete-firmware"] .pop-btn .yes').click(function () {
+    $.get("/alink-hq/file/deleteFileById?id=" + id, function (res) {
+        console.log("res", res);
+        location.reload();
+    });
     var selector = $('div[openContent="delete-firmware"]');
     selector.removeClass('active')
     hideOverlay()

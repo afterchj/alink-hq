@@ -38,18 +38,18 @@
 
             <div id="meshList" class="table-content-list">
                 <form class="clearfix" th:action="@{/file/OTAFile}" method="post">
-                    <input type="hidden" id="pageSize" th:value="${info.pageSize}">
+                    <input type="hidden" id="pageSize" th:value="${dict.pageSize}">
                     <div class="search-condition clearfix">
                         <div class="f-l search" style="margin-right: 150px;margin-left: 100px;">
                             <div>
                                 <label for="name" class="font">固件名称</label>
-                                <input type="text" id="name" name="otaName" placeholder="请输入固件名称" th:value="${info.otaName}">
+                                <input type="text" id="name" name="otaName" placeholder="请输入固件名称" th:value="${dict.otaName}">
                             </div>
                         </div>
                         <div class="f-l search">
                             <div>
                                 <label for="oid" class="font">固件ID</label>
-                                <input class="intInput" type="text" id="oid" name="otaId" placeholder="请输入固件ID" th:value="${info.otaId}">
+                                <input class="intInput" type="text" id="oid" name="otaId" placeholder="请输入固件ID" th:value="${dict.otaId}">
                             </div>
                         </div>
                         <div class="f-r search-button " style="padding-top: 0;">
@@ -84,7 +84,7 @@
                                 <!--&lt;!&ndash;<input type="hidden" th:value="${mesh.uid}" class="uid">&ndash;&gt;-->
                                 <!--</td>-->
                                 <td class="k-link">
-                                    <a th:href="@{/file/otaRevisionHistory}" th:text="${file.otaName}"></a>
+                                    <a th:href="@{/file/history(oid=${file.id},otaId=${file.otaId},otaName=${file.otaName})}" th:text="${file.otaName}"></a>
                                 </td>
                                 <td th:text="${file.otaId}"></td>
                                 <td th:text="${#dates.format(file.createDate, 'yyyy-MM-dd HH:mm:ss')}"></td>
@@ -113,7 +113,7 @@
                                     <a th:href="@{/file/editOta(id=${file.id})}" style="margin:0 30px;">
                                         <img src="/alink-hq/static/img/alter.png" alt="" title="编辑" style="width: 20px;height: 20px;">
                                     </a>
-                                    <a href="javascript:void(0);" class="singleDel pointer">
+                                    <a href="javascript:void(0);" class="singleDel pointer" th:alt="${file.id}" >
                                         <img src="/alink-hq/static/img/delete.png" alt="" title="删除" style="width: 17px; height: 17px;">
                                     </a>
                                 </td>
