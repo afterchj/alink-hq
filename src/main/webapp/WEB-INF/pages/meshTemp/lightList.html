@@ -118,6 +118,7 @@
                             <tr th:each="light:${pageInfo.list}">
                                 <td class="pid">
                                     <input type="checkbox" name="ids" th:value="${light.id}">
+                                    <input type="hidden" class="mid" th:value="${light.mid}">
                                     <input type="hidden" name="p_id" th:value="${light.pid}">
                                     <input type="hidden" name="u_id" th:value="${light.uid}">
                                 </td>

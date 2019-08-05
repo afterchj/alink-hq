@@ -6,13 +6,12 @@ $(function () {
             ids.push($(this).val());
             uid.push($(this).next('.uid').val())
         });
-        // console.log('ids',ids);
         var result=isAllEqual(uid);
-        console.log('result',result);
+        console.log("uid",uid[0],'result',result);
         if (ids.length == 1) {
-            location.href = "/alink-hq/mesh/move?ids=" + ids
+            location.href = "/alink-hq/mesh/move?uid="+uid[0]+"&ids=" + ids
         } else if (result && ids.length > 1) {
-            location.href = "/alink-hq/mesh/move?ids=" + ids
+            location.href = "/alink-hq/mesh/move?uid="+uid[0]+"&ids="+ ids
         } else {
             var selector = $('div[openContent="exchange"]');
             selector.addClass('active');
