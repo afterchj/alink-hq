@@ -1,6 +1,6 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org">
+      xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -108,8 +108,14 @@
                             </span>
                             <span class="title">隶属公司</span>
                             <span
-                            ><a style="cursor: pointer; text-decoration:none" th:text="${computeInfo.coname}"
-                                th:href="@{/cooperate/info(id=${computeInfo.id})}"></a></span>
+                            ><a shiro:hasAnyRoles="super,admin" style="cursor: pointer; text-decoration:none"
+                                th:text="${computeInfo.coname}"
+                                th:href="@{/cooperate/info(id=${computeInfo.id})}"></a>
+                                <p shiro:hasAnyRoles="manager,user" th:text="${computeInfo.coname}"></p>
+                            </span>
+                            <!--<span-->
+                            <!--&gt;<a style="cursor: pointer; text-decoration:none" th:text="${computeInfo.coname}"-->
+                                <!--th:href="@{/cooperate/info(id=${computeInfo.id})}"></a></span>-->
                             <!--<span>-->
                                 <!--<a th:href="@{pwd}" tab="myAccount/pwd">修改密码</a>-->
                             <!--</span>-->
