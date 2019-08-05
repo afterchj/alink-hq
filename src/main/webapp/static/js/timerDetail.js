@@ -78,7 +78,7 @@ $(function () {
                 });
 
                 group += '</ul></div>';
-                light += '<div class="f-l clearfix"><div class="f-l"><ul class="one">';
+                light += '<ul class="f-l clearfix"><div class="f-l"><ul class="one">';
                 lightXY += '<div class="f-l"><ul class="two">';
                 $.each(lightList, function (key, value) {
                     if (key == 0 && lightInfo == null) {

@@ -80,12 +80,14 @@ $(function() {
     $("#multiMove").click(function() {
         var idss = [];
         var meshArr = [];
+        var uidArr=[];
         var isTrue = true;
         $('input[name="ids"]:checked').each(function() {
             var meshName = $(this).parent().siblings('.meshName').text();
-            var uid=
+            var uid= $(this).siblings('#u_id').val();
             idss.push($(this).val());
             meshArr.push(meshName)
+            uidArr.push(uid);
         });
         if (meshArr.length > 0) {
             for (var i = 0; i < meshArr.length; i++) {
@@ -95,10 +97,11 @@ $(function() {
                 }
             }
         }
-        // console.log('meshArr',meshArr);
+        console.log('uidArr',uidArr);
         var result=isAllEqual(meshArr);
+        var result2=isAllEqual(uidArr);
         // console.log('result',result);
-        if (result && isTrue) {
+        if (result && isTrue && result2) {
             if (idss.length > 0) {
                 location.href = "/alink-hq/group/move?mid=" + $("#mid").val() + "&ids=" + idss
             }
