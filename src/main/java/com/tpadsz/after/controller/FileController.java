@@ -5,6 +5,7 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.tpadsz.after.entity.FileDTO;
 import com.tpadsz.after.entity.SearchDict;
+import com.tpadsz.after.exception.RepetitionException;
 import com.tpadsz.after.service.FileService;
 import com.tpadsz.after.utils.PropertiesUtil;
 import org.apache.commons.lang.StringUtils;
@@ -43,8 +44,28 @@ public class FileController {
         if (pageInfo.getList().size() > 0) {
             modelMap.put("pageInfo", pageInfo);
         }
-        modelMap.put("info", dict);
+        modelMap.put("dict", dict);
         return "fileManage/otaFile";
+    }
+
+    @RequestMapping("/history")
+    public String history(SearchDict dict, ModelMap modelMap) {
+        String str = dict.getUpdateDate();
+        if (StringUtils.isNotBlank(str)) {
+            logger.warn("date=" + str + ",id=" + dict.getId());
+            String begin = str.substring(0, 10);
+            String end = str.substring(str.length() - 10);
+            dict.setBeginDate(begin);
+            dict.setEndDate(end);
+        }
+        PageHelper.startPage(dict.getPageNum(), dict.getPageSize());
+        List<Map> cooperationList = fileService.getFileHistory(dict);
+        PageInfo<Map> pageInfo = new PageInfo(cooperationList, dict.getPageSize());
+        if (pageInfo.getList().size() > 0) {
+            modelMap.put("pageInfo", pageInfo);
+        }
+        modelMap.put("dict", dict);
+        return "fileManage/otaRevisionHistory";
     }
 
     @RequestMapping("/PCFile")
@@ -100,9 +121,23 @@ public class FileController {
     @RequestMapping("/saveUpdate")
     public String saveUpdate(int id, String otaDesc) {
         FileDTO info = fileService.getFileInfo(id);
-        info.setOtaDesc(otaDesc);
+        if (StringUtils.isNotBlank(otaDesc)) {
+            info.setOtaDesc(otaDesc);
+        }
         Map map = JSON.parseObject(JSON.toJSONString(info));
         fileService.saveFile(map);
+        return "ok";
+    }
+
+    @ResponseBody
+    @RequestMapping("/updateFile")
+    public String updateFile(FileDTO info) {
+        logger.warn("info=" + JSON.toJSONString(info));
+        try {
+            fileService.saveUpdate(info);
+        } catch (RepetitionException e) {
+            return "fail";
+        }
         return "ok";
     }
 
@@ -113,13 +148,26 @@ public class FileController {
         return "fileManage/editOta";
     }
 
-    @RequestMapping("/otaRevisionHistory")
-    public String otaRevisionHistory() {
-        return "fileManage/otaRevisionHistory";
+    @ResponseBody
+    @RequestMapping("/deleteFileById")
+    public String deleteFileById(int id) {
+        logger.warn("id=" + id);
+        fileService.deleteFileById(id);
+        return "ok";
+    }
+
+    @ResponseBody
+    @RequestMapping("/deleteHistoryById")
+    public String deleteHistoryById(int id) {
+        logger.warn("id=" + id);
+        fileService.deleteHistoryById(id);
+        return "ok";
     }
 
     @RequestMapping("/uploadNewVersionOTA")
-    public String uploadNewVersionOTA() {
+    public String uploadNewVersionOTA(Integer id, ModelMap modelMap) {
+        FileDTO info = fileService.getFileInfo(id);
+        modelMap.put("file", info);
         return "fileManage/uploadNewVersionOTA";
     }
 }

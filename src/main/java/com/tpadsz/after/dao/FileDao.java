@@ -13,9 +13,11 @@ public interface FileDao {
 
     List<Map> getByMap(SearchDict dict);
 
+    List<Map> getFileHistory(SearchDict dict);
+
     FileDTO getFileInfo(int id);
 
-    int getCount(int id);
+    int getCount(FileDTO info);
 
     void save(FileDTO info);
 
@@ -23,5 +25,6 @@ public interface FileDao {
 
     void saveFile(Map info);
 
-    void deleteCooperationById(int id);
+    void deleteFileById(int id);
+    void deleteHistoryById(int id);
 }

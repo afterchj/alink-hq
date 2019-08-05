@@ -6,72 +6,105 @@ laydate.render({
     elem: '#update-time',
     range: true
 });
-$('.singleDel').click(function() {
+let id;
+$('.singleDel').click(function () {
+    id = $(this).attr("alt");
+    console.log("id", id);
     var selector = $('div[openContent="delete-revision"]');
     selector.addClass('active');
     adjust(selector);
     showOverlay();
 });
-$('div[openContent="delete-revision"] .pop-btn .reduce').click(function() {
+$('div[openContent="delete-revision"] .pop-btn .reduce').click(function () {
     var selector = $('div[openContent="delete-revision"]');
     selector.removeClass('active');
     hideOverlay();
 });
-$('div[openContent="delete-revision"] .pop-btn .yes').click(function() {
+$('div[openContent="delete-revision"] .pop-btn .yes').click(function () {
+    $.get("/alink-hq/file/deleteHistoryById?id=" + id, function (res) {
+        console.log("res", res);
+        location.reload();
+    });
     var selector = $('div[openContent="delete-revision"]');
     selector.removeClass('active');
     hideOverlay();
 });
 //编辑版本
-$('.memo-edit-has').dblclick(function(event) {
+$('.memo-edit-has').dblclick(function (event) {
+    id = $(this).attr("alt");
     event.stopPropagation();
     var selector = $('div[openContent="memo-edit"]');
     selector.addClass('active');
     adjust(selector);
     showOverlay();
-    var text=$(this).find('.memo-content').text().trim();
-    var length=text.length;
+    var text = $(this).find('.memo-content').text().trim();
+    var length = text.length;
     $('.wishContent').val(text);
-    $('.wordsNum').text(length+'/200');
+    $('.wordsNum').text(length + '/200');
 });
-$('div[openContent="memo-edit"] .pop-btn .reduce').click(function() {
+$('div[openContent="memo-edit"] .pop-btn .reduce').click(function () {
     var selector = $('div[openContent="memo-edit"]');
     selector.removeClass('active');
     hideOverlay();
 });
-$('div[openContent="memo-edit"] .pop-btn .yes').click(function() {
+$('div[openContent="memo-edit"] .pop-btn .yes').click(function () {
     var selector = $('div[openContent="memo-edit"]');
     selector.removeClass('active');
+    var content = $(".wishContent").val();
+    console.log("id", id, "desc", content);
+    $.ajax({
+        type: "POST",
+        url: "/alink-hq/file/updateFile",
+        data: {"id": id, "otaDesc": content},
+        success: function (res) {
+            if (res == 'ok') {
+                location.reload();
+            } else {
+                history.back();
+            }
+        }
+    });
     hideOverlay();
 });
 
 //重命名
-$('.singleEdit').click(function(event) {
+$('.singleEdit').click(function (event) {
+    id = $(this).attr("alt");
     event.stopPropagation();
     var selector = $('div[openContent="reset-name"]');
     selector.addClass('active');
     adjust(selector);
     showOverlay();
 });
-$('div[openContent="reset-name"] .pop-btn .reduce').click(function() {
+$('div[openContent="reset-name"] .pop-btn .reduce').click(function () {
     var selector = $('div[openContent="reset-name"]');
     selector.removeClass('active');
     hideOverlay();
 });
-$('div[openContent="reset-name"] .pop-btn .yes').click(function() {
+$('div[openContent="reset-name"] .pop-btn .yes').click(function () {
     var selector = $('div[openContent="reset-name"]');
     $('.rename-hint').text('');
     var val = $('#rename').val();
     if (val == '') {
         $('.rename-hint').text('请输入固件版本');
-    }else if(val == '已存在'){
-        $('.rename-hint').text('已存在请重新输入');
     } else {
         $('.rename-hint').text('');
         selector.removeClass('active');
         hideOverlay();
     }
-
+    console.log("id", id, "version", val);
+    $.ajax({
+        type: "POST",
+        url: "/alink-hq/file/updateFile",
+        data: {"id": id, "otaVersion": val},
+        success: function (res) {
+            if (res == 'ok') {
+                location.reload();
+            } else {
+                $('.rename-hint').text('已存在请重新输入');
+            }
+        }
+    });
 });
 //封装一个限制字数方法
 var checkStrLengths = function (str, maxLength) {
