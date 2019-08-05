@@ -16,8 +16,8 @@
         g.id gid,
         g.gname,
         pl.pname,
-        IFNULL(ls.x, 'null') x,
-        IFNULL(ls.y, 'null') y,
+        IFNULL(ls.x, '50') x,
+        IFNULL(ls.y, '50') y,
         IFNULL(ls.off, 'null') off
 	</sql>
 
@@ -94,8 +94,8 @@
             l.mid,
             IFNULL(l.lname,'null') lname,
             l.lmac,
-            IFNULL(ls.x,'null') x,
-			IFNULL(ls.y,'null') y,
+            IFNULL(ls.x,'50') x,
+			IFNULL(ls.y,'50') y,
 			IFNULL(ls.off,'null') off,
             s.id sid,
             s.sname,
