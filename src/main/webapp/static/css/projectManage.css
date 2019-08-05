@@ -36,7 +36,7 @@
 }
 
 .search select,.search select option {
-    width: 290px!important;
+    width: 275px!important;
     height: 34px!important;
 }
 
@@ -68,7 +68,7 @@
 }
 
 .search label {
-    margin-right: 30px;
+    margin-right: 20px;
     font-size: 14px;
     display: inline-block;
     color: #2F4056;
@@ -78,7 +78,7 @@
 
 .search img {
     top:7px;
-    right:10px
+    left: 380px;
 }
 .search-result{
     min-height: 545px;
@@ -440,14 +440,18 @@ span.msg-use{
     color: #13223F;
 
 }
-
+.pop-content .off-or-on.one{
+    line-height: 3;
+}
 .pop-content .reset-pwd-hint {
     font-size: 14px;
     color: #FF5722;
     /* margin-top: 20px; */
     text-align: left;
 }
-
+#fillSubmit,#submitConfirm,#submit{
+    margin: 0 0 0 -80px;
+}
 #preload-anim {
     display:none
 }
@@ -578,17 +582,18 @@ span.msg-use{
     display:block
 }
 
-.pop-content .hasProject {
-    margin-top:50px
-}
+/*.pop-content .hasProject {*/
+    /*margin-top:50px*/
+/*}*/
 
-.pop-content .hasProject > div {
-    font-size: 16px;
-    color: #383e4b;
-    font-weight: 600;
-    line-height: 2;
+.pop-content .hasProject > div:first-child {
+    font-size: 15px;
+    color: #13223F;
 }
-
+.pop-content .hasProject > div:last-child {
+    font-size: 14px;
+    color: #FF5722;
+}
 .pop-content span {
     display: inline-block;
     width: 49%;
@@ -1234,7 +1239,7 @@ table.light-detail-table thead,
     font-size:15px;
     text-align:right;
     margin-right:25px;
-    color:#383e4b
+    color:#2F4056
 }
 
 .edit-company input {
@@ -1266,9 +1271,9 @@ form.company-msg {
 }
 
 .btn-submit button {
-    background-color: #47a6e6;
+    background-color: #39B6EF;
     color: #fff;
-    border: 1px solid #47a6e6;
+    border: 1px solid #39B6EF;
     width: 100px;
     height: 37px;
     border-radius: 4px;
@@ -1594,7 +1599,7 @@ i.cricle {
     display: inline-block;
     line-height: 40px;
     padding: 0 15px;
-    background-color: #00A0E9;
+    background-color: #39B6EF;
     color: #fff;
     white-space: nowrap;
     text-align: center;

@@ -4,7 +4,7 @@
 }
 
 #tab .tab-nav {
-    border: 1px solid #ddd;
+    border: 1px solid #dbdbdb;
     width:100%;
 }
 
@@ -12,7 +12,7 @@
     width: calc((100% - 306px)/6);
     height: 50px;
     line-height: 50px;
-    border-right: 1px solid #ddd;
+    border-right: 1px solid #dbdbdb;
     text-align: center;
     cursor: pointer;
     font-size: 15px;
@@ -22,14 +22,14 @@
 
 .tab-nav>div.data-scope {
     width: 300px;
-    background-color: #47A6E6;
+    background-color: #39B6EF;
     color: #fff;
 }
 
 .tab-nav>div.active {
-    background-color: #47A6E6;
+    background-color: #39B6EF;
     color: #fff;
-    border-color: #47A6E6;
+    border-color: #39B6EF;
     cursor: pointer;
 }
 
@@ -38,7 +38,7 @@
 }
 
 #tab .tab-content {
-    border: 1px solid #ddd;
+    border: 1px solid #dbdbdb;
     border-top: none;
     min-height: 410px;
     width: 100%;
@@ -48,11 +48,11 @@
 .fix-left-nav {
     width: 300px;
     min-height: 412px;
-    border-right: 1px solid #ddd;
+    border-right: 1px solid #dbdbdb;
     color: #2c2c2c;
 }
 .gray{
-    background-color: #ddd;
+    background-color: #dbdbdb;
     pointer-events: none;
 }
 
@@ -65,17 +65,19 @@
 .tab-content input {
     display: inline-block;
     vertical-align: middle;
+    color: #2F4056;
+    font-size: 13px;
 }
 
 .tab-content-part>div.list {
-    border-bottom: 1px solid #ddd;
+    border-bottom: 1px solid #dbdbdb;
     line-height: 50px;
     text-align: left;
 }
 
 .limit,
 .company {
-    border-bottom: 1px solid #ddd;
+    border-bottom: 1px solid #dbdbdb;
     padding: 0 20px;
     background-color: #eee;
     line-height: 50px;
@@ -94,7 +96,7 @@
 
 .list-content {
     width: calc(90% - 81px);
-    border-left: 1px solid #ddd;
+    border-left: 1px solid #dbdbdb;
     padding: 0 20px;
 }
 
@@ -132,8 +134,8 @@
     width: 115px;
     color: #fff;
     font-size: 16px;
-    background-color: #47A6E6;
-    border: 1px solid #47A6E6;
+    background-color: #39B6EF;
+    border: 1px solid #39B6EF;
     letter-spacing: 5px;
     padding-left: 5px;
     margin-top: 30px;
@@ -151,7 +153,7 @@
 }
 
 .tab-content-part>div.list.one {
-    border-bottom: 1px solid #ddd;
+    border-bottom: 1px solid #dbdbdb;
 }
 
 .tab-content-part>div.list.one .list-title {
@@ -188,7 +190,7 @@
     text-indent: 10px;
     height: 30px;
     border-radius: 5px;
-    border: 1px solid #ddd;
+    border: 1px solid #dbdbdb;
 }
 .createRole>div{
     text-align: center;
@@ -200,8 +202,8 @@
     color: #fff;
     font-size: 17px;
     letter-spacing: 5px;
-    border: 1px solid #47A6E6;
-    background-color: #47A6E6;
+    border: 1px solid #39B6EF;
+    background-color: #39B6EF;
     border-radius: 5px;
     cursor: pointer;
 }
