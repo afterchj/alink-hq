@@ -1,31 +1,34 @@
 /**
  * Created by yuanjie.fang on 2019/7/25.
  */
-let id;
+var id;
 $('.singleDel').click(function () {
     id = $(this).attr("alt");
-    var selector = $('div[openContent="delete-firmware"]');
+    var fileName=$(this).parent().siblings('.otaName').text();
+    var selector = $('div[openContent="delete-pop"]');
     selector.addClass('active');
+    $('div[openContent="delete-pop"] .reset-pwd p').text('您确定要删除 '+fileName+' 固件？');
+    $('div[openContent="delete-pop"] .reset-pwd-hint').text('删除后， '+fileName+' 固件所有历史版本将均被删除，请慎重！');
     adjust(selector);
     showOverlay();
 });
-$('div[openContent="delete-firmware"] .pop-btn .reduce').click(function () {
-    var selector = $('div[openContent="delete-firmware"]');
+$('div[openContent="delete-pop"] .pop-btn .reduce').click(function () {
+    var selector = $('div[openContent="delete-pop"]');
     selector.removeClass('active')
     hideOverlay()
 });
-$('div[openContent="delete-firmware"] .pop-btn .yes').click(function () {
+$('div[openContent="delete-pop"] .pop-btn .yes').click(function () {
     $.get("/alink-hq/file/deleteFileById?id=" + id, function (res) {
         console.log("res", res);
         location.reload();
     });
-    var selector = $('div[openContent="delete-firmware"]');
+    var selector = $('div[openContent="delete-pop"]');
     selector.removeClass('active')
     hideOverlay()
 });
 //备忘录
 $(function () {
-    let id;
+    var id;
     // var width = window.screen.width;
     // var height = window.screen.height;
     $('body').click(function () {
@@ -57,8 +60,8 @@ $(function () {
         // })
         var selector = $('div[openContent="memo-edit"]');
         selector.addClass('active');
-        adjust(selector)
-        showOverlay()
+        adjust(selector);
+        showOverlay();
     })
     //点击取消时
     $('div[openContent="memo-edit"] button.reduce').click(function (event) {
@@ -66,8 +69,8 @@ $(function () {
         // $('div[openContent="memo-edit"]').removeClass('active');
         // $('.hide-iframe').removeClass('active');
         var selector = $('div[openContent="memo-edit"]');
-        selector.removeClass('active')
-        hideOverlay()
+        selector.removeClass('active');
+        hideOverlay();
     })
     //点击确定时
     $('div[openContent="memo-edit"] button.yes').click(function (event) {
@@ -75,8 +78,8 @@ $(function () {
         // $('div[openContent="memo-edit"]').removeClass('active');
         // $('.hide-iframe').removeClass('active');
         var selector = $('div[openContent="memo-edit"]');
-        selector.removeClass('active')
-        hideOverlay()
+        selector.removeClass('active');
+        hideOverlay();
         //获取输入内容
         var content = $(".wishContent").val();
         console.log("desc", content);
