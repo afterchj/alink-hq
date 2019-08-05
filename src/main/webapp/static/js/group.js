@@ -82,7 +82,7 @@ $(function() {
         var meshArr = [];
         var isTrue = true;
         $('input[name="ids"]:checked').each(function() {
-            var meshName = $(this).parent().siblings('.meshName').text();
+            var meshName = $(this).parent().siblings('.mid').text();
             var uid=
             idss.push($(this).val());
             meshArr.push(meshName)

@@ -100,6 +100,7 @@
                             <tbody>
                             <tr th:each="group:${pageInfo.list}">
                                 <td class="">
+                                    <input type="hidden" class="mid" th:value="${dict.mid}">
                                     <input type="checkbox" name="ids" th:value="${group.id}">
                                     <input type="hidden" id="u_id" th:value="${group.uid}">
                                 </td>
