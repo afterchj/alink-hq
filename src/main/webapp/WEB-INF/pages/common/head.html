@@ -58,25 +58,40 @@
                 灯联网管理后台
             </div>
             <div class="f-r ad-nav">
-            <span class="nav-img">
-                <!--<img src="/alink-hq/static/img/off-unclick .png" alt=""/>-->
-                <i class="fa fa-power-off" aria-hidden="true" style="color: #fff;font-size: 18px;"></i>
-            </span>
-                <span class="font"><a style="color: white" th:href="@{/logOut}">退出</a></span>
-            </div>
-            <div class="f-r ad-nav">
-            <span class="nav-img">
-                <i class="fa fa-user" aria-hidden="true" style="color: #fff;font-size: 18px;"></i>
-                <!--<img src="/alink-hq/static/img/admin.png" alt="" style="margin-top: -17px;"/>-->
-            </span>
-            <span th:if="${session.user}!=null">
-                <span th:text="${session.user.uname}" class="font"></span>
-            </span>
-            <span th:if="${session.user.uname}==null">
-                <span th:text="admin" class="font"></span>
-            </span>
+                <ul>
+                    <li>
+                        <i class="fa fa-power-off" aria-hidden="true" style="color: #fff;"></i>
+                        <a th:href="@{/logOut}" class="font-white">退出</a>
+                    </li>
+                    <li>
+                        <i class="fa fa-user" aria-hidden="true" style="color: #fff;"></i>
+                        <span th:if="${session.user}!=null">
+                            <span th:text="${session.user.uname}" class="font"></span>
+                        </span>
+                        <span th:if="${session.user.uname}==null">
+                            <span th:text="admin" class="font"></span>
+                        </span>
+                    </li>
+                </ul>
+            <!--<span class="nav-img">-->
+                <!--&lt;!&ndash;<img src="/alink-hq/static/img/off-unclick .png" alt=""/>&ndash;&gt;-->
+                <!--<i class="fa fa-power-off" aria-hidden="true" style="color: #fff;font-size: 18px;"></i>-->
+            <!--</span>-->
+                <!--<span class="font"><a style="color: white" th:href="@{/logOut}">退出</a></span>-->
+            <!--</div>-->
+            <!--<div class="f-r ad-nav">-->
+            <!--<span class="nav-img">-->
+                <!--<i class="fa fa-user" aria-hidden="true" style="color: #fff;font-size: 18px;"></i>-->
+                <!--&lt;!&ndash;<img src="/alink-hq/static/img/admin.png" alt="" style="margin-top: -17px;"/>&ndash;&gt;-->
+            <!--</span>-->
+            <!--<span th:if="${session.user}!=null">-->
+                <!--<span th:text="${session.user.uname}" class="font"></span>-->
+            <!--</span>-->
+            <!--<span th:if="${session.user.uname}==null">-->
+                <!--<span th:text="admin" class="font"></span>-->
+            <!--</span>-->
                 <!--<span>admin</span>-->
-            </div>
+            <!--</div>-->
         </div>
     </div>
 </div>

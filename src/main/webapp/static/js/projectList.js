@@ -301,6 +301,8 @@ $(function () {
         })
         if(deleteArray.length!=0){
             var selector=$('div[openContent="delete-pop"]');
+            $('div[openContent="delete-pop"] .reset-pwd p').text('您确定要删除所选的项目吗？');
+            $('div[openContent="delete-pop"] .reset-pwd-hint').text('删除后项目中所有信息将无法恢复，请慎重！')
             selector.addClass('active');
             adjust(selector)
             showOverlay()

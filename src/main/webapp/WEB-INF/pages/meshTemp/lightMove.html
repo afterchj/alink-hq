@@ -66,17 +66,26 @@
                             <div class="" style="text-align: center; margin: 30px 0 20px 0;">
                                 <img src="/alink-hq/static/img/exchange-un.png" alt="">
                             </div>
-                            <div class="transfer-company">
-                                <p class="trans-hint" style="margin-left:55px;"></p>
-                                <label for="gid"><span>*</span>选择移动到的组：</label>
-                                <select name="gid" id="gid">
-                                    <option value="">选择移动到的组</option>
-                                    <option value="1">未分组1</option>
-                                </select>
-                            </div>
-                            <div class="tranfer-btn">
-                                <button class="confirm-btn" type="button">确定移动</button>
-                            </div>
+                            <fieldset>
+                                <div class="transfer-company clearfix">
+                                    <div class="form-row">
+                                        <!--<p class="trans-hint" style="margin-left:55px;"></p>-->
+                                        <div class="field-label" style="width: 150px;">
+                                            <label for="gid"><span>*</span>选择移动到的组：</label>
+                                        </div>
+                                        <div class="field-widget p-r">
+                                            <p class="p-a verify "></p>
+                                            <select name="gid" id="gid">
+                                                <option value="">选择移动到的组</option>
+                                                <option value="1">未分组1</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tranfer-btn">
+                                    <button class="confirm-btn" type="button">确定移动</button>
+                                </div>
+                            </fieldset>
                         </div>
                     </div>
                 </div>
@@ -120,27 +129,27 @@
         var gid = $('#gid option:selected').val();
         var ids = $('input[name="ids"]').val();
         if (gid == '') {
-            $('.trans-hint').text('请选择移动到的组');
+            $('#gid').prev('.verify').text('请选择移动到的组');
         } else {
-            $('.trans-hint').text('');
+            $('#gid').prev('.verify').text('');
             $.ajax({
                 type: "post",
                 url: "/alink-hq/light/saveUpdate",
                 data: {ids: ids, gid: gid},
                 success: function (res) {
-                    console.log(res);
+//                    console.log(res);
                     if (res == 'ok') {
                         $('#preload-anim').addClass('active');
                         $('#preload-anim .title').text('移动成功，正在跳转灯列表');
                         setTimeout(function () {
                             location.href = '/alink-hq/light/list?mid=' + mid;
-                        }, 500);
+                        }, 800);
                     } else {
                         $('#preload-anim').addClass('active');
                         $('#preload-anim .title').text('加载失败，请重新尝试');
                         setTimeout(function () {
                             $('#preload-anim').removeClass('active');
-                        }, 500);
+                        }, 800);
                     }
                 }
             })
@@ -150,9 +159,9 @@
     $('#gid').change(function () {
         var gid = $('#gid option:selected').val();
         if (gid == '') {
-            $('.trans-hint').text('请选择移动到的组');
+            $('#gid').prev('.verify').text('请选择移动到的组');
         } else {
-            $('.trans-hint').text('');
+            $('#gid').prev('.verify').text('');
         }
     })
 </script>

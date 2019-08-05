@@ -25,8 +25,8 @@
                 <div class="f-l main-right-title">
                     <nav class="bread">
                         <ol class="clearfix">
-                            <li class="f-l"><a th:href="@{/file/OTAFile}">OTA文件</a></li>
-                            <li class="f-l">固件信息编辑</li>
+                            <li class="f-l"><span th:inline="text">[[${file.otaName}]]</span></li>
+                            <li class="f-l">上传新版本</li>
                         </ol>
                     </nav>
                 </div>
@@ -43,43 +43,22 @@
             </div>
             <div id="timerDetail" class="table-content-list detail">
                 <div class="p-detail">
-                    <div class="p-nav"><span th:inline="text">[[${file.otaName}]]</span>固件信息编辑</div>
+                    <div class="p-nav">上传新版本</div>
                     <div class="p-content p-r">
-                        <form th:action="@{/file/save}" method="post">
+                        <form th:action="@{/file/doUpload}" method="post" enctype="multipart/form-data">
                             <input type="hidden" name="id" th:value="${file.id}">
+                            <input type="hidden" name="otaId" th:value="${file.otaId}">
+                            <input type="hidden" name="otaName" th:value="${file.otaName}">
                             <input type="hidden" name="otaVersion" th:value="${file.otaVersion}">
-                            <fieldset>
-                                <div class="form-row">
-                                    <div class="field-label">
-                                        <label><span>*</span>固件名称</label>：
-                                    </div>
-                                    <div class="field-widget p-r">
-                                        <p class="p-a verify"></p>
-                                        <input type="text" name="otaName" id="otaName"  placeholder="请输入固件名称" th:value="${file.otaName}">
-                                    </div>
-                                </div>
-                                <div class="form-row">
-                                    <div class="field-label ">
-                                        <label><span>*</span>固件ID</label>：
-                                    </div>
-                                    <div class="field-widget p-r">
-                                        <p class="p-a verify"></p>
-                                        <input type="text" name="otaId" id="otaID"  placeholder="请输入固件ID" th:value="${file.otaId}">
-                                    </div>
-                                </div>
-                                <div class="form-row">
-                                    <div class="field-label">
-                                        <label >固件描述</label>：
-                                    </div>
-                                    <div class="field-widget p-r">
-                                        <p class="p-a verify"></p>
-                                        <textarea id="otaDescribe" name="otaDesc" placeholder="请输入固件描述" th:text="${file.otaDesc}"></textarea>
-                                    </div>
+                            <input type="hidden" name="otaDesc" th:value="${file.otaDesc}">
+                            <div class="form-row">
+                                <div class="field-label">
+                                    <label><span>*</span>选择文件</label>：<input type="file" name="file">
                                 </div>
                                 <div class="form-row submit">
-                                    <button type="submit">保存</button>
+                                    <button type="submit">上传</button>
                                 </div>
-                            </fieldset>
+                            </div>
                         </form>
                     </div>
                 </div>
@@ -99,8 +78,10 @@
         </div>
         <!--<div class="reset-pwd-hint">（删除后项目中所有信息将无法恢复，请慎重！）</div>-->
         <div class="pop-btn">
-            <button class="reduce" style="width: auto;letter-spacing: 2px;display: inline-block;font-size: 15px;">再想想</button>
-            <button class="yes" style="width: auto;letter-spacing: 2px;display: inline-block;font-size: 15px;">上传新版本</button>
+            <button class="reduce" style="width: auto;letter-spacing: 2px;display: inline-block;font-size: 15px;">再想想
+            </button>
+            <button class="yes" style="width: auto;letter-spacing: 2px;display: inline-block;font-size: 15px;">上传新版本
+            </button>
         </div>
     </div>
 </div>

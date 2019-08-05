@@ -137,6 +137,11 @@ public class MainTest {
 
     @Test
     public void test() {
+        String str = "2019-08-01 - 2019-08-02";
+        String begin = str.substring(0, 10);
+        String end = str.substring(str.length() - 10);
+        System.out.println("begin=" + begin + ",end=" + end+",str"+new Date(begin));
+        Calendar calendar=Calendar.getInstance();
     }
 
     public static void main(String[] args) {

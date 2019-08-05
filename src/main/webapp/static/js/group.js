@@ -6,8 +6,8 @@ $(function() {
         id = $(this).attr("alt");
         var selector = $('div[openContent="reset-name"]');
         selector.addClass('active');
-        adjust(selector)
-        showOverlay()
+        adjust(selector);
+        showOverlay();
     })
     $('div[openContent="reset-name"] button.yes').click(function() {
         var name = $('#rename').val();
@@ -38,8 +38,8 @@ $(function() {
     })
     $('div[openContent="reset-name"] button.reduce').click(function() {
         var selector = $('div[openContent="reset-name"]');
-        selector.removeClass('active')
-        hideOverlay()
+        selector.removeClass('active');
+        hideOverlay();
     })
     $('.singleDel').click(function() {
         id = $(this).attr("alt");
@@ -53,14 +53,14 @@ $(function() {
     })
     $('div[openContent="delete-pop"] button.yes').click(function() {
         if (ids) {
-            location.href = "/alink-hq/group/delete?mid=" + $("#mid").val() + "&ids=" + ids;
-            ids = []
+            location.href = "/alink-hq/group/delete?pid=" + $("#projectId").val()+"mid=" + $("#mid").val() + "&ids=" + ids;
+            ids = [];
         }
     })
     $('div[openContent="delete-pop"] button.reduce').click(function() {
         var selector = $('div[openContent="delete-pop"]');
-        selector.removeClass('active')
-        hideOverlay()
+        selector.removeClass('active');
+        hideOverlay();
     })
     $("#multiDel").click(function() {
         var idss = [];
@@ -72,7 +72,7 @@ $(function() {
             var selector = $('div[openContent="delete-pop"]');
             selector.addClass('active');
             $('div[openContent="delete-pop"] .reset-pwd p').text('您确定要删除所选的组吗？');
-            $('div[openContent="delete-pop"] .reset-pwd-hint').text('删除后所选组所有的灯将会进入所属网络未分组中请慎重！');
+            $('div[openContent="delete-pop"] .reset-pwd-hint').text('删除后，所选组中所有信息将会被删除，请慎重！');
             adjust(selector);
             showOverlay();
         }
@@ -83,6 +83,7 @@ $(function() {
         var isTrue = true;
         $('input[name="ids"]:checked').each(function() {
             var meshName = $(this).parent().siblings('.meshName').text();
+            var uid=
             idss.push($(this).val());
             meshArr.push(meshName)
         });
@@ -90,25 +91,29 @@ $(function() {
             for (var i = 0; i < meshArr.length; i++) {
                 if (meshArr.indexOf(meshArr[i]) != 0) {
                     isTrue = false;
-                    break
+                    break;
                 }
             }
         }
-        if (isTrue) {
+        // console.log('meshArr',meshArr);
+        var result=isAllEqual(meshArr);
+        // console.log('result',result);
+        if (result && isTrue) {
             if (idss.length > 0) {
                 location.href = "/alink-hq/group/move?mid=" + $("#mid").val() + "&ids=" + idss
             }
         } else {
             var selector = $('div[openContent="exchange"]');
             selector.addClass('active');
-            adjust(selector)
-            showOverlay()
+            $('div[openContent="exchange"] .reset-pwd p').text('不同网络下的组不可进行移动！');
+            adjust(selector);
+            showOverlay();
         }
     })
     $('div[openContent="exchange"] .yes,div[openContent="exchange"] .reduce').click(function() {
         var selector = $('div[openContent="exchange"]');
-        selector.removeClass('active')
-        hideOverlay()
+        selector.removeClass('active');
+        hideOverlay();
     })
 })
 function nameKeyUp() {
@@ -118,12 +123,12 @@ function nameKeyUp() {
     if (name != '' && !userNameResult) {
         $('p.rename-hint').text('请输入 2-6 位汉字、字母、数字')
     } else {
-        $('p.rename-hint').text('')
+        $('p.rename-hint').text('');
     }
 }
 $('#meshId').bind('input propertychange', function() {
     var val = $(this).val();
     if (val != '' && isNaN(val)) {
-        $(this).val('')
+        $(this).val('');
     }
 })

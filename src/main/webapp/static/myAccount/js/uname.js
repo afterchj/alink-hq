@@ -8,8 +8,8 @@ $(function () {
     $("input[id*='userName']").bind("input propertychange change",function () {
         var context = $(this).val();
         if (!match.test(context)) {
-            $('p.use-hint').removeClass('active').text('');
-            $('p.use-hint').addClass('active').text(text);
+            $('#userNameNew').prev('.verify').removeClass('active').text('');
+            $('#userNameNew').prev('.verify').addClass('active').text(text);
         } else {
             $.ajax({
                 type: "POST",
@@ -20,10 +20,10 @@ $(function () {
                     console.log("msg: " + msg.info);
                     //存在用户名
                     if (msg.info == "true") {
-                        $('p.use-hint').removeClass('active').text('');
-                        $('p.use-hint').addClass('active').text('已存在，请重新输入');
+                        $('#userNameNew').prev('.verify').removeClass('active').text('');
+                        $('#userNameNew').prev('.verify').addClass('active').text('已存在，请重新输入');
                     } else {
-                        $('p.use-hint').removeClass('active').text('');
+                        $('#userNameNew').prev('.verify').removeClass('active').text('');
                     }
                 }
             });
@@ -38,19 +38,19 @@ $(function () {
         }
         // var account = $(".account").val();
         var unameFlag = isEmpty(uname);
-        var unameHint = $("p.use-hint").text();
+        var unameHint = $('#userNameNew').prev('.verify').text();
         var hintFlag = isEmpty(unameHint);
         console.log("form: " + $("#unameForm").serialize());
         if (unameFlag) {
-            $('p.use-hint').removeClass('active').text('');
-            $('p.use-hint').addClass('active').text("请输入用户名");
+            $('#userNameNew').prev('.verify').removeClass('active').text('');
+            $('#userNameNew').prev('.verify').addClass('active').text("请输入用户名");
         } else if (!hintFlag) {
             //提示框有提示
             return true;
         } else if ($(".name").val() == $.trim($("#userNameNew").val())) {
             //用户名相同
-            $('p.use-hint').removeClass('active').text('');
-            $('p.use-hint').addClass('active').text("用户名相同");
+            $('#userNameNew').prev('.verify').removeClass('active').text('');
+            $('#userNameNew').prev('.verify').addClass('active').text("用户名相同");
         } else {
             $.ajax({
                 type: "POST",

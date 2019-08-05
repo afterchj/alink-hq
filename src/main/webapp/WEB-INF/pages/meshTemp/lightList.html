@@ -44,7 +44,7 @@
                     <input type="hidden" id="mid" name="mid" th:value="${dict.mid}">
                     <input type="hidden" name="pid" th:value="${dict.pid}">
                     <input type="hidden" name="gid" th:value="${dict.gid}">
-                    <div class="search-condition clearfix">
+                    <div class="search-condition clearfix p-r">
                         <div class="f-l search" style="margin-right:0">
                             <div>
                                 <label for="lname" class="font">灯名称</label>
@@ -85,7 +85,7 @@
                                        placeholder="请输入网络ID">
                             </div>
                         </div>
-                        <div class="f-r search-button " style="">
+                        <div class="f-r search-button p-a" style="">
                             <button type="submit" class="pointer">查询</button>
                         </div>
                     </div>
@@ -116,8 +116,11 @@
                             </thead>
                             <tbody>
                             <tr th:each="light:${pageInfo.list}">
-                                <td class="pid"><input type="checkbox" name="ids" th:value="${light.id}"><input
-                                        type="hidden" th:value="${light.pid}"></td>
+                                <td class="pid">
+                                    <input type="checkbox" name="ids" th:value="${light.id}">
+                                    <input type="hidden" name="p_id" th:value="${light.pid}">
+                                    <input type="hidden" name="u_id" th:value="${light.uid}">
+                                </td>
                                 <td class="k-link lname">
                                     <a th:href="@{/light/info(id=${light.id})}" th:text="${light.lname}"></a>
                                 </td>
@@ -131,15 +134,15 @@
                                     <!--</span>-->
                                     <!--XXX-->
                                 <!--</td>-->
-                                <td class="k-link">
+                                <td class="k-link project_id">
                                     <a th:href="@{/project/detail(projectId=${light.project_id})}"
-                                       th:text="${light.name}"></a>
+                                       th:text="${light.name}" th:alt="${light.project_id}"></a>
                                 </td>
 
                                 <td class="k-link">
                                     <a th:href="@{/mesh/info(id=${light.mid})}" th:text="${light.mname}"></a>
                                 </td>
-                                <td th:text="${light.mesh_id}"></td>
+                                <td th:text="${light.mesh_id}" class="mesh_id"></td>
                                 <td class="k-link">
                                     <a th:href="@{/place/info(id=${light.pid})}" th:text="${light.pname}"></a>
                                 </td>
@@ -321,21 +324,23 @@
     <!--</div>-->
 <!--</div>-->
 <!-- 不可移动不同网络下的组 -->
-<div class="pop-iframe " openContent="exchange">
-    <div class=" p-r pop-nav">
-        温馨提示
-    </div>
-    <div class="pop-content">
-        <div class="reset-pwd">不同网络下的组不可进行移动</div>
-        <!--<div class="reset-pwd-hint">-->
-        <!--删除后所选组所有的灯将会进入所属网络未分组中请慎重！-->
+<!-- 不可移动不同账号下的网络 -->
+<div th:replace="pop/exchange::exchange"></div>
+<!--<div class="pop-iframe " openContent="exchange">-->
+    <!--<div class=" p-r pop-nav">-->
+        <!--温馨提示-->
+    <!--</div>-->
+    <!--<div class="pop-content">-->
+        <!--<div class="reset-pwd">不同网络下的组不可进行移动</div>-->
+        <!--&lt;!&ndash;<div class="reset-pwd-hint">&ndash;&gt;-->
+        <!--&lt;!&ndash;删除后所选组所有的灯将会进入所属网络未分组中请慎重！&ndash;&gt;-->
+        <!--&lt;!&ndash;</div>&ndash;&gt;-->
+        <!--<div class="pop-btn">-->
+            <!--<button class="reduce">取消</button>-->
+            <!--<button class="yes">确定</button>-->
         <!--</div>-->
-        <div class="pop-btn">
-            <button class="reduce">取消</button>
-            <button class="yes">确定</button>
-        </div>
-    </div>
-</div>
+    <!--</div>-->
+<!--</div>-->
 <div class="hide-iframe "></div>
 <script type="text/javascript" src="/alink-hq/static/js/left.js"></script>
 <script type="text/javascript" src="/alink-hq/static/js/page.js"></script>

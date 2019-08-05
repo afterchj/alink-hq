@@ -9,7 +9,7 @@
     <link rel="stylesheet" th:href="@{/static/font-awesome-4.7.0/css/font-awesome.min.css}"/>
     <link rel="stylesheet" href="/alink-hq/static/css/base.css"/>
     <link rel="stylesheet" href="/alink-hq/static/css/leftNav.css"/>
-    <link rel="stylesheet" href="/alink-hq/static/css/account.css"/>
+    <!--<link rel="stylesheet" href="/alink-hq/static/css/account.css"/>-->
     <link rel="stylesheet" href="/alink-hq/static/css/loding.css"/>
     <link rel="stylesheet" href="/alink-hq/static/css/projectManage.css"/>
     <title>修改邮箱</title>
@@ -50,36 +50,48 @@
                     <!--<img src="/alink-hq/static/img/go-back.png" alt="" id="clickReturn"/>-->
                 </div>
             </div>
-            <div id="bindEmail">
-                <div class="b-bindEmail">
-                    <div class="b-nav">
-                        修改邮箱
-                    </div>
-                    <div class="b-content ">
-                        <form id="emailForm" action="#" onsubmit="return false" method="post">
-                            <div style="margin-bottom:10px;">
-                                <p class="email-hint" style="height: 35px;"></p>
-                                <label for="">邮箱：</label>
-                                <input type="text" placeholder="请输入邮箱" id="email" name="email"/>
+            <div id="bindEmail" class=" table-content-list detail transfer">
+            <div class="p-detail">
+                <div class="p-nav">
+                    修改邮箱
+                </div>
+                <div class="p-content p-r ">
+                    <form id="emailForm" action="#" onsubmit="return false" method="post">
+                        <fieldset>
+                            <div class="form-row">
+                                <div class="field-label">
+                                    <!--<p class="email-hint" style="height: 35px;"></p>-->
+                                    <label for="">邮箱：</label>
+                                </div>
+                                <div class="field-widget p-r" >
+                                    <p class="p-a verify "></p>
+                                    <input type="text" placeholder="请输入邮箱" id="email" name="email"/>
+                                </div>
                             </div>
-                            <div class="verification-code">
-                                <p class="code-hint" style="height: 35px;"></p>
-                                <label for="">激活码：</label>
-                                <input type="text" placeholder="请输入激活码" id="code" name="code">
-                                <button type="button" class="security-code" id="codeSubmit">获取激活码</button>
-                                <span class="success-hint" style="height: 35px;"></span>
+                            <div class="verification-code form-row">
+                                <div class="field-label">
+                                    <!--<p class="code-hint" style="height: 35px;"></p>-->
+                                    <label for="">激活码：</label>
+                                </div>
+                                <div class="field-widget p-r" style="width: calc(100% - 320px);">
+                                    <p class="p-a verify "></p>
+                                    <input type="text" placeholder="请输入激活码" id="code" name="code" style="width: 60%;">
+                                    <button type="button" class="security-code" id="codeSubmit" style="width: 31%;">获取激活码</button>
+                                    <span class="success-hint" style="height: 35px;"></span>
+                                </div>
                             </div>
                             <!--<input type="hidden" th:value="${account}" id="account" name="account" class="account"/>-->
                             <input type="hidden" th:value="${flag}" id="flag" name="flag"/>
-                            <div class="submit-btn">
+                            <div class="submit-btn form-row">
                                 <button type="submit" id="fillSubmit">立即修改</button>
                             </div>
-                        </form>
-                    </div>
+                        </fieldset>
+                    </form>
                 </div>
             </div>
         </div>
     </div>
+</div>
 </div>
 <div id="preload-anim">
     <div id="circularG">

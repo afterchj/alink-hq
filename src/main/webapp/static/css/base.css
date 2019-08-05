@@ -86,7 +86,7 @@ ul li {
     border: 10px solid #eef2f5;
 }
 .fa{
-    color: #47A6E6;
+    color: #45B8FD;
 }
 .pointer {
     cursor: pointer;
@@ -226,18 +226,18 @@ fieldset .field-widget {
     text-align: center;
     width: 100%;
 }
-.img-msg{
-    height: 57px;
-/* line-height: 57px; */
-    width: 57px;
-}
+/*.img-msg{*/
+    /*height: 57px;*/
+/*!* line-height: 57px; *!*/
+    /*width: 57px;*/
+/*}*/
 .img-msg img{
-    margin: 5px 0px;
+    /*margin: 5px 0px;*/
 }
 .text-msg{
     width: calc(100% - 80px);
     margin-left: 20px;
-    line-height: normal;
+    line-height: 1.8;
     text-align: left;
 }
 .pop-content .unuse{
@@ -251,12 +251,10 @@ fieldset .field-widget {
     color: #555;
 }
 .pop-content .pop-msg {
-    /* height: calc(100% - 60px); */
-    /* line-height: calc(100% - 60px); */
-    width: 75%;
-    margin-left: calc(25%/2);
-    /* bottom: 5%; */
-    top: 27%;
+    width: 70%;
+    margin-left: calc(30%/2);
+    top: 50%;
+    margin-top: -50.5px;
 }
 /*input[type=text]{*/
     /*width: 300px;*/
@@ -355,7 +353,7 @@ fieldset span{
     /*display: inline-block;*/
     /*line-height: 38px;*/
     /*padding: 0 18px;*/
-    /*background-color: #47A6E6;*/
+    /*background-color: #45B8FD;*/
     /*color: #fff;*/
     /*white-space: nowrap;*/
     /*text-align: center;*/
@@ -565,7 +563,7 @@ input[type=checkbox]:checked,input[type=checkbox]:indeterminate {
 }
 
 .bread li:last-of-type {
-    color: #3c3c3c;
+    color:#13223F;
 }
 
 table tbody tr {
@@ -573,7 +571,7 @@ table tbody tr {
 }
 
 table tbody tr:hover {
-    background-color: #eee;
+    background-color: #F5f5f5;
 }
 input::-webkit-input-placeholder, textarea::-webkit-input-placeholder {
 
@@ -598,7 +596,14 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
     padding: 0 0 0 10px;
 }
 
-
+.font-white{
+    color: #fff;
+}
+.ad-nav li{
+    display: inline-block;
+    padding: 0 10px;
+    font-size: 15px;
+}
 /**/
 .am-topbar-brand {
     padding: 0 10px;
@@ -610,18 +615,16 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
 .am-topbar-nav>li>a {
    line-height: 60px;
 }
-.am-form select, .am-form textarea, .am-form input[type=text], .am-form input[type=password], .am-form input[type=datetime], .am-form input[type=datetime-local], .am-form input[type=date], .am-form input[type=month], .am-form input[type=time], .am-form input[type=week], .am-form input[type=number], .am-form input[type=email], .am-form input[type=url], .am-form input[type=search], .am-form input[type=tel], .am-form input[type=color], .am-form-field{
-    font-size: 14px;
+.search{
+    width: calc(85%/3);
 }
-
 .main-right-nav {
     /* padding: 0 0 10px 20px; */
     height: 45px;
     /* line-height: 45px; */
-    border-left: 4px solid #47a6e6;
-    border-bottom: 2px solid #47a6e6;
-    width: calc(100% - 10px);
-    /* margin-bottom: 30px; */
+    border-left: 4px solid #45B8FD;
+    border-bottom: 2px solid #45B8FD;
+     margin-bottom: 30px;
     /*margin: 10px 0 30px 0;*/
     padding-left: 10px;
 }

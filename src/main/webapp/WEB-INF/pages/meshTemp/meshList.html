@@ -49,8 +49,8 @@
                     <input type="hidden" name="uid" id="uid" th:value="${dict.uid}">
                     <input type="hidden" name="uid" id="pid" th:value="${dict.projectId}">
                     <input type="hidden" id="pageSize" th:value="${dict.pageSize}">
-                    <div class="search-condition temp">
-                        <div class="f-l search" style="margin-right: 150px;margin-left: 100px;">
+                    <div class="search-condition clearfix p-r">
+                        <div class="f-l search" >
                             <div>
                                 <label for="name" class="font">网络名称</label>
                                 <input type="text" id="name" name="mname" th:value="${dict.mname}"
@@ -58,7 +58,7 @@
                             </div>
                             <div>
                                 <label for="name" class="font">网络状态</label>
-                                <select name="status" style=" height: 38px;line-height: 38px;">
+                                <select name="status" >
                                     <option value="0">全部</option>
                                     <option value="1">未知</option>
                                 </select>
@@ -76,7 +76,7 @@
                                        placeholder="请输入项目名称">
                             </div>
                         </div>
-                        <div class="f-r search-button ">
+                        <div class="f-r search-button p-a">
                             <button type="submit" class="pointer">查询</button>
                         </div>
                     </div>
@@ -108,7 +108,7 @@
                             <tr th:each="mesh:${pageInfo.list}">
                                 <td class="checkbox">
                                     <input type="checkbox" name="ids" th:value="${mesh.id}" class="">
-                                    <input type="hidden" th:value="${mesh.uid}" class="uid">
+                                    <input type="hidden" th:value="${mesh.uid}" class="uid" name="uid">
                                 </td>
                                 <td class="k-link">
                                     <a th:href="@{/mesh/info(id=${mesh.id})}" th:text="${mesh.mname}"></a>
@@ -298,18 +298,19 @@
     <!--</div>-->
 <!--</div>-->
 <!-- 不可移动不同账号下的网络 -->
-<div class="pop-iframe " openContent="exchange">
-    <div class=" p-r pop-nav">
-        温馨提示
-    </div>
-    <div class="pop-content">
-        <div class="reset-pwd">不同账号下的网络不可进行移动</div>
-        <div class="pop-btn">
-            <button class="reduce">取消</button>
-            <button class="yes">确定</button>
-        </div>
-    </div>
-</div>
+<div th:replace="pop/exchange::exchange"></div>
+<!--<div class="pop-iframe " openContent="exchange">-->
+    <!--<div class=" p-r pop-nav">-->
+        <!--温馨提示-->
+    <!--</div>-->
+    <!--<div class="pop-content">-->
+        <!--<div class="reset-pwd">不同账号下的网络不可进行移动</div>-->
+        <!--<div class="pop-btn">-->
+            <!--<button class="reduce">取消</button>-->
+            <!--<button class="yes">确定</button>-->
+        <!--</div>-->
+    <!--</div>-->
+<!--</div>-->
 
 <div class="hide-iframe"></div>
 <script type="text/javascript" src="/alink-hq/static/js/left.js"></script>

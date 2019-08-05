@@ -111,6 +111,7 @@
     var uid = [[${session.user.id}]];
     $(function () {
         $.getJSON("/alink-hq/mesh/getProjects", {"uid": uid}, function (json) {
+            console.log('json',json);
             $.each(json, function (i, item) {
                 $("#pid").append("<option value='" + item.id + "'>" + item.label + "</option>");
             });
@@ -134,13 +135,13 @@
                         $('#preload-anim .title').text('移动成功，正在跳转网络列表');
                         setTimeout(function () {
                             location.href = '/alink-hq/mesh/list?uid=' + uid;
-                        }, 500)
+                        }, 800)
                     } else {
                         $('#preload-anim').addClass('active');
                         $('#preload-anim .title').text('加载失败，请重新尝试');
                         setTimeout(function () {
                             $('#preload-anim').removeClass('active');
-                        }, 500)
+                        }, 800)
                     }
                 }
             })

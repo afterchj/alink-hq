@@ -6,7 +6,9 @@ $(function () {
             ids.push($(this).val());
             uid.push($(this).next('.uid').val())
         });
-        var result = isRepeat(uid);
+        // console.log('ids',ids);
+        var result=isAllEqual(uid);
+        console.log('result',result);
         if (ids.length == 1) {
             location.href = "/alink-hq/mesh/move?ids=" + ids
         } else if (result && ids.length > 1) {
@@ -14,8 +16,10 @@ $(function () {
         } else {
             var selector = $('div[openContent="exchange"]');
             selector.addClass('active');
-            adjust(selector)
-            showOverlay()
+            $('div[openContent="exchange"] .reset-pwd p').text('不同账号下的网络不可进行移动!');
+            // $('div[openContent="delete-pop"] .reset-pwd-hint').text('删除后网络中所有信息将无法恢复，请慎重！');
+            adjust(selector);
+            showOverlay();  
         }
     });
     var ids = [];
