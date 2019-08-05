@@ -149,7 +149,7 @@ public class SceneController {
             }
         }
 
-        if (samePlaceXY == 1) {
+        if (samePlaceXY == 1&&groupList.size()!=0) {
             placeList.get(0).setX(groupList.get(0).getX());
             placeList.get(0).setY(groupList.get(0).getY());
         }
