@@ -164,11 +164,19 @@
 /*}*/
 
 .main-right-title {
-    color: #555;
-    height: 37px;
-    line-height: 45px;
+    /*color: #555;*/
+    /*height: 37px;*/
+    /*line-height: 45px;*/
+    /*font-size: 17px;*/
+    /*display: inline-block;*/
+
+    color: #13223F;
+    /* height: 37px; */
+    /* line-height: 45px; */
     font-size: 17px;
-    display: inline-block;
+    display: inline;
+    position: absolute;
+    bottom: 25%;
 }
 
 .last-nav {

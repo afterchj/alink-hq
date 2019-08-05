@@ -6,7 +6,6 @@ abbr,address,article,aside,audio,b,blockquote,body,canvas,caption,cite,code,dd,d
     border: 0;
     vertical-align: baseline;
 }
-
 table {
     border-collapse: unset;
     border-spacing: 0;
@@ -627,6 +626,7 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
      margin-bottom: 30px;
     /*margin: 10px 0 30px 0;*/
     padding-left: 10px;
+    position: relative;
 }
 /*.table-content-list {*/
     /*!*width: calc(100% - 10px);*!*/
