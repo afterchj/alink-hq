@@ -308,7 +308,7 @@ th.all-checkbox {
 }
 
  .p-content> div.clearfix:nth-child(odd){
-    background-color: #f5f5f5;
+    background-color: #F5F7FD;
 }
 
  .p-content > div > div:nth-child(2) {
@@ -1269,7 +1269,14 @@ form.company-msg {
     vertical-align:sub;
     color:red
 }
-
+#timeTitle .sname-a.active{
+cursor: pointer;
+padding: 3px 5px;
+background-color: #39b6ef;
+color: #fff;
+border-radius: 2px;
+box-shadow: 0 1px 1px 0 rgba(0,0,0,.2);
+}
 .btn-submit button {
     background-color: #39B6EF;
     color: #fff;

@@ -1,22 +1,8 @@
 $(function () {
-    var header = '<div class="scene-msg  timer f-l" id="time-scene"><div class="scene-content" ><div class="scene-list clearfix"><div class="f-l"><span>场景下的区域信息</span><span style="color:#999;font-weight: 300;">>></span></div><div class="f-l"><span>该区域下的组信息</span><span style="color:#999;font-weight: 300;">>></span></div><div class="f-l"> <span>该组下的灯详情</span></div></div><div class="clearfix  time-scene-msg  scene-msg-list">';
-    $(".sname-a").click(function () {
-        $(this).css({
-            'cursor': 'pointer',
-            'padding': '3px 5px',
-            'background': '#39b6ef',
-            'color': '#fff',
-            'border-radius': '2px',
-            'box-shadow': '0 1px 1px 0 rgba(0,0,0,.2)',
-        })
-        $(this).parent().parent().parent().siblings().find('.sname-a').css({
-            'cursor': 'pointer',
-        'padding': '3px 5px',
-        'background': '#39b6ef',
-         'color': '#fff',
-        'border-radius': '2px',
-        'box-shadow': '0 1px 1px 0 rgba(0,0,0,.2)',
-        })
+    var header = '<div class="scene-msg  timer f-l" id="time-scene" style=" width: 960px;"><div class="scene-content" ><div class="scene-list clearfix"><div class="f-l"><span>场景下的区域信息</span><span style="color:#999;font-weight: 300;">>></span></div><div class="f-l"><span>该区域下的组信息</span><span style="color:#999;font-weight: 300;">>></span></div><div class="f-l"> <span>该组下的灯详情</span></div></div><div class="clearfix  time-scene-msg  scene-msg-list">';
+    $("#timeTitle .sname-a").click(function () {
+        $(this).addClass('active');
+        $(this).parent().parent().parent().siblings().find('.sname-a').removeClass('active');
         var sid = $(this).next().val();
         var sceneName = $(this).text();
         var sceneId = $(this).siblings("input").eq(1).val();
