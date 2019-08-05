@@ -107,10 +107,8 @@
                                 <img style="width: 28px;height: 27px" src="/alink-hq/static/img/password1.png" alt=""/>
                             </span>
                             <span class="title">隶属公司</span>
-                            <span
-                            ><a shiro:hasAnyRoles="super,admin,manager" style="cursor: pointer; text-decoration:none"
-                                th:text="${computeInfo.coname}"
-                                th:href="@{/cooperate/info(id=${computeInfo.id})}"></a>
+                            <span>
+                                <a shiro:hasAnyRoles="super,admin" style="cursor: pointer; text-decoration:none" th:text="${computeInfo.coname}" th:href="@{/cooperate/info(id=${computeInfo.id})}"></a>
                                 <p shiro:hasAnyRoles="manager,user" th:text="${computeInfo.coname}"></p>
                             </span>
                             <!--<span>-->
