@@ -65,7 +65,7 @@ $(function () {
                 });
 
                 group += '</ul></div>';
-                light += '<div class="f-l clearfix"><div class="f-l" id="lightMsg"><ul class="one">';
+                light += '<div class="f-l clearfix"><div class="f-l" id="lightMsg2"><ul class="one">';
                 // lightXY += '<div class="f-l"><ul class="two">';
                 // var lightSpan1 = '';
                 // var lightSpan2 = '';
@@ -180,9 +180,11 @@ $(function () {
 $('.p-content ').on('click', '.gid', function () {
     var gid = $(this).attr('alt');
 //        var sid = $(".ssid").val();
-    var sid = GetUrlParam('sid');
+//     var sid = GetUrlParam('sid');
     // var lightInfo=[[${lightInfo}]];
     // $('.two li').remove();
+    console.log('gid',gid);
+    console.log('sid',sid);
     var content = '';
     // var content1 = '';
     $.ajax({
@@ -223,7 +225,7 @@ $('.p-content ').on('click', '.gid', function () {
                 //     content1 += '<li class="lid" alt="' + value.id + '" style="text-align: center;">' + value.x + '，' + value.y + '</li>';
                 // }
             })
-            $('.one').append(content);
+            $('.timerDetail  .one').append(content);
             // $('.two').append(content1);
         }
     })

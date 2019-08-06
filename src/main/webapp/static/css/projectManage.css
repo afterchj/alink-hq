@@ -1732,4 +1732,15 @@ table#timeTitle  thead{
 table#timeTitle tbody tr{
     border-bottom: 1px solid #dbdbdb;
 }
-#time-scene
+#lightMsg2{
+    width:100%;
+}
+#lightMsg2 li span:first-child{
+    width: 250px;
+    border-right: 1px solid #dbdbdb;
+    display: inline-block;
+}
+#lightMsg2 li span:last-child{
+    display: inline-block;
+    padding-left: 5px;
+}

@@ -120,7 +120,7 @@ function nameKeyUp() {
     var regUserName = /^[a-zA-Z0-9\u4e00-\u9fa5]{2,6}$/;
     var userNameResult = regUserName.test(name);
     if (name != '' && !userNameResult) {
-        $('p.rename-hint').text('请输入 2-6 位汉字、字母、数字')
+        $('p.rename-hint').text('请输入 2-6 位汉字、字母、数字');
     } else {
         $('p.rename-hint').text('');
     }
