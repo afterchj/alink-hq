@@ -36,7 +36,7 @@
                 </div>
             </div>
 
-            <div id="meshList" class="table-content-list">
+            <div  class="table-content-list">
                 <form class="clearfix" th:action="@{/file/OTAFile}" method="post">
                     <input type="hidden" id="pageSize" th:value="${dict.pageSize}">
                     <div class="search-condition clearfix">
@@ -83,7 +83,7 @@
                                 <!--<input type="checkbox" name="ids"  class="">-->
                                 <!--&lt;!&ndash;<input type="hidden" th:value="${mesh.uid}" class="uid">&ndash;&gt;-->
                                 <!--</td>-->
-                                <td class="k-link">
+                                <td class="k-link otaName">
                                     <a th:href="@{/file/history(oid=${file.id},otaId=${file.otaId},otaName=${file.otaName})}" th:text="${file.otaName}"></a>
                                 </td>
                                 <td th:text="${file.otaId}"></td>
@@ -103,7 +103,7 @@
                                     </a>
                                 </td>
                                 <td class="p-r ">
-                                    <a href="javascript:void(0);">
+                                    <a href="javascript:void(0);" class="memo-edit">
                                         <img  src="/alink-hq/static/img/memo.png" th:alt="${file.id}" class="pointer memo-edit2" th:title="备忘录" style="width: 18px;height: 18px;">
                                         <div class="memo-edit-has" th:text="${file.otaDesc}">
                                             <div class="meno-nav"><img src="/alink-hq/static/img/alter.png" alt="" class="pointer"></div>
@@ -174,26 +174,28 @@
     </div>
 </div>
 <!-- 删除账户 -->
-<div class="pop-iframe" openContent="delete-firmware">
-    <div class=" p-r pop-nav">
-        温馨提示
-    </div>
-    <div class="pop-content">
-        <div class="reset-pwd">您确定要删除XXX固件？</div>
-        <div class="reset-pwd-hint">（删除后，XXX固件所有历史版本将均被删除）</div>
-        <div class="pop-btn">
-            <button class="reduce">取消</button>
-            <button class="yes">确定</button>
-        </div>
-    </div>
-</div>
+<!--<div class="pop-iframe" openContent="delete-pop">-->
+    <!--<div class=" p-r pop-nav">-->
+        <!--温馨提示-->
+    <!--</div>-->
+    <!--<div class="pop-content">-->
+        <!--<div class="reset-pwd">您确定要删除XXX固件？</div>-->
+        <!--<div class="reset-pwd-hint">（删除后，XXX固件所有历史版本将均被删除）</div>-->
+        <!--<div class="pop-btn">-->
+            <!--<button class="reduce">取消</button>-->
+            <!--<button class="yes">确定</button>-->
+        <!--</div>-->
+    <!--</div>-->
+<!--</div>-->
+<!-- 删除账户 -->
+<div th:replace="pop/delete::delete-pop"></div>
 <!-- 固件描述-->
 <div class="pop-iframe" openContent="memo-edit">
     <div class=" p-r pop-nav">
         固件描述
     </div>
     <div class="pop-content">
-        <textarea maxlength="200" style="width: 93%;border: none;margin-top: 10px;resize: none;height: 130px;font-size: 13.5px;line-height: 1.6;color: #323232;font-family: inherit;" class="wishContent" placeholder="请输入不超过200个字"></textarea>
+        <textarea maxlength="200" class="wishContent" placeholder="请输入不超过200个字"></textarea>
         <p class="right-font"><span class="wordsNum">0/200</span></p>
         <div class="pop-btn">
             <button class="reduce">取消</button>

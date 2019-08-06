@@ -101,18 +101,18 @@
             </ul>
         </li>
 
-        <li  class="one-list active" shiro:hasanyPer="viewOTA,viewPC">
-            <div class="p-r">
-                <a th:href="@{/role/list}" tab="fileManage">文件管理</a>
-                <img src="/alink-hq/static/img/left-reduce.png" alt="" class="p-a on-off-triangle">
-            </div>
-            <ul class=" two-list ">
-                <li shiro:hasPermission="viewOTA"  tab="OTAFile"  th:if="${list}!='OTAFile'"><a th:href="@{/file/OTAFile}">OTA文件</a></li>
-                <li shiro:hasPermission="viewOTA" tab="OTAFile" class="active" th:if="${list}=='OTAFile'"><a th:href="@{/file/OTAFile}">OTA文件</a></li>
-                <li shiro:hasPermission="viewPC" tab="PCFile"   th:if="${list}!='PCfile'"><a th:href="@{/file/PCFile}">PC文件</a></li>
-                <li shiro:hasPermission="viewPC" tab="PCFile" class="active" th:if="${list}=='PCfile'"><a th:href="@{/file/PCFile}">PC文件</a></li>
-            </ul>
-        </li>
+<!--        <li  class="one-list active" shiro:hasanyPer="viewOTA,viewPC">-->
+<!--            <div class="p-r">-->
+<!--                <a th:href="@{/role/list}" tab="fileManage">文件管理</a>-->
+<!--                <img src="/alink-hq/static/img/left-reduce.png" alt="" class="p-a on-off-triangle">-->
+<!--            </div>-->
+<!--            <ul class=" two-list ">-->
+<!--                <li shiro:hasPermission="viewOTA"  tab="OTAFile"  th:if="${list}!='OTAFile'"><a th:href="@{/file/OTAFile}">OTA文件</a></li>-->
+<!--                <li shiro:hasPermission="viewOTA" tab="OTAFile" class="active" th:if="${list}=='OTAFile'"><a th:href="@{/file/OTAFile}">OTA文件</a></li>-->
+<!--                <li shiro:hasPermission="viewPC" tab="PCFile"   th:if="${list}!='PCfile'"><a th:href="@{/file/PCFile}">PC文件</a></li>-->
+<!--                <li shiro:hasPermission="viewPC" tab="PCFile" class="active" th:if="${list}=='PCfile'"><a th:href="@{/file/PCFile}">PC文件</a></li>-->
+<!--            </ul>-->
+<!--        </li>-->
 
         <li class="one-list">
             <div class="p-r nav-color " th:if="${list}=='myAccount'">

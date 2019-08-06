@@ -146,7 +146,7 @@
                                     <a th:if="${mesh.scount}=='0'" class="a-un" href="javascript:void(0);"
                                        th:text="${mesh.scount}"></a>
                                     <a th:if="${mesh.scount}!='0'"
-                                       th:href="@{/scene/list(meshName=${mesh.mname},meshId=${mesh.mesh_id},mid=${mesh.id})}"
+                                       th:href="@{/scene/list(projectName=${mesh.name},meshName=${mesh.mname},meshId=${mesh.mesh_id},mid=${mesh.id})}"
                                        th:text="${mesh.scount}"></a>
                                 </td>
                                 <td class="k-link">

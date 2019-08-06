@@ -23,6 +23,7 @@ $(function () {
         //     'height': height
         // })
         var selector=$('div[openContent="start-use"]');
+        $('div[openContent="start-use"] .off-or-on').removeClass('one');
         selector.addClass('active');
         adjust(selector)
         showOverlay()
@@ -31,11 +32,13 @@ $(function () {
         status = $(this).find('.result').text();
         if (status == '启用') {
             intStatus = 1;
+            $('div[openContent="start-use"] .off-or-on').removeClass('one');
             $('div[openContent="start-use"] .off-or-on').text('您确定要禁用 '+account+' 账号吗？');
             $('div[openContent="start-use"] .unuse').text('禁用后，该账号将无法登录！')
         } else if (status == '禁用') {
             intStatus = 0;
             $('div[openContent="start-use"] .off-or-on').text('您确定要启用 '+account+' 账号吗？');
+            $('div[openContent="start-use"] .off-or-on').addClass('one');
             $('div[openContent="start-use"] .unuse').text('');
         }
     })
@@ -54,15 +57,16 @@ $(function () {
                     }else if($('.off-or-on').text().indexOf('启用')!=-1){
                         result='启用';
                     }
-                    $('#preload-anim').addClass('active');
-                    $('#preload-anim .title').text(result+'成功！');
-                    setTimeout(function () {
-                        $('#preload-anim').removeClass('active');
-                        var selector= $('div[openContent="start-use"]');
-                        selector.removeClass('active');
-                        hideOverlay();
-                        location.reload();
-                    }, 1000);
+                    location.reload();
+                    // $('#preload-anim').addClass('active');
+                    // $('#preload-anim .title').text(result+'成功！');
+                    // setTimeout(function () {
+                    //     $('#preload-anim').removeClass('active');
+                    //     var selector= $('div[openContent="start-use"]');
+                    //     selector.removeClass('active');
+                    //     hideOverlay();
+                    //     location.reload();
+                    // }, 1000);
                 }
             }
         })

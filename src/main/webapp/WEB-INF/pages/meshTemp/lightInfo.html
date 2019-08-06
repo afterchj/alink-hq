@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" th:href="@{/static/font-awesome-4.7.0/css/font-awesome.min.css}"/>
     <link rel="stylesheet" href="/alink-hq/static/css/base.css">
-    <link rel="stylesheet" href="/alink-hq/static/css/common.css">
+    <!--<link rel="stylesheet" href="/alink-hq/static/css/common.css">-->
     <link rel="stylesheet" href="/alink-hq/static/css/leftNav.css">
     <link rel="stylesheet" href="/alink-hq/static/css/projectManage.css">
     <title>灯详情</title>
@@ -38,8 +38,8 @@
                     <!--<img src="/alink-hq/static/img/go-back.png" alt="" onclick="history.back()">-->
                 </div>
             </div>
-            <div id="projectDetail" class="table-content-list" style="height: auto;    box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.1), -1px 0 2px rgba(0, 0, 0, 0.05);">
-                <div class="p-detail">
+            <div id="projectDetail" class="table-content-list" style="height: auto;">
+                <div class="p-detail" style="    box-shadow: 0 2px 1px rgba(0, 0, 0, 0.2);">
                     <div class="p-nav">
                         <ul>
                             <li>灯名：<label th:text="${meshInfo.lname}"></label></li>
@@ -117,7 +117,7 @@
                                 <span th:text="${meshInfo.scount}"></span>
                             </div>
                             <div class="f-l">
-                                <a th:href="@{/scene/list(meshName=${meshInfo.mname},meshId=${meshInfo.mesh_id},mid=${meshInfo.mid},lid=${meshInfo.id})}">查看场景列表</a>
+                                <a th:href="@{/scene/list(projectName=${meshInfo.name},meshName=${meshInfo.mname},meshId=${meshInfo.mesh_id},mid=${meshInfo.mid},lid=${meshInfo.id})}">查看场景列表</a>
                             </div>
                         </div>
 

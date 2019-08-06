@@ -1,13 +1,15 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" th:href="@{/static/font-awesome-4.7.0/css/font-awesome.min.css}"/>
+    <link rel="stylesheet" th:href="@{/static/css/loding.css}"/>
     <link rel="stylesheet" th:href="@{/static/css/base.css}">
     <link rel="stylesheet" th:href="@{/static/css/leftNav.css}">
-    <link rel="stylesheet" th:href="@{/static/css/userManage.css}">
+    <link rel="stylesheet" th:href="@{/static/css/projectManage.css}">
     <title>移交账号</title>
 </head>
 
@@ -34,37 +36,49 @@
                     <!--<img src="/alink-hq/static/img/go-back.png" alt="" onClick="javascript :history.back(-1);"/>-->
                 </div>
             </div>
-            <div id="userTurnOver" class="table-content-list">
-                <div class="f-userTurnOver">
-                    <div class="f-nav">
+            <div id="userTurnOver" class="table-content-list detail">
+                <div class=" p-detail">
+                    <div class="p-nav">
                         移交账号
                     </div>
-                    <div class="f-content scrollbar">
-                        <form action="" class=" ">
+                    <div class="p-content p-r ">
+                        <div class="scrollbar">
                             <div class="accountMsg clearfix">
-                                <div class="f-l">
+                                <div class="f-l" style="width:50%;">
                                     <label for="account">账号：</label>
                                     <input type="text" id="account" th:value="${account}">
                                 </div>
-                                <div class="f-l">
+                                <div class="f-r">
                                     <label for="company">隶属公司：</label>
                                     <input type="text" id="company" th:value="${coname}">
                                 </div>
                             </div>
-                            <div class="img-exchange">
-                                <img src="/alink-hq/static/img/exchange-un.png" alt="">
-                            </div>
-                            <div class="transfer">
-                                <div class="transfer-company">
-                                    <p class="tranfer-company-hint"></p>
-                                    <label for=""><span style="">*</span>选择移交到的公司：</label>
-                                    <select name="transfer-company" id="transfer-company" class="pointer">
-                                        <option value="">请选择公司</option>
-                                        <option th:each="firm:${firmList}" th:value="${firm.id}" th:text="${firm.coname }"></option>
-                                    </select>
+
+                        </div>
+                        <div style="text-align: center;margin: 40px 0 18px 0;">
+                            <img src="/alink-hq/static/img/exchange-un.png" alt="">
+                        </div>
+                        <fieldset>
+                            <div class="transfer-company p-r clearfix">
+                                <!--<div class="transfer-company">-->
+                                <div class="form-row">
+                                    <div class="field-label" style="width: 160px;">
+                                        <!--<p class="tranfer-company-hint"></p>-->
+                                        <label style="width: 160px;"><span>*</span>选择移交到的公司：</label>
+                                    </div>
+                                    <div class="field-widget p-r">
+                                        <p class=" p-a verify "></p>
+                                        <select name="transfer-company" id="transfer-company" class="pointer">
+                                            <option value="">请选择公司</option>
+                                            <option th:each="firm:${firmList}" th:value="${firm.id}"
+                                                    th:text="${firm.coname }"></option>
+                                        </select>
+                                    </div>
                                 </div>
-                                <div class="attention">
-                                    <p><span style="color: red;">注意！</span><span>确认移交后</span></p>
+                                <!--</div>-->
+
+                                <div class="attention form-row">
+                                    <p><span>注意！</span><span style="color: #333;font-weight: bold;">确认移交后</span></p>
                                     <ul>
                                         <li>（1）账号中的项目保持不变；</li>
                                         <li>（2）该账号的用户名，绑定的手机号码及邮箱均会清空；</li>
@@ -73,10 +87,10 @@
                                 </div>
                             </div>
 
-                            <div class="btn-transfer">
-                                <button type="button">确定移交</button>
+                            <div class="btn-transfer form-row" style="text-align: center;">
+                                <button type="button" style="margin: 0;">确定移交</button>
                             </div>
-                        </form>
+                        </fieldset>
                     </div>
                 </div>
             </div>
@@ -84,38 +98,54 @@
     </div>
     <!--重置密码 -->
     <!--<div class="reset-passwords pop-iframe" openContent="reset-passwords">-->
-        <!--<div class="reset-passwords-nav p-r pop-nav">-->
-            <!--新密码-->
-        <!--</div>-->
-        <!--<div class="reset-passwords-content pop-content">-->
-            <!--<form action="">-->
-                <!--<div class="main-part">-->
-                    <!--<div class="account-part">-->
-                        <!--<span class="t-title t-account">账&nbsp;&nbsp;&nbsp;号：</span>-->
-                        <!--<span class="t-content t-account-result"></span>-->
-                    <!--</div>-->
-                    <!--<div class="pwd-part">-->
-                        <!--<span class="t-title t-pwd">新密码：</span>-->
-                        <!--<span class="t-content t-pwd-result"></span>-->
-                    <!--</div>-->
-                <!--</div>-->
+    <!--<div class="reset-passwords-nav p-r pop-nav">-->
+    <!--新密码-->
+    <!--</div>-->
+    <!--<div class="reset-passwords-content pop-content">-->
+    <!--<form action="">-->
+    <!--<div class="main-part">-->
+    <!--<div class="account-part">-->
+    <!--<span class="t-title t-account">账&nbsp;&nbsp;&nbsp;号：</span>-->
+    <!--<span class="t-content t-account-result"></span>-->
+    <!--</div>-->
+    <!--<div class="pwd-part">-->
+    <!--<span class="t-title t-pwd">新密码：</span>-->
+    <!--<span class="t-content t-pwd-result"></span>-->
+    <!--</div>-->
+    <!--</div>-->
 
-                <!--<div class="pop-btn clearfix">-->
-                    <!--<div class="f-l pop-hint">请牢记新密码，关闭后将无法展示</div>-->
-                    <!--<div class="f-r">-->
-                        <!--<button class="reduce" type="button">取消</button>-->
-                        <!--<button class="yes" type="button">确定</button>-->
-                    <!--</div>-->
-                <!--</div>-->
-            <!--</form>-->
-        <!--</div>-->
+    <!--<div class="pop-btn clearfix">-->
+    <!--<div class="f-l pop-hint">请牢记新密码，关闭后将无法展示</div>-->
+    <!--<div class="f-r">-->
+    <!--<button class="reduce" type="button">取消</button>-->
+    <!--<button class="yes" type="button">确定</button>-->
+    <!--</div>-->
+    <!--</div>-->
+    <!--</form>-->
+    <!--</div>-->
     <!--</div>-->
 </div>
+<!--新密码-->
+<div th:replace="pop/newPwd::new-pwd"></div>
 <div class="success " openContent="success">
     <div style="margin-bottom: 20px;"><img src="/alink-hq/static/img/success.png" alt=""></div>
     <div><img src="/alink-hq/static/img/sucessfont.png" alt=""></div>
 </div>
 <div class="hide-iframe "></div>
+<div id="preload-anim">
+    <div id="circularG">
+        <div id="circularG_1" class="circularG"></div>
+        <div id="circularG_2" class="circularG"></div>
+        <div id="circularG_3" class="circularG"></div>
+        <div id="circularG_4" class="circularG"></div>
+        <div id="circularG_5" class="circularG"></div>
+        <div id="circularG_6" class="circularG"></div>
+        <div id="circularG_7" class="circularG"></div>
+        <div id="circularG_8" class="circularG"></div>
+    </div>
+    <p class="title">
+    </p>
+</div>
 <script src="/alink-hq/static/js/jquery.min.js"></script>
 <script type="text/javascript" src="/alink-hq/static/js/left.js"></script>
 <script>
@@ -123,9 +153,9 @@
         var account = $("#account").val();
         var fid = $("#transfer-company option:selected").val();
         if (fid == '') {
-            $('p.tranfer-company-hint').text('请选择公司');
+            $('#transfer-company').prev('.verify').text('请选择公司');
         } else {
-            $('p.tranfer-company-hint').text('');
+            $('#transfer-company').prev('.verify').text('');
             $.ajax({
                 type: "POST",
                 url: "/alink-hq/account/transfer",
@@ -134,79 +164,77 @@
                 success: function (res) {
                     console.log(res);
                     if (res.result == '000') {
-//                        $('.pop-iframe').addClass('active');
-//                        var width = window.screen.scrollWidth;
-//                        var height = window.screen.scrollHeight;
-//                        $('.hide-iframe').addClass('active');
-//                        $('.hide-iframe').css({
-//                            'width': width,
-//                            'height': height
-//                        })
-//                        var selector = $('div[openContent="reset-passwords"]');
-//                        selector.addClass('active');
-//                        adjust(selector);
-//                        showOverlay();
-                        setTimeout(function () {
-                            var selector = $('div[openContent="success"]');
-                            selector.addClass('active');
-                            adjust(selector);
-                            showOverlay();
-                            window.location.href = '/alink-hq/account/list';
-                        }, 1000)
-//                        var pwd = res.pwd;
-//                        var account = res.account;
-//                        $('.t-account-result').text(account);
-//                        $('.t-pwd-result').text(pwd);
+                        var pwd = res.pwd;
+                        var account = res.account;
+                        $('.t-account-result').text(account);
+                        $('.t-pwd-result').text(pwd);
+                        var selector = $('div[openContent="new-pwd"]');
+                        selector.addClass('active');
+                        adjust(selector);
+                        showOverlay();
+//                        setTimeout(function () {
+//                            var selector = $('div[openContent="success"]');
+//                            selector.addClass('active');
+//                            adjust(selector);
+//                            showOverlay();
+//                            window.location.href = '/alink-hq/account/list';
+//                        }, 1000)
+
                     }
                 }
             });
         }
 
     })
-//    $('.reset-passwords-content button.yes').click(function () {
-//        var selector = $('div[openContent="reset-passwords"]');
-//        selector.removeClass('active');
-//        hideOverlay();
-//        window.location.href = '/alink-hq/account/list';
-//        setTimeout(function () {
-//            var selector = $('div[openContent="success"]');
-//            selector.addClass('active');
+    $('div[openContent="new-pwd"] button.yes,div[openContent="new-pwd"] button.reduce').click(function () {
+        var selector = $('div[openContent="new-pwd"]');
+        selector.removeClass('active');
+//            var selector1 = $('div[openContent="success"]');
+//            selector1.addClass('active');
+        $('#preload-anim').addClass('active');
+        $('#preload-anim .title').text('移交成功，正在跳转用户列表');
+//            hideOverlay();
 //            window.location.href = '/alink-hq/account/list';
-//        }, 1000)
-//    })
+        setTimeout(function () {
+//                var selector = $('div[openContent="success"]');
+//                selector.addClass('active');
+            window.location.href = '/alink-hq/account/list';
+        }, 1000)
+    })
 
     //监听公司选择
     $('#transfer-company').change(function () {
         var selected = $(this).children('option:selected').val();
         if (selected == '') {
-            $('p.tranfer-company-hint').text('请选择公司');
+            $(this).prev('.verify').text('请选择公司');
+//            $('p.tranfer-company-hint').text('请选择公司');
         } else {
-            $('p.tranfer-company-hint').text('');
+            $(this).prev('.verify').text('');
         }
     })
 
-//    function hide() {
-//        $('.hide-iframe').removeClass('active');
-//        $('.pop-iframe').removeClass('active');
-//    }
+    //    function hide() {
+    //        $('.hide-iframe').removeClass('active');
+    //        $('.pop-iframe').removeClass('active');
+    //    }
 
-//    $('.close').click(function () {
-//        var selector = $('div[openContent="reset-passwords]');
-//        selector.removeClass('active');
-//        hideOverlay();
-//    })
-//    // 点击取消时
-//    $('.pop-content  .pop-btn .reduce').click(function () {
-////        hide();
-////        $(this).parents('.pop-iframe').removeClass('active');
-//        var selector = $('div[openContent="reset-passwords"]');
-//        selector.removeClass('active');
-//        hideOverlay();
-//    })
-//    $(function () {
-//        var height = $(document).height();
-//        $('.main-left').css('height', height);
-//    })
+    //    $('.close').click(function () {
+    //        var selector = $('div[openContent="reset-passwords]');
+    //        selector.removeClass('active');
+    //        hideOverlay();
+    //    })
+    //    // 点击取消时
+    //    $('.pop-content  .pop-btn .reduce').click(function () {
+    ////        hide();
+    ////        $(this).parents('.pop-iframe').removeClass('active');
+    //        var selector = $('div[openContent="reset-passwords"]');
+    //        selector.removeClass('active');
+    //        hideOverlay();
+    //    })
+    //    $(function () {
+    //        var height = $(document).height();
+    //        $('.main-left').css('height', height);
+    //    })
 </script>
 </body>
 

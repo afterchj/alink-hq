@@ -38,7 +38,7 @@ public class SceneController {
 
     @RequestMapping(value = "/list", method = RequestMethod.GET)
     public String list(Integer pageNum, Integer pageSize, String sceneName, Integer sceneId, Integer lid, String
-            meshName, String meshId, Integer mid, HttpSession session, Model model) {
+            meshName,String projectName, String meshId, Integer mid, HttpSession session, Model model) {
         User loginUser = (User) session.getAttribute("user");
         String uid = loginUser.getId();
         if (pageNum == null) {
@@ -62,6 +62,7 @@ public class SceneController {
                 model.addAttribute("flag", 0);
             }
             model.addAttribute("meshName", meshName);
+            model.addAttribute("projectName", projectName);
             model.addAttribute("sceneName", sceneName);
             model.addAttribute("sceneId", sceneId);
 
@@ -149,7 +150,7 @@ public class SceneController {
             }
         }
 
-        if (samePlaceXY == 1) {
+        if (samePlaceXY == 1&&groupList.size()!=0) {
             placeList.get(0).setX(groupList.get(0).getX());
             placeList.get(0).setY(groupList.get(0).getY());
         }
