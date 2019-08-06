@@ -33,15 +33,22 @@ $(function () {
     //     $('.memo-edit-has').parent('td').removeClass('active');
     // })
     //如果备忘录不为空时
-    $('.memo-edit').click(function () {
-        // event.stopPropagation();
+    $('.memo-edit').click(function (event) {
+        console.log('我被点击了',$(this));
+        event.stopPropagation();
         $(this).parent('td').addClass('active');
         $(this).parent().parent('tr').siblings('tr').children('td').removeClass('active');
-    })
-    $('.meno-nav img,.memo-edit2').click(function (event) {
+    });
+    // $('.meno-nav img').click(function (event) {
+    //     event.stopPropagation();
+    //     $('div[openContent="memo-edit"]').addClass('active');
+    // })
+    $('.meno-nav img').click(function (event) {
         event.stopPropagation();
-        // $('div[openContent="memo-edit"]').addClass('active');
-        var content = $(this).siblings('div').text();
+        var selector = $('div[openContent="memo-edit"]');
+        $(this).parent().parent().parent().parent().removeClass('active');
+        selector.addClass('active');
+        var content = $(this).parent().siblings('.memo-content').text();
         id = $(this).attr("alt");
         if (content != '') {
             $(".wishContent").val(content);
@@ -50,8 +57,6 @@ $(function () {
         }
         $('div[openContent="memo-edit"] .pop-content').find('p.unuse').remove();
         $(".wordsNum").html(checkStrLengths(content, 200) + '/200');
-        var selector = $('div[openContent="memo-edit"]');
-        selector.addClass('active');
         adjust(selector);
         showOverlay();
     })
@@ -67,8 +72,6 @@ $(function () {
     //点击确定时
     $('div[openContent="memo-edit"] button.yes').click(function (event) {
         event.stopPropagation();
-        // $('div[openContent="memo-edit"]').removeClass('active');
-        // $('.hide-iframe').removeClass('active');
         var selector = $('div[openContent="memo-edit"]');
         selector.removeClass('active');
         hideOverlay();
@@ -85,7 +88,6 @@ $(function () {
                 }
             }
         });
-        $(this).parents('.pop-iframe').removeClass('active');
     })
 })
 

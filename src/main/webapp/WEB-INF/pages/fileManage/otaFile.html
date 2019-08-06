@@ -104,9 +104,9 @@
                                 </td>
                                 <td class="p-r ">
                                     <a href="javascript:void(0);" class="memo-edit">
-                                        <img  src="/alink-hq/static/img/memo.png" th:alt="${file.id}" class="pointer memo-edit2" th:title="备忘录" style="width: 18px;height: 18px;">
+                                        <img  src="/alink-hq/static/img/memo.png" th:alt="${file.id}" class="pointer " th:title="备忘录" style="width: 18px;height: 18px;">
                                         <div class="memo-edit-has" >
-                                            <div class="meno-nav"><img src="/alink-hq/static/img/alter.png" alt="" class="pointer"></div>
+                                            <div class="meno-nav"><img src="/alink-hq/static/img/alter.png"  alt="" class="pointer"></div>
                                             <div class="memo-content" th:text="${file.otaDesc}"></div>
                                         </div>
                                     </a>
@@ -144,7 +144,7 @@
                             <tbody>
                             <tr>
                                 <td colspan="8">
-                                    <img src="/alink-hq/static/img/no-data.png" alt="">
+                                    <img th:src="@{/static/img/no-data.png}" style="width: auto;height: auto;" alt="">
                                     <p>暂无数据</p>
                                 </td>
                             </tr>
@@ -205,9 +205,10 @@
 </div>
 
 <div class="hide-iframe"></div>
-<script type="text/javascript" src="/alink-hq/static/js/left.js"></script>
-<script type="text/javascript" src="/alink-hq/static/js/page.js"></script>
-<script type="text/javascript" src="/alink-hq/static/js/OTAFile.js"></script>
-<script src="/alink-hq/static/js/moment.js"></script>
+<script type="text/javascript" th:src="@{/static/js/left.js}"></script>
+<script type="text/javascript" th:src="@{/static/js/page.js}" ></script>
+<script type="text/javascript" th:src="@{/static/js/moment.js}"></script>
+<script type="text/javascript" th:src="@{/static/js/OTAFile.js}"></script>
+
 </body>
 </html>
