@@ -975,6 +975,7 @@ input:-ms-input-placeholder {
 #sceneDetail .scene-msg{
     width: 900px;
     margin: auto;
+
 }
 .scene-msg .scene-msg-list > div:nth-child(3) > div:nth-child(1) {
     width: 100%;
