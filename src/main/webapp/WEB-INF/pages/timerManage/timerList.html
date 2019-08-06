@@ -123,8 +123,10 @@
                             <td><p th:text="${timeLineList.update_date}"></p></td>
                             <td><p th:text="${timeLineList.state}"></p></td>
                             <td  class="p-r">
-                                <img src="/alink-hq/static/img/edit.png" alt="" class="pointer reset-name"
-                                     th:title="重命名" th:each="permission:${permissions}" th:if="${permission=='renameTime'}">
+                                <img shiro:hasPermission="renameTime" src="/alink-hq/static/img/edit.png" alt=""
+                                     class="pointer reset-name" th:title="重命名" >
+                                <img shiro:lacksPermission="renameTime" src="/alink-hq/static/img/un-rename.png" alt=""
+                                     th:title="无法操作"  class="reset-name unclick">
                             </td>
                         </tr>
                         </tbody>
