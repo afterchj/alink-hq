@@ -40,7 +40,7 @@
                 <form class="clearfix" th:action="@{/file/OTAFile}" method="post">
                     <input type="hidden" id="pageSize" th:value="${dict.pageSize}">
                     <div class="search-condition clearfix">
-                        <div class="f-l search" style="margin-right: 150px;margin-left: 100px;">
+                        <div class="f-l search" >
                             <div>
                                 <label for="name" class="font">固件名称</label>
                                 <input type="text" id="name" name="otaName" placeholder="请输入固件名称" th:value="${dict.otaName}">
