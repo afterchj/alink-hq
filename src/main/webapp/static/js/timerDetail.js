@@ -34,9 +34,9 @@ $(function () {
                         //xy值不统一
                         if (key == 0) {
                             //默认第一个选中
-                            place += '<li class="pid active">' + value.pname + '（查看详情）</li>';
+                            place += '<li class="pid active">' + value.pname + '(查看详情)</li>';
                         } else {
-                            place += '<li class="pid">' + value.pname + '（查看详情）</li>';
+                            place += '<li class="pid">' + value.pname + '(查看详情)</li>';
                         }
                     } else {
                         if (key == 0) {
@@ -74,27 +74,27 @@ $(function () {
                     // lightSpan2 = '<span>' + value.lname + '(' + value.lmac + ')</span><span>' + value.x + ',' + value.y + '</span></li>';
                     if (key == 0 && lightInfo == null) {
                         light += '<li class="lid active" alt="'+value.id+'">';
-                        light+= '<span>' + value.lname + '（' + value.lmac + '）</span><span>' + value.x + '（色温）,' + value.y + '（亮度）</span></li>';
+                        light+= '<span>' + value.lname + '(' + value.lmac + ')</span><span>' + value.x + '(色温),' + value.y + '(亮度)</span></li>';
                         // light =light+lightSpan1;
                     } else if (key != 0 && lightInfo == null) {
                         light += '<li class="lid" alt="'+value.id+'">';
-                        light += '<span>' + value.lname + '（' + value.lmac + '）</span><span>' + value.x + ',' + value.y + '</span></li>';
+                        light += '<span>' + value.lname + '(' + value.lmac + ')</span><span>' + value.x + ',' + value.y + '</span></li>';
                             // light =light+lightSpan2;
                     } else if (key == 0 && lightInfo != null && value.id == lightInfo.id) {
                         light += '<li class="lid active">';
-                        light+= '<span>' + value.lname + '（' + value.lmac + '）</span><span>' + value.x + '（色温),' + value.y + '（亮度）</span></li>';
+                        light+= '<span>' + value.lname + '(' + value.lmac + ')</span><span>' + value.x + '(色温),' + value.y + '(亮度)</span></li>';
                         // light =light+lightSpan1;
                     } else if (key != 0 && lightInfo != null && value.id == lightInfo.id) {
                         light += '<li class="lid active">';
-                        light += '<span>' + value.lname + '（' + value.lmac + '）</span><span>' + value.x + ',' + value.y + '</span></li>';
+                        light += '<span>' + value.lname + '(' + value.lmac + ')</span><span>' + value.x + ',' + value.y + '</span></li>';
                         // light =light+lightSpan2;
                     } else if (key == 0 && lightInfo != null && value.id != lightInfo.id) {
                         light += '<li class="lid">';
-                        light+= '<span>' + value.lname + '（' + value.lmac + '）</span><span>' + value.x + '（色温）,' + value.y + '（亮度）</span></li>';
+                        light+= '<span>' + value.lname + '(' + value.lmac + ')</span><span>' + value.x + '(色温),' + value.y + '(亮度)</span></li>';
                         // light =light+lightSpan1;
                     } else if (key != 0 && lightInfo != null && value.id != lightInfo.id) {
                         light += '<li class="lid">';
-                        light += '<span>' + value.lname + '（' + value.lmac + '）</span><span>' + value.x + ',' + value.y + '</span></li>';
+                        light += '<span>' + value.lname + '(' + value.lmac + ')</span><span>' + value.x + ',' + value.y + '</span></li>';
                         // light =light+lightSpan2;
                     }
 
@@ -177,16 +177,12 @@ $(function () {
 //         })
 //     }
 // });
-$('.p-content ').on('click', '.gid', function () {
+$('.clearfix.timerDetail.table').on('click', '.gid', function () {
     var gid = $(this).attr('alt');
-//        var sid = $(".ssid").val();
-//     var sid = GetUrlParam('sid');
-    // var lightInfo=[[${lightInfo}]];
-    // $('.two li').remove();
+    var sid = $(".ssid").val();
     console.log('gid',gid);
     console.log('sid',sid);
     var content = '';
-    // var content1 = '';
     $.ajax({
         type: "post",
         url: "/alink-hq/scene/groupDetail",
@@ -201,32 +197,25 @@ $('.p-content ').on('click', '.gid', function () {
             $.each(lightList, function (key, value) {
                 if(lightInfo2==null){
                     if (key == 0) {
-                        content += '<li class="lid" alt="' + value.id + '" ><span>' + value.lname + '（' + value.lmac + '）' + '</span><span>' + value.x + '（色温），' + value.y + '（亮度）</span></li>';
+                        content += '<li class="lid" alt="' + value.id + '" ><span>' + value.lname + '(' + value.lmac + ')' + '</span><span>' + value.x + '(色温)，' + value.y + '(亮度)</span></li>';
                     }else{
-                        content += '<li class="lid" alt="' + value.id + '" ><span>' + value.lname + '（' + value.lmac + '）' + '</span><span>' + value.x + '，' + value.y + '</span></li>';
+                        content += '<li class="lid" alt="' + value.id + '" ><span>' + value.lname + '(' + value.lmac + ')' + '</span><span>' + value.x + '，' + value.y + '</span></li>';
                     }
                 }else if(lightInfo2!=null && lightInfo2.id==value.id){
                     if (key == 0) {
-                        content += '<li class="lid active" alt="' + value.id + '" ><span>' + value.lname + '（' + value.lmac + '）' + '</span><span>' + value.x + '（色温），' + value.y + '(亮度）</span></li>';
+                        content += '<li class="lid active" alt="' + value.id + '" ><span>' + value.lname + '(' + value.lmac + ')' + '</span><span>' + value.x + '(色温)，' + value.y + '(亮度)</span></li>';
                     }else{
-                        content += '<li class="lid active" alt="' + value.id + '" ><span>' + value.lname + '（' + value.lmac + '）' + '</span><span>' + value.x + '，' + value.y + '</span></li>';
+                        content += '<li class="lid active" alt="' + value.id + '" ><span>' + value.lname + '(' + value.lmac + ')' + '</span><span>' + value.x + '，' + value.y + '</span></li>';
                     }
                 }else{
                     if (key == 0) {
-                        content += '<li class="lid " alt="' + value.id + '" ><span>' + value.lname + '（' + value.lmac + '）' + '</span><span>' + value.x + '（色温），' + value.y + '(亮度）</span></li>';
+                        content += '<li class="lid " alt="' + value.id + '" ><span>' + value.lname + '(' + value.lmac + ')' + '</span><span>' + value.x + '(色温)，' + value.y + '(亮度)</span></li>';
                     }else{
-                        content += '<li class="lid " alt="' + value.id + '" ><span>' + value.lname + '（' + value.lmac + '）' + '</span><span>' + value.x + '，' + value.y + '</span></li>';
+                        content += '<li class="lid " alt="' + value.id + '" ><span>' + value.lname + '(' + value.lmac + ')' + '</span><span>' + value.x + '，' + value.y + '</span></li>';
                     }
                 }
-                // content += '<li class="lid" alt=' + value.id + '>' + value.lname + '(' + value.lmac + ')' + '</li>';
-                // if (key == 0) {
-                //     content1 += '<li class="lid" alt="' + value.id + '" style="text-align: center;">' + value.x + '(色温)，' + value.y + '(亮度)</li>';
-                // } else {
-                //     content1 += '<li class="lid" alt="' + value.id + '" style="text-align: center;">' + value.x + '，' + value.y + '</li>';
-                // }
             })
             $('.timerDetail  .one').append(content);
-            // $('.two').append(content1);
         }
     })
 })
