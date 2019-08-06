@@ -6,27 +6,32 @@ laydate.render({
     elem: '#update-time',
     range: true
 });
-let id;
+var id;
 $('.singleDel').click(function () {
     id = $(this).attr("alt");
     console.log("id", id);
-    var selector = $('div[openContent="delete-revision"]');
+    var otaVersion=$(this).parent().siblings('.otaVersion').text();
+    var selector = $('div[openContent="delete-pop"]');
     selector.addClass('active');
+    $('div[openContent="delete-pop"] .reset-pwd p').text('您确定要删除 '+otaVersion+' ？');
+    $('div[openContent="delete-pop"] .reset-pwd p').css('margin-top','10px');
     adjust(selector);
     showOverlay();
 });
-$('div[openContent="delete-revision"] .pop-btn .reduce').click(function () {
-    var selector = $('div[openContent="delete-revision"]');
+$('div[openContent="delete-pop"] .pop-btn .reduce').click(function () {
+    var selector = $('div[openContent="delete-pop"]');
     selector.removeClass('active');
     hideOverlay();
 });
-$('div[openContent="delete-revision"] .pop-btn .yes').click(function () {
+$('div[openContent="delete-pop"] .pop-btn .yes').click(function () {
     $.get("/alink-hq/file/deleteHistoryById?id=" + id, function (res) {
         console.log("res", res);
         location.reload();
     });
-    var selector = $('div[openContent="delete-revision"]');
+    var selector = $('div[openContent="delete-pop"]');
     selector.removeClass('active');
+
+    // $('div[openContent="delete-pop"] .reset-pwd-hint').text('删除后，所选组中所有信息将会被删除，请慎重！');
     hideOverlay();
 });
 //编辑版本
