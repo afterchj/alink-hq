@@ -1,6 +1,6 @@
 var lightInfo2;
 $(function () {
-    var header = '<div class="scene-msg  timer f-l" id="time-scene" style=" width: 960px;"><div class="scene-content" ><div class="scene-list clearfix"><div class="f-l"><span>场景下的区域信息</span><span style="color:#999;font-weight: 300;">>></span></div><div class="f-l"><span>该区域下的组信息</span><span style="color:#999;font-weight: 300;">>></span></div><div class="f-l"> <span>该组下的灯详情</span></div></div><div class="clearfix  time-scene-msg  scene-msg-list">';
+    var header = '<div class="scene-msg  timer f-l" id="time-scene" style=" width: calc(100% - 370px - 50px);"><div class="scene-content" ><div class="scene-list clearfix"><div class="f-l"><span>场景下的区域信息</span><span style="color:#999;font-weight: 300;">>></span></div><div class="f-l"><span>该区域下的组信息</span><span style="color:#999;font-weight: 300;">>></span></div><div class="f-l"> <span>该组下的灯详情</span></div></div><div class="clearfix  time-scene-msg  scene-msg-list">';
     $("#timeTitle .sname-a").click(function () {
         $(this).addClass('active');
         $(this).parent().parent().parent().siblings().find('.sname-a').removeClass('active');
