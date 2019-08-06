@@ -22,7 +22,7 @@ $(function () {
                 var place = '';
                 var group = '';
                 var light = '';
-                var lightXY = '';
+                // var lightXY = '';
                 $(".scene-msg").remove();
 
                 place += '<div class="f-l" style="border-right: none;"><ul>';
@@ -65,32 +65,56 @@ $(function () {
 
                 group += '</ul></div>';
                 light += '<div class="f-l clearfix"><div class="f-l"><ul class="one">';
-                lightXY += '<div class="f-l"><ul class="two">';
+                // lightXY += '<div class="f-l"><ul class="two">';
+                var lightSpan1 = '<span>' + value.lname + '(' + value.lmac + ')</span><span>' + value.x + '(色温),' + value.y + '(亮度)</span></li>';
+                var lightSpan2 = '<span>' + value.lname + '(' + value.lmac + ')</span><span>' + value.x + ',' + value.y + '</span></li>';
                 $.each(lightList, function (key, value) {
+
                     if (key == 0 && lightInfo == null) {
-                        light += '<li class="lid active">' + value.lname + '(' + value.lmac + ')</li>';
-                        lightXY += '<li class="lid active" style="text-align: center;">' + value.x + '(色温),' + value.y + '(亮度)</li>';
+                        light += '<li class="lid active" alt="'+value.id+'">';
+                        light =light+lightSpan1;
                     } else if (key != 0 && lightInfo == null) {
-                        light += '<li class="lid">' + value.lname + '(' + value.lmac + ')</li>';
-                        lightXY += '<li class="lid" style="text-align: center;">' + value.x + ',' + value.y + '</li>';
+                        light += '<li class="lid" alt="'+value.id+'">';
+                        light =light+lightSpan2;
                     } else if (key == 0 && lightInfo != null && value.id == lightInfo.id) {
-                        light += '<li class="lid active">' + value.lname + '(' + value.lmac + ')</li>';
-                        lightXY += '<li class="lid active" style="text-align: center;">' + value.x + '(色温),' + value.y + '(亮度)</li>';
+                        light += '<li class="lid active">' + value.lname + '(' + value.lmac + ')';
+                        light =light+lightSpan1;
                     } else if (key != 0 && lightInfo != null && value.id == lightInfo.id) {
-                        light += '<li class="lid active">' + value.lname + '(' + value.lmac + ')</li>';
-                        lightXY += '<li class="lid active" style="text-align: center;">' + value.x + ',' + value.y + '</li>';
+                        light += '<li class="lid active">';
+                        light =light+lightSpan2;
                     } else if (key == 0 && lightInfo != null && value.id != lightInfo.id) {
-                        light += '<li class="lid">' + value.lname + '(' + value.lmac + ')</li>';
-                        lightXY += '<li class="lid" style="text-align: center;">' + value.x + '(色温),' + value.y + '(亮度)</li>';
+                        light += '<li class="lid">';
+                        light =light+lightSpan1;
                     } else if (key != 0 && lightInfo != null && value.id != lightInfo.id) {
                         light += '<li class="lid">' + value.lname + '(' + value.lmac + ')</li>';
-                        lightXY += '<li class="lid" style="text-align: center;">' + value.x + ',' + value.y + '</li>';
+                        light =light+lightSpan2;
                     }
+
+                    // if (key == 0 && lightInfo == null) {
+                    //     light += '<li class="lid active">' + value.lname + '(' + value.lmac + ')</li>';
+                    //     lightXY += '<li class="lid active" style="text-align: center;">' + value.x + '(色温),' + value.y + '(亮度)</li>';
+                    // } else if (key != 0 && lightInfo == null) {
+                    //     light += '<li class="lid">' + value.lname + '(' + value.lmac + ')</li>';
+                    //     lightXY += '<li class="lid" style="text-align: center;">' + value.x + ',' + value.y + '</li>';
+                    // } else if (key == 0 && lightInfo != null && value.id == lightInfo.id) {
+                    //     light += '<li class="lid active">' + value.lname + '(' + value.lmac + ')</li>';
+                    //     lightXY += '<li class="lid active" style="text-align: center;">' + value.x + '(色温),' + value.y + '(亮度)</li>';
+                    // } else if (key != 0 && lightInfo != null && value.id == lightInfo.id) {
+                    //     light += '<li class="lid active">' + value.lname + '(' + value.lmac + ')</li>';
+                    //     lightXY += '<li class="lid active" style="text-align: center;">' + value.x + ',' + value.y + '</li>';
+                    // } else if (key == 0 && lightInfo != null && value.id != lightInfo.id) {
+                    //     light += '<li class="lid">' + value.lname + '(' + value.lmac + ')</li>';
+                    //     lightXY += '<li class="lid" style="text-align: center;">' + value.x + '(色温),' + value.y + '(亮度)</li>';
+                    // } else if (key != 0 && lightInfo != null && value.id != lightInfo.id) {
+                    //     light += '<li class="lid">' + value.lname + '(' + value.lmac + ')</li>';
+                    //     lightXY += '<li class="lid" style="text-align: center;">' + value.x + ',' + value.y + '</li>';
+                    // }
                 });
 
                 light += '</ul></div>';
-                lightXY += '</ul></div></div>';
-                scene += header + place + group + light + lightXY;
+                // lightXY += '</ul></div></div>';
+                // scene += header + place + group + light + lightXY;
+                scene += header + place + group + light;
                 $(".p-content>div:eq(2)").append(scene);
                 $(".ssid").val(sid);
             }
