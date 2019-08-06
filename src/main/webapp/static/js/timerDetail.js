@@ -1,22 +1,9 @@
+var lightInfo2;
 $(function () {
-    var header = '<div class="scene-msg  timer f-l" id="time-scene"><div class="scene-content" ><div class="scene-list clearfix"><div class="f-l"><span>场景下的区域信息</span><span style="color:#999;font-weight: 300;">>></span></div><div class="f-l"><span>该区域下的组信息</span><span style="color:#999;font-weight: 300;">>></span></div><div class="f-l"> <span>该组下的灯详情</span></div></div><div class="clearfix  time-scene-msg  scene-msg-list">';
-    $(".sname-a").click(function () {
-        $(this).css({
-            'cursor': 'pointer',
-            'padding': '3px 5px',
-            'background': '#39b6ef',
-            'color': '#fff',
-            'border-radius': '2px',
-            'box-shadow': '0 1px 1px 0 rgba(0,0,0,.2)',
-        })
-        $(this).parent().parent().parent().siblings().find('.sname-a').css({
-            'cursor': 'pointer',
-        'padding': '3px 5px',
-        'background': '#39b6ef',
-         'color': '#fff',
-        'border-radius': '2px',
-        'box-shadow': '0 1px 1px 0 rgba(0,0,0,.2)',
-        })
+    var header = '<div class="scene-msg  timer f-l" id="time-scene" style=" width: 960px;"><div class="scene-content" ><div class="scene-list clearfix"><div class="f-l"><span>场景下的区域信息</span><span style="color:#999;font-weight: 300;">>></span></div><div class="f-l"><span>该区域下的组信息</span><span style="color:#999;font-weight: 300;">>></span></div><div class="f-l"> <span>该组下的灯详情</span></div></div><div class="clearfix  time-scene-msg  scene-msg-list">';
+    $("#timeTitle .sname-a").click(function () {
+        $(this).addClass('active');
+        $(this).parent().parent().parent().siblings().find('.sname-a').removeClass('active');
         var sid = $(this).next().val();
         var sceneName = $(this).text();
         var sceneId = $(this).siblings("input").eq(1).val();
@@ -32,11 +19,12 @@ $(function () {
                 var groupList = msg.groupList;
                 var lightList = msg.lightList;
                 var lightInfo = msg.lightInfo;
+                lightInfo2=lightInfo;
                 var scene = '';
                 var place = '';
                 var group = '';
                 var light = '';
-                var lightXY = '';
+                // var lightXY = '';
                 $(".scene-msg").remove();
 
                 place += '<div class="f-l" style="border-right: none;"><ul>';
@@ -59,52 +47,82 @@ $(function () {
                     }
                 });
                 place += '</ul></div>';
-                group += '<div class="f-l" style="border-right: none;" id="groupXYList"><ul>';
-
+                group += '<div class="f-l" style="border-right: none;" id="groupMsg"><ul>';
                 $.each(groupList, function (key, value) {
                     if (isEmpty(value.x)) {
                         if (key == 0) {
-                            group += '<li class="gid active" alt="' + value.gid + '"><span >' + value.gname + '</span>(<span class="groupXy">查看详情</span>)</li>';
+                            group += '<li class="gid active" alt="' + value.gid + '"><span >' + value.gname + '</span>(<span>查看详情</span>)</li>';
                         } else {
-                            group += '<li class="gid" alt="' + value.gid + '"><span >' + value.gname + '</span>(<span class="groupXy">查看详情</span>)</li>';
+                            group += '<li class="gid" alt="' + value.gid + '"><span >' + value.gname + '</span>(<span>查看详情</span>)</li>';
                         }
                     } else {
                         if (key == 0) {
-                            group += '<li class="gid active" alt="' + value.gid + '"><span >' + value.gname + '</span>(<span class="groupXy">' + value.x + ',' + value.y + '</span>)</li>';
+                            group += '<li class="gid active" alt="' + value.gid + '"><span >' + value.gname + '</span>(<span>' + value.x + ',' + value.y + '</span>)</li>';
                         } else {
-                            group += '<li class="gid" alt="' + value.gid + '"><span >' + value.gname + '</span>(<span class="groupXy">' + value.x + ',' + value.y + '</span>)</li>';
+                            group += '<li class="gid" alt="' + value.gid + '"><span >' + value.gname + '</span>(<span>' + value.x + ',' + value.y + '</span>)</li>';
                         }
                     }
                 });
 
                 group += '</ul></div>';
-                light += '<div class="f-l clearfix"><div class="f-l"><ul class="one">';
-                lightXY += '<div class="f-l"><ul class="two">';
+                light += '<div class="f-l clearfix"><div class="f-l" id="lightMsg"><ul class="one">';
+                // lightXY += '<div class="f-l"><ul class="two">';
+                // var lightSpan1 = '';
+                // var lightSpan2 = '';
                 $.each(lightList, function (key, value) {
+                    // lightSpan1 = '<span>' + value.lname + '(' + value.lmac + ')</span><span>' + value.x + '(色温),' + value.y + '(亮度)</span></li>';
+                    // lightSpan2 = '<span>' + value.lname + '(' + value.lmac + ')</span><span>' + value.x + ',' + value.y + '</span></li>';
                     if (key == 0 && lightInfo == null) {
-                        light += '<li class="lid active">' + value.lname + '(' + value.lmac + ')</li>';
-                        lightXY += '<li class="lid active" style="text-align: center;">' + value.x + '(色温),' + value.y + '(亮度)</li>';
+                        light += '<li class="lid active" alt="'+value.id+'">';
+                        light+= '<span>' + value.lname + '（' + value.lmac + '）</span><span>' + value.x + '（色温）,' + value.y + '（亮度）</span></li>';
+                        // light =light+lightSpan1;
                     } else if (key != 0 && lightInfo == null) {
-                        light += '<li class="lid">' + value.lname + '(' + value.lmac + ')</li>';
-                        lightXY += '<li class="lid" style="text-align: center;">' + value.x + ',' + value.y + '</li>';
+                        light += '<li class="lid" alt="'+value.id+'">';
+                        light += '<span>' + value.lname + '（' + value.lmac + '）</span><span>' + value.x + ',' + value.y + '</span></li>';
+                            // light =light+lightSpan2;
                     } else if (key == 0 && lightInfo != null && value.id == lightInfo.id) {
-                        light += '<li class="lid active">' + value.lname + '(' + value.lmac + ')</li>';
-                        lightXY += '<li class="lid active" style="text-align: center;">' + value.x + '(色温),' + value.y + '(亮度)</li>';
+                        light += '<li class="lid active">';
+                        light+= '<span>' + value.lname + '（' + value.lmac + '）</span><span>' + value.x + '（色温),' + value.y + '（亮度）</span></li>';
+                        // light =light+lightSpan1;
                     } else if (key != 0 && lightInfo != null && value.id == lightInfo.id) {
-                        light += '<li class="lid active">' + value.lname + '(' + value.lmac + ')</li>';
-                        lightXY += '<li class="lid active" style="text-align: center;">' + value.x + ',' + value.y + '</li>';
+                        light += '<li class="lid active">';
+                        light += '<span>' + value.lname + '（' + value.lmac + '）</span><span>' + value.x + ',' + value.y + '</span></li>';
+                        // light =light+lightSpan2;
                     } else if (key == 0 && lightInfo != null && value.id != lightInfo.id) {
-                        light += '<li class="lid">' + value.lname + '(' + value.lmac + ')</li>';
-                        lightXY += '<li class="lid" style="text-align: center;">' + value.x + '(色温),' + value.y + '(亮度)</li>';
+                        light += '<li class="lid">';
+                        light+= '<span>' + value.lname + '（' + value.lmac + '）</span><span>' + value.x + '（色温）,' + value.y + '（亮度）</span></li>';
+                        // light =light+lightSpan1;
                     } else if (key != 0 && lightInfo != null && value.id != lightInfo.id) {
-                        light += '<li class="lid">' + value.lname + '(' + value.lmac + ')</li>';
-                        lightXY += '<li class="lid" style="text-align: center;">' + value.x + ',' + value.y + '</li>';
+                        light += '<li class="lid">';
+                        light += '<span>' + value.lname + '（' + value.lmac + '）</span><span>' + value.x + ',' + value.y + '</span></li>';
+                        // light =light+lightSpan2;
                     }
+
+                    // if (key == 0 && lightInfo == null) {
+                    //     light += '<li class="lid active">' + value.lname + '(' + value.lmac + ')</li>';
+                    //     lightXY += '<li class="lid active" style="text-align: center;">' + value.x + '(色温),' + value.y + '(亮度)</li>';
+                    // } else if (key != 0 && lightInfo == null) {
+                    //     light += '<li class="lid">' + value.lname + '(' + value.lmac + ')</li>';
+                    //     lightXY += '<li class="lid" style="text-align: center;">' + value.x + ',' + value.y + '</li>';
+                    // } else if (key == 0 && lightInfo != null && value.id == lightInfo.id) {
+                    //     light += '<li class="lid active">' + value.lname + '(' + value.lmac + ')</li>';
+                    //     lightXY += '<li class="lid active" style="text-align: center;">' + value.x + '(色温),' + value.y + '(亮度)</li>';
+                    // } else if (key != 0 && lightInfo != null && value.id == lightInfo.id) {
+                    //     light += '<li class="lid active">' + value.lname + '(' + value.lmac + ')</li>';
+                    //     lightXY += '<li class="lid active" style="text-align: center;">' + value.x + ',' + value.y + '</li>';
+                    // } else if (key == 0 && lightInfo != null && value.id != lightInfo.id) {
+                    //     light += '<li class="lid">' + value.lname + '(' + value.lmac + ')</li>';
+                    //     lightXY += '<li class="lid" style="text-align: center;">' + value.x + '(色温),' + value.y + '(亮度)</li>';
+                    // } else if (key != 0 && lightInfo != null && value.id != lightInfo.id) {
+                    //     light += '<li class="lid">' + value.lname + '(' + value.lmac + ')</li>';
+                    //     lightXY += '<li class="lid" style="text-align: center;">' + value.x + ',' + value.y + '</li>';
+                    // }
                 });
 
                 light += '</ul></div>';
-                lightXY += '</ul></div></div>';
-                scene += header + place + group + light + lightXY;
+                // lightXY += '</ul></div></div>';
+                // scene += header + place + group + light + lightXY;
+                scene += header + place + group + light;
                 $(".p-content>div:eq(2)").append(scene);
                 $(".ssid").val(sid);
             }
@@ -115,36 +133,7 @@ $(function () {
 $('.p-content ').on('click', 'li', function () {
     $(this).toggleClass('active').siblings().removeClass('active');
 })
-$('.p-content ').on('click', '.gid', function () {
-    var gid = $(this).attr('alt');
-    var sid = $(".ssid").val();
-    $('.one li').remove();
-    $('.two li').remove();
-    var content = '';
-    var content1 = '';
-    $.ajax({
-        type: "post",
-        url: "/alink-hq/scene/groupDetail",
-        data: {
-            "gid": gid,
-            "sid": sid
-        },
-        async: true,
-        success: function (res) {
-            var lightList = res.lightList;
-            $.each(lightList, function (key, value) {
-                content += '<li class="lid" alt=' + value.id + '>' + value.lname + '(' + value.lmac + ')' + '</li>';
-                if (key == 0) {
-                    content1 += '<li class="lid" alt="' + value.id + '" style="text-align: center;">' + value.x + '(色温)，' + value.y + '(亮度)</li>';
-                } else {
-                    content1 += '<li class="lid" alt="' + value.id + '" style="text-align: center;">' + value.x + '，' + value.y + '</li>';
-                }
-            })
-            $('.one').append(content);
-            $('.two').append(content1);
-        }
-    })
-})
+
 
 function isEmpty(value) {
     if (value == null || value == "" || value == "undefined" || value == undefined) {
@@ -166,3 +155,96 @@ $(function () {
         $(".time .f-l:eq(1)>span").append('<a style="pointer-events: none">查看项目详情</a>')
     }
 })
+
+// $(function () {
+// //        var length = $('.scene-msg .scene-msg-list>div:nth-child(3)>div:nth-child(1)  ul').height();
+// //        if (length > 380) {
+// //            $('.scene-msg .scene-msg-list>div:nth-child(3)>div:nth-child(1) ul').addClass('active');
+// //            $('.scene-msg .scene-msg-list>div:nth-child(3)>div:nth-child(1)').css('border-right', 'none')
+// //        }
+// //     var lightInfo=[[${lightInfo}]];
+//     console.log(lightInfo2);
+//     if(lightInfo2!=null){
+//         $('#groupMsg li').each(function(){
+//             var gidss=parseInt($(this).attr('alt'));
+//             var lgid=lightInfo2.gid;
+//             console.log('lgid',lgid)
+//             if(gidss==lgid){
+//                 $(this).addClass('active');
+//             }else{
+//                 $(this).removeClass('active')
+//             }
+//         })
+//     }
+// });
+$('.p-content ').on('click', '.gid', function () {
+    var gid = $(this).attr('alt');
+//        var sid = $(".ssid").val();
+    var sid = GetUrlParam('sid');
+    // var lightInfo=[[${lightInfo}]];
+    // $('.two li').remove();
+    var content = '';
+    // var content1 = '';
+    $.ajax({
+        type: "post",
+        url: "/alink-hq/scene/groupDetail",
+        data: {
+            "gid": gid,
+            "sid": sid
+        },
+        async: true,
+        success: function (res) {
+            $('.one li').remove();
+            var lightList = res.lightList;
+            $.each(lightList, function (key, value) {
+                if(lightInfo2==null){
+                    if (key == 0) {
+                        content += '<li class="lid" alt="' + value.id + '" ><span>' + value.lname + '（' + value.lmac + '）' + '</span><span>' + value.x + '（色温），' + value.y + '（亮度）</span></li>';
+                    }else{
+                        content += '<li class="lid" alt="' + value.id + '" ><span>' + value.lname + '（' + value.lmac + '）' + '</span><span>' + value.x + '，' + value.y + '</span></li>';
+                    }
+                }else if(lightInfo2!=null && lightInfo2.id==value.id){
+                    if (key == 0) {
+                        content += '<li class="lid active" alt="' + value.id + '" ><span>' + value.lname + '（' + value.lmac + '）' + '</span><span>' + value.x + '（色温），' + value.y + '(亮度）</span></li>';
+                    }else{
+                        content += '<li class="lid active" alt="' + value.id + '" ><span>' + value.lname + '（' + value.lmac + '）' + '</span><span>' + value.x + '，' + value.y + '</span></li>';
+                    }
+                }else{
+                    if (key == 0) {
+                        content += '<li class="lid " alt="' + value.id + '" ><span>' + value.lname + '（' + value.lmac + '）' + '</span><span>' + value.x + '（色温），' + value.y + '(亮度）</span></li>';
+                    }else{
+                        content += '<li class="lid " alt="' + value.id + '" ><span>' + value.lname + '（' + value.lmac + '）' + '</span><span>' + value.x + '，' + value.y + '</span></li>';
+                    }
+                }
+                // content += '<li class="lid" alt=' + value.id + '>' + value.lname + '(' + value.lmac + ')' + '</li>';
+                // if (key == 0) {
+                //     content1 += '<li class="lid" alt="' + value.id + '" style="text-align: center;">' + value.x + '(色温)，' + value.y + '(亮度)</li>';
+                // } else {
+                //     content1 += '<li class="lid" alt="' + value.id + '" style="text-align: center;">' + value.x + '，' + value.y + '</li>';
+                // }
+            })
+            $('.one').append(content);
+            // $('.two').append(content1);
+        }
+    })
+})
+
+//paraName 等找参数的名称
+function GetUrlParam(paraName) {
+    var url = document.location.toString();
+    var arrObj = url.split("?");
+    if (arrObj.length > 1) {
+        var arrPara = arrObj[1].split("&");
+        var arr;
+        for (var i = 0; i < arrPara.length; i++) {
+            arr = arrPara[i].split("=");
+            if (arr != null && arr[0] == paraName) {
+                return arr[1];
+            }
+        }
+        return "";
+    }
+    else {
+        return "";
+    }
+}

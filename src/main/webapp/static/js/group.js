@@ -1,7 +1,7 @@
-$(function() {
+$(function () {
     var id;
     var ids = [];
-    $('.rename').click(function() {
+    $('.rename').click(function () {
         $('#rename').val('');
         id = $(this).attr("alt");
         var selector = $('div[openContent="reset-name"]');
@@ -9,7 +9,7 @@ $(function() {
         adjust(selector);
         showOverlay();
     })
-    $('div[openContent="reset-name"] button.yes').click(function() {
+    $('div[openContent="reset-name"] button.yes').click(function () {
         var name = $('#rename').val();
         var regUserName = /^[a-zA-Z0-9\u4e00-\u9fa5]{2,6}$/;
         var userNameResult = regUserName.test(name);
@@ -26,7 +26,7 @@ $(function() {
                     "id": id
                 },
                 async: true,
-                success: function(res) {
+                success: function (res) {
                     if (res == "ok") {
                         location.reload()
                     } else {
@@ -36,12 +36,12 @@ $(function() {
             })
         }
     })
-    $('div[openContent="reset-name"] button.reduce').click(function() {
+    $('div[openContent="reset-name"] button.reduce').click(function () {
         var selector = $('div[openContent="reset-name"]');
         selector.removeClass('active');
         hideOverlay();
     })
-    $('.singleDel').click(function() {
+    $('.singleDel').click(function () {
         id = $(this).attr("alt");
         ids.push(id);
         var selector = $('div[openContent="delete-pop"]');
@@ -51,20 +51,20 @@ $(function() {
         adjust(selector);
         showOverlay();
     })
-    $('div[openContent="delete-pop"] button.yes').click(function() {
+    $('div[openContent="delete-pop"] button.yes').click(function () {
         if (ids) {
-            location.href = "/alink-hq/group/delete?pid=" + $("#projectId").val()+"mid=" + $("#mid").val() + "&ids=" + ids;
+            location.href = "/alink-hq/group/delete?pid=" + $("#projectId").val() + "mid=" + $("#mid").val() + "&ids=" + ids;
             ids = [];
         }
     })
-    $('div[openContent="delete-pop"] button.reduce').click(function() {
+    $('div[openContent="delete-pop"] button.reduce').click(function () {
         var selector = $('div[openContent="delete-pop"]');
         selector.removeClass('active');
         hideOverlay();
     })
-    $("#multiDel").click(function() {
+    $("#multiDel").click(function () {
         var idss = [];
-        $('input[name="ids"]:checked').each(function() {
+        $('input[name="ids"]:checked').each(function () {
             idss.push($(this).val())
         });
         ids = idss;
@@ -77,15 +77,13 @@ $(function() {
             showOverlay();
         }
     })
-    $("#multiMove").click(function() {
+    $("#multiMove").click(function () {
         var idss = [];
         var meshArr = [];
         var isTrue = true;
-        $('input[name="ids"]:checked').each(function() {
-            var meshName = $(this).parent().siblings('.meshName').text();
-            var uid=
+        $('input[name="ids"]:checked').each(function () {
             idss.push($(this).val());
-            meshArr.push(meshName)
+            meshArr.push($(this).next('.mid').val());
         });
         if (meshArr.length > 0) {
             for (var i = 0; i < meshArr.length; i++) {
@@ -95,12 +93,12 @@ $(function() {
                 }
             }
         }
-        // console.log('meshArr',meshArr);
-        var result=isAllEqual(meshArr);
+        // console.log('meshArr', meshArr);
+        var result = isAllEqual(meshArr);
         // console.log('result',result);
         if (result && isTrue) {
             if (idss.length > 0) {
-                location.href = "/alink-hq/group/move?mid=" + $("#mid").val() + "&ids=" + idss
+                location.href = "/alink-hq/group/move?mid=" + meshArr[0] + "&ids=" + idss
             }
         } else {
             var selector = $('div[openContent="exchange"]');
@@ -110,12 +108,13 @@ $(function() {
             showOverlay();
         }
     })
-    $('div[openContent="exchange"] .yes,div[openContent="exchange"] .reduce').click(function() {
+    $('div[openContent="exchange"] .yes,div[openContent="exchange"] .reduce').click(function () {
         var selector = $('div[openContent="exchange"]');
         selector.removeClass('active');
         hideOverlay();
     })
 })
+
 function nameKeyUp() {
     var name = $('#rename').val();
     var regUserName = /^[a-zA-Z0-9\u4e00-\u9fa5]{2,6}$/;
@@ -126,7 +125,8 @@ function nameKeyUp() {
         $('p.rename-hint').text('');
     }
 }
-$('#meshId').bind('input propertychange', function() {
+
+$('#meshId').bind('input propertychange', function () {
     var val = $(this).val();
     if (val != '' && isNaN(val)) {
         $(this).val('');

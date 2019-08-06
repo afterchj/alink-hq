@@ -52,7 +52,6 @@ public class FileController {
     public String history(SearchDict dict, ModelMap modelMap) {
         String str = dict.getUpdateDate();
         if (StringUtils.isNotBlank(str)) {
-            logger.warn("date=" + str + ",id=" + dict.getId());
             String begin = str.substring(0, 10);
             String end = str.substring(str.length() - 10);
             dict.setBeginDate(begin);
@@ -132,7 +131,6 @@ public class FileController {
     @ResponseBody
     @RequestMapping("/updateFile")
     public String updateFile(FileDTO info) {
-        logger.warn("info=" + JSON.toJSONString(info));
         try {
             fileService.saveUpdate(info);
         } catch (RepetitionException e) {
@@ -151,7 +149,6 @@ public class FileController {
     @ResponseBody
     @RequestMapping("/deleteFileById")
     public String deleteFileById(int id) {
-        logger.warn("id=" + id);
         fileService.deleteFileById(id);
         return "ok";
     }
@@ -159,7 +156,6 @@ public class FileController {
     @ResponseBody
     @RequestMapping("/deleteHistoryById")
     public String deleteHistoryById(int id) {
-        logger.warn("id=" + id);
         fileService.deleteHistoryById(id);
         return "ok";
     }

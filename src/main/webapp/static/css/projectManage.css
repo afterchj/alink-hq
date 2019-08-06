@@ -21,7 +21,7 @@
 }
 
 .search input,.search select,.search select option {
-    width: 275px !important;
+    width: 260px !important;
     height:30px;
     font-size:14px;
     padding-left:10px;
@@ -36,7 +36,7 @@
 }
 
 .search select,.search select option {
-    width: 290px!important;
+    width: 275px!important;
     height: 34px!important;
 }
 
@@ -68,7 +68,7 @@
 }
 
 .search label {
-    margin-right: 30px;
+    margin-right: 20px;
     font-size: 14px;
     display: inline-block;
     color: #2F4056;
@@ -78,7 +78,7 @@
 
 .search img {
     top:7px;
-    right:10px
+    left: 380px;
 }
 .search-result{
     min-height: 545px;
@@ -308,7 +308,7 @@ th.all-checkbox {
 }
 
  .p-content> div.clearfix:nth-child(odd){
-    background-color: #f5f5f5;
+    background-color: #F5F7FD;
 }
 
  .p-content > div > div:nth-child(2) {
@@ -434,19 +434,24 @@ span.msg-use{
 }
 
 .pop-content .off-or-on {
+    text-align: left;
     font-size: 15px;
-    color: #2F4056;
-    text-align:left;
+    line-height: normal;
+    color: #13223F;
 
 }
-
+.pop-content .off-or-on.one{
+    line-height: 3;
+}
 .pop-content .reset-pwd-hint {
     font-size: 14px;
     color: #FF5722;
     /* margin-top: 20px; */
     text-align: left;
 }
-
+#fillSubmit,#submitConfirm,#submit{
+    margin: 0 0 0 -80px;
+}
 #preload-anim {
     display:none
 }
@@ -526,9 +531,9 @@ span.msg-use{
     position: absolute;
     right: 0;
     bottom: 0;
-    width: 490px;
-    padding: 13px 20px 11px 40px;
-    background-color: #f8f8f8;;
+    width: calc(100% - 40px);
+    padding: 13px 20px 11px 20px;
+    background-color: #f8f8f8;
 }
 
 .pop-content .pop-btn .reduce {
@@ -547,7 +552,7 @@ span.msg-use{
 }
 
 .pop-content .pop-btn .yes {
-    border:1px solid #00A0E9;
+    border:1px solid #39B6EF;
     font-size:16px;
     color:#fff;
     border-radius:5px;
@@ -555,13 +560,13 @@ span.msg-use{
     width:80px;
     letter-spacing:10px;
     cursor:pointer;
-    background-color:#00A0E9;
+    background-color:#39B6EF;
     padding-left:10px
 }
 
 .pop-hint {
-    font-size: 15px;
-    color: #fb2a2a;
+    font-size: 14px;
+    color: #FF5722;
     margin-top: 10px;
 }
 
@@ -577,22 +582,23 @@ span.msg-use{
     display:block
 }
 
-.pop-content .hasProject {
-    margin-top:50px
-}
+/*.pop-content .hasProject {*/
+    /*margin-top:50px*/
+/*}*/
 
-.pop-content .hasProject > div {
-    font-size: 16px;
-    color: #383e4b;
-    font-weight: 600;
-    line-height: 2;
+.pop-content .hasProject > div:first-child {
+    font-size: 15px;
+    color: #13223F;
 }
-
+.pop-content .hasProject > div:last-child {
+    font-size: 14px;
+    color: #FF5722;
+}
 .pop-content span {
     display: inline-block;
     width: 49%;
-    color: #555;
-    font-size: 15px;
+    color: #13223F;
+    font-size: 14px;
 }
 
 .status:hover {
@@ -600,7 +606,7 @@ span.msg-use{
 }
 
 .main-part {
-    width: 400px;
+    width: 100%;
     margin: 60px auto;
 }
 
@@ -615,7 +621,28 @@ span.msg-use{
 .account-part {
     margin-bottom:30px
 }
-
+fieldset .form-row.attention{
+    margin-left: 29%;
+    width: 71%;
+}
+.success{
+    display: none;
+}
+.success.active{
+    display: block;
+}
+fieldset .form-row.attention p{
+    font-size: 15px;
+}
+fieldset .form-row.attention p span{
+    font-weight: bold;
+}
+fieldset .form-row.attention  ul {
+    line-height: 2;
+    margin: 5px 0;
+    color: #696969;
+    font-size: 14px;
+}
 .hidden {
     visibility:hidden;
     width:0
@@ -1196,13 +1223,23 @@ table.light-detail-table thead,
     margin: 20px 0;
     font-size: 15px;
 }
-
+.wishContent {
+    width: 93%;
+    border: none;
+    margin-top: 10px;
+    resize: none;
+    height: 130px;
+    font-size: 13px;
+    line-height: 1.8;
+    color: #13223F;
+    font-family: inherit;
+}
 .edit-company label {
     width:150px;
     font-size:15px;
     text-align:right;
     margin-right:25px;
-    color:#383e4b
+    color:#2F4056
 }
 
 .edit-company input {
@@ -1232,11 +1269,18 @@ form.company-msg {
     vertical-align:sub;
     color:red
 }
-
+#timeTitle .sname-a.active{
+cursor: pointer;
+padding: 3px 5px;
+background-color: #39b6ef;
+color: #fff;
+border-radius: 2px;
+box-shadow: 0 1px 1px 0 rgba(0,0,0,.2);
+}
 .btn-submit button {
-    background-color: #47a6e6;
+    background-color: #39B6EF;
     color: #fff;
-    border: 1px solid #47a6e6;
+    border: 1px solid #39B6EF;
     width: 100px;
     height: 37px;
     border-radius: 4px;
@@ -1562,7 +1606,7 @@ i.cricle {
     display: inline-block;
     line-height: 40px;
     padding: 0 15px;
-    background-color: #00A0E9;
+    background-color: #39B6EF;
     color: #fff;
     white-space: nowrap;
     text-align: center;

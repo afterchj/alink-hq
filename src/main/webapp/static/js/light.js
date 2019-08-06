@@ -89,7 +89,7 @@ $(function () {
         $('input[name="ids"]:checked').each(function () {
             var pid = $(this).siblings('input[name="p_id"]').val();
             var uid = $(this).siblings('input[name="u_id"]').val();
-            var meshId=$(this).parent().siblings('.mesh_id').text();
+            var meshId=($(this).next('.mid').val());
             var projectId=$(this).parent().siblings('.project_id').find('a').attr('alt');
             idss.push($(this).val());
             pidArr.push(pid);
@@ -105,12 +105,12 @@ $(function () {
                 }
             }
         }
-        console.log('idss',idss);
-        console.log('meshIdArr',meshIdArr);
-        console.log('projectIdArr',projectIdArr);
-        console.log('pidArr', pidArr);
-        console.log('uidArr', uidArr);
-        console.log('isTrue', isTrue);
+        // console.log('idss',idss);
+        // console.log('meshIdArr',meshIdArr);
+        // console.log('projectIdArr',projectIdArr);
+        // console.log('pidArr', pidArr);
+        // console.log('uidArr', uidArr);
+        // console.log('isTrue', isTrue);
         // var result1 = isAllEqual(idss);
         var result1 = isAllEqual(projectIdArr);
         var result2 = isAllEqual(meshIdArr);
@@ -118,7 +118,7 @@ $(function () {
         var result4 = isAllEqual(uidArr);
         if (isTrue && result1 && result2 && result3 && result4 ) {
             if (idss.length > 0) {
-                location.href = "/alink-hq/light/move?mid=" + $("#mid").val() + "&ids=" + idss
+                location.href = "/alink-hq/light/move?mid=" +meshIdArr[0] + "&ids=" + idss
             }
         } else {
             var selector = $('div[openContent="exchange"]');

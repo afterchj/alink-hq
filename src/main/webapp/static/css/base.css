@@ -241,13 +241,8 @@ fieldset .field-widget {
 }
 .pop-content .unuse{
     font-size: 14px;
-    color: #f9220a;
-    margin-top: 5px;
+    color: #FF5722;
     text-align: left;
-}
-.pop-content .off-or-on {
-    font-size: 16px;
-    color: #555;
 }
 .pop-content .pop-msg {
     width: 70%;

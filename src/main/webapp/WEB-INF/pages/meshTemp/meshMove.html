@@ -38,6 +38,7 @@
                 </div>
             </div>
             <form th:action="@{/mesh/saveUpdate}" class="" method="post">
+                <input type="hidden" id="uid" th:value="${uid}">
                 <div id="meshTurnOver" class="table-content-list detail transfer">
                     <div class="p-detail">
                         <div class=" p-nav">
@@ -82,7 +83,6 @@
                                 </div>
                             </fieldset>
                         </div>
-
                     </div>
                 </div>
             </form>
@@ -108,10 +108,10 @@
 <script type="text/javascript" src="/alink-hq/static/js/left.js"></script>
 <script src="/alink-hq/static/js/moment.js"></script>
 <script th:inline="javascript">
-    var uid = [[${session.user.id}]];
+    let uid = $("#uid").val();
+    console.log('uid',uid);
     $(function () {
         $.getJSON("/alink-hq/mesh/getProjects", {"uid": uid}, function (json) {
-            console.log('json',json);
             $.each(json, function (i, item) {
                 $("#pid").append("<option value='" + item.id + "'>" + item.label + "</option>");
             });
