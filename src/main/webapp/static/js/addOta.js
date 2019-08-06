@@ -31,14 +31,14 @@ $('#otaID').bind('input propertychange', function () {
         $(this).parent().find('.verify').text('');
     }
 });
-$('#otaDescribe').keyup(function () {
-    var val = $(this).val();
-    if (val == '') {
-        $(this).parent().find('.verify').text('请输入固件描述');
-    } else {
-        $(this).parent().find('.verify').text('');
-    }
-});
+// $('#otaDescribe').keyup(function () {
+//     var val = $(this).val();
+//     if (val == '') {
+//         $(this).parent().find('.verify').text('请输入固件描述');
+//     } else {
+//         $(this).parent().find('.verify').text('');
+//     }
+// });
 $('.submit button').click(function () {
     var otaName = $('#otaName').val();
     var otaID = $('#otaID').val();
@@ -57,13 +57,13 @@ $('.submit button').click(function () {
     } else {
         $('#otaID').parent().find('.verify').text('');
     }
-    if (otaDescribe == '') {
-        $('#otaDescribe').parent().find('.verify').text('请输入固件描述');
-    }else if(otaDescribe=='已存在'){
-        $('#otaDescribe').parent().find('.verify').text('已存在，请重新输入');
-    }  else {
-        $('#otaDescribe').parent().find('.verify').text('');
-    }
+    // if (otaDescribe == '') {
+    //     $('#otaDescribe').parent().find('.verify').text('请输入固件描述');
+    // }else if(otaDescribe=='已存在'){
+    //     $('#otaDescribe').parent().find('.verify').text('已存在，请重新输入');
+    // }  else {
+    //     $('#otaDescribe').parent().find('.verify').text('');
+    // }
     console.log(otaName,otaID,otaDescribe);
     if(otaName!= '' &&  otaID!='' && otaDescribe!=''){
         //确定新增
