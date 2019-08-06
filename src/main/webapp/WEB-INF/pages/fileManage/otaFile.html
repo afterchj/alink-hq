@@ -105,9 +105,9 @@
                                 <td class="p-r ">
                                     <a href="javascript:void(0);" class="memo-edit">
                                         <img  src="/alink-hq/static/img/memo.png" th:alt="${file.id}" class="pointer memo-edit2" th:title="备忘录" style="width: 18px;height: 18px;">
-                                        <div class="memo-edit-has" th:text="${file.otaDesc}">
+                                        <div class="memo-edit-has" >
                                             <div class="meno-nav"><img src="/alink-hq/static/img/alter.png" alt="" class="pointer"></div>
-                                            <div class="memo-content"></div>
+                                            <div class="memo-content" th:text="${file.otaDesc}"></div>
                                         </div>
                                     </a>
                                     <a th:href="@{/file/editOta(id=${file.id})}" style="margin:0 30px;">

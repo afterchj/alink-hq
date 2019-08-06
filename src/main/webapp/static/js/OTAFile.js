@@ -29,14 +29,12 @@ $('div[openContent="delete-pop"] .pop-btn .yes').click(function () {
 //备忘录
 $(function () {
     var id;
-    // var width = window.screen.width;
-    // var height = window.screen.height;
-    $('body').click(function () {
-        $('.memo-edit-has').parent('td').removeClass('active');
-    })
+    // $('body').click(function () {
+    //     $('.memo-edit-has').parent('td').removeClass('active');
+    // })
     //如果备忘录不为空时
-    $('.memo-edit').click(function (event) {
-        event.stopPropagation();
+    $('.memo-edit').click(function () {
+        // event.stopPropagation();
         $(this).parent('td').addClass('active');
         $(this).parent().parent('tr').siblings('tr').children('td').removeClass('active');
     })
@@ -51,13 +49,7 @@ $(function () {
             $('table tr>td:last-child').removeClass('active');
         }
         $('div[openContent="memo-edit"] .pop-content').find('p.unuse').remove();
-        // $(".wishContent").val('');
         $(".wordsNum").html(checkStrLengths(content, 200) + '/200');
-        // $('.hide-iframe').addClass('active');
-        // $('.hide-iframe').css({
-        //     'width': width,
-        //     'height': height
-        // })
         var selector = $('div[openContent="memo-edit"]');
         selector.addClass('active');
         adjust(selector);
