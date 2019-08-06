@@ -60,4 +60,5 @@ public class LightServiceImpl implements LightService {
     public void deleteLightByIds(List list) {
         lightDao.deleteLightByIds(list);
     }
+
 }
