@@ -45,7 +45,7 @@
                 <div class="p-detail">
                     <div class="p-nav">新建固件</div>
                     <div class="p-content p-r">
-                        <form th:action="@{/file/save}"  method="post">
+                        <form th:action="@{/file/save}"  method="post" id="Ota">
                             <fieldset>
                                 <div class="form-row">
                                     <div class="field-label">
@@ -75,7 +75,7 @@
                                     </div>
                                 </div>
                                 <div class="form-row submit">
-                                    <button type="submit">确定新增</button>
+                                    <button type="button">确定新增</button>
                                 </div>
                             </fieldset>
                         </form>
@@ -90,9 +90,9 @@
     <div class=" p-r pop-nav">
         温馨提示
     </div>
-    <div class="pop-content">
-        <div class="reset-pwd">
-            <i class="fa fa-check-circle fa-3x" aria-hidden="true" style="display: block;color:#00A0E9;"></i>
+    <div class="pop-content p-r">
+        <div class="reset-pwd p-a" style="top: 20%;left: 25%;">
+            <i class="fa fa-check-circle fa-3x" aria-hidden="true" style="display:inline-block;color:#00A0E9;"></i>
             <p>新增成功！</p>
         </div>
         <!--<div class="reset-pwd-hint">（删除后项目中所有信息将无法恢复，请慎重！）</div>-->
