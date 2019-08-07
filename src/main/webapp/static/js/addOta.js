@@ -70,10 +70,7 @@ $(function () {
         // }
         // console.log(otaName,otaID);
         if (otaName != '' && otaID != '') {
-            $.post("/alink-hq/file/add",{"otaName":otaName,"otaId":otaID,"otaDesc":otaDescribe},function (result) {
-                console.log("id",result);
-                window.location.href = '/alink-hq/file/OTAFile';
-            });
+
             var idUrl = GetQueryString('id');
             console.log('idUrl', idUrl);
             if (idUrl != '') {
@@ -87,10 +84,21 @@ $(function () {
                 }, 800);
             } else {
                 //新增
+
                 // $('#Ota').submit();
+                var selector = $('div[openContent="add-success"]');
+                $('div[openContent="add-success"] .reset-pwd p').text('新增成功！');
+                selector.addClass('active');
+                adjust(selector);
+                showOverlay();
+                $.post("/alink-hq/file/add",{"otaName":otaName,"otaId":otaID,"otaDesc":otaDescribe},function (result) {
+                    console.log("id",result);
+                    return false;
+                    // window.location.href = '/alink-hq/file/OTAFile';
+                });
                 // $.ajax({
                 //     type: "post",
-                //     url: "/alink-hq/file/save",
+                //     url: "/alink-hq/file/add",
                 //     data: {
                 //         "otaName": otaName,
                 //         "otaId": otaID,
@@ -99,16 +107,9 @@ $(function () {
                 //     async: true,
                 //     success: function (res) {
                 //         console.log('res',res);
+                //         return false;
                 //     }
                 // })
-                // $("#Ota").ajaxForm(function(data){
-                //    console.log('data',data);
-                // });
-                var selector = $('div[openContent="add-success"]');
-                $('div[openContent="add-success"] .reset-pwd p').text('新增成功！');
-                selector.addClass('active');
-                adjust(selector);
-                showOverlay();
             }
         }
     })
