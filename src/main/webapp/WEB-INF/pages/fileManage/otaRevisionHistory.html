@@ -23,7 +23,14 @@
             <div class="clearfix main-right-nav">
                 <div class="f-l main-right-title"><label th:inline="text">[[${dict.otaName}]]</label>历史版本（固件ID：<label th:inline="text">[[${dict.otaId}]]</label>）</div>
                 <div class="f-r pointer last-nav">
-                    <a th:href="@{/file/uploadNewVersionOTA(id=${dict.oid})}"  >
+                    <!--没有上传新版本-->
+                    <a  th:if="${pageInfo.list.total == 1}" th:href="@{/file/uploadNewVersionOTA(id=${dict.oid},hasUpload=0)}"  >
+                        <div  class="create " onmousedown="createBtnMouseDown()" onmouseup="createBtnMouseUp()">
+                            <span>+</span><span>上传新版本</span>
+                        </div>
+                    </a>
+                    <!--已经上传新版本-->
+                    <a  th:if="${pageInfo.list.total > 1}" th:href="@{/file/uploadNewVersionOTA(id=${dict.oid},hasUpload=1)}"  >
                         <div  class="create " onmousedown="createBtnMouseDown()" onmouseup="createBtnMouseUp()">
                             <span>+</span><span>上传新版本</span>
                         </div>
@@ -68,6 +75,7 @@
                             <button type="submit" class="pointer">查询</button>
                         </div>
                     </div>
+                    <!--<div th:text="${pageInfo.list.total}"></div>-->
                     <div class="search-result">
                         <!-- 有数据时 -->
                         <table border="1" class="hasData active" th:if="${pageInfo!=null}">
@@ -83,7 +91,13 @@
                             <tbody>
                             <tr th:each="file:${pageInfo.list}">
                                 <td th:text="${file.otaVersion}" class="otaVersion"></td>
-                                <td  class="p-r show-lorem ">
+                                <td  class="p-r show-lorem " th:if="${file.otaDesc}!=''">
+                                    <p class="lorem-limit" th:text="${file.otaDesc}"></p>
+                                    <div class="memo-edit-has p-a" th:alt="${file.id}">
+                                        <div  class="memo-content" th:text="${file.otaDesc}"></div>
+                                    </div>
+                                </td>
+                                <td  class="p-r show-lorem no" th:if="${file.otaDesc}==''">
                                     <p class="lorem-limit" th:text="${file.otaDesc}"></p>
                                     <div class="memo-edit-has p-a" th:alt="${file.id}">
                                         <div  class="memo-content" th:text="${file.otaDesc}"></div>
