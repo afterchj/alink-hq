@@ -94,6 +94,17 @@ public class FileController {
         return "redirect:/file/OTAFile";
     }
 
+    @ResponseBody
+    @RequestMapping("/add")
+    public String add(FileDTO info) {
+        String version = info.getOtaVersion();
+        String otaVer = StringUtils.isEmpty(version) ? "v1.0.0" : version;
+        info.setOtaVersion(otaVer);
+        Map map = JSON.parseObject(JSON.toJSONString(info));
+        fileService.saveFile(map);
+        return map.get("result").toString();
+    }
+
     @RequestMapping("/doUpload")
     public String save(FileDTO info, @RequestParam(value = "file") MultipartFile file) {
         String path = PropertiesUtil.getPath("otaFile");

@@ -70,42 +70,46 @@ $(function () {
         // }
         // console.log(otaName,otaID);
         if (otaName != '' && otaID != '') {
-            var idUrl = GetQueryString('id');
-            console.log('idUrl', idUrl);
-            if (idUrl != '') {
-                //编辑
-                showOverlay();
-                $('#preload-anim').addClass('active');
-                $('#preload-anim .title').text('保存成功');
-                $('#Ota').submit();
-                setTimeout(function () {
-                    window.location.href = '/alink-hq/file/OTAFile';
-                }, 800);
-            } else {
-                //新增
-                $('#Ota').submit();
-                // $.ajax({
-                //     type: "post",
-                //     url: "/alink-hq/file/save",
-                //     data: {
-                //         "otaName": otaName,
-                //         "otaId": otaID,
-                //         "otaDesc":otaDescribe
-                //     },
-                //     async: true,
-                //     success: function (res) {
-                //         console.log('res',res);
-                //     }
-                // })
-                // $("#Ota").ajaxForm(function(data){
-                //    console.log('data',data);
-                // });
-                var selector = $('div[openContent="add-success"]');
-                $('div[openContent="add-success"] .reset-pwd p').text('新增成功！');
-                selector.addClass('active');
-                adjust(selector);
-                showOverlay();
-            }
+            $.post("/alink-hq/file/add",{"otaName":otaName,"otaId":otaID,"otaDesc":otaDescribe},function (result) {
+                console.log("id",result);
+                window.location.href = '/alink-hq/file/OTAFile';
+            });
+            // var idUrl = GetQueryString('id');
+            // console.log('idUrl', idUrl);
+            // if (idUrl != '') {
+            //     //编辑
+            //     showOverlay();
+            //     $('#preload-anim').addClass('active');
+            //     $('#preload-anim .title').text('保存成功');
+            //     $('#Ota').submit();
+            //     setTimeout(function () {
+            //         window.location.href = '/alink-hq/file/OTAFile';
+            //     }, 800);
+            // } else {
+            //     //新增
+            //     // $('#Ota').submit();
+            //     // $.ajax({
+            //     //     type: "post",
+            //     //     url: "/alink-hq/file/save",
+            //     //     data: {
+            //     //         "otaName": otaName,
+            //     //         "otaId": otaID,
+            //     //         "otaDesc":otaDescribe
+            //     //     },
+            //     //     async: true,
+            //     //     success: function (res) {
+            //     //         console.log('res',res);
+            //     //     }
+            //     // })
+            //     // $("#Ota").ajaxForm(function(data){
+            //     //    console.log('data',data);
+            //     // });
+            //     var selector = $('div[openContent="add-success"]');
+            //     $('div[openContent="add-success"] .reset-pwd p').text('新增成功！');
+            //     selector.addClass('active');
+            //     adjust(selector);
+            //     showOverlay();
+            // }
         }
     })
 })
