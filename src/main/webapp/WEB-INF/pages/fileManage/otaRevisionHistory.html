@@ -83,7 +83,7 @@
                             <tbody>
                             <tr th:each="file:${pageInfo.list}">
                                 <td th:text="${file.otaVersion}" class="otaVersion"></td>
-                                <td  class="p-r show-lorem">
+                                <td  class="p-r show-lorem ">
                                     <p class="lorem-limit" th:text="${file.otaDesc}"></p>
                                     <div class="memo-edit-has p-a" th:alt="${file.id}">
                                         <div  class="memo-content" th:text="${file.otaDesc}"></div>
@@ -140,24 +140,24 @@
     </div>
 </div>
 <!-- 重命名弹框 -->
-<!--<div th:replace="pop/reset::reset-name"></div>-->
+<div th:replace="pop/reset::reset-name"></div>
 <!-- 重命名弹框 -->
-<div class="confirm-on-off pop-iframe  " openContent="reset-name">
-    <div class="confirm-on-off-nav p-r pop-nav">
-        重命名
-    </div>
-    <div class="pop-content p-r">
-        <div class="newName p-a">
-            <p class="rename-hint"></p>
-            <label for="rename">固件版本</label>
-            <input type="text" placeholder="请输入固件版本" id="rename" onkeyup="nameKeyUp()" maxlength="16">
-        </div>
-        <div class="pop-btn p-a">
-            <button class="reduce">取消</button>
-            <button class="yes">确定</button>
-        </div>
-    </div>
-</div>
+<!--<div class="confirm-on-off pop-iframe  " openContent="reset-name">-->
+    <!--<div class="confirm-on-off-nav p-r pop-nav">-->
+        <!--重命名-->
+    <!--</div>-->
+    <!--<div class="pop-content p-r">-->
+        <!--<div class="newName p-a">-->
+            <!--<p class="rename-hint"></p>-->
+            <!--<label for="rename">固件版本</label>-->
+            <!--<input type="text" placeholder="请输入固件版本" id="rename" onkeyup="nameKeyUp()" maxlength="16">-->
+        <!--</div>-->
+        <!--<div class="pop-btn p-a">-->
+            <!--<button class="reduce">取消</button>-->
+            <!--<button class="yes">确定</button>-->
+        <!--</div>-->
+    <!--</div>-->
+<!--</div>-->
 
 <!-- 删除账户 -->
 <div th:replace="pop/delete::delete-pop"></div>
