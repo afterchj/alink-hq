@@ -1763,3 +1763,9 @@ table#timeTitle tbody tr{
     left:260px;
     background-color: #dbdbdb;
 }
+.noUpload,.hasUpload{
+    display: none;
+}
+.noUpload.active,.hasUpload.active{
+    display: block;
+}

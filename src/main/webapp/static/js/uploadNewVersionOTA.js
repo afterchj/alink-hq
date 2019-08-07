@@ -1,6 +1,17 @@
 /**
  * Created by yuanjie.fang on 2019/7/26.
  */
+$(function(){
+    var hasUpload=GetQueryString('hasUpload');
+    console.log('是否已经上传过新版本',hasUpload);
+    if(hasUpload==0){
+        //没有上传新版本
+        $('form.noUpload').addClass('active').siblings('form').removeClass('active');
+    }else if(hasUpload==1){
+        //已经上传新版本
+        $('form.hasUpload').addClass('active').siblings('form').removeClass('active');
+    }
+})
 $(".trueFile").on("change",function (e) {
     var e = e || window.event;
     //获取 文件 个数 取消的时候使用

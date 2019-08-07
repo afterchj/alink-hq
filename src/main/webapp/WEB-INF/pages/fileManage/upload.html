@@ -9,9 +9,9 @@
     <link rel="stylesheet" href="/alink-hq/static/css/common.css">
     <link rel="stylesheet" href="/alink-hq/static/css/leftNav.css">
     <link rel="stylesheet" href="/alink-hq/static/css/projectManage.css">
-    <script th:src="@{/static/js/jquery.min.js}"></script>
-    <script th:src="@{/static/js/upload.js}"></script>
-    <title>固件信息编辑</title>
+
+
+    <title>上传新固件</title>
 </head>
 
 <body>
@@ -41,7 +41,7 @@
                     <!--<img src="/alink-hq/static/img/go-back.png" alt="" onclick="history.back()">-->
                 </div>
             </div>
-            <div id="timerDetail" class="table-content-list detail">
+            <div  class="table-content-list detail transfer">
                 <div class="p-detail">
                     <div class="p-nav">上传新版本</div>
                     <div class="p-content p-r">
@@ -86,8 +86,10 @@
     </div>
 </div>
 <div class="hide-iframe "></div>
+<script th:src="@{/static/js/jquery.min.js}"></script>
 <script th:src="@{/static/js/left.js}"></script>
 <script th:src="@{/static/js/moment.js}"></script>
-<script th:src="@{/static/js/addOta.js}"></script>
+<!--<script th:src="@{/static/js/addOta.js}"></script>-->
+<script th:src="@{/static/js/uploadNewVersionOTA.js}"></script>
 </body>
 </html>

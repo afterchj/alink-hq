@@ -43,8 +43,9 @@
                 <div class="p-detail">
                     <div class="p-nav">上传新版本</div>
                     <div class="p-content p-r">
+                        <!--<div th:text="${file}"></div>-->
                         <!--未上传-->
-                        <form th:action="@{/file/doUpload}" method="post" style="display: none;" enctype="multipart/form-data">
+                        <form th:action="@{/file/doUpload}" method="post"  enctype="multipart/form-data" class="noUpload">
                             <input type="hidden" name="id" th:value="${file.id}">
                             <fieldset>
                                 <div class="form-row clearfix">
@@ -59,14 +60,13 @@
                                     </div>
                                 </div>
                                 <div class="form-row submit">
-                                    <button type="submit" style="    margin:50px 0  0 235px;">上传文件</button>
+                                    <button type="submit" style="margin:50px 0  0 235px;">上传文件</button>
                                     <p style="margin: 30px 30px 30px 155px;font-size: 15px;color: #999;">文件上传服务器耗时较长，请耐心等待…</p>
                                 </div>
-
                             </fieldset>
                         </form>
                         <!--已上传-->
-                        <form th:action="@{/file/doUpload}" method="post" enctype="multipart/form-data">
+                        <form th:action="@{/file/doUpload}" method="post" enctype="multipart/form-data" class="hasUpload">
                             <input type="hidden" name="id" th:value="${file.id}">
                             <fieldset>
                                 <div class="form-row clearfix">
@@ -113,7 +113,8 @@
                                     </div>
                                     <div class="field-widget p-r">
                                         <p class="p-a verify"></p>
-                                        <textarea name="otaDesc" id="otaDescribe" placeholder="请输入更新日志" th:text="${file.otaDesc}"></textarea>
+                                        <!--<textarea name="otaDesc" id="otaDescribe" placeholder="请输入更新日志" th:text="${file.otaDesc}"></textarea>-->
+                                        <textarea name="otaDesc" id="otaDescribe" placeholder="请输入更新日志" ></textarea>
                                     </div>
                                 </div>
                                 <div class="form-row submit">

@@ -79,6 +79,8 @@ $(function () {
         event.stopPropagation();
         var selector = $('div[openContent="reset-name"]');
         selector.addClass('active');
+        $('div[openContent="reset-name"] label').text('固件版本');
+        $('div[openContent="reset-name"] input').attr('placeholder',"请输入固件版本");
         adjust(selector);
         showOverlay();
     });
@@ -147,10 +149,3 @@ $(function () {
         }
     });
 })
-
-// $('.lorem-limit').hover(function () {
-//     // $(this).siblings('.memo-edit-has').addClass('active');
-// });
-// $('.show-lorem').hover(function () {
-//
-// })
