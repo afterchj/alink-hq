@@ -538,7 +538,7 @@ span.msg-use{
 
 .pop-content .pop-btn .reduce {
     border: 1px solid #ccc;
-    font-size: 15px;
+    font-size: 16px;
     color: #383e4b;
     border-radius: 5px;
     height: 35px;
@@ -553,7 +553,7 @@ span.msg-use{
 
 .pop-content .pop-btn .yes {
     border:1px solid #39B6EF;
-    font-size:15px;
+    font-size:16px;
     color:#fff;
     border-radius:5px;
     height:35px;
@@ -1763,9 +1763,4 @@ table#timeTitle tbody tr{
     left:260px;
     background-color: #dbdbdb;
 }
-.noUpload,.hasUpload{
-    display: none;
-}
-.noUpload.active,.hasUpload.active{
-    display: block;
-}
+
