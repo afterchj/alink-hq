@@ -86,22 +86,23 @@
     </div>
 </div>
 <!-- 新增固件 -->
-<div class="pop-iframe" openContent="add-OTA">
-    <div class=" p-r pop-nav">
-        温馨提示
-    </div>
-    <div class="pop-content p-r">
-        <div class="reset-pwd p-a" style="top: 20%;left: 25%;">
-            <i class="fa fa-check-circle fa-3x" aria-hidden="true" style="display:inline-block;color:#00A0E9;"></i>
-            <p>新增成功！</p>
-        </div>
-        <!--<div class="reset-pwd-hint">（删除后项目中所有信息将无法恢复，请慎重！）</div>-->
-        <div class="pop-btn">
-            <button class="reduce" style="width: auto;letter-spacing: 2px;display: inline-block;font-size: 15px;">再想想</button>
-            <button class="yes" style="width: auto;letter-spacing: 2px;display: inline-block;font-size: 15px;">上传新版本</button>
-        </div>
-    </div>
-</div>
+<!--<div class="pop-iframe" openContent="add-OTA">-->
+    <!--<div class=" p-r pop-nav">-->
+        <!--温馨提示-->
+    <!--</div>-->
+    <!--<div class="pop-content p-r">-->
+        <!--<div class="reset-pwd p-a" style="top: 20%;left: 25%;">-->
+            <!--<i class="fa fa-check-circle fa-3x" aria-hidden="true" style="display:inline-block;color:#00A0E9;"></i>-->
+            <!--<p>新增成功！</p>-->
+        <!--</div>-->
+        <!--&lt;!&ndash;<div class="reset-pwd-hint">（删除后项目中所有信息将无法恢复，请慎重！）</div>&ndash;&gt;-->
+        <!--<div class="pop-btn">-->
+            <!--<button class="reduce" style="width: auto;letter-spacing: 2px;display: inline-block;font-size: 15px;">再想想</button>-->
+            <!--<button class="yes" style="width: auto;letter-spacing: 2px;display: inline-block;font-size: 15px;">上传新版本</button>-->
+        <!--</div>-->
+    <!--</div>-->
+<!--</div>-->
+<div th:replace="pop/addSuccess::add-success"></div>
 <div class="hide-iframe "></div>
 <script th:src="@{/static/js/left.js}"></script>
 <script th:src="@{/static/js/moment.js}"></script>

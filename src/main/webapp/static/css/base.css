@@ -633,3 +633,7 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
     background: #eef5f9;
     padding-left: 30px;
 }
+.pop-content .pop-btn.add-success>button{
+    width: auto;
+    letter-spacing: 1px;
+}
