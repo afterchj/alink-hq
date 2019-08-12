@@ -35,5 +35,16 @@ $('#submitNewVersion').click(function () {
         that.prev('.verify').text('已存在，请重新输入');
     }else{
         that.prev('.verify').text('');
+        $('.hasUpload').submit();
+    }
+})
+$('#uploaded').click(function () {
+    var newFile=$('#newFile').val();
+    console.log('newFile',newFile);
+    if(newFile==''){
+        $('#newFile').siblings('.verify').text('请选择文件');
+    }else{
+        $('#newFile').siblings('.verify').text('');
+        $('.noUpload').submit();
     }
 })

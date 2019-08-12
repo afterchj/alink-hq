@@ -85,7 +85,7 @@ ul li {
     border: 10px solid #eef2f5;
 }
 .fa{
-    color: #45B8FD;
+    color: #00B7EF;
 }
 .pointer {
     cursor: pointer;
@@ -167,14 +167,14 @@ fieldset input[type=file] {
 .upload{
     position: absolute;
     left: 310px;
-    border-radius: 3px;
-    border-top-left-radius: 0;
+    /* border-radius: 3px; */
+    /* border-top-left-radius: 0; */
     border-bottom-left-radius: 0;
     line-height: 35px;
     padding: 0 15px;
-    background-color: #eee;
-    color: #00a0e9;
-    border: 1px solid #ccc;
+    background-color: #00B7EF;
+    color: #fff;
+    border: 1px solid #00B7EF;
     white-space: nowrap;
     text-align: center;
     /* border: none; */
@@ -188,7 +188,7 @@ fieldset input[type=file] {
     font-weight: 300;
     /* margin-left: 140px; */
     text-shadow: none;
-    letter-spacing: 4px;
+    letter-spacing: 2px;
     -moz-box-shadow: none;
     -webkit-box-shadow: none;
     -o-transition: all .3s;
@@ -210,7 +210,7 @@ fieldset input[type=text]{
     width:450px;
 }
 fieldset label {
-    color: #383e4b;
+    color: #606060;
     font-size: 15px;
 }
 fieldset .field-widget {
@@ -269,7 +269,7 @@ fieldset textarea{
     border: 1px solid #ddd;
     color: #666;
     transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
-    box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+    /*box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);*/
     color: #555;
     border-radius: 2px;
     padding-left: 14px;
@@ -279,23 +279,23 @@ fieldset textarea{
 fieldset button{
     display: inline-block;
     /* line-height: 40px; */
-    padding: 8px 13px;
-    background-color: #39B6EF;
+    padding: 6px 12px;
+    background-color: #00B7EF;
     color: #fff;
     white-space: nowrap;
     text-align: center;
-    border: none;
-    border-radius: 4px;
+    /*border: none;*/
+    /*border-radius: 2px;*/
     cursor: pointer;
     /* height: 40px; */
     margin: 0;
     vertical-align: middle;
-    border: 0;
-    font-size: 15px;
-    font-weight: 300;
+    /*border: 0;*/
+    /*font-size: 15px;*/
+    /*font-weight: 300;*/
     margin-left: 140px;
     text-shadow: none;
-    letter-spacing: 4px;
+    letter-spacing: 2px;
     -moz-box-shadow: none;
     -webkit-box-shadow: none;
     -o-transition: all .3s;
@@ -303,7 +303,21 @@ fieldset button{
     -webkit-transition: all .3s;
     -ms-transition: all .3s;
     transition: all .3s;
-    box-shadow: 0px 1px 2px 0 rgba(0, 0, 0, 0.2);
+    /*box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2);*/
+    /*display: inline-block;*/
+
+    /*margin-bottom: 0;*/
+    font-size: 15px;
+    font-weight: 400;
+    line-height: 1.42857143;
+    /*text-align: center;*/
+    /*white-space: nowrap;*/
+    /*vertical-align: middle;*/
+    /*cursor: pointer;*/
+    border: 1px solid transparent;
+}
+fieldset button:hover{
+    opacity: .7;
 }
 fieldset .verify{
     top: -22px;
@@ -355,7 +369,7 @@ fieldset span{
 /*display: inline-block;*/
 /*line-height: 38px;*/
 /*padding: 0 18px;*/
-/*background-color: #45B8FD;*/
+/*background-color: #00B7EF;*/
 /*color: #fff;*/
 /*white-space: nowrap;*/
 /*text-align: center;*/
@@ -624,8 +638,8 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
     /* padding: 0 0 10px 20px; */
     height: 45px;
     /* line-height: 45px; */
-    border-left: 4px solid #45B8FD;
-    border-bottom: 2px solid #45B8FD;
+    border-left: 4px solid #00B7EF;
+    border-bottom: 2px solid #00B7EF;
     margin-bottom: 30px;
     /*margin: 10px 0 30px 0;*/
     padding-left: 10px;
