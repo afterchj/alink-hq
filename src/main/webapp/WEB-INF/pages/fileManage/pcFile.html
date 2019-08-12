@@ -1,10 +1,213 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
+
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <title>PC文件</title>
+
+    <script src="/alink-hq/static/js/jquery.min.js"></script>
+    <script src="/alink-hq/static/js/browser.js"></script>
+    <link rel="stylesheet" th:href="@{/static/font-awesome-4.7.0/css/font-awesome.min.css}"/>
+    <!--<link rel="stylesheet" th:href="@{/static/css/common.css}"/>-->
+    <link rel="stylesheet" th:href="@{/static/css/laydate.css}"/>
+    <link rel="stylesheet" th:href="@{/static/css/base.css}"/>
+    <link rel="stylesheet" th:href="@{/static/css/leftNav.css}"/>
+    <link rel="stylesheet" th:href="@{/static/css/projectManage.css}"/>
 </head>
 <body>
-Hello World!
+
+<div class="c-container">
+    <div th:replace="common/head::head"></div>
+    <div class="main clearfix">
+        <div th:replace="common/left::left('OTAFile')"></div>
+        <div class="main-right f-l">
+            <div class="clearfix main-right-nav">
+                <div class="f-l main-right-title">PC文件</div>
+                <!--<div class="f-r pointer last-nav">-->
+                    <!--<a th:href="@{/file/addOta}">-->
+                        <!--<div class="create " onmousedown="createBtnMouseDown()" onmouseup="createBtnMouseUp()">-->
+                            <!--<span>+</span><span>新增固件</span>-->
+                        <!--</div>-->
+                    <!--</a>-->
+                <!--</div>-->
+                <div class="f-r pointer">
+                    <div class="goBack" onClick="javascript :history.back();" onmousedown="backBtnMouseDown()" onmouseup="backBtnMouseUp()">
+                        <span><</span><span>返回</span>
+                    </div>
+                </div>
+            </div>
+
+            <div  class="table-content-list">
+                <form class="clearfix" th:action="@{/file/OTAFile}" method="post">
+                    <input type="hidden" id="pageSize" th:value="${dict.pageSize}">
+                    <div class="search-condition clearfix">
+                        <div class="f-l search" >
+                            <div>
+                                <label for="name" class="font">固件名称</label>
+                                <input type="text" id="name" name="otaName" placeholder="请输入固件名称" th:value="${dict.otaName}">
+                            </div>
+                        </div>
+                        <div class="f-l search">
+                            <div>
+                                <label for="oid" class="font">固件ID</label>
+                                <input class="intInput" type="text" id="oid" name="otaId" placeholder="请输入固件ID" th:value="${dict.otaId}">
+                            </div>
+                        </div>
+                        <div class="f-r search-button " style="padding-top: 0;">
+                            <button type="submit" class="pointer">查询</button>
+                        </div>
+                    </div>
+                    <div class="search-result">
+                        <!-- 有数据时 -->
+                        <table border="1" class="hasData active" th:if="${pageInfo!=null}">
+                            <thead>
+                            <tr>
+                                <!--<th class="all-checkbox">-->
+                                <!--&lt;!&ndash;<span style="vertical-align: sub;">&ndash;&gt;-->
+                                <!--<input type="checkbox" id="all" class="pointer">-->
+                                <!--&lt;!&ndash;</span>&ndash;&gt;-->
+                                <!--<span class="">全选</span>-->
+                                <!--</th>-->
+                                <th><span>固件名称</span></th>
+                                <th><span>固件ID</span></th>
+                                <th><span>创建时间</span></th>
+                                <th><span>更新时间</span></th>
+                                <th><span>目前最新固件版本</span></th>
+                                <th><span>下载最新固件版本</span></th>
+                                <th><span>上传新固件版本</span></th>
+                                <th class="operation"><span>操作</span></th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr th:each="file:${pageInfo.list}">
+                                <!--<td class="checkbox">-->
+                                <!--<input type="checkbox" name="ids"  class="">-->
+                                <!--&lt;!&ndash;<input type="hidden" th:value="${mesh.uid}" class="uid">&ndash;&gt;-->
+                                <!--</td>-->
+                                <td class="k-link otaName">
+                                    <a th:href="@{/file/history(oid=${file.id},otaId=${file.otaId},otaName=${file.otaName})}" th:text="${file.otaName}"></a>
+                                </td>
+                                <td th:text="${file.otaId}"></td>
+                                <td th:text="${#dates.format(file.createDate, 'yyyy-MM-dd HH:mm:ss')}"></td>
+                                <td th:text="${#dates.format(file.updateDate, 'yyyy-MM-dd HH:mm:ss')}"></td>
+                                <td th:text="${file.otaVersion}"></td>
+                                <td class="k-link">
+                                    <a th:href="${file.otaPath}">
+                                        <img th:src="@{/static/img/updown.png}" alt="" class="pointer">
+                                    </a>
+                                </td>
+                                <td class="k-link">
+                                    <!--<i class="fa fa-upload" aria-hidden="true"></i>-->
+                                    <a th:href="@{/file/upload(id=${file.id})}">
+                                        <img th:src="@{/static/img/upload.png}" alt="" class="pointer">
+                                    </a>
+                                </td>
+                                <td class="p-r ">
+                                    <a href="javascript:void(0);" class="memo-edit">
+                                        <img  src="/alink-hq/static/img/memo.png" th:alt="${file.id}" class="pointer meno-img" th:title="备忘录" style="width: 18px;height: 18px;">
+                                        <div class="memo-edit-has" >
+                                            <div class="meno-nav"><img src="/alink-hq/static/img/alter.png"  alt="" class="pointer"></div>
+                                            <div class="memo-content" th:text="${file.otaDesc}"></div>
+                                        </div>
+                                    </a>
+                                    <a th:href="@{/file/editOta(id=${file.id})}" style="margin:0 30px;">
+                                        <img src="/alink-hq/static/img/alter.png" alt="" title="编辑" style="width: 20px;height: 20px;">
+                                    </a>
+                                    <a href="javascript:void(0);" class="singleDel pointer" th:alt="${file.id}" >
+                                        <img src="/alink-hq/static/img/delete.png" alt="" title="删除" style="width: 17px; height: 17px;">
+                                    </a>
+                                </td>
+                            </tr>
+                            </tbody>
+                            <tfoot>
+                            <tr>
+                                <td colspan="8" class="clearfix page">
+                                    <div th:replace="common/page::page"></div>
+                                </td>
+                            </tr>
+                            </tfoot>
+                        </table>
+                        <!-- 无数据时 -->
+                        <table th:if="${pageInfo==null}" border="1" class="noData active">
+                            <thead>
+                            <tr>
+                                <th><span>固件名称</span></th>
+                                <th><span>固件ID</span></th>
+                                <th><span>创建时间</span></th>
+                                <th><span>更新时间</span></th>
+                                <th><span>目前最新固件版本</span></th>
+                                <th><span>下载最新固件版本</span></th>
+                                <th><span>上传新固件版本</span></th>
+                                <th class="brief"><span>操作</span></th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td colspan="8">
+                                    <img th:src="@{/static/img/no-data.png}" style="width: auto;height: auto;" alt="">
+                                    <p>暂无数据</p>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- 重命名弹框 -->
+<div class="confirm-on-off pop-iframe  " openContent="reset-name">
+    <div class="confirm-on-off-nav p-r pop-nav">
+        重命名
+    </div>
+    <div class="pop-content">
+        <div class="newName">
+            <p class="rename-hint"></p>
+            <label for="rename">新名称</label>
+            <input type="text" placeholder="请输入（2-16位汉字、字母、数字）" id="rename" onkeyup="nameKeyUp()" maxlength="16"/>
+        </div>
+        <div class="pop-btn">
+            <button class="reduce">取消</button>
+            <button class="yes">确定</button>
+        </div>
+    </div>
+</div>
+<!-- 删除账户 -->
+<!--<div class="pop-iframe" openContent="delete-pop">-->
+<!--<div class=" p-r pop-nav">-->
+<!--温馨提示-->
+<!--</div>-->
+<!--<div class="pop-content">-->
+<!--<div class="reset-pwd">您确定要删除XXX固件？</div>-->
+<!--<div class="reset-pwd-hint">（删除后，XXX固件所有历史版本将均被删除）</div>-->
+<!--<div class="pop-btn">-->
+<!--<button class="reduce">取消</button>-->
+<!--<button class="yes">确定</button>-->
+<!--</div>-->
+<!--</div>-->
+<!--</div>-->
+<!-- 删除账户 -->
+<div th:replace="pop/delete::delete-pop"></div>
+<!-- 固件描述-->
+<div class="pop-iframe" openContent="memo-edit">
+    <div class=" p-r pop-nav">
+        固件描述
+    </div>
+    <div class="pop-content">
+        <textarea maxlength="200" class="wishContent" placeholder="请输入不超过200个字"></textarea>
+        <p class="right-font"><span class="wordsNum">0/200</span></p>
+        <div class="pop-btn">
+            <button class="reduce">取消</button>
+            <button class="yes">确定</button>
+        </div>
+    </div>
+</div>
+
+<div class="hide-iframe"></div>
+<script type="text/javascript" th:src="@{/static/js/left.js}"></script>
+<script type="text/javascript" th:src="@{/static/js/page.js}" ></script>
+<script type="text/javascript" th:src="@{/static/js/moment.js}"></script>
+<script type="text/javascript" th:src="@{/static/js/OTAFile.js}"></script>
+
 </body>
 </html>
