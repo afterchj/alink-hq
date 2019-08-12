@@ -20,10 +20,10 @@ function isEmpty(value){
 function matchInput(event) {
     var context = $(event.data.context).val();
     if (!(event.data.match).test(context)){
-        $('p.'+event.data.hint).removeClass('active').text('');
-        $('p.'+event.data.hint).addClass('active').text(event.data.text);
+        $(event.data.hint).removeClass('active').text('');
+        $(event.data.hint).addClass('active').text(event.data.text);
     }else {
-        $('p.'+event.data.hint).removeClass('active').text('');
+        $(event.data.hint).removeClass('active').text('');
     }
 }
 

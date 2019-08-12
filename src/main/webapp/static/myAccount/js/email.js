@@ -3,24 +3,16 @@
 $(function () {
     var match = /^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/;
     var text = "请输入正确的邮箱";
+    var hit = $('#email').prev('.verify');
     //鼠标点击任意一处 判断邮箱是否正确
-    // $("#email").bind("change", function () {
-    //         var context = $("#email").val();
-    //         if (!match.test(context)) {
-    //             $('p.email-hint').removeClass('active').text('');
-    //             $('p.email-hint').addClass('active').text(text);
-    //         } else {
-    //             $('p.email-hint').removeClass('active').text('');
-    //         }
-    //     });
     $("#email").bind(
         "change",
-        {hint:"email-hint",context:"#email",text:text,match:match},
+        {hint:hit,context:"#email",text:text,match:match},
         matchInput);
     //点击获取激活码
     $("#codeSubmit").click(function () {
         $('#code').prev('.verify').removeClass('active').text('');
-        $('#code').prev('.success-hint').removeClass("active").text('');
+        $('#code').next().next('.success-hint').removeClass("active").text('');
         var email = $("#email").val();
         var emailFlag = isEmpty(email);
         var emailHint =  $('#email').prev('.verify').text();
@@ -47,7 +39,7 @@ $(function () {
                     } else if (msg.info == "success") {
                         sendMessage($("#codeSubmit"), 60, "获取激活码");
                         $('#email').prev('.verify').removeClass('active').text('');
-                        $('#code').prev('.success-hint').addClass("active").text("请登录邮箱查收");
+                        $('#code').next().next('.success-hint').addClass("active").text("请登录邮箱查收");
                     } else {
                         alert("加载失败,请重试");
                     }
@@ -63,7 +55,7 @@ $(function () {
     //点击立即绑定
     $("#fillSubmit").click(function () {
         // $('p.code-hint').removeClass('active').text('');
-        $('#code').prev('.success-hint').removeClass("active").text('');
+        $('#code').next().next('.success-hint').removeClass("active").text('');
         var email = $("#email").val();
         var emailFlag = isEmpty(email);
         var code = $("#code").val();//用户输入的验证码
