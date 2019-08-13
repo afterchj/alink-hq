@@ -2,10 +2,11 @@ $(function () {
     // 6-16 位数字、字母
     var match = /^[a-zA-Z0-9]{6,16}$/;
     var text = "请输入 6-16 位数字、字母";
+    var hit = $('#pwd1').prev('.verify');
     //输入框值发生改变时显示提示
     $("#pwd1").bind(
         "input propertychange change",
-        {hint:"pwd-hint",context:"#pwd1",text:text,match:match},
+        {hint:hit,context:"#pwd1",text:text,match:match},
         matchInput);
 
     $(".submitConfirm").click(function () {
