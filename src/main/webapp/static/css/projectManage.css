@@ -16,6 +16,9 @@
     transition: box-shadow .25s;
 
 }
+.product-explain{
+    width:400px;
+}
 .excel-main{
     width: 400px;
     margin: 20px auto;
@@ -36,7 +39,39 @@
 .search input {
     padding-left:14px!important
 }
-
+i.select-company-i{
+    font-size: 20px;
+    color: #aaa;
+    cursor: pointer;
+    right: 15px;
+    top: 15px;
+}
+.select-company-th{
+    right: 0;
+    top: 100%;
+    width: calc(100% - 2px);
+    background-color: #fff;
+    border: 1px solid #dbdbdb;
+    box-shadow: 0 2px 4px rgba(0,0,0,.12);
+    border-radius: 2px;
+    padding: 5px 0;
+}
+.select-company-th li{
+    font-weight: normal;
+    padding: 0 10px;
+    line-height: 36px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: #4a4a4a;
+    text-shadow: none;
+    font-size: 13px;
+    text-align: left;
+    cursor: pointer;
+}
+.select-company-th li:hover{
+    background-color:#F5F7FD;
+}
 .search select,.search select option {
     width: 275px!important;
     height: 34px!important;
@@ -45,7 +80,34 @@
 .search > div {
     margin-bottom:26px
 }
-
+.pop-content input[type=radio]{
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    margin-bottom: 23px;
+}
+.pop-content label.radio{
+    display: inline-block;
+    vertical-align: middle;
+    color: #4a4a4a;
+    font-size: 13px;
+    padding-left: 0;
+}
+.firmware-list>div.f-l{
+    width:calc(100%/3);
+}
+.firmware-list{
+    max-height: 70px;
+    overflow-y: auto;
+}
+/*.relevance-firmware::after{*/
+    /*content: '10';*/
+    /*position: absolute;*/
+    /*background-color: #00B7EF;*/
+    /*width:15px;*/
+    /*height: 15px;*/
+    /*color: #fff;*/
+/*}*/
 .search-button button {
     width: 75px;
     height: 32px;
