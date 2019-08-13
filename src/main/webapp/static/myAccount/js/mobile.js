@@ -3,26 +3,18 @@
 $(function () {
     var match=/^(\+?0?86\-?)?1[345789]\d{9}$/;
     var text = "请输入正确的手机号";
+    var hit = $('#phone').prev('.verify');
     //鼠标点击任意一处 判断手机号是否正确
-    // $("#phone").bind("change", function () {
-    //         var context = $("#phone").val();
-    //         if (!match.test($.trim(context))){
-    //             $('p.phone-hint').removeClass('active').text('');
-    //             $('p.phone-hint').addClass('active').text(text);
-    //         }else {
-    //             $('p.phone-hint').removeClass('active').text('');
-    //         }
-    //     });
     $("#phone").bind(
         "change",
-        {hint:"phone-hint",context:"#phone",text:text,match:match},
+        {hint:hit,context:"#phone",text:text,match:match},
         matchInput);
     //点击获取验证码
     $("#codeSubmit").click(function () {
         $('#phone').prev('.verify').removeClass('active').text('');
         var mobile = $("#phone").val();
         var mobileFlag = isEmpty(mobile);
-        var mobileHint = ('#phone').prev('.verify').text();
+        var mobileHint = $('#phone').prev('.verify').text();
         var hintFlag = isEmpty(mobileHint);
         if (mobileFlag){
             //手机号为空
