@@ -32,7 +32,7 @@ $(function () {
         if (name == '') {
             $('p.rename-hint').text('请输入新名称')
         } else if (!userNameResult) {
-            $('p.rename-hint').text('请输入 2-6 位汉字、字母、数字')
+            $('p.rename-hint').text('请输入 2-16 位汉字、字母、数字')
         } else {
             $.ajax({
                 type: "post",

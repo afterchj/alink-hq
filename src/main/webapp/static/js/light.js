@@ -77,6 +77,8 @@ $(function () {
             adjust(selector);
             showOverlay();
             $('.showList').hide();
+            $('div[openContent="delete-pop"] .reset-pwd p').text('您确定要删除所选的灯吗？');
+            $('div[openContent="delete-pop"] .reset-pwd-hint').text('删除该灯将会退出所属网络，请慎重！');
         }
     });
     $("#multiMove").click(function () {

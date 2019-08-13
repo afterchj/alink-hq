@@ -293,14 +293,18 @@ th.all-checkbox {
 
 .p-content > div > div:nth-child(1) {
     width: 50%;
+    /* max-width: 50%; */
     text-align: left;
     font-size: 14px;
     color: #13223F;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 
 .p-content>div.clearfix {
-    width: 800px;
+    width: 900px;
     margin: auto;
     height: 50px;
     line-height: 50px;
