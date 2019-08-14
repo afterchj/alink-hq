@@ -92,4 +92,25 @@ $(function () {
         selector.removeClass('active');
         hideOverlay();
     });
+
+    //删除产品
+    $('.single-delete').click(function () {
+        var selector = $('div[openContent="delete-pop"]');
+        selector.addClass('active');
+        $('div[openContent="delete-pop"] .reset-pwd p').text('您确定要删除XXX？');
+        $('div[openContent="delete-pop"] .reset-pwd p').css('margin-top','10px');
+        // $('div[openContent="delete-pop"] .reset-pwd-hint').text('（XXX 项目，隶属 XX 账号，包含 X 个网络、 X 个区域、X 个组、X 个灯）');
+        adjust(selector);
+        showOverlay();
+    })
+    $('div[openContent="delete-pop"] .pop-btn .reduce').click(function () {
+        var selector = $('div[openContent="delete-pop"]');
+        selector.removeClass('active');
+        hideOverlay();
+    });
+    $('div[openContent="delete-pop"] .pop-btn .yes').click(function () {
+        var selector = $('div[openContent="delete-pop"]');
+        selector.removeClass('active');
+        hideOverlay();
+    });
 })

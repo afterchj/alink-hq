@@ -136,7 +136,17 @@ i.select-company-i{
 .sort-b {
     bottom:18px
 }
-
+.num-hint{
+    background-color: #FFB500;
+    color: #fff;
+    font-size: 12px;
+    width: 22px;
+    height: 22px;
+    line-height: 22px;
+    transform: scale(.75);
+    top: 8%;
+    left: 58%;
+}
 .search label {
     margin-right: 20px;
     font-size: 14px;
