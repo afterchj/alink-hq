@@ -60,6 +60,11 @@ public class HomeController {
         return "productManage/productList";
     }
 
+    @RequestMapping("/editProduct")
+    public String editProduct() {
+        return "productManage/editProduct";
+    }
+
     @RequestMapping("/createProduct")
     public String createProduct() {
         return "productManage/createProduct";
