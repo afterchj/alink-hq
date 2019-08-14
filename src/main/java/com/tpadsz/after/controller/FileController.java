@@ -67,6 +67,12 @@ public class FileController {
         return "fileManage/otaRevisionHistory";
     }
 
+    @RequestMapping("/projectFileList")
+    public String projectFileList() {
+        return "fileManage/projectFileList";
+    }
+
+
     @RequestMapping("/PCFile")
     public String PCFile() {
         return "fileManage/pcFile";

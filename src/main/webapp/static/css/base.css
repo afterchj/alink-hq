@@ -270,9 +270,10 @@ fieldset textarea{
     color: #666;
     transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
     /*box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);*/
-    color: #555;
+    color: #4a4a4a;
     border-radius: 2px;
     padding-left: 14px;
+
 }
 
 
@@ -524,7 +525,21 @@ input[type=checkbox]:indeterminate:after {
 input[type=radio]:checked:before {
     transform: scale(1);
 }
-
+::-webkit-scrollbar-thumb {
+    border-radius:20px;
+    /*-webkit-box-shadow:inset 0 0 5px rgba(0,0,0,0.2);*/
+    background:#999;
+}
+::-webkit-scrollbar {
+    width:8px;
+    height:8px;
+}
+/*滚动条里面轨道样式*/
+::-webkit-scrollbar-track {
+    /*-webkit-box-shadow:inset 0 0 5px rgba(0,0,0,0.2);*/
+    border-radius:0;
+    background:#eee;
+}
 input[type=radio]:before {
     display: block;
     margin: 2px;
@@ -534,6 +549,8 @@ input[type=radio]:before {
     content: "";
     transition: all ease-out 50ms;
     transform: scale(0);
+    position: absolute;
+    left: 0;
 }
 
 input[type=checkbox],input[type=radio] {
@@ -556,7 +573,7 @@ input[type=checkbox]:checked,input[type=checkbox]:indeterminate {
 }
 
 .bread li {
-    font-size: 16px;
+    font-size: 15px;
 }
 
 .bread li a {
@@ -618,7 +635,7 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
 .ad-nav li{
     display: inline-block;
     padding: 0 10px;
-    font-size: 15px;
+    font-size: 14px;
 }
 /**/
 .am-topbar-brand {
@@ -658,3 +675,6 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
 
 
 
+.ad-nav li:hover{
+    background-color: #00afe4;
+}
