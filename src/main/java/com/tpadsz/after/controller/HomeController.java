@@ -60,6 +60,11 @@ public class HomeController {
         return "productManage/productList";
     }
 
+    @RequestMapping("/createProduct")
+    public String createProduct() {
+        return "productManage/createProduct";
+    }
+
     @ResponseBody
     @RequestMapping("/checkUser")
     public String checkUser(String uname) {

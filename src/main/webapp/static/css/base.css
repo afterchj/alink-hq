@@ -210,8 +210,8 @@ fieldset input[type=text]{
     width:450px;
 }
 fieldset label {
-    color: #606060;
-    font-size: 15px;
+    color: #4a4a4a;
+    font-size: 14px;
 }
 fieldset .field-widget {
     float: left;
