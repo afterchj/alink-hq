@@ -6,7 +6,7 @@ laydate.render({
     elem: '#update-time',
     range: true
 });
-let id;
+var id;
 $('.singleDel').click(function () {
     id = $(this).attr("alt");
     console.log("id", id);

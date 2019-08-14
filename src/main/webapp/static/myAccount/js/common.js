@@ -20,10 +20,10 @@ function isEmpty(value){
 function matchInput(event) {
     var context = $(event.data.context).val();
     if (!(event.data.match).test(context)){
-        $('p.'+event.data.hint).removeClass('active').text('');
-        $('p.'+event.data.hint).addClass('active').text(event.data.text);
+        $(event.data.hint).removeClass('active').text('');
+        $(event.data.hint).addClass('active').text(event.data.text);
     }else {
-        $('p.'+event.data.hint).removeClass('active').text('');
+        $(event.data.hint).removeClass('active').text('');
     }
 }
 
@@ -71,8 +71,8 @@ function countDown(obj, second, value) {
         // 按钮置未可点击状态
 //          obj.disabled = false;
         obj.attr("disabled", false);
-        obj.css("background","#3598db");
-        obj.css("borderColor","#3598db");
+        obj.css("background","#00B7EF");
+        obj.css("borderColor","#00B7EF");
         // obj.style.background = "#3598db";
         // obj.style.borderColor = "#A0A0A0";
         // 按钮里的内容恢复初始状态

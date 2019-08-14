@@ -15,15 +15,19 @@
     <title>绑定邮箱</title>
     <style>
         input[type="text"] {
-            background: white;
+            background: #fff;
         }
 
         span.success-hint {
-            font-size: 15px;
-            color: red;
+            font-size: 14px;
+            color: #FF5722;
             line-height: 2;
+            position: absolute;
             /* display: none; */
             visibility: hidden;
+            white-space: nowrap;
+            top: 5px;
+            margin-left: 10px;
         }
 
         span.success-hint.active {
@@ -48,6 +52,7 @@
                         <span><</span><span>返回</span>
                     </div>
                     <!--<img src="/alink-hq/static/img/go-back.png" alt="" id="clickReturn"/>-->
+
                 </div>
             </div>
             <div id="bindEmail" class=" table-content-list detail transfer">

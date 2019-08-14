@@ -170,8 +170,13 @@ $(function () {
     })
     $('div[openContent="delete-account"] button.reduce').click(function () {
         var selector= $('div[openContent="delete-account"]');
-        selector.removeClass('active')
-        hideOverlay()
+        selector.removeClass('active');
+        hideOverlay();
+    })
+    $('div[openContent="delete-account-hasProject"] button.reduce').click(function () {
+        var selector= $('div[openContent="delete-account-hasProject"]');
+        selector.removeClass('active');
+        hideOverlay();
     })
 })
 $(function () {
