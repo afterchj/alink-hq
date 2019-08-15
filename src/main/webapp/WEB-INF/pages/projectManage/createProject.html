@@ -34,29 +34,43 @@
                     </div>
                 </div>
             </div>
-            <div id="createProject" class="table-content-list">
-                <div class="c-createProject">
-                    <div class="c-nav">
+            <div id="createProject" class="table-content-list detail">
+                <div class="p-detail">
+                    <div class="p-nav">
                         新建项目
                     </div>
-                    <div class="c-content ">
+                    <div class="p-content p-r">
                         <form th:action="@{/project/create}" method="GET">
-                            <div>
-                                <p class="project-hint"></p>
-                                <label for="projectName">项目名称：</label>
-                                <input type="text" placeholder="请输入（2-16位汉字、字母、数字）" maxlength="16" id="projectName"
-                                       onkeyup="nameKeyUp()">
-                            </div>
-                            <div>
-                                <p class="account-hint"></p>
-                                <label for="account">施工人员账号：</label>
-                                <input type="text" placeholder="请输入施工人员账号" id="account" th:if="${account}==null"/>
-                                <input type="text" id="account" th:if="${account}!=null" th:value="${account}"
-                                       readonly/>
-                            </div>
-                            <div class="">
-                                <button type="button" class="confirm-create" openTab="confirm-create">确定创建</button>
-                            </div>
+                            <fieldset>
+                                <div class="form-row">
+                                    <div class="field-label">
+                                        <!--<p class="project-hint"></p>-->
+                                        <label for="projectName">项目名称：</label>
+                                    </div>
+                                    <div class="field-widget p-r">
+                                        <p class="p-a verify project-hint"></p>
+                                        <input type="text" placeholder="请输入（2-16位汉字、字母、数字）" maxlength="16"
+                                               id="projectName"
+                                               onkeyup="nameKeyUp()">
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="field-label">
+                                        <!--<p class="account-hint"></p>-->
+                                        <label for="account">施工人员账号：</label>
+                                    </div>
+                                    <div class="field-widget p-r">
+                                        <p class="p-a verify account-hint"></p>
+                                        <input type="text" placeholder="请输入施工人员账号" id="account"
+                                               th:if="${account}==null"/>
+                                        <input type="text" id="account" th:if="${account}!=null" th:value="${account}"
+                                               readonly/>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <button type="button" class="confirm-create" openTab="confirm-create">确定创建</button>
+                                </div>
+                            </fieldset>
                         </form>
                     </div>
                 </div>
