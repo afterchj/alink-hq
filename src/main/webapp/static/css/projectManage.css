@@ -357,9 +357,9 @@ th.all-checkbox {
     border-bottom: 1px solid #d0d0d0;
     border-top: 1px solid #d0d0d0;
 }
-.table-content-list .p-content {
-    padding:70px 0
-}
+/*.table-content-list .p-content {*/
+    /*padding:70px 0*/
+/*}*/
 
 .table-content-list .c-content {
     padding: 60px 440px;
@@ -929,10 +929,10 @@ input:-ms-input-placeholder {
 
 .subjection {
     text-align:right;
-    font-size:15px;
+    font-size:14px;
 
-    margin:15px 0;
-    margin:15px 0 15px 15px;
+    /*margin:15px 0;*/
+    /*margin:15px 0 15px 15px;*/
 }
 
 .process {
@@ -962,6 +962,8 @@ input:-ms-input-placeholder {
 
 .select-project-step,.select-mesh-step,.select-place-step,.select-group-step {
     display:none;
+    width: 550px;
+    margin-left: 250px;
 }
 
 .select-project-step.active,.select-mesh-step.active,.select-place-step.active,.select-group-step.active {
