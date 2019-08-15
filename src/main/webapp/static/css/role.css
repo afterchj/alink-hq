@@ -22,14 +22,14 @@
 
 .tab-nav>div.data-scope {
     width: 300px;
-    background-color: #39B6EF;
+    background-color: #00B7EF;
     color: #fff;
 }
 
 .tab-nav>div.active {
-    background-color: #39B6EF;
+    background-color: #00B7EF;
     color: #fff;
-    border-color: #39B6EF;
+    border-color: #00B7EF;
     cursor: pointer;
 }
 
@@ -130,18 +130,19 @@
 }
 
 .alter button {
-    height: 40px;
-    width: 115px;
+    height: 37px;
+    width: 100px;
     color: #fff;
-    font-size: 16px;
-    background-color: #39B6EF;
-    border: 1px solid #39B6EF;
+    font-size: 14px;
+    background-color: #00B7EF;
+    border: 1px solid #00B7EF;
     letter-spacing: 5px;
-    padding-left: 5px;
+    padding-left: 10px;
     margin-top: 30px;
     text-align: center;
     border-radius: 5px;
     cursor: pointer;
+    box-shadow: 0 1px 1px 0 rgba(0,0,0,.2);
 }
 
 .list-content>div.one {
@@ -202,8 +203,8 @@
     color: #fff;
     font-size: 17px;
     letter-spacing: 5px;
-    border: 1px solid #39B6EF;
-    background-color: #39B6EF;
+    border: 1px solid #00B7EF;
+    background-color: #00B7EF;
     border-radius: 5px;
     cursor: pointer;
 }
