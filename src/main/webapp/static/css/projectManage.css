@@ -1643,6 +1643,7 @@ i.open-list{
 }
 .tranfer-btn{
     text-align: center;
+    margin-top: 25px;
 }
 #timerDetail{
     height: auto;
