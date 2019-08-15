@@ -14,7 +14,7 @@
 #account .a-content{
     padding: 10px 30px;
     font-size: 16px;
-    color: #3c3c3c;
+    color: #4a4a4a;
 }
 #account .a-content>div{
     padding: 40px 0;
@@ -156,7 +156,6 @@ p.phone-hint.active,p.use-hint2.active,p.email-hint.active,p.pwd-hint.active,p.u
     width: 115px;
     font-size: 16px;
     padding: 0;
-    margin: 0;
     margin: 0px 0 2px 18px;
     vertical-align: middle;
 }
