@@ -47,7 +47,7 @@
                 <form class="clearfix" th:action="@{/place/list}" method="POST">
                     <input type="hidden" name="uid" th:value="${dict.uid}">
                     <input type="hidden" name="mid" id="mid" th:value="${dict.mid}">
-                    <input type="hidden" id="pid" name="projectId" th:value="${dict.projectId}">
+                    <input type="hidden" id="pid" name="projectId"  th:value="${dict.projectId}">
                     <input type="hidden" id="pageSize" th:value="${dict.pageSize}">
                     <div class="search-condition clearfix p-r">
                         <div class="f-l search" >
@@ -58,7 +58,7 @@
 
                             <div>
                                 <label for="meshId" class="font">网络ID</label>
-                                <input type="text" id="meshId" name="meshId" th:value="${dict.meshId}" placeholder="请输入网络ID">
+                                <input type="text" id="meshId" name="mesh_id" th:value="${dict.mesh_id}" placeholder="请输入网络ID">
                             </div>
                         </div>
                         <div class="f-l search">

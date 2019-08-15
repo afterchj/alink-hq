@@ -168,14 +168,11 @@ $(function () {
     $('div[openContent="delete-account-hasProject"] button.yes').click(function () {
         location.href = '/alink-hq/project/list';
     })
-    $('div[openContent="delete-account"] button.reduce').click(function () {
+    $('div[openContent="delete-account"] button.reduce,div[openContent="delete-account-hasProject"] button.reduce').click(function () {
         var selector= $('div[openContent="delete-account"]');
         selector.removeClass('active');
-        hideOverlay();
-    })
-    $('div[openContent="delete-account-hasProject"] button.reduce').click(function () {
-        var selector= $('div[openContent="delete-account-hasProject"]');
-        selector.removeClass('active');
+        var selector1= $('div[openContent="delete-account-hasProject"]');
+        selector1.removeClass('active');
         hideOverlay();
     })
 })

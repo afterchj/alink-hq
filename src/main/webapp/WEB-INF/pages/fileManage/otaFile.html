@@ -40,7 +40,7 @@
                 <form class="clearfix" th:action="@{/file/OTAFile}" method="post">
                     <input type="hidden" id="pageSize" th:value="${dict.pageSize}">
                     <div class="search-condition clearfix">
-                        <div class="f-l search" style="margin-right: 150px;margin-left: 100px;">
+                        <div class="f-l search" >
                             <div>
                                 <label for="name" class="font">固件名称</label>
                                 <input type="text" id="name" name="otaName" placeholder="请输入固件名称" th:value="${dict.otaName}">
@@ -89,8 +89,7 @@
                                 <td th:text="${file.otaId}"></td>
                                 <td th:text="${#dates.format(file.createDate, 'yyyy-MM-dd HH:mm:ss')}"></td>
                                 <td th:text="${#dates.format(file.updateDate, 'yyyy-MM-dd HH:mm:ss')}"></td>
-                                <td th:text="${file.otaVersion}">
-                                </td>
+                                <td th:text="${file.otaVersion}"></td>
                                 <td class="k-link">
                                     <a th:href="${file.otaPath}">
                                         <img th:src="@{/static/img/updown.png}" alt="" class="pointer">
@@ -104,10 +103,10 @@
                                 </td>
                                 <td class="p-r ">
                                     <a href="javascript:void(0);" class="memo-edit">
-                                        <img  src="/alink-hq/static/img/memo.png" th:alt="${file.id}" class="pointer memo-edit2" th:title="备忘录" style="width: 18px;height: 18px;">
-                                        <div class="memo-edit-has" th:text="${file.otaDesc}">
-                                            <div class="meno-nav"><img src="/alink-hq/static/img/alter.png" alt="" class="pointer"></div>
-                                            <div class="memo-content"></div>
+                                        <img  src="/alink-hq/static/img/memo.png" th:alt="${file.id}" class="pointer meno-img" th:title="备忘录" style="width: 18px;height: 18px;">
+                                        <div class="memo-edit-has" >
+                                            <div class="meno-nav"><img src="/alink-hq/static/img/alter.png"  alt="" class="pointer"></div>
+                                            <div class="memo-content" th:text="${file.otaDesc}"></div>
                                         </div>
                                     </a>
                                     <a th:href="@{/file/editOta(id=${file.id})}" style="margin:0 30px;">
@@ -144,7 +143,7 @@
                             <tbody>
                             <tr>
                                 <td colspan="8">
-                                    <img src="/alink-hq/static/img/no-data.png" alt="">
+                                    <img th:src="@{/static/img/no-data.png}" style="width: auto;height: auto;" alt="">
                                     <p>暂无数据</p>
                                 </td>
                             </tr>
@@ -205,9 +204,10 @@
 </div>
 
 <div class="hide-iframe"></div>
-<script type="text/javascript" src="/alink-hq/static/js/left.js"></script>
-<script type="text/javascript" src="/alink-hq/static/js/page.js"></script>
-<script type="text/javascript" src="/alink-hq/static/js/OTAFile.js"></script>
-<script src="/alink-hq/static/js/moment.js"></script>
+<script type="text/javascript" th:src="@{/static/js/left.js}"></script>
+<script type="text/javascript" th:src="@{/static/js/page.js}" ></script>
+<script type="text/javascript" th:src="@{/static/js/moment.js}"></script>
+<script type="text/javascript" th:src="@{/static/js/OTAFile.js}"></script>
+
 </body>
 </html>

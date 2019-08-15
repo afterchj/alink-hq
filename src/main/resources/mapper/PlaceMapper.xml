@@ -60,8 +60,8 @@
         <if test="mname!=null and mname!=''">
             AND m.mname LIKE CONCAT('%',#{mname},'%')
         </if>
-        <if test="meshId!=null and meshId!=''">
-            AND m.mesh_id LIKE CONCAT('%',#{meshId},'%')
+        <if test="mesh_id!=null and mesh_id!=''">
+            AND m.mesh_id LIKE CONCAT('%',#{mesh_id},'%')
         </if>
         <if test="pname!=null and pname!=''">
             AND pl.pname LIKE CONCAT('%',#{pname},'%')
