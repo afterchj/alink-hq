@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" th:href="@{/static/font-awesome-4.7.0/css/font-awesome.min.css}"/>
+    <link rel="stylesheet" th:href="@{static/css/base.css}"/>
+    <link rel="stylesheet" th:href="@{/static/css/leftNav.css}"/>
+    <link rel="stylesheet" th:href="@{/static/css/loding.css}"/>
+    <link rel="stylesheet" th:href="@{/static/css/projectManage.css}"/>
+    <title>产品内容编辑</title>
+</head>
+<body>
+
+<div class="c-container">
+    <div th:replace="common/head::head"></div>
+    <div class="main clearfix">
+        <div th:replace="common/left::left('product')"></div>
+        <div class="main-right f-l">
+            <div class="clearfix main-right-nav">
+                <div class="f-l main-right-title">
+                    <nav class="bread">
+                        <ol class="clearfix">
+                            <li class="f-l"><a th:href="@{/productList}">产品列表</a></li>
+                            <li class="f-l">产品内容编辑</li>
+                        </ol>
+                    </nav>
+                </div>
+                <div class="f-r pointer">
+                    <div class="goBack" onClick="javascript :history.back(-1);" onmousedown="backBtnMouseDown()"
+                         onmouseup="backBtnMouseUp()">
+                        <span><</span><span>返回</span>
+                    </div>
+                </div>
+            </div>
+            <form  class="" method="post">
+                <div class="table-content-list detail transfer">
+                    <div class="p-detail">
+                        <div class="p-nav">
+                            产品内容编辑
+                        </div>
+                        <div class="p-content addProduct">
+                            <fieldset>
+                                <div class="form-row">
+                                    <div class="field-label">
+                                        <label><span>*</span>产品名称</label>：
+                                    </div>
+                                    <div class="field-widget p-r">
+                                        <p class="p-a verify"></p>
+                                        <input type="text" name="productName" id="productName"  placeholder="请输入产品名称" >
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="field-label ">
+                                        <label>产品型号</label>：
+                                    </div>
+                                    <div class="field-widget p-r">
+                                        <p class="p-a verify"></p>
+                                        <input type="text" name="productType" id="productType"  placeholder="请输入产品型号" >
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="field-label ">
+                                        <label><span>*</span>代码号(产品ID)</label>：
+                                    </div>
+                                    <div class="field-widget p-r">
+                                        <p class="p-a verify"></p>
+                                        <input type="text" name="productId" id="productId"  placeholder="请输入代码号（产品 ID）" >
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="field-label ">
+                                        <label><span>*</span>隶属公司</label>：
+                                    </div>
+                                    <div class="field-widget p-r">
+                                        <p class="p-a verify"></p>
+                                        <select name="belongCompany" id="belongCompany">
+                                            <option value="">请选择隶属公司</option>
+                                            <option value="0">苏州天平先进数字科技有限公司</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="field-label ">
+                                        <label>关键固件</label>：
+                                    </div>
+                                    <div class="field-widget p-r">
+                                        <p class="p-a verify"></p>
+                                        <div name="keyFirmware" id="keyFirmware">
+                                            <div class="clearfix firmware-list keyFirmware " >
+                                                <div class="f-l">
+                                                    <input class="" name="firmware" type="radio" value="1">
+                                                    <label class="radio">固件1</label>
+                                                </div>
+                                                <div class="f-l">
+                                                    <input class="" name="firmware" type="radio" value="2">
+                                                    <label class="radio">固件2</label>
+                                                </div>
+                                                <div class="f-l">
+                                                    <input class="" name="firmware" type="radio" value="3">
+                                                    <label class="radio">固件3</label>
+                                                </div>
+                                                <div class="f-l">
+                                                    <input class="" name="firmware" type="radio" value="4">
+                                                    <label class="radio">固件4</label>
+                                                </div>
+                                                <div class="f-l">
+                                                    <input class="" name="firmware" type="radio" value="5">
+                                                    <label class="radio">固件5</label>
+                                                </div>
+                                                <div class="f-l">
+                                                    <input class="" name="firmware" type="radio" value="6">
+                                                    <label class="radio">固件6</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="field-label">
+                                        <label >产品说明</label>：
+                                    </div>
+                                    <div class="field-widget p-r">
+                                        <p class="p-a verify"></p>
+                                        <textarea id="productExplain" name="productExplain" placeholder="请输入产品说明" ></textarea>
+                                    </div>
+                                </div>
+                                <div class="form-row submit">
+                                    <button type="button">保存</button>
+                                </div>
+                            </fieldset>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!-- 导出 -->
+<div th:replace="pop/loading::loading"></div>
+<script th:src="@{/static/js/jquery.min.js}"></script>
+<script th:src="@{/static/js/left.js}"></script>
+<script th:src="@{/static/js/moment.js}"></script>
+<script th:src="@{/static/js/editProduct.js}"></script>
+</body>
+</html>

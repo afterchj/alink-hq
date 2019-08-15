@@ -77,7 +77,6 @@ function scrollY() {
 /* 浏览器水平滚动位置 */
 function scrollX() {
     var de = document.documentElement;
-
     return self.pageXOffset || (de && de.scrollLeft) || document.body.scrollLeft;
 }
 $('.showList').hide();

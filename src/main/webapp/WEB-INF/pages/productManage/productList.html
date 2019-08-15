@@ -27,7 +27,7 @@
             <div class="clearfix main-right-nav">
                 <div class="f-l main-right-title">产品列表</div>
                 <div class="f-r pointer last-nav">
-                    <a th:href="@{/file/addOta}">
+                    <a th:href="@{/createProduct}">
                         <div class="create " onmousedown="createBtnMouseDown()" onmouseup="createBtnMouseUp()">
                             <span>+</span><span>新增产品</span>
                         </div>
@@ -132,9 +132,9 @@
                                     </a>
                                 </td>
                                 <td class="p-r pointer">
-                                    <a href="javascript:void(0);">
+                                    <a th:href="@{/editProduct}">
                                         <img th:src="@{/static/img/alter.png}" alt="" title="编辑"
-                                             style="width: 18px;height: 18px;margin-right: 15px;" class="single-updown">
+                                             style="width: 18px;height: 18px;margin-right: 15px;" class="single-edit">
                                     </a>
                                     <a href="javascript:void(0);">
                                         <img th:src="@{/static/img/delete.png}" alt="" title="删除"
