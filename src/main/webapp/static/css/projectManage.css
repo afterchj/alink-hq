@@ -1752,6 +1752,7 @@ i.open-list{
     min-width:inherit;
     margin: 0;
     border: 0;
+
 }
 .scene-msg .scene-msg-list.time-scene-msg > div:nth-child(3){
     width: calc(100%/2 );
