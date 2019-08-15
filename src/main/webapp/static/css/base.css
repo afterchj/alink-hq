@@ -285,15 +285,15 @@ fieldset button{
     color: #fff;
     white-space: nowrap;
     text-align: center;
-    /*border: none;*/
-    /*border-radius: 2px;*/
+    /* border: none; */
+    border-radius: 5px;
     cursor: pointer;
     /* height: 40px; */
     margin: 0;
     vertical-align: middle;
-    /*border: 0;*/
-    /*font-size: 15px;*/
-    /*font-weight: 300;*/
+    /* border: 0; */
+    /* font-size: 15px; */
+    /* font-weight: 300; */
     margin-left: 140px;
     text-shadow: none;
     letter-spacing: 2px;
@@ -304,18 +304,18 @@ fieldset button{
     -webkit-transition: all .3s;
     -ms-transition: all .3s;
     transition: all .3s;
-    /*box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2);*/
-    /*display: inline-block;*/
-
-    /*margin-bottom: 0;*/
-    font-size: 15px;
+    /* box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2); */
+    /* display: inline-block; */
+    /* margin-bottom: 0; */
+    font-size: 14px;
     font-weight: 400;
     line-height: 1.42857143;
-    /*text-align: center;*/
-    /*white-space: nowrap;*/
-    /*vertical-align: middle;*/
-    /*cursor: pointer;*/
+    /* text-align: center; */
+    /* white-space: nowrap; */
+    /* vertical-align: middle; */
+    /* cursor: pointer; */
     border: 1px solid transparent;
+    box-shadow: 0 1px 1px 0 rgba(0,0,0,.2);
 }
 fieldset button:hover{
     opacity: .7;
@@ -324,6 +324,7 @@ fieldset .verify{
     top: -22px;
     color: #FF5722;
     font-size: 14px;
+    margin-left: 0;
 }
 .lorem-limit{
     text-align: left;
