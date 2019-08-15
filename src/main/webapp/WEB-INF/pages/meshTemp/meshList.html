@@ -96,8 +96,8 @@
                                 <th><span>网络类型</span></th>
                                 <th><span>隶属项目</span></th>
                                 <th><span>区域数量</span></th>
-                                <th><span>组数量</span></th>
-                                <th><span>灯数量</span></th>
+<!--                                <th><span>组数量</span></th>-->
+<!--                                <th><span>灯数量</span></th>-->
                                 <th><span>场景数量</span></th>
                                 <th><span>定时数量</span></th>
                                 <th><span>状态</span></th>
@@ -126,22 +126,22 @@
                                        th:href="@{/place/list(projectId=${mesh.project_id},mid=${mesh.id})}"
                                        th:text="${mesh.pcount}"></a>
                                 </td>
-                                <!--组数量-->
-                                <td class="k-link">
-                                    <a th:if="${mesh.gcount}=='0'" class="a-un" href="javascript:void(0);"
-                                       th:text="${mesh.gcount}"></a>
-                                    <a th:if="${mesh.gcount}!='0'"
-                                       th:href="@{/group/list(projectId=${mesh.project_id},mid=${mesh.id})}"
-                                       th:text="${mesh.gcount}"></a>
-                                </td>
-                                <!--灯数量-->
-                                <td class="k-link">
-                                    <a th:if="${mesh.lcount}=='0'" class="a-un" href="javascript:void(0);"
-                                       th:text="${mesh.lcount}"></a>
-                                    <a th:if="${mesh.lcount}!='0'"
-                                       th:href="@{/light/list(projectId=${mesh.project_id},mid=${mesh.id})}"
-                                       th:text="${mesh.lcount}"></a>
-                                </td>
+<!--                                &lt;!&ndash;组数量&ndash;&gt;-->
+<!--                                <td class="k-link">-->
+<!--                                    <a th:if="${mesh.gcount}=='0'" class="a-un" href="javascript:void(0);"-->
+<!--                                       th:text="${mesh.gcount}"></a>-->
+<!--                                    <a th:if="${mesh.gcount}!='0'"-->
+<!--                                       th:href="@{/group/list(projectId=${mesh.project_id},mid=${mesh.id})}"-->
+<!--                                       th:text="${mesh.gcount}"></a>-->
+<!--                                </td>-->
+<!--                                &lt;!&ndash;灯数量&ndash;&gt;-->
+<!--                                <td class="k-link">-->
+<!--                                    <a th:if="${mesh.lcount}=='0'" class="a-un" href="javascript:void(0);"-->
+<!--                                       th:text="${mesh.lcount}"></a>-->
+<!--                                    <a th:if="${mesh.lcount}!='0'"-->
+<!--                                       th:href="@{/light/list(projectId=${mesh.project_id},mid=${mesh.id})}"-->
+<!--                                       th:text="${mesh.lcount}"></a>-->
+<!--                                </td>-->
                                 <td class="k-link">
                                     <a th:if="${mesh.scount}=='0'" class="a-un" href="javascript:void(0);"
                                        th:text="${mesh.scount}"></a>
