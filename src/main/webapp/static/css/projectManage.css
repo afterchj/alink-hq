@@ -1740,6 +1740,7 @@ i.open-list{
 }
 .tranfer-btn{
     text-align: center;
+    margin-top: 30px;
 }
 #timerDetail{
     height: auto;
