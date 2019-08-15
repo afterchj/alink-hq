@@ -2,6 +2,8 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" th:href="@{/static/css/base.css}"/>
     <link rel="stylesheet" th:href="@{/static/css/login.css}"/>
     <script type="text/javascript" th:src="@{/static/js/jquery.min.js}"></script>
@@ -101,11 +103,11 @@
                             <!--手机找回密码-->
                             <div class="phone-find-password" tabContent="phone-find-password">
                                 <form th:action="@{/login}" method="post">
+                                    <!--<p class="mobile-add-hint" style="height: 25px;line-height:2;"></p>-->
                                     <p class="mobile-add-hint" style="height: 25px;line-height:2;"></p>
                                     <div class="icon-input ">
                                         <input type="phone" name="mobile" maxlength="11" id="phone-f"
-                                               placeholder="请输入所绑定的手机号"
-                                               style="text-indent: 15px;    height: 36px;line-height: 36px;"
+                                               placeholder="请输入所绑定的手机号"class="no-icon-input"
                                                oninput="value=value.replace(/[^\d]/g,'')" onKeyUp="keyupPhone()"/>
                                     </div>
                                     <p class="mobile-code-hint" style="height:25px;line-height:2;"></p>
@@ -113,16 +115,16 @@
                                         <input type="text" class="phone" name="code-f"
                                                oninput="value=value.replace(/[^\d]/g,'')" maxlength="6" id="code-f"
                                                placeholder="请输入验证码"
-                                               style="text-indent: 15px;    height: 36px;line-height: 36px;"/>
+                                               style="padding-left: 10px;width: calc(100% - 120px);height: 36px;line-height: 36px;"/>
                                         <button class="security-code" type="button" onclick="phoneFindPwdCode()"
                                                 style="height:38px;">获取验证码
                                         </button>
                                     </div>
                                     <p class="mobile-password-hint" style="height: 25px;line-height:2;"></p>
-                                    <div class="icon-input  ">
+                                    <div class="icon-input">
                                         <input type="password" name="pwd-f" id="pwd-f" onKeyUp="keyup()" maxlength="16"
                                                placeholder="请输入新密码（6-16位数字、字母）"
-                                               style="text-indent: 15px;    height: 36px;line-height: 36px;"/>
+                                               class="no-icon-input" />
                                     </div>
                                     <p class="page-hint" style="height: 30px;line-height:2;"></p>
                                     <div class="btn-bottom">
@@ -142,14 +144,14 @@
                                     <p class="email-add-hint" style="height: 25px;line-height:2;"></p>
                                     <div class="icon-input ">
                                         <input type="email" name="email" id="email-e" placeholder="请输入所绑定的邮箱"
-                                               style="text-indent: 15px;    height: 36px;line-height: 36px;"/>
+                                               class="no-icon-input"/>
                                     </div>
                                     <p class="email-code-hint" style="height: 25px;line-height:2;"></p>
                                     <div class="icon-input p-r">
                                         <input type="text" class="phone" name="code-e" id="code-e"
                                                oninput="value=value.replace(/[^\d]/g,'')" maxlength="6"
                                                placeholder="请输入验证码"
-                                               style="text-indent: 15px;    height: 36px;line-height: 36px;"/>
+                                               style="padding-left: 10px;width: calc(100% - 120px);height: 36px;line-height: 36px;"/>
                                         <button class="security-code" type="button" onclick="emailFindPwdCode()"
                                                 style="height:38px;">获取验证码
                                         </button>
@@ -157,8 +159,7 @@
                                     <p class="email-password-hint" style="height: 25px;line-height:2;"></p>
                                     <div class="icon-input ">
                                         <input type="password" name="pwd-e" onKeyUp="keyup()" id="pwd-e" maxlength="16"
-                                               placeholder="请输入新密码（6-16位数字、字母）"
-                                               style="text-indent: 15px;    height: 36px;line-height: 38px;"/>
+                                               placeholder="请输入新密码（6-16位数字、字母）" class="no-icon-input"/>
                                     </div>
                                     <p class="page-hint" style="height: 30px;line-height:2;"></p>
                                     <div class="btn-bottom">

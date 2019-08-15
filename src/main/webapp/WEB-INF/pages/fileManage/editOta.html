@@ -41,11 +41,11 @@
                     <!--<img src="/alink-hq/static/img/go-back.png" alt="" onclick="history.back()">-->
                 </div>
             </div>
-            <div id="timerDetail" class="table-content-list detail">
+            <div  class="table-content-list detail">
                 <div class="p-detail">
                     <div class="p-nav"><span th:inline="text">[[${file.otaName}]]</span>固件信息编辑</div>
                     <div class="p-content p-r">
-                        <form th:action="@{/file/save}" method="post">
+                        <form th:action="@{/file/save}" method="post" id="Ota">
                             <input type="hidden" name="id" th:value="${file.id}">
                             <input type="hidden" name="otaVersion" th:value="${file.otaVersion}">
                             <fieldset>
@@ -77,7 +77,7 @@
                                     </div>
                                 </div>
                                 <div class="form-row submit">
-                                    <button type="submit">保存</button>
+                                    <button type="button">保存</button>
                                 </div>
                             </fieldset>
                         </form>
@@ -87,26 +87,28 @@
         </div>
     </div>
 </div>
-<!-- 新增固件 -->
-<div class="pop-iframe" openContent="add-OTA">
-    <div class=" p-r pop-nav">
-        温馨提示
-    </div>
-    <div class="pop-content">
-        <div class="reset-pwd">
-            <i class="fa fa-check-circle fa-3x" aria-hidden="true" style="display: block;color:#00A0E9;"></i>
-            <p>保存成功！</p>
-        </div>
-        <!--<div class="reset-pwd-hint">（删除后项目中所有信息将无法恢复，请慎重！）</div>-->
-        <div class="pop-btn">
-            <button class="reduce" style="width: auto;letter-spacing: 2px;display: inline-block;font-size: 15px;">再想想</button>
-            <button class="yes" style="width: auto;letter-spacing: 2px;display: inline-block;font-size: 15px;">上传新版本</button>
-        </div>
-    </div>
-</div>
-<div class="hide-iframe "></div>
+<!-- 转圈 -->
+<div th:replace="pop/loading::loading"></div>
+<!--&lt;!&ndash; 新增固件 &ndash;&gt;-->
+<!--<div class="pop-iframe" openContent="add-OTA">-->
+    <!--<div class=" p-r pop-nav">-->
+        <!--温馨提示-->
+    <!--</div>-->
+    <!--<div class="pop-content">-->
+        <!--<div class="reset-pwd">-->
+            <!--<i class="fa fa-check-circle fa-3x" aria-hidden="true" style="display: block;color:#00A0E9;"></i>-->
+            <!--<p>保存成功！</p>-->
+        <!--</div>-->
+        <!--&lt;!&ndash;<div class="reset-pwd-hint">（删除后项目中所有信息将无法恢复，请慎重！）</div>&ndash;&gt;-->
+        <!--<div class="pop-btn">-->
+            <!--<button class="reduce" style="width: auto;letter-spacing: 2px;display: inline-block;font-size: 15px;">再想想</button>-->
+            <!--<button class="yes" style="width: auto;letter-spacing: 2px;display: inline-block;font-size: 15px;">上传新版本</button>-->
+        <!--</div>-->
+    <!--</div>-->
+<!--</div>-->
+<div class="hide-iframe"></div>
 <script th:src="@{/static/js/left.js}"></script>
 <script th:src="@{/static/js/moment.js}"></script>
-<script th:src="@{/static/js/addOta.js}"></script>
+<script th:src="@{/static/js/editOta.js}"></script>
 </body>
 </html>

@@ -9,9 +9,9 @@
     <link rel="stylesheet" href="/alink-hq/static/css/common.css">
     <link rel="stylesheet" href="/alink-hq/static/css/leftNav.css">
     <link rel="stylesheet" href="/alink-hq/static/css/projectManage.css">
-    <script th:src="@{/static/js/jquery.min.js}"></script>
-    <script th:src="@{/static/js/upload.js}"></script>
-    <title>固件信息编辑</title>
+
+
+    <title>上传新固件</title>
 </head>
 
 <body>
@@ -41,24 +41,33 @@
                     <!--<img src="/alink-hq/static/img/go-back.png" alt="" onclick="history.back()">-->
                 </div>
             </div>
-            <div id="timerDetail" class="table-content-list detail">
+            <div  class="table-content-list detail transfer">
                 <div class="p-detail">
                     <div class="p-nav">上传新版本</div>
                     <div class="p-content p-r">
                         <form th:action="@{/file/doUpload}" method="post" enctype="multipart/form-data">
                             <input type="hidden" name="id" th:value="${file.id}">
                             <input type="hidden" name="otaId" th:value="${file.otaId}">
-                            <input type="hidden" name="otaName" th:value="${file.otaName}">
+                            <input type="hidden" name="otaName" th:value="${file.otaName}">"
                             <input type="hidden" name="otaVersion" th:value="${file.otaVersion}">
                             <input type="hidden" name="otaDesc" th:value="${file.otaDesc}">
-                            <div class="form-row">
-                                <div class="field-label">
-                                    <label><span>*</span>选择文件</label>：<input type="file" name="file">
+                            <fieldset>
+                                <div class="form-row clearfix">
+                                    <div class="field-label">
+                                        <label><span>*</span>固件名称</label>：
+                                    </div>
+                                    <div class="field-widget p-r" style="width: calc(100% - 150px);">
+                                        <p class="p-a verify"></p>
+                                        <input type="text" class="filename falseFile" readonly="" style="width: 300px;" >
+                                        <input type="button" class="button upload" value="浏览" >
+                                        <input type="file" name="file" size="30" class="trueFile" id="newFile">
+                                    </div>
                                 </div>
                                 <div class="form-row submit">
-                                    <button type="submit">上传</button>
+                                    <button type="submit" style="margin:50px 0  0 235px;" id="uploaded">上传</button>
+                                    <p style="margin: 30px 30px 30px 155px;font-size: 15px;color: #999;">文件上传服务器耗时较长，请耐心等待…</p>
                                 </div>
-                            </div>
+                            </fieldset>
                         </form>
                     </div>
                 </div>
@@ -86,8 +95,10 @@
     </div>
 </div>
 <div class="hide-iframe "></div>
+<script th:src="@{/static/js/jquery.min.js}"></script>
 <script th:src="@{/static/js/left.js}"></script>
 <script th:src="@{/static/js/moment.js}"></script>
-<script th:src="@{/static/js/addOta.js}"></script>
+<!--<script th:src="@{/static/js/addOta.js}"></script>-->
+<script th:src="@{/static/js/uploadNewVersionOTA.js}"></script>
 </body>
 </html>

@@ -114,6 +114,18 @@
 <!--            </ul>-->
 <!--        </li>-->
 
+<!--        <li  class="one-list active" shiro:hasanyPer="viewOTA,viewPC">-->
+<!--            <div class="p-r">-->
+<!--                <a th:href="@{/role/list}" tab="fileManage">产品管理</a>-->
+<!--                <img src="/alink-hq/static/img/left-reduce.png" alt="" class="p-a on-off-triangle">-->
+<!--            </div>-->
+<!--            <ul class=" two-list ">-->
+<!--                <li shiro:hasPermission="viewOTA"  tab="product"  th:if="${list}!='product'"><a th:href="@{/productList}">产品列表</a></li>-->
+<!--                <li shiro:hasPermission="viewOTA" tab="product" class="active" th:if="${list}=='product'"><a th:href="@{/productList}">产品列表</a></li>-->
+<!--                &lt;!&ndash;<li shiro:hasPermission="viewPC" tab="PCFile"   th:if="${list}!='PCfile'"><a th:href="@{/file/PCFile}">PC文件</a></li>&ndash;&gt;-->
+<!--                &lt;!&ndash;<li shiro:hasPermission="viewPC" tab="PCFile" class="active" th:if="${list}=='PCfile'"><a th:href="@{/file/PCFile}">PC文件</a></li>&ndash;&gt;-->
+<!--            </ul>-->
+<!--        </li>-->
         <li class="one-list">
             <div class="p-r nav-color " th:if="${list}=='myAccount'">
                 <a th:href="@{/myAccount/myAccount}">我的账户</a>

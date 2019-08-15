@@ -9,8 +9,8 @@
     <!--<link rel="stylesheet" href="/alink-hq/static/css/common.css">-->
     <link rel="stylesheet" href="/alink-hq/static/css/leftNav.css">
     <link rel="stylesheet" href="/alink-hq/static/css/projectManage.css">
-    <script th:src="@{/static/js/jquery.min.js}"></script>
-    <script th:src="@{/static/js/upload.js}"></script>
+    <!--<script th:src="@{/static/js/jquery.min.js}"></script>-->
+    <!--<script th:src="@{/static/js/upload.js}"></script>-->
     <title>新建固件</title>
 </head>
 
@@ -45,7 +45,7 @@
                 <div class="p-detail">
                     <div class="p-nav">新建固件</div>
                     <div class="p-content p-r">
-                        <form th:action="@{/file/save}"  method="post">
+                        <form method="post" id="Ota">
                             <fieldset>
                                 <div class="form-row">
                                     <div class="field-label">
@@ -75,7 +75,7 @@
                                     </div>
                                 </div>
                                 <div class="form-row submit">
-                                    <button type="submit">确定新增</button>
+                                    <button type="button">确定新增</button>
                                 </div>
                             </fieldset>
                         </form>
@@ -86,23 +86,25 @@
     </div>
 </div>
 <!-- 新增固件 -->
-<div class="pop-iframe" openContent="add-OTA">
-    <div class=" p-r pop-nav">
-        温馨提示
-    </div>
-    <div class="pop-content">
-        <div class="reset-pwd">
-            <i class="fa fa-check-circle fa-3x" aria-hidden="true" style="display: block;color:#00A0E9;"></i>
-            <p>新增成功！</p>
-        </div>
-        <!--<div class="reset-pwd-hint">（删除后项目中所有信息将无法恢复，请慎重！）</div>-->
-        <div class="pop-btn">
-            <button class="reduce" style="width: auto;letter-spacing: 2px;display: inline-block;font-size: 15px;">再想想</button>
-            <button class="yes" style="width: auto;letter-spacing: 2px;display: inline-block;font-size: 15px;">上传新版本</button>
-        </div>
-    </div>
-</div>
+<!--<div class="pop-iframe" openContent="add-OTA">-->
+    <!--<div class=" p-r pop-nav">-->
+        <!--温馨提示-->
+    <!--</div>-->
+    <!--<div class="pop-content p-r">-->
+        <!--<div class="reset-pwd p-a" style="top: 20%;left: 25%;">-->
+            <!--<i class="fa fa-check-circle fa-3x" aria-hidden="true" style="display:inline-block;color:#00A0E9;"></i>-->
+            <!--<p>新增成功！</p>-->
+        <!--</div>-->
+        <!--&lt;!&ndash;<div class="reset-pwd-hint">（删除后项目中所有信息将无法恢复，请慎重！）</div>&ndash;&gt;-->
+        <!--<div class="pop-btn">-->
+            <!--<button class="reduce" style="width: auto;letter-spacing: 2px;display: inline-block;font-size: 15px;">再想想</button>-->
+            <!--<button class="yes" style="width: auto;letter-spacing: 2px;display: inline-block;font-size: 15px;">上传新版本</button>-->
+        <!--</div>-->
+    <!--</div>-->
+<!--</div>-->
+<div th:replace="pop/addSuccess::add-success"></div>
 <div class="hide-iframe "></div>
+<script th:src="@{/static/js/jquery.min.js}"></script>
 <script th:src="@{/static/js/left.js}"></script>
 <script th:src="@{/static/js/moment.js}"></script>
 <script th:src="@{/static/js/addOta.js}"></script>

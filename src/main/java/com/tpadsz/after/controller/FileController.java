@@ -67,6 +67,12 @@ public class FileController {
         return "fileManage/otaRevisionHistory";
     }
 
+    @RequestMapping("/projectFileList")
+    public String projectFileList() {
+        return "fileManage/projectFileList";
+    }
+
+
     @RequestMapping("/PCFile")
     public String PCFile() {
         return "fileManage/pcFile";
@@ -92,6 +98,17 @@ public class FileController {
         Map map = JSON.parseObject(JSON.toJSONString(info));
         fileService.saveFile(map);
         return "redirect:/file/OTAFile";
+    }
+
+    @ResponseBody
+    @RequestMapping("/add")
+    public String add(FileDTO info) {
+        String version = info.getOtaVersion();
+        String otaVer = StringUtils.isEmpty(version) ? "v1.0.0" : version;
+        info.setOtaVersion(otaVer);
+        Map map = JSON.parseObject(JSON.toJSONString(info));
+        fileService.saveFile(map);
+        return map.get("result").toString();
     }
 
     @RequestMapping("/doUpload")

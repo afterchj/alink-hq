@@ -207,45 +207,45 @@
 
         })
         $('.select-project-step .confirm-create').click(function () {
-                    projectId = $('#projectId option:selected').val();
-                    if (projectId == '' || !projectId) {
-                        $('.project-hint').text('请选择项目');
-                    } else {
-                        $('.project-hint').text('');
-                        var step = 'mesh';
-                        step1(step, projectId, mid, pid, gname)
-                        $('#mid ').empty();
-                        $.getJSON("/alink-hq/group/getMesh", {"projectId": projectId}, function (json) {
-                            var content = '<option value="">请选择网络</option>';
-                            if (json.length == 1) {
-                                content = '<option value="' + json[0].id + '">' + json[0].label + '</option>';
-                            } else {
-                                $.each(json, function (i, item) {
-                                    var id = item.id;
-                                    if (id.substr(0, id.indexOf("_")) == mid) {
-                                        content += "<option value='" + item.id + "' selected>" + item.label + "</option>";
-                                    } else {
-                                        content += "<option value='" + item.id + "'>" + item.label + "</option>";
-
-                                    }
-                                });
-                            }
-                            $("#mid").append(content);
-                            var str = $("#mid option:selected").val();
-                            $("#meshId").val(str.substr(0, str.indexOf("_")));
-                            $("#mid").change(function () {
-                                mid = $("#mid option:selected").val();
-                                if (mid == '') {
-                                    $('.project-hint').text('请选择网络');
+                projectId = $('#projectId option:selected').val();
+                if (projectId == '' || !projectId) {
+                    $('.project-hint').text('请选择项目');
+                } else {
+                    $('.project-hint').text('');
+                    var step = 'mesh';
+                    step1(step, projectId, mid, pid, gname)
+                    $('#mid ').empty();
+                    $.getJSON("/alink-hq/group/getMesh", {"projectId": projectId}, function (json) {
+                        var content = '<option value="">请选择网络</option>';
+                        if (json.length == 1) {
+                            content = '<option value="' + json[0].id + '">' + json[0].label + '</option>';
+                        } else {
+                            $.each(json, function (i, item) {
+                                var id = item.id;
+                                if (id.substr(0, id.indexOf("_")) == mid) {
+                                    content += "<option value='" + item.id + "' selected>" + item.label + "</option>";
                                 } else {
-                                    $('.project-hint').text('');
+                                    content += "<option value='" + item.id + "'>" + item.label + "</option>";
+
                                 }
-                                meshId = mid.substr(mid.indexOf("_") + 1);
-                                $("#meshId").val(meshId);
-                            })
+                            });
+                        }
+                        $("#mid").append(content);
+                        var str = $("#mid option:selected").val();
+                        $("#meshId").val(str.substr(0, str.indexOf("_")));
+                        $("#mid").change(function () {
+                            mid = $("#mid option:selected").val();
+                            if (mid == '') {
+                                $('.project-hint').text('请选择网络');
+                            } else {
+                                $('.project-hint').text('');
+                            }
+                            meshId = mid.substr(mid.indexOf("_") + 1);
+                            $("#meshId").val(meshId);
                         })
-                    }
+                    })
                 }
+            }
         )
         //输入组的确定
         $('.select-group-step .confirm-create').click(function () {
@@ -253,6 +253,7 @@
             var regName = /^[a-zA-Z0-9\u4e00-\u9fa5]{2,16}$/;
             var groupResult = regName.test(gname);
             var mids = mid.substr(0, mid.indexOf("_"));
+            console.log("projectId",projectId,"mid",mids);
             if (gname && gname != '' && groupResult) {
                 $('.group-hint').text('');
                 $.ajax({
@@ -263,7 +264,7 @@
                         if (res == 'ok') {
                             $('#preload-anim').addClass('active');
                             $('#preload-anim .title').text('创建成功！');
-                            location.href = '/alink-hq/group/list?mid=' + mids;
+                            location.href = '/alink-hq/group/list?projectId=' + projectId + '&mid=' + mids;
                         } else if (res == 'fail') {
                             $('.group-hint').text('已存在，请重新输入');
                         } else {
@@ -374,6 +375,7 @@
         }
         return mid;
     }
+
     function pid1(pid) {
         if ($('#place option:selected').length > 0) {
             pid = $('#place option:selected').val();
