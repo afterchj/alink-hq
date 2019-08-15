@@ -53,7 +53,7 @@ $(function () {
     })
     $('div[openContent="delete-pop"] button.yes').click(function () {
         if (ids) {
-            location.href = "/alink-hq/group/delete?pid=" + $("#projectId").val() + "mid=" + $("#mid").val() + "&ids=" + ids;
+            location.href = "/alink-hq/group/delete?pid=" + $("#projectId").val() + "&mid=" + $("#mid").val() + "&ids=" + ids;
             ids = [];
         }
     })
