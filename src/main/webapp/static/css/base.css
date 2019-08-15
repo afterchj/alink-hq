@@ -608,17 +608,20 @@ table tbody tr:hover {
     background-color: #F5f5f5;
 }
 input::-webkit-input-placeholder, textarea::-webkit-input-placeholder {
-
+    font-size: 14px;
     color:    #999;
 }
 input:-moz-placeholder, textarea:-moz-placeholder {
     color:    #999;
+    font-size: 14px;
 }
 input::-moz-placeholder, textarea::-moz-placeholder {
     color:    #999;
+    font-size: 14px;
 }
 input:-ms-input-placeholder, textarea:-ms-input-placeholder {
     color:    #999;
+    font-size: 14px;
 }
 
 .pop-content input {

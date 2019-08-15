@@ -1714,13 +1714,13 @@ i.cricle {
     height: 38px;
     line-height: 38px;
     padding: 0 18px;
-    background-color: #12B7F5;
+    background-color: #00B7EF;
     color: #fff;
     white-space: nowrap;
     text-align: center;
     font-size: 15px;
     border: none;
-    border-radius: 2px;
+    border-radius: 5px;
     cursor: pointer;
     transition: all .3s;
 }
