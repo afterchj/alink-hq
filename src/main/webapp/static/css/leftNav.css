@@ -29,8 +29,8 @@
 }
 
 .one-list>div {
-    height: 45px;
-    line-height: 45px;
+    height: 40px;
+    line-height: 40px;
     padding-left: 50px;
 }
 
@@ -110,8 +110,8 @@
 }
 
 .one-list li {
-    height: 39px;
-    line-height: 39px;
+    height: 38px;
+    line-height: 38px;
     padding-left: 75px;
     cursor: pointer;
 }

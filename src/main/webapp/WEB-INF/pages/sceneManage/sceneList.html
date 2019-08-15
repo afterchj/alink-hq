@@ -82,7 +82,7 @@
                                 <td class="sceneId" th:text="${scene.sceneId}"></td>
                                 <td class="k-link"><a th:href="@{/mesh/info(id=${scene.mid})}" th:text="${scene.meshName}"></a></td>
                                 <td th:text="${scene.meshId}"></td>
-                                <td>未知</td>
+                                <td class="unknown">未知</td>
                                 <td class="p-r" >
                                     <img src="/alink-hq/static/img/edit.png" th:alt="${scene.id}"
                                          class="reset-name pointer" shiro:hasPermission ="renameScene"
