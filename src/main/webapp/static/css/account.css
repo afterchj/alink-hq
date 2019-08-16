@@ -14,7 +14,7 @@
 #account .a-content{
     padding: 10px 30px;
     font-size: 16px;
-    color: #4a4a4a;
+    color: #3c3c3c;
 }
 #account .a-content>div{
     padding: 40px 0;
@@ -45,7 +45,7 @@
 #account .a-content>div>span {
     display: inline-block;
     vertical-align: middle;
-    color: #4a4a4a;
+    color: #2F4056;
     /* transform: scale(1,.95); */
     font-size: 14px;
 }
@@ -63,7 +63,7 @@
 /*}*/
 #account .a-content>div>span ul li{
     font-size: 13px;
-    color: #888;
+    color: #898989;
     list-style-type: disc;
     /* line-height: 1; */
     margin: 10px 0;
@@ -103,7 +103,7 @@ i.dot-no{
 #changePassword form,#bindPhone form,#fillUsername form,#bindEmail form{
     margin: 100px auto;
     font-size: 16px;
-    color: #3c3c3c;
+    color: #4a4a4a;
     width: 600px;
 }
 
@@ -139,10 +139,10 @@ p.phone-hint.active,p.use-hint2.active,p.email-hint.active,p.pwd-hint.active,p.u
     height: 38px;
     font-size: 17px;
     padding: 0 20px;
-    background-color: #3598db;
+    background-color: #00B7EF;
     border-radius: 5px;
     color: #fff;
-    border: 1px solid #3598db;
+    border: 1px solid #00B7EF;
     margin-top: 70px;
     cursor: pointer;
 }
@@ -156,6 +156,7 @@ p.phone-hint.active,p.use-hint2.active,p.email-hint.active,p.pwd-hint.active,p.u
     width: 115px;
     font-size: 16px;
     padding: 0;
+    margin: 0;
     margin: 0px 0 2px 18px;
     vertical-align: middle;
 }
