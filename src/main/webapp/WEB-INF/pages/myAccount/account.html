@@ -36,113 +36,125 @@
                         我的账号
                     </div>
                     <div class="a-content p-content">
-                        <div>
-                            <span class="icon" style="width: 63px;">
+                        <ul class="clearfix">
+                            <!--<span class="icon" style="width: 63px;">-->
+                            <!--<i class="dot-no"></i>-->
+                            <!--<img style="width: 28px;height: 27px" src="/alink-hq/static/img/password1.png" alt=""/>-->
+                            <!--</span>-->
+                            <li class="icon f-l" >
                                 <i class="dot-no"></i>
-                                <img style="width: 28px;height: 27px" src="/alink-hq/static/img/password1.png" alt=""/>
-                            </span>
-                                <span class="title">账号</span>
-                                <span th:text="${myAccount.getAccount()}"></span>
-                            <span>
+                                <img s src="/alink-hq/static/img/password1.png" alt=""/>
+                            </li>
+                            <!--<span class="title">账号</span>-->
+                            <li class="title f-l">账号</li>
+                            <!--<span th:text="${myAccount.getAccount()}"></span>-->
+                            <li class="f-l" th:text="${myAccount.getAccount()}"></li>
+                            <!--<span>-->
+                            <!--<a th:href="@{pwd}" tab="myAccount/pwd">修改密码</a>-->
+                            <!--</span>-->
+                            <li class="f-l">
                                 <a th:href="@{pwd}" tab="myAccount/pwd">修改密码</a>
-                            </span>
-                        </div>
-                        <div>
-                            <span class="icon" style="width: 63px;">
-                                <i style="margin-right: 14px;" th:class="${myAccount.getUname()==null or #strings.isEmpty(myAccount.getUname())}?'dot':'dot-no'"></i>
-                                <img style="width: 25px;" src="/alink-hq/static/img/account1.png" alt=""/>
-                            </span>
-                            <span class="title">用户名</span>
-                            <span th:text="${myAccount.getUname()==null or #strings.isEmpty(myAccount.getUname())}?'未填写':${myAccount.getUname()}"></span>
-                        <span>
-                            <a th:if="${myAccount.getUname()==null or #strings.isEmpty(myAccount.getUname())}"
-                               th:href="@{fillUname(flag=0)}">填写用户名</a>
-                            <a th:if="${myAccount.getUname()!=null and !#strings.isEmpty(myAccount.getUname())}"
-                               th:href="@{modifiUname(flag=1)}">修改用户名</a>
-                        </span>
-                        </div>
-                        <div>
-                            <span class="icon" style="width: 63px;">
-                                <i style="margin-right: 14px;" th:class="${myAccount.getMobile()==null or #strings.isEmpty(myAccount.getMobile())}?'dot':'dot-no'"></i>
-                                <img style="width: 27px;" src="/alink-hq/static/img/phone1.png" alt=""/>
-                            </span>
-                            <span class="title">手机号</span>
-                            <span th:text="${myAccount.getMobile()==null or #strings.isEmpty(myAccount.getMobile())}?'未填写':${myAccount.getMobile()}"></span>
-                    <span>
-                        <a th:if="${myAccount.getMobile()==null or #strings.isEmpty(myAccount.getMobile())}"
-                           th:href="@{fillMobile(flag=0)}">绑定手机号</a>
-                        <a th:if="${myAccount.getMobile()!=null and !#strings.isEmpty(myAccount.getMobile())}"
-                           th:href="@{modifiMobile(flag=1)}">修改手机号</a>
-                    </span>
-                    <span>
-                        <ul>
-                            <li>绑定手机号可以进行账号登录</li>
-                            <li>密码丢失时可以通过绑定的手机号轻松找回</li>
+                            </li>
                         </ul>
-                    </span>
-                        </div>
-                        <div>
-                            <span class="icon" style="width: 63px;"><i
-                                    th:class="${myAccount.getEmail()==null or #strings.isEmpty(myAccount.getEmail())}?'dot':'dot-no'"
-                                    style="margin-right: 13px;"></i><img
-                                    src="/alink-hq/static/img/email1.png" alt=""/></span>
-                                    <span class="title">邮箱</span>
-                                    <span th:text="${myAccount.getEmail()==null or #strings.isEmpty(myAccount.getEmail())}?'未填写':${myAccount.getEmail()}"></span>
-                            <span>
+                        <ul>
+                            <li class="icon f-l" >
+                                <i th:class="${myAccount.getUname()==null or #strings.isEmpty(myAccount.getUname())}?'dot':'dot-no'"></i>
+                                <img  src="/alink-hq/static/img/account1.png" alt=""/>
+                            </li>
+                            <li class="title f-l">用户名</li>
+                            <li class="f-l"
+                                th:text="${myAccount.getUname()==null or #strings.isEmpty(myAccount.getUname())}?'未填写':${myAccount.getUname()}"></li>
+                            <li class="f-l">
+                                <a th:if="${myAccount.getUname()==null or #strings.isEmpty(myAccount.getUname())}"
+                                   th:href="@{fillUname(flag=0)}">填写用户名</a>
+                                <a th:if="${myAccount.getUname()!=null and !#strings.isEmpty(myAccount.getUname())}"
+                                   th:href="@{modifiUname(flag=1)}">修改用户名</a>
+                            </li>
+                        </ul>
+                        <ul>
+                            <li class="icon f-l" >
+                                <i th:class="${myAccount.getMobile()==null or #strings.isEmpty(myAccount.getMobile())}?'dot':'dot-no'"></i>
+                                <img src="/alink-hq/static/img/phone1.png" alt=""/>
+                            </li>
+                            <li class="title f-l">手机号</li>
+                            <li class="f-l"
+                                th:text="${myAccount.getMobile()==null or #strings.isEmpty(myAccount.getMobile())}?'未填写':${myAccount.getMobile()}"></li>
+                            <li class="f-l">
+                                <a th:if="${myAccount.getMobile()==null or #strings.isEmpty(myAccount.getMobile())}"
+                                   th:href="@{fillMobile(flag=0)}">绑定手机号</a>
+                                <a th:if="${myAccount.getMobile()!=null and !#strings.isEmpty(myAccount.getMobile())}"
+                                   th:href="@{modifiMobile(flag=1)}">修改手机号</a>
+                            </li>
+                            <li class="f-l">
+                                <ul>
+                                    <li>绑定手机号可以进行账号登录</li>
+                                    <li>密码丢失时可以通过绑定的手机号轻松找回</li>
+                                </ul>
+                            </li>
+                        </ul>
+                        <ul>
+                            <li class="icon f-l" >
+                                <i th:class="${myAccount.getEmail()==null or #strings.isEmpty(myAccount.getEmail())}?'dot':'dot-no'" ></i>
+                                <img src="/alink-hq/static/img/email1.png" alt=""/></li>
+                            <li class="title f-l">邮箱</li>
+                            <li class="f-l" th:text="${myAccount.getEmail()==null or #strings.isEmpty(myAccount.getEmail())}?'未填写':${myAccount.getEmail()}"></li>
+                            <li class="f-l">
                                 <a th:if="${myAccount.getEmail()==null or #strings.isEmpty(myAccount.getEmail())}"
                                    th:href="@{fillEmail(flag=0)}">绑定邮箱</a>
                                 <a th:href="@{modifiEmail(flag=1)}"
                                    th:if="${myAccount.getEmail()!=null and !#strings.isEmpty(myAccount.getEmail())}">修改邮箱</a>
-                            </span>
-                            <span>
+                            </li>
+                            <li class="f-l">
                                 <ul>
                                     <li>绑定邮箱可以进行账号登录</li>
                                     <li>密码丢失时可以通过绑定的邮箱轻松找回</li>
                                 </ul>
-                            </span>
-                        </div>
-                        <div>
-                            <span class="icon" style="width: 63px;">
+                            </li>
+                        </ul>
+                        <ul>
+                            <li class="icon f-l" >
                                 <i class="dot-no"></i>
-                                <img style="width: 28px;height: 27px" src="/alink-hq/static/img/password1.png" alt=""/>
-                            </span>
-                            <span class="title">隶属公司</span>
-                            <span>
-                                <a shiro:hasAnyRoles="super,admin" style="cursor: pointer; text-decoration:none" th:text="${computeInfo.coname}" th:href="@{/cooperate/info(id=${computeInfo.id})}"></a>
+                                <img  src="/alink-hq/static/img/password1.png" alt=""/>
+                            </li>
+                            <li class="title f-l">隶属公司</li>
+                            <li class="f-l">
+                                <a shiro:hasAnyRoles="super,admin" style="cursor: pointer; text-decoration:none"
+                                   th:text="${computeInfo.coname}"
+                                   th:href="@{/cooperate/info(id=${computeInfo.id})}"></a>
                                 <p shiro:hasAnyRoles="manager,user" th:text="${computeInfo.coname}"></p>
-                            </span>
+                            </li>
                             <!--<span>-->
-                                <!--<a th:href="@{pwd}" tab="myAccount/pwd">修改密码</a>-->
+                            <!--<a th:href="@{pwd}" tab="myAccount/pwd">修改密码</a>-->
                             <!--</span>-->
-                        </div>
+                        </ul>
                     </div>
                     <!--<div class="p-content">-->
-                        <!--<ul class="account-ul">-->
-                            <!--<li class="clearfix account-list">-->
-                                <!--<div class="f-l">-->
-                                    <!--<img  src="/alink-hq/static/img/password1.png" alt=""/>-->
-                                <!--</div>-->
-                                <!--<div class="f-l">-->
-                                    <!--账号-->
-                                <!--</div>-->
-                                <!--<div class="f-l" th:text="${myAccount.getAccount()}"></div>-->
-                                <!--<div class="f-l"><a th:href="@{pwd}" tab="myAccount/pwd">修改密码</a></div>-->
-                            <!--</li>-->
-                            <!--<li class="clearfix account-list">-->
-                                <!--<div class="f-l">-->
-                                    <!--&lt;!&ndash;<i style="margin-right: 14px;" th:class="${myAccount.getUname()==null or #strings.isEmpty(myAccount.getUname()}? 'dot':'dot-no'"></i>&ndash;&gt;-->
-                                    <!--<img style="width: 25px;" src="/alink-hq/static/img/account1.png" alt=""/>-->
-                                <!--</div>-->
-                                <!--<div class="f-l">-->
-                                    <!--用户名-->
-                                <!--</div>-->
-                                <!--<div class="f-l" th:text="${myAccount.getUname()==null or #strings.isEmpty(myAccount.getUname())}?'未填写':${myAccount.getUname()}"></div>-->
-                                <!--<div class="f-l">-->
-                                    <!--&lt;!&ndash;<a th:if="${myAccount.getUname()==null or #strings.isEmpty(myAccount.getUname())}" th:href="@{fillUname(flag=0)}">填写用户名</a>&ndash;&gt;-->
-                                    <!--&lt;!&ndash;<a th:if="${myAccount.getUname()!=null and !#strings.isEmpty(myAccount.getUname())}" th:href="@{modifiUname(flag=1)}">修改用户名</a>&ndash;&gt;-->
-                                <!--</div>-->
-                            <!--</li>-->
-                        <!--</ul>-->
+                    <!--<ul class="account-ul">-->
+                    <!--<li class="clearfix account-list">-->
+                    <!--<div class="f-l">-->
+                    <!--<img  src="/alink-hq/static/img/password1.png" alt=""/>-->
+                    <!--</div>-->
+                    <!--<div class="f-l">-->
+                    <!--账号-->
+                    <!--</div>-->
+                    <!--<div class="f-l" th:text="${myAccount.getAccount()}"></div>-->
+                    <!--<div class="f-l"><a th:href="@{pwd}" tab="myAccount/pwd">修改密码</a></div>-->
+                    <!--</li>-->
+                    <!--<li class="clearfix account-list">-->
+                    <!--<div class="f-l">-->
+                    <!--&lt;!&ndash;<i style="margin-right: 14px;" th:class="${myAccount.getUname()==null or #strings.isEmpty(myAccount.getUname()}? 'dot':'dot-no'"></i>&ndash;&gt;-->
+                    <!--<img style="width: 25px;" src="/alink-hq/static/img/account1.png" alt=""/>-->
+                    <!--</div>-->
+                    <!--<div class="f-l">-->
+                    <!--用户名-->
+                    <!--</div>-->
+                    <!--<div class="f-l" th:text="${myAccount.getUname()==null or #strings.isEmpty(myAccount.getUname())}?'未填写':${myAccount.getUname()}"></div>-->
+                    <!--<div class="f-l">-->
+                    <!--&lt;!&ndash;<a th:if="${myAccount.getUname()==null or #strings.isEmpty(myAccount.getUname())}" th:href="@{fillUname(flag=0)}">填写用户名</a>&ndash;&gt;-->
+                    <!--&lt;!&ndash;<a th:if="${myAccount.getUname()!=null and !#strings.isEmpty(myAccount.getUname())}" th:href="@{modifiUname(flag=1)}">修改用户名</a>&ndash;&gt;-->
+                    <!--</div>-->
+                    <!--</li>-->
+                    <!--</ul>-->
                     <!--</div>-->
                 </div>
             </div>

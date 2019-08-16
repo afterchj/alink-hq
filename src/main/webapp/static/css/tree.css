@@ -1,0 +1,11 @@
+.search-result table td i.fa-plus-square-o,.search-result table td i.fa-minus-square-o,.search-result table td i.fa-pencil-square-o{
+    font-size: 15px;
+    color: #999;
+    cursor: pointer;
+}
+/*.search-result table tbody tr .fa-pencil-square-o{*/
+    /*visibility: hidden;*/
+/*}*/
+/*.search-result table tbody tr:hover .fa-pencil-square-o{*/
+    /*visibility: visible;*/
+/*}*/

@@ -4,9 +4,10 @@
     <meta charset="UTF-8">
     <script src="/alink-hq/static/js/browser.js"></script>
     <link rel="stylesheet" th:href="@{/static/font-awesome-4.7.0/css/font-awesome.min.css}"/>
-    <link rel="stylesheet" href="/alink-hq/static/css/base.css"/>
-    <link rel="stylesheet" href="/alink-hq/static/css/leftNav.css"/>
-    <link rel="stylesheet" href="/alink-hq/static/css/projectManage.css"/>
+    <link rel="stylesheet" th:href="@{/static/css/tree.css}"/>
+    <link rel="stylesheet" th:href="@{/static/css/base.css}"/>
+    <link rel="stylesheet" th:href="@{/static/css/leftNav.css}"/>
+    <link rel="stylesheet" th:href="@{/static/css/projectManage.css}"/>
     <link rel="stylesheet" th:href="@{/static/css/common.css}"/>
     <link rel="stylesheet" th:href="@{/static/css/laydate.css}"/>
     <title>合作列表</title>
@@ -33,7 +34,7 @@
                     </div>
                 </div>
             </div>
-            <div id="projectList" class="table-content-list">
+            <div  class="table-content-list">
                 <form th:action="@{/cooperate/list}" class="clearfix" method="post">
                     <div class="search-condition clearfix p-r">
                         <input type="hidden" id="relation" th:value="${info.status}">
@@ -74,11 +75,14 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <tr th:each="cooperation:${pageInfo.list}">
-                                <td class="k-link coo-name">
+                            <tr th:each="cooperation:${pageInfo.list}" haschild="false">
+                                <td class="k-link coo-name" >
+                                    <i class="fa fa-plus-square-o treeOpen tree-icon" aria-hidden="true"></i>
+                                    <i class="fa fa-minus-square-o treeClose tree-icon" aria-hidden="true"></i>
                                     <a th:href="@{/cooperate/info(id=${cooperation.id})}"
                                        th:text="${cooperation.coname}"
                                        th:alt="${cooperation.id}"></a>
+                                    <!--<i class="fa fa-pencil-square-o" aria-hidden="true"></i>-->
                                 </td>
                                 <td th:text="${cooperation.mobile}"></td>
                                 <td th:text="${cooperation.create_date}">
@@ -238,7 +242,8 @@
 <div class="hide-iframe "></div>
 
 <script src="/alink-hq/static/js/jquery.min.js"></script>
-<script type="text/javascript" src="/alink-hq/static/js/page.js"></script>
+<script src="/alink-hq/static/js/tree.js"></script>
+<script src="/alink-hq/static/js/page.js"></script>
 <script src="/alink-hq/static/js/left.js"></script>
 <script src="/alink-hq/static/laydate/laydate.js"></script>
 <script src="/alink-hq/static/js/cooperateList.js"></script>

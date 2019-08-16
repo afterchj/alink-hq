@@ -92,12 +92,15 @@
 }
 
 #projectDetail .p-content a.a-un {
-    color: #00B7EF
+    color: #4a4a4a;
 }
+/*#projectDetail .p-content a.a-un:hover{*/
+    /*color: #4a4a4a;*/
+/*}*/
 
 #projectDetail .p-content a.a-un:focus,#projectDetail .p-content a.a-un:hover {
     border: none;
-    color: #00B7EF
+    color: #4a4a4a
 }
 
 .main-left a {
