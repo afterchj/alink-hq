@@ -16,7 +16,7 @@ import java.util.Properties;
  */
 
 public class SendMailUtil {
-    public static void sendCode(String code, String to, String flag) {
+    public static void sendCode(String code, String to, String flag) throws MessagingException {
         String subject = "";
         StringBuilder builder = new StringBuilder("亲爱的用户：您好！\n");
         if ("reset".equals(flag)) {
@@ -62,6 +62,7 @@ public class SendMailUtil {
             transport.sendMessage(message, message.getAllRecipients());
         } catch (MessagingException e) {
             e.printStackTrace();
+            throw new MessagingException();
         } finally {
 
             try {
@@ -75,6 +76,6 @@ public class SendMailUtil {
     public static void main(String[] args) {
         String code = "123456";
         String to = "quanhua.shi@tpadsz.com";
-        sendCode(code, to, "reset");
+//        sendCode(code, to, "reset");
     }
 }
