@@ -102,7 +102,7 @@ $(function() {
         }
     }
     $('.singleDel').click(function() {
-        var deleteArray = [];
+         deleteArray = [];
         var sid = parseInt($(this).parent().siblings('.sid').find('input').val());
         var sceneId = parseInt($(this).parent().siblings('.sceneId').text());
         var selector = $('div[openContent="delete-pop"]');
@@ -115,7 +115,7 @@ $(function() {
             id: sid,
             sceneId: sceneId
         }
-        deleteArray.push(msg)
+        deleteArray.push(msg);
     })
     $('div[openContent="delete-pop"] .pop-btn .reduce').click(function() {
         var selector = $('div[openContent="delete-pop"]');
