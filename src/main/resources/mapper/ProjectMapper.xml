@@ -155,15 +155,27 @@
     </delete>
 
     <select id="findPlaceNum" resultType="int">
-        SELECT count(*) from f_place where mid IN (SELECT id FROM f_mesh WHERE project_id=#{id})
+        SELECT count(*) from f_place pl
+        INNER JOIN f_mesh m ON m.id = pl.mid
+        INNER JOIN f_project p ON p.id=m.project_id
+        where pl.mid IN (SELECT id FROM f_mesh WHERE project_id=#{id})
     </select>
 
     <select id="findGroupNum" resultType="int">
-        SELECT count(*) from f_group where mid IN (SELECT id FROM f_mesh WHERE project_id=#{id})
+        SELECT count(*) from f_group g
+        INNER JOIN f_mesh m ON m.id = g.mid
+        INNER JOIN f_project p ON p.id=m.project_id
+        INNER JOIN f_place pl ON pl.id = g.pid
+        where m.project_id=#{id}
     </select>
 
     <select id="findLightNum" resultType="int">
-        SELECT count(*) from f_light where mid IN (SELECT id FROM f_mesh WHERE project_id=#{id})
+        SELECT count(*) from f_light l
+        INNER JOIN f_mesh m ON m.id = l.mid
+        INNER JOIN f_project p ON p.id=m.project_id
+        INNER JOIN f_place pl ON pl.id = l.pid
+        INNER JOIN f_group g ON g.id=l.gid
+        where l.mid IN (SELECT id FROM f_mesh WHERE project_id=#{id})
     </select>
 
     <select id="findNumAndUid" resultType="com.tpadsz.after.entity.ProjectList">

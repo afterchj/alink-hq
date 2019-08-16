@@ -77,12 +77,12 @@ $(function () {
     });
     $('div[openContent="reset-name"] .pop-btn .yes').click(function () {
         var name = $('#rename').val();
-        var regUserName = /^[a-zA-Z0-9\u4e00-\u9fa5]{2,6}$/;
+        var regUserName =  /^[a-zA-Z0-9\u4e00-\u9fa5]{2,16}$/;
         var userNameResult = regUserName.test(name);
         if (name == '') {
             $('p.rename-hint').text('请输入新名称')
         } else if (!userNameResult) {
-            $('p.rename-hint').text('请输入 2-6 位汉字、字母、数字')
+            $('p.rename-hint').text('请输入 2-16 位汉字、字母、数字')
         } else {
             $.ajax({
                 type: "post",
