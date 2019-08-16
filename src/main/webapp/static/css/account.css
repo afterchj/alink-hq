@@ -219,6 +219,7 @@ p.phone-hint.active,p.use-hint2.active,p.email-hint.active,p.pwd-hint.active,p.u
 .account-list>.f-l:first-child{
     padding-left: 30px;
 }
+
 .account-ul{
     margin: 0 80px;
 }
