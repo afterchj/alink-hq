@@ -55,10 +55,10 @@ public class HomeController {
         return "authError";
     }
 
-    @RequestMapping("/productList")
-    public String productList() {
-        return "productManage/productList";
-    }
+//    @RequestMapping("/productList")
+//    public String productList() {
+//        return "productManage/productList";
+//    }
 
     @RequestMapping("/editProduct")
     public String editProduct() {
