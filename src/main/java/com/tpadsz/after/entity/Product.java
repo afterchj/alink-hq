@@ -12,7 +12,15 @@ public class Product {
     private String type;
     private String product_id;
     private String coname;
-    private String create_date;
+    private String description;
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
 
     public String getProduct_category() {
         return product_category;
@@ -46,11 +54,4 @@ public class Product {
         this.coname = coname;
     }
 
-    public String getCreate_date() {
-        return create_date;
-    }
-
-    public void setCreate_date(String create_date) {
-        this.create_date = create_date;
-    }
 }

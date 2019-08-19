@@ -18,10 +18,10 @@ import java.util.List;
  **/
 @Service
 public class ProductServiceImpl implements ProductService {
-    
+
     @Resource
     private ProductDao productDao;
-    
+
     @Override
     public PageInfo<Product> getProductList(Integer pageNum, Integer pageSize, String type, String coname) {
         if (pageNum==null){
@@ -35,6 +35,12 @@ public class ProductServiceImpl implements ProductService {
         }
         PageHelper.startPage(pageNum,pageSize);
         List<Product> products = productDao.getProductList(type,coname);
-        return null;
+        PageInfo<Product> pageInfo = new PageInfo<>(products);
+        return pageInfo;
+    }
+
+    @Override
+    public List<String> getConame() {
+        return productDao.getConame();
     }
 }

@@ -14,4 +14,6 @@ import java.util.List;
 public interface ProductDao {
 
     List<Product> getProductList(@Param("type") String type, @Param("coname") String coname);
+
+    List<String> getConame();
 }

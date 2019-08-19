@@ -3,6 +3,8 @@ package com.tpadsz.after.service;
 import com.github.pagehelper.PageInfo;
 import com.tpadsz.after.entity.Product;
 
+import java.util.List;
+
 /**
  * @program: alink-hq
  * @description:
@@ -11,4 +13,6 @@ import com.tpadsz.after.entity.Product;
  **/
 public interface ProductService {
     PageInfo<Product> getProductList(Integer pageNum, Integer pageSize, String type, String coname);
+
+    List<String> getConame();
 }

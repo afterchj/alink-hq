@@ -52,18 +52,20 @@
                             </div>
                         </div>
                         <!--<div class="f-l search">-->
-                            <!--<div class="p-r">-->
-                            <!--<label for="end-time">更新时间</label>-->
-                            <!--<input type="text" id="end-time" placeholder="请选择日期" AUTOCOMPLETE="off">-->
-                            <!--<img src="/alink-hq/static/img/date.png" alt="" class="p-a">-->
+                        <!--<div class="p-r">-->
+                        <!--<label for="end-time">更新时间</label>-->
+                        <!--<input type="text" id="end-time" placeholder="请选择日期" AUTOCOMPLETE="off">-->
+                        <!--<img src="/alink-hq/static/img/date.png" alt="" class="p-a">-->
                         <!--</div>-->
                         <div class="f-l search">
                             <div>
                                 <label for="name" class="font">隶属公司</label>
                                 <select name="status">
                                     <option value="">请选择公司</option>
-                                    <option value="1">天平数字科技有限公司</option>
-                                    <option value="2">惠州市西顿工业发展有限公司</option>
+                                    <option th:each="coname:${conames}" th:value="${coname}"
+                                            th:text="${coname}"></option>
+                                    <!--<option value="1">天平数字科技有限公司</option>-->
+                                    <!--<option value="2">惠州市西顿工业发展有限公司</option>-->
                                 </select>
                             </div>
                         </div>
@@ -86,18 +88,6 @@
                                 <th><span>代码号(产品ID)</span></th>
                                 <th class="p-r">
                                     <span>隶属公司</span>
-                                    <!--<i class="fa fa-caret-down select-company-i p-a"-->
-                                                        <!--aria-hidden="true"></i>-->
-                                    <!--<span class="p-a select-company-th">-->
-                                       <!--<ul>-->
-                                           <!--<li>天平数字科技有限公司</li>-->
-                                           <!--<li>小不点科技有限公司</li>-->
-                                           <!--<li>呼呼字科技有限公司</li>-->
-                                           <!--<li>尔尔点科技有限公司</li>-->
-                                           <!--<li>球球数字科技有限公司</li>-->
-                                           <!--<li>豆豆科技有限公司</li>-->
-                                       <!--</ul>-->
-                                    <!--</span>-->
                                 </th>
                                 <th class="product-explain"><span>产品说明</span></th>
                                 <th><span>关联固件</span></th>
@@ -105,23 +95,19 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <tr>
+                            <tr th:each="product:${pageInfo.getList()}">
                                 <td class="checkbox">
                                     <input type="checkbox" name="ids" class="">
                                     <!--<input type="hidden" th:value="${mesh.uid}" class="uid">-->
                                 </td>
-                                <td>电源</td>
-                                <td>单路</td>
-                                <td>4099</td>
-                                <td>苏州天平先进数字科技有限公司</td>
+                                <td th:text="${product.product_category}"></td>
+                                <td th:text="${product.type}"></td>
+                                <td th:text="${product.product_id}"></td>
+                                <td th:text="${product.coname}"></td>
                                 <td class="p-r show-lorem product-explain">
-                                    <p class="lorem-limit">
-                                        こんにちは、私は小さい餅です、私は今日とても気分が良くて、天気もとてもかわいいです！あなたは私が好きですか？好きじゃないよ、嘘だよ。もちろん好きだよ。あは。
-                                    </p>
+                                    <p class="lorem-limit" th:text="${product.description}"></p>
                                     <div class="memo-edit-has p-a">
-                                        <div class="memo-content">
-                                            こんにちは、私は小さい餅です、私は今日とても気分が良くて、天気もとてもかわいいです！あなたは私が好きですか？好きじゃないよ、嘘だよ。もちろん好きだよ。あは。
-                                        </div>
+                                        <div class="memo-content" th:text="${product.description}"></div>
                                     </div>
                                 </td>
                                 <td class="p-r pointer">
@@ -165,25 +151,41 @@
                                     <div class="f-r page-right">
                                 <span class="prev-page">
                                     <!--前一页-->
-                                    <a>
-                                        <span class="prev active"><span><</span></span>
+                                    <a th:if="${pageInfo.getPrePage()}==0" href="#">
+                                        <span class="prev ">
+                                            <span><</span>
+                                        </span>
+                                    </a>
+                                    <a th:if="${pageInfo.getPrePage()}>0"
+                                       th:href="@{/product/list(pageNum=${pageInfo.getPrePage()},pageSize=${pageInfo.getPageSize()},type=${type},coname=${coname})}">
+                                        <span class="prev active">
+                                            <span><</span>
+                                        </span>
                                     </a>
                                 </span>
                                         <!--当前页-->
-                                        <span  class="pages">1</span>
+                                        <span class="pages" th:text="${pageInfo.getPageNum()}"></span>
                                         <span class="next-page">
-                                    <!--后一页-->
-                                    <a ><span class="prev active"><span>></span></span></a>
-                                </span>
+                                        <!--后一页-->
+                                            <a th:if="${pageInfo.getNextPage()}==0" href="#">
+                                                <span class="prev "><span>></span></span>
+                                            </a>
+                                            <a th:if="${pageInfo.getNextPage()}>0"
+                                               th:href="@{/product/list(pageNum=${pageInfo.getNextPage()},pageSize=${pageInfo.getPageSize()},type=${type},coname=${coname})}">
+                                                <span class="prev active"><span>></span></span>
+                                            </a>
+                                        </span>
                                         <span class="m-l-15 m-r-20">共
-                                    <span  class="pageTotal" id="pageTotal" ></span>
-                                    页/<span ></span>条数据
-                            </span>
+                                            <span class="pageTotal" id="pageTotal"
+                                                  th:text="${pageInfo.getPages()}"></span>页/
+                                            <span th:text="${pageInfo.getTotal()}"></span>条数据
+                                        </span>
                                         <span class="m-r-15">
-                            <input type="number" id="skipPage" />
+                            <input type="number" id="skipPage"/>
                         </span>
                                         <span class="m-r-35">
-                                <div id="skipPageBtn" class="pointer moment skipPageBtn" onmousedown="skipBtnMouseDown()" onmouseup="skipBtnMouseUp()">跳转
+                                <div id="skipPageBtn" class="pointer moment skipPageBtn"
+                                     onmousedown="skipBtnMouseDown()" onmouseup="skipBtnMouseUp()">跳转
                                 </div>
                         </span>
                                         <span class="m-r-15r">每页显示：</span>
@@ -200,6 +202,9 @@
                             </tr>
                             </tfoot>
                         </table>
+                        <input type="hidden" id="type" th:value="${type}">
+                        <input type="hidden" id="coname" th:value="${coname}">
+                        <input type="hidden" id="pageSize" th:value="${pageInfo.getPageSize()}"/>
                         <!-- 无数据时 -->
                         <table border="1" class="noData">
                             <thead>
@@ -240,9 +245,11 @@
         产品说明
     </div>
     <div class="pop-content">
-        <textarea maxlength="200" style="width: 93%;border: none;margin-top: 10px;resize: none;height: 130px;font-size: 13.5px;line-height: 1.8;color: #454545;font-family: inherit;"  class="wishContent" placeholder="请输入不超过200个字"></textarea>
+        <textarea maxlength="200"
+                  style="width: 93%;border: none;margin-top: 10px;resize: none;height: 130px;font-size: 13.5px;line-height: 1.8;color: #454545;font-family: inherit;"
+                  class="wishContent" placeholder="请输入不超过200个字"></textarea>
         <p class="right-font"><span class="wordsNum">0/200</span></p>
-        <input type="hidden" id="memo-account" >
+        <input type="hidden" id="memo-account">
         <div class="pop-btn">
             <button class="reduce">取消</button>
             <button class="yes">确定</button>

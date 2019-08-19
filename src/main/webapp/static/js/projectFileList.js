@@ -2,6 +2,31 @@
  * Created by yuanjie.fang on 2019/8/13.
  */
 $(function () {
+    //选择页数变化
+    $('#page-select option').each(function () {
+        if ($(this).val() == $("#pageSize").val()) {
+            $(this).attr("selected", "selected");
+        }
+    })
+    $('#page-select').change(function () {
+        var pageSize = $(this).children('option:selected').val();
+        var pageNum = $('.pages').text();
+        condition(pageSize, pageNum);
+    });
+    //跳转页数变化
+    $('#skipPageBtn').click(function () {
+        var pageSize = $('#page-select option:selected').val();
+        var pageNum = $('#skipPage').val();
+        condition(pageSize, pageNum);
+    });
+    //点击查询
+    $(".search-button button").click(function () {
+        var pageNum = $(".pages").text();
+        var pageSize = $("#pageSize").val();
+        var type = $("#name").val();
+        // var coname =
+    })
+
     $('.select-company-th').hide();
     $('.single-updown').click(function () {
         // id = $(this).attr("alt");
@@ -114,3 +139,14 @@ $(function () {
         hideOverlay();
     });
 })
+
+function condition(pageSize, pageNum) {
+    var url = window.location.href;
+    var test = new RegExp("\\?");
+    if (test.test(url)) {
+        url = url.substring(0, url.lastIndexOf("?"));
+    }
+    var newUrl = url + '?pageNum=' + pageNum + '&pageSize=' + pageSize + '&type=' +$('#type').val() + '&coname=' +$('#coname').val();
+    location.href = newUrl;
+}
+

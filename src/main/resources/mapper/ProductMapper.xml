@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.tpadsz.after.dao.TimeLineDao">
+<mapper namespace="com.tpadsz.after.dao.ProductDao">
 
     <select id="getProductList" resultType="com.tpadsz.after.entity.Product">
-        SELECT FROM alink.f_product
+        SELECT product_category,type,product_id,coname,description FROM alink.f_product
         <where>
             <if test="type!=null and type!=''">
                 type=#{type}
@@ -12,6 +12,10 @@
                 coname=#{coname}
             </if>
         </where>
+        order by id desc
     </select>
 
+    <select id="getConame" resultType="string">
+        SELECT DISTINCT coname FROM alink.f_product
+    </select>
 </mapper>
