@@ -4,6 +4,7 @@ import com.tpadsz.after.entity.Product;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @program: alink-hq
@@ -15,5 +16,5 @@ public interface ProductDao {
 
     List<Product> getProductList(@Param("type") String type, @Param("coname") String coname);
 
-    List<String> getConame();
+    List<Map<String, Object>> getConame();
 }

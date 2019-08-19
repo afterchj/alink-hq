@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @program: alink-hq
@@ -40,7 +41,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public List<String> getConame() {
+    public List<Map<String, Object>> getConame() {
         return productDao.getConame();
     }
 }

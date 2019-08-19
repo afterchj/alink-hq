@@ -4,6 +4,7 @@ import com.github.pagehelper.PageInfo;
 import com.tpadsz.after.entity.Product;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @program: alink-hq
@@ -14,5 +15,5 @@ import java.util.List;
 public interface ProductService {
     PageInfo<Product> getProductList(Integer pageNum, Integer pageSize, String type, String coname);
 
-    List<String> getConame();
+    List<Map<String, Object>> getConame();
 }

@@ -60,10 +60,10 @@
                         <div class="f-l search">
                             <div>
                                 <label for="name" class="font">隶属公司</label>
-                                <select name="status">
+                                <select name="status" id="productSelect">
                                     <option value="">请选择公司</option>
-                                    <option th:each="coname:${conames}" th:value="${coname}"
-                                            th:text="${coname}"></option>
+                                    <option th:each="coname:${conames}" th:value="${coname.id}"
+                                            th:text="${coname.coname}"></option>
                                     <!--<option value="1">天平数字科技有限公司</option>-->
                                     <!--<option value="2">惠州市西顿工业发展有限公司</option>-->
                                 </select>

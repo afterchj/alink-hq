@@ -9,13 +9,13 @@
                 type=#{type}
             </if>
             <if test="coname!=null and coname!=''">
-                coname=#{coname}
+                coname=(SELECT coname FROM alink.f_product where id=#{coname})
             </if>
         </where>
         order by id desc
     </select>
 
-    <select id="getConame" resultType="string">
-        SELECT DISTINCT coname FROM alink.f_product
+    <select id="getConame" resultType="map">
+        SELECT coname,id FROM alink.f_product GROUP BY coname
     </select>
 </mapper>

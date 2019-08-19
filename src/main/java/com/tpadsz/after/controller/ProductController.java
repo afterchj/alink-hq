@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.annotation.Resource;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @program: alink-hq
@@ -40,7 +41,7 @@ public class ProductController {
     @RequestMapping("/list")
     public String productList(Model model, Integer pageNum, Integer pageSize, String type,String coname){
         PageInfo<Product> pageInfo = productService.getProductList(pageNum,pageSize,type,coname);
-        List<String> conames = productService.getConame();
+        List<Map<String,Object>> conames = productService.getConame();
         model.addAttribute("pageInfo",pageInfo);
         model.addAttribute("type",type);
         model.addAttribute("coname",coname);

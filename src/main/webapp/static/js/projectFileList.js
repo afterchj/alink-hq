@@ -24,7 +24,18 @@ $(function () {
         var pageNum = $(".pages").text();
         var pageSize = $("#pageSize").val();
         var type = $("#name").val();
-        // var coname =
+        var coname = $("#productSelect").val();
+        if (isEmpty(type)){
+            type = '';
+        }
+        if (isEmpty(coname)){
+            coname='';
+        }else {
+            String(coname);
+        }
+        // $.post("/alink-hq/product/list",{pageNum:pageNum,pageSize:pageSize,type:type,coname:coname})
+        var url = "/alink-hq/product/list?pageNum=" +pageNum + "&pageSize=" + pageSize + "&type=" + type + "&coname=" +coname;
+        window.location.href = url;
     })
 
     $('.select-company-th').hide();
@@ -139,7 +150,18 @@ $(function () {
         hideOverlay();
     });
 })
-
+function isEmpty(value) {
+    if (value == null || value == "" || value == "undefined" || value == undefined) {
+        return true;
+    }
+    else {
+        value = value.replace(/\s/g, "");
+        if (value == "") {
+            return true;
+        }
+        return false;
+    }
+}
 function condition(pageSize, pageNum) {
     var url = window.location.href;
     var test = new RegExp("\\?");
