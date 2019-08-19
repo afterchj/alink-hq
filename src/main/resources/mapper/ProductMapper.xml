@@ -3,19 +3,36 @@
 <mapper namespace="com.tpadsz.after.dao.ProductDao">
 
     <select id="getProductList" resultType="com.tpadsz.after.entity.Product">
-        SELECT product_category,type,product_id,coname,description FROM alink.f_product
+        SELECT p.id,p.product_category,p.type,p.product_id,p.coname,p.description,o.ota_name FROM alink.f_product p
+        LEFT JOIN alink.f_ota_file o on p.o_id=o.id
         <where>
             <if test="type!=null and type!=''">
-                type=#{type}
+                (p.type LIKE concat('%',#{type},'%') or p.product_id LIKE concat('%',#{type},'%'))
             </if>
             <if test="coname!=null and coname!=''">
-                coname=(SELECT coname FROM alink.f_product where id=#{coname})
+                and p.coname=(SELECT coname FROM alink.f_product where id=#{coname})
             </if>
         </where>
-        order by id desc
+        order by p.id desc
     </select>
 
     <select id="getConame" resultType="map">
         SELECT coname,id FROM alink.f_product GROUP BY coname
+    </select>
+
+    <delete id="delete">
+        DELETE FROM alink.f_product WHERE id=#{id}
+    </delete>
+
+    <update id="updateDesc">
+        UPDATE alink.f_product set description=#{description} WHERE id=#{id}
+    </update>
+
+    <select id="getOTAFile" resultType="map">
+        SELECT ota_name,id FROM alink.f_ota_file ORDER BY update_date
+    </select>
+
+    <select id="getOTACount" resultType="integer">
+        SELECT count(*) FROM alink.f_ota_file
     </select>
 </mapper>

@@ -8,11 +8,20 @@ package com.tpadsz.after.entity;
  **/
 public class Product {
 
+    private Integer id;
     private String product_category;
     private String type;
     private String product_id;
     private String coname;
     private String description;
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
     public String getDescription() {
         return description;

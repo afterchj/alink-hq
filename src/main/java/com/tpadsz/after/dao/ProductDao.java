@@ -17,4 +17,12 @@ public interface ProductDao {
     List<Product> getProductList(@Param("type") String type, @Param("coname") String coname);
 
     List<Map<String, Object>> getConame();
+
+    void delete(@Param("id") String id);
+
+    void updateDesc(@Param("id") int id, @Param("description") String description);
+
+    List<Map<String, Object>> getOTAFile();
+
+    Integer getOTACount();
 }

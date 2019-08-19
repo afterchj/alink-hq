@@ -44,4 +44,29 @@ public class ProductServiceImpl implements ProductService {
     public List<Map<String, Object>> getConame() {
         return productDao.getConame();
     }
+
+    @Override
+    public void delete(String[] ids) {
+        if (ids.length>0){
+            for (String id:ids){
+                productDao.delete(id);
+            }
+        }
+
+    }
+
+    @Override
+    public void updateDesc(int id, String description) {
+        productDao.updateDesc(id,description);
+    }
+
+    @Override
+    public List<Map<String, Object>> getOTAFile() {
+        return productDao.getOTAFile();
+    }
+
+    @Override
+    public Integer getOTACount() {
+        return productDao.getOTACount();
+    }
 }

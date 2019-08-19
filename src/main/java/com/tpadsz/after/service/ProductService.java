@@ -16,4 +16,12 @@ public interface ProductService {
     PageInfo<Product> getProductList(Integer pageNum, Integer pageSize, String type, String coname);
 
     List<Map<String, Object>> getConame();
+
+    void delete(String[] ids);
+
+    void updateDesc(int id, String description);
+
+    List<Map<String, Object>> getOTAFile();
+
+    Integer getOTACount();
 }

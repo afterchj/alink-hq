@@ -139,7 +139,8 @@ $(function () {
         if (isEmpty(endTime)) {
             endTime = "";
         }
-        window.location.href = "/alink-hq/timer/list?id=" + $("#mid").val() + '&pageNum=' + $(".pages").text() + '&pageSize=' + $("#pageSize").val() + '&tname=' + tname + '&createDate=' + createTime + '&endTime=' + endTime + '&state=' + state;
+        window.location.href = "/alink-hq/timer/list?id=" + $("#mid").val() + "&pageNum=" + $(".pages").text() + '&pageSize=' + $("#pageSize").val() + '&tname=' + tname + '&createDate=' + createTime + '&endTime=' + endTime + '&state=' + state;
+        // console.log("url",window.location.href);
     });
 })
 

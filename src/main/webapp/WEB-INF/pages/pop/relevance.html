@@ -21,54 +21,55 @@
         <div class="pop-msg p-a clearfix" style="top: 42%;">
             <div class="f-l ">
                 <div class="clearfix firmware-list " >
-                    <div class="f-l">
+                    <div class="f-l" th:each="ota:${otas}">
                         <input class="" name="firmware" type="radio" value="0">
-                        <label class="radio">固件1</label>
+                        <label class="radio" th:text="${ota.ota_name}"></label>
+                        <input type="hidden" value="${ota.id}">
                     </div>
-                    <div class="f-l">
-                        <input class="" name="firmware" type="radio" value="0">
-                        <label class="radio">固件2</label>
-                    </div>
-                    <div class="f-l">
-                        <input class="" name="firmware" type="radio" value="0">
-                        <label class="radio">固件3</label>
-                    </div>
-                    <div class="f-l">
-                        <input class="" name="firmware" type="radio" value="0">
-                        <label class="radio">固件4</label>
-                    </div>
-                    <div class="f-l">
-                        <input class="" name="firmware" type="radio" value="0">
-                        <label class="radio">固件5</label>
-                    </div>
-                    <div class="f-l">
-                        <input class="" name="firmware" type="radio" value="0">
-                        <label class="radio">固件6</label>
-                    </div>
-                    <div class="f-l">
-                        <input class="" name="firmware" type="radio" value="0">
-                        <label class="radio">固件7</label>
-                    </div>
-                    <div class="f-l">
-                        <input class="" name="firmware" type="radio" value="0">
-                        <label class="radio">固件8</label>
-                    </div>
-                    <div class="f-l">
-                        <input class="" name="firmware" type="radio" value="0">
-                        <label class="radio">固件9</label>
-                    </div>
-                    <div class="f-l">
-                        <input class="" name="firmware" type="radio" value="0">
-                        <label class="radio">固件10</label>
-                    </div>
-                    <div class="f-l">
-                        <input class="" name="firmware" type="radio" value="0">
-                        <label class="radio">固件11</label>
-                    </div>
-                    <div class="f-l">
-                        <input class="" name="firmware" type="radio" value="0">
-                        <label class="radio">固件12</label>
-                    </div>
+                    <!--<div class="f-l">-->
+                        <!--<input class="" name="firmware" type="radio" value="0">-->
+                        <!--<label class="radio">固件2</label>-->
+                    <!--</div>-->
+                    <!--<div class="f-l">-->
+                        <!--<input class="" name="firmware" type="radio" value="0">-->
+                        <!--<label class="radio">固件3</label>-->
+                    <!--</div>-->
+                    <!--<div class="f-l">-->
+                        <!--<input class="" name="firmware" type="radio" value="0">-->
+                        <!--<label class="radio">固件4</label>-->
+                    <!--</div>-->
+                    <!--<div class="f-l">-->
+                        <!--<input class="" name="firmware" type="radio" value="0">-->
+                        <!--<label class="radio">固件5</label>-->
+                    <!--</div>-->
+                    <!--<div class="f-l">-->
+                        <!--<input class="" name="firmware" type="radio" value="0">-->
+                        <!--<label class="radio">固件6</label>-->
+                    <!--</div>-->
+                    <!--<div class="f-l">-->
+                        <!--<input class="" name="firmware" type="radio" value="0">-->
+                        <!--<label class="radio">固件7</label>-->
+                    <!--</div>-->
+                    <!--<div class="f-l">-->
+                        <!--<input class="" name="firmware" type="radio" value="0">-->
+                        <!--<label class="radio">固件8</label>-->
+                    <!--</div>-->
+                    <!--<div class="f-l">-->
+                        <!--<input class="" name="firmware" type="radio" value="0">-->
+                        <!--<label class="radio">固件9</label>-->
+                    <!--</div>-->
+                    <!--<div class="f-l">-->
+                        <!--<input class="" name="firmware" type="radio" value="0">-->
+                        <!--<label class="radio">固件10</label>-->
+                    <!--</div>-->
+                    <!--<div class="f-l">-->
+                        <!--<input class="" name="firmware" type="radio" value="0">-->
+                        <!--<label class="radio">固件11</label>-->
+                    <!--</div>-->
+                    <!--<div class="f-l">-->
+                        <!--<input class="" name="firmware" type="radio" value="0">-->
+                        <!--<label class="radio">固件12</label>-->
+                    <!--</div>-->
                 </div>
             </div>
         </div>

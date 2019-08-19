@@ -42,7 +42,7 @@
             </div>
 
             <div class="table-content-list">
-                <form class="clearfix" method="post">
+                <form class="clearfix" method="get" onclick="return false">
                     <!--<input type="hidden" id="pageSize" th:value="${dict.pageSize}">-->
                     <div class="search-condition clearfix">
                         <div class="f-l search" style="width: auto;">
@@ -71,7 +71,7 @@
                         </div>
                         <!--</div>-->
                         <div class="f-r search-button " style="padding-top: 0;">
-                            <button type="submit" class="pointer">查询</button>
+                            <button type="submit" class="pointer" id="productSearch">查询</button>
                         </div>
                     </div>
                     <div class="search-result">
@@ -97,16 +97,17 @@
                             <tbody>
                             <tr th:each="product:${pageInfo.getList()}">
                                 <td class="checkbox">
-                                    <input type="checkbox" name="ids" class="">
-                                    <!--<input type="hidden" th:value="${mesh.uid}" class="uid">-->
+                                    <input type="checkbox" name="ids" class=" " >
+                                    <input type="hidden" th:value="${product.id}" id="id">
                                 </td>
                                 <td th:text="${product.product_category}"></td>
                                 <td th:text="${product.type}"></td>
                                 <td th:text="${product.product_id}"></td>
                                 <td th:text="${product.coname}"></td>
                                 <td class="p-r show-lorem product-explain">
+                                    <input type="hidden" >
                                     <p class="lorem-limit" th:text="${product.description}"></p>
-                                    <div class="memo-edit-has p-a">
+                                    <div class="memo-edit-has p-a" th:alt="${product.id}">
                                         <div class="memo-content" th:text="${product.description}"></div>
                                     </div>
                                 </td>
@@ -114,7 +115,7 @@
                                     <a href="javascript:void(0);">
                                         <img th:src="@{/static/img/relevance.png}" alt="" title="关联固件"
                                              style="width: 30px;height: 30px;" class="relevance-firmware">
-                                        <span class="num-hint p-a">10</span>
+                                        <span class="num-hint p-a" th:text="${OTACount}"></span>
                                     </a>
                                 </td>
                                 <td class="p-r pointer">
@@ -145,7 +146,7 @@
                                             <!--<span class="skipPageBtn  moment active unclick1">下载</span>-->
                                             <span class="skipPageBtn pointer moment"
                                                   onmousedown="exchangeBtnMouseDown()"
-                                                  onmouseup="exchangeBtnMouseUp()" id="multiMove">下载</span>
+                                                  onmouseup="exchangeBtnMouseUp()" id="multiMove">删除</span>
                                         </span>
                                     </div>
                                     <div class="f-r page-right">
