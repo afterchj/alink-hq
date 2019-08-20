@@ -18,12 +18,12 @@
         请选择关联的固件
     </div>
     <div class="pop-content p-r">
-        <div class="pop-msg p-a clearfix" style="top: 42%;">
+        <div class="pop-msg p-a clearfix" style="top: 42%;width: 80%;margin-left: calc(20%/2);">
             <div class="f-l ">
                 <div class="clearfix firmware-list " >
-                    <div class="f-l" th:each="ota:${otas}">
+                    <div class="f-l  overflow-hidden-1" th:each="ota:${otas}">
                         <input class="" name="firmware" type="radio" value="0">
-                        <label class="radio" th:text="${ota.ota_name}"></label>
+                        <label class="radio" th:text="${ota.ota_name}" th:title="${ota.ota_name}"></label>
                         <input type="hidden" th:value="${ota.id}">
                     </div>
                     <!--<div class="f-l">-->

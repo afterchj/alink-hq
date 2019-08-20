@@ -33,7 +33,17 @@ button,input,optgroup,select,textarea {
     font-family: inherit;
     line-height: inherit;
 }
-
+.overflow-hidden-1{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.overflow-hidden-3{
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    overflow: hidden;
+}
 a {
     color: #00A0E9;
     text-decoration: none;

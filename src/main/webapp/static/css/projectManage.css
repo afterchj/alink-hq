@@ -99,6 +99,7 @@ i.select-company-i{
 .firmware-list{
     max-height: 70px;
     overflow-y: auto;
+    text-align: left;
 }
 /*.relevance-firmware::after{*/
     /*content: '10';*/
@@ -144,8 +145,8 @@ i.select-company-i{
     height: 22px;
     line-height: 22px;
     transform: scale(.75);
-    top: 8%;
-    left: 58%;
+    top: -20px;
+    right: -17px;
 }
 .search label {
     margin-right: 20px;

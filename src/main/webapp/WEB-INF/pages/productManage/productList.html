@@ -51,12 +51,6 @@
                                 <input type="text" id="name" name="otaName" placeholder="请输入产品品类/代码号(产品ID)">
                             </div>
                         </div>
-                        <!--<div class="f-l search">-->
-                        <!--<div class="p-r">-->
-                        <!--<label for="end-time">更新时间</label>-->
-                        <!--<input type="text" id="end-time" placeholder="请选择日期" AUTOCOMPLETE="off">-->
-                        <!--<img src="/alink-hq/static/img/date.png" alt="" class="p-a">-->
-                        <!--</div>-->
                         <div class="f-l search">
                             <div>
                                 <label for="name" class="font">隶属公司</label>
@@ -97,7 +91,7 @@
                             <tbody>
                             <tr th:each="product:${pageInfo.getList()}">
                                 <td class="checkbox">
-                                    <input type="checkbox" name="ids"  >
+                                    <input type="checkbox" name="ids">
                                     <input type="hidden" th:value="${product.id}" id="id">
                                 </td>
                                 <td th:text="${product.product_category}"></td>
@@ -105,18 +99,25 @@
                                 <td th:text="${product.product_id}"></td>
                                 <td th:text="${product.coname}"></td>
                                 <td class="p-r show-lorem product-explain">
-                                    <input type="hidden" >
+                                    <input type="hidden">
                                     <p class="lorem-limit" th:text="${product.description}"></p>
                                     <div class="memo-edit-has p-a" th:alt="${product.id}">
                                         <div class="memo-content" th:text="${product.description}"></div>
                                     </div>
                                 </td>
-                                <td class="p-r pointer">
-                                    <a href="javascript:void(0);">
-                                        <span th:text="${product.ota_name}"></span>
-                                        <img th:src="@{/static/img/relevance.png}" alt="" title="关联固件"
-                                             style="width: 30px;height: 30px;" class="relevance-firmware">
-                                        <span class="num-hint p-a" th:text="${OTACount}"></span>
+                                <td class=" pointer">
+                                    <a href="javascript:void(0);" >
+
+                                        <span th:if="${product.ota_name}" th:text="${product.ota_name}"></span>
+                                        <!--<span th:text="${product.ota_name}"></span>-->
+                                            <span class="p-r">
+                                                <img th:if="${product.ota_name}" th:src="@{/static/img/edit-ota.png}"alt="" title="编辑关联固件"style="width:                                                          17px;height: 17px;" class="relevance-firmware">
+                                                <img th:unless="${product.ota_name}" th:src="@{/static/img/relevance.png}"
+                                                alt="" title="关联固件"
+                                                style="width: 30px;height: 30px;" class="relevance-firmware">
+                                                <span class="num-hint p-a" th:text="${OTACount}"></span>
+                                            </span>
+
                                     </a>
                                 </td>
                                 <td class="p-r pointer">
@@ -152,54 +153,54 @@
                                     </div>
                                     <div th:replace="common/page::page"></div>
                                     <!--<div class="f-r page-right">-->
-                                <!--<span class="prev-page">-->
+                                    <!--<span class="prev-page">-->
                                     <!--&lt;!&ndash;前一页&ndash;&gt;-->
                                     <!--<a th:if="${pageInfo.getPrePage()}==0" href="#">-->
-                                        <!--<span class="prev ">-->
-                                            <!--<span><</span>-->
-                                        <!--</span>-->
+                                    <!--<span class="prev ">-->
+                                    <!--<span><</span>-->
+                                    <!--</span>-->
                                     <!--</a>-->
                                     <!--<a th:if="${pageInfo.getPrePage()}>0"-->
-                                       <!--th:href="@{/product/list(pageNum=${pageInfo.getPrePage()},pageSize=${pageInfo.getPageSize()},type=${type},coname=${coname})}">-->
-                                        <!--<span class="prev active">-->
-                                            <!--<span><</span>-->
-                                        <!--</span>-->
+                                    <!--th:href="@{/product/list(pageNum=${pageInfo.getPrePage()},pageSize=${pageInfo.getPageSize()},type=${type},coname=${coname})}">-->
+                                    <!--<span class="prev active">-->
+                                    <!--<span><</span>-->
+                                    <!--</span>-->
                                     <!--</a>-->
-                                <!--</span>-->
-                                        <!--&lt;!&ndash;当前页&ndash;&gt;-->
-                                        <!--<span class="pages" th:text="${pageInfo.getPageNum()}"></span>-->
-                                        <!--<span class="next-page">-->
-                                        <!--&lt;!&ndash;后一页&ndash;&gt;-->
-                                            <!--<a th:if="${pageInfo.getNextPage()}==0" href="#">-->
-                                                <!--<span class="prev "><span>></span></span>-->
-                                            <!--</a>-->
-                                            <!--<a th:if="${pageInfo.getNextPage()}>0"-->
-                                               <!--th:href="@{/product/list(pageNum=${pageInfo.getNextPage()},pageSize=${pageInfo.getPageSize()},type=${type},coname=${coname})}">-->
-                                                <!--<span class="prev active"><span>></span></span>-->
-                                            <!--</a>-->
-                                        <!--</span>-->
-                                        <!--<span class="m-l-15 m-r-20">共-->
-                                            <!--<span class="pageTotal" id="pageTotal"-->
-                                                  <!--th:text="${pageInfo.getPages()}"></span>页/-->
-                                            <!--<span th:text="${pageInfo.getTotal()}"></span>条数据-->
-                                        <!--</span>-->
-                                        <!--<span class="m-r-15">-->
-                            <!--<input type="number" id="skipPage"/>-->
-                        <!--</span>-->
-                                        <!--<span class="m-r-35">-->
-                                <!--<div id="skipPageBtn" class="pointer moment skipPageBtn"-->
-                                     <!--onmousedown="skipBtnMouseDown()" onmouseup="skipBtnMouseUp()">跳转-->
-                                <!--</div>-->
-                        <!--</span>-->
-                                        <!--<span class="m-r-15r">每页显示：</span>-->
-                                        <!--<span class="m-r-20">-->
-                        <!--<select name="" id="page-select">-->
-                            <!--<option value="10" data-index="10">10</option>-->
-                            <!--<option value="30" data-index="30">30</option>-->
-                            <!--<option value="50" data-index="50">50</option>-->
-                            <!--<option value="100" data-index="100">100</option>-->
-                        <!--</select>-->
-                        <!--</span>-->
+                                    <!--</span>-->
+                                    <!--&lt;!&ndash;当前页&ndash;&gt;-->
+                                    <!--<span class="pages" th:text="${pageInfo.getPageNum()}"></span>-->
+                                    <!--<span class="next-page">-->
+                                    <!--&lt;!&ndash;后一页&ndash;&gt;-->
+                                    <!--<a th:if="${pageInfo.getNextPage()}==0" href="#">-->
+                                    <!--<span class="prev "><span>></span></span>-->
+                                    <!--</a>-->
+                                    <!--<a th:if="${pageInfo.getNextPage()}>0"-->
+                                    <!--th:href="@{/product/list(pageNum=${pageInfo.getNextPage()},pageSize=${pageInfo.getPageSize()},type=${type},coname=${coname})}">-->
+                                    <!--<span class="prev active"><span>></span></span>-->
+                                    <!--</a>-->
+                                    <!--</span>-->
+                                    <!--<span class="m-l-15 m-r-20">共-->
+                                    <!--<span class="pageTotal" id="pageTotal"-->
+                                    <!--th:text="${pageInfo.getPages()}"></span>页/-->
+                                    <!--<span th:text="${pageInfo.getTotal()}"></span>条数据-->
+                                    <!--</span>-->
+                                    <!--<span class="m-r-15">-->
+                                    <!--<input type="number" id="skipPage"/>-->
+                                    <!--</span>-->
+                                    <!--<span class="m-r-35">-->
+                                    <!--<div id="skipPageBtn" class="pointer moment skipPageBtn"-->
+                                    <!--onmousedown="skipBtnMouseDown()" onmouseup="skipBtnMouseUp()">跳转-->
+                                    <!--</div>-->
+                                    <!--</span>-->
+                                    <!--<span class="m-r-15r">每页显示：</span>-->
+                                    <!--<span class="m-r-20">-->
+                                    <!--<select name="" id="page-select">-->
+                                    <!--<option value="10" data-index="10">10</option>-->
+                                    <!--<option value="30" data-index="30">30</option>-->
+                                    <!--<option value="50" data-index="50">50</option>-->
+                                    <!--<option value="100" data-index="100">100</option>-->
+                                    <!--</select>-->
+                                    <!--</span>-->
                                     <!--</div>-->
                                 </td>
                             </tr>
