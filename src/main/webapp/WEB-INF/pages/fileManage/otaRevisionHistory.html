@@ -91,18 +91,18 @@
                             <tbody>
                             <tr th:each="file:${pageInfo.list}">
                                 <td th:text="${file.otaVersion}" class="otaVersion"></td>
-                                <td  class="p-r show-lorem " th:if="${file.otaDesc}!=''">
+                                <td  class="p-r show-lorem " th:class="${#strings.isEmpty(file.otaDesc)}? ' ':'show-lorem p-r  '">
                                     <p class="lorem-limit" th:text="${file.otaDesc}"></p>
                                     <div class="memo-edit-has p-a" th:alt="${file.id}">
                                         <div  class="memo-content" th:text="${file.otaDesc}"></div>
                                     </div>
                                 </td>
-                                <td  class="p-r show-lorem no" th:if="${file.otaDesc}==''">
-                                    <p class="lorem-limit" th:text="${file.otaDesc}"></p>
-                                    <div class="memo-edit-has p-a" th:alt="${file.id}">
-                                        <div  class="memo-content" th:text="${file.otaDesc}"></div>
-                                    </div>
-                                </td>
+                                <!--<td  class="p-r show-lorem no" th:if="${file.otaDesc}==''">-->
+                                    <!--<p class="lorem-limit" th:text="${file.otaDesc}"></p>-->
+                                    <!--<div class="memo-edit-has p-a" th:alt="${file.id}">-->
+                                        <!--<div  class="memo-content" th:text="${file.otaDesc}"></div>-->
+                                    <!--</div>-->
+                                <!--</td>-->
                                 <td th:text="${#dates.format(file.updateDate, 'yyyy-MM-dd HH:mm:ss')}"></td>
                                 <td   class="p-r ">
                                     <a href="javascript:void(0);" class="singleEdit" style="margin:0 30px 0 0;" th:alt="${file.id}">

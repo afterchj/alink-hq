@@ -29,19 +29,28 @@ $(function () {
         hideOverlay();
     });
 
-    $('.select-company-i').click(function () {
-        $(this).parent().find('.select-company-th').toggle();
-    })
-    $('.select-company-th li').click(function () {
-        $(this).parent().parent('.select-company-th').hide();
-    })
+    // $('.select-company-i').click(function () {
+    //     $(this).parent().find('.select-company-th').toggle();
+    // })
+    // $('.select-company-th li').click(function () {
+    //     $(this).parent().parent('.select-company-th').hide();
+    // })
 
 
+    // $('.show-lorem').hover(function (event) {
+    //     event.stopPropagation();
+    //     var isEmpty=$(this).text();
+    //     console.log('isEmpty',isEmpty);
+    //     if(isEmpty==''){
+    //         $(this).unbind('hover');
+    //     }
+    // })
 
     //编辑产品说明
     $('.memo-edit-has').dblclick(function (event) {
-        id = $(this).attr("alt");
         event.stopPropagation();
+        id = $(this).attr("alt");
+        var isEmpty=$(this).text();
         var selector = $('div[openContent="memo-edit"]');
         selector.addClass('active');
         adjust(selector);
@@ -142,6 +151,40 @@ $(function () {
         selector.removeClass('active');
         hideOverlay();
         deleteProduct("right");
+    });
+
+
+    $("#all,#addAll").click(function (event) {
+        // this 全选的复选框
+        event.stopPropagation();
+        $("#all,#addAll").prop('checked',$(this).prop('checked'));
+        var checked = this.checked;
+        //获取name=mids的复选框 遍历输出复选框
+        $("input[name=ids]").each(function () {
+            this.checked = checked;
+        });
+        if (checked) {
+            var len = $("input[name=ids]:checked").length;
+            $("#amount").text(len);
+        } else {
+            $("#amount").text(0);
+        }
+    });
+    //给name=mids的复选框绑定单击事件
+    $("input[name=ids]").click(function (event) {
+        event.stopPropagation();
+        //获取选中复选框长度
+        var length = $("input[name=ids]:checked").length;
+
+        //未选中的长度
+        var len = $("input[name=ids]").length;
+        if (length == len) {
+            $("#all,#addAll").prop('checked',true);
+            // [0].checked = true;
+        } else {
+            $("#all,#addAll").prop('checked',false);
+        }
+        $("#amount").text(length);
     });
 })
 $(function () {

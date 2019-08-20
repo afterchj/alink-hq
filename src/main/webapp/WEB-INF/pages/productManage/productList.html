@@ -1,21 +1,17 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" >
 
 <head>
     <title>产品列表</title>
 
     <script src="/alink-hq/static/js/jquery.min.js"></script>
-    <!--<script type="text/javascript" th:src="@{/static/js/smooth-scrollbar.js}"></script>-->
     <script src="/alink-hq/static/js/browser.js"></script>
     <link rel="stylesheet" th:href="@{/static/font-awesome-4.7.0/css/font-awesome.min.css}"/>
     <!--<link rel="stylesheet" th:href="@{/static/css/common.css}"/>-->
-    <!--<link rel="stylesheet"  th:href="@{/static/css/smooth-scrollbar.css}">-->
-    <link rel="stylesheet" th:href="@{/static/css/base.css}"/>
     <link rel="stylesheet" th:href="@{/static/css/laydate.css}"/>
+    <link rel="stylesheet" th:href="@{/static/css/base.css}"/>
     <link rel="stylesheet" th:href="@{/static/css/leftNav.css}"/>
-
     <link rel="stylesheet" th:href="@{/static/css/projectManage.css}"/>
-
 </head>
 <body>
 
@@ -70,11 +66,11 @@
                     </div>
                     <div class="search-result">
                         <!-- 有数据时 -->
-                        <table border="1" class="hasData active">
+                        <table border="1" class="hasData active" th:unless="${pageInfo.getList().total==0}">
                             <thead>
                             <tr>
-                                <th class="all-checkbox">
-                                    <input type="checkbox" id="all" class="pointer">
+                                <th >
+                                    <input type="checkbox" id="all" >
                                     <span class="">全选</span>
                                 </th>
                                 <th><span>产品品类</span></th>
@@ -90,7 +86,7 @@
                             </thead>
                             <tbody>
                             <tr th:each="product:${pageInfo.getList()}">
-                                <td class="checkbox">
+                                <td >
                                     <input type="checkbox" name="ids">
                                     <input type="hidden" th:value="${product.id}" id="id">
                                 </td>
@@ -98,13 +94,21 @@
                                 <td th:text="${product.type}"></td>
                                 <td th:text="${product.product_id}"></td>
                                 <td th:text="${product.coname}"></td>
-                                <td class="p-r show-lorem product-explain">
+                                <td class="p-r  "  th:class="${#strings.isEmpty(product.description)}? 'p-r  product-explain ':'show-lorem p-r  product-explain'">
                                     <input type="hidden">
                                     <p class="lorem-limit" th:text="${product.description}"></p>
                                     <div class="memo-edit-has p-a" th:alt="${product.id}">
                                         <div class="memo-content" th:text="${product.description}"></div>
                                     </div>
                                 </td>
+                                <!--<td class="p-r  product-explain" >-->
+                                    <!--<div th:text="${product.description}"></div>-->
+                                    <!--&lt;!&ndash;<input type="hidden">&ndash;&gt;-->
+                                    <!--&lt;!&ndash;<p class="lorem-limit" th:text="${product.description}"></p>&ndash;&gt;-->
+                                    <!--&lt;!&ndash;<div class="memo-edit-has p-a" th:alt="${product.id}">&ndash;&gt;-->
+                                        <!--&lt;!&ndash;<div class="memo-content" th:text="${product.description}"></div>&ndash;&gt;-->
+                                    <!--&lt;!&ndash;</div>&ndash;&gt;-->
+                                <!--</td>-->
                                 <td class=" pointer">
                                     <a href="javascript:void(0);" >
 
@@ -210,11 +214,12 @@
                         <input type="hidden" id="prePage" th:value="${pageInfo.getPrePage()}"/>
                         <input type="hidden" id="nextPage" th:value="${pageInfo.getNextPage()}"/>
                         <!-- 无数据时 -->
-                        <table border="1" class="noData">
+                        <!--<div th:text="${pageInfo.getList().total==0}"></div>-->
+                        <table border="1" class="noData active" th:if="${pageInfo.getList().total==0}" >
                             <thead>
                             <tr>
                                 <th class="all-checkbox">
-                                    <input type="checkbox" id="all" class="pointer">
+                                    <input type="checkbox"  class="pointer">
                                     <span class="">全选</span>
                                 </th>
                                 <th><span>网络名称</span></th>
@@ -269,8 +274,8 @@
 
 <div class="hide-iframe"></div>
 
-<script type="text/javascript" th:src="@{/static/js/left.js}"></script>
 <script type="text/javascript" th:src="@{/static/laydate/laydate.js}"></script>
+<script type="text/javascript" th:src="@{/static/js/left.js}"></script>
 <!--<script type="text/javascript" th:src="@{/static/js/page.js}"></script>-->
 <script type="text/javascript" th:src="@{/static/js/moment.js}"></script>
 <script type="text/javascript" th:src="@{/static/js/projectFileList.js}"></script>

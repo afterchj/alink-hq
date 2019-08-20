@@ -107,7 +107,7 @@
                             <tbody>
                             <tr th:each="mesh:${pageInfo.list}">
                                 <td class="checkbox">
-                                    <input type="checkbox" name="ids" th:value="${mesh.id}" class="">
+                                    <input type="checkbox" name="ids" th:value="${mesh.id}" >
                                     <input type="hidden" th:value="${mesh.uid}" class="uid" name="uid">
                                 </td>
                                 <td class="k-link">
@@ -314,7 +314,7 @@
 
 <div class="hide-iframe"></div>
 <script type="text/javascript" src="/alink-hq/static/js/left.js"></script>
-<script type="text/javascript" src="/alink-hq/static/js/page.js"></script>
+<!--<script type="text/javascript" src="/alink-hq/static/js/page.js"></script>-->
 <script type="text/javascript" src="/alink-hq/static/js/mesh.js"></script>
 <script src="/alink-hq/static/js/moment.js"></script>
 </body>
