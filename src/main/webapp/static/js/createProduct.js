@@ -19,22 +19,11 @@ $(function () {
        var firmware=$("input[name='firmware']:checked").next().next().val();
        var productExplain=$('#productExplain').val();
        var id;
-       console.log('产品名称',productName);
-       console.log('产品型号',productType);
-       console.log('代码号',productId);
-       console.log('隶属公司',belongCompany);
-       console.log('关键固件',firmware);
-       console.log('产品说明',productExplain);
-
         //同一个公司的产品名称、代码号（产品 ID）不能重复，若重复,提示已存在请重新输入
        var isTrue1=false;
        if(productName==''){
            $('#productName').prev('.verify').text('请输入产品名称');
-       }
-       // else if(productName=='重复'){
-       //     $('#productName').prev('.verify').text('已存在，请重新输入');
-       // }
-       else{
+       } else{
            $('#productName').prev('.verify').text('');
            isTrue1=true;
        }
@@ -42,11 +31,7 @@ $(function () {
        var isTrue2=false;
        if(productId==''){
            $('#productId').prev('.verify').text('请输入代码号（产品 ID）');
-       }
-       // else if(productName=='重复'){
-       //     $('#productId').prev('.verify').text('已存在，请重新输入');
-       // }
-       else{
+       }else{
            $('#productId').prev('.verify').text('');
            isTrue2=true;
        }
@@ -54,11 +39,7 @@ $(function () {
        var isTrue3=false;
        if(belongCompany=='' || belongCompany=='请选择隶属公司' ){
            $('#belongCompany').prev('.verify').text('请选择隶属公司');
-       }
-       // else if(productName=='重复'){
-       //     $('#belongCompany').prev('.verify').text('已存在，请重新输入');
-       // }
-       else{
+       }else{
            $('#belongCompany').prev('.verify').text('');
            isTrue3=true;
        }
@@ -88,16 +69,33 @@ $(function () {
                     }else if (success == 'success'){
                         // 新增成功！
                         var selector = $('div[openContent="loading"]');
-                        $('div[openContent="loading"] .title').text('保存成功');
+                        $('div[openContent="loading"] .title').text('新增成功');
                         selector.addClass('active');
                         showOverlay();
                         setTimeout(function () {
                             location.href="/alink-hq/product/list";
-                        },800)
+                        },1500)
+                    }else {
+                        var selector = $('div[openContent="loading"]');
+                        $('div[openContent="loading"] .title').text('新增失败，请重新尝试');
+                        selector.addClass('active');
+                        showOverlay();
+                        setTimeout(function () {
+                            selector.removeClass('active');
+                            hideOverlay();
+                        },1500);
                     }
                 },
                 error: function(data){
-                    alert("操作异常");
+                    var selector = $('div[openContent="loading"]');
+                    $('div[openContent="loading"] .title').text('新增失败，请重新尝试');
+                    selector.addClass('active');
+                    showOverlay();
+                    setTimeout(function () {
+                        selector.removeClass('active');
+                        hideOverlay();
+                    },1500);
+                    // alert("操作异常");
                 }
             })
         }

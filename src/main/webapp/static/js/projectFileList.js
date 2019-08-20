@@ -249,11 +249,6 @@ $(function () {
         var pageNum = $('#skipPage').val();
         condition(pageSize, pageNum);
     });
-    // //删除
-    // $("#multiMove").click(function () {
-    //
-    //     deleteProduct("up");
-    // });
 
     //点击查询
     $("#productSearch").click(function () {
