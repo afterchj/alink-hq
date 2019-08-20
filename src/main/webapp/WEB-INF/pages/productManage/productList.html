@@ -183,7 +183,7 @@
                                     <span th:text="${pageInfo.getTotal()}"></span>条数据
                                     </span>
                                     <span class="m-r-15">
-                                    <input type="number" id="skipPage"/>
+                                    <input type="number" id="skipPage" th:value="${pageInfo.getPageNum()}"/>
                                     </span>
                                     <span class="m-r-35">
                                     <div id="skipPageBtn" class="pointer moment skipPageBtn"
@@ -207,6 +207,8 @@
                         <input type="hidden" id="type" th:value="${type}">
                         <input type="hidden" id="coname" th:value="${coname}">
                         <input type="hidden" id="pageSize" th:value="${pageInfo.getPageSize()}"/>
+                        <input type="hidden" id="prePage" th:value="${pageInfo.getPrePage()}"/>
+                        <input type="hidden" id="nextPage" th:value="${pageInfo.getNextPage()}"/>
                         <!-- 无数据时 -->
                         <table border="1" class="noData">
                             <thead>
