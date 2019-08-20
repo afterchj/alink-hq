@@ -69,4 +69,9 @@ public class ProductServiceImpl implements ProductService {
     public Integer getOTACount() {
         return productDao.getOTACount();
     }
+
+    @Override
+    public void bindOTA(int oId, int id) {
+        productDao.bindOTA(oId,id);
+    }
 }

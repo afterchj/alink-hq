@@ -3,39 +3,39 @@
 <mapper namespace="com.tpadsz.after.dao.MyAccountDao">
 
     <select id="getAllByAccount" resultType="com.tpadsz.after.entity.MyAccount">
-        SELECT uname,mobile,account,email FROM alink.f_user_account WHERE account=#{account}
+        SELECT uname,mobile,account,email FROM test.f_user_account WHERE account=#{account}
     </select>
     <!--返回id-->
     <update id="updatePwd" parameterType="com.tpadsz.after.entity.MyAccount" useGeneratedKeys="true" keyProperty="id">
-        update alink.f_user_account set pwd=#{password}, salt=#{salt}, update_date=now() WHERE account=#{account}
+        update test.f_user_account set pwd=#{password}, salt=#{salt}, update_date=now() WHERE account=#{account}
     </update>
 
     <update id="updateUserName">
-        UPDATE alink.f_user_account set uname=#{uname}, update_date=now() WHERE account=#{account}
+        UPDATE test.f_user_account set uname=#{uname}, update_date=now() WHERE account=#{account}
     </update>
 
     <select id="getMobile" resultType="int">
-        select count(*) FROM alink.f_user_account WHERE mobile=#{mobile}
+        select count(*) FROM test.f_user_account WHERE mobile=#{mobile}
     </select>
 
     <update id="updateMobile">
-        UPDATE alink.f_user_account set mobile=#{mobile}, update_date=now() WHERE account=#{account}
+        UPDATE test.f_user_account set mobile=#{mobile}, update_date=now() WHERE account=#{account}
     </update>
 
     <update id="updateEmail">
-        UPDATE alink.f_user_account set email=#{email}, update_date=now() WHERE account=#{account}
+        UPDATE test.f_user_account set email=#{email}, update_date=now() WHERE account=#{account}
     </update>
 
     <select id="getEmail" resultType="int">
-        select count(*) FROM alink.f_user_account WHERE email=#{email}
+        select count(*) FROM test.f_user_account WHERE email=#{email}
     </select>
 
     <select id="getUserName" resultType="int">
-        select count(*) FROM alink.f_user_account WHERE uname=#{uname}
+        select count(*) FROM test.f_user_account WHERE uname=#{uname}
     </select>
 
     <select id="getComputeInfoByUid" resultType="map">
-        select id,coname from alink.f_firm where id=(select c.fid as fid from alink.f_user_account a, alink.f_user_customer c where
+        select id,coname from test.f_firm where id=(select c.fid as fid from test.f_user_account a, test.f_user_customer c where
         a.id=c.uid and a.id=#{id})
     </select>
 </mapper>

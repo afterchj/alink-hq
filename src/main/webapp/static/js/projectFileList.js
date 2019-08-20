@@ -82,6 +82,7 @@ $(function () {
         selector.addClass('active');
         adjust(selector);
         showOverlay();
+        thisId = $(this).parent().parent().parent().find("td:eq(0)>input:eq(1)").val();
     })
     $('div[openContent="relevance-pop"] .pop-btn .reduce').click(function () {
         var selector = $('div[openContent="relevance-pop"]');
@@ -89,15 +90,32 @@ $(function () {
         hideOverlay();
     });
     $('div[openContent="relevance-pop"] .pop-btn .yes').click(function () {
+        var pageNum = $(".pages").text();
+        var pageSize = $("#pageSize").val();
         var selector = $('div[openContent="relevance-pop"]');
         selector.removeClass('active');
         hideOverlay();
-        var checkedLabel = $(":radio:checked[value=0]").next().text();
-        var checkedHidden = $(":radio:checked[value=0]").next().next().val();
-        console.log(checkedLabel,checkedHidden);
-        if (checkedLabel.length>0){
-            // console.log(checkedRadio);
-
+        var OTAName = $(":radio:checked[value=0]").next().text();
+        var OTAId = $(":radio:checked[value=0]").next().next().val();
+        console.log(OTAName,OTAId,thisId);
+        if (OTAName.length>0){
+            $.ajax({
+                type:"POST",
+                url:"/alink-hq/product/binding",
+                data:{oId:OTAId,id:thisId},
+                dataType: 'json',
+                // traditional: true,
+                success:function (data) {
+                    var result = data.success;
+                    if (result=='success'){
+                        var url = "/alink-hq/product/list?pageNum=" +pageNum + "&pageSize=" + pageSize + "&type=" + $('#type').val() + "&coname=" +$('#coname').val();
+                        window.location.href = url;
+                    }
+                },
+                error: function(data){
+                    alert("操作异常");
+                }
+            })
         }
     });
 
@@ -211,6 +229,18 @@ function condition(pageSize, pageNum) {
     }
     var newUrl = url + '?pageNum=' + pageNum + '&pageSize=' + pageSize + '&type=' +$('#type').val() + '&coname=' +$('#coname').val();
     location.href = newUrl;
+}
+
+function clickLink(page) {
+    var pageSize = $("#pageSize").val();
+    var pageNum;
+    if (page == 'pre'){
+        pageNum = $("#prePage").val();
+    }else if (page == 'next'){
+        pageNum = $("#nextPage").val();
+    }
+    var url = "/alink-hq/product/list?pageNum=" +pageNum + "&pageSize=" + pageSize + "&type=" + $('#type').val() + "&coname=" +$('#coname').val();
+    window.location.href = url;
 }
 
 

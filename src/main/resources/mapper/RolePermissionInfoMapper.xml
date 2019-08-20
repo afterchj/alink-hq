@@ -3,45 +3,45 @@
 <mapper namespace="com.tpadsz.after.dao.RolePermissionInfoDao">
 
     <insert id="authorization" >
-        INSERT INTO alink.f_role_permission( create_date,role_id, permission_id) VALUES
-            ( now(),#{role_id}, (select id from alink.f_permission where permission_name=#{permission}))
+        INSERT INTO test.f_role_permission( create_date,role_id, permission_id) VALUES
+            ( now(),#{role_id}, (select id from test.f_permission where permission_name=#{permission}))
     </insert>
 
     <delete id="deleteRolePermission">
-        delete from alink.f_role_permission where role_id=#{role_id}
+        delete from test.f_role_permission where role_id=#{role_id}
     </delete>
 
     <select id="getRoleName" resultType="string">
-        select role_name from alink.f_role where id=${rid}
+        select role_name from test.f_role where id=${rid}
     </select>
 
     <select id="getUsers" resultType="map">
         select distinct
 		p.permission_name,p.role_descr
-		from alink.f_user_account u
-		left join alink.f_user_role ur on u.id = ur.user_id
-		left join alink.f_role r on ur.role_id = r.id
-		left join alink.f_role_permission rp on rp.role_id = r.id
-		left join alink.f_permission p on rp.permission_id = p.id
+		from test.f_user_account u
+		left join test.f_user_role ur on u.id = ur.user_id
+		left join test.f_role r on ur.role_id = r.id
+		left join test.f_role_permission rp on rp.role_id = r.id
+		left join test.f_permission p on rp.permission_id = p.id
 		where account = 'tpad1d12' and p.permission_name like concat('createUser','%')
     </select>
 
     <select id="getRolePermissions" resultType="map">
         select distinct
 		p.permission_name,p.role_descr
-		from alink.f_user_account u
-		left join alink.f_user_role ur on u.id = ur.user_id
-		left join alink.f_role r on ur.role_id = r.id
-		left join alink.f_role_permission rp on rp.role_id = r.id
-		left join alink.f_permission p on rp.permission_id = p.id
+		from test.f_user_account u
+		left join test.f_user_role ur on u.id = ur.user_id
+		left join test.f_role r on ur.role_id = r.id
+		left join test.f_role_permission rp on rp.role_id = r.id
+		left join test.f_permission p on rp.permission_id = p.id
 		where account = #{account} and p.permission_name like concat('viewRP','%')
     </select>
 
     <select id="getPermissionsByRid" resultType="map">
         select distinct
 		p.permission_name,p.descr
-		from  (select * from alink.f_role where id=#{rid}) r
-		left join alink.f_role_permission rp on rp.role_id = r.id
-		left join alink.f_permission p on rp.permission_id = p.id
+		from  (select * from test.f_role where id=#{rid}) r
+		left join test.f_role_permission rp on rp.role_id = r.id
+		left join test.f_permission p on rp.permission_id = p.id
     </select>
 </mapper>

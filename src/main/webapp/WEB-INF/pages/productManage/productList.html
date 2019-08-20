@@ -160,7 +160,7 @@
                                     <span><</span>
                                     </span>
                                     </a>
-                                    <a th:if="${pageInfo.getPrePage()}>0">
+                                    <a th:if="${pageInfo.getPrePage()}>0" onclick="clickLink('pre')">
                                     <span class="prev active">
                                     <span><</span>
                                     </span>
@@ -173,7 +173,7 @@
                                     <a th:if="${pageInfo.getNextPage()}==0" href="#">
                                     <span class="prev "><span>></span></span>
                                     </a>
-                                    <a th:if="${pageInfo.getNextPage()}>0">
+                                    <a th:if="${pageInfo.getNextPage()}>0" onclick="clickLink('next')">
                                     <span class="prev active"><span>></span></span>
                                     </a>
                                     </span>

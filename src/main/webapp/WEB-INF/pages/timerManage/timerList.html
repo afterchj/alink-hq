@@ -153,7 +153,9 @@
                                     <a th:if="${pageInfo.getNextPage()}==0" href="#">
                                         <span class="prev "><span>></span></span>
                                     </a>
-                                    <a th:if="${pageInfo.getNextPage()}>0" th:href="@{/timer/list(id=${id},pageNum=${pageInfo.getNextPage()},pageSize=${pageInfo.getPageSize()},tname=${tname},createDate=${createDate},updateDate=${updateDate},state=${state})}"><span class="prev active"><span>></span></span></a>
+                                    <a th:if="${pageInfo.getNextPage()}>0" th:href="@{/timer/list(id=${id},pageNum=${pageInfo.getNextPage()},pageSize=${pageInfo.getPageSize()},tname=${tname},createDate=${createDate},updateDate=${updateDate},state=${state})}" ><span
+                                            class="prev active"><span>
+                                        ></span></span></a>
                                 </span>
                             <span class="m-l-15 m-r-20">共
                                     <span  class="pageTotal" id="pageTotal" th:text="${pageInfo.getPages()}"></span>

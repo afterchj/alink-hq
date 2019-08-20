@@ -45,14 +45,12 @@ public class ProductController {
         model.addAttribute("conames",conames);
         model.addAttribute("otas",otas);
         model.addAttribute("OTACount",OTACount);
-        System.out.println(otas);
         return "productManage/productList";
     }
 
     @RequestMapping(value = "/delete" ,method = RequestMethod.POST)
     @ResponseBody
     public Map<String,String> delete(String[] ids){
-//        System.out.println(ids.toString());
         Map<String,String> map = new HashMap<>();
         productService.delete(ids);
         map.put("success","success");
@@ -68,14 +66,24 @@ public class ProductController {
         return map;
     }
 
-    @RequestMapping(value = "/biding" ,method = RequestMethod.POST)
+    @RequestMapping(value = "/binding" ,method = RequestMethod.POST)
     @ResponseBody
-    public Map<String,String> biding(int id,String description){
-//        System.out.println(id);
+    public Map<String,String> biding(int oId,int id){
         Map<String,String> map = new HashMap<>();
-        productService.updateDesc(id,description);
+        productService.bindOTA(oId,id);
         map.put("success","success");
         return map;
+    }
+
+    @RequestMapping("/editProduct")
+    public String editProduct() {
+        return "productManage/editProduct";
+    }
+
+    @RequestMapping("/createProduct")
+    public String createProduct() {
+
+        return "productManage/createProduct";
     }
 
 }

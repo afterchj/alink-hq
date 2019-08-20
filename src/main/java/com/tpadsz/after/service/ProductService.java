@@ -24,4 +24,6 @@ public interface ProductService {
     List<Map<String, Object>> getOTAFile();
 
     Integer getOTACount();
+
+    void bindOTA(int oId, int id);
 }
