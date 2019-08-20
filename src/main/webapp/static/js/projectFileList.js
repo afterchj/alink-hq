@@ -45,7 +45,17 @@ $(function () {
     //         $(this).unbind('hover');
     //     }
     // })
-
+    //产品说明为空时直接弹出编辑框
+    $('.empty-edit').click(function (event) {
+        event.stopPropagation();
+        id = $(this).find('.memo-edit-has').attr("alt");
+        var selector = $('div[openContent="memo-edit"]');
+        selector.addClass('active');
+        adjust(selector);
+        showOverlay();
+        $('.wishContent').val('');
+        $('.wordsNum').text('0/200');
+    })
     //编辑产品说明
     $('.memo-edit-has').dblclick(function (event) {
         event.stopPropagation();
@@ -84,7 +94,31 @@ $(function () {
         });
         hideOverlay();
     });
-
+    //封装一个限制字数方法
+    var checkStrLengths = function (str, maxLength) {
+        var maxLength = maxLength;
+        var result = 0;
+        if (str && str.length > maxLength) {
+            result = maxLength;
+        } else {
+            result = str.length;
+        }
+        return result;
+    }
+//监听输入
+    $(".wishContent").on('input propertychange', function () {
+        //获取输入内容
+        var userDesc = $(this).val();
+        //判断字数
+        var len;
+        if (userDesc) {
+            len = checkStrLengths(userDesc, 200);
+        } else {
+            len = 0
+        }
+        //显示字数
+        $(".wordsNum").html(len + '/200');
+    });
     //关联固件
     $('.relevance-firmware').click(function () {
         var selector = $('div[openContent="relevance-pop"]');

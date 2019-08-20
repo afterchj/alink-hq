@@ -94,7 +94,7 @@
                                 <td th:text="${product.type}"></td>
                                 <td th:text="${product.product_id}"></td>
                                 <td th:text="${product.coname}"></td>
-                                <td class="p-r  "  th:class="${#strings.isEmpty(product.description)}? 'p-r  product-explain ':'show-lorem p-r  product-explain'">
+                                <td  th:class="${#strings.isEmpty(product.description)}? 'p-r  product-explain  empty-edit':'show-lorem p-r  product-explain'">
                                     <input type="hidden">
                                     <p class="lorem-limit" th:text="${product.description}"></p>
                                     <div class="memo-edit-has p-a" th:alt="${product.id}">

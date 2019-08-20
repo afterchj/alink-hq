@@ -91,7 +91,7 @@
                             <tbody>
                             <tr th:each="file:${pageInfo.list}">
                                 <td th:text="${file.otaVersion}" class="otaVersion"></td>
-                                <td  class="p-r show-lorem " th:class="${#strings.isEmpty(file.otaDesc)}? ' ':'show-lorem p-r  '">
+                                <td  class="p-r show-lorem " th:class="${#strings.isEmpty(file.otaDesc)}? ' empty-edit ':'show-lorem p-r  '">
                                     <p class="lorem-limit" th:text="${file.otaDesc}"></p>
                                     <div class="memo-edit-has p-a" th:alt="${file.id}">
                                         <div  class="memo-content" th:text="${file.otaDesc}"></div>
