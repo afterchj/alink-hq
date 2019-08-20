@@ -92,8 +92,10 @@ $(function () {
         var selector = $('div[openContent="relevance-pop"]');
         selector.removeClass('active');
         hideOverlay();
-        var checkedRadio = $(":radio:checked[value=0]").next().text();
-        if (checkedRadio.length>0){
+        var checkedLabel = $(":radio:checked[value=0]").next().text();
+        var checkedHidden = $(":radio:checked[value=0]").next().next().val();
+        console.log(checkedLabel,checkedHidden);
+        if (checkedLabel.length>0){
             // console.log(checkedRadio);
 
         }

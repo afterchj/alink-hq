@@ -113,6 +113,7 @@
                                 </td>
                                 <td class="p-r pointer">
                                     <a href="javascript:void(0);">
+                                        <span th:text="${product.ota_name}"></span>
                                         <img th:src="@{/static/img/relevance.png}" alt="" title="关联固件"
                                              style="width: 30px;height: 30px;" class="relevance-firmware">
                                         <span class="num-hint p-a" th:text="${OTACount}"></span>

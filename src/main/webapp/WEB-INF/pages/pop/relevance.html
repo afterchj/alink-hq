@@ -24,7 +24,7 @@
                     <div class="f-l" th:each="ota:${otas}">
                         <input class="" name="firmware" type="radio" value="0">
                         <label class="radio" th:text="${ota.ota_name}"></label>
-                        <input type="hidden" value="${ota.id}">
+                        <input type="hidden" th:value="${ota.id}">
                     </div>
                     <!--<div class="f-l">-->
                         <!--<input class="" name="firmware" type="radio" value="0">-->

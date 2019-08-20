@@ -14,6 +14,15 @@ public class Product {
     private String product_id;
     private String coname;
     private String description;
+    private String ota_name;
+
+    public String getOta_name() {
+        return ota_name;
+    }
+
+    public void setOta_name(String ota_name) {
+        this.ota_name = ota_name;
+    }
 
     public Integer getId() {
         return id;
