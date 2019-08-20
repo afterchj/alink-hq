@@ -82,8 +82,8 @@ $(function () {
         selector.addClass('active');
         adjust(selector);
         showOverlay();
-        thisId = $(this).parent().parent().parent().find("td:eq(0)>input:eq(1)").val();
-    })
+        thisId = $(this).parent().parent().parent().parent().find("td:eq(0)>input:eq(1)").val();
+    });
     $('div[openContent="relevance-pop"] .pop-btn .reduce').click(function () {
         var selector = $('div[openContent="relevance-pop"]');
         selector.removeClass('active');
