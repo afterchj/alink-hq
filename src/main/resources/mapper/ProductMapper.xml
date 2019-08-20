@@ -89,7 +89,7 @@
     </select>
 
     <insert id="saveProduct">
-        INSERT INTO alink.f_product
+        INSERT INTO f_product
         <trim prefix="(" suffix=")" suffixOverrides=",">
             product_category,
             <if test="type!=null and type!=''" >

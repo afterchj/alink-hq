@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" >
+<html xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
 
 <head>
     <title>产品列表</title>
@@ -23,8 +23,13 @@
             <div class="clearfix main-right-nav">
                 <div class="f-l main-right-title">产品列表</div>
                 <div class="f-r pointer last-nav">
-                    <a th:href="@{/product/createProduct}">
+                    <a th:href="@{/product/createProduct}" shiro:hasAnyPermissions="insertProduct">
                         <div class="create " onmousedown="createBtnMouseDown()" onmouseup="createBtnMouseUp()">
+                            <span>+</span><span>新增产品</span>
+                        </div>
+                    </a>
+                    <a shiro:lacksPermission="insertProduct">
+                        <div onmousedown="createBtnMouseDown()" onmouseup="createBtnMouseUp()">
                             <span>+</span><span>新增产品</span>
                         </div>
                     </a>
@@ -94,11 +99,21 @@
                                 <td th:text="${product.type}"></td>
                                 <td th:text="${product.product_id}"></td>
                                 <td th:text="${product.coname}"></td>
-                                <td  th:class="${#strings.isEmpty(product.description)}? 'p-r  product-explain  empty-edit':'show-lorem p-r  product-explain'">
+                                <td
+                                        th:class="${#strings.isEmpty(product.description)}? 'p-r  product-explain  empty-edit':'show-lorem p-r  product-explain'"  shiro:hasAnyPermissions="updateProduct">
                                     <input type="hidden">
-                                    <p class="lorem-limit" th:text="${product.description}"></p>
+                                    <p class="lorem-limit" th:text="${product.description}" shiro:hasAnyPermissions="viewProductShow"></p>
+                                    <p shiro:lacksPermission="viewProductShow"></p>
                                     <div class="memo-edit-has p-a" th:alt="${product.id}">
                                         <div class="memo-content" th:text="${product.description}"></div>
+                                    </div>
+                                </td>
+                                <td shiro:lacksPermission="updateProduct" >
+                                    <input type="hidden">
+                                    <p class="lorem-limit" th:text="${product.description}" shiro:hasAnyPermissions="viewProductShow"></p>
+                                    <p shiro:lacksPermission="viewProductShow"></p>
+                                    <div shiro:lacksPermission="updateProduct">
+                                        <div ></div>
                                     </div>
                                 </td>
                                 <!--<td class="p-r  product-explain" >-->
@@ -110,7 +125,7 @@
                                     <!--&lt;!&ndash;</div>&ndash;&gt;-->
                                 <!--</td>-->
                                 <td class=" pointer">
-                                    <a href="javascript:void(0);" >
+                                    <a href="javascript:void(0);" shiro:hasAnyPermissions="relevanceProduct">
                                         <span th:if="${product.ota_name}" th:text="${product.ota_name}"></span>
                                         <!--<span th:text="${product.ota_name}"></span>-->
                                             <span class="p-r">
@@ -122,16 +137,31 @@
                                             </span>
 
                                     </a>
+                                    <a href="javascript:void(0);" shiro:lacksPermission="relevanceProduct">
+                                        <span >
+                                                <img th:unless="${product.ota_name}" th:src="@{/static/img/relevance.png}" style="width: 30px;height: 30px;">
+                                        </span>
+
+                                    </a>
                                 </td>
                                 <td class="p-r pointer">
-                                    <a th:alt="${product.id}" class="product edit">
+                                    <a th:alt="${product.id}" class="product edit" shiro:hasAnyPermissions="insertProduct">
                                         <img th:src="@{/static/img/alter.png}" alt="" title="编辑"
                                              style="width: 18px;height: 18px;margin-right: 15px;" class="single-edit">
                                     </a>
-                                    <a href="javascript:void(0);">
+                                    <a th:alt="${product.id}" shiro:lacksPermission="insertProduct">
+                                        <img th:src="@{/static/img/alter-un.png}" alt="" title="编辑"
+                                             style="width: 18px;height: 18px;margin-right: 15px;">
+                                    </a>
+                                    <a href="javascript:void(0);"  shiro:hasAnyPermissions="deleteProduct">
                                         <img th:src="@{/static/img/delete.png}" alt="" title="删除"
                                              style="width: 16px;height: 16px;" class="single-delete">
                                     </a>
+                                    <a href="javascript:void(0);"  shiro:lacksPermission="deleteProduct">
+                                        <img th:src="@{/static/img/un-delete.png}" alt="" title="删除"
+                                             style="width: 16px;height: 16px;">
+                                    </a>
+
                                 </td>
                             </tr>
                             </tbody>
@@ -151,7 +181,7 @@
                                             <!--<span class="skipPageBtn  moment active unclick1">下载</span>-->
                                             <span class="skipPageBtn pointer moment"
                                                   onmousedown="exchangeBtnMouseDown()"
-                                                  onmouseup="exchangeBtnMouseUp()" id="multiMove">删除</span>
+                                                  onmouseup="exchangeBtnMouseUp()" id="multiMove" shiro:hasAnyPermissions="deleteProduct">删除</span>
                                         </span>
                                     </div>
                                     <!--<div th:replace="common/page::page"></div>-->
@@ -248,7 +278,7 @@
 <div th:replace="pop/export::export-pop"></div>
 
 <!-- 更新日志-->
-<div class="pop-iframe" openContent="memo-edit">
+<div class="pop-iframe" openContent="memo-edit" shiro:hasAnyPermissions="updateProduct">
     <div class=" p-r pop-nav">
         产品说明
     </div>
@@ -266,7 +296,7 @@
 </div>
 
 <!--关联固件-->
-<div th:replace="pop/relevance::relevance-pop"></div>
+<div th:replace="pop/relevance::relevance-pop" ></div>
 
 <!-- 删除 -->
 <div th:replace="pop/delete::delete-pop"></div>
