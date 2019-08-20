@@ -2,6 +2,8 @@
  * Created by yuanjie.fang on 2019/8/14.
  */
 $(function () {
+
+
     //监听公司select选择
     $('#belongCompany').change(function () {
         var belongCompany=$(this).children('option:selected').val();
@@ -15,8 +17,8 @@ $(function () {
         var productName=$('#productName').val();
         var productType=$('#productType').val();
         var productId=$('#productId').val();
-        var belongCompany=$('#belongCompany option:selected').val();
-        var firmware=$("input[name='firmware']:checked").val();
+        var belongCompany=$('#belongCompany option:selected').val();//公司
+        var firmware=$("input[name='firmware']:checked").next().next().val();//固件
         var productExplain=$('#productExplain').val();
         console.log('产品名称',productName);
         console.log('产品型号',productType);
@@ -59,14 +61,24 @@ $(function () {
 
         console.log(isTrue1,isTrue2,isTrue3);
         if(isTrue1 && isTrue2 && isTrue3){
+
             //新增成功！
             var selector = $('div[openContent="loading"]');
-            $('div[openContent="loading"] .title').text('新增成功！即将跳转产品列表');
+            $('div[openContent="loading"] .title').text('保存成功');
             selector.addClass('active');
             showOverlay();
             setTimeout(function () {
-                location.href="/alink-hq/productList";
+                location.href="/alink-hq/product/list";
             },800)
         }
     })
+})
+
+$(function () {
+    // $('#belongCompany').each(function () {
+    //     console.log($(this).val());
+    //     if ($(this).val() == $("#coname").val()) {
+    //         $(this).attr("selected", "selected");
+    //     }
+    // });
 })

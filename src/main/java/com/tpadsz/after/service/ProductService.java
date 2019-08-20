@@ -26,4 +26,8 @@ public interface ProductService {
     Integer getOTACount();
 
     void bindOTA(int oId, int id);
+
+    Product getProductById(int id);
+
+    List<Map<String,Object>> getFirm();
 }

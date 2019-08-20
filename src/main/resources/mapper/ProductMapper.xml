@@ -39,4 +39,12 @@
     <update id="bindOTA">
         UPDATE f_product set o_id=#{o_id} WHERE id=#{id}
     </update>
+
+    <select id="getProductById" resultType="com.tpadsz.after.entity.Product">
+        SELECT p.id,p.product_category,p.type,p.product_id,p.coname,p.description,o.ota_name FROM f_product p LEFT JOIN f_ota_file o on p.o_id=o.id WHERE p.id=#{id}
+    </select>
+
+    <select id="getFirm" resultType="map">
+        select id,coname from f_firm
+    </select>
 </mapper>

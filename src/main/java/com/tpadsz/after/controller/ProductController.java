@@ -76,9 +76,25 @@ public class ProductController {
     }
 
     @RequestMapping("/editProduct")
-    public String editProduct() {
+    public String editProduct(int id,Model model) {
+        Product product = productService.getProductById(id);
+        List<Map<String,Object>> otas = productService.getOTAFile();
+        List<Map<String,Object>> firms = productService.getFirm();
+        model.addAttribute("product",product);
+        model.addAttribute("otas",otas);
+        model.addAttribute("firms",firms);
         return "productManage/editProduct";
     }
+
+    @RequestMapping(value = "/updateEdit" ,method = RequestMethod.POST)
+    @ResponseBody
+    public Map<String,String> updateEdit(int oId,int id){
+        Map<String,String> map = new HashMap<>();
+        productService.bindOTA(oId,id);
+        map.put("success","success");
+        return map;
+    }
+
 
     @RequestMapping("/createProduct")
     public String createProduct() {

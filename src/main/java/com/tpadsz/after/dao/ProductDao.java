@@ -27,4 +27,8 @@ public interface ProductDao {
     Integer getOTACount();
 
     void bindOTA(@Param("o_id") int oId, @Param("id") int id);
+
+    Product getProductById(@Param("id") int id);
+
+    List<Map<String,Object>> getFirm();
 }

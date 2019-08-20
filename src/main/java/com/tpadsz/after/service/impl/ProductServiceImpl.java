@@ -74,4 +74,14 @@ public class ProductServiceImpl implements ProductService {
     public void bindOTA(int oId, int id) {
         productDao.bindOTA(oId,id);
     }
+
+    @Override
+    public Product getProductById(int id) {
+        return productDao.getProductById(id);
+    }
+
+    @Override
+    public List<Map<String, Object>> getFirm() {
+        return productDao.getFirm();
+    }
 }

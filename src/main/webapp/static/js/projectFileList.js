@@ -193,7 +193,7 @@ $(function () {
         if ($(this).val() == $("#pageSize").val()) {
             $(this).attr("selected", "selected");
         }
-    })
+    });
     $('#page-select').change(function () {
         var pageSize = $(this).children('option:selected').val();
         var pageNum = $('.pages').text();
@@ -230,7 +230,6 @@ function deleteProduct(type) {
             ids.push($(this).next().val());
         });
     }else if (type == 'right'){
-        console.log(thisId);
         ids.push(thisId);
     }
 
@@ -285,5 +284,11 @@ function clickLink(page) {
     var url = "/alink-hq/product/list?pageNum=" +pageNum + "&pageSize=" + pageSize + "&type=" + $('#type').val() + "&coname=" +$('#coname').val();
     window.location.href = url;
 }
-
+$(function () {
+   $("td.p-r.pointer a:eq(0)").click(function () {
+        // console.log($(this).attr('alt'));
+       var url = "/alink-hq/product/editProduct?id="+$(this).attr('alt');
+       window.location.href = url;
+   });
+});
 

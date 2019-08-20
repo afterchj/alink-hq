@@ -111,7 +111,6 @@
                                 <!--</td>-->
                                 <td class=" pointer">
                                     <a href="javascript:void(0);" >
-
                                         <span th:if="${product.ota_name}" th:text="${product.ota_name}"></span>
                                         <!--<span th:text="${product.ota_name}"></span>-->
                                             <span class="p-r">
@@ -125,7 +124,7 @@
                                     </a>
                                 </td>
                                 <td class="p-r pointer">
-                                    <a th:href="@{/editProduct}">
+                                    <a th:alt="${product.id}">
                                         <img th:src="@{/static/img/alter.png}" alt="" title="编辑"
                                              style="width: 18px;height: 18px;margin-right: 15px;" class="single-edit">
                                     </a>
@@ -279,6 +278,11 @@
 <!--<script type="text/javascript" th:src="@{/static/js/page.js}"></script>-->
 <script type="text/javascript" th:src="@{/static/js/moment.js}"></script>
 <script type="text/javascript" th:src="@{/static/js/projectFileList.js}"></script>
-
+<script>
+//    $("#check").click(function () {
+//        $(this).prop('checked',true);
+//        console.log(11)
+//    });
+</script>
 </body>
 </html>
