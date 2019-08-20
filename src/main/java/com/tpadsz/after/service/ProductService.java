@@ -30,4 +30,9 @@ public interface ProductService {
     Product getProductById(int id);
 
     List<Map<String,Object>> getFirm();
+
+    void updateEdit(String productName, String type, String id, String coname, Integer otaId, String description,
+                    Integer i);
+
+    Map<String,Integer> getRepeatNameByConame(String productName, String productId, String coname,Integer id);
 }

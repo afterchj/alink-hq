@@ -48,6 +48,7 @@
                                         <p class="p-a verify"></p>
                                         <input type="text" name="productName" id="productName"  placeholder="请输入产品名称"
                                                th:value="${product.product_category}">
+                                        <input type="hidden" th:value="${product.id}">
                                     </div>
                                 </div>
                                 <div class="form-row">
@@ -75,8 +76,8 @@
                                         <label><span>*</span>隶属公司</label>：
                                     </div>
                                     <div class="field-widget p-r">
-                                        <p class="p-a verify"></p>
                                         <input type="hidden" th:value="${product.coname}" id="coname">
+                                        <p class="p-a verify"></p>
                                         <select name="belongCompany" id="belongCompany">
                                             <option value="">请选择隶属公司</option>
                                             <option th:each="firm:${firms}" th:value="${firm.id}"
@@ -99,26 +100,6 @@
                                                     <label class="radio" th:text="${ota.ota_name}" th:title="${ota.ota_name}"></label>
                                                     <input type="hidden" th:value="${ota.id}">
                                                 </div>
-                                                <!--<div class="f-l">-->
-                                                    <!--<input class="" name="firmware" type="radio" value="2">-->
-                                                    <!--<label class="radio">固件2</label>-->
-                                                <!--</div>-->
-                                                <!--<div class="f-l">-->
-                                                    <!--<input class="" name="firmware" type="radio" value="3">-->
-                                                    <!--<label class="radio">固件3</label>-->
-                                                <!--</div>-->
-                                                <!--<div class="f-l">-->
-                                                    <!--<input class="" name="firmware" type="radio" value="4">-->
-                                                    <!--<label class="radio">固件4</label>-->
-                                                <!--</div>-->
-                                                <!--<div class="f-l">-->
-                                                    <!--<input class="" name="firmware" type="radio" value="5">-->
-                                                    <!--<label class="radio">固件5</label>-->
-                                                <!--</div>-->
-                                                <!--<div class="f-l">-->
-                                                    <!--<input class="" name="firmware" type="radio" value="6">-->
-                                                    <!--<label class="radio">固件6</label>-->
-                                                <!--</div>-->
                                             </div>
                                         </div>
                                     </div>

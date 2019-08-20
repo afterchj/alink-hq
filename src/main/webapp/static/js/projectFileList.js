@@ -163,12 +163,22 @@ $(function () {
     });
 
     //删除产品
-    $('.single-delete').click(function () {
+    $('.single-delete,#multiMove').click(function () {
         var selector = $('div[openContent="delete-pop"]');
         selector.addClass('active');
-        var type = $(this).parent().parent().parent().find("td:eq(1)").text();
+        var type ;
         thisId = $(this).parent().parent().parent().find("td:eq(0)>input:eq(1)").val();
-        $('div[openContent="delete-pop"] .reset-pwd p').text('您确定要删除'+type+'？');
+        var checkeds = $("input:checkbox:checked[name='ids']");
+        if (isEmpty(thisId) && checkeds.length>0){
+            $('div[openContent="delete-pop"] .reset-pwd p').text('您确定要删除？');
+
+        }else if(!isEmpty(thisId)){
+            type = $(this).parent().parent().parent().find("td:eq(1)").text();
+            $('div[openContent="delete-pop"] .reset-pwd p').text('您确定要删除'+type+'？');
+        }else {
+            selector.removeClass('active');
+            return;
+        }
         $('div[openContent="delete-pop"] .reset-pwd p').css('margin-top','10px');
         // $('div[openContent="delete-pop"] .reset-pwd-hint').text('（XXX 项目，隶属 XX 账号，包含 X 个网络、 X 个区域、X 个组、X 个灯）');
         adjust(selector);
@@ -184,7 +194,7 @@ $(function () {
         var selector = $('div[openContent="delete-pop"]');
         selector.removeClass('active');
         hideOverlay();
-        deleteProduct("right");
+        deleteProduct();
     });
 
 
@@ -239,10 +249,11 @@ $(function () {
         var pageNum = $('#skipPage').val();
         condition(pageSize, pageNum);
     });
-    //删除
-    $("#multiMove").click(function () {
-        deleteProduct("up");
-    });
+    // //删除
+    // $("#multiMove").click(function () {
+    //
+    //     deleteProduct("up");
+    // });
 
     //点击查询
     $("#productSearch").click(function () {
@@ -254,16 +265,16 @@ $(function () {
 
 
 });
-function deleteProduct(type) {
+function deleteProduct() {
     var pageNum = $(".pages").text();
     var pageSize = $("#pageSize").val();
     var ids=[];
-    if (type == 'up'){
+    if (isEmpty(thisId)){
         var checkeds = $("input:checkbox:checked[name='ids']");
         checkeds.each(function () {
             ids.push($(this).next().val());
         });
-    }else if (type == 'right'){
+    }else {
         ids.push(thisId);
     }
 

@@ -15,9 +15,10 @@ $(function () {
        var productName=$('#productName').val();
        var productType=$('#productType').val();
        var productId=$('#productId').val();
-       var belongCompany=$('#belongCompany option:selected').val();
-       var firmware=$("input[name='firmware']:checked").val();
+       var belongCompany=$('#belongCompany option:selected').text();
+       var firmware=$("input[name='firmware']:checked").next().next().val();
        var productExplain=$('#productExplain').val();
+       var id;
        console.log('产品名称',productName);
        console.log('产品型号',productType);
        console.log('代码号',productId);
@@ -29,9 +30,11 @@ $(function () {
        var isTrue1=false;
        if(productName==''){
            $('#productName').prev('.verify').text('请输入产品名称');
-       }else if(productName=='重复'){
-           $('#productName').prev('.verify').text('已存在，请重新输入');
-       }else{
+       }
+       // else if(productName=='重复'){
+       //     $('#productName').prev('.verify').text('已存在，请重新输入');
+       // }
+       else{
            $('#productName').prev('.verify').text('');
            isTrue1=true;
        }
@@ -39,33 +42,64 @@ $(function () {
        var isTrue2=false;
        if(productId==''){
            $('#productId').prev('.verify').text('请输入代码号（产品 ID）');
-       }else if(productName=='重复'){
-           $('#productId').prev('.verify').text('已存在，请重新输入');
-       }else{
+       }
+       // else if(productName=='重复'){
+       //     $('#productId').prev('.verify').text('已存在，请重新输入');
+       // }
+       else{
            $('#productId').prev('.verify').text('');
            isTrue2=true;
        }
 
        var isTrue3=false;
-       if(belongCompany==''){
+       if(belongCompany=='' || belongCompany=='请选择隶属公司' ){
            $('#belongCompany').prev('.verify').text('请选择隶属公司');
-       }else if(productName=='重复'){
-           $('#belongCompany').prev('.verify').text('已存在，请重新输入');
-       }else{
+       }
+       // else if(productName=='重复'){
+       //     $('#belongCompany').prev('.verify').text('已存在，请重新输入');
+       // }
+       else{
            $('#belongCompany').prev('.verify').text('');
            isTrue3=true;
        }
 
        console.log(isTrue1,isTrue2,isTrue3);
         if(isTrue1 && isTrue2 && isTrue3){
-            //新增成功！
-            var selector = $('div[openContent="loading"]');
-            $('div[openContent="loading"] .title').text('新增成功！即将跳转产品列表');
-            selector.addClass('active');
-            showOverlay();
-            setTimeout(function () {
-                location.href="/alink-hq/productList";
-            },800)
+            $.ajax({
+                type:"POST",
+                url:"/alink-hq/product/updateEdit",
+                data:{productName:productName,type:productType,productId:productId,coname:belongCompany,otaId:firmware,description:productExplain,id:id},
+                dataType: 'json',
+                // traditional: true,
+                success:function (data) {
+                    var success = data.success;
+                    var repeatName = data.repeatName;
+                    var productNameNum;
+                    var productIdNum;
+                    if (repeatName!=undefined){
+                        productNameNum = repeatName.productNameNum;
+                        productIdNum = repeatName.productIdNum;
+                        if (productNameNum==1){
+                            $('#productName').prev('.verify').text('已存在，请重新输入');
+                        }
+                        if (productIdNum == 1){
+                            $('#productId').prev('.verify').text('已存在，请重新输入');
+                        }
+                    }else if (success == 'success'){
+                        // 新增成功！
+                        var selector = $('div[openContent="loading"]');
+                        $('div[openContent="loading"] .title').text('保存成功');
+                        selector.addClass('active');
+                        showOverlay();
+                        setTimeout(function () {
+                            location.href="/alink-hq/product/list";
+                        },800)
+                    }
+                },
+                error: function(data){
+                    alert("操作异常");
+                }
+            })
         }
    })
 })

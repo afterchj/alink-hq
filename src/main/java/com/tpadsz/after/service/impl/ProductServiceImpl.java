@@ -8,6 +8,7 @@ import com.tpadsz.after.service.ProductService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -83,5 +84,28 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public List<Map<String, Object>> getFirm() {
         return productDao.getFirm();
+    }
+
+    @Override
+    public void updateEdit(String productName, String type, String productId, String coname, Integer otaId, String
+            description, Integer id) {
+        if (id==null){
+            //插入
+            productDao.saveProduct(productName,type,productId,coname,otaId,description);
+        }else {
+            //更新
+            productDao.updateEdit(productName,type,productId,coname,otaId,description,id);
+        }
+
+    }
+
+    @Override
+    public Map<String, Integer> getRepeatNameByConame(String productName, String productId, String coname, Integer id) {
+        Map<String,Integer> repeatName = new HashMap<>();
+        Integer productNameNum =  productDao.getRepeatProductName(productName,coname,id);
+        Integer productIdNum =  productDao.getRepeatProductId(productId,coname,id);
+        repeatName.put("productNameNum",productNameNum);
+        repeatName.put("productIdNum",productIdNum);
+        return repeatName;
     }
 }

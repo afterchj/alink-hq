@@ -47,4 +47,81 @@
     <select id="getFirm" resultType="map">
         select id,coname from f_firm
     </select>
+    
+    <update id="updateEdit">
+        UPDATE f_product
+        <set>
+            product_category=#{productName},
+            <if test="type!=null">
+              type=#{type},
+            </if>
+            product_id=#{productId},
+            coname=#{coname},
+            <if test="otaId!=null">
+                o_id=#{otaId},
+            </if>
+            <if test="description!=null">
+                description = #{description},
+            </if>
+            update_date = now()
+        </set>
+        where id=#{id}
+    </update>
+
+    <select id="getRepeatProductName" resultType="integer">
+        SELECT count(*) FROM f_product
+        <where>
+            coname=#{coname} AND product_category=#{productName}
+            <if test="id!=null">
+                AND id != #{id}
+            </if>
+        </where>
+    </select>
+
+    <select id="getRepeatProductId" resultType="integer">
+        SELECT count(*) FROM f_product
+        <where>
+            coname=#{coname} AND product_id=#{productId}
+            <if test="id!=null">
+                AND id != #{id}
+            </if>
+        </where>
+    </select>
+
+    <insert id="saveProduct">
+        INSERT INTO alink.f_product
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            product_category,
+            <if test="type!=null and type!=''" >
+                type,
+            </if>
+            product_id,
+            coname,
+            <if test="description!=null and description!=''">
+                description,
+            </if>
+            create_date,
+            update_date,
+            <if test="otaId!=null and otaId!=''">
+                o_id
+            </if>
+        </trim>
+        <trim prefix="values(" suffix=")" suffixOverrides=",">
+            #{productName},
+            <if test="type!=null and type!=''" >
+                #{type},
+            </if>
+            #{productId},
+            #{coname},
+            <if test="description!=null and description!=''">
+                #{description},
+            </if>
+            now(),
+            now(),
+            <if test="otaId!=null and otaId!=''">
+                #{otaId}
+            </if>
+        </trim>
+    </insert>
+
 </mapper>
