@@ -285,7 +285,7 @@ function clickLink(page) {
     window.location.href = url;
 }
 $(function () {
-   $("td.p-r.pointer a:eq(0)").click(function () {
+   $(".product.edit").click(function () {
         // console.log($(this).attr('alt'));
        var url = "/alink-hq/product/editProduct?id="+$(this).attr('alt');
        window.location.href = url;
