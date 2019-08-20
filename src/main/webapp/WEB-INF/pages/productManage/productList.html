@@ -1,21 +1,17 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" >
 
 <head>
     <title>产品列表</title>
 
     <script src="/alink-hq/static/js/jquery.min.js"></script>
-    <!--<script type="text/javascript" th:src="@{/static/js/smooth-scrollbar.js}"></script>-->
     <script src="/alink-hq/static/js/browser.js"></script>
     <link rel="stylesheet" th:href="@{/static/font-awesome-4.7.0/css/font-awesome.min.css}"/>
     <!--<link rel="stylesheet" th:href="@{/static/css/common.css}"/>-->
-    <!--<link rel="stylesheet"  th:href="@{/static/css/smooth-scrollbar.css}">-->
-    <link rel="stylesheet" th:href="@{/static/css/base.css}"/>
     <link rel="stylesheet" th:href="@{/static/css/laydate.css}"/>
+    <link rel="stylesheet" th:href="@{/static/css/base.css}"/>
     <link rel="stylesheet" th:href="@{/static/css/leftNav.css}"/>
-
     <link rel="stylesheet" th:href="@{/static/css/projectManage.css}"/>
-
 </head>
 <body>
 
@@ -27,7 +23,7 @@
             <div class="clearfix main-right-nav">
                 <div class="f-l main-right-title">产品列表</div>
                 <div class="f-r pointer last-nav">
-                    <a th:href="@{/createProduct}">
+                    <a th:href="@{/product/createProduct}">
                         <div class="create " onmousedown="createBtnMouseDown()" onmouseup="createBtnMouseUp()">
                             <span>+</span><span>新增产品</span>
                         </div>
@@ -70,11 +66,11 @@
                     </div>
                     <div class="search-result">
                         <!-- 有数据时 -->
-                        <table border="1" class="hasData active">
+                        <table border="1" class="hasData active" th:unless="${pageInfo.getList().total==0}">
                             <thead>
                             <tr>
-                                <th class="all-checkbox">
-                                    <input type="checkbox" id="all" class="pointer">
+                                <th >
+                                    <input type="checkbox" id="all" >
                                     <span class="">全选</span>
                                 </th>
                                 <th><span>产品品类</span></th>
@@ -90,7 +86,7 @@
                             </thead>
                             <tbody>
                             <tr th:each="product:${pageInfo.getList()}">
-                                <td class="checkbox">
+                                <td >
                                     <input type="checkbox" name="ids">
                                     <input type="hidden" th:value="${product.id}" id="id">
                                 </td>
@@ -98,16 +94,23 @@
                                 <td th:text="${product.type}"></td>
                                 <td th:text="${product.product_id}"></td>
                                 <td th:text="${product.coname}"></td>
-                                <td class="p-r show-lorem product-explain">
+                                <td  th:class="${#strings.isEmpty(product.description)}? 'p-r  product-explain  empty-edit':'show-lorem p-r  product-explain'">
                                     <input type="hidden">
                                     <p class="lorem-limit" th:text="${product.description}"></p>
                                     <div class="memo-edit-has p-a" th:alt="${product.id}">
                                         <div class="memo-content" th:text="${product.description}"></div>
                                     </div>
                                 </td>
+                                <!--<td class="p-r  product-explain" >-->
+                                    <!--<div th:text="${product.description}"></div>-->
+                                    <!--&lt;!&ndash;<input type="hidden">&ndash;&gt;-->
+                                    <!--&lt;!&ndash;<p class="lorem-limit" th:text="${product.description}"></p>&ndash;&gt;-->
+                                    <!--&lt;!&ndash;<div class="memo-edit-has p-a" th:alt="${product.id}">&ndash;&gt;-->
+                                        <!--&lt;!&ndash;<div class="memo-content" th:text="${product.description}"></div>&ndash;&gt;-->
+                                    <!--&lt;!&ndash;</div>&ndash;&gt;-->
+                                <!--</td>-->
                                 <td class=" pointer">
                                     <a href="javascript:void(0);" >
-
                                         <span th:if="${product.ota_name}" th:text="${product.ota_name}"></span>
                                         <!--<span th:text="${product.ota_name}"></span>-->
                                             <span class="p-r">
@@ -121,7 +124,7 @@
                                     </a>
                                 </td>
                                 <td class="p-r pointer">
-                                    <a th:href="@{/editProduct}">
+                                    <a th:alt="${product.id}" class="product edit">
                                         <img th:src="@{/static/img/alter.png}" alt="" title="编辑"
                                              style="width: 18px;height: 18px;margin-right: 15px;" class="single-edit">
                                     </a>
@@ -183,7 +186,7 @@
                                     <span th:text="${pageInfo.getTotal()}"></span>条数据
                                     </span>
                                     <span class="m-r-15">
-                                    <input type="number" id="skipPage"/>
+                                    <input type="number" id="skipPage" th:value="${pageInfo.getPageNum()}"/>
                                     </span>
                                     <span class="m-r-35">
                                     <div id="skipPageBtn" class="pointer moment skipPageBtn"
@@ -207,12 +210,15 @@
                         <input type="hidden" id="type" th:value="${type}">
                         <input type="hidden" id="coname" th:value="${coname}">
                         <input type="hidden" id="pageSize" th:value="${pageInfo.getPageSize()}"/>
+                        <input type="hidden" id="prePage" th:value="${pageInfo.getPrePage()}"/>
+                        <input type="hidden" id="nextPage" th:value="${pageInfo.getNextPage()}"/>
                         <!-- 无数据时 -->
-                        <table border="1" class="noData">
+                        <!--<div th:text="${pageInfo.getList().total==0}"></div>-->
+                        <table border="1" class="noData active" th:if="${pageInfo.getList().total==0}" >
                             <thead>
                             <tr>
                                 <th class="all-checkbox">
-                                    <input type="checkbox" id="all" class="pointer">
+                                    <input type="checkbox"  class="pointer">
                                     <span class="">全选</span>
                                 </th>
                                 <th><span>网络名称</span></th>
@@ -267,11 +273,16 @@
 
 <div class="hide-iframe"></div>
 
-<script type="text/javascript" th:src="@{/static/js/left.js}"></script>
 <script type="text/javascript" th:src="@{/static/laydate/laydate.js}"></script>
+<script type="text/javascript" th:src="@{/static/js/left.js}"></script>
 <!--<script type="text/javascript" th:src="@{/static/js/page.js}"></script>-->
 <script type="text/javascript" th:src="@{/static/js/moment.js}"></script>
 <script type="text/javascript" th:src="@{/static/js/projectFileList.js}"></script>
-
+<script>
+//    $("#check").click(function () {
+//        $(this).prop('checked',true);
+//        console.log(11)
+//    });
+</script>
 </body>
 </html>

@@ -29,19 +29,38 @@ $(function () {
         hideOverlay();
     });
 
-    $('.select-company-i').click(function () {
-        $(this).parent().find('.select-company-th').toggle();
+    // $('.select-company-i').click(function () {
+    //     $(this).parent().find('.select-company-th').toggle();
+    // })
+    // $('.select-company-th li').click(function () {
+    //     $(this).parent().parent('.select-company-th').hide();
+    // })
+
+
+    // $('.show-lorem').hover(function (event) {
+    //     event.stopPropagation();
+    //     var isEmpty=$(this).text();
+    //     console.log('isEmpty',isEmpty);
+    //     if(isEmpty==''){
+    //         $(this).unbind('hover');
+    //     }
+    // })
+    //产品说明为空时直接弹出编辑框
+    $('.empty-edit').click(function (event) {
+        event.stopPropagation();
+        id = $(this).find('.memo-edit-has').attr("alt");
+        var selector = $('div[openContent="memo-edit"]');
+        selector.addClass('active');
+        adjust(selector);
+        showOverlay();
+        $('.wishContent').val('');
+        $('.wordsNum').text('0/200');
     })
-    $('.select-company-th li').click(function () {
-        $(this).parent().parent('.select-company-th').hide();
-    })
-
-
-
     //编辑产品说明
     $('.memo-edit-has').dblclick(function (event) {
-        id = $(this).attr("alt");
         event.stopPropagation();
+        id = $(this).attr("alt");
+        var isEmpty=$(this).text();
         var selector = $('div[openContent="memo-edit"]');
         selector.addClass('active');
         adjust(selector);
@@ -75,15 +94,39 @@ $(function () {
         });
         hideOverlay();
     });
-
+    //封装一个限制字数方法
+    var checkStrLengths = function (str, maxLength) {
+        var maxLength = maxLength;
+        var result = 0;
+        if (str && str.length > maxLength) {
+            result = maxLength;
+        } else {
+            result = str.length;
+        }
+        return result;
+    }
+//监听输入
+    $(".wishContent").on('input propertychange', function () {
+        //获取输入内容
+        var userDesc = $(this).val();
+        //判断字数
+        var len;
+        if (userDesc) {
+            len = checkStrLengths(userDesc, 200);
+        } else {
+            len = 0
+        }
+        //显示字数
+        $(".wordsNum").html(len + '/200');
+    });
     //关联固件
     $('.relevance-firmware').click(function () {
         var selector = $('div[openContent="relevance-pop"]');
         selector.addClass('active');
         adjust(selector);
         showOverlay();
-        thisId = $(this).parent().parent().parent().find("td:eq(0)>input:eq(1)").val();
-    })
+        thisId = $(this).parent().parent().parent().parent().find("td:eq(0)>input:eq(1)").val();
+    });
     $('div[openContent="relevance-pop"] .pop-btn .reduce').click(function () {
         var selector = $('div[openContent="relevance-pop"]');
         selector.removeClass('active');
@@ -120,12 +163,22 @@ $(function () {
     });
 
     //删除产品
-    $('.single-delete').click(function () {
+    $('.single-delete,#multiMove').click(function () {
         var selector = $('div[openContent="delete-pop"]');
         selector.addClass('active');
-        var type = $(this).parent().parent().parent().find("td:eq(1)").text();
+        var type ;
         thisId = $(this).parent().parent().parent().find("td:eq(0)>input:eq(1)").val();
-        $('div[openContent="delete-pop"] .reset-pwd p').text('您确定要删除'+type+'？');
+        var checkeds = $("input:checkbox:checked[name='ids']");
+        if (isEmpty(thisId) && checkeds.length>0){
+            $('div[openContent="delete-pop"] .reset-pwd p').text('您确定要删除？');
+
+        }else if(!isEmpty(thisId)){
+            type = $(this).parent().parent().parent().find("td:eq(1)").text();
+            $('div[openContent="delete-pop"] .reset-pwd p').text('您确定要删除'+type+'？');
+        }else {
+            selector.removeClass('active');
+            return;
+        }
         $('div[openContent="delete-pop"] .reset-pwd p').css('margin-top','10px');
         // $('div[openContent="delete-pop"] .reset-pwd-hint').text('（XXX 项目，隶属 XX 账号，包含 X 个网络、 X 个区域、X 个组、X 个灯）');
         adjust(selector);
@@ -141,7 +194,41 @@ $(function () {
         var selector = $('div[openContent="delete-pop"]');
         selector.removeClass('active');
         hideOverlay();
-        deleteProduct("right");
+        deleteProduct();
+    });
+
+
+    $("#all,#addAll").click(function (event) {
+        // this 全选的复选框
+        event.stopPropagation();
+        $("#all,#addAll").prop('checked',$(this).prop('checked'));
+        var checked = this.checked;
+        //获取name=mids的复选框 遍历输出复选框
+        $("input[name=ids]").each(function () {
+            this.checked = checked;
+        });
+        if (checked) {
+            var len = $("input[name=ids]:checked").length;
+            $("#amount").text(len);
+        } else {
+            $("#amount").text(0);
+        }
+    });
+    //给name=mids的复选框绑定单击事件
+    $("input[name=ids]").click(function (event) {
+        event.stopPropagation();
+        //获取选中复选框长度
+        var length = $("input[name=ids]:checked").length;
+
+        //未选中的长度
+        var len = $("input[name=ids]").length;
+        if (length == len) {
+            $("#all,#addAll").prop('checked',true);
+            // [0].checked = true;
+        } else {
+            $("#all,#addAll").prop('checked',false);
+        }
+        $("#amount").text(length);
     });
 })
 $(function () {
@@ -150,7 +237,7 @@ $(function () {
         if ($(this).val() == $("#pageSize").val()) {
             $(this).attr("selected", "selected");
         }
-    })
+    });
     $('#page-select').change(function () {
         var pageSize = $(this).children('option:selected').val();
         var pageNum = $('.pages').text();
@@ -162,10 +249,11 @@ $(function () {
         var pageNum = $('#skipPage').val();
         condition(pageSize, pageNum);
     });
-    //删除
-    $("#multiMove").click(function () {
-        deleteProduct("up");
-    });
+    // //删除
+    // $("#multiMove").click(function () {
+    //
+    //     deleteProduct("up");
+    // });
 
     //点击查询
     $("#productSearch").click(function () {
@@ -177,17 +265,16 @@ $(function () {
 
 
 });
-function deleteProduct(type) {
+function deleteProduct() {
     var pageNum = $(".pages").text();
     var pageSize = $("#pageSize").val();
     var ids=[];
-    if (type == 'up'){
+    if (isEmpty(thisId)){
         var checkeds = $("input:checkbox:checked[name='ids']");
         checkeds.each(function () {
             ids.push($(this).next().val());
         });
-    }else if (type == 'right'){
-        console.log(thisId);
+    }else {
         ids.push(thisId);
     }
 
@@ -242,5 +329,11 @@ function clickLink(page) {
     var url = "/alink-hq/product/list?pageNum=" +pageNum + "&pageSize=" + pageSize + "&type=" + $('#type').val() + "&coname=" +$('#coname').val();
     window.location.href = url;
 }
-
+$(function () {
+   $(".product.edit").click(function () {
+        // console.log($(this).attr('alt'));
+       var url = "/alink-hq/product/editProduct?id="+$(this).attr('alt');
+       window.location.href = url;
+   });
+});
 

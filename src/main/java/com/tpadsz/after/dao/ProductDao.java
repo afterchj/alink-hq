@@ -27,4 +27,18 @@ public interface ProductDao {
     Integer getOTACount();
 
     void bindOTA(@Param("o_id") int oId, @Param("id") int id);
+
+    Product getProductById(@Param("id") int id);
+
+    List<Map<String,Object>> getFirm();
+
+    void updateEdit(@Param("productName") String productName, @Param("type") String type, @Param("productId") String productId, @Param("coname") String
+            coname, @Param("otaId") Integer otaId, @Param("description") String description,@Param("id") Integer id);
+
+    Integer getRepeatProductName(@Param("productName") String productName, @Param("coname") String coname, @Param("id") Integer id);
+
+    Integer getRepeatProductId(@Param("productId") String productId, @Param("coname") String coname, @Param("id") Integer id);
+
+    void saveProduct(@Param("productName") String productName, @Param("type") String type, @Param("productId") String productId, @Param("coname") String
+            coname, @Param("otaId") Integer otaId, @Param("description") String description);
 }

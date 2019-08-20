@@ -114,6 +114,16 @@ $(function () {
             }
         });
     });
+    $('.empty-edit').click(function (event) {
+        event.stopPropagation();
+        id = $(this).find('.memo-edit-has').attr("alt");
+        var selector = $('div[openContent="memo-edit"]');
+        selector.addClass('active');
+        adjust(selector);
+        showOverlay();
+        $('.wishContent').val('');
+        $('.wordsNum').text('0/200');
+    })
 //封装一个限制字数方法
     var checkStrLengths = function (str, maxLength) {
         var maxLength = maxLength;

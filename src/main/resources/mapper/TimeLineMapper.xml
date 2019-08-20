@@ -56,17 +56,17 @@
     <select id="getProjectNameByMid" resultType="com.tpadsz.after.entity.ProjectList">
         SELECT NAME,id
         FROM
-            test.f_project
+            f_project
         WHERE
-          id = ( SELECT project_id FROM test.f_mesh WHERE id = #{id} )
+          id = ( SELECT project_id FROM f_mesh WHERE id = #{id} )
     </select>
 
     <select id="getTimeLineByMid" resultType="com.tpadsz.after.entity.TimeLine">
         SELECT
           <include refid="TimeLineList"/>
         FROM
-        test.f_time_line t,
-        test.f_mesh m
+        f_time_line t,
+        f_mesh m
         <include refid="TimeLineWhere"/>
         ORDER BY
         t.update_date desc
@@ -75,8 +75,8 @@
         SELECT
         <include refid="TimeLineList"/>
         FROM
-        test.f_time_line t,
-        test.f_mesh m
+        f_time_line t,
+        f_mesh m
         <include refid="TimeLineWhere"/>
         ORDER BY
         t.update_date
@@ -85,8 +85,8 @@
         SELECT
         <include refid="TimeLineList"/>
         FROM
-        test.f_time_line t,
-        test.f_mesh m
+        f_time_line t,
+        f_mesh m
         <include refid="TimeLineWhere"/>
         ORDER BY
         t.create_date DESC
@@ -95,34 +95,34 @@
         SELECT
         <include refid="TimeLineList"/>
         FROM
-        test.f_time_line t,
-        test.f_mesh m
+        f_time_line t,
+        f_mesh m
         <include refid="TimeLineWhere"/>
         ORDER BY
         t.create_date
     </select>
 
     <insert id="insertTimeLine" parameterType="com.tpadsz.after.entity.TimeLine">
-        INSERT INTO `alink`.`f_time_line`(`tname`, `tid`, `mid`,  `repetition`, `week`, `create_date`, `update_date`)
+        INSERT INTO `f_time_line`(`tname`, `tid`, `mid`,  `repetition`, `week`, `create_date`, `update_date`)
 	    VALUES ( #{tname}, #{tid}, 19936, '1', '周日、周一、周二', now(), now())
     </insert>
 
     <update id="updateTnameById">
-        update test.f_time_line set tname=#{tname},update_date=now() where id=#{id}
+        update f_time_line set tname=#{tname},update_date=now() where id=#{id}
     </update>
 
     <select id="getTnameById" resultType="int">
-        select count(*) from test.f_time_line where mid=#{mid} and tname=#{tname}
+        select count(*) from f_time_line where mid=#{mid} and tname=#{tname}
     </select>
 
     <select id="getTimeLineById" resultType="com.tpadsz.after.entity.TimeLine">
         select
           <include refid="TimeLineListById"/>
-		from test.f_time_line t,test.f_mesh m where t.mid=m.id and t.id=#{id}
+		from f_time_line t,f_mesh m where t.mid=m.id and t.id=#{id}
     </select>
 
     <select id="getProjectByProjectId" resultType="com.tpadsz.after.entity.ProjectList">
-        SELECT NAME,id FROM test.f_project WHERE id = #{projectId}
+        SELECT NAME,id FROM f_project WHERE id = #{projectId}
     </select>
 
     <select id="getTimePointByTsid" resultType="com.tpadsz.after.entity.TimePoint">
@@ -132,8 +132,8 @@
         	s.sname,
         	s.scene_id
         FROM
-        	( SELECT tsid, sid, hour,minute FROM test.f_time_point WHERE sid not IN ( -1, -2 ) AND tsid = #{id} ) p,
-            test.f_scene s
+        	( SELECT tsid, sid, hour,minute FROM f_time_point WHERE sid not IN ( -1, -2 ) AND tsid = #{id} ) p,
+            f_scene s
         WHERE p.sid = s.id UNION all
         SELECT
         	tsid,sid,concat(IF(LENGTH(hour)=1,CONCAT('0',hour),hour),':',if(LENGTH(minute)=1,concat('0',minute),minute)) as time,
@@ -146,20 +146,20 @@
         	END AS state,
         	NULL AS sname,
         	NULL as scene_id
-        FROM test.f_time_point
+        FROM f_time_point
         WHERE sid IN ( -1, -2 ) AND tsid = #{id}
         ORDER BY time
 
     </select>
 
     <select id="getTimeJson" resultType="com.tpadsz.after.entity.TimeBean">
-        select tid,mid,json from test.f_time_json  where tid=(select tid from test.f_time_line where id=#{tid} and mid=#{mid})
+        select tid,mid,json from f_time_json  where tid=(select tid from f_time_line where id=#{tid} and mid=#{mid})
         and
         mid=#{mid}
     </select>
 
     <update id="updateTimeJson">
-        update test.f_time_json set json=#{json} where tid=(select tid from test.f_time_line where id=#{tid}) and mid=#{mid}
+        update f_time_json set json=#{json} where tid=(select tid from f_time_line where id=#{tid}) and mid=#{mid}
     </update>
 
 </mapper>

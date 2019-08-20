@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" th:href="@{/static/font-awesome-4.7.0/css/font-awesome.min.css}"/>
-    <link rel="stylesheet" th:href="@{static/css/base.css}"/>
+    <link rel="stylesheet" th:href="@{/static/css/base.css}"/>
     <link rel="stylesheet" th:href="@{/static/css/leftNav.css}"/>
     <link rel="stylesheet" th:href="@{/static/css/loding.css}"/>
     <link rel="stylesheet" th:href="@{/static/css/projectManage.css}"/>
@@ -20,7 +20,7 @@
                 <div class="f-l main-right-title">
                     <nav class="bread">
                         <ol class="clearfix">
-                            <li class="f-l"><a th:href="@{/productList}">产品列表</a></li>
+                            <li class="f-l"><a th:href="@{/product/list}">产品列表</a></li>
                             <li class="f-l">产品内容编辑</li>
                         </ol>
                     </nav>
@@ -46,7 +46,9 @@
                                     </div>
                                     <div class="field-widget p-r">
                                         <p class="p-a verify"></p>
-                                        <input type="text" name="productName" id="productName"  placeholder="请输入产品名称" >
+                                        <input type="text" name="productName" id="productName"  placeholder="请输入产品名称"
+                                               th:value="${product.product_category}">
+                                        <input type="hidden" th:value="${product.id}">
                                     </div>
                                 </div>
                                 <div class="form-row">
@@ -55,7 +57,8 @@
                                     </div>
                                     <div class="field-widget p-r">
                                         <p class="p-a verify"></p>
-                                        <input type="text" name="productType" id="productType"  placeholder="请输入产品型号" >
+                                        <input type="text" name="productType" id="productType"  placeholder="请输入产品型号"
+                                               th:value="${product.type}">
                                     </div>
                                 </div>
                                 <div class="form-row">
@@ -64,7 +67,8 @@
                                     </div>
                                     <div class="field-widget p-r">
                                         <p class="p-a verify"></p>
-                                        <input type="text" name="productId" id="productId"  placeholder="请输入代码号（产品 ID）" >
+                                        <input type="text" name="productId" id="productId"
+                                               placeholder="请输入代码号（产品 ID）" th:value="${product.product_id}">
                                     </div>
                                 </div>
                                 <div class="form-row">
@@ -72,10 +76,14 @@
                                         <label><span>*</span>隶属公司</label>：
                                     </div>
                                     <div class="field-widget p-r">
+                                        <input type="hidden" th:value="${product.coname}" id="coname">
                                         <p class="p-a verify"></p>
                                         <select name="belongCompany" id="belongCompany">
                                             <option value="">请选择隶属公司</option>
-                                            <option value="0">苏州天平先进数字科技有限公司</option>
+                                            <option th:each="firm:${firms}" th:value="${firm.id}"
+                                                    th:text="${firm.coname}"
+                                                    th:selected="${firm.coname}==${product.coname}">
+                                            </option>
                                         </select>
                                     </div>
                                 </div>
@@ -87,29 +95,10 @@
                                         <p class="p-a verify"></p>
                                         <div name="keyFirmware" id="keyFirmware">
                                             <div class="clearfix firmware-list keyFirmware " >
-                                                <div class="f-l">
-                                                    <input class="" name="firmware" type="radio" value="1">
-                                                    <label class="radio">固件1</label>
-                                                </div>
-                                                <div class="f-l">
-                                                    <input class="" name="firmware" type="radio" value="2">
-                                                    <label class="radio">固件2</label>
-                                                </div>
-                                                <div class="f-l">
-                                                    <input class="" name="firmware" type="radio" value="3">
-                                                    <label class="radio">固件3</label>
-                                                </div>
-                                                <div class="f-l">
-                                                    <input class="" name="firmware" type="radio" value="4">
-                                                    <label class="radio">固件4</label>
-                                                </div>
-                                                <div class="f-l">
-                                                    <input class="" name="firmware" type="radio" value="5">
-                                                    <label class="radio">固件5</label>
-                                                </div>
-                                                <div class="f-l">
-                                                    <input class="" name="firmware" type="radio" value="6">
-                                                    <label class="radio">固件6</label>
+                                                <div class="f-l" th:each="ota:${otas}">
+                                                    <input class="" name="firmware" type="radio" value="1" th:checked="${ota.ota_name}==${product.ota_name}">
+                                                    <label class="radio" th:text="${ota.ota_name}" th:title="${ota.ota_name}"></label>
+                                                    <input type="hidden" th:value="${ota.id}">
                                                 </div>
                                             </div>
                                         </div>
@@ -121,7 +110,8 @@
                                     </div>
                                     <div class="field-widget p-r">
                                         <p class="p-a verify"></p>
-                                        <textarea id="productExplain" name="productExplain" placeholder="请输入产品说明" ></textarea>
+                                        <textarea id="productExplain" name="productExplain" placeholder="请输入产品说明"
+                                                  th:text="${product.description}"></textarea>
                                     </div>
                                 </div>
                                 <div class="form-row submit">
