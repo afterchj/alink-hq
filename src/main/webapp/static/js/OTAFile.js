@@ -34,6 +34,8 @@ $(function () {
     });
 
 
+    
+
     $('.memo-edit').click(function (event) {
         event.stopPropagation();
         id = $(this).find('.meno-img').attr('alt');
