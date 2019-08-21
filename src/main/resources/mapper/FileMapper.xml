@@ -74,10 +74,10 @@
         SELECT COUNT(0) FROM f_ota_file f
         WHERE 1=1
         <if test="otaId!=null and otaId!=''">
-            AND fh.ota_id =#{otaId}
+            AND f.ota_id =#{otaId}
         </if>
         <if test="otaName!=null and otaName!=''">
-            AND fh.ota_name =  #{otaName}
+            AND f.ota_name =  #{otaName}
         </if>
     </select>
 
