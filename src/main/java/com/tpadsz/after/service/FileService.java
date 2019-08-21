@@ -18,13 +18,13 @@ public interface FileService {
 
     FileDTO getFileInfo(int id);
 
-    int getCount(FileDTO info);
+    int getCount(FileDTO info) throws RepetitionException;
 
     void save(FileDTO info);
 
     void saveFile(Map info);
 
-    void saveUpdate(FileDTO info) throws RepetitionException;
+    void saveUpdate(FileDTO info);
     void deleteFileById(int id);
     void deleteHistoryById(int id);
 }

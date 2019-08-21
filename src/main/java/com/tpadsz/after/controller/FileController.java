@@ -148,8 +148,15 @@ public class FileController {
     @ResponseBody
     @RequestMapping("/updateFile")
     public String updateFile(FileDTO info) {
+        fileService.saveUpdate(info);
+        return "ok";
+    }
+
+    @ResponseBody
+    @RequestMapping("/checkCount")
+    public String checkCount(FileDTO info) {
         try {
-            fileService.saveUpdate(info);
+            fileService.getCount(info);
         } catch (RepetitionException e) {
             return "fail";
         }

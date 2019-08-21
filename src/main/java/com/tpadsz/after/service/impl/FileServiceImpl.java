@@ -38,8 +38,12 @@ public class FileServiceImpl implements FileService {
     }
 
     @Override
-    public int getCount(FileDTO info) {
-        return 0;
+    public int getCount(FileDTO info) throws RepetitionException {
+        int count = fileDao.getCount(info);
+        if (count > 0) {
+            throw new RepetitionException(100, "版本重复");
+        }
+        return count;
     }
 
     @Override
@@ -53,11 +57,7 @@ public class FileServiceImpl implements FileService {
     }
 
     @Override
-    public void saveUpdate(FileDTO info) throws RepetitionException {
-        int count=getCount(info);
-        if (count>0){
-            throw new RepetitionException(100,"版本重复");
-        }
+    public void saveUpdate(FileDTO info) {
         fileDao.saveUpdate(info);
     }
 
