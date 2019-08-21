@@ -146,4 +146,9 @@ public class ProductController {
         model.addAttribute("firms", firms);
         return "productManage/createProduct";
     }
+
+    @RequestMapping("vue")
+    public String toVue(){
+        return "vueTest";
+    }
 }
