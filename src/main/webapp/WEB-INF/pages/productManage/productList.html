@@ -176,7 +176,7 @@
                                                      th:src="@{/static/img/relevance.png}"
                                                      alt="" title="关联固件"
                                                      style="width: 30px;height: 30px;" class="relevance-firmware">
-                                                <span class="num-hint p-a" th:text="${OTACount}"></span>
+                                                <!--<span class="num-hint p-a" th:text="${OTACount}"></span>-->
                                             </span>
 
                                     </a>
@@ -221,7 +221,7 @@
                                     </div>
                                     <div class="f-l">
                                         <span class="selected-order">已选择
-                                            <span id="amount" class="amount">0</span>条文件
+                                            <span id="amount" class="amount">0</span>条数据
                                         </span>
                                         <span class="m-r-20">
                                             <!--<span class="skipPageBtn  moment active unclick1">下载</span>-->
@@ -299,16 +299,30 @@
                         <table border="1" class="noData active" th:if="${pageInfo.getList().total==0}">
                             <thead>
                             <tr>
-                                <th class="all-checkbox">
-                                    <input type="checkbox" class="pointer">
+                                <th>
+                                    <input type="checkbox" id="all">
                                     <span class="">全选</span>
                                 </th>
-                                <th><span>网络名称</span></th>
-                                <th><span>文件版本</span></th>
-                                <th><span>创建者账号(用户名)</span></th>
-                                <th><span>最后修改者账号(用户名)</span></th>
-                                <th><span>更新时间</span></th>
-                                <th class="operation"><span>下载</span></th>
+                                <th><span>产品品类</span></th>
+                                <th><span>型号</span></th>
+                                <th><span>代码号(产品ID)</span></th>
+                                <th class="p-r">
+                                    <span>隶属公司</span>
+                                </th>
+                                <th class="product-explain"><span>产品说明</span></th>
+                                <th><span>关联固件</span></th>
+                                <th class="operation"><span>操作</span></th>
+
+                                <!--<th class="all-checkbox">-->
+                                    <!--<input type="checkbox" class="pointer">-->
+                                    <!--<span class="">全选</span>-->
+                                <!--</th>-->
+                                <!--<th><span>产品类型</span></th>-->
+                                <!--<th><span>型号</span></th>-->
+                                <!--<th><span>创建者账号(用户名)</span></th>-->
+                                <!--<th><span>最后修改者账号(用户名)</span></th>-->
+                                <!--<th><span>更新时间</span></th>-->
+                                <!--<th class="operation"><span>下载</span></th>-->
                             </tr>
                             </thead>
                             <tbody>

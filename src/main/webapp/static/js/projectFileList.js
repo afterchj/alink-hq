@@ -170,7 +170,7 @@ $(function () {
         var type ;
         thisId = $(this).parent().parent().parent().find("td:eq(0)>input:eq(1)").val();
         var checkeds = $("input:checkbox:checked[name='ids']");
-        $('div[openContent="delete-pop"] .reset-pwd p').text('您确定要删除？');
+        $('div[openContent="delete-pop"] .reset-pwd p').text('您确定要删除所选的产品？');
 
         if (isEmpty(thisId) && checkeds.length>0){
         }else if(!isEmpty(thisId)){
