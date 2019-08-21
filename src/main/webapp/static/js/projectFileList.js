@@ -46,7 +46,7 @@ $(function () {
     //     }
     // })
     //产品说明为空时直接弹出编辑框
-    $('.empty-edit').click(function (event) {
+    $('.empty-edit').dblclick(function (event) {
         event.stopPropagation();
         id = $(this).find('.memo-edit-has').attr("alt");
         var selector = $('div[openContent="memo-edit"]');

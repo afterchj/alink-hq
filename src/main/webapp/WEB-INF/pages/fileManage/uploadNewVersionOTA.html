@@ -44,7 +44,7 @@
                     <div class="p-nav">上传新版本</div>
                     <div class="p-content p-r">
                         <!--<div th:text="${file}"></div>-->
-                        <!--未上传-->
+                        <!--第一步未上传-->
                         <form th:action="@{/file/doUpload}" method="post"  enctype="multipart/form-data" class="noUpload" >
                             <input type="hidden" name="id" th:value="${file.id}">
                             <input type="hidden" name="otaId" th:value="${file.otaId}">
@@ -69,7 +69,7 @@
                                 </div>
                             </fieldset>
                         </form>
-                        <!--已上传-->
+                        <!--第二步--已上传-->
                         <form th:action="@{/file/doUpload}" method="post" enctype="multipart/form-data" class="hasUpload">
                             <input type="hidden" name="id" th:value="${file.id}">
                             <fieldset>
