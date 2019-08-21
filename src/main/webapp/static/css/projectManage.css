@@ -622,13 +622,13 @@ span.msg-use{
 
 .pop-content .pop-btn .reduce {
     border: 1px solid #ccc;
-    font-size: 16px;
+    font-size: 15px;
     color: #383e4b;
     border-radius: 5px;
     height: 35px;
     width: 80px;
     line-height: 33px;
-    letter-spacing: 9px;
+    letter-spacing: 6px;
     background-color: #fff;
     cursor: pointer;
     margin-right: 20px;
@@ -637,7 +637,7 @@ span.msg-use{
 
 .pop-content .pop-btn .yes {
     border:1px solid #39B6EF;
-    font-size:16px;
+    font-size:15px;
     color:#fff;
     border-radius:5px;
     height:35px;

@@ -24,13 +24,13 @@
                 <div class="f-l main-right-title"><label th:inline="text">[[${dict.otaName}]]</label>历史版本（固件ID：<label th:inline="text">[[${dict.otaId}]]</label>）</div>
                 <div class="f-r pointer last-nav">
                     <!--没有上传新版本-->
-                    <a  th:if="${pageInfo.list.total == 1}" th:href="@{/file/uploadNewVersionOTA(id=${dict.oid},hasUpload=0)}"  >
+                    <a  th:if="${pageInfo.list.total == 1}" th:href="@{/file/uploadNewVersionOTAAdd(id=${dict.oid})}"  >
                         <div  class="create " onmousedown="createBtnMouseDown()" onmouseup="createBtnMouseUp()">
                             <span>+</span><span>上传新版本</span>
                         </div>
                     </a>
                     <!--已经上传新版本-->
-                    <a  th:if="${pageInfo.list.total > 1}" th:href="@{/file/uploadNewVersionOTA(id=${dict.oid},hasUpload=1)}"  >
+                    <a  th:if="${pageInfo.list.total > 1}" th:href="@{/file/uploadNewVersionOTAAdd(id=${dict.oid})}"  >
                         <div  class="create " onmousedown="createBtnMouseDown()" onmouseup="createBtnMouseUp()">
                             <span>+</span><span>上传新版本</span>
                         </div>

@@ -184,10 +184,16 @@ public class FileController {
         return "ok";
     }
 
-    @RequestMapping("/uploadNewVersionOTA")
-    public String uploadNewVersionOTA(Integer id, ModelMap modelMap) {
+    @RequestMapping("/uploadNewVersionOTAAdd")
+    public String uploadNewVersionOTAAdd(Integer id, ModelMap modelMap) {
         FileDTO info = fileService.getFileInfo(id);
         modelMap.put("file", info);
-        return "fileManage/uploadNewVersionOTA";
+        return "fileManage/uploadNewVersionOTAAdd";
+    }
+    @RequestMapping("/uploadNewVersionOTAEdit")
+    public String uploadNewVersionOTAEdit(Integer id, ModelMap modelMap) {
+        FileDTO info = fileService.getFileInfo(id);
+        modelMap.put("file", info);
+        return "fileManage/uploadNewVersionOTAEdit";
     }
 }

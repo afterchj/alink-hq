@@ -23,7 +23,7 @@
                 <div class="f-l main-right-title">
                     <nav class="bread">
                         <ol class="clearfix">
-                            <li class="f-l"><a th:href="@{/file/OTAFile}">OTA文件</a></li>
+                            <li class="f-l"><a th:href="@{/file/OTAFile}" th:text="${file.otaName}"></a></li>
                             <li class="f-l">上传新版本</li>
                         </ol>
                     </nav>
@@ -44,31 +44,6 @@
                     <div class="p-nav">上传新版本</div>
                     <div class="p-content p-r">
                         <!--<div th:text="${file}"></div>-->
-                        <!--第一步未上传-->
-                        <form th:action="@{/file/doUpload}" method="post"  enctype="multipart/form-data" class="noUpload" >
-                            <input type="hidden" name="id" th:value="${file.id}">
-                            <input type="hidden" name="otaId" th:value="${file.otaId}">
-                            <input type="hidden" name="otaName" th:value="${file.otaName}">"
-                            <input type="hidden" name="otaVersion" th:value="${file.otaVersion}">
-                            <input type="hidden" name="otaDesc" th:value="${file.otaDesc}">
-                            <fieldset>
-                                <div class="form-row clearfix">
-                                    <div class="field-label">
-                                        <label><span>*</span>固件名称</label>：
-                                    </div>
-                                    <div class="field-widget p-r" style="width: calc(100% - 150px);">
-                                        <p class="p-a verify"></p>
-                                        <input type="text" class="filename falseFile" readonly="" style="width: 300px;" >
-                                        <input type="button" class="button upload" value="浏览" >
-                                        <input type="file" name="file" size="30" class="trueFile" id="newFile">
-                                    </div>
-                                </div>
-                                <div class="form-row submit">
-                                    <button type="button" style="margin:50px 0  0 235px;" id="uploaded">上传文件</button>
-                                    <p style="margin: 30px 30px 30px 155px;font-size: 15px;color: #999;">文件上传服务器耗时较长，请耐心等待…</p>
-                                </div>
-                            </fieldset>
-                        </form>
                         <!--第二步--已上传-->
                         <form th:action="@{/file/doUpload}" method="post" enctype="multipart/form-data" class="hasUpload">
                             <input type="hidden" name="id" th:value="${file.id}">
