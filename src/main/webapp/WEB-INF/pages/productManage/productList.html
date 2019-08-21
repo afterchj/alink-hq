@@ -140,7 +140,7 @@
                                         th:class="${#strings.isEmpty(product.description)}? 'p-r  product-explain  empty-edit':'show-lorem p-r  product-explain'"
                                         shiro:hasAnyPermissions="updateProduct">
                                     <input type="hidden">
-                                    <p class="lorem-limit" th:text="${product.description}"
+                                    <p class="lorem-limit" style="max-width: 390px;"th:text="${product.description}"
                                        shiro:hasAnyPermissions="viewProductShow"></p>
                                     <p shiro:lacksPermission="viewProductShow"></p>
                                     <div class="memo-edit-has p-a" th:alt="${product.id}">
@@ -149,7 +149,7 @@
                                 </td>
                                 <td shiro:lacksPermission="updateProduct">
                                     <input type="hidden">
-                                    <p class="lorem-limit" th:text="${product.description}"
+                                    <p class="lorem-limit" style="max-width: 390px;"  th:text="${product.description}"
                                        shiro:hasAnyPermissions="viewProductShow"></p>
                                     <p shiro:lacksPermission="viewProductShow"></p>
                                     <div shiro:lacksPermission="updateProduct">
@@ -313,17 +313,6 @@
                                 <th class="product-explain"><span>产品说明</span></th>
                                 <th><span>关联固件</span></th>
                                 <th class="operation"><span>操作</span></th>
-
-                                <!--<th class="all-checkbox">-->
-                                    <!--<input type="checkbox" class="pointer">-->
-                                    <!--<span class="">全选</span>-->
-                                <!--</th>-->
-                                <!--<th><span>产品类型</span></th>-->
-                                <!--<th><span>型号</span></th>-->
-                                <!--<th><span>创建者账号(用户名)</span></th>-->
-                                <!--<th><span>最后修改者账号(用户名)</span></th>-->
-                                <!--<th><span>更新时间</span></th>-->
-                                <!--<th class="operation"><span>下载</span></th>-->
                             </tr>
                             </thead>
                             <tbody>

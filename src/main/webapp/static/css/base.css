@@ -6,6 +6,13 @@ abbr,address,article,aside,audio,b,blockquote,body,canvas,caption,cite,code,dd,d
     border: 0;
     vertical-align: baseline;
 }
+html, body { min-width: 1500px;}
+@media only screen and (min-width: 1500px) {
+    html, body { min-width: 1500px; }
+}
+button{
+    white-space: nowrap;
+}
 table {
     border-collapse: unset;
     border-spacing: 0;
@@ -43,6 +50,9 @@ button,input,optgroup,select,textarea {
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 3;
     overflow: hidden;
+}
+textarea {
+    resize: none;
 }
 a {
     color: #00A0E9;
@@ -663,6 +673,7 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
 }
 .search{
     width: calc(85%/3);
+    white-space: nowrap;
 }
 .main-right-nav {
     /* padding: 0 0 10px 20px; */
