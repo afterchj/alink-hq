@@ -151,8 +151,9 @@ $(function () {
                 success:function (data) {
                     var result = data.success;
                     if (result=='success'){
-                        var url = "/alink-hq/product/list?pageNum=" +pageNum + "&pageSize=" + pageSize + "&type=" + $('#type').val() + "&coname=" +$('#coname').val();
-                        window.location.href = url;
+                        document.currentForm.submit();
+                        // var url = "/alink-hq/product/list?pageNum=" +pageNum + "&pageSize=" + pageSize + "&type=" + $('#type').val() + "&coname=" +$('#coname').val();
+                        // window.location.href = url;
                     }
                 },
                 error: function(data){
@@ -169,9 +170,9 @@ $(function () {
         var type ;
         thisId = $(this).parent().parent().parent().find("td:eq(0)>input:eq(1)").val();
         var checkeds = $("input:checkbox:checked[name='ids']");
-        if (isEmpty(thisId) && checkeds.length>0){
-            $('div[openContent="delete-pop"] .reset-pwd p').text('您确定要删除？');
+        $('div[openContent="delete-pop"] .reset-pwd p').text('您确定要删除？');
 
+        if (isEmpty(thisId) && checkeds.length>0){
         }else if(!isEmpty(thisId)){
             type = $(this).parent().parent().parent().find("td:eq(1)").text();
             $('div[openContent="delete-pop"] .reset-pwd p').text('您确定要删除'+type+'？');
@@ -240,28 +241,33 @@ $(function () {
     });
     $('#page-select').change(function () {
         var pageSize = $(this).children('option:selected').val();
-        var pageNum = $('.pages').text();
-        condition(pageSize, pageNum);
+        // var pageNum = $('.pages').text();
+        $("form[name='selectForm']>input[name='pageSize']").val(pageSize)
+        document.selectForm.submit();
+        // condition(pageSize, pageNum);
     });
     //跳转页数变化
     $('#skipPageBtn').click(function () {
-        var pageSize = $('#page-select option:selected').val();
+        // var pageSize = $('#page-select option:selected').val();
         var pageNum = $('#skipPage').val();
-        condition(pageSize, pageNum);
+        $("form[name='skipForm']>input[name='pageNum']").val(pageNum);
+        document.skipForm.submit();
+        // condition(pageSize, pageNum);
     });
 
     //点击查询
-    $("#productSearch").click(function () {
-        var pageNum = $(".pages").text();
-        var pageSize = $("#pageSize").val();
-        var url = "/alink-hq/product/list?pageNum=" +pageNum + "&pageSize=" + pageSize + "&type=" + $("#name").val() + "&coname=" +$("#productSelect").val();
-        window.location.href = url;
-    });
+    // $("#productSearch").click(function () {
+    //     var pageNum = $(".pages").text();
+    //     var pageSize = $("#pageSize").val();
+    //     var url = "/alink-hq/product/list?pageNum=" +pageNum + "&pageSize=" + pageSize + "&type=" + $("#name").val() + "&coname=" +$("#productSelect").val();
+    //     window.location.href = url;
+    // });
 
 
 });
+//删除产品
 function deleteProduct() {
-    var pageNum = $(".pages").text();
+    // var pageNum = $(".pages").text();
     var pageSize = $("#pageSize").val();
     var ids=[];
     if (isEmpty(thisId)){
@@ -282,8 +288,9 @@ function deleteProduct() {
         success:function (data) {
             var result = data.success;
             if (result=='success'){
-                var url = "/alink-hq/product/list?pageNum=" +pageNum + "&pageSize=" + pageSize + "&type=" + $('#type').val() + "&coname=" +$('#coname').val();
-                window.location.href = url;
+                document.currentForm.submit();
+                // var url = "/alink-hq/product/list?pageNum=" +pageNum + "&pageSize=" + pageSize + "&type=" + $('#type').val() + "&coname=" +$('#coname').val();
+                // window.location.href = url;
             }
         },
         error: function(data){
@@ -303,32 +310,41 @@ function isEmpty(value) {
         return false;
     }
 }
-function condition(pageSize, pageNum) {
-    var url = window.location.href;
-    var test = new RegExp("\\?");
-    if (test.test(url)) {
-        url = url.substring(0, url.lastIndexOf("?"));
-    }
-    var newUrl = url + '?pageNum=' + pageNum + '&pageSize=' + pageSize + '&type=' +$('#type').val() + '&coname=' +$('#coname').val();
-    location.href = newUrl;
-}
+// function condition(pageSize, pageNum) {
+//     var url = window.location.href;
+//     var test = new RegExp("\\?");
+//     if (test.test(url)) {
+//         url = url.substring(0, url.lastIndexOf("?"));
+//     }
+//     var newUrl = url + '?pageNum=' + pageNum + '&pageSize=' + pageSize + '&type=' +$('#type').val() + '&coname=' +$('#coname').val();
+//     location.href = newUrl;
+// }
 
-function clickLink(page) {
-    var pageSize = $("#pageSize").val();
-    var pageNum;
-    if (page == 'pre'){
-        pageNum = $("#prePage").val();
-    }else if (page == 'next'){
-        pageNum = $("#nextPage").val();
-    }
-    var url = "/alink-hq/product/list?pageNum=" +pageNum + "&pageSize=" + pageSize + "&type=" + $('#type').val() + "&coname=" +$('#coname').val();
-    window.location.href = url;
-}
+// function clickLink(page) {
+//     var pageSize = $("#pageSize").val();
+//     var pageNum;
+//     if (page == 'pre'){
+//         pageNum = $("#prePage").val();
+//     }else if (page == 'next'){
+//         pageNum = $("#nextPage").val();
+//     }
+//     var url = "/alink-hq/product/list?pageNum=" +pageNum + "&pageSize=" + pageSize + "&type=" + $('#type').val() + "&coname=" +$('#coname').val();
+//     window.location.href = url;
+// }
 $(function () {
+    //编辑产品
    $(".product.edit").click(function () {
         // console.log($(this).attr('alt'));
        var url = "/alink-hq/product/editProduct?id="+$(this).attr('alt');
        window.location.href = url;
    });
+    //翻页 左翻
+    $(".prev-page-link").click(function () {
+        document.preForm.submit();
+    });
+    //翻页 右翻
+    $(".next-page-link").click(function () {
+        document.nextForm.submit();
+    });
 });
 

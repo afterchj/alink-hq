@@ -28,11 +28,9 @@ public class ProductController {
     private ProductService productService;
 
     /**
-     * 跳转到productList.html
-     *
      * @param type   产品品类/代码号(产品ID)
-     * @param coname 隶属公司
-     * @return
+     * @param coname:隶属公司 pageNum:目标页 pageSize:每页显示行数 type:型号
+     * @return 跳转到productList.html
      */
     @RequestMapping(value = "/list")
     public String productList(Model model, Integer pageNum, Integer pageSize, String type, String coname) {
@@ -49,6 +47,11 @@ public class ProductController {
         return "productManage/productList";
     }
 
+    /**
+     * 删除产品
+     * @param ids 产品id数组
+     * @return success:成功
+     */
     @RequestMapping(value = "/delete", method = RequestMethod.POST)
     @ResponseBody
     public Map<String, String> delete(String[] ids) {
@@ -58,16 +61,27 @@ public class ProductController {
         return map;
     }
 
+    /**
+     * 产品说明更新
+     * @param id 产品id
+     * @param description  产品说明
+     * @return success:成功
+     */
     @RequestMapping(value = "/update", method = RequestMethod.POST)
     @ResponseBody
     public Map<String, String> update(int id, String description) {
-//        System.out.println(id);
         Map<String, String> map = new HashMap<>();
         productService.updateDesc(id, description);
         map.put("success", "success");
         return map;
     }
 
+    /**
+     * 关联固件
+     * @param oId 固件id
+     * @param id 产品id
+     * @return success:成功
+     */
     @RequestMapping(value = "/binding", method = RequestMethod.POST)
     @ResponseBody
     public Map<String, String> biding(int oId, int id) {
@@ -77,6 +91,11 @@ public class ProductController {
         return map;
     }
 
+    /**
+     * @param id 产品id
+     * @param model product:产品信息 otas:固件集合 firms:公司集合
+     * @return 跳转到editProduct.html
+     */
     @RequestMapping("/editProduct")
     public String editProduct(int id, Model model) {
         Product product = productService.getProductById(id);
@@ -88,6 +107,17 @@ public class ProductController {
         return "productManage/editProduct";
     }
 
+    /**
+     * 编辑/新增产品
+     * @param productName 产品类型
+     * @param type 型号
+     * @param productId 代码号
+     * @param coname 隶属公司
+     * @param otaId 固件id
+     * @param description 产品说明
+     * @param id 产品id 新增产品id为null
+     * @return repeatName:重复名信息 success:成功
+     */
     @RequestMapping(value = "/updateEdit", method = RequestMethod.POST)
     @ResponseBody
     public Map<String, Object> updateEdit(String productName, String type, String productId, String coname, Integer
@@ -104,7 +134,10 @@ public class ProductController {
         return map;
     }
 
-
+    /**
+     * @param model otas:固件集合 firms:公司集合
+     * @return 跳转到createProduct.html
+     */
     @RequestMapping("/createProduct")
     public String createProduct(Model model) {
         List<Map<String, Object>> otas = productService.getOTAFile();
@@ -113,5 +146,4 @@ public class ProductController {
         model.addAttribute("firms", firms);
         return "productManage/createProduct";
     }
-
 }

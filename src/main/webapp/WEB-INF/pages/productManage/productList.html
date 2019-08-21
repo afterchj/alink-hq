@@ -41,21 +41,56 @@
                 <!--</div>-->
                 <!--</div>-->
             </div>
-
+            <!--form表单不要删-->
+            <!--页数变化-->
+            <form name="selectForm" method="post" action="/alink-hq/product/list">
+                <input type="hidden" name="type" th:value="${type}">
+                <input type="hidden" name="coname" th:value="${coname}">
+                <input type="hidden" name="pageSize"/>
+                <input type="hidden" name="pageNum" th:value="${pageInfo.getPageNum()}"/>
+            </form>
+            <!--跳转指定页-->
+            <form name="skipForm" method="post" action="/alink-hq/product/list">
+                <input type="hidden" name="type" th:value="${type}">
+                <input type="hidden" name="coname" th:value="${coname}">
+                <input type="hidden" name="pageSize" th:value="${pageInfo.getPageSize()}"/>
+                <input type="hidden" name="pageNum" />
+            </form>
+            <!--当前页-->
+            <form name="currentForm" method="post" action="/alink-hq/product/list">
+                <input type="hidden" name="type" th:value="${type}">
+                <input type="hidden" name="coname" th:value="${coname}">
+                <input type="hidden" name="pageSize" th:value="${pageInfo.getPageSize()}"/>
+                <input type="hidden" name="pageNum" th:value="${pageInfo.getPageNum()}"/>
+            </form>
+            <!--下一页-->
+            <form name="nextForm" method="post" action="/alink-hq/product/list">
+            <input type="hidden" name="type" th:value="${type}">
+            <input type="hidden" name="coname" th:value="${coname}">
+            <input type="hidden" name="pageSize" th:value="${pageInfo.getPageSize()}"/>
+            <input type="hidden" name="pageNum" th:value="${pageInfo.getNextPage()}"/>
+            </form>
+            <!--上一页-->
+            <form name="preForm" method="post" action="/alink-hq/product/list">
+                <input type="hidden" name="type" th:value="${type}">
+                <input type="hidden" name="coname" th:value="${coname}">
+                <input type="hidden" name="pageSize" th:value="${pageInfo.getPageSize()}"/>
+                <input type="hidden" name="pageNum" th:value="${pageInfo.getPrePage()}"/>
+            </form>
             <div class="table-content-list">
-                <form class="clearfix" method="get" onclick="return false">
+                <form class="clearfix" method="post" action="/alink-hq/product/list">
                     <!--<input type="hidden" id="pageSize" th:value="${dict.pageSize}">-->
                     <div class="search-condition clearfix">
                         <div class="f-l search" style="width: auto;">
                             <div>
                                 <label for="name" class="font" style="width: 200px;">产品品类/代码号(产品ID)</label>
-                                <input type="text" id="name" name="otaName" placeholder="请输入产品品类/代码号(产品ID)">
+                                <input type="text" id="name" name="type" placeholder="请输入产品品类/代码号(产品ID)">
                             </div>
                         </div>
                         <div class="f-l search">
                             <div>
                                 <label for="name" class="font">隶属公司</label>
-                                <select name="status" id="productSelect">
+                                <select name="coname" id="productSelect">
                                     <option value="">请选择公司</option>
                                     <option th:each="coname:${conames}" th:value="${coname.id}"
                                             th:text="${coname.coname}"></option>
@@ -70,12 +105,13 @@
                         </div>
                     </div>
                     <div class="search-result">
+
                         <!-- 有数据时 -->
                         <table border="1" class="hasData active" th:unless="${pageInfo.getList().total==0}">
                             <thead>
                             <tr>
-                                <th >
-                                    <input type="checkbox" id="all" >
+                                <th>
+                                    <input type="checkbox" id="all">
                                     <span class="">全选</span>
                                 </th>
                                 <th><span>产品品类</span></th>
@@ -91,7 +127,7 @@
                             </thead>
                             <tbody>
                             <tr th:each="product:${pageInfo.getList()}">
-                                <td >
+                                <td>
                                     <input type="checkbox" name="ids">
                                     <input type="hidden" th:value="${product.id}" id="id">
                                 </td>
@@ -100,52 +136,62 @@
                                 <td th:text="${product.product_id}"></td>
                                 <td th:text="${product.coname}"></td>
                                 <td
-                                        th:class="${#strings.isEmpty(product.description)}? 'p-r  product-explain  empty-edit':'show-lorem p-r  product-explain'"  shiro:hasAnyPermissions="updateProduct">
+                                        th:class="${#strings.isEmpty(product.description)}? 'p-r  product-explain  empty-edit':'show-lorem p-r  product-explain'"
+                                        shiro:hasAnyPermissions="updateProduct">
                                     <input type="hidden">
-                                    <p class="lorem-limit" th:text="${product.description}" shiro:hasAnyPermissions="viewProductShow"></p>
+                                    <p class="lorem-limit" th:text="${product.description}"
+                                       shiro:hasAnyPermissions="viewProductShow"></p>
                                     <p shiro:lacksPermission="viewProductShow"></p>
                                     <div class="memo-edit-has p-a" th:alt="${product.id}">
                                         <div class="memo-content" th:text="${product.description}"></div>
                                     </div>
                                 </td>
-                                <td shiro:lacksPermission="updateProduct" >
+                                <td shiro:lacksPermission="updateProduct">
                                     <input type="hidden">
-                                    <p class="lorem-limit" th:text="${product.description}" shiro:hasAnyPermissions="viewProductShow"></p>
+                                    <p class="lorem-limit" th:text="${product.description}"
+                                       shiro:hasAnyPermissions="viewProductShow"></p>
                                     <p shiro:lacksPermission="viewProductShow"></p>
                                     <div shiro:lacksPermission="updateProduct">
-                                        <div ></div>
+                                        <div></div>
                                     </div>
                                 </td>
                                 <!--<td class="p-r  product-explain" >-->
-                                    <!--<div th:text="${product.description}"></div>-->
-                                    <!--&lt;!&ndash;<input type="hidden">&ndash;&gt;-->
-                                    <!--&lt;!&ndash;<p class="lorem-limit" th:text="${product.description}"></p>&ndash;&gt;-->
-                                    <!--&lt;!&ndash;<div class="memo-edit-has p-a" th:alt="${product.id}">&ndash;&gt;-->
-                                        <!--&lt;!&ndash;<div class="memo-content" th:text="${product.description}"></div>&ndash;&gt;-->
-                                    <!--&lt;!&ndash;</div>&ndash;&gt;-->
+                                <!--<div th:text="${product.description}"></div>-->
+                                <!--&lt;!&ndash;<input type="hidden">&ndash;&gt;-->
+                                <!--&lt;!&ndash;<p class="lorem-limit" th:text="${product.description}"></p>&ndash;&gt;-->
+                                <!--&lt;!&ndash;<div class="memo-edit-has p-a" th:alt="${product.id}">&ndash;&gt;-->
+                                <!--&lt;!&ndash;<div class="memo-content" th:text="${product.description}"></div>&ndash;&gt;-->
+                                <!--&lt;!&ndash;</div>&ndash;&gt;-->
                                 <!--</td>-->
-                                <td class=" pointer">
+                                <td class=" pointer" >
                                     <a href="javascript:void(0);" shiro:hasAnyPermissions="relevanceProduct">
                                         <span th:if="${product.ota_name}" th:text="${product.ota_name}"></span>
                                         <!--<span th:text="${product.ota_name}"></span>-->
-                                            <span class="p-r">
-                                                <img th:if="${product.ota_name}" th:src="@{/static/img/edit-ota.png}"alt="" title="编辑关联固件"style="width:                                                          17px;height: 17px;" class="relevance-firmware">
-                                                <img th:unless="${product.ota_name}" th:src="@{/static/img/relevance.png}"
-                                                alt="" title="关联固件"
-                                                style="width: 30px;height: 30px;" class="relevance-firmware">
+                                        <span class="p-r">
+                                                <img th:if="${product.ota_name}" th:src="@{/static/img/edit-ota.png}"
+                                                     alt="" title="编辑关联固件"
+                                                     style="width:                                                          17px;height: 17px;"
+                                                     class="relevance-firmware">
+                                                <img th:unless="${product.ota_name}"
+                                                     th:src="@{/static/img/relevance.png}"
+                                                     alt="" title="关联固件"
+                                                     style="width: 30px;height: 30px;" class="relevance-firmware">
                                                 <span class="num-hint p-a" th:text="${OTACount}"></span>
                                             </span>
 
                                     </a>
                                     <a href="javascript:void(0);" shiro:lacksPermission="relevanceProduct">
-                                        <span >
-                                                <img th:unless="${product.ota_name}" th:src="@{/static/img/relevance.png}" style="width: 30px;height: 30px;">
+                                        <span>
+                                                <img th:unless="${product.ota_name}"
+                                                     th:src="@{/static/img/relevance.png}"
+                                                     style="width: 30px;height: 30px;">
                                         </span>
 
                                     </a>
                                 </td>
                                 <td class="p-r pointer">
-                                    <a th:alt="${product.id}" class="product edit" shiro:hasAnyPermissions="insertProduct">
+                                    <a th:alt="${product.id}" class="product edit"
+                                       shiro:hasAnyPermissions="insertProduct">
                                         <img th:src="@{/static/img/alter.png}" alt="" title="编辑"
                                              style="width: 18px;height: 18px;margin-right: 15px;" class="single-edit">
                                     </a>
@@ -153,11 +199,11 @@
                                         <img th:src="@{/static/img/alter-un.png}" alt="" title="编辑"
                                              style="width: 18px;height: 18px;margin-right: 15px;">
                                     </a>
-                                    <a href="javascript:void(0);"  shiro:hasAnyPermissions="deleteProduct">
+                                    <a href="javascript:void(0);" shiro:hasAnyPermissions="deleteProduct">
                                         <img th:src="@{/static/img/delete.png}" alt="" title="删除"
                                              style="width: 16px;height: 16px;" class="single-delete">
                                     </a>
-                                    <a href="javascript:void(0);"  shiro:lacksPermission="deleteProduct">
+                                    <a href="javascript:void(0);" shiro:lacksPermission="deleteProduct">
                                         <img th:src="@{/static/img/un-delete.png}" alt="" title="删除"
                                              style="width: 16px;height: 16px;">
                                     </a>
@@ -167,7 +213,7 @@
                             </tbody>
                             <tfoot>
                             <tr>
-                                <td colspan="8" class="clearfix page">
+                                <td colspan="8" class="clearfix page" >
                                     <div class="f-l" style="padding-left: 20px;">
                                         <input type="checkbox" id="addAll" class="pointer">
                                         <!--</span>-->
@@ -181,7 +227,8 @@
                                             <!--<span class="skipPageBtn  moment active unclick1">下载</span>-->
                                             <span class="skipPageBtn pointer moment"
                                                   onmousedown="exchangeBtnMouseDown()"
-                                                  onmouseup="exchangeBtnMouseUp()" id="multiMove" shiro:hasAnyPermissions="deleteProduct">删除</span>
+                                                  onmouseup="exchangeBtnMouseUp()" id="multiMove"
+                                                  shiro:hasAnyPermissions="deleteProduct">删除</span>
                                         </span>
                                     </div>
                                     <!--<div th:replace="common/page::page"></div>-->
@@ -193,38 +240,40 @@
                                     <span><</span>
                                     </span>
                                     </a>
-                                    <a th:if="${pageInfo.getPrePage()}>0" onclick="clickLink('pre')">
+                                    <!--<a th:if="${pageInfo.getPrePage()}>0" onclick="clickLink('pre')">-->
+                                    <a th:if="${pageInfo.getPrePage()}>0" class="prev-page-link">
                                     <span class="prev active">
                                     <span><</span>
                                     </span>
                                     </a>
                                     </span>
-                                    <!--当前页-->
-                                    <span class="pages" th:text="${pageInfo.getPageNum()}"></span>
-                                    <span class="next-page">
+                                        <!--当前页-->
+                                        <span class="pages" th:text="${pageInfo.getPageNum()}"></span>
+                                        <span class="next-page">
                                     <!--后一页-->
                                     <a th:if="${pageInfo.getNextPage()}==0" href="#">
                                     <span class="prev "><span>></span></span>
                                     </a>
-                                    <a th:if="${pageInfo.getNextPage()}>0" onclick="clickLink('next')">
+                                            <!--<a th:if="${pageInfo.getNextPage()}>0" onclick="clickLink('next')">-->
+                                    <a th:if="${pageInfo.getNextPage()}>0" class="next-page-link">
                                     <span class="prev active"><span>></span></span>
                                     </a>
                                     </span>
-                                    <span class="m-l-15 m-r-20">共
+                                        <span class="m-l-15 m-r-20">共
                                     <span class="pageTotal" id="pageTotal"
-                                    th:text="${pageInfo.getPages()}"></span>页/
+                                          th:text="${pageInfo.getPages()}"></span>页/
                                     <span th:text="${pageInfo.getTotal()}"></span>条数据
                                     </span>
-                                    <span class="m-r-15">
+                                        <span class="m-r-15">
                                     <input type="number" id="skipPage" th:value="${pageInfo.getPageNum()}"/>
                                     </span>
-                                    <span class="m-r-35">
+                                        <span class="m-r-35">
                                     <div id="skipPageBtn" class="pointer moment skipPageBtn"
-                                    onmousedown="skipBtnMouseDown()" onmouseup="skipBtnMouseUp()">跳转
+                                         onmousedown="skipBtnMouseDown()" onmouseup="skipBtnMouseUp()">跳转
                                     </div>
                                     </span>
-                                    <span class="m-r-15r">每页显示：</span>
-                                    <span class="m-r-20">
+                                        <span class="m-r-15r">每页显示：</span>
+                                        <span class="m-r-20">
                                     <select name="" id="page-select">
                                     <option value="10" data-index="10">10</option>
                                     <option value="30" data-index="30">30</option>
@@ -234,21 +283,24 @@
                                     </span>
                                     </div>
                                 </td>
+
                             </tr>
                             </tfoot>
                         </table>
+
                         <input type="hidden" id="type" th:value="${type}">
                         <input type="hidden" id="coname" th:value="${coname}">
                         <input type="hidden" id="pageSize" th:value="${pageInfo.getPageSize()}"/>
                         <input type="hidden" id="prePage" th:value="${pageInfo.getPrePage()}"/>
                         <input type="hidden" id="nextPage" th:value="${pageInfo.getNextPage()}"/>
+                        <input type="hidden" id="pageNum" th:value="${pageInfo.getPageNum()}"/>
                         <!-- 无数据时 -->
                         <!--<div th:text="${pageInfo.getList().total==0}"></div>-->
-                        <table border="1" class="noData active" th:if="${pageInfo.getList().total==0}" >
+                        <table border="1" class="noData active" th:if="${pageInfo.getList().total==0}">
                             <thead>
                             <tr>
                                 <th class="all-checkbox">
-                                    <input type="checkbox"  class="pointer">
+                                    <input type="checkbox" class="pointer">
                                     <span class="">全选</span>
                                 </th>
                                 <th><span>网络名称</span></th>
@@ -296,7 +348,7 @@
 </div>
 
 <!--关联固件-->
-<div th:replace="pop/relevance::relevance-pop" ></div>
+<div th:replace="pop/relevance::relevance-pop"></div>
 
 <!-- 删除 -->
 <div th:replace="pop/delete::delete-pop"></div>
@@ -308,11 +360,6 @@
 <!--<script type="text/javascript" th:src="@{/static/js/page.js}"></script>-->
 <script type="text/javascript" th:src="@{/static/js/moment.js}"></script>
 <script type="text/javascript" th:src="@{/static/js/projectFileList.js}"></script>
-<script>
-//    $("#check").click(function () {
-//        $(this).prop('checked',true);
-//        console.log(11)
-//    });
-</script>
+<script type="text/javascript" th:src="@{/static/js/banDebugging.js}"></script>
 </body>
 </html>
