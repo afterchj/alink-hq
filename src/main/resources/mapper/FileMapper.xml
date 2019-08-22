@@ -80,7 +80,7 @@
             AND f.ota_name = #{otaName}
         </if>
         <if test="oid!=null and oid!=''">
-            AND fh.o_id=#{id}
+            AND fh.o_id=#{oid}
         </if>
         <if test="otaName!=null and otaName!=''">
             AND fh.o_version = #{otaVersion}

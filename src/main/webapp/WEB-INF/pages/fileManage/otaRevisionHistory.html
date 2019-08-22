@@ -53,7 +53,7 @@
 
             <div  class="table-content-list">
                 <form class="clearfix" th:action="@{/file/history}" method="post">
-                    <input type="hidden" name="oid" th:value="${dict.oid}">
+                    <input type="hidden" id="oid" name="oid" th:value="${dict.oid}">
                     <input type="hidden" id="pageSize" th:value="${dict.pageSize}">
                     <input type="hidden" name="otaName" th:value="${dict.otaName}">
                     <input type="hidden" name="otaId" th:value="${dict.otaId}">

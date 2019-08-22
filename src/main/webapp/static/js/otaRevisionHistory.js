@@ -8,14 +8,14 @@ laydate.render({
 });
 $(function () {
     var id;
+    var oid = $("#oid").val();
     $('.singleDel').click(function () {
         id = $(this).attr("alt");
-        console.log("id", id);
-        var otaVersion=$(this).parent().siblings('.otaVersion').text();
+        var otaVersion = $(this).parent().siblings('.otaVersion').text();
         var selector = $('div[openContent="delete-pop"]');
         selector.addClass('active');
-        $('div[openContent="delete-pop"] .reset-pwd p').text('您确定要删除 '+otaVersion+' ？');
-        $('div[openContent="delete-pop"] .reset-pwd p').css('margin-top','10px');
+        $('div[openContent="delete-pop"] .reset-pwd p').text('您确定要删除 ' + otaVersion + ' ？');
+        $('div[openContent="delete-pop"] .reset-pwd p').css('margin-top', '10px');
         adjust(selector);
         showOverlay();
     });
@@ -80,7 +80,7 @@ $(function () {
         var selector = $('div[openContent="reset-name"]');
         selector.addClass('active');
         $('div[openContent="reset-name"] label').text('固件版本');
-        $('div[openContent="reset-name"] input').attr('placeholder',"请输入固件版本");
+        $('div[openContent="reset-name"] input').attr('placeholder', "请输入固件版本");
         adjust(selector);
         showOverlay();
     });
@@ -100,11 +100,11 @@ $(function () {
             selector.removeClass('active');
             hideOverlay();
         }
-        console.log("id", id, "version", val);
+        console.log("id", id, "oid", oid, "version", val);
         $.ajax({
             type: "POST",
             url: "/alink-hq/file/updateFile",
-            data: {"id": id, "otaVersion": val},
+            data: {"id": id, "oid": oid, "otaVersion": val},
             success: function (res) {
                 if (res == 'ok') {
                     location.reload();
