@@ -23,7 +23,7 @@
                 <div class="f-l main-right-title">
                     <nav class="bread">
                         <ol class="clearfix">
-                            <li class="f-l"><a th:href="@{/file/OTAFile}" th:text="${file.otaName}"></a></li>
+                            <li class="f-l"><a th:href="@{/file/OTAFile}" th:text="${file.otaName} "></a></li>
                             <li class="f-l">上传新版本</li>
                         </ol>
                     </nav>
@@ -47,6 +47,7 @@
                         <!--第二步--已上传-->
                         <form th:action="@{/file/doUpload(type='edit')}" method="post" enctype="multipart/form-data" class="hasUpload active">
                             <input type="hidden" name="id" th:value="${file.id}">
+                            <!--<input type="hidden" name="oid" th:value="${file.oid}">-->
                             <fieldset>
                                 <div class="form-row clearfix">
                                     <div class="field-label">
@@ -54,7 +55,7 @@
                                     </div>
                                     <div class="field-widget p-r" >
                                         <p class="p-a verify"></p>
-                                        <input type="text" class="filename falseFile" readonly="" >
+                                        <input type="text" class="filename falseFile" readonly=""  th:value="${#strings.substringAfter(file.otaPath,'ota/')}">
                                         <input type="button" class="button upload" value="重新上传" style="right: 0;left: auto;top: 0;">
                                         <input type="file" name="file" size="30"   class="trueFile" >
                                     </div>
@@ -97,7 +98,7 @@
                                     </div>
                                 </div>
                                 <div class="form-row submit">
-                                    <button type="submit" id="submitNewVersion">确定</button>
+                                    <button type="button" id="submitNewVersion">确定</button>
                                 </div>
                             </fieldset>
                         </form>

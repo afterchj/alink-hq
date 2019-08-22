@@ -33,14 +33,19 @@ $(".trueFile").on("change",function (e) {
 $('#submitNewVersion').click(function () {
     var otaVersion=$('#otaVersion').val();
     var that=$('#otaVersion');
-    // console.log('otaVersion',otaVersion);
+    var oid=$('input[name=id]').val();
+
+    var otaVersionRepetResult=otaVersionRepet(oid,otaVersion);
+    console.log('oid',oid);
+    console.log('otaVersion',otaVersion);
+    console.log('otaVersionRepetResult',otaVersionRepetResult);
     if(otaVersion==''){
         that.prev('.verify').text('请输入固件版本');
-    }else if(otaVersion=='已存在'){
+    }else if(otaVersionRepetResult){
         that.prev('.verify').text('已存在，请重新输入');
     }else{
         that.prev('.verify').text('');
-        $('.hasUpload').submit();
+        // $('.hasUpload').submit();
     }
 })
 $('#uploaded').click(function () {
@@ -53,3 +58,26 @@ $('#uploaded').click(function () {
         $('.noUpload').submit();
     }
 })
+
+//判断固件历史版本的名称是否重复
+function otaVersionRepet(oid,otaVersion) {
+    var result;
+    $.ajax({
+        type: "post",
+        url: "/alink-hq/file/checkCount",
+        data: {
+            "oid": oid,
+            "otaVersion": otaVersion
+        },
+        async:false,
+        success: function (res) {
+            console.log('res',res);
+            if(res=='ok'){
+                result=true;
+            }else{
+                result=false;
+            }
+        }
+    })
+    return result;
+}
