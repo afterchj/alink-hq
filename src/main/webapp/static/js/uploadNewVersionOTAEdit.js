@@ -41,11 +41,11 @@ $('#submitNewVersion').click(function () {
     console.log('otaVersionRepetResult',otaVersionRepetResult);
     if(otaVersion==''){
         that.prev('.verify').text('请输入固件版本');
-    }else if(otaVersionRepetResult){
+    }else if(!otaVersionRepetResult){
         that.prev('.verify').text('已存在，请重新输入');
     }else{
         that.prev('.verify').text('');
-        // $('.hasUpload').submit();
+        $('.hasUpload').submit();
     }
 })
 $('#uploaded').click(function () {

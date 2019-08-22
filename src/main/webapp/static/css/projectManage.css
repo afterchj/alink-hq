@@ -1889,3 +1889,12 @@ table#timeTitle tbody tr{
 .addProduct .firmware-list.keyFirmware>div.f-l{
     width:calc(100%/2);
 }
+.table-content-list .hasUpload  input[type=text], .table-content-list .hasUpload  input[type=password]{
+    width:458px;
+}
+.fieldset .submit button{
+    font-size: 15px;
+    letter-spacing: 10px;
+    padding-right: 5px;
+    border-radius: 3px;
+}
