@@ -96,23 +96,24 @@ $(function () {
         if (val == '') {
             $('.rename-hint').text('请输入固件版本');
         } else {
-            $('.rename-hint').text('');
-            selector.removeClass('active');
-            hideOverlay();
+            $.ajax({
+                type: "POST",
+                url: "/alink-hq/file/updateFile",
+                data: {"id": id, "oid": oid, "otaVersion": val},
+                success: function (res) {
+                    if (res == 'ok') {
+                        $('.rename-hint').text('');
+                        selector.removeClass('active');
+                        hideOverlay();
+                        location.reload();
+                    } else {
+                        $('.rename-hint').text('已存在请重新输入');
+                    }
+                }
+            });
         }
         console.log("id", id, "oid", oid, "version", val);
-        $.ajax({
-            type: "POST",
-            url: "/alink-hq/file/updateFile",
-            data: {"id": id, "oid": oid, "otaVersion": val},
-            success: function (res) {
-                if (res == 'ok') {
-                    location.reload();
-                } else {
-                    $('.rename-hint').text('已存在请重新输入');
-                }
-            }
-        });
+
     });
     $('.empty-edit').click(function (event) {
         event.stopPropagation();
@@ -159,3 +160,5 @@ $(function () {
         }
     });
 })
+
+
