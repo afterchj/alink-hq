@@ -3,9 +3,12 @@ package com.tpadsz.after.test;
 import com.alibaba.fastjson.JSON;
 import com.tpadsz.after.dao.MeshDao;
 import com.tpadsz.after.dao.RoleDao;
+import com.tpadsz.after.entity.FileDTO;
 import com.tpadsz.after.entity.OptionList;
 import com.tpadsz.after.entity.SearchDict;
 import com.tpadsz.after.entity.User;
+import com.tpadsz.after.exception.RepetitionException;
+import com.tpadsz.after.service.FileService;
 import com.tpadsz.after.service.GroupService;
 import com.tpadsz.after.service.MeshService;
 import net.rubyeye.xmemcached.XMemcachedClient;
@@ -127,12 +130,21 @@ public class MainTest {
 //        map.put("uid", 18);
         map.put("mid", 0);
         MeshService meshService = (MeshService) ctx.getBean("meshServiceImpl");
-        GroupService groupService = (GroupService) ctx.getBean("groupServiceImpl");
-        List<OptionList> lists = meshService.getProjects(map);
-        OptionList optionList = meshService.getProject(map);
+        FileService fileService = (FileService) ctx.getBean("fileServiceImpl");
+        FileDTO info=new FileDTO();
+        info.setOid(28);
+        info.setOtaVersion("v1.0.1");
+        try {
+            System.out.println(fileService.getCount(info));;
+        } catch (RepetitionException e) {
+            e.printStackTrace();
+        }
+//        GroupService groupService = (GroupService) ctx.getBean("groupServiceImpl");
+//        List<OptionList> lists = meshService.getProjects(map);
+//        OptionList optionList = meshService.getProject(map);
 //        List<OptionList> lists = groupService.getPlaces(map);
 //        logger.info("lists=" + JSON.toJSONString(lists));
-        logger.info("lists=" + JSON.toJSONString(optionList));
+//        logger.info("lists=" + JSON.toJSONString(optionList));
     }
 
     @Test

@@ -71,7 +71,8 @@
    </insert>
 
     <select id="getCount" resultType="int" parameterType="FileDTO">
-        SELECT COUNT(0) FROM f_ota_file f INNER JOIN f_file_history_version fh
+        SELECT COUNT(0) FROM f_ota_file f
+        INNER JOIN f_file_history_version fh
         ON f.id=fh.o_id WHERE 1=1
         <if test="otaId!=null and otaId!=''">
             AND f.ota_id =#{otaId}
@@ -82,7 +83,7 @@
         <if test="oid!=null and oid!=''">
             AND fh.o_id=#{oid}
         </if>
-        <if test="otaName!=null and otaName!=''">
+        <if test="otaVersion!=null and otaVersion!=''">
             AND fh.o_version = #{otaVersion}
         </if>
     </select>
