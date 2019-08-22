@@ -83,11 +83,18 @@ public class FileController {
         return "fileManage/addOta";
     }
 
-    @RequestMapping("/upload")
-    public String upload(Integer id, ModelMap modelMap) {
+    @RequestMapping("/uploadAdd")
+    public String uploadAdd(Integer id, ModelMap modelMap) {
         FileDTO info = fileService.getFileInfo(id);
         modelMap.put("file", info);
-        return "fileManage/upload";
+        return "fileManage/uploadNewVersionOTAAdd";
+    }
+
+    @RequestMapping("/uploadEdit")
+    public String uploadEdit(Integer id, ModelMap modelMap) {
+        FileDTO info = fileService.getFileInfo(id);
+        modelMap.put("file", info);
+        return "fileManage/uploadNewVersionOTAEdit";
     }
 
     @RequestMapping("/save")
