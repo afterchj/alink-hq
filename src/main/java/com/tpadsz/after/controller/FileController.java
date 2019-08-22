@@ -136,7 +136,7 @@ public class FileController {
             modelMap.put("file", fileDTO);
             return "fileManage/uploadNewVersionOTAEdit";
         } else {
-            return "redirect:/file/history?oid="+oid;
+            return "redirect:/file/history?oid="+oid+"&otaId="+fileDTO.getOtaId();
         }
     }
 
