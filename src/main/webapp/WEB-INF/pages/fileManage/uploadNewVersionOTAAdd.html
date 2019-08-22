@@ -45,7 +45,7 @@
                     <div class="p-content p-r">
                         <!--<div th:text="${file}"></div>-->
                         <!--第一步未上传-->
-                        <form th:action="@{/file/doUpload}" method="post"  enctype="multipart/form-data" class="noUpload active" >
+                        <form th:action="@{/file/doUpload(type='add')}" method="post"  enctype="multipart/form-data" class="noUpload active" >
                             <input type="hidden" name="id" th:value="${file.id}">
                             <input type="hidden" name="otaId" th:value="${file.otaId}">
                             <input type="hidden" name="otaName" th:value="${file.otaName}">"
@@ -95,6 +95,6 @@
 <div class="hide-iframe "></div>
 <script th:src="@{/static/js/left.js}"></script>
 <script th:src="@{/static/js/moment.js}"></script>
-<script th:src="@{/static/js/uploadNewVersionOTA.js}"></script>
+<script th:src="@{/static/js/uploadNewVersionOTAAdd.js}"></script>
 </body>
 </html>
