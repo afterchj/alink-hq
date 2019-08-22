@@ -5,6 +5,7 @@ import com.tpadsz.after.entity.FileDTO;
 import com.tpadsz.after.entity.SearchDict;
 import com.tpadsz.after.exception.RepetitionException;
 import com.tpadsz.after.service.FileService;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -58,9 +59,11 @@ public class FileServiceImpl implements FileService {
 
     @Override
     public void saveUpdate(FileDTO info) throws RepetitionException {
-        int count = fileDao.getCount(info);
-        if (count > 0) {
-            throw new RepetitionException(100, "版本重复");
+       if (StringUtils.isNotBlank(info.getOtaVersion())){
+            int count = fileDao.getCount(info);
+            if (count > 0) {
+                throw new RepetitionException(100, "版本重复");
+            }
         }
         fileDao.saveUpdate(info);
     }
