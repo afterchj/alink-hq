@@ -10,6 +10,7 @@ import java.util.Date;
 public class FileDTO implements Serializable {
 
     private int id;
+    private Integer oid;
     private String otaId;
     private String otaName;
     private String otaVersion;
@@ -80,5 +81,13 @@ public class FileDTO implements Serializable {
 
     public void setUpdateDate(Date updateDate) {
         this.updateDate = updateDate;
+    }
+
+    public Integer getOid() {
+        return oid;
+    }
+
+    public void setOid(Integer oid) {
+        this.oid = oid;
     }
 }

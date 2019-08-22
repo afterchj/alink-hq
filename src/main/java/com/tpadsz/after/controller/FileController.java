@@ -84,10 +84,10 @@ public class FileController {
     }
 
     @RequestMapping("/upload")
-    public String upload(Integer id,String type, ModelMap modelMap) {
+    public String upload(Integer id, ModelMap modelMap) {
         FileDTO info = fileService.getFileInfo(id);
         modelMap.put("file", info);
-        return "fileManage/uploadNewVersionOTAAdd";
+        return "fileManage/uploadNewVersionOTAADD";
     }
 
     @RequestMapping("/save")
@@ -112,7 +112,8 @@ public class FileController {
     }
 
     @RequestMapping("/doUpload")
-    public String save(FileDTO info,String type, @RequestParam(value = "file") MultipartFile file,ModelMap modelMap) {
+    public String save(FileDTO info, String type, @RequestParam(value = "file") MultipartFile file, ModelMap modelMap) {
+        int oid = info.getId();
         String path = PropertiesUtil.getPath("otaFile");
         String prefix = PropertiesUtil.getPath("otaPath");
         String fileName = file.getOriginalFilename();
@@ -130,11 +131,12 @@ public class FileController {
         } catch (Exception e) {
             logger.error("error:" + e.getMessage());
         }
-        FileDTO fileDTO = fileService.getFileInfo(info.getId());
-        if (type.equals("add")){
+        FileDTO fileDTO = fileService.getFileInfo(oid);
+        if (type.equals("add")) {
             modelMap.put("file", fileDTO);
             return "fileManage/uploadNewVersionOTAEdit";
-        }else {
+        } else {
+            fileDTO.setOid(oid);
             modelMap.put("dict", fileDTO);
             return "fileManage/otaRevisionHistory";
         }
@@ -197,6 +199,7 @@ public class FileController {
         modelMap.put("file", info);
         return "fileManage/uploadNewVersionOTAAdd";
     }
+
     @RequestMapping("/uploadNewVersionOTAEdit")
     public String uploadNewVersionOTAEdit(Integer id, ModelMap modelMap) {
         FileDTO info = fileService.getFileInfo(id);
