@@ -136,7 +136,7 @@ public class FileController {
             modelMap.put("file", fileDTO);
             return "fileManage/uploadNewVersionOTAEdit";
         } else {
-            return "redirect:/file/history?oid="+oid+"&otaId="+fileDTO.getOtaId();
+            return "redirect:/file/history?oid="+oid+"&otaId="+fileDTO.getOtaId()+"&otaName="+fileDTO.getOtaName();
         }
     }
 
@@ -155,7 +155,11 @@ public class FileController {
     @ResponseBody
     @RequestMapping("/updateFile")
     public String updateFile(FileDTO info) {
-        fileService.saveUpdate(info);
+        try {
+            fileService.saveUpdate(info);
+        } catch (RepetitionException e) {
+            return "fail";
+        }
         return "ok";
     }
 

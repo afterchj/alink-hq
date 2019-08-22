@@ -24,7 +24,7 @@ public interface FileService {
 
     void saveFile(Map info);
 
-    void saveUpdate(FileDTO info);
+    void saveUpdate(FileDTO info) throws RepetitionException;
     void deleteFileById(int id);
     void deleteHistoryById(int id);
 }

@@ -39,23 +39,23 @@
 
     <select id="getFileHistory" resultType="map" parameterType="SearchDict">
         SELECT
-            fh.id,
-            fh.o_id oid,
-            IFNULL(fh.o_desc,'') otaDesc,
-            IFNULL(fh.o_version,'') otaVersion,
-            IFNULL(ff.ota_path,'') otaPath,
-            ff.ota_id otaId,
-            fh.update_date updateDate
+        fh.id,
+        fh.o_id oid,
+        IFNULL(fh.o_desc,'') otaDesc,
+        IFNULL(fh.o_version,'') otaVersion,
+        IFNULL(ff.ota_path,'') otaPath,
+        ff.ota_id otaId,
+        fh.update_date updateDate
         FROM
-            f_file_history_version fh
+        f_file_history_version fh
         INNER JOIN f_ota_file ff ON fh.o_id = ff.id
         WHERE 1=1
-        AND	fh.o_id = #{oid}
+        AND fh.o_id = #{oid}
         <if test="otaVersion!=null and otaVersion!=''">
             AND fh.o_version LIKE CONCAT('%',#{otaVersion},'%')
         </if>
         <if test="updateDate!=null and updateDate!=''">
-            AND fh.update_date BETWEEN #{beginDate} AND  #{endDate}
+            AND fh.update_date BETWEEN #{beginDate} AND #{endDate}
         </if>
         ORDER BY fh.update_date DESC
     </select>
@@ -71,13 +71,19 @@
    </insert>
 
     <select id="getCount" resultType="int" parameterType="FileDTO">
-        SELECT COUNT(0) FROM f_ota_file f
-        WHERE 1=1
+        SELECT COUNT(0) FROM f_ota_file f INNER JOIN f_file_history_version fh
+        ON f.id=fh.o_id
         <if test="otaId!=null and otaId!=''">
             AND f.ota_id =#{otaId}
         </if>
         <if test="otaName!=null and otaName!=''">
-            AND f.ota_name =  #{otaName}
+            AND f.ota_name = #{otaName}
+        </if>
+        <if test="oid!=null and oid!=''">
+            AND fh.o_id=#{id}
+        </if>
+        <if test="otaName!=null and otaName!=''">
+            AND fh.o_version = #{otaVersion}
         </if>
     </select>
 
