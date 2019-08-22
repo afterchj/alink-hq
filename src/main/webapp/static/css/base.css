@@ -254,7 +254,7 @@ fieldset .field-widget {
     /*margin: 5px 0px;*/
 }
 .text-msg{
-    width: calc(100% - 80px);
+    /*width: calc(100% - 80px);*/
     margin-left: 20px;
     line-height: 1.8;
     text-align: left;

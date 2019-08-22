@@ -98,7 +98,7 @@ $(function () {
             // showOverlay();
             // $('#preload-anim').addClass('active');
             // $('#preload-anim .title').text('保存成功');
-            // $('#Ota').submit();
+            $('#Ota').submit();
             var selector = $('div[openContent="add-success"]');
             $('div[openContent="add-success"] .reset-pwd p').text('新增成功！');
             selector.addClass('active');
