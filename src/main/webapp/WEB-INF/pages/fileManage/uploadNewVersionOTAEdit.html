@@ -55,7 +55,7 @@
                                     </div>
                                     <div class="field-widget p-r" >
                                         <p class="p-a verify"></p>
-                                        <input type="text" class="filename falseFile" readonly=""  th:value="${#strings.substringAfter(file.otaPath,'ota/')}">
+                                        <input type="text" class="filename falseFile " readonly=""  th:value="${#strings.substringAfter(file.otaPath,'ota/')}">
                                         <input type="button" class="button upload" value="重新上传" style="right: 0;left: auto;top: 0;">
                                         <input type="file" name="file" size="30"   class="trueFile" >
                                     </div>
@@ -66,7 +66,7 @@
                                     </div>
                                     <div class="field-widget p-r">
                                         <p class="p-a verify"></p>
-                                        <input type="text" name="otaName " class="readonly" id="otaName"  placeholder="请输入固件名称" th:value="${file.otaName}" readonly>
+                                        <input type="text" name="otaName " class="readonly " id="otaName"  placeholder="请输入固件名称" th:value="${file.otaName}" readonly>
                                     </div>
                                 </div>
                                 <div class="form-row">
@@ -75,7 +75,7 @@
                                     </div>
                                     <div class="field-widget p-r">
                                         <p class="p-a verify"></p>
-                                        <input type="text" class="readonly" name="otaId" id="otaID"  placeholder="请输入固件ID" th:value="${file.otaId}" readonly>
+                                        <input type="text" class="readonly " name="otaId" id="otaID"  placeholder="请输入固件ID" th:value="${file.otaId}" readonly>
                                     </div>
                                 </div>
                                 <div class="form-row">
