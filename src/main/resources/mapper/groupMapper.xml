@@ -12,6 +12,7 @@
         m.mname,
         m.mesh_id,
         pl.id pid,
+        pl.place_id,
         pl.pname,
         IFNULL(l.lcount,0) lcount
 	</sql>
