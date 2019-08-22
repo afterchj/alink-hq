@@ -87,7 +87,7 @@ public class FileController {
     public String upload(Integer id, ModelMap modelMap) {
         FileDTO info = fileService.getFileInfo(id);
         modelMap.put("file", info);
-        return "fileManage/uploadNewVersionOTAADD";
+        return "fileManage/uploadNewVersionOTAAdd";
     }
 
     @RequestMapping("/save")
@@ -132,13 +132,11 @@ public class FileController {
             logger.error("error:" + e.getMessage());
         }
         FileDTO fileDTO = fileService.getFileInfo(oid);
-        if (type.equals("add")) {
+        if ("add".equals(type)) {
             modelMap.put("file", fileDTO);
             return "fileManage/uploadNewVersionOTAEdit";
         } else {
-            fileDTO.setOid(oid);
-            modelMap.put("dict", fileDTO);
-            return "fileManage/otaRevisionHistory";
+            return "redirect:/file/history";
         }
     }
 
