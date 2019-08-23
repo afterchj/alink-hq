@@ -91,7 +91,7 @@
                                 <td th:text="${#dates.format(file.updateDate, 'yyyy-MM-dd HH:mm:ss')}"></td>
                                 <td th:text="${file.otaVersion}"></td>
                                 <td class="k-link">
-                                    <a th:href="${file.otaPath}">
+                                    <a th:href="${file.otaPath}" download="">
                                         <img th:src="@{/static/img/updown.png}" alt="" class="pointer">
                                     </a>
                                 </td>
