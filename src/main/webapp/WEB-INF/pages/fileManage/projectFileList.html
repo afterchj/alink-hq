@@ -21,7 +21,7 @@
         <div th:replace="common/left::left('pcFile')"></div>
         <div class="main-right f-l">
             <div class="clearfix main-right-nav">
-                <div class="f-l main-right-title">项目1文件</div>
+                <div class="f-l main-right-title"><span th:inline="text">[[${dict.projectName}]]</span></div>
                 <div class="f-r pointer">
                     <div class="goBack" onClick="javascript :history.back();" onmousedown="backBtnMouseDown()"
                          onmouseup="backBtnMouseUp()">
@@ -81,7 +81,7 @@
                                 <td th:inline="text">[[${file.account}]]([[${file.uname}]])</td>
                                 <td th:text="${#dates.format(file.update_date, 'yyyy-MM-dd HH:mm:ss')}"></td>
                                 <td class="p-r pointer">
-                                    <a th:href="${file.file_path}" download=""></a>
+                                    <a th:href="${file.file_path}" download="">
                                         <img th:src="@{/static/img/updown.png}" alt="" title="下载" style="width: 20px;height: 20px;">
                                     </a>
                                 </td>

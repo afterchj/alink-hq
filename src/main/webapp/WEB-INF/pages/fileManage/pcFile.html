@@ -23,33 +23,36 @@
             <div class="clearfix main-right-nav">
                 <div class="f-l main-right-title">PC文件</div>
                 <!--<div class="f-r pointer last-nav">-->
-                    <!--<a th:href="@{/file/addOta}">-->
-                        <!--<div class="create " onmousedown="createBtnMouseDown()" onmouseup="createBtnMouseUp()">-->
-                            <!--<span>+</span><span>新增固件</span>-->
-                        <!--</div>-->
-                    <!--</a>-->
+                <!--<a th:href="@{/file/addOta}">-->
+                <!--<div class="create " onmousedown="createBtnMouseDown()" onmouseup="createBtnMouseUp()">-->
+                <!--<span>+</span><span>新增固件</span>-->
+                <!--</div>-->
+                <!--</a>-->
                 <!--</div>-->
                 <div class="f-r pointer">
-                    <div class="goBack" onClick="javascript :history.back();" onmousedown="backBtnMouseDown()" onmouseup="backBtnMouseUp()">
+                    <div class="goBack" onClick="javascript :history.back();" onmousedown="backBtnMouseDown()"
+                         onmouseup="backBtnMouseUp()">
                         <span><</span><span>返回</span>
                     </div>
                 </div>
             </div>
 
-            <div  class="table-content-list">
+            <div class="table-content-list">
                 <form class="clearfix" th:action="@{/file/PCFile}" method="post">
                     <input type="hidden" id="pageSize" th:value="${dict.pageSize}">
                     <div class="search-condition clearfix">
                         <div class="f-l search" style="width: auto;">
                             <div>
                                 <label for="name" class="font" style="width: 150px;">项目名称/账号/用户名</label>
-                                <input type="text" id="name" name="name" placeholder="请输入项目名称/账号/用户名" th:value="${dict.name}" >
+                                <input type="text" id="name" name="name" placeholder="请输入项目名称/账号/用户名"
+                                       th:value="${dict.name}">
                             </div>
                         </div>
                         <div class="f-l search">
                             <div class="p-r">
                                 <label for="start-time">创建时间</label>
-                                <input type="text" name="createDate" id="start-time" placeholder="请选择日期" th:value="${dict.createDate}" AUTOCOMPLETE="off">
+                                <input type="text" name="createDate" id="start-time" placeholder="请选择日期"
+                                       th:value="${dict.createDate}" AUTOCOMPLETE="off">
                                 <img src="/alink-hq/static/img/date.png" alt="" class="p-a">
                             </div>
 
@@ -57,7 +60,8 @@
                         <div class="f-l search">
                             <div class="p-r">
                                 <label for="end-time">更新时间</label>
-                                <input type="text" name="updateDate" id="end-time" placeholder="请选择日期" th:value="${dict.updateDate}" AUTOCOMPLETE="off">
+                                <input type="text" name="updateDate" id="end-time" placeholder="请选择日期"
+                                       th:value="${dict.updateDate}" AUTOCOMPLETE="off">
                                 <img src="/alink-hq/static/img/date.png" alt="" class="p-a">
                             </div>
                         </div>
@@ -92,7 +96,8 @@
                                 <!--&lt;!&ndash;<input type="hidden" th:value="${mesh.uid}" class="uid">&ndash;&gt;-->
                                 <!--</td>-->
                                 <td class="k-link otaName">
-                                    <a th:href="@{/file/fileList(id=${file.id})}" th:text="${file.file_name}"></a>
+                                    <!--                                    <a th:href="@{/file/fileList(id=${file.id},name=${file.file_name})}" th:text="${file.file_name}"></a>-->
+                                    <a th:href="@{/file/fileList(id=${file.id},projectName=${file.file_name})}" th:text="${file.file_name}"></a>
                                 </td>
                                 <td th:inline="text">[[${file.account}]]([[${file.uname}]])</td>
                                 <td th:inline="text">[[${file.account}]]([[${file.uname}]])</td>
@@ -100,19 +105,19 @@
                                 <td th:text="${#dates.format(file.create_date, 'yyyy-MM-dd HH:mm:ss')}"></td>
                                 <td th:text="${#dates.format(file.update_date, 'yyyy-MM-dd HH:mm:ss')}"></td>
                                 <td class="p-r pointer">
-                                    <a  th:href="@{/file/fileList(id=${file.id})}">
+                                    <a th:href="@{/file/fileList(id=${file.id},projectName=${file.file_name})}">
                                         <img th:src="@{/static/img/look.png}" alt="" title="查看详情" style="width: 20px;height: 20px;">
                                     </a>
                                 </td>
                             </tr>
                             </tbody>
                             <tfoot>
-                        <tr>
-                            <td colspan="8" class="clearfix page">
-                                <div th:replace="common/page::page"></div>
-                            </td>
-                        </tr>
-                        </tfoot>
+                            <tr>
+                                <td colspan="8" class="clearfix page">
+                                    <div th:replace="common/page::page"></div>
+                                </td>
+                            </tr>
+                            </tfoot>
                         </table>
                         <!-- 无数据时 -->
                         <table th:if="${pageInfo==null}" border="1" class="noData active">
@@ -193,7 +198,7 @@
 <div class="hide-iframe"></div>
 <script type="text/javascript" th:src="@{/static/js/left.js}"></script>
 <script type="text/javascript" th:src="@{/static/laydate/laydate.js}"></script>
-<script type="text/javascript" th:src="@{/static/js/page.js}" ></script>
+<script type="text/javascript" th:src="@{/static/js/page.js}"></script>
 <script type="text/javascript" th:src="@{/static/js/moment.js}"></script>
 <script type="text/javascript" th:src="@{/static/js/PCFile.js}"></script>
 
