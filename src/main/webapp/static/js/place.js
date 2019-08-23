@@ -71,6 +71,7 @@ $(function () {
         selector.addClass('active');
         $('div[openContent="delete-pop"] .reset-pwd p').text('您确定要删除所选的区域吗？删除后将无法恢复，请慎重！');
         $('div[openContent="delete-pop"] .reset-pwd-hint').text('（扫描区仅可清除内容，不可删除）');
+        $('div[openContent="delete-pop"] .text-msg').css('text-align','left');
         adjust(selector);
         showOverlay();
     });

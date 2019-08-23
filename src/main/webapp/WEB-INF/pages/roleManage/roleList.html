@@ -55,7 +55,7 @@
                             <tbody>
                             <tr th:each="role:${pageInfo.list}">
                                 <input type="hidden" th:value="${role.id}">
-                                <td class="k-link"><a th:href="@{/rolePer/detail(rid=${role.id})}" th:text="${role.roleName}"></a></td>
+                                <td class="k-link role-name"><a th:href="@{/rolePer/detail(rid=${role.id})}" th:text="${role.roleName}"></a></td>
                                 <td class="k-link" th:text="${role.accountNum}"></td>
                                 <td th:text="${role.createTime}"></td>
                                 <td th:text="${role.updateTime}"></td>
@@ -64,8 +64,10 @@
                                     <img th:src="@{/static/img/edit.png}" alt="" class="pointer reset-name "
                                          th:title="重命名">
                                     <!--编辑-->
-                                    <img th:src="@{/static/img/alter.png}" alt="" class="pointer left-img"
-                                         th:title="编辑">
+                                    <a th:href="@{/rolePer/detail(rid=${role.id})}" >
+                                        <img th:src="@{/static/img/alter.png}" alt="" class="pointer left-img"
+                                             th:title="编辑">
+                                    </a>
                                     <!--删除-->
                                     <img th:if="${role.accountNum==0}" th:src="@{/static/img/delete.png}" alt="" class="pointer delete-pop left-img"
                                          th:title="删除">

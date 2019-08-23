@@ -46,8 +46,8 @@
                         <div class="p-content p-r">
                             <div class="f-content scrollbar ">
                                 <div class="accountMsg clearfix" th:each="project:${projectMap}">
-                                    <div class="f-l mesh-name">
-                                        <span th:text="${project.name}"></span>
+                                    <div class="f-l mesh-name overflow-hidden-1">
+                                        <span th:text="${project.name}" th:title="${project.name}"></span>
                                     </div>
                                     <div class="f-l  mesh-id">
                                         <label for="account">施工负责人：</label>

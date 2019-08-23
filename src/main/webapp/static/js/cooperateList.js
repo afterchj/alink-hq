@@ -104,9 +104,9 @@ $(function() {
         $.get("/alink-hq/cooperate/getCount?id=" + companyId, function(result) {
             str = result;
             if (result == 'ok') {
-                $('div[openContent="delete-pop"] .reset-pwd p').text('您确定要删除' + companyName + '信息？')
+                $('div[openContent="delete-pop"] .reset-pwd p').html('您确定要删除 ' + '<span class="hint-font">'+companyName+'</span> '+ '信息？');
             } else {
-                $('div[openContent="delete-pop"] .reset-pwd').text('您无法删除' + companyName + '信息');
+                $('div[openContent="delete-pop"] .reset-pwd p').html('您无法删除 ' + '<span class="hint-font">'+companyName+'</span> '+ '信息');;
                 $('div[openContent="delete-pop"] .reset-pwd-hint').text('请将其名下所有项目进行移交!')
             }
         })

@@ -14,8 +14,8 @@ $(function () {
         var otaVersion = $(this).parent().siblings('.otaVersion').text();
         var selector = $('div[openContent="delete-pop"]');
         selector.addClass('active');
-        $('div[openContent="delete-pop"] .reset-pwd p').text('您确定要删除 ' + otaVersion + ' ？');
-        $('div[openContent="delete-pop"] .reset-pwd p').css('margin-top', '10px');
+        $('div[openContent="delete-pop"] .reset-pwd p').html('您确定要删除 ' + '<span class="hint-font">'+otaVersion+'</span> '+ ' ？');
+
         adjust(selector);
         showOverlay();
     });
