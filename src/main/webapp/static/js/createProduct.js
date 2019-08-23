@@ -2,7 +2,8 @@
  * Created by yuanjie.fang on 2019/8/14.
  */
 $(function () {
-    //监听公司select选择
+
+        //监听公司select选择
     $('#belongCompany').change(function () {
         var belongCompany=$(this).children('option:selected').val();
         if(belongCompany==''){

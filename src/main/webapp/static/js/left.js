@@ -103,3 +103,9 @@ function GetQueryString(name) {
     return context == null || context == "" || context == "undefined" ? "" : context;
 }
 
+$(window).keydown( function(e) {
+    var key = window.event ? e.keyCode : e.which;
+    if (key.toString() == "13") {
+        return false;
+    }
+})
