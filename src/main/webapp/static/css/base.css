@@ -254,7 +254,7 @@ fieldset .field-widget {
     /*margin: 5px 0px;*/
 }
 .text-msg{
-    width: calc(100% - 80px);
+    /*width: calc(100% - 80px);*/
     margin-left: 20px;
     line-height: 1.8;
     text-align: left;
@@ -265,10 +265,11 @@ fieldset .field-widget {
     text-align: left;
 }
 .pop-content .pop-msg {
-    width: 70%;
-    margin-left: calc(30%/2);
-    top: 50%;
-    margin-top: -50.5px;
+    /*width: 70%;*/
+    /*margin-left: calc(30%/2);*/
+    /*top: 50%;*/
+    /*margin-top: -50.5px;*/
+    margin: 50px;
 }
 /*input[type=text]{*/
 /*width: 300px;*/

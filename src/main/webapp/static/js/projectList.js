@@ -203,6 +203,7 @@ $(function () {
     var deleteArray=[];
     //重命名弹框
     $('.reset-name').click(function () {
+
         $('#rename').val('');
         projectId = parseInt($(this).parent().siblings('.checkbox ').find('input[type=checkbox]').val());
         account = $(this).parent().siblings('.project-account').text();
@@ -214,6 +215,7 @@ $(function () {
 
     //弹框重命名里操作
     $('.pop-btn .yes').click(function () {
+        $('#rename').attr('placeholder','请输入 2-16 位汉字、字母、数字');
         var rename = $('#rename').val();
         var regName = /^[a-zA-Z0-9\u4e00-\u9fa5]{2,16}$/;
         var renameResult = regName.test(rename);

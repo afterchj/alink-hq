@@ -68,6 +68,7 @@ $(function () {
     var id;
     $('.reset-name').click(function () {
         $('#rename').val('');
+        $('#rename').attr('placeholder','请输入 2-16 位汉字、字母、数字');
         $('.showList').hide();
         id = $(this).attr("alt");
         var selector = $('div[openContent="reset-name"]');

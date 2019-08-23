@@ -1,4 +1,13 @@
 $(function () {
+    // var data=$('#placeId').val();
+    // console.log(data);
+    var placeId=GetQueryString('placeId');
+    console.log('placeId',placeId);
+    if(placeId=='0'){
+        $('.create').addClass('no-access');
+        $('.create').parent('a').addClass('unclick1');
+        $('.create').parent('a').attr('href','javascript:void(0);');
+    }
     var id;
     var ids = [];
     $('.rename').click(function () {
