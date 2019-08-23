@@ -66,11 +66,16 @@ $(function() {
         status = parseInt($(this).attr('alt'));
         companyId = parseInt($(this).parent().siblings('.coo-name').find('a').attr('alt'));
         if (status == 0) {
-            var content = '<div class="off-or-on">您确定要禁用' + companyName + '？</div><p style="color: #f9220a; font-size: 14px; font-weight: normal;margin-top:0;">禁用后，其名下所有账户将无法使用，请慎重！</p>'
-            $('div[openContent="start-use"] .text-msg').html(content);
+            $('div[openContent="start-use"] .reset-pwd p').html('您确定要禁用 ' + '<span class="hint-font">'+companyName+'</span> '+ '？');
+            $('div[openContent="start-use"] .reset-pwd-hint').text('禁用后，其名下所有账户将无法使用，请慎重！');
+            // var content = '<div class="off-or-on">您确定要禁用' + companyName + '？</div><p style="color: #f9220a; font-size: 14px; font-weight: normal;margin-top:0;">禁用后，其名下所有账户将无法使用，请慎重！</p>'
+            // $('div[openContent="start-use"] .text-msg').html(content);
         } else if (status == 1) {
-            var content='<div class="off-or-on p-a" style="top: 20px;">您确定要启用'+ companyName + '？'+'</div>';
-            $('div[openContent="start-use"] .text-msg').html(content);
+            // var content='<div class="off-or-on p-a" style="top: 20px;">您确定要启用'+ companyName + '？'+'</div>';
+            $('div[openContent="start-use"] .reset-pwd p').html('您确定要启用 ' + '<span class="hint-font">'+companyName+'</span> '+ '？');
+            $('div[openContent="start-use"] .reset-pwd-hint').text('');
+            $('div[openContent="start-use"] .reset-pwd p').css('margin-top','5px');
+            // $('div[openContent="start-use"] .text-msg').html(content);
         }
     }) 
     $('div[openContent="start-use"] button.reduce').click(function() {
@@ -104,9 +109,9 @@ $(function() {
         $.get("/alink-hq/cooperate/getCount?id=" + companyId, function(result) {
             str = result;
             if (result == 'ok') {
-                $('div[openContent="delete-pop"] .reset-pwd p').text('您确定要删除' + companyName + '信息？')
+                $('div[openContent="delete-pop"] .reset-pwd p').html('您确定要删除 ' + '<span class="hint-font">'+companyName+'</span> '+ '信息？');
             } else {
-                $('div[openContent="delete-pop"] .reset-pwd').text('您无法删除' + companyName + '信息');
+                $('div[openContent="delete-pop"] .reset-pwd p').html('您无法删除 ' + '<span class="hint-font">'+companyName+'</span> '+ '信息');;
                 $('div[openContent="delete-pop"] .reset-pwd-hint').text('请将其名下所有项目进行移交!')
             }
         })

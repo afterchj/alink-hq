@@ -30,14 +30,16 @@ $(function () {
         // $('div[openContent="start-use"]').addClass('active');
         account = $(this).siblings('.use-account').text();
         status = $(this).find('.result').text();
+        $('div[openContent="start-use"] .text-msg').css('text-align','left');
         if (status == '启用') {
             intStatus = 1;
             $('div[openContent="start-use"] .off-or-on').removeClass('one');
-            $('div[openContent="start-use"] .off-or-on').text('您确定要禁用 '+account+' 账号吗？');
+            $('div[openContent="start-use"] .off-or-on p').html('您确定要禁用 ' + '<span class="hint-font">'+account+'</span> '+ '账号吗 ？');
             $('div[openContent="start-use"] .unuse').text('禁用后，该账号将无法登录！')
+
         } else if (status == '禁用') {
             intStatus = 0;
-            $('div[openContent="start-use"] .off-or-on').text('您确定要启用 '+account+' 账号吗？');
+            $('div[openContent="start-use"] .off-or-on p').html('您确定要启用 ' + '<span class="hint-font">'+account+'</span> '+ '账号吗 ？');
             $('div[openContent="start-use"] .off-or-on').addClass('one');
             $('div[openContent="start-use"] .unuse').text('');
         }
@@ -85,6 +87,7 @@ $(function () {
         var openTab = $(this).attr('openTab');
         $('div[openContent="reset-pwd"] .pop-content').find('p.unuse').remove();
         var selector=$('div[openContent="reset-pwd"]');
+        $('div[openContent="reset-pwd"] .text-msg').css('text-align','left');
         selector.addClass('active');
         adjust(selector);
         showOverlay();
@@ -141,6 +144,7 @@ $(function () {
     $('img[openTab="delete-account"]').click(function () {
         var openTab = $(this).attr('openTab');
         var selector=$('div[openContent="delete-account"]');
+        $('div[openContent="delete-account"] .text-msg').css('text-align','left');
         selector.addClass('active');
         adjust(selector);
         showOverlay();

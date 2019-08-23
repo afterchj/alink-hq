@@ -90,10 +90,10 @@
                                                 <input type="hidden" class="sid" th:value="${timePoint.sid}">
                                                 <input type="hidden" class="sceneName" th:value="${timePoint.scene_id}">
                                             </span>
-                                            <span>
-                                                <span  class="a-span" style="width:30px;color:#ccc;" shiro:hasPermission="viewScene">|</span>
-                                            </span>
-                                                <span  class="a-span"><a th:href="@{/scene/detail(sid=${timePoint.sid},sceneName=${timePoint.sname},sceneId=${timePoint.scene_id},meshName=${timeLine.mname},meshId=${timeLine.mesh_id})}" shiro:hasPermission="viewScene">查看详情</a></span>
+                                            <!--<span>-->
+                                                <!--<span  class="a-span" style="width:30px;color:#ccc;" shiro:hasPermission="viewScene">|</span>-->
+                                            <!--</span>-->
+                                                <!--<span  class="a-span"><a th:href="@{/scene/detail(sid=${timePoint.sid},sceneName=${timePoint.sname},sceneId=${timePoint.scene_id},meshName=${timeLine.mname},meshId=${timeLine.mesh_id})}" shiro:hasPermission="viewScene">查看详情</a></span>-->
                                             </td>
                                             <td th:if="${timePoint.sname==null}">
                                                 <span class="a-span"  th:text="${timePoint.state}"></span>

@@ -250,14 +250,32 @@ fieldset .field-widget {
 /*!* line-height: 57px; *!*/
 /*width: 57px;*/
 /*}*/
+.hint-fa-icon{
+    font-size: 35px;
+    vertical-align: top;
+}
 .img-msg img{
-    /*margin: 5px 0px;*/
+    width: 35px;
+    height: 35px;
+
 }
 .text-msg{
-    /*width: calc(100% - 80px);*/
-    margin-left: 20px;
-    line-height: 1.8;
-    text-align: left;
+    /* width: calc(100% - 80px); */
+    /* margin-left: 20px; */
+    line-height: normal;
+     /*text-align: left;*/
+    display: inline-block;
+    /* vertical-align: middle; */
+}
+.hint-font{
+    color: #0E8EE9;
+/* font-weight: bold; */
+    font-size: 15px;
+    margin: 5px;
+}
+.img-msg{
+    display: inline-block;
+    vertical-align: middle;
 }
 .pop-content .unuse{
     font-size: 14px;
@@ -265,11 +283,17 @@ fieldset .field-widget {
     text-align: left;
 }
 .pop-content .pop-msg {
-    /*width: 70%;*/
-    /*margin-left: calc(30%/2);*/
-    /*top: 50%;*/
-    /*margin-top: -50.5px;*/
-    margin: 50px;
+     width: 80%;
+    /* margin-left: calc(30%/2); */
+    /* top: 50%; */
+    /* margin-top: -50.5px; */
+    /* margin: 50px; */
+    /* display: flex; */
+    position: absolute;
+    left: 50%;
+    top: 50%;
+
+    transform: translate(-50% ,calc( -50% - 25px ));
 }
 /*input[type=text]{*/
 /*width: 300px;*/
@@ -327,7 +351,7 @@ fieldset button{
     /* box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2); */
     /* display: inline-block; */
     /* margin-bottom: 0; */
-    font-size: 14px;
+    font-size: 15px;
     font-weight: 400;
     line-height: 1.42857143;
     /* text-align: center; */
@@ -427,7 +451,7 @@ button:hover{
 
 .unclick {
     cursor: not-allowed;
-    pointer-events: none;
+    /*pointer-events: none;*/
 }
 
 .unclick1 {

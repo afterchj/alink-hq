@@ -175,7 +175,7 @@ $(function () {
         if (isEmpty(thisId) && checkeds.length>0){
         }else if(!isEmpty(thisId)){
             type = $(this).parent().parent().parent().find("td:eq(1)").text();
-            $('div[openContent="delete-pop"] .reset-pwd p').text('您确定要删除'+type+'？');
+            $('div[openContent="delete-pop"] .reset-pwd p').html('您确定要删除 ' + '<span class="hint-font">'+type+'</span> '+ '？');;
         }else {
             selector.removeClass('active');
             return;

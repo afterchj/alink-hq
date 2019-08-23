@@ -50,8 +50,8 @@
                                 <input type="hidden" id="mid" name="mid" th:value="${mid}">
                                 <input type="hidden" id="projectName" name="projectName" th:value="${projectName}">
                                 <div class="accountMsg clearfix" th:each="group:${groupMap}">
-                                    <div class="f-l mesh-name">
-                                        <span th:text="${group.gname}"></span>
+                                    <div class="f-l mesh-name overflow-hidden-1">
+                                        <span th:text="${group.gname}"  th:title="${group.gname}"></span>
                                     </div>
                                     <div class="f-l  mesh-id">
                                         <label for="mesh_id">网络ID：</label>

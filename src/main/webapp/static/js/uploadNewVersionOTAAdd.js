@@ -40,13 +40,13 @@ $('#submitNewVersion').click(function () {
         $('.hasUpload').submit();
     }
 })
-$('#uploaded').click(function () {
-    var newFile=$('#newFile').val();
-    console.log('newFile',newFile);
-    if(newFile==''){
-        $('#newFile').siblings('.verify').text('请选择文件');
-    }else{
-        $('#newFile').siblings('.verify').text('');
-        $('.noUpload').submit();
-    }
-})
+// $('#uploaded').click(function () {
+//     var newFile=$('#newFile').val();
+//     console.log('newFile',newFile);
+//     if(newFile==''){
+//         $('#newFile').siblings('.verify').text('请选择文件');
+//     }else{
+//         $('#newFile').siblings('.verify').text('');
+//         $('.noUpload').submit();
+//     }
+// })
