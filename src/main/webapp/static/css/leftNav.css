@@ -89,7 +89,8 @@
 .a-un,.a-un:hover {
     border: none !important;
     color: #383e4b !important;
-    cursor: default!important;
+    cursor:none !important;
+    pointer-events: none !important;
 }
 /*.search-result table td.k-link .a-un:focus,.search-result table td.k-link .a-un:hover {*/
     /*border: none;*/
