@@ -451,7 +451,7 @@ button:hover{
 
 .unclick {
     cursor: not-allowed;
-    pointer-events: none;
+    /*pointer-events: none;*/
 }
 
 .unclick1 {
