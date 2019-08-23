@@ -141,7 +141,7 @@
         	sid
 --         	WHEN '0' THEN 'ON'
 --         	WHEN '1' THEN 'OFF'
-        	WHEN -1 THEN 'ALl OFF'
+        	WHEN -1 THEN 'ALL OFF'
         	WHEN -2 THEN 'ALL ON'
         	END AS state,
         	NULL AS sname,

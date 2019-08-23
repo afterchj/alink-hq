@@ -93,9 +93,11 @@ $(function () {
                 $(".ssid").val(sid);
             }
         });
-    })
-})
-;
+    });
+
+    $("#timeTitle .sname-a:eq(0)").trigger("click");
+
+});
 $('.p-content ').on('click', 'li', function () {
     $(this).toggleClass('active').siblings().removeClass('active');
 })
