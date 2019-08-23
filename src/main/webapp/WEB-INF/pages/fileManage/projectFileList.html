@@ -31,19 +31,20 @@
             </div>
 
             <div class="table-content-list">
-                <form class="clearfix" method="post">
-                    <!--<input type="hidden" id="pageSize" th:value="${dict.pageSize}">-->
+                <form class="clearfix" th:action="@{/file/fileList}" method="post">
+                    <input type="hidden" id="pageSize" th:value="${dict.pageSize}">
+                    <input type="hidden" id="id" name="id" th:value="${dict.id}">
                     <div class="search-condition clearfix">
                         <div class="f-l search" style="width: auto;">
                             <div>
                                 <label for="name" class="font" style="width: 200px;">网络名称/文件版本/账号/用户名</label>
-                                <input type="text" id="name" name="otaName" placeholder="请输入网络名称/文件版本/账号/用户名">
+                                <input type="text" id="name" name="name" placeholder="请输入网络名称/文件版本/账号/用户名" th:value="${dict.name}">
                             </div>
                         </div>
                         <div class="f-l search">
                             <div class="p-r">
                                 <label for="end-time">更新时间</label>
-                                <input type="text" id="end-time" placeholder="请选择日期" AUTOCOMPLETE="off">
+                                <input type="text" name="updateDate" id="end-time" placeholder="请选择日期" AUTOCOMPLETE="off" th:value="${dict.updateDate}">
                                 <img src="/alink-hq/static/img/date.png" alt="" class="p-a">
                             </div>
                         </div>
@@ -53,7 +54,7 @@
                     </div>
                     <div class="search-result">
                         <!-- 有数据时 -->
-                        <table border="1" class="hasData active">
+                        <table border="1" class="hasData active" th:if="${pageInfo!=null}">
                             <thead>
                             <tr>
                                 <th class="all-checkbox">
@@ -69,22 +70,19 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <tr>
+                            <tr th:each="file:${pageInfo.list}">
                                 <td class="checkbox">
                                     <input type="checkbox" name="ids" class="">
                                     <!--<input type="hidden" th:value="${mesh.uid}" class="uid">-->
                                 </td>
-                                <td class="k-link otaName">
-                                    网络1
-                                </td>
-                                <td>网络ID+修改时间</td>
-                                <td>UBM2C02(小二)</td>
-                                <td>OBM0R03(钱大)</td>
-                                <td>2019/02/15 15:47:44</td>
+                                <td class="k-link otaName" th:text="${file.mesh_name}"></td>
+                                <td th:text="${file.file_version}"></td>
+                                <td th:inline="text">[[${file.account}]]([[${file.uname}]])</td>
+                                <td th:inline="text">[[${file.account}]]([[${file.uname}]])</td>
+                                <td th:text="${#dates.format(file.update_date, 'yyyy-MM-dd HH:mm:ss')}"></td>
                                 <td class="p-r pointer">
-                                    <a href="javascript:void(0);">
-                                        <img th:src="@{/static/img/updown.png}" alt="" title="下载"
-                                             style="width: 20px;height: 20px;" class="single-updown">
+                                    <a th:href="${file.file_path}" download=""></a>
+                                        <img th:src="@{/static/img/updown.png}" alt="" title="下载" style="width: 20px;height: 20px;">
                                     </a>
                                 </td>
                             </tr>
@@ -92,29 +90,13 @@
                             <tfoot>
                             <tr>
                                 <td colspan="8" class="clearfix page">
-                                    <div class="f-l" style="padding-left: 20px;">
-                                        <input type="checkbox" id="addAll" class="pointer">
-                                        <!--</span>-->
-                                        <span class="" style="vertical-align: middle;">全选</span>
-                                    </div>
-                                    <div class="f-l">
-                                        <span class="selected-order">已选择
-                                            <span id="amount" class="amount">0</span>条文件
-                                        </span>
-                                        <span class="m-r-20">
-                                            <!--<span class="skipPageBtn  moment active unclick1">下载</span>-->
-                                            <span class="skipPageBtn pointer moment"
-                                                  onmousedown="exchangeBtnMouseDown()"
-                                                  onmouseup="exchangeBtnMouseUp()" id="multiMove">下载</span>
-                                        </span>
-                                    </div>
-                                    <!--<div th:replace="common/page::page"></div>-->
+                                    <div th:replace="common/page::page"></div>
                                 </td>
                             </tr>
                             </tfoot>
                         </table>
                         <!-- 无数据时 -->
-                        <table border="1" class="noData">
+                        <table th:if="${pageInfo==null}" border="1" class="noData active">
                             <thead>
                             <tr>
                                 <th class="all-checkbox">
@@ -151,6 +133,7 @@
 <script type="text/javascript" th:src="@{/static/laydate/laydate.js}"></script>
 <script type="text/javascript" th:src="@{/static/js/page.js}"></script>
 <script type="text/javascript" th:src="@{/static/js/moment.js}"></script>
+<script type="text/javascript" th:src="@{/static/js/PCFile.js}"></script>
 <script type="text/javascript" th:src="@{/static/js/projectFileList.js}"></script>
 
 </body>

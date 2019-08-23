@@ -30,6 +30,7 @@ public class SearchDict {
     private String otaName;
     private String otaVersion;
     private String updateDate;
+    private String createDate;
     private String beginDate;
     private String endDate;
     private Integer pageNum=1;
@@ -241,6 +242,14 @@ public class SearchDict {
 
     public void setEndDate(String endDate) {
         this.endDate = endDate;
+    }
+
+    public String getCreateDate() {
+        return createDate;
+    }
+
+    public void setCreateDate(String createDate) {
+        this.createDate = createDate;
     }
 
     public String getUpdateDate() {

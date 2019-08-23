@@ -7,6 +7,7 @@ import com.tpadsz.after.entity.FileDTO;
 import com.tpadsz.after.entity.SearchDict;
 import com.tpadsz.after.exception.RepetitionException;
 import com.tpadsz.after.service.FileService;
+import com.tpadsz.after.utils.CommonManager;
 import com.tpadsz.after.utils.PropertiesUtil;
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
@@ -50,13 +51,7 @@ public class FileController {
 
     @RequestMapping("/history")
     public String history(SearchDict dict, ModelMap modelMap) {
-        String str = dict.getUpdateDate();
-        if (StringUtils.isNotBlank(str)) {
-            String begin = str.substring(0, 10);
-            String end = str.substring(str.length() - 10);
-            dict.setBeginDate(begin);
-            dict.setEndDate(end);
-        }
+        dict = CommonManager.parseStr(dict);
         PageHelper.startPage(dict.getPageNum(), dict.getPageSize());
         List<Map> cooperationList = fileService.getFileHistory(dict);
         PageInfo<Map> pageInfo = new PageInfo(cooperationList, dict.getPageSize());
@@ -65,17 +60,6 @@ public class FileController {
         }
         modelMap.put("dict", dict);
         return "fileManage/otaRevisionHistory";
-    }
-
-    @RequestMapping("/projectFileList")
-    public String projectFileList() {
-        return "fileManage/projectFileList";
-    }
-
-
-    @RequestMapping("/PCFile")
-    public String PCFile() {
-        return "fileManage/pcFile";
     }
 
     @RequestMapping("/addOta")
