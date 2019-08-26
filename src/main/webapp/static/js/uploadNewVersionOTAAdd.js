@@ -27,26 +27,26 @@ $(".trueFile").on("change",function (e) {
         $(".falseFile").val("");
     }
 });
-$('#submitNewVersion').click(function () {
-    var otaVersion=$('#otaVersion').val();
-    var that=$('#otaVersion');
-    // console.log('otaVersion',otaVersion);
-    if(otaVersion==''){
-        that.prev('.verify').text('请输入固件版本');
-    }else if(otaVersion=='已存在'){
-        that.prev('.verify').text('已存在，请重新输入');
-    }else{
-        that.prev('.verify').text('');
-        $('.hasUpload').submit();
-    }
-})
-// $('#uploaded').click(function () {
-//     var newFile=$('#newFile').val();
-//     console.log('newFile',newFile);
-//     if(newFile==''){
-//         $('#newFile').siblings('.verify').text('请选择文件');
+// $('#submitNewVersion').click(function () {
+//     var otaVersion=$('#otaVersion').val();
+//     var that=$('#otaVersion');
+//     // console.log('otaVersion',otaVersion);
+//     if(otaVersion==''){
+//         that.prev('.verify').text('请输入固件版本');
+//     }else if(otaVersion=='已存在'){
+//         that.prev('.verify').text('已存在，请重新输入');
 //     }else{
-//         $('#newFile').siblings('.verify').text('');
-//         $('.noUpload').submit();
+//         that.prev('.verify').text('');
+//         $('.hasUpload').submit();
 //     }
 // })
+$('#uploaded').click(function () {
+    var newFile=$('#newFile').val();
+    console.log('newFile',newFile);
+    if(newFile==''){
+        $('#newFile').siblings('.verify').text('请选择文件');
+    }else{
+        $('#newFile').siblings('.verify').text('');
+        $('.noUpload').submit();
+    }
+})
