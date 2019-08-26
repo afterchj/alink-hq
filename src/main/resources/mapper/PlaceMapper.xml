@@ -9,6 +9,12 @@
         <parameter property="result" mode="OUT" jdbcType="INTEGER"/>
     </parameterMap>
 
+    <parameterMap id="deleteMapper" type="map">
+        <parameter property="pid" mode="IN"/>
+        <parameter property="mid" mode="IN"/>
+        <parameter property="result" mode="OUT" jdbcType="INTEGER"/>
+    </parameterMap>
+
     <sql id="Base_Column_List">
         pl.id,
         pl.mid,
@@ -49,6 +55,10 @@
         CALL create_place (?,?,?,?)
     </select>
 
+    <select id="deleteGroup" parameterMap="deleteMapper" statementType="CALLABLE">
+        CALL delete_place (?,?,?)
+    </select>
+
     <select id="getByMap" resultType="map" parameterType="SearchDict">
         SELECT
         <include refid="Base_Column_List"/>
@@ -79,7 +89,7 @@
         <if test="projectId!=null and projectId!=''">
             AND m.project_id=#{projectId}
         </if>
---         GROUP BY m.uid,m.mesh_id
+        -- GROUP BY m.uid,m.mesh_id
         ORDER BY pl.update_date DESC
     </select>
 

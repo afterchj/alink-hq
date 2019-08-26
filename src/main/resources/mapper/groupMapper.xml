@@ -133,7 +133,7 @@
         p.pname label
         FROM f_place p
         INNER JOIN f_mesh m ON p.mid = m.id
-        WHERE 1=1
+        WHERE place_id!=0
         <if test="projectId!=null and projectId!=''">
             AND m.project_id=#{projectId}
         </if>

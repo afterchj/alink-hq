@@ -48,7 +48,7 @@ public class PlaceServiceImpl implements PlaceService {
     }
 
     @Override
-    public void save(Map map){
+    public void save(Map map) {
         placeDao.save(map);
     }
 
@@ -60,6 +60,11 @@ public class PlaceServiceImpl implements PlaceService {
     @Override
     public void deleteByIds(List list) {
         placeDao.deleteByIds(list);
+    }
+
+    @Override
+    public void deleteGroup(Map map) {
+        placeDao.deleteGroup(map);
     }
 
     @Override
