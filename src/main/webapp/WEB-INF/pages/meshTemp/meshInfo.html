@@ -91,8 +91,8 @@
                                 <span th:text="${meshInfo.gcount}"></span>
                             </div>
                             <div class="f-l">
-                                <a  th:if="${meshInfo.pcount}=='0'" class="a-un" href="javascript:void(0);">查看组列表</a>
-                                <a  th:if="${meshInfo.pcount}!='0'" th:href="@{/group/list(uid=${session.user.id},projectId=${meshInfo.project_id},mid=${meshInfo.id})}">查看组列表</a>
+                                <a  th:if="${meshInfo.gcount}=='0'" class="a-un" href="javascript:void(0);" th:alt="${meshInfo.gcount}">查看组列表</a>
+                                <a  th:if="${meshInfo.gcount}!='0'" th:alt="${meshInfo.gcount}" th:href="@{/group/list(uid=${session.user.id},projectId=${meshInfo.project_id},mid=${meshInfo.id})}">查看组列表</a>
                             </div>
                         </div>
                         <div class="clearfix">
