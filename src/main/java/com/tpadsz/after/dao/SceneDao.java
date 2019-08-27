@@ -37,7 +37,12 @@ public interface SceneDao {
 
     int findRoleIdByMid(@Param("mid")Integer mid);
 
-    void deleteXY(@Param("sid")Integer id, @Param("mid")Integer mid,@Param("x") String x,@Param("y") String y);
+    void resetXY(@Param("sid")Integer id, @Param("mid")Integer mid,@Param("x") String x,@Param("y") String y);
 
-    MeshInfo findDefaultXY(@Param("sceneId")Integer id);
+    void deleteXY(@Param("sid")Integer id, @Param("mid")Integer mid);
+
+    MeshInfo findDefaultXY(@Param("id")Integer id);
+
+    void saveDeleteLog(@Param("uid") String uid, @Param("sceneId") Integer sceneId, @Param("mid") Integer mid);
+
 }

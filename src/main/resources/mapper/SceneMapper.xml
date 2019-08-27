@@ -41,9 +41,15 @@
         DELETE FROM f_scene WHERE id = #{sid};
     </delete>
 
+    <update id="resetXY">
+        <if test="mid!=null">
+            UPDATE f_light_setting set x=#{x}, y=#{y},update_date= NOW() WHERE sid = #{sid} and lid IN (SELECT id FROM f_light WHERE mid=#{mid});
+        </if>
+    </update>
+
     <delete id="deleteXY">
         <if test="mid!=null">
-        UPDATE f_light_setting set x=#{x}, y=#{y},update_date= NOW() WHERE sid = #{sid} and lid IN (SELECT id FROM f_light WHERE mid=#{mid});
+        DELETE FROM f_light_setting WHERE sid = #{sid} and lid IN (SELECT id FROM f_light WHERE mid=#{mid});
         </if>
     </delete>
 
@@ -60,6 +66,10 @@
     </select>
 
     <select id="findDefaultXY" resultType="com.tpadsz.after.entity.MeshInfo">
-        SELECT x,y FROM f_scene_setting WHERE sceneId = #{sceneId}
+        SELECT x,y FROM f_scene_setting WHERE id = #{id}
     </select>
+
+    <insert id="saveDeleteLog">
+        INSERT INTO f_delete_log(delete_date,uid,deleteId,other) VALUES(NOW(),#{uid},#{sceneId},#{mid})
+    </insert>
 </mapper>

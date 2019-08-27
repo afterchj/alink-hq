@@ -95,19 +95,24 @@ public class SceneController {
 
     @RequestMapping(value = "/delete", method = RequestMethod.POST)
     @ResponseBody
-    public Map<String, String> delete(String sceneInfo) {
+    public Map<String, String> delete(HttpSession session,String sceneInfo) {
         Map<String, String> map = new HashMap<>();
+        User loginUser = (User) session.getAttribute("user");
+        String uid = loginUser.getId();
         List<SceneList> sceneList = JSONArray.parseArray(sceneInfo, SceneList.class);
+        Integer flag;
         try {
             for (SceneList scene : sceneList) {
                 if (scene.getSceneId() > 3) {
                     sceneService.deleteSid(scene.getId());
+                    flag =1;
                 } else {
                     String sceneName = "场景" + (scene.getSceneId() + 1);
                     sceneService.saveSceneName(sceneName, scene.getId());
-                    sceneService.deleteXY(scene.getId(),scene.getSceneId(),scene.getMid());
+                    flag = 0;
                 }
-
+                sceneService.deleteXY(scene.getId(),scene.getSceneId(),scene.getMid(),flag);
+                sceneService.saveDeleteLog(uid,scene.getSceneId(),scene.getMid());
             }
             map.put("result", ResultDict.SUCCESS.getCode());
         } catch (Exception e) {
@@ -177,6 +182,15 @@ public class SceneController {
     @RequestMapping(value = "/groupDetail", method = RequestMethod.POST)
     @ResponseBody
     public Map<String, List> groupDetail(Integer gid, Integer sid) {
+        Map<String, List> map = new HashMap<>();
+        List<MeshInfo> lightList = sceneService.findLightByGid(gid, sid);
+        map.put("lightList", lightList);
+        return map;
+    }
+
+    @RequestMapping(value = "/placeDetail", method = RequestMethod.POST)
+    @ResponseBody
+    public Map<String, List> placeDetail(Integer gid, Integer sid) {
         Map<String, List> map = new HashMap<>();
         List<MeshInfo> lightList = sceneService.findLightByGid(gid, sid);
         map.put("lightList", lightList);

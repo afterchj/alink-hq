@@ -83,9 +83,18 @@ public class SceneServiceImpl implements SceneService {
     }
 
     @Override
-    public void deleteXY(Integer id, Integer sceneId,Integer mid) {
-        MeshInfo meshInfo = sceneDao.findDefaultXY(sceneId);
-        sceneDao.deleteXY(id,mid,meshInfo.getX(),meshInfo.getY());
+    public void deleteXY(Integer id, Integer sceneId,Integer mid,Integer flag) {
+        if(flag==0) {
+            MeshInfo meshInfo = sceneDao.findDefaultXY(sceneId+1);
+            sceneDao.resetXY(id, mid, meshInfo.getX(), meshInfo.getY());
+        }else if(flag==1){
+            sceneDao.deleteXY(id,mid);
+        }
+    }
+
+    @Override
+    public void saveDeleteLog(String uid, Integer sceneId, Integer mid) {
+        sceneDao.saveDeleteLog(uid,sceneId,mid);
     }
 
 
