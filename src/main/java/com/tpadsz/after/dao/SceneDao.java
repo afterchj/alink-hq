@@ -41,7 +41,7 @@ public interface SceneDao {
 
     void deleteXY(@Param("sid")Integer id, @Param("mid")Integer mid);
 
-    MeshInfo findDefaultXY(@Param("sceneId")Integer id);
+    MeshInfo findDefaultXY(@Param("id")Integer id);
 
     void saveDeleteLog(@Param("uid") String uid, @Param("sceneId") Integer sceneId, @Param("mid") Integer mid);
 
