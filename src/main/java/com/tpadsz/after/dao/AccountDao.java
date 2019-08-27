@@ -52,9 +52,11 @@ public interface AccountDao {
 
     List<User> findAccountByFid(@Param("fid")Integer fid);
 
-    void createPlace(@Param("uid")String uid, @Param("mid")Integer mid);
+    void createDefaultPlace(SceneList sceneList);
 
     int findDefaultNetworkByUid(@Param("uid")String uid);
 
     void saveMemo(@Param("account") String account, @Param("memo") String content);
+
+    void createDefaultGroup(SceneList sceneList);
 }

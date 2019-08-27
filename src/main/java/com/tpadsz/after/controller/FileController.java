@@ -11,6 +11,7 @@ import com.tpadsz.after.utils.CommonManager;
 import com.tpadsz.after.utils.PropertiesUtil;
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -51,6 +52,8 @@ public class FileController {
 
     @RequestMapping("/history")
     public String history(SearchDict dict, ModelMap modelMap) {
+        FileDTO info = fileService.getFileInfo(dict.getOid());
+        BeanUtils.copyProperties(info, dict);
         dict = CommonManager.parseStr(dict);
         PageHelper.startPage(dict.getPageNum(), dict.getPageSize());
         List<Map> cooperationList = fileService.getFileHistory(dict);
@@ -120,7 +123,7 @@ public class FileController {
             modelMap.put("file", fileDTO);
             return "fileManage/uploadNewVersionOTAEdit";
         } else {
-            return "redirect:/file/history?oid=" + oid + "&otaId=" + fileDTO.getOtaId() + "&otaName=" + fileDTO.getOtaName();
+            return "redirect:/file/history?oid=" + oid;
         }
     }
 
