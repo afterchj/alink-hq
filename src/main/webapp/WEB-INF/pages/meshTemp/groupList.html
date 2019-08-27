@@ -5,7 +5,7 @@
     <title>组列表</title>
     <script src="/alink-hq/static/js/browser.js"></script>
     <script src="/alink-hq/static/js/jquery.min.js"></script>
-    <link rel="stylesheet" th:href="@{/static/css/common.css}"/>
+    <!--<link rel="stylesheet" th:href="@{/static/css/common.css}"/>-->
     <link rel="stylesheet" th:href="@{/static/css/laydate.css}"/>
     <link rel="stylesheet" th:href="@{/static/font-awesome-4.7.0/css/font-awesome.min.css}"/>
     <link rel="stylesheet" th:href="@{/static/css/base.css}"/>
@@ -100,10 +100,11 @@
                             </thead>
                             <tbody>
                             <tr th:each="group:${pageInfo.list}">
-                                <td class="">
+                                <td class="checkbox-all">
                                     <input type="checkbox" name="ids" th:value="${group.id}">
                                     <input type="hidden" class="mid" th:value="${group.mid}">
                                     <input type="hidden" class="u_id" th:value="${group.uid}">
+                                    <input type="hidden" class="place_id" th:value="${group.placeId}">
                                 </td>
                                 <td class="k-link"><a th:href="@{/group/info(id=${group.id})}" th:text="${group.gname}"></a>
                                 </td>
@@ -128,8 +129,8 @@
                                         <img  th:alt="${group.id}"  th:src="${group.placeId  == 0}? '/alink-hq/static/img/un-exchange.png':'/alink-hq/static/img/exchange.png'"
                                              th:class="${group.placeId == 0}? 'center-img unclick ':'center-img pointer'"  th:title="${group.placeId == 0}? '不可移动':'移动'"  shiro:hasPermission ="moveGroup">
                                     </a>
-                                    <img src="/alink-hq/static/img/delete.png" th:alt="${group.id}"
-                                         class="singleDel pointer" title="删除" shiro:hasPermission ="deleteGroup">
+                                    <img  th:alt="${group.id}" class="singleDel pointer"  th:src="@{/static/img/delete.png}" title="删除"  shiro:hasPermission ="deleteGroup">
+                                    <!--<img  th:alt="${group.id}" th:class="${group.placeId == 0}? 'unclick pointer':'singleDel pointer'"  th:src="${group.placeId  == 0}? '/alink-hq/static/img/un-delete.png':'/alink-hq/static/img/delete.png'" th:title="${group.placeId == 0}? '不可删除':'删除'"  shiro:hasPermission ="deleteGroup">-->
                                     <!--不能重命名-->
                                     <img src="/alink-hq/static/img/un-rename.png" alt="" class="pointer  unclick"
                                          th:title="无法操作" shiro:lacksPermission ="renameGroup" >
