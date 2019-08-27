@@ -86,12 +86,13 @@ public class PlaceController {
     @RequestMapping("/move")
     public String delete(Integer pid, Integer mid, String ids) {
         Map map = new HashMap();
-        map.put("pid", pid);
         map.put("mid", mid);
         String[] ids1 = ids.split(",");
-        List<String> list = new ArrayList(Arrays.asList(ids1));
-        placeService.deleteByIds(list);
-        placeService.deleteGroup(map);
+//        List<String> list = new ArrayList(Arrays.asList(ids1));
+        for (String id:ids1){
+            map.put("pid", id);
+            placeService.deleteGroup(map);
+        }
         return "redirect:/place/list?projectId=" + pid + "&mid=" + mid;
     }
 
