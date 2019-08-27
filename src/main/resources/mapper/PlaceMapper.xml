@@ -132,8 +132,7 @@
     </select>
 
     <delete id="deleteByIds" parameterType="list">
-        DELETE FROM f_place
-        WHERE id IN
+        DELETE FROM f_place WHERE id IN
         <foreach collection="list" item="id" index="index" open="(" close=")" separator=",">
             #{id}
         </foreach>
