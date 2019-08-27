@@ -84,7 +84,7 @@
                                     </div>
                                     <div class="field-widget p-r">
                                         <p class="p-a verify"></p>
-                                        <input type="text" name="otaVersion" id="otaVersion"  placeholder="请输入固件版本" >
+                                        <input type="text" name="otaVersion" id="otaVersion"  placeholder="请输入固件版本" th:value="${file.otaVersion}">
                                     </div>
                                 </div>
                                 <div class="form-row">
@@ -94,7 +94,7 @@
                                     <div class="field-widget p-r">
                                         <p class="p-a verify"></p>
                                         <!--<textarea name="otaDesc" id="otaDescribe" placeholder="请输入更新日志" th:text="${file.otaDesc}"></textarea>-->
-                                        <textarea name="otaDesc" id="otaDescribe" placeholder="请输入更新日志" ></textarea>
+                                        <textarea name="otaDesc" id="otaDescribe" placeholder="请输入更新日志" th:text="${file.otaDesc}"></textarea>
                                     </div>
                                 </div>
                                 <div class="form-row submit">

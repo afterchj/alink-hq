@@ -14,6 +14,7 @@
 
     <sql id="Base_Column_List">
 		id,
+		id oid,
         ota_id otaId,
         ota_name otaName,
         IFNULL(ota_desc,'') otaDesc,
@@ -51,7 +52,7 @@
         INNER JOIN f_ota_file ff ON fh.o_id = ff.id
         WHERE 1=1
         AND fh.o_id = #{oid}
-        <if test="otaVersion!=null and otaVersion!=''">
+        <if test="otaVer!=null and otaVer!=''">
             AND fh.o_version LIKE CONCAT('%',#{otaVersion},'%')
         </if>
         <if test="updateDate!=null and updateDate!=''">

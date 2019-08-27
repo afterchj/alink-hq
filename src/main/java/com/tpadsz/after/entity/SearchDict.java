@@ -28,7 +28,7 @@ public class SearchDict {
     private Integer placeId;
     private String otaId;
     private String otaName;
-    private String otaVersion;
+    private String otaVer;
     private String updateDate;
     private String createDate;
     private String beginDate;
@@ -220,12 +220,12 @@ public class SearchDict {
         this.otaName = otaName;
     }
 
-    public String getOtaVersion() {
-        return otaVersion;
+    public String getOtaVer() {
+        return otaVer;
     }
 
-    public void setOtaVersion(String otaVersion) {
-        this.otaVersion = otaVersion;
+    public void setOtaVer(String otaVer) {
+        this.otaVer = otaVer;
     }
 
     public String getBeginDate() {
