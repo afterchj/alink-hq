@@ -170,7 +170,7 @@
     </delete>
 
     <select id="deleteGroup" parameterMap="deleteMapper" statementType="CALLABLE">
-        CALL delete_place (?,?,?)
+        CALL delete_group (?,?,?)
     </select>
 
     <update id="saveRename" parameterType="map">
