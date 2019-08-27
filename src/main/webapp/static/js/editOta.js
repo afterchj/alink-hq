@@ -17,7 +17,7 @@ $(function () {
         selector.removeClass('active');
         hideOverlay();
         // window.location.href = '/alink-hq/file/uploadNewVersionOTA?id='+otaID;
-        $.post("/alink-hq/file/add",{"otaName":otaName,"otaId":otaID,"otaDesc":otaDescribe},function (result) {
+        $.post("/alink-hq/file/doUpload",{"otaName":otaName,"otaId":otaID,"otaDesc":otaDescribe},function (result) {
             console.log("id",result);
             return false;
             // window.location.href = '/alink-hq/file/OTAFile';

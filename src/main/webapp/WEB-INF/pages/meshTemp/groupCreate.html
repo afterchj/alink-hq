@@ -40,7 +40,7 @@
                         创建组
                     </div>
                     <div class="p-content p-r">
-                        <div class="subjection">隶属项目：<span th:inline="text">[[${project.label}]]</span></div>
+                        <!--<div class="subjection">隶属项目：<span th:inline="text">[[${project.label}]]</span></div>-->
                         <form th:action="@{/group/save}" method="POST" style="width: 1100px;margin: auto;">
                             <fieldset>
                                 <input type="hidden" name="uid" id="uid" th:value="${session.user.id}">
