@@ -47,6 +47,11 @@ public class CooperateServiceImpl implements CooperateService {
     }
 
     @Override
+    public void updateUser(Map map) {
+        cooperateDao.updateUser(map);
+    }
+
+    @Override
     public void deleteCooperationById(int id) {
         cooperateDao.deleteCooperationById(id);
     }
