@@ -31,6 +31,7 @@ public interface GroupDao {
     void saveUpdate(Map map);
 
     void saveRename(SearchDict map);
+    void deleteGroup(Map map);
 
     void deleteGroupByIds(List list);
 }
