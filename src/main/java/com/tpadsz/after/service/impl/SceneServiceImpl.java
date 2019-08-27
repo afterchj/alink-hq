@@ -38,8 +38,8 @@ public class SceneServiceImpl implements SceneService {
     }
 
     @Override
-    public void delete(Integer sid) {
-        sceneDao.delete(sid);
+    public void deleteSid(Integer sid) {
+        sceneDao.deleteSid(sid);
     }
 
     @Override
@@ -75,6 +75,17 @@ public class SceneServiceImpl implements SceneService {
     @Override
     public List<MeshInfo> findXYByGid(Integer gid,Integer sid) {
         return sceneDao.findXYByGid(gid,sid);
+    }
+
+    @Override
+    public int findRoleIdByMid(Integer mid) {
+        return sceneDao.findRoleIdByMid(mid);
+    }
+
+    @Override
+    public void deleteXY(Integer id, Integer sceneId,Integer mid) {
+        MeshInfo meshInfo = sceneDao.findDefaultXY(sceneId);
+        sceneDao.deleteXY(id,mid,meshInfo.getX(),meshInfo.getY());
     }
 
 

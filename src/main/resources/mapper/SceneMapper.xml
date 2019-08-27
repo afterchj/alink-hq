@@ -37,8 +37,14 @@
         update f_scene s set s.sname = #{sceneName},s.update_date = NOW() where s.id=#{sid}
     </update>
 
-    <delete id="delete" parameterType="int">
-        DELETE FROM f_scene WHERE id = #{sid}
+    <delete id="deleteSid" parameterType="int">
+        DELETE FROM f_scene WHERE id = #{sid};
+    </delete>
+
+    <delete id="deleteXY">
+        <if test="mid!=null">
+        UPDATE f_light_setting set x=#{x}, y=#{y},update_date= NOW() WHERE sid = #{sid} and lid IN (SELECT id FROM f_light WHERE mid=#{mid});
+        </if>
     </delete>
 
     <update id="saveSceneName">
@@ -49,4 +55,11 @@
         SELECT t1.id AS project_id,t1.name,t2.id AS mid FROM f_project AS t1 INNER JOIN f_mesh AS t2 ON t1.id = t2.project_id WHERE t2.mesh_id = #{meshId}
     </select>
 
+    <select id="findRoleIdByMid" resultType="int">
+        SELECT role_id FROM f_user_role WHERE user_id = (SELECT uid FROM f_mesh WHERE id = #{mid})
+    </select>
+
+    <select id="findDefaultXY" resultType="com.tpadsz.after.entity.MeshInfo">
+        SELECT x,y FROM f_scene_setting WHERE sceneId = #{sceneId}
+    </select>
 </mapper>
