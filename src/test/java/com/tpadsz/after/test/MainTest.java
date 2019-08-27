@@ -4,18 +4,15 @@ import com.alibaba.fastjson.JSON;
 import com.tpadsz.after.dao.MeshDao;
 import com.tpadsz.after.dao.RoleDao;
 import com.tpadsz.after.entity.FileDTO;
-import com.tpadsz.after.entity.OptionList;
 import com.tpadsz.after.entity.SearchDict;
 import com.tpadsz.after.entity.User;
-import com.tpadsz.after.exception.RepetitionException;
 import com.tpadsz.after.service.FileService;
-import com.tpadsz.after.service.GroupService;
-import com.tpadsz.after.service.MeshService;
 import net.rubyeye.xmemcached.XMemcachedClient;
 import net.rubyeye.xmemcached.exception.MemcachedException;
 import org.apache.log4j.Logger;
 import org.junit.Test;
 import org.mybatis.spring.SqlSessionTemplate;
+import org.springframework.beans.BeanUtils;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
@@ -129,12 +126,17 @@ public class MainTest {
 //        map.put("role", "manager");
 //        map.put("uid", 18);
         map.put("mid", "20204");
-        map.put("gid","2051");
+        map.put("gid", "2051");
 //        MeshService meshService = (MeshService) ctx.getBean("meshServiceImpl");
-//        FileService fileService = (FileService) ctx.getBean("fileServiceImpl");
-        GroupService groupService = (GroupService) ctx.getBean("groupServiceImpl");
-        groupService.deleteGroup(map);
-        logger.info("result=" + map.get("result"));
+        FileService fileService = (FileService) ctx.getBean("fileServiceImpl");
+//        GroupService groupService = (GroupService) ctx.getBean("groupServiceImpl");
+//        groupService.deleteGroup(map);
+//        logger.info("result=" + map.get("result"));
+        SearchDict dict = new SearchDict();
+        FileDTO info = fileService.getFileInfo(53);
+        BeanUtils.copyProperties(info, dict);
+        logger.info("dict=" + JSON.toJSONString(dict));
+
 //        FileDTO info=new FileDTO();
 //        info.setOid(28);
 //        info.setOtaVersion("v1.0.1");
@@ -156,8 +158,8 @@ public class MainTest {
         String str = "2019-08-01 - 2019-08-02";
         String begin = str.substring(0, 10);
         String end = str.substring(str.length() - 10);
-        System.out.println("begin=" + begin + ",end=" + end+",str"+new Date(begin));
-        Calendar calendar=Calendar.getInstance();
+        System.out.println("begin=" + begin + ",end=" + end + ",str" + new Date(begin));
+        Calendar calendar = Calendar.getInstance();
     }
 
     public static void main(String[] args) {
