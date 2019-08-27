@@ -23,7 +23,7 @@
                 <div class="f-l main-right-title">
                     <nav class="bread">
                         <ol class="clearfix">
-                            <li class="f-l"><a th:href="@{/file/OTAFile}" th:text="${file.otaName}+'固件'"></a></li>
+                            <li class="f-l"><a th:href="@{/file//history(oid=${file.id},otaId=${file.otaId},otaName=${file.otaName})}" th:text="${file.otaName}+'固件'"></a></li>
                             <li class="f-l">上传新版本</li>
                         </ol>
                     </nav>
@@ -48,7 +48,7 @@
                         <form th:action="@{/file/doUpload(type='add')}" method="post"  enctype="multipart/form-data" class="noUpload active" >
                             <input type="hidden" name="id" th:value="${file.id}">
                             <input type="hidden" name="otaId" th:value="${file.otaId}">
-                            <input type="hidden" name="otaName" th:value="${file.otaName}">"
+                            <input type="hidden" name="otaName" th:value="${file.otaName}">
                             <input type="hidden" name="otaVersion" th:value="${file.otaVersion}">
                             <input type="hidden" name="otaDesc" th:value="${file.otaDesc}">
                             <fieldset>

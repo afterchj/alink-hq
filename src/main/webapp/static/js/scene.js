@@ -105,6 +105,7 @@ $(function() {
          deleteArray = [];
         var sid = parseInt($(this).parent().siblings('.sid').find('input').val());
         var sceneId = parseInt($(this).parent().siblings('.sceneId').text());
+        var mid = $("#mid").val();
         var selector = $('div[openContent="delete-pop"]');
         selector.addClass('active');
         $('div[openContent="delete-pop"] .reset-pwd p').text('您确定要删除所选的场景吗？');
@@ -113,7 +114,8 @@ $(function() {
         showOverlay();
         var msg = {
             id: sid,
-            sceneId: sceneId
+            sceneId: sceneId,
+            mid: mid
         }
         deleteArray.push(msg);
     })

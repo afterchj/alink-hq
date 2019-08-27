@@ -37,7 +37,7 @@
                     <!--<img src="/alink-hq/static/img/go-back.png" alt="" onclick="history.back()">-->
                 </div>
             </div>
-            <form th:action="@{/mesh/saveUpdate}" class="" method="post">
+            <form th:action="@{/mesh/saveUpdate}"  method="post">
                 <input type="hidden" id="uid" th:value="${uid}">
                 <div id="meshTurnOver" class="table-content-list detail transfer">
                     <div class="p-detail">
@@ -48,8 +48,8 @@
                             <div class="scrollbar">
                                 <input type="hidden" name="ids" th:value="${ids}">
                                 <div class="accountMsg clearfix" th:each="mesh:${meshMap}">
-                                    <div class="f-l mesh-name">
-                                        <span th:text="${mesh.mname}"></span>
+                                    <div class="f-l mesh-name overflow-hidden-1">
+                                        <span th:text="${mesh.mname}" th:title="${mesh.mname}"></span>
                                     </div>
                                     <div class="f-l  mesh-id">
                                         <label for="mid">网络ID：</label>

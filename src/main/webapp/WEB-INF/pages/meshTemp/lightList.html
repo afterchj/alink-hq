@@ -102,8 +102,8 @@
                                 </th>
                                 <th><span>灯名称</span></th>
                                 <th><span>灯MAC地址</span></th>
-<!--                                <th><span>灯类型</span></th>-->
-<!--                                <th><span>版本信息</span></th>-->
+                                <!--<th><span>灯类型</span></th>-->
+                                <!--<th><span>版本信息</span></th>-->
                                 <th><span>隶属项目</span></th>
                                 <th><span>隶属网络</span></th>
                                 <th><span>网络ID</span></th>
@@ -126,15 +126,15 @@
                                     <a th:href="@{/light/info(id=${light.id})}" th:text="${light.lname}"></a>
                                 </td>
                                 <td th:text="${light.lmac}"></td>
-<!--                                <td>-->
-<!--                                RGB-->
-<!--                                </td>-->
-<!--                                <td class="p-r">-->
-<!--                                <span class="p-a version">-->
-<!--                                <span>NEW</span>-->
-<!--                                </span>-->
-<!--                                XXX-->
-<!--                                </td>-->
+                                <!--<td>-->
+                                <!--RGB-->
+                                <!--</td>-->
+                                <!--<td class="p-r">-->
+                                <!--<span class="p-a version">-->
+                                <!--<span>NEW</span>-->
+                                <!--</span>-->
+                                <!--XXX-->
+                                <!--</td>-->
                                 <td class="k-link project_id">
                                     <a th:href="@{/project/detail(projectId=${light.project_id})}"
                                        th:text="${light.name}" th:alt="${light.project_id}"></a>

@@ -9,7 +9,7 @@
     <link rel="stylesheet" th:href="@{/static/css/base.css}">
     <link rel="stylesheet" th:href="@{/static/css/leftNav.css}">
     <link rel="stylesheet" th:href="@{/static/css/projectManage.css}">
-    <title>移交账号</title>
+    <title>项目移交</title>
 </head>
 
 <body>
@@ -46,8 +46,8 @@
                         <div class="p-content p-r">
                             <div class="f-content scrollbar ">
                                 <div class="accountMsg clearfix" th:each="project:${projectMap}">
-                                    <div class="f-l mesh-name">
-                                        <span th:text="${project.name}"></span>
+                                    <div class="f-l mesh-name overflow-hidden-1">
+                                        <span th:text="${project.name}" th:title="${project.name}"></span>
                                     </div>
                                     <div class="f-l  mesh-id">
                                         <label for="account">施工负责人：</label>

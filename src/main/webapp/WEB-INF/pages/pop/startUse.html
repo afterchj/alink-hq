@@ -18,13 +18,20 @@
         温馨提示
     </div>
     <div class="pop-content p-r">
-        <div class="pop-msg p-a clearfix" >
-            <div class="f-l img-msg"><img th:src="@{/static/img/hint.png}" alt=""></div>
-            <div class="f-l text-msg">
-                <div class="off-or-on">
-                    <p></p>
-                </div>
-                <p class="unuse" ></p>
+        <div class="pop-msg p-a " >
+            <!--<div class=" img-msg"><img th:src="@{/static/img/hint.png}" alt=""></div>-->
+            <div class=" text-msg">
+                    <i class="fa fa-question-circle hint-fa-icon" aria-hidden="true"></i>
+                    <span style="display: inherit">
+                       <span class="reset-pwd off-or-on">
+                            <p></p>
+                       </span>
+                       <span class="reset-pwd-hint unuse"></span>
+                    </span>
+                <!--<div class="off-or-on">-->
+                    <!--<p></p>-->
+                <!--</div>-->
+                <!--<p class="unuse" ></p>-->
             </div>
         </div>
         <div class="pop-btn p-a">

@@ -2,6 +2,13 @@
  * Created by qian.chen on 2019/5/6.
  */
 $(function(){
+    // var isExistText=$('.reset-pwd-hint').text();
+    // console.log('isExistText',isExistText);
+    // if(isExistText==''){
+    //     $('.pop-content p').css('margin-top','5px');
+    // }else{
+    //     // $('.reset-pwd-hint').parent().parent().parent('.text-msg').css('text-align','left');
+    // }
     $('.on-off-triangle').click(function () {
         var imgUrl = $(this).attr('src');
         if(imgUrl == '/alink-hq/static/img/left-reduce.png') {
@@ -95,3 +102,10 @@ function GetQueryString(name) {
     r = null;
     return context == null || context == "" || context == "undefined" ? "" : context;
 }
+
+$(window).keydown( function(e) {
+    var key = window.event ? e.keyCode : e.which;
+    if (key.toString() == "13") {
+        return false;
+    }
+})

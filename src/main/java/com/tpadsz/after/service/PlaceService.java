@@ -29,5 +29,7 @@ public interface PlaceService {
 
     void deleteByIds(List list);
 
+    void deleteGroup(Map map);
+
     void saveRename(Map map) throws RepetitionException;
 }

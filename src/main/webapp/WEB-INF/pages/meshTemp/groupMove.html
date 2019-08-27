@@ -50,8 +50,8 @@
                                 <input type="hidden" id="mid" name="mid" th:value="${mid}">
                                 <input type="hidden" id="projectName" name="projectName" th:value="${projectName}">
                                 <div class="accountMsg clearfix" th:each="group:${groupMap}">
-                                    <div class="f-l mesh-name">
-                                        <span th:text="${group.gname}"></span>
+                                    <div class="f-l mesh-name overflow-hidden-1">
+                                        <span th:text="${group.gname}"  th:title="${group.gname}"></span>
                                     </div>
                                     <div class="f-l  mesh-id">
                                         <label for="mesh_id">网络ID：</label>
@@ -78,7 +78,7 @@
                                         <p class="p-a verify "></p>
                                         <select name="pid" id="pid">
                                             <option value="">选择移动到的区域</option>
-                                            <option value="0">区域1</option>
+<!--                                            <option value="1">区域1</option>-->
                                         </select>
                                     </div>
                                 </div>
@@ -120,9 +120,6 @@
     $(function () {
         console.log("mid=" + mid + ",pid=" + $("#pid option:selected").val());
         $.getJSON("/alink-hq/group/getPlace", {"mid": mid}, function (json) {
-            if (json != '') {
-                $("#pid option:first").siblings().remove();
-            }
             $.each(json, function (i, item) {
                 console.log("result=", JSON.stringify(json));
                 $("#pid").append("<option value='" + item.id + "'>" + item.label + "</option>");

@@ -51,21 +51,24 @@ public class SceneController {
             pageSize = 10;    //设置默认每页显示的数据数
         }
         try {
-            Integer role_id = accountService.findRoleIdByUid(uid);
-            PageHelper.startPage(pageNum, pageSize);
-            List<SceneList> list = sceneService.searchSceneList(sceneName, sceneId, lid, meshName, meshId, mid);
-            PageInfo<SceneList> pageInfo = new PageInfo<>(list, pageSize);
-            if (pageInfo.getList().size() > 0) {
-                model.addAttribute("pageInfo", pageInfo);
-            }
-            if (role_id == 1) {
-                model.addAttribute("flag", 0);
-            }
-            model.addAttribute("meshName", meshName);
-            model.addAttribute("projectName", projectName);
-            model.addAttribute("sceneName", sceneName);
-            model.addAttribute("sceneId", sceneId);
-
+                Integer role_id = accountService.findRoleIdByUid(uid);
+                Integer role_id2 = sceneService.findRoleIdByMid(mid);
+                if(role_id<role_id2) {
+                    PageHelper.startPage(pageNum, pageSize);
+                    List<SceneList> list = sceneService.searchSceneList(sceneName, sceneId, lid, meshName, meshId, mid);
+                    PageInfo<SceneList> pageInfo = new PageInfo<>(list, pageSize);
+                    if (pageInfo.getList().size() > 0) {
+                        model.addAttribute("pageInfo", pageInfo);
+                    }
+                    if (role_id == 1) {
+                        model.addAttribute("flag", 0);
+                    }
+                    model.addAttribute("mid", mid);
+                    model.addAttribute("meshName", meshName);
+                    model.addAttribute("projectName", projectName);
+                    model.addAttribute("sceneName", sceneName);
+                    model.addAttribute("sceneId", sceneId);
+                }
         } catch (Exception e) {
         }
         return "sceneManage/sceneList";
@@ -98,11 +101,13 @@ public class SceneController {
         try {
             for (SceneList scene : sceneList) {
                 if (scene.getSceneId() > 3) {
-                    sceneService.delete(scene.getId());
+                    sceneService.deleteSid(scene.getId());
                 } else {
                     String sceneName = "场景" + (scene.getSceneId() + 1);
                     sceneService.saveSceneName(sceneName, scene.getId());
+                    sceneService.deleteXY(scene.getId(),scene.getSceneId(),scene.getMid());
                 }
+
             }
             map.put("result", ResultDict.SUCCESS.getCode());
         } catch (Exception e) {

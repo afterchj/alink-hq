@@ -14,6 +14,7 @@ $(function () {
             location.href = "/alink-hq/mesh/move?uid="+uid[0]+"&ids="+ ids
         } else {
             var selector = $('div[openContent="exchange"]');
+            $('div[openContent="exchange"] p').css('margin-top','5px');
             selector.addClass('active');
             $('div[openContent="exchange"] .reset-pwd p').text('不同账号下的网络不可进行移动!');
             // $('div[openContent="delete-pop"] .reset-pwd-hint').text('删除后网络中所有信息将无法恢复，请慎重！');
@@ -29,6 +30,7 @@ $(function () {
         if (ids.length > 0) {
             $('.showList').hide();
             var selector = $('div[openContent="delete-pop"]');
+            $('div[openContent="delete-pop"] p').css('margin-top','5px');
             selector.addClass('active');
             $('div[openContent="delete-pop"] .reset-pwd p').text('您确定要删除该所选的网络吗？');
             $('div[openContent="delete-pop"] .reset-pwd-hint').text('删除后网络中所有信息将无法恢复，请慎重！');
