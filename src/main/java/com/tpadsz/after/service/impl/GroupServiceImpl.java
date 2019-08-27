@@ -77,6 +77,11 @@ public class GroupServiceImpl implements GroupService {
     }
 
     @Override
+    public void deleteGroup(Map map) {
+        groupDao.deleteGroup(map);
+    }
+
+    @Override
     public List<OptionList> getPlaces(Map map) {
         return groupDao.getPlaces(map);
     }

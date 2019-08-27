@@ -2,6 +2,12 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.tpadsz.after.dao.GroupDao">
 
+    <parameterMap id="deleteMapper" type="map">
+        <parameter property="gid" mode="IN"/>
+        <parameter property="mid" mode="IN"/>
+        <parameter property="result" mode="OUT" jdbcType="INTEGER"/>
+    </parameterMap>
+
     <sql id="Base_Column_List">
 		g.id,
         g.mid,
@@ -133,14 +139,13 @@
         p.pname label
         FROM f_place p
         INNER JOIN f_mesh m ON p.mid = m.id
-        WHERE place_id!=0
+        WHERE place_id &gt;0
         <if test="projectId!=null and projectId!=''">
             AND m.project_id=#{projectId}
         </if>
         <if test="mid!=null and mid!=''">
             AND m.id=#{mid}
         </if>
-        LIMIT 1
     </select>
 
     <select id="getMesh" resultType="OptionList" parameterType="map">
@@ -163,6 +168,10 @@
             #{id}
         </foreach>
     </delete>
+
+    <select id="deleteGroup" parameterMap="deleteMapper" statementType="CALLABLE">
+        CALL delete_place (?,?,?)
+    </select>
 
     <update id="saveRename" parameterType="map">
         UPDATE f_group SET gname=#{name},update_date=NOW() WHERE id =#{id}
