@@ -1,14 +1,14 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
-      xmlns:shiro="http://www.pollix.at/thymeleaf/shiro" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+      xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
 <head>
     <meta charset="UTF-8">
-    <script src="/alink-hq/static/js/browser.js"></script>
+    <script th:src="@{/static/js/browser.js}" type="application/javascript"></script>
     <link rel="stylesheet" th:href="@{/static/font-awesome-4.7.0/css/font-awesome.min.css}"/>
-    <link rel="stylesheet" href="/alink-hq/static/css/base.css"/>
-    <link rel="stylesheet" href="/alink-hq/static/css/leftNav.css"/>
-    <link rel="stylesheet" href="/alink-hq/static/css/projectManage.css"/>
+    <link rel="stylesheet" th:href="@{/static/css/base.css}"/>
+    <link rel="stylesheet" th:href="@{/static/css/leftNav.css}"/>
+    <link rel="stylesheet" th:href="@{/static/css/projectManage.css}"/>
     <link rel="stylesheet" th:href="@{/static/css/laydate.css}"/>
     <title>定时列表</title>
     <style type="text/css">
@@ -49,7 +49,7 @@
                             <div class="p-r">
                                 <label for="create-time">创建时间</label>
                                 <input type="text" id="create-time" placeholder="请选择日期" AUTOCOMPLETE="off" name="createDate">
-                                <img src="/alink-hq/static/img/date.png" alt="" class="p-a">
+                                <img th:src="@{/static/img/date.png}" alt="" class="p-a">
                             </div>
                         </div>
                         <div class="f-l search" >
@@ -63,8 +63,8 @@
                             </div>
                             <div class="p-r">
                                 <label for="end-time">更新时间</label>
-                                <input type="text" id="end-time" placeholder="请选择日期" AUTOCOMPLETE="off">
-                                <img src="/alink-hq/static/img/date.png" alt="" class="p-a">
+                                <input type="text" id="end-time" placeholder="请选择日期" AUTOCOMPLETE="off" name="endTime">
+                                <img th:src="@{/static/img/date.png}" alt="" class="p-a">
                             </div>
                         </div>
                         <!--<div class="f-l search">-->
@@ -94,16 +94,16 @@
                             <th><span>是否重复</span></th>
                             <th class="p-r">
                                 <span class="toTime ">创建时间</span>
-                                <img src="/alink-hq/static/img/fewer.png" alt="" class="p-a toTop  sort-t pointer"
+                                <img th:src="@{/static/img/fewer.png}" alt="" class="p-a toTop  sort-t pointer"
                                      id="creToTop">
-                                <img src="/alink-hq/static/img/unfold.png" alt=""
+                                <img th:src="@{/static/img/unfold.png}" alt=""
                                      class="p-a toBottom sort-b  pointer" id="creToBottom">
                             </th>
                             <th class="p-r">
                                 <span class="toTime">更新时间</span>
-                                <img src="/alink-hq/static/img/fewer.png" alt="" class="p-a  toTop1 sort-t pointer"
+                                <img th:src="@{/static/img/fewer.png}" alt="" class="p-a  toTop1 sort-t pointer"
                                      id="upToTop">
-                                <img src="/alink-hq/static/img/unfold.png" alt=""
+                                <img th:src="@{/static/img/unfold.png}" alt=""
                                      class="p-a  toBottom1  sort-b pointer" id="upToBottom">
                             </th>
                             <th><span>定时状态</span></th>
@@ -118,16 +118,14 @@
                             <td th:text="${timeLineList.mesh_id}" class="mid"></td>
                             <td th:text="${timeLineList.week}"></td>
                             <td th:text="${timeLineList.repetition}"></td>
-                            <!--<td><p>2019/05/13</p><p>14:55:44</p></td>-->
-                            <!--<td><p>2019/05/13</p><p>14:55:44</p></td>-->
                             <td><p th:text="${timeLineList.create_date}"></p></td>
                             <td><p th:text="${timeLineList.update_date}"></p></td>
                             <td><p th:text="${timeLineList.state}"></p></td>
                             <td  class="p-r">
-                                <img shiro:hasPermission="renameTime" src="/alink-hq/static/img/edit.png" alt=""
+                                <img shiro:hasPermission="renameTime" th:src="@{/static/img/edit.png}" alt=""
                                      class="pointer reset-name"
                                      th:title="重命名">
-                                <img shiro:lacksPermission="renameTime" src="/alink-hq/static/img/un-rename.png"
+                                <img shiro:lacksPermission="renameTime" th:src="@{/static/img/un-rename.png}"
                                      alt=""
                                      th:title="无法操作">
                             </td>
@@ -163,7 +161,7 @@
                                     页/<span th:text="${pageInfo.getTotal()}"></span>条数据
                             </span>
                             <span class="m-r-15">
-                            <input type="number" id="skipPage" />
+                            <input type="number" id="skipPage" placeholder=""/>
                         </span>
                             <span class="m-r-35">
                                 <div id="skipPageBtn" class="pointer moment skipPageBtn" onmousedown="skipBtnMouseDown()" onmouseup="skipBtnMouseUp()">跳转
@@ -171,11 +169,15 @@
                         </span>
                                     <span class="m-r-15r">每页显示：</span>
                             <span class="m-r-20">
-                        <select name="" id="page-select">
-                            <option value="10" data-index="10">10</option>
-                            <option value="30" data-index="30">30</option>
-                            <option value="50" data-index="50">50</option>
-                            <option value="100" data-index="100">100</option>
+                        <select name="" id="page-select" placeholder="">
+                            <!--<option value="10" data-index="10">10</option>-->
+                            <!--<option value="30" data-index="30">30</option>-->
+                            <!--<option value="50" data-index="50">50</option>-->
+                            <!--<option value="100" data-index="100">100</option>-->
+                            <option value="10" >10</option>
+                            <option value="30" >30</option>
+                            <option value="50" >50</option>
+                            <option value="100" >100</option>
                         </select>
                         </span>
                                 </div>
@@ -188,7 +190,6 @@
                     <input type="hidden" id="createDate" th:value="${createDate}"/>
                     <input type="hidden" id="endTime" th:value="${endTime}"/>
                     <input type="hidden" id="state" th:value="${state}"/>
-                    <!--/*@thymesVar id="getPageSize" type="com.sun.prism.j2d.print.J2DPrinterJob.PageInfo"*/-->
                     <input type="hidden" id="pageSize" th:value="${pageInfo.getPageSize()}"/>
                     <!-- 无数据时 -->
                     <table border="1" class="noData active" th:if="${pageInfo.getTotal()}=='0'">
@@ -201,17 +202,16 @@
                             <th><span>是否重复</span></th>
                             <th class="p-r">
                                 <span class="toTime ">创建时间</span>
-                                <img src="/alink-hq/static/img/fewer.png" alt="" class="p-a toTop  sort-t pointer"
-                                     id="creToTop">
-                                <img src="/alink-hq/static/img/unfold.png" alt=""
-                                     class="p-a toBottom sort-b  pointer" id="creToBottom">
+                                <img th:src="@{/static/img/fewer.png}" alt="" class="p-a toTop  sort-t pointer"
+                                     >
+                                <img th:src="@{/static/img/unfold.png}" alt=""
+                                     class="p-a toBottom sort-b  pointer" >
                             </th>
                             <th class="p-r">
                                 <span class="toTime">更新时间</span>
-                                <img src="/alink-hq/static/img/fewer.png" alt="" class="p-a  toTop1 sort-t pointer"
-                                     id="upToTop">
-                                <img src="/alink-hq/static/img/unfold.png" alt=""
-                                     class="p-a  toBottom1  sort-b pointer" id="upToBottom">
+                                <img th:src="@{/static/img/fewer.png}" alt="" class="p-a  toTop1 sort-t pointer">
+                                <img th:src="@{/static/img/unfold.png}" alt=""
+                                     class="p-a  toBottom1  sort-b pointer">
                             </th>
                             <th><span>定时状态</span></th>
                             <th class="operation"><span>操作</span></th>
@@ -251,10 +251,10 @@
 <!--</div>-->
 <div class="hide-iframe "></div>
 
-<script src="/alink-hq/static/js/jquery.min.js"></script>
-<script  src="/alink-hq/static/js/left.js"></script>
-<script src="/alink-hq/static/laydate/laydate.js"></script>
-<script src="/alink-hq/static/js/timerList.js"></script>
-<script src="/alink-hq/static/js/moment.js"></script>
+<script th:src="@{/static/js/jquery.min.js}" type="application/javascript"></script>
+<script th:src="@{/static/js/left.js}" type="application/javascript"></script>
+<script th:src="@{/static/laydate/laydate.js}" type="application/javascript"></script>
+<script th:src="@{/static/js/timerList.js}" type="application/javascript"></script>
+<script th:src="@{/static/js/moment.js}" type="application/javascript"></script>
 </body>
 </html>

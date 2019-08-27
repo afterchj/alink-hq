@@ -17,6 +17,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
 import java.io.File;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -85,6 +86,11 @@ public class CooperationController {
     @RequestMapping("/saveUpdate")
     public String saveUpdate(CooperationInfo info) {
         cooperateService.saveUpdate(info);
+        Map map = new HashMap();
+        map.put("fid", info.getId());
+        map.put("status", info.getStatus());
+        cooperateService.updateUser(map);
+        logger.warn("result=" + map.get("result"));
         return "redirect:/cooperate/list";
 //        return "ok";
     }
