@@ -33,5 +33,8 @@ public interface SceneService {
 
     int findRoleIdByMid(Integer mid);
 
-    void deleteXY(Integer id, Integer sceneId,Integer mid);
+    void deleteXY(Integer id, Integer sceneId,Integer mid,Integer flag);
+
+    void saveDeleteLog(String uid, Integer sceneId, Integer mid);
+
 }
