@@ -92,8 +92,12 @@
             VALUES(#{mname},#{mesh_id},#{pcount},'3344',#{pcount},0,NOW(),NOW())
     </insert>
 
-    <insert id="createPlace">
-        INSERT INTO f_place (place_id,pname,uid,mid,create_date,update_date) VALUES(1,'区域1',#{uid},#{mid},NOW(),NOW())
+    <insert id="createDefaultPlace" useGeneratedKeys="true" keyProperty="pid" parameterType="com.tpadsz.after.entity.SceneList">
+        INSERT INTO f_place (place_id,pname,uid,mid,create_date,update_date) VALUES(0,'扫描区',#{uid},#{mid},NOW(),NOW());
+    </insert>
+
+    <insert id="createDefaultGroup" parameterType="com.tpadsz.after.entity.SceneList">
+        INSERT INTO f_group (group_id,gname,mid,pid,create_date,update_date) VALUES(0,'未分组',#{mid},#{pid},NOW(),NOW());
     </insert>
 
     <select id="findByAccount" resultType="com.tpadsz.after.entity.User">

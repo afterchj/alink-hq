@@ -43,18 +43,19 @@
                         <div class="f-l search" >
                             <div>
                                 <label for="projectName">定时名称</label>
-                                <input type="text" id="projectName" placeholder="请输入定时名称">
+                                <input type="text" id="projectName" placeholder="请输入定时名称" name="tname">
+                                <input type="hidden"  name="id" th:value="${id}"/>
                             </div>
                             <div class="p-r">
                                 <label for="create-time">创建时间</label>
-                                <input type="text" id="create-time" placeholder="请选择日期" AUTOCOMPLETE="off">
+                                <input type="text" id="create-time" placeholder="请选择日期" AUTOCOMPLETE="off" name="createDate">
                                 <img src="/alink-hq/static/img/date.png" alt="" class="p-a">
                             </div>
                         </div>
                         <div class="f-l search" >
                             <div>
                                 <label for="status" class="font">定时状态</label>
-                                <select name="status" style=" height: 38px;line-height: 38px;" id="status">
+                                <select name="state" style=" height: 38px;line-height: 38px;" id="status">
                                     <option value="0">全部</option>
                                     <option value="1">启用</option>
                                     <option value="2">停用</option>
@@ -187,6 +188,7 @@
                     <input type="hidden" id="createDate" th:value="${createDate}"/>
                     <input type="hidden" id="endTime" th:value="${endTime}"/>
                     <input type="hidden" id="state" th:value="${state}"/>
+                    <!--/*@thymesVar id="getPageSize" type="com.sun.prism.j2d.print.J2DPrinterJob.PageInfo"*/-->
                     <input type="hidden" id="pageSize" th:value="${pageInfo.getPageSize()}"/>
                     <!-- 无数据时 -->
                     <table border="1" class="noData active" th:if="${pageInfo.getTotal()}=='0'">
