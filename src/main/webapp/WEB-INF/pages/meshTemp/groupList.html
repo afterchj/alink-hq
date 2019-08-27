@@ -123,7 +123,7 @@
                                     <a th:if="${group.lcount}!='0'"  th:href="@{/light/list(mid=${group.mid},gid=${group.id})}" th:text="${group.lcount}"></a>
                                 </td>
                                 <td class="p-r" >
-                                    <img  th:alt="${group.id}" th:class="(${group.placeId == 0} or ${group.placeId == -1})? ' unclick pointer' : 'reset-name pointer'" th:src="(${group.placeId == 0} or ${group.placeId == -1})? '/alink-hq/static/img/edit-un.png': '/alink-hq/static/img/edit.png' " th:abbr="${group.placeId}"  th:title="(${group.placeId == 0 } or ${group.placeId  == -1})? '不可重命名':'重命名'"  shiro:hasPermission ="renameGroup">
+                                    <img  th:alt="${group.id}" th:class="${group.placeId == 0}? ' unclick pointer' : 'reset-name pointer'" th:src="${group.placeId == 0}? '/alink-hq/static/img/edit-un.png': '/alink-hq/static/img/edit.png' " th:abbr="${group.placeId}"  th:title="${group.placeId == 0 }? '不可重命名':'重命名'"  shiro:hasPermission ="renameGroup">
                                     <a  th:href="${group.placeId == 0}? 'javascript:void(0);': @{/group/move(mid=${group.mid},ids=${group.id})}">
                                         <img  th:alt="${group.id}"  th:src="${group.placeId  == 0}? '/alink-hq/static/img/un-exchange.png':'/alink-hq/static/img/exchange.png'"
                                              th:class="${group.placeId == 0}? 'center-img unclick ':'center-img pointer'"  th:title="${group.placeId == 0}? '不可移动':'移动'"  shiro:hasPermission ="moveGroup">
