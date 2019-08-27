@@ -21,6 +21,7 @@ public interface CooperateService {
     void save(CooperationInfo info);
 
     void saveUpdate(CooperationInfo info);
+    void updateUser(Map map);
 
     void deleteCooperationById(int id);
 }

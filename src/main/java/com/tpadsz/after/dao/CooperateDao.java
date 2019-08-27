@@ -21,5 +21,7 @@ public interface CooperateDao {
 
     void saveUpdate(CooperationInfo info);
 
+    void updateUser(Map map);
+
     void deleteCooperationById(int id);
 }

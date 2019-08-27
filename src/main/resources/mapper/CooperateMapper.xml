@@ -2,6 +2,12 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.tpadsz.after.dao.CooperateDao">
 
+    <parameterMap id="updateMapper" type="map">
+        <parameter property="fid" mode="IN"/>
+        <parameter property="status" mode="IN"/>
+        <parameter property="result" mode="OUT" jdbcType="INTEGER"/>
+    </parameterMap>
+
     <sql id="Base_Column_List">
 		id,
         coname,
@@ -47,6 +53,10 @@
         WHERE f.id=#{id}
     </select>
 
+    <select id="updateUser" parameterMap="updateMapper" statementType="CALLABLE">
+        CALL disable_user (?,?,?)
+    </select>
+
     <delete id="deleteCooperationById" parameterType="int">
         DELETE FROM f_firm WHERE id=#{id}
     </delete>
@@ -54,9 +64,8 @@
     <update id="saveUpdate" parameterType="CooperationInfo">
         UPDATE f_firm
         <set>
-            update_date=now(),
             <if test="coname!=null and coname!=''">
-               coname=#{coname},
+                coname=#{coname},
             </if>
             <if test="mobile!=null and mobile!=''">
                 mobile=#{mobile},
@@ -74,8 +83,9 @@
                 other=#{other},
             </if>
             <if test="status!=null">
-               status=#{status}
+                status=#{status},
             </if>
+            update_date=now()
         </set>
         WHERE id=#{id}
     </update>
