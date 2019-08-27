@@ -455,6 +455,11 @@
                                                                class="singleListChecked builders singleRoleChecked user-role" alt="createUserUser">
                                                         <label for="">施工人员</label>
                                                         </div>
+                                                        <div class="f-l zero" th:if="${#lists.contains(permissions,'createUserOtamanager')}">
+                                                            <input type="checkbox"
+                                                                   class="singleListChecked builders singleRoleChecked otamanager-role" alt="createUserOtamanager">
+                                                            <label for="">固件管理员</label>
+                                                        </div>
                                                     </div>
 
                                                 </div>
@@ -541,6 +546,12 @@
                                                         <input type="checkbox"
                                                                class="singleListChecked user builders singleRoleChecked" alt="viewRPUser">
                                                         <label for="">施工人员</label>
+                                                        </div>
+                                                        <div class="f-l zero"
+                                                             th:if="${#lists.contains(permissions,'viewRPOtamanager')}">
+                                                            <input type="checkbox"
+                                                                   class="singleListChecked otamanager builders singleRoleChecked" alt="viewRPOtamanager">
+                                                            <label for="">固件管理员</label>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -863,7 +874,7 @@
 
         //单选查看数据
         $.each(permissionList, function (key, value) {
-//            console.log(value.descr, value.permission_name);
+            console.log(value.descr, value.permission_name);
             var rolePermission = value.descr;
             var permissionName = value.permission_name;
             if (permissionName.indexOf('view')!=-1){
@@ -891,22 +902,22 @@
             //创建账号
             if (permissionName == 'createUserAdmin'){
                 $(".singleListChecked.singleRoleChecked.admin-role").prop('checked',true);
-            }
-            if (permissionName == 'createUserManager'){
+            }else if (permissionName == 'createUserManager'){
                 $("input.singleListChecked.singleRoleChecked.manage-role").prop('checked',true);
-            }
-            if (permissionName == 'createUserUser'){
+            }else if (permissionName == 'createUserUser'){
                 $("input.singleListChecked.builders.singleRoleChecked.user-role").prop('checked',true);
+            }else if (permissionName == 'createUserOtamanager'){
+                $("input.singleListChecked.builders.singleRoleChecked.otamanager-role").prop('checked',true);
             }
             //查看角色权限
             if (permissionName == 'viewRPAdmin'){
                 $("input.singleListChecked.admin.singleRoleChecked").prop('checked',true);
-            }
-            if (permissionName == 'viewRPManager'){
+            }else if (permissionName == 'viewRPManager'){
                 $("input.singleListChecked.yi-admin-role.manage.singleRoleChecked").prop('checked',true);
-            }
-            if (permissionName == 'viewRPUser'){
+            }else if (permissionName == 'viewRPUser'){
                 $("input.singleListChecked.user.builders.singleRoleChecked").prop('checked',true);
+            }else if (permissionName == 'viewRPOtamanager'){
+                $("input.singleListChecked.otamanager.builders.singleRoleChecked").prop('checked',true);
             }
             //左侧权限勾选
             $.each(alreadyExistPermissions, function (key, value) {
