@@ -276,6 +276,7 @@ function condition(sceneName, sceneId, pageSize, pageNum) {
     var meshName = decodeURIComponent(GetUrlParam("meshName"));
     var meshId = decodeURIComponent(GetUrlParam("meshId"));
     var mid = decodeURIComponent(GetUrlParam("mid"));
-    var newUrl = url2 + '&meshName=' + meshName + '&meshId=' + meshId + '&mid=' + mid + '&pageSize=' + pageSize + '&pageNum=' + pageNum + '&sceneName=' + sceneName + '&sceneId=' + sceneId;
+    var projectName = decodeURIComponent(GetUrlParam("projectName"));
+    var newUrl = url2 + '&projectName=' + projectName + '&meshName=' + meshName + '&meshId=' + meshId + '&mid=' + mid + '&pageSize=' + pageSize + '&pageNum=' + pageNum + '&sceneName=' + sceneName + '&sceneId=' + sceneId;
     location.href = newUrl
 }

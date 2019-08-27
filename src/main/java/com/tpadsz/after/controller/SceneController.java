@@ -121,6 +121,65 @@ public class SceneController {
         return map;
     }
 
+//    @RequestMapping(value = "/detail", method = RequestMethod.GET)
+//    public String detail(Integer sid, Integer lid, String sceneName, Integer sceneId, String meshName, String meshId,Model model) {
+//        MeshInfo meshInfo = sceneService.findProjectByMeshId(meshId);
+//        List<MeshInfo> placeList = sceneService.findPlaceBySid(sid);
+//        List<MeshInfo> lightList = new ArrayList<>();
+//        for(int i=0;i<placeList.size();i++) {
+//            List<MeshInfo> groupList = sceneService.findGroupByPid(placeList.get(i).getPid());
+//            if(i==0) {
+//                if (lid == null) {
+//                    if (groupList.size() > 0) {
+//                        lightList = sceneService.findLightByGid(groupList.get(0).getGid(), sid);
+//                    }
+//                } else {
+//                    MeshInfo lightInfo = sceneService.findLightInfoByLid(lid);
+//                    lightList = sceneService.findLightByGid(lightInfo.getGid(), sid);
+//                    model.addAttribute("lightInfo", lightInfo);
+//                }
+//            }
+//            int samePlaceXY = 1;
+//            String groupX = "";
+//            String groupY = "";
+//            for (int j = 0; j < groupList.size(); j++) {
+//                List<MeshInfo> list2 = sceneService.findXYByGid(groupList.get(j).getGid(), sid);
+//                if (list2.size() == 1) {
+//                    if (!"".equals(groupX) && groupX != null && groupY != null) {
+//                        if (!groupX.equals(list2.get(0).getX()) || !groupY.equals(list2.get(0).getY())) {
+//                            samePlaceXY = 0;
+//                        }
+//                    }
+//                    groupX = list2.get(0).getX();
+//                    groupY = list2.get(0).getY();
+//                    if (groupX == null || groupY == null) {
+//                        samePlaceXY = 0;
+//                    }
+//                    groupList.get(j).setX(groupX);
+//                    groupList.get(j).setY(groupY);
+//                } else {
+//                    samePlaceXY = 0;
+//                }
+//            }
+//
+//            if (samePlaceXY == 1 && groupList.size() != 0) {
+//                placeList.get(i).setX(groupList.get(0).getX());
+//                placeList.get(i).setY(groupList.get(0).getY());
+//            }
+//        }
+//        model.addAttribute("sceneName", sceneName);
+//        model.addAttribute("sceneId", sceneId);
+//        model.addAttribute("projectName", meshInfo.getName());
+//        model.addAttribute("projectId", meshInfo.getProject_id());
+//        model.addAttribute("meshName", meshName);
+//        model.addAttribute("meshId", meshId);
+//        model.addAttribute("mid", meshInfo.getMid());
+//        model.addAttribute("placeList", placeList);
+//        model.addAttribute("groupList", groupList);
+//        model.addAttribute("lightList", lightList);
+//        return "sceneManage/sceneDetail";
+//    }
+
     @RequestMapping(value = "/detail", method = RequestMethod.GET)
     public String detail(Integer sid, Integer lid, String sceneName, Integer sceneId, String meshName, String meshId,Model model) {
         MeshInfo meshInfo = sceneService.findProjectByMeshId(meshId);
