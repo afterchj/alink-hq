@@ -128,17 +128,21 @@ public class MainTest {
         Map map = new HashMap();
 //        map.put("role", "manager");
 //        map.put("uid", 18);
-        map.put("mid", 0);
-        MeshService meshService = (MeshService) ctx.getBean("meshServiceImpl");
-        FileService fileService = (FileService) ctx.getBean("fileServiceImpl");
-        FileDTO info=new FileDTO();
-        info.setOid(28);
-        info.setOtaVersion("v1.0.1");
-        try {
-            System.out.println(fileService.getCount(info));;
-        } catch (RepetitionException e) {
-            e.printStackTrace();
-        }
+        map.put("mid", "20204");
+        map.put("gid","2051");
+//        MeshService meshService = (MeshService) ctx.getBean("meshServiceImpl");
+//        FileService fileService = (FileService) ctx.getBean("fileServiceImpl");
+        GroupService groupService = (GroupService) ctx.getBean("groupServiceImpl");
+        groupService.deleteGroup(map);
+        logger.info("result=" + map.get("result"));
+//        FileDTO info=new FileDTO();
+//        info.setOid(28);
+//        info.setOtaVersion("v1.0.1");
+//        try {
+//            System.out.println(fileService.getCount(info));
+//        } catch (RepetitionException e) {
+//            e.printStackTrace();
+//        }
 //        GroupService groupService = (GroupService) ctx.getBean("groupServiceImpl");
 //        List<OptionList> lists = meshService.getProjects(map);
 //        OptionList optionList = meshService.getProject(map);
