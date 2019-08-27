@@ -190,10 +190,10 @@ public class SceneController {
 
     @RequestMapping(value = "/placeDetail", method = RequestMethod.POST)
     @ResponseBody
-    public Map<String, List> placeDetail(Integer gid, Integer sid) {
+    public Map<String, List> placeDetail(Integer pid, Integer sid) {
         Map<String, List> map = new HashMap<>();
-        List<MeshInfo> lightList = sceneService.findLightByGid(gid, sid);
-        map.put("lightList", lightList);
+//        List<MeshInfo> lightList = sceneService.findLightByGid(gid, sid);
+//        map.put("lightList", lightList);
         return map;
     }
 

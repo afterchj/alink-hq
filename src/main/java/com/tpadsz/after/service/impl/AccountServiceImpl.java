@@ -72,7 +72,11 @@ public class AccountServiceImpl implements AccountService {
         int count = accountDao.findDefaultNetworkByUid(user.getId());
         if(count==0) {
             accountDao.generateDefaultNetwork(meshInfo);
-            accountDao.createPlace(user.getId(),meshInfo.getId());
+            SceneList sceneList = new SceneList();
+            sceneList.setUid(user.getId());
+            sceneList.setMid(meshInfo.getId());
+            accountDao.createDefaultPlace(sceneList);
+            accountDao.createDefaultGroup(sceneList);
         }
     }
 
