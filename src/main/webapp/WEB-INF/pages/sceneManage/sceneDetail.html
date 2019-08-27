@@ -97,17 +97,25 @@
                     </div>
                     <div class="scene-msg  sceneData">
                         <div class="clearfix  scene-msg-list">
-                            <div class="f-l" style="border-right: none;">
+                            <div class="f-l" style="border-right: none;" id="placeMsg">
                                 <ul>
-                                    <li th:if="${userStat.index}=='0'"  th:each="placeList,userStat:${placeList}"
-                                        th:alt="${placeList.pid}" class="pid active">
+                                    <!--<li th:if="${userStat.index}=='0'"  th:each="placeList,userStat:${placeList}"-->
+                                        <!--th:alt="${placeList.pid}" class="pid active">-->
+                                        <!--<span th:if="${placeList.x}==null" th:text="${placeList.pname}+'（查看详情）'"></span>-->
+                                        <!--<span th:if="${placeList.x}!=null" th:text="${placeList.pname}+'('+${placeList.x}+'，'+${placeList.y}+')'"></span>-->
+                                    <!--</li>-->
+                                    <!--<li th:if="${userStat.index}!='0'"  th:each="placeList,userStat:${placeList}"-->
+                                        <!--th:alt="${placeList.pid}" class="pid">-->
+                                        <!--<span th:if="${placeList.x}==null" th:text="${placeList.pname}+'（查看详情）'"></span>-->
+                                        <!--<span th:if="${placeList.x}!=null" th:text="${placeList.pname}+'('+${placeList.x}+'，'+${placeList.y}+')'"></span>-->
+                                    <!--</li>-->
+                                    <li th:if="${userStat.index}=='0'" th:each="placeList,userStat:${placeList}" class="pid active" th:alt="${placeList.pid}">
                                         <span th:if="${placeList.x}==null" th:text="${placeList.pname}+'（查看详情）'"></span>
-                                        <span th:if="${placeList.x}!=null" th:text="${placeList.pname}+'('+${placeList.x}+'，'+${placeList.y}+')'"></span>
+                                        <span th:if="${placeList.x}!=null" th:text="${placeList.pname}+'（'+${placeList.x}+'，'+${placeList.y}+'）'"></span>
                                     </li>
-                                    <li th:if="${userStat.index}!='0'"  th:each="placeList,userStat:${placeList}"
-                                        th:alt="${placeList.pid}" class="pid">
+                                    <li  th:if="${userStat.index}!='0'"  th:each="placeList,userStat:${placeList}" class="pid" th:alt="${placeList.pid}">
                                         <span th:if="${placeList.x}==null" th:text="${placeList.pname}+'（查看详情）'"></span>
-                                        <span th:if="${placeList.x}!=null" th:text="${placeList.pname}+'('+${placeList.x}+'，'+${placeList.y}+')'"></span>
+                                        <span th:if="${placeList.x}!=null" th:text="${placeList.pname}+'（'+${placeList.x}+'，'+${placeList.y}+'）'"></span>
                                     </li>
                                 </ul>
                             </div>
@@ -182,12 +190,51 @@
     $('.scene-msg-list ').on('click', 'li', function () {
         $(this).toggleClass('active').siblings().removeClass('active');
     })
-
-    $('.gid').click(function () {
-        var gid = $(this).attr('alt');
+    $('#placeMsg .pid').click(function () {
+        var pid = $(this).attr('alt');
         var sid = GetUrlParam('sid');
         var lightInfo=[[${lightInfo}]];
 //        console.log('lightInfoId',lightInfo.id);
+        console.log('我被点击了',pid);
+        var content = '';
+        $.ajax({
+            type: "post",
+            url: "/alink-hq/scene/placeDetail",
+            data: {
+                "pid": pid,
+                "sid": sid
+            },
+            async: true,
+            success: function (res) {
+                $('#groupMsg ul').empty();
+                var groupList=res.groupList;
+                console.log('groupList',groupList);
+//                var lightList = res.lightList;
+                <!--<li th:if="${userStat.index}=='0'" th:each="groupList,userStat:${groupList}" class="gid active" th:alt="${groupList.gid}">-->
+                $.each(groupList, function (key, value) {
+                    if(lightInfo==null){
+                        if (key == 0) {
+                            content += '<li class="gid active" alt="' + value.gid + '" ><span>' + value.gname + '（查看详情）'+'</span></li>';
+                        }else{
+                            content += '<li class="gid" alt="' + value.gid + '" ><span>' + value.gname + '（'+ value.x +'，'+ value.y +'）' + '</span></li>';
+                        }
+                    }else if(lightInfo!=null && lightInfo.id==value.id){
+                        if (key == 0) {
+                            content += '<li class="gid active" alt="' + value.gid + '" ><span>' + value.gname + '（查看详情）'+'</span></li>';
+                        }else{
+                            content += '<li class="gid active" alt="' + value.gid + '" ><span>' + value.gname + '（'+ value.x +'，'+ value.y +'）' + '</span></li>';
+                        }
+                    }
+                })
+                $('#groupMsg ul').append(content);
+            }
+        })
+    })
+    $('#groupMsg').on('click','.gid',function () {
+        var gid = $(this).attr('alt');
+        var sid = GetUrlParam('sid');
+        var lightInfo=[[${lightInfo}]];
+        console.log('我被点击了',gid);
         var content = '';
         $.ajax({
             type: "post",
@@ -200,6 +247,7 @@
             success: function (res) {
                 $('.one li').remove();
                 var lightList = res.lightList;
+                console.log('lightList',lightList);
                 $.each(lightList, function (key, value) {
                     if(lightInfo==null){
                         if (key == 0) {
