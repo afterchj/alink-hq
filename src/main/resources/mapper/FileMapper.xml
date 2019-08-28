@@ -119,7 +119,8 @@
                 ota_path=#{otaPath},
             </if>
             update_date=now()
-        </set>WHERE id=#{id}
+        </set>
+        WHERE id=#{id}
     </update>
 
     <update id="saveUpdate" parameterType="FileDTO">
