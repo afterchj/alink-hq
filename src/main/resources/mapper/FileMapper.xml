@@ -13,22 +13,21 @@
     </parameterMap>
 
     <sql id="Base_Column_List">
-		f.id,
-        h.o_id oid,
+		id,
+		id oid,
         ota_id otaId,
         ota_name otaName,
-        IFNULL(ota_desc, '') otaDesc,
-        IFNULL(h.o_version, '') otaVersion,
-        IFNULL(ota_path, '') otaPath,
-        f.create_date createDate,
-        f.update_date updateDate
+        IFNULL(ota_desc,'') otaDesc,
+        IFNULL(ota_version,'') otaVersion,
+        IFNULL(ota_path,'') otaPath,
+        create_date createDate,
+        update_date updateDate
 	</sql>
 
     <select id="getByMap" resultType="map" parameterType="SearchDict">
         SELECT
         <include refid="Base_Column_List"/>
         FROM f_ota_file f
-        INNER JOIN (SELECT id,o_id,o_version ,create_date FROM f_file_history_version ORDER BY create_date DESC) h ON f.id=h.o_id
         WHERE 1=1
         <if test="otaId!=null and otaId!=''">
             AND ota_id LIKE CONCAT('%',#{otaId},'%')
