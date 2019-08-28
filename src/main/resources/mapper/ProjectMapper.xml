@@ -163,18 +163,18 @@
 
     <select id="findGroupNum" resultType="int">
         SELECT count(*) from f_group g
-        INNER JOIN f_mesh m ON m.id = g.mid
-        INNER JOIN f_project p ON p.id=m.project_id
         INNER JOIN f_place pl ON pl.id = g.pid
+        INNER JOIN f_mesh m ON m.id = pl.mid
+        INNER JOIN f_project p ON p.id=m.project_id
         where m.project_id=#{id}
     </select>
 
     <select id="findLightNum" resultType="int">
         SELECT count(*) from f_light l
-        INNER JOIN f_mesh m ON m.id = l.mid
-        INNER JOIN f_project p ON p.id=m.project_id
-        INNER JOIN f_place pl ON pl.id = l.pid
         INNER JOIN f_group g ON g.id=l.gid
+        INNER JOIN f_place pl ON pl.id = g.pid
+        INNER JOIN f_mesh m ON m.id = pl.mid
+        INNER JOIN f_project p ON p.id=m.project_id
         where l.mid IN (SELECT id FROM f_mesh WHERE project_id=#{id})
     </select>
 
