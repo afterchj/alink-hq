@@ -12,6 +12,11 @@
         <parameter property="result" mode="OUT" jdbcType="INTEGER"/>
     </parameterMap>
 
+    <parameterMap id="deleteMapper" type="map">
+        <parameter property="id" mode="IN"/>
+        <parameter property="oid" mode="IN"/>
+    </parameterMap>
+
     <sql id="Base_Column_List">
 		id,
 		id oid,
@@ -99,9 +104,9 @@
         DELETE FROM f_ota_file WHERE id=#{id}
     </delete>
 
-    <delete id="deleteHistoryById" parameterType="int">
-        DELETE FROM f_file_history_version WHERE id=#{id}
-    </delete>
+    <select id="deleteHistoryById" parameterMap="deleteMapper" statementType="CALLABLE">
+        CALL delete_flie_history (?,?)
+    </select>
 
     <update id="updateFile" parameterType="FileDTO">
       UPDATE f_ota_file

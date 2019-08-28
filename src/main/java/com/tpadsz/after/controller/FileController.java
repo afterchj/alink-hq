@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -169,8 +170,11 @@ public class FileController {
 
     @ResponseBody
     @RequestMapping("/deleteHistoryById")
-    public String deleteHistoryById(int id) {
-        fileService.deleteHistoryById(id);
+    public String deleteHistoryById(int id,int oid) {
+        Map map=new HashMap();
+        map.put("id",id);
+        map.put("oid",oid);
+        fileService.deleteHistoryById(map);
         return "ok";
     }
 

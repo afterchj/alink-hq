@@ -79,7 +79,7 @@ public class FileServiceImpl implements FileService {
     }
 
     @Override
-    public void deleteHistoryById(int id) {
-        fileDao.deleteHistoryById(id);
+    public void deleteHistoryById(Map map) {
+        fileDao.deleteHistoryById(map);
     }
 }

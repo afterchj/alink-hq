@@ -31,5 +31,5 @@ public interface FileService {
 
     void deleteFileById(int id);
 
-    void deleteHistoryById(int id);
+    void deleteHistoryById(Map map);
 }

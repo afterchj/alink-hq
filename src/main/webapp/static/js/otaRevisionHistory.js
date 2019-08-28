@@ -25,7 +25,7 @@ $(function () {
         hideOverlay();
     });
     $('div[openContent="delete-pop"] .pop-btn .yes').click(function () {
-        $.get("/alink-hq/file/deleteHistoryById?id=" + id, function (res) {
+        $.get("/alink-hq/file/deleteHistoryById?id=" + id+"&oid="+oid, function (res) {
             console.log("res", res);
             location.reload();
         });

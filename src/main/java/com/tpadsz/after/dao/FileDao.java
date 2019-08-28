@@ -29,5 +29,5 @@ public interface FileDao {
 
     void deleteFileById(int id);
 
-    void deleteHistoryById(int id);
+    void deleteHistoryById(Map map);
 }
