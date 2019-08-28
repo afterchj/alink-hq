@@ -53,7 +53,9 @@ public class FileController {
     @RequestMapping("/history")
     public String history(SearchDict dict, ModelMap modelMap) {
         FileDTO info = fileService.getFileInfo(dict.getOid());
-        BeanUtils.copyProperties(info, dict);
+        if (info != null) {
+            BeanUtils.copyProperties(info, dict);
+        }
         dict = CommonManager.parseStr(dict);
         PageHelper.startPage(dict.getPageNum(), dict.getPageSize());
         List<Map> cooperationList = fileService.getFileHistory(dict);
@@ -79,9 +81,6 @@ public class FileController {
 
     @RequestMapping("/save")
     public String save(FileDTO info) {
-        String version = info.getOtaVersion();
-        String otaVer = StringUtils.isEmpty(version) ? "v1.0.0" : version;
-        info.setOtaVersion(otaVer);
         Map map = JSON.parseObject(JSON.toJSONString(info));
         fileService.saveFile(map);
         return "redirect:/file/OTAFile";
@@ -90,9 +89,6 @@ public class FileController {
     @ResponseBody
     @RequestMapping("/add")
     public String add(FileDTO info) {
-        String version = info.getOtaVersion();
-        String otaVer = StringUtils.isEmpty(version) ? "v1.0.0" : version;
-        info.setOtaVersion(otaVer);
         Map map = JSON.parseObject(JSON.toJSONString(info));
         fileService.saveFile(map);
         return map.get("result").toString();
@@ -103,6 +99,8 @@ public class FileController {
         int oid = info.getId();
         String path = PropertiesUtil.getPath("otaFile");
         String prefix = PropertiesUtil.getPath("otaPath");
+        String suffix = info.getOtaPath();
+        info.setOtaPath(prefix + suffix);
         String fileName = file.getOriginalFilename();
         File targetFile = new File(path, fileName);
         if (!targetFile.getParentFile().exists()) {
@@ -113,16 +111,17 @@ public class FileController {
                 file.transferTo(targetFile);
                 info.setOtaPath(prefix + fileName);
             }
-            Map map = JSON.parseObject(JSON.toJSONString(info));
-            fileService.saveFile(map);
         } catch (Exception e) {
             logger.error("error:" + e.getMessage());
         }
-        FileDTO fileDTO = fileService.getFileInfo(oid);
         if ("add".equals(type)) {
+            fileService.updateFile(info);
+            FileDTO fileDTO = fileService.getFileInfo(oid);
             modelMap.put("file", fileDTO);
             return "fileManage/uploadNewVersionOTAEdit";
         } else {
+            Map map = JSON.parseObject(JSON.toJSONString(info));
+            fileService.saveFile(map);
             return "redirect:/file/history?oid=" + oid;
         }
     }
