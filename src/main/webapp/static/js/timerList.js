@@ -4,7 +4,7 @@
 //日期选择
 laydate.render({
     elem: '#create-time',
-    // type: 'datetime'
+    // type: 'datetime',
     range: true
 });
 laydate.render({
@@ -17,7 +17,8 @@ var height = window.screen.height;
 
 $(function () {
     //排序箭头
-    var timeFlag = GetUrlParam("timeFlag");
+    // var timeFlag = GetUrlParam("timeFlag");
+    var timeFlag = $("#timeFlag").val();
     if (timeFlag == 'creToTop' || timeFlag == 'upToTop') {
         $('#' + timeFlag).attr('src', '/alink-hq/static/img/fewer-color.png');
     } else if (timeFlag == 'creToBottom' || timeFlag == 'upToBottom') {
@@ -36,14 +37,18 @@ $(function () {
 //选择页数变化
     $('#page-select').change(function () {
         var pageSize = $(this).children('option:selected').val();
-        var pageNum = $('.pages').text();
-        condition(pageSize, pageNum);
+        // var pageNum = $('.pages').text();
+        $("form[name='selectPageForm'] input[name='pageSize']").val(pageSize);
+        // condition(pageSize, pageNum);
+        document.selectPageForm.submit();
     });
-//跳转页数变化
+//点击跳转
     $('#skipPageBtn').click(function () {
-        var pageSize = $('#page-select option:selected').val();
+        // var pageSize = $('#page-select option:selected').val();
         var pageNum = $('#skipPage').val();
-        condition(pageSize, pageNum);
+        $("form[name='skipPageForm'] input[name='pageNum']").val(pageNum);
+        // condition(pageSize, pageNum);
+        document.skipPageForm.submit();
     });
 
     var tid;
@@ -95,7 +100,8 @@ $(function () {
                         $(".rename-hint").removeClass("active").text("");
                         $(".rename-hint").addClass("active").text("已存在，请重新输入");
                     } else {
-                        window.location.href = "/alink-hq/timer/list?id=" + $('#mid').val() + '&pageNum=' + $(".pages").text() + '&pageSize=' + $("#pageSize").val();
+                        document.currentPageForm.submit();
+                        // window.location.href = "/alink-hq/timer/list?id=" + $('#mid').val() + '&pageNum=' + $(".pages").text() + '&pageSize=' + $("#pageSize").val();
                         var selector = $('div[openContent="reset-name"]');
                         selector.removeClass('active');
                         hideOverlay();
@@ -118,31 +124,33 @@ $(function () {
         var timeFlag = $(this).attr("id");
         // console.log('timeFlag',timeFlag);
         // $(this).attr('src','/alink-hq/static/img/fewer-color.png');
-        window.location.href = "/alink-hq/timer/list?id=" + $("#mid").val() + '&pageNum=' + $(".pages").text() + '&pageSize=' + $("#pageSize").val() + '&timeFlag=' + timeFlag + '&tname=' + $("#tname").val() + '&createDate=' + $("#createDate").val() + '&endTime=' + $("#endTime").val() + '&state=' + $("#state").val();
+        $("form[name='orderPageForm'] input[name='timeFlag']").val(timeFlag);
+        document.orderPageForm.submit();
+        // window.location.href = "/alink-hq/timer/list?id=" + $("#mid").val() + '&pageNum=' + $(".pages").text() + '&pageSize=' + $("#pageSize").val() + '&timeFlag=' + timeFlag + '&tname=' + $("#tname").val() + '&createDate=' + $("#createDate").val() + '&updateDate=' + $("#updateDate").val() + '&state=' + $("#state").val();
     });
 })
-$(function () {
-    //点击查询
-    $(".search-button button").click(function () {
-        var tname = $("#projectName").val();//定时名称
-        var state = $("#status").val();//定时状态
-        var createTime = $("#create-time").val();//创建时间
-        var endTime = $("#end-time").val();//结束时间
-        if (isEmpty(tname)) {
-            tname = "";
-        } else {
-            tname = String(tname);
-        }
-        if (isEmpty(createTime)) {
-            createTime = "";
-        }
-        if (isEmpty(endTime)) {
-            endTime = "";
-        }
-        window.location.href = "/alink-hq/timer/list?id=" + $("#mid").val() + "&pageNum=" + $(".pages").text() + '&pageSize=' + $("#pageSize").val() + '&tname=' + tname + '&createDate=' + createTime + '&endTime=' + endTime + '&state=' + state;
-        // console.log("url",window.location.href);
-    });
-})
+// $(function () {
+//     //点击查询
+//     $(".search-button button").click(function () {
+//         var tname = $("#projectName").val();//定时名称
+//         var state = $("#status").val();//定时状态
+//         var createTime = $("#create-time").val();//创建时间
+//         var updateDate = $("#end-time").val();//结束时间
+//         if (isEmpty(tname)) {
+//             tname = "";
+//         } else {
+//             tname = String(tname);
+//         }
+//         if (isEmpty(createTime)) {
+//             createTime = "";
+//         }
+//         if (isEmpty(updateDate)) {
+//             updateDate = "";
+//         }
+//         window.location.href = "/alink-hq/timer/list?id=" + $("#mid").val() + "&pageNum=" + $(".pages").text() + '&pageSize=' + $("#pageSize").val() + '&tname=' + tname + '&createDate=' + createTime + '&updateDate=' + updateDate + '&state=' + state;
+//         // console.log("url",window.location.href);
+//     });
+// })
 
 function isEmpty(value) {
     if (value == null || value == "" || value == "undefined" || value == undefined) {
@@ -178,12 +186,22 @@ function mouseUp() {
     $('#skipPageBtn').attr('src', '/alink-hq/static/img/skip.png');
 }
 
-function condition(pageSize, pageNum) {
-    var url = window.location.href;
-    var test = new RegExp("\\?");
-    if (test.test(url)) {
-        url = url.substring(0, url.lastIndexOf("?"));
+// function condition(pageSize, pageNum) {
+//     var url = window.location.href;
+//     var test = new RegExp("\\?");
+//     if (test.test(url)) {
+//         url = url.substring(0, url.lastIndexOf("?"));
+//     }
+//     var newUrl = url + '?id=' + $("#mid").val() + '&pageNum=' + pageNum + '&pageSize=' + pageSize + '&tname=' + $("#tname").val() + '&createDate=' + $("#createDate").val() + '&updateDate=' + $("#updateDate").val() + '&state=' + $("#state").val();
+//     location.href = newUrl;
+// }
+function nameKeyUp() {
+    var name = $('#rename').val();
+    var regUserName = /^[a-zA-Z0-9\u4e00-\u9fa5]{2,6}$/;
+    var userNameResult = regUserName.test(name);
+    if (name != '' && !userNameResult) {
+        $('p.rename-hint').text('请输入 2-6 位汉字、字母、数字')
+    } else {
+        $('p.rename-hint').text('')
     }
-    var newUrl = url + '?id=' + $("#mid").val() + '&pageNum=' + pageNum + '&pageSize=' + pageSize + '&tname=' + $("#tname").val() + '&createDate=' + $("#createDate").val() + '&endTime=' + $("#endTime").val() + '&state=' + $("#state").val();
-    location.href = newUrl;
 }

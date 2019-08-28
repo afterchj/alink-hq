@@ -1,6 +1,5 @@
 package com.tpadsz.after.test;
 
-import com.github.pagehelper.PageInfo;
 import com.tpadsz.after.dao.UserExtendDao;
 import com.tpadsz.after.entity.ProjectList;
 import com.tpadsz.after.entity.TimeLine;
@@ -46,9 +45,9 @@ public class TimeLineTest {
     public void getTimeLineByMidTest() {
 //        List<TimeLine> timeLineList =  timeLineService.getTimeLineByMid(id, pageNum, 19936);
 //        timeLineList.stream().forEach(System.out::println);
-        PageInfo pageInfo = timeLineService.getTimeLineByMid(19936, 1, 10, "", "", "2019-05-29", "2019-05-28", "");
-        List<TimeLine> timeLineList = pageInfo.getList();
-        timeLineList.stream().forEach(System.out::println);
+//        PageInfo pageInfo = timeLineService.getTimeLineByMid(19936, 1, 10, "", "", "2019-05-29", "2019-05-28", "");
+//        List<TimeLine> timeLineList = pageInfo.getList();
+//        timeLineList.stream().forEach(System.out::println);
     }
 
     @Test
@@ -86,5 +85,14 @@ public class TimeLineTest {
     public void test() {
         List<String> permissionList = getSession().getMapper(UserExtendDao.class).getPermissions("1122");
         permissionList.stream().forEach(System.out::println);
+    }
+
+    @Test
+    public void substringTest(){
+        String str = "2019-07-04 - 2019-07-05";
+        String endCreateDate = str.substring(str.lastIndexOf("- ")+2);
+        String startCreateDate = str.substring(0,str.lastIndexOf(" -"));
+        System.out.println(startCreateDate.length()+":"+endCreateDate.length());
+        System.out.println(startCreateDate+":"+endCreateDate);
     }
 }

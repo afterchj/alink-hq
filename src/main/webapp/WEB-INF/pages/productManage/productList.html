@@ -85,7 +85,7 @@
                         <div class="f-l search" style="width: auto;">
                             <div>
                                 <label for="name" class="font" style="width: 200px;">产品品类/代码号(产品ID)</label>
-                                <input type="text" id="name" name="type" placeholder="请输入产品品类/代码号(产品ID)">
+                                <input type="text" id="name" name="type" placeholder="请输入产品品类/代码号(产品ID)" th:value="${type}">
                             </div>
                         </div>
                         <div class="f-l search">
@@ -93,8 +93,9 @@
                                 <label for="name" class="font">隶属公司</label>
                                 <select name="coname" id="productSelect">
                                     <option value="">请选择公司</option>
-                                    <option th:each="coname:${conames}" th:value="${coname.id}"
-                                            th:text="${coname.coname}"></option>
+                                    <option th:each="conameMap:${conames}" th:value="${conameMap.id}"
+                                            th:text="${conameMap.coname}"
+                                            th:selected="${conameMap.id}==${coname}"></option>
                                     <!--<option value="1">天平数字科技有限公司</option>-->
                                     <!--<option value="2">惠州市西顿工业发展有限公司</option>-->
                                 </select>

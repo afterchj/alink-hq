@@ -37,33 +37,97 @@
                     </div>
                 </div>
             </div>
+            <form th:action="@{/timer/list}" method="post" name="orderPageForm">
+                <input type="hidden"  name="tname" th:value="${tname}">
+                <input type="hidden" name="id" th:value="${id}"/>
+                <input type="hidden" name="state" th:value="${state}"/>
+                <input type="hidden" name="pageSize" th:value="${pageInfo.getPageSize()}"/>
+                <input type="hidden" name="pageNum" th:value="${pageInfo.getPageNum()}"/>
+                <input type="hidden" name="createDate" th:value="${createDate}">
+                <input type="hidden" name="updateDate" th:value="${updateDate}">
+                <input type="hidden" name="timeFlag">
+            </form>
+            <form th:action="@{/timer/list}" method="post" name="currentPageForm">
+                <input type="hidden"  name="tname" th:value="${tname}">
+                <input type="hidden" name="id" th:value="${id}"/>
+                <input type="hidden" name="state" th:value="${state}"/>
+                <input type="hidden" name="pageSize" th:value="${pageInfo.getPageSize()}"/>
+                <input type="hidden" name="pageNum" th:value="${pageInfo.getPageNum()}"/>
+                <input type="hidden" name="createDate" th:value="${createDate}">
+                <input type="hidden" name="updateDate" th:value="${updateDate}">
+                <input type="hidden" name="timeFlag" th:value="${timeFlag}"/>
+            </form>
+            <form th:action="@{/timer/list}" method="post" name="selectPageForm">
+                <input type="hidden"  name="tname" th:value="${tname}">
+                <input type="hidden" name="id" th:value="${id}"/>
+                <input type="hidden" name="state" th:value="${state}"/>
+                <input type="hidden" name="pageSize" />
+                <input type="hidden" name="pageNum" th:value="${pageInfo.getPageNum()}"/>
+                <input type="hidden" name="createDate" th:value="${createDate}">
+                <input type="hidden" name="updateDate" th:value="${updateDate}">
+                <input type="hidden" name="timeFlag" th:value="${timeFlag}"/>
+            </form>
+            <form th:action="@{/timer/list}" method="post" name="skipPageForm">
+                <input type="hidden"  name="tname" th:value="${tname}">
+                <input type="hidden" name="id" th:value="${id}"/>
+                <input type="hidden" name="state" th:value="${state}"/>
+                <input type="hidden" name="pageSize" th:value="${pageInfo.getPageSize()}"/>
+                <input type="hidden" name="pageNum"/>
+                <input type="hidden" name="createDate" th:value="${createDate}">
+                <input type="hidden" name="updateDate" th:value="${updateDate}">
+                <input type="hidden" name="timeFlag" th:value="${timeFlag}"/>
+            </form>
+            <form th:action="@{/timer/list}" method="post" name="prePageForm">
+                <input type="hidden"  name="tname" th:value="${tname}">
+                <input type="hidden" name="id" th:value="${id}"/>
+                <input type="hidden" name="state" th:value="${state}"/>
+                <input type="hidden" name="pageSize" th:value="${pageInfo.getPageSize()}"/>
+                <input type="hidden" name="pageNum" th:value="${pageInfo.getPrePage()}"/>
+                <input type="hidden" name="createDate" th:value="${createDate}">
+                <input type="hidden" name="updateDate" th:value="${updateDate}">
+                <input type="hidden" name="timeFlag" th:value="${timeFlag}"/>
+            </form>
+            <form th:action="@{/timer/list}" method="post" name="nextPageForm">
+                <input type="hidden"  name="tname" th:value="${tname}">
+                <input type="hidden" name="id" th:value="${id}"/>
+                <input type="hidden" name="state" th:value="${state}"/>
+                <input type="hidden" name="pageSize" th:value="${pageInfo.getPageSize()}"/>
+                <input type="hidden" name="pageNum" th:value="${pageInfo.getNextPage()}"/>
+                <input type="hidden" name="createDate" th:value="${createDate}">
+                <input type="hidden" name="updateDate" th:value="${updateDate}">
+                <input type="hidden" name="timeFlag" th:value="${timeFlag}"/>
+            </form>
             <div id="projectList" class="table-content-list">
                 <div class="search-condition ">
-                    <form action="" class="clearfix p-r" method="get" onsubmit="return false">
+                    <form action="/alink-hq/timer/list" class="clearfix p-r" method="post" >
                         <div class="f-l search" >
                             <div>
                                 <label for="projectName">定时名称</label>
-                                <input type="text" id="projectName" placeholder="请输入定时名称" name="tname">
+                                <input type="text" id="projectName" placeholder="请输入定时名称" name="tname" th:value="${tname}">
                                 <input type="hidden"  name="id" th:value="${id}"/>
+                                <input type="hidden" name="pageSize" th:value="${pageInfo.getPageSize()}"/>
+                                <input type="hidden" name="timeFlag" th:value="${timeFlag}"/>
                             </div>
                             <div class="p-r">
                                 <label for="create-time">创建时间</label>
-                                <input type="text" id="create-time" placeholder="请选择日期" AUTOCOMPLETE="off" name="createDate">
+                                <input type="text" id="create-time" placeholder="请选择日期" AUTOCOMPLETE="off"
+                                       name="createDate" th:value="${createDate}">
                                 <img th:src="@{/static/img/date.png}" alt="" class="p-a">
                             </div>
                         </div>
                         <div class="f-l search" >
                             <div>
                                 <label for="status" class="font">定时状态</label>
-                                <select name="state" style=" height: 38px;line-height: 38px;" id="status">
-                                    <option value="0">全部</option>
-                                    <option value="1">启用</option>
-                                    <option value="2">停用</option>
+                                <select name="state" style=" height: 38px;line-height: 38px;" id="status" >
+                                    <option value="0" th:selected="${state=='0'}">全部</option>
+                                    <option value="1" th:selected="${state=='1'}">启用</option>
+                                    <option value="2" th:selected="${state=='2'}">停用</option>
                                 </select>
                             </div>
                             <div class="p-r">
                                 <label for="end-time">更新时间</label>
-                                <input type="text" id="end-time" placeholder="请选择日期" AUTOCOMPLETE="off" name="endTime">
+                                <input type="text" id="end-time" placeholder="请选择日期" AUTOCOMPLETE="off"
+                                       name="updateDate" th:value="${updateDate}">
                                 <img th:src="@{/static/img/date.png}" alt="" class="p-a">
                             </div>
                         </div>
@@ -140,8 +204,9 @@
                                     <a th:if="${pageInfo.getPrePage()}==0" href="#">
                                         <span class="prev "><span><</span></span>
                                     </a>
+                                    <!--<a th:if="${pageInfo.getPrePage()}>0" th:href="@{/timer/list(id=${id},pageNum=${pageInfo.getPrePage()},pageSize=${pageInfo.getPageSize()},tname=${tname},createDate=${createDate},updateDate=${updateDate},state=${state})}">-->
                                     <a th:if="${pageInfo.getPrePage()}>0"
-                                            th:href="@{/timer/list(id=${id},pageNum=${pageInfo.getPrePage()},pageSize=${pageInfo.getPageSize()},tname=${tname},createDate=${createDate},updateDate=${updateDate},state=${state})}">
+                                       href="javascript:document.prePageForm.submit()">
                                         <span class="prev active"><span><</span></span>
                                     </a>
                                 </span>
@@ -152,9 +217,11 @@
                                     <a th:if="${pageInfo.getNextPage()}==0" href="#">
                                         <span class="prev "><span>></span></span>
                                     </a>
-                                    <a th:if="${pageInfo.getNextPage()}>0" th:href="@{/timer/list(id=${id},pageNum=${pageInfo.getNextPage()},pageSize=${pageInfo.getPageSize()},tname=${tname},createDate=${createDate},updateDate=${updateDate},state=${state})}" ><span
-                                            class="prev active"><span>
-                                        ></span></span></a>
+                                    <!--<a th:if="${pageInfo.getNextPage()}>0" th:href="@{/timer/list(id=${id},pageNum=${pageInfo.getNextPage()},pageSize=${pageInfo.getPageSize()},tname=${tname},createDate=${createDate},updateDate=${updateDate},state=${state})}" >-->
+                                    <a th:if="${pageInfo.getNextPage()}>0"
+                                       href="javascript:document.nextPageForm.submit()">
+                                        <span class="prev active"><span>></span></span>
+                                    </a>
                                 </span>
                             <span class="m-l-15 m-r-20">共
                                     <span  class="pageTotal" id="pageTotal" th:text="${pageInfo.getPages()}"></span>
@@ -188,9 +255,10 @@
                     <input type="hidden" id="mid" th:value="${id}"/>
                     <input type="hidden" id="tname" th:value="${tname}"/>
                     <input type="hidden" id="createDate" th:value="${createDate}"/>
-                    <input type="hidden" id="endTime" th:value="${endTime}"/>
+                    <input type="hidden" id="updateDate" th:value="${updateDate}"/>
                     <input type="hidden" id="state" th:value="${state}"/>
                     <input type="hidden" id="pageSize" th:value="${pageInfo.getPageSize()}"/>
+                    <input type="hidden" id="timeFlag" th:value="${timeFlag}"/>
                     <!-- 无数据时 -->
                     <table border="1" class="noData active" th:if="${pageInfo.getTotal()}=='0'">
                         <thead>
