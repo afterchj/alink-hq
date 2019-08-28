@@ -23,8 +23,10 @@
                     <nav class="bread">
                         <ol class="clearfix">
                             <li class="f-l">
-                                <a th:if="${lightInfo}==null" th:href="@{/scene/list(projectName=${projectName},meshName=${meshName},meshId=${meshId},mid=${mid})}">场景列表</a>
-                                <a th:if="${lightInfo}!=null" th:href="@{/scene/list(projectName=${projectName},meshName=${meshName},meshId=${meshId},mid=${mid},lid=${lightInfo.id})}">场景列表</a>
+                                <a th:if="${lightInfo}==null"
+                                   th:href="@{/scene/list(projectName=${projectName},meshName=${meshName},meshId=${meshId},mid=${mid})}">场景列表</a>
+                                <a th:if="${lightInfo}!=null"
+                                   th:href="@{/scene/list(projectName=${projectName},meshName=${meshName},meshId=${meshId},mid=${mid},lid=${lightInfo.id})}">场景列表</a>
                             </li>
                             <li class="f-l">场景详情</li>
                         </ol>
@@ -100,57 +102,143 @@
                             <div class="f-l" style="border-right: none;" id="placeMsg">
                                 <ul>
                                     <!--<li th:if="${userStat.index}=='0'"  th:each="placeList,userStat:${placeList}"-->
-                                        <!--th:alt="${placeList.pid}" class="pid active">-->
-                                        <!--<span th:if="${placeList.x}==null" th:text="${placeList.pname}+'（查看详情）'"></span>-->
-                                        <!--<span th:if="${placeList.x}!=null" th:text="${placeList.pname}+'('+${placeList.x}+'，'+${placeList.y}+')'"></span>-->
+                                    <!--th:alt="${placeList.pid}" class="pid active">-->
+                                    <!--<span th:if="${placeList.x}==null" th:text="${placeList.pname}+'（查看详情）'"></span>-->
+                                    <!--<span th:if="${placeList.x}!=null" th:text="${placeList.pname}+'('+${placeList.x}+'，'+${placeList.y}+')'"></span>-->
                                     <!--</li>-->
                                     <!--<li th:if="${userStat.index}!='0'"  th:each="placeList,userStat:${placeList}"-->
-                                        <!--th:alt="${placeList.pid}" class="pid">-->
-                                        <!--<span th:if="${placeList.x}==null" th:text="${placeList.pname}+'（查看详情）'"></span>-->
-                                        <!--<span th:if="${placeList.x}!=null" th:text="${placeList.pname}+'('+${placeList.x}+'，'+${placeList.y}+')'"></span>-->
+                                    <!--th:alt="${placeList.pid}" class="pid">-->
+                                    <!--<span th:if="${placeList.x}==null" th:text="${placeList.pname}+'（查看详情）'"></span>-->
+                                    <!--<span th:if="${placeList.x}!=null" th:text="${placeList.pname}+'('+${placeList.x}+'，'+${placeList.y}+')'"></span>-->
                                     <!--</li>-->
-                                    <li th:if="${userStat.index}=='0'" th:each="placeList,userStat:${placeList}" class="pid active" th:alt="${placeList.pid}">
+                                    <li th:if="${userStat.index}=='0' and ${lightInfo}==null"
+                                        th:each="placeList,userStat:${placeList}"
+                                        class="pid active" th:alt="${placeList.pid}">
                                         <span th:if="${placeList.x}==null" th:text="${placeList.pname}+'（查看详情）'"></span>
-                                        <span th:if="${placeList.x}!=null" th:text="${placeList.pname}+'（'+${placeList.x}+'，'+${placeList.y}+'）'"></span>
+                                        <span th:if="${placeList.x}!=null"
+                                              th:text="${placeList.pname}+'（'+${placeList.x}+'，'+${placeList.y}+'）'"></span>
                                     </li>
-                                    <li  th:if="${userStat.index}!='0'"  th:each="placeList,userStat:${placeList}" class="pid" th:alt="${placeList.pid}">
+                                    <li th:if="${userStat.index}!='0' and ${lightInfo}==null"
+                                        th:each="placeList,userStat:${placeList}"
+                                        class="pid" th:alt="${placeList.pid}">
                                         <span th:if="${placeList.x}==null" th:text="${placeList.pname}+'（查看详情）'"></span>
-                                        <span th:if="${placeList.x}!=null" th:text="${placeList.pname}+'（'+${placeList.x}+'，'+${placeList.y}+'）'"></span>
+                                        <span th:if="${placeList.x}!=null"
+                                              th:text="${placeList.pname}+'（'+${placeList.x}+'，'+${placeList.y}+'）'"></span>
+                                    </li>
+                                    <li th:if="${userStat.index}=='0' and ${lightInfo}!=null and ${lightInfo.pid}==${placeList.pid}"
+                                        th:each="placeList,userStat:${placeList}"
+                                        class="pid active" th:alt="${placeList.pid}">
+                                        <span th:if="${placeList.x}==null" th:text="${placeList.pname}+'（查看详情）'"></span>
+                                        <span th:if="${placeList.x}!=null"
+                                              th:text="${placeList.pname}+'（'+${placeList.x}+'，'+${placeList.y}+'）'"></span>
+                                    </li>
+                                    <li th:if="${userStat.index}!='0' and ${lightInfo}!=null and ${lightInfo.pid}==${placeList.pid}"
+                                        th:each="placeList,userStat:${placeList}"
+                                        class="pid active" th:alt="${placeList.pid}">
+                                        <span th:if="${placeList.x}==null" th:text="${placeList.pname}+'（查看详情）'"></span>
+                                        <span th:if="${placeList.x}!=null"
+                                              th:text="${placeList.pname}+'（'+${placeList.x}+'，'+${placeList.y}+'）'"></span>
+                                    </li>
+                                    <li th:if="${userStat.index}=='0' and ${lightInfo}!=null and ${lightInfo.pid}!=${placeList.pid}"
+                                        th:each="placeList,userStat:${placeList}"
+                                        class="pid" th:alt="${placeList.pid}">
+                                        <span th:if="${placeList.x}==null" th:text="${placeList.pname}+'（查看详情）'"></span>
+                                        <span th:if="${placeList.x}!=null"
+                                              th:text="${placeList.pname}+'（'+${placeList.x}+'，'+${placeList.y}+'）'"></span>
+                                    </li>
+                                    <li th:if="${userStat.index}!='0' and ${lightInfo}!=null and ${lightInfo.pid}!=${placeList.pid}"
+                                        th:each="placeList,userStat:${placeList}"
+                                        class="pid" th:alt="${placeList.pid}">
+                                        <span th:if="${placeList.x}==null" th:text="${placeList.pname}+'（查看详情）'"></span>
+                                        <span th:if="${placeList.x}!=null"
+                                              th:text="${placeList.pname}+'（'+${placeList.x}+'，'+${placeList.y}+'）'"></span>
                                     </li>
                                 </ul>
                             </div>
                             <div class="f-l" style="border-right: none;" id="groupMsg">
                                 <ul>
-                                    <li th:if="${userStat.index}=='0'" th:each="groupList,userStat:${groupList}" class="gid active" th:alt="${groupList.gid}">
+                                    <li th:if="${userStat.index}=='0' and ${lightInfo}==null"
+                                        th:each="groupList,userStat:${groupList}"
+                                        class="gid active" th:alt="${groupList.gid}">
                                         <span th:if="${groupList.x}==null" th:text="${groupList.gname}+'（查看详情）'"></span>
-                                        <span th:if="${groupList.x}!=null" th:text="${groupList.gname}+'（'+${groupList.x}+'，'+${groupList.y}+'）'"></span>
+                                        <span th:if="${groupList.x}!=null"
+                                              th:text="${groupList.gname}+'（'+${groupList.x}+'，'+${groupList.y}+'）'"></span>
                                     </li>
-                                    <li  th:if="${userStat.index}!='0'"  th:each="groupList,userStat:${groupList}" class="gid" th:alt="${groupList.gid}">
+                                    <li th:if="${userStat.index}!='0' and ${lightInfo}==null"
+                                        th:each="groupList,userStat:${groupList}"
+                                        class="gid" th:alt="${groupList.gid}">
                                         <span th:if="${groupList.x}==null" th:text="${groupList.gname}+'（查看详情）'"></span>
-                                        <span th:if="${groupList.x}!=null" th:text="${groupList.gname}+'（'+${groupList.x}+'，'+${groupList.y}+'）'"></span>
+                                        <span th:if="${groupList.x}!=null"
+                                              th:text="${groupList.gname}+'（'+${groupList.x}+'，'+${groupList.y}+'）'"></span>
+                                    </li>
+                                    <li th:if="${userStat.index}=='0' and ${lightInfo}!=null and ${lightInfo.gid}==${groupList.gid}"
+                                        th:each="groupList,userStat:${groupList}"
+                                        class="gid active" th:alt="${groupList.gid}">
+                                        <span th:if="${groupList.x}==null" th:text="${groupList.gname}+'（查看详情）'"></span>
+                                        <span th:if="${groupList.x}!=null"
+                                              th:text="${groupList.gname}+'（'+${groupList.x}+'，'+${groupList.y}+'）'"></span>
+                                    </li>
+                                    <li th:if="${userStat.index}!='0' and ${lightInfo}!=null and ${lightInfo.gid}==${groupList.gid}"
+                                        th:each="groupList,userStat:${groupList}"
+                                        class="gid active" th:alt="${groupList.gid}">
+                                        <span th:if="${groupList.x}==null" th:text="${groupList.gname}+'（查看详情）'"></span>
+                                        <span th:if="${groupList.x}!=null"
+                                              th:text="${groupList.gname}+'（'+${groupList.x}+'，'+${groupList.y}+'）'"></span>
+                                    </li>
+                                    <li th:if="${userStat.index}=='0' and ${lightInfo}!=null and ${lightInfo.gid}!=${groupList.gid}"
+                                        th:each="groupList,userStat:${groupList}"
+                                        class="gid " th:alt="${groupList.gid}">
+                                        <span th:if="${groupList.x}==null" th:text="${groupList.gname}+'（查看详情）'"></span>
+                                        <span th:if="${groupList.x}!=null"
+                                              th:text="${groupList.gname}+'（'+${groupList.x}+'，'+${groupList.y}+'）'"></span>
+                                    </li>
+                                    <li th:if="${userStat.index}!='0' and ${lightInfo}!=null and ${lightInfo.gid}!=${groupList.gid}"
+                                        th:each="groupList,userStat:${groupList}"
+                                        class="gid " th:alt="${groupList.gid}">
+                                        <span th:if="${groupList.x}==null" th:text="${groupList.gname}+'（查看详情）'"></span>
+                                        <span th:if="${groupList.x}!=null"
+                                              th:text="${groupList.gname}+'（'+${groupList.x}+'，'+${groupList.y}+'）'"></span>
                                     </li>
                                 </ul>
                             </div>
                             <div class="f-l clearfix">
                                 <div class="f-l" id="lightMsg">
                                     <ul class="one">
-                                        <li th:if="${userStat.index}=='0' and ${lightInfo}==null" th:each="lightList,userStat:${lightList}"  class="lid active" th:alt="${lightList.id}" >
-                                            <span  th:text="${lightList.lname}+'（'+${lightList.lmac}+')'"></span><span th:text="${lightList.x}+'（色温），'+${lightList.y}+'（亮度）'"></span>
+                                        <li th:if="${userStat.index}=='0' and ${lightInfo}==null"
+                                            th:each="lightList,userStat:${lightList}" class="lid active"
+                                            th:alt="${lightList.id}">
+                                            <span th:text="${lightList.lname}+'（'+${lightList.lmac}+')'"></span><span
+                                                th:text="${lightList.x}+'（色温），'+${lightList.y}+'（亮度）'"></span>
                                         </li>
-                                        <li th:if="${userStat.index}=='0' and ${lightInfo}!=null and ${lightInfo.id}==${lightList.id}" th:each="lightList,userStat:${lightList}"  class="lid active" th:alt="${lightList.id}">
-                                            <span  th:text="${lightList.lname}+'（'+${lightList.lmac}+')'"></span><span th:text="${lightList.x}+'（色温），'+${lightList.y}+'（亮度）'"></span>
+                                        <li th:if="${userStat.index}=='0' and ${lightInfo}!=null and ${lightInfo.id}==${lightList.id}"
+                                            th:each="lightList,userStat:${lightList}" class="lid active"
+                                            th:alt="${lightList.id}">
+                                            <span th:text="${lightList.lname}+'（'+${lightList.lmac}+')'"></span><span
+                                                th:text="${lightList.x}+'（色温），'+${lightList.y}+'（亮度）'"></span>
                                         </li>
-                                        <li th:if="${userStat.index}=='0' and ${lightInfo}!=null and ${lightInfo.id}!=${lightList.id}" th:each="lightList,userStat:${lightList}"  class="lid" th:alt="${lightList.id}">
-                                            <span  th:text="${lightList.lname}+'（'+${lightList.lmac}+')'"></span><span th:text="${lightList.x}+'（色温），'+${lightList.y}+'（亮度）'"></span>
+                                        <li th:if="${userStat.index}=='0' and ${lightInfo}!=null and ${lightInfo.id}!=${lightList.id}"
+                                            th:each="lightList,userStat:${lightList}" class="lid"
+                                            th:alt="${lightList.id}">
+                                            <span th:text="${lightList.lname}+'（'+${lightList.lmac}+')'"></span><span
+                                                th:text="${lightList.x}+'（色温），'+${lightList.y}+'（亮度）'"></span>
                                         </li>
-                                        <li th:if="${userStat.index}!='0' and ${lightInfo}==null" th:each="lightList,userStat:${lightList}"  class="lid" th:alt="${lightList.id}" >
-                                            <span th:text="${lightList.lname}+'（'+${lightList.lmac}+')'"></span><span th:text="${lightList.x}+'，'+${lightList.y}"></span>
+                                        <li th:if="${userStat.index}!='0' and ${lightInfo}==null"
+                                            th:each="lightList,userStat:${lightList}" class="lid"
+                                            th:alt="${lightList.id}">
+                                            <span th:text="${lightList.lname}+'（'+${lightList.lmac}+')'"></span><span
+                                                th:text="${lightList.x}+'，'+${lightList.y}"></span>
                                         </li>
-                                        <li th:if="${userStat.index}!='0' and ${lightInfo}!=null and ${lightInfo.id}==${lightList.id}" th:each="lightList,userStat:${lightList}"  class="lid active" th:alt="${lightList.id}" >
-                                            <span th:text="${lightList.lname}+'（'+${lightList.lmac}+')'"></span><span th:text="${lightList.x}+'，'+${lightList.y}"></span>
+                                        <li th:if="${userStat.index}!='0' and ${lightInfo}!=null and ${lightInfo.id}==${lightList.id}"
+                                            th:each="lightList,userStat:${lightList}" class="lid active"
+                                            th:alt="${lightList.id}">
+                                            <span th:text="${lightList.lname}+'（'+${lightList.lmac}+')'"></span><span
+                                                th:text="${lightList.x}+'，'+${lightList.y}"></span>
                                         </li>
-                                        <li th:if="${userStat.index}!='0' and ${lightInfo}!=null and ${lightInfo.id}!=${lightList.id}" th:each="lightList,userStat:${lightList}"  class="lid" th:alt="${lightList.id}" >
-                                            <span th:text="${lightList.lname}+'（'+${lightList.lmac}+')'"></span><span th:text="${lightList.x}+'，'+${lightList.y}"></span>
+                                        <li th:if="${userStat.index}!='0' and ${lightInfo}!=null and ${lightInfo.id}!=${lightList.id}"
+                                            th:each="lightList,userStat:${lightList}" class="lid"
+                                            th:alt="${lightList.id}">
+                                            <span th:text="${lightList.lname}+'（'+${lightList.lmac}+')'"></span><span
+                                                th:text="${lightList.x}+'，'+${lightList.y}"></span>
                                         </li>
                                     </ul>
                                 </div>
@@ -165,23 +253,34 @@
 <script src="/alink-hq/static/js/jquery.min.js"></script>
 <script type="text/javascript" src="/alink-hq/static/js/left.js"></script>
 <script src="/alink-hq/static/js/moment.js"></script>
-<script  th:inline="javascript">
+<script th:inline="javascript">
     $(function () {
         var length = $('.scene-msg .scene-msg-list>div:nth-child(3)>div:nth-child(1)  ul').height();
         if (length > 380) {
             $('.scene-msg .scene-msg-list>div:nth-child(3)>div:nth-child(1) ul').addClass('active');
             $('.scene-msg .scene-msg-list>div:nth-child(3)>div:nth-child(1)').css('border-right', 'none')
         }
-        var lightInfo=[[${lightInfo}]];
-        console.log(lightInfo);
-        if(lightInfo!=null){
-            $('#groupMsg li').each(function(){
-                var gidss=parseInt($(this).attr('alt'));
-                var lgid=lightInfo.gid;
-                console.log('lgid',lgid)
-                if(gidss==lgid){
+        var lightInfo = [[${lightInfo}]];
+        var groupList = [[${groupList}]];
+        var lightList = [[${lightList}]];
+        console.log('lightInfo', lightInfo);
+        console.log('groupList', groupList);
+        console.log('lightList', lightList);
+        var lid = $('#lid').val();
+        var gid = $('#gid').val();
+        var pid = $('#pid').val();
+
+        console.log('lid', lid);
+        console.log('gid', gid);
+        console.log('pid', pid);
+        if (lightInfo != null) {
+            $('#groupMsg li').each(function () {
+                var gidss = parseInt($(this).attr('alt'));
+                var lgid = lightInfo.gid;
+                console.log('lgid', lgid)
+                if (gidss == lgid) {
                     $(this).addClass('active');
-                }else{
+                } else {
                     $(this).removeClass('active')
                 }
             })
@@ -190,13 +289,16 @@
     $('.scene-msg-list ').on('click', 'li', function () {
         $(this).toggleClass('active').siblings().removeClass('active');
     })
-    $('#placeMsg .pid').click(function () {
+    $('#placeMsg').on('click', '.pid', function () {
         var pid = $(this).attr('alt');
         var sid = GetUrlParam('sid');
-        var lightInfo=[[${lightInfo}]];
+        var firstKeyGroupMsgGid, firstKeyGroupMsgSid;
+//        灯信息，c包括该灯的id,pid,gid，如果是从网络详情跳转过来的，则为null
+        var lightInfo = [[${lightInfo}]];
 //        console.log('lightInfoId',lightInfo.id);
-        console.log('我被点击了',pid);
+        console.log('我被点击了', pid);
         var content = '';
+        var content1 = '';
         $.ajax({
             type: "post",
             url: "/alink-hq/scene/placeDetail",
@@ -204,37 +306,115 @@
                 "pid": pid,
                 "sid": sid
             },
-            async: true,
+            async: false,
             success: function (res) {
                 $('#groupMsg ul').empty();
-                var groupList=res.groupList;
-                console.log('groupList',groupList);
-//                var lightList = res.lightList;
-                <!--<li th:if="${userStat.index}=='0'" th:each="groupList,userStat:${groupList}" class="gid active" th:alt="${groupList.gid}">-->
+                var groupList = res.groupList;
+                firstKeyGroupMsgGid = groupList[0].gid;
+                firstKeyGroupMsgSid = groupList[0].sid;
+                console.log('groupList', groupList);
+                console.log('firstKeyGroupMsgGid', firstKeyGroupMsgGid);
+                console.log('firstKeyGroupMsgSid', firstKeyGroupMsgSid);
+                console.log('sid', sid);
+                //  var lightList = res.lightList;
                 $.each(groupList, function (key, value) {
-                    if(lightInfo==null){
-                        if (key == 0) {
-                            content += '<li class="gid active" alt="' + value.gid + '" ><span>' + value.gname + '（查看详情）'+'</span></li>';
-                        }else{
-                            content += '<li class="gid" alt="' + value.gid + '" ><span>' + value.gname + '（'+ value.x +'，'+ value.y +'）' + '</span></li>';
+                    //从网络详情跳过来，无灯信息，区域默认为第一个
+                    if (key == 0) {
+                        if (value.x == null) {
+                            content += '<li class="gid active" alt="' + value.gid + '"  key="' + key + '" ><span>' + value.gname + '（查看详情）' + '</span></li>';
+                        } else {
+                            content += '<li class="gid active" alt="' + value.gid + '" key="' + key + '"><span>' + value.gname + '（' + value.x + '，' + value.y + '）' + '</span></li>';
                         }
-                    }else if(lightInfo!=null && lightInfo.id==value.id){
-                        if (key == 0) {
-                            content += '<li class="gid active" alt="' + value.gid + '" ><span>' + value.gname + '（查看详情）'+'</span></li>';
-                        }else{
-                            content += '<li class="gid active" alt="' + value.gid + '" ><span>' + value.gname + '（'+ value.x +'，'+ value.y +'）' + '</span></li>';
+                    } else {
+                        if (value.x == null) {
+                            content += '<li class="gid " alt="' + value.gid + '" key="' + key + '"><span>' + value.gname + '（查看详情）' + '</span></li>';
+                        } else {
+                            content += '<li class="gid " alt="' + value.gid + '" key="' + key + '"><span>' + value.gname + '（' + value.x + '，' + value.y + '）' + '</span></li>';
                         }
                     }
+//                    if (lightInfo == null) {
+//                        if (key == 0) {
+//                            if (value.x == null) {
+//                                content += '<li class="gid active" alt="' + value.gid + '"  key="' + key + '" ><span>' + value.gname + '（查看详情）' + '</span></li>';
+//                            } else {
+//                                content += '<li class="gid active" alt="' + value.gid + '" key="' + key + '"><span>' + value.gname + '（' + value.x + '，' + value.y + '）' + '</span></li>';
+//                            }
+//                        } else {
+//                            if (value.x == null) {
+//                                content += '<li class="gid " alt="' + value.gid + '" key="' + key + '"><span>' + value.gname + '（查看详情）' + '</span></li>';
+//                            } else {
+//                                content += '<li class="gid " alt="' + value.gid + '" key="' + key + '"><span>' + value.gname + '（' + value.x + '，' + value.y + '）' + '</span></li>';
+//                            }
+//                        }
+//                        // 从灯详情跳出来，有灯信息，当前灯
+//                    } else if (lightInfo != null && lightInfo.id == value.id) {
+//
+//                        // x,y值不统一，则查看详情
+//                        if (value.x == null) {
+//                            content += '<li class="gid active" alt="' + value.gid + '" key="' + key + '" ><span>' + value.gname + '（查看详情）' + '</span></li>';
+//                        // x,y值统一，展示
+//                        } else {
+//                            content += '<li class="gid active" alt="' + value.gid + '"  key="' + key + '"><span>' + value.gname + '（' + value.x + '，' + value.y + '）' + '</span></li>';
+//                        }
+//                        // 从灯详情跳出来，有灯信息，不是当前灯
+//                    } else {
+//                        if (value.x == null) {
+//                            content += '<li class="gid " alt="' + value.gid + '" key="' + key + '"><span>' + value.gname + '（查看详情）' + '</span></li>';
+//                        // x,y值统一，展示
+//                        } else {
+//                            content += '<li class="gid " alt="' + value.gid + '"  key="' + key + '"><span>' + value.gname + '（' + value.x + '，' + value.y + '）' + '</span></li>';
+//                        }
+//                    }
                 })
                 $('#groupMsg ul').append(content);
+                $.ajax({
+                    type: "post",
+                    url: "/alink-hq/scene/groupDetail",
+                    data: {
+                        "gid": firstKeyGroupMsgGid,
+                        "sid": sid
+                    },
+                    async: false,
+                    success: function (res) {
+                        $('.one li').remove();
+                        console.log('res', res);
+                        var lightList = res.lightList;
+                        console.log('lightList', lightList);
+                        console.log('相同的firstKeyGroupMsgGid', firstKeyGroupMsgGid);
+                        console.log('相同的sid', sid);
+                        $.each(lightList, function (key, value) {
+//                            if (lightInfo == null) {
+                            if (key == 0) {
+                                content1 += '<li class="lid active" alt="' + value.id + '" ><span>' + value.lname + '（' + value.lmac + '）' + '</span><span>' + value.x + '（色温），' + value.y + '（亮度）</span></li>';
+                            } else {
+                                content1 += '<li class="lid" alt="' + value.id + '" ><span>' + value.lname + '（' + value.lmac + '）' + '</span><span>' + value.x + '，' + value.y + '</span></li>';
+                            }
+//                            } else if (lightInfo != null && lightInfo.id == value.id) {
+//                                if (key == 0) {
+//                                    content += '<li class="lid active" alt="' + value.id + '" ><span>' + value.lname + '（' + value.lmac + '）' + '</span><span>' + value.x + '（色温），' + value.y + '(亮度）</span></li>';
+//                                } else {
+//                                    content += '<li class="lid active" alt="' + value.id + '" ><span>' + value.lname + '（' + value.lmac + '）' + '</span><span>' + value.x + '，' + value.y + '</span></li>';
+//                                }
+//                            } else {
+//                                if (key == 0) {
+//                                    content += '<li class="lid " alt="' + value.id + '" ><span>' + value.lname + '（' + value.lmac + '）' + '</span><span>' + value.x + '（色温），' + value.y + '(亮度）</span></li>';
+//                                } else {
+//                                    content += '<li class="lid " alt="' + value.id + '" ><span>' + value.lname + '（' + value.lmac + '）' + '</span><span>' + value.x + '，' + value.y + '</span></li>';
+//                                }
+//                            }
+                        })
+                        $('.one').append(content1);
+                    }
+                })
             }
-        })
+        });
+
     })
-    $('#groupMsg').on('click','.gid',function () {
+    $('#groupMsg').on('click', '.gid', function () {
         var gid = $(this).attr('alt');
         var sid = GetUrlParam('sid');
-        var lightInfo=[[${lightInfo}]];
-        console.log('我被点击了',gid);
+        var lightInfo = [[${lightInfo}]];
+        console.log('我被点击了', gid);
         var content = '';
         $.ajax({
             type: "post",
@@ -243,28 +423,31 @@
                 "gid": gid,
                 "sid": sid
             },
-            async: true,
+            async: false,
             success: function (res) {
                 $('.one li').remove();
                 var lightList = res.lightList;
-                console.log('lightList',lightList);
+                console.log('lightList', lightList);
                 $.each(lightList, function (key, value) {
-                    if(lightInfo==null){
+                    //从网络详情跳过来，无灯信息，区域默认为第一个
+                    if (lightInfo == null) {
                         if (key == 0) {
-                            content += '<li class="lid" alt="' + value.id + '" ><span>' + value.lname + '（' + value.lmac + '）' + '</span><span>' + value.x + '（色温），' + value.y + '（亮度）</span></li>';
-                        }else{
+                            content += '<li class="lid active" alt="' + value.id + '" ><span>' + value.lname + '（' + value.lmac + '）' + '</span><span>' + value.x + '（色温），' + value.y + '（亮度）</span></li>';
+                        } else {
                             content += '<li class="lid" alt="' + value.id + '" ><span>' + value.lname + '（' + value.lmac + '）' + '</span><span>' + value.x + '，' + value.y + '</span></li>';
                         }
-                    }else if(lightInfo!=null && lightInfo.id==value.id){
+                        // 从灯详情跳出来，有灯信息，当前灯
+                    } else if (lightInfo != null && lightInfo.id == value.id) {
                         if (key == 0) {
                             content += '<li class="lid active" alt="' + value.id + '" ><span>' + value.lname + '（' + value.lmac + '）' + '</span><span>' + value.x + '（色温），' + value.y + '(亮度）</span></li>';
-                        }else{
+                        } else {
                             content += '<li class="lid active" alt="' + value.id + '" ><span>' + value.lname + '（' + value.lmac + '）' + '</span><span>' + value.x + '，' + value.y + '</span></li>';
                         }
-                    }else{
+                        // 从灯详情跳出来，有灯信息，不是当前灯
+                    } else {
                         if (key == 0) {
                             content += '<li class="lid " alt="' + value.id + '" ><span>' + value.lname + '（' + value.lmac + '）' + '</span><span>' + value.x + '（色温），' + value.y + '(亮度）</span></li>';
-                        }else{
+                        } else {
                             content += '<li class="lid " alt="' + value.id + '" ><span>' + value.lname + '（' + value.lmac + '）' + '</span><span>' + value.x + '，' + value.y + '</span></li>';
                         }
                     }
