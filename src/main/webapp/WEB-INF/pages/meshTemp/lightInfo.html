@@ -59,7 +59,7 @@
                                 <span th:if="${meshInfo.y}=='null' or ${meshInfo.y}<0" th:text="${meshInfo.y}"></span>
                                 <span th:if="${meshInfo.y}!='null' and ${meshInfo.y}!=50 and ${meshInfo.y}>=0"
                                       th:text="100-${meshInfo.y}*5+'%'"></span>
-                                <span th:if="${meshInfo.y==50}" th:text="50"></span>
+                                <span th:if="${meshInfo.y}==50" th:text="50"></span>
                             </li>
                             <li>当前状态：
                             <span th:switch="${meshInfo.off}">
@@ -170,8 +170,9 @@
 <script type="text/javascript" src="/alink-hq/static/js/left.js"></script>
 <script src="/alink-hq/static/js/moment.js"></script>
 
-<script type="text/javascript">
-
+<script th:inline="javascript">
+    var meshInfo = [[${meshInfo}]];
+    console.log(meshInfo);
 </script>
 </body>
 
