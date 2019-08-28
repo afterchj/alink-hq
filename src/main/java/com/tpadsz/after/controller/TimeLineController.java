@@ -101,45 +101,56 @@ public class TimeLineController {
         Map<String,Object> map = new HashMap<>();
         MeshInfo meshInfo = sceneService.findProjectByMeshId(meshId);
         List<MeshInfo> placeList = sceneService.findPlaceBySid(sid);
-        List<MeshInfo> groupList = sceneService.findGroupByPid(placeList.get(0).getPid());
         List<MeshInfo> lightList = new ArrayList<>();
-        if (lid == null) {
-            if(groupList.size()>0) {
-                lightList = sceneService.findLightByGid(groupList.get(0).getGid(), sid);
-            }
-        } else {
-            MeshInfo lightInfo = sceneService.findLightInfoByLid(lid);
-            lightList = sceneService.findLightByGid(lightInfo.getGid(),sid);
-            map.put("lightInfo",lightInfo);
-        }
-
-        int samePlaceXY = 1;
-        String groupX = "";
-        String groupY = "";
-        for (int i = 0; i < groupList.size(); i++) {
-            List<MeshInfo> list2 = sceneService.findXYByGid(groupList.get(i).getGid(), sid);
-            if (list2.size() == 1) {
-                if (!"".equals(groupX) && groupX != null && groupY != null) {
-                    if (!groupX.equals(list2.get(0).getX()) || !groupY.equals(list2.get(0).getY())) {
+        List<MeshInfo> groupList = new ArrayList<>();
+        int lidFlag = 0;
+        for(int i=0;i<placeList.size();i++) {
+            List<MeshInfo> groupList1 = sceneService.findGroupByPid(placeList.get(i).getPid());
+            int samePlaceXY = 1;
+            String groupX = "";
+            String groupY = "";
+            for (int j = 0; j < groupList1.size(); j++) {
+                List<MeshInfo> list2 = sceneService.findXYByGid(groupList1.get(j).getGid(), sid);
+                //该组xy值相同则list2的size为1
+                if (list2.size() == 1) {
+                    if (!"".equals(groupX) && groupX != null && groupY != null) {
+                        if (!groupX.equals(list2.get(0).getX()) || !groupY.equals(list2.get(0).getY())) {
+                            samePlaceXY = 0;
+                        }
+                    }
+                    groupX = list2.get(0).getX();
+                    groupY = list2.get(0).getY();
+                    if (groupX == null || groupY == null) {
                         samePlaceXY = 0;
                     }
-                }
-                groupY = list2.get(0).getY();
-                groupX = list2.get(0).getX();
-
-                if (groupX == null || groupY == null) {
+                    groupList1.get(j).setX(groupX);
+                    groupList1.get(j).setY(groupY);
+                } else {
                     samePlaceXY = 0;
                 }
-                groupList.get(i).setX(groupX);
-                groupList.get(i).setY(groupY);
-            } else {
-                samePlaceXY = 0;
             }
-        }
 
-        if (samePlaceXY == 1) {
-            placeList.get(0).setX(groupList.get(0).getX());
-            placeList.get(0).setY(groupList.get(0).getY());
+            if (samePlaceXY == 1 && groupList1.size() != 0) {
+                placeList.get(i).setX(groupList1.get(0).getX());
+                placeList.get(i).setY(groupList1.get(0).getY());
+            }
+            if(lidFlag==0) {
+                if (lid == null) {
+                    if (groupList1.size() > 0) {
+                        lightList = sceneService.findLightByGid(groupList1.get(0).getGid(), sid);
+                    }
+                    groupList = groupList1;
+                    lidFlag = 1;
+                } else {
+                    MeshInfo lightInfo = sceneService.findLightInfoByLid(lid);
+                    lightList = sceneService.findLightByGid(lightInfo.getGid(), sid);
+                    map.put("lightInfo", lightInfo);
+                    if(placeList.get(i).getPid()==lightInfo.getPid()){
+                        groupList = groupList1;
+                        lidFlag = 1;
+                    }
+                }
+            }
         }
         map.put("sceneName", sceneName);
         map.put("sceneId", sceneId);

@@ -135,6 +135,7 @@ public class SceneController {
             String groupY = "";
             for (int j = 0; j < groupList1.size(); j++) {
                 List<MeshInfo> list2 = sceneService.findXYByGid(groupList1.get(j).getGid(), sid);
+                //该组xy值相同则list2的size为1
                 if (list2.size() == 1) {
                     if (!"".equals(groupX) && groupX != null && groupY != null) {
                         if (!groupX.equals(list2.get(0).getX()) || !groupY.equals(list2.get(0).getY())) {
@@ -204,17 +205,11 @@ public class SceneController {
     public Map<String, List> placeDetail(Integer pid, Integer sid) {
         Map<String, List> map = new HashMap<>();
         List<MeshInfo> groupList = sceneService.findGroupByPid(pid);
-        String groupX = "";
-        String groupY = "";
         for (int j = 0; j < groupList.size(); j++) {
             List<MeshInfo> list2 = sceneService.findXYByGid(groupList.get(j).getGid(), sid);
             if (list2.size() == 1) {
-                if (!"".equals(groupX) && groupX != null && groupY != null) {
-                }
-                groupX = list2.get(0).getX();
-                groupY = list2.get(0).getY();
-                groupList.get(j).setX(groupX);
-                groupList.get(j).setY(groupY);
+                groupList.get(j).setX(list2.get(0).getX());
+                groupList.get(j).setY(list2.get(0).getY());
             }
         }
         map.put("groupList", groupList);
