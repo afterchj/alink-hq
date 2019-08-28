@@ -62,21 +62,21 @@
                                         <label for="">角色：</label>
                                     </div>
                                     <div class="field-widget p-r">
-                                        <label shiro:hasAnyRoles="super" for="" class="l-radio" >
+                                        <label shiro:hasPermission ="createUserAdmin" for="" class="l-radio" >
                                             <!--<img src="/alink-hq/static/img/select-un.png" alt=""/>-->
                                             <input type="radio" name="role" value="2"/>管理员
                                         </label>
-                                        <label shiro:hasAnyRoles="super,admin" for="" class="l-radio">
+                                        <label shiro:hasPermission ="createUserManager" for="" class="l-radio">
                                             <!--<img src="/alink-hq/static/img/select-un.png" alt=""/>-->
                                             <input type="radio" name="role" value="3"/>乙方管理员
                                         </label>
-                                        <label shiro:hasAnyRoles="super,admin,manager" for="" class="l-radio">
+                                        <label shiro:hasPermission ="createUserUser" for="" class="l-radio">
                                             <!--<img src="/alink-hq/static/img/select-on.png" alt=""/>-->
                                             <input type="radio" name="role" checked value="4"/>施工人员
                                         </label>
-                                        <label shiro:hasAnyRoles="super,admin,manager" for="" class="l-radio">
+                                        <label shiro:hasPermission ="createUserOtamanager" for="" class="l-radio">
                                             <!--<img src="/alink-hq/static/img/select-on.png" alt=""/>-->
-                                            <input type="radio" name="role"  value="5"/>固件管理员
+                                            <input type="radio" name="role"  value="13"/>固件管理员
                                         </label>
                                     </div>
                                 </div>
