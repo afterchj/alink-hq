@@ -4,10 +4,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.tpadsz.after.dao.TimeLineDao;
-import com.tpadsz.after.entity.ProjectList;
-import com.tpadsz.after.entity.TimeBean;
-import com.tpadsz.after.entity.TimeLine;
-import com.tpadsz.after.entity.TimePoint;
+import com.tpadsz.after.entity.*;
 import com.tpadsz.after.entity.dd.Week;
 import com.tpadsz.after.service.TimeLineService;
 import org.apache.commons.lang3.StringUtils;
@@ -43,7 +40,15 @@ public class TimeLineServiceImpl implements TimeLineService {
     }
 
     @Override
-    public PageInfo<TimeLine> getTimeLineByMid(int id, Integer pageNum, Integer pageSize, String timeFlag, String tname, String createDate, String endTime,String state) {
+    public PageInfo<TimeLine> getTimeLineByMid(TimeListPage timeListPage) {
+        Integer pageNum = timeListPage.getPageNum();
+        Integer pageSize = timeListPage.getPageSize();
+        String state = timeListPage.getState();
+        String timeFlag = timeListPage.getTimeFlag();
+        int id = timeListPage.getId();
+        String tname = timeListPage.getTname();
+        String createDate = timeListPage.getCreateDate();
+        String updateDate = timeListPage.getUpdateDate();
         if (pageNum==null){
             pageNum = 1;//默认第一页
         }
@@ -65,15 +70,15 @@ public class TimeLineServiceImpl implements TimeLineService {
             }
         }
         if (timeFlag==null||timeFlag.length()<1){
-            timeLineList = timeLineDao.getTimeLineByMid(id,tname,createDate,endTime,state);
+            timeLineList = timeLineDao.getTimeLineByMid(id,tname,createDate,updateDate,state);
         }else if (timeFlag.equals("creToTop")){
-            timeLineList = timeLineDao.getTimeLineByMidOrderByCreateDate(id,tname,createDate,endTime,state);
+            timeLineList = timeLineDao.getTimeLineByMidOrderByCreateDate(id,tname,createDate,updateDate,state);
         }else if (timeFlag.equals("creToBottom")){
-            timeLineList = timeLineDao.getTimeLineByMidOrderByCreateDateDesc(id,tname,createDate,endTime,state);
+            timeLineList = timeLineDao.getTimeLineByMidOrderByCreateDateDesc(id,tname,createDate,updateDate,state);
         }else if (timeFlag.equals("upToTop")){
-            timeLineList = timeLineDao.getTimeLineByMidOrderByUpdateDate(id,tname,createDate,endTime,state);
+            timeLineList = timeLineDao.getTimeLineByMidOrderByUpdateDate(id,tname,createDate,updateDate,state);
         }else if (timeFlag.equals("upToBottom")){
-            timeLineList = timeLineDao.getTimeLineByMid(id,tname,createDate,endTime,state);
+            timeLineList = timeLineDao.getTimeLineByMid(id,tname,createDate,updateDate,state);
         }
         for (TimeLine timeLine:timeLineList){
             String dayObj = timeLine.getDayObj();

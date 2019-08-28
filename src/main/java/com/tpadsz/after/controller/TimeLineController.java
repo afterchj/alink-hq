@@ -7,6 +7,7 @@ import com.tpadsz.after.service.SceneService;
 import com.tpadsz.after.service.TimeLineService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -40,23 +41,23 @@ public class TimeLineController {
      * @return
      */
     @RequestMapping("/list")
-    public String timerList(Model model, int id, Integer pageNum, Integer pageSize, String timeFlag, String tname, String
-            createDate, String endTime, String state, HttpSession session) {
+    public String timerList(Model model, @ModelAttribute("timeListPage") TimeListPage timeListPage, HttpSession
+                                    session) {
         User loginUser = (User) session.getAttribute("user");
         String account = loginUser.getAccount();
-        ProjectList projectList= timeLineService.getProjectNameByMid(id);
+        ProjectList projectList= timeLineService.getProjectNameByMid(timeListPage.getId());
         List<String> permissions = rolePermissionInfoService.getPermissions(account);
-        PageInfo<TimeLine> pageInfo = timeLineService.getTimeLineByMid(id,pageNum,pageSize,timeFlag,tname,createDate,
-                endTime, state);
+        PageInfo<TimeLine> pageInfo = timeLineService.getTimeLineByMid(timeListPage);
         model.addAttribute("permissions",permissions);
         model.addAttribute("pageInfo",pageInfo);
         model.addAttribute("projectName",projectList.getName());
         model.addAttribute("projectId",projectList.getId());
-        model.addAttribute("id",id);
-        model.addAttribute("tname",tname);
-        model.addAttribute("createDate",createDate);
-        model.addAttribute("endTime",endTime);
-        model.addAttribute("state",state);
+        model.addAttribute("id",timeListPage.getId());
+        model.addAttribute("tname",timeListPage.getTname());
+        model.addAttribute("createDate",timeListPage.getCreateDate());
+        model.addAttribute("updateDate",timeListPage.getUpdateDate());
+        model.addAttribute("state",timeListPage.getState());
+        model.addAttribute("timeFlag",timeListPage.getTimeFlag());
         return "timerManage/timerList";
     }
 
