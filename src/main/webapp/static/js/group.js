@@ -80,7 +80,7 @@ $(function () {
             placeArr.push($(this).siblings('.place_id').val());
         });
         ids = idss;
-        var result2 = placeArr.includes('0');
+        // var result2 = placeArr.includes('0');
         if (ids.length > 0) {
             var selector = $('div[openContent="delete-pop"]');
             selector.addClass('active');
