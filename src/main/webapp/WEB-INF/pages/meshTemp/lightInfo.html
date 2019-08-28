@@ -170,8 +170,9 @@
 <script type="text/javascript" src="/alink-hq/static/js/left.js"></script>
 <script src="/alink-hq/static/js/moment.js"></script>
 
-<script type="text/javascript">
-
+<script th:inline="javascript">
+    var meshInfo = [[${meshInfo}]];
+    console.log(meshInfo);
 </script>
 </body>
 
