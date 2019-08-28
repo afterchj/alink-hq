@@ -81,8 +81,7 @@ public class FileController {
 
     @RequestMapping("/save")
     public String save(FileDTO info) {
-        Map map = JSON.parseObject(JSON.toJSONString(info));
-        fileService.saveFile(map);
+        fileService.updateFile(info);
         return "redirect:/file/OTAFile";
     }
 
@@ -127,13 +126,8 @@ public class FileController {
 
     @ResponseBody
     @RequestMapping("/saveUpdate")
-    public String saveUpdate(int id, String otaDesc) {
-        FileDTO info = fileService.getFileInfo(id);
-        if (StringUtils.isNotBlank(otaDesc)) {
-            info.setOtaDesc(otaDesc);
-        }
-        Map map = JSON.parseObject(JSON.toJSONString(info));
-        fileService.saveFile(map);
+    public String saveUpdate(FileDTO info)  {
+        fileService.updateFile(info);
         return "ok";
     }
 

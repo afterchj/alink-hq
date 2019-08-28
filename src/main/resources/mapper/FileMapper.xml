@@ -104,7 +104,22 @@
     </delete>
 
     <update id="updateFile" parameterType="FileDTO">
-      UPDATE f_ota_file SET update_date = now(),ota_path = #{otaPath} WHERE id=#{id}
+      UPDATE f_ota_file
+        <set>
+            <if test="otaId!=null and otaId!=''">
+                ota_id=#{otaId},
+            </if>
+            <if test="otaName!=null and otaName!=''">
+                ota_name=#{otaName},
+            </if>
+            <if test="otaDesc!=null and otaDesc!=''">
+                ota_desc=#{otaDesc},
+            </if>
+            <if test="otaPath!=null and otaPath!=''">
+                ota_path=#{otaPath},
+            </if>
+            update_date=now()
+        </set>WHERE id=#{id}
     </update>
 
     <update id="saveUpdate" parameterType="FileDTO">
