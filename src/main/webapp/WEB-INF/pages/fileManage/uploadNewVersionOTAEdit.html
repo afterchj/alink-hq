@@ -47,7 +47,6 @@
                         <!--第二步--已上传-->
                         <form th:action="@{/file/doUpload(type='edit')}" method="post" enctype="multipart/form-data" class="hasUpload active">
                             <input type="hidden" name="id" th:value="${file.id}">
-                            <!--<input type="hidden" name="oid" th:value="${file.oid}">-->
                             <fieldset>
                                 <div class="form-row clearfix">
                                     <div class="field-label">
