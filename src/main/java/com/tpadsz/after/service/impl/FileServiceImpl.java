@@ -58,8 +58,13 @@ public class FileServiceImpl implements FileService {
     }
 
     @Override
+    public void updateFile(FileDTO info) {
+        fileDao.updateFile(info);
+    }
+
+    @Override
     public void saveUpdate(FileDTO info) throws RepetitionException {
-       if (StringUtils.isNotBlank(info.getOtaVersion())){
+        if (StringUtils.isNotBlank(info.getOtaVersion())) {
             int count = fileDao.getCount(info);
             if (count > 0) {
                 throw new RepetitionException(100, "版本重复");

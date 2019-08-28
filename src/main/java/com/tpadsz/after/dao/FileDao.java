@@ -23,8 +23,11 @@ public interface FileDao {
 
     void saveUpdate(FileDTO info);
 
+    void updateFile(FileDTO info);
+
     void saveFile(Map info);
 
     void deleteFileById(int id);
+
     void deleteHistoryById(int id);
 }

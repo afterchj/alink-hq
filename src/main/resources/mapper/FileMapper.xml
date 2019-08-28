@@ -97,6 +97,10 @@
         DELETE FROM f_file_history_version WHERE id=#{id}
     </delete>
 
+    <update id="updateFile" parameterType="FileDTO">
+      UPDATE f_ota_file SET update_date = now(),ota_path = #{otaPath} WHERE id=#{id}
+    </update>
+
     <update id="saveUpdate" parameterType="FileDTO">
         UPDATE f_file_history_version
         <set>
