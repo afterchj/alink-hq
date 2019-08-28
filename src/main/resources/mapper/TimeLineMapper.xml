@@ -42,10 +42,10 @@
                 and  t.tname LIKE '%/_%' escape '/'
             </if>
             <if test="createDate!=null and createDate!=''">
-                AND t.create_date BETWEEN #{createDate} and DATE_ADD(#{createDate},INTERVAL 1 DAY)
+                AND t.create_date BETWEEN left(#{createDate},10) and right(#{createDate},10)
             </if>
-            <if test="endTime!=null and endTime!=''">
-                AND t.update_date BETWEEN #{endTime} and Date_Add(#{endTime},INTERVAL 1 DAY )
+            <if test="updateDate!=null and updateDate!=''">
+                AND t.update_date BETWEEN left(#{updateDate},10) and right(#{updateDate},10)
             </if>
             <if test="state!=null and state!=''">
                 AND t.item_set=#{state}

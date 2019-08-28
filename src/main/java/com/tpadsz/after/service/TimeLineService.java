@@ -3,6 +3,7 @@ package com.tpadsz.after.service;
 import com.github.pagehelper.PageInfo;
 import com.tpadsz.after.entity.ProjectList;
 import com.tpadsz.after.entity.TimeLine;
+import com.tpadsz.after.entity.TimeListPage;
 import com.tpadsz.after.entity.TimePoint;
 
 import java.util.List;
@@ -16,7 +17,7 @@ import java.util.List;
 public interface TimeLineService {
     ProjectList getProjectNameByMid(int id);
 
-    PageInfo<TimeLine> getTimeLineByMid(int id, Integer pageNum, Integer pageSize, String timeFlag, String tname, String createDate, String endTime,String state);
+    PageInfo<TimeLine> getTimeLineByMid(TimeListPage timeListPage);
 
     void batchInsertTimeLine(List<TimeLine> timeLines);
 

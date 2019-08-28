@@ -7,6 +7,7 @@ import com.tpadsz.after.service.SceneService;
 import com.tpadsz.after.service.TimeLineService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -40,23 +41,23 @@ public class TimeLineController {
      * @return
      */
     @RequestMapping("/list")
-    public String timerList(Model model, int id, Integer pageNum, Integer pageSize, String timeFlag, String tname, String
-            createDate, String endTime, String state, HttpSession session) {
+    public String timerList(Model model, @ModelAttribute("timeListPage") TimeListPage timeListPage, HttpSession
+                                    session) {
         User loginUser = (User) session.getAttribute("user");
         String account = loginUser.getAccount();
-        ProjectList projectList= timeLineService.getProjectNameByMid(id);
+        ProjectList projectList= timeLineService.getProjectNameByMid(timeListPage.getId());
         List<String> permissions = rolePermissionInfoService.getPermissions(account);
-        PageInfo<TimeLine> pageInfo = timeLineService.getTimeLineByMid(id,pageNum,pageSize,timeFlag,tname,createDate,
-                endTime, state);
+        PageInfo<TimeLine> pageInfo = timeLineService.getTimeLineByMid(timeListPage);
         model.addAttribute("permissions",permissions);
         model.addAttribute("pageInfo",pageInfo);
         model.addAttribute("projectName",projectList.getName());
         model.addAttribute("projectId",projectList.getId());
-        model.addAttribute("id",id);
-        model.addAttribute("tname",tname);
-        model.addAttribute("createDate",createDate);
-        model.addAttribute("endTime",endTime);
-        model.addAttribute("state",state);
+        model.addAttribute("id",timeListPage.getId());
+        model.addAttribute("tname",timeListPage.getTname());
+        model.addAttribute("createDate",timeListPage.getCreateDate());
+        model.addAttribute("updateDate",timeListPage.getUpdateDate());
+        model.addAttribute("state",timeListPage.getState());
+        model.addAttribute("timeFlag",timeListPage.getTimeFlag());
         return "timerManage/timerList";
     }
 
@@ -101,45 +102,56 @@ public class TimeLineController {
         Map<String,Object> map = new HashMap<>();
         MeshInfo meshInfo = sceneService.findProjectByMeshId(meshId);
         List<MeshInfo> placeList = sceneService.findPlaceBySid(sid);
-        List<MeshInfo> groupList = sceneService.findGroupByPid(placeList.get(0).getPid());
         List<MeshInfo> lightList = new ArrayList<>();
-        if (lid == null) {
-            if(groupList.size()>0) {
-                lightList = sceneService.findLightByGid(groupList.get(0).getGid(), sid);
-            }
-        } else {
-            MeshInfo lightInfo = sceneService.findLightInfoByLid(lid);
-            lightList = sceneService.findLightByGid(lightInfo.getGid(),sid);
-            map.put("lightInfo",lightInfo);
-        }
-
-        int samePlaceXY = 1;
-        String groupX = "";
-        String groupY = "";
-        for (int i = 0; i < groupList.size(); i++) {
-            List<MeshInfo> list2 = sceneService.findXYByGid(groupList.get(i).getGid(), sid);
-            if (list2.size() == 1) {
-                if (!"".equals(groupX) && groupX != null && groupY != null) {
-                    if (!groupX.equals(list2.get(0).getX()) || !groupY.equals(list2.get(0).getY())) {
+        List<MeshInfo> groupList = new ArrayList<>();
+        int lidFlag = 0;
+        for(int i=0;i<placeList.size();i++) {
+            List<MeshInfo> groupList1 = sceneService.findGroupByPid(placeList.get(i).getPid());
+            int samePlaceXY = 1;
+            String groupX = "";
+            String groupY = "";
+            for (int j = 0; j < groupList1.size(); j++) {
+                List<MeshInfo> list2 = sceneService.findXYByGid(groupList1.get(j).getGid(), sid);
+                //该组xy值相同则list2的size为1
+                if (list2.size() == 1) {
+                    if (!"".equals(groupX) && groupX != null && groupY != null) {
+                        if (!groupX.equals(list2.get(0).getX()) || !groupY.equals(list2.get(0).getY())) {
+                            samePlaceXY = 0;
+                        }
+                    }
+                    groupX = list2.get(0).getX();
+                    groupY = list2.get(0).getY();
+                    if (groupX == null || groupY == null) {
                         samePlaceXY = 0;
                     }
-                }
-                groupY = list2.get(0).getY();
-                groupX = list2.get(0).getX();
-
-                if (groupX == null || groupY == null) {
+                    groupList1.get(j).setX(groupX);
+                    groupList1.get(j).setY(groupY);
+                } else {
                     samePlaceXY = 0;
                 }
-                groupList.get(i).setX(groupX);
-                groupList.get(i).setY(groupY);
-            } else {
-                samePlaceXY = 0;
             }
-        }
 
-        if (samePlaceXY == 1) {
-            placeList.get(0).setX(groupList.get(0).getX());
-            placeList.get(0).setY(groupList.get(0).getY());
+            if (samePlaceXY == 1 && groupList1.size() != 0) {
+                placeList.get(i).setX(groupList1.get(0).getX());
+                placeList.get(i).setY(groupList1.get(0).getY());
+            }
+            if(lidFlag==0) {
+                if (lid == null) {
+                    if (groupList1.size() > 0) {
+                        lightList = sceneService.findLightByGid(groupList1.get(0).getGid(), sid);
+                    }
+                    groupList = groupList1;
+                    lidFlag = 1;
+                } else {
+                    MeshInfo lightInfo = sceneService.findLightInfoByLid(lid);
+                    lightList = sceneService.findLightByGid(lightInfo.getGid(), sid);
+                    map.put("lightInfo", lightInfo);
+                    if(placeList.get(i).getPid()==lightInfo.getPid()){
+                        groupList = groupList1;
+                        lidFlag = 1;
+                    }
+                }
+            }
         }
         map.put("sceneName", sceneName);
         map.put("sceneId", sceneId);

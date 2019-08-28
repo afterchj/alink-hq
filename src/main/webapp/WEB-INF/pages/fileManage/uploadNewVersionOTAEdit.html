@@ -55,7 +55,7 @@
                                     </div>
                                     <div class="field-widget p-r" >
                                         <p class="p-a verify"></p>
-                                        <input type="text" class="filename falseFile " readonly=""  th:value="${#strings.substringAfter(file.otaPath,'ota/')}">
+                                        <input type="text" name="otaPath" class="filename falseFile " readonly=""  th:value="${#strings.substringAfter(file.otaPath,'ota/')}">
                                         <input type="button" class="button upload" value="重新上传" style="right: 0;left: auto;top: 0;">
                                         <input type="file" name="file" size="30"   class="trueFile" style=" width: 470px;
 " >
@@ -85,7 +85,7 @@
                                     </div>
                                     <div class="field-widget p-r">
                                         <p class="p-a verify"></p>
-                                        <input type="text" name="otaVersion" id="otaVersion"  placeholder="请输入固件版本" th:value="${file.otaVersion}">
+                                        <input type="text" name="otaVersion" id="otaVersion"  placeholder="请输入固件版本" >
                                     </div>
                                 </div>
                                 <div class="form-row">
@@ -95,7 +95,7 @@
                                     <div class="field-widget p-r">
                                         <p class="p-a verify"></p>
                                         <!--<textarea name="otaDesc" id="otaDescribe" placeholder="请输入更新日志" th:text="${file.otaDesc}"></textarea>-->
-                                        <textarea name="otaDesc" id="otaDescribe" placeholder="请输入更新日志" th:text="${file.otaDesc}"></textarea>
+                                        <textarea name="otaDesc" id="otaDescribe" placeholder="请输入更新日志"></textarea>
                                     </div>
                                 </div>
                                 <div class="form-row submit">
