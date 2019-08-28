@@ -111,17 +111,16 @@ public class FileController {
                 file.transferTo(targetFile);
                 info.setOtaPath(prefix + fileName);
             }
+            Map map = JSON.parseObject(JSON.toJSONString(info));
+            fileService.saveFile(map);
         } catch (Exception e) {
             logger.error("error:" + e.getMessage());
         }
         if ("add".equals(type)) {
-            fileService.updateFile(info);
             FileDTO fileDTO = fileService.getFileInfo(oid);
             modelMap.put("file", fileDTO);
             return "fileManage/uploadNewVersionOTAEdit";
         } else {
-            Map map = JSON.parseObject(JSON.toJSONString(info));
-            fileService.saveFile(map);
             return "redirect:/file/history?oid=" + oid;
         }
     }
