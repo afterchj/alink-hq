@@ -50,7 +50,7 @@
         fh.o_id oid,
         IFNULL(fh.o_desc,'') otaDesc,
         IFNULL(fh.o_version,'') otaVersion,
-        IFNULL(ff.ota_path,'') otaPath,
+        IFNULL(fh.o_path,'') otaPath,
         ff.ota_id otaId,
         fh.update_date updateDate
         FROM
