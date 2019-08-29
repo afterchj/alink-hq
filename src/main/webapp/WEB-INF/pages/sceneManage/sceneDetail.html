@@ -309,29 +309,30 @@
             async: false,
             success: function (res) {
                 $('#groupMsg ul').empty();
+                $('.one li').remove();
                 var groupList = res.groupList;
-                firstKeyGroupMsgGid = groupList[0].gid;
-                firstKeyGroupMsgSid = groupList[0].sid;
                 console.log('groupList', groupList);
-                console.log('firstKeyGroupMsgGid', firstKeyGroupMsgGid);
-                console.log('firstKeyGroupMsgSid', firstKeyGroupMsgSid);
-                console.log('sid', sid);
-                //  var lightList = res.lightList;
-                $.each(groupList, function (key, value) {
-                    //从网络详情跳过来，无灯信息，区域默认为第一个
-                    if (key == 0) {
-                        if (value.x == null) {
-                            content += '<li class="gid active" alt="' + value.gid + '"  key="' + key + '" ><span>' + value.gname + '（查看详情）' + '</span></li>';
+                if(groupList.length!=0){
+                    firstKeyGroupMsgGid = groupList[0].gid;
+                    firstKeyGroupMsgSid = groupList[0].sid;
+                    console.log('firstKeyGroupMsgGid', firstKeyGroupMsgGid);
+                    console.log('firstKeyGroupMsgSid', firstKeyGroupMsgSid);
+                    console.log('sid', sid);
+                    $.each(groupList, function (key, value) {
+                        //从网络详情跳过来，无灯信息，区域默认为第一个
+                        if (key == 0) {
+                            if (value.x == null) {
+                                content += '<li class="gid active" alt="' + value.gid + '"  key="' + key + '" ><span>' + value.gname + '（查看详情）' + '</span></li>';
+                            } else {
+                                content += '<li class="gid active" alt="' + value.gid + '" key="' + key + '"><span>' + value.gname + '（' + value.x + '，' + value.y + '）' + '</span></li>';
+                            }
                         } else {
-                            content += '<li class="gid active" alt="' + value.gid + '" key="' + key + '"><span>' + value.gname + '（' + value.x + '，' + value.y + '）' + '</span></li>';
+                            if (value.x == null) {
+                                content += '<li class="gid " alt="' + value.gid + '" key="' + key + '"><span>' + value.gname + '（查看详情）' + '</span></li>';
+                            } else {
+                                content += '<li class="gid " alt="' + value.gid + '" key="' + key + '"><span>' + value.gname + '（' + value.x + '，' + value.y + '）' + '</span></li>';
+                            }
                         }
-                    } else {
-                        if (value.x == null) {
-                            content += '<li class="gid " alt="' + value.gid + '" key="' + key + '"><span>' + value.gname + '（查看详情）' + '</span></li>';
-                        } else {
-                            content += '<li class="gid " alt="' + value.gid + '" key="' + key + '"><span>' + value.gname + '（' + value.x + '，' + value.y + '）' + '</span></li>';
-                        }
-                    }
 //                    if (lightInfo == null) {
 //                        if (key == 0) {
 //                            if (value.x == null) {
@@ -365,30 +366,30 @@
 //                            content += '<li class="gid " alt="' + value.gid + '"  key="' + key + '"><span>' + value.gname + '（' + value.x + '，' + value.y + '）' + '</span></li>';
 //                        }
 //                    }
-                })
-                $('#groupMsg ul').append(content);
-                $.ajax({
-                    type: "post",
-                    url: "/alink-hq/scene/groupDetail",
-                    data: {
-                        "gid": firstKeyGroupMsgGid,
-                        "sid": sid
-                    },
-                    async: false,
-                    success: function (res) {
-                        $('.one li').remove();
-                        console.log('res', res);
-                        var lightList = res.lightList;
-                        console.log('lightList', lightList);
-                        console.log('相同的firstKeyGroupMsgGid', firstKeyGroupMsgGid);
-                        console.log('相同的sid', sid);
-                        $.each(lightList, function (key, value) {
+                    })
+                    $('#groupMsg ul').append(content);
+                    $.ajax({
+                        type: "post",
+                        url: "/alink-hq/scene/groupDetail",
+                        data: {
+                            "gid": firstKeyGroupMsgGid,
+                            "sid": sid
+                        },
+                        async: false,
+                        success: function (res) {
+
+                            console.log('res', res);
+                            var lightList = res.lightList;
+                            console.log('lightList', lightList);
+                            console.log('相同的firstKeyGroupMsgGid', firstKeyGroupMsgGid);
+                            console.log('相同的sid', sid);
+                            $.each(lightList, function (key, value) {
 //                            if (lightInfo == null) {
-                            if (key == 0) {
-                                content1 += '<li class="lid active" alt="' + value.id + '" ><span>' + value.lname + '（' + value.lmac + '）' + '</span><span>' + value.x + '（色温），' + value.y + '（亮度）</span></li>';
-                            } else {
-                                content1 += '<li class="lid" alt="' + value.id + '" ><span>' + value.lname + '（' + value.lmac + '）' + '</span><span>' + value.x + '，' + value.y + '</span></li>';
-                            }
+                                if (key == 0) {
+                                    content1 += '<li class="lid active" alt="' + value.id + '" ><span>' + value.lname + '（' + value.lmac + '）' + '</span><span>' + value.x + '（色温），' + value.y + '（亮度）</span></li>';
+                                } else {
+                                    content1 += '<li class="lid" alt="' + value.id + '" ><span>' + value.lname + '（' + value.lmac + '）' + '</span><span>' + value.x + '，' + value.y + '</span></li>';
+                                }
 //                            } else if (lightInfo != null && lightInfo.id == value.id) {
 //                                if (key == 0) {
 //                                    content += '<li class="lid active" alt="' + value.id + '" ><span>' + value.lname + '（' + value.lmac + '）' + '</span><span>' + value.x + '（色温），' + value.y + '(亮度）</span></li>';
@@ -402,10 +403,16 @@
 //                                    content += '<li class="lid " alt="' + value.id + '" ><span>' + value.lname + '（' + value.lmac + '）' + '</span><span>' + value.x + '，' + value.y + '</span></li>';
 //                                }
 //                            }
-                        })
-                        $('.one').append(content1);
-                    }
-                })
+                            })
+                            $('.one').append(content1);
+                        }
+                    })
+                }
+
+
+
+                //  var lightList = res.lightList;
+
             }
         });
 
