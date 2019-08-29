@@ -204,20 +204,9 @@
                             <div class="f-l clearfix">
                                 <div class="f-l" id="lightMsg">
                                     <ul class="one">
+
                                         <li th:if="${userStat.index}=='0' and ${lightInfo}==null"
                                             th:each="lightList,userStat:${lightList}" class="lid active"
-                                            th:alt="${lightList.id}">
-                                            <span th:text="${lightList.lname}+'（'+${lightList.lmac}+')'"></span><span
-                                                th:text="${lightList.x}+'（色温），'+${lightList.y}+'（亮度）'"></span>
-                                        </li>
-                                        <li th:if="${userStat.index}=='0' and ${lightInfo}!=null and ${lightInfo.id}==${lightList.id}"
-                                            th:each="lightList,userStat:${lightList}" class="lid active"
-                                            th:alt="${lightList.id}">
-                                            <span th:text="${lightList.lname}+'（'+${lightList.lmac}+')'"></span><span
-                                                th:text="${lightList.x}+'（色温），'+${lightList.y}+'（亮度）'"></span>
-                                        </li>
-                                        <li th:if="${userStat.index}=='0' and ${lightInfo}!=null and ${lightInfo.id}!=${lightList.id}"
-                                            th:each="lightList,userStat:${lightList}" class="lid"
                                             th:alt="${lightList.id}">
                                             <span th:text="${lightList.lname}+'（'+${lightList.lmac}+')'"></span><span
                                                 th:text="${lightList.x}+'（色温），'+${lightList.y}+'（亮度）'"></span>
@@ -228,13 +217,25 @@
                                             <span th:text="${lightList.lname}+'（'+${lightList.lmac}+')'"></span><span
                                                 th:text="${lightList.x}+'，'+${lightList.y}"></span>
                                         </li>
-                                        <li th:if="${userStat.index}!='0' and ${lightInfo}!=null and ${lightInfo.id}==${lightList.id}"
+                                        <li th:if="${userStat.index}=='0' and ${lightInfo}!=null and ${lightInfo.pid}==${lightList.pid} and ${lightInfo.gid}==${lightList.gid} and ${lightInfo.id}==${lightList.id}"
+                                            th:each="lightList,userStat:${lightList}" class="lid active"
+                                            th:alt="${lightList.id}">
+                                            <span th:text="${lightList.lname}+'（'+${lightList.lmac}+')'"></span><span
+                                                th:text="${lightList.x}+'（色温），'+${lightList.y}+'（亮度）'"></span>
+                                        </li>
+                                        <li th:if="${userStat.index}!='0' and ${lightInfo}!=null  and ${lightInfo.pid}==${lightList.pid} and  ${lightInfo.gid}==${lightList.gid} and ${lightInfo.id}==${lightList.id}"
                                             th:each="lightList,userStat:${lightList}" class="lid active"
                                             th:alt="${lightList.id}">
                                             <span th:text="${lightList.lname}+'（'+${lightList.lmac}+')'"></span><span
                                                 th:text="${lightList.x}+'，'+${lightList.y}"></span>
                                         </li>
-                                        <li th:if="${userStat.index}!='0' and ${lightInfo}!=null and ${lightInfo.id}!=${lightList.id}"
+                                        <li th:if="${userStat.index}=='0' and ${lightInfo}!=null and ${lightInfo.pid}==${lightList.pid} and ${lightInfo.gid}==${lightList.gid} and  ${lightInfo.id}!=${lightList.id}"
+                                            th:each="lightList,userStat:${lightList}" class="lid"
+                                            th:alt="${lightList.id}">
+                                            <span th:text="${lightList.lname}+'（'+${lightList.lmac}+')'"></span><span
+                                                th:text="${lightList.x}+'（色温），'+${lightList.y}+'（亮度）'"></span>
+                                        </li>
+                                        <li th:if="${userStat.index}!='0' and ${lightInfo}!=null and ${lightInfo.pid}==${lightList.pid} and ${lightInfo.gid}==${lightList.gid} and ${lightInfo.id}!=${lightList.id}"
                                             th:each="lightList,userStat:${lightList}" class="lid"
                                             th:alt="${lightList.id}">
                                             <span th:text="${lightList.lname}+'（'+${lightList.lmac}+')'"></span><span
