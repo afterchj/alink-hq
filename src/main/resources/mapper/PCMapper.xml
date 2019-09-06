@@ -18,7 +18,7 @@
         INNER JOIN f_user_customer c ON c.uid=u.id
         INNER JOIN f_firm ff ON c.fid=ff.id
         WHERE f.file_name IS NOT NULL AND f.file_path IS NOT NULL
-        <if test="name!=null and name">
+        <if test="name!=null and name!=''">
             AND  u.account LIKE CONCAT('%',#{name},'%')
         </if>
         <if test="createDate!=null and createDate!=''">
