@@ -460,6 +460,11 @@
                                                                    class="singleListChecked builders singleRoleChecked otamanager-role" alt="createUserOtamanager">
                                                             <label for="">固件管理员</label>
                                                         </div>
+                                                        <div class="f-l zero" th:if="${#lists.contains(permissions,'createSalesman')}">
+                                                            <input type="checkbox"
+                                                                   class="singleListChecked builders singleRoleChecked salesman-role" alt="createSalesman">
+                                                            <label for="">业务员</label>
+                                                        </div>
                                                     </div>
 
                                                 </div>
@@ -552,6 +557,12 @@
                                                             <input type="checkbox"
                                                                    class="singleListChecked otamanager builders singleRoleChecked" alt="viewRPOtamanager">
                                                             <label for="">固件管理员</label>
+                                                        </div>
+                                                        <div class="f-l zero"
+                                                             th:if="${#lists.contains(permissions,'viewSalesman')}">
+                                                            <input type="checkbox"
+                                                                   class="singleListChecked salesman builders singleRoleChecked" alt="viewSalesman">
+                                                            <label for="">业务员</label>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -908,6 +919,8 @@
                 $("input.singleListChecked.builders.singleRoleChecked.user-role").prop('checked',true);
             }else if (permissionName == 'createUserOtamanager'){
                 $("input.singleListChecked.builders.singleRoleChecked.otamanager-role").prop('checked',true);
+            }else if (permissionName == 'createSalesman'){
+                $("input.singleListChecked.builders.singleRoleChecked.salesman-role").prop('checked',true);
             }
             //查看角色权限
             if (permissionName == 'viewRPAdmin'){
@@ -918,6 +931,8 @@
                 $("input.singleListChecked.user.builders.singleRoleChecked").prop('checked',true);
             }else if (permissionName == 'viewRPOtamanager'){
                 $("input.singleListChecked.otamanager.builders.singleRoleChecked").prop('checked',true);
+            }else if (permissionName == 'viewSalesman'){
+                $("input.singleListChecked.salesman.builders.singleRoleChecked").prop('checked',true);
             }
             //左侧权限勾选
             $.each(alreadyExistPermissions, function (key, value) {
