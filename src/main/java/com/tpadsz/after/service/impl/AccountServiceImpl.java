@@ -65,12 +65,12 @@ public class AccountServiceImpl implements AccountService {
         accountDao.createAccount(user);
         accountDao.createFirmInfo(Integer.parseInt(user.getId()), fid);
         accountDao.createRoleInfo(Integer.parseInt(user.getId()), roleId);
-        MeshInfo meshInfo = new MeshInfo();
-        meshInfo.setMname("1122");
-        meshInfo.setMesh_id(11223344);
-        meshInfo.setPcount(Integer.parseInt(user.getId()));
         int count = accountDao.findDefaultNetworkByUid(user.getId());
         if(count==0) {
+            MeshInfo meshInfo = new MeshInfo();
+            meshInfo.setMname("1122");
+            meshInfo.setMesh_id(11223344);
+            meshInfo.setPcount(Integer.parseInt(user.getId()));
             accountDao.generateDefaultNetwork(meshInfo);
             SceneList sceneList = new SceneList();
             sceneList.setUid(user.getId());

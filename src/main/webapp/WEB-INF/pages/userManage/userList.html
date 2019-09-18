@@ -132,6 +132,7 @@
                             <td th:if="${user.role_id=='3'}" th:text="乙方管理员" class="role"></td>
                             <td th:if="${user.role_id=='4'}" th:text="施工人员" class="role"></td>
                             <td th:if="${user.role_id=='13'}" th:text="固件管理员" class="role"></td>
+                            <td th:if="${user.role_id=='14'}" th:text="业务员" class="role"></td>
                             <td th:text="${user.create_date}"></td>
                             <td th:if="${user.status=='1' && user.coStatus=='1'}" style="color: #47a6e6;"
                                 openTab="start-use" id="start-use" class="status pointer">
