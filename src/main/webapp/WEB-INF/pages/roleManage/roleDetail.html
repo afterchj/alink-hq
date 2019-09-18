@@ -72,15 +72,15 @@
                                     <div class="company-select">
                                         <div class="account-related">
                                             <input type="radio" name="data-scope-content" value="0" alt="oneself" >
-                                            <label >所在账号相关内容</label>
+                                            <label for="">所在账号相关内容</label>
                                         </div>
                                         <div class="subject-company-related">
                                             <input type="radio" name="data-scope-content" value="1" alt="company" >
-                                            <label >隶属公司名下所有账号相关内容</label>
+                                            <label for="">隶属公司名下所有账号相关内容</label>
                                         </div>
                                         <div th:if="${rid} le 2">
                                             <input type="radio" name="data-scope-content" value="2" alt="all" >
-                                            <label >所有公司名下所有账号相关内容</label>
+                                            <label for="">所有公司名下所有账号相关内容</label>
                                         </div>
                                     </div>
                                 </div>
@@ -90,17 +90,17 @@
                                         <div class="clearfix limit">
                                             <div class="f-l ">
                                                 <input type="checkbox" class="allChecked">
-                                                <label >全选</label>
+                                                <label for="">全选</label>
                                             </div>
                                             <div class="f-r clearfix">
                                                 <div class="f-l">
                                                     <input type="radio" value="0" class="isAllRadio"
                                                            name="isProjectRead">
-                                                    <label >查看数据</label>
+                                                    <label for="">查看数据</label>
                                                 </div>
                                                 <div class="f-l">
                                                     <input type="radio" value="1" class="noAllRadio" name="isProjectRead">
-                                                    <label >不可查看数据</label>
+                                                    <label for="">不可查看数据</label>
                                                 </div>
                                             </div>
                                         </div>
@@ -109,7 +109,7 @@
                                             <div class="f-l list-title">
                                                 <div>
                                                     <input type="checkbox" class="singleChecked allListChecked">
-                                                    <label>项目列表</label>
+                                                    <label for="">项目列表</label>
                                                 </div>
                                             </div>
                                             <div class="f-l clearfix list-content">
@@ -117,34 +117,34 @@
                                                     <div class="f-l zero"
                                                          th:if="${#lists.contains(permissions,'createProject')}">
                                                         <input type="checkbox" class="singleListChecked" alt="createProject">
-                                                        <label >创建项目</label>
+                                                        <label for="">创建项目</label>
                                                     </div>
                                                     <div class="f-l zero"
                                                          th:if="${#lists.contains(permissions,'renameProject')}">
                                                         <input type="checkbox" class="singleListChecked" alt="renameProject">
-                                                        <label >项目重命名</label>
+                                                        <label for="">项目重命名</label>
                                                     </div>
                                                     <div class="f-l zero"
                                                          th:if="${#lists.contains(permissions,'moveProject')}">
                                                         <input type="checkbox" class="singleListChecked" alt="moveProject">
-                                                        <label >项目移交</label>
+                                                        <label for="">项目移交</label>
                                                     </div>
                                                     <div class="f-l zero"
                                                          th:if="${#lists.contains(permissions,'deleteProject')}">
                                                         <input type="checkbox" class="singleListChecked" alt="deleteProject">
-                                                        <label >项目删除</label>
+                                                        <label for="">项目删除</label>
                                                     </div>
                                                 </div>
                                                 <div class="f-r clearfix">
                                                     <div class="f-l">
                                                         <input type="radio" value="0" name="isRead1"
                                                                class="singleIsRadio" alt="viewProject">
-                                                        <label  alt="viewProject">查看数据</label>
+                                                        <label for="" alt="viewProject">查看数据</label>
                                                     </div>
                                                     <div class="f-l">
                                                         <input type="radio" value="1" name="isRead1"
                                                                class="singleNoRadio">
-                                                        <label >不可查看数据</label>
+                                                        <label for="">不可查看数据</label>
                                                     </div>
                                                 </div>
                                             </div>
@@ -154,7 +154,7 @@
                                             <div class="f-l list-title">
                                                 <div>
                                                     <input type="checkbox" class="singleChecked allListChecked">
-                                                    <label >网络列表</label>
+                                                    <label for="">网络列表</label>
                                                 </div>
                                             </div>
                                             <div class="f-l clearfix list-content">
@@ -162,34 +162,34 @@
                                                     <div class="f-l zero"
                                                          th:if="${#lists.contains(permissions,'createMesh')}">
                                                         <input type="checkbox" class="singleListChecked" alt="createMesh">
-                                                        <label >创建网络</label>
+                                                        <label for="">创建网络</label>
                                                     </div>
                                                     <div class="f-l zero"
                                                          th:if="${#lists.contains(permissions,'renameMesh')}">
                                                         <input type="checkbox" class="singleListChecked" alt="renameMesh">
-                                                        <label >网络重命名</label>
+                                                        <label for="">网络重命名</label>
                                                     </div>
                                                     <div class="f-l zero"
                                                          th:if="${#lists.contains(permissions,'moveMesh')}">
                                                         <input type="checkbox" class="singleListChecked" alt="moveMesh">
-                                                        <label >网络移动</label>
+                                                        <label for="">网络移动</label>
                                                     </div>
                                                     <div class="f-l zero"
                                                          th:if="${#lists.contains(permissions,'deleteMesh')}">
                                                         <input type="checkbox" class="singleListChecked" alt="deleteMesh">
-                                                        <label >网络删除</label>
+                                                        <label for="">网络删除</label>
                                                     </div>
                                                 </div>
                                                 <div class="f-r clearfix">
                                                     <div class="f-l">
                                                         <input type="radio" value="0" name="isRead2"
                                                                class="singleIsRadio" alt="viewMesh">
-                                                        <label  alt="viewMesh">查看数据</label>
+                                                        <label for="" alt="viewMesh">查看数据</label>
                                                     </div>
                                                     <div class="f-l">
                                                         <input type="radio" value="1" name="isRead2"
                                                                class="singleNoRadio">
-                                                        <label >不可查看数据</label>
+                                                        <label for="">不可查看数据</label>
                                                     </div>
                                                 </div>
                                             </div>
@@ -198,7 +198,7 @@
                                             <div class="f-l list-title">
                                                 <div>
                                                     <input type="checkbox" class="singleChecked allListChecked">
-                                                    <label >区域列表</label>
+                                                    <label for="">区域列表</label>
                                                 </div>
                                             </div>
                                             <div class="f-l clearfix list-content">
@@ -206,29 +206,29 @@
                                                     <div class="f-l zero"
                                                          th:if="${#lists.contains(permissions,'createPlace')}">
                                                         <input type="checkbox" class="singleListChecked" alt="createPlace">
-                                                        <label >创建区域</label>
+                                                        <label for="">创建区域</label>
                                                     </div>
                                                     <div class="f-l zero"
                                                          th:if="${#lists.contains(permissions,'renamePlace')}">
                                                         <input type="checkbox" class="singleListChecked" alt="renamePlace">
-                                                        <label >区域重命名</label>
+                                                        <label for="">区域重命名</label>
                                                     </div>
                                                     <div class="f-l zero"
                                                          th:if="${#lists.contains(permissions,'deletePlace')}">
                                                         <input type="checkbox" class="singleListChecked" alt="deletePlace">
-                                                        <label >区域删除</label>
+                                                        <label for="">区域删除</label>
                                                     </div>
                                                 </div>
                                                 <div class="f-r clearfix">
                                                     <div class="f-l">
                                                         <input type="radio" value="0" name="isRead3"
                                                                class="singleIsRadio" alt="viewPlace">
-                                                        <label  alt="viewPlace">查看数据</label>
+                                                        <label for="" alt="viewPlace">查看数据</label>
                                                     </div>
                                                     <div class="f-l">
                                                         <input type="radio" value="1" name="isRead3"
                                                                class="singleNoRadio">
-                                                        <label >不可查看数据</label>
+                                                        <label for="">不可查看数据</label>
                                                     </div>
                                                 </div>
                                             </div>
@@ -237,7 +237,7 @@
                                             <div class="f-l list-title">
                                                 <div>
                                                     <input type="checkbox" class="singleChecked allListChecked">
-                                                    <label >组列表</label>
+                                                    <label for="">组列表</label>
                                                 </div>
                                             </div>
                                             <div class="f-l clearfix list-content">
@@ -245,34 +245,34 @@
                                                     <div class="f-l zero"
                                                          th:if="${#lists.contains(permissions,'createGroup')}">
                                                         <input type="checkbox" class="singleListChecked" alt="createGroup">
-                                                        <label >创建组</label>
+                                                        <label for="">创建组</label>
                                                     </div>
                                                     <div class="f-l zero"
                                                          th:if="${#lists.contains(permissions,'renameGroup')}">
                                                         <input type="checkbox" class="singleListChecked" alt="renameGroup">
-                                                        <label >组重命名</label>
+                                                        <label for="">组重命名</label>
                                                     </div>
                                                     <div class="f-l zero"
                                                          th:if="${#lists.contains(permissions,'moveGroup')}">
                                                         <input type="checkbox" class="singleListChecked" alt="moveGroup">
-                                                        <label >组移动</label>
+                                                        <label for="">组移动</label>
                                                     </div>
                                                     <div class="f-l zero"
                                                          th:if="${#lists.contains(permissions,'deleteGroup')}">
                                                         <input type="checkbox" class="singleListChecked" alt="deleteGroup">
-                                                        <label>组删除</label>
+                                                        <label for="">组删除</label>
                                                     </div>
                                                 </div>
                                                 <div class="f-r clearfix">
                                                     <div class="f-l">
                                                         <input type="radio" value="0" name="isRead4"
                                                                class="singleIsRadio" alt="viewGroup">
-                                                        <label  alt="viewGroup">查看数据</label>
+                                                        <label for="" alt="viewGroup">查看数据</label>
                                                     </div>
                                                     <div class="f-l">
                                                         <input type="radio" value="1" name="isRead4"
                                                                class="singleNoRadio">
-                                                        <label>不可查看数据</label>
+                                                        <label for="">不可查看数据</label>
                                                     </div>
                                                 </div>
                                             </div>
@@ -281,7 +281,7 @@
                                             <div class="f-l list-title">
                                                 <div>
                                                     <input type="checkbox" class="singleChecked allListChecked">
-                                                    <label >灯列表</label>
+                                                    <label for="">灯列表</label>
                                                 </div>
                                             </div>
                                             <div class="f-l clearfix list-content">
@@ -289,34 +289,34 @@
                                                     <div class="f-l zero"
                                                          th:if="${#lists.contains(permissions,'renameLight')}">
                                                         <input type="checkbox" class="singleListChecked" alt="renameLight">
-                                                        <label >灯重命名</label>
+                                                        <label for="">灯重命名</label>
                                                     </div>
                                                     <div class="f-l zero"
                                                          th:if="${#lists.contains(permissions,'moveLight')}">
                                                         <input type="checkbox" class="singleListChecked" alt="moveLight">
-                                                        <label >灯移动</label>
+                                                        <label for="">灯移动</label>
                                                     </div>
                                                     <div class="f-l zero"
                                                          th:if="${#lists.contains(permissions,'deleteLight')}">
                                                         <input type="checkbox" class="singleListChecked" alt="deleteLight">
-                                                        <label >灯删除</label>
+                                                        <label for="">灯删除</label>
                                                     </div>
                                                     <div class="f-l zero"
                                                          th:if="${#lists.contains(permissions,'outLight')}">
                                                         <input type="checkbox" class="singleListChecked" alt="outLight">
-                                                        <label >导出灯信息</label>
+                                                        <label for="">导出灯信息</label>
                                                     </div>
                                                 </div>
                                                 <div class="f-r clearfix">
                                                     <div class="f-l">
                                                         <input type="radio" value="0" name="isRead5"
                                                                class="singleIsRadio" alt="viewLight">
-                                                        <label  alt="viewLight">查看数据</label>
+                                                        <label for="" alt="viewLight">查看数据</label>
                                                     </div>
                                                     <div class="f-l">
                                                         <input type="radio" value="1" name="isRead5"
                                                                class="singleNoRadio">
-                                                        <label >不可查看数据</label>
+                                                        <label for="">不可查看数据</label>
                                                     </div>
                                                 </div>
                                             </div>
@@ -325,7 +325,7 @@
                                             <div class="f-l list-title">
                                                 <div>
                                                     <input type="checkbox" class="singleChecked allListChecked">
-                                                    <label >场景列表</label>
+                                                    <label for="">场景列表</label>
                                                 </div>
                                             </div>
                                             <div class="f-l clearfix list-content">
@@ -333,24 +333,24 @@
                                                     <div class="f-l zero"
                                                          th:if="${#lists.contains(permissions,'renameScene')}">
                                                         <input type="checkbox" class="singleListChecked" alt="renameScene">
-                                                        <label >场景重命名</label>
+                                                        <label for="">场景重命名</label>
                                                     </div>
                                                     <div class="f-l zero"
                                                          th:if="${#lists.contains(permissions,'deleteScene')}">
                                                         <input type="checkbox" class="singleListChecked" alt="deleteScene">
-                                                        <label >场景删除</label>
+                                                        <label for="">场景删除</label>
                                                     </div>
                                                 </div>
                                                 <div class="f-r clearfix">
                                                     <div class="f-l">
                                                         <input type="radio" value="0" name="isRead6"
                                                                class="singleIsRadio" alt="viewScene">
-                                                        <label  alt="viewScene">查看数据</label>
+                                                        <label for="" alt="viewScene">查看数据</label>
                                                     </div>
                                                     <div class="f-l">
                                                         <input type="radio" value="1" name="isRead6"
                                                                class="singleNoRadio">
-                                                        <label>不可查看数据</label>
+                                                        <label for="">不可查看数据</label>
                                                     </div>
                                                 </div>
                                             </div>
@@ -359,7 +359,7 @@
                                             <div class="f-l list-title">
                                                 <div>
                                                     <input type="checkbox" class="singleChecked allListChecked">
-                                                    <label >定时列表</label>
+                                                    <label for="">定时列表</label>
                                                 </div>
                                             </div>
                                             <div class="f-l clearfix list-content">
@@ -367,19 +367,19 @@
                                                     <div class="f-l zero"
                                                          th:if="${#lists.contains(permissions,'renameTime')}">
                                                         <input type="checkbox" class="singleListChecked" alt="renameTime">
-                                                        <label >定时重命名</label>
+                                                        <label for="">定时重命名</label>
                                                     </div>
                                                 </div>
                                                 <div class="f-r clearfix">
                                                     <div class="f-l">
                                                         <input type="radio" value="0" name="isRead7"
                                                                class="singleIsRadio" alt="viewTime">
-                                                        <label  alt="viewTime">查看数据</label>
+                                                        <label for="" alt="viewTime">查看数据</label>
                                                     </div>
                                                     <div class="f-l">
                                                         <input type="radio" value="1" name="isRead7"
                                                                class="singleNoRadio">
-                                                        <label >不可查看数据</label>
+                                                        <label for="">不可查看数据</label>
                                                     </div>
                                                 </div>
                                             </div>
@@ -390,16 +390,16 @@
                                         <div class="clearfix limit">
                                             <div class="f-l ">
                                                 <input type="checkbox" class="allChecked">
-                                                <label >全选</label>
+                                                <label for="">全选</label>
                                             </div>
                                             <div class="f-r clearfix">
                                                 <div class="f-l">
                                                     <input type="radio" value="0" class="isAllRadio" name="isUserRead">
-                                                    <label >查看数据</label>
+                                                    <label for="">查看数据</label>
                                                 </div>
                                                 <div class="f-l">
                                                     <input type="radio" value="1" class="noAllRadio" name="isUserRead">
-                                                    <label >不可查看数据</label>
+                                                    <label for="">不可查看数据</label>
                                                 </div>
                                             </div>
                                         </div>
@@ -409,7 +409,7 @@
                                                 <div>
                                                     <input type="checkbox"
                                                            class="singleChecked allListChecked userList">
-                                                    <label >用户列表</label>
+                                                    <label for="">用户列表</label>
                                                 </div>
                                             </div>
                                             <div class="f-l  clearfix list-content">
@@ -417,53 +417,53 @@
                                                     <div class="f-l zero"
                                                          th:if="${#lists.contains(permissions,'moveUser')}">
                                                         <input type="checkbox" class="singleListChecked" alt="moveUser">
-                                                        <label >账号移交</label>
+                                                        <label for="">账号移交</label>
                                                     </div>
                                                     <div class="f-l zero"
                                                          th:if="${#lists.contains(permissions,'updateUser')}">
                                                         <input type="checkbox" class="singleListChecked" alt="updateUser">
-                                                        <label >账号状态编辑</label>
+                                                        <label for="">账号状态编辑</label>
                                                     </div>
                                                     <div class="f-l zero"
                                                          th:if="${#lists.contains(permissions,'replaceUser')}">
                                                         <input type="checkbox" class="singleListChecked" alt="replaceUser">
-                                                        <label >重置账号密码</label>
+                                                        <label for="">重置账号密码</label>
                                                     </div>
                                                     <div class="f-l zero"
                                                          th:if="${#lists.contains(permissions,'deleteUser')}">
                                                         <input type="checkbox" class="singleListChecked" alt="deleteUser">
-                                                        <label >账号删除</label>
+                                                        <label for="">账号删除</label>
                                                     </div>
                                                     <div class="f-l zero" style="width: 100%;" th:if="${#lists.contains(permissions,'createUser')}">
                                                         <input type="checkbox" class="singleListChecked"
                                                                alt="createUser">
-                                                        <label >创建账号（创建账号时的角色选择）</label>
+                                                        <label for="">创建账号（创建账号时的角色选择）</label>
                                                     </div>
                                                     <div class="f-l clearfix create-account" th:if="${#lists.contains(permissions,'createUser')}">
                                                         <div class="f-l zero" th:if="${#lists.contains(permissions,'createUserAdmin')}">
                                                             <input type="checkbox"
                                                                    class="singleListChecked singleRoleChecked admin-role" alt="createUserAdmin">
-                                                            <label >管理员</label>
+                                                            <label for="">管理员</label>
                                                         </div>
                                                         <div class="f-l zero" th:if="${#lists.contains(permissions,'createUserManager')}">
                                                         <input type="checkbox"
                                                                class="singleListChecked singleRoleChecked manage-role" alt="createUserManager">
-                                                        <label >乙方管理员</label>
+                                                        <label for="">乙方管理员</label>
                                                         </div>
                                                         <div class="f-l zero" th:if="${#lists.contains(permissions,'createUserUser')}">
                                                         <input type="checkbox"
                                                                class="singleListChecked builders singleRoleChecked user-role" alt="createUserUser">
-                                                        <label >施工人员</label>
+                                                        <label for="">施工人员</label>
                                                         </div>
                                                         <div class="f-l zero" th:if="${#lists.contains(permissions,'createUserOtamanager')}">
                                                             <input type="checkbox"
                                                                    class="singleListChecked builders singleRoleChecked otamanager-role" alt="createUserOtamanager">
-                                                            <label >固件管理员</label>
+                                                            <label for="">固件管理员</label>
                                                         </div>
                                                         <div class="f-l zero" th:if="${#lists.contains(permissions,'createSalesman')}">
                                                             <input type="checkbox"
                                                                    class="singleListChecked builders singleRoleChecked salesman-role" alt="createSalesman">
-                                                            <label>业务员</label>
+                                                            <label for="">普通用户</label>
                                                         </div>
                                                     </div>
 
@@ -472,12 +472,12 @@
                                                     <div class="f-l">
                                                         <input type="radio" value="0" name="isRead8"
                                                                class="singleIsRadio" alt="viewUser">
-                                                        <label  alt="viewUser">查看数据</label>
+                                                        <label for="" alt="viewUser">查看数据</label>
                                                     </div>
                                                     <div class="f-l">
                                                         <input type="radio" value="1" name="isRead8"
                                                                class="singleNoRadio">
-                                                        <label >不可查看数据</label>
+                                                        <label for="">不可查看数据</label>
                                                     </div>
                                                 </div>
 
@@ -489,16 +489,16 @@
                                         <div class="clearfix limit">
                                             <div class="f-l ">
                                                 <input type="checkbox" class="allChecked">
-                                                <label >全选</label>
+                                                <label for="">全选</label>
                                             </div>
                                             <div class="f-r clearfix">
                                                 <div class="f-l">
                                                     <input type="radio" value="0" class="isAllRadio" name="isRoleRead">
-                                                    <label >查看数据</label>
+                                                    <label for="">查看数据</label>
                                                 </div>
                                                 <div class="f-l">
                                                     <input type="radio" value="1" class="noAllRadio" name="isRoleRead">
-                                                    <label >不可查看数据</label>
+                                                    <label for="">不可查看数据</label>
                                                 </div>
                                             </div>
                                         </div>
@@ -507,62 +507,62 @@
                                             <div class="f-l list-title" style="line-height: calc(49px * 3);">
                                                 <div>
                                                     <input type="checkbox" class="singleChecked allListChecked">
-                                                    <label >角色列表</label>
+                                                    <label for="">角色列表</label>
                                                 </div>
                                             </div>
                                             <div class="f-l  clearfix list-content">
                                                 <div class=" f-l clearfix one">
                                                     <div class="f-l zero" th:if="${#lists.contains(permissions,'createRole')}">
                                                         <input type="checkbox" class="singleListChecked" alt="createRole">
-                                                        <label >创建角色</label>
+                                                        <label for="">创建角色</label>
                                                     </div>
                                                     <div class="f-l zero"
                                                          th:if="${#lists.contains(permissions,'deleteRole')}">
                                                         <input type="checkbox" class="singleListChecked" alt="deleteRole">
-                                                        <label >角色删除</label>
+                                                        <label for="">角色删除</label>
                                                     </div>
                                                     <div class="f-l zero"
                                                          th:if="${#lists.contains(permissions,'renameRole')}">
                                                         <input type="checkbox" class="singleListChecked" alt="renameRole">
-                                                        <label >角色重命名</label>
+                                                        <label for="">角色重命名</label>
                                                     </div>
                                                     <div class="f-l zero"
                                                          th:if="${#lists.contains(permissions,'updateRolePermission')}">
                                                         <input type="checkbox" class="singleListChecked" alt="updateRolePermission">
-                                                        <label >修改角色权限</label>
+                                                        <label for="">修改角色权限</label>
                                                     </div>
                                                     <div class="f-l zero" style="width: 100%;">
                                                         <!--<input type="checkbox" class="singleListChecked lookRole">-->
-                                                        <label >查看角色权限（可查看的角色）</label>
+                                                        <label for="">查看角色权限（可查看的角色）</label>
                                                     </div>
                                                     <div class="f-l clearfix create-account">
                                                         <div class="f-l zero" th:if="${#lists.contains(permissions,'viewRPAdmin')}">
                                                             <input type="checkbox"
                                                                    class="singleListChecked admin singleRoleChecked" alt="viewRPAdmin">
-                                                            <label >管理员</label>
+                                                            <label for="">管理员</label>
                                                         </div>
                                                         <div class="f-l zero" th:if="${#lists.contains(permissions,'viewRPManager')}">
                                                         <input type="checkbox"
                                                         class="singleListChecked yi-admin-role manage singleRoleChecked" alt="viewRPManager">
-                                                        <label>乙方管理员</label>
+                                                        <label for="">乙方管理员</label>
                                                         </div>
                                                         <div class="f-l zero"
                                                              th:if="${#lists.contains(permissions,'viewRPUser')}">
                                                         <input type="checkbox"
                                                                class="singleListChecked user builders singleRoleChecked" alt="viewRPUser">
-                                                        <label >施工人员</label>
+                                                        <label for="">施工人员</label>
                                                         </div>
                                                         <div class="f-l zero"
                                                              th:if="${#lists.contains(permissions,'viewRPOtamanager')}">
                                                             <input type="checkbox"
                                                                    class="singleListChecked otamanager builders singleRoleChecked" alt="viewRPOtamanager">
-                                                            <label >固件管理员</label>
+                                                            <label for="">固件管理员</label>
                                                         </div>
                                                         <div class="f-l zero"
                                                              th:if="${#lists.contains(permissions,'viewSalesman')}">
                                                             <input type="checkbox"
                                                                    class="singleListChecked salesman builders singleRoleChecked" alt="viewSalesman">
-                                                            <label >业务员</label>
+                                                            <label for="">普通用户1</label>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -570,12 +570,12 @@
                                                     <div class="f-l">
                                                         <input type="radio" value="0" name="isRead9"
                                                                class="singleIsRadio" alt="viewRole">
-                                                        <label  alt="viewRole">查看数据</label>
+                                                        <label for="" alt="viewRole">查看数据</label>
                                                     </div>
                                                     <div class="f-l">
                                                         <input type="radio" value="1" name="isRead9"
                                                                class="singleNoRadio">
-                                                        <label >不可查看数据</label>
+                                                        <label for="">不可查看数据</label>
                                                     </div>
                                                 </div>
                                             </div>
@@ -586,16 +586,16 @@
                                         <div class="clearfix limit">
                                             <div class="f-l ">
                                                 <input type="checkbox" class="allChecked">
-                                                <label >全选</label>
+                                                <label for="">全选</label>
                                             </div>
                                             <div class="f-r clearfix">
                                                 <div class="f-l">
                                                     <input type="radio" value="0" class="isAllRadio" name="isFileRead">
-                                                    <label>查看数据</label>
+                                                    <label for="">查看数据</label>
                                                 </div>
                                                 <div class="f-l">
                                                     <input type="radio" value="1" class="noAllRadio" name="isFileRead">
-                                                    <label >不可查看数据</label>
+                                                    <label for="">不可查看数据</label>
                                                 </div>
                                             </div>
                                         </div>
@@ -605,7 +605,7 @@
                                                 <div>
                                                     <input type="checkbox"
                                                            class="singleChecked allListChecked userList">
-                                                    <label >OTA文件</label>
+                                                    <label for="">OTA文件</label>
                                                 </div>
                                             </div>
                                             <div class="f-l  clearfix list-content">
@@ -613,53 +613,53 @@
                                                     <div class="f-l zero"
                                                          th:if="${#lists.contains(permissions,'insertOTA')}" style=" width: 33%;">
                                                         <input type="checkbox" class="singleListChecked" alt="insertOTA">
-                                                        <label alt="insertOTA">新增固件&上传新版本</label>
+                                                        <label for="" alt="insertOTA">新增固件&上传新版本</label>
                                                     </div>
                                                     <div class="f-l zero"
                                                          th:if="${#lists.contains(permissions,'uploadNewOTA')}" style=" width: 33%;">
                                                         <input type="checkbox" class="singleListChecked" alt="uploadNewOTA">
-                                                        <label  alt="uploadNewOTA">下载最新固件版本</label>
+                                                        <label for="" alt="uploadNewOTA">下载最新固件版本</label>
                                                     </div>
                                                     <div class="f-l zero"
                                                          th:if="${#lists.contains(permissions,'deltelNewOTA')}">
                                                         <input type="checkbox" class="singleListChecked" alt="deltelNewOTA">
-                                                        <label  alt="deltelNewOTA">固件删除</label>
+                                                        <label for="" alt="deltelNewOTA">固件删除</label>
                                                     </div>
                                                     <div class="f-l zero"
                                                          th:if="${#lists.contains(permissions,'viewOTADescribe')}">
                                                         <input type="checkbox" class="singleListChecked" alt="viewOTADescribe">
-                                                        <label >固件描述查看</label>
+                                                        <label for="">固件描述查看</label>
                                                     </div>
                                                     <div class="f-l zero"
                                                          th:if="${#lists.contains(permissions,'updateOTADescribe')}">
                                                         <input type="checkbox" class="singleListChecked" alt="updateOTADescribe">
-                                                        <label >固件描述修改</label>
+                                                        <label for="">固件描述修改</label>
                                                     </div>
                                                     <div class="f-l zero"
                                                          th:if="${#lists.contains(permissions,'updateOTAInfo')}">
                                                         <input type="checkbox" class="singleListChecked" alt="updateOTAInfo">
-                                                        <label >固件信息编辑</label>
+                                                        <label for="">固件信息编辑</label>
                                                     </div>
                                                     <div class="f-l zero" style="width: 100%;" th:if="${#lists.contains(permissions,'viewHistoryOTA')}">
                                                         <input type="checkbox" class="singleListChecked"
                                                                alt="viewHistoryOTA">
-                                                        <label >固件历史版本查看</label>
+                                                        <label for="">固件历史版本查看</label>
                                                     </div>
                                                     <div class="f-l clearfix create-account" th:if="${#lists.contains(permissions,'viewHistoryOTA')}" >
                                                         <div class="f-l zero" th:if="${#lists.contains(permissions,'OTArenameOTA')}" style="width:30%;">
                                                             <input type="checkbox"
                                                                    class="singleListChecked singleRoleChecked OTArenameOTA" alt="OTArenameOTA">
-                                                            <label >固件版本重命名</label>
+                                                            <label for="">固件版本重命名</label>
                                                         </div>
                                                         <div class="f-l zero" th:if="${#lists.contains(permissions,'OTArenameOTA')}">
                                                             <input type="checkbox"
                                                                    class="singleListChecked singleRoleChecked OTAdeleteOTA" alt="OTAdeleteOTA">
-                                                            <label >固件版本删除</label>
+                                                            <label for="">固件版本删除</label>
                                                         </div>
                                                         <div class="f-l zero" th:if="${#lists.contains(permissions,'OTArenameOTA')}">
                                                             <input type="checkbox"
                                                                    class="singleListChecked builders singleRoleChecked OTAuploadOTA" alt="OTAuploadOTA">
-                                                            <label >固件下载</label>
+                                                            <label for="">固件下载</label>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -667,12 +667,12 @@
                                                     <div class="f-l">
                                                         <input type="radio" value="0" name="isRead11"
                                                                class="singleIsRadio" alt="viewOTA">
-                                                        <label  alt="viewOTA">查看数据</label>
+                                                        <label for="" alt="viewOTA">查看数据</label>
                                                     </div>
                                                     <div class="f-l">
                                                         <input type="radio" value="1" name="isRead11"
                                                                class="singleNoRadio">
-                                                        <label >不可查看数据</label>
+                                                        <label for="">不可查看数据</label>
                                                     </div>
                                                 </div>
                                             </div>
@@ -683,7 +683,7 @@
                                                 <div>
                                                     <input type="checkbox"
                                                            class="singleChecked allListChecked userList">
-                                                    <label >PC文件</label>
+                                                    <label for="">PC文件</label>
                                                 </div>
                                             </div>
                                             <div class="f-l  clearfix list-content">
@@ -691,19 +691,19 @@
                                                     <div class="f-l zero"
                                                          th:if="${#lists.contains(permissions,'uploadPCFile')}" style="line-height: 55px;">
                                                         <input type="checkbox" class="singleListChecked" alt="uploadPCFile">
-                                                        <label>文件下载</label>
+                                                        <label for="">文件下载</label>
                                                     </div>
                                                 </div>
                                                 <div class="f-r clearfix " style="height: 57px;">
                                                     <div class="f-l">
                                                         <input type="radio" value="0" name="isRead12"
                                                                class="singleIsRadio" alt="viewPC">
-                                                        <label alt="viewPC">查看数据</label>
+                                                        <label for="" alt="viewPC">查看数据</label>
                                                     </div>
                                                     <div class="f-l">
                                                         <input type="radio" value="1" name="isRead12"
                                                                class="singleNoRadio">
-                                                        <label>不可查看数据</label>
+                                                        <label for="">不可查看数据</label>
                                                     </div>
                                                 </div>
                                             </div>
@@ -714,17 +714,17 @@
                                         <div class="clearfix limit">
                                             <div class="f-l ">
                                                 <input type="checkbox" class="allChecked">
-                                                <label>全选</label>
+                                                <label for="">全选</label>
                                             </div>
                                             <div class="f-r clearfix">
                                                 <div class="f-l">
                                                     <input type="radio" value="0" class="isAllRadio"
                                                            name="isProductRead">
-                                                    <label>查看数据</label>
+                                                    <label for="">查看数据</label>
                                                 </div>
                                                 <div class="f-l">
                                                     <input type="radio" value="1" class="noAllRadio" name="isProductRead">
-                                                    <label>不可查看数据</label>
+                                                    <label for="">不可查看数据</label>
                                                 </div>
                                             </div>
                                         </div>
@@ -734,42 +734,42 @@
                                                 <div>
                                                     <input type="checkbox"
                                                            class="singleChecked allListChecked userList">
-                                                    <label>产品列表</label>
+                                                    <label for="">产品列表</label>
                                                 </div>
                                             </div>
                                             <div class="f-l  clearfix list-content">
                                                 <div class=" f-l clearfix one">
                                                     <div class="f-l zero" th:if="${#lists.contains(permissions,'insertProduct')}" style=" width: 33%;">
                                                         <input type="checkbox" class="singleListChecked" alt="insertProduct">
-                                                        <label>新增产品&内容编辑</label>
+                                                        <label for="">新增产品&内容编辑</label>
                                                     </div>
                                                     <div class="f-l zero" th:if="${#lists.contains(permissions,'viewProductShow')}" style=" width: 33%;">
                                                         <input type="checkbox" class="singleListChecked" alt="viewProductShow">
-                                                        <label>产品说明查看</label>
+                                                        <label for="">产品说明查看</label>
                                                     </div>
                                                     <div class="f-l zero" th:if="${#lists.contains(permissions,'updateProduct')}">
                                                         <input type="checkbox" class="singleListChecked" alt="updateProduct">
-                                                        <label>产品说明修改</label>
+                                                        <label for="">产品说明修改</label>
                                                     </div>
                                                     <div class="f-l zero" th:if="${#lists.contains(permissions,'relevanceProduct')}" style="width: 30%;">
                                                         <input type="checkbox" class="singleListChecked" alt="relevanceProduct">
-                                                        <label>固件关联&修改关联</label>
+                                                        <label for="">固件关联&修改关联</label>
                                                     </div>
                                                     <div class="f-l zero"  th:if="${#lists.contains(permissions,'deleteProduct')}" >
                                                         <input type="checkbox" class="singleListChecked" alt="deleteProduct">
-                                                        <label>删除产品</label>
+                                                        <label for="">删除产品</label>
                                                     </div>
                                                 </div>
                                                 <div class="f-r clearfix " style="line-height: calc(49px * 2);">
                                                     <div class="f-l">
                                                         <input type="radio" value="0" name="isRead13"
                                                                class="singleIsRadio" alt="viewProduct">
-                                                        <label alt="viewProduct">查看数据</label>
+                                                        <label for="" alt="viewProduct">查看数据</label>
                                                     </div>
                                                     <div class="f-l">
                                                         <input type="radio" value="1" name="isRead13"
                                                                class="singleNoRadio">
-                                                        <label>不可查看数据</label>
+                                                        <label for="">不可查看数据</label>
                                                     </div>
                                                 </div>
                                             </div>
@@ -780,16 +780,16 @@
                                         <div class="clearfix limit">
                                             <div class="f-l ">
                                                 <input type="checkbox" class="allChecked">
-                                                <label>全选</label>
+                                                <label for="">全选</label>
                                             </div>
                                             <div class="f-r clearfix">
                                                 <div class="f-l">
                                                     <input type="radio" value="0" class="isAllRadio" name="isCorRead">
-                                                    <label>查看数据</label>
+                                                    <label for="">查看数据</label>
                                                 </div>
                                                 <div class="f-l">
                                                     <input type="radio" value="1" class="noAllRadio" name="isCorRead">
-                                                    <label>不可查看数据</label>
+                                                    <label for="">不可查看数据</label>
                                                 </div>
                                             </div>
                                         </div>
@@ -798,7 +798,7 @@
                                             <div class="f-l list-title" style="line-height: calc(49px * 2);">
                                                 <div>
                                                     <input type="checkbox" class="singleChecked allListChecked">
-                                                    <label>合作列表</label>
+                                                    <label for="">合作列表</label>
                                                 </div>
                                             </div>
                                             <div class="f-l  clearfix list-content">
@@ -806,39 +806,39 @@
                                                     <div class="f-l zero"
                                                          th:if="${#lists.contains(permissions,'createCooperation')}">
                                                         <input type="checkbox" class="singleListChecked" alt="createCooperation">
-                                                        <label>新增合作</label>
+                                                        <label for="">新增合作</label>
                                                     </div>
                                                     <div class="f-l zero"
                                                          th:if="${#lists.contains(permissions,'updateCooperation')}">
                                                         <input type="checkbox" class="singleListChecked" alt="updateCooperation">
-                                                        <label>合作信息编辑</label>
+                                                        <label for="">合作信息编辑</label>
                                                     </div>
                                                     <div class="f-l zero"
                                                          th:if="${#lists.contains(permissions,'deleteCooperation')}">
                                                         <input type="checkbox" class="singleListChecked" alt="deleteCooperation">
-                                                        <label>合作删除</label>
+                                                        <label for="">合作删除</label>
                                                     </div>
                                                     <div class="f-l zero"
                                                          th:if="${#lists.contains(permissions,'updateCooperationState')}">
                                                         <input type="checkbox" class="singleListChecked" alt="updateCooperationState">
-                                                        <label>合作状态变更</label>
+                                                        <label for="">合作状态变更</label>
                                                     </div>
                                                     <div class="f-l zero"
                                                          th:if="${#lists.contains(permissions,'CooperationMemo')}">
                                                         <input type="checkbox" class="singleListChecked" alt="CooperationMemo">
-                                                        <label>合作备忘录</label>
+                                                        <label for="">合作备忘录</label>
                                                     </div>
                                                 </div>
                                                 <div class="f-r clearfix " style="line-height: calc(49px * 2);">
                                                     <div class="f-l">
                                                         <input type="radio" value="0" name="isRead10"
                                                                class="singleIsRadio" alt="viewCooperation">
-                                                        <label alt="viewCooperation">查看数据</label>
+                                                        <label for="" alt="viewCooperation">查看数据</label>
                                                     </div>
                                                     <div class="f-l">
                                                         <input type="radio" value="1" name="isRead10"
                                                                class="singleNoRadio">
-                                                        <label>不可查看数据</label>
+                                                        <label for="">不可查看数据</label>
                                                     </div>
                                                 </div>
                                             </div>
