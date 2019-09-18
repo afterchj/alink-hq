@@ -102,14 +102,14 @@
                     <form action="/alink-hq/timer/list" class="clearfix p-r" method="post" >
                         <div class="f-l search" >
                             <div>
-                                <label for="projectName">定时名称</label>
+                                <label >定时名称</label>
                                 <input type="text" id="projectName" placeholder="请输入定时名称" name="tname" th:value="${tname}">
                                 <input type="hidden"  name="id" th:value="${id}"/>
                                 <input type="hidden" name="pageSize" th:value="${pageInfo.getPageSize()}"/>
                                 <input type="hidden" name="timeFlag" th:value="${timeFlag}"/>
                             </div>
                             <div class="p-r">
-                                <label for="create-time">创建时间</label>
+                                <label >创建时间</label>
                                 <input type="text" id="create-time" placeholder="请选择日期" AUTOCOMPLETE="off"
                                        name="createDate" th:value="${createDate}">
                                 <img th:src="@{/static/img/date.png}" alt="" class="p-a">
@@ -117,7 +117,7 @@
                         </div>
                         <div class="f-l search" >
                             <div>
-                                <label for="status" class="font">定时状态</label>
+                                <label class="font">定时状态</label>
                                 <select name="state" style=" height: 38px;line-height: 38px;" id="status" >
                                     <option value="0" th:selected="${state=='0'}">全部</option>
                                     <option value="1" th:selected="${state=='1'}">启用</option>
@@ -125,7 +125,7 @@
                                 </select>
                             </div>
                             <div class="p-r">
-                                <label for="end-time">更新时间</label>
+                                <label >更新时间</label>
                                 <input type="text" id="end-time" placeholder="请选择日期" AUTOCOMPLETE="off"
                                        name="updateDate" th:value="${updateDate}">
                                 <img th:src="@{/static/img/date.png}" alt="" class="p-a">

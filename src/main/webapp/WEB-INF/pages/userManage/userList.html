@@ -51,11 +51,11 @@
                     <form action="" class="clearfix p-r">
                         <div class="f-l search">
                             <div>
-                                <label for="account">账号</label>
+                                <label >账号</label>
                                 <input type="text" id="account" placeholder="请输入账号">
                             </div>
                             <div class="p-r">
-                                <label for="role" class="font">角色</label>
+                                <label  class="font">角色</label>
                                 <select name="role" id="role">
                                     <option>请选择角色</option>
                                     <option th:each="role:${roleList}" th:value="${role.id}"
@@ -66,18 +66,18 @@
                         <div class="f-l search">
 
                             <div>
-                                <label for="username">用户名</label>
+                                <label >用户名</label>
                                 <input type="text" id="username" placeholder="请输入用户名" AUTOCOMPLETE="off">
                             </div>
                             <div class="p-r">
-                                <label for="add-time" class="font">添加时间</label>
+                                <label  class="font">添加时间</label>
                                 <input type="text" id="add-time" placeholder="请选择日期" AUTOCOMPLETE="off">
                                 <img src="/alink-hq/static/img/date.png" alt="" class="p-a show-date">
                             </div>
                         </div>
                         <div class="f-l search">
                             <div>
-                                <label for="company" class="font">隶属公司</label>
+                                <label  class="font">隶属公司</label>
                                 <select name="company" id="company">
                                     <option>请选择公司</option>
                                     <option th:each="firm:${firmList}" th:value="${firm.id}"

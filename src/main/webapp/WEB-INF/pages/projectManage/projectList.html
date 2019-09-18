@@ -43,33 +43,33 @@
                     <form action="" class="clearfix p-r">
                         <div class="f-l search" >
                             <div>
-                                <label for="projectName">项目名称</label>
+                                <label >项目名称</label>
                                 <input type="text" id="projectName" placeholder="请输入项目名称">
                             </div>
                             <div>
-                                <label for="company">隶属公司</label>
+                                <label >隶属公司</label>
                                 <input type="text" placeholder="请输入隶属公司" id="company">
                             </div>
 
                         </div>
                         <div class="f-l search"  style="margin-right: 15px;">
                             <div>
-                                <label for="account">施工人员账号</label>
+                                <label >施工人员账号</label>
                                 <input type="text" placeholder="请输入施工人员账号" id="account">
                             </div>
                             <div class="p-r">
-                                <label for="start-time">创建时间</label>
+                                <label >创建时间</label>
                                 <input type="text" id="start-time" placeholder="请选择日期" AUTOCOMPLETE="off">
                                 <img src="/alink-hq/static/img/date.png" alt="" class="p-a">
                             </div>
                         </div>
                         <div class="f-l search">
                             <div >
-                                <label for="username">施工人员用户名</label>
+                                <label >施工人员用户名</label>
                                 <input type="text" id="username" placeholder="请输入施工人员用户名" AUTOCOMPLETE="off">
                             </div>
                             <div class="p-r">
-                                <label for="end-time">更新时间</label>
+                                <label >更新时间</label>
                                 <input type="text" id="end-time" placeholder="请选择日期" AUTOCOMPLETE="off">
                                 <img src="/alink-hq/static/img/date.png" alt="" class="p-a">
                             </div>
@@ -241,41 +241,8 @@
 </div>
 <!-- 重命名弹框 -->
 <div th:replace="pop/reset::reset-name"></div>
-<!--<div class="confirm-on-off pop-iframe  " openContent="reset-name">-->
-    <!--<div class="confirm-on-off-nav p-r pop-nav">-->
-        <!--重命名-->
-    <!--</div>-->
-    <!--<div class="pop-content">-->
-        <!--<div class="newName">-->
-            <!--<p class="rename-hint"></p>-->
-            <!--<label for="rename">新名称</label>-->
-            <!--<input type="text" placeholder="请输入（2-16位汉字、字母、数字）" id="rename" onkeyup="nameKeyUp()" maxlength="16"/>-->
-        <!--</div>-->
-        <!--<div class="pop-btn">-->
-            <!--<button class="reduce">取消</button>-->
-            <!--<button class="yes">确定</button>-->
-        <!--</div>-->
-    <!--</div>-->
-<!--</div>-->
-<!-- 删除账户 -->
 <div th:replace="pop/delete::delete-pop"></div>
-<!--<div class="pop-iframe" openContent="delete-pop">-->
-    <!--<div class=" p-r pop-nav">-->
-        <!--温馨提示-->
-    <!--</div>-->
-    <!--<div class="pop-content">-->
 
-        <!--<div class="reset-pwd">-->
-            <!--<i class="fa fa-exclamation-circle fa-3x" aria-hidden="true" style="display: block;color:#00A0E9;"></i>-->
-            <!--<p>您确定要删除所选的项目吗？</p>-->
-        <!--</div>-->
-        <!--<div class="reset-pwd-hint">（删除后项目中所有信息将无法恢复，请慎重！）</div>-->
-        <!--<div class="pop-btn">-->
-            <!--<button class="reduce">取消</button>-->
-            <!--<button class="yes">确定</button>-->
-        <!--</div>-->
-    <!--</div>-->
-<!--</div>-->
 <div class="hide-iframe "></div>
 
 <script src="/alink-hq/static/js/jquery.min.js"></script>
