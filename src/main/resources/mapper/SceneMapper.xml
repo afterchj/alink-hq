@@ -2,6 +2,9 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.tpadsz.after.dao.SceneDao">
 
+    <select id="findMeshList" resultType="Integer">
+        SELECT DISTINCT(id) FROM f_mesh WHERE uid IN (SELECT uid FROM f_user_customer WHERE fid=(SELECT fid FROM f_user_customer WHERE uid=#{uid}))
+    </select>
 
     <select id="searchSceneList" resultType="com.tpadsz.after.entity.SceneList">
         SELECT s.id,s.sname AS sceneName,s.scene_id AS sceneId,#{lid} AS lid,#{meshName} AS meshName,#{meshId} AS meshId,#{mid} AS mid FROM f_scene s WHERE s.sname LIKE CONCAT('%',IFNULL(#{sceneName},''),'%') and s.scene_id LIKE CONCAT('%',IFNULL(#{sceneId},''),'%') and s.mid=#{mid} ORDER BY s.scene_id

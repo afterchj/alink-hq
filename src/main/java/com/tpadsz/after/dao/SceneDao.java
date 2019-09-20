@@ -45,4 +45,5 @@ public interface SceneDao {
 
     void saveDeleteLog(@Param("uid") String uid, @Param("sceneId") Integer sceneId, @Param("mid") Integer mid);
 
+    List<Integer> findMeshList(@Param("uid") String uid);
 }
