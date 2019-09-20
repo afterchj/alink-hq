@@ -37,9 +37,9 @@
                 <when test="role == 'user'">
                     AND m.uid =#{uid}
                 </when>
-                <otherwise>
+                <when test="role == 'salesman'">
                     AND m.uid IN (SELECT c.uid FROM f_user_customer c WHERE fid=(SELECT fid FROM f_user_customer WHERE uid=#{uid}))
-                </otherwise>
+                </when>
             </choose>
         </if>
     </sql>
