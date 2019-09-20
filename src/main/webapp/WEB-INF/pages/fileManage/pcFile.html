@@ -43,14 +43,14 @@
                     <div class="search-condition clearfix">
                         <div class="f-l search" style="width: auto;">
                             <div>
-                                <label for="name" class="font" style="width: 150px;">项目名称/账号/用户名</label>
+                                <label  class="font" style="width: 150px;">项目名称/账号/用户名</label>
                                 <input type="text" id="name" name="name" placeholder="请输入项目名称/账号/用户名"
                                        th:value="${dict.name}">
                             </div>
                         </div>
                         <div class="f-l search">
                             <div class="p-r">
-                                <label for="start-time">创建时间</label>
+                                <label >创建时间</label>
                                 <input type="text" name="createDate" id="start-time" placeholder="请选择日期"
                                        th:value="${dict.createDate}" AUTOCOMPLETE="off">
                                 <img src="/alink-hq/static/img/date.png" alt="" class="p-a">
@@ -59,7 +59,7 @@
                         </div>
                         <div class="f-l search">
                             <div class="p-r">
-                                <label for="end-time">更新时间</label>
+                                <label >更新时间</label>
                                 <input type="text" name="updateDate" id="end-time" placeholder="请选择日期"
                                        th:value="${dict.updateDate}" AUTOCOMPLETE="off">
                                 <img src="/alink-hq/static/img/date.png" alt="" class="p-a">
@@ -155,7 +155,7 @@
     <div class="pop-content">
         <div class="newName">
             <p class="rename-hint"></p>
-            <label for="rename">新名称</label>
+            <label >新名称</label>
             <input type="text" placeholder="请输入（2-16位汉字、字母、数字）" id="rename" onkeyup="nameKeyUp()" maxlength="16"/>
         </div>
         <div class="pop-btn">
@@ -164,20 +164,6 @@
         </div>
     </div>
 </div>
-<!-- 删除账户 -->
-<!--<div class="pop-iframe" openContent="delete-pop">-->
-<!--<div class=" p-r pop-nav">-->
-<!--温馨提示-->
-<!--</div>-->
-<!--<div class="pop-content">-->
-<!--<div class="reset-pwd">您确定要删除XXX固件？</div>-->
-<!--<div class="reset-pwd-hint">（删除后，XXX固件所有历史版本将均被删除）</div>-->
-<!--<div class="pop-btn">-->
-<!--<button class="reduce">取消</button>-->
-<!--<button class="yes">确定</button>-->
-<!--</div>-->
-<!--</div>-->
-<!--</div>-->
 <!-- 删除账户 -->
 <div th:replace="pop/delete::delete-pop"></div>
 <!-- 固件描述-->

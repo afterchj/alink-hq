@@ -1,9 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-
 <head>
     <title>OTA文件</title>
-
     <script src="/alink-hq/static/js/jquery.min.js"></script>
     <script src="/alink-hq/static/js/browser.js"></script>
     <link rel="stylesheet" th:href="@{/static/font-awesome-4.7.0/css/font-awesome.min.css}"/>
@@ -42,13 +40,13 @@
                     <div class="search-condition clearfix">
                         <div class="f-l search" >
                             <div>
-                                <label for="name" class="font">固件名称</label>
+                                <label  class="font">固件名称</label>
                                 <input type="text" id="name" name="otaName" placeholder="请输入固件名称" th:value="${dict.otaName}">
                             </div>
                         </div>
                         <div class="f-l search">
                             <div>
-                                <label for="oid" class="font">固件ID</label>
+                                <label  class="font">固件ID</label>
                                 <input class="intInput" type="text" id="oid" name="otaId" placeholder="请输入固件ID" th:value="${dict.otaId}">
                             </div>
                         </div>
@@ -163,7 +161,7 @@
     <div class="pop-content">
         <div class="newName">
             <p class="rename-hint"></p>
-            <label for="rename">新名称</label>
+            <label >新名称</label>
             <input type="text" placeholder="请输入（2-16位汉字、字母、数字）" id="rename" onkeyup="nameKeyUp()" maxlength="16"/>
         </div>
         <div class="pop-btn">
@@ -172,20 +170,6 @@
         </div>
     </div>
 </div>
-<!-- 删除账户 -->
-<!--<div class="pop-iframe" openContent="delete-pop">-->
-    <!--<div class=" p-r pop-nav">-->
-        <!--温馨提示-->
-    <!--</div>-->
-    <!--<div class="pop-content">-->
-        <!--<div class="reset-pwd">您确定要删除XXX固件？</div>-->
-        <!--<div class="reset-pwd-hint">（删除后，XXX固件所有历史版本将均被删除）</div>-->
-        <!--<div class="pop-btn">-->
-            <!--<button class="reduce">取消</button>-->
-            <!--<button class="yes">确定</button>-->
-        <!--</div>-->
-    <!--</div>-->
-<!--</div>-->
 <!-- 删除账户 -->
 <div th:replace="pop/delete::delete-pop"></div>
 <!-- 固件描述-->

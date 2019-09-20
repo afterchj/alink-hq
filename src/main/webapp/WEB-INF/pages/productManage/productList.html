@@ -84,13 +84,13 @@
                     <div class="search-condition clearfix">
                         <div class="f-l search" style="width: auto;">
                             <div>
-                                <label for="name" class="font" style="width: 200px;">产品品类/代码号(产品ID)</label>
+                                <label  class="font" style="width: 200px;">产品品类/代码号(产品ID)</label>
                                 <input type="text" id="name" name="type" placeholder="请输入产品品类/代码号(产品ID)" th:value="${type}">
                             </div>
                         </div>
                         <div class="f-l search">
                             <div>
-                                <label for="name" class="font">隶属公司</label>
+                                <label  class="font">隶属公司</label>
                                 <select name="coname" id="productSelect">
                                     <option value="">请选择公司</option>
                                     <option th:each="conameMap:${conames}" th:value="${conameMap.id}"

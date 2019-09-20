@@ -45,11 +45,11 @@
                         <div class="scrollbar">
                             <div class="accountMsg clearfix">
                                 <div class="f-l" style="width:50%;">
-                                    <label for="account">账号：</label>
+                                    <label>账号：</label>
                                     <input type="text" id="account" th:value="${account}">
                                 </div>
                                 <div class="f-r">
-                                    <label for="company">隶属公司：</label>
+                                    <label >隶属公司：</label>
                                     <input type="text" id="company" th:value="${coname}">
                                 </div>
                             </div>
@@ -96,34 +96,6 @@
             </div>
         </div>
     </div>
-    <!--重置密码 -->
-    <!--<div class="reset-passwords pop-iframe" openContent="reset-passwords">-->
-    <!--<div class="reset-passwords-nav p-r pop-nav">-->
-    <!--新密码-->
-    <!--</div>-->
-    <!--<div class="reset-passwords-content pop-content">-->
-    <!--<form action="">-->
-    <!--<div class="main-part">-->
-    <!--<div class="account-part">-->
-    <!--<span class="t-title t-account">账&nbsp;&nbsp;&nbsp;号：</span>-->
-    <!--<span class="t-content t-account-result"></span>-->
-    <!--</div>-->
-    <!--<div class="pwd-part">-->
-    <!--<span class="t-title t-pwd">新密码：</span>-->
-    <!--<span class="t-content t-pwd-result"></span>-->
-    <!--</div>-->
-    <!--</div>-->
-
-    <!--<div class="pop-btn clearfix">-->
-    <!--<div class="f-l pop-hint">请牢记新密码，关闭后将无法展示</div>-->
-    <!--<div class="f-r">-->
-    <!--<button class="reduce" type="button">取消</button>-->
-    <!--<button class="yes" type="button">确定</button>-->
-    <!--</div>-->
-    <!--</div>-->
-    <!--</form>-->
-    <!--</div>-->
-    <!--</div>-->
 </div>
 <!--新密码-->
 <div th:replace="pop/newPwd::new-pwd"></div>

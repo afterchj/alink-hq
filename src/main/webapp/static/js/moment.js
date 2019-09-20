@@ -52,3 +52,4 @@ function isAllEqual(array) {
         return true;
     }
 }
+$('label').unbind('focus');
