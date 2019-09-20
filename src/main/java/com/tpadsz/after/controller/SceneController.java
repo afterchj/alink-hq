@@ -53,7 +53,14 @@ public class SceneController {
         try {
                 Integer role_id = accountService.findRoleIdByUid(uid);
                 Integer role_id2 = sceneService.findRoleIdByMid(mid);
-                if(role_id<=role_id2) {
+                int count = 1;
+            if(role_id ==14){
+                List<Integer> ids = sceneService.findMeshList(uid);
+                if (!ids.contains(mid)) {
+                    count = 0;
+                }
+            }
+                if(role_id<=role_id2 || (role_id==14 && count==1)) {
                     PageHelper.startPage(pageNum, pageSize);
                     List<SceneList> list = sceneService.searchSceneList(sceneName, sceneId, lid, meshName, meshId, mid);
                     PageInfo<SceneList> pageInfo = new PageInfo<>(list, pageSize);

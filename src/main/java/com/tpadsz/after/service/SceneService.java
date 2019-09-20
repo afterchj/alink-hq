@@ -37,4 +37,5 @@ public interface SceneService {
 
     void saveDeleteLog(String uid, Integer sceneId, Integer mid);
 
+    List<Integer> findMeshList(String uid);
 }

@@ -97,5 +97,10 @@ public class SceneServiceImpl implements SceneService {
         sceneDao.saveDeleteLog(uid,sceneId,mid);
     }
 
+    @Override
+    public List<Integer> findMeshList(String uid) {
+        return sceneDao.findMeshList(uid);
+    }
+
 
 }

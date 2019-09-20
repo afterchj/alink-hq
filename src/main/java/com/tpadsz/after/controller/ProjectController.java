@@ -74,7 +74,7 @@ public class ProjectController {
                 PageHelper.startPage(pageNum, pageSize);
                 list = projectService.searchBySuper(account, uname, projectName, coname, startCreateDate, endCreateDate,
                         startUpdateDate, endUpdateDate, sortFlag);
-            } else if (role_id == 3) {
+            } else if (role_id == 3 || role_id == 14) {
                 List<Integer> ids = projectService.findProjectList(uid);
                 if (ids.size() != 0) {
                     PageHelper.startPage(pageNum, pageSize);
