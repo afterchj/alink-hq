@@ -31,8 +31,7 @@
                     r.role_id in (2,3,4))
                 </when>
                 <when test="role == 'manager'">
-                    AND m.uid IN (SELECT c.uid FROM f_user_customer c WHERE fid=(SELECT fid FROM f_user_customer WHERE
-                    uid=#{uid}))
+                    AND m.uid IN (SELECT c.uid FROM f_user_customer c WHERE fid=(SELECT fid FROM f_user_customer WHERE uid=#{uid}))
                     <!--
                         AND m.uid IN (SELECT c.uid FROM f_user_customer c INNER JOIN f_user_role r ON c.uid=r.user_id WHERE r.role_id in (4) OR fid=(SELECT fid FROM f_user_customer WHERE uid=#{uid}))
                      -->
@@ -40,8 +39,9 @@
                 <when test="role == 'user'">
                     AND m.uid =#{uid}
                 </when>
-                <!--<otherwise>-->
-                <!--</otherwise>-->
+                <otherwise>
+                    AND m.uid IN (SELECT c.uid FROM f_user_customer c WHERE fid=(SELECT fid FROM f_user_customer WHERE uid=#{uid}))
+                </otherwise>
             </choose>
         </if>
     </sql>
@@ -152,7 +152,7 @@
         SELECT CONCAT_WS('_',id,mesh_id) id,mesh_id, mname label FROM f_mesh m
         WHERE 1=1
         <include refid="common_choose"></include>
---         GROUP BY mesh_id
+        -- GROUP BY mesh_id
     </select>
     <insert id="save" parameterType="SearchDict">
         <selectKey keyProperty="id" order="BEFORE" resultType="int">
