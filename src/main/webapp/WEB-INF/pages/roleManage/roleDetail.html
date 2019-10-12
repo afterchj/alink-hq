@@ -78,8 +78,12 @@
                                             <input type="radio" name="data-scope-content" value="1" alt="company" >
                                             <label >隶属公司名下所有账号相关内容</label>
                                         </div>
+                                        <div>
+                                            <input type="radio" name="data-scope-content" value="2" alt="companyProject" >
+                                            <label >隶属公司名下任意项目相关内容</label>
+                                        </div>
                                         <div th:if="${rid} le 2">
-                                            <input type="radio" name="data-scope-content" value="2" alt="all" >
+                                            <input type="radio" name="data-scope-content" value="3" alt="all" >
                                             <label >所有公司名下所有账号相关内容</label>
                                         </div>
                                     </div>
@@ -433,6 +437,11 @@
                                                          th:if="${#lists.contains(permissions,'deleteUser')}">
                                                         <input type="checkbox" class="singleListChecked" alt="deleteUser">
                                                         <label >账号删除</label>
+                                                    </div>
+                                                    <div class="f-l zero"
+                                                         th:if="${#lists.contains(permissions,'relatedProject')}">
+                                                        <input type="checkbox" class="singleListChecked" alt="relatedProject">
+                                                        <label >项目关联</label>
                                                     </div>
                                                     <div class="f-l zero" style="width: 100%;" th:if="${#lists.contains(permissions,'createUser')}">
                                                         <input type="checkbox" class="singleListChecked"
@@ -907,8 +916,10 @@
                 $(".company-select").find('input:eq(0)').prop('checked',true);
             }else if (permissionName=='company'){
                 $(".company-select").find('input:eq(1)').prop('checked',true);
-            }else if (permissionName=='all'){
+            }else if (permissionName=='companyProject'){
                 $(".company-select").find('input:eq(2)').prop('checked',true);
+            }else if (permissionName=='all'){
+                $(".company-select").find('input:eq(3)').prop('checked',true);
             }
             //创建账号
             if (permissionName == 'createUserAdmin'){
