@@ -372,4 +372,17 @@ public class AccountController {
         return firmList;
     }
 
+
+    @RequestMapping(value = "/associateProject", method = RequestMethod.GET)
+    public String associateProject(HttpSession session, Model model) {
+        User loginUser = (User) session.getAttribute("user");
+        String uid = loginUser.getId();
+        Integer role_id = accountService.findRoleIdByUid(uid);
+//        List<Firm> firmList = getFirmInfo(role_id, uid);
+//        model.addAttribute("firmList", firmList);
+//        model.addAttribute("account", account);
+//        model.addAttribute("coname", coname);
+        return "userManage/associateProject";
+    }
+
 }
