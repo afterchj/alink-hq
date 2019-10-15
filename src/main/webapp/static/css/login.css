@@ -126,7 +126,14 @@ body,html {
 .content .login-in-box-tab-content button.active {
     opacity: .7;
 }
-
+.msg-bottom{
+    color: #fff;
+    position: absolute;
+    bottom: 30px;
+/* margin: auto; */
+    width: 100%;
+    text-align: center;
+}
 .icon {
     top: 10px;
     left: 10px;
