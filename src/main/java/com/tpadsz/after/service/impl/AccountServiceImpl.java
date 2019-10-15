@@ -127,5 +127,10 @@ public class AccountServiceImpl implements AccountService {
         accountDao.saveMemo(account,content);
     }
 
+    @Override
+    public List<ProjectList> findAssociateProjectsList(String id) {
+        return accountDao.findAssociateProjectsList(id);
+    }
+
 
 }

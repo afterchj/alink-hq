@@ -4,10 +4,7 @@ import com.alibaba.fastjson.JSON;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.tpadsz.after.constants.MemcachedObjectType;
-import com.tpadsz.after.entity.Firm;
-import com.tpadsz.after.entity.Role;
-import com.tpadsz.after.entity.User;
-import com.tpadsz.after.entity.UserList;
+import com.tpadsz.after.entity.*;
 import com.tpadsz.after.entity.dd.ResultDict;
 import com.tpadsz.after.service.AccountService;
 import com.tpadsz.after.utils.ExcelUtil;
@@ -374,14 +371,15 @@ public class AccountController {
 
 
     @RequestMapping(value = "/associateProject", method = RequestMethod.GET)
-    public String associateProject(HttpSession session, Model model) {
-        User loginUser = (User) session.getAttribute("user");
-        String uid = loginUser.getId();
-        Integer role_id = accountService.findRoleIdByUid(uid);
-//        List<Firm> firmList = getFirmInfo(role_id, uid);
-//        model.addAttribute("firmList", firmList);
-//        model.addAttribute("account", account);
-//        model.addAttribute("coname", coname);
+    public String associateProject(String account,Model model) {
+        if(account!=null) {
+            User user = accountService.findByAccount(account);
+            Integer role_id = accountService.findRoleIdByUid(user.getId());
+            if (role_id == 14) {
+                List<ProjectList> list = accountService.findAssociateProjectsList(user.getId());
+                model.addAttribute("projectList", list);
+            }
+        }
         return "userManage/associateProject";
     }
 

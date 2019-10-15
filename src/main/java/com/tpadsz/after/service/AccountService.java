@@ -1,9 +1,6 @@
 package com.tpadsz.after.service;
 
-import com.tpadsz.after.entity.Firm;
-import com.tpadsz.after.entity.Role;
-import com.tpadsz.after.entity.User;
-import com.tpadsz.after.entity.UserList;
+import com.tpadsz.after.entity.*;
 
 import java.util.List;
 
@@ -45,4 +42,6 @@ public interface AccountService {
     List<User> findAccountByFid(Integer fid);
 
     void saveMemo(String account, String content);
+
+    List<ProjectList> findAssociateProjectsList(String id);
 }

@@ -59,4 +59,6 @@ public interface AccountDao {
     void saveMemo(@Param("account") String account, @Param("memo") String content);
 
     void createDefaultGroup(SceneList sceneList);
+
+    List<ProjectList> findAssociateProjectsList(@Param("uid")String id);
 }
