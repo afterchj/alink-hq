@@ -178,7 +178,6 @@
 //            }
 //        })
         $('#account-transfer').bind('input propertychange', function () {
-
             var keyword = $(this).val();
             if (keyword != '') {
                 $(this).prev('.verify').text('');
@@ -187,10 +186,7 @@
 //                $('.account-hint').text('请选择账号');
             }
             var keyArr = [];
-
-
             var reg = new RegExp(keyword);
-
             for (var i = 0; i < list.length; i++) {
                 if (list[i].account != null && list[i].account.match(reg)) {
 
@@ -214,6 +210,7 @@
                 $('#list').removeClass('active');
             }
         });
+        console.log('ids',$('#ids').val());
         $('.confirm-btn').click(function () {
             var ids = $('#ids').val();
             var fid = $('#fid option:selected').val();

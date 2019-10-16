@@ -1930,3 +1930,96 @@ table#timeTitle tbody tr{
     padding-right: 5px;
     border-radius: 3px;
 }
+#associateProject tr th,#associateProject tr td{
+    width:400px;
+    text-align: left;
+}
+#associateProject tr th:first-child,#associateProject tr td:first-child{
+    width:250px;
+    text-align: center;
+}
+/*#associateProject tr th:nth-child(2),#associateProject tr td:nth-child(2){*/
+    /*width:200px;*/
+/*}*/
+#associateProject tr td .title{
+    margin-right:30px;
+}
+#associateProject tr th{
+    height:50px;
+    line-height: 50px;
+    background-color: #f5f5f5;
+    /*border-bottom: 1px solid #e5e5e5;*/
+}
+#associateProject{
+    padding-bottom: 20px;
+    border: 1px solid #f5f5f5;
+    /* border: 1px solid #e5e5e5; */
+    /* background-color: #fafafa; */
+    margin-left: -230px;
+    /*border: 1px solid #e5e5e5;*/
+    /*background-color: #fafafa;*/
+}
+#associateProject tr td{
+    height: 42px;
+    vertical-align: middle;
+    /*background-color: #fafafa;*/
+}
+#associateSubmit{
+    width: auto;
+    letter-spacing: 5px;
+    cursor: pointer;
+    padding-right: 10px;
+}
+#associateProject tr td.projectName span.line-limit-length{
+    width: 35%;
+    display: inline-block;
+}
+#associateProject tr td.projectUser span.line-limit-length{
+    /*width: 35%;*/
+    display: inline-block;
+ }
+#associateProject tr td.associatedCompany span.line-limit-length{
+    width: 35%;
+    display: inline-block;
+}
+#associateProject tr td span{
+    vertical-align: middle;
+}
+#associateProject tr td span.line-limit-length.user{
+    width: auto;
+}
+#associateProject thead {
+    display: table;
+    table-layout: fixed;
+    background: #fca;
+}
+#associateProject tbody {
+    height:300px;
+    display: block;
+    overflow-y: scroll;
+    table-layout: fixed;
+}
+#associateProject tr {
+    display: table;
+    table-layout: fixed;
+    width:100%;
+}
+#associateProject tr td:first-child{
+
+}
+/*#associateProject tr th:nth-child(2),#associateProject tr td:nth-child(2){*/
+    /*width: 200px;*/
+/*}*/
+/*#associateProject tr td .content{*/
+    /*display: inline-block;*/
+    /*width: 250px;*/
+    /*background-color: #f5f5f5;*/
+    /*padding: 8px;*/
+    /*margin-right: 30px;*/
+/*}*/
+/*#associateProject tr td:last-child .content{*/
+    /*margin-right:0;*/
+/*}*/
+/*#associateProject tr{*/
+    /*padding: 5px;*/
+/*}*/

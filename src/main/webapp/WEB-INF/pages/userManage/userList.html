@@ -134,10 +134,11 @@
                             <td th:if="${user.role_id=='13'}" th:text="固件管理员" class="role"></td>
                             <td th:if="${user.role_id=='14'}" th:text="普通用户" class="role"></td>
                             <td th:text="${user.create_date}"></td>
-                            <td th:if="${user.status=='1' && user.coStatus=='1'}" style="color: #47a6e6;"
-                                openTab="start-use" id="start-use" class="status pointer">
+
+                            <td th:if="${user.status=='1' && user.coStatus=='1'}" style="color: #47a6e6;" openTab="start-use" id="start-use" class="status pointer">
                                 <span class="result" th:text="启用"></span>
                             </td>
+
                             <td th:if="${user.status=='1' && user.coStatus=='0'}" style="color: #999;"
                                 class="status1 pointer p-r">
                                 <span class="result" th:text="启用"></span>
@@ -148,6 +149,7 @@
                                 openTab="start-use" id="start-use" class="status pointer p-r">
                                 <span th:text="禁用" class="result"></span>
                             </td>
+
                             <td th:if="${user.status=='0' && user.coStatus=='0'}" style="color: #999;"
                                 class="status1 pointer p-r">
                                 <span th:text="禁用" class="result"></span>
@@ -155,6 +157,9 @@
                             </td>
 
                             <td class="p-r">
+                                <a th:if="${user.role_id=='14'}"   th:href="@{/account/associateProject(account=${user.account})}" ><img class="center-img" style=" width: 16px;height: 16px;"  src="/alink-hq/static/img/project-related.png" alt=""  th:title="项目关联">
+                                </a>
+                                <img th:if="${user.role_id!='14'}" class="center-img" style=" width: 18px;height: 18px;" src="/alink-hq/static/img/project-related-un.png" alt=""  th:title="不可操作">
                                 <img src="/alink-hq/static/img/newPassword.png" alt="" openTab="reset-pwd"
                                      id="reset-pwd" class="pointer" th:title="重置密码" style="width: 18px;height: 18px;">
                                 <a th:if="${user.role_id=='4'}"
@@ -170,9 +175,9 @@
                                             </td>
                                             <td class="p-r">
                                                 <img th:if="${user.memo!=null&&user.memo!=''}" src="/alink-hq/static/img/memo.png"
-                                                     alt="" class="pointer memo-edit" th:title="备忘录">
+                                                     alt="" class="pointer memo-edit" th:title="备忘录" >
                                                 <img th:if="${user.memo==null||user.memo==''}" src="/alink-hq/static/img/memo.png"
-                                                     alt="" class="pointer memo-edit2" th:title="备忘录">
+                                                     alt="" class="pointer memo-edit2" th:title="备忘录" >
                                                 <div class="memo-edit-has">
                                                     <div class="meno-nav"><img src="/alink-hq/static/img/alter.png" alt=""
                                                                                class="pointer"></div>

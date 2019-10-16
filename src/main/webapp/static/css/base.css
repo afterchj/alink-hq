@@ -259,6 +259,15 @@ fieldset .field-widget {
     height: 35px;
 
 }
+.line-limit-length {
+
+    overflow: hidden;
+
+    text-overflow: ellipsis;
+
+    white-space: nowrap;
+
+}
 .text-msg{
     /* width: calc(100% - 80px); */
     /* margin-left: 20px; */
