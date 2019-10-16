@@ -132,5 +132,10 @@ public class AccountServiceImpl implements AccountService {
         return accountDao.findAssociateProjectsList(id);
     }
 
+    @Override
+    public void unassociated(List<String> list) {
+        accountDao.unassociated(list);
+    }
+
 
 }

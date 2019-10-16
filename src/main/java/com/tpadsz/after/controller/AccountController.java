@@ -25,10 +25,7 @@ import javax.servlet.http.HttpSession;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.OutputStream;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Created by chenhao.lu on 2019/4/9.
@@ -371,7 +368,7 @@ public class AccountController {
 
 
     @RequestMapping(value = "/associateProject", method = RequestMethod.GET)
-    public String associateProject(String account,Model model) {
+    public String associateProject(String account ,Model model) {
         if(account!=null) {
             User user = accountService.findByAccount(account);
             Integer role_id = accountService.findRoleIdByUid(user.getId());
@@ -381,6 +378,24 @@ public class AccountController {
             }
         }
         return "userManage/associateProject";
+    }
+
+
+    @RequestMapping(value = "/associate", method = RequestMethod.POST)
+    @ResponseBody
+    public Map<String, String> associate(String ids) {
+        Map<String, String> map = new HashMap<>();
+        try {
+            String[] ids1 = ids.split(",");
+            List<String> list = new ArrayList(Arrays.asList(ids1));
+            if (list.size() != 0) {
+                accountService.unassociated(list);
+            }
+            map.put("result", ResultDict.SUCCESS.getCode());
+        }catch (Exception e){
+            map.put("result", ResultDict.SYSTEM_ERROR.getCode());
+        }
+        return map;
     }
 
 }

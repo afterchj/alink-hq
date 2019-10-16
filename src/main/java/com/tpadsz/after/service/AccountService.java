@@ -44,4 +44,6 @@ public interface AccountService {
     void saveMemo(String account, String content);
 
     List<ProjectList> findAssociateProjectsList(String id);
+
+    void unassociated(List<String> list);
 }
