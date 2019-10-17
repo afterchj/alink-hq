@@ -62,5 +62,5 @@ public interface AccountDao {
 
     List<ProjectList> findAssociateProjectsList(@Param("uid")String id);
 
-    void unassociated(List<String> list);
+    void unassociated(@Param("uid")String uid,@Param("list")List<String> list);
 }

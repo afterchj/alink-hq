@@ -139,14 +139,17 @@
     </update>
 
     <select id="findAssociateProjectsList" resultType="ProjectList">
-        SELECT t1.id,t1.name,t2.account,t2.uname,t4.coname FROM f_project t1 INNER JOIN f_user_account t2 ON t1.uid=t2.id INNER JOIN f_user_customer t3 ON t2.id=t3.uid INNER JOIN (SELECT * FROM f_firm WHERE id=(SELECT fid FROM f_user_customer WHERE uid=#{uid})) t4 ON t3.fid = t4.id WHERE t1.is_associated !='unassociated' and t1.other !='old' or t1.is_associated is NULL and t1.other is NULL ORDER BY t1.update_date DESC
+        SELECT t1.id,t1.name,t2.account,t2.uname,t4.coname,t1.is_associated FROM f_project t1 INNER JOIN f_user_account t2 ON t1.uid=t2.id INNER JOIN f_user_customer t3 ON t2.id=t3.uid INNER JOIN (SELECT * FROM f_firm WHERE id=(SELECT fid FROM f_user_customer WHERE uid=#{uid})) t4 ON t3.fid = t4.id WHERE t1.other !='old' or t1.other is NULL ORDER BY t1.update_date DESC
     </select>
 
-    <update id="unassociated" parameterType="list">
+    <update id="unassociated">
+        update f_project set is_associated = NULL,update_date = NOW() WHERE uid IN (SELECT uid FROM f_user_customer WHERE fid=(SELECT fid FROM f_user_customer WHERE uid=#{uid}));
+        <if test="list.size != 0">
         update f_project set is_associated = 'unassociated',update_date = NOW()
         WHERE id IN
         <foreach collection="list" item="id" index="index" open="(" close=")" separator=",">
             #{id}
         </foreach>
+        </if>
     </update>
 </mapper>

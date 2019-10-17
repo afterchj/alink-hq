@@ -368,7 +368,7 @@ public class AccountController {
 
 
     @RequestMapping(value = "/associateProject", method = RequestMethod.GET)
-    public String associateProject(String account ,Model model) {
+    public String associateProject(String account,Model model) {
         if(account!=null) {
             User user = accountService.findByAccount(account);
             Integer role_id = accountService.findRoleIdByUid(user.getId());
@@ -383,14 +383,16 @@ public class AccountController {
 
     @RequestMapping(value = "/associate", method = RequestMethod.POST)
     @ResponseBody
-    public Map<String, String> associate(String ids) {
+    public Map<String, String> associate(String account,String ids) {
         Map<String, String> map = new HashMap<>();
+        List<String> list = new ArrayList();
         try {
-            String[] ids1 = ids.split(",");
-            List<String> list = new ArrayList(Arrays.asList(ids1));
-            if (list.size() != 0) {
-                accountService.unassociated(list);
+            User user = accountService.findByAccount(account);
+            if(!"".equals(ids)){
+                String[] ids1 = ids.split(",");
+                list = new ArrayList(Arrays.asList(ids1));
             }
+                accountService.unassociated(user.getId(),list);
             map.put("result", ResultDict.SUCCESS.getCode());
         }catch (Exception e){
             map.put("result", ResultDict.SYSTEM_ERROR.getCode());

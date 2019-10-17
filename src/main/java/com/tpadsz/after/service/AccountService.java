@@ -45,5 +45,5 @@ public interface AccountService {
 
     List<ProjectList> findAssociateProjectsList(String id);
 
-    void unassociated(List<String> list);
+    void unassociated(String uid,List<String> list);
 }

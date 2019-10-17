@@ -133,8 +133,8 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
-    public void unassociated(List<String> list) {
-        accountDao.unassociated(list);
+    public void unassociated(String uid,List<String> list) {
+        accountDao.unassociated(uid,list);
     }
 
 
