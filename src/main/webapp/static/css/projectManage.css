@@ -1930,11 +1930,11 @@ table#timeTitle tbody tr{
     border-radius: 3px;
 }
 #associateProject tr th,#associateProject tr td{
-    width:400px;
+    width:30%;
     text-align: left;
 }
 #associateProject tr th:first-child,#associateProject tr td:first-child{
-    width:250px;
+    width:10%;
     text-align: center;
 }
 /*#associateProject tr th:nth-child(2),#associateProject tr td:nth-child(2){*/
@@ -1951,10 +1951,9 @@ table#timeTitle tbody tr{
 }
 #associateProject{
     padding-bottom: 20px;
-    border: 1px solid #f5f5f5;
+    border: 1px solid #d7d7d7;
     /* border: 1px solid #e5e5e5; */
     /* background-color: #fafafa; */
-    margin-left: -230px;
     /*border: 1px solid #e5e5e5;*/
     /*background-color: #fafafa;*/
 }
