@@ -385,14 +385,17 @@ public class AccountController {
     @ResponseBody
     public Map<String, String> associate(String account,String ids) {
         Map<String, String> map = new HashMap<>();
-        List<String> list = new ArrayList();
+        List<String> list = new ArrayList<>();
         try {
             User user = accountService.findByAccount(account);
+            Integer role_id = accountService.findRoleIdByUid(user.getId());
+            if (role_id == 14) {
             if(!"".equals(ids)){
                 String[] ids1 = ids.split(",");
                 list = new ArrayList(Arrays.asList(ids1));
             }
                 accountService.unassociated(user.getId(),list);
+            }
             map.put("result", ResultDict.SUCCESS.getCode());
         }catch (Exception e){
             map.put("result", ResultDict.SYSTEM_ERROR.getCode());
