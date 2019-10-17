@@ -66,7 +66,8 @@
                                 <tbody>
                                 <tr  th:each="user:${projectList}">
                                     <td >
-                                        <input type="checkbox" name="selectSingle" checked th:id="${user.id}">
+                                        <input type="checkbox" name="selectSingle" th:if="${user.is_associated}==null"  checked th:id="${user.id}">
+                                        <input type="checkbox" name="selectSingle" th:if="${user.is_associated}=='unassociated'"   th:id="${user.id}">
                                     </td>
                                     <td class="projectName">
                                         <span class="line-limit-length"  th:title="${user.name}" th:text="${user.name}"></span>
@@ -112,6 +113,16 @@
 <script type="text/javascript" src="/alink-hq/static/js/left.js"></script>
 <script  th:inline="javascript">
     $(function () {
+        var list=[[${projectList}]];
+        console.log('list',list);
+        $('#associateProject tbody tr td>input:checkbox').each(function () {
+            if (!this.checked) {
+                $('input:checkbox[name="selectAll"]').prop('checked', false);
+                return false;
+            } else {
+                $('input:checkbox[name="selectAll"]').prop('checked', true);
+            }
+        })
         $('#associateProject input:checkbox[name="selectAll"]').on('click', function () {
             var that = this;
             var parents = $(this).parents('#associateProject')[0];
@@ -134,21 +145,22 @@
         //项目关联提交
         $('#associateSubmit').click(function () {
             var ids=[];
-
             $('#associateProject tbody tr td>input:checkbox').each(function () {
                 if (!this.checked) {
                     ids.push($(this).attr('id'));
                 }
             })
-
+            var account=GetUrlParam('account');
             var idss=ids.join(',');
+            console.log('account',account);
             console.log('idss',idss);
             $.ajax({
                 type: "post",
                 url: "/alink-hq/account/associate",
-                data: {ids: idss},
+                data: {ids: idss,account:account},
                 dataType: "json",
                 success: function (data) {
+                    console.log('data',data);
                     if (data.result == '000') {
                         console.log('成功！')
                         $('#preload-anim').addClass('active');
@@ -168,6 +180,25 @@
             })
         })
     })
+    //paraName 等找参数的名称
+    function GetUrlParam(paraName) {
+        var url = document.location.toString();
+        var arrObj = url.split("?");
+        if (arrObj.length > 1) {
+            var arrPara = arrObj[1].split("&");
+            var arr;
+            for (var i = 0; i < arrPara.length; i++) {
+                arr = arrPara[i].split("=");
+                if (arr != null && arr[0] == paraName) {
+                    return arr[1];
+                }
+            }
+            return "";
+        }
+        else {
+            return "";
+        }
+    }
 </script>
 </body>
 

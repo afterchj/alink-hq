@@ -1995,7 +1995,7 @@ table#timeTitle tbody tr{
 #associateProject tbody {
     height:300px;
     display: block;
-    overflow-y: scroll;
+    overflow-y: auto;
     table-layout: fixed;
 }
 #associateProject tr {
@@ -2003,22 +2003,3 @@ table#timeTitle tbody tr{
     table-layout: fixed;
     width:100%;
 }
-#associateProject tr td:first-child{
-
-}
-/*#associateProject tr th:nth-child(2),#associateProject tr td:nth-child(2){*/
-    /*width: 200px;*/
-/*}*/
-/*#associateProject tr td .content{*/
-    /*display: inline-block;*/
-    /*width: 250px;*/
-    /*background-color: #f5f5f5;*/
-    /*padding: 8px;*/
-    /*margin-right: 30px;*/
-/*}*/
-/*#associateProject tr td:last-child .content{*/
-    /*margin-right:0;*/
-/*}*/
-/*#associateProject tr{*/
-    /*padding: 5px;*/
-/*}*/
