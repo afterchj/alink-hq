@@ -373,7 +373,8 @@ public class AccountController {
             User user = accountService.findByAccount(account);
             Integer role_id = accountService.findRoleIdByUid(user.getId());
             if (role_id == 14) {
-                List<ProjectList> list = accountService.findAssociateProjectsList(user.getId());
+                List<String> ids = accountService.findUnassociatedProjectIds(user.getId());
+                List<ProjectList> list = accountService.findAssociateProjectsList(user.getId(),ids);
                 model.addAttribute("projectList", list);
             }
         }

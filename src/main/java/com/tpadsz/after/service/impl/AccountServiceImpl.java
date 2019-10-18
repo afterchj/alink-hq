@@ -128,13 +128,18 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
-    public List<ProjectList> findAssociateProjectsList(String id) {
-        return accountDao.findAssociateProjectsList(id);
+    public List<ProjectList> findAssociateProjectsList(String uid,List<String> list) {
+        return accountDao.findAssociateProjectsList(uid,list);
     }
 
     @Override
     public void unassociated(String uid,List<String> list) {
         accountDao.unassociated(uid,list);
+    }
+
+    @Override
+    public List<String> findUnassociatedProjectIds(String uid) {
+        return accountDao.findUnassociatedProjectIds(uid);
     }
 
 

@@ -138,17 +138,33 @@
         update f_user_account set memo = #{memo},update_date = NOW() where account=#{account}
     </update>
 
+    <select id="findUnassociatedProjectIds" parameterType="string" resultType="string">
+        SELECT hidden_project_id FROM f_user_project WHERE uid=#{uid}
+    </select>
+
+
     <select id="findAssociateProjectsList" resultType="ProjectList">
-        SELECT t1.id,t1.name,t2.account,t2.uname,t4.coname,t1.is_associated FROM f_project t1 INNER JOIN f_user_account t2 ON t1.uid=t2.id INNER JOIN f_user_customer t3 ON t2.id=t3.uid INNER JOIN (SELECT * FROM f_firm WHERE id=(SELECT fid FROM f_user_customer WHERE uid=#{uid})) t4 ON t3.fid = t4.id WHERE t1.other NOT IN('old','freezingOld') or t1.other is NULL ORDER BY t1.update_date DESC
+        SELECT t1.id,t1.name,t2.account,t2.uname,t4.coname FROM f_project t1 INNER JOIN f_user_account t2 ON t1.uid=t2.id INNER JOIN f_user_customer t3 ON t2.id=t3.uid INNER JOIN (SELECT * FROM f_firm WHERE id=(SELECT fid FROM f_user_customer WHERE uid=#{uid})) t4 ON t3.fid = t4.id
+        <if test="list.size == 0">
+        WHERE t1.other NOT IN('old','freezingOld') or t1.other is NULL
+        </if>
+        <if test="list.size != 0">
+        WHERE t1.other NOT IN('old','freezingOld') and t1.id NOT IN
+        <foreach item="item" collection="list" open="(" separator="," close=")">#{item}
+        </foreach>
+        or t1.other is NULL and t1.id NOT IN
+        <foreach item="item" collection="list" open="(" separator="," close=")">#{item}
+        </foreach>
+        </if>
+        ORDER BY t1.update_date DESC
     </select>
 
     <update id="unassociated">
-        update f_project set is_associated = NULL,update_date = NOW() WHERE uid IN (SELECT uid FROM f_user_customer WHERE fid=(SELECT fid FROM f_user_customer WHERE uid=#{uid}));
+        DELETE FROM f_user_project WHERE uid=#{uid};
         <if test="list.size != 0">
-        update f_project set is_associated = 'unassociated',update_date = NOW()
-        WHERE id IN
+        INSERT INTO f_user_project(uid,hidden_project_id,create_date,update_date) VALUES
         <foreach collection="list" item="id" index="index" open="(" close=")" separator=",">
-            #{id}
+            #{uid},#{id},NOW(),NOW()
         </foreach>
         </if>
     </update>

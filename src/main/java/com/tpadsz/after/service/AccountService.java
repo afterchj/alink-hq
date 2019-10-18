@@ -43,7 +43,9 @@ public interface AccountService {
 
     void saveMemo(String account, String content);
 
-    List<ProjectList> findAssociateProjectsList(String id);
+    List<ProjectList> findAssociateProjectsList(String uid,List<String> list);
 
     void unassociated(String uid,List<String> list);
+
+    List<String> findUnassociatedProjectIds(String uid);
 }
