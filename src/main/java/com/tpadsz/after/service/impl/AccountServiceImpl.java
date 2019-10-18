@@ -128,8 +128,8 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
-    public List<ProjectList> findAssociateProjectsList(String uid,List<String> list) {
-        return accountDao.findAssociateProjectsList(uid,list);
+    public List<ProjectList> findAssociateProjectsList(String uid) {
+        return accountDao.findAssociateProjectsList(uid);
     }
 
     @Override

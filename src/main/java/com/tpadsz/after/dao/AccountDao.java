@@ -60,7 +60,7 @@ public interface AccountDao {
 
     void createDefaultGroup(SceneList sceneList);
 
-    List<ProjectList> findAssociateProjectsList(@Param("uid")String uid,@Param("list")List<String> list);
+    List<ProjectList> findAssociateProjectsList(@Param("uid")String uid);
 
     void unassociated(@Param("uid")String uid,@Param("list")List<String> list);
 
