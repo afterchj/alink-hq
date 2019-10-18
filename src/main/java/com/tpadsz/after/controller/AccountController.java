@@ -395,7 +395,10 @@ public class AccountController {
                 String[] ids1 = ids.split(",");
                 list = new ArrayList(Arrays.asList(ids1));
             }
-                accountService.unassociated(user.getId(),list);
+                accountService.resetUserProject(user.getId());
+                if(list.size()!=0) {
+                    accountService.unassociated(user.getId(), list);
+                }
             }
             map.put("result", ResultDict.SUCCESS.getCode());
         }catch (Exception e){

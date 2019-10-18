@@ -142,5 +142,10 @@ public class AccountServiceImpl implements AccountService {
         return accountDao.findUnassociatedProjectIds(uid);
     }
 
+    @Override
+    public void resetUserProject(String uid) {
+        accountDao.resetUserProject(uid);
+    }
+
 
 }

@@ -149,13 +149,14 @@
         ORDER BY t1.update_date DESC
     </select>
 
-    <update id="unassociated">
+    <delete id="resetUserProject">
         DELETE FROM f_user_project WHERE uid=#{uid};
-        <if test="list.size != 0">
+    </delete>
+
+    <insert id="unassociated" parameterType="java.util.List" useGeneratedKeys="false">
         INSERT INTO f_user_project(uid,hidden_project_id,create_date,update_date) VALUES
-        <foreach collection="list" item="id" index="index" open="(" close=")" separator=",">
-            #{uid},#{id},NOW(),NOW()
+        <foreach collection="list" item="item" index="index" separator=",">
+            (#{uid},#{item},NOW(),NOW())
         </foreach>
-        </if>
-    </update>
+    </insert>
 </mapper>

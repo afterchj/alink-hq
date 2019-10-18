@@ -48,4 +48,6 @@ public interface AccountService {
     void unassociated(String uid,List<String> list);
 
     List<String> findUnassociatedProjectIds(String uid);
+
+    void resetUserProject(String uid);
 }

@@ -66,8 +66,8 @@
                                 <tbody>
                                 <tr  th:each="user:${projectList}">
                                     <td >
-                                        <input type="checkbox" name="selectSingle" th:if="${user.is_associated}==null"  checked th:id="${user.id}">
-                                        <input type="checkbox" name="selectSingle" th:if="${user.is_associated}=='unassociated'"   th:id="${user.id}">
+                                        <input type="checkbox" name="selectSingle" th:if="${user.is_associated}==0"  checked th:id="${user.id}">
+                                        <input type="checkbox" name="selectSingle" th:if="${user.is_associated}!=0"   th:id="${user.id}">
                                     </td>
                                     <td class="projectName">
                                         <span class="line-limit-length"  th:title="${user.name}" th:text="${user.name}"></span>
