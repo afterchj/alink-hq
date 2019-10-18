@@ -144,7 +144,7 @@
 
 
     <select id="findAssociateProjectsList" resultType="ProjectList">
-        SELECT t1.id,t1.name,t2.account,t2.uname,t4.coname,t5.id as is_associated FROM f_project t1 INNER JOIN f_user_account t2 ON t1.uid=t2.id INNER JOIN f_user_customer t3 ON t2.id=t3.uid INNER JOIN (SELECT * FROM f_firm WHERE id=(SELECT fid FROM f_user_customer WHERE uid=#{uid})) t4 ON t3.fid = t4.id LEFT JOIN f_user_project t5 ON t1.id = t5.hidden_project_id
+        SELECT t1.id,t1.name,t2.account,t2.uname,t4.coname,t5.id as is_associated FROM f_project t1 INNER JOIN f_user_account t2 ON t1.uid=t2.id INNER JOIN f_user_customer t3 ON t2.id=t3.uid INNER JOIN (SELECT * FROM f_firm WHERE id=(SELECT fid FROM f_user_customer WHERE uid=#{uid})) t4 ON t3.fid = t4.id LEFT JOIN (SELECT * FROM f_user_project WHERE uid=#{uid}) t5 ON t1.id = t5.hidden_project_id
         WHERE t1.other NOT IN('old','freezingOld') or t1.other is NULL
         ORDER BY t1.update_date DESC
     </select>
