@@ -2,6 +2,7 @@ package com.tpadsz.after.service;
 
 import com.tpadsz.after.entity.*;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 /**
@@ -50,4 +51,6 @@ public interface AccountService {
     List<String> findUnassociatedProjectIds(String uid);
 
     void resetUserProject(String uid);
+
+    List<DownloadExcelData> setDownloadExcelData(HttpSession session, String account, String uname, Integer fid, Integer roleId, String startDate, String endDate);
 }
