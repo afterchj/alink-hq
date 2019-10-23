@@ -142,7 +142,6 @@
             </thead>
             <tbody id="toExcel">
             </tbody>
-
         </table>
     </div>
 </div>
@@ -180,11 +179,6 @@
         var roleId;
         $('.role-radio .l-radio').each(function () {
             var role=$(this).children('input[type=radio]');
-            console.log('role',role);
-//            var imgUrl = $(this).find('img').attr('src');
-//            if (imgUrl == '/alink-hq/static/img/select-on.png') {
-//                roleId = parseInt($(this).find('input').val());
-//            }
             if(role.prop('checked')){
                 roleId=role.val();
             }
@@ -250,15 +244,6 @@
         }, 500)
     })
 
-//    $('#createAccount .c-content img').click(function () {
-//        var imgUrl = $(this).attr('src');
-//        var isRadio = '/alink-hq/static/img/select-on.png';
-//        var noRadio = '/alink-hq/static/img/select-un.png';
-//        if (imgUrl == noRadio) {
-//            $(this).attr('src', isRadio);
-//            $(this).parent('label').siblings().find('img').attr('src', noRadio);
-//        }
-//    })
     $(function () {
         var num = 1;
         $('.add-num').click(function () {

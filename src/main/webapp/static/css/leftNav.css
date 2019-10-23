@@ -208,7 +208,7 @@
 .create {
     /*background-color: #00A0E9;*/
     /*background-image: linear-gradient(#00A0E9,#0baff9,#00A0E9);*/
-    background-image: linear-gradient(#41b2ff,#3598db);
+    background-image: linear-gradient(rgba(73, 179, 251, 0.95),rgb(53, 152, 219));
     color: #fff;
     border: 1px solid #3598db;
     height: 33px;

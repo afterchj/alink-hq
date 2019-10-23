@@ -114,9 +114,9 @@ i.select-company-i{
     height: 32px;
     font-size: 15px;
     letter-spacing: 10px;
-    /*background-color: #ffb500;*/
-    background-image: linear-gradient(#ffb500,#ffc330,#ffb500);
-    border: 1px solid #ffb500;
+    /* background-color: #ffb500; */
+    background-image: linear-gradient(#ffc944,#f7aa04);
+    border: 1px solid #f7aa04;
     border-radius: 5px;
     padding-left: 15px;
     color: #fff;
@@ -129,7 +129,7 @@ i.select-company-i{
     box-shadow: 0 1px 2px 0 rgba(0,0,0,.2);
 }
 .search-button button:hover{
-   opacity: .8;
+   opacity: .85;
 }
 .sort-t {
     top:12px
@@ -412,13 +412,13 @@ th.all-checkbox {
 .p-content a {
     width: 100%;
     font-size: 14px;
-    color: #00A0E9;
+    color: #3598db;
     text-align: right;
 }
 
 .p-content a:hover {
-    color:#00A0E9;
-    border-bottom:1px solid #00A0E9
+    color:#3598db;
+    border-bottom:1px solid #3598db
 }
 
 .c-content > div {
@@ -457,7 +457,7 @@ span.msg-use{
 .pop-content a {
     display:inline-block;
     font-size:18px;
-    color:#47a6e6;
+    color: #3598db;
     margin-bottom:30px
 }
 
@@ -507,7 +507,7 @@ span.msg-use{
 }
 
 .c-list {
-    overflow-y: scroll;
+    overflow-y: auto;
     overflow-x: hidden;
     max-height: 116px;
     font-size: 13px;
@@ -868,7 +868,7 @@ fieldset .field-widget.two-radio button{
 }
 
 .search-result table td.k-link a {
-    color:#00A0E9
+    color:#3598db
 }
 
 .search-result table td.k-link a:hover {
@@ -1421,7 +1421,7 @@ form.company-msg {
     width: 90px;
     height: 37px;
     border-radius: 5px;
-    font-size: 16px;
+    font-size: 15px;
     letter-spacing: 10px;
     padding-left: 15px;
     cursor: pointer;
@@ -1747,7 +1747,7 @@ i.cricle {
     display: inline-block;
     height: 38px;
     line-height: 38px;
-    padding: 0 18px;
+    padding: 0 15px;
     background-color: #3598db;
     color: #fff;
     white-space: nowrap;
