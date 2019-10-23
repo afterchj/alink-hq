@@ -44,50 +44,135 @@
                         <div class="p-nav">
                             组移动
                         </div>
-                        <div class="p-content p-r ">
-                            <div class="scrollbar">
-                                <input type="hidden" name="ids" th:value="${ids}">
-                                <input type="hidden" id="mid" name="mid" th:value="${mid}">
-                                <input type="hidden" id="projectName" name="projectName" th:value="${projectName}">
-                                <div class="accountMsg clearfix" th:each="group:${groupMap}">
-                                    <div class="f-l mesh-name overflow-hidden-1">
-                                        <span th:text="${group.gname}"  th:title="${group.gname}"></span>
-                                    </div>
-                                    <div class="f-l  mesh-id">
-                                        <label >网络ID：</label>
-                                        <input type="text" id="mesh_id" th:value="${group.mesh_id}" readonly>
-                                    </div>
-                                    <div class="f-l mesh-project">
-                                        <label>属于区域：</label>
-                                        <input type="text" id="project" th:value="${group.pname}" readonly>
-                                    </div>
+                        <!--<div class="p-content p-r ">-->
+                            <!--<div class="scrollbar">-->
+                                <!--<input type="hidden" name="ids" th:value="${ids}">-->
+                                <!--<input type="hidden" id="mid" name="mid" th:value="${mid}">-->
+                                <!--<input type="hidden" id="projectName" name="projectName" th:value="${projectName}">-->
+                                <!--<div class="accountMsg clearfix" th:each="group:${groupMap}">-->
+                                    <!--<div class="f-l mesh-name overflow-hidden-1">-->
+                                        <!--<span th:text="${group.gname}"  th:title="${group.gname}"></span>-->
+                                    <!--</div>-->
+                                    <!--<div class="f-l  mesh-id">-->
+                                        <!--<label >网络ID：</label>-->
+                                        <!--<input type="text" id="mesh_id" th:value="${group.mesh_id}" readonly>-->
+                                    <!--</div>-->
+                                    <!--<div class="f-l mesh-project">-->
+                                        <!--<label>属于区域：</label>-->
+                                        <!--<input type="text" id="project" th:value="${group.pname}" readonly>-->
+                                    <!--</div>-->
+                                <!--</div>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                        <!--<div class="" style="text-align: center;margin-bottom: 30px;">-->
+                            <!--<img src="/alink-hq/static/img/exchange-un.png" alt="">-->
+                        <!--</div>-->
+                        <!--<fieldset>-->
+                            <!--<div class="transfer-company clearfix">-->
+                                <!--<div class="form-row">-->
+                                    <!--&lt;!&ndash;<p class="trans-hint"></p>&ndash;&gt;-->
+                                    <!--<div class="field-label" style="width: 150px;">-->
+                                        <!--<label  style="width: 160px;"><span style="color: #FF5722;">*</span>选择移动到的区域：</label>-->
+                                    <!--</div>-->
+                                    <!--<div class="field-widget p-r">-->
+                                        <!--<p class="p-a verify "></p>-->
+                                        <!--<select name="pid" id="pid">-->
+                                            <!--<option value="">选择移动到的区域</option>-->
+<!--&lt;!&ndash;                                            <option value="1">区域1</option>&ndash;&gt;-->
+                                        <!--</select>-->
+                                    <!--</div>-->
+                                <!--</div>-->
+                            <!--</div>-->
+                            <!--<div class="tranfer-btn">-->
+                                <!--<button class="confirm-btn" type="button">确定移动</button>-->
+                                <!--&lt;!&ndash;<button class="confirm-btn" type="button">确定移交</button>&ndash;&gt;-->
+                            <!--</div>-->
+                        <!--</fieldset>-->
+
+                        <div class="c-content p-content p-r" style="padding: 60px 300px;">
+                            <input type="hidden" name="ids" th:value="${ids}">
+                            <input type="hidden" id="mid" name="mid" th:value="${mid}">
+                            <input type="hidden" id="projectName" name="projectName" th:value="${projectName}">
+                            <form>
+                                <table class="scroll-table" id="meshMove" >
+                                    <thead>
+                                    <tr>
+                                        <!--<th>-->
+                                        <!--<input type="checkbox" name="selectAll" checked><span>全选</span>-->
+                                        <!--</th>-->
+                                        <th>
+                                            <span>组名称</span>
+                                        </th>
+                                        <th>
+                                            <span>区域名称</span>
+                                        </th>
+                                        <th>
+                                            <span>网络名称（ID）</span>
+                                        </th>
+                                        <th>
+                                            <span>隶属项目</span>
+                                        </th>
+
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr th:each="group:${groupMap}">
+                                        <!--<td >-->
+                                        <!--<input type="checkbox" name="selectSingle" th:if="${user.is_associated}==0"  checked th:id="${user.id}">-->
+                                        <!--<input type="checkbox" name="selectSingle" th:if="${user.is_associated}!=0"   th:id="${user.id}">-->
+                                        <!--</td>-->
+                                        <td class="group-name">
+                                            <span class=""th:text="${group.gname}"   th:title="${group.gname}"></span>
+                                        </td>
+                                        <td class="place-name">
+                                            <span id="place-name" th:title="${group.pname}" th:text="${group.pname}"></span>
+                                        </td>
+                                        <td class="mesh-name">
+                                            <span class="">网络名称（ID）</span>
+                                        </td>
+                                        <!--<td class="">-->
+                                        <!--<span class="" th:title="${mesh.name}" th:text="${mesh.name}"></span>-->
+                                        <!--&lt;!&ndash;<span th:if="${user.uname}">(</span>&ndash;&gt;-->
+                                        <!--&lt;!&ndash;<span th:if="${user.uname}" class="line-limit-length  user" th:title="${user.uname}" th:text="${user.uname}"></span>&ndash;&gt;-->
+                                        <!--&lt;!&ndash;<span th:if="${user.uname}">)</span>&ndash;&gt;-->
+                                        <!--</td>-->
+
+                                        <td class="mesh-project">
+                                            <span class="" >隶属项目</span>
+                                            <!--<span th:if="${user.uname}">(</span>-->
+                                            <!--<span th:if="${user.uname}" class="line-limit-length  user" th:title="${user.uname}" th:text="${user.uname}"></span>-->
+                                            <!--<span th:if="${user.uname}">)</span>-->
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                                <div class="" style="text-align: center;margin: 40px 0 18px 0;">
+                                    <img src="/alink-hq/static/img/exchange-un.png" alt="">
                                 </div>
-                            </div>
-                        </div>
-                        <div class="" style="text-align: center;margin-bottom: 30px;">
-                            <img src="/alink-hq/static/img/exchange-un.png" alt="">
-                        </div>
-                        <fieldset>
-                            <div class="transfer-company clearfix">
-                                <div class="form-row">
-                                    <!--<p class="trans-hint"></p>-->
-                                    <div class="field-label" style="width: 150px;">
-                                        <label  style="width: 160px;"><span style="color: #FF5722;">*</span>选择移动到的区域：</label>
+
+                                <fieldset>
+                                    <div class="transfer-company clearfix">
+                                        <div class="form-row">
+                                            <!--<p class="trans-hint"></p>-->
+                                            <div class="field-label" style="width: 150px;">
+                                                <label  style="width: 160px;"><span style="color: #FF5722;">*</span>选择移动到的区域：</label>
+                                            </div>
+                                            <div class="field-widget p-r">
+                                                <p class="p-a verify "></p>
+                                                <select name="pid" id="pid">
+                                                    <option value="">选择移动到的区域</option>
+                                                    <!--                                            <option value="1">区域1</option>-->
+                                                </select>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div class="field-widget p-r">
-                                        <p class="p-a verify "></p>
-                                        <select name="pid" id="pid">
-                                            <option value="">选择移动到的区域</option>
-<!--                                            <option value="1">区域1</option>-->
-                                        </select>
+                                    <div class="tranfer-btn">
+                                        <button class="confirm-btn" type="button">确定移动</button>
+                                        <!--<button class="confirm-btn" type="button">确定移交</button>-->
                                     </div>
-                                </div>
-                            </div>
-                            <div class="tranfer-btn">
-                                <button class="confirm-btn" type="button">确定移动</button>
-                                <!--<button class="confirm-btn" type="button">确定移交</button>-->
-                            </div>
-                        </fieldset>
+                                </fieldset>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </form>
