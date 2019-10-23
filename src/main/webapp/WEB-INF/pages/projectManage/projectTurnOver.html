@@ -43,67 +43,153 @@
                         <div class="f-nav p-nav">
                             项目移交
                         </div>
-                        <div class="p-content p-r">
-                            <div class="f-content scrollbar ">
-                                <div class="accountMsg clearfix" th:each="project:${projectMap}">
-                                    <div class="f-l mesh-name overflow-hidden-1">
-                                        <span th:text="${project.name}" th:title="${project.name}"></span>
-                                    </div>
-                                    <div class="f-l  mesh-id">
-                                        <label >施工负责人：</label>
-                                        <input type="text" id="account" th:value="${project.account}"
-                                               class="overflow"
-                                               th:title="${project.account}" readonly/>
-                                    </div>
-                                    <div class="f-l mesh-project">
-                                        <label >隶属公司：</label>
-                                        <input type="text" id="coname" th:value="${project.coname}" class="overflow"
-                                               th:title="${project.coname}" readonly/>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="" style="text-align: center;margin: 40px 0 18px 0;">
-                                <img src="/alink-hq/static/img/exchange-un.png" alt="">
-                            </div>
+                        <!--<div class="p-content p-r">-->
+                            <!--<div class="f-content scrollbar ">-->
+                                <!--<div class="accountMsg clearfix" th:each="project:${projectMap}">-->
+                                    <!--<div class="f-l mesh-name overflow-hidden-1">-->
+                                        <!--<span th:text="${project.name}" th:title="${project.name}"></span>-->
+                                    <!--</div>-->
+                                    <!--<div class="f-l  mesh-id">-->
+                                        <!--<label >施工负责人：</label>-->
+                                        <!--<input type="text" id="account" th:value="${project.account}"-->
+                                               <!--class="overflow"-->
+                                               <!--th:title="${project.account}" readonly/>-->
+                                    <!--</div>-->
+                                    <!--<div class="f-l mesh-project">-->
+                                        <!--<label >隶属公司：</label>-->
+                                        <!--<input type="text" id="coname" th:value="${project.coname}" class="overflow"-->
+                                               <!--th:title="${project.coname}" readonly/>-->
+                                    <!--</div>-->
+                                <!--</div>-->
+                            <!--</div>-->
+                            <!--<div class="" style="text-align: center;margin: 40px 0 18px 0;">-->
+                                <!--<img src="/alink-hq/static/img/exchange-un.png" alt="">-->
+                            <!--</div>-->
 
-                            <fieldset>
-                                <div class="transfer-company p-r clearfix">
-                                    <div class="form-row">
-                                        <div class="field-label" style="width: 135px;">
-                                            <label ><span>*</span>隶属公司：</label>
+                            <!--<fieldset>-->
+                                <!--<div class="transfer-company p-r clearfix">-->
+                                    <!--<div class="form-row">-->
+                                        <!--<div class="field-label" style="width: 135px;">-->
+                                            <!--<label ><span>*</span>隶属公司：</label>-->
+                                        <!--</div>-->
+                                        <!--<div class="field-widget p-r" >-->
+                                            <!--<p class="p-a verify "></p>-->
+                                            <!--<select name="fid" id="fid" class="pointer overflow">-->
+                                                <!--<option value="" class="pointer overflow">请选择公司</option>-->
+                                                <!--<option th:each="firm:${firmList}" th:value="${firm.id}"-->
+                                                        <!--th:text="${firm.coname }"-->
+                                                        <!--class="pointer overflow"></option>-->
+                                            <!--</select>-->
+                                        <!--</div>-->
+                                    <!--</div>-->
+                                    <!--<div class="form-row">-->
+                                        <!--<div class="field-label" style="width: 135px;">-->
+                                            <!--<label ><span>*</span>选择移交账号：</label>-->
+                                        <!--</div>-->
+                                        <!--<div class="field-widget p-r">-->
+                                            <!--<p class=" p-a verify "></p>-->
+                                            <!--<input type="text" id="account-transfer" placeholder="请选择账号" uid=""-->
+                                                   <!--autocomplete="off"-->
+                                                   <!--class="overflow">-->
+                                            <!--<i class="fa fa-caret-down open-list" aria-hidden="true"></i>-->
+                                            <!--&lt;!&ndash;<span class="open-list"></span>&ndash;&gt;-->
+                                            <!--<div id="list" class="overflow">-->
+                                                <!--<ul>-->
+                                                <!--</ul>-->
+                                            <!--</div>-->
+                                        <!--</div>-->
+                                    <!--</div>-->
+                                <!--</div>-->
+                                <!--<div class="tranfer-btn ">-->
+                                    <!--<button class="confirm-btn" type="button">确定移交</button>-->
+                                <!--</div>-->
+                            <!--</fieldset>-->
+                        <!--</div>-->
+
+                        <div class="c-content p-content p-r" style="padding: 60px 300px;">
+                            <form>
+                                <table class="scroll-table">
+                                    <thead>
+                                    <tr>
+                                        <!--<th>-->
+                                            <!--<input type="checkbox" name="selectAll" checked><span>全选</span>-->
+                                        <!--</th>-->
+                                        <th>
+                                            <span>项目名称</span>
+                                        </th>
+                                        <th>
+                                            <span>施工负责人账号（用户名）</span>
+
+                                        </th>
+                                        <th>
+                                            <span>隶属公司</span>
+                                        </th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr  th:each="project:${projectMap}">
+                                        <!--<td >-->
+                                            <!--<input type="checkbox" name="selectSingle" th:if="${user.is_associated}==0"  checked th:id="${user.id}">-->
+                                            <!--<input type="checkbox" name="selectSingle" th:if="${user.is_associated}!=0"   th:id="${user.id}">-->
+                                        <!--</td>-->
+                                        <td class="projectName">
+                                            <span class=""  th:title="${project.name}" th:text="${project.name}"></span>
+                                        </td>
+                                        <td class="projectUser">
+                                            <span class=""  th:title="${project.account}" th:text="${project.account}" ></span>
+                                            <!--<span th:if="${user.uname}">(</span>-->
+                                            <!--<span th:if="${user.uname}" class="line-limit-length  user" th:title="${user.uname}" th:text="${user.uname}"></span>-->
+                                            <!--<span th:if="${user.uname}">)</span>-->
+                                        </td>
+                                        <td class="associatedCompany">
+                                            <span class="" th:title="${project.coname}" th:text="${project.coname}" ></span>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                                <div class="" style="text-align: center;margin: 40px 0 18px 0;">
+                                    <img src="/alink-hq/static/img/exchange-un.png" alt="">
+                                </div>
+
+                                <fieldset>
+                                    <div class="transfer-company p-r clearfix">
+                                        <div class="form-row">
+                                            <div class="field-label" style="width: 135px;">
+                                                <label ><span>*</span>隶属公司：</label>
+                                            </div>
+                                            <div class="field-widget p-r" >
+                                                <p class="p-a verify "></p>
+                                                <select name="fid" id="fid" class="pointer overflow">
+                                                    <option value="" class="pointer overflow">请选择公司</option>
+                                                    <option th:each="firm:${firmList}" th:value="${firm.id}"
+                                                            th:text="${firm.coname }"
+                                                            class="pointer overflow"></option>
+                                                </select>
+                                            </div>
                                         </div>
-                                        <div class="field-widget p-r" >
-                                            <p class="p-a verify "></p>
-                                            <select name="fid" id="fid" class="pointer overflow">
-                                                <option value="" class="pointer overflow">请选择公司</option>
-                                                <option th:each="firm:${firmList}" th:value="${firm.id}"
-                                                        th:text="${firm.coname }"
-                                                        class="pointer overflow"></option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="form-row">
-                                        <div class="field-label" style="width: 135px;">
-                                            <label ><span>*</span>选择移交账号：</label>
-                                        </div>
-                                        <div class="field-widget p-r">
-                                            <p class=" p-a verify "></p>
-                                            <input type="text" id="account-transfer" placeholder="请选择账号" uid=""
-                                                   autocomplete="off"
-                                                   class="overflow">
-                                            <i class="fa fa-caret-down open-list" aria-hidden="true"></i>
-                                            <!--<span class="open-list"></span>-->
-                                            <div id="list" class="overflow">
-                                                <ul>
-                                                </ul>
+                                        <div class="form-row">
+                                            <div class="field-label" style="width: 135px;">
+                                                <label ><span>*</span>选择移交账号：</label>
+                                            </div>
+                                            <div class="field-widget p-r">
+                                                <p class=" p-a verify "></p>
+                                                <input type="text" id="account-transfer" placeholder="请选择账号" uid=""
+                                                       autocomplete="off"
+                                                       class="overflow">
+                                                <i class="fa fa-caret-down open-list" aria-hidden="true"></i>
+                                                <!--<span class="open-list"></span>-->
+                                                <div id="list" class="overflow">
+                                                    <ul>
+                                                    </ul>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="tranfer-btn ">
-                                    <button class="confirm-btn" type="button">确定移交</button>
-                                </div>
-                            </fieldset>
+                                    <div class="tranfer-btn ">
+                                        <button class="confirm-btn" type="button">确定移交</button>
+                                    </div>
+                                </fieldset>
+                            </form>
                         </div>
                     </div>
                 </form>

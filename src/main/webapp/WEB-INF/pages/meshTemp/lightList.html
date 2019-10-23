@@ -48,8 +48,7 @@
                         <div class="f-l search" style="margin-right:0">
                             <div>
                                 <label  class="font">灯名称</label>
-                                <input type="text" id="lname" name="lname" th:value="${dict.lname}"
-                                       placeholder="请输入灯名称">
+                                <input type="text" id="lname" name="lname" th:value="${dict.lname}"  placeholder="请输入灯名称">
                             </div>
                             <div>
                                 <label  class="font">区域名称</label>
@@ -68,21 +67,17 @@
                             </div>
                             <div>
                                 <label  class="font">网络名称</label>
-                                <input type="text" id="mname" name="mname" th:value="${dict.mname}"
-                                       placeholder="请输入网络名称">
+                                <input type="text" id="mname" name="mname" th:value="${dict.mname}"   placeholder="请输入网络名称">
                             </div>
-
                         </div>
                         <div class="f-l search">
                             <div>
                                 <label  class="font">组名称</label>
-                                <input type="text" id="gname" name="gname" th:value="${dict.gname}"
-                                       placeholder="请输入组名称">
+                                <input type="text" id="gname" name="gname" th:value="${dict.gname}"   placeholder="请输入组名称">
                             </div>
                             <div>
                                 <label  class="font">网络ID</label>
-                                <input type="text" id="meshId" name="meshId" th:value="${dict.meshId}"
-                                       placeholder="请输入网络ID">
+                                <input type="text" id="meshId" name="meshId" th:value="${dict.meshId}"   placeholder="请输入网络ID">
                             </div>
                         </div>
                         <div class="f-r search-button p-a" style="">
@@ -102,8 +97,8 @@
                                 </th>
                                 <th><span>灯名称</span></th>
                                 <th><span>灯MAC地址</span></th>
-                                <!--<th><span>灯类型</span></th>-->
-                                <!--<th><span>版本信息</span></th>-->
+                                <th><span>灯类型</span></th>
+                                <th><span>灯光(X色温,Y亮度)角度(垂直,水平,光束)</span></th>
                                 <th><span>隶属项目</span></th>
                                 <th><span>隶属网络</span></th>
                                 <th><span>网络ID</span></th>
@@ -126,15 +121,17 @@
                                     <a th:href="@{/light/info(id=${light.id})}" th:text="${light.lname}"></a>
                                 </td>
                                 <td th:text="${light.lmac}"></td>
-                                <!--<td>-->
-                                <!--RGB-->
-                                <!--</td>-->
-                                <!--<td class="p-r">-->
+                                <td>
+                                RGB
+                                </td>
+                                <td class="p-r">
+                                    <span>20(CCT调光)，10%</span><br>
+                                    <span>0，180，45</span>
                                 <!--<span class="p-a version">-->
                                 <!--<span>NEW</span>-->
                                 <!--</span>-->
                                 <!--XXX-->
-                                <!--</td>-->
+                                </td>
                                 <td class="k-link project_id">
                                     <a th:href="@{/project/detail(projectId=${light.project_id})}"
                                        th:text="${light.name}" th:alt="${light.project_id}"></a>
