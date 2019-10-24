@@ -17,21 +17,41 @@
         photo,
         code,
         other,
-        status
+        status,
+        IFNULL(s.total, 0) fcount
 	</sql>
+
+    <select id="getParentId" parameterType="string" resultType="int">
+        SELECT f.parent_id
+        FROM f_firm f
+        WHERE f.parent_id = (
+            SELECT c.fid
+            FROM f_user_account u
+            INNER JOIN f_user_customer c ON c.uid = u.id
+            WHERE u.id = #{uid}
+        ) LIMIT 1
+    </select>
 
     <select id="getByMap" resultType="map" parameterType="SearchDict">
         SELECT
         <include refid="Base_Column_List"/>
-        FROM f_firm
+        FROM f_firm f
+        LEFT JOIN (
+        SELECT fid,COUNT(1) total
+        FROM f_firm_cooperation c
+        GROUP BY fid
+        ) s ON s.fid = f.id
         WHERE 1=1
+        <if test="parentId!=null and parentId!=''">
+            AND parent_id=#{parentId}
+        </if>
         <if test="coname!=null and coname!=''">
             AND coname LIKE CONCAT('%',#{coname},'%')
         </if>
         <if test="status!=null">
             AND status=#{status}
         </if>
-        ORDER BY update_date DESC
+        ORDER BY fcount DESC,update_date DESC
     </select>
 
     <select id="getCooperationInfo" resultType="CooperationInfo" parameterType="int">
@@ -43,7 +63,6 @@
     <insert id="save" parameterType="CooperationInfo">
        INSERT INTO f_firm(coname,address,mobile,create_date,update_date,photo,code,status) VALUES(#{coname},#{address},#{mobile},now(),now(),#{photo},#{code},#{status});
    </insert>
-
 
     <select id="getCount" resultType="int" parameterType="int">
         SELECT COUNT(0)

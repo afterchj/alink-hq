@@ -5,6 +5,7 @@ import com.github.pagehelper.PageInfo;
 import com.tpadsz.after.entity.CooperationInfo;
 import com.tpadsz.after.entity.SearchDict;
 import com.tpadsz.after.service.CooperateService;
+import com.tpadsz.after.utils.AppUtils;
 import com.tpadsz.after.utils.PropertiesUtil;
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
@@ -35,6 +36,9 @@ public class CooperationController {
 
     @RequestMapping("/list")
     public String cooperateList(SearchDict dict, ModelMap modelMap) {
+        String uid = AppUtils.getUserID();
+        Integer parentId = dict.getParentId() == null ? cooperateService.getParentId(uid) : dict.getParentId();
+        dict.setParentId(parentId);
         PageHelper.startPage(dict.getPageNum(), dict.getPageSize());
         List<Map> cooperationList = cooperateService.getByMap(dict);
         PageInfo<Map> pageInfo = new PageInfo(cooperationList, dict.getPageSize());

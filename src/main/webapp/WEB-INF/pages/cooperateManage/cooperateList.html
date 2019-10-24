@@ -37,13 +37,12 @@
             <div  class="table-content-list">
                 <form th:action="@{/cooperate/list}" class="clearfix" method="post">
                     <div class="search-condition clearfix p-r">
-                        <input type="hidden" id="relation" th:value="${info.status}">
+                        <input type="hidden" id="relation" th:value="${info.parentId}">
                         <input type="hidden" id="pageSize" th:value="${info.pageSize}">
                         <div class="f-l search" >
                             <div>
                                 <label >合作公司名称</label>
-                                <input type="text" id="name" name="coname" placeholder="请输入合作公司名称"
-                                       th:value="${info.coname}">
+                                <input type="text" id="name" name="coname" placeholder="请输入合作公司名称" th:value="${info.coname}">
                             </div>
                         </div>
                         <div class="f-l search">
@@ -67,6 +66,7 @@
                             <thead>
                             <tr>
                                 <th><span>合作公司名称</span></th>
+                                <th><span>下层合作数量</span></th>
                                 <th><span>联系方式</span></th>
                                 <th><span>录入时间</span></th>
                                 <th><span>合作状态</span></th>
@@ -83,6 +83,10 @@
                                        th:text="${cooperation.coname}"
                                        th:alt="${cooperation.id}"></a>
                                     <!--<i class="fa fa-pencil-square-o" aria-hidden="true"></i>-->
+                                </td>
+                                <td class="k-link">
+                                    <a th:if="${cooperation.fcount}=='0'" class="a-un" href="javascript:void(0);" th:text="${cooperation.fcount}"></a>
+                                    <a th:if="${cooperation.fcount}!='0'"  th:href="@{/cooperate/list(parentId=${cooperation.id})}" th:text="${cooperation.fcount}"></a>
                                 </td>
                                 <td th:text="${cooperation.mobile}"></td>
                                 <td th:text="${cooperation.create_date}">
