@@ -104,7 +104,7 @@
                                 <th><span>网络ID</span></th>
                                 <th><span>隶属区域</span></th>
                                 <th><span>隶属组</span></th>
-                                <th style="width: 190px;"><span>X（色温），Y（亮度）</span></th>
+                                <!--<th style="width: 190px;"><span>X（色温），Y（亮度）</span></th>-->
                                 <th><span>状态</span></th>
                                 <th class="brief"><span>操作</span></th>
                             </tr>
@@ -124,13 +124,36 @@
                                 <td>
                                 RGB
                                 </td>
-                                <td class="p-r">
-                                    <span>20(CCT调光)，10%</span><br>
+                                <!--<td class="p-r">-->
+                                    <!--<span>20(CCT调光)，10%</span>-->
+                                <!--&lt;!&ndash;<span class="p-a version">&ndash;&gt;-->
+                                <!--&lt;!&ndash;<span>NEW</span>&ndash;&gt;-->
+                                <!--&lt;!&ndash;</span>&ndash;&gt;-->
+                                <!--&lt;!&ndash;XXX&ndash;&gt;-->
+                                <!--</td>-->
+                                <td class="p-r"><span th:if="${light.x}=='null' or ${light.x} < 0" th:text="${light.x}"></span>
+                                    <span th:if="${light.x} != 'null' and ${light.x} >= 0 and ${light.x} <= 20"
+                                          th:text="${light.x}+'(CCT调光)'"></span>
+                                    <span th:if="${light.x} != 'null' and ${light.x} >= 235 and ${light.x} <= 273"
+                                          th:text="${light.x}-235+'(RGB调光)'"></span>
+                                    <span th:if="${light.x} != 'null' and ${light.x} >= 571 and ${light.x} <= 630"
+                                          th:text="${light.x}-532+'(RGB调光)'"></span>
+                                    <span th:if="${light.x} != 'null' and ${light.x} >= 1786 and ${light.x} <= 1899"
+                                          th:text="${light.x}-1687+'(RGB调光)'"></span>
+                                    <span th:if="${light.x}==50" th:text="50"></span>
+                                    <span>,&nbsp;&nbsp;</span>
+                                    <span th:if="${light.y}=='null' or ${light.y}<0" th:text="${light.y}"></span>
+                                    <span th:if="${light.y}!='null' and ${light.y}!=50 and ${light.y}>=0"
+                                          th:text="100-${light.y}*5+'%'"></span>
+                                    <span th:if="${light.y}==50" th:text="50"></span>
+                                    <br>
+                                    <!--如果灯类型为轨道灯-->
                                     <span>0，180，45</span>
-                                <!--<span class="p-a version">-->
-                                <!--<span>NEW</span>-->
-                                <!--</span>-->
-                                <!--XXX-->
+                                </td>
+                                <td th:switch="${light.off}">
+                                    <span th:case="1">开</span>
+                                    <span th:case="0">关</span>
+                                    <span th:case="*">未知</span>
                                 </td>
                                 <td class="k-link project_id">
                                     <a th:href="@{/project/detail(projectId=${light.project_id})}"
@@ -147,27 +170,7 @@
                                 <td class="k-link">
                                     <a th:href="@{/group/info(id=${light.gid})}" th:text="${light.gname}"></a>
                                 </td>
-                                <td><span th:if="${light.x}=='null' or ${light.x} < 0" th:text="${light.x}"></span>
-                                    <span th:if="${light.x} != 'null' and ${light.x} >= 0 and ${light.x} <= 20"
-                                          th:text="${light.x}+'(CCT调光)'"></span>
-                                    <span th:if="${light.x} != 'null' and ${light.x} >= 235 and ${light.x} <= 273"
-                                          th:text="${light.x}-235+'(RGB调光)'"></span>
-                                    <span th:if="${light.x} != 'null' and ${light.x} >= 571 and ${light.x} <= 630"
-                                          th:text="${light.x}-532+'(RGB调光)'"></span>
-                                    <span th:if="${light.x} != 'null' and ${light.x} >= 1786 and ${light.x} <= 1899"
-                                          th:text="${light.x}-1687+'(RGB调光)'"></span>
-                                    <span th:if="${light.x}==50" th:text="50"></span>
-                                    <span>,&nbsp;&nbsp;</span>
-                                    <span th:if="${light.y}=='null' or ${light.y}<0" th:text="${light.y}"></span>
-                                    <span th:if="${light.y}!='null' and ${light.y}!=50 and ${light.y}>=0"
-                                          th:text="100-${light.y}*5+'%'"></span>
-                                    <span th:if="${light.y}==50" th:text="50"></span>
-                                </td>
-                                <td th:switch="${light.off}">
-                                    <span th:case="1">开</span>
-                                    <span th:case="0">关</span>
-                                    <span th:case="*">未知</span>
-                                </td>
+
                                 <td class="p-r">
                                     <i class="fa  fa-ellipsis-v  fa-lg openList pointer" style="width: 40%;"></i>
                                     <ul class="showList p-a">
