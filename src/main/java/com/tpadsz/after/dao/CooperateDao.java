@@ -17,6 +17,8 @@ public interface CooperateDao {
 
     int getCount(int id);
 
+    int getParentId(String uid);
+
     void save(CooperationInfo info);
 
     void saveUpdate(CooperationInfo info);

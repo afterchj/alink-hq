@@ -37,6 +37,11 @@ public class CooperateServiceImpl implements CooperateService {
     }
 
     @Override
+    public int getParentId(String uid) {
+        return cooperateDao.getParentId(uid);
+    }
+
+    @Override
     public void save(CooperationInfo info) {
         cooperateDao.save(info);
     }

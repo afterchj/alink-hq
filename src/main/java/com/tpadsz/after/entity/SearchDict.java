@@ -6,6 +6,7 @@ package com.tpadsz.after.entity;
 public class SearchDict {
 
     private Integer id;
+    private Integer parentId;
     private String uid;
     private String role;
     private Integer mid = 0;
@@ -42,6 +43,14 @@ public class SearchDict {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public Integer getParentId() {
+        return parentId;
+    }
+
+    public void setParentId(Integer parentId) {
+        this.parentId = parentId;
     }
 
     public String getUid() {
