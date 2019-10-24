@@ -40,8 +40,9 @@
 }
 
 .all-container {
-    /*background-color: #00A0E9;*/
-    background-image: linear-gradient(#02c4ff,#00B7EF);
+    background-color: #00B7EF;
+    
+    /*background-image: linear-gradient(#02c4ff,#00B7EF);*/
     /* border-radius: 5px; */
     position: fixed;
     width: 100%;
