@@ -68,24 +68,34 @@
                                 <div class="f-l" tabindex="5">合作管理</div>
                             </div>
                             <div class="tab-content clearfix">
-                                <div class="clearfix f-l  fix-left-nav">
-                                    <div class="company-select">
+                                <div class="clearfix f-l  fix-left-nav p-r">
+                                    <div class="company-select ">
                                         <div class="account-related">
                                             <input type="radio" name="data-scope-content" value="0" alt="oneself">
-                                            <label>所在账号相关内容</label>
+                                            <label>所在账号--相关内容</label>
                                         </div>
                                         <div class="subject-company-related">
                                             <input type="radio" name="data-scope-content" value="1" alt="company">
-                                            <label>隶属公司名下所有账号相关内容</label>
+                                            <label>隶属公司</label>
+
+                                        </div>
+                                        <div class="check-box-role" style=" height: 40px;">
+                                            <input type="checkbox">
+                                            <label >对隶属所有账号及项目的管控权</label>
+                                        </div>
+                                        <div class="check-box-role">
+                                            <input type="checkbox">
+                                            <label >对直接合作公司管理员账号的管控权（但不可删除）</label>
                                         </div>
                                         <div>
                                             <input type="radio" name="data-scope-content" value="2" alt="companyProject">
-                                            <label>隶属公司名下任意项目相关内容</label>
+                                            <label>隶属公司名下任意直属项目相关内容</label>
                                         </div>
                                         <div th:if="${rid} le 2">
                                             <input type="radio" name="data-scope-content" value="3" alt="all">
-                                            <label>所有公司名下所有账号相关内容</label>
+                                            <label>所有公司--相关内容</label>
                                         </div>
+                                        <p class="p-a  role-hint-bottom">（注意：同级别的账号内容不可见）</p>
                                     </div>
                                 </div>
                                 <div class="clearfix f-r fix-right-nav">
@@ -836,6 +846,10 @@
                                                          th:if="${#lists.contains(permissions,'CooperationMemo')}">
                                                         <input type="checkbox" class="singleListChecked" alt="CooperationMemo">
                                                         <label>合作备忘录</label>
+                                                    </div>
+                                                    <div class="f-l zero" style="    width: 25%;">
+                                                        <input type="checkbox" >
+                                                        <label>Execl导出合作关系</label>
                                                     </div>
                                                 </div>
                                                 <div class="f-r clearfix " style="line-height: calc(49px * 2);">

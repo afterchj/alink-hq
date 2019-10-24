@@ -19,7 +19,23 @@
     color: #4a4a4a;
     font-weight: bold;
 }
-
+.company-select>div.check-box-role{
+    /*line-height: normal;*/
+    padding:0 7% 0 15%;
+    width: 78%;
+    line-height: 35px;
+    height: auto;
+}
+.company-select>div.check-box-role label{
+    width: 80%;
+    /* line-height: 32px; */
+    vertical-align: top;
+}
+p.role-hint-bottom{
+    bottom: 10px;
+    left: 7%;
+    font-size: 13px;
+}
 .tab-nav>div.data-scope {
     width: 300px;
     background-color: #00B7EF;
