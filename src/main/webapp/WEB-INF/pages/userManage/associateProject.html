@@ -49,8 +49,8 @@
                             <table class="scroll-table" id="associate">
                                 <thead>
                                 <tr>
-                                    <th>
-                                        <input type="checkbox" name="selectAll" checked><span>全选</span>
+                                    <th style="width: 75px;    text-align: right;">
+                                        <input type="checkbox" name="selectAll" checked><span style="padding-left: 0;">全选</span>
                                     </th>
                                     <th>
                                         <span>项目名称</span>
@@ -65,7 +65,7 @@
                                 </thead>
                                 <tbody>
                                 <tr  th:each="user:${projectList}">
-                                    <td >
+                                    <td style="width: 75px;text-align: right;">
                                         <input type="checkbox" name="selectSingle" th:if="${user.is_associated}==0"  checked th:id="${user.id}">
                                         <input type="checkbox" name="selectSingle" th:if="${user.is_associated}!=0"   th:id="${user.id}">
                                     </td>
@@ -74,12 +74,12 @@
                                     </td>
                                     <td class="projectUser">
                                         <span class="line-limit-length"  th:title="${user.account}" th:text="${user.account}" ></span>
-                                        <span th:if="${user.uname}">(</span>
-                                        <span th:if="${user.uname}" class="line-limit-length  user" th:title="${user.uname}" th:text="${user.uname}"></span>
-                                        <span th:if="${user.uname}">)</span>
+                                        <span th:if="${user.uname}" style="display: inline;padding: 0;">(</span>
+                                        <span th:if="${user.uname}" style="display: inline;padding: 0;" class="line-limit-length  user" th:title="${user.uname}" th:text="${user.uname}"></span>
+                                        <span th:if="${user.uname}" style="display: inline;padding: 0;">)</span>
                                     </td>
                                     <td class="associatedCompany">
-                                        <span class="line-limit-length" th:title="${user.coname}" th:text="${user.coname}" ></span>
+                                        <span  th:title="${user.coname}" th:text="${user.coname}" ></span>
                                     </td>
                                 </tr>
                                 </tbody>
@@ -115,7 +115,7 @@
     $(function () {
         var list=[[${projectList}]];
         console.log('list',list);
-        $('#associateProject tbody tr td>input:checkbox').each(function () {
+        $('#associate tbody tr td>input:checkbox').each(function () {
             if (!this.checked) {
                 $('input:checkbox[name="selectAll"]').prop('checked', false);
                 return false;
@@ -123,15 +123,15 @@
                 $('input:checkbox[name="selectAll"]').prop('checked', true);
             }
         })
-        $('#associateProject input:checkbox[name="selectAll"]').on('click', function () {
+        $('#associate input:checkbox[name="selectAll"]').on('click', function () {
             var that = this;
-            var parents = $(this).parents('#associateProject')[0];
+            var parents = $(this).parents('#associate')[0];
             $(parents).find('tbody tr td>input:checkbox').each(function () {
                 this.checked = that.checked;
             })
         })
         $('[name="selectSingle"]').click(function () {
-            var parents = $(this).parents('#associateProject')[0];
+            var parents = $(this).parents('#associate')[0];
             $(parents).find('tbody tr td>input:checkbox').each(function () {
                 if (!this.checked) {
                     $('input:checkbox[name="selectAll"]').prop('checked', false);
@@ -145,7 +145,7 @@
         //项目关联提交
         $('#associateSubmit').click(function () {
             var ids=[];
-            $('#associateProject tbody tr td>input:checkbox').each(function () {
+            $('#associate tbody tr td>input:checkbox').each(function () {
                 if (!this.checked) {
                     ids.push($(this).attr('id'));
                 }

@@ -200,6 +200,13 @@ public class AccountController {
         try {
             String fileName = URLEncoder.encode(new StringBuffer().append("用户列表-").append(System.currentTimeMillis()).toString(), "UTF-8");
             response.setHeader("Content-disposition", "attachment;filename=" + fileName + ".xlsx");
+//            ExcelWriter excelWriter = EasyExcel.write(response.getOutputStream()).build();
+//            WriteSheet writeSheet;
+//            for (int i=0;i<2;i++){
+//                writeSheet = EasyExcel.writerSheet(i, "模板"+i).head(DownloadExcelData.class).build();
+//                excelWriter.write(downloadExcelDatas,writeSheet);
+//            }
+//            excelWriter.finish();
             EasyExcel.write(response.getOutputStream(),DownloadExcelData.class).sheet("用户列表").doWrite(downloadExcelDatas);
         } catch (UnsupportedEncodingException e) {
             logger.error("method:getExcel;result:download excel error,account:{},uname:{}",account,uname);
