@@ -19,14 +19,14 @@
     color: #4a4a4a;
     font-weight: bold;
 }
-.company-select>div.check-box-role{
+.company-select>div .check-box-role{
     /*line-height: normal;*/
-    padding:0 7% 0 15%;
-    width: 78%;
+    padding: 0 0 0 12%;
+    width: 88%;
     line-height: 35px;
     height: auto;
 }
-.company-select>div.check-box-role label{
+.company-select>div .check-box-role label{
     width: 80%;
     /* line-height: 32px; */
     vertical-align: top;
@@ -82,7 +82,7 @@ p.role-hint-bottom{
     display: inline-block;
     vertical-align: middle;
     color: #2F4056;
-    font-size: 13px;
+    font-size: 13.8px;
 }
 
 .tab-content-part>div.list {
@@ -126,17 +126,29 @@ p.role-hint-bottom{
     text-align: left;
     width: 86%;
     /* line-height: 4; */
-    height: 50px;
+    height: 40px;
     vertical-align: text-bottom;
-    line-height: 50px;
+    line-height: 40px;
 }
 .company-select>div:first-child{
-    margin-top:50px;
+    margin-top:10px;
 }
 .alter {
     text-align: center;
 }
-
+.circle{
+    display: inline-block;
+    /* padding: 3px; */
+    border: 1px solid #888;
+    border-radius: 50%;
+    height: 18px;
+    line-height: 16px;
+    width: 18px;
+    text-align: center;
+    color: #888;
+    font-size: 12px;
+    transform: scale(.9);
+}
 .tab-content-part {
     display: none;
 }
