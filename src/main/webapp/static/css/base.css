@@ -16,7 +16,7 @@ button{
 }
 table {
     border-collapse: unset;
-    border-spacing: 0;
+    /*border-spacing: 0;*/
 }
 
 body {
@@ -56,7 +56,7 @@ textarea {
     resize: none;
 }
 a {
-    color: #3598db;
+    color: #00B7EF;
     text-decoration: none;
 }
 
@@ -194,9 +194,9 @@ fieldset input[type=file] {
     line-height: 35px;
     padding: 0 15px;
     /*background-color: #00B7EF;*/
-    background-color: #3598db;
+    background-color: #00B7EF;
     color: #fff;
-    border: 1px solid #3598db;
+    border: 1px solid #00B7EF;
     white-space: nowrap;
     text-align: center;
     /* border: none; */
@@ -336,7 +336,7 @@ fieldset button{
     display: inline-block;
     /* line-height: 40px; */
     padding: 6px 12px;
-    background-image: linear-gradient(#41b2ff,#3598db);
+    background: linear-gradient(#5fdaff,#00B7EF);
     color: #fff;
     white-space: nowrap;
     text-align: center;
@@ -426,7 +426,7 @@ fieldset span{
 /*display: inline-block;*/
 /*line-height: 38px;*/
 /*padding: 0 18px;*/
-/*background-color: #3598db;*/
+/*background-color: #00B7EF;*/
 /*color: #fff;*/
 /*white-space: nowrap;*/
 /*text-align: center;*/
@@ -497,7 +497,7 @@ input[type=checkbox],input[type=radio] {
     height: 18px;
     outline: 0;
     border-radius: 5%;
-    color: #3598db;
+    color: #00B7EF;
     vertical-align: middle;
     cursor: pointer;
     transition: all .1s ease-out 0s;
@@ -510,7 +510,7 @@ input[type=checkbox],input[type=radio] {
 
 input[type=checkbox]:after,input[type=checkbox]:before {
     position: absolute;
-    background: #3598db;
+    background: #00B7EF;
     content: "";
     transition: all .1s ease-in-out;
 }
@@ -633,11 +633,11 @@ input[type=checkbox]:checked,input[type=checkbox]:indeterminate {
 }
 
 .bread li a {
-    color: #3598db;
+    color: #00B7EF;
 }
 
 .bread li a:hover {
-    color: #3598db;
+    color: #00B7EF;
 }
 
 .bread li::after {
@@ -718,8 +718,8 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
     /* padding: 0 0 10px 20px; */
     height: 45px;
     /* line-height: 45px; */
-    border-left: 4px solid #3598db;
-    border-bottom: 2px solid #3598db;
+    border-left: 4px solid #00B7EF;
+    border-bottom: 2px solid #00B7EF;
     margin-bottom: 30px;
     /*margin: 10px 0 30px 0;*/
     padding-left: 10px;

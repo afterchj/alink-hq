@@ -104,7 +104,7 @@ i.select-company-i{
 /*.relevance-firmware::after{*/
     /*content: '10';*/
     /*position: absolute;*/
-    /*background-color: #3598db;*/
+    /*background-color: #00B7EF;*/
     /*width:15px;*/
     /*height: 15px;*/
     /*color: #fff;*/
@@ -193,7 +193,7 @@ i.select-company-i{
     font-size: 14px;
     color: #5a6165;
     /*background-color: #F5F7FD;*/
-    background-image: linear-gradient(#f4f4f4,#f8f8f8,#f4f4f4);
+    background-image: linear-gradient(#F5F7FD,#f2f4f9);
     text-shadow: 0 2px 0 #efefef;
 }
 
@@ -358,7 +358,7 @@ th.all-checkbox {
     color: #5a6165;
     font-weight: bold;
     /*background-color: #f4f4f4;*/
-    background-image: linear-gradient(#f4f4f4,#f8f8f8,#f4f4f4);
+    background-image: linear-gradient(#F5F7FD,#f2f4f9);
     border-bottom: 1px solid #d0d0d0;
     border-top: 1px solid #d0d0d0;
 }
@@ -412,13 +412,13 @@ th.all-checkbox {
 .p-content a {
     width: 100%;
     font-size: 14px;
-    color: #3598db;
+    color: #00B7EF;
     text-align: right;
 }
 
 .p-content a:hover {
-    color:#3598db;
-    border-bottom:1px solid #3598db
+    color:#00B7EF;
+    border-bottom:1px solid #00B7EF
 }
 
 .c-content > div {
@@ -457,7 +457,7 @@ span.msg-use{
 .pop-content a {
     display:inline-block;
     font-size:18px;
-    color: #3598db;
+    color: #00B7EF;
     margin-bottom:30px
 }
 
@@ -868,7 +868,7 @@ fieldset .field-widget.two-radio button{
 }
 
 .search-result table td.k-link a {
-    color:#3598db
+    color:#00afe5;
 }
 
 .search-result table td.k-link a:hover {
@@ -1414,10 +1414,10 @@ form.company-msg {
     font-size: 12px;
 }
 .btn-submit button {
-    /*background-color: #3598db;*/
-    background-image: linear-gradient(#41b2ff,#3598db);
+    /*background-color: #00B7EF;*/
+    background-image: linear-gradient(#41b2ff,#00B7EF);
     color: #fff;
-    border: 1px solid #3598db;
+    border: 1px solid #00B7EF;
     width: 90px;
     height: 37px;
     border-radius: 5px;
@@ -1748,7 +1748,7 @@ i.cricle {
     height: 38px;
     line-height: 38px;
     padding: 0 15px;
-    background-color: #3598db;
+    background-color: #00B7EF;
     color: #fff;
     white-space: nowrap;
     text-align: center;
@@ -1998,7 +1998,7 @@ table#timeTitle tbody tr{
 .scroll-table thead {
     display: table;
     table-layout: fixed;
-    background-image: linear-gradient(#F5F5F5,#f6f7f7,#f5f5f5);
+    background: linear-gradient(#F5F5F5,#f6f7f7,#f5f5f5);
 }
 .scroll-table tbody {
     max-height:300px;
