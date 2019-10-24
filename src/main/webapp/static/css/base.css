@@ -16,7 +16,7 @@ button{
 }
 table {
     border-collapse: unset;
-    /*border-spacing: 0;*/
+    border-spacing: 0;
 }
 
 body {
