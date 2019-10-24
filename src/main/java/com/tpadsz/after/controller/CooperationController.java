@@ -1,8 +1,12 @@
 package com.tpadsz.after.controller;
 
+import com.alibaba.excel.EasyExcel;
+import com.alibaba.excel.ExcelWriter;
+import com.alibaba.excel.write.metadata.WriteSheet;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.tpadsz.after.entity.CooperationInfo;
+import com.tpadsz.after.entity.DownloadExcelData;
 import com.tpadsz.after.entity.SearchDict;
 import com.tpadsz.after.service.CooperateService;
 import com.tpadsz.after.utils.AppUtils;
@@ -17,7 +21,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.File;
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -118,5 +127,29 @@ public class CooperationController {
             return "ok";
         }
         return "fail";
+    }
+
+    @RequestMapping(value = "/exportExcel")
+    @ResponseBody
+    public void getExcel( HttpServletResponse response) {
+        response.setHeader("Content-disposition", "attachment;filename=" + "demo.xlsx");
+        List<DownloadExcelData> downloadExcelDatas = new ArrayList<>();
+        try {
+            ExcelWriter excelWriter = EasyExcel.write(response.getOutputStream()).build();
+            WriteSheet writeSheet;
+            for (int i = 0; i < 2; i++) {
+                writeSheet = EasyExcel.writerSheet(i, "模板" + i).head(DownloadExcelData.class).build();
+                excelWriter.write(downloadExcelDatas, writeSheet);
+            }
+            excelWriter.finish();
+
+//            String fileName = URLEncoder.encode(new StringBuffer().append("用户列表-").append(System.currentTimeMillis()).toString(), "UTF-8");
+//            response.setHeader("Content-disposition", "attachment;filename=" + fileName + ".xlsx");
+//            EasyExcel.write(response.getOutputStream(),DownloadExcelData.class).sheet("用户列表").doWrite(downloadExcelDatas);
+        } catch (UnsupportedEncodingException e) {
+            logger.error(e.getMessage());
+        } catch (IOException e) {
+            logger.error(e.getMessage());
+        }
     }
 }
