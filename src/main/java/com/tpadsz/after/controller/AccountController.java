@@ -10,6 +10,8 @@ import com.tpadsz.after.entity.dd.ResultDict;
 import com.tpadsz.after.service.AccountService;
 import com.tpadsz.after.utils.GenerateUtils;
 import net.rubyeye.xmemcached.MemcachedClient;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -38,6 +40,7 @@ public class AccountController {
     @Autowired
     private MemcachedClient client;
 
+    Logger logger = LoggerFactory.getLogger(AccountController.class);
 
     @RequestMapping(value = "/list", method = RequestMethod.GET)
     public String list(Integer pageNum, Integer pageSize, String account,String uname, Integer fid, Integer roleId, String
@@ -199,9 +202,9 @@ public class AccountController {
             response.setHeader("Content-disposition", "attachment;filename=" + fileName + ".xlsx");
             EasyExcel.write(response.getOutputStream(),DownloadExcelData.class).sheet("用户列表").doWrite(downloadExcelDatas);
         } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
+            logger.error("method:getExcel;result:download excel error,account:{},uname:{}",account,uname);
         } catch (IOException e) {
-            e.printStackTrace();
+            logger.error("method:getExcel;result:download excel error,account:{},uname:{}",account,uname);
         }
     }
 
