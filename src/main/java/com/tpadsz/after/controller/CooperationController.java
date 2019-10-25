@@ -6,7 +6,7 @@ import com.alibaba.excel.write.metadata.WriteSheet;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.tpadsz.after.entity.CooperationInfo;
-import com.tpadsz.after.entity.DownloadExcelData;
+import com.tpadsz.after.entity.CooperationTemplate;
 import com.tpadsz.after.entity.SearchDict;
 import com.tpadsz.after.service.CooperateService;
 import com.tpadsz.after.utils.AppUtils;
@@ -22,11 +22,10 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
-import java.util.ArrayList;
+import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -46,7 +45,8 @@ public class CooperationController {
     @RequestMapping("/list")
     public String cooperateList(SearchDict dict, ModelMap modelMap) {
         String uid = AppUtils.getUserID();
-        Integer parentId = dict.getParentId() == null ? cooperateService.getParentId(uid) : dict.getParentId();
+        CooperationTemplate cooperationInfo = cooperateService.getParentCompany(uid);
+        int parentId = dict.getParentId() == 0 ? cooperationInfo.getParent_id() : dict.getParentId();
         dict.setParentId(parentId);
         PageHelper.startPage(dict.getPageNum(), dict.getPageSize());
         List<Map> cooperationList = cooperateService.getByMap(dict);
@@ -131,21 +131,21 @@ public class CooperationController {
 
     @RequestMapping(value = "/exportExcel")
     @ResponseBody
-    public void getExcel( HttpServletResponse response) {
-        response.setHeader("Content-disposition", "attachment;filename=" + "demo.xlsx");
-        List<DownloadExcelData> downloadExcelDatas = new ArrayList<>();
+    public void getExcel(HttpServletResponse response) {
+        String uid = AppUtils.getUserID();
+        CooperationTemplate parent = cooperateService.getParentCompany(uid);
         try {
+            String fileName = URLEncoder.encode(cooperateService.parseName(parent), "UTF-8");
+            Map<Integer, List<CooperationTemplate>> company = cooperateService.buildExcelData(parent);
+            response.setHeader("Content-disposition", "attachment;filename=" + fileName + ".xls");
             ExcelWriter excelWriter = EasyExcel.write(response.getOutputStream()).build();
-            WriteSheet writeSheet;
-            for (int i = 0; i < 2; i++) {
-                writeSheet = EasyExcel.writerSheet(i, "模板" + i).head(DownloadExcelData.class).build();
-                excelWriter.write(downloadExcelDatas, writeSheet);
+            int i = 0;
+            for (List<CooperationTemplate> companyList : company.values()) {
+                i++;
+                WriteSheet writeSheet = EasyExcel.writerSheet(i, "sheet" + i).head(CooperationTemplate.class).build();
+                excelWriter.write(companyList, writeSheet);
             }
             excelWriter.finish();
-
-//            String fileName = URLEncoder.encode(new StringBuffer().append("用户列表-").append(System.currentTimeMillis()).toString(), "UTF-8");
-//            response.setHeader("Content-disposition", "attachment;filename=" + fileName + ".xlsx");
-//            EasyExcel.write(response.getOutputStream(),DownloadExcelData.class).sheet("用户列表").doWrite(downloadExcelDatas);
         } catch (UnsupportedEncodingException e) {
             logger.error(e.getMessage());
         } catch (IOException e) {

@@ -3,20 +3,19 @@ package com.tpadsz.after.test;
 import com.alibaba.fastjson.JSON;
 import com.tpadsz.after.dao.MeshDao;
 import com.tpadsz.after.dao.RoleDao;
-import com.tpadsz.after.entity.FileDTO;
+import com.tpadsz.after.entity.CooperationInfo;
+import com.tpadsz.after.entity.CooperationTemplate;
 import com.tpadsz.after.entity.SearchDict;
-import com.tpadsz.after.entity.User;
 import com.tpadsz.after.service.CooperateService;
-import com.tpadsz.after.service.FileService;
 import net.rubyeye.xmemcached.XMemcachedClient;
 import net.rubyeye.xmemcached.exception.MemcachedException;
 import org.apache.log4j.Logger;
 import org.junit.Test;
 import org.mybatis.spring.SqlSessionTemplate;
-import org.springframework.beans.BeanUtils;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.concurrent.TimeoutException;
 
@@ -35,19 +34,23 @@ public class MainTest {
 
     @Test
     public void testSqlSessionTemplate() {
-        Map map = new HashMap();
-        map.put("uname", "test");
-//        map.put("account", "admin");
-//        map.put("mobile", "18170756879");
-        map.put("email", "after@tpadsz.com");
-        User user = new User();
-        user.setMobile("18170756879");
-//        User user = getSqlSessionTemplate().selectOne("com.tpadsz.after.dao.UserExtendDao.selectByUsername", "超级管理员");
-//        System.out.println("user:" + getSqlSessionTemplate().selectList("com.tpadsz.after.dao.UserExtendDao.getPermissions", "超级管理员"));
-        System.out.println("user=" + getSqlSessionTemplate().selectOne("com.tpadsz.after.dao.UserDao.selectByUsername", "test").toString());
-//        System.out.println("count:" + getSqlSessionTemplate().selectOne("com.tpadsz.after.dao.UserDao.getCount", map));
-        System.out.println("user:" + getSqlSessionTemplate().selectList("com.tpadsz.after.dao.MeshDao.getByMap", null).size());
-        System.out.println("count:" + getSqlSessionTemplate().selectOne("com.tpadsz.after.dao.MeshDao.getCountByTable", "f_mesh"));
+//        Map map = new HashMap();
+//        map.put("uname", "test");
+////        map.put("account", "admin");
+////        map.put("mobile", "18170756879");
+//        map.put("email", "after@tpadsz.com");
+//        User user = new User();
+//        user.setMobile("18170756879");
+////        User user = getSqlSessionTemplate().selectOne("com.tpadsz.after.dao.UserExtendDao.selectByUsername", "超级管理员");
+////        System.out.println("user:" + getSqlSessionTemplate().selectList("com.tpadsz.after.dao.UserExtendDao.getPermissions", "超级管理员"));
+//        System.out.println("user=" + getSqlSessionTemplate().selectOne("com.tpadsz.after.dao.UserDao.selectByUsername", "test").toString());
+////        System.out.println("count:" + getSqlSessionTemplate().selectOne("com.tpadsz.after.dao.UserDao.getCount", map));
+//        System.out.println("user:" + getSqlSessionTemplate().selectList("com.tpadsz.after.dao.MeshDao.getByMap", null).size());
+//        System.out.println("count:" + getSqlSessionTemplate().selectOne("com.tpadsz.after.dao.MeshDao.getCountByTable", "f_mesh"));
+        SqlSessionTemplate sqlSessionTemplate = getSqlSessionTemplate();
+        List<CooperationTemplate> parentList = sqlSessionTemplate.selectList("com.tpadsz.after.dao.CooperateDao.getCompanyByUid", "2730");
+        List<CooperationTemplate> childList = sqlSessionTemplate.selectList("com.tpadsz.after.dao.CooperateDao.getCompanyByFid", 40);
+        logger.warn(JSON.toJSONString(parentList) + "\t" + JSON.toJSONString(childList));
     }
 
     @Test
@@ -122,19 +125,33 @@ public class MainTest {
 
     @Test
     public void testDao() {
+
         ApplicationContext ctx = new ClassPathXmlApplicationContext("classpath:applicationContext.xml");
-        Map map = new HashMap();
+//        Map map = new HashMap();
 //        map.put("role", "manager");
 //        map.put("uid", 18);
-        map.put("fid", 26);
-        map.put("status", 0);
+//        map.put("fid", 26);
+//        map.put("status", 0);
 //        MeshService meshService = (MeshService) ctx.getBean("meshServiceImpl");
-        FileService fileService = (FileService) ctx.getBean("fileServiceImpl");
+//        FileService fileService = (FileService) ctx.getBean("fileServiceImpl");
         CooperateService cooperateService = (CooperateService) ctx.getBean("cooperateServiceImpl");
-        cooperateService.updateUser(map);
+        CooperationTemplate parent = cooperateService.getParentCompany("18");
+//        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+//        StringBuilder stringBuilder = new StringBuilder();
+//        if (parent.getStatus() == 0) {
+//            stringBuilder.append(String.format("%s_%s_%s", parent.getConame(), "终止", dateFormat.format(new Date())));
+//        } else {
+//            stringBuilder.append(String.format("%s_%s_%s", parent.getConame(), "合作", dateFormat.format(new Date())));
+//        }
+//        System.out.println(stringBuilder.toString());
+        cooperateService.buildExcelData(parent);
+//        CooperationInfo parent = cooperateService.getParentCompany("2730");
+//        Map<Integer,List<CooperationTemplate>> company = cooperateService.buildExcelData(parent);
+//        logger.warn("\n"+JSON.toJSONString(company) + "\n"+JSON.toJSONString(parent));
+//        cooperateService.updateUser(map);
 //        GroupService groupService = (GroupService) ctx.getBean("groupServiceImpl");
 //        groupService.deleteGroup(map);
-        logger.info("result=" + map.get("result"));
+//        logger.info("result=" + map.get("result"));
 //        SearchDict dict = new SearchDict();
 //        FileDTO info = fileService.getFileInfo(53);
 //        BeanUtils.copyProperties(info, dict);

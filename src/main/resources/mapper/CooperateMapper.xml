@@ -21,10 +21,17 @@
         IFNULL(s.total, 0) fcount
 	</sql>
 
-    <select id="getParentId" parameterType="string" resultType="int">
-        SELECT f.parent_id
+    <select id="getParentCompany" parameterType="string" resultType="CooperationTemplate">
+        SELECT
+            f.id,
+            f.parent_id,
+            f.coname,
+            f.mobile,
+            f.address,
+            f.`code`,
+            f.`status`
         FROM f_firm f
-        WHERE f.parent_id = (
+        WHERE f.id = (
             SELECT c.fid
             FROM f_user_account u
             INNER JOIN f_user_customer c ON c.uid = u.id
@@ -55,14 +62,41 @@
     </select>
 
     <select id="getCooperationInfo" resultType="CooperationInfo" parameterType="int">
-        SELECT
-        <include refid="Base_Column_List"/>
-        FROM f_firm WHERE id=#{id}
+        SELECT * FROM f_firm WHERE id=#{id}
     </select>
 
     <insert id="save" parameterType="CooperationInfo">
        INSERT INTO f_firm(coname,address,mobile,create_date,update_date,photo,code,status) VALUES(#{coname},#{address},#{mobile},now(),now(),#{photo},#{code},#{status});
    </insert>
+
+    <select id="getCompanyByUid" parameterType="string" resultType="CooperationTemplate">
+        SELECT
+            f.id,
+            f.coname,
+            f.mobile,
+            f.address,
+            f.`code`,
+            f.`status`
+        FROM f_firm f
+        WHERE f.parent_id = (
+		SELECT c.fid
+		FROM f_user_account u
+		INNER JOIN f_user_customer c ON c.uid = u.id
+		WHERE u.id = #{uid}
+	    )
+    </select>
+
+    <select id="getCompanyByFid" resultType="CooperationTemplate" parameterType="int">
+       SELECT
+            f.id,
+            f.coname,
+            f.mobile,
+            f.address,
+            f.`code` ,
+            f.`status`
+        FROM f_firm f INNER JOIN f_firm_cooperation c ON f.id=c.child_id
+        WHERE parent_id=#{fid} GROUP BY f.id
+    </select>
 
     <select id="getCount" resultType="int" parameterType="int">
         SELECT COUNT(0)

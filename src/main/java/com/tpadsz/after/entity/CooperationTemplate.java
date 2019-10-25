@@ -1,5 +1,6 @@
 package com.tpadsz.after.entity;
 
+import com.alibaba.excel.annotation.ExcelIgnore;
 import com.alibaba.excel.annotation.ExcelProperty;
 
 /**
@@ -8,14 +9,44 @@ import com.alibaba.excel.annotation.ExcelProperty;
  */
 public class CooperationTemplate {
 
+    @ExcelIgnore
+    private int id;
+    @ExcelIgnore
+    private int parent_id;
     @ExcelProperty("合作公司名称")
     private String coname;
     @ExcelProperty("联系方式")
     private String mobile;
     @ExcelProperty("公司地址")
-    private String adress;
+    private String address;
     @ExcelProperty("营业执照编号")
     private String code;
+    @ExcelIgnore
+    private int status;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getParent_id() {
+        return parent_id;
+    }
+
+    public void setParent_id(int parent_id) {
+        this.parent_id = parent_id;
+    }
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
+    }
 
     public String getConame() {
         return coname;
@@ -33,12 +64,12 @@ public class CooperationTemplate {
         this.mobile = mobile;
     }
 
-    public String getAdress() {
-        return adress;
+    public String getAddress() {
+        return address;
     }
 
-    public void setAdress(String adress) {
-        this.adress = adress;
+    public void setAddress(String address) {
+        this.address = address;
     }
 
     public String getCode() {

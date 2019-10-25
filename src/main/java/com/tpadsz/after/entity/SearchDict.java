@@ -6,7 +6,7 @@ package com.tpadsz.after.entity;
 public class SearchDict {
 
     private Integer id;
-    private Integer parentId;
+    private Integer parentId = 0;
     private String uid;
     private String role;
     private Integer mid = 0;
@@ -34,7 +34,7 @@ public class SearchDict {
     private String createDate;
     private String beginDate;
     private String endDate;
-    private Integer pageNum=1;
+    private Integer pageNum = 1;
     private Integer pageSize = 10;
 
     public Integer getId() {

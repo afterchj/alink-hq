@@ -1,6 +1,7 @@
 package com.tpadsz.after.service;
 
 import com.tpadsz.after.entity.CooperationInfo;
+import com.tpadsz.after.entity.CooperationTemplate;
 import com.tpadsz.after.entity.SearchDict;
 
 import java.util.List;
@@ -15,9 +16,13 @@ public interface CooperateService {
 
     CooperationInfo getCooperationInfo(int id);
 
+    List<CooperationTemplate> getChildCompanyByFid(int fid);
+
+    List<CooperationTemplate> getChildCompanyByUid(String uid);
+
     int getCount(int id);
 
-    int getParentId(String uid);
+    CooperationTemplate getParentCompany(String uid);
 
     void save(CooperationInfo info);
 
@@ -26,4 +31,8 @@ public interface CooperateService {
     void updateUser(Map map);
 
     void deleteCooperationById(int id);
+
+    Map buildExcelData(CooperationTemplate parent);
+
+    String parseName(CooperationTemplate cooperationInfo);
 }

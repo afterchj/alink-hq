@@ -1,6 +1,7 @@
 package com.tpadsz.after.dao;
 
 import com.tpadsz.after.entity.CooperationInfo;
+import com.tpadsz.after.entity.CooperationTemplate;
 import com.tpadsz.after.entity.SearchDict;
 
 import java.util.List;
@@ -15,9 +16,13 @@ public interface CooperateDao {
 
     CooperationInfo getCooperationInfo(int id);
 
+    List<CooperationTemplate> getCompanyByFid(int fid);
+
+    List<CooperationTemplate> getCompanyByUid(String Uid);
+
     int getCount(int id);
 
-    int getParentId(String uid);
+    CooperationTemplate getParentCompany(String uid);
 
     void save(CooperationInfo info);
 
