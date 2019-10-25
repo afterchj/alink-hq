@@ -1,9 +1,9 @@
 package com.tpadsz.after.test;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.tpadsz.after.dao.MeshDao;
 import com.tpadsz.after.dao.RoleDao;
-import com.tpadsz.after.entity.CooperationInfo;
 import com.tpadsz.after.entity.CooperationTemplate;
 import com.tpadsz.after.entity.SearchDict;
 import com.tpadsz.after.service.CooperateService;
@@ -15,7 +15,6 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.concurrent.TimeoutException;
 
@@ -144,9 +143,9 @@ public class MainTest {
 //            stringBuilder.append(String.format("%s_%s_%s", parent.getConame(), "合作", dateFormat.format(new Date())));
 //        }
 //        System.out.println(stringBuilder.toString());
-        cooperateService.buildExcelData(parent);
-//        CooperationInfo parent = cooperateService.getParentCompany("2730");
-//        Map<Integer,List<CooperationTemplate>> company = cooperateService.buildExcelData(parent);
+//        cooperateService.buildExcelData(parent);
+        Map<Integer, List<CooperationTemplate>> company = cooperateService.buildExcelData(parent);
+        logger.warn("\n" + JSONObject.toJSONString(company) + "\n" + company.size());
 //        logger.warn("\n"+JSON.toJSONString(company) + "\n"+JSON.toJSONString(parent));
 //        cooperateService.updateUser(map);
 //        GroupService groupService = (GroupService) ctx.getBean("groupServiceImpl");

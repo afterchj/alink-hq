@@ -79,24 +79,25 @@ public class CooperateServiceImpl implements CooperateService {
         Map map = new HashMap();
         int fid = cooperationInfo.getId();
         List<CooperationTemplate> list = getChildCompanyByFid(fid);
-        map.put(fid, list);
-        for (CooperationTemplate info : list) {
-            fid = info.getId();
-            List<CooperationTemplate> company = getChildCompanyByFid(fid);
-            if (company.size() > 0) {
-                map.put(fid, company);
-                for (CooperationTemplate template : company) {
-                    fid = template.getId();
-                    List<CooperationTemplate> childCompany = getChildCompanyByFid(template.getId());
-                    if (childCompany.size() > 0) {
-                        map.put(fid, childCompany);
+        if (list.size() > 0) {
+            map.put(fid, list);
+            for (CooperationTemplate info : list) {
+                fid = info.getId();
+                List<CooperationTemplate> company = getChildCompanyByFid(fid);
+                if (company.size() > 0) {
+                    map.put(fid, company);
+                    for (CooperationTemplate template : company) {
+                        fid = template.getId();
+                        List<CooperationTemplate> childCompany = getChildCompanyByFid(fid);
+                        if (childCompany.size() > 0) {
+                            map.put(fid, childCompany);
+                        }
                     }
                 }
             }
         }
         return map;
     }
-
 
     @Override
     public String parseName(CooperationTemplate parent) {

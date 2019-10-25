@@ -54,7 +54,7 @@
         ff.ota_id otaId,
         fh.update_date updateDate
         FROM
-        f_file_history_version fh
+        f_ota_history_version fh
         INNER JOIN f_ota_file ff ON fh.o_id = ff.id
         WHERE 1=1
         AND fh.o_id = #{oid}
@@ -84,7 +84,7 @@
 
     <select id="getCount" resultType="int" parameterType="FileDTO">
         SELECT COUNT(0) FROM f_ota_file f
-        INNER JOIN f_file_history_version fh
+        INNER JOIN f_ota_history_version fh
         ON f.id=fh.o_id WHERE 1=1
         <if test="otaId!=null and otaId!=''">
             AND f.ota_id =#{otaId}
@@ -129,7 +129,7 @@
     </update>
 
     <update id="saveUpdate" parameterType="FileDTO">
-        UPDATE f_file_history_version
+        UPDATE f_ota_history_version
         <set>
             <if test="otaVersion!=null and otaVersion!=''">
                 o_version=#{otaVersion},

@@ -44,7 +44,10 @@
                         <ul  class="d-label-msg">
                             <li>灯名：<label th:text="${meshInfo.lname}"></label></li>
                             <li>灯MAC地址：<label th:text="${meshInfo.lmac}"></label></li>
-                            <li>灯类型：<label th:text="XXX"></label></li>
+                            <li>灯类型：
+                                <span th:if="${meshInfo.angle}!=''">轨道灯</span>
+                                <span th:if="${meshInfo.angle}==''">RGB</span>
+                            </li>
                             <li>当前状态：
                             <span th:switch="${meshInfo.off}">
                                 <span th:case="1">开</span>
@@ -75,7 +78,7 @@
                             </li>
                             <li>
                                 角度（垂直，水平，光束）：
-                                <span>0</span>，<span>180</span>，<span>45</span>
+                                <span th:if="${meshInfo.angle}!=null" th:text="${meshInfo.angle}"></span>
                             </li>
                         </ul>
                     </div>

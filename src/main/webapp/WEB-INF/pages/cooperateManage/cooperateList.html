@@ -37,8 +37,9 @@
             <div  class="table-content-list">
                 <form th:action="@{/cooperate/list}" class="clearfix" method="post">
                     <div class="search-condition clearfix p-r">
-                        <input type="hidden" id="relation" th:value="${info.parentId}">
-                        <input type="hidden" id="pageSize" th:value="${info.pageSize}">
+                        <input type="hidden" id="relation" th:value="${info.status}">
+                        <input type="hidden" name="parentId" th:value="${info.parentId}">
+                        <input type="hidden" id="pageSize" name="pageSize" th:value="${info.pageSize}">
                         <div class="f-l search" >
                             <div>
                                 <label >合作公司名称</label>

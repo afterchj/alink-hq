@@ -18,6 +18,7 @@
         pl.pname,
         IFNULL(ls.x, '50') x,
         IFNULL(ls.y, '50') y,
+        CONCAT_WS('，',ls.vertical_angle,ls.horizontal_angle,ls.focus) angle,
         IFNULL(ls.off, 'null') off
 	</sql>
 
@@ -127,8 +128,9 @@
             s.mid,
             s.scene_id,
             s.sname,
-            IFNULL(ls.x, 'null') x,
-            IFNULL(ls.y, 'null') y
+            IFNULL(ls.x, '0') x,
+            IFNULL(ls.y, '0') y,
+            CONCAT_WS('，',ls.vertical_angle,ls.horizontal_angle,ls.focus) angle
         FROM f_light l
         INNER JOIN f_light_setting ls ON ls.lid = l.id
         INNER JOIN f_scene s ON ls.sid = s.id
