@@ -14,12 +14,12 @@ $(function () {
                     //项目管理、用户管理权限范围可选
                     $('.fix-left-nav').removeClass('gray');
                     $('.company-select>div').removeClass('gray');
-                }else if (tabindex == 2 || tabindex == 3 || tabindex == 5) {
-                    //角色管理、文件管理、合作管理权限范围背景灰色
+                }else if (tabindex == 2 || tabindex == 3 ) {
+                    //角色管理、文件管理权限范围背景灰色
                     $('.fix-left-nav').addClass('gray');
                     $('.company-select>div').removeClass('gray');
-                }else if (tabindex == 4){
-                    //产品管理权限范围 所在账号相关内容不可选
+                }else if (tabindex == 4 || tabindex == 5){
+                    //产品管理、合作管理权限范围 所在账号相关内容不可选
                     $('.fix-left-nav').removeClass('gray');
                     $('.account-related').addClass('gray');
                 }
@@ -122,29 +122,31 @@ $(function () {
                 $(this).parent().next().find('input:checkbox:last').prop('checked',true);
             }
         }
-        // 固件历史版本查看勾选
-        if (!$(this).prop("checked") && $(this).attr('alt')=='viewHistoryOTA'){
+        // 固件历史版本查看
+        if ($(this).attr('alt')=='viewHistoryOTA'){
             var viewHistoryOTA = $(this).parent().next().find('input:checkbox');
-            //固件历史版本子层全部取消勾选
-            viewHistoryOTA.each(function () {
-                $(this).prop('checked',false);
-            })
+            if (!$(this).prop("checked")){//取消勾选
+                //固件历史版本子层全部取消勾选
+                viewHistoryOTA.each(function () {
+                    $(this).prop('checked',false);
+                })
+            }else {//勾选
+                $(viewHistoryOTA).eq(0).prop('checked',true);
+            }
         }
-
-
     })
     //创建账号 查看角色权限
     $('input.singleRoleChecked:checkbox').click(function () {
         var singleListLength = $(this).parent().parent().parent().parent('.list-content').find(
             'input.singleListChecked:checkbox').length
         var singleListCheckedLength = $(this).parent().parent().parent().parent('.list-content').find(
-            'input.singleListChecked:checkbox:checked').length
+            'input.singleListChecked:checkbox:checked').length//单个全选勾选数
         $(this).parent().parent().parent().parent().siblings('.list-title').find('input.allListChecked:checkbox').prop(
-            'checked', singleListLength == singleListCheckedLength)
-        $(this).parents('.tab-content-part.active').find('.allChecked').prop('checked', $(this).parents(".tab-content-part.active").find('.singleChecked').length == $(this).parents(".tab-content-part.active").find('.singleChecked:checked').length);
+            'checked', singleListLength == singleListCheckedLength);//左侧复选
+        $(this).parents('.tab-content-part.active').find('.allChecked').prop('checked', $(this).parents(".tab-content-part.active").find('.singleChecked').length == $(this).parents(".tab-content-part.active").find('.singleChecked:checked').length);//右侧全选
         if (singleListCheckedLength>=1){
-            if ($(".tab-content-part.active").attr('id')=='projectManage'|| $(".tab-content-part.active").attr('id')=='fileManage'){
-                $(this).parent().parent().next().find('input[value=0]').prop('checked',true)
+            if ($(".tab-content-part.active").attr('id')=='fileManage'){
+                $(this).parent().parent().parent().next().find('input[value=0]').prop('checked',true)//查看数据勾选
             }else {
                 var allRadio = $(".tab-content-part.active").find('input[value=0]');
                 allRadio.each(function () {
@@ -153,12 +155,8 @@ $(function () {
             }
         }
         $("input.singleListChecked:checkbox[alt='createUser']").prop('checked',$("input[alt^='createUser'].singleRoleChecked:checked").length>0);
-        if ($(this).prev("checked")&&$(".tab-content-part.active").attr('id')=='fileManage'){
-            $("input.singleListChecked:checkbox[alt='viewHistoryOTA']").prop('checked',true);
-        }
-
-
-    })
+        $("input.singleListChecked:checkbox[alt='viewHistoryOTA']").prop('checked',$("input[alt^='OTA'].singleRoleChecked:checked").length>0);//固件历史版本查看是否需要勾选
+    });
 
     //单选纵向
     //全选可查看数据

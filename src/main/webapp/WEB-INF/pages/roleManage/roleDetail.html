@@ -849,8 +849,8 @@
                                                         <input type="checkbox" class="singleListChecked" alt="CooperationMemo">
                                                         <label>合作备忘录</label>
                                                     </div>
-                                                    <div class="f-l zero" style="    width: 25%;">
-                                                        <input type="checkbox" >
+                                                    <div class="f-l zero" style="width: 25%;" th:if="${#lists.contains(permissions,'exportCooperationExcel')}">
+                                                        <input type="checkbox" class="singleListChecked" alt="exportCooperationExcel">
                                                         <label>Execl导出合作关系</label>
                                                     </div>
                                                 </div>
