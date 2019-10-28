@@ -133,7 +133,7 @@
                                             <!--<span th:if="${user.uname}">)</span>-->
                                         </td>
                                         <td class="execution-account">
-                                            <span class="">账号（用户名）</span>
+                                            <span class="" th:inline="text">[[${mesh.account}]]（[[${mesh.uname}]]）</span>
                                         </td>
                                     </tr>
                                     </tbody>

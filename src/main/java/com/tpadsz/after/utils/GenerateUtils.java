@@ -126,13 +126,8 @@ public class GenerateUtils {
 
     public static String generateAccount(String str) {
         while (!check(str)) {
-            System.out.println("str=" + str);
             str = getCharAndNumr(8);
         }
         return str;
-    }
-
-    public static void main(String[] args) {
-        System.out.println("account=" + generateAccount(getCharAndNumr(8)));
     }
 }

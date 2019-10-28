@@ -121,12 +121,15 @@
         g.id,
         g.mid,
         g.gname,
+        m.mname,
         m.mesh_id,
         g.pid,
+        sp.name,
         IFNULL(p.pname,'null') pname
         FROM f_group g
         LEFT JOIN f_place p ON g.pid=p.id
         INNER JOIN f_mesh m ON m.id=g.mid
+        INNER JOIN f_project sp ON sp.id=m.project_id
         WHERE g.id IN
         <foreach collection="list" item="id" index="index" open="(" close=")" separator=",">
             #{id}

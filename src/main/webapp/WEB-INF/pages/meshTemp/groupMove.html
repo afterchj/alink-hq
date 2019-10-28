@@ -9,7 +9,6 @@
     <link rel="stylesheet" th:href="@{/static/css/base.css}">
     <link rel="stylesheet" th:href="@{/static/css/leftNav.css}">
     <link rel="stylesheet" th:href="@{/static/css/projectManage.css}">
-
     <title>组移动</title>
 </head>
 
@@ -128,7 +127,7 @@
                                             <span id="place-name" th:title="${group.pname}" th:text="${group.pname}"></span>
                                         </td>
                                         <td class="mesh-name">
-                                            <span class="">网络名称（ID）</span>
+                                            <span class="" th:inline="text">[[${group.mname}]]（[[${group.mesh_id}]]）</span>
                                         </td>
                                         <!--<td class="">-->
                                         <!--<span class="" th:title="${mesh.name}" th:text="${mesh.name}"></span>-->
@@ -138,7 +137,7 @@
                                         <!--</td>-->
 
                                         <td class="mesh-project">
-                                            <span class="" >隶属项目</span>
+                                            <span class="" th:text="${group.name}"></span>
                                             <!--<span th:if="${user.uname}">(</span>-->
                                             <!--<span th:if="${user.uname}" class="line-limit-length  user" th:title="${user.uname}" th:text="${user.uname}"></span>-->
                                             <!--<span th:if="${user.uname}">)</span>-->

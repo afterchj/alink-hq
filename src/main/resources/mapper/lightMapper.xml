@@ -140,11 +140,18 @@
     <select id="selectByLid" resultType="map" parameterType="list">
         SELECT
         l.id,
-        IFNULL(l.lname,'null') lname,
         l.lmac,
-        IFNULL(g.gname,'null') gname
+        m.mname,
+        m.mesh_id,
+        sp.name,
+        IFNULL(l.lname,'') lname,
+        IFNULL(g.gname,'') gname,
+        IFNULL(p.pname,'') pname
         FROM f_light l
         LEFT JOIN f_group g ON g.id=l.gid
+        LEFT JOIN f_place p ON g.pid=p.id
+        INNER JOIN f_mesh m ON m.id=g.mid
+        INNER JOIN f_project sp ON sp.id=m.project_id
         WHERE l.id in
         <foreach collection="list" item="id" index="index" open="(" close=")" separator=",">
             #{id}

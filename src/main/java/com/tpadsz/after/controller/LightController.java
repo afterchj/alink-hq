@@ -9,6 +9,7 @@ import com.tpadsz.after.service.LightService;
 import com.tpadsz.after.service.MeshService;
 import com.tpadsz.after.service.RoleService;
 import com.tpadsz.after.utils.AppUtils;
+import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -59,6 +60,7 @@ public class LightController {
         List<MeshInfo> sceneInfo = lightService.getSceneInfo(id);
         modelMap.put("meshInfo", meshInfo);
         modelMap.put("sceneInfo", sceneInfo);
+        modelMap.put("flag", StringUtils.isEmpty(meshInfo.getAngle()));
         return "meshTemp/lightInfo";
     }
 
