@@ -8,6 +8,18 @@
         <parameter property="result" mode="OUT" jdbcType="INTEGER"/>
     </parameterMap>
 
+    <parameterMap id="cooperationMapper" type="map">
+        <parameter property="coname" mode="IN"/>
+        <parameter property="address" mode="IN"/>
+        <parameter property="mobile" mode="IN"/>
+        <parameter property="photo" mode="IN"/>
+        <parameter property="code" mode="IN"/>
+        <parameter property="account" mode="IN"/>
+        <parameter property="pwd" mode="IN"/>
+        <parameter property="salt" mode="IN"/>
+        <parameter property="parent_id" mode="IN"/>
+    </parameterMap>
+
     <sql id="Base_Column_List">
 		id,
         coname,
@@ -20,6 +32,10 @@
         status,
         IFNULL(s.total, 0) fcount
 	</sql>
+
+    <select id="saveCooperation" parameterMap="cooperationMapper" statementType="CALLABLE">
+        CALL save_cooperation (?,?,?,?,?,?,?,?,?)
+    </select>
 
     <select id="getParentCompany" parameterType="string" resultType="CooperationTemplate">
         SELECT

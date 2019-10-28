@@ -55,8 +55,8 @@ public class CooperateServiceImpl implements CooperateService {
     }
 
     @Override
-    public void save(CooperationInfo info) {
-        cooperateDao.save(info);
+    public void save(Map info) {
+        cooperateDao.saveCooperation(info);
     }
 
     @Override

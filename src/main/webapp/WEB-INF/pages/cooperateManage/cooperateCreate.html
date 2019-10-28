@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="/alink-hq/static/css/common.css">
     <link rel="stylesheet" href="/alink-hq/static/css/leftNav.css">
     <link rel="stylesheet" href="/alink-hq/static/css/projectManage.css">
+    <script src="/alink-hq/static/js/excel/excel.js"></script>
     <script src="/alink-hq/static/js/jquery.min.js"></script>
     <script src="/alink-hq/static/js/upload.js"></script>
     <title>公司信息录入</title>
@@ -45,7 +46,7 @@
                 <div class="p-detail">
                     <div class="p-nav">公司信息录入</div>
                     <div class="p-content p-r">
-                        <form th:action="@{/cooperate/save}" class="company-msg" method="post"
+                        <form th:action="@{/cooperate/save}" id="form" class="company-msg" method="post"
                               enctype="multipart/form-data">
                             <div class="edit-company">
                                 <p class="company-name-hint"></p>
@@ -207,18 +208,25 @@
             islicenseNumber = true;
         }
         if (iscompanyName && iscompanyPhone && isaddress && islicenseNumber) {
+
 //            $('form.company-msg').submit();
             var selector = $('div[openContent="confirm-create"]');
             selector.addClass('active');
-            var account='9GBACD';
-            var pwd="000000";
-            var content = '<div class="clearfix"><div class="f-l c-width one">' + account + '</div>'
+
+            let account = '9GBACD';
+            let pwd = "000000";
+            $.getJSON("/alink-hq/cooperate/show", function (data) {
+                account = data['account'];
+                pwd = data['pwd'];
+                // console.log("account", account, "pwd", pwd);
+                var content = '<div class="clearfix"><div class="f-l c-width one">' + account + '</div>'
                     + '<div class="f-l c-width two">' + pwd + '</div></div>';
-            $('.c-list').append(content);
-            adjust(selector);
-            showOverlay();
+                $('.c-list').append(content);
+                adjust(selector);
+                showOverlay();
+            });
         }
-    })
+    });
     $('.pop-nav .close').click(function () {
         $('form.company-msg').submit();
 //        var selector = $('div[openContent="confirm-create"]');
@@ -242,6 +250,7 @@
             return false;
         }
     }
+
     //验证营业执照编号
     function checkLicense(str) {
         reg = /(^(?:(?![IOZSV])[\dA-Z]){2}\d{6}(?:(?![IOZSV])[\dA-Z]){10}$)|(^\d{15}$)/;

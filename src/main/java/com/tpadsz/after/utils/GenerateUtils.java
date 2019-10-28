@@ -37,7 +37,7 @@ public class GenerateUtils {
                 }
                 charOrNum = "char";
             } else {
-                    charOrNum = random.nextInt(2) % 2 == 0 ? "char" : "num";
+                charOrNum = random.nextInt(2) % 2 == 0 ? "char" : "num";
             }
             int isDuplicateNum;
             int randomValue;
@@ -69,7 +69,7 @@ public class GenerateUtils {
                             }
                         }
                     } while (isDuplicateNum == 2);
-                }else {
+                } else {
                     randomValue = random.nextInt(10);
                 }
                 val += String.valueOf(randomValue);
@@ -124,4 +124,15 @@ public class GenerateUtils {
         return (sdf.format(date));
     }
 
+    public static String generateAccount(String str) {
+        while (!check(str)) {
+            System.out.println("str=" + str);
+            str = getCharAndNumr(8);
+        }
+        return str;
+    }
+
+    public static void main(String[] args) {
+        System.out.println("account=" + generateAccount(getCharAndNumr(8)));
+    }
 }

@@ -3,6 +3,8 @@ package com.tpadsz.after.controller;
 import com.alibaba.excel.EasyExcel;
 import com.alibaba.excel.ExcelWriter;
 import com.alibaba.excel.write.metadata.WriteSheet;
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.tpadsz.after.entity.CooperationInfo;
@@ -10,6 +12,8 @@ import com.tpadsz.after.entity.CooperationTemplate;
 import com.tpadsz.after.entity.SearchDict;
 import com.tpadsz.after.service.CooperateService;
 import com.tpadsz.after.utils.AppUtils;
+import com.tpadsz.after.utils.Encryption;
+import com.tpadsz.after.utils.GenerateUtils;
 import com.tpadsz.after.utils.PropertiesUtil;
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
@@ -39,6 +43,8 @@ public class CooperationController {
 
     @Resource
     private CooperateService cooperateService;
+
+    private static String account;
 
     private Logger logger = Logger.getLogger(this.getClass());
 
@@ -74,6 +80,10 @@ public class CooperationController {
 
     @RequestMapping("/save")
     public String save(CooperationInfo info, @RequestParam(value = "file") MultipartFile file) {
+        String uid = AppUtils.getUserID();
+        CooperationTemplate cooperationInfo = cooperateService.getParentCompany(uid);
+        int fid = cooperationInfo.getId();
+        info.setParent_id(fid);
         String path = PropertiesUtil.getPath("img");
         String fileName = file.getOriginalFilename();
         File targetFile = new File(path, fileName);
@@ -86,7 +96,12 @@ public class CooperationController {
                 info.setPhoto(fileName);
             }
             if (info.getId() == 0) {
-                cooperateService.save(info);
+                Map param = JSONObject.parseObject(JSON.toJSONString(info));
+                param.put("account", account);
+                Encryption.HashPassword password = Encryption.encrypt(Encryption.getMD5Str("123456"));
+                param.put("pwd", password.getPassword());
+                param.put("salt", password.getSalt());
+                cooperateService.save(param);
             } else {
                 cooperateService.saveUpdate(info);
             }
@@ -94,6 +109,16 @@ public class CooperationController {
             logger.error("error:" + e.getMessage());
         }
         return "redirect:/cooperate/list";
+    }
+
+    @RequestMapping("/show")
+    @ResponseBody
+    public Map createAccount() {
+        account = GenerateUtils.generateAccount(GenerateUtils.getCharAndNumr(8));
+        Map map = new HashMap();
+        map.put("account", account);
+        map.put("pwd", "123456");
+        return map;
     }
 
     @RequestMapping("/saveUpdate")

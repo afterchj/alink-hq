@@ -4,9 +4,12 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.tpadsz.after.dao.MeshDao;
 import com.tpadsz.after.dao.RoleDao;
+import com.tpadsz.after.entity.CooperationInfo;
 import com.tpadsz.after.entity.CooperationTemplate;
 import com.tpadsz.after.entity.SearchDict;
 import com.tpadsz.after.service.CooperateService;
+import com.tpadsz.after.utils.Encryption;
+import com.tpadsz.after.utils.GenerateUtils;
 import net.rubyeye.xmemcached.XMemcachedClient;
 import net.rubyeye.xmemcached.exception.MemcachedException;
 import org.apache.log4j.Logger;
@@ -174,11 +177,26 @@ public class MainTest {
 
     @Test
     public void test() {
-        String str = "2019-08-01 - 2019-08-02";
-        String begin = str.substring(0, 10);
-        String end = str.substring(str.length() - 10);
-        System.out.println("begin=" + begin + ",end=" + end + ",str" + new Date(begin));
-        Calendar calendar = Calendar.getInstance();
+        ApplicationContext ctx = new ClassPathXmlApplicationContext("classpath:applicationContext.xml");
+        CooperateService cooperateService = (CooperateService) ctx.getBean("cooperateServiceImpl");
+        CooperationInfo info=new CooperationInfo();
+        info.setConame("test有限公司");
+        info.setAddress("中国苏州菜");
+        info.setCode("12341243123");
+        info.setMobile("12580");
+        info.setPhoto("test.img");
+        info.setParent_id(1);
+        Map param = JSONObject.parseObject(JSON.toJSONString(info));
+        param.put("account", GenerateUtils.generateAccount(GenerateUtils.getCharAndNumr(8)));
+        Encryption.HashPassword password = Encryption.encrypt(Encryption.getMD5Str("123456"));
+        param.put("pwd", password.getPassword());
+        param.put("salt", password.getSalt());
+        cooperateService.save(param);
+//        String str = "2019-08-01 - 2019-08-02";
+//        String begin = str.substring(0, 10);
+//        String end = str.substring(str.length() - 10);
+//        System.out.println("begin=" + begin + ",end=" + end + ",str" + new Date(begin));
+//        Calendar calendar = Calendar.getInstance();
     }
 
     public static void main(String[] args) {

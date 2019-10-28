@@ -24,7 +24,7 @@ public interface CooperateService {
 
     CooperationTemplate getParentCompany(String uid);
 
-    void save(CooperationInfo info);
+    void save(Map info);
 
     void saveUpdate(CooperationInfo info);
 
