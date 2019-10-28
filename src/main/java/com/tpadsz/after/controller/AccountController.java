@@ -282,8 +282,10 @@ public class AccountController {
         String uid = loginUser.getId();
         Integer role_id = accountService.findRoleIdByUid(uid);
         List<Firm> firmList = getFirmInfo(role_id, uid);
+        User user = accountService.findByAccount(account);
         model.addAttribute("firmList", firmList);
         model.addAttribute("account", account);
+        model.addAttribute("uname", user.getUname());
         model.addAttribute("coname", coname);
         return "userManage/userTurnOver";
     }

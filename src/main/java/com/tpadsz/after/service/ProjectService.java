@@ -43,4 +43,6 @@ public interface ProjectService {
     int findProjectByProjectId(int id);
 
     List<Map> selectByPid(List<String> list);
+
+    int findLightByPid(int id, String uid);
 }

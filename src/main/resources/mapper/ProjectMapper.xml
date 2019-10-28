@@ -99,6 +99,7 @@
         t1.id,
         t1.name,
         t2.account,
+        t2.uname,
         t4.coname
         FROM f_project t1
         INNER JOIN f_user_account t2 ON t1.uid=t2.id
@@ -188,6 +189,12 @@
 
     <select id="findProjectByProjectId" resultType="int">
         SELECT count(*) FROM f_project WHERE id = #{id}
+    </select>
+
+    <select id="findLightByPid" resultType="int">
+        SELECT COUNT(1) FROM f_light WHERE mid IN (
+        SELECT m.id from f_mesh m where m.project_id=#{id} and m.uid = #{uid}
+        )
     </select>
 
 </mapper>

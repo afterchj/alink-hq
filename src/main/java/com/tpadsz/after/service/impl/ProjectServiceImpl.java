@@ -127,5 +127,10 @@ public class ProjectServiceImpl implements ProjectService {
         return projectDao.selectByPid(list);
     }
 
+    @Override
+    public int findLightByPid(int id, String uid) {
+        return projectDao.findLightByPid(id,uid);
+    }
+
 
 }
