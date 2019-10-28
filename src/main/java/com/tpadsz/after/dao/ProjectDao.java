@@ -65,4 +65,6 @@ public interface ProjectDao {
     int findProjectByProjectId(@Param("id") int id);
 
     List<Map> selectByPid(List<String> list);
+
+    int findLightByPid(@Param("id")int id, @Param("uid")String uid);
 }

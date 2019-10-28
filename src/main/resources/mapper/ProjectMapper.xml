@@ -191,4 +191,10 @@
         SELECT count(*) FROM f_project WHERE id = #{id}
     </select>
 
+    <select id="findLightByPid" resultType="int">
+        SELECT COUNT(1) FROM f_light WHERE mid IN (
+        SELECT m.id from f_mesh m where m.project_id=#{id} and m.uid = #{uid}
+        )
+    </select>
+
 </mapper>

@@ -219,13 +219,21 @@ public class ProjectController {
     @ResponseBody
     public Map<String, String> delete(String projectInfo) {
         Map<String, String> map = new HashMap<>();
+        int lightFlag = 0;
         List<ProjectList> projectList = JSONArray.parseArray(projectInfo, ProjectList.class);
         try {
             for (ProjectList project : projectList) {
                 User user = accountService.findByAccount(project.getAccount());
+                lightFlag = projectService.findLightByPid(project.getId(), user.getId());
+                if(lightFlag>0){
+                    map.put("result", ResultDict.LIGHT_EXISTED.getCode());
+                    break;
+                }
                 projectService.delete(user.getId(), project.getId());
             }
-            map.put("result", ResultDict.SUCCESS.getCode());
+            if(lightFlag==0) {
+                map.put("result", ResultDict.SUCCESS.getCode());
+            }
         } catch (Exception e) {
             map.put("result", ResultDict.SYSTEM_ERROR.getCode());
         }
