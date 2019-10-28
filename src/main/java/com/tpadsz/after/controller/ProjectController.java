@@ -122,25 +122,11 @@ public class ProjectController {
 
     @RequestMapping(value = "/create", method = RequestMethod.POST)
     @ResponseBody
-    public Map<String, String> create(HttpSession session, String projectName, String account) {
+    public Map<String, String> create(HttpSession session, String projectName) {
         Map<String, String> map = new HashMap<>();
         User loginUser = (User) session.getAttribute("user");
-        String uid = loginUser.getId();
         try {
-            User user = accountService.findByAccount(account);
-            if (user == null) {
-                map.put("result", ResultDict.ACCOUNT_NOT_EXISTED.getCode());
-                return map;
-            }
-            Integer role_id = accountService.findRoleIdByUid(uid);
-            if (role_id == 3) {
-                Integer firmUid = accountService.findFirmUid(uid, user.getId());
-                if (firmUid == null) {
-                    map.put("result", ResultDict.NOT_SAME_COMPANY.getCode());
-                    return map;
-                }
-            }
-            int flag = projectService.createProject(projectName, user);
+            int flag = projectService.createProject(projectName, loginUser);
             if (flag == 0) {
                 map.put("result", ResultDict.REPEAT_NAME.getCode());
             } else if (flag == 1) {
