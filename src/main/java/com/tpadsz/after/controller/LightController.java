@@ -58,7 +58,7 @@ public class LightController {
         List<MeshInfo> sceneInfo = lightService.getSceneInfo(id);
         modelMap.put("meshInfo", meshInfo);
         modelMap.put("sceneInfo", sceneInfo);
-        modelMap.put("flag", StringUtils.isEmpty(meshInfo.getAngle()));
+        modelMap.put("flag", StringUtils.isNotEmpty(meshInfo.getAngle()));
         return "meshTemp/lightInfo";
     }
 
