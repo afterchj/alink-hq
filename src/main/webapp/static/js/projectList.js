@@ -275,9 +275,21 @@ $(function () {
                     $('#all').prop('checked',false);
                 } else if (res.result == '200') {
                     console.log('系统错误');
+                } else if(res.result=='120'){
+                    $('div[openContent="delete-pop"]').removeClass('active');
+                    // hideOverlay();
+                    var selector=$('div[openContent="noDelete-pop"]');
+                    $('div[openContent="noDelete-pop"] .reset-pwd p').text('该项目下有灯，不可删除！');
+                    selector.addClass('active');
+                    adjust(selector);
+                    console.log('有灯存在');
                 }
             }
         })
+    })
+    $('div[openContent="noDelete-pop"] .yes').click(function(){
+        $('div[openContent="noDelete-pop"]').removeClass('active');
+        hideOverlay();
     })
     //移交单个
     $('.exchange-project').click(function () {

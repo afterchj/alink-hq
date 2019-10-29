@@ -53,7 +53,6 @@
                                     <input type="text" id="company" th:value="${coname}">
                                 </div>
                             </div>
-
                         </div>
                         <div style="text-align: center;margin: 40px 0 18px 0;">
                             <img src="/alink-hq/static/img/exchange-un.png" alt="">
@@ -76,7 +75,6 @@
                                     </div>
                                 </div>
                                 <!--</div>-->
-
                                 <div class="attention form-row">
                                     <p><span>注意！</span><span style="color: #333;font-weight: bold;">确认移交后</span></p>
                                     <ul>
@@ -86,7 +84,6 @@
                                     </ul>
                                 </div>
                             </div>
-
                             <div class="btn-transfer form-row" style="text-align: center;">
                                 <button type="button" style="margin: 0;">确定移交</button>
                             </div>
@@ -99,7 +96,7 @@
 </div>
 <!--新密码-->
 <div th:replace="pop/newPwd::new-pwd"></div>
-<div class="success " openContent="success">
+<div class="success" openContent="success">
     <div style="margin-bottom: 20px;"><img src="/alink-hq/static/img/success.png" alt=""></div>
     <div><img src="/alink-hq/static/img/sucessfont.png" alt=""></div>
 </div>
@@ -134,7 +131,7 @@
                 data: {account: account, fid: fid},
                 dataType: "json",
                 success: function (res) {
-                    console.log(res);
+//                    console.log(res);
                     if (res.result == '000') {
                         var pwd = res.pwd;
                         var account = res.account;

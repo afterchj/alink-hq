@@ -13,7 +13,7 @@
 </head>
 <body>
 <!-- 删除 -->
-<div class="pop-iframe" openContent="delete-pop" th:fragment="delete-pop">
+<div class="pop-iframe" openContent="noDelete-pop" th:fragment="noDelete-pop">
     <div class=" p-r pop-nav">
         温馨提示
     </div>
@@ -24,18 +24,19 @@
             <!---->
             <!--</div>-->
             <div class=" text-msg">
+                <img  th:src="@{/static/img/exclamation.png}" alt="" style="width: 40px;height: 40px;">
                 <!--<i class="fa fa-question-circle hint-fa-icon" aria-hidden="true"></i>-->
-                <img style="width: 40px;height: 40px;"  th:src="@{/static/img/question.png}" alt="">
-                    <span style="display: inherit; max-width: 400px;white-space: normal;">
+                    <span style="display:inline-block; max-width: 400px;white-space: normal;    vertical-align: top;
+    margin-top: 10px;">
                        <span class="reset-pwd">
                             <p></p>
                        </span>
-                       <span class="reset-pwd-hint"></span>
+                       <!--<span class="reset-pwd-hint"></span>-->
                     </span>
             </div>
         </div>
         <div class="pop-btn p-a">
-            <button class="reduce">取消</button>
+            <!--<button class="reduce">取消</button>-->
             <button class="yes">确定</button>
         </div>
     </div>
