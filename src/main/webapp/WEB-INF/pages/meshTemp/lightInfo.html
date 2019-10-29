@@ -69,12 +69,12 @@
                                       th:text="${meshInfo.x}-532+'(RGB调光)'"></span>
                                 <span th:if="${meshInfo.x}!='null' and ${meshInfo.x} >= 1786 and ${meshInfo.x} <= 1899"
                                       th:text="${meshInfo.x}-1687+'(RGB调光)'"></span>
-                                <span th:if="${meshInfo.x}==50" th:text="50"></span>
+                                <span th:if="${meshInfo.x}==50" th:text="50+'(CCT调光)'"></span>
                                 <span>,&nbsp;&nbsp;</span>
                                 <span th:if="${meshInfo.y}=='null' or ${meshInfo.y}<0" th:text="${meshInfo.y}"></span>
                                 <span th:if="${meshInfo.y}!='null' and ${meshInfo.y}!=50 and ${meshInfo.y}>=0"
                                       th:text="100-${meshInfo.y}*5+'%'"></span>
-                                <span th:if="${meshInfo.y}==50" th:text="50"></span>
+                                <span th:if="${meshInfo.y}==50" th:text="50+'%'"></span>
                             </li>
                             <li>
                                 角度（垂直，水平，光束）：
@@ -144,7 +144,7 @@
                                         <th><span>场景名称</span></th>
                                         <th><span>场景id</span></th>
                                         <th th:switch="${flag}">
-                                            <span th:case='true'>灯光（X色温，Y亮度)<br>角度（垂直，水平，光束）</span>
+                                            <span th:case='true'>灯光（X色温，Y亮度)  &nbsp;&nbsp;角度（垂直，水平，光束）</span>
                                             <span th:case="*">灯光（X色温，Y亮度</span>
                                         </th>
                                     </tr>
