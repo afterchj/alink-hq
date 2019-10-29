@@ -31,8 +31,6 @@ public class LightController {
     private LightService lightService;
     @Resource
     private RoleService roleService;
-    @Resource
-    private MeshService meshService;
 
     private Logger logger = Logger.getLogger(this.getClass());
 

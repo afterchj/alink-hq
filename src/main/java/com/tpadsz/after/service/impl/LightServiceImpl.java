@@ -47,6 +47,11 @@ public class LightServiceImpl implements LightService {
     }
 
     @Override
+    public int getLightCount(int id) {
+        return lightDao.getLightCount(id);
+    }
+
+    @Override
     public void saveUpdate(Map map) {
         lightDao.saveUpdate(map);
     }

@@ -44,7 +44,8 @@ public class CooperationController {
     @Resource
     private CooperateService cooperateService;
 
-    private static String account;
+    private static String account = "";
+    private static String plain = "123456";
 
     private Logger logger = Logger.getLogger(this.getClass());
 
@@ -98,7 +99,7 @@ public class CooperationController {
             if (info.getId() == 0) {
                 Map param = JSONObject.parseObject(JSON.toJSONString(info));
                 param.put("account", account);
-                Encryption.HashPassword password = Encryption.encrypt(Encryption.getMD5Str("123456"));
+                Encryption.HashPassword password = Encryption.encrypt(Encryption.getMD5Str(plain));
                 param.put("pwd", password.getPassword());
                 param.put("salt", password.getSalt());
                 cooperateService.save(param);
@@ -117,7 +118,7 @@ public class CooperationController {
         account = GenerateUtils.generateAccount(GenerateUtils.getCharAndNumr(8));
         Map map = new HashMap();
         map.put("account", account);
-        map.put("pwd", "123456");
+        map.put("pwd", plain);
         return map;
     }
 

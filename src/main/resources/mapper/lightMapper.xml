@@ -170,6 +170,10 @@
         </if>
     </select>
 
+    <select id="getLightCount" resultType="int" parameterType="int">
+        SELECT COUNT(*) FROM f_light l WHERE l.mid = #{id} OR l.gid = #{id} OR l.pid = #{id}
+    </select>
+
     <delete id="deleteLightByIds" parameterType="list">
         DELETE FROM f_light
         WHERE id IN
