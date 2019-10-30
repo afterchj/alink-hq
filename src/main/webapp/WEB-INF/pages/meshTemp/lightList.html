@@ -136,8 +136,8 @@
                                 <!--&lt;!&ndash;</span>&ndash;&gt;-->
                                 <!--&lt;!&ndash;XXX&ndash;&gt;-->
                                 <!--</td>-->
-                                <td class="p-r"><span th:if="${light.x}=='null' or ${light.x} < 0"
-                                                      th:text="${light.x}"></span>
+                                <td class="p-r">
+                                    <span th:if="${light.x}=='null' or ${light.x} < 0"  th:text="${light.x}"></span>
                                     <span th:if="${light.x} != 'null' and ${light.x} >= 0 and ${light.x} <= 20"
                                           th:text="${light.x}+'(CCT调光)'"></span>
                                     <span th:if="${light.x} != 'null' and ${light.x} >= 235 and ${light.x} <= 273"
@@ -165,7 +165,6 @@
                                     <a th:href="@{/project/detail(projectId=${light.project_id})}"
                                        th:text="${light.name}" th:alt="${light.project_id}"></a>
                                 </td>
-
                                 <td class="k-link">
                                     <a th:href="@{/mesh/info(id=${light.mid})}" th:text="${light.mname}"></a>
                                 </td>
