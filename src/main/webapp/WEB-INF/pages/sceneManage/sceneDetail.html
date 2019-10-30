@@ -205,37 +205,86 @@
                                         <li th:if="${userStat.index}=='0' and ${lightInfo}==null"
                                             th:each="lightList,userStat:${lightList}" class="lid active"
                                             th:alt="${lightList.id}">
-                                            <span th:text="${lightList.lname}+'（'+${lightList.lmac}+')'"></span><span th:text="${lightList.x}+'（色温），'+${lightList.y}+'（亮度）'"></span>
+                                            <!--<span th:text="${lightList.lname}+'（'+${lightList.lmac}+')'"></span><span th:text="${lightList.x}+'（色温），'+${lightList.y}+'（亮度）'+${lightList.angle}">[[${lightList.x}]]（色温）,[[${lightList.y}]]（亮度）<br> [[${lightList.angle}]]</span>-->
+                                            <span th:text="${lightList.lname}+'（'+${lightList.lmac}+')'" style="    height: auto;
+    min-height: auto;"></span>
+                                            <span >
+                                                <p th:text="${lightList.x}+'（色温），'+${lightList.y}+'（亮度）'"></p>
+                                                <p th:text="${lightList.angle}"></p>
+                                            </span>
+                                            <!--[[${lightList.x}]]（色温）,[[${lightList.y}]]（亮度）<br> [[${lightList.angle}]]</span>-->
                                         </li>
                                         <li th:if="${userStat.index}!='0' and ${lightInfo}==null"
                                             th:each="lightList,userStat:${lightList}" class="lid"
                                             th:alt="${lightList.id}">
-                                            <span th:text="${lightList.lname}+'（'+${lightList.lmac}+')'"></span><span
-                                                th:text="${lightList.x}+'，'+${lightList.y}"></span>
+                                            <!--<span th:text="${lightList.lname}+'（'+${lightList.lmac}+')'"></span><span-->
+                                                <!--th:text="${lightList.x}+'，'+${lightList.y}+'\n' +${lightList.angle}"></span>-->
+                                            <span th:text="${lightList.lname}+'（'+${lightList.lmac}+')'" style="    height: auto;
+    min-height: auto;"></span>
+                                            <span >
+                                                <p th:text="${lightList.x}+'，'+${lightList.y}"></p>
+                                                <p th:text="${lightList.angle}"></p>
+                                            </span>
+                                            <!--<span>-->
+                                            <!--[[${lightList.x}]]，[[${lightList.y}]] <br>[[${lightList.angle}]]-->
+                                                <!--</span>-->
                                         </li>
                                         <li th:if="${userStat.index}=='0' and ${lightInfo}!=null  and ${lightInfo.id}==${lightList.id}"
                                             th:each="lightList,userStat:${lightList}" class="lid active"
                                             th:alt="${lightList.id}">
-                                            <span th:text="${lightList.lname}+'（'+${lightList.lmac}+')'"></span><span
-                                                th:text="${lightList.x}+'（色温），'+${lightList.y}+'（亮度）'"></span>
+                                            <!--<span th:text="${lightList.lname}+'（'+${lightList.lmac}+')'"></span><span-->
+                                                <!--th:text="${lightList.x}+'（色温），'+${lightList.y}+'（亮度）'+'\n' +${lightList.angle}"></span>-->
+                                            <span th:text="${lightList.lname}+'（'+${lightList.lmac}+')'" style="    height: auto;
+    min-height: auto;"></span>
+                                            <!--<span>-->
+<!--[[${lightList.x}]]（色温），[[${lightList.y}]]（亮度）<br>[[${lightList.angle}]]-->
+                                            <!--</span>-->
+                                             <span >
+                                                <p th:text="${lightList.x}+'（色温），'+${lightList.y}+'（亮度）'"></p>
+                                                <p th:text="${lightList.angle}"></p>
+                                            </span>
                                         </li>
                                         <li th:if="${userStat.index}!='0' and ${lightInfo}!=null   and ${lightInfo.id}==${lightList.id}"
                                             th:each="lightList,userStat:${lightList}" class="lid active"
                                             th:alt="${lightList.id}">
-                                            <span th:text="${lightList.lname}+'（'+${lightList.lmac}+')'"></span><span
-                                                th:text="${lightList.x}+'，'+${lightList.y}"></span>
+                                            <span th:text="${lightList.lname}+'（'+${lightList.lmac}+')'" style="    height: auto;
+    min-height: auto;"></span>
+                                            <!--<span  >-->
+                                                <!--[[${lightList.x}]]，[[${lightList.y}]]<br>[[${lightList.angle}]]-->
+                                            <!--</span>-->
+                                              <span >
+                                                <p th:text="${lightList.x}+'，'+${lightList.y}"></p>
+                                                <p th:text="${lightList.angle}"></p>
+                                            </span>
                                         </li>
                                         <li th:if="${userStat.index}=='0' and ${lightInfo}!=null  and  ${lightInfo.id}!=${lightList.id}"
                                             th:each="lightList,userStat:${lightList}" class="lid"
                                             th:alt="${lightList.id}">
-                                            <span th:text="${lightList.lname}+'（'+${lightList.lmac}+')'"></span><span
-                                                th:text="${lightList.x}+'（色温），'+${lightList.y}+'（亮度）'"></span>
+                                            <!--<span th:text="${lightList.lname}+'（'+${lightList.lmac}+')'"></span><span-->
+                                                <!--th:text="${lightList.x}+'（色温），'+${lightList.y}+'（亮度）'+'\n' +${lightList.angle}"></span>-->
+                                            <span th:text="${lightList.lname}+'（'+${lightList.lmac}+')'" style="    height: auto;
+    min-height: auto;"></span>
+                                             <span >
+                                                <p th:text="${lightList.x}+'（色温），'+${lightList.y}+'（亮度）'"></p>
+                                                <p th:text="${lightList.angle}"></p>
+                                            </span>
                                         </li>
                                         <li th:if="${userStat.index}!='0' and ${lightInfo}!=null  and ${lightInfo.id}!=${lightList.id}"
                                             th:each="lightList,userStat:${lightList}" class="lid"
                                             th:alt="${lightList.id}">
-                                            <span th:text="${lightList.lname}+'（'+${lightList.lmac}+')'"></span><span
-                                                th:text="${lightList.x}+'，'+${lightList.y}"></span>
+                                            <!--<span th:text="${lightList.lname}+'（'+${lightList.lmac}+')'"></span>-->
+                                            <!--<span th:text="${lightList.x}+'，'+${lightList.y}+'\n' +${lightList.angle}">-->
+                                                <!---->
+                                            <!--</span>-->
+                                            <span th:text="${lightList.lname}+'（'+${lightList.lmac}+')'" style="    height: auto;
+    min-height: auto;"></span>
+                                            <!--<span >-->
+                                                <!--[[${lightList.x}]]，[[${lightList.y}]]<br>[[${lightList.angle}]]-->
+                                            <!--</span>-->
+                                             <span >
+                                                <p th:text="${lightList.x}+'（色温），'+${lightList.y}+'（亮度）'"></p>
+                                                <p th:text="${lightList.angle}"></p>
+                                            </span>
                                         </li>
                                     </ul>
                                 </div>
@@ -247,6 +296,7 @@
         </div>
     </div>
 </div>
+<div>[[${lightInfo}]]</div>
 <script src="/alink-hq/static/js/jquery.min.js"></script>
 <script type="text/javascript" src="/alink-hq/static/js/left.js"></script>
 <script src="/alink-hq/static/js/moment.js"></script>
