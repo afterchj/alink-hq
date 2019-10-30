@@ -22,7 +22,7 @@ public interface CooperateService {
 
     int getCount(int id);
 
-    CooperationTemplate getParentCompany(String uid);
+    CooperationTemplate getParentCompany(Map map);
 
     void save(Map info);
 

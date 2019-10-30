@@ -22,7 +22,7 @@ public interface CooperateDao {
 
     int getCount(int id);
 
-    CooperationTemplate getParentCompany(String uid);
+    CooperationTemplate getParentCompany(Map map);
 
     void saveCooperation(Map map);
 

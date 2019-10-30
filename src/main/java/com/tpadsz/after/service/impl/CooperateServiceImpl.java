@@ -50,8 +50,8 @@ public class CooperateServiceImpl implements CooperateService {
     }
 
     @Override
-    public CooperationTemplate getParentCompany(String uid) {
-        return cooperateDao.getParentCompany(uid);
+    public CooperationTemplate getParentCompany(Map map) {
+        return cooperateDao.getParentCompany(map);
     }
 
     @Override

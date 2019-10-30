@@ -45,15 +45,22 @@ public class CooperationController {
     private CooperateService cooperateService;
 
     private static String account = "";
-    private static String plain = "123456";
+    private static String plain = "00000000";
 
     private Logger logger = Logger.getLogger(this.getClass());
 
     @RequestMapping("/list")
     public String cooperateList(SearchDict dict, ModelMap modelMap) {
+        int parentId = dict.getParentId();
         String uid = AppUtils.getUserID();
-        CooperationTemplate cooperationInfo = cooperateService.getParentCompany(uid);
-        int parentId = dict.getParentId() == 0 ? cooperationInfo.getParent_id() : dict.getParentId();
+        Map map = new HashMap();
+        if (parentId != 0) {
+            map.put("parentId", parentId);
+        } else {
+            map.put("uid", uid);
+        }
+        CooperationTemplate cooperationInfo = cooperateService.getParentCompany(map);
+        parentId = parentId == 0 ? cooperationInfo.getParent_id() : parentId;
         dict.setParentId(parentId);
         PageHelper.startPage(dict.getPageNum(), dict.getPageSize());
         List<Map> cooperationList = cooperateService.getByMap(dict);
@@ -61,10 +68,8 @@ public class CooperationController {
         if (pageInfo.getList().size() > 0) {
             modelMap.put("pageInfo", pageInfo);
         }
-        if (cooperationInfo.getId() != 1) {
-            String company = cooperationInfo.getConame();
-            modelMap.put("company", company);
-        }
+        String company = cooperationInfo.getConame();
+        modelMap.put("company", company);
         modelMap.put("info", dict);
         return "cooperateManage/cooperateList";
     }
@@ -85,8 +90,10 @@ public class CooperationController {
 
     @RequestMapping("/save")
     public String save(CooperationInfo info, @RequestParam(value = "file") MultipartFile file) {
+        Map map = new HashMap();
         String uid = AppUtils.getUserID();
-        CooperationTemplate cooperationInfo = cooperateService.getParentCompany(uid);
+        map.put("uid", uid);
+        CooperationTemplate cooperationInfo = cooperateService.getParentCompany(map);
         int fid = cooperationInfo.getId();
         info.setParent_id(fid);
         String path = PropertiesUtil.getPath("img");
@@ -162,8 +169,10 @@ public class CooperationController {
     @RequestMapping(value = "/exportExcel")
     @ResponseBody
     public void getExcel(HttpServletResponse response) {
+        Map map = new HashMap();
         String uid = AppUtils.getUserID();
-        CooperationTemplate parent = cooperateService.getParentCompany(uid);
+        map.put("uid", uid);
+        CooperationTemplate parent = cooperateService.getParentCompany(map);
         try {
             String fileName = URLEncoder.encode(cooperateService.parseName(parent), "UTF-8");
             Map<Integer, List<CooperationTemplate>> company = cooperateService.buildExcelData(parent);

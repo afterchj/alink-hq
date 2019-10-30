@@ -137,7 +137,16 @@ public class MainTest {
 //        MeshService meshService = (MeshService) ctx.getBean("meshServiceImpl");
 //        FileService fileService = (FileService) ctx.getBean("fileServiceImpl");
         CooperateService cooperateService = (CooperateService) ctx.getBean("cooperateServiceImpl");
-        CooperationTemplate parent = cooperateService.getParentCompany("18");
+        int parentId = 39;
+        String uid = "18";
+        Map map = new HashMap();
+        if (parentId != 0) {
+            map.put("parentId", parentId);
+        } else {
+            map.put("uid", uid);
+        }
+        CooperationTemplate parent = cooperateService.getParentCompany(map);
+        logger.warn("result=" + JSON.toJSONString(parent));
 //        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 //        StringBuilder stringBuilder = new StringBuilder();
 //        if (parent.getStatus() == 0) {
@@ -147,8 +156,8 @@ public class MainTest {
 //        }
 //        System.out.println(stringBuilder.toString());
 //        cooperateService.buildExcelData(parent);
-        Map<Integer, List<CooperationTemplate>> company = cooperateService.buildExcelData(parent);
-        logger.warn("\n" + JSONObject.toJSONString(company) + "\n" + company.size());
+//        Map<Integer, List<CooperationTemplate>> company = cooperateService.buildExcelData(parent);
+//        logger.warn("\n" + JSONObject.toJSONString(company) + "\n" + company.size());
 //        logger.warn("\n"+JSON.toJSONString(company) + "\n"+JSON.toJSONString(parent));
 //        cooperateService.updateUser(map);
 //        GroupService groupService = (GroupService) ctx.getBean("groupServiceImpl");
@@ -179,7 +188,7 @@ public class MainTest {
     public void test() {
         ApplicationContext ctx = new ClassPathXmlApplicationContext("classpath:applicationContext.xml");
         CooperateService cooperateService = (CooperateService) ctx.getBean("cooperateServiceImpl");
-        CooperationInfo info=new CooperationInfo();
+        CooperationInfo info = new CooperationInfo();
         info.setConame("test有限公司");
         info.setAddress("中国苏州菜");
         info.setCode("12341243123");
