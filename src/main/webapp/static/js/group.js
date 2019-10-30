@@ -2,7 +2,7 @@ $(function () {
     // var data=$('#placeId').val();
     // console.log(data);
     var placeId=GetQueryString('placeId');
-    console.log('placeId',placeId);
+    // console.log('placeId',placeId);
     if(placeId=='0'){
         $('.create').addClass('no-access');
         $('.create').parent('a').addClass('unclick1');
@@ -63,9 +63,36 @@ $(function () {
     })
     $('div[openContent="delete-pop"] button.yes').click(function () {
         if (ids) {
-            location.href = "/alink-hq/group/delete?pid=" + $("#projectId").val() + "&mid=" + $("#mid").val() + "&ids=" + ids;
-            ids = [];
+            // console.log('ids',ids);
+            $.ajax({
+                type: "get",
+                url: "/alink-hq/main/checkCount?id="+ids,
+                // data: {
+                //     "id": ids
+                // },
+                async: true,
+                success: function (res) {
+                    console.log('res',res);
+                    if(res=='ok'){
+                        // deletePlace(ids);
+                        location.href = "/alink-hq/group/delete?pid=" + $("#projectId").val() + "&mid=" + $("#mid").val() + "&ids=" + ids;
+                        ids = [];
+                    }else if(res=='fail'){
+                        $('div[openContent="delete-pop"]').removeClass('active');
+                        // hideOverlay();
+                        var selector=$('div[openContent="noDelete-pop"]');
+                        $('div[openContent="noDelete-pop"] .reset-pwd p').text('该组下有灯，不可删除！');
+                        selector.addClass('active');
+                        adjust(selector);
+                        console.log('有灯存在');
+                    }
+                }
+            })
         }
+    })
+    $('div[openContent="noDelete-pop"] .yes').click(function(){
+        $('div[openContent="noDelete-pop"]').removeClass('active');
+        hideOverlay();
     })
     $('div[openContent="delete-pop"] button.reduce').click(function () {
         var selector = $('div[openContent="delete-pop"]');
