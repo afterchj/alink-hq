@@ -503,23 +503,23 @@
                     //从网络详情跳过来，无灯信息，区域默认为第一个
                     if (lightInfo == null) {
                         if (key == 0) {
-                            content += '<li class="lid active" alt="' + value.id + '" ><span>' + value.lname + '（' + value.lmac + '）' + '</span><span>' + value.x + '（色温），' + value.y + '（亮度）</span></li>';
+                            content += '<li class="lid active clearfix" alt="' + value.id + '" ><span class="f-l"><p>' + value.lname + '（' + value.lmac + '）' + '</p></span><span><p>' + value.x + '（色温），' + value.y + '（亮度）</p><p>'+value.angle+'</p></span></li>';
                         } else {
-                            content += '<li class="lid" alt="' + value.id + '" ><span>' + value.lname + '（' + value.lmac + '）' + '</span><span>' + value.x + '，' + value.y + '</span></li>';
+                            content += '<li class="lid clearfix" alt="' + value.id + '" ><span class="f-l"><p>' + value.lname + '（' + value.lmac + '）' + '</p></span><span><p>' + value.x + '，' + value.y + '<p><p>'+value.angle+'</p></span></li>';
                         }
                         // 从灯详情跳出来，有灯信息，当前灯
                     } else if (lightInfo != null && lightInfo.id == value.id) {
                         if (key == 0) {
-                            content += '<li class="lid active" alt="' + value.id + '" ><span>' + value.lname + '（' + value.lmac + '）' + '</span><span>' + value.x + '（色温），' + value.y + '(亮度）</span></li>';
+                            content += '<li class="lid active clearfix" alt="' + value.id + '" ><span class="f-l"><p>' + value.lname + '（' + value.lmac + '）' + '</p></span><span><p>' + value.x + '（色温），' + value.y + '(亮度）</p><p>'+value.angle+'</p></span></li>';
                         } else {
-                            content += '<li class="lid active" alt="' + value.id + '" ><span>' + value.lname + '（' + value.lmac + '）' + '</span><span>' + value.x + '，' + value.y + '</span></li>';
+                            content += '<li class="lid active clearfix" alt="' + value.id + '" ><span class="f-l"><p>' + value.lname + '（' + value.lmac + '）' + '</p></span><span><p>' + value.x + '，' + value.y + '</p><p>'+value.angle+'</p></span></li>';
                         }
                         // 从灯详情跳出来，有灯信息，不是当前灯
                     } else {
                         if (key == 0) {
-                            content += '<li class="lid " alt="' + value.id + '" ><span>' + value.lname + '（' + value.lmac + '）' + '</span><span>' + value.x + '（色温），' + value.y + '(亮度）</span></li>';
+                            content += '<li class="lid clearfix " alt="' + value.id + '" ><span class="f-l"><p>' + value.lname + '（' + value.lmac + '）' + '</p></span><span><p>' + value.x + '（色温），' + value.y + '(亮度）</p><p>'+value.angle+'</p></span></li>';
                         } else {
-                            content += '<li class="lid " alt="' + value.id + '" ><span>' + value.lname + '（' + value.lmac + '）' + '</span><span>' + value.x + '，' + value.y + '</span></li>';
+                            content += '<li class="lid clearfix" alt="' + value.id + '" ><span class="f-l"><p>' + value.lname + '（' + value.lmac + '）' + '</p></span><span>' + value.x + '，' + value.y + '</p><p>'+value.angle+'</p></span></li>';
                         }
                     }
                 })

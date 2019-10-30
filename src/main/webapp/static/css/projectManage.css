@@ -1321,7 +1321,7 @@ table.light-detail-table thead,
     color: #696969;
 }
 #lightMsg li span:first-child {
-    border-right: 1px solid #d0d0d0;
+    /*border-right: 1px solid #d0d0d0;*/
     /*display: inline-block;*/
     width: 320px;
     /* min-height: 380px; */
@@ -1343,6 +1343,22 @@ table.light-detail-table thead,
     width: 320px;
     text-align: center;
     height: 45px;
+}
+.scene-msg .scene-msg-list > div:nth-child(3) > div:nth-child(1){
+    position: relative;
+}
+.scene-msg .scene-msg-list > div:nth-child(3) > div:nth-child(1):after{
+    content: '';
+    display: block;
+    width: 1px;
+    height: 100%;
+    position: absolute;
+    background-color: #ddd;
+    right: 340px;
+}
+.scene-msg .scene-msg-list > div:nth-child(3) > div:nth-child(1) ul{
+    position: absolute;
+    width: 100%;
 }
 .search-result table td.active .memo-edit-has {
     display:block
