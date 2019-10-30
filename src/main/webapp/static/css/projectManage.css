@@ -1102,8 +1102,8 @@ input:-ms-input-placeholder {
 }
 
 .scene-msg-list li {
-    height: 37px;
-    line-height: 37px;
+    height:45px;
+    /*line-height: 37px;*/
     text-align: left;
     padding-left: 10px;
     color: #5a6165;
