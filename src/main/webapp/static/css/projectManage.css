@@ -1304,7 +1304,11 @@ table.light-detail-table thead,
     text-align: left;
     transition: box-shadow .25s;
 }
-
+.scene-msg-list li .l-sceneD{
+    display: inline-block;
+    height: 45px;
+    line-height: 45px;
+}
 .meno-nav {
     text-align:right
 }
@@ -1318,15 +1322,27 @@ table.light-detail-table thead,
 }
 #lightMsg li span:first-child {
     border-right: 1px solid #d0d0d0;
-    display: inline-block;
+    /*display: inline-block;*/
     width: 320px;
-    min-height: 380px;
+    /* min-height: 380px; */
+    height: 45px;
+    line-height: 45px;
     padding-right: 10px;
+    display: block;
+    float: left;
+}
+#lightMsg li span:last-child p:first-child{
+    height: 25px;
+    line-height: 25px;
+}
+#lightMsg li span:last-child p:last-child{
+    font-size: 12px;
 }
 #lightMsg li span:last-child{
     display: inline-block;
     width: 320px;
     text-align: center;
+    height: 45px;
 }
 .search-result table td.active .memo-edit-has {
     display:block
