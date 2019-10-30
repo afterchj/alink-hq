@@ -137,9 +137,9 @@
                                         </td>
                                         <td class="projectUser">
                                             <span class=""  th:title="${project.account}" th:text="${project.account}" ></span>
-                                            <span th:if="${project.uname}">(</span>
-                                            <span th:if="${project.uname}" class="line-limit-length  user" th:title="${project.uname}" th:text="${project.uname}"></span>
-                                            <span th:if="${project.uname}">)</span>
+                                            <span th:if="${project.uname}!='null'">(</span>
+                                            <span th:if="${project.uname}!='null'" class="line-limit-length  user" th:title="${project.uname}" th:text="${project.uname}"></span>
+                                            <span th:if="${project.uname}!='null'">)</span>
                                         </td>
                                         <td class="associatedCompany">
                                             <span class="" th:title="${project.coname}" th:text="${project.coname}" ></span>
