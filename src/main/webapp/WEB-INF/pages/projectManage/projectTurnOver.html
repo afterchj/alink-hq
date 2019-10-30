@@ -137,9 +137,9 @@
                                         </td>
                                         <td class="projectUser">
                                             <span class=""  th:title="${project.account}" th:text="${project.account}" ></span>
-                                            <!--<span th:if="${user.uname}">(</span>-->
-                                            <!--<span th:if="${user.uname}" class="line-limit-length  user" th:title="${user.uname}" th:text="${user.uname}"></span>-->
-                                            <!--<span th:if="${user.uname}">)</span>-->
+                                            <span th:if="${project.uname}">(</span>
+                                            <span th:if="${project.uname}" class="line-limit-length  user" th:title="${project.uname}" th:text="${project.uname}"></span>
+                                            <span th:if="${project.uname}">)</span>
                                         </td>
                                         <td class="associatedCompany">
                                             <span class="" th:title="${project.coname}" th:text="${project.coname}" ></span>
@@ -217,8 +217,10 @@
 <script src="/alink-hq/static/js/left.js"></script>
 <script src="/alink-hq/static/js/moment.js"></script>
 
-<script>
+<script th:inline="javascript">
     $(function () {
+        var msg=[[${projectMap}]];
+        console.log(msg);
         var list = [];
         $('#fid').change(function () {
             $('#account-transfer').val('');

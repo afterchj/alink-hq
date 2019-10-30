@@ -107,16 +107,16 @@ public class ProjectController {
 
     @RequestMapping(value = "/createProject", method = RequestMethod.GET)
     public String createProject(HttpSession session, Model model) {
-        User loginUser = (User) session.getAttribute("user");
-        String uid = loginUser.getId();
-        Integer role_id = accountService.findRoleIdByUid(uid);
-        Integer flag;
-        if (role_id == 4) {
-            flag = 0;
-        } else {
-            flag = 1;
-        }
-        model.addAttribute("flag", flag);
+//        User loginUser = (User) session.getAttribute("user");
+//        String uid = loginUser.getId();
+//        Integer role_id = accountService.findRoleIdByUid(uid);
+//        Integer flag;
+//        if (role_id == 4) {
+//            flag = 0;
+//        } else {
+//            flag = 1;
+//        }
+//        model.addAttribute("flag", flag);
         return "projectManage/createProject";
     }
 
