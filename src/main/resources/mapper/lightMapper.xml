@@ -136,7 +136,6 @@
         INNER JOIN f_light_setting ls ON ls.lid = l.id
         INNER JOIN f_scene s ON ls.sid = s.id
         WHERE ls.lid = #{id}
-        GROUP BY l.id,sname
     </select>
     <select id="selectByLid" resultType="map" parameterType="list">
         SELECT
