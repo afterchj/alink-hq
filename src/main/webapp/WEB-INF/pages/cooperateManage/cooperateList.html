@@ -62,7 +62,7 @@
                             <a th:href="@{/cooperate/exportExcel}" class="export">Excel导出</a>
                         </div>
                     </div>
-                    <span>上层公司：<label th:text="${company}"></label></span><br>
+                    <span style="margin-bottom: 10px;display: inline-block;font-weight: bold;">上层合作公司：<label style="font-weight: normal;" th:text="${company}"></label></span><br>
                     <div class="search-result">
                         <!-- 有数据时 -->
                         <table border="1" class="hasData active" th:if="${pageInfo!=null}">

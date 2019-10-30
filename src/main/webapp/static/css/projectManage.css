@@ -1344,6 +1344,12 @@ table.light-detail-table thead,
     text-align: center;
     height: 45px;
 }
+.search-result table th span.light-angle{
+    line-height: normal;
+    /*position: absolute;*/
+    right: 25%;
+    top: 8%;
+}
 .scene-msg .scene-msg-list > div:nth-child(3) > div:nth-child(1){
     position: relative;
 }

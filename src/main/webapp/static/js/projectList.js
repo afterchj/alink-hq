@@ -399,9 +399,21 @@ function condition(pageSize, pageNum, sortFlag) {
         var url2 = url + '?';
     }
     var account = $('#account').val();
+    if($.trim(account) ==''){
+        account='';
+    }
     var uname = $('#username').val();
+    if($.trim(uname) ==''){
+        uname='';
+    }
     var projectName = $('#projectName').val();
+    if($.trim(projectName) ==''){
+        projectName='';
+    }
     var coname = $('#company').val();
+    if($.trim(coname) ==''){
+        coname='';
+    }
     var startTime = $('#start-time').val();
     var startCreateDate = startTime.substring(0, 10);
     var endCreateDate = startTime.substring(13, 23);
