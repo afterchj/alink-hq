@@ -14,7 +14,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
@@ -143,7 +142,7 @@ public class SceneController {
             for (int j = 0; j < groupList1.size(); j++) {
                 List<MeshInfo> list2 = sceneService.findXYByGid(groupList1.get(j).getGid(), sid);
                 //该组xy值相同则list2的size为1
-                if (list2.size() == 1) {
+                if (list2.size() == 1 && list2.get(0)!=null) {
                     if (!"".equals(groupX) && groupX != null && groupY != null) {
                         if (!groupX.equals(list2.get(0).getX()) || !groupY.equals(list2.get(0).getY())) {
                             samePlaceXY = 0;
@@ -214,7 +213,7 @@ public class SceneController {
         List<MeshInfo> groupList = sceneService.findGroupByPid(pid);
         for (int j = 0; j < groupList.size(); j++) {
             List<MeshInfo> list2 = sceneService.findXYByGid(groupList.get(j).getGid(), sid);
-            if (list2.size() == 1) {
+            if (list2.size() == 1 && list2.get(0)!=null) {
                 groupList.get(j).setX(list2.get(0).getX());
                 groupList.get(j).setY(list2.get(0).getY());
             }
