@@ -47,7 +47,7 @@ public class LightServiceImpl implements LightService {
     }
 
     @Override
-    public int getLightCount(int id) {
+    public int getLightCount(List id) {
         return lightDao.getLightCount(id);
     }
 

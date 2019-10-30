@@ -172,7 +172,18 @@
     </select>
 
     <select id="getLightCount" resultType="int" parameterType="int">
-        SELECT COUNT(*) FROM f_light l WHERE l.mid = #{id} OR l.gid = #{id} OR l.pid = #{id}
+        SELECT COUNT(*) FROM f_light l WHERE l.mid IN
+        <foreach collection="list" item="id" index="index" open="(" close=")" separator=",">
+            #{id}
+        </foreach>
+        OR l.gid IN
+        <foreach collection="list" item="id" index="index" open="(" close=")" separator=",">
+            #{id}
+        </foreach>
+        OR l.pid IN
+        <foreach collection="list" item="id" index="index" open="(" close=")" separator=",">
+            #{id}
+        </foreach>
     </select>
 
     <delete id="deleteLightByIds" parameterType="list">

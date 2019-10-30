@@ -61,6 +61,10 @@ public class CooperationController {
         if (pageInfo.getList().size() > 0) {
             modelMap.put("pageInfo", pageInfo);
         }
+        if (cooperationInfo.getId() != 1) {
+            String company = cooperationInfo.getConame();
+            modelMap.put("company", company);
+        }
         modelMap.put("info", dict);
         return "cooperateManage/cooperateList";
     }

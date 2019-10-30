@@ -5,6 +5,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * @author hongjian.chen
@@ -19,8 +22,10 @@ public class MainController {
     private LightService lightService;
 
     @RequestMapping("/checkCount")
-    public String rename(Integer id) {
-        int count = lightService.getLightCount(id);
+    public String rename(String id) {
+        String[] idArray = id.split(",");
+        List<String> list = new ArrayList(Arrays.asList(idArray));
+        int count = lightService.getLightCount(list);
         if (count > 0) {
             return "fail";
         }

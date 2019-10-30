@@ -22,7 +22,7 @@ public interface LightDao {
 
     List<MeshInfo> getSceneInfo(int id);
 
-    int getLightCount(int id);
+    int getLightCount(List id);
 
     void saveUpdate(Map map);
 
