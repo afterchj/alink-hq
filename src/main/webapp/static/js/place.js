@@ -81,8 +81,34 @@ $(function () {
         selector.removeClass('active');
         hideOverlay();
     });
-    $('.pop-btn .yes').click(function () {
-        deletePlace(ids);
+    $('div[openContent="delete-pop"] .pop-btn .yes').click(function () {
+        // deletePlace(ids);
+        $.ajax({
+            type: "post",
+            url: "/alink-hq/main/checkCount",
+            data: {
+                "id": ids
+            },
+            async: true,
+            success: function (res) {
+                console.log('res',res);
+                if(res=='ok'){
+                    // deletePlace(ids);
+                }else if(res=='fail'){
+                    $('div[openContent="delete-pop"]').removeClass('active');
+                    // hideOverlay();
+                    var selector=$('div[openContent="noDelete-pop"]');
+                    $('div[openContent="noDelete-pop"] .reset-pwd p').text('该区域下有灯，不可删除！');
+                    selector.addClass('active');
+                    adjust(selector);
+                    console.log('有灯存在');
+                }
+            }
+        })
+    })
+    $('div[openContent="noDelete-pop"] .yes').click(function(){
+        $('div[openContent="noDelete-pop"]').removeClass('active');
+        hideOverlay();
     })
 });
 
