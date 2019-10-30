@@ -37,22 +37,29 @@
         CALL save_cooperation (?,?,?,?,?,?,?,?,?)
     </select>
 
-    <select id="getParentCompany" parameterType="string" resultType="CooperationTemplate">
+    <select id="getParentCompany" parameterType="map" resultType="CooperationTemplate">
         SELECT
-            f.id,
-            f.parent_id,
-            f.coname,
-            f.mobile,
-            f.address,
-            f.`code`,
-            f.`status`
+        f.id,
+        f.parent_id,
+        f.coname,
+        f.mobile,
+        f.address,
+        f.`code`,
+        f.`status`
         FROM f_firm f
-        WHERE f.id = (
+        WHERE 1=1
+        <if test="uid!=null and uid!=''">
+            AND f.id = (
             SELECT c.fid
             FROM f_user_account u
             INNER JOIN f_user_customer c ON c.uid = u.id
             WHERE u.id = #{uid}
-        ) LIMIT 1
+            )
+        </if>
+        <if test="parentId!=null and parentId!=''">
+            AND f.parent_id=#{parentId}
+        </if>
+        LIMIT 1
     </select>
 
     <select id="getByMap" resultType="map" parameterType="SearchDict">
@@ -64,7 +71,7 @@
         FROM f_firm_cooperation c
         GROUP BY fid
         ) s ON s.fid = f.id
-        WHERE 1=1
+        WHERE id !=1
         <if test="parentId!=null and parentId!=''">
             AND parent_id=#{parentId}
         </if>
