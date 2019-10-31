@@ -18,6 +18,7 @@ public class CooperationInfo {
     private int status;
     private String other;
     private int parent_id;
+    private int parentId;
 
     public int getId() {
         return id;
@@ -101,6 +102,14 @@ public class CooperationInfo {
 
     public int getParent_id() {
         return parent_id;
+    }
+
+    public int getParentId() {
+        return parentId;
+    }
+
+    public void setParentId(int parentId) {
+        this.parentId = parentId;
     }
 
     public void setParent_id(int parent_id) {

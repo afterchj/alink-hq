@@ -120,7 +120,7 @@ public class CooperationController {
         } catch (Exception e) {
             logger.error("error:" + e.getMessage());
         }
-        return "redirect:/cooperate/list";
+        return "redirect:/cooperate/list?parentId=" + info.getParentId();
     }
 
     @RequestMapping("/show")
@@ -141,7 +141,7 @@ public class CooperationController {
         map.put("status", info.getStatus());
         cooperateService.updateUser(map);
         logger.warn("result=" + map.get("result"));
-        return "redirect:/cooperate/list";
+        return "redirect:/cooperate/list?parentId=" + info.getParentId();
 //        return "ok";
     }
 
