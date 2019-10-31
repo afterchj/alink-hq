@@ -208,12 +208,13 @@
                                             <!--<span th:text="${lightList.lname}+'（'+${lightList.lmac}+')'"></span><span th:text="${lightList.x}+'（色温），'+${lightList.y}+'（亮度）'+${lightList.angle}">[[${lightList.x}]]（色温）,[[${lightList.y}]]（亮度）<br> [[${lightList.angle}]]</span>-->
                                             <!--<span th:text="${lightList.lname}+'（'+${lightList.lmac}+')'" style="    height: auto;-->
     <!--min-height: auto;"></span>-->
-                                         <span  class="f-l">
-                                               <p th:text="${lightList.lname}+'（'+${lightList.lmac}+')'" ></p>
-                                          </span>
-                                            <span >
-                                                <p th:text="${lightList.x}+'（色温），'+${lightList.y}+'（亮度）'"></p>
-                                                <p th:text="${lightList.angle}"></p>
+                                            <span  class="f-l">
+                                                   <div th:text="${lightList.lname}+'（'+${lightList.lmac}+')'" ></div>
+                                            </span>
+                                            <span class="f-l">
+                                                <div th:if="${#strings.length(lightList.angle)}!=0 " style="line-height: 22.5px;"  th:text="${lightList.x}+'（色温），'+${lightList.y}+'（亮度）'"></div>
+                                                <div th:if="${#strings.length(lightList.angle)}==0 "  th:text="${lightList.x}+'（色温），'+${lightList.y}+'（亮度）'"></div>
+                                                <div th:if="${#strings.length(lightList.angle)}!=0 " style="line-height: 1" th:text="${lightList.angle}"></div>
                                             </span>
                                             <!--[[${lightList.x}]]（色温）,[[${lightList.y}]]（亮度）<br> [[${lightList.angle}]]</span>-->
                                         </li>
@@ -224,11 +225,12 @@
                                                 <!--th:text="${lightList.x}+'，'+${lightList.y}+'\n' +${lightList.angle}"></span>-->
                                             <!--<span  class="f-l"></span>-->
                                             <span >
-                                                <p th:text="${lightList.lname}+'（'+${lightList.lmac}+')'"></p>
+                                                <div th:text="${lightList.lname}+'（'+${lightList.lmac}+')'"></div>
                                             </span>
-                                            <span >
-                                                <p th:text="${lightList.x}+'，'+${lightList.y}"></p>
-                                                <p th:text="${lightList.angle}"></p>
+                                            <span style="vertical-align: middle;">
+                                                <div  th:if="${#strings.length(lightList.angle)}!=0 " style="line-height: 22.5px;" th:text="${lightList.x}+'，'+${lightList.y}"></div>
+                                                <div  th:if="${#strings.length(lightList.angle)}==0 "  th:text="${lightList.x}+'，'+${lightList.y}"></div>
+                                                <div th:if="${#strings.length(lightList.angle)}!=0 " style="line-height: 22.5px;" th:text="${lightList.angle}"></div>
                                             </span>
                                             <!--<span>-->
                                             <!--[[${lightList.x}]]，[[${lightList.y}]] <br>[[${lightList.angle}]]-->
@@ -245,11 +247,12 @@
 <!--[[${lightList.x}]]（色温），[[${lightList.y}]]（亮度）<br>[[${lightList.angle}]]-->
                                             <!--</span>-->
                                             <span  class="f-l">
-                                                <p th:text="${lightList.lname}+'（'+${lightList.lmac}+')'"></p>
+                                                <div th:text="${lightList.lname}+'（'+${lightList.lmac}+')'"></div>
                                             </span>
-                                             <span >
-                                                <p th:text="${lightList.x}+'（色温），'+${lightList.y}+'（亮度）'"></p>
-                                                <p th:text="${lightList.angle}"></p>
+                                             <span  class="f-l">
+                                               <div th:if="${#strings.length(lightList.angle)}==0 "  th:text="${lightList.x}+'（色温），'+${lightList.y}+'（亮度）'"></div>
+                                               <div th:if="${#strings.length(lightList.angle)}!=0 " style="line-height:22.5px;" th:text="${lightList.x}+'（色温），'+${lightList.y}+'（亮度）'"></div>
+                                                <div th:if="${#strings.length(lightList.angle)}!=0 " style="line-height:22.5px;" th:text="${lightList.angle}"></div>
                                             </span>
                                         </li>
                                         <li th:if="${userStat.index}!='0' and ${lightInfo}!=null   and ${lightInfo.id}==${lightList.id}"
@@ -261,11 +264,12 @@
                                                 <!--[[${lightList.x}]]，[[${lightList.y}]]<br>[[${lightList.angle}]]-->
                                             <!--</span>-->
                                              <span class="f-l">
-                                                 <p  th:text="${lightList.lname}+'（'+${lightList.lmac}+')'" ></p>
+                                                 <div  th:text="${lightList.lname}+'（'+${lightList.lmac}+')'" ></div>
                                              </span>
-                                              <span >
-                                                <p th:text="${lightList.x}+'，'+${lightList.y}"></p>
-                                                <p th:text="${lightList.angle}"></p>
+                                              <span  style="vertical-align: middle;">
+                                                   <div th:if="${#strings.length(lightList.angle)}!=0 "  style="line-height: 22px;"  th:text="${lightList.x}+'，'+${lightList.y}"></div>
+                                                <div th:if="${#strings.length(lightList.angle)}==0 "  th:text="${lightList.x}+'，'+${lightList.y}"></div>
+                                                <div th:if="${#strings.length(lightList.angle)}!=0 " style="line-height: 22px;"  th:text="${lightList.angle}"></div>
                                             </span>
                                         </li>
                                         <li th:if="${userStat.index}=='0' and ${lightInfo}!=null  and  ${lightInfo.id}!=${lightList.id}"
@@ -276,11 +280,12 @@
                                             <!--<span th:text="${lightList.lname}+'（'+${lightList.lmac}+')'" style="    height: auto;-->
     <!--min-height: auto;"></span>-->
                                             <span class="f-l" >
-                                                <p th:text="${lightList.lname}+'（'+${lightList.lmac}+')'" ></p>
+                                                <div th:text="${lightList.lname}+'（'+${lightList.lmac}+')'" ></div>
                                             </span>
-                                             <span >
-                                                <p th:text="${lightList.x}+'（色温），'+${lightList.y}+'（亮度）'"></p>
-                                                <p th:text="${lightList.angle}"></p>
+                                             <span class="f-l">
+                                                <div th:if="${#strings.length(lightList.angle)}!=0 "  style="line-height: 22.5px;" th:text="${lightList.x}+'（色温），'+${lightList.y}+'（亮度）'"></div>
+                                                   <div th:if="${#strings.length(lightList.angle)}==0 "   th:text="${lightList.x}+'（色温），'+${lightList.y}+'（亮度）'"></div>
+                                                <div th:if="${#strings.length(lightList.angle)}!=0 " style="line-height:22px;" th:text="${lightList.angle}"></div>
                                             </span>
                                         </li>
                                         <li th:if="${userStat.index}!='0' and ${lightInfo}!=null  and ${lightInfo.id}!=${lightList.id}"
@@ -296,11 +301,12 @@
                                                 <!--[[${lightList.x}]]，[[${lightList.y}]]<br>[[${lightList.angle}]]-->
                                             <!--</span>-->
                                             <span  class="f-l">
-                                                <p th:text="${lightList.lname}+'（'+${lightList.lmac}+')'"></p>
+                                                <div th:text="${lightList.lname}+'（'+${lightList.lmac}+')'"></div>
                                             </span>
-                                             <span >
-                                                <p th:text="${lightList.x}+'（色温），'+${lightList.y}+'（亮度）'"></p>
-                                                <p th:text="${lightList.angle}"></p>
+                                             <span class="f-l">
+                                                <div  th:if="${#strings.length(lightList.angle)}!=0 " style="line-height: 22.5px;" th:text="${lightList.x}+'（色温），'+${lightList.y}+'（亮度）'"></div>
+                                                   <div  th:if="${#strings.length(lightList.angle)}==0 " th:text="${lightList.x}+'（色温），'+${lightList.y}+'（亮度）'"></div>
+                                                <div th:if="${#strings.length(lightList.angle)}!=0 " style="line-height: 22px;" th:text="${lightList.angle}"></div>
                                             </span>
                                         </li>
                                     </ul>
@@ -324,6 +330,18 @@
             $('.scene-msg .scene-msg-list>div:nth-child(3)>div:nth-child(1) ul').addClass('active');
             $('.scene-msg .scene-msg-list>div:nth-child(3)>div:nth-child(1)').css('border-right', 'none')
         }
+//        var length2=$('#lightMsg li').length;
+//        var height2=45 * length2;
+//        var height;
+//        if(height2 < 380){
+//            height='100% !important';
+//        }else{
+//            height=height2+'px !important';
+//        }
+//        console.log('height',height);
+//        $('.scene-msg .scene-msg-list > div:nth-child(3) > div:nth-child(1):after').css('height',height);
+//        console.log('length2',length2);
+//        console.log('height2',height2);
         var lightInfo = [[${lightInfo}]];
         var groupList = [[${groupList}]];
         var lightList = [[${lightList}]];
@@ -450,9 +468,19 @@
                             $.each(lightList, function (key, value) {
 //                            if (lightInfo == null) {
                                 if (key == 0) {
-                                    content1 += '<li class="lid active clearfix" alt="' + value.id + '" ><span  class="f-l"> <p>'+ value.lname + '（' + value.lmac + '）' + '</p></span><span> <p>' + value.x + '（色温），' + value.y + '（亮度）</p><p>'+value.angle+'</p></span></li>';
+                                    if(value.angle.length>0){
+                                        content1 += '<li class="lid active clearfix" alt="' + value.id + '" ><span  class="f-l"><div>'+ value.lname + '（' + value.lmac + '）' + '</div></span><span> <div style="line-height: 22.5px;">' + value.x + '（色温），' + value.y + '（亮度）</div><div style="line-height: 22.5px;">'+value.angle+'</div></span></li>';
+                                    }else{
+                                        content1 += '<li class="lid active clearfix" alt="' + value.id + '" ><span  class="f-l"><div>'+ value.lname + '（' + value.lmac + '）' + '</div></span><span> <div>' + value.x + '（色温），' + value.y + '（亮度）</div><div>'+value.angle+'</div></span></li>';
+                                    }
+
                                 } else {
-                                    content1 += '<li class="lid clearfix" alt="' + value.id + '" ><span class="f-l"> <p>' + value.lname + '（' + value.lmac + '）' + '</p></span><span><p>' + value.x + '，' + value.y + '</p><p>'+value.angle+'</p></span></li>';
+                                    if(value.angle.length>0){
+                                        content1 += '<li class="lid clearfix" alt="' + value.id + '" ><span class="f-l"> <div>' + value.lname + '（' + value.lmac + '）' + '</div></span><span><div style="line-height: 22.5px;">' + value.x + '，' + value.y + '</div><div style="line-height: 22.5px;">'+value.angle+'</div></span></li>';
+                                    }else{
+                                        content1 += '<li class="lid clearfix" alt="' + value.id + '" ><span class="f-l"> <div>' + value.lname + '（' + value.lmac + '）' + '</div></span><span><div>' + value.x + '，' + value.y + '</div><div>'+value.angle+'</div></span></li>';
+                                    }
+//                                    content1 += '<li class="lid clearfix" alt="' + value.id + '" ><span class="f-l"> <div>' + value.lname + '（' + value.lmac + '）' + '</div></span><span><div>' + value.x + '，' + value.y + '</div><div>'+value.angle+'</div></span></li>';
                                 }
 //                            } else if (lightInfo != null && lightInfo.id == value.id) {
 //                                if (key == 0) {
@@ -503,23 +531,52 @@
                     //从网络详情跳过来，无灯信息，区域默认为第一个
                     if (lightInfo == null) {
                         if (key == 0) {
-                            content += '<li class="lid active clearfix" alt="' + value.id + '" ><span class="f-l"><p>' + value.lname + '（' + value.lmac + '）' + '</p></span><span><p>' + value.x + '（色温），' + value.y + '（亮度）</p><p>'+value.angle+'</p></span></li>';
+                            if(value.angle.length>0){
+                                content += '<li class="lid active clearfix" alt="' + value.id + '" ><span class="f-l"><div >' + value.lname + '（' + value.lmac + '）' + '</div></span><span><div style="line-height: 22.5px;">' + value.x + '（色温），' + value.y + '（亮度）</div><div style="line-height: 22.5px;">'+value.angle+'</div></span></li>';
+                            }else{
+                                content += '<li class="lid active clearfix" alt="' + value.id + '" ><span class="f-l"><div>' + value.lname + '（' + value.lmac + '）' + '</div></span><span><div>' + value.x + '（色温），' + value.y + '（亮度）</div><div>'+value.angle+'</div></span></li>';
+                            }
                         } else {
-                            content += '<li class="lid clearfix" alt="' + value.id + '" ><span class="f-l"><p>' + value.lname + '（' + value.lmac + '）' + '</p></span><span><p>' + value.x + '，' + value.y + '<p><p>'+value.angle+'</p></span></li>';
+                            if(value.angle.length>0){
+                                content += '<li class="lid clearfix" alt="' + value.id + '" ><span class="f-l"><div>' + value.lname + '（' + value.lmac + '）' + '</div></span><span><div style="line-height: 22.5px;">' + value.x + '，' + value.y + '</div><div style="line-height: 22.5px;">'+value.angle+'</div></span></li>';
+                            }else{
+                                content += '<li class="lid clearfix" alt="' + value.id + '" ><span class="f-l"><div>' + value.lname + '（' + value.lmac + '）' + '</div></span><span><div>' + value.x + '，' + value.y + '<div><div>'+value.angle+'</div></span></li>';
+                            }
+//                            content += '<li class="lid clearfix" alt="' + value.id + '" ><span class="f-l"><div>' + value.lname + '（' + value.lmac + '）' + '</div></span><span><div>' + value.x + '，' + value.y + '<div><div>'+value.angle+'</div></span></li>';
                         }
                         // 从灯详情跳出来，有灯信息，当前灯
                     } else if (lightInfo != null && lightInfo.id == value.id) {
                         if (key == 0) {
-                            content += '<li class="lid active clearfix" alt="' + value.id + '" ><span class="f-l"><p>' + value.lname + '（' + value.lmac + '）' + '</p></span><span><p>' + value.x + '（色温），' + value.y + '(亮度）</p><p>'+value.angle+'</p></span></li>';
+                            if(value.angle.length>0){
+                                content += '<li class="lid active clearfix" alt="' + value.id + '" ><span class="f-l"><div>' + value.lname + '（' + value.lmac + '）' + '</div></span><span><div style="line-height: 22.5px;">' + value.x + '（色温），' + value.y + '(亮度）</div><div style="line-height: 22.5px;">'+value.angle+'</div></span></li>';
+                            }else{
+                                content += '<li class="lid active clearfix" alt="' + value.id + '" ><span class="f-l"><div>' + value.lname + '（' + value.lmac + '）' + '</div></span><span><div>' + value.x + '（色温），' + value.y + '(亮度）</div><div>'+value.angle+'</div></span></li>';
+                            }
+
                         } else {
-                            content += '<li class="lid active clearfix" alt="' + value.id + '" ><span class="f-l"><p>' + value.lname + '（' + value.lmac + '）' + '</p></span><span><p>' + value.x + '，' + value.y + '</p><p>'+value.angle+'</p></span></li>';
+                            if(value.angle.length>0){
+                                content += '<li class="lid active clearfix" alt="' + value.id + '" ><span class="f-l"><div>' + value.lname + '（' + value.lmac + '）' + '</div></span><span><div style="line-height: 22.5px;">' + value.x + '，' + value.y + '</div><div style="line-height: 22.5px;">'+value.angle+'</div></span></li>';
+                            }else{
+                                content += '<li class="lid active clearfix" alt="' + value.id + '" ><span class="f-l"><div>' + value.lname + '（' + value.lmac + '）' + '</div></span><span><div>' + value.x + '，' + value.y + '</div><div>'+value.angle+'</div></span></li>';
+                            }
+//                            content += '<li class="lid active clearfix" alt="' + value.id + '" ><span class="f-l"><div>' + value.lname + '（' + value.lmac + '）' + '</div></span><span><div>' + value.x + '，' + value.y + '</div><div>'+value.angle+'</div></span></li>';
                         }
                         // 从灯详情跳出来，有灯信息，不是当前灯
                     } else {
                         if (key == 0) {
-                            content += '<li class="lid clearfix " alt="' + value.id + '" ><span class="f-l"><p>' + value.lname + '（' + value.lmac + '）' + '</p></span><span><p>' + value.x + '（色温），' + value.y + '(亮度）</p><p>'+value.angle+'</p></span></li>';
+                            if(value.angle.length>0){
+                                content += '<li class="lid clearfix " alt="' + value.id + '" ><span class="f-l"><div >' + value.lname + '（' + value.lmac + '）' + '</div></span><span><div style="line-height: 22.5px;">' + value.x + '（色温），' + value.y + '(亮度）</div><div style="line-height: 22.5px;">'+value.angle+'</div></span></li>';
+                            }else{
+                                content += '<li class="lid clearfix " alt="' + value.id + '" ><span class="f-l"><div>' + value.lname + '（' + value.lmac + '）' + '</div></span><span><div>' + value.x + '（色温），' + value.y + '(亮度）</div><div>'+value.angle+'</div></span></li>';
+                            }
+
                         } else {
-                            content += '<li class="lid clearfix" alt="' + value.id + '" ><span class="f-l"><p>' + value.lname + '（' + value.lmac + '）' + '</p></span><span>' + value.x + '，' + value.y + '</p><p>'+value.angle+'</p></span></li>';
+                            if(value.angle.length>0){
+                                content += '<li class="lid clearfix" alt="' + value.id + '" ><span class="f-l"><div>' + value.lname + '（' + value.lmac + '）' + '</div></span><span><div  style="line-height: 22.5px;">' + value.x + '，' + value.y + '</div><div  style="line-height: 22.5px;">'+value.angle+'</div></span></li>';
+                            }else{
+                                content += '<li class="lid clearfix" alt="' + value.id + '" ><span class="f-l"><div>' + value.lname + '（' + value.lmac + '）' + '</div></span><span><div>' + value.x + '，' + value.y + '</div><div>'+value.angle+'</div></span></li>';
+                            }
+
                         }
                     }
                 })

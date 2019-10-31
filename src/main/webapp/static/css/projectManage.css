@@ -1081,7 +1081,7 @@ input:-ms-input-placeholder {
     width:250px;
     border:1px solid #d0d0d0;
     height:380px;
-    overflow-y:scroll
+    overflow-y:auto;
 }
 
 .scene-msg .scene-msg-list > div:nth-child(3) {
@@ -1339,10 +1339,20 @@ table.light-detail-table thead,
     font-size: 12px;
 }
 #lightMsg li span:last-child{
-    display: inline-block;
+    /*display: inline-block;*/
+    /*width: 320px;*/
+    /*text-align: center;*/
+    /*height: 45px;*/
+    /*width: 320px;*/
+    /*text-align: center;*/
+    /*height: 45px;*/
+    /*float: left;*/
     width: 320px;
     text-align: center;
     height: 45px;
+    float: left;
+    display: block;
+    line-height: 45px;
 }
 .search-result table th span.light-angle{
     line-height: normal;
@@ -1362,6 +1372,7 @@ table.light-detail-table thead,
     background-color: #ddd;
     right: 340px;
 }
+
 .scene-msg .scene-msg-list > div:nth-child(3) > div:nth-child(1) ul{
     position: absolute;
     width: 100%;

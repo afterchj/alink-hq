@@ -1,5 +1,5 @@
 $(function () {
-    let ids = [];
+    var ids = [];
     $("#multiMove").click(function () {
         var ids = [];
         var uid = [];
@@ -24,7 +24,7 @@ $(function () {
         }
     });
     $("#multiDel").click(function () {
-        let idss=[];
+        var idss=[];
         $('input[name="ids"]:checked').each(function () {
             idss.push($(this).val())
         });
