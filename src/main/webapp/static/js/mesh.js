@@ -1,4 +1,5 @@
 $(function () {
+    let ids = [];
     $("#multiMove").click(function () {
         var ids = [];
         var uid = [];
@@ -22,12 +23,13 @@ $(function () {
             showOverlay();
         }
     });
-    var ids = [];
     $("#multiDel").click(function () {
+        let idss=[];
         $('input[name="ids"]:checked').each(function () {
-            ids.push($(this).val())
+            idss.push($(this).val())
         });
-        if (ids.length > 0) {
+        ids=idss;
+        if (idss.length > 0) {
             $('.showList').hide();
             var selector = $('div[openContent="delete-pop"]');
             $('div[openContent="delete-pop"] p').css('margin-top', '5px');
@@ -38,7 +40,7 @@ $(function () {
             showOverlay();
         }
     });
-    var ids;
+    // var ids;
     $('.singleDel').click(function () {
         ids = $(this).attr("alt");
         $('.showList').hide();
@@ -70,7 +72,7 @@ $(function () {
             type: "post",
             url: "/alink-hq/main/checkCount",
             data: {
-                "id": ids
+                "id": JSON.stringify(ids)
             },
             async: true,
             success: function (res) {

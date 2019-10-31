@@ -1,12 +1,12 @@
 package com.tpadsz.after.controller;
 
+import com.alibaba.fastjson.JSON;
 import com.tpadsz.after.service.LightService;
+import org.apache.log4j.Logger;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -20,12 +20,13 @@ public class MainController {
 
     @Resource
     private LightService lightService;
+    private Logger logger = Logger.getLogger(this.getClass());
 
     @RequestMapping("/checkCount")
     public String rename(String id) {
-        String[] idArray = id.split(",");
-        List<String> list = new ArrayList(Arrays.asList(idArray));
-        int count = lightService.getLightCount(list);
+        List array = JSON.parseArray(id);
+        logger.warn("array=" + JSON.toJSONString(array));
+        int count = lightService.getLightCount(array);
         if (count > 0) {
             return "fail";
         }

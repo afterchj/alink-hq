@@ -1,6 +1,7 @@
 package com.tpadsz.after.test;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.tpadsz.after.dao.MeshDao;
 import com.tpadsz.after.dao.RoleDao;
@@ -219,5 +220,16 @@ public class MainTest {
         for (String id : list) {
             System.out.println(id);
         }
+    }
+
+    @Test
+    public void testStr() {
+        String id = "[\"20234\",\"20233\",\"20232\",\"20229\",\"20228\",\"20225\",\"20224\",\"20222\",\"20221\",\"20219\"]";
+        logger.warn("id=" + id);
+        List array = JSON.parseArray(id);
+        String[] idArray = id.split(",");
+
+        logger.warn("ids="+JSON.toJSONString(array));
+
     }
 }
