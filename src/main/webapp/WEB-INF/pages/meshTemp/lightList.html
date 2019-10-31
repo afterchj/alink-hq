@@ -154,7 +154,7 @@
                                     <span th:if="${light.y}==50" th:text="50 +'%'"></span>
                                     <br>
                                     <!--如果灯类型为轨道灯-->
-                                    <span th:if="${light.angle}!=null" th:text="${light.angle}"></span>
+                                    <span th:if="${light.angle}!=null and ${light.angle}!='0，0，0'" th:text="${light.angle}"></span>
                                 </td>
                                 <td th:switch="${light.off}">
                                     <span th:case="1">开</span>
