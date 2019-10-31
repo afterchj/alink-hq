@@ -368,6 +368,14 @@
             })
         }
     })
+
+    $('.scene-msg .scene-msg-list > div:nth-child(3)').scroll(function() {
+        var height=$(this).height();
+        var scrollHeight=$('#lightMsg .one').height();
+//        console.log('height',height);
+//        console.log('scrollHeight',scrollHeight);
+        $('.scene-msg .scene-msg-list > div:nth-child(3) > div:nth-child(1)').css("height",scrollHeight);
+    });
     $('.scene-msg-list ').on('click', 'li', function () {
         $(this).toggleClass('active').siblings().removeClass('active');
     })

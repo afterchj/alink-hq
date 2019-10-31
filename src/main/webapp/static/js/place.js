@@ -1,26 +1,24 @@
 $(function () {
+    var ids = [];
     $("#multiDel").click(function () {
-        var ids = [];
+         ids = [];
         $('input[name="ids"]:checked').each(function () {
             ids.push($(this).val())
         });
+        console.log('ids',ids);
         if (ids.length > 0) {
             var selector = $('div[openContent="delete-pop"]');
             selector.addClass('active');
             $('div[openContent="delete-pop"] .reset-pwd p').text('您确定要删除所选的区域吗？删除后将无法恢复，请慎重！');
             $('div[openContent="delete-pop"] .reset-pwd-hint').text('（扫描区仅可清除内容，不可删除）');
             $('div[openContent="delete-pop"] .text-msg').css('text-align','left');
-            adjust(selector)
-            showOverlay()
+            adjust(selector);
+            showOverlay();
         }
-        $('.pop-btn .yes').click(function () {
-            deletePlace(ids)
-        })
     });
     var id;
     $('.reset-name').click(function () {
         $('#rename').val('');
-      
         id = $(this).attr("alt");
         var selector = $('div[openContent="reset-name"]');
         selector.addClass('active');
@@ -65,9 +63,12 @@ $(function () {
         selector.removeClass('active');
         hideOverlay();
     });
-    var ids;
+    // var ids;
     $('.singleDel').click(function () {
-        ids = $(this).parent().siblings('.checkbox').find('input').val();
+        // ids = $(this).parent().siblings('.checkbox').find('input').val();
+        ids=[];
+        ids.push($(this).parent().siblings('.checkbox').find('input').val());
+        console.log('ids',ids);
         var selector = $('div[openContent="delete-pop"]');
         selector.addClass('active');
         $('div[openContent="delete-pop"] .reset-pwd p').text('您确定要删除所选的区域吗？删除后将无法恢复，请慎重！');
@@ -76,7 +77,7 @@ $(function () {
         adjust(selector);
         showOverlay();
     });
-    $('.pop-btn .reduce').click(function () {
+    $('div[openContent="delete-pop"] .pop-btn .reduce').click(function () {
         var selector = $('div[openContent="delete-pop"]');
         selector.removeClass('active');
         hideOverlay();
@@ -87,13 +88,13 @@ $(function () {
             type: "post",
             url: "/alink-hq/main/checkCount",
             data: {
-                "id": ids
+                "id": JSON.stringify(ids)
             },
             async: true,
             success: function (res) {
                 console.log('res',res);
                 if(res=='ok'){
-                    // deletePlace(ids);
+                    deletePlace(ids);
                 }else if(res=='fail'){
                     $('div[openContent="delete-pop"]').removeClass('active');
                     // hideOverlay();

@@ -128,11 +128,11 @@
                                     <img  th:alt="${place.id}" th:class="(${place.place_id == 0} or ${place.place_id == -1})? 'unclick pointer':'reset-name pointer'"   th:title="(${place.place_id == 0} or ${place.place_id == -1})? '不可重命名':'重命名'"  shiro:hasPermission ="renamePlace" th:src="(${place.place_id == 0} or ${place.place_id == -1})? '/alink-hq/static/img/edit-un.png':'/alink-hq/static/img/edit.png'">
                                     <img  th:src="${place.place_id  == 0}? '/alink-hq/static/img/edit-un.png':'/alink-hq/static/img/edit.png'" th:alt="${place.id}"   class=" pointer unclick" th:accept="${place.place_id}"   th:title="无法操作" shiro:lacksPermission ="renamePlace">
                                     <a href="javascript:void(0);" class="singleDel pointer" shiro:hasPermission ="deletePlace">
-                                        <img src="/alink-hq/static/img/delete.png" alt="" class="left-img pointer"
+                                        <img src="/alink-hq/static/img/delete.png" th:alt="${place.id}" class="left-img pointer"
                                              title="删除">
                                     </a>
                                     <a href="javascript:void(0);" class=" unclick" shiro:lacksPermission ="deletePlace">
-                                        <img src="/alink-hq/static/img/un-delete.png" alt="" class="left-img  unclick"
+                                        <img src="/alink-hq/static/img/un-delete.png" th:alt="${place.id}" class="left-img  unclick"
                                              th:title="无法操作">
                                     </a>
                                 </td>
