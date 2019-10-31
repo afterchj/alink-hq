@@ -42,7 +42,7 @@ $(function () {
     });
     // var ids;
     $('.singleDel').click(function () {
-        ids = $(this).attr("alt");
+        ids.push($(this).attr("alt"));
         $('.showList').hide();
         var selector = $('div[openContent="delete-pop"]');
         $('div[openContent="delete-pop"] .reset-pwd p').text('您确定要删除该所选的网络吗？');
