@@ -62,6 +62,18 @@
         LIMIT 1
     </select>
 
+    <select id="getParent" parameterType="int" resultType="CooperationTemplate">
+        SELECT
+        f.id,
+        f.parent_id,
+        f.coname,
+        f.mobile,
+        f.address,
+        f.`code`,
+        f.`status`
+        FROM f_firm f
+        WHERE f.id=#{_parameter}
+    </select>
     <select id="getByMap" resultType="map" parameterType="SearchDict">
         SELECT
         <include refid="Base_Column_List"/>

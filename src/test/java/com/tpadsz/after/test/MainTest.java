@@ -138,16 +138,17 @@ public class MainTest {
 //        MeshService meshService = (MeshService) ctx.getBean("meshServiceImpl");
 //        FileService fileService = (FileService) ctx.getBean("fileServiceImpl");
         CooperateService cooperateService = (CooperateService) ctx.getBean("cooperateServiceImpl");
-        int parentId = 39;
-        String uid = "18";
-        Map map = new HashMap();
-        if (parentId != 0) {
-            map.put("parentId", parentId);
-        } else {
-            map.put("uid", uid);
-        }
-        CooperationTemplate parent = cooperateService.getParentCompany(map);
-        logger.warn("result=" + JSON.toJSONString(parent));
+//        int parentId = 0;
+//        String uid = "2722";
+//        Map map = new HashMap();
+//        if (parentId != 0) {
+//            map.put("parentId", parentId);
+//        } else {
+//            map.put("uid", uid);
+//        }
+//        CooperationTemplate parent = cooperateService.getParentCompany(map);
+        CooperationTemplate parent1 = cooperateService.getParent(1);
+        logger.warn("result=" + JSON.toJSONString(parent1));
 //        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 //        StringBuilder stringBuilder = new StringBuilder();
 //        if (parent.getStatus() == 0) {

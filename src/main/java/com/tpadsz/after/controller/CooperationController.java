@@ -60,7 +60,7 @@ public class CooperationController {
             map.put("uid", uid);
         }
         CooperationTemplate cooperationInfo = cooperateService.getParentCompany(map);
-        parentId = parentId == 0 ? cooperationInfo.getParent_id() : parentId;
+        parentId = parentId == 0 ? cooperationInfo.getId() : parentId;
         dict.setParentId(parentId);
         PageHelper.startPage(dict.getPageNum(), dict.getPageSize());
         List<Map> cooperationList = cooperateService.getByMap(dict);
@@ -68,7 +68,8 @@ public class CooperationController {
         if (pageInfo.getList().size() > 0) {
             modelMap.put("pageInfo", pageInfo);
         }
-        String company = cooperationInfo.getConame();
+        CooperationTemplate parent = cooperateService.getParent(parentId);
+        String company = parent.getConame();
         modelMap.put("company", company);
         modelMap.put("info", dict);
         return "cooperateManage/cooperateList";
@@ -166,15 +167,21 @@ public class CooperationController {
         return "fail";
     }
 
-    @RequestMapping(value = "/exportExcel")
     @ResponseBody
-    public void getExcel(HttpServletResponse response) {
+    @RequestMapping(value = "/exportExcel")
+    public void getExcel(SearchDict dict, HttpServletResponse response) {
         Map map = new HashMap();
+        int parentId = dict.getParentId();
         String uid = AppUtils.getUserID();
-        map.put("uid", uid);
+        if (parentId != 0) {
+            map.put("parentId", parentId);
+        } else {
+            map.put("uid", uid);
+        }
         CooperationTemplate parent = cooperateService.getParentCompany(map);
+        CooperationTemplate template = cooperateService.getParent(parentId);
         try {
-            String fileName = URLEncoder.encode(cooperateService.parseName(parent), "UTF-8");
+            String fileName = URLEncoder.encode(cooperateService.parseName(template), "UTF-8");
             Map<Integer, List<CooperationTemplate>> company = cooperateService.buildExcelData(parent);
             response.setHeader("Content-disposition", "attachment;filename=" + fileName + ".xls");
             ExcelWriter excelWriter = EasyExcel.write(response.getOutputStream()).build();

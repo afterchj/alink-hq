@@ -24,6 +24,8 @@ public interface CooperateDao {
 
     CooperationTemplate getParentCompany(Map map);
 
+    CooperationTemplate getParent(int id);
+
     void saveCooperation(Map map);
 
     void saveUpdate(CooperationInfo info);

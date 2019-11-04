@@ -55,6 +55,11 @@ public class CooperateServiceImpl implements CooperateService {
     }
 
     @Override
+    public CooperationTemplate getParent(int id) {
+        return cooperateDao.getParent(id);
+    }
+
+    @Override
     public void save(Map info) {
         cooperateDao.saveCooperation(info);
     }
@@ -95,6 +100,9 @@ public class CooperateServiceImpl implements CooperateService {
                     }
                 }
             }
+        } else {
+            list = getChildCompanyByFid(cooperationInfo.getParent_id());
+            map.put(fid, list);
         }
         return map;
     }
