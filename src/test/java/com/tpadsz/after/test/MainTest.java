@@ -138,17 +138,17 @@ public class MainTest {
 //        MeshService meshService = (MeshService) ctx.getBean("meshServiceImpl");
 //        FileService fileService = (FileService) ctx.getBean("fileServiceImpl");
         CooperateService cooperateService = (CooperateService) ctx.getBean("cooperateServiceImpl");
-//        int parentId = 0;
-//        String uid = "2722";
-//        Map map = new HashMap();
-//        if (parentId != 0) {
-//            map.put("parentId", parentId);
-//        } else {
-//            map.put("uid", uid);
-//        }
-//        CooperationTemplate parent = cooperateService.getParentCompany(map);
-        CooperationTemplate parent1 = cooperateService.getParent(1);
-        logger.warn("result=" + JSON.toJSONString(parent1));
+        int parentId = 0;
+        String uid = "18";
+        Map map = new HashMap();
+        if (parentId != 0) {
+            map.put("parentId", parentId);
+        } else {
+            map.put("uid", uid);
+        }
+        CooperationTemplate parent = cooperateService.getParentCompany(map);
+//        CooperationTemplate parent1 = cooperateService.getParent(1);
+//        logger.warn("result=" + JSON.toJSONString(parent1));
 //        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 //        StringBuilder stringBuilder = new StringBuilder();
 //        if (parent.getStatus() == 0) {
@@ -157,10 +157,10 @@ public class MainTest {
 //            stringBuilder.append(String.format("%s_%s_%s", parent.getConame(), "合作", dateFormat.format(new Date())));
 //        }
 //        System.out.println(stringBuilder.toString());
-//        cooperateService.buildExcelData(parent);
-//        Map<Integer, List<CooperationTemplate>> company = cooperateService.buildExcelData(parent);
-//        logger.warn("\n" + JSONObject.toJSONString(company) + "\n" + company.size());
-//        logger.warn("\n"+JSON.toJSONString(company) + "\n"+JSON.toJSONString(parent));
+        cooperateService.buildExcelData(parent);
+        Map<Integer, List<CooperationTemplate>> company = cooperateService.buildExcelData(parent);
+        logger.warn("\n" + JSONObject.toJSONString(company) + "\n" + company.size());
+        logger.warn("\n"+JSON.toJSONString(company) + "\n"+JSON.toJSONString(parent));
 //        cooperateService.updateUser(map);
 //        GroupService groupService = (GroupService) ctx.getBean("groupServiceImpl");
 //        groupService.deleteGroup(map);

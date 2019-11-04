@@ -173,7 +173,7 @@ public class CooperationController {
         Map map = new HashMap();
         int parentId = dict.getParentId();
         String uid = AppUtils.getUserID();
-        if (parentId != 0) {
+        if (parentId > 1) {
             map.put("parentId", parentId);
         } else {
             map.put("uid", uid);
