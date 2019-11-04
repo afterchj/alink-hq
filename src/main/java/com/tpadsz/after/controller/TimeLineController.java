@@ -35,6 +35,9 @@ public class TimeLineController {
     @Resource
     private RolePermissionInfoService rolePermissionInfoService;
 
+    @Resource
+    private SceneService sceneService;
+
     /**
      * 跳转到timerList.html
      * @param model
@@ -92,8 +95,6 @@ public class TimeLineController {
         return "timerManage/timerDetail";
     }
 
-    @Resource
-    private SceneService sceneService;
 
     @RequestMapping(value = "/sceneDetail",method = RequestMethod.POST)
     @ResponseBody
