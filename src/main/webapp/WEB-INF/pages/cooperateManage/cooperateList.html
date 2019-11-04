@@ -11,6 +11,11 @@
     <link rel="stylesheet" th:href="@{/static/css/common.css}"/>
     <link rel="stylesheet" th:href="@{/static/css/laydate.css}"/>
     <title>合作列表</title>
+    <style>
+        .pop-content p{
+            margin-top:10px;
+        }
+    </style>
 </head>
 <body>
 <div class="c-container">
@@ -131,7 +136,7 @@
                                          class="pointer delete-pop" title="删除" style="width: 16px; height: 16px;">
                                     <img shiro:lacksPermission="deleteCooperation"
                                          src="/alink-hq/static/img/un-delete.png" th:alt="${cooperation.id}"
-                                         class="pointer delete-pop unclick" th:title="无法操作"
+                                         class="pointer  unclick" th:title="无法操作"
                                          style="width: 16px; height: 16px;">
                                 </td>
                                 <td class="p-r" shiro:hasPermission="CooperationMemo">

@@ -3,7 +3,6 @@
 
 <head>
     <title>产品列表</title>
-
     <script src="/alink-hq/static/js/jquery.min.js"></script>
     <script src="/alink-hq/static/js/browser.js"></script>
     <link rel="stylesheet" th:href="@{/static/font-awesome-4.7.0/css/font-awesome.min.css}"/>
@@ -22,14 +21,14 @@
         <div class="main-right f-l">
             <div class="clearfix main-right-nav">
                 <div class="f-l main-right-title">产品列表</div>
-                <div class="f-r pointer last-nav">
+                <div class="f-r pointer last-nav ">
                     <a th:href="@{/product/createProduct}" shiro:hasAnyPermissions="insertProduct">
                         <div class="create " onmousedown="createBtnMouseDown()" onmouseup="createBtnMouseUp()">
                             <span>+</span><span>新增产品</span>
                         </div>
                     </a>
-                    <a shiro:lacksPermission="insertProduct">
-                        <div onmousedown="createBtnMouseDown()" onmouseup="createBtnMouseUp()">
+                    <a shiro:lacksPermission="insertProduct" title="无法操作">
+                        <div class="no-create "  onmousedown="createBtnMouseDown()" onmouseup="createBtnMouseUp()">
                             <span>+</span><span>新增产品</span>
                         </div>
                     </a>
@@ -172,7 +171,7 @@
                                         <span class="p-r">
                                                 <img th:if="${product.ota_name}" th:src="@{/static/img/edit-ota.png}"
                                                      alt="" title="编辑关联固件"
-                                                     style="width:                                                          17px;height: 17px;"
+                                                     style="width:17px;height: 17px;"
                                                      class="relevance-firmware">
                                                 <img th:unless="${product.ota_name}"
                                                      th:src="@{/static/img/relevance.png}"
@@ -185,8 +184,8 @@
                                     <a href="javascript:void(0);" shiro:lacksPermission="relevanceProduct">
                                         <span th:if="${product.ota_name}" th:text="${product.ota_name}"></span>
                                         <span>
-                                            <img th:if="${product.ota_name}" alt="" style="width:                                                          17px;height: 17px;" th:src="@{/static/img/edit-ota.png}" title="无法点击">
-                                            <img th:unless="${product.ota_name}" th:src="@{/static/img/relevance.png}" style="width: 30px;height: 30px;" title="无法点击">
+                                            <img th:if="${product.ota_name}" alt="" style="width:                                                          17px;height: 17px;" th:src="@{/static/img/no-edit-ota.png}" title="无法点击">
+                                            <img th:unless="${product.ota_name}" th:src="@{/static/img/no-relevance.png}" style="width: 30px;height: 30px;" title="无法点击">
                                         </span>
 
                                     </a>

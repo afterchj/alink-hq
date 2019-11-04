@@ -1363,6 +1363,18 @@ table.light-detail-table thead,
 .scene-msg .scene-msg-list > div:nth-child(3) > div:nth-child(1){
     position: relative;
 }
+.no-create {
+    color: #fff;
+    height: 31px;
+    line-height: 30px;
+    border-radius: 5px;
+    text-align: center;
+    font-size: 14px;
+    background-color: #bbb;
+    padding: 0 8px;
+    box-shadow: 0 1px 1px 0 rgba(0,0,0,.2);
+    cursor: no-drop;
+}
 /*.scene-msg .scene-msg-list > div:nth-child(3) > div:nth-child(1) ul:after{*/
     /*content: '';*/
     /*display: block;*/

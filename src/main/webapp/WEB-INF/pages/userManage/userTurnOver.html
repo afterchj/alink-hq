@@ -46,7 +46,9 @@
                             <div class="accountMsg clearfix">
                                 <div class="f-l" style="width:50%;">
                                     <label>账号（用户名）：</label>
-                                    <input type="text" id="account" th:value="${account}+' ( '+${uname}+' ) '">
+                                    <input type="hidden" id="account" th:value="${account}">
+                                    <input th:if="${uname}!=null" type="text"  th:value="${account}+ '( '+${uname}+' ) '">
+                                    <input th:if="${uname}==null" type="text"  th:value="${account}">
                                 </div>
                                 <div class="f-r">
                                     <label >隶属公司：</label>
