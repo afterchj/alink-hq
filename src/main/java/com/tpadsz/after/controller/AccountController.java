@@ -80,6 +80,8 @@ public class AccountController {
                 }
             } else if (role_id == 3) {
                 List<String> uids = accountService.findFirmUidOfUser(uid);
+                List<String> uids2 = accountService.findAccountsOfCooperateFirms(uid);
+                uids.addAll(uids2);
                 if (uids.size() != 0) {
                     PageHelper.startPage(pageNum, pageSize);
                     userList = accountService.searchByManager(account,uname, uids, startDate, endDate);
@@ -106,91 +108,6 @@ public class AccountController {
         return "userManage/userList";
     }
 
-    /**
-     * 导出excel
-     * @param account
-     * @param fid
-     * @param roleId
-     * @param startDate
-     * @param endDate
-     * @param session
-     * @param response
-     */
-//    @RequestMapping(value = "/getUserListExcel")
-//    @ResponseBody
-//    public void getUserListExcel(String account, String uname,Integer fid, Integer roleId, String
-//            startDate, String endDate, HttpSession session, HttpServletResponse response) {
-//        User loginUser = (User) session.getAttribute("user");
-//        String uid = loginUser.getId();
-//        Integer role_id = accountService.findRoleIdByUid(uid);
-//        List<UserList> userList = new ArrayList<>();
-//        if (role_id == 1) {
-//            userList = accountService.searchBySuper(account, uname,fid, roleId, startDate, endDate);
-//        } else if (role_id == 2) {
-//            userList = accountService.searchByAdmin(account, uname,fid, roleId, startDate, endDate);
-//        } else if (role_id == 3) {
-//            List<String> uids = accountService.findFirmUidOfUser(uid);
-//            if (uids.size() != 0) {
-//                userList = accountService.searchByManager(account, uname,uids, startDate, endDate);
-//            }
-//        }
-//        //excel标题
-//        String[] title = {"账号", "用户名", "绑定手机号", "绑定邮箱", "隶属公司", "角色", "添加时间", "状态"};
-//        String[][] values = new String[userList.size()][title.length];
-//        for (int i = 0; i < userList.size(); i++) {
-//            UserList userList1 = userList.get(i);
-//            values[i][0] = userList1.getAccount();
-//            if (StringUtils.isNotBlank(userList1.getUname())) {
-//                values[i][1] = userList1.getUname();
-//            }
-//            if (StringUtils.isNotBlank(userList1.getMobile())) {
-//                values[i][2] = userList1.getMobile();
-//            }
-//            if (StringUtils.isNotBlank(userList1.getEmail())) {
-//                values[i][3] = userList1.getEmail();
-//            }
-//            if (StringUtils.isNotBlank(userList1.getConame())) {
-//                values[i][4] = userList1.getConame();
-//            }
-//            if (StringUtils.isNotBlank(userList1.getRole_id())) {
-//                if ("1".equals(userList1.getRole_id())) {
-//                    values[i][5] = "超级管理员";
-//                } else if ("2".equals(userList1.getRole_id())) {
-//                    values[i][5] = "管理员";
-//                } else if ("3".equals(userList1.getRole_id())) {
-//                    values[i][5] = "乙方管理员";
-//                } else if ("4".equals(userList1.getRole_id())) {
-//                    values[i][5] = "施工人员";
-//                }
-//            }
-//            if (StringUtils.isNotBlank(userList1.getCreate_date())) {
-//                values[i][6] = userList1.getCreate_date();
-//            }
-//            if (StringUtils.isNotBlank(userList1.getStatus())) {
-//                if ("1".equals(userList1.getStatus())) {
-//                    values[i][7] = "启用";
-//                } else {
-//                    values[i][7] = "禁用";
-//                }
-//            }
-//        }
-//        HSSFWorkbook wb = ExcelUtil.getHSSFWorkbook("用户列表", title, values, null);
-//        String fileName = "用户列表-" + System.currentTimeMillis();
-//        try {
-//            response.setHeader("content-disposition", "attachment;filename=" + new String(fileName.getBytes(),
-//                    "ISO8859-1") + ".xls");//中文乱码
-//            response.setContentType("application/vnd.ms-excel");
-//            response.setCharacterEncoding("utf-8");
-//            OutputStream ouputStream = response.getOutputStream();
-//            wb.write(ouputStream);
-//            ouputStream.flush();
-//            ouputStream.close();
-//        } catch (FileNotFoundException e) {
-//            e.printStackTrace();
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//    }
 
     @RequestMapping(value = "/getExcel")
     @ResponseBody
@@ -242,9 +159,9 @@ public class AccountController {
                 User user = new User();
                 User user2 = new User();
                 do {
-                    account = GenerateUtils.getCharAndNumr(8);
+                    account = GenerateUtils.generateAccount(8);
                     user2 = accountService.findByAccount(account);
-                } while (!GenerateUtils.check(account) || (user2 != null));
+                } while (user2 != null);
                 user.setAccount(account);
                 user.setPwd("dc10cc20d435f846425f1f7a31b5d293cb39e590");
                 user.setSalt("0e9cc6f31100af96");
@@ -398,7 +315,6 @@ public class AccountController {
             User user = accountService.findByAccount(account);
             Integer role_id = accountService.findRoleIdByUid(user.getId());
             if (role_id == 14) {
-//                List<String> ids = accountService.findUnassociatedProjectIds(user.getId());
                 List<ProjectList> list = accountService.findAssociateProjectsList(user.getId());
                 model.addAttribute("projectList", list);
             }

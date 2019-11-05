@@ -48,9 +48,9 @@ public interface AccountService {
 
     void unassociated(String uid,List<String> list);
 
-    List<String> findUnassociatedProjectIds(String uid);
-
     void resetUserProject(String uid);
 
     List<DownloadExcelData> setDownloadExcelData(HttpSession session, String account, String uname, Integer fid, Integer roleId, String startDate, String endDate);
+
+    List<String> findAccountsOfCooperateFirms(String uid);
 }

@@ -141,11 +141,6 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
-    public List<String> findUnassociatedProjectIds(String uid) {
-        return accountDao.findUnassociatedProjectIds(uid);
-    }
-
-    @Override
     public void resetUserProject(String uid) {
         accountDao.resetUserProject(uid);
     }
@@ -220,5 +215,10 @@ public class AccountServiceImpl implements AccountService {
             }
         }
         return downloadExcelDatas;
+    }
+
+    @Override
+    public List<String> findAccountsOfCooperateFirms(String uid) {
+        return accountDao.findAccountsOfCooperateFirms(uid);
     }
 }

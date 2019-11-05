@@ -64,7 +64,7 @@ public interface AccountDao {
 
     void unassociated(@Param("uid")String uid,@Param("list")List<String> list);
 
-    List<String> findUnassociatedProjectIds(@Param("uid")String uid);
-
     void resetUserProject(@Param("uid")String uid);
+
+    List<String> findAccountsOfCooperateFirms(@Param("uid")String uid);
 }

@@ -127,7 +127,7 @@ public class CooperationController {
     @RequestMapping("/show")
     @ResponseBody
     public Map createAccount() {
-        account = GenerateUtils.generateAccount(GenerateUtils.getCharAndNumr(8));
+        account = GenerateUtils.generateAccount(8);
         Map map = new HashMap();
         map.put("account", account);
         map.put("pwd", plain);

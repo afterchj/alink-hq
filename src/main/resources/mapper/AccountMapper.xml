@@ -138,11 +138,6 @@
         update f_user_account set memo = #{memo},update_date = NOW() where account=#{account}
     </update>
 
-    <select id="findUnassociatedProjectIds" parameterType="string" resultType="string">
-        SELECT hidden_project_id FROM f_project t1 INNER JOIN f_user_project t2 ON t1.id = t2.hidden_project_id WHERE uid=#{uid}
-    </select>
-
-
     <select id="findAssociateProjectsList" resultType="ProjectList">
         SELECT t1.id,t1.name,t2.account,t2.uname,t4.coname,t5.id as is_associated FROM f_project t1 INNER JOIN f_user_account t2 ON t1.uid=t2.id INNER JOIN f_user_customer t3 ON t2.id=t3.uid INNER JOIN (SELECT * FROM f_firm WHERE id=(SELECT fid FROM f_user_customer WHERE uid=#{uid})) t4 ON t3.fid = t4.id LEFT JOIN (SELECT * FROM f_user_project WHERE uid=#{uid}) t5 ON t1.id = t5.hidden_project_id
         WHERE t1.other NOT IN('old','freezingOld') or t1.other is NULL
@@ -159,4 +154,10 @@
             (#{uid},#{item},NOW(),NOW())
         </foreach>
     </insert>
+
+    <select id="findAccountsOfCooperateFirms" resultType="string" parameterType="string">
+        SELECT uid FROM f_user_account AS t1 INNER JOIN f_user_customer AS t2 ON t1.id = t2.uid INNER JOIN f_user_role AS t3 ON t1.id = t3.user_id WHERE t3.role_id=3 and t2.fid IN (
+        SELECT id FROM f_firm f LEFT JOIN (SELECT fid FROM f_firm_cooperation GROUP BY fid) s ON s.fid = f.id WHERE id!=1 and parent_id=(SELECT fid FROM f_user_customer WHERE uid=#{uid}))
+    </select>
+
 </mapper>
