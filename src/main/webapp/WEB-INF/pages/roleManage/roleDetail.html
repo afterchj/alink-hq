@@ -557,30 +557,27 @@
                                                         <label>查看角色权限（可查看的角色）</label>
                                                     </div>
                                                     <div class="f-l clearfix create-account view-permission">
-                                                        <div class="f-l zero" th:if="${#lists.contains(permissions,'viewRPAdmin')}">
+                                                        <div class="f-l zero" th:if="${#lists.contains(permissions,'viewRPAdmin')} and ${rid}<2">
                                                             <input type="checkbox"
                                                                    class="singleListChecked admin singleRoleChecked" alt="viewRPAdmin">
                                                             <label>管理员</label>
                                                         </div>
-                                                        <div class="f-l zero" th:if="${#lists.contains(permissions,'viewRPManager')}">
+                                                        <div class="f-l zero" th:if="${#lists.contains(permissions,'viewRPManager')} and ${rid}<3">
                                                             <input type="checkbox"
                                                                    class="singleListChecked yi-admin-role manage singleRoleChecked" alt="viewRPManager">
                                                             <label>乙方管理员</label>
                                                         </div>
-                                                        <div class="f-l zero"
-                                                             th:if="${#lists.contains(permissions,'viewRPUser')}">
+                                                        <div class="f-l zero" th:if="${#lists.contains(permissions,'viewRPUser')} and ${rid}<4">
                                                             <input type="checkbox"
                                                                    class="singleListChecked user builders singleRoleChecked" alt="viewRPUser">
                                                             <label>施工人员</label>
                                                         </div>
-                                                        <div class="f-l zero"
-                                                             th:if="${#lists.contains(permissions,'viewRPOtamanager')}">
+                                                        <div class="f-l zero" th:if="${#lists.contains(permissions,'viewRPOtamanager')} and ${rid}<13">
                                                             <input type="checkbox"
                                                                    class="singleListChecked otamanager builders singleRoleChecked" alt="viewRPOtamanager">
                                                             <label>固件管理员</label>
                                                         </div>
-                                                        <div class="f-l zero"
-                                                             th:if="${#lists.contains(permissions,'viewSalesman')}">
+                                                        <div class="f-l zero" th:if="${#lists.contains(permissions,'viewSalesman')} and ${rid}<14">
                                                             <input type="checkbox"
                                                                    class="singleListChecked salesman builders singleRoleChecked" alt="viewSalesman">
                                                             <label>普通用户</label>
