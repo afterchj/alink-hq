@@ -84,10 +84,10 @@ public class AccountController {
                 uids.addAll(uids2);
                 if (uids.size() != 0) {
                     PageHelper.startPage(pageNum, pageSize);
-                    userList = accountService.searchByManager(account,uname, uids, startDate, endDate);
+                    userList = accountService.searchByManager(account,uname, fid, roleId, uids, startDate, endDate);
                 }
                 roleList = accountService.findRoleList();
-                for (int i = 0; i < role_id; i++) {
+                for (int i = 0; i < role_id-1; i++) {
                     roleList.remove(0);
                 }
             }
@@ -304,6 +304,8 @@ public class AccountController {
             firmList = accountService.findFirmList();
         } else if (role_id == 3) {
             firmList = accountService.findFirmByUid(uid);
+            List<Firm> firmList2 = accountService.findCooperateFirms(uid);
+            firmList.addAll(firmList2);
         }
         return firmList;
     }

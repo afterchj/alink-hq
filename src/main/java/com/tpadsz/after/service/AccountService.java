@@ -22,7 +22,7 @@ public interface AccountService {
 
     List<UserList> searchByAdmin(String account,String uname, Integer fid, Integer roleId, String startDate, String endDate);
 
-    List<UserList> searchByManager(String account,String uname, List<String> uids, String startDate, String endDate);
+    List<UserList> searchByManager(String account,String uname, Integer fid, Integer roleId, List<String> uids, String startDate, String endDate);
 
     List<String> findFirmUidOfUser(String uid);
 
@@ -53,4 +53,6 @@ public interface AccountService {
     List<DownloadExcelData> setDownloadExcelData(HttpSession session, String account, String uname, Integer fid, Integer roleId, String startDate, String endDate);
 
     List<String> findAccountsOfCooperateFirms(String uid);
+
+    List<Firm> findCooperateFirms(String uid);
 }

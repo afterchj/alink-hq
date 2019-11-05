@@ -20,7 +20,7 @@ public interface AccountDao {
 
     List<UserList> searchByAdmin(@Param("account")String account, @Param("uname")String uname,@Param("fid")Integer fid, @Param("roleId")Integer roleId, @Param("startDate")String startDate, @Param("endDate")String endDate);
 
-    List<UserList> searchByManager(@Param("account")String account,@Param("uname")String uname, @Param("list")List<String> uids,@Param("startDate")String startDate,@Param("endDate")String endDate);
+    List<UserList> searchByManager(@Param("account")String account,@Param("uname")String uname, @Param("fid")Integer fid, @Param("roleId")Integer roleId, @Param("list")List<String> uids,@Param("startDate")String startDate,@Param("endDate")String endDate);
 
     List<String> findFirmUidOfUser(@Param("uid") String uid);
 
@@ -66,5 +66,7 @@ public interface AccountDao {
 
     void resetUserProject(@Param("uid")String uid);
 
-    List<String> findAccountsOfCooperateFirms(@Param("uid")String uid);
+    List<String> findAccountsOfCooperateFirms(@Param("firms")List<Firm> firms);
+
+    List<Firm> findCooperateFirms(@Param("uid")String uid);
 }

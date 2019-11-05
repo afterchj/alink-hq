@@ -53,9 +53,9 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
-    public List<UserList> searchByManager(String account,String uname, List<String> uids, String startDate, String
+    public List<UserList> searchByManager(String account,String uname, Integer fid, Integer roleId, List<String> uids, String startDate, String
             endDate) {
-        return accountDao.searchByManager(account, uname,uids, startDate, endDate);
+        return accountDao.searchByManager(account, uname,fid,roleId,uids, startDate, endDate);
     }
 
     @Override
@@ -157,7 +157,7 @@ public class AccountServiceImpl implements AccountService {
         } else if (role_id == 3) {
             List<String> uids = accountDao.findFirmUidOfUser(uid);
             if (uids.size() != 0) {
-                userList = accountDao.searchByManager(account, uname, uids, startDate, endDate);
+                userList = accountDao.searchByManager(account, uname, fid, roleId, uids, startDate, endDate);
             }
         }
         List<DownloadExcelData> downloadExcelDatas = new ArrayList<>();
@@ -219,6 +219,12 @@ public class AccountServiceImpl implements AccountService {
 
     @Override
     public List<String> findAccountsOfCooperateFirms(String uid) {
-        return accountDao.findAccountsOfCooperateFirms(uid);
+        List<Firm> firms = accountDao.findCooperateFirms(uid);
+        return accountDao.findAccountsOfCooperateFirms(firms);
+    }
+
+    @Override
+    public List<Firm> findCooperateFirms(String uid) {
+        return accountDao.findCooperateFirms(uid);
     }
 }
