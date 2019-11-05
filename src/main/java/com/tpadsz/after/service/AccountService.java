@@ -38,8 +38,6 @@ public interface AccountService {
 
     void enable(User user);
 
-    Integer findFirmUid(String uid, String userId);
-
     List<User> findAccountByFid(Integer fid);
 
     void saveMemo(String account, String content);
@@ -54,5 +52,5 @@ public interface AccountService {
 
     List<String> findAccountsOfCooperateFirms(String uid);
 
-    List<Firm> findCooperateFirms(String uid);
+    List<Firm> getFirmInfo(Integer role_id, String uid, int flag);
 }

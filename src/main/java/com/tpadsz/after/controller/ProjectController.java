@@ -164,7 +164,7 @@ public class ProjectController {
             List<String> list = new ArrayList(Arrays.asList(ids1));
             List<Map> projectMap = projectService.selectByPid(list);
             Integer role_id = accountService.findRoleIdByUid(uid);
-            List<Firm> firmList = getFirmInfo(role_id, uid);
+            List<Firm> firmList = accountService.getFirmInfo(role_id, uid,1);
             model.addAttribute("ids", ids);
             model.addAttribute("projectMap", projectMap);
             model.addAttribute("firmList", firmList);
@@ -280,17 +280,6 @@ public class ProjectController {
         model.addAttribute("user", user);
         model.addAttribute("coname", coname);
         return "projectManage/projectDetail";
-    }
-
-
-    private List<Firm> getFirmInfo(Integer role_id, String uid) {
-        List<Firm> firmList = new ArrayList<>();
-        if (role_id == 1 || role_id == 2) {
-            firmList = accountService.findFirmList();
-        } else if (role_id == 3) {
-            firmList = accountService.findFirmByUid(uid);
-        }
-        return firmList;
     }
 
 }

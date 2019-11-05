@@ -116,11 +116,6 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
-    public Integer findFirmUid(String uid, String userId) {
-        return accountDao.findFirmUid(uid, userId);
-    }
-
-    @Override
     public List<User> findAccountByFid(Integer fid) {
         return accountDao.findAccountByFid(fid);
     }
@@ -224,7 +219,17 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
-    public List<Firm> findCooperateFirms(String uid) {
-        return accountDao.findCooperateFirms(uid);
-    }
+    public List<Firm> getFirmInfo(Integer role_id, String uid, int flag) {
+            List<Firm> firmList = new ArrayList<>();
+            if (role_id == 1 || role_id == 2) {
+                firmList = accountDao.findFirmList();
+            } else if (role_id == 3) {
+                firmList = accountDao.findFirmByUid(uid);
+                if (flag == 0) {
+                    List<Firm> firmList2 = accountDao.findCooperateFirms(uid);
+                    firmList.addAll(firmList2);
+                }
+            }
+            return firmList;
+        }
 }

@@ -6,10 +6,6 @@
         SELECT role_id FROM f_user_role WHERE user_id=#{uid}
     </select>
 
-    <select id="findFirmUid" resultType="Integer" parameterType="string">
-        SELECT uid FROM f_user_customer WHERE fid=(SELECT fid FROM f_user_customer WHERE uid=#{uid}) and uid =#{userId}
-    </select>
-
     <select id="findFirmUidOfUser" resultType="string" parameterType="string">
         SELECT uid FROM f_user_customer AS t1 INNER JOIN f_user_role AS t4 ON t1.uid = t4.user_id WHERE t4.role_id > 3 and t1.fid=(SELECT fid FROM f_user_customer WHERE uid=#{uid})
     </select>

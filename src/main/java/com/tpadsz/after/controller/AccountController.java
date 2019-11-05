@@ -43,7 +43,7 @@ public class AccountController {
     Logger logger = LoggerFactory.getLogger(AccountController.class);
 
     @RequestMapping(value = "/list", method = RequestMethod.GET)
-    public String list(Integer pageNum, Integer pageSize, String account,String uname, Integer fid, Integer roleId, String
+    public String list(Integer pageNum, Integer pageSize, String account, String uname, Integer fid, Integer roleId, String
             startDate, String endDate, HttpSession session, Model model) {
         User loginUser = (User) session.getAttribute("user");
         String uid = loginUser.getId();
@@ -59,21 +59,21 @@ public class AccountController {
         try {
             Integer role_id = accountService.findRoleIdByUid(uid);
             List<Role> roleList = new ArrayList<>();
-            List<Firm> firmList = getFirmInfo(role_id, uid);
+            List<Firm> firmList = accountService.getFirmInfo(role_id, uid, 0);
             List<UserList> userList = new ArrayList<>();
-            if(startDate!=null&&!"".equals(startDate)){
-                if(startDate.equals(endDate)){
+            if (startDate != null && !"".equals(startDate)) {
+                if (startDate.equals(endDate)) {
                     endDate = GenerateUtils.getAfterDate(startDate);
                 }
             }
             if (role_id == 1) {
                 PageHelper.startPage(pageNum, pageSize);
-                userList = accountService.searchBySuper(account,uname, fid, roleId, startDate, endDate);
+                userList = accountService.searchBySuper(account, uname, fid, roleId, startDate, endDate);
                 roleList = accountService.findRoleList();
                 roleList.remove(0);
             } else if (role_id == 2) {
                 PageHelper.startPage(pageNum, pageSize);
-                userList = accountService.searchByAdmin(account,uname, fid, roleId, startDate, endDate);
+                userList = accountService.searchByAdmin(account, uname, fid, roleId, startDate, endDate);
                 roleList = accountService.findRoleList();
                 for (int i = 0; i < role_id; i++) {
                     roleList.remove(0);
@@ -84,10 +84,10 @@ public class AccountController {
                 uids.addAll(uids2);
                 if (uids.size() != 0) {
                     PageHelper.startPage(pageNum, pageSize);
-                    userList = accountService.searchByManager(account,uname, fid, roleId, uids, startDate, endDate);
+                    userList = accountService.searchByManager(account, uname, fid, roleId, uids, startDate, endDate);
                 }
                 roleList = accountService.findRoleList();
-                for (int i = 0; i < role_id-1; i++) {
+                for (int i = 0; i < role_id - 1; i++) {
                     roleList.remove(0);
                 }
                 model.addAttribute("adminFlag", true);
@@ -99,7 +99,7 @@ public class AccountController {
             model.addAttribute("firmList", firmList);
             model.addAttribute("roleList", roleList);
             model.addAttribute("account", account);
-            model.addAttribute("uname",uname);
+            model.addAttribute("uname", uname);
             model.addAttribute("fid", fid);
             model.addAttribute("roleId", roleId);
             model.addAttribute("startDate", startDate);
@@ -114,7 +114,7 @@ public class AccountController {
     @ResponseBody
     public void getExcel(String account, String uname, Integer fid, Integer roleId, String
             startDate, String endDate, HttpSession session, HttpServletResponse response) {
-        List<DownloadExcelData> downloadExcelDatas = accountService.setDownloadExcelData(session,account, uname, fid, roleId, startDate, endDate);
+        List<DownloadExcelData> downloadExcelDatas = accountService.setDownloadExcelData(session, account, uname, fid, roleId, startDate, endDate);
         try {
             String fileName = URLEncoder.encode(new StringBuffer().append("用户列表-").append(System.currentTimeMillis()).toString(), "UTF-8");
             response.setHeader("Content-disposition", "attachment;filename=" + fileName + ".xlsx");
@@ -125,11 +125,11 @@ public class AccountController {
 //                excelWriter.write(downloadExcelDatas,writeSheet);
 //            }
 //            excelWriter.finish();
-            EasyExcel.write(response.getOutputStream(),DownloadExcelData.class).sheet("用户列表").doWrite(downloadExcelDatas);
+            EasyExcel.write(response.getOutputStream(), DownloadExcelData.class).sheet("用户列表").doWrite(downloadExcelDatas);
         } catch (UnsupportedEncodingException e) {
-            logger.error("method:getExcel;result:download excel error,account:{},uname:{}",account,uname);
+            logger.error("method:getExcel;result:download excel error,account:{},uname:{}", account, uname);
         } catch (IOException e) {
-            logger.error("method:getExcel;result:download excel error,account:{},uname:{}",account,uname);
+            logger.error("method:getExcel;result:download excel error,account:{},uname:{}", account, uname);
         }
     }
 
@@ -139,7 +139,7 @@ public class AccountController {
         User loginUser = (User) session.getAttribute("user");
         String uid = loginUser.getId();
         Integer role_id = accountService.findRoleIdByUid(uid);
-        List<Firm> firmList = getFirmInfo(role_id, uid);
+        List<Firm> firmList = accountService.getFirmInfo(role_id, uid, 1);
         model.addAttribute("firmList", firmList);
         return "userManage/createAccount";
     }
@@ -199,7 +199,7 @@ public class AccountController {
         User loginUser = (User) session.getAttribute("user");
         String uid = loginUser.getId();
         Integer role_id = accountService.findRoleIdByUid(uid);
-        List<Firm> firmList = getFirmInfo(role_id, uid);
+        List<Firm> firmList = accountService.getFirmInfo(role_id, uid, 1);
         User user = accountService.findByAccount(account);
         model.addAttribute("firmList", firmList);
         model.addAttribute("account", account);
@@ -275,7 +275,7 @@ public class AccountController {
             String key = MemcachedObjectType.CACHE_TOKEN.getPrefix() + user.getId();
             if (status == 1) {
                 client.set(key, 0, "disabled");
-            }else {
+            } else {
                 client.delete(key);
             }
             map.put("result", ResultDict.SUCCESS.getCode());
@@ -290,7 +290,7 @@ public class AccountController {
     public Map<String, String> saveMemo(String account, String content) {
         Map<String, String> map = new HashMap<>();
         try {
-            accountService.saveMemo(account,content);
+            accountService.saveMemo(account, content);
             map.put("result", ResultDict.SUCCESS.getCode());
         } catch (Exception e) {
             map.put("result", ResultDict.SYSTEM_ERROR.getCode());
@@ -299,22 +299,12 @@ public class AccountController {
     }
 
 
-    private List<Firm> getFirmInfo(Integer role_id, String uid) {
-        List<Firm> firmList = new ArrayList<>();
-        if (role_id == 1 || role_id == 2) {
-            firmList = accountService.findFirmList();
-        } else if (role_id == 3) {
-            firmList = accountService.findFirmByUid(uid);
-            List<Firm> firmList2 = accountService.findCooperateFirms(uid);
-            firmList.addAll(firmList2);
-        }
-        return firmList;
-    }
+
 
 
     @RequestMapping(value = "/associateProject", method = RequestMethod.GET)
-    public String associateProject(String account,Model model) {
-        if(account!=null) {
+    public String associateProject(String account, Model model) {
+        if (account != null) {
             User user = accountService.findByAccount(account);
             Integer role_id = accountService.findRoleIdByUid(user.getId());
             if (role_id == 14) {
@@ -328,24 +318,24 @@ public class AccountController {
 
     @RequestMapping(value = "/associate", method = RequestMethod.POST)
     @ResponseBody
-    public Map<String, String> associate(String account,String ids) {
+    public Map<String, String> associate(String account, String ids) {
         Map<String, String> map = new HashMap<>();
         List<String> list = new ArrayList<>();
         try {
             User user = accountService.findByAccount(account);
             Integer role_id = accountService.findRoleIdByUid(user.getId());
             if (role_id == 14) {
-            if(!"".equals(ids)){
-                String[] ids1 = ids.split(",");
-                list = new ArrayList(Arrays.asList(ids1));
-            }
+                if (!"".equals(ids)) {
+                    String[] ids1 = ids.split(",");
+                    list = new ArrayList(Arrays.asList(ids1));
+                }
                 accountService.resetUserProject(user.getId());
-                if(list.size()!=0) {
+                if (list.size() != 0) {
                     accountService.unassociated(user.getId(), list);
                 }
             }
             map.put("result", ResultDict.SUCCESS.getCode());
-        }catch (Exception e){
+        } catch (Exception e) {
             map.put("result", ResultDict.SYSTEM_ERROR.getCode());
         }
         return map;
