@@ -184,8 +184,8 @@
                                     <a href="javascript:void(0);" shiro:lacksPermission="relevanceProduct">
                                         <span th:if="${product.ota_name}" th:text="${product.ota_name}"></span>
                                         <span>
-                                            <img th:if="${product.ota_name}" alt="" style="width:                                                          17px;height: 17px;" th:src="@{/static/img/no-edit-ota.png}" title="无法点击">
-                                            <img th:unless="${product.ota_name}" th:src="@{/static/img/no-relevance.png}" style="width: 30px;height: 30px;" title="无法点击">
+                                            <img th:if="${product.ota_name}" class="unclick" alt="" style="width:17px;height: 17px;" th:src="@{/static/img/no-edit-ota.png}" title="无法操作">
+                                            <img th:unless="${product.ota_name}" class="unclick" th:src="@{/static/img/no-relevance.png}" style="width: 30px;height: 30px;" title="无法操作">
                                         </span>
 
                                     </a>
@@ -197,15 +197,15 @@
                                              style="width: 18px;height: 18px;margin-right: 15px;" class="single-edit">
                                     </a>
                                     <a th:alt="${product.id}" shiro:lacksPermission="insertProduct">
-                                        <img th:src="@{/static/img/alter-un.png}" alt="" title="编辑"
-                                             style="width: 18px;height: 18px;margin-right: 15px;">
+                                        <img th:src="@{/static/img/alter-un.png}" alt="" title="无法操作"
+                                             class="unclick"  style="width: 18px;height: 18px;margin-right: 15px;">
                                     </a>
                                     <a href="javascript:void(0);" shiro:hasAnyPermissions="deleteProduct">
                                         <img th:src="@{/static/img/delete.png}" alt="" title="删除"
                                              style="width: 16px;height: 16px;" class="single-delete">
                                     </a>
                                     <a href="javascript:void(0);" shiro:lacksPermission="deleteProduct">
-                                        <img th:src="@{/static/img/un-delete.png}" alt="" title="删除"
+                                        <img class="unclick" th:src="@{/static/img/un-delete.png}" alt="" title="无法操作"
                                              style="width: 16px;height: 16px;">
                                     </a>
 
