@@ -90,6 +90,7 @@ public class AccountController {
                 for (int i = 0; i < role_id-1; i++) {
                     roleList.remove(0);
                 }
+                model.addAttribute("adminFlag", true);
             }
             PageInfo<UserList> pageInfo = new PageInfo<>(userList, pageSize);
             if (pageInfo.getList().size() > 0) {
