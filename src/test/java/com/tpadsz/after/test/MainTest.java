@@ -198,7 +198,7 @@ public class MainTest {
         info.setPhoto("test.img");
         info.setParent_id(1);
         Map param = JSONObject.parseObject(JSON.toJSONString(info));
-        param.put("account", GenerateUtils.generateAccount(GenerateUtils.getCharAndNumr(8)));
+        param.put("account", GenerateUtils.generateAccount(8));
         Encryption.HashPassword password = Encryption.encrypt(Encryption.getMD5Str("123456"));
         param.put("pwd", password.getPassword());
         param.put("salt", password.getSalt());

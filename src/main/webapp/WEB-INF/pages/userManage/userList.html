@@ -169,9 +169,10 @@
                                 <a th:if="${user.role_id!='4'}" href="javascript:void(0);" class="unclick"><img
                                         src="/alink-hq/static/img/un-exchange.png"
                                         alt="" class="center-img" th:title="不可移交"></a>
-                                <img src="/alink-hq/static/img/delete.png" style="width: 16px;height: 16px;" alt=""
-                                     id="delete-account"
-                                     openTab="delete-account" class="pointer" th:title="删除">
+                                <img th:if="${user.role_id!='3'} or ${adminFlag}==null" src="/alink-hq/static/img/delete.png" style="width: 16px;height: 16px;" alt=""
+                                     id="delete-account"  openTab="delete-account" class="pointer" th:title="删除">
+                                <img th:if="${user.role_id=='3'} and ${adminFlag}!=null" src="/alink-hq/static/img/un-delete.png" style="width: 16px;height: 16px;" alt=""
+                                        class="unclick" th:title="不可删除">
                                             </td>
                                             <td class="p-r">
                                                 <img th:if="${user.memo!=null&&user.memo!=''}" src="/alink-hq/static/img/memo.png"
