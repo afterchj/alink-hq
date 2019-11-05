@@ -52,4 +52,9 @@ public class RoleServiceImpl implements RoleService {
 		roleDao.delete(roleId);
 	}
 
+	@Override
+	public List<Integer> findViewPermission(Integer role_id) {
+		return roleDao.findViewPermission(role_id);
+	}
+
 }

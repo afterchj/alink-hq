@@ -50,6 +50,29 @@ public class RoleController {
             if (role_id < 4) {
                 PageHelper.startPage(pageNum, pageSize);
                 List<RoleList> roleList = roleService.selectRoleList(role_id, roleName);
+                List<Integer> viewPermissions = roleService.findViewPermission(role_id);
+                for(int i=0;i<roleList.size();i++){
+                    if(roleList.get(i).getId()==3){
+                        if(!viewPermissions.contains(55)){
+                            roleList.remove(i);
+                        }
+                    }
+                    if(roleList.get(i).getId()==4){
+                        if(!viewPermissions.contains(56)){
+                            roleList.remove(i);
+                        }
+                    }
+                    if(roleList.get(i).getId()==13){
+                        if(!viewPermissions.contains(78)){
+                            roleList.remove(i);
+                        }
+                    }
+                    if(roleList.get(i).getId()==14){
+                        if(!viewPermissions.contains(79)){
+                            roleList.remove(i);
+                        }
+                    }
+                }
                 PageInfo<RoleList> pageInfo = new PageInfo<>(roleList, pageSize);
                 if (pageInfo.getList().size() > 0) {
                     model.addAttribute("pageInfo", pageInfo);
