@@ -10,7 +10,7 @@ $(function () {
     }
     var id;
     var ids = [];
-    $('.rename').click(function () {
+    $('.reset-name').click(function () {
         $('#rename').val('');
         id = $(this).attr("alt");
         var selector = $('div[openContent="reset-name"]');
