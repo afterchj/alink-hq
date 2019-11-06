@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -24,8 +26,14 @@ public class MainController {
 
     @RequestMapping("/checkCount")
     public String rename(String id) {
-        List array = JSON.parseArray(id);
-        logger.warn("array=" + JSON.toJSONString(array));
+        logger.warn("array=" + id);
+        String[] ids = id.split(",");
+        List array;
+        try {
+            array = JSON.parseArray(id);
+        } catch (Exception e) {
+            array = new ArrayList(Arrays.asList(ids));
+        }
         int count = lightService.getLightCount(array);
         if (count > 0) {
             return "fail";

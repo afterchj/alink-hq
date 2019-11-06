@@ -10,6 +10,8 @@ import com.github.pagehelper.PageInfo;
 import com.tpadsz.after.entity.CooperationInfo;
 import com.tpadsz.after.entity.CooperationTemplate;
 import com.tpadsz.after.entity.SearchDict;
+import com.tpadsz.after.entity.User;
+import com.tpadsz.after.service.AccountService;
 import com.tpadsz.after.service.CooperateService;
 import com.tpadsz.after.utils.AppUtils;
 import com.tpadsz.after.utils.Encryption;
@@ -43,7 +45,8 @@ public class CooperationController {
 
     @Resource
     private CooperateService cooperateService;
-
+    @Resource
+    private AccountService accountService;
     private static String account = "";
     private static String plain = "00000000";
 
@@ -70,7 +73,9 @@ public class CooperationController {
         }
         CooperationTemplate parent = cooperateService.getParent(parentId);
         String company = parent.getConame();
-        modelMap.put("company", company);
+        if (parentId > 1) {
+            modelMap.put("company", company);
+        }
         modelMap.put("info", dict);
         return "cooperateManage/cooperateList";
     }
@@ -127,7 +132,11 @@ public class CooperationController {
     @RequestMapping("/show")
     @ResponseBody
     public Map createAccount() {
-        account = GenerateUtils.generateAccount(8);
+        User user;
+        do {
+            account = GenerateUtils.generateAccount(8);
+            user = accountService.findByAccount(account);
+        } while (user != null);
         Map map = new HashMap();
         map.put("account", account);
         map.put("pwd", plain);
