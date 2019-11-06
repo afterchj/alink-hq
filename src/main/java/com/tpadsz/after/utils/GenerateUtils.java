@@ -13,7 +13,15 @@ public class GenerateUtils {
 
     static SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 
-    public static String getCharAndNumr(int length) {
+    public static String generateAccount(int length) {
+        String account;
+        do{
+            account = getCharAndNumr(length);
+        }while (!GenerateUtils.check(account));
+        return account;
+    }
+
+    private static String getCharAndNumr(int length) {
         String val = "";
         String charOrNum;
         int num1 = 0;
@@ -37,7 +45,7 @@ public class GenerateUtils {
                 }
                 charOrNum = "char";
             } else {
-                    charOrNum = random.nextInt(2) % 2 == 0 ? "char" : "num";
+                charOrNum = random.nextInt(2) % 2 == 0 ? "char" : "num";
             }
             int isDuplicateNum;
             int randomValue;
@@ -69,7 +77,7 @@ public class GenerateUtils {
                             }
                         }
                     } while (isDuplicateNum == 2);
-                }else {
+                } else {
                     randomValue = random.nextInt(10);
                 }
                 val += String.valueOf(randomValue);

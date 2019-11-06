@@ -42,10 +42,10 @@
                 and  t.tname LIKE '%/_%' escape '/'
             </if>
             <if test="createDate!=null and createDate!=''">
-                AND t.create_date BETWEEN #{createDate} and DATE_ADD(#{createDate},INTERVAL 1 DAY)
+                AND t.create_date BETWEEN left(#{createDate},10) and right(#{createDate},10)
             </if>
-            <if test="endTime!=null and endTime!=''">
-                AND t.update_date BETWEEN #{endTime} and Date_Add(#{endTime},INTERVAL 1 DAY )
+            <if test="updateDate!=null and updateDate!=''">
+                AND t.update_date BETWEEN left(#{updateDate},10) and right(#{updateDate},10)
             </if>
             <if test="state!=null and state!=''">
                 AND t.item_set=#{state}
@@ -56,7 +56,7 @@
     <select id="getProjectNameByMid" resultType="com.tpadsz.after.entity.ProjectList">
         SELECT NAME,id
         FROM
-          f_project
+            f_project
         WHERE
           id = ( SELECT project_id FROM f_mesh WHERE id = #{id} )
     </select>
@@ -103,7 +103,7 @@
     </select>
 
     <insert id="insertTimeLine" parameterType="com.tpadsz.after.entity.TimeLine">
-        INSERT INTO `alink`.`f_time_line`(`tname`, `tid`, `mid`,  `repetition`, `week`, `create_date`, `update_date`)
+        INSERT INTO `f_time_line`(`tname`, `tid`, `mid`,  `repetition`, `week`, `create_date`, `update_date`)
 	    VALUES ( #{tname}, #{tid}, 19936, '1', '周日、周一、周二', now(), now())
     </insert>
 
@@ -127,21 +127,21 @@
 
     <select id="getTimePointByTsid" resultType="com.tpadsz.after.entity.TimePoint">
         SELECT
-  	      p.tsid,p.sid,concat(IF(LENGTH(hour)=1,CONCAT("0",hour),hour),":",if(LENGTH(minute)=1,concat("0",minute),minute)) as time,
+  	      p.tsid,p.sid,concat(IF(LENGTH(hour)=1,CONCAT('0',hour),hour),':',if(LENGTH(minute)=1,concat('0',minute),minute)) as time,
           'ON' AS state,
         	s.sname,
         	s.scene_id
         FROM
         	( SELECT tsid, sid, hour,minute FROM f_time_point WHERE sid not IN ( -1, -2 ) AND tsid = #{id} ) p,
-        	f_scene s
+            f_scene s
         WHERE p.sid = s.id UNION all
         SELECT
-        	tsid,sid,concat(IF(LENGTH(hour)=1,CONCAT("0",hour),hour),":",if(LENGTH(minute)=1,concat("0",minute),minute)) as time,
+        	tsid,sid,concat(IF(LENGTH(hour)=1,CONCAT('0',hour),hour),':',if(LENGTH(minute)=1,concat('0',minute),minute)) as time,
         CASE
         	sid
 --         	WHEN '0' THEN 'ON'
 --         	WHEN '1' THEN 'OFF'
-        	WHEN -1 THEN 'ALl OFF'
+        	WHEN -1 THEN 'ALL OFF'
         	WHEN -2 THEN 'ALL ON'
         	END AS state,
         	NULL AS sname,
@@ -151,5 +151,15 @@
         ORDER BY time
 
     </select>
+
+    <select id="getTimeJson" resultType="com.tpadsz.after.entity.TimeBean">
+        select tid,mid,json from f_time_json  where tid=(select tid from f_time_line where id=#{tid} and mid=#{mid})
+        and
+        mid=#{mid}
+    </select>
+
+    <update id="updateTimeJson">
+        update f_time_json set json=#{json} where tid=(select tid from f_time_line where id=#{tid}) and mid=#{mid}
+    </update>
 
 </mapper>

@@ -3,36 +3,28 @@
 $(function () {
     var match = /^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/;
     var text = "请输入正确的邮箱";
+    var hit = $('#email').prev('.verify');
     //鼠标点击任意一处 判断邮箱是否正确
-    // $("#email").bind("change", function () {
-    //         var context = $("#email").val();
-    //         if (!match.test(context)) {
-    //             $('p.email-hint').removeClass('active').text('');
-    //             $('p.email-hint').addClass('active').text(text);
-    //         } else {
-    //             $('p.email-hint').removeClass('active').text('');
-    //         }
-    //     });
     $("#email").bind(
         "change",
-        {hint:"email-hint",context:"#email",text:text,match:match},
+        {hint:hit,context:"#email",text:text,match:match},
         matchInput);
     //点击获取激活码
     $("#codeSubmit").click(function () {
-        $('p.code-hint').removeClass('active').text('');
-        $("span.success-hint").removeClass("active").text('');
+        $('#code').prev('.verify').removeClass('active').text('');
+        $('#code').next().next('.success-hint').removeClass("active").text('');
         var email = $("#email").val();
         var emailFlag = isEmpty(email);
-        var emailHint = $("p.email-hint").text();
+        var emailHint =  $('#email').prev('.verify').text();
         var hintFlag = isEmpty(emailHint);
         if (emailFlag) {
             //邮箱为空
-            $('p.email-hint').removeClass('active').text('');
-            $('p.email-hint').addClass('active').text("请输入邮箱");
+            $('#email').prev('.verify').removeClass('active').text('');
+            $('#email').prev('.verify').addClass('active').text("请输入邮箱");
         } else if (!hintFlag) {
             //提示框有提示
-            $('p.email-hint').removeClass('active').text('');
-            $('p.email-hint').addClass('active').text(emailHint);
+            $('#email').prev('.verify').removeClass('active').text('');
+            $('#email').prev('.verify').addClass('active').text(emailHint);
         } else {
             $.ajax({
                 type: "POST",
@@ -42,11 +34,12 @@ $(function () {
                 success: function (msg) {
                     console.log("msg: " + msg.info);
                     if (msg.info == "isBinding") {
-                        $('p.email-hint').removeClass('active').text('');
-                        $('p.email-hint').addClass('active').text("该邮箱已绑定");
+                        $('#email').prev('.verify').removeClass('active').text('');
+                        $('#email').prev('.verify').addClass('active').text("该邮箱已绑定");
                     } else if (msg.info == "success") {
                         sendMessage($("#codeSubmit"), 60, "获取激活码");
-                        $("span.success-hint").addClass("active").text("请登录邮箱查收");
+                        $('#email').prev('.verify').removeClass('active').text('');
+                        $('#code').next().next('.success-hint').addClass("active").text("请登录邮箱查收");
                     } else {
                         alert("加载失败,请重试");
                     }
@@ -62,38 +55,40 @@ $(function () {
     //点击立即绑定
     $("#fillSubmit").click(function () {
         // $('p.code-hint').removeClass('active').text('');
-        $("p.success-hint").removeClass("active").text('');
+        $('#code').next().next('.success-hint').removeClass("active").text('');
         var email = $("#email").val();
         var emailFlag = isEmpty(email);
         var code = $("#code").val();//用户输入的验证码
         // var account = $(".account").val();
         var codeFlag = isEmpty(code);
-        var emailHint = $("p.email-hint").text();
+        var emailHint = $('#email').prev('.verify').text();
         var hintFlag = isEmpty(emailHint);
         if (emailFlag) {
             //手机号为空
-            $('p.email-hint').removeClass('active').text('');
-            $('p.email-hint').addClass('active').text("请输入邮箱");
+            $('#email').prev('.verify').removeClass('active').text('');
+            $('#email').prev('.verify').addClass('active').text("请输入邮箱");
         } else if ($.trim(emailHint) == text) {
             //提示框有提示
-            $('p.email-hint').removeClass('active').text('');
-            $('p.email-hint').addClass('active').text(text);
+            $('#email').prev('.verify').removeClass('active').text('');
+            $('#email').prev('.verify').addClass('active').text(text);
+        }else{
+            $('#email').prev('.verify').removeClass('active').text('');
         }
         if (codeFlag) {
             //验证码为空
-            $('p.code-hint').removeClass('active').text('');
-            $('p.code-hint').addClass('active').text("请输入激活码");
+            $('#code').prev('.verify').removeClass('active').text('');
+            $('#code').prev('.verify').addClass('active').text("请输入激活码");
         }
         if (!emailFlag && !codeFlag && hintFlag) {
             //手机号和验证码不为空
             var length = $.trim(code).length;
             if (length != 6) {
                 //激活码不正确
-                $('p.code-hint').removeClass('active').text('');
-                $('p.code-hint').addClass('active').text("激活码不正确");
+                $('#code').prev('.verify').removeClass('active').text('');
+                $('#code').prev('.verify').addClass('active').text("激活码不正确");
                 // console.log("激活码不正确");
             } else {
-                $('p.email-hint').removeClass('active').text('');
+                $('#email').prev('.verify').removeClass('active').text('');
                 $.ajax({
                     type: "POST",
                     url: "/alink-hq/myAccount/changeEmail",
@@ -105,8 +100,8 @@ $(function () {
                         var info = msg.info;
                         if (info == "codeError") {
                             //验证码不正确
-                            $('p.code-hint').removeClass('active').text('');
-                            $('p.code-hint').addClass('active').text("激活码不正确");
+                            $('#code').prev('.verify').removeClass('active').text('');
+                            $('#code').prev('.verify').addClass('active').text("激活码不正确");
                         }
                         // else if (info=="codeTimeOut"){
                         //     //验证码超时

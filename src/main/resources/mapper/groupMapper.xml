@@ -2,15 +2,23 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.tpadsz.after.dao.GroupDao">
 
+    <parameterMap id="deleteMapper" type="map">
+        <parameter property="gid" mode="IN"/>
+        <parameter property="mid" mode="IN"/>
+        <parameter property="result" mode="OUT" jdbcType="INTEGER"/>
+    </parameterMap>
+
     <sql id="Base_Column_List">
 		g.id,
         g.mid,
         g.gname,
         p.name,
+        m.uid,
         m.project_id,
         m.mname,
         m.mesh_id,
         pl.id pid,
+        pl.place_id placeId,
         pl.pname,
         IFNULL(l.lcount,0) lcount
 	</sql>
@@ -23,8 +31,7 @@
                     r.role_id in (2,3,4))
                 </when>
                 <when test="role == 'manager'">
-                    AND m.uid IN (SELECT c.uid FROM f_user_customer c WHERE fid=(SELECT fid FROM f_user_customer WHERE
-                    uid=#{uid}))
+                    AND m.uid IN (SELECT c.uid FROM f_user_customer c WHERE fid=(SELECT fid FROM f_user_customer WHERE uid=#{uid}))
                     <!--
                         AND m.uid IN (SELECT c.uid FROM f_user_customer c INNER JOIN f_user_role r ON c.uid=r.user_id WHERE r.role_id in (4) OR fid=(SELECT fid FROM f_user_customer WHERE uid=#{uid}))
                      -->
@@ -32,8 +39,9 @@
                 <when test="role == 'user'">
                     AND m.uid =#{uid}
                 </when>
-                <!--<otherwise>-->
-                <!--</otherwise>-->
+                <when test="role == 'salesman'">
+                    AND m.uid IN (SELECT c.uid FROM f_user_customer c WHERE fid=(SELECT fid FROM f_user_customer WHERE uid=#{uid}))
+                </when>
             </choose>
         </if>
     </sql>
@@ -113,12 +121,15 @@
         g.id,
         g.mid,
         g.gname,
+        m.mname,
         m.mesh_id,
         g.pid,
+        sp.name,
         IFNULL(p.pname,'null') pname
         FROM f_group g
         LEFT JOIN f_place p ON g.pid=p.id
         INNER JOIN f_mesh m ON m.id=g.mid
+        INNER JOIN f_project sp ON sp.id=m.project_id
         WHERE g.id IN
         <foreach collection="list" item="id" index="index" open="(" close=")" separator=",">
             #{id}
@@ -131,21 +142,20 @@
         p.pname label
         FROM f_place p
         INNER JOIN f_mesh m ON p.mid = m.id
-        WHERE 1=1
+        WHERE place_id &gt;0
         <if test="projectId!=null and projectId!=''">
             AND m.project_id=#{projectId}
         </if>
         <if test="mid!=null and mid!=''">
             AND m.id=#{mid}
         </if>
-        LIMIT 1
     </select>
 
     <select id="getMesh" resultType="OptionList" parameterType="map">
         SELECT CONCAT_WS('_',id,mesh_id) id,mesh_id, mname label FROM f_mesh m
         WHERE 1=1
         <include refid="common_choose"></include>
---         GROUP BY mesh_id
+        -- GROUP BY mesh_id
     </select>
     <insert id="save" parameterType="SearchDict">
         <selectKey keyProperty="id" order="BEFORE" resultType="int">
@@ -161,6 +171,10 @@
             #{id}
         </foreach>
     </delete>
+
+    <select id="deleteGroup" parameterMap="deleteMapper" statementType="CALLABLE">
+        CALL delete_group (?,?,?)
+    </select>
 
     <update id="saveRename" parameterType="map">
         UPDATE f_group SET gname=#{name},update_date=NOW() WHERE id =#{id}

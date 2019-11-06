@@ -1,10 +1,8 @@
 package com.tpadsz.after.service;
 
-import com.tpadsz.after.entity.Firm;
-import com.tpadsz.after.entity.Role;
-import com.tpadsz.after.entity.User;
-import com.tpadsz.after.entity.UserList;
+import com.tpadsz.after.entity.*;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 /**
@@ -24,7 +22,7 @@ public interface AccountService {
 
     List<UserList> searchByAdmin(String account,String uname, Integer fid, Integer roleId, String startDate, String endDate);
 
-    List<UserList> searchByManager(String account,String uname, List<String> uids, String startDate, String endDate);
+    List<UserList> searchByManager(String account,String uname, Integer fid, Integer roleId, List<String> uids, String startDate, String endDate);
 
     List<String> findFirmUidOfUser(String uid);
 
@@ -40,9 +38,19 @@ public interface AccountService {
 
     void enable(User user);
 
-    Integer findFirmUid(String uid, String userId);
-
     List<User> findAccountByFid(Integer fid);
 
     void saveMemo(String account, String content);
+
+    List<ProjectList> findAssociateProjectsList(String uid);
+
+    void unassociated(String uid,List<String> list);
+
+    void resetUserProject(String uid);
+
+    List<DownloadExcelData> setDownloadExcelData(HttpSession session, String account, String uname, Integer fid, Integer roleId, String startDate, String endDate);
+
+    List<String> findAccountsOfCooperateFirms(String uid);
+
+    List<Firm> getFirmInfo(Integer role_id, String uid, int flag);
 }

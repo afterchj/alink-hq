@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.tpadsz.after.dao.FileDao">
+
+    <parameterMap id="fileMapper" type="map">
+        <parameter property="id" mode="IN"/>
+        <parameter property="otaId" mode="IN"/>
+        <parameter property="otaVersion" mode="IN"/>
+        <parameter property="otaName" mode="IN"/>
+        <parameter property="otaDesc" mode="IN"/>
+        <parameter property="otaPath" mode="IN"/>
+        <parameter property="result" mode="OUT" jdbcType="INTEGER"/>
+    </parameterMap>
+
+    <parameterMap id="deleteMapper" type="map">
+        <parameter property="id" mode="IN"/>
+        <parameter property="oid" mode="IN"/>
+    </parameterMap>
+
+    <sql id="Base_Column_List">
+		id,
+		id oid,
+        ota_id otaId,
+        ota_name otaName,
+        IFNULL(ota_desc,'') otaDesc,
+        IFNULL(ota_version,'') otaVersion,
+        IFNULL(ota_path,'') otaPath,
+        create_date createDate,
+        update_date updateDate
+	</sql>
+
+    <select id="getByMap" resultType="map" parameterType="SearchDict">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM f_ota_file f
+        WHERE 1=1
+        <if test="otaId!=null and otaId!=''">
+            AND ota_id LIKE CONCAT('%',#{otaId},'%')
+        </if>
+        <if test="otaName!=null">
+            AND ota_name LIKE CONCAT('%',#{otaName},'%')
+        </if>
+        GROUP BY f.id
+        ORDER BY update_date DESC
+    </select>
+
+    <select id="getFileHistory" resultType="map" parameterType="SearchDict">
+        SELECT
+        fh.id,
+        fh.o_id oid,
+        IFNULL(fh.o_desc,'') otaDesc,
+        IFNULL(fh.o_version,'') otaVersion,
+        IFNULL(fh.o_path,'') otaPath,
+        ff.ota_id otaId,
+        fh.update_date updateDate
+        FROM
+        f_ota_history_version fh
+        INNER JOIN f_ota_file ff ON fh.o_id = ff.id
+        WHERE 1=1
+        AND fh.o_id = #{oid}
+        <if test="otaVer!=null and otaVer!=''">
+            AND fh.o_version LIKE CONCAT('%',#{otaVersion},'%')
+        </if>
+        <if test="updateDate!=null and updateDate!=''">
+            AND fh.update_date BETWEEN #{beginDate} AND #{endDate}
+        </if>
+        ORDER BY fh.update_date DESC
+    </select>
+
+    <select id="getFileInfo" resultType="FileDTO" parameterType="int">
+        SELECT
+            id,
+            id oid,
+            ota_id otaId,
+            ota_name otaName,
+            IFNULL(ota_desc, '') otaDesc,
+            IFNULL(ota_path, '') otaPath
+        FROM f_ota_file WHERE id=#{id}
+    </select>
+
+    <insert id="save" parameterType="FileDTO">
+       INSERT INTO f_ota_file(ota_name,ota_id,ota_desc,create_date,update_date) VALUES(#{otaName},#{otaId},#{otaDesc},now(),now());
+   </insert>
+
+    <select id="getCount" resultType="int" parameterType="FileDTO">
+        SELECT COUNT(0) FROM f_ota_file f
+        INNER JOIN f_ota_history_version fh
+        ON f.id=fh.o_id WHERE 1=1
+        <if test="otaId!=null and otaId!=''">
+            AND f.ota_id =#{otaId}
+        </if>
+        <if test="otaName!=null and otaName!=''">
+            AND f.ota_name = #{otaName}
+        </if>
+        <if test="oid!=null and oid!=''">
+            AND fh.o_id=#{oid}
+        </if>
+        <if test="otaVersion!=null and otaVersion!=''">
+            AND fh.o_version = #{otaVersion}
+        </if>
+    </select>
+
+    <delete id="deleteFileById" parameterType="int">
+        DELETE FROM f_ota_file WHERE id=#{id}
+    </delete>
+
+    <select id="deleteHistoryById" parameterMap="deleteMapper" statementType="CALLABLE">
+        CALL delete_flie_history (?,?)
+    </select>
+
+    <update id="updateFile" parameterType="FileDTO">
+      UPDATE f_ota_file
+        <set>
+            <if test="otaId!=null and otaId!=''">
+                ota_id=#{otaId},
+            </if>
+            <if test="otaName!=null and otaName!=''">
+                ota_name=#{otaName},
+            </if>
+            <if test="otaDesc!=null and otaDesc!=''">
+                ota_desc=#{otaDesc},
+            </if>
+            <if test="otaPath!=null and otaPath!=''">
+                ota_path=#{otaPath},
+            </if>
+            update_date=now()
+        </set>
+        WHERE id=#{id}
+    </update>
+
+    <update id="saveUpdate" parameterType="FileDTO">
+        UPDATE f_ota_history_version
+        <set>
+            <if test="otaVersion!=null and otaVersion!=''">
+                o_version=#{otaVersion},
+            </if>
+            <if test="otaDesc!=null and otaDesc!=''">
+                o_desc=#{otaDesc},
+            </if>
+            update_date=now()
+        </set>
+        WHERE id=#{id}
+    </update>
+
+    <select id="saveFile" parameterMap="fileMapper" resultType="map" statementType="CALLABLE">
+        CALL record_file_history(?,?,?,?,?,?,?)
+    </select>
+</mapper>

@@ -32,4 +32,6 @@ public interface RoleDao {
     void rename(@Param("roleId")Integer roleId, @Param("roleName")String roleName);
 
     void delete(@Param("roleId")Integer roleId);
+
+    List<Integer> findViewPermission(@Param("roleId")Integer role_id);
 }

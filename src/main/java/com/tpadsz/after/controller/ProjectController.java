@@ -22,10 +22,7 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Created by chenhao.lu on 2019/4/8.
@@ -77,7 +74,7 @@ public class ProjectController {
                 PageHelper.startPage(pageNum, pageSize);
                 list = projectService.searchBySuper(account, uname, projectName, coname, startCreateDate, endCreateDate,
                         startUpdateDate, endUpdateDate, sortFlag);
-            } else if (role_id == 3) {
+            } else if (role_id == 3 || role_id == 14) {
                 List<Integer> ids = projectService.findProjectList(uid);
                 if (ids.size() != 0) {
                     PageHelper.startPage(pageNum, pageSize);
@@ -110,40 +107,26 @@ public class ProjectController {
 
     @RequestMapping(value = "/createProject", method = RequestMethod.GET)
     public String createProject(HttpSession session, Model model) {
-        User loginUser = (User) session.getAttribute("user");
-        String uid = loginUser.getId();
-        Integer role_id = accountService.findRoleIdByUid(uid);
-        Integer flag;
-        if (role_id == 4) {
-            flag = 0;
-        } else {
-            flag = 1;
-        }
-        model.addAttribute("flag", flag);
+//        User loginUser = (User) session.getAttribute("user");
+//        String uid = loginUser.getId();
+//        Integer role_id = accountService.findRoleIdByUid(uid);
+//        Integer flag;
+//        if (role_id == 4) {
+//            flag = 0;
+//        } else {
+//            flag = 1;
+//        }
+//        model.addAttribute("flag", flag);
         return "projectManage/createProject";
     }
 
     @RequestMapping(value = "/create", method = RequestMethod.POST)
     @ResponseBody
-    public Map<String, String> create(HttpSession session, String projectName, String account) {
+    public Map<String, String> create(HttpSession session, String projectName) {
         Map<String, String> map = new HashMap<>();
         User loginUser = (User) session.getAttribute("user");
-        String uid = loginUser.getId();
         try {
-            User user = accountService.findByAccount(account);
-            if (user == null) {
-                map.put("result", ResultDict.ACCOUNT_NOT_EXISTED.getCode());
-                return map;
-            }
-            Integer role_id = accountService.findRoleIdByUid(uid);
-            if (role_id == 3) {
-                Integer firmUid = accountService.findFirmUid(uid, user.getId());
-                if (firmUid == null) {
-                    map.put("result", ResultDict.NOT_SAME_COMPANY.getCode());
-                    return map;
-                }
-            }
-            int flag = projectService.createProject(projectName, user);
+            int flag = projectService.createProject(projectName, loginUser);
             if (flag == 0) {
                 map.put("result", ResultDict.REPEAT_NAME.getCode());
             } else if (flag == 1) {
@@ -173,18 +156,19 @@ public class ProjectController {
     }
 
     @RequestMapping(value = "/transferPage", method = RequestMethod.GET)
-    public String transferPage(HttpSession session, String projectInfo, Model model) {
+    public String transferPage(HttpSession session, String ids, Model model) {
         User loginUser = (User) session.getAttribute("user");
         String uid = loginUser.getId();
         try {
-            String str = URLDecoder.decode(projectInfo, "utf-8");
-            List<ProjectList> projectList = JSONArray.parseArray(str, ProjectList.class);
+            String[] ids1 = ids.split(",");
+            List<String> list = new ArrayList(Arrays.asList(ids1));
+            List<Map> projectMap = projectService.selectByPid(list);
             Integer role_id = accountService.findRoleIdByUid(uid);
-            List<Firm> firmList = getFirmInfo(role_id, uid);
-            model.addAttribute("projectInfo", projectInfo);
-            model.addAttribute("projectList", projectList);
+            List<Firm> firmList = accountService.getFirmInfo(role_id, uid,1);
+            model.addAttribute("ids", ids);
+            model.addAttribute("projectMap", projectMap);
             model.addAttribute("firmList", firmList);
-        } catch (UnsupportedEncodingException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return "projectManage/projectTurnOver";
@@ -201,25 +185,26 @@ public class ProjectController {
 
     @RequestMapping(value = "/transfer", method = RequestMethod.POST)
     @ResponseBody
-    public Map<String, String> transfer(HttpSession session, String projectInfo, String uid) {
+    public Map<String, String> transfer(HttpSession session, String idss, String uid) {
         Map<String, String> map = new HashMap<>();
-        List<ProjectList> projectList = JSONArray.parseArray(projectInfo, ProjectList.class);
+        String[] ids1 = idss.split(",");
+        List<String> list = new ArrayList(Arrays.asList(ids1));
         User loginUser = (User) session.getAttribute("user");
         String userId = loginUser.getId();
         int count = 0;
         try {
             Integer role_id = accountService.findRoleIdByUid(userId);
-            for (ProjectList project : projectList) {
+            for (String id : list) {
                 if (role_id == 1 || role_id == 2) {
-                    count = projectService.findProjectByProjectId(project.getId());
+                    count = projectService.findProjectByProjectId(Integer.parseInt(id));
                 } else if (role_id == 3) {
                     List<Integer> ids = projectService.findProjectList(userId);
-                    if (ids.contains(project.getId())) {
+                    if (ids.contains(Integer.parseInt(id))) {
                         count = 1;
                     }
                 }
                 if (count != 0) {
-                    projectService.transferProject(project.getId(), uid);
+                    projectService.transferProject(Integer.parseInt(id), uid);
                 }
             }
             map.put("result", ResultDict.SUCCESS.getCode());
@@ -234,13 +219,21 @@ public class ProjectController {
     @ResponseBody
     public Map<String, String> delete(String projectInfo) {
         Map<String, String> map = new HashMap<>();
+        int lightFlag = 0;
         List<ProjectList> projectList = JSONArray.parseArray(projectInfo, ProjectList.class);
         try {
             for (ProjectList project : projectList) {
                 User user = accountService.findByAccount(project.getAccount());
+                lightFlag = projectService.findLightByPid(project.getId(), user.getId());
+                if(lightFlag>0){
+                    map.put("result", ResultDict.LIGHT_EXISTED.getCode());
+                    break;
+                }
                 projectService.delete(user.getId(), project.getId());
             }
-            map.put("result", ResultDict.SUCCESS.getCode());
+            if(lightFlag==0) {
+                map.put("result", ResultDict.SUCCESS.getCode());
+            }
         } catch (Exception e) {
             map.put("result", ResultDict.SYSTEM_ERROR.getCode());
         }
@@ -287,17 +280,6 @@ public class ProjectController {
         model.addAttribute("user", user);
         model.addAttribute("coname", coname);
         return "projectManage/projectDetail";
-    }
-
-
-    private List<Firm> getFirmInfo(Integer role_id, String uid) {
-        List<Firm> firmList = new ArrayList<>();
-        if (role_id == 1 || role_id == 2) {
-            firmList = accountService.findFirmList();
-        } else if (role_id == 3) {
-            firmList = accountService.findFirmByUid(uid);
-        }
-        return firmList;
     }
 
 }

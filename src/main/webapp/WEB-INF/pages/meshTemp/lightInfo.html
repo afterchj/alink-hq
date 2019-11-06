@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" th:href="@{/static/font-awesome-4.7.0/css/font-awesome.min.css}"/>
     <link rel="stylesheet" href="/alink-hq/static/css/base.css">
-    <link rel="stylesheet" href="/alink-hq/static/css/common.css">
+    <!--<link rel="stylesheet" href="/alink-hq/static/css/common.css">-->
     <link rel="stylesheet" href="/alink-hq/static/css/leftNav.css">
     <link rel="stylesheet" href="/alink-hq/static/css/projectManage.css">
     <title>灯详情</title>
@@ -39,12 +39,27 @@
                 </div>
             </div>
             <div id="projectDetail" class="table-content-list" style="height: auto;">
-                <div class="p-detail">
-                    <div class="p-nav">
-                        <ul>
+                <div class="p-detail" style="    box-shadow: 0 2px 1px rgba(0, 0, 0, 0.2);">
+                    <div class="p-nav" style="    height: 75px;">
+                        <ul class="d-label-msg">
                             <li>灯名：<label th:text="${meshInfo.lname}"></label></li>
                             <li>灯MAC地址：<label th:text="${meshInfo.lmac}"></label></li>
-                            <li>X（色温），Y（亮度）：
+                            <li>灯类型：
+                                <span th:if="${meshInfo.angle}!=''">轨道灯</span>
+                                <span th:if="${meshInfo.angle}==''">RGB</span>
+                            </li>
+                            <li>当前状态：
+                                <span th:switch="${meshInfo.off}">
+                                <span th:case="1">开</span>
+                                <span th:case="0">关</span>
+                                <span th:case="*">未知</span>
+                            </span>
+                            </li>
+
+                            <!--  <li>灯版本信息：<label th:text="XXXX"></label></li>-->
+                        </ul>
+                        <ul class="d-label-msg">
+                            <li>灯光（X（色温，Y亮度）：
                                 <span th:if="${meshInfo.x}=='null' or ${meshInfo.x} < 0" th:text="${meshInfo.x}"></span>
                                 <span th:if="${meshInfo.x}!='null' and ${meshInfo.x} >= 0 and ${meshInfo.x} <= 20"
                                       th:text="${meshInfo.x}+'(CCT调光)'"></span>
@@ -54,22 +69,17 @@
                                       th:text="${meshInfo.x}-532+'(RGB调光)'"></span>
                                 <span th:if="${meshInfo.x}!='null' and ${meshInfo.x} >= 1786 and ${meshInfo.x} <= 1899"
                                       th:text="${meshInfo.x}-1687+'(RGB调光)'"></span>
-                                <span th:if="${meshInfo.x}==50" th:text="50"></span>
+                                <span th:if="${meshInfo.x}==50" th:text="50+'(CCT调光)'"></span>
                                 <span>,&nbsp;&nbsp;</span>
                                 <span th:if="${meshInfo.y}=='null' or ${meshInfo.y}<0" th:text="${meshInfo.y}"></span>
                                 <span th:if="${meshInfo.y}!='null' and ${meshInfo.y}!=50 and ${meshInfo.y}>=0"
                                       th:text="100-${meshInfo.y}*5+'%'"></span>
-                                <span th:if="${meshInfo.y==50}" th:text="50"></span>
+                                <span th:if="${meshInfo.y}==50" th:text="50+'%'"></span>
                             </li>
-                            <li>当前状态：
-                            <span th:switch="${meshInfo.off}">
-                                <span th:case="1">开</span>
-                                <span th:case="0">关</span>
-                                <span th:case="*">未知</span>
-                            </span>
+                            <li th:if="${meshInfo.angle}!=''">
+                                角度（垂直，水平，光束）：
+                                <span  th:text="${meshInfo.angle}"></span>
                             </li>
-                            <!--<li>灯类型：<label th:text="XXX"></label></li>-->
-                            <!--<li>灯版本信息：<label th:text="XXXX"></label></li>-->
                         </ul>
                     </div>
                     <div class="p-content">
@@ -117,47 +127,83 @@
                                 <span th:text="${meshInfo.scount}"></span>
                             </div>
                             <div class="f-l">
-                                <a th:href="@{/scene/list(meshName=${meshInfo.mname},meshId=${meshInfo.mesh_id},mid=${meshInfo.mid},lid=${meshInfo.id})}">查看场景列表</a>
+                                <a th:href="@{/scene/list(projectName=${meshInfo.name},meshName=${meshInfo.mname},meshId=${meshInfo.mesh_id},mid=${meshInfo.mid},lid=${meshInfo.id})}">查看场景列表</a>
                             </div>
                         </div>
 
                     </div>
                     <div class="p-detail two">
                         <div class="p-nav">
-                            XXX灯所在场景详情
+                            灯所在场景详情
                         </div>
                         <div class="p-content">
-                            <div class="light-table">
+                            <div class="light-table" >
                                 <table border="1" class="light-detail-table">
                                     <thead>
                                     <tr>
                                         <th><span>场景名称</span></th>
                                         <th><span>场景id</span></th>
-                                        <th><span>灯-X(色温)Y(亮度)</span></th>
+                                        <th th:switch="${flag}">
+                                            <span th:case='true' style="vertical-align: middle;">
+                                                <div style="line-height: 1">灯光（X色温，Y亮度)</div>
+                                                <div style="line-height: 1">角度（垂直，水平，光束）</div>
+                                            </span>
+                                            <span th:case="*">灯光（X色温，Y亮度）</span>
+                                            <!--<span th:case="*">灯光（X色温，Y亮度)&nbsp;&nbsp;角度（垂直，水平，光束）</span>-->
+                                            <!--<span  th:case='true'>灯光（X色温，Y亮度）</span>-->
+                                        </th>
                                     </tr>
                                     </thead>
                                     <tbody>
+                                    <tr th:if="${#arrays.isEmpty(sceneInfo)}">
+                                        <td style="color: #999;">暂无数据</td>
+                                    </tr>
                                     <tr th:each="scene:${sceneInfo}">
                                         <td><span th:text="${scene.sname}"></span></td>
                                         <td><span th:text="${scene.scene_id}"></span></td>
                                         <td>
-                                            <span th:if="${scene.x}=='null' or ${scene.x} < 0"
-                                                  th:text="${scene.x}"></span>
-                                            <span th:if="${scene.x} != 'null' and ${scene.x} >= 0 and ${scene.x} <= 20"
-                                                  th:text="${scene.x}+'(CCT调光)'"></span>
-                                            <span th:if="${scene.x} != 'null' and ${scene.x} >= 235 and ${scene.x} <= 273"
-                                                  th:text="${scene.x}-235+'(RGB调光)'"></span>
-                                            <span th:if="${scene.x} != 'null' and ${scene.x} >= 571 and ${scene.x} <= 630"
-                                                  th:text="${scene.x}-532+'(RGB调光)'"></span>
-                                            <span th:if="${scene.x} != 'null' and ${scene.x} >= 1786 and ${scene.x} <= 1899"
-                                                  th:text="${scene.x}-1687+'(RGB调光)'"></span>
-                                            <span th:if="${scene.x==50}" th:text="50"></span>
-                                            <span>,&nbsp;&nbsp;</span>
-                                            <span th:if="${scene.y}=='null' or ${scene.y}<0"
-                                                  th:text="${scene.y}"></span>
-                                            <span th:if="${scene.y}!='null' and ${scene.y}!=50 and ${scene.y}>=0"
-                                                  th:text="100-${scene.y}*5+'%'"></span>
-                                            <span th:if="${scene.y==50}" th:text="50"></span>
+                                            <!--<span th:if="${scene.x}=='null' or ${scene.x} < 0"-->
+                                                  <!--th:text="${scene.x}"></span>-->
+                                            <!--<span th:if="${scene.x} != 'null' and ${scene.x} >= 0 and ${scene.x} <= 20"-->
+                                                  <!--th:text="${scene.x}+'(CCT调光)'"></span>-->
+                                            <!--<span th:if="${scene.x} != 'null' and ${scene.x} >= 235 and ${scene.x} <= 273"-->
+                                                  <!--th:text="${scene.x}-235+'(RGB调光)'"></span>-->
+                                            <!--<span th:if="${scene.x} != 'null' and ${scene.x} >= 571 and ${scene.x} <= 630"-->
+                                                  <!--th:text="${scene.x}-532+'(RGB调光)'"></span>-->
+                                            <!--<span th:if="${scene.x} != 'null' and ${scene.x} >= 1786 and ${scene.x} <= 1899"-->
+                                                  <!--th:text="${scene.x}-1687+'(RGB调光)'"></span>-->
+                                            <!--<span th:if="${scene.x}==50" th:text="50+'(CCT调光)'"></span>-->
+                                            <!--<span>,&nbsp;&nbsp;</span>-->
+                                            <!--<span th:if="${scene.y}=='null' or ${scene.y}<0"-->
+                                                  <!--th:text="${scene.y}"></span>-->
+                                            <!--<span th:if="${scene.y}!='null' and ${scene.y}!=50 and ${scene.y}>=0"-->
+                                                  <!--th:text="100-${scene.y}*5+'%'"></span>-->
+                                            <!--<span th:if="${scene.y}==50" th:text="50+'%'"></span>-->
+
+                                            <!--<span th:if="${scene.angle}!=null" th:text="${scene.angle}"></span>-->
+
+
+                                             <span  style="vertical-align: middle;">
+                                                <div style="line-height: 1">
+                                                    <span th:if="${scene.x}=='null' or ${scene.x} < 0"   th:text="${scene.x}"></span>
+                                                    <span th:if="${scene.x} != 'null' and ${scene.x} >= 0 and ${scene.x} <= 20"
+                                                          th:text="${scene.x}+'(CCT调光)'"></span>
+                                                    <span th:if="${scene.x} != 'null' and ${scene.x} >= 235 and ${scene.x} <= 273"
+                                                          th:text="${scene.x}-235+'(RGB调光)'"></span>
+                                                    <span th:if="${scene.x} != 'null' and ${scene.x} >= 571 and ${scene.x} <= 630"
+                                                          th:text="${scene.x}-532+'(RGB调光)'"></span>
+                                                    <span th:if="${scene.x} != 'null' and ${scene.x} >= 1786 and ${scene.x} <= 1899"
+                                                          th:text="${scene.x}-1687+'(RGB调光)'"></span>
+                                                            <span th:if="${scene.x}==50" th:text="50+'(CCT调光)'"></span>
+                                                            <span>,&nbsp;&nbsp;</span>
+                                                    <span th:if="${scene.y}=='null' or ${scene.y}<0"
+                                                          th:text="${scene.y}"></span>
+                                                    <span th:if="${scene.y}!='null' and ${scene.y}!=50 and ${scene.y}>=0"
+                                                          th:text="100-${scene.y}*5+'%'"></span>
+                                                    <span th:if="${scene.y}==50" th:text="50+'%'"></span>
+                                                </div>
+                                                <div th:if="${#strings.length(scene.angle)}!=0 " style="line-height: 1"> <span th:text="${scene.angle}"></span></div>
+                                            </span>
                                         </td>
                                     </tr>
                                     </tbody>
@@ -174,16 +220,11 @@
 <script type="text/javascript" src="/alink-hq/static/js/left.js"></script>
 <script src="/alink-hq/static/js/moment.js"></script>
 
-<script type="text/javascript">
-    $(function () {
-//        var length = $('#projectDetail .light-detail-table tbody>tr').length;
-//        if (length > 4) {
-//            $('#projectDetail .light-detail-table tbody').css('border-bottom', '1px solid #bbb');
-//            $('#projectDetail .light-detail-table thead th').css('width', '360px');
-//        } else if (length <= 4) {
-//            $('#projectDetail .light-detail-table thead th').css('width', '220px');
-//        }
-    })
+<script th:inline="javascript">
+    var meshInfo = [[${meshInfo}]];
+    var sceneInfo= [[${sceneInfo}]];
+    console.log(meshInfo);
+    console.log(sceneInfo);
 </script>
 </body>
 

@@ -36,62 +36,226 @@
                 </div>
             </div>
 
-            <div id="meshList" class="table-content-list">
+            <div class="table-content-list">
                 <form class="clearfix" th:action="@{/light/list}" method="post">
                     <input type="hidden" name="uid" th:value="${dict.uid}">
                     <input type="hidden" id="pageSize" th:value="${dict.pageSize}">
-                    <input type="hidden" name="projectId" th:value="${dict.projectId}">
+                    <input type="hidden" name="projectId" id="projectId" th:value="${dict.projectId}">
                     <input type="hidden" id="mid" name="mid" th:value="${dict.mid}">
                     <input type="hidden" name="pid" th:value="${dict.pid}">
                     <input type="hidden" name="gid" th:value="${dict.gid}">
-                    <div class="search-condition clearfix">
+                    <div class="search-condition clearfix p-r">
                         <div class="f-l search" style="margin-right:0">
                             <div>
-                                <label for="lname" class="font">灯名称</label>
+                                <label class="font">灯名称</label>
                                 <input type="text" id="lname" name="lname" th:value="${dict.lname}"
                                        placeholder="请输入灯名称">
                             </div>
                             <div>
-                                <label for="pname" class="font">区域名称</label>
+                                <label class="font">区域名称</label>
                                 <input type="text" id="pname" name="pname" th:value="${dict.pname}"
                                        placeholder="请输入区域名称">
                             </div>
                             <div>
-                                <label for="name" class="font">项目名称</label>
+                                <label class="font">项目名称</label>
                                 <input type="text" id="name" name="name" th:value="${dict.name}" placeholder="请输入项目名称">
                             </div>
                         </div>
                         <div class="f-l search" style="margin-right:0">
                             <div>
-                                <label for="lmac" class="font">灯MAC地址</label>
+                                <label class="font">灯MAC地址</label>
                                 <input type="text" id="lmac" name="lmac" th:value="${dict.lmac}" placeholder="请输入MAC地址">
                             </div>
                             <div>
-                                <label for="mname" class="font">网络名称</label>
+                                <label class="font">网络名称</label>
                                 <input type="text" id="mname" name="mname" th:value="${dict.mname}"
                                        placeholder="请输入网络名称">
                             </div>
-
                         </div>
                         <div class="f-l search">
                             <div>
-                                <label for="gname" class="font">组名称</label>
+                                <label class="font">组名称</label>
                                 <input type="text" id="gname" name="gname" th:value="${dict.gname}"
                                        placeholder="请输入组名称">
                             </div>
                             <div>
-                                <label for="meshId" class="font">网络ID</label>
+                                <label class="font">网络ID</label>
                                 <input type="text" id="meshId" name="meshId" th:value="${dict.meshId}"
                                        placeholder="请输入网络ID">
                             </div>
                         </div>
-                        <div class="f-r search-button " style="">
+                        <div class="f-r search-button p-a" style="">
                             <button type="submit" class="pointer">查询</button>
                         </div>
                     </div>
                     <div class="search-result">
                         <!-- 有数据时 -->
                         <table border="1" class="hasData active" th:if="${pageInfo!=null}">
+                            <thead>
+                            <tr>
+                                <th class="all-checkbox">
+                                    <!--<span style="vertical-align: sub;">-->
+                                    <input type="checkbox" id="all" class="pointer">
+                                    <!--</span>-->
+                                    <span class="">全选</span>
+                                </th>
+                                <th><span>灯名称</span></th>
+                                <th><span>灯MAC地址</span></th>
+                                <th><span>灯类型</span></th>
+                                <th class="p-r"><span class="light-angle p-a">灯光(X色温,Y亮度)<br style="height: 1px;">角度(垂直,水平,光束)</span></th>
+                                <th><span>隶属项目</span></th>
+                                <th><span>隶属网络</span></th>
+                                <th><span>网络ID</span></th>
+                                <th><span>隶属区域</span></th>
+                                <th><span>隶属组</span></th>
+                                <!--<th style="width: 190px;"><span>X（色温），Y（亮度）</span></th>-->
+                                <th><span>状态</span></th>
+                                <th class="brief"><span>操作</span></th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr th:each="light:${pageInfo.list}">
+                                <td class="pid">
+                                    <input type="checkbox" name="ids" th:value="${light.id}">
+                                    <input type="hidden" class="mid" th:value="${light.mid}">
+                                    <input type="hidden" name="p_id" th:value="${light.pid}">
+                                    <input type="hidden" name="u_id" th:value="${light.uid}">
+                                </td>
+                                <td class="k-link lname">
+                                    <a th:href="@{/light/info(id=${light.id})}" th:text="${light.lname}"></a>
+                                </td>
+                                <td th:text="${light.lmac}"></td>
+                                <td>
+                                    <span th:if="${light.angle}!=''">轨道灯</span>
+                                    <span th:if="${light.angle}==''">RGB</span>
+                                </td>
+                                <!--<td class="p-r">-->
+                                <!--<span>20(CCT调光)，10%</span>-->
+                                <!--&lt;!&ndash;<span class="p-a version">&ndash;&gt;-->
+                                <!--&lt;!&ndash;<span>NEW</span>&ndash;&gt;-->
+                                <!--&lt;!&ndash;</span>&ndash;&gt;-->
+                                <!--&lt;!&ndash;XXX&ndash;&gt;-->
+                                <!--</td>-->
+                                <td class="p-r">
+                                    <span th:if="${light.x}=='null' or ${light.x} < 0"  th:text="${light.x}"></span>
+                                    <span th:if="${light.x} != 'null' and ${light.x} >= 0 and ${light.x} <= 20"
+                                          th:text="${light.x}+'(CCT调光)'"></span>
+                                    <span th:if="${light.x} != 'null' and ${light.x} >= 235 and ${light.x} <= 273"
+                                          th:text="${light.x}-235+'(RGB调光)'"></span>
+                                    <span th:if="${light.x} != 'null' and ${light.x} >= 571 and ${light.x} <= 630"
+                                          th:text="${light.x}-532+'(RGB调光)'"></span>
+                                    <span th:if="${light.x} != 'null' and ${light.x} >= 1786 and ${light.x} <= 1899"
+                                          th:text="${light.x}-1687+'(RGB调光)'"></span>
+                                    <span th:if="${light.x}==50" th:text="50+'(CCT调光)'"></span>
+                                    <span>,&nbsp;&nbsp;</span>
+                                    <span th:if="${light.y}=='null' or ${light.y}<0" th:text="${light.y}"></span>
+                                    <span th:if="${light.y}!='null' and ${light.y}!=50 and ${light.y}>=0"
+                                          th:text="100-${light.y}*5+'%'"></span>
+                                    <span th:if="${light.y}==50" th:text="50 +'%'"></span>
+                                    <br>
+                                    <!--如果灯类型为轨道灯-->
+                                    <span th:if="${light.angle}!=null and ${light.angle}!='0，0，0'" th:text="${light.angle}"></span>
+                                </td>
+                                <td th:switch="${light.off}">
+                                    <span th:case="1">开</span>
+                                    <span th:case="0">关</span>
+                                    <span th:case="*">未知</span>
+                                </td>
+                                <td class="k-link project_id">
+                                    <a th:href="@{/project/detail(projectId=${light.project_id})}"
+                                       th:text="${light.name}" th:alt="${light.project_id}"></a>
+                                </td>
+                                <td class="k-link">
+                                    <a th:href="@{/mesh/info(id=${light.mid})}" th:text="${light.mname}"></a>
+                                </td>
+                                <td th:text="${light.mesh_id}" class="mesh_id"></td>
+                                <td class="k-link">
+                                    <a th:href="@{/place/info(id=${light.pid})}" th:text="${light.pname}"></a>
+                                </td>
+                                <td class="k-link">
+                                    <a th:href="@{/group/info(id=${light.gid})}" th:text="${light.gname}"></a>
+                                </td>
+
+                                <td class="p-r">
+                                    <i class="fa  fa-ellipsis-v  fa-lg openList pointer" style="width: 40%;"></i>
+                                    <ul class="showList p-a">
+                                        <li>
+                                            <img shiro:hasPermission="renameLight" src="/alink-hq/static/img/edit.png"
+                                                 th:alt="${light.id}" class="rename pointer"
+                                                 title="重命名">
+                                            <img shiro:lacksPermission="renameLight"
+                                                 src="/alink-hq/static/img/un-rename.png" alt=""
+                                                 class="pointer  unclick"
+                                                 th:title="无法操作">
+                                        </li>
+                                        <li>
+                                            <a shiro:hasPermission="moveLight"
+                                               th:href="@{/light/move(mid=${light.mid},ids=${light.id})} ">
+                                                <img src="/alink-hq/static/img/exchange.png" th:alt="${light.id}"
+                                                     class="center-img pointer" title="移动">
+                                            </a>
+                                            <img shiro:lacksPermission="moveLight"
+                                                 src="/alink-hq/static/img/un-exchange.png"
+                                                 alt=""
+                                                 class=" pointer  unclick center-img"
+                                                 th:title="无法操作">
+                                        </li>
+                                        <li>
+                                            <img shiro:hasPermission="deleteLight" src="/alink-hq/static/img/delete.png"
+                                                 th:alt="${light.id}"
+                                                 class="singleDel pointer " title="删除"
+                                                 style="width: 15px;height: 15px;">
+                                            <img shiro:lacksPermission="deleteLight"
+                                                 src="/alink-hq/static/img/un-delete.png"
+                                                 alt="" class="pointer   unclick" style="width: 15px;height: 15px;"
+                                                 th:title="无法操作">
+                                        </li>
+                                    </ul>
+                                    <div style="width: 40%;display: inline-block;vertical-align: sub;">
+                                        <img shiro:hasPermission="outLight" src="/alink-hq/static/img/export.png"
+                                             th:alt="${light.id}"
+                                             class="pointer backup" title="灯信息导出">
+                                        <img shiro:lacksPermission="outLight" src="/alink-hq/static/img/export-un.png"
+                                             th:alt="${light.id}"
+                                             class=" pointer unclick" title="灯信息导出">
+                                    </div>
+                                </td>
+                            </tr>
+                            </tbody>
+                            <tfoot>
+                            <tr>
+                                <td colspan="13" class="clearfix page">
+                                    <div class="f-l" style="padding-left: 20px;">
+                                        <input type="checkbox" id="addAll" class="pointer">
+                                        <!--</span>-->
+                                        <span class="">全选</span>
+                                    </div>
+                                    <div class="f-l">
+                            <span class="selected-order">已选择
+                                 <span id="amount" class="amount">0</span>条数据
+                            </span>
+                                        <span class="m-r-20">
+                                <span shiro:hasPermission="moveLight" class="skipPageBtn pointer moment"
+                                      onmousedown="exchangeBtnMouseDown()"
+                                      onmouseup="exchangeBtnMouseUp()" id="multiMove">移动</span>
+                                <span shiro:lacksPermission="moveLight"
+                                      class="skipPageBtn pointer moment active unclick1">移动</span>
+                            </span>
+                                        <span>
+                                <span class="skipPageBtn pointer moment" shiro:hasPermission="deleteLight"
+                                      onmousedown="deleteBtnMouseDown()"
+                                      onmouseup="deleteBtnMouseUp()" id="multiDel">删除</span>
+                                <span shiro:lacksPermission="deleteLight"
+                                      class="skipPageBtn pointer moment active unclick1">删除</span>
+                            </span>
+                                    </div>
+                                    <div th:replace="common/page::page"></div>
+                                </td>
+                            </tr>
+                            </tfoot>
+                        </table>
+                        <!-- 无数据时 -->
+                        <table th:if="${pageInfo==null}" border="1" class="noData active">
                             <thead>
                             <tr>
                                 <th class="all-checkbox">
@@ -115,155 +279,9 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <tr th:each="light:${pageInfo.list}">
-                                <td class="pid"><input type="checkbox" name="ids" th:value="${light.id}"><input
-                                        type="hidden" th:value="${light.pid}"></td>
-                                <td class="k-link lname">
-                                    <a th:href="@{/light/info(id=${light.id})}" th:text="${light.lname}"></a>
-                                </td>
-                                <td th:text="${light.lmac}"></td>
-                                <!--<td>-->
-                                    <!--RGB-->
-                                <!--</td>-->
-                                <!--<td class="p-r">-->
-                                    <!--<span class="p-a version">-->
-                                        <!--<span>NEW</span>-->
-                                    <!--</span>-->
-                                    <!--XXX-->
-                                <!--</td>-->
-                                <td class="k-link">
-                                    <a th:href="@{/project/detail(projectId=${light.project_id})}"
-                                       th:text="${light.name}"></a>
-                                </td>
-
-                                <td class="k-link">
-                                    <a th:href="@{/mesh/info(id=${light.mid})}" th:text="${light.mname}"></a>
-                                </td>
-                                <td th:text="${light.mesh_id}"></td>
-                                <td class="k-link">
-                                    <a th:href="@{/place/info(id=${light.pid})}" th:text="${light.pname}"></a>
-                                </td>
-                                <td class="k-link">
-                                    <a th:href="@{/group/info(id=${light.gid})}" th:text="${light.gname}"></a>
-                                </td>
-                                <td><span th:if="${light.x}=='null' or ${light.x} < 0" th:text="${light.x}"></span>
-                                    <span th:if="${light.x} != 'null' and ${light.x} >= 0 and ${light.x} <= 20"
-                                          th:text="${light.x}+'(CCT调光)'"></span>
-                                    <span th:if="${light.x} != 'null' and ${light.x} >= 235 and ${light.x} <= 273"
-                                          th:text="${light.x}-235+'(RGB调光)'"></span>
-                                    <span th:if="${light.x} != 'null' and ${light.x} >= 571 and ${light.x} <= 630"
-                                          th:text="${light.x}-532+'(RGB调光)'"></span>
-                                    <span th:if="${light.x} != 'null' and ${light.x} >= 1786 and ${light.x} <= 1899"
-                                          th:text="${light.x}-1687+'(RGB调光)'"></span>
-                                    <span th:if="${light.x==50}" th:text="50"></span>
-                                    <span>,&nbsp;&nbsp;</span>
-                                    <span th:if="${light.y}=='null' or ${light.y}<0" th:text="${light.y}"></span>
-                                    <span th:if="${light.y}!='null' and ${light.y}!=50 and ${light.y}>=0"
-                                          th:text="100-${light.y}*5+'%'"></span>
-                                    <span th:if="${light.y==50}" th:text="50"></span>
-                                </td>
-                                <td th:switch="${light.off}">
-                                    <span th:case="1">开</span>
-                                    <span th:case="0">关</span>
-                                    <span th:case="*">未知</span>
-                                </td>
-                                <td class="p-r">
-                                    <i class="fa  fa-ellipsis-v  fa-lg openList pointer" style="width: 40%;"></i>
-                                    <ul class="showList p-a">
-                                        <li>
-                                            <img shiro:hasPermission="renameLight" src="/alink-hq/static/img/edit.png"
-                                                 th:alt="${light.id}" class="rename pointer"
-                                                 title="重命名">
-                                            <img shiro:lacksPermission="renameLight"
-                                                 src="/alink-hq/static/img/un-rename.png" alt=""
-                                                 class="pointer  unclick"
-                                                 th:title="无法操作">
-                                        </li>
-                                        <li>
-                                            <a shiro:hasPermission="moveLight"
-                                               th:href="@{/light/move(mid=${light.mid},ids=${light.id})} ">
-                                                <img src="/alink-hq/static/img/exchange.png" th:alt="${light.id}"
-                                                     class="center-img pointer" title="移动">
-                                            </a>
-                                            <img shiro:lacksPermission="moveLight" src="/alink-hq/static/img/un-exchange.png"
-                                                 alt=""
-                                                 class=" pointer  unclick center-img"
-                                                 th:title="无法操作">
-                                        </li>
-                                        <li>
-                                            <img shiro:hasPermission="deleteLight" src="/alink-hq/static/img/delete.png"
-                                                 th:alt="${light.id}"
-                                                 class="singleDel pointer " title="删除" >
-                                            <img shiro:lacksPermission="deleteLight" src="/alink-hq/static/img/un-delete.png"
-                                                 alt="" class="pointer   unclick"
-                                                 th:title="无法操作" >
-                                        </li>
-                                    </ul>
-                                    <div style="width: 40%;display: inline-block;vertical-align: sub;">
-                                        <img shiro:hasPermission="outLight" src="/alink-hq/static/img/export.png"
-                                             th:alt="${light.id}"
-                                             class="pointer backup" title="灯信息导出">
-                                        <img shiro:lacksPermission="outLight" src="/alink-hq/static/img/export-un.png"
-                                             th:alt="${light.id}"
-                                             class=" pointer unclick" title="灯信息导出">
-                                    </div>
-
-                                </td>
-                            </tr>
-                            </tbody>
-                            <tfoot>
                             <tr>
-                                <td colspan="13" class="clearfix page">
-                                    <div class="f-l" style="padding-left: 20px;">
-                                        <input type="checkbox" id="addAll" class="pointer">
-                                        <!--</span>-->
-                                        <span class="">全选</span>
-                                    </div>
-                                    <div class="f-l">
-                            <span class="selected-order">已选择
-                                 <span id="amount" class="amount">0</span>条数据
-                            </span>
-                            <span class="m-r-20">
-                                <span shiro:hasPermission="moveLight" class="skipPageBtn pointer moment"
-                                      onmousedown="exchangeBtnMouseDown()"
-                                      onmouseup="exchangeBtnMouseUp()" id="multiMove">移动</span>
-                                <span shiro:lacksPermission="moveLight"
-                                      class="skipPageBtn pointer moment active unclick1">移动</span>
-                            </span>
-                             <span>
-                                <span class="skipPageBtn pointer moment" shiro:hasPermission="deleteLight"
-                                      onmousedown="deleteBtnMouseDown()"
-                                      onmouseup="deleteBtnMouseUp()" id="multiDel">删除</span>
-                                <span shiro:lacksPermission="deleteLight"
-                                      class="skipPageBtn pointer moment active unclick1">删除</span>
-                            </span>
-                                    </div>
-                                    <div th:replace="common/page::page"></div>
-                                </td>
-                            </tr>
-                            </tfoot>
-                        </table>
-                        <!-- 无数据时 -->
-                        <table th:if="${pageInfo==null}" border="1" class="noData active">
-                            <thead>
-                            <tr>
-                                <th class="all-checkbox">
-                                    <span style="vertical-align: sub;"><input type="checkbox" class="pointer"></span>
-                                    <span class="">全选</span>
-                                </th>
-                                <th>组名称</th>
-                                <th>隶属网络</th>
-                                <th>网络ID</th>
-                                <th>隶属区域</th>
-                                <th>隶属组</th>
-                                <th>灯数量</th>
-                                <th>操作</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr>
-                                <td colspan="9">
-                                    <img src="/alink-hq/static/img/no-data.png" alt="">
+                                <td colspan="11">
+                                    <img th:src="@{/static/img/no-data.png}" style="width: auto;height: auto;" alt="">
                                     <p>暂无数据</p>
                                 </td>
                             </tr>
@@ -276,54 +294,61 @@
     </div>
 </div>
 <!-- 重命名弹框 -->
-<div class="confirm-on-off pop-iframe  " openContent="reset-name">
-    <div class="confirm-on-off-nav p-r pop-nav">
-        重命名
-    </div>
-    <div class="pop-content">
-        <div class="newName">
-            <p class="rename-hint"></p>
-            <label for="rename">新名称</label>
-            <input type="text" placeholder="请输入（2-16位汉字、字母、数字）" id="rename" onkeyup="nameKeyUp()" maxlength="16"/>
-        </div>
-        <div class="pop-btn">
-            <button class="reduce">取消</button>
-            <button class="yes">确定</button>
-        </div>
-    </div>
-</div>
-<!-- 删除账户 -->
-<div class="pop-iframe" openContent="delete-mesh">
-    <div class=" p-r pop-nav">
-        温馨提示
-    </div>
-    <div class="pop-content">
-        <div class="reset-pwd">您确定要删除所选的灯吗？</div>
-        <div class="reset-pwd-hint">
-            删除该灯将会退出网络，请慎重！
-        </div>
-        <div class="pop-btn">
-            <button class="reduce">取消</button>
-            <button class="yes">确定</button>
-        </div>
-    </div>
-</div>
+<div th:replace="pop/reset::reset-name"></div>
+<!--<div class="confirm-on-off pop-iframe  " openContent="reset-name">-->
+<!--<div class="confirm-on-off-nav p-r pop-nav">-->
+<!--重命名-->
+<!--</div>-->
+<!--<div class="pop-content">-->
+<!--<div class="newName">-->
+<!--<p class="rename-hint"></p>-->
+<!--<label for="rename">新名称</label>-->
+<!--<input type="text" placeholder="请输入（2-16位汉字、字母、数字）" id="rename" onkeyup="nameKeyUp()" maxlength="16"/>-->
+<!--</div>-->
+<!--<div class="pop-btn">-->
+<!--<button class="reduce">取消</button>-->
+<!--<button class="yes">确定</button>-->
+<!--</div>-->
+<!--</div>-->
+<!--</div>-->
+<!-- 删除灯 -->
+<div th:replace="pop/delete::delete-pop"></div>
+<!--<div class="pop-iframe" openContent="delete-pop">-->
+<!--<div class=" p-r pop-nav">-->
+<!--温馨提示-->
+<!--</div>-->
+<!--<div class="pop-content">-->
+<!--<div class="reset-pwd">-->
+<!--<i class="fa fa-exclamation-circle fa-3x" aria-hidden="true" style="display: block;color:#00A0E9;"></i>-->
+<!--<p> 您确定要删除所选的灯吗？</p>-->
+<!--</div>-->
+<!--<div class="reset-pwd-hint">-->
+<!--删除该灯将会退出网络，请慎重！-->
+<!--</div>-->
+<!--<div class="pop-btn">-->
+<!--<button class="reduce">取消</button>-->
+<!--<button class="yes">确定</button>-->
+<!--</div>-->
+<!--</div>-->
+<!--</div>-->
 <!-- 不可移动不同网络下的组 -->
-<div class="pop-iframe " openContent="exchange">
-    <div class=" p-r pop-nav">
-        温馨提示
-    </div>
-    <div class="pop-content">
-        <div class="reset-pwd">不同网络下的组不可进行移动</div>
-        <!--<div class="reset-pwd-hint">-->
-        <!--删除后所选组所有的灯将会进入所属网络未分组中请慎重！-->
-        <!--</div>-->
-        <div class="pop-btn">
-            <button class="reduce">取消</button>
-            <button class="yes">确定</button>
-        </div>
-    </div>
-</div>
+<!-- 不可移动不同账号下的网络 -->
+<div th:replace="pop/exchange::exchange"></div>
+<!--<div class="pop-iframe " openContent="exchange">-->
+<!--<div class=" p-r pop-nav">-->
+<!--温馨提示-->
+<!--</div>-->
+<!--<div class="pop-content">-->
+<!--<div class="reset-pwd">不同网络下的组不可进行移动</div>-->
+<!--&lt;!&ndash;<div class="reset-pwd-hint">&ndash;&gt;-->
+<!--&lt;!&ndash;删除后所选组所有的灯将会进入所属网络未分组中请慎重！&ndash;&gt;-->
+<!--&lt;!&ndash;</div>&ndash;&gt;-->
+<!--<div class="pop-btn">-->
+<!--<button class="reduce">取消</button>-->
+<!--<button class="yes">确定</button>-->
+<!--</div>-->
+<!--</div>-->
+<!--</div>-->
 <div class="hide-iframe "></div>
 <script type="text/javascript" src="/alink-hq/static/js/left.js"></script>
 <script type="text/javascript" src="/alink-hq/static/js/page.js"></script>
@@ -334,25 +359,61 @@
     $(".backup").click(function () {
         var id = $(this).attr("alt");
         //要导出的json数据
-        $.get("/alink-hq/light/getLightInfo?id=" + id, function (data) {
-            var status = '';
+        $.get("/alink-hq/light/getLightInfo?id=" + id, function (result) {
+            let status = '';
+            let data = result.light;
+            let scene = result.scene;
+            let scenes = '';
+            let s_info = '';
             var str = '';
             var mac = data.lmac;
-            var flag = data.off;
-            console.log("flag", flag);
-            if (flag == '1') {
-                status = '开';
-            } else if (flag == '0') {
-                status = '关';
-            } else {
-                status = '未知';
+            var x = f_x(data.x);
+            var y = f_y(data.y);
+            console.log("light", data, "scene", scene);
+            console.log("x", x, "y", y);
+
+            function f_x(x) {
+                if (x == '50') {
+                    x = 50;
+                    status = '关';
+                } else if (x >= 0 && x <= 20) {
+                    x += '(CCT调光)';
+                    status = '开';
+                } else if (x >= 235 && x <= 273) {
+                    x = x - 235 + '(RGB调光)';
+                    status = '开';
+                } else if (x >= 571 && x <= 630) {
+                    x = x - 571 + '(RGB调光)';
+                    status = '开';
+                } else if (x >= 1786 && x <= 1899) {
+                    x = x - 1786 + '(RGB调光)';
+                    status = '开';
+                }
+                return x;
             }
-            console.log("status", status);
+
+            function f_y(y) {
+                if (y == '50') {
+                    y = 50
+                } else if (y >= 0 && y < 20) {
+                    y = 100 - y * 5 + '%';
+                }
+                return y;
+            }
+
+            for (var s in scene) {//遍历json数组时，这么写s为索引，0,1
+                scenes += scene[s].sname + ',';
+                s_info += f_x(scene[s].x) + '，' + f_y(scene[s].y) + ',';
+            }
+            console.log("s_info", s_info);
+            console.log("scenes", scenes);
             str += '灯名称,' + data.lname + '\n' + '灯MAC地址,' + mac + '\n' +
-                    '当前状态,' + status + '\n' + '隶属项目,' + data.name + '\n' +
-                    '隶属网络,' + data.mname + '\n' + '网络ID,' + data.mesh_id + '\n' +
-                    '隶属区域,' + data.pname + '\n' + '隶属组,' + data.gname + '\n' +
-                    '所在场景名称,' + data.sname + '\n' + '场景中对应的X（色温），Y（亮度）,' + data.x + '，' + data.y + '\n';
+                '当前状态,' + status + '\n' + '隶属项目,' + data.name + '\n' +
+                '隶属网络,' + data.mname + '\n' + '网络ID,' + data.mesh_id + '\n' +
+                '隶属区域,' + data.pname + '\n' + '隶属组,' + data.gname + '\n' +
+                '当前X（色温），Y（亮度）,' + x + '，' + y + '\n' +
+                '所在场景名称,' + scenes + '\n' +
+                '场景中对应的X（色温），Y（亮度）,' + s_info + '\n';
             //encodeURIComponent解决中文乱码
             let uri = 'data:text/csv;charset=utf-8,\ufeff' + encodeURIComponent(str);
             //通过创建a标签实现

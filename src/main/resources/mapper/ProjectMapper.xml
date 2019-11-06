@@ -94,6 +94,24 @@
             update f_project p set p.name = #{name},p.update_date = NOW() where p.id=#{projectId}
     </update>
 
+    <select id="selectByPid" resultType="map" parameterType="list">
+        SELECT
+        t1.id,
+        t1.name,
+        t2.account,
+        IFNULL(t2.uname,'') AS uname,
+        t4.coname
+        FROM f_project t1
+        INNER JOIN f_user_account t2 ON t1.uid=t2.id
+        INNER JOIN f_user_customer t3 ON t1.uid=t3.uid
+        INNER JOIN f_firm t4 ON t4.id=t3.fid
+        WHERE t1.id IN
+        <foreach collection="list" item="id" index="index" open="(" close=")" separator=",">
+            #{id}
+        </foreach> ORDER BY t1.create_date DESC,t1.update_date DESC
+    </select>
+
+
     <update id="transferProject">
         update f_project set uid = #{uid},update_date = NOW() where id=#{id};
         update f_place set uid = #{uid},update_date = NOW() where mid IN ( SELECT id FROM f_mesh WHERE project_id=#{id});
@@ -138,15 +156,27 @@
     </delete>
 
     <select id="findPlaceNum" resultType="int">
-        SELECT count(*) from f_place where mid IN (SELECT id FROM f_mesh WHERE project_id=#{id})
+        SELECT count(*) from f_place pl
+        INNER JOIN f_mesh m ON m.id = pl.mid
+        INNER JOIN f_project p ON p.id=m.project_id
+        where pl.mid IN (SELECT id FROM f_mesh WHERE project_id=#{id})
     </select>
 
     <select id="findGroupNum" resultType="int">
-        SELECT count(*) from f_group where mid IN (SELECT id FROM f_mesh WHERE project_id=#{id})
+        SELECT count(*) from f_group g
+        INNER JOIN f_place pl ON pl.id = g.pid
+        INNER JOIN f_mesh m ON m.id = pl.mid
+        INNER JOIN f_project p ON p.id=m.project_id
+        where m.project_id=#{id}
     </select>
 
     <select id="findLightNum" resultType="int">
-        SELECT count(*) from f_light where mid IN (SELECT id FROM f_mesh WHERE project_id=#{id})
+        SELECT count(*) from f_light l
+        INNER JOIN f_group g ON g.id=l.gid
+        INNER JOIN f_place pl ON pl.id = g.pid
+        INNER JOIN f_mesh m ON m.id = pl.mid
+        INNER JOIN f_project p ON p.id=m.project_id
+        where l.mid IN (SELECT id FROM f_mesh WHERE project_id=#{id})
     </select>
 
     <select id="findNumAndUid" resultType="com.tpadsz.after.entity.ProjectList">
@@ -159,6 +189,12 @@
 
     <select id="findProjectByProjectId" resultType="int">
         SELECT count(*) FROM f_project WHERE id = #{id}
+    </select>
+
+    <select id="findLightByPid" resultType="int">
+        SELECT COUNT(1) FROM f_light WHERE mid IN (
+        SELECT m.id from f_mesh m where m.project_id=#{id} and m.uid = #{uid}
+        )
     </select>
 
 </mapper>

@@ -1,9 +1,7 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
-
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>OTA文件</title>
-
     <script src="/alink-hq/static/js/jquery.min.js"></script>
     <script src="/alink-hq/static/js/browser.js"></script>
     <link rel="stylesheet" th:href="@{/static/font-awesome-4.7.0/css/font-awesome.min.css}"/>
@@ -23,45 +21,33 @@
             <div class="clearfix main-right-nav">
                 <div class="f-l main-right-title">OTA文件</div>
                 <div class="f-r pointer last-nav">
-                    <a href=""  >
-                        <div   class="create " onmousedown="createBtnMouseDown()" onmouseup="createBtnMouseUp()">
+                    <a th:href="@{/file/addOta}">
+                        <div class="create " onmousedown="createBtnMouseDown()" onmouseup="createBtnMouseUp()">
                             <span>+</span><span>新增固件</span>
                         </div>
                     </a>
-                    <!--<a href="javascript:void(0)"   class="unclick1">-->
-                        <!--<div  class="create no-access" onmousedown="createBtnMouseDown()" onmouseup="createBtnMouseUp()">-->
-                            <!--<span>+</span><span>创建网络</span>-->
-                        <!--</div>-->
-                    <!--</a>-->
                 </div>
                 <div class="f-r pointer">
-                    <div class="goBack" onClick="javascript :history.back();" onmousedown="backBtnMouseDown()"
-                         onmouseup="backBtnMouseUp()">
-                        <!--<span class="triangle-facing-left"></span>-->
+                    <div class="goBack" onClick="javascript :history.back();" onmousedown="backBtnMouseDown()" onmouseup="backBtnMouseUp()">
                         <span><</span><span>返回</span>
                     </div>
-                    <!--<img src="/alink-hq/static/img/go-back.png" alt="" onclick="history.back()">-->
                 </div>
             </div>
 
-            <div id="meshList" class="table-content-list">
-                <form class="clearfix"  method="post">
-                    <!--<input type="hidden" name="uid" th:value="${dict.uid}">-->
-                    <!--<input type="hidden" id="pageSize" th:value="${dict.pageSize}">-->
+            <div  class="table-content-list">
+                <form class="clearfix" th:action="@{/file/OTAFile}" method="post">
+                    <input type="hidden" id="pageSize" th:value="${dict.pageSize}">
                     <div class="search-condition clearfix">
-                        <div class="f-l search" style="margin-right: 150px;margin-left: 100px;">
+                        <div class="f-l search" >
                             <div>
-                                <label for="name" class="font">固件名称</label>
-                                <input type="text" id="name" name="mname"
-                                       placeholder="请输入固件名称">
+                                <label  class="font">固件名称</label>
+                                <input type="text" id="name" name="otaName" placeholder="请输入固件名称" th:value="${dict.otaName}">
                             </div>
-
                         </div>
                         <div class="f-l search">
                             <div>
-                                <label for="mid" class="font">固件ID</label>
-                                <input type="text" id="mid" name="meshId"
-                                       placeholder="请输入固件ID" class="intInput">
+                                <label  class="font">固件ID</label>
+                                <input class="intInput" type="text" id="oid" name="otaId" placeholder="请输入固件ID" th:value="${dict.otaId}">
                             </div>
                         </div>
                         <div class="f-r search-button " style="padding-top: 0;">
@@ -70,14 +56,14 @@
                     </div>
                     <div class="search-result">
                         <!-- 有数据时 -->
-                        <table border="1" class="hasData active" >
+                        <table border="1" class="hasData active" th:if="${pageInfo!=null}">
                             <thead>
                             <tr>
                                 <!--<th class="all-checkbox">-->
-                                    <!--&lt;!&ndash;<span style="vertical-align: sub;">&ndash;&gt;-->
-                                    <!--<input type="checkbox" id="all" class="pointer">-->
-                                    <!--&lt;!&ndash;</span>&ndash;&gt;-->
-                                    <!--<span class="">全选</span>-->
+                                <!--&lt;!&ndash;<span style="vertical-align: sub;">&ndash;&gt;-->
+                                <!--<input type="checkbox" id="all" class="pointer">-->
+                                <!--&lt;!&ndash;</span>&ndash;&gt;-->
+                                <!--<span class="">全选</span>-->
                                 <!--</th>-->
                                 <th><span>固件名称</span></th>
                                 <th><span>固件ID</span></th>
@@ -90,139 +76,58 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <tr >
+                            <tr th:each="file:${pageInfo.list}">
                                 <!--<td class="checkbox">-->
-                                    <!--<input type="checkbox" name="ids"  class="">-->
-                                    <!--&lt;!&ndash;<input type="hidden" th:value="${mesh.uid}" class="uid">&ndash;&gt;-->
+                                <!--<input type="checkbox" name="ids"  class="">-->
+                                <!--&lt;!&ndash;<input type="hidden" th:value="${mesh.uid}" class="uid">&ndash;&gt;-->
                                 <!--</td>-->
+                                <td class="k-link otaName">
+                                    <a th:href="@{/file/history(oid=${file.id},otaId=${file.otaId},otaName=${file.otaName})}" th:text="${file.otaName}"></a>
+                                </td>
+                                <td th:text="${file.otaId}"></td>
+                                <td th:text="${#dates.format(file.createDate, 'yyyy-MM-dd HH:mm:ss')}"></td>
+                                <td th:text="${#dates.format(file.updateDate, 'yyyy-MM-dd HH:mm:ss')}"></td>
+                                <td th:text="${file.otaVersion}"></td>
                                 <td class="k-link">
-                                    <a href="" th:text="GY_USB_Dongle_RSSI"></a>
-                                </td>
-                                <td th:text="6001"></td>
-                                <td >2019/02/05 15:47:44</td>
-                                <td  >2019/02/05 15:47:44
-                                    <!--<a th:href="@{/project/detail(projectId=${mesh.project_id},projectName=${mesh.name})}"-->
-                                       <!--th:text="${mesh.name}"></a>-->
-                                </td>
-                                <td  th:text="v1.3.2">
-                                    <!--<a th:if="${mesh.pcount}=='0'" class="a-un"  href="javascript:void(0);" th:text="${mesh.pcount}"></a>-->
-                                    <!--<a th:if="${mesh.pcount}!='0'" th:href="@{/place/list(projectId=${mesh.project_id},mid=${mesh.id})}" th:text="${mesh.pcount}"></a>-->
+                                    <a th:href="${file.otaPath}" download="">
+                                        <img th:src="@{/static/img/updown.png}" alt="" class="pointer">
+                                    </a>
                                 </td>
                                 <td class="k-link">
-                                    <!--<i class="fa fa-download" aria-hidden="true"></i>-->
-                                    <img th:src="@{/alink-hq/static/img/updown.png}" alt="">
-                                    <!--<a th:if="${mesh.pcount}=='0'" class="a-un"  href="javascript:void(0);" th:text="${mesh.pcount}"></a>-->
-                                    <!--<a th:if="${mesh.pcount}!='0'" th:href="@{/place/list(projectId=${mesh.project_id},mid=${mesh.id})}" th:text="${mesh.pcount}"></a>-->
+                                    <!--<i class="fa fa-upload" aria-hidden="true"></i>-->
+                                    <a th:href="@{/file/uploadNewVersionOTAAdd(id=${file.id})}">
+                                        <img th:src="@{/static/img/upload.png}" alt="" class="pointer">
+                                    </a>
                                 </td>
-                                <!--组数量-->
-                                <td class="k-link">
-                                    <i class="fa fa-upload" aria-hidden="true"></i>
-                                    <!--<a th:if="${mesh.pcount}=='0'" class="a-un"  href="javascript:void(0);" th:text="${mesh.pcount}"></a>-->
-                                    <!--<a th:if="${mesh.pcount}!='0'" th:href="@{/place/list(projectId=${mesh.project_id},mid=${mesh.id})}" th:text="${mesh.pcount}"></a>-->
-                                </td>
-                                <!--灯数量-->
-                                <!--<td class="k-link">-->
-                                    <!--<a th:if="${mesh.scount}=='0'" class="a-un" href="javascript:void(0);" th:text="${mesh.scount}"></a>-->
-                                    <!--<a th:if="${mesh.scount}!='0'" th:href="@{/scene/list(meshName=${mesh.mname},meshId=${mesh.mesh_id},mid=${mesh.id})}" th:text="${mesh.scount}"></a>-->
-                                <!--</td>-->
-                                <!--<td class="k-link">-->
-                                    <!--<a th:if="${mesh.tcount}=='0'" class="a-un" href="javascript:void(0);" th:text="${mesh.tcount}"></a>-->
-                                    <!--<a th:if="${mesh.tcount}!='0'" th:href="@{/timer/list(id=${mesh.id})}" th:text="${mesh.tcount}"></a>-->
-                                <!--</td>-->
-                                <!--<td  th:if="${mesh.scount}=='0'">-->
-                                <!--<a href="javascript:void(0);" th:text="${mesh.scount}"></a>-->
-                                <!--</td>-->
-                                <!--<td class="unknown">未知</td>-->
-                                <td   class="p-r " >
-                                    <a href="javascript:void(0);">
-                                        <img  src="/alink-hq/static/img/memo.png" alt="" class="pointer memo-edit2" th:title="备忘录" style="width: 18px;height: 18px;">
-                                        <div class="memo-edit-has">
-                                            <div class="meno-nav"><img src="/alink-hq/static/img/alter.png" alt="" class="pointer">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci assumenda delectus, enim in nesciunt quod ratione. Commodi eaque harum, id impedit libero nam nisi quos repellendus saepe sed ullam, voluptate.</div>
-                                            <div  class="memo-content">
-                                            </div>
+                                <td class="p-r ">
+                                    <a href="javascript:void(0);" class="memo-edit">
+                                        <img  src="/alink-hq/static/img/memo.png" th:alt="${file.id}" class="pointer meno-img" th:title="备忘录" style="width: 18px;height: 18px;">
+                                        <div class="memo-edit-has" >
+                                            <div class="meno-nav"><img src="/alink-hq/static/img/alter.png"  alt="" class="pointer"></div>
+                                            <div class="memo-content" th:text="${file.otaDesc}"></div>
                                         </div>
                                     </a>
-                                    <a href="javascript:void(0);" style="margin:0 30px;">
-                                        <img src="/alink-hq/static/img/alter.png" alt=""  title="编辑" style="width: 20px;height: 20px;">
+                                    <a th:href="@{/file/editOta(id=${file.id})}" style="margin:0 30px;">
+                                        <img src="/alink-hq/static/img/alter.png" alt="" title="编辑" style="width: 20px;height: 20px;">
                                     </a>
-                                    <a href="javascript:void(0);" class="singleDel pointer">
+                                    <a href="javascript:void(0);" class="singleDel pointer" th:alt="${file.id}" >
                                         <img src="/alink-hq/static/img/delete.png" alt="" title="删除" style="width: 17px; height: 17px;">
                                     </a>
-                                    <!--<ul class="showList p-a">-->
-                                        <!--<li>-->
-                                            <!--&lt;!&ndash;重命名&ndash;&gt;-->
-                                            <!--<img  shiro:hasPermission ="renameMesh"  src="/alink-hq/static/img/edit.png" th:alt="${mesh.id}" class="reset-name pointer"title="重命名">-->
-                                            <!--&lt;!&ndash;不能重命名&ndash;&gt;-->
-                                            <!--<img shiro:lacksPermission ="renameMesh" src="/alink-hq/static/img/un-rename.png" alt="" class="pointer  unclick"-->
-                                                 <!--th:title="无法操作">-->
-                                        <!--</li>-->
-                                        <!--&lt;!&ndash;<li>&ndash;&gt;-->
-                                            <!--&lt;!&ndash;&lt;!&ndash;移交&ndash;&gt;&ndash;&gt;-->
-                                            <!--&lt;!&ndash;<a th:href="@{/mesh/move(ids=${mesh.id})}" shiro:hasPermission ="moveMesh" >&ndash;&gt;-->
-                                                <!--&lt;!&ndash;<img src="/alink-hq/static/img/exchange.png" alt="" class="center-img pointer" title="移动">&ndash;&gt;-->
-                                            <!--&lt;!&ndash;</a>&ndash;&gt;-->
-                                            <!--&lt;!&ndash;&lt;!&ndash;不能移交&ndash;&gt;&ndash;&gt;-->
-                                            <!--&lt;!&ndash;<img src="/alink-hq/static/img/un-exchange.png" alt=""&ndash;&gt;-->
-                                                 <!--&lt;!&ndash;class="center-img pointer  unclick"  shiro:lacksPermission ="moveMesh"&ndash;&gt;-->
-                                                 <!--&lt;!&ndash;th:title="无法操作">&ndash;&gt;-->
-                                        <!--&lt;!&ndash;</li>&ndash;&gt;-->
-                                        <!--<li>-->
-                                            <!--&lt;!&ndash;删除&ndash;&gt;-->
-                                            <!--<a href="javascript:void(0);" class="singleDel pointer">-->
-                                                <!--&lt;!&ndash;<img src="/alink-hq/static/img/delete.png" alt="" title="删除" style="width: 14px; height: 14px;">&ndash;&gt;-->
-                                                <!--<i class="fa fa-times" aria-hidden="true"></i>-->
-                                            <!--</a>-->
-                                            <!--&lt;!&ndash;不能删除&ndash;&gt;-->
-                                            <!--&lt;!&ndash;<img src="/alink-hq/static/img/un-delete.png" alt="" shiro:lacksPermission ="deleteMesh"  class="pointer   unclick"&ndash;&gt;-->
-                                                 <!--&lt;!&ndash;th:title="无法操作" style="width: 14px; height: 14px;">&ndash;&gt;-->
-                                        <!--</li>-->
-                                    </ul>
                                 </td>
                             </tr>
                             </tbody>
                             <tfoot>
                             <tr>
-
-                                <!--<td colspan="12" class="clearfix page">-->
-                                    <!--&lt;!&ndash;<div class="f-l" style="padding-left: 20px;">&ndash;&gt;-->
-                                        <!--&lt;!&ndash;<input type="checkbox" id="addAll" class="pointer">&ndash;&gt;-->
-                                        <!--&lt;!&ndash;&lt;!&ndash;</span>&ndash;&gt;&ndash;&gt;-->
-                                        <!--&lt;!&ndash;<span class="">全选</span>&ndash;&gt;-->
-                                    <!--&lt;!&ndash;</div>&ndash;&gt;-->
-                                    <!--<div class="f-l">-->
-                            <!--<span class="selected-order">已选择-->
-                                <!--<span id="amount" class="amount">0</span>条数据-->
-                            <!--</span>-->
-                                        <!--<span class="m-r-20">-->
-                                <!--&lt;!&ndash;<span  class="skipPageBtn  moment active unclick1"&ndash;&gt;-->
-                                       <!--&lt;!&ndash;id="multiMove"  >移动</span>&ndash;&gt;-->
-                                <!--<span  class="skipPageBtn pointer moment" onmousedown="exchangeBtnMouseDown()"-->
-                                      <!--onmouseup="exchangeBtnMouseUp()" id="multiMove">移动</span>-->
-                            <!--</span>-->
-                                        <!--<span>-->
-                            <!--&lt;!&ndash;<span   class="skipPageBtn moment active unclick1"  id="multiDel">删除</span>&ndash;&gt;-->
-                                <!--<span  class="skipPageBtn pointer moment" onmousedown="deleteBtnMouseDown()"-->
-                                      <!--onmouseup="deleteBtnMouseUp()" id="multiDel">删除</span>-->
-                            <!--</span>-->
-                                    <!--</div>-->
-                                    <!--&lt;!&ndash;<div th:replace="common/page::page"></div>&ndash;&gt;-->
-                                <!--</td>-->
-                                <td colspan="12" class="clearfix page">
-                                    <!--<div th:replace="common/page::page"></div>-->
+                                <td colspan="8" class="clearfix page">
+                                    <div th:replace="common/page::page"></div>
                                 </td>
                             </tr>
                             </tfoot>
                         </table>
                         <!-- 无数据时 -->
-                        <table  border="1" class="noData ">
+                        <table th:if="${pageInfo==null}" border="1" class="noData active">
                             <thead>
                             <tr>
-                                <th class="all-checkbox">
-                                 <span style="vertical-align: sub;">
-                                    <input type="checkbox" class="pointer">
-                                </span>
-                                    <span class="">全选</span>
-                                </th>
                                 <th><span>固件名称</span></th>
                                 <th><span>固件ID</span></th>
                                 <th><span>创建时间</span></th>
@@ -235,8 +140,8 @@
                             </thead>
                             <tbody>
                             <tr>
-                                <td colspan="10">
-                                    <img src="/alink-hq/static/img/no-data.png" alt="">
+                                <td colspan="8">
+                                    <img th:src="@{/static/img/no-data.png}" style="width: auto;height: auto;" alt="">
                                     <p>暂无数据</p>
                                 </td>
                             </tr>
@@ -256,7 +161,7 @@
     <div class="pop-content">
         <div class="newName">
             <p class="rename-hint"></p>
-            <label for="rename">新名称</label>
+            <label >新名称</label>
             <input type="text" placeholder="请输入（2-16位汉字、字母、数字）" id="rename" onkeyup="nameKeyUp()" maxlength="16"/>
         </div>
         <div class="pop-btn">
@@ -266,28 +171,15 @@
     </div>
 </div>
 <!-- 删除账户 -->
-<div class="pop-iframe" openContent="delete-firmware">
-    <div class=" p-r pop-nav">
-        温馨提示
-    </div>
-    <div class="pop-content">
-        <div class="reset-pwd">您确定要删除XXX固件？</div>
-        <div class="reset-pwd-hint">（删除后，XXX固件所有历史版本将均被删除）</div>
-        <div class="pop-btn">
-            <button class="reduce">取消</button>
-            <button class="yes">确定</button>
-        </div>
-    </div>
-</div>
+<div th:replace="pop/delete::delete-pop"></div>
 <!-- 固件描述-->
 <div class="pop-iframe" openContent="memo-edit">
     <div class=" p-r pop-nav">
         固件描述
     </div>
     <div class="pop-content">
-        <textarea maxlength="200" style="width: 93%;border: none;margin-top: 10px;resize: none;height: 130px;font-size: 13.5px;line-height: 1.6;color: #323232;font-family: inherit;"  class="wishContent" placeholder="请输入不超过200个字"></textarea>
+        <textarea maxlength="200" class="wishContent" placeholder="请输入不超过200个字"></textarea>
         <p class="right-font"><span class="wordsNum">0/200</span></p>
-        <input type="hidden" id="memo-account" >
         <div class="pop-btn">
             <button class="reduce">取消</button>
             <button class="yes">确定</button>
@@ -296,9 +188,10 @@
 </div>
 
 <div class="hide-iframe"></div>
-<script type="text/javascript" src="/alink-hq/static/js/left.js"></script>
-<script type="text/javascript" src="/alink-hq/static/js/page.js"></script>
-<script type="text/javascript" src="/alink-hq/static/js/OTAFile.js"></script>
-<script src="/alink-hq/static/js/moment.js"></script>
+<script type="text/javascript" th:src="@{/static/js/left.js}"></script>
+<script type="text/javascript" th:src="@{/static/js/page.js}" ></script>
+<script type="text/javascript" th:src="@{/static/js/moment.js}"></script>
+<script type="text/javascript" th:src="@{/static/js/OTAFile.js}"></script>
+
 </body>
 </html>

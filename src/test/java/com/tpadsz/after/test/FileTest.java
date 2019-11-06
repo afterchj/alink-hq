@@ -53,7 +53,7 @@ public class FileTest {
     }
 
     @Test
-    public void testProperty()throws Exception{
+    public void testProperty(){
         Properties pro = new Properties();
         try {
             InputStream in = this.getClass().getResourceAsStream("/common.properties");
@@ -62,8 +62,7 @@ public class FileTest {
         }catch (IOException e){
             e.printStackTrace();
         }
-        String name = pro.getProperty("info");
-        System.out.println("info:" + name);
-        System.out.println("getPath:" + PropertiesUtil.getPath());
+        System.out.println(pro.getProperty("otaPath"));
+        System.out.println("getPath:" + PropertiesUtil.getPath("img"));
     }
 }

@@ -10,7 +10,6 @@
     <link rel="stylesheet" th:href="@{/static/css/base.css}"/>
     <link rel="stylesheet" th:href="@{/static/css/leftNav.css}"/>
     <link rel="stylesheet" th:href="@{/static/css/projectManage.css}"/>
-
 </head>
 <body>
 <div class="c-container">
@@ -43,30 +42,32 @@
                 </div>
             </div>
 
-            <div id="meshList" class="table-content-list">
+            <div id="meshList" class=" table-content-list">
                 <form class="clearfix" th:action="@{/place/list}" method="POST">
                     <input type="hidden" name="uid" th:value="${dict.uid}">
+                    <input type="hidden" name="mid" id="mid" th:value="${dict.mid}">
+                    <input type="hidden" id="pid" name="projectId"  th:value="${dict.projectId}">
                     <input type="hidden" id="pageSize" th:value="${dict.pageSize}">
-                    <div class="search-condition clearfix">
-                        <div class="f-l search" style="margin-right: 150px;margin-left: 100px;">
+                    <div class="search-condition clearfix p-r">
+                        <div class="f-l search" >
                             <div>
-                                <label for="pname" class="font">区域名称</label>
+                                <label  class="font">区域名称</label>
                                 <input type="text" id="pname" name="pname" th:value="${dict.pname}" placeholder="请输入区域名称">
                             </div>
 
                             <div>
-                                <label for="mid" class="font">网络ID</label>
-                                <input type="text" id="mid" name="meshId" th:value="${dict.meshId}" placeholder="请输入网络ID">
+                                <label  class="font">网络ID</label>
+                                <input type="text" id="meshId" name="mesh_id" th:value="${dict.mesh_id}" placeholder="请输入网络ID">
                             </div>
                         </div>
                         <div class="f-l search">
                             <div>
-                                <label for="mname" class="font">网络名称</label>
+                                <label  class="font">网络名称</label>
                                 <input type="text" id="mname" name="mname" th:value="${dict.mname}"
                                        placeholder="请输入网络名称">
                             </div>
                             <div>
-                                <label for="name" class="font">项目名称</label>
+                                <label  class="font">项目名称</label>
                                 <input type="text" id="name" name="name" th:value="${dict.name}" placeholder="请输入项目名称">
                             </div>
                             <!--<div>-->
@@ -74,7 +75,7 @@
                             <!--<input type="text" id="pid" name="placeId" th:value="${dict.placeId}"--><!--placeholder="请输入区域ID">-->
                             <!--</div>-->
                         </div>
-                        <div class="f-r search-button ">
+                        <div class="f-r search-button p-a">
                             <button type="submit" class="pointer">查询</button>
                         </div>
                     </div>
@@ -101,9 +102,12 @@
                             </thead>
                             <tbody>
                             <tr th:each="place:${pageInfo.list}">
-                                <td class="checkbox"><input type="checkbox" name="ids"  th:value="${place.id}"></td>
+                                <td class="checkbox">
+                                    <input type="checkbox" name="ids"  th:value="${place.id}">
+                                    <input type="hidden" id="u_id" th:value="${place.uid}">
+                                </td>
                                 <td class="k-link">
-                                    <a  th:href="@{/place/info(id=${place.id})}" th:text="${place.pname}"></a>
+                                    <a  th:href="@{/place/info(id=${place.id},placeId=${place.place_id})}" th:text="${place.pname}"></a>
                                 </td>
                                 <td th:text="${place.place_id}"></td>
                                 <td class="k-link">
@@ -121,18 +125,14 @@
                                 </td>
                                 <td>未知</td>
                                 <td class="p-r" >
-                                    <img src="/alink-hq/static/img/edit.png" th:alt="${place.id}"
-                                         class="reset-name pointer"
-                                         title="重命名" shiro:hasPermission ="renamePlace">
-                                    <img src="/alink-hq/static/img/un-rename.png" th:alt="${place.id}"
-                                         class=" pointer unclick"
-                                         th:title="无法操作" shiro:lacksPermission ="renamePlace">
+                                    <img  th:alt="${place.id}" th:class="(${place.place_id == 0} or ${place.place_id == -1})? 'unclick pointer':'reset-name pointer'"   th:title="(${place.place_id == 0} or ${place.place_id == -1})? '不可重命名':'重命名'"  shiro:hasPermission ="renamePlace" th:src="(${place.place_id == 0} or ${place.place_id == -1})? '/alink-hq/static/img/edit-un.png':'/alink-hq/static/img/edit.png'">
+                                    <img  th:src="${place.place_id  == 0}? '/alink-hq/static/img/edit-un.png':'/alink-hq/static/img/edit.png'" th:alt="${place.id}"   class=" pointer unclick" th:accept="${place.place_id}"   th:title="无法操作" shiro:lacksPermission ="renamePlace">
                                     <a href="javascript:void(0);" class="singleDel pointer" shiro:hasPermission ="deletePlace">
-                                        <img src="/alink-hq/static/img/delete.png" alt="" class="left-img pointer"
+                                        <img src="/alink-hq/static/img/delete.png" th:alt="${place.id}" class="left-img pointer"
                                              title="删除">
                                     </a>
                                     <a href="javascript:void(0);" class=" unclick" shiro:lacksPermission ="deletePlace">
-                                        <img src="/alink-hq/static/img/un-delete.png" alt="" class="left-img  unclick"
+                                        <img src="/alink-hq/static/img/un-delete.png" th:alt="${place.id}" class="left-img  unclick"
                                              th:title="无法操作">
                                     </a>
                                 </td>
@@ -160,22 +160,25 @@
                             <thead>
                             <tr>
                                 <th class="all-checkbox">
-                                    <span style="vertical-align: sub;"><input type="checkbox" class="pointer"></span>
+                                    <!--<span style="vertical-align: sub;">-->
+                                    <input type="checkbox" id="all" class="pointer ">
+                                    <!--</span>-->
                                     <span class="">全选</span>
                                 </th>
-                                <th>区域名称</th>
-                                <th>区域ID</th>
-                                <th>隶属网络</th>
-                                <th>网络ID</th>
-                                <th>组数量</th>
-                                <th>状态</th>
-                                <th>操作</th>
+                                <th><span>区域名称</span></th>
+                                <th><span>区域ID</span></th>
+                                <th><span>隶属项目</span></th>
+                                <th><span>隶属网络</span></th>
+                                <th><span>网络ID</span></th>
+                                <th><span>组数量</span></th>
+                                <th><span>状态</span></th>
+                                <th class="operation"><span>操作</span></th>
                             </tr>
                             </thead>
                             <tbody>
                             <tr>
-                                <td colspan="8">
-                                    <img src="/alink-hq/static/img/no-data.png" alt="">
+                                <td colspan="9">
+                                    <img th:src="@{/static/img/no-data.png}" style="width: auto;height: auto;" alt="">
                                     <p>暂无数据</p>
                                 </td>
                             </tr>
@@ -186,38 +189,9 @@
             </div>
         </div>
     </div>
-
-<!-- 重命名弹框 -->
-<div class="confirm-on-off pop-iframe  " openContent="reset-name">
-    <div class="confirm-on-off-nav p-r pop-nav">
-        重命名
-    </div>
-    <div class="pop-content">
-        <div class="newName">
-            <p class="rename-hint"></p>
-            <label for="rename">新名称</label>
-            <input type="text" placeholder="请输入（2-16位汉字、字母、数字）" id="rename" onkeyup="nameKeyUp()" maxlength="16"/>
-        </div>
-        <div class="pop-btn">
-            <button class="reduce">取消</button>
-            <button class="yes">确定</button>
-        </div>
-    </div>
-</div>
-<!-- 删除账户 -->
-<div class="pop-iframe" openContent="delete-place">
-    <div class=" p-r pop-nav">
-        温馨提示
-    </div>
-    <div class="pop-content">
-        <div class="reset-pwd">您确定要删除所选的区域吗？</div>
-        <div class="reset-pwd-hint">删除后将无法恢复，请慎重！</div>
-        <div class="pop-btn">
-            <button class="reduce">取消</button>
-            <button class="yes">确定</button>
-        </div>
-    </div>
-</div>
+    <div th:replace="pop/reset::reset-name"></div>
+    <div th:replace="pop/noDelete::noDelete-pop"></div>
+    <div th:replace="pop/delete::delete-pop"></div>
 </div>
 <div class="hide-iframe "></div>
 <script type="text/javascript" src="/alink-hq/static/js/left.js"></script>

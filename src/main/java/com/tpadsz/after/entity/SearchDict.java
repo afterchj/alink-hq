@@ -6,11 +6,13 @@ package com.tpadsz.after.entity;
 public class SearchDict {
 
     private Integer id;
+    private Integer parentId = 0;
     private String uid;
     private String role;
-    private Integer mid=0;
+    private Integer mid = 0;
     private Integer pid;
     private Integer gid;
+    private Integer oid;
     private String name;
     private String mesh_id;
     private String coname;
@@ -23,8 +25,15 @@ public class SearchDict {
     private String lmac;
     private Integer status;
     private Integer meshId;
-    private Integer projectId=0;
+    private Integer projectId = 0;
     private Integer placeId;
+    private String otaId;
+    private String otaName;
+    private String otaVer;
+    private String updateDate;
+    private String createDate;
+    private String beginDate;
+    private String endDate;
     private Integer pageNum = 1;
     private Integer pageSize = 10;
 
@@ -34,6 +43,14 @@ public class SearchDict {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public Integer getParentId() {
+        return parentId;
+    }
+
+    public void setParentId(Integer parentId) {
+        this.parentId = parentId;
     }
 
     public String getUid() {
@@ -74,6 +91,14 @@ public class SearchDict {
 
     public void setGid(Integer gid) {
         this.gid = gid;
+    }
+
+    public Integer getOid() {
+        return oid;
+    }
+
+    public void setOid(Integer oid) {
+        this.oid = oid;
     }
 
     public String getName() {
@@ -186,6 +211,62 @@ public class SearchDict {
 
     public void setPlaceId(Integer placeId) {
         this.placeId = placeId;
+    }
+
+    public String getOtaId() {
+        return otaId;
+    }
+
+    public void setOtaId(String otaId) {
+        this.otaId = otaId;
+    }
+
+    public String getOtaName() {
+        return otaName;
+    }
+
+    public void setOtaName(String otaName) {
+        this.otaName = otaName;
+    }
+
+    public String getOtaVer() {
+        return otaVer;
+    }
+
+    public void setOtaVer(String otaVer) {
+        this.otaVer = otaVer;
+    }
+
+    public String getBeginDate() {
+        return beginDate;
+    }
+
+    public void setBeginDate(String beginDate) {
+        this.beginDate = beginDate;
+    }
+
+    public String getEndDate() {
+        return endDate;
+    }
+
+    public void setEndDate(String endDate) {
+        this.endDate = endDate;
+    }
+
+    public String getCreateDate() {
+        return createDate;
+    }
+
+    public void setCreateDate(String createDate) {
+        this.createDate = createDate;
+    }
+
+    public String getUpdateDate() {
+        return updateDate;
+    }
+
+    public void setUpdateDate(String updateDate) {
+        this.updateDate = updateDate;
     }
 
     public Integer getPageNum() {

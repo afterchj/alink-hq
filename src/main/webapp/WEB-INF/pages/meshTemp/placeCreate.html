@@ -39,90 +39,132 @@
                     <!--<img src="/alink-hq/static/img/go-back.png" alt="" onclick="history.back()">-->
                 </div>
             </div>
-            <div id="createProject" class="table-content-list">
-                <div class="c-createProject">
-                    <div class="c-nav">
+            <div id="createProject" class="table-content-list detail">
+                <div class="p-detail">
+                    <div class="p-nav">
                         创建区域
                     </div>
-                    <div class="c-content ">
+                    <div class="p-content p-r">
                         <!--<div class="subjection">隶属项目：<span th:inline="text">[[${project.label}]]</span></div>-->
                         <form th:action="@{/place/save}" method="post" style="margin-top: 0;">
-                            <input type="hidden" name="uid" id="uid" th:value="${session.user.id}">
-                            <input type="hidden" name="mid" id="mid" th:value="${dict.mid}">
-                            <input type="hidden" id="project_id" th:value="${dict.projectId}">
-                            <div class="process clearfix">
-                                <div class="f-l part " stepIcon="one">
-                                    <img src="/alink-hq/static/img/fill-1-on.png" alt="">
-                                    <span>选择项目</span>
+                            <fieldset>
+                                <input type="hidden" name="uid" id="uid" th:value="${session.user.id}">
+                                <input type="hidden" name="mid" id="mid" th:value="${dict.mid}">
+                                <input type="hidden" id="project_id" th:value="${dict.projectId}">
+                                <div class="process clearfix">
+                                    <div class="f-l part " stepIcon="one">
+                                        <img src="/alink-hq/static/img/fill-1-on.png" alt="">
+                                        <span>选择项目</span>
+                                    </div>
+                                    <div class="f-l part  line ">............</div>
+                                    <div class="f-l part " stepIcon="two">
+                                        <img src="/alink-hq/static/img/fill-2-no.png" alt="">
+                                        <span>选择网络</span>
+                                    </div>
+                                    <div class="f-l part  line ">............</div>
+                                    <div class="f-l part " stepIcon="three">
+                                        <img src="/alink-hq/static/img/fill-3-no.png" alt="">
+                                        <span>输入名称</span>
+                                    </div>
                                 </div>
-                                <div class="f-l part  line ">……</div>
-                                <div class="f-l part " stepIcon="two">
-                                    <img src="/alink-hq/static/img/fill-2-no.png" alt="">
-                                    <span>选择网络</span>
-                                </div>
-                                <div class="f-l part  line ">……</div>
-                                <div class="f-l part " stepIcon="three">
-                                    <img src="/alink-hq/static/img/fill-3-no.png" alt="">
-                                    <span>输入名称</span>
-                                </div>
-                            </div>
 
-                            <!--输入项目名-->
-                            <div step="one-content" class="init-content active">
-                                <div>
-                                    <p class="project-hint"></p>
-                                    <label for="projectId">项目名称：</label>
-                                    <select id="projectId" name="projectId" style="height:35px;">
-                                    </select>
+                                <!--输入项目名-->
+                                <div step="one-content" class="init-content active clearfix">
+                                    <div class="form-row">
+                                        <div class="field-label">
+                                            <!--<p class="project-hint"></p>-->
+                                            <label >项目名称：</label>
+                                        </div>
+                                        <div class="field-widget p-r">
+                                            <p class="p-a verify project-hint" ></p>
+                                            <select id="projectId" name="projectId" style="height:35px;">
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-row">
+                                        <button type="button" class="confirm-create next-step" openTab="confirm-create">
+                                            下一步
+                                        </button>
+                                    </div>
                                 </div>
-                                <div class="">
-                                    <button type="button" class="confirm-create next-step" openTab="confirm-create">
-                                        下一步
-                                    </button>
-                                </div>
-                            </div>
 
 
-                            <!--输入网络-->
-                            <div step="two-content" class="init-content ">
-                                <div>
-                                    <p class="mesh-hint"></p>
-                                    <label for="mesh_id">选择网络：</label>
-                                    <select id="mesh_id" name="mesh_id" style="height:35px;">
-                                    </select>
+                                <!--输入网络-->
+                                <div step="two-content" class="init-content clearfix">
+                                    <div class="form-row">
+                                        <div class="field-label">
+                                            <!--<p class="mesh-hint"></p>-->
+                                            <label >选择网络：</label>
+                                        </div>
+                                        <div class="field-widget p-r">
+                                            <p class="p-a verify project-hint"></p>
+                                            <select id="mesh_id" name="mesh_id" style="height:35px;">
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="field-label">
+                                            <!--<p class="" style="height: 20px"></p>-->
+                                            <label >网络ID：</label>
+                                        </div>
+                                        <div class="field-widget p-r">
+                                            <p class="p-a verify"></p>
+                                            <input type="text" id="meshId" name="" readonly>
+                                        </div>
+                                    </div>
+                                    <div class="form-row ">
+                                        <div class="field-label">
+                                            <label></label>
+                                        </div>
+                                        <div class="field-widget p-r clearfix two-radio">
+                                            <div class="f-l">
+                                                <button type="button" class="confirm-create prev-step "
+                                                        openTab="confirm-create" >上一步
+                                                </button>
+                                            </div>
+                                            <div class="f-l">
+                                                <button type="button" class="confirm-create next-step f-r"
+                                                        openTab="confirm-create">下一步
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div>
-                                    <p class="" style="height: 20px"></p>
-                                    <label for="meshId">网络ID：</label>
-                                    <input type="text" id="meshId" name="" readonly>
-                                </div>
-                                <div class="">
-                                    <button type="button" class="confirm-create prev-step" openTab="confirm-create"
-                                            style="margin: 0 100px;">上一步
-                                    </button>
-                                    <button type="button" class="confirm-create next-step" openTab="confirm-create">
-                                        下一步
-                                    </button>
-                                </div>
-                            </div>
 
-                            <!--输入区域名-->
-                            <div step="three-content" class="init-content ">
-                                <div>
-                                    <p class="place-hint"></p>
-                                    <label for="pname">区域名称：</label>
-                                    <input type="text" id="pname" name="pname" placeholder="请输入（2-6 位汉字、字母、数字）"
-                                           value="">
+                                <!--输入区域名-->
+                                <div step="three-content" class="init-content ">
+                                    <div class="form-row">
+                                        <div class="field-label">
+                                            <!--<p class="place-hint"></p>-->
+                                            <label >区域名称：</label>
+                                        </div>
+                                        <div class="field-widget p-r">
+                                            <p class="p-a verify place-hint"></p>
+                                            <input type="text" id="pname" name="pname" placeholder="请输入（2-6 位汉字、字母、数字）"
+                                                   value="">
+                                        </div>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="field-label">
+                                            <label></label>
+                                        </div>
+                                        <div class="field-widget p-r clearfix two-radio">
+                                            <div class="f-l">
+                                                <button type="button" class="confirm-create prev-step"
+                                                        openTab="confirm-create"
+                                                        >上一步
+                                                </button>
+                                            </div>
+                                            <div class="f-r">
+                                                <button type="button" class="confirm-create next-step"
+                                                        openTab="confirm-create">
+                                                    确定创建
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="">
-                                    <button type="button" class="confirm-create prev-step" openTab="confirm-create"
-                                            style="margin: 0 100px;">上一步
-                                    </button>
-                                    <button type="button" class="confirm-create next-step" openTab="confirm-create">
-                                        确定创建
-                                    </button>
-                                </div>
-                            </div>
+                            </fieldset>
                         </form>
                     </div>
                 </div>
@@ -143,62 +185,9 @@
     </div>
     <p class="title"></p>
 </div>
-<script type="text/javascript" src="/alink-hq/static/js/jquery.min.js"></script>
-<script type="text/javascript" src="/alink-hq/static/js/left.js"></script>
-<script src="/alink-hq/static/js/moment.js"></script>
+<script type="text/javascript" th:src="@{/static/js/jquery.min.js}"></script>
+<script type="text/javascript" th:src="@{/static/js/left.js}"></script>
+<script th:src="@{/static/js/moment.js}"></script>
 <script th:src="@{/static/js/placeCreate.js}"></script>
-<!--<script th:inline="javascript">-->
-<!--var uid = $("#uid").val();-->
-<!--$(function () {-->
-<!--$.getJSON("/alink-hq/mesh/getProjects", {"uid": uid}, function (json) {-->
-<!--$.each(json, function (i, item) {-->
-<!--$("#projectId").append("<option value='" + item.id + "'>" + item.label + "</option>");-->
-<!--});-->
-<!--});-->
-<!--$("#projectId").change(function () {-->
-<!--$("#mesh_id option:gt(0)").remove();-->
-<!--var projectId = $("#projectId option:selected").val();-->
-<!--//            console.log("projectId", projectId);-->
-<!--$.getJSON("/alink-hq/group/getMesh", {"projectId": projectId}, function (json) {-->
-<!--// 下面使用each进行遍历-->
-<!--$.each(json, function (i, item) {-->
-<!--$("#mesh_id").append("<option value='" + item.id + "'>" + item.label + "</option>");-->
-<!--});-->
-<!--});-->
-<!--});-->
-<!--//        var str = $("#mid option:selected").val();-->
-<!--//        console.log("str=" + str);-->
-<!--//        $("#meshId").val(str.substr(0, str.indexOf("_")));-->
-<!--$("#mesh_id").change(function () {-->
-<!--var mid = $("#mesh_id option:selected").val();-->
-<!--if (mid == '') {-->
-<!--$('.project-hint').text('请选择网络');-->
-<!--} else {-->
-<!--$('.project-hint').text('');-->
-<!--}-->
-<!--var meshId = mid.substr(mid.indexOf("_") + 1);-->
-<!--//            console.log("mid=" + mid + ",meshId=" + meshId);-->
-<!--$("#meshId").val(meshId);-->
-<!--});-->
-<!--})-->
-<!--$('.confirm-create').click(function () {-->
-<!--var mid = $("#mid option:selected").val();-->
-<!--if (mid == '') {-->
-<!--$('.project-hint').text('请选择网络');-->
-<!--} else {-->
-<!--$('.project-hint').text('');-->
-<!--$("form").submit();-->
-<!--}-->
-<!--});-->
-<!--//监听网络选择-->
-<!--//    $('#mid').change(function(){-->
-<!--//        var mid = $('#pid option:selected').val();-->
-<!--//        if(mid==''){-->
-<!--//            $('.project-hint').text('请选择网络');-->
-<!--//        }else{-->
-<!--//            $('.project-hint').text('');-->
-<!--//        }-->
-<!--//    })-->
-<!--</script>-->
 </body>
 </html>

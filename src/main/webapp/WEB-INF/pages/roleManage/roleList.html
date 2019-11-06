@@ -4,8 +4,8 @@
     <title>角色列表</title>
     <script src="/alink-hq/static/js/browser.js"></script>
     <script src="/alink-hq/static/js/jquery.min.js"></script>
-    <link rel="stylesheet" th:href="@{/static/css/common.css}"/>
-    <link rel="stylesheet" th:href="@{/static/css/laydate.css}"/>
+    <!--<link rel="stylesheet" th:href="@{/static/css/common.css}"/>-->
+    <!--<link rel="stylesheet" th:href="@{/static/css/laydate.css}"/>-->
     <link rel="stylesheet" th:href="@{/static/font-awesome-4.7.0/css/font-awesome.min.css}"/>
     <link rel="stylesheet" th:href="@{/static/css/base.css}"/>
     <link rel="stylesheet" th:href="@{/static/css/leftNav.css}"/>
@@ -27,16 +27,16 @@
                 </div>
             </div>
 
-            <div id="roleList" class="">
+            <div id="roleList" class="table-content-list">
                 <form class="clearfix">
-                    <div class="search-condition  clearfix">
-                        <div class="f-l search" style="margin-right:125px;margin-left: 100px;">
+                    <div class="search-condition  clearfix p-r">
+                        <div class="f-l search">
                             <div>
-                                <label for="roleName" class="font">角色名称</label>
+                                <label class="font">角色名称</label>
                                 <input type="text" id="roleName" name="roleName" placeholder="请输入角色名称">
                             </div>
                         </div>
-                        <div class="f-r search search-button " style="padding-top: 0">
+                        <div class="f-l  search-button p-a">
                             <button type="button" class="pointer">查询</button>
                         </div>
                     </div>
@@ -53,25 +53,144 @@
                             </tr>
                             </thead>
                             <tbody>
+                            <!--<tr th:each="role:${pageInfo.list}">-->
+                                <!--<input type="hidden" th:value="${role.id}">-->
+                                <!--<td class="k-link role-name" th:if="${role.id}==1">-->
+                                    <!--<a th:href="@{/rolePer/detail(rid=${role.id})}" th:alt="${role.id}" th:text="${role.roleName}"></a>-->
+                                <!--</td>-->
+                                <!--<td class="k-link role-name" th:if="${role.id}==2" shiro:hasAnyPermissions="viewRPAdmin">-->
+                                    <!--<a th:href="@{/rolePer/detail(rid=${role.id})}" th:alt="${role.id}" th:text="${role.roleName}"></a>-->
+                                <!--</td>-->
+                                <!--&lt;!&ndash;<td class=" role-name" th:if="${role.id}==2"  shiro:lacksPermission="viewRPAdmin" >&ndash;&gt;-->
+                                <!--&lt;!&ndash;<a  th:alt="${role.id}" th:text="${role.roleName}"></a>&ndash;&gt;-->
+                                <!--&lt;!&ndash;</td>&ndash;&gt;-->
+                                <!--<td class="k-link role-name" th:if="${role.id}==3"-->
+                                    <!--shiro:hasAnyPermissions="viewRPManager">-->
+                                    <!--<a th:href="@{/rolePer/detail(rid=${role.id})}" th:alt="${role.id}"-->
+                                       <!--th:text="${role.roleName}"></a>-->
+                                <!--</td>-->
+                                <!--&lt;!&ndash;<td class=" role-name" th:if="${role.id}==3"  shiro:lacksPermission="viewRPManager" >&ndash;&gt;-->
+                                <!--&lt;!&ndash;<a  th:alt="${role.id}" th:text="${role.roleName}"></a>&ndash;&gt;-->
+                                <!--&lt;!&ndash;</td>&ndash;&gt;-->
+                                <!--<td class="k-link role-name" th:if="${role.id}==4" shiro:hasAnyPermissions="viewRPUser">-->
+                                    <!--<a th:href="@{/rolePer/detail(rid=${role.id})}" th:alt="${role.id}"-->
+                                       <!--th:text="${role.roleName}"></a>-->
+                                <!--</td>-->
+                                <!--&lt;!&ndash;<td class=" role-name" th:if="${role.id}==4"  shiro:lacksPermission="viewRPUser" >&ndash;&gt;-->
+                                <!--&lt;!&ndash;<a  th:alt="${role.id}" th:text="${role.roleName}"></a>&ndash;&gt;-->
+                                <!--&lt;!&ndash;</td>&ndash;&gt;-->
+                                <!--<td class="k-link role-name" th:if="${role.id}==13"-->
+                                    <!--shiro:hasAnyPermissions="viewRPOtamanager">-->
+                                    <!--<a th:href="@{/rolePer/detail(rid=${role.id})}" th:alt="${role.id}"-->
+                                       <!--th:text="${role.roleName}"></a>-->
+                                <!--</td>-->
+                                <!--&lt;!&ndash;<td class=" role-name" th:if="${role.id}==13"  shiro:lacksPermission="viewRPOtamanager" >&ndash;&gt;-->
+                                <!--&lt;!&ndash;<a  th:alt="${role.id}" th:text="${role.roleName}"></a>&ndash;&gt;-->
+                                <!--&lt;!&ndash;</td>&ndash;&gt;-->
+                                <!--<td class="k-link role-name" th:if="${role.id}==14"-->
+                                    <!--shiro:hasAnyPermissions="viewSalesman">-->
+                                    <!--<a th:href="@{/rolePer/detail(rid=${role.id})}" th:alt="${role.id}"-->
+                                       <!--th:text="${role.roleName}"></a>-->
+                                <!--</td>-->
+                                <!--&lt;!&ndash;<td class=" role-name" th:if="${role.id}==14"  shiro:lacksPermission="viewSalesman" >&ndash;&gt;-->
+                                <!--&lt;!&ndash;<a  th:alt="${role.id}" th:text="${role.roleName}"></a>&ndash;&gt;-->
+                                <!--&lt;!&ndash;</td>&ndash;&gt;-->
+                                <!--<td class="k-link" th:text="${role.accountNum}"></td>-->
+                                <!--<td th:text="${role.createTime}"></td>-->
+                                <!--<td th:text="${role.updateTime}"></td>-->
+                                <!--<td class="p-r">-->
+                                    <!--&lt;!&ndash;重命名&ndash;&gt;-->
+                                    <!--<img shiro:hasAnyPermissions="renameRole" th:src="@{/static/img/edit.png}" alt=""-->
+                                         <!--class="pointer reset-name " th:title="重命名">-->
+                                    <!--<img shiro:lacksPermission="renameRole" th:src="@{/static/img/edit-un.png}" alt=""-->
+                                         <!--class="unclick  " th:title="无法操作">-->
+                                    <!--&lt;!&ndash;编辑&ndash;&gt;-->
+                                    <!--<a th:href="@{/rolePer/detail(rid=${role.id})}"-->
+                                       <!--shiro:hasAnyPermissions="updateRolePermission">-->
+                                        <!--<img th:src="@{/static/img/alter.png}" alt="" class="pointer left-img"-->
+                                             <!--th:title="编辑">-->
+                                    <!--</a>-->
+                                    <!--<a shiro:lacksPermission="updateRolePermission">-->
+                                        <!--<img th:src="@{/static/img/alter-un.png}" alt="" class="left-img unclick"-->
+                                             <!--th:title="无法操作">-->
+                                    <!--</a>-->
+                                    <!--&lt;!&ndash;删除&ndash;&gt;-->
+                                    <!--<img shiro:hasAnyPermissions="deleteRole" th:src="@{/static/img/delete.png}"-->
+                                         <!--title="删除" alt="" class="pointer delete-pop left-img" th:title="删除">-->
+                                    <!--&lt;!&ndash;不能删除&ndash;&gt;-->
+                                    <!--<img shiro:lacksPermission="deleteRole" th:src="@{/static/img/un-delete.png}" title="无法操作" alt="" class="unclick left-img  unclick" th:title="无法操作">-->
+                                <!--</td>-->
+                            <!--</tr>-->
                             <tr th:each="role:${pageInfo.list}">
                                 <input type="hidden" th:value="${role.id}">
-                                <td class="k-link"><a th:href="@{/rolePer/detail(rid=${role.id})}" th:text="${role.roleName}"></a></td>
+                                <td class="k-link role-name" th:if="${role.id}==1">
+                                    <a th:href="@{/rolePer/detail(rid=${role.id})}" th:alt="${role.id}"
+                                       th:text="${role.roleName}"></a>
+                                </td>
+                                <td class="k-link role-name" th:if="${role.id}==2"
+                                    shiro:hasAnyPermissions="viewRPAdmin">
+                                    <a th:href="@{/rolePer/detail(rid=${role.id})}" th:alt="${role.id}"
+                                       th:text="${role.roleName}"></a>
+                                </td>
+                                <!--<td class=" role-name" th:if="${role.id}==2"  shiro:lacksPermission="viewRPAdmin" >-->
+                                <!--<a  th:alt="${role.id}" th:text="${role.roleName}"></a>-->
+                                <!--</td>-->
+                                <td class="k-link role-name" th:if="${role.id}==3"
+                                    shiro:hasAnyPermissions="viewRPManager">
+                                    <a th:href="@{/rolePer/detail(rid=${role.id})}" th:alt="${role.id}"
+                                       th:text="${role.roleName}"></a>
+                                </td>
+                                <!--<td class=" role-name" th:if="${role.id}==3"  shiro:lacksPermission="viewRPManager" >-->
+                                <!--<a  th:alt="${role.id}" th:text="${role.roleName}"></a>-->
+                                <!--</td>-->
+                                <td class="k-link role-name" th:if="${role.id}==4" shiro:hasAnyPermissions="viewRPUser">
+                                    <a th:href="@{/rolePer/detail(rid=${role.id})}" th:alt="${role.id}"
+                                       th:text="${role.roleName}"></a>
+                                </td>
+                                <!--<td class=" role-name" th:if="${role.id}==4"  shiro:lacksPermission="viewRPUser" >-->
+                                <!--<a  th:alt="${role.id}" th:text="${role.roleName}"></a>-->
+                                <!--</td>-->
+                                <td class="k-link role-name" th:if="${role.id}==13"
+                                    shiro:hasAnyPermissions="viewRPOtamanager">
+                                    <a th:href="@{/rolePer/detail(rid=${role.id})}" th:alt="${role.id}"
+                                       th:text="${role.roleName}"></a>
+                                </td>
+                                <!--<td class=" role-name" th:if="${role.id}==13"  shiro:lacksPermission="viewRPOtamanager" >-->
+                                <!--<a  th:alt="${role.id}" th:text="${role.roleName}"></a>-->
+                                <!--</td>-->
+                                <td class="k-link role-name" th:if="${role.id}==14"
+                                    shiro:hasAnyPermissions="viewSalesman">
+                                    <a th:href="@{/rolePer/detail(rid=${role.id})}" th:alt="${role.id}"
+                                       th:text="${role.roleName}"></a>
+                                </td>
+                                <!--<td class=" role-name" th:if="${role.id}==14"  shiro:lacksPermission="viewSalesman" >-->
+                                <!--<a  th:alt="${role.id}" th:text="${role.roleName}"></a>-->
+                                <!--</td>-->
                                 <td class="k-link" th:text="${role.accountNum}"></td>
                                 <td th:text="${role.createTime}"></td>
                                 <td th:text="${role.updateTime}"></td>
-                                <td class="p-r" >
+                                <td class="p-r">
                                     <!--重命名-->
-                                    <img th:src="@{/static/img/edit.png}" alt="" class="pointer reset-name "
-                                         th:title="重命名">
+                                    <img shiro:hasAnyPermissions="renameRole" th:src="@{/static/img/edit.png}" alt=""
+                                         class="pointer reset-name " th:title="重命名">
+                                    <img shiro:lacksPermission="renameRole" th:src="@{/static/img/edit-un.png}" alt=""
+                                         class="unclick  " th:title="无法操作">
                                     <!--编辑-->
-                                    <img th:src="@{/static/img/alter.png}" alt="" class="pointer left-img"
-                                         th:title="编辑">
+                                    <a th:href="@{/rolePer/detail(rid=${role.id})}"
+                                       shiro:hasAnyPermissions="updateRolePermission">
+                                        <img th:src="@{/static/img/alter.png}" alt="" class="pointer left-img"
+                                             th:title="编辑">
+                                    </a>
+                                    <a shiro:lacksPermission="updateRolePermission">
+                                        <img th:src="@{/static/img/alter-un.png}" alt="" class="left-img unclick"
+                                             th:title="无法操作">
+                                    </a>
                                     <!--删除-->
-                                    <img th:if="${role.accountNum==0}" th:src="@{/static/img/delete.png}" alt="" class="pointer delete-role left-img"
-                                         th:title="删除">
+                                    <img shiro:hasAnyPermissions="deleteRole" th:src="@{/static/img/delete.png}"
+                                         title="删除" alt="" class="pointer delete-pop left-img" th:title="删除">
                                     <!--不能删除-->
-                                    <img th:if="${role.accountNum!=0}" th:src="@{/static/img/un-delete.png}" alt="" class="pointer  left-img  unclick"
-                                         th:title="无法操作">
+                                    <img shiro:lacksPermission="deleteRole" th:src="@{/static/img/un-delete.png}"
+                                         title="无法操作" alt="" class="unclick left-img  unclick" th:title="无法操作">
                                 </td>
                             </tr>
                             </tbody>
@@ -87,10 +206,11 @@
                                     <span>
                                           <span class="next" id="next"><span>></span></span>
                                     </span>
-                                    <span class="m-l-15 m-r-20">共<span class="amount" id="pages" th:text="${pageInfo.pages}"></span>页/
+                                    <span class="m-l-15 m-r-20">共<span class="amount" id="pages"
+                                                                       th:text="${pageInfo.pages}"></span>页/
                                          <span class="amount  pageTotal" th:text="${pageInfo.total}"></span>条数据</span>
                                     <span class="m-r-15">
-                                         <input type="number"  id="page" name="pageNum" th:max="${pageInfo.pages}"
+                                         <input type="number" id="page" name="pageNum" th:max="${pageInfo.pages}"
                                                 style="height: 22px;"/>
                                     </span>
                                     <span class="m-r-35">
@@ -112,7 +232,7 @@
                             </tr>
                             </tfoot>
                         </table>
-                         <!--无数据时-->
+                        <!--无数据时-->
                         <table th:if="${pageInfo==null}" border="1" class="noData active">
                             <thead>
                             <tr>
@@ -139,40 +259,41 @@
     </div>
 </div>
 <!-- 重命名弹框 -->
-<div class="confirm-on-off pop-iframe  " openContent="reset-name">
-    <div class="confirm-on-off-nav p-r pop-nav">
-        重命名
-    </div>
-    <div class="pop-content">
-        <div class="newName">
-            <p class="rename-hint"></p>
-            <label for="rename">新名称</label>
-            <input type="text" placeholder="请输入（2-6位汉字、字母、数字）" id="rename" onkeyup="nameKeyUp()" maxlength="16"/>
-        </div>
-        <div class="pop-btn">
-            <button class="reduce">取消</button>
-            <button class="yes">确定</button>
-        </div>
-    </div>
-</div>
+<div th:replace="pop/reset::reset-name"></div>
+<!--<div class="confirm-on-off pop-iframe  " openContent="reset-name">-->
+<!--<div class="confirm-on-off-nav p-r pop-nav">-->
+<!--重命名-->
+<!--</div>-->
+<!--<div class="pop-content">-->
+<!--<div class="newName">-->
+<!--<p class="rename-hint"></p>-->
+<!--<label for="rename">新名称</label>-->
+<!--<input type="text" placeholder="请输入（2-6位汉字、字母、数字）" id="rename" onkeyup="nameKeyUp()" maxlength="16"/>-->
+<!--</div>-->
+<!--<div class="pop-btn">-->
+<!--<button class="reduce">取消</button>-->
+<!--<button class="yes">确定</button>-->
+<!--</div>-->
+<!--</div>-->
+<!--</div>-->
 <!-- 删除账户 -->
-<div class="pop-iframe" openContent="delete-role">
-    <div class=" p-r pop-nav">
-        温馨提示
-    </div>
-    <div class="pop-content">
-        <div class="reset-pwd">您确定要删除角色吗？</div>
-        <div class="pop-btn">
-            <button class="reduce">取消</button>
-            <button class="yes">确定</button>
-        </div>
-    </div>
-</div>
+<div th:replace="pop/delete::delete-pop"></div>
+<!--<div class="pop-iframe" openContent="delete-pop">-->
+<!--<div class=" p-r pop-nav">-->
+<!--温馨提示-->
+<!--</div>-->
+<!--<div class="pop-content">-->
+<!--<div class="reset-pwd">您确定要删除角色吗？</div>-->
+<!--<div class="pop-btn">-->
+<!--<button class="reduce">取消</button>-->
+<!--<button class="yes">确定</button>-->
+<!--</div>-->
+<!--</div>-->
+<!--</div>-->
 <div class="hide-iframe "></div>
-<script type="text/javascript" th:src="@{/static/js/left.js}"></script>
-
-
-<script type="text/javascript" th:src="@{/static/js/role.js}"></script>
 <script th:src="@{/static/js/moment.js}"></script>
+<script type="text/javascript" th:src="@{/static/js/left.js}"></script>
+<script type="text/javascript" th:src="@{/static/js/role.js}"></script>
+
 </body>
 </html>

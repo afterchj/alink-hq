@@ -2,6 +2,24 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.tpadsz.after.dao.CooperateDao">
 
+    <parameterMap id="updateMapper" type="map">
+        <parameter property="fid" mode="IN"/>
+        <parameter property="status" mode="IN"/>
+        <parameter property="result" mode="OUT" jdbcType="INTEGER"/>
+    </parameterMap>
+
+    <parameterMap id="cooperationMapper" type="map">
+        <parameter property="coname" mode="IN"/>
+        <parameter property="address" mode="IN"/>
+        <parameter property="mobile" mode="IN"/>
+        <parameter property="photo" mode="IN"/>
+        <parameter property="code" mode="IN"/>
+        <parameter property="account" mode="IN"/>
+        <parameter property="pwd" mode="IN"/>
+        <parameter property="salt" mode="IN"/>
+        <parameter property="parent_id" mode="IN"/>
+    </parameterMap>
+
     <sql id="Base_Column_List">
 		id,
         coname,
@@ -11,33 +29,109 @@
         photo,
         code,
         other,
-        status
+        status,
+        IFNULL(s.total, 0) fcount
 	</sql>
 
+    <select id="saveCooperation" parameterMap="cooperationMapper" statementType="CALLABLE">
+        CALL save_cooperation (?,?,?,?,?,?,?,?,?)
+    </select>
+
+    <select id="getParentCompany" parameterType="map" resultType="CooperationTemplate">
+        SELECT
+        f.id,
+        f.parent_id,
+        f.coname,
+        f.mobile,
+        f.address,
+        f.`code`,
+        f.`status`
+        FROM f_firm f
+        WHERE 1=1
+        <if test="uid!=null and uid!=''">
+            AND f.id = (
+            SELECT c.fid
+            FROM f_user_account u
+            INNER JOIN f_user_customer c ON c.uid = u.id
+            WHERE u.id = #{uid}
+            )
+        </if>
+        <if test="parentId!=null and parentId!=''">
+            AND f.parent_id=#{parentId}
+        </if>
+        LIMIT 1
+    </select>
+
+    <select id="getParent" parameterType="int" resultType="CooperationTemplate">
+        SELECT
+        f.id,
+        f.parent_id,
+        f.coname,
+        f.mobile,
+        f.address,
+        f.`code`,
+        f.`status`
+        FROM f_firm f
+        WHERE f.id=#{_parameter}
+    </select>
     <select id="getByMap" resultType="map" parameterType="SearchDict">
         SELECT
         <include refid="Base_Column_List"/>
-        FROM f_firm
-        WHERE 1=1
+        FROM f_firm f
+        LEFT JOIN (
+        SELECT fid,COUNT(1) total
+        FROM f_firm_cooperation c
+        GROUP BY fid
+        ) s ON s.fid = f.id
+        WHERE id !=1
+        <if test="parentId!=null and parentId!=''">
+            AND parent_id=#{parentId}
+        </if>
         <if test="coname!=null and coname!=''">
             AND coname LIKE CONCAT('%',#{coname},'%')
         </if>
         <if test="status!=null">
             AND status=#{status}
         </if>
-        ORDER BY update_date DESC
+        ORDER BY fcount DESC,update_date DESC
     </select>
 
     <select id="getCooperationInfo" resultType="CooperationInfo" parameterType="int">
-        SELECT
-        <include refid="Base_Column_List"/>
-        FROM f_firm WHERE id=#{id}
+        SELECT * FROM f_firm WHERE id=#{id}
     </select>
 
     <insert id="save" parameterType="CooperationInfo">
        INSERT INTO f_firm(coname,address,mobile,create_date,update_date,photo,code,status) VALUES(#{coname},#{address},#{mobile},now(),now(),#{photo},#{code},#{status});
    </insert>
 
+    <select id="getCompanyByUid" parameterType="string" resultType="CooperationTemplate">
+        SELECT
+            f.id,
+            f.coname,
+            f.mobile,
+            f.address,
+            f.`code`,
+            f.`status`
+        FROM f_firm f
+        WHERE f.parent_id = (
+		SELECT c.fid
+		FROM f_user_account u
+		INNER JOIN f_user_customer c ON c.uid = u.id
+		WHERE u.id = #{uid}
+	    )
+    </select>
+
+    <select id="getCompanyByFid" resultType="CooperationTemplate" parameterType="int">
+       SELECT
+            f.id,
+            f.coname,
+            f.mobile,
+            f.address,
+            f.`code` ,
+            f.`status`
+        FROM f_firm f INNER JOIN f_firm_cooperation c ON f.id=c.child_id
+        WHERE parent_id=#{fid} GROUP BY f.id
+    </select>
 
     <select id="getCount" resultType="int" parameterType="int">
         SELECT COUNT(0)
@@ -47,6 +141,10 @@
         WHERE f.id=#{id}
     </select>
 
+    <select id="updateUser" parameterMap="updateMapper" statementType="CALLABLE">
+        CALL disable_user (?,?,?)
+    </select>
+
     <delete id="deleteCooperationById" parameterType="int">
         DELETE FROM f_firm WHERE id=#{id}
     </delete>
@@ -54,9 +152,8 @@
     <update id="saveUpdate" parameterType="CooperationInfo">
         UPDATE f_firm
         <set>
-            update_date=now(),
             <if test="coname!=null and coname!=''">
-               coname=#{coname},
+                coname=#{coname},
             </if>
             <if test="mobile!=null and mobile!=''">
                 mobile=#{mobile},
@@ -74,8 +171,9 @@
                 other=#{other},
             </if>
             <if test="status!=null">
-               status=#{status}
+                status=#{status},
             </if>
+            update_date=now()
         </set>
         WHERE id=#{id}
     </update>

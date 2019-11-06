@@ -5,7 +5,7 @@
     <title>组列表</title>
     <script src="/alink-hq/static/js/browser.js"></script>
     <script src="/alink-hq/static/js/jquery.min.js"></script>
-    <link rel="stylesheet" th:href="@{/static/css/common.css}"/>
+    <!--<link rel="stylesheet" th:href="@{/static/css/common.css}"/>-->
     <link rel="stylesheet" th:href="@{/static/css/laydate.css}"/>
     <link rel="stylesheet" th:href="@{/static/font-awesome-4.7.0/css/font-awesome.min.css}"/>
     <link rel="stylesheet" th:href="@{/static/css/base.css}"/>
@@ -25,12 +25,13 @@
                     <!--<span class="subjection">隶属项目：<span th:inline="text">[[${project.label}]]</span></span>-->
                 </div>
                 <div class="f-r pointer last-nav">
+                    <!--<input th:value="${dict}" type="hidden" id="placeId"></input>-->
                     <a th:href="@{/group/create(mid=${dict.mid})}" shiro:hasPermission ="createGroup">
                         <div class="create" onmousedown="createBtnMouseDown()" onmouseup="createBtnMouseUp()">
                             <span>+</span><span>创建组</span></div>
                     </a>
-                    <a href="javascript:void(0)"   shiro:lacksPermission ="createGroup" class="unclick1">
-                        <div class="create no-access" onmousedown="createBtnMouseDown()" onmouseup="createBtnMouseUp()">
+                    <a href="javascript:void(0)"   shiro:lacksPermission ="createGroup" class="unclick1" >
+                        <div class="create no-access"  onmousedown="createBtnMouseDown()" onmouseup="createBtnMouseUp()">
                             <span>+</span><span>创建组</span></div>
                     </a>
                 </div>
@@ -46,33 +47,34 @@
             <div id="meshList" class="table-content-list">
                 <form class="clearfix" th:action="@{/group/list}" method="post">
                     <input type="hidden" id="uid" name="uid" th:value="${dict.uid}">
+                    <input type="hidden" id="projectId" name="projectId" th:value="${dict.projectId}">
                     <input type="hidden" id="mid" name="mid" th:value="${dict.mid}">
                     <input type="hidden" id="pageSize" th:value="${dict.pageSize}">
-                    <div class="search-condition temp">
-                        <div class="f-l search" style="margin-right: 150px;margin-left: 100px;">
+                    <div class="search-condition clearfix p-r">
+                        <div class="f-l search" >
                             <div>
-                                <label for="gname" class="font">组名称</label>
+                                <label  class="font">组名称</label>
                                 <input type="text" id="gname" name="gname" th:value="${dict.gname}"
                                        placeholder="请输入组名称">
                             </div>
                             <div>
-                                <label for="mname" class="font">网络名称</label>
+                                <label  class="font">网络名称</label>
                                 <input type="text" id="mname" name="mname" th:value="${dict.mname}"
                                        placeholder="请输入网络名称">
                             </div>
                         </div>
                         <div class="f-l search">
                             <div>
-                                <label for="meshId" class="font">网络ID</label>
+                                <label  class="font">网络ID</label>
                                 <input type="text" id="meshId" name="meshId" th:value="${dict.meshId}" placeholder="请输入网络ID">
                             </div>
                             <div>
-                                <label for="meshId" class="font">项目名称</label>
+                                <label  class="font">项目名称</label>
                                 <input type="text" id="name" name="name" th:value="${dict.name}"
                                        placeholder="请输入项目名称">
                             </div>
                         </div>
-                        <div class="f-r search-button ">
+                        <div class="f-r search-button p-a">
                             <button type="submit" class="pointer">查询</button>
                         </div>
                     </div>
@@ -98,7 +100,12 @@
                             </thead>
                             <tbody>
                             <tr th:each="group:${pageInfo.list}">
-                                <td class=""><input type="checkbox" name="ids" th:value="${group.id}"></td>
+                                <td class="checkbox-all">
+                                    <input type="checkbox" name="ids" th:value="${group.id}">
+                                    <input type="hidden" class="mid" th:value="${group.mid}">
+                                    <input type="hidden" class="u_id" th:value="${group.uid}">
+                                    <input type="hidden" class="place_id" th:value="${group.placeId}">
+                                </td>
                                 <td class="k-link"><a th:href="@{/group/info(id=${group.id})}" th:text="${group.gname}"></a>
                                 </td>
                                 <td class="k-link">
@@ -116,17 +123,16 @@
                                     <a th:if="${group.lcount}!='0'"  th:href="@{/light/list(mid=${group.mid},gid=${group.id})}" th:text="${group.lcount}"></a>
                                 </td>
                                 <td class="p-r" >
-                                    <img src="/alink-hq/static/img/edit.png" th:alt="${group.id}" class="rename pointer"
-                                         title="重命名" shiro:hasPermission ="renameGroup">
-                                    <a th:href="@{/group/move(mid=${group.mid},ids=${group.id})}">
-                                        <img src="/alink-hq/static/img/exchange.png" th:alt="${group.id}"
-                                             class="center-img pointer" title="移动" shiro:hasPermission ="moveGroup">
+                                    <img  th:alt="${group.id}" th:class="${group.placeId == 0}? ' unclick pointer' : 'reset-name pointer'" th:src="${group.placeId == 0}? '/alink-hq/static/img/edit-un.png': '/alink-hq/static/img/edit.png' " th:abbr="${group.placeId}"  th:title="${group.placeId == 0 }? '不可重命名':'重命名'"  shiro:hasPermission ="renameGroup" th:accept="${group.placeId}">
+                                    <a  th:href="${group.placeId == 0}? 'javascript:void(0);': @{/group/move(mid=${group.mid},ids=${group.id})}">
+                                        <img  th:alt="${group.id}"  th:src="${group.placeId  == 0}? '/alink-hq/static/img/un-exchange.png':'/alink-hq/static/img/exchange.png'"
+                                             th:class="${group.placeId == 0}? 'center-img unclick ':'center-img pointer'"  th:title="${group.placeId == 0}? '不可移动':'移动'"  shiro:hasPermission ="moveGroup">
                                     </a>
-                                    <img src="/alink-hq/static/img/delete.png" th:alt="${group.id}"
-                                         class="singleDel pointer" title="删除" shiro:hasPermission ="deleteGroup">
+                                    <img  th:alt="${group.id}" class="singleDel pointer"  th:src="@{/static/img/delete.png}" title="删除"  shiro:hasPermission ="deleteGroup">
+                                    <!--<img  th:alt="${group.id}" th:class="${group.placeId == 0}? 'unclick pointer':'singleDel pointer'"  th:src="${group.placeId  == 0}? '/alink-hq/static/img/un-delete.png':'/alink-hq/static/img/delete.png'" th:title="${group.placeId == 0}? '不可删除':'删除'"  shiro:hasPermission ="deleteGroup">-->
                                     <!--不能重命名-->
                                     <img src="/alink-hq/static/img/un-rename.png" alt="" class="pointer  unclick"
-                                         th:title="无法操作" shiro:lacksPermission ="renameGroup">
+                                         th:title="无法操作" shiro:lacksPermission ="renameGroup" >
                                     <!--不能移交-->
                                     <img src="/alink-hq/static/img/un-exchange.png" alt=""
                                          class="center-img pointer  unclick" shiro:lacksPermission ="moveGroup"
@@ -147,7 +153,7 @@
                             </span>
                              <span class="m-r-20">
                                 <span  class="skipPageBtn pointer moment active unclick1"  shiro:lacksPermission ="moveGroup"  id="multiMove">移动</span>
-                                <span  class="skipPageBtn pointer moment" shiro:hasPermission ="moveGroup"  onmousedown="exchangeBtnMouseDown()" onmouseup="exchangeBtnMouseUp()" id="multiMove">移动</span>
+                                <span  th:class="${dict.placeId == 0}? 'skipPageBtn pointer moment active unclick1':'skipPageBtn pointer moment'"  shiro:hasPermission ="moveGroup"  onmousedown="exchangeBtnMouseDown()" onmouseup="exchangeBtnMouseUp()" id="multiMove">移动</span>
                             </span>
                              <span>
                                  <span shiro:lacksPermission ="deleteGroup" class="skipPageBtn pointer moment active unclick1"  id="multiDel">删除</span>
@@ -164,21 +170,24 @@
                             <thead>
                             <tr>
                                 <th class="all-checkbox">
-                                    <span style="vertical-align: sub;"><input type="checkbox" class="pointer"></span>
+                                    <!--<span style="vertical-align: sub;">-->
+                                    <input type="checkbox" id="all" class="pointer">
+                                    <!--</span>-->
                                     <span class="">全选</span>
                                 </th>
-                                <th>组名称</th>
-                                <th>隶属网络</th>
-                                <th>网络ID</th>
-                                <th>隶属区域</th>
-                                <th>灯数量</th>
-                                <th>操作</th>
+                                <th><span>组名称</span></th>
+                                <th><span>隶属项目</span></th>
+                                <th><span>隶属网络</span></th>
+                                <th><span>网络ID</span></th>
+                                <th><span>隶属区域</span></th>
+                                <th><span>灯数量</span></th>
+                                <th class="operation"><span>操作</span></th>
                             </tr>
                             </thead>
                             <tbody>
                             <tr>
                                 <td colspan="9">
-                                    <img src="/alink-hq/static/img/no-data.png" alt="">
+                                    <img th:src="@{/static/img/no-data.png}" style="width: auto;height: auto;" alt="">
                                     <p>暂无数据</p>
                                 </td>
                             </tr>
@@ -191,54 +200,58 @@
     </div>
 </div>
 <!-- 重命名弹框 -->
-<div class="confirm-on-off pop-iframe  " openContent="reset-name">
-    <div class="confirm-on-off-nav p-r pop-nav">
-        重命名
-    </div>
-    <div class="pop-content">
-        <div class="newName">
-            <p class="rename-hint"></p>
-            <label for="rename">新名称</label>
-            <input type="text" placeholder="请输入（2-16位汉字、字母、数字）" id="rename" onkeyup="nameKeyUp()" maxlength="16"/>
-        </div>
-        <div class="pop-btn">
-            <button class="reduce">取消</button>
-            <button class="yes">确定</button>
-        </div>
-    </div>
-</div>
-<!-- 删除账户 -->
-<div class="pop-iframe" openContent="delete-mesh">
-    <div class=" p-r pop-nav">
-        温馨提示
-    </div>
-    <div class="pop-content">
-        <div class="reset-pwd">您确定要删除所选的组吗？</div>
-        <div class="reset-pwd-hint">
-            删除后所选组所有的灯将会进入所属网络未分组中请慎重！
-        </div>
-        <div class="pop-btn">
-            <button class="reduce">取消</button>
-            <button class="yes">确定</button>
-        </div>
-    </div>
-</div>
-<!-- 不可移动不同网络下的组 -->
-<div class="pop-iframe " openContent="exchange">
-    <div class=" p-r pop-nav">
-        温馨提示
-    </div>
-    <div class="pop-content">
-        <div class="reset-pwd">不同网络下的组不可进行移动</div>
-        <!--<div class="reset-pwd-hint">-->
-        <!--删除后所选组所有的灯将会进入所属网络未分组中请慎重！-->
+<div th:replace="pop/reset::reset-name"></div>
+<div th:replace="pop/noDelete::noDelete-pop"></div>
+<!--<div class="confirm-on-off pop-iframe  " openContent="reset-name">-->
+    <!--<div class="confirm-on-off-nav p-r pop-nav">-->
+        <!--重命名-->
+    <!--</div>-->
+    <!--<div class="pop-content">-->
+        <!--<div class="newName">-->
+            <!--<p class="rename-hint"></p>-->
+            <!--<label for="rename">新名称</label>-->
+            <!--<input type="text" placeholder="请输入（2-16位汉字、字母、数字）" id="rename" onkeyup="nameKeyUp()" maxlength="16"/>-->
         <!--</div>-->
-        <div class="pop-btn">
-            <button class="reduce">取消</button>
-            <button class="yes">确定</button>
-        </div>
-    </div>
-</div>
+        <!--<div class="pop-btn">-->
+            <!--<button class="reduce">取消</button>-->
+            <!--<button class="yes">确定</button>-->
+        <!--</div>-->
+    <!--</div>-->
+<!--</div>-->
+<!-- 删除账户 -->
+<div th:replace="pop/delete::delete-pop"></div>
+<!--<div class="pop-iframe" openContent="delete-pop">-->
+    <!--<div class=" p-r pop-nav">-->
+        <!--温馨提示-->
+    <!--</div>-->
+    <!--<div class="pop-content">-->
+        <!--<div class="reset-pwd">您确定要删除所选的组吗？</div>-->
+        <!--<div class="reset-pwd-hint">-->
+            <!--删除后所选组所有的灯将会进入所属网络未分组中请慎重！-->
+        <!--</div>-->
+        <!--<div class="pop-btn">-->
+            <!--<button class="reduce">取消</button>-->
+            <!--<button class="yes">确定</button>-->
+        <!--</div>-->
+    <!--</div>-->
+<!--</div>-->
+<!-- 不可移动不同网络下的组 -->
+<div th:replace="pop/exchange::exchange"></div>
+<!--<div class="pop-iframe " openContent="exchange">-->
+    <!--<div class=" p-r pop-nav">-->
+        <!--温馨提示-->
+    <!--</div>-->
+    <!--<div class="pop-content">-->
+        <!--<div class="reset-pwd">不同网络下的组不可进行移动</div>-->
+        <!--&lt;!&ndash;<div class="reset-pwd-hint">&ndash;&gt;-->
+        <!--&lt;!&ndash;删除后所选组所有的灯将会进入所属网络未分组中请慎重！&ndash;&gt;-->
+        <!--&lt;!&ndash;</div>&ndash;&gt;-->
+        <!--<div class="pop-btn">-->
+            <!--<button class="reduce">取消</button>-->
+            <!--<button class="yes">确定</button>-->
+        <!--</div>-->
+    <!--</div>-->
+<!--</div>-->
 <div class="hide-iframe "></div>
 <script type="text/javascript" src="/alink-hq/static/js/left.js"></script>
 <script type="text/javascript" src="/alink-hq/static/js/page.js"></script>

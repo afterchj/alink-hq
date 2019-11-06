@@ -13,6 +13,44 @@
 </head>
 <body>
 <!--<div >-->
+<!--<header class="am-topbar admin-header am-topbar-inverse am-topbar-fixed-top" th:fragment="head">-->
+    <!--<div class="am-topbar-brand">-->
+        <!--<strong>灯联网管理后台</strong>-->
+    <!--</div>-->
+
+    <!--&lt;!&ndash;<button class="am-topbar-btn am-topbar-toggle am-btn am-btn-sm am-btn-success am-show-sm-only"&ndash;&gt;-->
+            <!--&lt;!&ndash;data-am-collapse="{target: '#topbar-collapse'}"><span class="am-sr-only">导航切换</span> <span&ndash;&gt;-->
+            <!--&lt;!&ndash;class="am-icon-bars"></span></button>&ndash;&gt;-->
+
+    <!--<div class="am-collapse am-topbar-collapse" id="topbar-collapse">-->
+
+        <!--<ul class="am-nav am-nav-pills am-topbar-nav am-topbar-right admin-header-list">-->
+            <!--<li>-->
+                <!--<a href="javascript:;">-->
+                    <!--<span class="am-icon-user"></span>-->
+                    <!--<span th:if="${session.user}!=null">-->
+                         <!--<span th:text="${session.user.uname}" class="font"></span>-->
+                    <!--</span>-->
+                    <!--<span th:if="${session.user.uname}==null">-->
+                          <!--<span th:text="admin" class="font"></span>-->
+                     <!--</span>-->
+                <!--</a>-->
+            <!--</li>-->
+            <!--<li><a th:href="@{/logOut}"><span class="am-icon-power-off"></span> 退出 </a></li>-->
+            <!--&lt;!&ndash;<li class="am-dropdown" data-am-dropdown>&ndash;&gt;-->
+                <!--&lt;!&ndash;<a class="am-dropdown-toggle" data-am-dropdown-toggle href="javascript:;">&ndash;&gt;-->
+                    <!--&lt;!&ndash;<span class="am-icon-users"></span> 管理员 <span class="am-icon-caret-down"></span>&ndash;&gt;-->
+                <!--&lt;!&ndash;</a>&ndash;&gt;-->
+                <!--&lt;!&ndash;<ul class="am-dropdown-content">&ndash;&gt;-->
+                    <!--&lt;!&ndash;<li><a href="#"><span class="am-icon-user"></span> 资料</a></li>&ndash;&gt;-->
+                    <!--&lt;!&ndash;&lt;!&ndash;<li><a href="#"><span class="am-icon-cog"></span> 设置</a></li>&ndash;&gt;&ndash;&gt;-->
+                    <!--&lt;!&ndash;<li><a th:href="@{/logOut}"><span class="am-icon-power-off"></span> 退出</a></li>&ndash;&gt;-->
+                <!--&lt;!&ndash;</ul>&ndash;&gt;-->
+            <!--&lt;!&ndash;</li>&ndash;&gt;-->
+            <!--&lt;!&ndash;<li><a href="javascript:;" id="admin-fullscreen"><span class="am-icon-arrows-alt"></span> 开启全屏</a></li>&ndash;&gt;-->
+        <!--</ul>-->
+    <!--</div>-->
+<!--</header>-->
 <div class="all-container" th:fragment="head">
     <div class="container" style="">
         <div class="nav-top clearfix">
@@ -20,28 +58,43 @@
                 灯联网管理后台
             </div>
             <div class="f-r ad-nav">
-            <span class="nav-img">
-                <!--<img src="/alink-hq/static/img/off-unclick .png" alt=""/>-->
-                <i class="fa fa-power-off" aria-hidden="true" style="color: #fff;font-size: 18px;"></i>
-            </span>
-                <span class="font"><a style="color: white" th:href="@{/logOut}">退出</a></span>
-            </div>
-            <div class="f-r ad-nav">
-            <span class="nav-img">
-                <i class="fa fa-user" aria-hidden="true" style="color: #fff;font-size: 18px;"></i>
-                <!--<img src="/alink-hq/static/img/admin.png" alt="" style="margin-top: -17px;"/>-->
-            </span>
-            <span th:if="${session.user}!=null">
-                <span th:text="${session.user.uname}" class="font"></span>
-            </span>
-            <span th:if="${session.user.uname}==null">
-                <span th:text="admin" class="font"></span>
-            </span>
+                <ul>
+                    <li>
+                        <i class="fa fa-power-off" aria-hidden="true" style="color: #fff;"></i>
+                        <a th:href="@{/logOut}" class="font-white">退出</a>
+                    </li>
+                    <li>
+                        <i class="fa fa-user" aria-hidden="true" style="color: #fff;"></i>
+                        <span th:if="${session.user}!=null">
+                            <span th:text="${session.user.uname}" class="font"></span>
+                        </span>
+                        <span th:if="${session.user.uname}==null">
+                            <span th:text="admin" class="font"></span>
+                        </span>
+                    </li>
+                </ul>
+            <!--<span class="nav-img">-->
+                <!--&lt;!&ndash;<img src="/alink-hq/static/img/off-unclick .png" alt=""/>&ndash;&gt;-->
+                <!--<i class="fa fa-power-off" aria-hidden="true" style="color: #fff;font-size: 18px;"></i>-->
+            <!--</span>-->
+                <!--<span class="font"><a style="color: white" th:href="@{/logOut}">退出</a></span>-->
+            <!--</div>-->
+            <!--<div class="f-r ad-nav">-->
+            <!--<span class="nav-img">-->
+                <!--<i class="fa fa-user" aria-hidden="true" style="color: #fff;font-size: 18px;"></i>-->
+                <!--&lt;!&ndash;<img src="/alink-hq/static/img/admin.png" alt="" style="margin-top: -17px;"/>&ndash;&gt;-->
+            <!--</span>-->
+            <!--<span th:if="${session.user}!=null">-->
+                <!--<span th:text="${session.user.uname}" class="font"></span>-->
+            <!--</span>-->
+            <!--<span th:if="${session.user.uname}==null">-->
+                <!--<span th:text="admin" class="font"></span>-->
+            <!--</span>-->
                 <!--<span>admin</span>-->
-            </div>
+            <!--</div>-->
         </div>
     </div>
 </div>
-<!--</div>-->
+</div>
 </body>
 </html>

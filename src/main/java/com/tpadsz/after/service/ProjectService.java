@@ -4,6 +4,7 @@ import com.tpadsz.after.entity.ProjectList;
 import com.tpadsz.after.entity.User;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by chenhao.lu on 2019/4/8.
@@ -41,4 +42,7 @@ public interface ProjectService {
 
     int findProjectByProjectId(int id);
 
+    List<Map> selectByPid(List<String> list);
+
+    int findLightByPid(int id, String uid);
 }

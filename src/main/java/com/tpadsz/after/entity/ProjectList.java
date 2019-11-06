@@ -11,6 +11,7 @@ public class ProjectList {
     private String account;
     private String uname;
     private String coname;
+    private int is_associated;
     private String mobile;
     private String uid;
     private String create_date;
@@ -71,6 +72,14 @@ public class ProjectList {
 
     public void setUid(String uid) {
         this.uid = uid;
+    }
+
+    public int getIs_associated() {
+        return is_associated;
+    }
+
+    public void setIs_associated(int is_associated) {
+        this.is_associated = is_associated;
     }
 
     public String getMobile() {

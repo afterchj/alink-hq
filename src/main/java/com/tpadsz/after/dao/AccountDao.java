@@ -20,7 +20,7 @@ public interface AccountDao {
 
     List<UserList> searchByAdmin(@Param("account")String account, @Param("uname")String uname,@Param("fid")Integer fid, @Param("roleId")Integer roleId, @Param("startDate")String startDate, @Param("endDate")String endDate);
 
-    List<UserList> searchByManager(@Param("account")String account,@Param("uname")String uname, @Param("list")List<String> uids,@Param("startDate")String startDate,@Param("endDate")String endDate);
+    List<UserList> searchByManager(@Param("account")String account,@Param("uname")String uname, @Param("fid")Integer fid, @Param("roleId")Integer roleId, @Param("list")List<String> uids,@Param("startDate")String startDate,@Param("endDate")String endDate);
 
     List<String> findFirmUidOfUser(@Param("uid") String uid);
 
@@ -48,13 +48,23 @@ public interface AccountDao {
 
     int findProjectByUid(@Param("uid")String uid);
 
-    Integer findFirmUid(@Param("uid")String uid, @Param("userId")String userId);
-
     List<User> findAccountByFid(@Param("fid")Integer fid);
 
-    void createPlace(@Param("uid")String uid, @Param("mid")Integer mid);
+    void createDefaultPlace(SceneList sceneList);
 
     int findDefaultNetworkByUid(@Param("uid")String uid);
 
     void saveMemo(@Param("account") String account, @Param("memo") String content);
+
+    void createDefaultGroup(SceneList sceneList);
+
+    List<ProjectList> findAssociateProjectsList(@Param("uid")String uid);
+
+    void unassociated(@Param("uid")String uid,@Param("list")List<String> list);
+
+    void resetUserProject(@Param("uid")String uid);
+
+    List<String> findAccountsOfCooperateFirms(@Param("firms")List<Firm> firms);
+
+    List<Firm> findCooperateFirms(@Param("uid")String uid);
 }

@@ -110,11 +110,17 @@ public class GroupController {
     }
 
     @RequestMapping("/delete")
-    public String delete(Integer mid, String ids) {
+    public String delete(Integer pid, Integer mid, String ids) {
+        Map map = new HashMap();
+        map.put("mid", mid);
         String[] ids1 = ids.split(",");
-        List<String> list = new ArrayList(Arrays.asList(ids1));
-        groupService.deleteGroupByIds(list);
-        return "redirect:/group/list?mid=" + mid;
+        for (String id : ids1) {
+            map.put("gid", id);
+            groupService.deleteGroup(map);
+        }
+//        List<String> list = new ArrayList(Arrays.asList(ids1));
+//        groupService.deleteGroupByIds(list);
+        return "redirect:/group/list?projectId=" + pid + "&mid=" + mid;
     }
 
     @ResponseBody

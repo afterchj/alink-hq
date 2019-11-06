@@ -55,6 +55,13 @@ public class HomeController {
         return "authError";
     }
 
+//    @RequestMapping("/productList")
+//    public String productList() {
+//        return "productManage/productList";
+//    }
+
+
+
     @ResponseBody
     @RequestMapping("/checkUser")
     public String checkUser(String uname) {

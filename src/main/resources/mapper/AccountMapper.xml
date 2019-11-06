@@ -6,12 +6,8 @@
         SELECT role_id FROM f_user_role WHERE user_id=#{uid}
     </select>
 
-    <select id="findFirmUid" resultType="Integer" parameterType="string">
-        SELECT uid FROM f_user_customer WHERE fid=(SELECT fid FROM f_user_customer WHERE uid=#{uid}) and uid =#{userId}
-    </select>
-
     <select id="findFirmUidOfUser" resultType="string" parameterType="string">
-        SELECT uid FROM f_user_customer AS t1 INNER JOIN f_user_role AS t4 ON t1.uid = t4.user_id WHERE t4.role_id = 4 and t1.fid=(SELECT fid FROM f_user_customer WHERE uid=#{uid})
+        SELECT uid FROM f_user_customer AS t1 INNER JOIN f_user_role AS t4 ON t1.uid = t4.user_id WHERE t4.role_id > 3 and t1.fid=(SELECT fid FROM f_user_customer WHERE uid=#{uid})
     </select>
 
     <select id="findFirmList" resultType="com.tpadsz.after.entity.Firm">
@@ -43,7 +39,7 @@
     </select>
 
     <select id="searchByAdmin" resultType="com.tpadsz.after.entity.UserList">
-        SELECT t1.id,t1.account,t1.uname,t1.mobile,t1.email,t3.coname,t4.role_id,DATE_FORMAT(t1.create_date,'%Y-%m-%d %H:%i:%s') AS create_date,t1.status,t3.status AS coStatus,t1.memo FROM (SELECT * FROM f_user_account WHERE account LIKE CONCAT('%',IFNULL(#{account},''),'%') and create_date BETWEEN IFNULL(NULLIF(#{startDate},''),create_date) and IFNULL(NULLIF(#{endDate},''),create_date)) AS t1 INNER JOIN f_user_customer AS t2 ON t1.id = t2.uid INNER JOIN f_firm AS t3 ON t2.fid = t3.id INNER JOIN f_user_role AS t4 ON t1.id = t4.user_id WHERE t2.fid = IFNULL(NULLIF(#{fid},''),fid) and t4.role_id IN(3,4) and t4.role_id = IFNULL(NULLIF(#{roleId},''),t4.role_id)
+        SELECT t1.id,t1.account,t1.uname,t1.mobile,t1.email,t3.coname,t4.role_id,DATE_FORMAT(t1.create_date,'%Y-%m-%d %H:%i:%s') AS create_date,t1.status,t3.status AS coStatus,t1.memo FROM (SELECT * FROM f_user_account WHERE account LIKE CONCAT('%',IFNULL(#{account},''),'%') and create_date BETWEEN IFNULL(NULLIF(#{startDate},''),create_date) and IFNULL(NULLIF(#{endDate},''),create_date)) AS t1 INNER JOIN f_user_customer AS t2 ON t1.id = t2.uid INNER JOIN f_firm AS t3 ON t2.fid = t3.id INNER JOIN f_user_role AS t4 ON t1.id = t4.user_id WHERE t2.fid = IFNULL(NULLIF(#{fid},''),fid) and t4.role_id >2 and t4.role_id = IFNULL(NULLIF(#{roleId},''),t4.role_id)
         <if test="uname!=null and uname!=''">
             and t1.uname LIKE CONCAT('%',#{uname},'%')
         </if>
@@ -58,8 +54,10 @@
         <foreach item="item" collection="list" open="(" separator="," close=")">#{item}
         </foreach>) AS t1 INNER JOIN f_user_customer AS t2 ON t1.id = t2.uid INNER JOIN f_firm AS t3 ON
         t2.fid = t3.id INNER JOIN f_user_role AS t4 ON t1.id = t4.user_id
+        WHERE
+        t2.fid = IFNULL(NULLIF(#{fid},''),fid) and t4.role_id = IFNULL(NULLIF(#{roleId},''),t4.role_id)
         <if test="uname!=null and uname!=''">
-            WHERE t1.uname LIKE CONCAT('%',#{uname},'%')
+          and t1.uname LIKE CONCAT('%',#{uname},'%')
         </if>
         ORDER BY t1.update_date DESC,t1.create_date DESC
     </select>
@@ -92,8 +90,12 @@
             VALUES(#{mname},#{mesh_id},#{pcount},'3344',#{pcount},0,NOW(),NOW())
     </insert>
 
-    <insert id="createPlace">
-        INSERT INTO f_place (place_id,pname,uid,mid,create_date,update_date) VALUES(1,'区域1',#{uid},#{mid},NOW(),NOW())
+    <insert id="createDefaultPlace" useGeneratedKeys="true" keyProperty="pid" parameterType="com.tpadsz.after.entity.SceneList">
+        INSERT INTO f_place (place_id,pname,uid,mid,create_date,update_date) VALUES(0,'扫描区',#{uid},#{mid},NOW(),NOW());
+    </insert>
+
+    <insert id="createDefaultGroup" parameterType="com.tpadsz.after.entity.SceneList">
+        INSERT INTO f_group (group_id,gname,mid,pid,create_date,update_date) VALUES(0,'未分组',#{mid},#{pid},NOW(),NOW());
     </insert>
 
     <select id="findByAccount" resultType="com.tpadsz.after.entity.User">
@@ -133,4 +135,34 @@
     <update id="saveMemo" parameterType="string">
         update f_user_account set memo = #{memo},update_date = NOW() where account=#{account}
     </update>
+
+    <select id="findAssociateProjectsList" resultType="ProjectList">
+        SELECT t1.id,t1.name,t2.account,t2.uname,t4.coname,t5.id as is_associated FROM f_project t1 INNER JOIN f_user_account t2 ON t1.uid=t2.id INNER JOIN f_user_customer t3 ON t2.id=t3.uid INNER JOIN (SELECT * FROM f_firm WHERE id=(SELECT fid FROM f_user_customer WHERE uid=#{uid})) t4 ON t3.fid = t4.id LEFT JOIN (SELECT * FROM f_user_project WHERE uid=#{uid}) t5 ON t1.id = t5.hidden_project_id
+        WHERE t1.other NOT IN('old','freezingOld') or t1.other is NULL
+        ORDER BY t1.update_date DESC
+    </select>
+
+    <delete id="resetUserProject">
+        DELETE FROM f_user_project WHERE uid=#{uid};
+    </delete>
+
+    <insert id="unassociated" parameterType="java.util.List" useGeneratedKeys="false">
+        INSERT INTO f_user_project(uid,hidden_project_id,create_date,update_date) VALUES
+        <foreach collection="list" item="item" index="index" separator=",">
+            (#{uid},#{item},NOW(),NOW())
+        </foreach>
+    </insert>
+
+    <select id="findAccountsOfCooperateFirms" resultType="string" parameterType="java.util.List">
+        SELECT uid FROM f_user_account AS t1 INNER JOIN f_user_customer AS t2 ON t1.id = t2.uid INNER JOIN f_user_role AS t3 ON t1.id = t3.user_id WHERE t3.role_id=3 and t2.fid IN (
+        <foreach collection="firms" item="item" index="index" separator=",">
+            #{item.id}
+        </foreach>
+        )
+    </select>
+
+    <select id="findCooperateFirms" resultType="com.tpadsz.after.entity.Firm" parameterType="string">
+        SELECT id,coname FROM f_firm f LEFT JOIN (SELECT fid FROM f_firm_cooperation GROUP BY fid) s ON s.fid = f.id WHERE id!=1 and parent_id=(SELECT fid FROM f_user_customer WHERE uid=#{uid})
+    </select>
+
 </mapper>

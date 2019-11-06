@@ -23,19 +23,24 @@ $(function () {
         //     'height': height
         // })
         var selector=$('div[openContent="start-use"]');
+        $('div[openContent="start-use"] .off-or-on').removeClass('one');
         selector.addClass('active');
         adjust(selector)
         showOverlay()
         // $('div[openContent="start-use"]').addClass('active');
         account = $(this).siblings('.use-account').text();
         status = $(this).find('.result').text();
+        $('div[openContent="start-use"] .text-msg').css('text-align','left');
         if (status == '启用') {
             intStatus = 1;
-            $('div[openContent="start-use"] .off-or-on').text('您确定要禁用 '+account+' 账号吗？');
-            $('div[openContent="start-use"] .unuse').text('禁用后，该账号将无法登录')
+            $('div[openContent="start-use"] .off-or-on').removeClass('one');
+            $('div[openContent="start-use"] .off-or-on p').html('您确定要禁用 ' + '<span class="hint-font">'+account+'</span> '+ '账号吗 ？');
+            $('div[openContent="start-use"] .unuse').text('禁用后，该账号将无法登录！')
+
         } else if (status == '禁用') {
             intStatus = 0;
-            $('div[openContent="start-use"] .off-or-on').text('您确定要启用 '+account+' 账号吗？');
+            $('div[openContent="start-use"] .off-or-on p').html('您确定要启用 ' + '<span class="hint-font">'+account+'</span> '+ '账号吗 ？');
+            $('div[openContent="start-use"] .off-or-on').addClass('one');
             $('div[openContent="start-use"] .unuse').text('');
         }
     })
@@ -54,15 +59,16 @@ $(function () {
                     }else if($('.off-or-on').text().indexOf('启用')!=-1){
                         result='启用';
                     }
-                    $('#preload-anim').addClass('active');
-                    $('#preload-anim .title').text(result+'成功！');
-                    setTimeout(function () {
-                        $('#preload-anim').removeClass('active');
-                        var selector= $('div[openContent="start-use"]');
-                        selector.removeClass('active');
-                        hideOverlay();
-                        location.reload();
-                    }, 1000);
+                    location.reload();
+                    // $('#preload-anim').addClass('active');
+                    // $('#preload-anim .title').text(result+'成功！');
+                    // setTimeout(function () {
+                    //     $('#preload-anim').removeClass('active');
+                    //     var selector= $('div[openContent="start-use"]');
+                    //     selector.removeClass('active');
+                    //     hideOverlay();
+                    //     location.reload();
+                    // }, 1000);
                 }
             }
         })
@@ -81,6 +87,7 @@ $(function () {
         var openTab = $(this).attr('openTab');
         $('div[openContent="reset-pwd"] .pop-content').find('p.unuse').remove();
         var selector=$('div[openContent="reset-pwd"]');
+        $('div[openContent="reset-pwd"] .text-msg').css('text-align','left');
         selector.addClass('active');
         adjust(selector);
         showOverlay();
@@ -112,7 +119,7 @@ $(function () {
     $('div[openContent="reset-pwd"] button.reduce').click(function () {
         var selector= $('div[openContent="reset-pwd"]');
         selector.removeClass('active')
-        hideOverlay()
+        hideOverlay();
     })
     $('div[openContent="new-pwd"] button.reduce').click(function () {
         $('div[openContent="new-pwd"]').removeClass('active');
@@ -126,7 +133,7 @@ $(function () {
         $('#preload-anim .title').text('密码重置成功！');
         setTimeout(function () {
             $('#preload-anim').removeClass('active');
-        }, 1500);
+        }, 500);
         hideOverlay();
     })
 
@@ -137,9 +144,10 @@ $(function () {
     $('img[openTab="delete-account"]').click(function () {
         var openTab = $(this).attr('openTab');
         var selector=$('div[openContent="delete-account"]');
+        $('div[openContent="delete-account"] .text-msg').css('text-align','left');
         selector.addClass('active');
-        adjust(selector)
-        showOverlay()
+        adjust(selector);
+        showOverlay();
         $('div[openContent="delete-account"] .pop-content').find('p.unuse').remove();
         account = $(this).parent().siblings('.use-account').text();
     })
@@ -164,10 +172,12 @@ $(function () {
     $('div[openContent="delete-account-hasProject"] button.yes').click(function () {
         location.href = '/alink-hq/project/list';
     })
-    $('div[openContent="delete-account"] button.reduce').click(function () {
+    $('div[openContent="delete-account"] button.reduce,div[openContent="delete-account-hasProject"] button.reduce').click(function () {
         var selector= $('div[openContent="delete-account"]');
-        selector.removeClass('active')
-        hideOverlay()
+        selector.removeClass('active');
+        var selector1= $('div[openContent="delete-account-hasProject"]');
+        selector1.removeClass('active');
+        hideOverlay();
     })
 })
 $(function () {

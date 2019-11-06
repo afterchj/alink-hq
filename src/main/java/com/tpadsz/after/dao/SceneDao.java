@@ -19,7 +19,7 @@ public interface SceneDao {
 
     void renameScene(@Param("sceneName")String sceneName, @Param("sid")Integer sid);
 
-    void delete(@Param("sid")Integer sid);
+    void deleteSid(@Param("sid")Integer sid);
 
     void saveSceneName(@Param("sceneName")String sceneName, @Param("sid")Integer sid);
 
@@ -34,4 +34,16 @@ public interface SceneDao {
     MeshInfo findLightInfoByLid(@Param("lid")Integer lid);
 
     List<MeshInfo> findXYByGid(@Param("gid")Integer gid,@Param("sid")Integer sid);
+
+    int findRoleIdByMid(@Param("mid")Integer mid);
+
+    void resetXY(@Param("sid")Integer id, @Param("mid")Integer mid,@Param("x") String x,@Param("y") String y);
+
+    void deleteXY(@Param("sid")Integer id, @Param("mid")Integer mid);
+
+    MeshInfo findDefaultXY(@Param("id")Integer id);
+
+    void saveDeleteLog(@Param("uid") String uid, @Param("sceneId") Integer sceneId, @Param("mid") Integer mid);
+
+    List<Integer> findMeshList(@Param("uid") String uid);
 }

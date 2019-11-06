@@ -9,7 +9,7 @@
     <link rel="stylesheet" th:href="@{/static/font-awesome-4.7.0/css/font-awesome.min.css}"/>
     <link rel="stylesheet" href="/alink-hq/static/css/base.css"/>
     <link rel="stylesheet" href="/alink-hq/static/css/leftNav.css"/>
-    <link rel="stylesheet" href="/alink-hq/static/css/account.css"/>
+    <!--<link rel="stylesheet" href="/alink-hq/static/css/account.css"/>-->
     <link rel="stylesheet" href="/alink-hq/static/css/loding.css"/>
     <link rel="stylesheet" href="/alink-hq/static/css/projectManage.css"/>
     <title>修改邮箱</title>
@@ -19,12 +19,17 @@
         }
 
         span.success-hint {
-            font-size: 15px;
-            color: red;
+            font-size: 14px;
+            color: #FF5722;
             line-height: 2;
+            position: absolute;
             /* display: none; */
             visibility: hidden;
+            white-space: nowrap;
+            top: 5px;
+            margin-left: 10px;
         }
+
 
         span.success-hint.active {
             /* display: block; */
@@ -50,30 +55,42 @@
                     <!--<img src="/alink-hq/static/img/go-back.png" alt="" id="clickReturn"/>-->
                 </div>
             </div>
-            <div id="bindEmail">
-                <div class="b-bindEmail">
-                    <div class="b-nav">
+            <div id="bindEmail" class=" table-content-list detail transfer">
+                <div class="p-detail">
+                    <div class="p-nav">
                         修改邮箱
                     </div>
-                    <div class="b-content ">
+                    <div class="p-content p-r ">
                         <form id="emailForm" action="#" onsubmit="return false" method="post">
-                            <div style="margin-bottom:10px;">
-                                <p class="email-hint" style="height: 35px;"></p>
-                                <label for="">邮箱：</label>
-                                <input type="text" placeholder="请输入邮箱" id="email" name="email"/>
-                            </div>
-                            <div class="verification-code">
-                                <p class="code-hint" style="height: 35px;"></p>
-                                <label for="">激活码：</label>
-                                <input type="text" placeholder="请输入激活码" id="code" name="code">
-                                <button type="button" class="security-code" id="codeSubmit">获取激活码</button>
-                                <span class="success-hint" style="height: 35px;"></span>
-                            </div>
-                            <!--<input type="hidden" th:value="${account}" id="account" name="account" class="account"/>-->
-                            <input type="hidden" th:value="${flag}" id="flag" name="flag"/>
-                            <div class="submit-btn">
-                                <button type="submit" id="fillSubmit">立即修改</button>
-                            </div>
+                            <fieldset>
+                                <div class="form-row">
+                                    <div class="field-label">
+                                        <!--<p class="email-hint" style="height: 35px;"></p>-->
+                                        <label >邮箱：</label>
+                                    </div>
+                                    <div class="field-widget p-r" >
+                                        <p class="p-a verify "></p>
+                                        <input type="text" placeholder="请输入邮箱" id="email" name="email"/>
+                                    </div>
+                                </div>
+                                <div class="verification-code form-row">
+                                    <div class="field-label">
+                                        <!--<p class="code-hint" style="height: 35px;"></p>-->
+                                        <label >激活码：</label>
+                                    </div>
+                                    <div class="field-widget p-r" style="width: calc(100% - 320px);">
+                                        <p class="p-a verify "></p>
+                                        <input type="text" placeholder="请输入激活码" id="code" name="code" style="width: 60%;">
+                                        <button type="button" class="security-code" id="codeSubmit" style="width: 31%;">获取激活码</button>
+                                        <span class="success-hint" style="height: 35px;"></span>
+                                    </div>
+                                </div>
+                                <!--<input type="hidden" th:value="${account}" id="account" name="account" class="account"/>-->
+                                <input type="hidden" th:value="${flag}" id="flag" name="flag"/>
+                                <div class="submit-btn form-row" style="text-align: center;">
+                                    <button type="submit" id="fillSubmit">立即修改</button>
+                                </div>
+                            </fieldset>
                         </form>
                     </div>
                 </div>

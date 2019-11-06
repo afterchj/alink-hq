@@ -47,6 +47,11 @@ public class LightServiceImpl implements LightService {
     }
 
     @Override
+    public int getLightCount(List id) {
+        return lightDao.getLightCount(id);
+    }
+
+    @Override
     public void saveUpdate(Map map) {
         lightDao.saveUpdate(map);
     }
@@ -60,4 +65,5 @@ public class LightServiceImpl implements LightService {
     public void deleteLightByIds(List list) {
         lightDao.deleteLightByIds(list);
     }
+
 }

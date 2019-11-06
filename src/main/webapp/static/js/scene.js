@@ -102,27 +102,31 @@ $(function() {
         }
     }
     $('.singleDel').click(function() {
-        var deleteArray = [];
+         deleteArray = [];
         var sid = parseInt($(this).parent().siblings('.sid').find('input').val());
         var sceneId = parseInt($(this).parent().siblings('.sceneId').text());
-        var selector = $('div[openContent="delete-place"]');
+        var mid = $("#mid").val();
+        var selector = $('div[openContent="delete-pop"]');
         selector.addClass('active');
+        $('div[openContent="delete-pop"] .reset-pwd p').text('您确定要删除所选的场景吗？');
+        $('div[openContent="delete-pop"] .reset-pwd-hint').text('删除后该场景将无法应用，请慎重！');
         adjust(selector);
         showOverlay();
         var msg = {
             id: sid,
-            sceneId: sceneId
+            sceneId: sceneId,
+            mid: mid
         }
-        deleteArray.push(msg)
+        deleteArray.push(msg);
     })
-    $('div[openContent="delete-place"] .pop-btn .reduce').click(function() {
-        var selector = $('div[openContent="delete-place"]');
+    $('div[openContent="delete-pop"] .pop-btn .reduce').click(function() {
+        var selector = $('div[openContent="delete-pop"]');
         selector.removeClass('active');
         hideOverlay()
     });
-    $('div[openContent="delete-place"] .pop-btn .yes').click(function() {
+    $('div[openContent="delete-pop"] .pop-btn .yes').click(function() {
         var newJsonArray = JSON.stringify(deleteArray);
-        var selector = $('div[openContent="delete-place"]');
+        var selector = $('div[openContent="delete-pop"]');
         selector.removeClass('active') ;
         hideOverlay();
         deleteScene(newJsonArray)
@@ -139,10 +143,12 @@ $(function() {
             deleteArray.push(msg);
         });
         if (deleteArray.length > 0) {
-            var selector = $('div[openContent="delete-place"]');
+            var selector = $('div[openContent="delete-pop"]');
             selector.addClass('active');
+            $('div[openContent="delete-pop"] .reset-pwd p').text('您确定要删除所选的场景吗？');
+            $('div[openContent="delete-pop"] .reset-pwd-hint').text('删除后该场景将无法应用，请慎重！');
             adjust(selector);
-            showOverlay()
+            showOverlay();
         }
     })
 })
@@ -270,6 +276,7 @@ function condition(sceneName, sceneId, pageSize, pageNum) {
     var meshName = decodeURIComponent(GetUrlParam("meshName"));
     var meshId = decodeURIComponent(GetUrlParam("meshId"));
     var mid = decodeURIComponent(GetUrlParam("mid"));
-    var newUrl = url2 + '&meshName=' + meshName + '&meshId=' + meshId + '&mid=' + mid + '&pageSize=' + pageSize + '&pageNum=' + pageNum + '&sceneName=' + sceneName + '&sceneId=' + sceneId;
+    var projectName = decodeURIComponent(GetUrlParam("projectName"));
+    var newUrl = url2 + '&projectName=' + projectName + '&meshName=' + meshName + '&meshId=' + meshId + '&mid=' + mid + '&pageSize=' + pageSize + '&pageNum=' + pageNum + '&sceneName=' + sceneName + '&sceneId=' + sceneId;
     location.href = newUrl
 }

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.tpadsz.after.dao.PCDao">
+
+    <select id="getByMap" resultType="map" parameterType="SearchDict">
+        SELECT
+            f.id,
+            f.file_name,
+            u.account,
+            ff.coname,
+            f.author_user uname,
+            f.last_edit_user lname,
+            f.create_date,
+            f.update_date
+        FROM
+            f_pc_file f
+        INNER JOIN f_user_account u ON f.uid = u.id
+        INNER JOIN f_user_customer c ON c.uid=u.id
+        INNER JOIN f_firm ff ON c.fid=ff.id
+        WHERE f.file_name IS NOT NULL AND f.file_path IS NOT NULL
+        <if test="name!=null and name!=''">
+            AND  u.account LIKE CONCAT('%',#{name},'%')
+        </if>
+        <if test="createDate!=null and createDate!=''">
+            AND f.create_date BETWEEN #{beginDate} AND #{endDate}
+        </if>
+        <if test="updateDate!=null and updateDate!=''">
+            AND f.update_date BETWEEN #{beginDate} AND #{endDate}
+        </if>
+        ORDER BY f.update_date DESC
+    </select>
+
+    <select id="getPCFile" resultType="map" parameterType="SearchDict">
+        SELECT
+            p.fid,
+            p.mesh_name,
+            p.mesh_id,
+            p.file_version,
+            u.account,
+            f.author_user uname,
+            f.last_edit_user lname,
+            f.file_path,
+            p.update_date
+        FROM
+            f_pc_file f
+        INNER JOIN f_pc_info p ON f.id=p.fid
+        INNER JOIN f_user_account u ON f.uid = u.id
+        WHERE p.fid = #{id} AND p.mesh_id IS NOT NULL AND f.file_path IS NOT NULL
+        <if test="name!=null and name!=''">
+            AND p.mesh_name LIKE CONCAT('%',#{name},'%')
+        </if>
+        <if test="updateDate!=null and updateDate!=''">
+            AND p.update_date BETWEEN #{beginDate} AND #{endDate}
+        </if>
+        ORDER BY p.update_date DESC
+    </select>
+
+</mapper>

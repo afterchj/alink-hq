@@ -34,100 +34,160 @@
                     </div>
                 </div>
             </div>
-            <div id="createProject" class="table-content-list">
-                <div class="c-createProject">
-                    <div class="c-nav">
+            <div id="createProject" class="table-content-list detail">
+                <div class="p-detail">
+                    <div class="p-nav">
                         创建组
                     </div>
-                    <div class="c-content ">
-                        <div class="subjection">隶属项目：<span th:inline="text">[[${project.label}]]</span></div>
-                        <form th:action="@{/group/save}" method="POST" style="margin-top: 0;width: 1100px;">
-                            <input type="hidden" name="uid" id="uid" th:value="${session.user.id}">
-                            <div class="process clearfix" style="width: 1100px;">
-                                <div class="f-l part project">
-                                    <img src="/alink-hq/static/img/fill-1-on.png" alt="" id="one-step">
-                                    <span>选择项目</span>
-                                </div>
-                                <div class="f-l part  line ">……</div>
-                                <div class="f-l part mesh">
-                                    <img src="/alink-hq/static/img/fill-2-no.png" alt="" id="two-step">
-                                    <span>选择网络</span>
-                                </div>
-                                <div class="f-l part  line ">……</div>
-                                <div class="f-l part place">
-                                    <img src="/alink-hq/static/img/fill-3-no.png" alt="" id="three-step">
-                                    <span>选择区域</span>
-                                </div>
-                                <div class="f-l part  line ">……</div>
-                                <div class="f-l part group">
-                                    <img src="/alink-hq/static/img/fill-4-no.png" alt="" id="four-step">
-                                    <span>输入名称</span>
-                                </div>
-                            </div>
-
-                            <!--输入项目名-->
-                            <div class="select-project-step active step">
-                                <div>
-                                    <p class="project-hint" style="margin-left: 470px;"></p>
-                                    <label for="projectId">选择项目：</label>
-                                    <select id="projectId" name="projectId" style="height:35px;">
-                                    </select>
-                                </div>
-                                <div class="">
-                                    <button type="button" class="confirm-create next-step" openTab="confirm-create">
-                                        下一步
-                                    </button>
-                                </div>
-                            </div>
-
-                            <!--选择网络-->
-                            <div class="select-mesh-step  step">
-                                <div>
-                                    <p class="project-hint" style="margin-left: 470px;"></p>
-                                    <label for="mid">选择网络：</label>
-                                    <select id="mid" name="mid" style="height:35px;">
-                                        <!--<option value="">请选择网络</option>-->
-                                    </select>
-                                </div>
-                                <div>
-                                    <p class="" style="height: 35px"></p>
-                                    <label for="meshId">网络ID：</label>
-                                    <input type="text" id="meshId" readonly>
-                                </div>
-                                <div class="">
-                                    <button type="button" class="back-btn">上一步</button>
-                                    <button type="button" class="confirm-create" openTab="confirm-create">下一步</button>
-                                </div>
-                            </div>
-
-                            <!--选择区域-->
-                            <div class="select-place-step step">
-                                <div>
-                                    <p class="place-hint" style="margin-left: 470px;"></p>
-                                    <label for="place">选择区域：</label>
-                                    <select id="place" name="pid" style="height:35px;">
-                                        <!--<option value="">请选择区域</option>-->
-                                    </select>
+                    <div class="p-content p-r">
+                        <!--<div class="subjection">隶属项目：<span th:inline="text">[[${project.label}]]</span></div>-->
+                        <form th:action="@{/group/save}" method="POST" style="width: 1100px;margin: auto;">
+                            <fieldset>
+                                <input type="hidden" name="uid" id="uid" th:value="${session.user.id}">
+                                <div class="process clearfix" style="width: 1100px;">
+                                    <div class="f-l part project">
+                                        <img src="/alink-hq/static/img/fill-1-on.png" alt="" id="one-step">
+                                        <span>选择项目</span>
+                                    </div>
+                                    <div class="f-l part  line ">……</div>
+                                    <div class="f-l part mesh">
+                                        <img src="/alink-hq/static/img/fill-2-no.png" alt="" id="two-step">
+                                        <span>选择网络</span>
+                                    </div>
+                                    <div class="f-l part  line ">……</div>
+                                    <div class="f-l part place">
+                                        <img src="/alink-hq/static/img/fill-3-no.png" alt="" id="three-step">
+                                        <span>选择区域</span>
+                                    </div>
+                                    <div class="f-l part  line ">……</div>
+                                    <div class="f-l part group">
+                                        <img src="/alink-hq/static/img/fill-4-no.png" alt="" id="four-step">
+                                        <span>输入名称</span>
+                                    </div>
                                 </div>
 
-                                <div class="">
-                                    <button type="button" class="back-btn">上一步</button>
-                                    <button type="button" class="confirm-create" openTab="confirm-create">下一步</button>
+                                <!--输入项目名-->
+                                <div class="select-project-step active step clearfix">
+                                    <div class="form-row">
+                                        <div class="field-label">
+                                            <!--<p class="project-hint" style="margin-left: 470px;"></p>-->
+                                            <label >选择项目：</label>
+                                        </div>
+                                        <div class="field-widget p-r">
+                                            <p class="p-a verify project-hint"></p>
+                                            <select id="projectId" name="projectId" style="height:35px;">
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-row">
+                                        <button type="button" class="confirm-create next-step" openTab="confirm-create">
+                                            下一步
+                                        </button>
+                                    </div>
                                 </div>
-                            </div>
 
-                            <!--输入组名-->
-                            <div class="select-group-step step">
-                                <div>
-                                    <p class="group-hint" style="margin-left: 470px;"></p>
-                                    <label for="group">组名：</label>
-                                    <input type="text" id="group" placeholder="请输入（2-16 位汉字、字母、数字）">
+                                <!--选择网络-->
+                                <div class="select-mesh-step  step clearfix">
+                                    <div class="form-row">
+                                        <div class="field-label">
+                                            <!--<p class="project-hint" style="margin-left: 470px;"></p>-->
+                                            <label >选择网络：</label>
+                                        </div>
+                                        <div class="field-widget p-r">
+                                            <p class="p-a verify"></p>
+                                            <select id="mid" name="mid" style="height:35px;">
+                                                <!--<option value="">请选择网络</option>-->
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="field-label">
+                                            <!--<p class="" style="height: 35px"></p>-->
+                                            <label >网络ID：</label>
+                                        </div>
+                                        <div class="field-widget p-r">
+                                            <p class="p-a verify"></p>
+                                            <input type="text" id="meshId" readonly>
+                                        </div>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="field-label">
+                                            <label></label>
+                                        </div>
+                                        <div class="field-widget p-r clearfix two-radio">
+                                            <div class="f-l">
+                                                <button type="button" class="back-btn">上一步</button>
+                                            </div>
+                                            <div class="f-r">
+                                                <button type="button" class="confirm-create" openTab="confirm-create">
+                                                    下一步
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="">
-                                    <button type="button" class="back-btn">上一步</button>
-                                    <button type="button" class="confirm-create" openTab="confirm-create">完成</button>
+
+                                <!--选择区域-->
+                                <div class="select-place-step step clearfix">
+                                    <div class="form-row">
+                                        <div class="field-label">
+                                            <!--<p class="place-hint" style="margin-left: 470px;"></p>-->
+                                            <label >选择区域：</label>
+                                        </div>
+                                        <div class="field-widget p-r">
+                                            <p class="p-a verify place-hint"></p>
+                                            <select id="place" name="pid" style="height:35px;">
+                                                <!--<option value="">请选择区域</option>-->
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-row">
+                                        <div class="field-label">
+                                            <label></label>
+                                        </div>
+                                        <div class="field-widget p-r clearfix two-radio">
+                                            <div class="f-l">
+                                                <button type="button" class="back-btn">上一步</button>
+                                            </div>
+                                            <div class="f-r">
+                                                <button type="button" class="confirm-create" openTab="confirm-create">
+                                                    下一步
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
+
+                                <!--输入组名-->
+                                <div class="select-group-step step clearfix">
+                                    <div class="form-row">
+                                        <div class="field-label">
+                                            <!--<p class="group-hint" style="margin-left: 470px;"></p>-->
+                                            <label >组名：</label>
+                                        </div>
+                                        <div class="field-widget p-r">
+                                            <p class="p-a verify group-hint"></p>
+                                            <input type="text" id="group" placeholder="请输入（2-16 位汉字、字母、数字）">
+                                        </div>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="field-label">
+                                            <label></label>
+                                        </div>
+                                        <div class="field-widget p-r clearfix two-radio">
+                                            <div class="f-l">
+                                                <button type="button" class="back-btn">上一步</button>
+                                            </div>
+                                            <div class="f-r">
+                                                <button type="button" class="confirm-create"
+                                                        openTab="confirm-create">完成
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </fieldset>
                         </form>
                     </div>
                 </div>
@@ -253,6 +313,7 @@
             var regName = /^[a-zA-Z0-9\u4e00-\u9fa5]{2,16}$/;
             var groupResult = regName.test(gname);
             var mids = mid.substr(0, mid.indexOf("_"));
+            console.log("projectId", projectId, "mid", mids);
             if (gname && gname != '' && groupResult) {
                 $('.group-hint').text('');
                 $.ajax({
@@ -263,7 +324,7 @@
                         if (res == 'ok') {
                             $('#preload-anim').addClass('active');
                             $('#preload-anim .title').text('创建成功！');
-                            location.href = '/alink-hq/group/list?mid=' + mids;
+                            location.href = '/alink-hq/group/list?projectId=' + projectId + '&mid=' + mids;
                         } else if (res == 'fail') {
                             $('.group-hint').text('已存在，请重新输入');
                         } else {
@@ -374,6 +435,7 @@
         }
         return mid;
     }
+
     function pid1(pid) {
         if ($('#place option:selected').length > 0) {
             pid = $('#place option:selected').val();

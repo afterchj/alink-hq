@@ -8,7 +8,8 @@
     <link rel="stylesheet" href="/alink-hq/static/css/loding.css"/>
     <link rel="stylesheet" th:href="@{/static/css/base.css}">
     <link rel="stylesheet" th:href="@{/static/css/leftNav.css}">
-    <link rel="stylesheet" th:href="@{/static/css/mesh.css}">
+    <link rel="stylesheet" th:href="@{/static/css/projectManage.css}">
+    <!--<link rel="stylesheet" th:href="@{/static/css/mesh.css}">-->
     <title>灯移动</title>
 </head>
 
@@ -37,41 +38,148 @@
                 </div>
             </div>
             <form th:action="@{/light/saveUpdate}" class="" method="post">
-                <div id="meshTurnOver" class="table-content-list">
-                    <div class="f-nav">
-                        灯移动
-                    </div>
-                    <div class="f-content scrollbar">
-                        <input type="hidden" name="ids" th:value="${ids}">
-                        <input type="hidden" id="mid" th:value="${mid}">
-                        <input type="hidden" id="projectName" name="projectName" th:value="${projectName}">
-                        <div class="accountMsg clearfix" th:each="light:${lightMap}">
-                            <div class="f-l mesh-name">
-                                <span th:text="${light.lname}"></span>
-                            </div>
-                            <div class="f-l  mesh-id">
-                                <label for="lmac">MAC地址：</label>
-                                <input type="text" id="lmac" th:value="${light.lmac}">
-                            </div>
-                            <div class="f-l mesh-project">
-                                <label for="project">属于组：</label>
-                                <input type="text" id="project" th:value="${light.gname}">
-                            </div>
+                <div class="table-content-list detail transfer">
+                    <div class="p-detail">
+                        <div class="p-nav">
+                            灯移动
                         </div>
-                    </div>
-                    <div class="" style="text-align: center;    margin-bottom: 30px;">
-                        <img src="/alink-hq/static/img/exchange-un.png" alt="">
-                    </div>
-                    <div class="transfer-company">
-                        <p class="trans-hint" style="margin-left:55px;"></p>
-                        <label for="gid"><span>*</span>选择移动到的组：</label>
-                        <select name="gid" id="gid">
-                            <option value="">选择移动到的组</option>
-                            <option value="1">未分组1</option>
-                        </select>
-                    </div>
-                    <div class="tranfer-btn">
-                        <button class="confirm-btn" type="button">确定移动</button>
+                        <!--<div class="p-content ">-->
+                            <!--<div class="scrollbar">-->
+                                <!--<input type="hidden" name="ids" th:value="${ids}">-->
+                                <!--<input type="hidden" id="mid" th:value="${mid}">-->
+                                <!--<input type="hidden" id="projectName" name="projectName" th:value="${projectName}">-->
+                                <!--<div class="accountMsg clearfix" th:each="light:${lightMap}">-->
+                                    <!--<div class="f-l mesh-name overflow-hidden-1">-->
+                                        <!--<span th:text="${light.lname}" th:title="${light.lname}"></span>-->
+                                    <!--</div>-->
+                                    <!--<div class="f-l  mesh-id">-->
+                                        <!--<label>MAC地址：</label>-->
+                                        <!--<input type="text" id="lmac" th:value="${light.lmac}">-->
+                                    <!--</div>-->
+                                    <!--<div class="f-l mesh-project">-->
+                                        <!--<label>属于组：</label>-->
+                                        <!--<input type="text" id="project" th:value="${light.gname}">-->
+                                    <!--</div>-->
+                                <!--</div>-->
+                            <!--</div>-->
+
+                            <!--<div class="" style="text-align: center; margin: 30px 0 20px 0;">-->
+                                <!--<img src="/alink-hq/static/img/exchange-un.png" alt="">-->
+                            <!--</div>-->
+                            <!--<fieldset>-->
+                                <!--<div class="transfer-company clearfix">-->
+                                    <!--<div class="form-row">-->
+                                        <!--&lt;!&ndash;<p class="trans-hint" style="margin-left:55px;"></p>&ndash;&gt;-->
+                                        <!--<div class="field-label" style="width: 150px;">-->
+                                            <!--<label ><span>*</span>选择移动到的组：</label>-->
+                                        <!--</div>-->
+                                        <!--<div class="field-widget p-r">-->
+                                            <!--<p class="p-a verify "></p>-->
+                                            <!--<select name="gid" id="gid">-->
+                                                <!--<option value="">选择移动到的组</option>-->
+                                                <!--<option value="1">未分组1</option>-->
+                                            <!--</select>-->
+                                        <!--</div>-->
+                                    <!--</div>-->
+                                <!--</div>-->
+                                <!--<div class="tranfer-btn">-->
+                                    <!--<button class="confirm-btn" type="button">确定移动</button>-->
+                                <!--</div>-->
+                            <!--</fieldset>-->
+                        <!--</div>-->
+                        <div class="c-content p-content p-r" style="padding: 60px 300px;">
+                            <input type="hidden" name="ids" th:value="${ids}">
+                            <input type="hidden" id="mid" th:value="${mid}">
+                            <input type="hidden" id="projectName" name="projectName" th:value="${projectName}">
+                            <form>
+                                <table class="scroll-table" id="lightMove">
+                                    <thead>
+                                    <tr>
+                                        <!--<th>-->
+                                        <!--<input type="checkbox" name="selectAll" checked><span>全选</span>-->
+                                        <!--</th>-->
+                                        <th>
+                                            <span>灯名称</span>
+                                        </th>
+                                        <th>
+                                            <span>灯MAC地址</span>
+                                        </th>
+                                        <th>
+                                            <span>组名称</span>
+                                        </th>
+                                        <th>
+                                            <span>区域名称</span>
+                                        </th>
+                                        <th>
+                                            <span>网络名称（ID）</span>
+                                        </th>
+                                        <th>
+                                            <span>隶属项目</span>
+                                        </th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr th:each="light:${lightMap}">
+                                        <!--<td >-->
+                                        <!--<input type="checkbox" name="selectSingle" th:if="${user.is_associated}==0"  checked th:id="${user.id}">-->
+                                        <!--<input type="checkbox" name="selectSingle" th:if="${user.is_associated}!=0"   th:id="${user.id}">-->
+                                        <!--</td>-->
+                                        <td >
+                                            <span class="" th:title="${light.lname}" th:text="${light.lname}"></span>
+                                        </td>
+                                        <td >
+                                            <span id="lmac" th:title="${light.lmac}" th:text="${light.lmac}"></span>
+                                        </td>
+                                        <td>
+                                            <span id="group-name" th:title="${light.gname}" th:text="${light.gname}"></span>
+                                        </td>
+                                        <!--<td class="">-->
+                                        <!--<span class="" th:title="${mesh.name}" th:text="${mesh.name}"></span>-->
+                                        <!--&lt;!&ndash;<span th:if="${user.uname}">(</span>&ndash;&gt;-->
+                                        <!--&lt;!&ndash;<span th:if="${user.uname}" class="line-limit-length  user" th:title="${user.uname}" th:text="${user.uname}"></span>&ndash;&gt;-->
+                                        <!--&lt;!&ndash;<span th:if="${user.uname}">)</span>&ndash;&gt;-->
+                                        <!--</td>-->
+                                        <td >
+                                            <span class="" th:text="${light.pname}"></span>
+                                        </td>
+                                        <td >
+                                            <span class="" th:inline="text">[[${light.mname}]]（[[${light.mesh_id}]]）</span>
+                                            <!--<span th:if="${user.uname}">(</span>-->
+                                            <!--<span th:if="${user.uname}" class="line-limit-length  user" th:title="${user.uname}" th:text="${user.uname}"></span>-->
+                                            <!--<span th:if="${user.uname}">)</span>-->
+                                        </td>
+                                        <td >
+                                            <span class="" th:text="${light.name}"></span>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                                <div class="" style="text-align: center;margin: 40px 0 18px 0;">
+                                    <img src="/alink-hq/static/img/exchange-un.png" alt="">
+                                </div>
+
+                                <fieldset>
+                                    <div class="transfer-company clearfix">
+                                        <div class="form-row">
+                                            <!--<p class="trans-hint" style="margin-left:55px;"></p>-->
+                                            <div class="field-label" style="width: 150px;">
+                                                <label ><span>*</span>选择移动到的组：</label>
+                                            </div>
+                                            <div class="field-widget p-r">
+                                                <p class="p-a verify "></p>
+                                                <select name="gid" id="gid">
+                                                    <option value="">选择移动到的组</option>
+                                                    <option value="1">未分组1</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="tranfer-btn">
+                                        <button class="confirm-btn" type="button">确定移动</button>
+                                    </div>
+                                </fieldset>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </form>
@@ -114,30 +222,27 @@
         var gid = $('#gid option:selected').val();
         var ids = $('input[name="ids"]').val();
         if (gid == '') {
-            $('.trans-hint').text('请选择移动到的组');
+            $('#gid').prev('.verify').text('请选择移动到的组');
         } else {
-            $('.trans-hint').text('');
+            $('#gid').prev('.verify').text('');
             $.ajax({
                 type: "post",
                 url: "/alink-hq/light/saveUpdate",
                 data: {ids: ids, gid: gid},
                 success: function (res) {
-                    console.log(res);
+//                    console.log(res);
                     if (res == 'ok') {
                         $('#preload-anim').addClass('active');
-                        $('.hide-iframe').addClass('active');
-                        $('#preload-anim .title').text('移交成功，正在跳转灯列表');
-                        setInterval(function () {
+                        $('#preload-anim .title').text('移动成功，正在跳转灯列表');
+                        setTimeout(function () {
                             location.href = '/alink-hq/light/list?mid=' + mid;
-                        }, 1000)
+                        }, 800);
                     } else {
                         $('#preload-anim').addClass('active');
-                        $('.hide-iframe').addClass('active');
                         $('#preload-anim .title').text('加载失败，请重新尝试');
-                        setInterval(function () {
+                        setTimeout(function () {
                             $('#preload-anim').removeClass('active');
-                            $('.hide-iframe').removeClass('active');
-                        }, 1000)
+                        }, 800);
                     }
                 }
             })
@@ -147,9 +252,9 @@
     $('#gid').change(function () {
         var gid = $('#gid option:selected').val();
         if (gid == '') {
-            $('.trans-hint').text('请选择移动到的组');
+            $('#gid').prev('.verify').text('请选择移动到的组');
         } else {
-            $('.trans-hint').text('');
+            $('#gid').prev('.verify').text('');
         }
     })
 </script>

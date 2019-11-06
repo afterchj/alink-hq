@@ -1,20 +1,17 @@
 package com.tpadsz.after.controller;
 
+import com.alibaba.excel.EasyExcel;
 import com.alibaba.fastjson.JSON;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.tpadsz.after.constants.MemcachedObjectType;
-import com.tpadsz.after.entity.Firm;
-import com.tpadsz.after.entity.Role;
-import com.tpadsz.after.entity.User;
-import com.tpadsz.after.entity.UserList;
+import com.tpadsz.after.entity.*;
 import com.tpadsz.after.entity.dd.ResultDict;
 import com.tpadsz.after.service.AccountService;
-import com.tpadsz.after.utils.ExcelUtil;
 import com.tpadsz.after.utils.GenerateUtils;
 import net.rubyeye.xmemcached.MemcachedClient;
-import org.apache.commons.lang3.StringUtils;
-import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -25,13 +22,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.OutputStream;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+import java.util.*;
 
 /**
  * Created by chenhao.lu on 2019/4/9.
@@ -46,9 +40,10 @@ public class AccountController {
     @Autowired
     private MemcachedClient client;
 
+    Logger logger = LoggerFactory.getLogger(AccountController.class);
 
     @RequestMapping(value = "/list", method = RequestMethod.GET)
-    public String list(Integer pageNum, Integer pageSize, String account,String uname, Integer fid, Integer roleId, String
+    public String list(Integer pageNum, Integer pageSize, String account, String uname, Integer fid, Integer roleId, String
             startDate, String endDate, HttpSession session, Model model) {
         User loginUser = (User) session.getAttribute("user");
         String uid = loginUser.getId();
@@ -64,35 +59,38 @@ public class AccountController {
         try {
             Integer role_id = accountService.findRoleIdByUid(uid);
             List<Role> roleList = new ArrayList<>();
-            List<Firm> firmList = getFirmInfo(role_id, uid);
+            List<Firm> firmList = accountService.getFirmInfo(role_id, uid, 0);
             List<UserList> userList = new ArrayList<>();
-            if(startDate!=null&&!"".equals(startDate)){
-                if(startDate.equals(endDate)){
+            if (startDate != null && !"".equals(startDate)) {
+                if (startDate.equals(endDate)) {
                     endDate = GenerateUtils.getAfterDate(startDate);
                 }
             }
             if (role_id == 1) {
                 PageHelper.startPage(pageNum, pageSize);
-                userList = accountService.searchBySuper(account,uname, fid, roleId, startDate, endDate);
+                userList = accountService.searchBySuper(account, uname, fid, roleId, startDate, endDate);
                 roleList = accountService.findRoleList();
                 roleList.remove(0);
             } else if (role_id == 2) {
                 PageHelper.startPage(pageNum, pageSize);
-                userList = accountService.searchByAdmin(account,uname, fid, roleId, startDate, endDate);
+                userList = accountService.searchByAdmin(account, uname, fid, roleId, startDate, endDate);
                 roleList = accountService.findRoleList();
                 for (int i = 0; i < role_id; i++) {
                     roleList.remove(0);
                 }
             } else if (role_id == 3) {
                 List<String> uids = accountService.findFirmUidOfUser(uid);
+                List<String> uids2 = accountService.findAccountsOfCooperateFirms(uid);
+                uids.addAll(uids2);
                 if (uids.size() != 0) {
                     PageHelper.startPage(pageNum, pageSize);
-                    userList = accountService.searchByManager(account,uname, uids, startDate, endDate);
+                    userList = accountService.searchByManager(account, uname, fid, roleId, uids, startDate, endDate);
                 }
                 roleList = accountService.findRoleList();
-                for (int i = 0; i < role_id; i++) {
+                for (int i = 0; i < role_id - 1; i++) {
                     roleList.remove(0);
                 }
+                model.addAttribute("adminFlag", true);
             }
             PageInfo<UserList> pageInfo = new PageInfo<>(userList, pageSize);
             if (pageInfo.getList().size() > 0) {
@@ -101,7 +99,7 @@ public class AccountController {
             model.addAttribute("firmList", firmList);
             model.addAttribute("roleList", roleList);
             model.addAttribute("account", account);
-            model.addAttribute("uname",uname);
+            model.addAttribute("uname", uname);
             model.addAttribute("fid", fid);
             model.addAttribute("roleId", roleId);
             model.addAttribute("startDate", startDate);
@@ -111,92 +109,29 @@ public class AccountController {
         return "userManage/userList";
     }
 
-    /**
-     * 导出excel
-     * @param account
-     * @param fid
-     * @param roleId
-     * @param startDate
-     * @param endDate
-     * @param session
-     * @param response
-     */
-    @RequestMapping(value = "/getUserListExcel")
+
+    @RequestMapping(value = "/getExcel")
     @ResponseBody
-    public void getUserListExcel(String account, String uname,Integer fid, Integer roleId, String
+    public void getExcel(String account, String uname, Integer fid, Integer roleId, String
             startDate, String endDate, HttpSession session, HttpServletResponse response) {
-        User loginUser = (User) session.getAttribute("user");
-        String uid = loginUser.getId();
-        Integer role_id = accountService.findRoleIdByUid(uid);
-        List<UserList> userList = new ArrayList<>();
-        if (role_id == 1) {
-            userList = accountService.searchBySuper(account, uname,fid, roleId, startDate, endDate);
-        } else if (role_id == 2) {
-            userList = accountService.searchByAdmin(account, uname,fid, roleId, startDate, endDate);
-        } else if (role_id == 3) {
-            List<String> uids = accountService.findFirmUidOfUser(uid);
-            if (uids.size() != 0) {
-                userList = accountService.searchByManager(account, uname,uids, startDate, endDate);
-            }
-        }
-        //excel标题
-        String[] title = {"账号", "用户名", "绑定手机号", "绑定邮箱", "隶属公司", "角色", "添加时间", "状态"};
-        String[][] values = new String[userList.size()][title.length];
-        for (int i = 0; i < userList.size(); i++) {
-            UserList userList1 = userList.get(i);
-            values[i][0] = userList1.getAccount();
-            if (StringUtils.isNotBlank(userList1.getUname())) {
-                values[i][1] = userList1.getUname();
-            }
-            if (StringUtils.isNotBlank(userList1.getMobile())) {
-                values[i][2] = userList1.getMobile();
-            }
-            if (StringUtils.isNotBlank(userList1.getEmail())) {
-                values[i][3] = userList1.getEmail();
-            }
-            if (StringUtils.isNotBlank(userList1.getConame())) {
-                values[i][4] = userList1.getConame();
-            }
-            if (StringUtils.isNotBlank(userList1.getRole_id())) {
-                if ("1".equals(userList1.getRole_id())) {
-                    values[i][5] = "超级管理员";
-                } else if ("2".equals(userList1.getRole_id())) {
-                    values[i][5] = "管理员";
-                } else if ("3".equals(userList1.getRole_id())) {
-                    values[i][5] = "乙方管理员";
-                } else if ("4".equals(userList1.getRole_id())) {
-                    values[i][5] = "施工人员";
-                }
-            }
-            if (StringUtils.isNotBlank(userList1.getCreate_date())) {
-                values[i][6] = userList1.getCreate_date();
-            }
-            if (StringUtils.isNotBlank(userList1.getStatus())) {
-                if ("1".equals(userList1.getStatus())) {
-                    values[i][7] = "启用";
-                } else {
-                    values[i][7] = "禁用";
-                }
-            }
-        }
-        HSSFWorkbook wb = ExcelUtil.getHSSFWorkbook("用户列表", title, values, null);
-        String fileName = "用户列表-" + System.currentTimeMillis();
+        List<DownloadExcelData> downloadExcelDatas = accountService.setDownloadExcelData(session, account, uname, fid, roleId, startDate, endDate);
         try {
-            response.setHeader("content-disposition", "attachment;filename=" + new String(fileName.getBytes(),
-                    "ISO8859-1") + ".xls");//中文乱码
-            response.setContentType("application/vnd.ms-excel");
-            response.setCharacterEncoding("utf-8");
-            OutputStream ouputStream = response.getOutputStream();
-            wb.write(ouputStream);
-            ouputStream.flush();
-            ouputStream.close();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
+            String fileName = URLEncoder.encode(new StringBuffer().append("用户列表-").append(System.currentTimeMillis()).toString(), "UTF-8");
+            response.setHeader("Content-disposition", "attachment;filename=" + fileName + ".xlsx");
+//            ExcelWriter excelWriter = EasyExcel.write(response.getOutputStream()).build();
+//            WriteSheet writeSheet;
+//            for (int i=0;i<2;i++){
+//                writeSheet = EasyExcel.writerSheet(i, "模板"+i).head(DownloadExcelData.class).build();
+//                excelWriter.write(downloadExcelDatas,writeSheet);
+//            }
+//            excelWriter.finish();
+            EasyExcel.write(response.getOutputStream(), DownloadExcelData.class).sheet("用户列表").doWrite(downloadExcelDatas);
+        } catch (UnsupportedEncodingException e) {
+            logger.error("method:getExcel;result:download excel error,account:{},uname:{}", account, uname);
         } catch (IOException e) {
-            e.printStackTrace();
+            logger.error("method:getExcel;result:download excel error,account:{},uname:{}", account, uname);
         }
     }
-
 
     @RequestMapping(value = "/createAccount", method = RequestMethod.GET)
     public String createAccount(HttpSession session,
@@ -204,7 +139,7 @@ public class AccountController {
         User loginUser = (User) session.getAttribute("user");
         String uid = loginUser.getId();
         Integer role_id = accountService.findRoleIdByUid(uid);
-        List<Firm> firmList = getFirmInfo(role_id, uid);
+        List<Firm> firmList = accountService.getFirmInfo(role_id, uid, 1);
         model.addAttribute("firmList", firmList);
         return "userManage/createAccount";
     }
@@ -225,9 +160,9 @@ public class AccountController {
                 User user = new User();
                 User user2 = new User();
                 do {
-                    account = GenerateUtils.getCharAndNumr(8);
+                    account = GenerateUtils.generateAccount(8);
                     user2 = accountService.findByAccount(account);
-                } while (!GenerateUtils.check(account) || (user2 != null));
+                } while (user2 != null);
                 user.setAccount(account);
                 user.setPwd("dc10cc20d435f846425f1f7a31b5d293cb39e590");
                 user.setSalt("0e9cc6f31100af96");
@@ -264,9 +199,11 @@ public class AccountController {
         User loginUser = (User) session.getAttribute("user");
         String uid = loginUser.getId();
         Integer role_id = accountService.findRoleIdByUid(uid);
-        List<Firm> firmList = getFirmInfo(role_id, uid);
+        List<Firm> firmList = accountService.getFirmInfo(role_id, uid, 1);
+        User user = accountService.findByAccount(account);
         model.addAttribute("firmList", firmList);
         model.addAttribute("account", account);
+        model.addAttribute("uname", user.getUname());
         model.addAttribute("coname", coname);
         return "userManage/userTurnOver";
     }
@@ -338,7 +275,7 @@ public class AccountController {
             String key = MemcachedObjectType.CACHE_TOKEN.getPrefix() + user.getId();
             if (status == 1) {
                 client.set(key, 0, "disabled");
-            }else {
+            } else {
                 client.delete(key);
             }
             map.put("result", ResultDict.SUCCESS.getCode());
@@ -353,7 +290,7 @@ public class AccountController {
     public Map<String, String> saveMemo(String account, String content) {
         Map<String, String> map = new HashMap<>();
         try {
-            accountService.saveMemo(account,content);
+            accountService.saveMemo(account, content);
             map.put("result", ResultDict.SUCCESS.getCode());
         } catch (Exception e) {
             map.put("result", ResultDict.SYSTEM_ERROR.getCode());
@@ -362,14 +299,46 @@ public class AccountController {
     }
 
 
-    private List<Firm> getFirmInfo(Integer role_id, String uid) {
-        List<Firm> firmList = new ArrayList<>();
-        if (role_id == 1 || role_id == 2) {
-            firmList = accountService.findFirmList();
-        } else if (role_id == 3) {
-            firmList = accountService.findFirmByUid(uid);
+
+
+
+    @RequestMapping(value = "/associateProject", method = RequestMethod.GET)
+    public String associateProject(String account, Model model) {
+        if (account != null) {
+            User user = accountService.findByAccount(account);
+            Integer role_id = accountService.findRoleIdByUid(user.getId());
+            if (role_id == 14) {
+                List<ProjectList> list = accountService.findAssociateProjectsList(user.getId());
+                model.addAttribute("projectList", list);
+            }
         }
-        return firmList;
+        return "userManage/associateProject";
+    }
+
+
+    @RequestMapping(value = "/associate", method = RequestMethod.POST)
+    @ResponseBody
+    public Map<String, String> associate(String account, String ids) {
+        Map<String, String> map = new HashMap<>();
+        List<String> list = new ArrayList<>();
+        try {
+            User user = accountService.findByAccount(account);
+            Integer role_id = accountService.findRoleIdByUid(user.getId());
+            if (role_id == 14) {
+                if (!"".equals(ids)) {
+                    String[] ids1 = ids.split(",");
+                    list = new ArrayList(Arrays.asList(ids1));
+                }
+                accountService.resetUserProject(user.getId());
+                if (list.size() != 0) {
+                    accountService.unassociated(user.getId(), list);
+                }
+            }
+            map.put("result", ResultDict.SUCCESS.getCode());
+        } catch (Exception e) {
+            map.put("result", ResultDict.SYSTEM_ERROR.getCode());
+        }
+        return map;
     }
 
 }

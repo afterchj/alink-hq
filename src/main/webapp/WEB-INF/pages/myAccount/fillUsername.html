@@ -9,7 +9,7 @@
     <link rel="stylesheet" th:href="@{/static/font-awesome-4.7.0/css/font-awesome.min.css}"/>
     <link rel="stylesheet" href="/alink-hq/static/css/base.css">
     <link rel="stylesheet" href="/alink-hq/static/css/leftNav.css">
-    <link rel="stylesheet" href="/alink-hq/static/css/account.css">
+    <!--<link rel="stylesheet" href="/alink-hq/static/css/account.css">-->
     <link rel="stylesheet" href="/alink-hq/static/css/loding.css"/>
     <link rel="stylesheet" href="/alink-hq/static/css/projectManage.css"/>
     <title>填写用户名</title>
@@ -37,23 +37,30 @@
                     <!--<img src="/alink-hq/static/img/go-back.png" alt="" id="clickReturn">-->
                 </div>
             </div>
-            <div id="fillUsername">
-                <div class="f-fillUsername">
-                    <div class="f-nav">
+            <div id="fillUsername" class=" table-content-list detail transfer">
+                <div class="p-detail">
+                    <div class="p-nav">
                         填写用户名
                     </div>
-                    <div class="f-content ">
+                    <div class="p-content p-r ">
                         <form id="unameForm" action="#" onsubmit="return false" method="post">
-                            <div style="margin-bottom:10px;">
-                                <p class="use-hint" style="height: 35px;"></p>
-                                <label for="">用户名：</label>
-                                <input type="text" placeholder="请输入用户名（2-6位中文、字母或数字）" id="userName" name="uname">
-                            </div>
-                            <!--<input type="hidden" th:value="${account}" id="account" name="account" class="account"/>-->
-                            <input type="hidden" th:value="${flag}" id="flag" name="flag"/>
-                            <div class="submit-btn">
-                                <button type="submit" id="submit">确定</button>
-                            </div>
+                            <fieldset>
+                                <div class="form-row">
+                                    <div class="field-label">
+                                        <!--<p class="use-hint" style="height: 35px;"></p>-->
+                                        <label >用户名：</label>
+                                    </div>
+                                    <div class="field-widget p-r">
+                                        <p class="p-a verify "></p>
+                                        <input type="text" placeholder="请输入用户名（2-6位中文、字母或数字）" id="userNameNew" name="uname">
+                                    </div>
+                                </div>
+                                <!--<input type="hidden" th:value="${account}" id="account" name="account" class="account"/>-->
+                                <input type="hidden" th:value="${flag}" id="flag" name="flag"/>
+                                <div class="submit-btn form-row" style="text-align: center;">
+                                    <button type="submit" id="submit">确定</button>
+                                </div>
+                            </fieldset>
                         </form>
                     </div>
                 </div>
@@ -78,7 +85,7 @@
 <script src="/alink-hq/static/myAccount/js/jquery-3.3.1.min.js"></script>
 <script src="/alink-hq/static/myAccount/js/common.js"></script>
 <script src="/alink-hq/static/myAccount/js/uname.js"></script>
-<script  src="/alink-hq/static/js/left.js"></script>
+<script src="/alink-hq/static/js/left.js"></script>
 
 </body>
 

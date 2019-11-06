@@ -20,6 +20,8 @@
         p.name,
        	IFNULL(pl.pcount,0) pcount,
         IFNULL(s.scount,0) scount,
+        IFNULL(g.gcount,0) gcount,
+        IFNULL(l.lcount,0) lcount,
         IFNULL(t.tcount,0) tcount
 	</sql>
 
@@ -27,21 +29,17 @@
         <if test="uid!=null and uid!=''">
             <choose>
                 <when test="role == 'admin'">
-                    AND m.uid IN (SELECT u.id FROM f_user_account u INNER JOIN f_user_role r ON u.id=r.user_id WHERE
-                    r.role_id in (2,3,4))
+                    AND m.uid IN (SELECT u.id FROM f_user_account u INNER JOIN f_user_role r ON u.id=r.user_id WHERE r.role_id in (2,3,4))
                 </when>
                 <when test="role == 'manager'">
-                    AND m.uid IN (SELECT c.uid FROM f_user_customer c WHERE fid=(SELECT fid FROM f_user_customer WHERE
-                    uid=#{uid}))
+                    AND m.uid IN (SELECT c.uid FROM f_user_customer c WHERE fid=(SELECT fid FROM f_user_customer WHERE uid=#{uid}))
                     <!--
                         AND p.uid IN (SELECT c.uid FROM f_user_customer c INNER JOIN f_user_role r ON c.uid=r.user_id WHERE r.role_id in (4) OR fid=(SELECT fid FROM f_user_customer WHERE uid=#{uid}))
                      -->
                 </when>
-                <when test="role == 'user'">
-                    AND m.uid =#{uid}
+                <when test="role == 'salesman'">
+                    AND m.uid IN (SELECT c.uid FROM f_user_customer c WHERE fid=(SELECT fid FROM f_user_customer WHERE uid=#{uid}))
                 </when>
-                <!--<otherwise>-->
-                <!--</otherwise>-->
             </choose>
         </if>
     </sql>
@@ -57,6 +55,8 @@
         INNER JOIN f_project p ON m.project_id = p.id
         LEFT JOIN (SELECT COUNT(1) pcount,mid FROM f_place GROUP BY mid) pl ON pl.mid=m.id
         LEFT JOIN (SELECT COUNT(1) scount,mid FROM f_scene GROUP BY mid) s ON s.mid=m.id
+        LEFT JOIN (SELECT COUNT(1) gcount,mid FROM f_group GROUP BY mid) g ON g.mid=m.id
+        LEFT JOIN (SELECT COUNT(1) lcount,mid FROM f_light GROUP BY mid) l ON l.mid=m.id
         LEFT JOIN (SELECT COUNT(1) tcount,mid FROM f_time_line GROUP BY mid) t ON t.mid=m.id
         WHERE 1=1
         <include refid="common_choose"></include>
@@ -117,9 +117,12 @@
         m.id,
         m.mname,
         m.mesh_id,
+        u.account,
+        IFNULL(u.uname,'') uname,
         p.name
         FROM f_mesh m
         INNER JOIN f_project p ON m.project_id = p.id
+        INNER JOIN f_user_account u ON u.id=p.uid
         WHERE m.id IN
         <foreach collection="list" item="mid" index="index" open="(" close=")" separator=",">
             #{mid}

@@ -4,11 +4,12 @@
     <meta charset="UTF-8">
     <script src="/alink-hq/static/js/browser.js"></script>
     <link rel="stylesheet" th:href="@{/static/font-awesome-4.7.0/css/font-awesome.min.css}"/>
+    <link rel="stylesheet" th:href="@{/static/css/laydate.css}"/>
     <link rel="stylesheet" href="/alink-hq/static/css/base.css"/>
     <link rel="stylesheet" href="/alink-hq/static/css/leftNav.css"/>
     <link rel="stylesheet" href="/alink-hq/static/css/loding.css"/>
     <link rel="stylesheet" href="/alink-hq/static/css/projectManage.css"/>
-    <link rel="stylesheet" th:href="@{/static/css/laydate.css}"/>
+
     <title>创建网络</title>
 </head>
 <body>
@@ -38,42 +39,66 @@
                     <!--<img src="/alink-hq/static/img/go-back.png" alt="" onclick="history.back()">-->
                 </div>
             </div>
-            <div id="createProject" class="table-content-list">
-                <div class="c-createProject">
-                    <div class="c-nav">
+            <div id="createProject" class="table-content-list detail">
+                <div class="p-detail">
+                    <div class="p-nav">
                         创建网络
                     </div>
-                    <div class="c-content ">
+                    <div class="p-content p-r">
                         <form th:action="@{/mesh/save}" method="post">
-                            <input type="hidden" id="uid" name="uid" th:value="${session.user.id}">
-                            <input type="hidden" id="project_id" th:value="${dict.projectId}">
-                            <div>
-                                <p class="mesh-hint"></p>
-                                <label for="mesh">网络名：</label>
-                                <input type="text" id="mesh" name="mesh" placeholder="请输入（2-16位汉字、字母、数字）">
-                            </div>
-                            <div>
-                                <p class="project-hint"></p>
-                                <label for="projectId">隶属项目：</label>
-                                <select id="projectId" name="projectId" style="height: 33px;">
-                                    <option value="">请选择项目</option>
-                                </select>
-                            </div>
-                            <div style="margin:30px 0 0 55px;">
-                                <input type="radio" name="mtype" value="商业照明" checked
-                                       style="vertical-align: middle;margin-right: 10px;">商业照明 &nbsp; &nbsp; &nbsp;
-                                <input type="radio" name="mtype" value="家庭照明"
-                                       style="vertical-align: middle;margin-right: 10px;">家庭照明
-                            </div>
-                            <div class="">
-                                <button type="button" class="confirm-create" openTab="confirm-create">确定创建</button>
-                            </div>
+                            <fieldset>
+                                <div class="form-row">
+                                    <input type="hidden" id="uid" name="uid" th:value="${session.user.id}">
+                                    <input type="hidden" id="project_id" th:value="${dict.projectId}">
+                                    <!--<p class="mesh-hint"></p>-->
+                                    <div class="field-label">
+                                        <label >网络名：</label>
+                                    </div>
+                                    <div class="field-widget p-r">
+                                        <p class="p-a verify mesh-hint"></p>
+                                        <input type="text" id="mesh" name="mesh" placeholder="请输入（2-16位汉字、字母、数字）">
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <!--<p class="project-hint"></p>-->
+                                    <div class="field-label">
+                                        <label >隶属项目：</label>
+                                    </div>
+                                    <div class="field-widget p-r">
+                                        <p class="p-a verify project-hint"></p>
+                                        <select id="projectId" name="projectId" style="height: 33px;width: 310px;">
+                                            <option value="">请选择项目</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-row clearfix">
+                                    <div class="field-label">
+                                        <label></label>
+                                    </div>
+                                    <div class="field-widget p-r two-radio" >
+                                        <div class="f-l">
+                                            <input type="radio" name="mtype" value="商业照明" checked>
+                                            <label>商业照明</label>
+                                        </div>
+                                        <div class="f-l">
+                                            <input type="radio" name="mtype" value="家庭照明">
+                                            <label>家庭照明</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <button type="button" class="confirm-create" openTab="confirm-create">确定创建
+                                    </button>
+                                </div>
+
+                            </fieldset>
                         </form>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+</div>
 </div>
 <div id="preload-anim">
     <div id="circularG">
@@ -106,6 +131,7 @@
             });
         });
     });
+
     $('.confirm-create').click(function () {
         var mesh = $('#mesh').val();
         var type = $("input[type='radio']:checked").val();

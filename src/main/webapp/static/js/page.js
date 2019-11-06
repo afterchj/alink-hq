@@ -7,9 +7,9 @@ $(function () {
     $("#amount").text(length);
     $("#size").val(size);
     //给全选的复选框添加事件
-    $("#all,#addAll").click(function () {
+    $("#all,#addAll").click(function (event) {
         // this 全选的复选框
-
+        event.stopPropagation();
         $("#all,#addAll").prop('checked',$(this).prop('checked'));
         var checked = this.checked;
         //获取name=mids的复选框 遍历输出复选框
@@ -24,7 +24,8 @@ $(function () {
         }
     });
     //给name=mids的复选框绑定单击事件
-    $("input[name=ids]").click(function () {
+    $("input[name=ids]").click(function (event) {
+        event.stopPropagation();
         //获取选中复选框长度
         var length = $("input[name=ids]:checked").length;
         

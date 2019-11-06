@@ -112,17 +112,23 @@ $(function() {
     $('div[openContent="reset-name"] .reduce').click(function() {
         var selector = $('div[openContent="reset-name"]');
         selector.removeClass('active');
-        hideOverlay()
+        hideOverlay();
     }) 
-    $('.delete-role').click(function() {
+    $('.delete-pop').click(function() {
+        $('div[openContent="delete-pop"] p').css('margin-top','5px');
         roleId = $(this).parent().siblings("input").val();
-        var selector = $('div[openContent="delete-role"]');
+        roleName=$(this).parent().siblings('.role-name').children('a').text();
+
+        var selector = $('div[openContent="delete-pop"]');
         selector.addClass('active');
+        $('div[openContent="delete-pop"] .reset-pwd p').html('您确定要删除 ' + '<span class="hint-font">'+roleName+'</span> '+ '角色吗 ？');
+
+        // $('div[openContent="delete-pop"] .reset-pwd-hint').text('删除后项目中所有信息将无法恢复，请慎重！');
         adjust(selector);
         showOverlay()
     }) 
-    $('div[openContent="delete-role"] .yes').click(function() {
-        var selector = $('div[openContent="delete-role"]');
+    $('div[openContent="delete-pop"] .yes').click(function() {
+        var selector = $('div[openContent="delete-pop"]');
         selector.removeClass('active');
         hideOverlay();
         $.ajax({
@@ -141,8 +147,8 @@ $(function() {
             }
         })
     }) 
-    $('div[openContent="delete-role"] .reduce').click(function() {
-        var selector = $('div[openContent="delete-role"]');
+    $('div[openContent="delete-pop"] .reduce').click(function() {
+        var selector = $('div[openContent="delete-pop"]');
         selector.removeClass('active');
         hideOverlay()
     })

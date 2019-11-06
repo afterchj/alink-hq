@@ -18,4 +18,6 @@ public interface RoleService {
     int rename(String roleName, Integer roleId);
 
     void delete(Integer roleId);
+
+    List<Integer> findViewPermission(Integer role_id);
 }

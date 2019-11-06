@@ -14,7 +14,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
@@ -38,7 +37,7 @@ public class SceneController {
 
     @RequestMapping(value = "/list", method = RequestMethod.GET)
     public String list(Integer pageNum, Integer pageSize, String sceneName, Integer sceneId, Integer lid, String
-            meshName, String meshId, Integer mid, HttpSession session, Model model) {
+            meshName,String projectName, String meshId, Integer mid, HttpSession session, Model model) {
         User loginUser = (User) session.getAttribute("user");
         String uid = loginUser.getId();
         if (pageNum == null) {
@@ -51,19 +50,31 @@ public class SceneController {
             pageSize = 10;    //设置默认每页显示的数据数
         }
         try {
-            Integer role_id = accountService.findRoleIdByUid(uid);
-            PageHelper.startPage(pageNum, pageSize);
-            List<SceneList> list = sceneService.searchSceneList(sceneName, sceneId, lid, meshName, meshId, mid);
-            PageInfo<SceneList> pageInfo = new PageInfo<>(list, pageSize);
-            if (pageInfo.getList().size() > 0) {
-                model.addAttribute("pageInfo", pageInfo);
+                Integer role_id = accountService.findRoleIdByUid(uid);
+                Integer role_id2 = sceneService.findRoleIdByMid(mid);
+                int count = 1;
+            if(role_id ==14){
+                List<Integer> ids = sceneService.findMeshList(uid);
+                if (!ids.contains(mid)) {
+                    count = 0;
+                }
             }
-            if (role_id == 1) {
-                model.addAttribute("flag", 0);
-            }
-            model.addAttribute("sceneName", sceneName);
-            model.addAttribute("sceneId", sceneId);
-
+                if(role_id<=role_id2 || (role_id==14 && count==1)) {
+                    PageHelper.startPage(pageNum, pageSize);
+                    List<SceneList> list = sceneService.searchSceneList(sceneName, sceneId, lid, meshName, meshId, mid);
+                    PageInfo<SceneList> pageInfo = new PageInfo<>(list, pageSize);
+                    if (pageInfo.getList().size() > 0) {
+                        model.addAttribute("pageInfo", pageInfo);
+                    }
+                    if (role_id == 1) {
+                        model.addAttribute("flag", 0);
+                    }
+                    model.addAttribute("mid", mid);
+                    model.addAttribute("meshName", meshName);
+                    model.addAttribute("projectName", projectName);
+                    model.addAttribute("sceneName", sceneName);
+                    model.addAttribute("sceneId", sceneId);
+                }
         } catch (Exception e) {
         }
         return "sceneManage/sceneList";
@@ -90,17 +101,24 @@ public class SceneController {
 
     @RequestMapping(value = "/delete", method = RequestMethod.POST)
     @ResponseBody
-    public Map<String, String> delete(String sceneInfo) {
+    public Map<String, String> delete(HttpSession session,String sceneInfo) {
         Map<String, String> map = new HashMap<>();
+        User loginUser = (User) session.getAttribute("user");
+        String uid = loginUser.getId();
         List<SceneList> sceneList = JSONArray.parseArray(sceneInfo, SceneList.class);
+        Integer flag;
         try {
             for (SceneList scene : sceneList) {
                 if (scene.getSceneId() > 3) {
-                    sceneService.delete(scene.getId());
+                    sceneService.deleteSid(scene.getId());
+                    flag =1;
                 } else {
                     String sceneName = "场景" + (scene.getSceneId() + 1);
                     sceneService.saveSceneName(sceneName, scene.getId());
+                    flag = 0;
                 }
+                sceneService.deleteXY(scene.getId(),scene.getSceneId(),scene.getMid(),flag);
+                sceneService.saveDeleteLog(uid,scene.getSceneId(),scene.getMid());
             }
             map.put("result", ResultDict.SUCCESS.getCode());
         } catch (Exception e) {
@@ -113,46 +131,57 @@ public class SceneController {
     public String detail(Integer sid, Integer lid, String sceneName, Integer sceneId, String meshName, String meshId,Model model) {
         MeshInfo meshInfo = sceneService.findProjectByMeshId(meshId);
         List<MeshInfo> placeList = sceneService.findPlaceBySid(sid);
-        List<MeshInfo> groupList = sceneService.findGroupByPid(placeList.get(0).getPid());
         List<MeshInfo> lightList = new ArrayList<>();
-        if (lid == null) {
-            if (groupList.size() > 0) {
-                lightList = sceneService.findLightByGid(groupList.get(0).getGid(), sid);
-            }
-        } else {
-            MeshInfo lightInfo = sceneService.findLightInfoByLid(lid);
-            lightList = sceneService.findLightByGid(lightInfo.getGid(), sid);
-            model.addAttribute("lightInfo", lightInfo);
-        }
-
-        int samePlaceXY = 1;
-        String groupX = "";
-        String groupY = "";
-        for (int i = 0; i < groupList.size(); i++) {
-            List<MeshInfo> list2 = sceneService.findXYByGid(groupList.get(i).getGid(), sid);
-            if (list2.size() == 1) {
-                if (!"".equals(groupX) && groupX != null && groupY != null) {
-                    if (!groupX.equals(list2.get(0).getX()) || !groupY.equals(list2.get(0).getY())) {
+        List<MeshInfo> groupList = new ArrayList<>();
+        int lidFlag = 0;
+        for(int i=0;i<placeList.size();i++) {
+            List<MeshInfo> groupList1 = sceneService.findGroupByPid(placeList.get(i).getPid());
+            int samePlaceXY = 1;
+            String groupX = "";
+            String groupY = "";
+            for (int j = 0; j < groupList1.size(); j++) {
+                List<MeshInfo> list2 = sceneService.findXYByGid(groupList1.get(j).getGid(), sid);
+                //该组xy值相同则list2的size为1
+                if (list2.size() == 1 && list2.get(0)!=null) {
+                    if (!"".equals(groupX) && groupX != null && groupY != null) {
+                        if (!groupX.equals(list2.get(0).getX()) || !groupY.equals(list2.get(0).getY())) {
+                            samePlaceXY = 0;
+                        }
+                    }
+                    groupX = list2.get(0).getX();
+                    groupY = list2.get(0).getY();
+                    if (groupX == null || groupY == null) {
                         samePlaceXY = 0;
                     }
-                }
-                groupX = list2.get(0).getX();
-                groupY = list2.get(0).getY();
-                if (groupX == null || groupY == null) {
+                    groupList1.get(j).setX(groupX);
+                    groupList1.get(j).setY(groupY);
+                } else {
                     samePlaceXY = 0;
                 }
-                groupList.get(i).setX(groupX);
-                groupList.get(i).setY(groupY);
-            } else {
-                samePlaceXY = 0;
+            }
+
+            if (samePlaceXY == 1 && groupList1.size() != 0) {
+                placeList.get(i).setX(groupList1.get(0).getX());
+                placeList.get(i).setY(groupList1.get(0).getY());
+            }
+            if(lidFlag==0) {
+                if (lid == null) {
+                    if (groupList1.size() > 0) {
+                        lightList = sceneService.findLightByGid(groupList1.get(0).getGid(), sid);
+                    }
+                    groupList = groupList1;
+                    lidFlag = 1;
+                } else {
+                    MeshInfo lightInfo = sceneService.findLightInfoByLid(lid);
+                    lightList = sceneService.findLightByGid(lightInfo.getGid(), sid);
+                    model.addAttribute("lightInfo", lightInfo);
+                    if(placeList.get(i).getPid()==lightInfo.getPid()){
+                        groupList = groupList1;
+                        lidFlag = 1;
+                    }
+                }
             }
         }
-
-        if (samePlaceXY == 1) {
-            placeList.get(0).setX(groupList.get(0).getX());
-            placeList.get(0).setY(groupList.get(0).getY());
-        }
-
         model.addAttribute("sceneName", sceneName);
         model.addAttribute("sceneId", sceneId);
         model.addAttribute("projectName", meshInfo.getName());
@@ -167,12 +196,29 @@ public class SceneController {
     }
 
 
+
     @RequestMapping(value = "/groupDetail", method = RequestMethod.POST)
     @ResponseBody
     public Map<String, List> groupDetail(Integer gid, Integer sid) {
         Map<String, List> map = new HashMap<>();
         List<MeshInfo> lightList = sceneService.findLightByGid(gid, sid);
         map.put("lightList", lightList);
+        return map;
+    }
+
+    @RequestMapping(value = "/placeDetail", method = RequestMethod.POST)
+    @ResponseBody
+    public Map<String, List> placeDetail(Integer pid, Integer sid) {
+        Map<String, List> map = new HashMap<>();
+        List<MeshInfo> groupList = sceneService.findGroupByPid(pid);
+        for (int j = 0; j < groupList.size(); j++) {
+            List<MeshInfo> list2 = sceneService.findXYByGid(groupList.get(j).getGid(), sid);
+            if (list2.size() == 1 && list2.get(0)!=null) {
+                groupList.get(j).setX(list2.get(0).getX());
+                groupList.get(j).setY(list2.get(0).getY());
+            }
+        }
+        map.put("groupList", groupList);
         return map;
     }
 

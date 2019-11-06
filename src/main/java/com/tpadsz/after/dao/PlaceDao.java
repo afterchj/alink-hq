@@ -28,5 +28,7 @@ public interface PlaceDao {
 
     void deleteByIds(List list);
 
+    void deleteGroup(Map map);
+
     void saveRename(Map map);
 }

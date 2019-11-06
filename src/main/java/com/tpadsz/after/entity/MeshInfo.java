@@ -19,6 +19,7 @@ public class MeshInfo {
     private String lmac;
     private String x;
     private String y;
+    private String angle;
     private int mesh_id;
     private int scene_id;
     private int place_id;
@@ -116,6 +117,14 @@ public class MeshInfo {
 
     public void setY(String y) {
         this.y = y;
+    }
+
+    public String getAngle() {
+        return angle;
+    }
+
+    public void setAngle(String angle) {
+        this.angle = angle;
     }
 
     public int getMesh_id() {

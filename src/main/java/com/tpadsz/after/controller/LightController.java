@@ -1,16 +1,14 @@
 package com.tpadsz.after.controller;
 
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONArray;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.tpadsz.after.entity.MeshInfo;
 import com.tpadsz.after.entity.OptionList;
 import com.tpadsz.after.entity.SearchDict;
 import com.tpadsz.after.service.LightService;
-import com.tpadsz.after.service.MeshService;
 import com.tpadsz.after.service.RoleService;
 import com.tpadsz.after.utils.AppUtils;
+import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -32,8 +30,6 @@ public class LightController {
     private LightService lightService;
     @Resource
     private RoleService roleService;
-    @Resource
-    private MeshService meshService;
 
     private Logger logger = Logger.getLogger(this.getClass());
 
@@ -61,14 +57,19 @@ public class LightController {
         List<MeshInfo> sceneInfo = lightService.getSceneInfo(id);
         modelMap.put("meshInfo", meshInfo);
         modelMap.put("sceneInfo", sceneInfo);
+        modelMap.put("flag", StringUtils.isNotEmpty(meshInfo.getAngle()));
         return "meshTemp/lightInfo";
     }
 
     @ResponseBody
     @RequestMapping("/getLightInfo")
-    public MeshInfo getLight(int id) {
-        MeshInfo meshInfo = lightService.getLightInfo(id);
-        return meshInfo;
+    public Map getLight(int id) {
+        MeshInfo lightInfo = lightService.getLightInfo(id);
+        List<MeshInfo> sceneInfo = lightService.getSceneInfo(id);
+        Map map = new HashMap();
+        map.put("light", lightInfo);
+        map.put("scene", sceneInfo);
+        return map;
     }
 
     @RequestMapping("/move")
@@ -96,7 +97,7 @@ public class LightController {
     }
 
     @RequestMapping("/delete")
-    public String delete(Integer mid, String ids) {
+    public String delete(Integer pid, Integer mid, String ids) {
         String[] ids1 = ids.split(",");
         List<String> list = new ArrayList(Arrays.asList(ids1));
         try {
@@ -105,7 +106,7 @@ public class LightController {
             logger.warn(e);
             return "authError";
         }
-        return "redirect:/light/list?mid=" + mid;
+        return "redirect:/light/list?projectId=" + pid + "&mid=" + mid;
     }
 
     @ResponseBody

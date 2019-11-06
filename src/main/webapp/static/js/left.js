@@ -2,6 +2,13 @@
  * Created by qian.chen on 2019/5/6.
  */
 $(function(){
+    // var isExistText=$('.reset-pwd-hint').text();
+    // console.log('isExistText',isExistText);
+    // if(isExistText==''){
+    //     $('.pop-content p').css('margin-top','5px');
+    // }else{
+    //     // $('.reset-pwd-hint').parent().parent().parent('.text-msg').css('text-align','left');
+    // }
     $('.on-off-triangle').click(function () {
         var imgUrl = $(this).attr('src');
         if(imgUrl == '/alink-hq/static/img/left-reduce.png') {
@@ -77,11 +84,28 @@ function scrollY() {
 /* 浏览器水平滚动位置 */
 function scrollX() {
     var de = document.documentElement;
-
     return self.pageXOffset || (de && de.scrollLeft) || document.body.scrollLeft;
 }
 $('.showList').hide();
 $('.openList').click(function () {
     $(this).siblings('.showList').toggle();
     $(this).parent().parent('tr').siblings('tr').find('.showList').hide();
+})
+
+function GetQueryString(name) {
+    var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+    var r = window.location.search.substr(1).match(reg); //获取url中"?"符后的字符串并正则匹配
+    var context = "";
+    if (r != null)
+        context = r[2];
+    reg = null;
+    r = null;
+    return context == null || context == "" || context == "undefined" ? "" : context;
+}
+
+$(window).keydown( function(e) {
+    var key = window.event ? e.keyCode : e.which;
+    if (key.toString() == "13") {
+        return false;
+    }
 })

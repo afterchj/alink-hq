@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="/alink-hq/static/css/common.css">
     <link rel="stylesheet" href="/alink-hq/static/css/leftNav.css">
     <link rel="stylesheet" href="/alink-hq/static/css/projectManage.css">
+    <script src="/alink-hq/static/js/excel/excel.js"></script>
     <script src="/alink-hq/static/js/jquery.min.js"></script>
     <script src="/alink-hq/static/js/upload.js"></script>
     <title>公司信息录入</title>
@@ -41,37 +42,37 @@
                     <!--<img src="/alink-hq/static/img/go-back.png" alt="" onclick="history.back()">-->
                 </div>
             </div>
-            <div id="timerDetail" class="table-content-list">
+            <div id="timerDetail" class="table-content-list detail">
                 <div class="p-detail">
                     <div class="p-nav">公司信息录入</div>
                     <div class="p-content p-r">
-                        <form th:action="@{/cooperate/save}" class="company-msg" method="post"
+                        <form th:action="@{/cooperate/save}" id="form" class="company-msg" method="post"
                               enctype="multipart/form-data">
                             <div class="edit-company">
                                 <p class="company-name-hint"></p>
-                                <label for="company-name"><span>*</span>公司名称：</label>
+                                <label><span>*</span>公司名称：</label>
                                 <input type="text" id="company-name" name="coname" placeholder="请填写公司名称">
                             </div>
                             <div class="edit-company">
                                 <p class="company-phone-hint"></p>
-                                <label for="company-phone"><span>*</span>公司电话：</label>
+                                <label><span>*</span>公司电话：</label>
                                 <input type="text" id="company-phone" name="mobile" placeholder="请填写公司电话">
                             </div>
-                            <div class="edit-company" style="margin-bottom: 40px;">
+                            <div class="edit-company">
                                 <p class="address-hint"></p>
-                                <label for="address"><span>*</span>通讯地址：</label>
+                                <label><span>*</span>通讯地址：</label>
                                 <input type="text" id="address" name="address" placeholder="请填写通讯地址">
                             </div>
-                            <div class="edit-company clearfix" style="margin-bottom: 40px;">
+                            <div class="edit-company clearfix">
                                 <p class="license-hint"></p>
-                                <label for="drop_area" style="vertical-align: top;">营业执照：</label>
+                                <label style="vertical-align: top;">营业执照：</label>
                                 <div style="display: none">
                                     <input type="file" id="file" name="file">
                                 </div>
                                 <div id="drop_area">
                                     <div id="preview">
                                         <!--<div id="delete-img" style="">×</div>-->
-                                        <img src="/alink-hq/static/img/upload.png" class="img-responsive"
+                                        <img src="/alink-hq/static/img/up-file.png" class="img-responsive"
                                              style="width: 100%;height:100%;" alt="" title="">
                                         <!--<img src="http://iotsztp.com/file/imgs/chat_qrcode.jpg" style="width: 100%">-->
                                     </div>
@@ -79,7 +80,7 @@
                             </div>
                             <div class="edit-company">
                                 <p class="license-number-hint"></p>
-                                <label for="serial">营业执照编号：</label>
+                                <label>营业执照编号：</label>
                                 <input type="text" id="serial" name="code" placeholder="请填写营业执照编号">
                             </div>
                             <div class="btn-submit">
@@ -94,6 +95,56 @@
             </div>
         </div>
     </div>
+</div>
+<!-- 确定导出弹框 -->
+<div class="confirm-create-iframe  pop-iframe " openContent="confirm-create">
+    <div class="create-nav p-r pop-nav">
+        导出账号
+        <img src="/alink-hq/static/img/close.png" alt="" class="p-a pointer close">
+    </div>
+    <div class="create-content pop-content p-r">
+        <div class="c-main excel-main">
+            <div class="c-title excel-up">
+                <div class="clearfix">
+                    <div class="f-l c-width one">账号</div>
+                    <div class="f-l c-width two">密码</div>
+                </div>
+            </div>
+            <div class="c-list">
+            </div>
+        </div>
+        <div class="p-a c-bottom">
+            <a href="#" class="excel-a" onclick="method5('d2')">EXCEL导出</a>
+            <!--<a href="#" id="excel">Excel导出</a>-->
+            <p class="c-hint excel-p">注：请牢记/导出新账号密码，关闭后将无法展示。</p>
+        </div>
+
+        <table id="d2" style="display:none;margin-left: 30px;">
+            <thead>
+            <tr>
+                <td>账号</td>
+                <td>密码</td>
+            </tr>
+            </thead>
+            <tbody id="toExcel">
+            </tbody>
+        </table>
+    </div>
+</div>
+<div class="hide-iframe "></div>
+<div id="preload-anim">
+    <div id="circularG">
+        <div id="circularG_1" class="circularG"></div>
+        <div id="circularG_2" class="circularG"></div>
+        <div id="circularG_3" class="circularG"></div>
+        <div id="circularG_4" class="circularG"></div>
+        <div id="circularG_5" class="circularG"></div>
+        <div id="circularG_6" class="circularG"></div>
+        <div id="circularG_7" class="circularG"></div>
+        <div id="circularG_8" class="circularG"></div>
+    </div>
+    <p class="title">
+    </p>
 </div>
 <script src="/alink-hq/static/js/left.js"></script>
 <script src="/alink-hq/static/js/moment.js"></script>
@@ -157,9 +208,38 @@
             islicenseNumber = true;
         }
         if (iscompanyName && iscompanyPhone && isaddress && islicenseNumber) {
-            $('form.company-msg').submit();
+
+//            $('form.company-msg').submit();
+            var selector = $('div[openContent="confirm-create"]');
+            selector.addClass('active');
+
+            let account = '9GBACD';
+            let pwd = "000000";
+            $.getJSON("/alink-hq/cooperate/show", function (data) {
+                account = data['account'];
+                pwd = data['pwd'];
+                // console.log("account", account, "pwd", pwd);
+                var content = '<div class="clearfix"><div class="f-l c-width one">' + account + '</div>'
+                    + '<div class="f-l c-width two">' + pwd + '</div></div>';
+                $('.c-list').append(content);
+                adjust(selector);
+                showOverlay();
+            });
         }
+    });
+    $('.pop-nav .close').click(function () {
+        $('form.company-msg').submit();
+//        var selector = $('div[openContent="confirm-create"]');
+//        selector.removeClass('active');
+//        hideOverlay();
+//        $('#preload-anim').addClass('active');
+//        $('#preload-anim .title').text(' 创建成功，正在跳转合作列表');
+//        setTimeout(function () {
+//            $('form.company-msg').submit();
+////            window.location.href = '/alink-hq/account/list';
+//        }, 500)
     })
+
     //验证手机号或座机
     function CheckPhone(number) {
         var reg1 = /^((0\d{2,3}-\d{7,8})|(1[3584]\d{9}))$/;
@@ -170,6 +250,7 @@
             return false;
         }
     }
+
     //验证营业执照编号
     function checkLicense(str) {
         reg = /(^(?:(?![IOZSV])[\dA-Z]){2}\d{6}(?:(?![IOZSV])[\dA-Z]){10}$)|(^\d{15}$)/;

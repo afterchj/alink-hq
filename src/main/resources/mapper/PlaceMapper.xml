@@ -2,11 +2,25 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.tpadsz.after.dao.PlaceDao">
 
+    <parameterMap id="createMapper" type="map">
+        <parameter property="uid" mode="IN"/>
+        <parameter property="mid" mode="IN"/>
+        <parameter property="name" mode="IN"/>
+        <parameter property="result" mode="OUT" jdbcType="INTEGER"/>
+    </parameterMap>
+
+    <parameterMap id="deleteMapper" type="map">
+        <parameter property="pid" mode="IN"/>
+        <parameter property="mid" mode="IN"/>
+        <parameter property="result" mode="OUT" jdbcType="INTEGER"/>
+    </parameterMap>
+
     <sql id="Base_Column_List">
         pl.id,
         pl.mid,
         pl.pname,
         pl.place_id,
+        m.uid,
         m.mname,
         m.mesh_id,
         m.project_id,
@@ -22,8 +36,7 @@
                     r.role_id in (2,3,4))
                 </when>
                 <when test="role == 'manager'">
-                    AND m.uid IN (SELECT c.uid FROM f_user_customer c WHERE fid=(SELECT fid FROM f_user_customer WHERE
-                    uid=#{uid}))
+                    AND m.uid IN (SELECT c.uid FROM f_user_customer c WHERE fid=(SELECT fid FROM f_user_customer WHERE uid=#{uid}))
                     <!--
                         AND m.uid IN (SELECT c.uid FROM f_user_customer c INNER JOIN f_user_role r ON c.uid=r.user_id WHERE r.role_id in (4) OR fid=(SELECT fid FROM f_user_customer WHERE uid=#{uid}))
                      -->
@@ -31,18 +44,20 @@
                 <when test="role == 'user'">
                     AND m.uid =#{uid}
                 </when>
-                <!--<otherwise>-->
-                <!--</otherwise>-->
+                <when test="role == 'salesman'">
+                    AND m.uid IN (SELECT c.uid FROM f_user_customer c WHERE fid=(SELECT fid FROM f_user_customer WHERE uid=#{uid}))
+                </when>
             </choose>
         </if>
     </sql>
 
-    <insert id="save" parameterType="map">
-        <selectKey keyProperty="id" order="BEFORE" resultType="int">
-            SELECT IFNULL(max(place_id)+1,1) FROM f_place WHERE mid=#{mid}
-        </selectKey>
-        INSERT INTO f_place(place_id,pname,uid,mid,create_date,update_date ) VALUES(#{id},#{name},#{uid},#{mid},now(),now())
-    </insert>
+    <select id="save" parameterMap="createMapper" statementType="CALLABLE">
+        CALL create_place (?,?,?,?)
+    </select>
+
+    <select id="deleteGroup" parameterMap="deleteMapper" statementType="CALLABLE">
+        CALL delete_place (?,?,?)
+    </select>
 
     <select id="getByMap" resultType="map" parameterType="SearchDict">
         SELECT
@@ -59,8 +74,8 @@
         <if test="mname!=null and mname!=''">
             AND m.mname LIKE CONCAT('%',#{mname},'%')
         </if>
-        <if test="meshId!=null and meshId!=''">
-            AND m.mesh_id LIKE CONCAT('%',#{meshId},'%')
+        <if test="mesh_id!=null and mesh_id!=''">
+            AND m.mesh_id LIKE CONCAT('%',#{mesh_id},'%')
         </if>
         <if test="pname!=null and pname!=''">
             AND pl.pname LIKE CONCAT('%',#{pname},'%')
@@ -74,7 +89,7 @@
         <if test="projectId!=null and projectId!=''">
             AND m.project_id=#{projectId}
         </if>
---         GROUP BY m.uid,m.mesh_id
+        -- GROUP BY m.uid,m.mesh_id
         ORDER BY pl.update_date DESC
     </select>
 
@@ -117,8 +132,7 @@
     </select>
 
     <delete id="deleteByIds" parameterType="list">
-        DELETE FROM f_place
-        WHERE id IN
+        DELETE FROM f_place WHERE id IN
         <foreach collection="list" item="id" index="index" open="(" close=")" separator=",">
             #{id}
         </foreach>

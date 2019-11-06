@@ -41,7 +41,7 @@
                     <!--<img src="/alink-hq/static/img/go-back.png" alt="" onclick="history.back()">-->
                 </div>
             </div>
-            <div id="timerDetail" class="table-content-list">
+            <div id="timerDetail" class="table-content-list detail">
                 <div class="p-detail">
                     <div class="p-nav">公司信息详情</div>
                     <div class="p-content p-r">
@@ -49,35 +49,35 @@
                               enctype="multipart/form-data">
                             <input type="hidden" name="id" th:value="${info.id}">
                             <div class="edit-company" th:switch="${info.status}">
-                                <label for="company-name">当前状态：</label>
+                                <label >当前状态：</label>
                                 <input th:case="1" type="text" id="company-status" name="status" placeholder="合作"
                                        disabled>
                                 <input th:case="0" type="text" id="company-status" name="status" placeholder="终止"
                                        disabled>
                             </div>
                             <div class="edit-company">
-                                <label for="company-name">公司名称：</label>
+                                <label >公司名称：</label>
                                 <input type="text" id="company-name" name="coname" placeholder="请填写公司名称"
                                        th:value="${info.coname}" readonly>
                             </div>
                             <div class="edit-company">
-                                <label for="company-phone">公司电话：</label>
+                                <label >公司电话：</label>
                                 <input type="text" id="company-phone" name="mobile" placeholder="请填写公司电话"
                                        th:value="${info.mobile}" readonly>
                             </div>
                             <div class="edit-company">
-                                <label for="address">通讯地址：</label>
+                                <label >通讯地址：</label>
                                 <input type="text" id="address" name="address" placeholder="请填写通讯地址"
                                        th:value="${info.address}" readonly>
                             </div>
                             <div class="edit-company clearfix">
-                                <label for="drop_area" style="vertical-align: top;">营业执照：</label>
+                                <label  style="vertical-align: top;">营业执照：</label>
                                 <div style="display: none">
                                     <input type="file" id="file" name="file">
                                 </div>
                                 <div id="drop_area">
                                     <div id="preview" th:switch="${info.photo}" class="p-r">
-                                        <img th:case="null" src="/alink-hq/static/img/upload.png" class="img-responsive" style="width: 100%;height:100%;" alt="" title="">
+                                        <img th:case="null" src="/alink-hq/static/img/up-file.png" class="img-responsive" style="width: 100%;height:100%;" alt="" title="">
                                         <img th:case="*" th:src="@{'http://iotsztp.com/file/imgs/'+${info.photo}}" class="img-responsive" style="width: 100%;height:100%;" alt="" title="">
 <!--                                        <img th:case="*" th:src="@{'http://uichange.com/file/imgs/'+${info.photo}}" class="img-responsive" style="width: 100%;height:100%;" alt="" title="">-->
                                         <!--<img th:case="*" th:src="@{'../static/upload/'+${info.photo}}" class="img-responsive" style="width: 100%;height:100%;" alt="" title="">-->
@@ -91,7 +91,7 @@
                                 </div>
                             </div>
                             <div class="edit-company">
-                                <label for="serial">营业执照编号：</label>
+                                <label >营业执照编号：</label>
                                 <input type="text" id="serial" name="code" placeholder="请填写营业执照编号"
                                        th:value="${info.code}" readonly>
                             </div>
@@ -129,8 +129,10 @@
                 var imgUrl = $(this).find('img')[0].src;
                 $('#img-max').attr('src', '');
             }
-        });
+        })
+
     })
+
 </script>
 </body>
 </html>

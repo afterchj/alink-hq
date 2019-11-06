@@ -51,6 +51,7 @@ public class MeshController {
     }
 
 
+
     @RequestMapping("/info")
     public String info(Integer id, ModelMap modelMap) {
         MeshInfo meshInfo = meshService.getMeshInfo(id);
@@ -88,11 +89,12 @@ public class MeshController {
     }
 
     @RequestMapping("/move")
-    public String move(String ids, ModelMap modelMap) {
+    public String move(String uid,String ids, ModelMap modelMap) {
         String[] idArray = ids.split(",");
         List<String> list = new ArrayList(Arrays.asList(idArray));
         List<Map> meshMap = meshService.selectByMid(list);
         modelMap.put("meshMap", meshMap);
+        modelMap.put("uid", uid);
         modelMap.put("ids", ids);
         return "meshTemp/meshMove";
     }
@@ -112,12 +114,12 @@ public class MeshController {
     }
 
     @RequestMapping("/delete")
-    public String delete(Integer uid, String ids) {
+    public String delete(Integer pid, String ids) {
         logger.info("ids=" + ids);
         String[] idArray = ids.split(",");
         List<String> list = new ArrayList(Arrays.asList(idArray));
         meshService.deleteMeshByIds(list);
-        return "redirect:/mesh/list?uid" + uid;
+        return "redirect:/mesh/list?projectId=" + pid;
     }
 
 

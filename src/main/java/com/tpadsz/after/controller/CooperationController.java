@@ -1,10 +1,21 @@
 package com.tpadsz.after.controller;
 
+import com.alibaba.excel.EasyExcel;
+import com.alibaba.excel.ExcelWriter;
+import com.alibaba.excel.write.metadata.WriteSheet;
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.tpadsz.after.entity.CooperationInfo;
+import com.tpadsz.after.entity.CooperationTemplate;
 import com.tpadsz.after.entity.SearchDict;
+import com.tpadsz.after.entity.User;
+import com.tpadsz.after.service.AccountService;
 import com.tpadsz.after.service.CooperateService;
+import com.tpadsz.after.utils.AppUtils;
+import com.tpadsz.after.utils.Encryption;
+import com.tpadsz.after.utils.GenerateUtils;
 import com.tpadsz.after.utils.PropertiesUtil;
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
@@ -16,7 +27,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletResponse;
 import java.io.File;
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -29,16 +45,36 @@ public class CooperationController {
 
     @Resource
     private CooperateService cooperateService;
+    @Resource
+    private AccountService accountService;
+    private static String account = "";
+    private static String plain = "00000000";
 
     private Logger logger = Logger.getLogger(this.getClass());
 
     @RequestMapping("/list")
     public String cooperateList(SearchDict dict, ModelMap modelMap) {
+        int parentId = dict.getParentId();
+        String uid = AppUtils.getUserID();
+        Map map = new HashMap();
+        if (parentId != 0) {
+            map.put("parentId", parentId);
+        } else {
+            map.put("uid", uid);
+        }
+        CooperationTemplate cooperationInfo = cooperateService.getParentCompany(map);
+        parentId = parentId == 0 ? cooperationInfo.getId() : parentId;
+        dict.setParentId(parentId);
         PageHelper.startPage(dict.getPageNum(), dict.getPageSize());
         List<Map> cooperationList = cooperateService.getByMap(dict);
         PageInfo<Map> pageInfo = new PageInfo(cooperationList, dict.getPageSize());
         if (pageInfo.getList().size() > 0) {
             modelMap.put("pageInfo", pageInfo);
+        }
+        CooperationTemplate parent = cooperateService.getParent(parentId);
+        String company = parent.getConame();
+        if (parentId > 1) {
+            modelMap.put("company", company);
         }
         modelMap.put("info", dict);
         return "cooperateManage/cooperateList";
@@ -60,7 +96,13 @@ public class CooperationController {
 
     @RequestMapping("/save")
     public String save(CooperationInfo info, @RequestParam(value = "file") MultipartFile file) {
-        String path = PropertiesUtil.getPath();
+        Map map = new HashMap();
+        String uid = AppUtils.getUserID();
+        map.put("uid", uid);
+        CooperationTemplate cooperationInfo = cooperateService.getParentCompany(map);
+        int fid = cooperationInfo.getId();
+        info.setParent_id(fid);
+        String path = PropertiesUtil.getPath("img");
         String fileName = file.getOriginalFilename();
         File targetFile = new File(path, fileName);
         if (!targetFile.getParentFile().exists()) {
@@ -72,20 +114,44 @@ public class CooperationController {
                 info.setPhoto(fileName);
             }
             if (info.getId() == 0) {
-                cooperateService.save(info);
+                Map param = JSONObject.parseObject(JSON.toJSONString(info));
+                param.put("account", account);
+                Encryption.HashPassword password = Encryption.encrypt(Encryption.getMD5Str(plain));
+                param.put("pwd", password.getPassword());
+                param.put("salt", password.getSalt());
+                cooperateService.save(param);
             } else {
                 cooperateService.saveUpdate(info);
             }
         } catch (Exception e) {
             logger.error("error:" + e.getMessage());
         }
-        return "redirect:/cooperate/list";
+        return "redirect:/cooperate/list?parentId=" + info.getParentId();
+    }
+
+    @RequestMapping("/show")
+    @ResponseBody
+    public Map createAccount() {
+        User user;
+        do {
+            account = GenerateUtils.generateAccount(8);
+            user = accountService.findByAccount(account);
+        } while (user != null);
+        Map map = new HashMap();
+        map.put("account", account);
+        map.put("pwd", plain);
+        return map;
     }
 
     @RequestMapping("/saveUpdate")
     public String saveUpdate(CooperationInfo info) {
         cooperateService.saveUpdate(info);
-        return "redirect:/cooperate/list";
+        Map map = new HashMap();
+        map.put("fid", info.getId());
+        map.put("status", info.getStatus());
+        cooperateService.updateUser(map);
+        logger.warn("result=" + map.get("result"));
+        return "redirect:/cooperate/list?parentId=" + info.getParentId();
 //        return "ok";
     }
 
@@ -108,5 +174,37 @@ public class CooperationController {
             return "ok";
         }
         return "fail";
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/exportExcel")
+    public void getExcel(SearchDict dict, HttpServletResponse response) {
+        Map map = new HashMap();
+        int parentId = dict.getParentId();
+        String uid = AppUtils.getUserID();
+        if (parentId > 1) {
+            map.put("parentId", parentId);
+        } else {
+            map.put("uid", uid);
+        }
+        CooperationTemplate parent = cooperateService.getParentCompany(map);
+        CooperationTemplate template = cooperateService.getParent(parentId);
+        try {
+            String fileName = URLEncoder.encode(cooperateService.parseName(template), "UTF-8");
+            Map<Integer, List<CooperationTemplate>> company = cooperateService.buildExcelData(parent);
+            response.setHeader("Content-disposition", "attachment;filename=" + fileName + ".xls");
+            ExcelWriter excelWriter = EasyExcel.write(response.getOutputStream()).build();
+            int i = 0;
+            for (List<CooperationTemplate> companyList : company.values()) {
+                i++;
+                WriteSheet writeSheet = EasyExcel.writerSheet(i, "sheet" + i).head(CooperationTemplate.class).build();
+                excelWriter.write(companyList, writeSheet);
+            }
+            excelWriter.finish();
+        } catch (UnsupportedEncodingException e) {
+            logger.error(e.getMessage());
+        } catch (IOException e) {
+            logger.error(e.getMessage());
+        }
     }
 }

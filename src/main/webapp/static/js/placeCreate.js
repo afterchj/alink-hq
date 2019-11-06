@@ -28,6 +28,7 @@ $(function() {
         } else {
             $('.project-hint').text('')
         }
+        getMesh(pid);
     }) 
     $('div[step="one-content"] .next-step').click(function() {
         pid = pid1(pid);
@@ -115,7 +116,7 @@ $(function() {
                         $('.place-hint').text('');
                         $('#preload-anim').addClass('active');
                         $('#preload-anim .title').text('创建成功！');
-                        $("form").submit()
+                        $("form").submit();
                     } else {
                         $('.place-hint').text('已存在，请重新输入')
                     }
@@ -199,6 +200,25 @@ function mesh(pid, mesh_id, pname) {
     }
 }
 
+function getMesh(pid) {
+    $('#mesh_id ').empty();
+    $('#meshId').val('');
+    $.getJSON('/alink-hq/group/getMesh', {
+        "projectId": pid
+    }, function(data) {
+        var content = '<option value="" selected>请选择网络</option>';
+        if (data.length == 1) {
+            content = '<option value="' + data[0].id + '" >' + data[0].label + '</option>';
+            var meshId = data[0].id.substr(data[0].id.indexOf("_") + 1);
+            $('#meshId').val(meshId)
+        } else {
+            $.each(data, function(i, val) {
+                content += '<option value="' + val.id + '">' + val.label + '</option>'
+            })
+        }
+        $('#mesh_id ').append(content)
+    })
+}
 function pid1(pid) {
     if ($('#projectId option:selected').length > 0) {
         pid = $('#projectId option:selected').val()

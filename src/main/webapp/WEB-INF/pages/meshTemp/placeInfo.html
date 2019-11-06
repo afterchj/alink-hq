@@ -38,7 +38,7 @@
                     <!--<img src="/alink-hq/static/img/go-back.png" alt="" onclick="history.back()">-->
                 </div>
             </div>
-            <div id="projectDetail" class="table-content-list">
+            <div id="projectDetail" class="table-content-list detail">
                 <div class="p-detail">
                     <div class="p-nav">
                         <ul>
@@ -80,7 +80,7 @@
                             <div class="f-l">
                                 <a th:if="${meshInfo.gcount}=='0'" class="a-un" href="javascript:void(0);">查看组列表</a>
                                 <a th:if="${meshInfo.gcount}!='0'"
-                                   th:href="@{/group/list(mid=${meshInfo.mid},pid=${meshInfo.id})}">查看组列表</a>
+                                   th:href="@{/group/list(mid=${meshInfo.mid},pid=${meshInfo.id},placeId=${meshInfo.place_id})}">查看组列表</a>
                             </div>
                         </div>
                         <div class="clearfix">
@@ -108,7 +108,7 @@
     <div class="pop-content">
         <div class="newName">
             <p class="rename-hint"></p>
-            <label for="rename">新名称</label>
+            <label>新名称</label>
             <input type="text" placeholder="请输入（2-16位汉字、字母、数字）" id="rename" onkeyup="nameKeyUp()" maxlength="16"/>
         </div>
         <div class="pop-btn">

@@ -4,9 +4,8 @@ import com.alibaba.fastjson.JSONObject;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.tpadsz.after.dao.TimeLineDao;
-import com.tpadsz.after.entity.ProjectList;
-import com.tpadsz.after.entity.TimeLine;
-import com.tpadsz.after.entity.TimePoint;
+import com.tpadsz.after.entity.*;
+import com.tpadsz.after.entity.dd.Week;
 import com.tpadsz.after.service.TimeLineService;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.ibatis.session.ExecutorType;
@@ -18,6 +17,7 @@ import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.StringJoiner;
 
 /**
  * @program: alink-hq
@@ -40,7 +40,15 @@ public class TimeLineServiceImpl implements TimeLineService {
     }
 
     @Override
-    public PageInfo<TimeLine> getTimeLineByMid(int id, Integer pageNum, Integer pageSize, String timeFlag, String tname, String createDate, String endTime,String state) {
+    public PageInfo<TimeLine> getTimeLineByMid(TimeListPage timeListPage) {
+        Integer pageNum = timeListPage.getPageNum();
+        Integer pageSize = timeListPage.getPageSize();
+        String state = timeListPage.getState();
+        String timeFlag = timeListPage.getTimeFlag();
+        int id = timeListPage.getId();
+        String tname = timeListPage.getTname();
+        String createDate = timeListPage.getCreateDate();
+        String updateDate = timeListPage.getUpdateDate();
         if (pageNum==null){
             pageNum = 1;//默认第一页
         }
@@ -62,48 +70,49 @@ public class TimeLineServiceImpl implements TimeLineService {
             }
         }
         if (timeFlag==null||timeFlag.length()<1){
-            timeLineList = timeLineDao.getTimeLineByMid(id,tname,createDate,endTime,state);
+            timeLineList = timeLineDao.getTimeLineByMid(id,tname,createDate,updateDate,state);
         }else if (timeFlag.equals("creToTop")){
-            timeLineList = timeLineDao.getTimeLineByMidOrderByCreateDate(id,tname,createDate,endTime,state);
+            timeLineList = timeLineDao.getTimeLineByMidOrderByCreateDate(id,tname,createDate,updateDate,state);
         }else if (timeFlag.equals("creToBottom")){
-            timeLineList = timeLineDao.getTimeLineByMidOrderByCreateDateDesc(id,tname,createDate,endTime,state);
+            timeLineList = timeLineDao.getTimeLineByMidOrderByCreateDateDesc(id,tname,createDate,updateDate,state);
         }else if (timeFlag.equals("upToTop")){
-            timeLineList = timeLineDao.getTimeLineByMidOrderByUpdateDate(id,tname,createDate,endTime,state);
+            timeLineList = timeLineDao.getTimeLineByMidOrderByUpdateDate(id,tname,createDate,updateDate,state);
         }else if (timeFlag.equals("upToBottom")){
-            timeLineList = timeLineDao.getTimeLineByMid(id,tname,createDate,endTime,state);
+            timeLineList = timeLineDao.getTimeLineByMid(id,tname,createDate,updateDate,state);
         }
-        StringBuffer sb;
         for (TimeLine timeLine:timeLineList){
-            sb = new StringBuffer();
             String dayObj = timeLine.getDayObj();
-//            System.out.println(dayObj);
             JSONObject jsonObject = JSONObject.parseObject(dayObj);
-            if (jsonObject.getInteger("mon").equals(1)){
-                sb.append("周一、");
-            }
-            if (jsonObject.getInteger("tus").equals(1)){
-                sb.append("周二、");
-            }
-            if (jsonObject.getInteger("wed").equals(1)){
-                sb.append("周三、");
-            }
-            if (jsonObject.getInteger("thr").equals(1)){
-                sb.append("周四、");
-            }
-            if (jsonObject.getInteger("fri").equals(1)){
-                sb.append("周五、");
-            }
-            if (jsonObject.getInteger("sat").equals(1)){
-                sb.append("周六、");
-            }
-            if (jsonObject.getInteger("sun").equals(1)){
-                sb.append("周日、");
-            }
-            String sbStr = sb.toString().substring(0,sb.toString().lastIndexOf("、"));
-            timeLine.setWeek(sbStr);
+            timeLine.setWeek(getWeeks(jsonObject));
         }
         PageInfo<TimeLine> pageInfo = new PageInfo<>(timeLineList);
         return pageInfo;
+    }
+    public String getWeeks(JSONObject jsonWeek){
+        jsonWeek.getInteger(Week.MON.getWeekCN());
+        StringJoiner sj = new StringJoiner("、");
+        if (jsonWeek.getInteger("mon").equals(1)){
+            sj.add(Week.MON.getWeekCN());
+        }
+        if (jsonWeek.getInteger("tus").equals(1)){
+            sj.add(Week.TUS.getWeekCN());
+        }
+        if (jsonWeek.getInteger("wed").equals(1)){
+            sj.add(Week.WED.getWeekCN());
+        }
+        if (jsonWeek.getInteger("thr").equals(1)){
+            sj.add(Week.THR.getWeekCN());
+        }
+        if (jsonWeek.getInteger("fri").equals(1)){
+            sj.add(Week.FRR.getWeekCN());
+        }
+        if (jsonWeek.getInteger("sat").equals(1)){
+            sj.add(Week.SAT.getWeekCN());
+        }
+        if (jsonWeek.getInteger("sun").equals(1)){
+            sj.add(Week.SUN.getWeekCN());
+        }
+        return sj.toString();
     }
 
     @Override
@@ -126,8 +135,17 @@ public class TimeLineServiceImpl implements TimeLineService {
     }
 
     @Override
-    public void updateTnameById(int id, String tname) {
+    public void updateTnameById(int id, String tname, int mid) {
         timeLineDao.updateTnameById(id,tname);
+        TimeBean timeBean = timeLineDao.getTimeJson(id,mid);
+        String json = timeBean.getJson();
+        JSONObject jsonObject = JSONObject.parseObject(json);
+        jsonObject.remove("tname");
+        jsonObject.put("tname", tname);
+        jsonObject.remove("item_title");
+        jsonObject.put("item_title", tname);
+        json = jsonObject.toJSONString();
+        timeLineDao.updateTimeJson(id,mid, json);
     }
 
     @Override

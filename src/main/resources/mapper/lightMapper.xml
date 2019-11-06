@@ -6,6 +6,7 @@
 		l.id,
         l.mid,
         l.pid,
+        m.uid,
         IFNULL(l.lname, 'null') lname,
         l.lmac,
         p.name,
@@ -15,8 +16,9 @@
         g.id gid,
         g.gname,
         pl.pname,
-        IFNULL(ls.x, 'null') x,
-        IFNULL(ls.y, 'null') y,
+        IFNULL(ls.x, '50') x,
+        IFNULL(ls.y, '50') y,
+        CONCAT_WS('，',ls.vertical_angle,ls.horizontal_angle,ls.focus) angle,
         IFNULL(ls.off, 'null') off
 	</sql>
 
@@ -24,7 +26,8 @@
         <if test="uid!=null and uid!=''">
             <choose>
                 <when test="role == 'admin'">
-                    AND m.uid IN (SELECT u.id FROM f_user_account u INNER JOIN f_user_role r ON u.id=r.user_id WHERE r.role_id in (2,3,4))
+                    AND m.uid IN (SELECT u.id FROM f_user_account u INNER JOIN f_user_role r ON u.id=r.user_id WHERE
+                    r.role_id in (2,3,4))
                 </when>
                 <when test="role == 'manager'">
                     AND m.uid IN (SELECT c.uid FROM f_user_customer c WHERE fid=(SELECT fid FROM f_user_customer WHERE uid=#{uid}))
@@ -35,8 +38,9 @@
                 <when test="role == 'user'">
                     AND m.uid =#{uid}
                 </when>
-                <!--<otherwise>-->
-                <!--</otherwise>-->
+                <when test="role == 'salesman'">
+                    AND m.uid IN (SELECT c.uid FROM f_user_customer c WHERE fid=(SELECT fid FROM f_user_customer WHERE uid=#{uid}))
+                </when>
             </choose>
         </if>
     </sql>
@@ -48,7 +52,7 @@
         INNER JOIN f_project p ON p.id=m.project_id
         INNER JOIN f_place pl ON pl.id = l.pid
         INNER JOIN f_group g ON g.id=l.gid
-        LEFT JOIN (SELECT * FROM f_light_setting ORDER BY update_date DESC) ls ON ls.lid=l.id
+        LEFT JOIN (SELECT * FROM f_light_adjust ORDER BY update_date DESC) ls ON ls.lid=l.id
         WHERE 1 = 1
         <include refid="common_choose"></include>
         <if test="name!=null and name!=''">
@@ -93,9 +97,10 @@
             l.mid,
             IFNULL(l.lname,'null') lname,
             l.lmac,
-            IFNULL(ls.x,'null') x,
-			IFNULL(ls.y,'null') y,
+            IFNULL(ls.x,'50') x,
+			IFNULL(ls.y,'50') y,
 			IFNULL(ls.off,'null') off,
+			CONCAT_WS('，',ls.vertical_angle,ls.horizontal_angle,ls.focus) angle,
             s.id sid,
             s.sname,
             m.project_id,
@@ -108,7 +113,7 @@
             pl.pname,
             IFNULL(s.scount,0) scount
         FROM f_light l
-        LEFT JOIN f_light_setting ls ON ls.lid=l.id
+        LEFT JOIN f_light_adjust ls ON ls.lid=l.id
         LEFT JOIN f_group g ON g.id=l.gid
         LEFT JOIN f_mesh m ON m.id=l.mid
         LEFT JOIN f_project p ON p.id=m.project_id
@@ -124,22 +129,29 @@
             s.mid,
             s.scene_id,
             s.sname,
-            IFNULL(ls.x, 'null') x,
-            IFNULL(ls.y, 'null') y
+            IFNULL(ls.x, '0') x,
+            IFNULL(ls.y, '0') y,
+            CONCAT_WS('，',ls.vertical_angle,ls.horizontal_angle,ls.focus) angle
         FROM f_light l
         INNER JOIN f_light_setting ls ON ls.lid = l.id
         INNER JOIN f_scene s ON ls.sid = s.id
         WHERE ls.lid = #{id}
-        GROUP BY l.id,sname
     </select>
     <select id="selectByLid" resultType="map" parameterType="list">
         SELECT
-            l.id,
-            IFNULL(l.lname,'null') lname,
-            l.lmac,
-            IFNULL(g.gname,'null') gname
+        l.id,
+        l.lmac,
+        m.mname,
+        m.mesh_id,
+        sp.name,
+        IFNULL(l.lname,'') lname,
+        IFNULL(g.gname,'') gname,
+        IFNULL(p.pname,'') pname
         FROM f_light l
         LEFT JOIN f_group g ON g.id=l.gid
+        LEFT JOIN f_place p ON g.pid=p.id
+        INNER JOIN f_mesh m ON m.id=g.mid
+        INNER JOIN f_project sp ON sp.id=m.project_id
         WHERE l.id in
         <foreach collection="list" item="id" index="index" open="(" close=")" separator=",">
             #{id}
@@ -148,14 +160,29 @@
 
     <select id="getGroups" resultType="OptionList" parameterType="map">
         SELECT
-            g.id,
-            g.gname label
+        g.id,
+        g.gname label
         FROM f_group g
         INNER JOIN f_mesh m ON m.id = g.mid
-        WHERE 1=1
+        WHERE group_id &gt;0
         <if test="id!=null and id!=''">
             AND m.id =#{id}
         </if>
+    </select>
+
+    <select id="getLightCount" resultType="int" parameterType="int">
+        SELECT COUNT(*) FROM f_light l WHERE l.mid IN
+        <foreach collection="list" item="id" index="index" open="(" close=")" separator=",">
+            #{id}
+        </foreach>
+        OR l.gid IN
+        <foreach collection="list" item="id" index="index" open="(" close=")" separator=",">
+            #{id}
+        </foreach>
+        OR l.pid IN
+        <foreach collection="list" item="id" index="index" open="(" close=")" separator=",">
+            #{id}
+        </foreach>
     </select>
 
     <delete id="deleteLightByIds" parameterType="list">

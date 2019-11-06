@@ -2,6 +2,8 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" th:href="@{/static/css/base.css}"/>
     <link rel="stylesheet" th:href="@{/static/css/login.css}"/>
     <script type="text/javascript" th:src="@{/static/js/jquery.min.js}"></script>
@@ -11,225 +13,254 @@
 </head>
 <body>
 <div class="outer-container">
-<div class="container clearfix">
-    <!--<img th:src="@{/static/img/background.png}" class="p-a" alt=""/>-->
-    <div class="f-l b-l">
-        <div class="logo ">
-            <img th:src="@{/static/img/logo.png}" alt=""/>
+    <div class="container clearfix">
+        <!--<img th:src="@{/static/img/background.png}" class="p-a" alt=""/>-->
+        <div class="f-l b-l">
+            <div class="logo ">
+                <img th:src="@{/static/img/logo.png}" alt=""/>
+            </div>
+            <div class="background-left">
+                <img th:src="@{/static/img/background-left.png}" alt=""/>
+            </div>
         </div>
-        <div class="background-left">
-            <img th:src="@{/static/img/background-left.png}" alt=""/>
+        <div class="f-r b-r">
+            <div class="content  ">
+                <div class="main p-r">
+                    <img th:src="@{/static/img/login.png}" style="width: 100%;height: 100%;" class="" alt=""/>
+                    <div class="login-in-box p-a">
+                        <div class="clearfix login-in-box-tab">
+                            <div class="f-l login-in-box-l active visible" tab="password-login">账密登录</div>
+                            <div class="f-r login-in-box-r visible" tab="phone-login">手机验证码登录</div>
+                            <div class="f-l login-in-box-l " tab="phone-find-password">手机找回密码</div>
+                            <div class="f-r login-in-box-r" tab="email-find-password">邮箱找回密码</div>
+                        </div>
+                        <div class="login-in-box-tab-content">
+                            <!--账号密码登录-->
+                            <div class="password-login active" tabContent="password-login">
+                                <form th:action="@{/login}" method="post">
+                                    <p class="add-hint" style="height: 50px;line-height: 4;margin-right: 50%;"></p>
+                                    <div class="icon-input p-r">
+                                        <img th:src="@{/static/img/account.png}" alt="" class="icon p-a"/>
+                                        <input type="text" name="uname" id="uname" placeholder="请输入账号/用户名/邮箱/手机号"
+                                               class="p-l-val"/>
+                                    </div>
+                                    <p class="password-hint" style="height: 40px;line-height:3;"></p>
+                                    <div class="icon-input p-r">
+                                        <img th:src="@{/static/img/password.png}" alt="" class="icon p-a"/>
+                                        <input type="password" placeholder="请输入密码" name="pwd" id="pwd"
+                                               class="p-l-password-val"
+                                               maxlength="16"/>
+                                    </div>
+                                    <div style="height: 40px;line-height:3;">
+                                        <p class="page-hint"></p>
+                                        <div th:if="${errMsg!=null}" class="errMsg">
+                                            <p class="" th:text="${errMsg}" class="page-hint"></p>
+                                        </div>
+                                    </div>
+                                    <div class="btn-bottom">
+                                        <button type="button" onclick="passwordLogin()" onmousedown="mouseDown()"
+                                                onmouseup="mouseUp()">登录
+                                        </button>
+                                        <div class="clearfix hint">
+                                            <span class="f-l forget-password">忘记密码？</span>
+                                            <span class="f-r contact-us">注册请联系我们</span>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            <!--手机验证码登录-->
+                            <div class="phone-login" tabContent="phone-login">
+                                <form th:action="@{/login}" method="post">
+                                    <p class="add-hint" style="height: 50px;line-height: 4;"></p>
+                                    <div class="icon-input p-r">
+                                        <img th:src="@{/static/img/phone.png}" alt="" class="icon p-a"/>
+                                        <input type="phone" name="mobile" id="phone-l" placeholder="请输入手机号"
+                                               onKeyUp="keyupPhone()" maxlength="11"
+                                               oninput="value=value.replace(/[^\d]/g,'')"/>
+                                    </div>
+                                    <p class="password-hint" style=" height:40px;line-height:3;"></p>
+                                    <div class="icon-input p-r">
+                                        <img th:src="@{/static/img/code.png}" alt="" class="icon p-a"/>
+                                        <input type="text" class="phone" name="code" id="code-l"
+                                               oninput="value=value.replace(/[^\d]/g,'')" maxlength="6"
+                                               placeholder="请输入验证码"/>
+                                        <button class="security-code" type="button" onclick="phoneCode()"
+                                                style="top:1px;">获取验证码
+                                        </button>
+                                    </div>
+                                    <p class="page-hint" style="height: 40px;line-height:4;"></p>
+                                    <div class="btn-bottom">
+                                        <button type="button" onclick="phoneLogin()" onmousedown="mouseDown()"
+                                                onmouseup="mouseUp()">登录
+                                        </button>
+                                        <div class="clearfix hint">
+                                            <span class="f-l forget-password">忘记密码？</span>
+                                            <span class="f-r contact-us">注册请联系我们</span>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            <!--手机找回密码-->
+                            <div class="phone-find-password" tabContent="phone-find-password">
+                                <form th:action="@{/login}" method="post">
+                                    <!--<p class="mobile-add-hint" style="height: 25px;line-height:2;"></p>-->
+                                    <p class="mobile-add-hint" style="height: 25px;line-height:2;"></p>
+                                    <div class="icon-input ">
+                                        <input type="phone" name="mobile" maxlength="11" id="phone-f"
+                                               placeholder="请输入所绑定的手机号"class="no-icon-input"
+                                               oninput="value=value.replace(/[^\d]/g,'')" onKeyUp="keyupPhone()"/>
+                                    </div>
+                                    <p class="mobile-code-hint" style="height:25px;line-height:2;"></p>
+                                    <div class="icon-input p-r">
+                                        <input type="text" class="phone" name="code-f"
+                                               oninput="value=value.replace(/[^\d]/g,'')" maxlength="6" id="code-f"
+                                               placeholder="请输入验证码"
+                                               style="padding-left: 10px;width: calc(100% - 120px);height: 36px;line-height: 36px;"/>
+                                        <button class="security-code" type="button" onclick="phoneFindPwdCode()"
+                                                style="height:38px;">获取验证码
+                                        </button>
+                                    </div>
+                                    <p class="mobile-password-hint" style="height: 25px;line-height:2;"></p>
+                                    <div class="icon-input">
+                                        <input type="password" name="pwd-f" id="pwd-f" onKeyUp="keyup()" maxlength="16"
+                                               placeholder="请输入新密码（6-16位数字、字母）"
+                                               class="no-icon-input" />
+                                    </div>
+                                    <p class="page-hint" style="height: 30px;line-height:2;"></p>
+                                    <div class="btn-bottom">
+                                        <button onclick="phoneFindPwd()" type="button"
+                                                style="letter-spacing: 5px;height: 45px;" onmousedown="mouseDown()"
+                                                onmouseup="mouseUp()">修改密码
+                                        </button>
+                                        <div class="clearfix hint">
+                                            <span class="f-r go-login">已有账号，请点击这里<span style="color: #006DC1;">登录</span></span>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            <!--邮箱找回密码-->
+                            <div class="email-find-password" tabContent="email-find-password">
+                                <form th:action="@{/login}" method="post">
+                                    <p class="email-add-hint" style="height: 25px;line-height:2;"></p>
+                                    <div class="icon-input ">
+                                        <input type="email" name="email" id="email-e" placeholder="请输入所绑定的邮箱"
+                                               class="no-icon-input"/>
+                                    </div>
+                                    <p class="email-code-hint" style="height: 25px;line-height:2;"></p>
+                                    <div class="icon-input p-r">
+                                        <input type="text" class="phone" name="code-e" id="code-e"
+                                               oninput="value=value.replace(/[^\d]/g,'')" maxlength="6"
+                                               placeholder="请输入验证码"
+                                               style="padding-left: 10px;width: calc(100% - 120px);height: 36px;line-height: 36px;"/>
+                                        <button class="security-code" type="button" onclick="emailFindPwdCode()"
+                                                style="height:38px;">获取验证码
+                                        </button>
+                                    </div>
+                                    <p class="email-password-hint" style="height: 25px;line-height:2;"></p>
+                                    <div class="icon-input ">
+                                        <input type="password" name="pwd-e" onKeyUp="keyup()" id="pwd-e" maxlength="16"
+                                               placeholder="请输入新密码（6-16位数字、字母）" class="no-icon-input"/>
+                                    </div>
+                                    <p class="page-hint" style="height: 30px;line-height:2;"></p>
+                                    <div class="btn-bottom">
+                                        <button onclick="emailFindPwd()" style="letter-spacing: 5px;height: 45px;"
+                                                type="button" onmousedown="mouseDown()" onmouseup="mouseUp()">修改密码
+                                        </button>
+                                        <div class="clearfix hint">
+                                            <span class="f-r go-login">已有账号，请点击这里<span style="color: #006DC1;">登录</span></span>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
+
     </div>
-    <div class="f-r b-r">
-        <div class="content  ">
-            <div class="main p-r">
-                <img th:src="@{/static/img/login.png}" style="width: 100%;height: 100%;" class="" alt=""/>
-                <div class="login-in-box p-a">
-                    <div class="clearfix login-in-box-tab">
-                        <div class="f-l login-in-box-l active visible" tab="password-login">账密登录</div>
-                        <div class="f-r login-in-box-r visible" tab="phone-login">手机验证码登录</div>
-                        <div class="f-l login-in-box-l " tab="phone-find-password">手机找回密码</div>
-                        <div class="f-r login-in-box-r" tab="email-find-password">邮箱找回密码</div>
-                    </div>
-                    <div class="login-in-box-tab-content">
-                        <!--账号密码登录-->
-                        <div class="password-login active" tabContent="password-login">
-                            <form th:action="@{/login}" method="post">
-                                <p class="add-hint" style="height: 50px;line-height: 4;margin-right: 50%;"></p>
-                                <div class="icon-input p-r">
-                                    <img th:src="@{/static/img/account.png}" alt="" class="icon p-a"/>
-                                    <input type="text" name="uname" id="uname" placeholder="请输入账号/用户名/邮箱/手机号"
-                                           class="p-l-val"  />
-                                </div>
-                                <p class="password-hint"  style="height: 40px;line-height:3;"></p>
-                                <div class="icon-input p-r">
-                                    <img th:src="@{/static/img/password.png}" alt="" class="icon p-a"/>
-                                    <input type="password" placeholder="请输入密码" name="pwd" id="pwd" class="p-l-password-val"
-                                           maxlength="16"/>
-                                </div>
-                                <div style="height: 40px;line-height:3;" >
-                                    <p class="page-hint" ></p>
-                                    <div th:if="${errMsg!=null}" class="errMsg">
-                                        <p class="" th:text="${errMsg}" class="page-hint"></p>
-                                    </div>
-                                </div>
-                                <div class="btn-bottom">
-                                    <button type="button" onclick="passwordLogin()" onmousedown="mouseDown()" onmouseup="mouseUp()">登录</button>
-                                    <div class="clearfix hint">
-                                        <span class="f-l forget-password">忘记密码？</span>
-                                        <span class="f-r contact-us">注册请联系我们</span>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                        <!--手机验证码登录-->
-                        <div class="phone-login" tabContent="phone-login">
-                            <form th:action="@{/login}" method="post">
-                                <p class="add-hint" style="height: 50px;line-height: 4;"></p>
-                                <div class="icon-input p-r">
-                                    <img th:src="@{/static/img/phone.png}" alt="" class="icon p-a"/>
-                                    <input type="phone" name="mobile" id="phone-l" placeholder="请输入手机号" onKeyUp="keyupPhone()" maxlength="11"  oninput = "value=value.replace(/[^\d]/g,'')"/>
-                                </div>
-                                <p class="password-hint"  style=" height:40px;line-height:3;"></p>
-                                <div class="icon-input p-r">
-                                    <img th:src="@{/static/img/code.png}" alt="" class="icon p-a" />
-                                    <input type="text" class="phone" name="code" id="code-l" oninput = "value=value.replace(/[^\d]/g,'')" maxlength="6" placeholder="请输入验证码"/>
-                                    <button class="security-code" type="button" onclick="phoneCode()"
-                                            style="top:1px;">获取验证码
-                                    </button>
-                                </div>
-                                <p class="page-hint" style="height: 40px;line-height:4;"></p>
-                                <div class="btn-bottom">
-                                    <button type="button" onclick="phoneLogin()" onmousedown="mouseDown()" onmouseup="mouseUp()">登录</button>
-                                    <div class="clearfix hint">
-                                        <span class="f-l forget-password">忘记密码？</span>
-                                        <span class="f-r contact-us" >注册请联系我们</span>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                        <!--手机找回密码-->
-                        <div class="phone-find-password" tabContent="phone-find-password">
-                            <form th:action="@{/login}" method="post">
-                                <p class="mobile-add-hint" style="height: 25px;line-height:2;"></p>
-                                <div class="icon-input " >
-                                    <input type="phone" name="mobile" maxlength="11" id="phone-f" placeholder="请输入所绑定的手机号"
-                                           style="text-indent: 15px;    height: 36px;line-height: 36px;" oninput = "value=value.replace(/[^\d]/g,'')" onKeyUp="keyupPhone()" />
-                                </div>
-                                <p class="mobile-code-hint" style="height:25px;line-height:2;"></p>
-                                <div class="icon-input p-r" >
-                                    <input type="text" class="phone" name="code-f"  oninput = "value=value.replace(/[^\d]/g,'')" maxlength="6" id="code-f" placeholder="请输入验证码"
-                                           style="text-indent: 15px;    height: 36px;line-height: 36px;"/>
-                                    <button class="security-code" type="button" onclick="phoneFindPwdCode()" style="height:38px;">获取验证码</button>
-                                </div>
-                                <p class="mobile-password-hint"style="height: 25px;line-height:2;"></p>
-                                <div class="icon-input  " >
-                                    <input type="password" name="pwd-f" id="pwd-f" onKeyUp="keyup()" maxlength="16" placeholder="请输入新密码（6-16位数字、字母）"
-                                           style="text-indent: 15px;    height: 36px;line-height: 36px;"/>
-                                </div>
-                                <p class="page-hint" style="height: 30px;line-height:2;"></p>
-                                <div class="btn-bottom">
-                                    <button onclick="phoneFindPwd()" type="button" style="letter-spacing: 5px;height: 45px;" onmousedown="mouseDown()" onmouseup="mouseUp()">修改密码</button>
-                                    <div class="clearfix hint">
-                                        <span class="f-r go-login">已有账号，请点击这里<span style="color: #006DC1;">登录</span></span>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                        <!--邮箱找回密码-->
-                        <div class="email-find-password" tabContent="email-find-password">
-                            <form th:action="@{/login}" method="post">
-                                <p class="email-add-hint" style="height: 25px;line-height:2;"></p>
-                                <div class="icon-input " >
-                                    <input type="email" name="email" id="email-e" placeholder="请输入所绑定的邮箱"
-                                           style="text-indent: 15px;    height: 36px;line-height: 36px;"/>
-                                </div>
-                                <p class="email-code-hint" style="height: 25px;line-height:2;"></p>
-                                <div class="icon-input p-r" >
-                                    <input type="text" class="phone" name="code-e" id="code-e"  oninput = "value=value.replace(/[^\d]/g,'')" maxlength="6" placeholder="请输入验证码"
-                                           style="text-indent: 15px;    height: 36px;line-height: 36px;"/>
-                                    <button class="security-code" type="button" onclick="emailFindPwdCode()" style="height:38px;">获取验证码</button>
-                                </div>
-                                <p class="email-password-hint" style="height: 25px;line-height:2;"></p>
-                                <div class="icon-input " >
-                                    <input type="password" name="pwd-e" onKeyUp="keyup()" id="pwd-e" maxlength="16" placeholder="请输入新密码（6-16位数字、字母）"
-                                           style="text-indent: 15px;    height: 36px;line-height: 38px;"/>
-                                </div>
-                                <p class="page-hint" style="height: 30px;line-height:2;"></p>
-                                <div class="btn-bottom">
-                                    <button onclick="emailFindPwd()" style="letter-spacing: 5px;height: 45px;" type="button" onmousedown="mouseDown()" onmouseup="mouseUp()">修改密码</button>
-                                    <div class="clearfix hint">
-                                        <span class="f-r go-login">已有账号，请点击这里<span style="color: #006DC1;">登录</span></span>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    </div>
-</div>
-<div class="foot-container">
-    <div class="login-in-box-foot ">
-        <div class="clearfix twoCode">
-            <div class="f-l part">
-                <div class="f-l">
-                    <img th:src="@{/static/img/codeTwo.png}" alt=""/>
-                </div>
-                <div class="f-l part-right">
-                    <div>微信扫一扫关注</div>
-                    <div>或者搜索关注：XXX</div>
-                </div>
-            </div>
-            <div class="f-l part">
-                <div class="f-l">
-                    <img th:src="@{/static/img/codeTwo.png}" alt=""/>
-                </div>
-                <div class="f-l part-right">
-                    <div>微信扫一扫关注群主</div>
-                    <div>加入微信交流群</div>
-                </div>
-            </div>
-            <div class="f-l part">
-                <div class="clearfix">
-                    <div class="part-icon f-l">
-                        <img th:src="@{/static/img/email.png}" alt=""/>
-                    </div>
-                    <div class="part-icon f-l two">
-                        联系邮箱：XX@tpadsz.com
-                    </div>
-                </div>
-                <div class="clearfix">
-                    <div class="part-icon f-l">
-                        <img th:src="@{/static/img/tel.png}" alt=""/>
-                    </div>
-                    <div class="part-icon f-l two">
-                        联系电话：0512-68315742
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="link">
-            <span>友链</span>
-            <span>|</span>
-            <span>友链</span>
-            <span>|</span>
-            <span>友链</span>
-            <span>|</span>
-            <span>友链</span>
-        </div>
-        <div class="filing">
-            备案信息备案信息备案信息备案信息备案信息
-        </div>
+    <div class="msg-bottom ">
+        网站备案号：苏ICP备08023318号-6
     </div>
 </div>
-<div class="pop-iframe" >
+<!--<div class="foot-container">-->
+<!--<div class="login-in-box-foot ">-->
+<!--<div class="clearfix twoCode">-->
+<!--<div class="f-l part">-->
+<!--<div class="f-l">-->
+<!--<img th:src="@{/static/img/codeTwo.png}" alt=""/>-->
+<!--</div>-->
+<!--<div class="f-l part-right">-->
+<!--<div>微信扫一扫关注</div>-->
+<!--<div>或者搜索关注：XXX</div>-->
+<!--</div>-->
+<!--</div>-->
+<!--<div class="f-l part">-->
+<!--<div class="f-l">-->
+<!--<img th:src="@{/static/img/codeTwo.png}" alt=""/>-->
+<!--</div>-->
+<!--<div class="f-l part-right">-->
+<!--<div>微信扫一扫关注群主</div>-->
+<!--<div>加入微信交流群</div>-->
+<!--</div>-->
+<!--</div>-->
+<!--<div class="f-l part">-->
+<!--<div class="clearfix">-->
+<!--<div class="part-icon f-l">-->
+<!--<img th:src="@{/static/img/email.png}" alt=""/>-->
+<!--</div>-->
+<!--<div class="part-icon f-l two">-->
+<!--联系邮箱：XX@tpadsz.com-->
+<!--</div>-->
+<!--</div>-->
+<!--<div class="clearfix">-->
+<!--<div class="part-icon f-l">-->
+<!--<img th:src="@{/static/img/tel.png}" alt=""/>-->
+<!--</div>-->
+<!--<div class="part-icon f-l two">-->
+<!--联系电话：0512-68315742-->
+<!--</div>-->
+<!--</div>-->
+<!--</div>-->
+<!--</div>-->
+<!--<div class="link">-->
+<!--<span>友链</span>-->
+<!--<span>|</span>-->
+<!--<span>友链</span>-->
+<!--<span>|</span>-->
+<!--<span>友链</span>-->
+<!--<span>|</span>-->
+<!--<span>友链</span>-->
+<!--</div>-->
+<!--<div class="filing">-->
+<!--备案信息备案信息备案信息备案信息备案信息-->
+<!--</div>-->
+<!--</div>-->
+<!--</div>-->
+<div class="pop-iframe">
     <div class=" p-r pop-nav">
         联系我们
     </div>
     <div class="pop-content clearfix">
 
-            <div class="f-l share-l">
-                <div class="share-accounts">关注微信公账号</div>
-                <div class="share-hint">（分享最新内容）</div>
-                <div>
-                    <img src="/alink-hq/static/img/chat_qrcode.jpg" alt="">
-                </div>
-                <div class="share-attention">微信扫一扫关注或者</div>
-                <div class="share-attention">搜索关注：XXX</div>
+        <div class="f-l share-l">
+            <div class="share-accounts">关注微信公账号</div>
+            <div class="share-hint">（分享最新内容）</div>
+            <div>
+                <img src="/alink-hq/static/img/chat_qrcode.jpg" alt="">
             </div>
-            <div class="f-l share-r">
-                <div class="share-accounts">关注微信公账号</div>
-                <div class="share-hint">（分享最新内容）</div>
-                <div>
-                    <img src="/alink-hq/static/img/chat_qrcode.jpg" alt="">
-                </div>
-                <div class="share-attention">微信扫一扫关注或者</div>
-                <div class="share-attention">搜索关注：XXX</div>
+            <div class="share-attention">微信扫一扫关注或者</div>
+            <div class="share-attention">搜索关注：XXX</div>
+        </div>
+        <div class="f-l share-r">
+            <div class="share-accounts">关注微信公账号</div>
+            <div class="share-hint">（分享最新内容）</div>
+            <div>
+                <img src="/alink-hq/static/img/chat_qrcode.jpg" alt="">
             </div>
+            <div class="share-attention">微信扫一扫关注或者</div>
+            <div class="share-attention">搜索关注：XXX</div>
+        </div>
 
     </div>
 </div>

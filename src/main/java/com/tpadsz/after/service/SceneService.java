@@ -15,7 +15,7 @@ public interface SceneService {
 
     int renameScene(String sceneName, Integer sid);
 
-    void delete(Integer sid);
+    void deleteSid(Integer sid);
 
     void saveSceneName(String sceneName, Integer sid);
 
@@ -30,4 +30,12 @@ public interface SceneService {
     MeshInfo findLightInfoByLid(Integer lid);
 
     List<MeshInfo> findXYByGid(Integer gid,Integer sid);
+
+    int findRoleIdByMid(Integer mid);
+
+    void deleteXY(Integer id, Integer sceneId,Integer mid,Integer flag);
+
+    void saveDeleteLog(String uid, Integer sceneId, Integer mid);
+
+    List<Integer> findMeshList(String uid);
 }

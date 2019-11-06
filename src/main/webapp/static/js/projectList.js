@@ -203,6 +203,7 @@ $(function () {
     var deleteArray=[];
     //重命名弹框
     $('.reset-name').click(function () {
+        $('#rename').attr('placeholder','请输入 2-16 位汉字、字母、数字');
         $('#rename').val('');
         projectId = parseInt($(this).parent().siblings('.checkbox ').find('input[type=checkbox]').val());
         account = $(this).parent().siblings('.project-account').text();
@@ -214,6 +215,7 @@ $(function () {
 
     //弹框重命名里操作
     $('.pop-btn .yes').click(function () {
+
         var rename = $('#rename').val();
         var regName = /^[a-zA-Z0-9\u4e00-\u9fa5]{2,16}$/;
         var renameResult = regName.test(rename);
@@ -241,23 +243,25 @@ $(function () {
         }
     })
     //删除项目弹框
-    $('.delete-project').click(function () {
+    $('.delete-pop').click(function () {
         projectId = parseInt($(this).parent().siblings('.checkbox ').find('input[type=checkbox]').val());
         account = $(this).parent().siblings('.project-account').text();
+        $('div[openContent="delete-pop"] .reset-pwd p').text('您确定要删除所选的项目吗？');
+        $('div[openContent="delete-pop"] .reset-pwd-hint').text('删除后项目中所有信息将无法恢复，请慎重！')
         var msg = {
             id: projectId,
-            account: account,
+            account: account
         }
         deleteArray.push(msg);
         if(deleteArray.length!=0){
-            var selector=$('div[openContent="delete-project"]');
+            var selector=$('div[openContent="delete-pop"]');
             selector.addClass('active');
             adjust(selector)
             showOverlay()
         }
     })
     //确定删除
-    $('div[openContent="delete-project"] .yes').click(function () {
+    $('div[openContent="delete-pop"] .yes').click(function () {
         var newJsonArray = JSON.stringify(deleteArray);
         $.ajax({
             type: "POST",
@@ -271,30 +275,32 @@ $(function () {
                     $('#all').prop('checked',false);
                 } else if (res.result == '200') {
                     console.log('系统错误');
+                } else if(res.result=='120'){
+                    $('div[openContent="delete-pop"]').removeClass('active');
+                    // hideOverlay();
+                    var selector=$('div[openContent="noDelete-pop"]');
+                    $('div[openContent="noDelete-pop"] .reset-pwd p').text('该项目下有灯，不可删除！');
+                    selector.addClass('active');
+                    adjust(selector);
+                    console.log('有灯存在');
                 }
             }
         })
     })
+    $('div[openContent="noDelete-pop"] .yes').click(function(){
+        $('div[openContent="noDelete-pop"]').removeClass('active');
+        hideOverlay();
+    })
     //移交单个
     $('.exchange-project').click(function () {
         var jsonArray = [];
-        var projectName = $(this).parent('td').siblings('.project-name').find('a').text();
-        var account = $(this).parent('td').siblings('.project-account').text();
-        var coname = $(this).parent('td').siblings('.project-coname').text();
+        var ids = [];
         var id = $(this).parent('td').siblings('.project-id').text();
-        var msg = {
-            name: projectName,
-            account: account,
-            coname: coname,
-            id: id
-        }
-        jsonArray.push(msg);
-        var newJsonArray = JSON.stringify(jsonArray);
-        var projectInfo = encodeURIComponent(newJsonArray);
-        location.href = '/alink-hq/project/transferPage?projectInfo=' + projectInfo;
+        ids.push(id);
+        location.href = '/alink-hq/project/transferPage?ids=' + ids;
     })
     //删除多个弹框
-    $('#delete-project').click(function () {
+    $('#delete-pop').click(function () {
         $('tbody tr td.checkbox input').each(function () {
             var checked = $(this).prop('checked');
             if (checked) {
@@ -308,7 +314,9 @@ $(function () {
             }
         })
         if(deleteArray.length!=0){
-            var selector=$('div[openContent="delete-project"]');
+            var selector=$('div[openContent="delete-pop"]');
+            $('div[openContent="delete-pop"] .reset-pwd p').text('您确定要删除所选的项目吗？');
+            $('div[openContent="delete-pop"] .reset-pwd-hint').text('删除后项目中所有信息将无法恢复，请慎重！')
             selector.addClass('active');
             adjust(selector)
             showOverlay()
@@ -318,34 +326,24 @@ $(function () {
     //移交项目多个
     $('#transfer-project').click(function () {
         var num = 0;
-        var jsonArray = [];
+        var ids = [];
+        // var jsonArray = [];
         $('tbody tr td.checkbox input').each(function () {
             var checked = $(this).prop('checked');
             if (checked) {
                 num++;
-                var projectName = $(this).parent('td').siblings('.project-name').find('a').text();
-                var account = $(this).parent('td').siblings('.project-account').text();
-                var coname = $(this).parent('td').siblings('.project-coname').text();
                 var id = $(this).parent('td').siblings('.project-id').text();
-                var msg = {
-                    name: projectName,
-                    account: account,
-                    coname: coname,
-                    id: id
-                }
-                jsonArray.push(msg);
+                ids.push(id);
             }
         })
-        var newJsonArray = JSON.stringify(jsonArray);
-        var projectInfo = encodeURIComponent(newJsonArray);
-        if(jsonArray.length!=0){
-            location.href = '/alink-hq/project/transferPage?projectInfo=' + projectInfo;
+        if(ids.length!=0){
+            location.href = '/alink-hq/project/transferPage?ids=' + ids;
         }
     })
     //取消按钮
     $('.pop-btn .reduce').click(function () {
         $('div[openContent="reset-name"]').removeClass('active');
-        $('div[openContent="delete-project"]').removeClass('active');
+        $('div[openContent="delete-pop"]').removeClass('active');
         hideOverlay()
         deleteArray= [];
     })
@@ -401,9 +399,21 @@ function condition(pageSize, pageNum, sortFlag) {
         var url2 = url + '?';
     }
     var account = $('#account').val();
+    if($.trim(account) ==''){
+        account='';
+    }
     var uname = $('#username').val();
+    if($.trim(uname) ==''){
+        uname='';
+    }
     var projectName = $('#projectName').val();
+    if($.trim(projectName) ==''){
+        projectName='';
+    }
     var coname = $('#company').val();
+    if($.trim(coname) ==''){
+        coname='';
+    }
     var startTime = $('#start-time').val();
     var startCreateDate = startTime.substring(0, 10);
     var endCreateDate = startTime.substring(13, 23);

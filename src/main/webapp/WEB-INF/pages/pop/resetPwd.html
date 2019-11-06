@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+
+    <!--<title>导航栏</title>-->
+    <!--<link rel="stylesheet" href="/alink-hq/static/css/base.css"/>-->
+    <!--<link rel="stylesheet" href="/alink-hq/static/css/leftNav.css"/>-->
+    <!--<link rel="stylesheet" href="/alink-hq/static/css/projectManage.css"/>-->
+
+    <!--[if lt IE 9]>
+    <script type="text/javascript" src="/alink-hq/static/js/html5shiv.js"></script>
+    <![endif]-->
+</head>
+<body>
+<!-- 确定重置密码 -->
+<div class="confirm-on-off pop-iframe " openContent="reset-pwd" th:fragment="reset-pwd">
+    <div class="confirm-on-off-nav p-r pop-nav">
+        温馨提示
+    </div>
+    <div class="pop-content p-r">
+        <div class="pop-msg p-a ">
+            <div class=" text-msg">
+                <i class="fa fa-question-circle hint-fa-icon" aria-hidden="true"></i>
+                     <span style="display: inherit">
+                       <span class="reset-pwd">
+                            <p>您确定要重置该账号密码吗？</p>
+                       </span>
+                       <span class="reset-pwd-hint">重置后将无法恢复，请慎重！</span>
+                    </span>
+            </div>
+        </div>
+        <div class="pop-btn">
+            <button class="reduce" type="button">取消</button>
+            <button class="yes" type="button">确定</button>
+        </div>
+    </div>
+</div>
+</body>
+</html>

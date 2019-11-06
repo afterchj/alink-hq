@@ -2,18 +2,6 @@
  * Created by yuanjie.fang on 2019/6/21.
  */
 $(function () {
-
-    var role = 'default';
-    $('.ad').click(function () {
-        role = $(this).attr('alt');
-        $(this).css('background','pink').siblings().css('background','#fff')
-        console.log(role);
-        $('[tabindex=0]').trigger("click");
-    })
-
-    // $('#default.ad').trigger("click");
-    // $('[tabindex=0]').trigger("click");
-
 //tab切换
     $('.tab-nav>div').on('click', function () {
         var tabindex = $(this).attr('tabindex')
@@ -22,106 +10,19 @@ $(function () {
             var tabContent = $(this).attr('tabContent')
             if (tabContent == tabindex) {
                 $(this).addClass('active').siblings().removeClass('active')
-                console.log('role1',role)
-                //权限;创建时默认
-                if (role == 'default') {
-                    if (tabindex == 0) {
-                        // $('.roleName').text('XXX')
-                        $('.fix-left-nav').removeClass('gray');
-                        // $('input#isAllRadio:radio').prop('checked', true);
-                        // $('.company-select input[value=0]:radio').prop('checked', true);
-                        // $('[tabContent=0].active input.singleIsRadio:radio[value=0]').prop('checked', true);
-                    } else if (tabindex == 1) {
-                        $('.fix-left-nav').removeClass('gray');
-                        // $('input#noAllRadio:radio').prop('checked', true);
-                        // $('[tabContent=1].active input.singleNoRadio:radio[value=1]').prop('checked', true);
-                    } else if (tabindex == 2) {
-                        $('.fix-left-nav').addClass('gray');
-                        // $('input#noAllRadio:radio').prop('checked', true);
-                        // $('[tabContent=2].active input.singleNoRadio:radio[value=1]').prop('checked', true);
-                    } else if (tabindex == 3) {
-                        $('.fix-left-nav').addClass('gray');
-                        // $('input#noAllRadio:radio').prop('checked', true);
-                        // $('[tabContent=3].active input.singleNoRadio:radio[value=1]').prop('checked', true);
-                    }
-                } else if (role == 'Admin') {
-                    //权限：管理员
-                    if (tabindex == 0) {
-                        $('.roleName').text('管理员')
-                        $('.fix-left-nav').removeClass('gray');
-                        // $('input#isAllRadio:radio').prop('checked', true);
-                        // $('.company-select input[value=2]:radio').prop('checked', true);
-                        // $('input#allChecked').trigger('click')
-                        // $('[tabContent=0].active input.singleIsRadio:radio[value=0]').prop('checked', true);
-                        // $('[tabContent=0].active input.singleIsRadio:radio[value=0]').prop('checked', true);
-                    } else if (tabindex == 1) {
-                        $('.fix-left-nav').removeClass('gray');
-                        // $('input#allChecked').prop('checked', false);
-                        // $('input#isAllRadio:radio').prop('checked', true);
-                        // $('.company-select input[value=2]:radio').prop('checked', true);
-                        // $('input#allChecked').trigger('click')
-                        // $('[tabContent=1].active input.admin-role:checkbox').prop('checked', false).parent().siblings().find('input:checkbox').prop('checked', true);
-                        // $('[tabContent=1].active input.singleIsRadio:radio[value=0]').prop('checked', true);
-                    } else if (tabindex == 2) {
-                        $('.fix-left-nav').addClass('gray');
-                        // $('input#isAllRadio:radio').prop('checked', true);
-                        // $('input#allChecked').prop('checked', false);
-                        // $('[tabContent=2].active input:checkbox').prop('checked', false);
-                        // $('[tabContent=2].active input.lookRole:checkbox').prop('checked', true);
-                        // $('[tabContent=2].active input.yi-admin-role:checkbox').prop('checked', true);
-                        // $('[tabContent=2].active input.builders:checkbox').prop('checked', true);
-                        // $('[tabContent=2].active input.singleIsRadio:radio[value=0]').prop('checked', true);
-                    } else if (tabindex == 3) {
-                        $('.fix-left-nav').addClass('gray');
-                        // $('input#isAllRadio:radio').prop('checked', true);
-                        // $('input#allChecked').trigger('click')
-                        // $('[tabContent=3].active input.singleIsRadio:radio[value=0]').prop('checked', true);
-                    }
-                }else if (role == 'yi-Admin') {
-                    //权限：乙方管理员
-                    if (tabindex == 0) {
-                        // $('.roleName').text('乙方管理员')
-                        $('.fix-left-nav').removeClass('gray');
-                        // $('input#isAllRadio:radio').prop('checked', true);
-                        // $('.company-select input[value=0]:radio').prop('checked', true);
-                        // $('[tabContent=0].active input.singleIsRadio:radio[value=0]').prop('checked', true);
-                    } else if (tabindex == 1) {
-                        $('.fix-left-nav').removeClass('gray');
-                        // $('input#noAllRadio:radio').prop('checked', true);
-                        // $('[tabContent=1].active input.singleNoRadio:radio[value=1]').prop('checked', true);
-                    } else if (tabindex == 2) {
-                        $('.fix-left-nav').addClass('gray');
-                        // $('input#noAllRadio:radio').prop('checked', true);
-                        // $('[tabContent=2].active input.singleNoRadio:radio[value=1]').prop('checked', true);
-                    } else if (tabindex == 3) {
-                        $('.fix-left-nav').addClass('gray');
-                        // $('input#noAllRadio:radio').prop('checked', true);
-                        // $('[tabContent=3].active input.singleNoRadio:radio[value=1]').prop('checked', true);
-                    }
-                }else if(role=='builders'){
-                    //权限：施工人员
-                    if (tabindex == 0) {
-                        // $('.roleName').text('施工人员')
-                        // $('.fix-left-nav').removeClass('gray');
-                        // $('input#isAllRadio:radio').prop('checked', true);
-                        // $('.company-select input[value=0]:radio').prop('checked', true);
-                        // $('[tabContent=0].active input.singleIsRadio:radio[value=0]').prop('checked', true);
-                    } else if (tabindex == 1) {
-                        $('.fix-left-nav').removeClass('gray');
-                        // $('input#noAllRadio:radio').prop('checked', true);
-                        // $('[tabContent=1].active input.singleNoRadio:radio[value=1]').prop('checked', true);
-                    } else if (tabindex == 2) {
-                        $('.fix-left-nav').addClass('gray');
-                        // $('input#noAllRadio:radio').prop('checked', true);
-                        // $('[tabContent=2].active input.singleNoRadio:radio[value=1]').prop('checked', true);
-                    } else if (tabindex == 3) {
-                        $('.fix-left-nav').addClass('gray');
-                        // $('input#noAllRadio:radio').prop('checked', true);
-                        // $('[tabContent=3].active input.singleNoRadio:radio[value=1]').prop('checked', true);
-                    }
+                if (tabindex == 0 || tabindex == 1) {
+                    //项目管理、用户管理权限范围可选
+                    $('.fix-left-nav').removeClass('gray');
+                    $('.company-select>div').removeClass('gray');
+                }else if (tabindex == 2 || tabindex == 3 ) {
+                    //角色管理、文件管理权限范围背景灰色
+                    $('.fix-left-nav').addClass('gray');
+                    $('.company-select>div').removeClass('gray');
+                }else if (tabindex == 4 || tabindex == 5){
+                    //产品管理、合作管理权限范围 所在账号相关内容不可选
+                    $('.fix-left-nav').removeClass('gray');
+                    $('.account-related').addClass('gray');
                 }
-
-
             }
         })
     })
@@ -160,7 +61,7 @@ $(function () {
                 $(this).find('input.singleListChecked:checkbox').prop('checked', true)
             });
             //勾选查看数据
-            if ($(".tab-content-part.active").attr('id')=='projectManage'){
+            if ($(".tab-content-part.active").attr('id')=='projectManage' ||$(".tab-content-part.active").attr('id')=='fileManage'){
                 //取消全选不可查看数据
                 $(".tab-content-part.active").find('input.noAllRadio').prop('checked',false);
                 $(this).parent().parent().siblings('.list-content').find('input.singleIsRadio').prop('checked',true);
@@ -191,7 +92,7 @@ $(function () {
         $(this).parent().parent().parent().parent().parent('.tab-content-part.active').find('.allChecked').prop('checked', $(this).parents(".tab-content-part.active").find('.singleChecked').length == $(this).parents(".tab-content-part.active").find('.singleChecked:checked').length);
         //查看数据选项
         if (singleListCheckedLength>=1){
-            if ($(".tab-content-part.active").attr('id')=='projectManage'){
+            if ($(".tab-content-part.active").attr('id')=='projectManage' || $(".tab-content-part.active").attr('id')=='fileManage'){
                 $(this).parent().parent().next().find('input[value=0]').prop('checked',true);
                 //取消全选不可查看数据
                 $(".tab-content-part.active").find('input.noAllRadio').prop('checked',false);
@@ -221,21 +122,31 @@ $(function () {
                 $(this).parent().next().find('input:checkbox:last').prop('checked',true);
             }
         }
-
-
+        // 固件历史版本查看
+        if ($(this).attr('alt')=='viewHistoryOTA'){
+            var viewHistoryOTA = $(this).parent().next().find('input:checkbox');
+            if (!$(this).prop("checked")){//取消勾选
+                //固件历史版本子层全部取消勾选
+                viewHistoryOTA.each(function () {
+                    $(this).prop('checked',false);
+                })
+            }else {//勾选
+                $(viewHistoryOTA).eq(0).prop('checked',true);
+            }
+        }
     })
     //创建账号 查看角色权限
     $('input.singleRoleChecked:checkbox').click(function () {
         var singleListLength = $(this).parent().parent().parent().parent('.list-content').find(
             'input.singleListChecked:checkbox').length
         var singleListCheckedLength = $(this).parent().parent().parent().parent('.list-content').find(
-            'input.singleListChecked:checkbox:checked').length
+            'input.singleListChecked:checkbox:checked').length//单个全选勾选数
         $(this).parent().parent().parent().parent().siblings('.list-title').find('input.allListChecked:checkbox').prop(
-            'checked', singleListLength == singleListCheckedLength)
-        $(this).parents('.tab-content-part.active').find('.allChecked').prop('checked', $(this).parents(".tab-content-part.active").find('.singleChecked').length == $(this).parents(".tab-content-part.active").find('.singleChecked:checked').length);
+            'checked', singleListLength == singleListCheckedLength);//左侧复选
+        $(this).parents('.tab-content-part.active').find('.allChecked').prop('checked', $(this).parents(".tab-content-part.active").find('.singleChecked').length == $(this).parents(".tab-content-part.active").find('.singleChecked:checked').length);//右侧全选
         if (singleListCheckedLength>=1){
-            if ($(".tab-content-part.active").attr('id')=='projectManage'){
-                $(this).parent().parent().next().find('input[value=0]').prop('checked',true)
+            if ($(".tab-content-part.active").attr('id')=='fileManage'){
+                $(this).parent().parent().parent().next().find('input[value=0]').prop('checked',true)//查看数据勾选
             }else {
                 var allRadio = $(".tab-content-part.active").find('input[value=0]');
                 allRadio.each(function () {
@@ -244,36 +155,8 @@ $(function () {
             }
         }
         $("input.singleListChecked:checkbox[alt='createUser']").prop('checked',$("input[alt^='createUser'].singleRoleChecked:checked").length>0);
-
-    })
-
-// //单选纵向
-// //可查看数据
-//     $('input.isAllRadio:radio').click(function () {
-//         var selector = $(this).parent().parent().parent().siblings('.list').find('input.singleIsRadio:radio[value=0]');
-//         selector.each(function () {
-//             $(this).prop('checked', true);
-//         })
-//     })
-// //不可查看数据
-//     $('input.noAllRadio:radio').click(function () {
-//         var selector = $(this).parent().parent().parent().siblings('.list').find('input.singleNoRadio:radio[value=1]');
-//         selector.each(function () {
-//             $(this).prop('checked', true);
-//         })
-//     })
-//     $('.list input.singleIsRadio:radio[value=0]').click(function () {
-//         var singleIsRadioLength = $(this).parent().parent().parent().parent().parent('.tab-content-part.active').find('input.singleIsRadio:radio[value=0]').length;
-//         var singleIsRadioCheckedLength = $(this).parent().parent().parent().parent().parent('.tab-content-part.active').find('input.singleIsRadio:radio[value=0]:checked').length;
-//         $(this).parent().parent().parent().parent().parent('.tab-content-part.active').find('input.isAllRadio:radio').prop('checked', singleIsRadioLength == singleIsRadioCheckedLength);
-//         $(this).parent().parent().parent().parent().parent('.tab-content-part.active').find('input.noAllRadio:radio').prop('checked', false);
-//     })
-//     $('.list input.singleNoRadio:radio[value=1]').click(function () {
-//         var singleNoRadioLength = $(this).parent().parent().parent().parent().parent('.tab-content-part.active').find('input.singleNoRadio:radio[value=1]').length;
-//         var singleNoRadioCheckedLength = $(this).parent().parent().parent().parent().parent('.tab-content-part.active').find('input.singleNoRadio:radio[value=1]:checked').length;
-//         $(this).parent().parent().parent().parent().parent('.tab-content-part.active').find('input.noAllRadio:radio').prop('checked', singleNoRadioLength == singleNoRadioCheckedLength);
-//         $(this).parent().parent().parent().parent().parent('.tab-content-part.active').find('input.isAllRadio:radio').prop('checked', false);
-//     })
+        $("input.singleListChecked:checkbox[alt='viewHistoryOTA']").prop('checked',$("input[alt^='OTA'].singleRoleChecked:checked").length>0);//固件历史版本查看是否需要勾选
+    });
 
     //单选纵向
     //全选可查看数据
